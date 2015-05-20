@@ -1,0 +1,76 @@
+<div class="page-sidebar navbar-collapse collapse">
+    <ul class="page-sidebar-menu" data-keep-expanded="false" data-auto-scroll="true" data-slide-speed="200">
+
+        <li class="sidebar-toggler-wrapper">
+            <div class="sidebar-toggler">
+            </div>
+        </li>
+
+        <?php
+        $s_menu = '';
+
+        $i_cnt = 0;
+        foreach ($this->container as $page) {
+
+            if ($this->navigation('navigation')->accept($page)) {
+
+                $s_child_menu = '';
+                $b_childActive = false;
+
+                if ($page->hasPages()) {
+
+                    $s_child_menu .= '<ul class="sub-menu">';
+
+                    foreach ($page->getPages() as $child) {
+
+                        if($child->get('isVisible')) {
+
+                            if($child->isActive()) {
+                                $b_childActive = true;
+                            }
+
+                            $icon = $child->get('icon');
+
+                            $s_child_menu .= sprintf('<li class="%s"><a href="%s">', $child->isActive() ? 'active' : '', $child->getHref());
+
+                            if(isset($icon)) {
+                                $s_child_menu .= sprintf('<i class="%s"></i>', $icon);
+                            }
+
+                            $s_child_menu .= sprintf('%s </a></li>', $child->getLabel());
+                        }
+
+                    }
+
+                    $s_child_menu .= '</ul>';
+                }
+
+                if ($i_cnt == 0) {
+                    $s_menu .= sprintf('<li class="%s">', $page->isActive() || $b_childActive ? 'start active open' : 'start ');
+                } else {
+                    $s_menu .= sprintf('<li class="%s">', $page->isActive() || $b_childActive ? 'active open' : '');
+                }
+
+                $isRouteJs = $page->get('isRouteJs');
+                $s_menu .= sprintf('<a href="%s">', isset($isRouteJs) ? 'javascript:;' : $page->getHref());
+                $s_menu .= sprintf('<i class="%s"></i>', $page->get('icon'));
+                $s_menu .= sprintf('<span class="title">%s</span>', $page->getLabel());
+
+                if ($page->hasPages()) {
+                    $s_menu .= sprintf('<span class="arrow %s"></span>', $b_childActive ? 'open' : '');
+                }
+
+                $s_menu .= '</a>';
+
+                $s_menu .= $s_child_menu;
+
+                $s_menu .= '</li>';
+                $i_cnt++;
+
+            }
+        }
+
+        echo $s_menu;
+        ?>
+    </ul>
+</div>

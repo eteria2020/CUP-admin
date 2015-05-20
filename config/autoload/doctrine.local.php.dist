@@ -1,0 +1,30 @@
+<?php
+
+return array(
+    'doctrine' => array(
+        'connection' => array(
+            // default connection name
+            'orm_default' => array(
+                'driverClass' => 'Doctrine\DBAL\Driver\PDOPgSql\Driver',
+                'params' => array(
+                    'host'     => '127.0.0.1',
+                    'port'     => '5432',
+                    'user'     => 'user',
+                    'password' => 'pass',
+                    'dbname'   => 'db',
+                )
+            )
+        ),
+        'configuration' => array(
+            'orm_default' => array(
+                'naming_strategy' => new \Doctrine\ORM\Mapping\UnderscoreNamingStrategy(),
+                'types' => array(
+                    'geometry' => 'CrEOF\Spatial\DBAL\Types\GeometryType',
+                    'point' => 'CrEOF\Spatial\DBAL\Types\Geometry\PointType',
+                    'polygon' => 'CrEOF\Spatial\DBAL\Types\Geometry\PolygonType',
+                    'linestring' => 'CrEOF\Spatial\DBAL\Types\Geometry\LineStringType',
+                ),
+            ),
+        ),
+    ),
+);
