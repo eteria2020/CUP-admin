@@ -7,10 +7,17 @@
         "zf2"
     ],
     "homepage": "http://framework.zend.com/",
+    "repositories": [
+        {
+            "url": "ssh://git@git.mvlabs.it:4222/clients/sharengo-coremodule.git",
+            "type": "git"
+        }
+    ],
     "require": {
         "php": ">=5.3.3",
         "zendframework/zendframework": "~2.4",
         "bjyoungblood/bjy-authorize": "1.4.0",
-        "zf-commons/zfc-user-doctrine-orm": "^1.0"
+        "zf-commons/zfc-user-doctrine-orm": "^1.0",
+        "mvlabs/sharengo-coremodule": "dev-master"
     }
 }

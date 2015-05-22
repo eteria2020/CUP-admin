@@ -9,6 +9,7 @@ return array(
         'ZfcUserDoctrineORM',
         'BjyAuthorize',
 
+        'SharengoCore',
         'Application',
     ),
 

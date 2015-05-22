@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "b7f8e77c63a6f1b3e054327351359e9a",
+    "hash": "196b62b6dac8c0cb48ac9d36230173d2",
     "packages": [
         {
             "name": "bjyoungblood/bjy-authorize",
@@ -837,6 +837,28 @@
             "time": "2015-04-02 20:40:18"
         },
         {
+            "name": "mvlabs/sharengo-coremodule",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "ssh://git@git.mvlabs.it:4222/clients/sharengo-coremodule.git",
+                "reference": "7957db16d28519b91c881d49c5efb2e6ca2f7ff4"
+            },
+            "require": {
+                "doctrine/doctrine-orm-module": "0.*",
+                "php": ">=5.4.0",
+                "zendframework/zendframework": "2.4.*"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "SharengoCore": "src/"
+                }
+            },
+            "description": "Core ZF2 module for Sharengo apps",
+            "time": "2015-05-22 10:49:15"
+        },
+        {
             "name": "symfony/console",
             "version": "v2.6.7",
             "target-dir": "Symfony/Component/Console",
@@ -1246,7 +1268,9 @@
     "packages-dev": [],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": [],
+    "stability-flags": {
+        "mvlabs/sharengo-coremodule": 20
+    },
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {
