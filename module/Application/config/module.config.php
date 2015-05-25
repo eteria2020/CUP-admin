@@ -28,9 +28,34 @@ return array(
                         'controller' => 'Application\Controller\Customers',
                         'action' => 'list'
                     ]
-                ]
+                ],
+                'may_terminate' => true,
+                'child_routes' => [
+                    'datatable' => [
+                        'type'    => 'Literal',
+                        'options' => [
+                            'route'    => '/datatable',
+                            'defaults' => [
+                                '__NAMESPACE__' => 'Application\Controller',
+                                'controller'    => 'Customers',
+                                'action'        => 'datatable',
+                            ],
+                        ],
+                    ],
+                    'edit-customer' => [
+                        'type'    => 'Segment',
+                        'options' => [
+                            'route'    => '/edit/:id',
+                            'defaults' => [
+                                '__NAMESPACE__' => 'Application\Controller',
+                                'controller'    => 'Customers',
+                                'action'        => 'edit',
+                            ],
+                        ],
+                    ],
+                ],
             ],
-            /*'zfcuser' => [
+            'zfcuser' => [
                 'child_routes' => [
                     'register' => [
                         'options' => [
@@ -40,7 +65,7 @@ return array(
                         ]
                     ]
                 ]
-            ]*/
+            ]
         ),
     ),
     'service_manager' => array(
@@ -50,14 +75,16 @@ return array(
         ),
         'factories' => [
             'navigation' => 'Zend\Navigation\Service\DefaultNavigationFactory',
+            'CustomerForm' => 'Application\Form\CustomerFormFactory',
         ]
     ),
     'controllers' => array(
         'invokables' => array(
             'Application\Controller\Index' => 'Application\Controller\IndexController',
-            'Application\controller\Customers' => 'Application\Controller\CustomersController'
         ),
+
         'factories' => [
+            'Application\controller\Customers' => 'Application\Controller\CustomersControllerFactory',
             'Application\Controller\ConsoleUser' => 'Application\Controller\ConsoleUserControllerFactory'
         ]
     ),
@@ -75,6 +102,9 @@ return array(
         ),
         'template_path_stack' => array(
             __DIR__ . '/../view',
+        ),
+        'strategies' => array(
+            'ViewJsonStrategy',
         ),
     ),
     // Placeholder for console routes

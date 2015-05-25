@@ -1,0 +1,152 @@
+<?php
+
+$form = $this->customerForm->prepare();
+$this->headLink()->appendStylesheet('/js/datatables/plugins/bootstrap/dataTables.bootstrap.css');
+$this->headScript()
+    ->appendFile('/js/datatables/media/js/jquery.dataTables.min.js')
+    ->appendFile('/js/datatables/plugins/bootstrap/dataTables.bootstrap.js')
+    ->appendFile($this->basePath() .'/js/customers.js');
+?>
+<div class="page-content-wrapper">
+    <div class="page-content">
+
+        <!-- BEGIN PAGE HEADER-->
+        <h3 class="page-title">
+            MODIFICA CLIENTE <small><?= $this->customer->getName() . ' ' . $this->customer->getSurname(); ?></small>
+        </h3>
+
+        <div class="page-bar">
+        </div>
+
+        <div class="row">
+            <div class="col-md-12">
+
+                <?= $this->form()->openTag($form); ?>
+
+                <div class="panel panel-default">
+                    <div class="panel-heading">Anagrafica</div>
+                    <div class="panel-body">
+
+                        <div class="row">
+                            <div class="col-lg-4">
+                                <div class="form-group">
+                                    <label for="gender">Titolo</label>
+                                    <?= $this->formRow($form->get('gender')); ?>
+                                </div>
+                            </div>
+
+                            <div class="col-lg-4">
+                                <div class="form-group">
+                                    <label for="name">Nome</label>
+                                    <?= $this->formRow($form->get('name')); ?>
+                                </div>
+                            </div>
+
+                            <div class="col-lg-4">
+                                <div class="form-group">
+                                    <label for="surname">Cognome</label>
+                                    <?= $this->formRow($form->get('surname')); ?>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-lg-4">
+                                <div class="form-group">
+                                    <label for="gender">Email</label>
+                                    <?= $this->formRow($form->get('email')); ?>
+                                </div>
+                            </div>
+
+                            <div class="col-lg-4">
+                                <div class="form-group">
+                                    <label for="name">Data di nascita</label>
+                                    <? /*$this->formRow($form->get('birthDate'));*/ ?>
+                                </div>
+                            </div>
+
+                            <div class="col-lg-4">
+                                <div class="form-group">
+                                    <label for="surname">Stato di nascita</label>
+                                    <?= $this->formRow($form->get('birthCountry')); ?>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-lg-4">
+                                <div class="form-group">
+                                    <label for="gender">Provincia di nascita (EE = estero)</label>
+                                    <?= $this->formRow($form->get('birthProvince')); ?>
+                                </div>
+                            </div>
+
+                            <div class="col-lg-4">
+                                <div class="form-group">
+                                    <label for="name">Comune di nascita</label>
+                                    <?= $this->formRow($form->get('birthTown')); ?>
+                                </div>
+                            </div>
+
+                            <div class="col-lg-4">
+                                <div class="form-group">
+                                    <label for="surname">Via e numero civico</label>
+                                    <?= $this->formRow($form->get('address')); ?>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-lg-4">
+                                <div class="form-group">
+                                    <label for="gender">Informazioni aggiuntive</label>
+                                    <?= $this->formRow($form->get('addressInfo')); ?>
+                                </div>
+                            </div>
+
+                            <div class="col-lg-4">
+                                <div class="form-group">
+                                    <label for="name">CAP</label>
+                                    <?= $this->formRow($form->get('zipCode')); ?>
+                                </div>
+                            </div>
+
+                            <div class="col-lg-4">
+                                <div class="form-group">
+                                    <label for="surname">Città</label>
+                                    <?= $this->formRow($form->get('town')); ?>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="panel panel-default">
+                    <div class="panel-heading">Dati Patente</div>
+                    <div class="panel-body">
+                        Panel content
+                    </div>
+                </div>
+
+                <div class="panel panel-default">
+                    <div class="panel-heading">Stato Iscrizione</div>
+                    <div class="panel-body">
+                        Panel content
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-lg-12">
+                        <button type="submit" class="btn btn-success">Salva</button>
+                    </div>
+                </div>
+
+                <?php echo $this->form()->closeTag(); ?>
+
+            </div>
+        </div>
+
+        <!-- END PAGE CONTENT-->
+    </div>
+</div>
