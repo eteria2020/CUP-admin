@@ -2,6 +2,8 @@
 
 namespace Application\Controller;
 
+use Application\Form\CustomerForm;
+use Application\Form\CustomerFormFilter;
 use Zend\ServiceManager\FactoryInterface;
 use Zend\ServiceManager\ServiceLocatorInterface;
 use Zend\Stdlib\Hydrator\Reflection;

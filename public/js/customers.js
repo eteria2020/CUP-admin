@@ -111,7 +111,7 @@ $(function() {
 
     $('.date-picker').datepicker({
         autoclose: true,
-        format: 'yyyy-mm-dd',
+        format: 'dd-mm-yy',
         weekStart: 1
     });
 });
