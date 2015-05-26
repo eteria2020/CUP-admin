@@ -108,4 +108,10 @@ $(function() {
         search.val('');
         column.val('select');
     });
+
+    $('.date-picker').datepicker({
+        autoclose: true,
+        format: 'yyyy-mm-dd',
+        weekStart: 1
+    });
 });

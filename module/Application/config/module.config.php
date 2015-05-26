@@ -42,7 +42,7 @@ return array(
                             ],
                         ],
                     ],
-                    'edit-customer' => [
+                    'edit' => [
                         'type'    => 'Segment',
                         'options' => [
                             'route'    => '/edit/:id',

@@ -1,10 +1,12 @@
 <?php
-
 $form = $this->customerForm->prepare();
-$this->headLink()->appendStylesheet('/js/datatables/plugins/bootstrap/dataTables.bootstrap.css');
+$this->headLink()
+    ->appendStylesheet('/js/datatables/plugins/bootstrap/dataTables.bootstrap.css')
+    ->appendStylesheet('/plugins/bootstrap-datepicker/css/datepicker3.css');
 $this->headScript()
     ->appendFile('/js/datatables/media/js/jquery.dataTables.min.js')
     ->appendFile('/js/datatables/plugins/bootstrap/dataTables.bootstrap.js')
+    ->appendFile('/plugins/bootstrap-datepicker/js/bootstrap-datepicker.js')
     ->appendFile($this->basePath() .'/js/customers.js');
 ?>
 <div class="page-content-wrapper">
@@ -31,21 +33,21 @@ $this->headScript()
                             <div class="col-lg-4">
                                 <div class="form-group">
                                     <label for="gender">Titolo</label>
-                                    <?= $this->formRow($form->get('gender')); ?>
+                                    <?= $this->formRow($form->get('customer')->get('gender')); ?>
                                 </div>
                             </div>
 
                             <div class="col-lg-4">
                                 <div class="form-group">
                                     <label for="name">Nome</label>
-                                    <?= $this->formRow($form->get('name')); ?>
+                                    <?= $this->formRow($form->get('customer')->get('name')); ?>
                                 </div>
                             </div>
 
                             <div class="col-lg-4">
                                 <div class="form-group">
                                     <label for="surname">Cognome</label>
-                                    <?= $this->formRow($form->get('surname')); ?>
+                                    <?= $this->formRow($form->get('customer')->get('surname')); ?>
                                 </div>
                             </div>
                         </div>
@@ -54,21 +56,21 @@ $this->headScript()
                             <div class="col-lg-4">
                                 <div class="form-group">
                                     <label for="gender">Email</label>
-                                    <?= $this->formRow($form->get('email')); ?>
+                                    <?= $this->formRow($form->get('customer')->get('email')); ?>
                                 </div>
                             </div>
 
                             <div class="col-lg-4">
                                 <div class="form-group">
                                     <label for="name">Data di nascita</label>
-                                    <? /*$this->formRow($form->get('birthDate'));*/ ?>
+                                    <?= $this->formRow($form->get('customer')->get('birthDate')); ?>
                                 </div>
                             </div>
 
                             <div class="col-lg-4">
                                 <div class="form-group">
                                     <label for="surname">Stato di nascita</label>
-                                    <?= $this->formRow($form->get('birthCountry')); ?>
+                                    <?= $this->formRow($form->get('customer')->get('birthCountry')); ?>
                                 </div>
                             </div>
                         </div>
@@ -77,21 +79,21 @@ $this->headScript()
                             <div class="col-lg-4">
                                 <div class="form-group">
                                     <label for="gender">Provincia di nascita (EE = estero)</label>
-                                    <?= $this->formRow($form->get('birthProvince')); ?>
+                                    <?= $this->formRow($form->get('customer')->get('birthProvince')); ?>
                                 </div>
                             </div>
 
                             <div class="col-lg-4">
                                 <div class="form-group">
                                     <label for="name">Comune di nascita</label>
-                                    <?= $this->formRow($form->get('birthTown')); ?>
+                                    <?= $this->formRow($form->get('customer')->get('birthTown')); ?>
                                 </div>
                             </div>
 
                             <div class="col-lg-4">
                                 <div class="form-group">
                                     <label for="surname">Via e numero civico</label>
-                                    <?= $this->formRow($form->get('address')); ?>
+                                    <?= $this->formRow($form->get('customer')->get('address')); ?>
                                 </div>
                             </div>
                         </div>
@@ -100,22 +102,64 @@ $this->headScript()
                             <div class="col-lg-4">
                                 <div class="form-group">
                                     <label for="gender">Informazioni aggiuntive</label>
-                                    <?= $this->formRow($form->get('addressInfo')); ?>
+                                    <?= $this->formRow($form->get('customer')->get('addressInfo')); ?>
                                 </div>
                             </div>
 
                             <div class="col-lg-4">
                                 <div class="form-group">
                                     <label for="name">CAP</label>
-                                    <?= $this->formRow($form->get('zipCode')); ?>
+                                    <?= $this->formRow($form->get('customer')->get('zipCode')); ?>
                                 </div>
                             </div>
 
                             <div class="col-lg-4">
                                 <div class="form-group">
                                     <label for="surname">Città</label>
-                                    <?= $this->formRow($form->get('town')); ?>
+                                    <?= $this->formRow($form->get('customer')->get('town')); ?>
                                 </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-lg-4">
+                                <div class="form-group">
+                                    <label for="language">Lingua preferita</label>
+                                    <?= $this->formRow($form->get('customer')->get('language')); ?>
+                                </div>
+                            </div>
+
+                            <div class="col-lg-4">
+                                <div class="form-group">
+                                    <label for="taxCode">Codice fiscale</label>
+                                    <?= $this->formRow($form->get('customer')->get('taxCode')); ?>
+                                </div>
+                            </div>
+
+                            <div class="col-lg-4">
+                                <div class="form-group">
+                                    <label for="vat">Partita IVA (opzionale)</label>
+                                    <?= $this->formRow($form->get('customer')->get('vat')); ?>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-lg-4">
+                                <div class="form-group">
+                                    <label for="mobile">Cellulare</label>
+                                    <?= $this->formRow($form->get('customer')->get('mobile')); ?>
+                                </div>
+                            </div>
+
+                            <div class="col-lg-4">
+                                <div class="form-group">
+                                    <label for="phone">Telefono</label>
+                                    <?= $this->formRow($form->get('customer')->get('phone')); ?>
+                                </div>
+                            </div>
+
+                            <div class="col-lg-4">
                             </div>
                         </div>
 
@@ -125,14 +169,75 @@ $this->headScript()
                 <div class="panel panel-default">
                     <div class="panel-heading">Dati Patente</div>
                     <div class="panel-body">
-                        Panel content
+
+                        <div class="row">
+                            <div class="col-lg-4">
+                                <div class="form-group">
+                                    <label for="driverLicense">Patente</label>
+                                    <?= $this->formRow($form->get('customer')->get('driverLicense')); ?>
+                                </div>
+                            </div>
+
+                            <div class="col-lg-4">
+                                <div class="form-group">
+                                    <label for="driverLicenseAuthority">Rilasciato da (autorità)</label>
+                                    <?= $this->formRow($form->get('customer')->get('driverLicenseAuthority')); ?>
+                                </div>
+                            </div>
+
+                            <div class="col-lg-4">
+                                <div class="form-group">
+                                    <label for="driverLicenseReleaseDate">Rilasciato il</label>
+                                    <?= $this->formRow($form->get('customer')->get('driverLicenseReleaseDate')); ?>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-lg-4">
+                                <div class="form-group">
+                                    <label for="driverLicenseName">Nome sulla patente</label>
+                                    <?= $this->formRow($form->get('customer')->get('driverLicenseName')); ?>
+                                </div>
+                            </div>
+
+                            <div class="col-lg-4">
+                                <div class="form-group">
+                                    <label for="driverLicenseCountry">Rilasciata da (nazione)</label>
+                                    <?= $this->formRow($form->get('customer')->get('driverLicenseCountry')); ?>
+                                </div>
+                            </div>
+
+                            <div class="col-lg-4">
+                                <div class="form-group">
+                                    <label for="driverLicenseExpire">Data di scadenza</label>
+                                    <?= $this->formRow($form->get('customer')->get('driverLicenseExpire')); ?>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
 
                 <div class="panel panel-default">
                     <div class="panel-heading">Stato Iscrizione</div>
                     <div class="panel-body">
-                        Panel content
+
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <?php if($this->customer->getRegistrationCompleted()): ?>
+                                    <h4 class="text-success">Registrazione Confermata</h4>
+                                <?php else: ?>
+                                    <h4 class="text-danger">Registrazione Non Confermata</h4>
+                                <?php endif; ?>
+                            </div>
+
+                            <div class="col-lg-6">
+                                <div class="form-group">
+                                    <label for="registrationCompleted">Registrazione</label>
+                                    <?= $this->formRow($form->get('customer')->get('registrationCompleted')); ?>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
 

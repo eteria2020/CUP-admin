@@ -2,8 +2,6 @@
 
 namespace Application\Controller;
 
-use Application\Form\CustomerForm;
-use Application\Form\CustomerFormFilter;
 use Zend\ServiceManager\FactoryInterface;
 use Zend\ServiceManager\ServiceLocatorInterface;
 use Zend\Stdlib\Hydrator\Reflection;
@@ -19,10 +17,7 @@ class CustomersControllerFactory implements FactoryInterface
     {
         // dependency is fetched from Service Manager
         $I_clientService = $serviceLocator->getServiceLocator()->get('SharengoCore\Service\CustomersService');
-        $I_countriesService = $serviceLocator->getServiceLocator()->get('SharengoCore\Service\CountriesService');
-        $entityManager = $serviceLocator->getServiceLocator()->get('doctrine.entitymanager.orm_default');
-        $I_customerForm = new CustomerForm($I_countriesService, $entityManager);
-        $I_customerForm->setInputFilter(new CustomerFormFilter());
+        $I_customerForm = $serviceLocator->getServiceLocator()->get('CustomerForm');
         $hydrator = new Reflection();
 
         // Controller is constructed, dependencies are injected (IoC in action)
