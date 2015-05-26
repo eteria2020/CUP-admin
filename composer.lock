@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "196b62b6dac8c0cb48ac9d36230173d2",
+    "hash": "740977cae26f491a9ec860536b0aa987",
     "packages": [
         {
             "name": "bjyoungblood/bjy-authorize",
@@ -838,7 +838,7 @@
         },
         {
             "name": "mvlabs/sharengo-coremodule",
-            "version": "dev-master",
+            "version": "dev-issue-267",
             "source": {
                 "type": "git",
                 "url": "ssh://git@git.mvlabs.it:4222/clients/sharengo-coremodule.git",
