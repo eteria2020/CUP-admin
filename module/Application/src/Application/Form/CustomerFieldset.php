@@ -9,8 +9,8 @@ use Zend\InputFilter\InputFilterProviderInterface;
 use Zend\Stdlib\Hydrator\HydratorInterface;
 
 /**
- * Class DishesForm
- * @package Administrator\Form
+ * Class CustomerFieldset
+ * @package Application\Form
  */
 class CustomerFieldset extends Fieldset implements InputFilterProviderInterface
 {
