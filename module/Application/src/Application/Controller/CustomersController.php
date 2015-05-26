@@ -1,7 +1,6 @@
 <?php
 namespace Application\Controller;
 
-
 use Application\Form\CustomerForm;
 use SharengoCore\Entity\Customers;
 use SharengoCore\Service\CustomersService;
@@ -79,7 +78,6 @@ class CustomersController extends AbstractActionController
 
                 } catch (\Exception $e) {
                     $this->flashMessenger()->addErrorMessage($e->getMessage());
-
                 }
 
                 return $this->redirect()->toRoute('customers');
