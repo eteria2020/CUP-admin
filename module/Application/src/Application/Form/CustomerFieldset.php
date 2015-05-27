@@ -148,8 +148,7 @@ class CustomerFieldset extends Fieldset implements InputFilterProviderInterface
             'attributes' => [
                 'id'        => 'addressInfo',
                 'maxlength' => 64,
-                'class'     => 'form-control',
-                'required'  => 'required'
+                'class'     => 'form-control'
             ]
         ]);
 
@@ -203,7 +202,8 @@ class CustomerFieldset extends Fieldset implements InputFilterProviderInterface
                 'id'          => 'taxCode',
                 'maxlength'   => 16,
                 'placeholder' => 'XXXXXXXXXXXXXXXX',
-                'class'       => 'form-control'
+                'class'       => 'form-control',
+                'required' => 'required'
             ]
         ]);
 
@@ -225,6 +225,7 @@ class CustomerFieldset extends Fieldset implements InputFilterProviderInterface
                 'id'        => 'mobile',
                 'maxlength' => 13,
                 'class'     => 'form-control',
+                'required' => 'required'
             ]
         ]);
 
@@ -244,6 +245,7 @@ class CustomerFieldset extends Fieldset implements InputFilterProviderInterface
             'attributes' => [
                 'id'    => 'driverLicense',
                 'class' => 'form-control',
+                'required' => 'required'
             ]
         ]);
 
@@ -253,7 +255,8 @@ class CustomerFieldset extends Fieldset implements InputFilterProviderInterface
             'attributes' => [
                 'id'          => 'driverLicenseAuthority',
                 'placeholder' => 'UCO',
-                'class'       => 'form-control'
+                'class'       => 'form-control',
+                'required' => 'required'
             ]
         ]);
 
@@ -264,7 +267,8 @@ class CustomerFieldset extends Fieldset implements InputFilterProviderInterface
                 'id'    => 'driverLicenseReleaseDate',
                 'class' => 'form-control date-picker',
                 'max'   => date_create()->format('d-m-Y'),
-                'type'  => 'text'
+                'type'  => 'text',
+                'required' => 'required'
             ]
         ]);
 
@@ -273,7 +277,8 @@ class CustomerFieldset extends Fieldset implements InputFilterProviderInterface
             'type'       => 'Zend\Form\Element\Text',
             'attributes' => [
                 'id'    => 'driverLicenseName',
-                'class' => 'form-control'
+                'class' => 'form-control',
+                'required' => 'required'
             ]
         ]);
 
@@ -282,7 +287,8 @@ class CustomerFieldset extends Fieldset implements InputFilterProviderInterface
             'type'       => 'Zend\Form\Element\Select',
             'attributes' => [
                 'id'    => 'driverLicenseCountry',
-                'class' => 'form-control'
+                'class' => 'form-control',
+                'required' => 'required'
             ],
             'options'    => [
                 'value_options' => $countriesService->getAllCountries()
@@ -295,7 +301,8 @@ class CustomerFieldset extends Fieldset implements InputFilterProviderInterface
             'attributes' => [
                 'id'    => 'driverLicenseExpire',
                 'class' => 'form-control date-picker',
-                'type'  => 'text'
+                'type'  => 'text',
+                'required' => 'required'
             ]
         ]);
 
