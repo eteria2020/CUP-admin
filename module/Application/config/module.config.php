@@ -182,6 +182,10 @@ return array(
                         'route' => 'customers',
                         'isVisible' => true
                     ],
+                    [
+                        'route' => 'customers/edit',
+                        'isVisible' => false
+                    ],
                 ],
             ]
         ]

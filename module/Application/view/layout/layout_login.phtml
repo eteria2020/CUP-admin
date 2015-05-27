@@ -1,10 +1,8 @@
-<?php echo $this->doctype(); ?>
-
-<html lang="en">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="it">
 <head>
-    <meta charset="utf-8">
-    <?php echo $this->headTitle('Sharengo Admin') ?>
-
+    <meta charset="utf-8"/>
+    <title>Sharengo Admin</title>
     <?php echo $this->headMeta()
         ->appendName('viewport', 'width=device-width, initial-scale=1.0')
         ->appendHttpEquiv('X-UA-Compatible', 'IE=edge')
@@ -12,13 +10,15 @@
 
     <!-- Le styles -->
     <?php echo $this->headLink(array('rel' => 'shortcut icon', 'type' => 'image/vnd.microsoft.icon', 'href' => $this->basePath() . '/img/favicon.ico'))
+        ->prependStylesheet($this->basePath('css/custom.css'))
         ->prependStylesheet($this->basePath('css/themes/blue.css'))
         ->prependStylesheet($this->basePath('css/layout.css'))
         ->prependStylesheet($this->basePath('css/plugins.css'))
-        ->prependStylesheet($this->basepath('css/components.css'))
-        ->prependStylesheet($this->basePath('css/style.css'))
-        ->prependStylesheet($this->basePath('css/bootstrap-theme.min.css'))
+        ->prependStylesheet($this->basePath('css/components.css'))
+        ->prependStylesheet($this->basepath('css/login.css'))
+        ->prependStylesheet($this->basePath('plugins/uniform/css/uniform.default.css'))
         ->prependStylesheet($this->basePath('css/bootstrap.min.css'))
+        ->prependStylesheet($this->basePath('plugins/simple-line-icons/simple-line-icons.min.css'))
         ->prependStylesheet($this->basePath('css/font-awesome.min.css'))
         ->prependStylesheet('http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700&subset=all') ?>
 
@@ -32,49 +32,25 @@
         ->prependFile($this->basePath('js/respond.min.js'), 'text/javascript', array('conditional' => 'lt IE 9',))
         ->prependFile($this->basePath('js/html5shiv.js'),   'text/javascript', array('conditional' => 'lt IE 9',))
     ; ?>
-
 </head>
-<body class="page-header-fixed page-quick-sidebar-over-content">
-<div class="page-header navbar navbar-fixed-top">
-    <div class="page-header-inner">
-        <div class="page-logo">
-            <a href="#">
-                <img src="/img/logo.png" alt="logo" class="logo-default" width="180"/>
-            </a>
-            <div class="menu-toggler sidebar-toggler hide">
-            </div>
-        </div>
 
-        <a href="javascript:;" class="menu-toggler responsive-toggler" data-toggle="collapse" data-target=".navbar-collapse">
-        </a>
+<body class="login">
 
-        <div class="top-menu">
-            <?php echo $this->partial('partials/menu-user.phtml', array()); ?>
-        </div>
-    </div>
+<div class="logo">
+    <a href="#">
+        <img src="/img/logo.png" alt=""/>
+    </a>
 </div>
 
-<div class="clearfix">
-</div>
-
-<div class="page-container">
-
-    <div class="page-sidebar-wrapper">
-        <?php echo $this->navigation('navigation')->menu()->setPartial('partials/left-menu'); ?>
-    </div>
-
+<div class="content">
     <?php echo $this->content; ?>
 </div>
 
-<!-- BEGIN FOOTER -->
-<div class="page-footer">
-    <div class="page-footer-inner">
-        <?php echo date('Y') ?> &copy; Sharengo.
-    </div>
-    <div class="scroll-to-top">
-        <i class="icon-arrow-up"></i>
-    </div>
+
+<div class="copyright">
+    <?php echo date('Y') ?> &copy; Sharengo.
 </div>
+
 <?php echo $this->inlineScript()
     ->appendScript(
         '$(document).ready(function() {

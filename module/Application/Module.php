@@ -41,7 +41,7 @@ class Module
 
             $eventManager->attach("dispatch", function ($e) {
                 $I_controller = $e->getTarget();
-                //$I_controller->layout('layout/layout_login');
+                $I_controller->layout('layout/layout_login');
             });
 
         } else {

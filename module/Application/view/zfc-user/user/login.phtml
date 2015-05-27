@@ -1,0 +1,43 @@
+<?php
+$form = $this->loginForm;
+$form->prepare();
+$form->setAttribute('action', $this->url('zfcuser/login'));
+$form->setAttribute('method', 'post');
+
+
+//fix per risolvere la mancata traduzione dentro ZfcUser
+$as_errorsIdentity = array();
+if ($form->get('identity') instanceof Zend\Form\Element &&
+    count($form->get('identity')->getMessages())>0 ) {
+    $as_errorsIdentity = array("Nome utente o password errati. Ti preghiamo di verificare i dati inseriti e riprovare.");
+}
+
+$as_errors = array_merge($as_errorsIdentity,
+    $form->get('credential')->getMessages());
+?>
+
+<h3 class="form-title">Area amministrativa</h3>
+
+<?php if (count($as_errors) > 0) { ?>
+    <div class="alert alert-danger">
+        <?php echo implode(', ', $as_errors); ?>
+    </div>
+<?php } ?>
+
+<?php echo $this->form()->openTag($form); ?>
+
+<div class="form-group">
+    <label class="control-label visible-ie8 visible-ie9">Username</label>
+    <?php echo $this->formInput($form->get('identity')->setAttributes(array('class'=>'form-control form-control-solid placeholder-no-fix', 'placeholder' => 'Nome utente')));?>
+</div>
+
+<div class="form-group">
+    <label class="control-label visible-ie8 visible-ie9">Password</label>
+    <?php echo $this->formInput($form->get('credential')->setAttributes(array('class'=>'form-control form-control-solid placeholder-no-fix', 'placeholder' => 'Password'))); ?>
+</div>
+
+<div class="form-actions">
+    <?php echo $this->formButton($form->get('submit')->setAttributes(array('class'=>'btn btn-success uppercase'))->setLabel('Entra'));?>
+</div>
+
+<?php echo $this->form()->closeTag() ?>

@@ -23,11 +23,11 @@
 
                     foreach ($page->getPages() as $child) {
 
-                        if($child->get('isVisible')) {
+                        if($child->isActive()) {
+                            $b_childActive = true;
+                        }
 
-                            if($child->isActive()) {
-                                $b_childActive = true;
-                            }
+                        if($child->get('isVisible')) {
 
                             $icon = $child->get('icon');
 
