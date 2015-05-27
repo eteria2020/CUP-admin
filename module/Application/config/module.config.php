@@ -29,7 +29,18 @@ return array(
                         'action' => 'list'
                     ]
                 ]
-            ]
+            ],
+            /*'zfcuser' => [
+                'child_routes' => [
+                    'register' => [
+                        'options' => [
+                            'defaults' => [
+                                'controller' => null
+                            ]
+                        ]
+                    ]
+                ]
+            ]*/
         ),
     ),
     'service_manager' => array(
@@ -46,6 +57,9 @@ return array(
             'Application\Controller\Index' => 'Application\Controller\IndexController',
             'Application\controller\Customers' => 'Application\Controller\CustomersController'
         ),
+        'factories' => [
+            'Application\Controller\ConsoleUser' => 'Application\Controller\ConsoleUserControllerFactory'
+        ]
     ),
     'view_manager' => array(
         'display_not_found_reason' => true,
@@ -64,12 +78,23 @@ return array(
         ),
     ),
     // Placeholder for console routes
-    'console' => array(
-        'router' => array(
-            'routes' => array(
-            ),
-        ),
-    ),
+    'console' => [
+        'router' => [
+            'routes' => [
+                'register' => [
+                    'type' => 'simple',
+                    'options' => [
+                        'route' => 'register [<email>]',
+                        'defaults' => [
+                            '__NAMESPACE__' => 'Application\Controller',
+                            'controller' => 'ConsoleUser',
+                            'action' => 'register'
+                        ]
+                    ]
+                ]
+            ],
+        ],
+    ],
 
     'doctrine' => array(
         'driver' => array(
@@ -106,7 +131,8 @@ return array(
                 // Enable access to ZFC User pages
                 array('controller' => 'zfcuser', 'roles' => array()),
                 array('controller' => 'Application\Controller\Index', 'roles' => array('user')),
-                ['controller' => 'Application\Controller\Customers', 'roles' => ['user']]
+                ['controller' => 'Application\Controller\Customers', 'roles' => ['user']],
+                ['controller' => 'Application\Controller\ConsoleUser', 'roles' => []],
             ),
         ),
     ),
