@@ -65,6 +65,30 @@ return array(
                         ]
                     ]
                 ]
+            ],
+            'users' => [
+                'type' => 'Literal',
+                'options' => [
+                    'route' => '/users',
+                    'defaults' => [
+                        'controller' => 'Application\Controller\Users',
+                        'action' => 'index'
+                    ]
+                ],
+                'may_terminate' => true,
+                'child_routes' => [
+                    'add' => [
+                        'type'    => 'Literal',
+                        'options' => [
+                            'route'    => '/add',
+                            'defaults' => [
+                                '__NAMESPACE__' => 'Application\Controller',
+                                'controller'    => 'Users',
+                                'action'        => 'add',
+                            ],
+                        ],
+                    ]
+                ],
             ]
         ),
     ),
@@ -85,7 +109,8 @@ return array(
 
         'factories' => [
             'Application\controller\Customers' => 'Application\Controller\CustomersControllerFactory',
-            'Application\Controller\ConsoleUser' => 'Application\Controller\ConsoleUserControllerFactory'
+            'Application\Controller\ConsoleUser' => 'Application\Controller\ConsoleUserControllerFactory',
+            'Application\controller\Users' => 'Application\Controller\UsersControllerFactory',
         ]
     ),
     'view_manager' => array(
@@ -138,7 +163,7 @@ return array(
                 'drivers' => array(
                     __NAMESPACE__ . '\Entity' => __NAMESPACE__ . '_driver'
                 )
-            )
+            ),
         ),
     ),
 
@@ -163,6 +188,7 @@ return array(
                 array('controller' => 'Application\Controller\Index', 'roles' => array('user')),
                 ['controller' => 'Application\Controller\Customers', 'roles' => ['user']],
                 ['controller' => 'Application\Controller\ConsoleUser', 'roles' => []],
+                ['controller' => 'Application\Controller\Users', 'roles' => ['user']]
             ),
         ),
     ),
