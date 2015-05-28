@@ -100,6 +100,7 @@ return array(
         'factories' => [
             'navigation' => 'Zend\Navigation\Service\DefaultNavigationFactory',
             'CustomerForm' => 'Application\Form\CustomerFormFactory',
+            'UserForm' => 'Application\Form\UserFormFactory',
         ]
     ),
     'controllers' => array(
