@@ -40,9 +40,7 @@ class CustomersController extends AbstractActionController
 
     public function listAction()
     {
-        return new ViewModel([
-            'totalCustomers' => $this->I_customerService->getTotalCustomers()
-        ]);
+        return new ViewModel();
     }
 
     public function editAction()
