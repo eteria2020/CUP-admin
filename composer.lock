@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "740977cae26f491a9ec860536b0aa987",
+    "hash": "196b62b6dac8c0cb48ac9d36230173d2",
     "packages": [
         {
             "name": "bjyoungblood/bjy-authorize",
@@ -838,11 +838,11 @@
         },
         {
             "name": "mvlabs/sharengo-coremodule",
-            "version": "dev-issue-267",
+            "version": "dev-master",
             "source": {
                 "type": "git",
                 "url": "ssh://git@git.mvlabs.it:4222/clients/sharengo-coremodule.git",
-                "reference": "545b9862c5801f557f198658bdefd4a04bdc0fb5"
+                "reference": "5caa10c581238bc3c5e38ece8ba9d227be530a51"
             },
             "require": {
                 "doctrine/doctrine-orm-module": "0.*",
@@ -856,21 +856,21 @@
                 }
             },
             "description": "Core ZF2 module for Sharengo apps",
-            "time": "2015-05-26 09:26:51"
+            "time": "2015-05-28 11:55:44"
         },
         {
             "name": "symfony/console",
-            "version": "v2.6.7",
+            "version": "v2.6.8",
             "target-dir": "Symfony/Component/Console",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/Console.git",
-                "reference": "ebc5679854aa24ed7d65062e9e3ab0b18a917272"
+                "reference": "2343f6d8026306bd330e0c987e4c102483c213e7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/Console/zipball/ebc5679854aa24ed7d65062e9e3ab0b18a917272",
-                "reference": "ebc5679854aa24ed7d65062e9e3ab0b18a917272",
+                "url": "https://api.github.com/repos/symfony/Console/zipball/2343f6d8026306bd330e0c987e4c102483c213e7",
+                "reference": "2343f6d8026306bd330e0c987e4c102483c213e7",
                 "shasum": ""
             },
             "require": {
@@ -914,7 +914,7 @@
             ],
             "description": "Symfony Console Component",
             "homepage": "https://symfony.com",
-            "time": "2015-05-02 15:18:45"
+            "time": "2015-05-22 14:53:08"
         },
         {
             "name": "zendframework/zendframework",
