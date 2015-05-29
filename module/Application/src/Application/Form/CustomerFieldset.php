@@ -4,6 +4,9 @@ namespace Application\Form;
 use SharengoCore\Entity\Customers;
 use SharengoCore\Service\CountriesService;
 use SharengoCore\Service\CustomersService;
+use SharengoCore\Service\ProvincesService;
+use SharengoCore\Service\AuthorityService;
+
 use Zend\Form\Fieldset;
 use Zend\InputFilter\InputFilterProviderInterface;
 use Zend\Stdlib\Hydrator\HydratorInterface;
@@ -20,8 +23,13 @@ class CustomerFieldset extends Fieldset implements InputFilterProviderInterface
      * @param string $name
      * @param array  $options
      */
-    public function __construct(CustomersService $customersService, CountriesService $countriesService, HydratorInterface $hydrator)
-    {
+    public function __construct(
+        CustomersService $customersService,
+        CountriesService $countriesService,
+        ProvincesService $provincesService,
+        AuthorityService $authorityService,
+        HydratorInterface $hydrator
+    ) {
         $this->customersService = $customersService;
 
         parent::__construct('customer', [
@@ -111,13 +119,16 @@ class CustomerFieldset extends Fieldset implements InputFilterProviderInterface
 
         $this->add([
             'name'       => 'birthProvince',
-            'type'       => 'Zend\Form\Element\Text',
+            'type'       => 'Zend\Form\Element\Select',
             'attributes' => [
                 'id'       => 'birthProvince',
                 'class'    => 'form-control',
                 'required' => 'required'
 
             ],
+            'options' => [
+                'value_options' => $provincesService->getAllProvinces()
+            ]
         ]);
 
         $this->add([
@@ -251,12 +262,15 @@ class CustomerFieldset extends Fieldset implements InputFilterProviderInterface
 
         $this->add([
             'name'       => 'driverLicenseAuthority',
-            'type'       => 'Zend\Form\Element\Text',
+            'type'       => 'Zend\Form\Element\Select',
             'attributes' => [
                 'id'          => 'driverLicenseAuthority',
                 'placeholder' => 'UCO',
                 'class'       => 'form-control',
                 'required' => 'required'
+            ],
+            'options' => [
+                'value_options' => $authorityService->getAllAuthorities()
             ]
         ]);
 
@@ -507,8 +521,8 @@ class CustomerFieldset extends Fieldset implements InputFilterProviderInterface
                     [
                         'name' => 'StringLength',
                         'options' => [
-                            'min' => 4,
-                            'max' => 32
+                            'min' => 2,
+                            'max' => 3
                         ]
                     ]
                 ]
