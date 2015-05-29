@@ -137,7 +137,7 @@ class UserFieldset extends Fieldset implements InputFilterProviderInterface
                     [
                         'name' => 'Application\Form\Validator\DuplicateEmail',
                         'options' => [
-                            'userService' => $this->I_userService
+                            'service' => $this->I_userService
                         ]
                     ]
                 ]

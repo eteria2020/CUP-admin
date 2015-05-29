@@ -365,7 +365,7 @@ class CustomerFieldset extends Fieldset implements InputFilterProviderInterface
                     [
                         'name' => 'Application\Form\Validator\DuplicateEmail',
                         'options' => [
-                            'customerService' => $this->customersService,
+                            'service' => $this->customersService,
                             'avoid' => [
                                 $this->customersService->getValidatorEmail()
                             ]
