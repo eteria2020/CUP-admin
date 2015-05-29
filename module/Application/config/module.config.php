@@ -55,6 +55,31 @@ return array(
                     ],
                 ],
             ],
+            'cars' => [
+                'type' => 'Literal',
+                'options' => [
+                    'route' => '/cars',
+                    'defaults' => [
+                        'controller' => 'Application\Controller\Cars',
+                        'action' => 'index'
+                    ]
+                ],
+                'may_terminate' => true,
+                'child_routes' => [
+                    'datatable' => [
+                        'type'    => 'Literal',
+                        'options' => [
+                            'route'    => '/datatable',
+                            'defaults' => [
+                                '__NAMESPACE__' => 'Application\Controller',
+                                'controller'    => 'Cars',
+                                'action'        => 'datatable',
+                            ],
+                        ],
+                    ]
+                ],
+            ],
+
             'zfcuser' => [
                 'child_routes' => [
                     'register' => [
@@ -82,10 +107,10 @@ return array(
         'invokables' => array(
             'Application\Controller\Index' => 'Application\Controller\IndexController',
         ),
-
         'factories' => [
-            'Application\controller\Customers' => 'Application\Controller\CustomersControllerFactory',
-            'Application\Controller\ConsoleUser' => 'Application\Controller\ConsoleUserControllerFactory'
+            'Application\controller\Customers'   => 'Application\Controller\CustomersControllerFactory',
+            'Application\Controller\ConsoleUser' => 'Application\Controller\ConsoleUserControllerFactory',
+            'Application\Controller\Cars'        => 'Application\Controller\CarsControllerFactory'
         ]
     ),
     'view_manager' => array(
@@ -162,6 +187,7 @@ return array(
                 array('controller' => 'zfcuser', 'roles' => array()),
                 array('controller' => 'Application\Controller\Index', 'roles' => array('user')),
                 ['controller' => 'Application\Controller\Customers', 'roles' => ['user']],
+                ['controller' => 'Application\Controller\Cars', 'roles' => ['user']],
                 ['controller' => 'Application\Controller\ConsoleUser', 'roles' => []],
             ),
         ),
@@ -186,6 +212,20 @@ return array(
                         'route' => 'customers/edit',
                         'isVisible' => false
                     ],
+                ],
+            ],
+            [
+                'label'     => 'Auto',
+                'route'     => 'cars',
+                'icon'      => 'fa fa-users',
+                'resource'  => 'admin',
+                'isRouteJs' => true,
+                'pages'     => [
+                    [
+                        'label' => 'Elenco',
+                        'route' => 'cars',
+                        'isVisible' => true
+                    ]
                 ],
             ]
         ]
