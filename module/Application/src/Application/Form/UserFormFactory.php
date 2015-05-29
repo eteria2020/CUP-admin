@@ -19,10 +19,11 @@ class UserFormFactory implements FactoryInterface
     {
         $entityManager = $serviceLocator->get('doctrine.entitymanager.orm_default');
         $I_usersService = $serviceLocator->get('SharengoCore\Service\UsersService');
+        $I_options = $serviceLocator->get('zfcuser_module_options');
 
         $hydrator = new DoctrineHydrator($entityManager);
         $userFieldset = new UserFieldset($I_usersService, $hydrator);
 
-        return new UserForm($userFieldset, $entityManager);
+        return new UserForm($userFieldset, $entityManager, $I_options);
     }
 }
