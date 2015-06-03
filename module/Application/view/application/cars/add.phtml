@@ -1,0 +1,60 @@
+<?php
+$form = $this->carForm->prepare();
+?>
+<div class="page-content-wrapper">
+    <div class="page-content">
+
+        <div class="row">
+            <div class="col-lg-6">
+                <h3 class="page-title">AGGIUNGI AUTO</h3>
+            </div>
+            <div class="col-lg-6">
+                <a href="<?php echo $this->url('cars'); ?>" class="btn btn-success pull-right"><i class="fa fa-arrow-left"></i> Torna alla lista</a>
+            </div>
+        </div>
+
+
+        <div class="page-bar">
+        </div>
+
+        <div class="row">
+            <div class="col-md-12">
+
+                <?= $this->form()->openTag($form); ?>
+
+                <div class="row">
+                    <div class="col-lg-4">
+                        <div class="form-group">
+                            <label for="gender">Targa</label>
+                            <?= $this->formRow($form->get('car')->get('plate')); ?>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-4">
+                        <div class="form-group">
+                            <label for="name">Azienda</label>
+                            <?= $this->formRow($form->get('car')->get('manufactures')); ?>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-4">
+                        <div class="form-group">
+                            <label for="surname">Modello</label>
+                            <?= $this->formRow($form->get('car')->get('model')); ?>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-lg-12">
+                        <button type="submit" class="btn btn-success">Aggiungi Auto</button>
+                    </div>
+                </div>
+
+                <?= $this->form()->closeTag(); ?>
+
+            </div>
+        </div>
+
+    </div>
+</div>

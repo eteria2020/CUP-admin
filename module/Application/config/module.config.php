@@ -76,6 +76,45 @@ return array(
                                 'action'        => 'datatable',
                             ],
                         ],
+                    ],
+                    'add' => [
+                        'type'    => 'Literal',
+                        'options' => [
+                            'route'    => '/add',
+                            'defaults' => [
+                                '__NAMESPACE__' => 'Application\Controller',
+                                'controller'    => 'Cars',
+                                'action'        => 'add',
+                            ],
+                        ],
+                    ],
+                    'edit' => [
+                        'type'    => 'Segment',
+                        'options' => [
+                            'route'    => '/edit/:plate',
+                            'constraints' => array(
+                                'plate' => '[A-Z0-9]*'
+                            ),
+                            'defaults' => [
+                                '__NAMESPACE__' => 'Application\Controller',
+                                'controller'    => 'Cars',
+                                'action'        => 'edit',
+                            ],
+                        ],
+                    ],
+                    'delete' => [
+                        'type'    => 'Segment',
+                        'options' => [
+                            'route'    => '/delete/:plate/:type',
+                            'constraints' => array(
+                                'plate' => '[A-Z0-9]*'
+                            ),
+                            'defaults' => [
+                                '__NAMESPACE__' => 'Application\Controller',
+                                'controller'    => 'Cars',
+                                'action'        => 'delete',
+                            ],
+                        ],
                     ]
                 ],
             ],
@@ -101,6 +140,7 @@ return array(
         'factories' => [
             'navigation' => 'Zend\Navigation\Service\DefaultNavigationFactory',
             'CustomerForm' => 'Application\Form\CustomerFormFactory',
+            'CarForm' => 'Application\Form\CarFormFactory',
         ]
     ),
     'controllers' => array(
@@ -225,7 +265,19 @@ return array(
                         'label' => 'Elenco',
                         'route' => 'cars',
                         'isVisible' => true
-                    ]
+                    ],
+                    [
+                        'route' => 'cars/add',
+                        'isVisible' => false
+                    ],
+                    [
+                        'route' => 'cars/edit',
+                        'isVisible' => false
+                    ],
+                    [
+                        'route' => 'cars/delete',
+                        'isVisible' => false
+                    ],
                 ],
             ]
         ]
