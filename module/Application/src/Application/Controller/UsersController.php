@@ -49,7 +49,7 @@ class UsersController extends AbstractActionController
 
                 try {
 
-                    $form->saveData();
+                    $this->I_usersService->saveData($form->getData());
                     $this->flashMessenger()->addSuccessMessage('Utente creato con successo!');
 
                 } catch (\Exception $e) {

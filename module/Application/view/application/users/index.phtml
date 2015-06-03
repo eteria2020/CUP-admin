@@ -35,7 +35,6 @@
                                 <th>Id</th>
                                 <th>Nome & Cognome</th>
                                 <th>Email</th>
-                                <th>Stato</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -46,13 +45,6 @@
                                 <td><?= $I_user->getId(); ?></td>
                                 <td><?= $I_user->getDisplayName(); ?></td>
                                 <td><?= $I_user->getEmail(); ?></td>
-                                <td>
-                                    <?php if($I_user->getState() == 1): ?>
-                                        <span class="label label-success">Attivo</span>
-                                    <?php else: ?>
-                                        <span class="label label-danger">Non Attivo</span>
-                                    <?php endif; ?>
-                                </td>
                             </tr>
                             <?php endforeach; ?>
                             </tbody>

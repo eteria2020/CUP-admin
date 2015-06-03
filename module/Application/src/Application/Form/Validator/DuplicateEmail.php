@@ -2,14 +2,14 @@
 
 namespace Application\Form\Validator;
 
-use SharengoCore\Service\ServiceInterface;
+use SharengoCore\Service\ValidatorServiceInterface;
 use Zend\Validator\AbstractValidator;
 
 class DuplicateEmail extends AbstractValidator
 {
     const DUPLICATE = 'duplicateEmail';
 
-    /** @var  ServiceInterface */
+    /** @var  ValidatorServiceInterface */
     private $service;
 
     /**

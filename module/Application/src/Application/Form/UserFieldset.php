@@ -99,21 +99,6 @@ class UserFieldset extends Fieldset implements InputFilterProviderInterface
                 'required' => 'required'
             ]
         ]);
-
-        $this->add([
-            'name'       => 'state',
-            'type'       => 'Zend\Form\Element\Select',
-            'attributes' => [
-                'id'    => 'state',
-                'class' => 'form-control',
-            ],
-            'options'    => [
-                'value_options' => [
-                    1 => "Attivo",
-                    0 => "Non Attivo"
-                ]
-            ]
-        ]);
     }
 
     public function getInputFilterSpecification()

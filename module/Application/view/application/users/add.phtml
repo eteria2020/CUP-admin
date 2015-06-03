@@ -24,26 +24,20 @@ $form = $this->userForm->prepare();
                     <div class="col-md-12">
                         <?= $this->form()->openTag($form); ?>
                             <div class="row">
-                                <div class="col-lg-4">
+                                <div class="col-lg-6">
                                     <div class="form-group">
                                         <label for="username">Username</label>
                                         <?= $this->formRow($form->get('user')->get('username')); ?>
                                     </div>
                                 </div>
 
-                                <div class="col-lg-4">
+                                <div class="col-lg-6">
                                     <div class="form-group">
                                         <label for="displayName">Nome & Cognome</label>
                                         <?= $this->formRow($form->get('user')->get('displayName')); ?>
                                     </div>
                                 </div>
 
-                                <div class="col-lg-4">
-                                    <div class="form-group">
-                                        <label for="state">Stato</label>
-                                        <?= $this->formRow($form->get('user')->get('state')); ?>
-                                    </div>
-                                </div>
                             </div>
 
                             <div class="row">
