@@ -1,0 +1,26 @@
+<div class="page-content-wrapper">
+    <div class="page-content">
+
+        <div class="row">
+            <div class="col-lg-6">
+                <h3 class="page-title">ELIMINA AUTO: <?= $this->car->getPlate(); ?></h3>
+            </div>
+            <div class="col-lg-6">
+                <a href="<?php echo $this->url('cars'); ?>" class="btn btn-success pull-right"><i class="fa fa-arrow-left"></i> Torna alla lista</a>
+            </div>
+        </div>
+
+        <hr>
+
+        <div class="row">
+            <div class="col-md-12">
+
+                <h3>Sei sicuro di voler eliminare quest'auto?</h3>
+
+                <a href="<?= $this->url('cars/delete', array('plate' => $this->car->getPlate(), 'type' => 'delete')); ?>" class="btn btn-danger btn-lg">Elimina Auto</a>
+
+            </div>
+        </div>
+
+    </div>
+</div>

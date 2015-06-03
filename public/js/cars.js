@@ -28,7 +28,23 @@ $(function() {
         "order": [[0, 'desc']],
         "columns": [
             {data: 'plate'},
-            {data: 'manufactures'}
+            {data: 'manufactures'},
+            {data: 'model'},
+            {data: 'button'}
+        ],
+        "columnDefs": [
+            {
+                targets: 3,
+                data: 'button',
+                searchable: false,
+                sortable: false,
+                render: function (data) {
+                    return' <div class="btn-group" role="group">' +
+                        '<a href="/cars/edit/' + data + '" class="btn btn-default btn-xs">Modifica</a>' +
+                        '<a href="/cars/delete/' + data + '/view" class="btn btn-default btn-xs">Elimina</a>' +
+                        '</div>';
+                }
+            }
         ],
         "lengthMenu": [
             [100, 200, 300],
