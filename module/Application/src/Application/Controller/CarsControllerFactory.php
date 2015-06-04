@@ -4,7 +4,7 @@ namespace Application\Controller;
 
 use Zend\ServiceManager\FactoryInterface;
 use Zend\ServiceManager\ServiceLocatorInterface;
-use Zend\Stdlib\Hydrator\Reflection;
+use DoctrineModule\Stdlib\Hydrator\DoctrineObject as DoctrineHydrator;
 
 class CarsControllerFactory implements FactoryInterface
 {
@@ -15,9 +15,10 @@ class CarsControllerFactory implements FactoryInterface
      */
     public function createService(ServiceLocatorInterface $serviceLocator)
     {
+        $entityManager = $serviceLocator->getServiceLocator()->get('doctrine.entitymanager.orm_default');
         $I_carsService = $serviceLocator->getServiceLocator()->get('SharengoCore\Service\CarsService');
         $I_carForm = $serviceLocator->getServiceLocator()->get('CarForm');
-        $hydrator = new Reflection();
+        $hydrator = new DoctrineHydrator($entityManager);
 
         return new CarsController($I_carsService, $I_carForm, $hydrator);
     }
