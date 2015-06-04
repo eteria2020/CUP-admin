@@ -129,6 +129,30 @@ return array(
                         ]
                     ]
                 ]
+            ],
+            'users' => [
+                'type' => 'Literal',
+                'options' => [
+                    'route' => '/users',
+                    'defaults' => [
+                        'controller' => 'Application\Controller\Users',
+                        'action' => 'index'
+                    ]
+                ],
+                'may_terminate' => true,
+                'child_routes' => [
+                    'add' => [
+                        'type'    => 'Literal',
+                        'options' => [
+                            'route'    => '/add',
+                            'defaults' => [
+                                '__NAMESPACE__' => 'Application\Controller',
+                                'controller'    => 'Users',
+                                'action'        => 'add',
+                            ],
+                        ],
+                    ]
+                ],
             ]
         ),
     ),
@@ -140,6 +164,7 @@ return array(
         'factories' => [
             'navigation' => 'Zend\Navigation\Service\DefaultNavigationFactory',
             'CustomerForm' => 'Application\Form\CustomerFormFactory',
+            'UserForm' => 'Application\Form\UserFormFactory',
             'CarForm' => 'Application\Form\CarFormFactory',
         ]
     ),
@@ -150,6 +175,7 @@ return array(
         'factories' => [
             'Application\controller\Customers'   => 'Application\Controller\CustomersControllerFactory',
             'Application\Controller\ConsoleUser' => 'Application\Controller\ConsoleUserControllerFactory',
+            'Application\controller\Users'       => 'Application\Controller\UsersControllerFactory',
             'Application\Controller\Cars'        => 'Application\Controller\CarsControllerFactory'
         ]
     ),
@@ -203,7 +229,7 @@ return array(
                 'drivers' => array(
                     __NAMESPACE__ . '\Entity' => __NAMESPACE__ . '_driver'
                 )
-            )
+            ),
         ),
     ),
 
@@ -229,6 +255,7 @@ return array(
                 ['controller' => 'Application\Controller\Customers', 'roles' => ['user']],
                 ['controller' => 'Application\Controller\Cars', 'roles' => ['user']],
                 ['controller' => 'Application\Controller\ConsoleUser', 'roles' => []],
+                ['controller' => 'Application\Controller\Users', 'roles' => ['user']]
             ),
         ),
     ),

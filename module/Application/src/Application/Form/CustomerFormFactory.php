@@ -21,9 +21,13 @@ class CustomerFormFactory implements FactoryInterface
         $hydrator = new DoctrineHydrator($entityManager);
         $I_clientService = $serviceLocator->get('SharengoCore\Service\CustomersService');
         $countriesService = $serviceLocator->get('SharengoCore\Service\CountriesService');
+        $provincesService = $serviceLocator->get('SharengoCore\Service\ProvincesService');
+        $authorityService = $serviceLocator->get('SharengoCore\Service\AuthorityService');
         $customerFieldset = new CustomerFieldset(
             $I_clientService,
             $countriesService,
+            $provincesService,
+            $authorityService,
             $hydrator
         );
 

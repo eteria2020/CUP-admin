@@ -2,18 +2,15 @@
 
 namespace Application\Form\Validator;
 
-use SharengoCore\Service\CustomersService;
+use SharengoCore\Service\ValidatorServiceInterface;
 use Zend\Validator\AbstractValidator;
 
 class DuplicateEmail extends AbstractValidator
 {
     const DUPLICATE = 'duplicateEmail';
 
-    /**
-     * SM
-     * @var CustomersService
-     */
-    private $customersService;
+    /** @var  ValidatorServiceInterface */
+    private $service;
 
     /**
      * @var array
@@ -27,7 +24,9 @@ class DuplicateEmail extends AbstractValidator
     public function __construct($options)
     {
         parent::__construct();
-        $this->customersService = $options['customerService'];
+
+        $this->service = $options['service'];
+
         if (isset($options['avoid'])) {
             $this->emailsToAvoid = $options['avoid'];
         }
@@ -37,9 +36,9 @@ class DuplicateEmail extends AbstractValidator
     {
         $this->setValue($value);
 
-        $customer = $this->customersService->findByEmail($value);
+        $data = $this->service->findByEmail($value);
 
-        if (!empty($customer) && !in_array($customer[0]->getEmail(), $this->emailsToAvoid)) {
+        if (!empty($data) && !in_array($data[0]->getEmail(), $this->emailsToAvoid)) {
             $this->error(self::DUPLICATE);
             return false;
         }
