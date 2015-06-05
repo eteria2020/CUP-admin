@@ -21,7 +21,7 @@ $settings = array(
      * instead of the default one provided. Default is ZfcUser\Entity\User.
      * The entity class should implement ZfcUser\Entity\UserInterface
      */
-    //'user_entity_class' => 'ZfcUser\Entity\User',
+    'user_entity_class' => 'Application\Entity\Webuser',
 
     /**
      * Enable registration
@@ -30,7 +30,7 @@ $settings = array(
      *
      * Accepted values: boolean true or false
      */
-    //'enable_registration' => true,
+    'enable_registration' => false,
 
     /**
      * Enable Username
@@ -220,6 +220,12 @@ $settings = array(
     /**
      * End of ZfcUser configuration
      */
+
+    /**
+     * Start configuration for ZfcUserDoctrineORM
+     */
+    'enable_default_entities' => false,
+    
 );
 
 /**
