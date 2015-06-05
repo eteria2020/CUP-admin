@@ -31,17 +31,4 @@ class CustomerForm extends Form
         ]);
     }
 
-    /**
-     * persists the form data in the database and returns the saved data
-     *
-     * @return Customers
-     */
-    public function saveData()
-    {
-        $customer = $this->getData();
-        $this->entityManager->persist($customer);
-        $this->entityManager->flush();
-
-        return $customer;
-    }
 }
