@@ -42,19 +42,20 @@ $(function() {
         "order": [[0, 'desc']],
         "columns": [
             {data: 'id'},
-            {data: 'name'},
-            {data: 'surname'},
-            {data: 'card'},
-            {data: 'mobile'},
+            {data: 'user'},
             {data: 'plate'},
-            {data: 'kmBeginning'},
-            {data: 'kmEnd'},
+            {data: 'card'},
+            {data: 'km'},
+            {data: 'price'},
+            {data: 'addressBeginning'},
+            {data: 'addressEnd'},
             {data: 'timeBeginning'},
             {data: 'timeEnd'},
+            {data: 'payable'},
             {data: 'parkSeconds'}
         ],
         "aoColumnDefs": [
-            { 'bSortable': false, 'aTargets': [1, 2, 3, 4, 5]}
+            { 'bSortable': false, 'aTargets': [1, 2, 3, 4, 5, 8,9]}
         ],
         "lengthMenu": [
             [100, 200, 300],
