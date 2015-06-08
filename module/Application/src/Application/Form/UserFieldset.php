@@ -33,7 +33,7 @@ class UserFieldset extends Fieldset implements InputFilterProviderInterface
         $this->setObject(new Webuser());
 
         $this->add([
-            'name'       => 'userId',
+            'name'       => 'id',
             'type'       => 'Zend\Form\Element\Hidden',
             'attributes' => [
                 'id' => 'id'
@@ -76,7 +76,6 @@ class UserFieldset extends Fieldset implements InputFilterProviderInterface
             'attributes' => [
                 'id'       => 'password',
                 'class'    => 'form-control',
-                'required' => 'required'
             ]
         ]);
 
@@ -86,7 +85,6 @@ class UserFieldset extends Fieldset implements InputFilterProviderInterface
             'attributes' => [
                 'id'       => 'password',
                 'class'    => 'form-control',
-                'required' => 'required'
             ]
         ]);
     }
@@ -104,7 +102,10 @@ class UserFieldset extends Fieldset implements InputFilterProviderInterface
                     [
                         'name' => 'Application\Form\Validator\DuplicateEmail',
                         'options' => [
-                            'service' => $this->I_userService
+                            'service' => $this->I_userService,
+                            'avoid' => [
+                                $this->I_userService->getValidatorEmail()
+                            ]
                         ]
                     ]
                 ]
@@ -133,7 +134,7 @@ class UserFieldset extends Fieldset implements InputFilterProviderInterface
                 ]
             ],
             'password' => [
-                'required' => true,
+                'required' => $this->I_userService->getEditMode() ? false :  true,
                 'filters' => [
                     [
                         'name' => 'StringTrim'
@@ -149,7 +150,7 @@ class UserFieldset extends Fieldset implements InputFilterProviderInterface
                 ]
             ],
             'password2' => [
-                'required' => true,
+                'required' => $this->I_userService->getEditMode() ? false :  true,
                 'filters' => [
                     [
                         'name' => 'StringTrim'
