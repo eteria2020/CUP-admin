@@ -60,12 +60,93 @@ class CarFieldset extends Fieldset implements InputFilterProviderInterface
             ]
         ]);
 
+        $this->add([
+            'name'       => 'label',
+            'type'       => 'Zend\Form\Element\Text',
+            'attributes' => [
+                'id'       => 'label',
+                'class'    => 'form-control',
+                'required' => 'required'
+            ]
+        ]);
+
+        $this->add([
+            'name'       => 'notes',
+            'type'       => 'Zend\Form\Element\Text',
+            'attributes' => [
+                'id'       => 'notes',
+                'class'    => 'form-control'
+            ]
+        ]);
+
+        $this->add([
+            'name'       => 'active',
+            'type'       => 'Zend\Form\Element\Select',
+            'attributes' => [
+                'id'    => 'active',
+                'class' => 'form-control',
+            ],
+            'options'    => [
+                'value_options' => [
+                    1 => "Attivo",
+                    0 => "Non Attivo"
+                ]
+            ]
+        ]);
+
+        $this->add([
+            'name'       => 'status',
+            'type'       => 'Zend\Form\Element\Select',
+            'attributes' => [
+                'id'    => 'active',
+                'class' => 'form-control',
+            ],
+            'options'    => [
+                'value_options' => [
+                    "operative" => "Operativa",
+                    "not operative" => "Non Operativa",
+                    "maintenance" => "Manutenzione",
+
+                ]
+            ]
+        ]);
+
+        $this->add([
+            'name'       => 'busy',
+            'type'       => 'Zend\Form\Element\Select',
+            'attributes' => [
+                'id'    => 'busy',
+                'class' => 'form-control',
+            ],
+            'options'    => [
+                'value_options' => [
+                    0 => "Non Occupata",
+                    1 => "Occupata"
+                ]
+            ]
+        ]);
+
+        $this->add([
+            'name'       => 'hidden',
+            'type'       => 'Zend\Form\Element\Select',
+            'attributes' => [
+                'id'    => 'busy',
+                'class' => 'form-control',
+            ],
+            'options'    => [
+                'value_options' => [
+                    0 => "Non Nascosta",
+                    1 => "Nascosta"
+                ]
+            ]
+        ]);
+
     }
 
     public function getInputFilterSpecification()
     {
         return [
-            'plate'    => [
+            'plate'        => [
                 'required' => true,
                 'filters'  => [
                     [
@@ -81,14 +162,62 @@ class CarFieldset extends Fieldset implements InputFilterProviderInterface
                     ]
                 ]
             ],
-            'model' => [
+            'model'        => [
                 'required' => true,
                 'filters'  => [
                     [
                         'name' => 'StringTrim'
                     ]
                 ]
-            ]
+            ],
+            'label'        => [
+                'required' => true,
+                'filters'  => [
+                    [
+                        'name' => 'StringTrim'
+                    ]
+                ]
+            ],
+            'notes'        => [
+                'required' => false,
+                'filters'  => [
+                    [
+                        'name' => 'StringTrim'
+                    ]
+                ]
+            ],
+            'active'        => [
+                'required' => true,
+                'filters'  => [
+                    [
+                        'name' => 'StringTrim'
+                    ]
+                ]
+            ],
+            'status'        => [
+                'required' => true,
+                'filters'  => [
+                    [
+                        'name' => 'StringTrim'
+                    ]
+                ]
+            ],
+            'busy'        => [
+                'required' => true,
+                'filters'  => [
+                    [
+                        'name' => 'StringTrim'
+                    ]
+                ]
+            ],
+            'hidden'        => [
+                'required' => true,
+                'filters'  => [
+                    [
+                        'name' => 'StringTrim'
+                    ]
+                ]
+            ],
         ];
     }
 

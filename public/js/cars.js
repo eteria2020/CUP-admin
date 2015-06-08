@@ -30,11 +30,28 @@ $(function() {
             {data: 'plate'},
             {data: 'manufactures'},
             {data: 'model'},
+            {data: 'clean'},
+            {data: 'position'},
+            {data: 'lastContact'},
+            {data: 'rpm'},
+            {data: 'speed'},
+            {data: 'km'},
+            {data: 'running'},
+            {data: 'parking'},
             {data: 'button'}
         ],
+
         "columnDefs": [
             {
                 targets: 3,
+                sortable: false
+            },
+            {
+                targets: 4,
+                sortable: false
+            },
+            {
+                targets: 11,
                 data: 'button',
                 searchable: false,
                 sortable: false,

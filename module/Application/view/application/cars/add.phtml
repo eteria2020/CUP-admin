@@ -23,24 +23,68 @@ $form = $this->carForm->prepare();
                 <?= $this->form()->openTag($form); ?>
 
                 <div class="row">
-                    <div class="col-lg-4">
+                    <div class="col-lg-3">
                         <div class="form-group">
                             <label for="gender">Targa</label>
                             <?= $this->formRow($form->get('car')->get('plate')); ?>
                         </div>
                     </div>
 
-                    <div class="col-lg-4">
+                    <div class="col-lg-3">
                         <div class="form-group">
                             <label for="name">Azienda</label>
                             <?= $this->formRow($form->get('car')->get('manufactures')); ?>
                         </div>
                     </div>
 
-                    <div class="col-lg-4">
+                    <div class="col-lg-3">
                         <div class="form-group">
                             <label for="surname">Modello</label>
                             <?= $this->formRow($form->get('car')->get('model')); ?>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-3">
+                        <div class="form-group">
+                            <label for="surname">Label</label>
+                            <?= $this->formRow($form->get('car')->get('label')); ?>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-lg-4">
+                        <div class="form-group">
+                            <label for="gender">Note</label>
+                            <?= $this->formRow($form->get('car')->get('notes')); ?>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-2">
+                        <div class="form-group">
+                            <label for="name">Attiva</label>
+                            <?= $this->formRow($form->get('car')->get('active')); ?>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-2">
+                        <div class="form-group">
+                            <label for="surname">Status</label>
+                            <?= $this->formRow($form->get('car')->get('status')); ?>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-2">
+                        <div class="form-group">
+                            <label for="surname">Occupata</label>
+                            <?= $this->formRow($form->get('car')->get('busy')); ?>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-2">
+                        <div class="form-group">
+                            <label for="surname">Nascosta</label>
+                            <?= $this->formRow($form->get('car')->get('hidden')); ?>
                         </div>
                     </div>
                 </div>
