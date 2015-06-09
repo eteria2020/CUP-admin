@@ -52,14 +52,14 @@ $form = $this->userForm->prepare();
                                 <div class="col-lg-3">
                                     <div class="form-group">
                                         <label for="password">Password</label>
-                                        <?= $this->formRow($form->get('user')->get('password')); ?>
+                                        <?= $this->formRow($form->get('user')->get('password')->setAttribute('required', 'required')); ?>
                                     </div>
                                 </div>
 
                                 <div class="col-lg-3">
                                     <div class="form-group">
                                         <label for="password">Ripeti Password</label>
-                                        <?= $this->formRow($form->get('user')->get('password2')); ?>
+                                        <?= $this->formRow($form->get('user')->get('password2')->setAttribute('required', 'required')); ?>
                                     </div>
                                 </div>
                             </div>
