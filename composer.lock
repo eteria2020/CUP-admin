@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "740977cae26f491a9ec860536b0aa987",
+    "hash": "8ce295ace5878caec875fddb5c0fa690",
     "packages": [
         {
             "name": "bjyoungblood/bjy-authorize",
@@ -75,6 +75,61 @@
                 "zfc-user"
             ],
             "time": "2013-07-05 11:59:46"
+        },
+        {
+            "name": "creof/doctrine2-spatial",
+            "version": "0.0.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/djlambert/doctrine2-spatial.git",
+                "reference": "be4ee9aeadb7c886caab2c07ab5b1f13c8b9999e"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/djlambert/doctrine2-spatial/zipball/be4ee9aeadb7c886caab2c07ab5b1f13c8b9999e",
+                "reference": "be4ee9aeadb7c886caab2c07ab5b1f13c8b9999e",
+                "shasum": ""
+            },
+            "require": {
+                "doctrine/orm": ">=2.1"
+            },
+            "require-dev": {
+                "doctrine/common": ">=2.1",
+                "doctrine/dbal": ">=2.1",
+                "phpunit/phpunit": ">=3.7",
+                "rhumsaa/array_column": "~1.1"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "CrEOF\\Spatial": "lib/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Derek J. Lambert",
+                    "email": "dlambert@dereklambert.com"
+                }
+            ],
+            "description": "Doctrine2 multi-platform support for spatial types and functions",
+            "keywords": [
+                "database",
+                "dbal",
+                "geography",
+                "geometry",
+                "gis",
+                "mysql",
+                "opengis",
+                "orm",
+                "postgis",
+                "postgresql",
+                "spatial"
+            ],
+            "time": "2014-03-17 13:45:28"
         },
         {
             "name": "doctrine/annotations",
@@ -842,7 +897,7 @@
             "source": {
                 "type": "git",
                 "url": "ssh://git@git.mvlabs.it:4222/clients/sharengo-coremodule.git",
-                "reference": "5caa10c581238bc3c5e38ece8ba9d227be530a51"
+                "reference": "545b9862c5801f557f198658bdefd4a04bdc0fb5"
             },
             "require": {
                 "doctrine/doctrine-orm-module": "0.*",
@@ -856,7 +911,7 @@
                 }
             },
             "description": "Core ZF2 module for Sharengo apps",
-            "time": "2015-05-28 11:55:44"
+            "time": "2015-05-26 09:26:51"
         },
         {
             "name": "symfony/console",

@@ -18,6 +18,7 @@
         "zendframework/zendframework": "~2.4",
         "bjyoungblood/bjy-authorize": "1.4.0",
         "zf-commons/zfc-user-doctrine-orm": "^1.0",
-        "mvlabs/sharengo-coremodule": "dev-master"
+        "mvlabs/sharengo-coremodule": "dev-master",
+        "creof/doctrine2-spatial": "^0.0.1"
     }
 }
