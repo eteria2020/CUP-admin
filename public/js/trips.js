@@ -3,6 +3,8 @@ $(function() {
     var table    = $('#js-trips-table');
     var search   = $('#js-value');
     var column   = $('#js-column');
+    var from = $('#js-date-from');
+    var to = $('#js-date-to');
     search.val('');
     column.val('select');
 
@@ -38,6 +40,10 @@ $(function() {
         "fnServerParams": function ( aoData ) {
             aoData.push({ "name": "column", "value": $(column).val()});
             aoData.push({ "name": "searchValue", "value": search.val().trim()});
+            aoData.push({ "name": "from", "value": $(from).val().trim()});
+            aoData.push({ "name": "to", "value": $(to).val().trim()});
+            aoData.push({ "name": "columnFromDate", "value": "e.timestampBeginning"});
+            aoData.push({ "name": "columnFromEnd", "value": "e.timestampEnd"});
         },
         "order": [[0, 'desc']],
         "columns": [
@@ -94,7 +100,15 @@ $(function() {
 
     $('#js-clear').click(function() {
         search.val('');
+        from.val('');
+        to.val('');
         column.val('select');
+    });
+
+    $('.date-picker').datepicker({
+        autoclose: true,
+        format: 'yyyy-mm-dd',
+        weekStart: 1
     });
 
 });
