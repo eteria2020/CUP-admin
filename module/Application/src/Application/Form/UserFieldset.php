@@ -5,7 +5,7 @@ use SharengoCore\Service\UsersService;
 use Zend\Form\Fieldset;
 use Zend\InputFilter\InputFilterProviderInterface;
 use Zend\Stdlib\Hydrator\HydratorInterface;
-use ZfcUserDoctrineORM\Entity\User;
+use Application\Entity\Webuser;
 
 /**
  * Class UserFieldset
@@ -30,23 +30,13 @@ class UserFieldset extends Fieldset implements InputFilterProviderInterface
 
         $this->I_userService = $I_userService;
         $this->setHydrator($hydrator);
-        $this->setObject(new User());
+        $this->setObject(new Webuser());
 
         $this->add([
             'name'       => 'userId',
             'type'       => 'Zend\Form\Element\Hidden',
             'attributes' => [
                 'id' => 'id'
-            ]
-        ]);
-
-        $this->add([
-            'name'       => 'username',
-            'type'       => 'Zend\Form\Element\Text',
-            'attributes' => [
-                'id'       => 'username',
-                'class'    => 'form-control',
-                'required' => 'required',
             ]
         ]);
 
@@ -104,14 +94,6 @@ class UserFieldset extends Fieldset implements InputFilterProviderInterface
     public function getInputFilterSpecification()
     {
         return [
-            'username'    => [
-                'required' => true,
-                'filters'  => [
-                    [
-                        'name' => 'StringTrim'
-                    ]
-                ]
-            ],
             'email' => [
                 'required' => true,
                 'validators' => [

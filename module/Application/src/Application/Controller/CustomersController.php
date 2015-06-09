@@ -75,7 +75,7 @@ class CustomersController extends AbstractActionController
 
                 try {
 
-                    $form->saveData();
+                    $this->I_customerService->saveData($form->getData());
                     $this->flashMessenger()->addSuccessMessage('Modifica effettuta con successo!');
 
                 } catch (\Exception $e) {
