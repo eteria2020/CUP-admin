@@ -28,6 +28,7 @@ $(function() {
         "order": [[0, 'desc']],
         "columns": [
             {data: 'plate'},
+            {data: 'label'},
             {data: 'manufactures'},
             {data: 'model'},
             {data: 'clean'},
@@ -38,20 +39,21 @@ $(function() {
             {data: 'km'},
             {data: 'running'},
             {data: 'parking'},
+            {data: 'hidden'},
             {data: 'button'}
         ],
 
         "columnDefs": [
             {
-                targets: 3,
-                sortable: false
-            },
-            {
                 targets: 4,
                 sortable: false
             },
             {
-                targets: 11,
+                targets: 5,
+                sortable: false
+            },
+            {
+                targets: 13,
                 data: 'button',
                 searchable: false,
                 sortable: false,

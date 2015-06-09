@@ -26,7 +26,7 @@ $form = $this->carForm->prepare();
                     <div class="col-lg-3">
                         <div class="form-group">
                             <label for="gender">Targa</label>
-                            <?= $this->formRow($form->get('car')->get('plate')); ?>
+                            <?= $this->formRow($form->get('car')->get('plate')->setAttribute('disabled', 'disabled')); ?>
                         </div>
                     </div>
 
@@ -46,7 +46,7 @@ $form = $this->carForm->prepare();
 
                     <div class="col-lg-3">
                         <div class="form-group">
-                            <label for="surname">Label</label>
+                            <label for="surname">Identificativo</label>
                             <?= $this->formRow($form->get('car')->get('label')); ?>
                         </div>
                     </div>
@@ -69,7 +69,7 @@ $form = $this->carForm->prepare();
 
                     <div class="col-lg-2">
                         <div class="form-group">
-                            <label for="surname">Status</label>
+                            <label for="surname">Stato</label>
                             <?= $this->formRow($form->get('car')->get('status')); ?>
                         </div>
                     </div>

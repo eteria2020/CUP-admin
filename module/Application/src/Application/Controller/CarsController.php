@@ -103,6 +103,8 @@ class CarsController extends AbstractActionController
 
         if ($this->getRequest()->isPost()) {
             $postData = $this->getRequest()->getPost()->toArray();
+            $postData['car']['plate'] = $I_car->getPlate();
+
             $form->setData($postData);
 
             if ($form->isValid()) {
