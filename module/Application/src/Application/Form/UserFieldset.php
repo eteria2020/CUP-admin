@@ -98,15 +98,6 @@ class UserFieldset extends Fieldset implements InputFilterProviderInterface
                     [
                         'name' => 'EmailAddress',
                         'break_chain_on_failure' => true
-                    ],
-                    [
-                        'name' => 'Application\Form\Validator\DuplicateEmail',
-                        'options' => [
-                            'service' => $this->I_userService,
-                            'avoid' => [
-                                $this->I_userService->getValidatorEmail()
-                            ]
-                        ]
                     ]
                 ]
             ],
@@ -134,7 +125,7 @@ class UserFieldset extends Fieldset implements InputFilterProviderInterface
                 ]
             ],
             'password' => [
-                'required' => $this->I_userService->getEditMode() ? false :  true,
+                'required' => true,
                 'filters' => [
                     [
                         'name' => 'StringTrim'
@@ -150,7 +141,7 @@ class UserFieldset extends Fieldset implements InputFilterProviderInterface
                 ]
             ],
             'password2' => [
-                'required' => $this->I_userService->getEditMode() ? false :  true,
+                'required' => true,
                 'filters' => [
                     [
                         'name' => 'StringTrim'

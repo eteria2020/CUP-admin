@@ -3,6 +3,7 @@ namespace Application\Controller;
 
 use Application\Entity\Webuser;
 use Application\Form\UserForm;
+use Application\Form\Validator\DuplicateEmail;
 use SharengoCore\Service\UsersService;
 use Zend\Form\Form;
 use Zend\Http\Response;
@@ -52,6 +53,9 @@ class UsersController extends AbstractActionController
             $postData = $this->getRequest()->getPost()->toArray();
             $form->setData($postData);
 
+            $validator = new DuplicateEmail(['service' => $this->I_usersService]);
+            $email = $form->getInputFilter()->get('user')->get('email');
+            $email->getValidatorChain()->attach($validator);
 
             if ($form->isValid()) {
 
@@ -99,8 +103,14 @@ class UsersController extends AbstractActionController
             $postData['user']['id'] = $I_user->getId();
             $form->setData($postData);
 
-            $this->I_usersService->setEditMode(true);
-            $this->I_usersService->setValidatorEmail($I_user->getEmail());
+            $form->getInputFilter()->get('user')->get('password')->setRequired(false);
+            $form->getInputFilter()->get('user')->get('password2')->setRequired(false);
+            $validator = new DuplicateEmail([
+                'service' => $this->I_usersService,
+                'avoid'   => [$I_user->getEmail()]
+            ]);
+            $email = $form->getInputFilter()->get('user')->get('email');
+            $email->getValidatorChain()->attach($validator);
 
             if ($form->isValid()) {
 
