@@ -93,7 +93,7 @@ return array(
                         'options' => [
                             'route'    => '/edit/:plate',
                             'constraints' => array(
-                                'plate' => '[A-Z0-9]*'
+                                'plate' => '[a-zA-Z0-9]*'
                             ),
                             'defaults' => [
                                 '__NAMESPACE__' => 'Application\Controller',
