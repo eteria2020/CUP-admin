@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "8ce295ace5878caec875fddb5c0fa690",
+    "hash": "cbc5e938dfa156826c8edbf18df4528f",
     "packages": [
         {
             "name": "bjyoungblood/bjy-authorize",
@@ -893,11 +893,11 @@
         },
         {
             "name": "mvlabs/sharengo-coremodule",
-            "version": "dev-issue-267",
+            "version": "dev-master",
             "source": {
                 "type": "git",
                 "url": "ssh://git@git.mvlabs.it:4222/clients/sharengo-coremodule.git",
-                "reference": "545b9862c5801f557f198658bdefd4a04bdc0fb5"
+                "reference": "df241a9498c6a97d68760bfd6059c04dda971af2"
             },
             "require": {
                 "doctrine/doctrine-orm-module": "0.*",
@@ -911,7 +911,7 @@
                 }
             },
             "description": "Core ZF2 module for Sharengo apps",
-            "time": "2015-05-26 09:26:51"
+            "time": "2015-06-09 14:10:02"
         },
         {
             "name": "symfony/console",
