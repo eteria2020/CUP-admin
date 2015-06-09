@@ -40,6 +40,10 @@ $(function() {
             {data: 'running'},
             {data: 'parking'},
             {data: 'hidden'},
+            {data: 'active'},
+            {data: 'status'},
+            {data: 'busy'},
+            {data: 'notes'},
             {data: 'button'}
         ],
 
@@ -53,7 +57,7 @@ $(function() {
                 sortable: false
             },
             {
-                targets: 13,
+                targets: 17,
                 data: 'button',
                 searchable: false,
                 sortable: false,
