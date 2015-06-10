@@ -215,7 +215,8 @@ return array(
             'Application\Controller\ConsoleUser' => 'Application\Controller\ConsoleUserControllerFactory',
             'Application\Controller\Trips' => 'Application\Controller\TripsControllerFactory',
             'Application\controller\Users' => 'Application\Controller\UsersControllerFactory',
-            'Application\Controller\Cars' => 'Application\Controller\CarsControllerFactory'
+            'Application\Controller\Cars' => 'Application\Controller\CarsControllerFactory',
+            'Application\Controller\Customers' => 'Application\Controller\CustomersControllerFactory'
         ]
     ),
     'view_manager' => array(
