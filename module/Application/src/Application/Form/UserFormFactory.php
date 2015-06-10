@@ -18,10 +18,9 @@ class UserFormFactory implements FactoryInterface
     public function createService(ServiceLocatorInterface $serviceLocator)
     {
         $entityManager = $serviceLocator->get('doctrine.entitymanager.orm_default');
-        $I_usersService = $serviceLocator->get('SharengoCore\Service\UsersService');
 
         $hydrator = new DoctrineHydrator($entityManager);
-        $userFieldset = new UserFieldset($I_usersService, $hydrator);
+        $userFieldset = new UserFieldset($hydrator);
 
         return new UserForm($userFieldset);
     }
