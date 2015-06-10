@@ -13,27 +13,22 @@ use Application\Entity\Webuser;
  */
 class UserFieldset extends Fieldset implements InputFilterProviderInterface
 {
-    /**
-     * @var UsersService
-     */
-    private $I_userService;
 
     /**
      * @param string $name
      * @param array  $options
      */
-    public function __construct(UsersService $I_userService, HydratorInterface $hydrator)
+    public function __construct(HydratorInterface $hydrator)
     {
         parent::__construct('user', [
             'use_as_base_fieldset' => true
         ]);
 
-        $this->I_userService = $I_userService;
         $this->setHydrator($hydrator);
         $this->setObject(new Webuser());
 
         $this->add([
-            'name'       => 'userId',
+            'name'       => 'id',
             'type'       => 'Zend\Form\Element\Hidden',
             'attributes' => [
                 'id' => 'id'
@@ -76,7 +71,6 @@ class UserFieldset extends Fieldset implements InputFilterProviderInterface
             'attributes' => [
                 'id'       => 'password',
                 'class'    => 'form-control',
-                'required' => 'required'
             ]
         ]);
 
@@ -86,7 +80,6 @@ class UserFieldset extends Fieldset implements InputFilterProviderInterface
             'attributes' => [
                 'id'       => 'password',
                 'class'    => 'form-control',
-                'required' => 'required'
             ]
         ]);
     }
@@ -100,12 +93,6 @@ class UserFieldset extends Fieldset implements InputFilterProviderInterface
                     [
                         'name' => 'EmailAddress',
                         'break_chain_on_failure' => true
-                    ],
-                    [
-                        'name' => 'Application\Form\Validator\DuplicateEmail',
-                        'options' => [
-                            'service' => $this->I_userService
-                        ]
                     ]
                 ]
             ],

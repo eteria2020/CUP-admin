@@ -153,6 +153,20 @@ return array(
                                 'action'        => 'add',
                             ],
                         ],
+                    ],
+                    'edit' => [
+                        'type'    => 'Segment',
+                        'options' => [
+                            'route'    => '/edit/:id',
+                            'constraints' => [
+                                'id'    => '[0-9]*'
+                            ],
+                            'defaults' => [
+                                '__NAMESPACE__' => 'Application\Controller',
+                                'controller'    => 'Users',
+                                'action'        => 'edit',
+                            ],
+                        ],
                     ]
                 ],
             ]
