@@ -155,6 +155,30 @@ return array(
                         ],
                     ]
                 ],
+            ],
+            'reservations' => [
+                'type' => 'Literal',
+                'options' => [
+                    'route' => '/reservations',
+                    'defaults' => [
+                        'controller' => 'Application\Controller\Reservations',
+                        'action' => 'index'
+                    ]
+                ],
+                'may_terminate' => true,
+                'child_routes' => [
+                    'datatable' => [
+                        'type'    => 'Literal',
+                        'options' => [
+                            'route'    => '/datatable',
+                            'defaults' => [
+                                '__NAMESPACE__' => 'Application\Controller',
+                                'controller'    => 'Reservations',
+                                'action'        => 'datatable',
+                            ],
+                        ],
+                    ],
+                ],
             ]
         ),
     ),
@@ -175,10 +199,11 @@ return array(
             'Application\Controller\Index' => 'Application\Controller\IndexController',
         ),
         'factories' => [
-            'Application\controller\Customers'   => 'Application\Controller\CustomersControllerFactory',
-            'Application\Controller\ConsoleUser' => 'Application\Controller\ConsoleUserControllerFactory',
-            'Application\controller\Users'       => 'Application\Controller\UsersControllerFactory',
-            'Application\Controller\Cars'        => 'Application\Controller\CarsControllerFactory'
+            'Application\controller\Customers'    => 'Application\Controller\CustomersControllerFactory',
+            'Application\Controller\ConsoleUser'  => 'Application\Controller\ConsoleUserControllerFactory',
+            'Application\controller\Users'        => 'Application\Controller\UsersControllerFactory',
+            'Application\Controller\Cars'         => 'Application\Controller\CarsControllerFactory',
+            'Application\Controller\Reservations' => 'Application\Controller\ReservationsControllerFactory'
         ]
     ),
     'view_manager' => array(
@@ -257,7 +282,8 @@ return array(
                 ['controller' => 'Application\Controller\Customers', 'roles' => ['user']],
                 ['controller' => 'Application\Controller\Cars', 'roles' => ['user']],
                 ['controller' => 'Application\Controller\ConsoleUser', 'roles' => []],
-                ['controller' => 'Application\Controller\Users', 'roles' => ['user']]
+                ['controller' => 'Application\Controller\Users', 'roles' => ['user']],
+                ['controller' => 'Application\Controller\Reservations', 'roles' => ['user']]
             ),
         ),
     ),
@@ -307,6 +333,20 @@ return array(
                         'route' => 'cars/delete',
                         'isVisible' => false
                     ],
+                ],
+            ],
+            [
+                'label'     => 'Prenotazioni',
+                'route'     => 'reservations',
+                'icon'      => 'fa fa-calendar',
+                'resource'  => 'admin',
+                'isRouteJs' => true,
+                'pages'     => [
+                    [
+                        'label' => 'Elenco',
+                        'route' => 'reservations',
+                        'isVisible' => true
+                    ]
                 ],
             ]
         ]
