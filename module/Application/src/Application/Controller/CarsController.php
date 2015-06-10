@@ -133,7 +133,6 @@ class CarsController extends AbstractActionController
     public function deleteAction()
     {
         $plate = $this->params()->fromRoute('plate', 0);
-        $type = $this->params()->fromRoute('type', '');
 
         /** @var Cars $I_car */
         $I_car = $this->I_carsService->getCarByPlate($plate);
@@ -144,25 +143,19 @@ class CarsController extends AbstractActionController
             return false;
         }
 
-        if ($type == 'delete') {
+        try {
 
-            try {
+            $this->I_carsService->deleteCar($I_car);
+            $this->flashMessenger()->addSuccessMessage('Auto rimossa con successo!');
 
-                $this->I_carsService->deleteCar($I_car);
-                $this->flashMessenger()->addSuccessMessage('Auto rimossa con successo!');
+        } catch (\Exception $e) {
 
-            } catch (\Exception $e) {
+            $this->flashMessenger()->addErrorMessage($e->getMessage());
 
-                $this->flashMessenger()->addErrorMessage($e->getMessage());
-
-            }
-
-            return $this->redirect()->toRoute('cars');
         }
 
-        return new ViewModel([
-            'car' => $I_car,
-        ]);
+        return $this->redirect()->toRoute('cars');
+
     }
 
     protected function _getRecordsFiltered($as_filters, $i_totalCustomer)

@@ -107,7 +107,7 @@ return array(
                     'delete' => [
                         'type'    => 'Segment',
                         'options' => [
-                            'route'    => '/delete/:plate/:type',
+                            'route'    => '/delete/:plate',
                             'constraints' => array(
                                 'plate' => '[A-Z0-9]*'
                             ),

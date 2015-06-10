@@ -64,7 +64,7 @@ $(function() {
                 render: function (data) {
                     return' <div class="btn-group" role="group">' +
                         '<a href="/cars/edit/' + data + '" class="btn btn-default btn-xs">Modifica</a>' +
-                        '<a href="/cars/delete/' + data + '/view" class="btn btn-default btn-xs">Elimina</a>' +
+                        '<a href="/cars/delete/' + data + '" class="btn btn-default btn-xs js-delete">Elimina</a>' +
                         '</div>';
                 }
             }
@@ -108,4 +108,9 @@ $(function() {
         search.val('');
         column.val('select');
     });
+    
+    $('#js-cars-table').on('click', '.js-delete', function() {
+        return confirm("Confermi l'eliminazione dell'auto? L'operazione non è annullabile");
+    });
+    
 });
