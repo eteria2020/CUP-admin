@@ -1,8 +1,10 @@
 $(function() {
 
-    var table    = $('#js-cars-table');
+    var table    = $('#js-trips-table');
     var search   = $('#js-value');
     var column   = $('#js-column');
+    var from = $('#js-date-from');
+    var to = $('#js-date-to');
     search.val('');
     column.val('select');
 
@@ -11,63 +13,55 @@ $(function() {
         "serverSide": true,
         "bStateSave": false,
         "bFilter": false,
-        "sAjaxSource": "/cars/datatable",
+        "sAjaxSource": "/trips/datatable",
         "fnServerData": function ( sSource, aoData, fnCallback, oSettings ) {
             oSettings.jqXHR = $.ajax( {
                 "dataType": 'json',
                 "type": "POST",
                 "url": sSource,
                 "data": aoData,
-                "success": fnCallback
+                "success": fnCallback,
+                "error": function(jqXHR, textStatus, errorThrown) {
+
+                    /*
+                    if (jqXHR.status == '200' &&
+                        textStatus == 'parsererror') {
+
+                        bootbox.alert('La tua sessione è scaduta, clicca sul pulsante OK per tornare alla pagina di login.', function(r) {
+                            document.location.href = '/user/login';
+                        });
+
+                        //@tofix user come here also if the response is wrong
+
+                    }*/
+                }
             } );
         },
         "fnServerParams": function ( aoData ) {
             aoData.push({ "name": "column", "value": $(column).val()});
             aoData.push({ "name": "searchValue", "value": search.val().trim()});
+            aoData.push({ "name": "from", "value": $(from).val().trim()});
+            aoData.push({ "name": "to", "value": $(to).val().trim()});
+            aoData.push({ "name": "columnFromDate", "value": "e.timestampBeginning"});
+            aoData.push({ "name": "columnFromEnd", "value": "e.timestampEnd"});
         },
         "order": [[0, 'desc']],
         "columns": [
+            {data: 'id'},
+            {data: 'user'},
             {data: 'plate'},
-            {data: 'label'},
-            {data: 'manufactures'},
-            {data: 'model'},
-            {data: 'clean'},
-            {data: 'position'},
-            {data: 'lastContact'},
-            {data: 'rpm'},
-            {data: 'speed'},
+            {data: 'card'},
             {data: 'km'},
-            {data: 'running'},
-            {data: 'parking'},
-            {data: 'hidden'},
-            {data: 'active'},
-            {data: 'status'},
-            {data: 'busy'},
-            {data: 'notes'},
-            {data: 'button'}
+            {data: 'price'},
+            {data: 'addressBeginning'},
+            {data: 'addressEnd'},
+            {data: 'timeBeginning'},
+            {data: 'timeEnd'},
+            {data: 'payable'},
+            {data: 'parkSeconds'}
         ],
-
-        "columnDefs": [
-            {
-                targets: 4,
-                sortable: false
-            },
-            {
-                targets: 5,
-                sortable: false
-            },
-            {
-                targets: 17,
-                data: 'button',
-                searchable: false,
-                sortable: false,
-                render: function (data) {
-                    return' <div class="btn-group" role="group">' +
-                        '<a href="/cars/edit/' + data + '" class="btn btn-default btn-xs">Modifica</a>' +
-                        '<a href="/cars/delete/' + data + '" class="btn btn-default btn-xs js-delete">Elimina</a>' +
-                        '</div>';
-                }
-            }
+        "aoColumnDefs": [
+            { 'bSortable': false, 'aTargets': [1, 2, 3, 4, 5, 8,9]}
         ],
         "lengthMenu": [
             [100, 200, 300],
@@ -76,7 +70,7 @@ $(function() {
         "pageLength": 100,
         "pagingType": "bootstrap_full_number",
         "language": {
-            "sEmptyTable":     "Nessun cliente presente nella tabella",
+            "sEmptyTable":     "Nessuna corsa presente nella tabella",
             "sInfo":           "Vista da _START_ a _END_ di _TOTAL_ elementi",
             "sInfoEmpty":      "Vista da 0 a 0 di 0 elementi",
             "sInfoFiltered":   "(filtrati da _MAX_ elementi totali)",
@@ -106,11 +100,15 @@ $(function() {
 
     $('#js-clear').click(function() {
         search.val('');
+        from.val('');
+        to.val('');
         column.val('select');
     });
-    
-    $('#js-cars-table').on('click', '.js-delete', function() {
-        return confirm("Confermi l'eliminazione dell'auto? L'operazione non è annullabile");
+
+    $('.date-picker').datepicker({
+        autoclose: true,
+        format: 'yyyy-mm-dd',
+        weekStart: 1
     });
-    
+
 });

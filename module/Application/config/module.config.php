@@ -107,7 +107,7 @@ return array(
                     'delete' => [
                         'type'    => 'Segment',
                         'options' => [
-                            'route'    => '/delete/:plate/:type',
+                            'route'    => '/delete/:plate',
                             'constraints' => array(
                                 'plate' => '[A-Z0-9]*'
                             ),
@@ -120,7 +120,30 @@ return array(
                     ]
                 ],
             ],
-
+            'trips' => [
+                'type' => 'Literal',
+                'options' => [
+                    'route' => '/trips',
+                    'defaults' => [
+                        'controller' => 'Application\Controller\Trips',
+                        'action' => 'index'
+                    ]
+                ],
+                'may_terminate' => true,
+                'child_routes' => [
+                    'datatable' => [
+                        'type'    => 'Literal',
+                        'options' => [
+                            'route'    => '/datatable',
+                            'defaults' => [
+                                '__NAMESPACE__' => 'Application\Controller',
+                                'controller'    => 'Trips',
+                                'action'        => 'datatable',
+                            ],
+                        ],
+                    ]
+                ],
+             ],
             'zfcuser' => [
                 'child_routes' => [
                     'register' => [
@@ -151,6 +174,20 @@ return array(
                                 '__NAMESPACE__' => 'Application\Controller',
                                 'controller'    => 'Users',
                                 'action'        => 'add',
+                            ],
+                        ],
+                    ],
+                    'edit' => [
+                        'type'    => 'Segment',
+                        'options' => [
+                            'route'    => '/edit/:id',
+                            'constraints' => [
+                                'id'    => '[0-9]*'
+                            ],
+                            'defaults' => [
+                                '__NAMESPACE__' => 'Application\Controller',
+                                'controller'    => 'Users',
+                                'action'        => 'edit',
                             ],
                         ],
                     ]
@@ -194,18 +231,19 @@ return array(
             'CarForm' => 'Application\Form\CarFormFactory',
         ]
     ),
-    'controllers' => array(
-        'invokables' => array(
+    'controllers' => [
+        'invokables' => [
             'Application\Controller\Index' => 'Application\Controller\IndexController',
-        ),
+        ],
         'factories' => [
-            'Application\controller\Customers'    => 'Application\Controller\CustomersControllerFactory',
             'Application\Controller\ConsoleUser'  => 'Application\Controller\ConsoleUserControllerFactory',
+            'Application\Controller\Trips'        => 'Application\Controller\TripsControllerFactory',
             'Application\controller\Users'        => 'Application\Controller\UsersControllerFactory',
             'Application\Controller\Cars'         => 'Application\Controller\CarsControllerFactory',
+            'Application\Controller\Customers'    => 'Application\Controller\CustomersControllerFactory',
             'Application\Controller\Reservations' => 'Application\Controller\ReservationsControllerFactory'
         ]
-    ),
+    ],
     'view_manager' => array(
         'display_not_found_reason' => true,
         'display_exceptions'       => true,
@@ -280,6 +318,7 @@ return array(
                 array('controller' => 'zfcuser', 'roles' => array()),
                 array('controller' => 'Application\Controller\Index', 'roles' => array('user')),
                 ['controller' => 'Application\Controller\Customers', 'roles' => ['user']],
+                ['controller' => 'Application\Controller\Trips', 'roles' => ['user']],
                 ['controller' => 'Application\Controller\Cars', 'roles' => ['user']],
                 ['controller' => 'Application\Controller\ConsoleUser', 'roles' => []],
                 ['controller' => 'Application\Controller\Users', 'roles' => ['user']],
@@ -336,6 +375,20 @@ return array(
                 ],
             ],
             [
+                'label'     => 'Corse',
+                'route'     => 'trips',
+                'icon'      => 'fa fa-users',
+                'resource'  => 'admin',
+                'isRouteJs' => true,
+                'pages'     => [
+                    [
+                        'label' => 'Elenco',
+                        'route' => 'trips',
+                        'isVisible' => true
+                    ]
+                ],
+            ],
+            [
                 'label'     => 'Prenotazioni',
                 'route'     => 'reservations',
                 'icon'      => 'fa fa-calendar',
@@ -348,7 +401,7 @@ return array(
                         'isVisible' => true
                     ]
                 ],
-            ]
+            ],
         ]
     ]
 );

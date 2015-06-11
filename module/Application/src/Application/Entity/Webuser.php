@@ -36,7 +36,7 @@ class Webuser implements ProviderInterface {
      *
      * @ORM\Column(name="display_name", type="string", length=100, nullable=false)
      */
-    private $display_name;
+    private $displayName;
 
     /**
      * @var string
@@ -72,7 +72,7 @@ class Webuser implements ProviderInterface {
      */
     public function setDisplayName($displayName)
     {
-        $this->display_name = $displayName;
+        $this->displayName = $displayName;
 
         return $this;
     }
@@ -84,7 +84,7 @@ class Webuser implements ProviderInterface {
      */
     public function getDisplayName()
     {
-        return $this->display_name;
+        return $this->displayName;
     }
     
     /**

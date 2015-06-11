@@ -35,6 +35,7 @@
                                 <th>Id</th>
                                 <th>Nome & Cognome</th>
                                 <th>Email</th>
+                                <th>Azione</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -45,6 +46,7 @@
                                 <td><?= $I_user->getId(); ?></td>
                                 <td><?= $I_user->getDisplayName(); ?></td>
                                 <td><?= $I_user->getEmail(); ?></td>
+                                <td><a href="<?= $this->url('users/edit', ['id' => $I_user->getId()]); ?>" class="btn btn-sm btn-success">Modifica</a> </td>
                             </tr>
                             <?php endforeach; ?>
                             </tbody>
