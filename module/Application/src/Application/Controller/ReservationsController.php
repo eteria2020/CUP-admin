@@ -29,13 +29,31 @@ class ReservationsController extends AbstractActionController
         $as_filters['withLimit'] = true;
         $as_dataDataTable = $this->I_reservationsService->getDataDataTable($as_filters);
         $i_totalReservations = $this->I_reservationsService->getTotalReservations();
-        //$i_recordsFiltered = $this->_getRecordsFiltered($as_filters, $i_userCar);
+        $i_recordsFiltered = $this->_getRecordsFiltered($as_filters, $i_totalReservations);
 
         return new JsonModel([
             'draw'            => $this->params()->fromQuery('sEcho', 0),
             'recordsTotal'    => $i_totalReservations,
-            'recordsFiltered' => 1,
+            'recordsFiltered' => $i_recordsFiltered,
             'data'            => $as_dataDataTable
         ]);
+    }
+
+    protected function _getRecordsFiltered($as_filters, $i_totalReservations)
+    {
+        $as_filters['withLimit'] = false;
+
+        if (isset($as_filters['columnFromDate']) && isset($as_filters['columnFromEnd'])) {
+
+            return count($this->I_reservationsService->getDataDataTable($as_filters));
+
+        } else if (empty($as_filters['searchValue'])) {
+
+            return $i_totalReservations;
+
+        } else {
+
+            return count($this->I_reservationsService->getDataDataTable($as_filters));
+        }
     }
 }
