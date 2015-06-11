@@ -5,8 +5,10 @@ $(function() {
     var column   = $('#js-column');
     var from = $('#js-date-from');
     var to = $('#js-date-to');
+    var filterWithNull = false;
     search.val('');
     column.val('select');
+
 
     table.dataTable({
         "processing": true,
@@ -38,8 +40,16 @@ $(function() {
             } );
         },
         "fnServerParams": function ( aoData ) {
-            aoData.push({ "name": "column", "value": $(column).val()});
-            aoData.push({ "name": "searchValue", "value": search.val().trim()});
+
+            if(filterWithNull) {
+                aoData.push({ "name": "column", "value": ''});
+                aoData.push({ "name": "searchValue", "value": ''});
+                aoData.push({ "name": "columnNull", "value": "e.timestampEnd"});
+            } else {
+                aoData.push({ "name": "column", "value": $(column).val()});
+                aoData.push({ "name": "searchValue", "value": search.val().trim()});
+            }
+
             aoData.push({ "name": "from", "value": $(from).val().trim()});
             aoData.push({ "name": "to", "value": $(to).val().trim()});
             aoData.push({ "name": "columnFromDate", "value": "e.timestampBeginning"});
@@ -103,6 +113,8 @@ $(function() {
         from.val('');
         to.val('');
         column.val('select');
+        search.prop('disabled', false);
+        filterWithNull = false;
     });
 
     $('.date-picker').datepicker({
@@ -110,5 +122,21 @@ $(function() {
         format: 'yyyy-mm-dd',
         weekStart: 1
     });
+
+    $(column).change(function() {
+        var value = $(this).val();
+
+        if(value == 'timestampEnd') {
+            filterWithNull = true;
+            search.val('');
+            search.prop('disabled', true);
+        } else {
+            filterWithNull = false;
+            search.val('');
+            search.prop('disabled', false);
+        }
+
+    });
+
 
 });
