@@ -31,11 +31,9 @@ $this->headScript()
                             <div class="form-group">
                                 <select name="column" id="js-column" class="form-control">
                                     <option value="select" selected>-- Seleziona --</option>
-                                    <option value="ts">Data</option>
-                                    <option value="plate">Targa</option>
-                                    <option value="reservations_a">Prenotazione Aperte</option>
-                                    <option value="reservations_b">Prenotazione Chiuse</option>
-                                    <option value="cf">Codice Fiscale</option>
+                                    <option value="beginningTs">Data</option>
+                                    <option value="c.plate">Targa</option>
+                                    <option value="cu.taxCode">Codice Fiscale</option>
                                 </select>
                             </div>
                             <div class="form-group">
@@ -68,6 +66,7 @@ $this->headScript()
                         <table class="table table-striped table-bordered table-hover" id="js-reservations-table">
                             <thead>
                             <tr>
+                                <th>ID</th>
                                 <th>Targa</th>
                                 <th>Cliente</th>
                                 <th>Card</th>

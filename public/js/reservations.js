@@ -3,6 +3,7 @@ $(function() {
     var table    = $('#js-reservations-table');
     var search   = $('#js-value');
     var column   = $('#js-column');
+    var filterDate = false;
     search.val('');
     column.val('select');
 
@@ -22,14 +23,25 @@ $(function() {
             } );
         },
         "fnServerParams": function ( aoData ) {
-            aoData.push({ "name": "column", "value": $(column).val()});
-            aoData.push({ "name": "searchValue", "value": search.val().trim()});
+
+            if(filterDate) {
+                aoData.push({ "name": "column", "value": ''});
+                aoData.push({ "name": "searchValue", "value": ''});
+                aoData.push({ "name": "from", "value": search.val().trim()});
+                aoData.push({ "name": "to", "value": search.val().trim()});
+                aoData.push({ "name": "columnFromDate", "value": "e.beginningTs"});
+                aoData.push({ "name": "columnFromEnd", "value": "e.beginningTs"});
+            } else {
+                aoData.push({ "name": "column", "value": $(column).val()});
+                aoData.push({ "name": "searchValue", "value": search.val().trim()});
+            }
         },
         "order": [[0, 'desc']],
         "columns": [
+            {data: 'id'},
             {data: 'carPlate'},
             {data: 'customer'},
-            {data: 'card'},
+            {data: 'cards'},
             {data: 'active'}
         ],
 
@@ -44,10 +56,6 @@ $(function() {
             },
             {
                 targets: 2,
-                sortable: false
-            },
-            {
-                targets: 3,
                 sortable: false
             }
         ],
@@ -100,8 +108,8 @@ $(function() {
     $(column).change(function() {
         var value = $(this).val();
 
-        if(value == 'ts') {
-
+        if(value == 'beginningTs') {
+            filterDate = true;
             search.val('');
             $(search).datepicker({
                 autoclose: true,
@@ -110,14 +118,9 @@ $(function() {
             });
 
         } else {
+            filterDate = false;
             search.val('');
             $(search).datepicker("remove");
-        }
-
-        if(value == 'reservations_a' || value == 'reservations_b') {
-            search.prop("disabled", true);
-        } else {
-            search.prop("disabled", false);
         }
 
     });
