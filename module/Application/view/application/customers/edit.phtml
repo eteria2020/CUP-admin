@@ -70,7 +70,7 @@ $this->headScript()
                             <div class="col-lg-4">
                                 <div class="form-group">
                                     <label for="name">Data di nascita</label>
-                                    <?= $this->formRow($form->get('customer')->get('birthDate')->setAttribute('readonly', 'true')); ?>
+                                    <?= $this->formRow($form->get('customer')->get('birthDate')->setAttributes(['readonly'=> 'true', 'class' => 'form-control'])); ?>
                                 </div>
                             </div>
 
