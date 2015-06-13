@@ -126,7 +126,7 @@ $(function() {
     $(column).change(function() {
         var value = $(this).val();
 
-        if(value == 'timestampEnd') {
+        if(value == 'c.timestampEnd') {
             filterWithNull = true;
             search.val('');
             search.prop('disabled', true);
