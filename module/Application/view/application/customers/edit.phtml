@@ -47,14 +47,14 @@ $this->headScript()
                             <div class="col-lg-4">
                                 <div class="form-group">
                                     <label for="name">Nome</label>
-                                    <?= $this->formRow($form->get('customer')->get('name')); ?>
+                                    <?= $this->formRow($form->get('customer')->get('name')->setAttribute('readonly', 'true')); ?>
                                 </div>
                             </div>
 
                             <div class="col-lg-4">
                                 <div class="form-group">
                                     <label for="surname">Cognome</label>
-                                    <?= $this->formRow($form->get('customer')->get('surname')); ?>
+                                    <?= $this->formRow($form->get('customer')->get('surname')->setAttribute('readonly', 'true')); ?>
                                 </div>
                             </div>
                         </div>
@@ -63,14 +63,14 @@ $this->headScript()
                             <div class="col-lg-4">
                                 <div class="form-group">
                                     <label for="gender">Email</label>
-                                    <?= $this->formRow($form->get('customer')->get('email')); ?>
+                                    <?= $this->formRow($form->get('customer')->get('email')->setAttribute('readonly', 'true')); ?>
                                 </div>
                             </div>
 
                             <div class="col-lg-4">
                                 <div class="form-group">
                                     <label for="name">Data di nascita</label>
-                                    <?= $this->formRow($form->get('customer')->get('birthDate')); ?>
+                                    <?= $this->formRow($form->get('customer')->get('birthDate')->setAttributes(['readonly'=> 'true', 'class' => 'form-control'])); ?>
                                 </div>
                             </div>
 
@@ -139,7 +139,7 @@ $this->headScript()
                             <div class="col-lg-4">
                                 <div class="form-group">
                                     <label for="taxCode">Codice fiscale</label>
-                                    <?= $this->formRow($form->get('customer')->get('taxCode')); ?>
+                                    <?= $this->formRow($form->get('customer')->get('taxCode')->setAttribute('readonly', 'true')); ?>
                                 </div>
                             </div>
 

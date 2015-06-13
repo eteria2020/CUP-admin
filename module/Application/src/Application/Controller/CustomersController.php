@@ -65,7 +65,12 @@ class CustomersController extends AbstractActionController
 
         if ($this->getRequest()->isPost()) {
             $postData = $this->getRequest()->getPost()->toArray();
-            $postData['customer']['id'] = $id;
+            $postData['customer']['id'] = $I_customer->getId();
+            $postData['customer']['name'] = $I_customer->getName();
+            $postData['customer']['surname'] = $I_customer->getSurname();
+            $postData['customer']['email'] = $I_customer->getEmail();
+            $postData['customer']['taxCode'] = $I_customer->getTaxCode();
+            $postData['customer']['birthDate'] = $I_customer->getBirthDate()->format('Y-m-d');
             $form->setData($postData);
 
             $this->I_customerService->setValidatorEmail($I_customer->getEmail());
