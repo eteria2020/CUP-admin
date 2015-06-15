@@ -57,21 +57,26 @@ $(function() {
         },
         "order": [[0, 'desc']],
         "columns": [
-            {data: 'id'},
-            {data: 'user'},
-            {data: 'plate'},
-            {data: 'card'},
-            {data: 'km'},
+            {data: 'e-id'},
+            {data: 'cu-surname'},
+            {data: 'cu-name'},
+            {data: 'cu-mobile'},
+            {data: 'cu-cardCode'},
+            {data: 'c-plate'},
+            {data: 'c-label'},
+            {data: 'e-kmBeginning'},
+            {data: 'e-kmEnd'},
+            {data: 'e-timestampBeginning'},
+            {data: 'e-timestampEnd'},
+            {data: 'duration'},
+            {data: 'e-parkSeconds'},
             {data: 'price'},
-            {data: 'addressBeginning'},
-            {data: 'addressEnd'},
-            {data: 'timeBeginning'},
-            {data: 'timeEnd'},
-            {data: 'payable'},
-            {data: 'parkSeconds'}
+            {data: 'StatoQuadro'},
+            {data: 'c-parking'},
+            {data: 'e-payable'}
         ],
         "aoColumnDefs": [
-            { 'bSortable': false, 'aTargets': [1, 2, 3, 4, 5, 8,9]}
+            { 'bSortable': false, 'aTargets': [11,13,14]}
         ],
         "lengthMenu": [
             [100, 200, 300],
