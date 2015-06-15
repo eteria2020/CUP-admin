@@ -20,6 +20,7 @@
         ->prependStylesheet($this->basePath('css/bootstrap.min.css'))
         ->prependStylesheet($this->basePath('plugins/simple-line-icons/simple-line-icons.min.css'))
         ->prependStylesheet($this->basePath('css/font-awesome.min.css'))
+        ->prependStylesheet($this->basePath('css/palette.css'))
         ->prependStylesheet('http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700&subset=all') ?>
 
     <!-- Scripts -->
@@ -34,11 +35,11 @@
     ; ?>
 </head>
 
-<body class="login">
+<body id="login-background" class="login">
 
 <div class="logo">
     <a href="#">
-        <img src="/img/logo.png" alt=""/>
+        <img src="/img/logo_white.png" alt=""/>
     </a>
 </div>
 
@@ -47,7 +48,7 @@
 </div>
 
 
-<div class="copyright">
+<div id="login-copyright" class="copyright">
     <?php echo date('Y') ?> &copy; Sharengo.
 </div>
 

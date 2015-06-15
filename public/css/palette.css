@@ -1,0 +1,45 @@
+/* Login page */
+
+#login-background {
+	background-color: #43a34c !important;
+}
+
+#login-button {
+	background-color: #43a34c !important;
+	width: 340px !important;
+}
+
+#login-button:hover,
+#login-button:focus {
+	background-color: #33933c !important;
+}
+
+#login-copyright {
+	color: #7aca8c !important;
+}
+
+/* Admin page */
+
+.portlet.box.blue > .portlet-title {
+	background-color: #52e25f !important; /* 4B8DF8 */
+}
+
+#js-search {
+	background-color: #52e25f !important;
+}
+
+#search-dropdown-toggle {
+	background-color: #52e25f !important;
+}
+
+.portlet > .portlet-body.blue, .portlet.blue {
+	background-color: #52e25f !important;
+}
+
+.portlet.box.blue {
+	border: 1px solid #52e25f !important;
+}
+
+.btn-success {
+	background-color: #43a34c !important;
+}
