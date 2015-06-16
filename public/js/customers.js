@@ -45,7 +45,7 @@ $(function() {
             {data: 'e-name'},
             {data: 'e-surname'},
             {data: 'e-mobile'},
-            {data: 'e-cardCode'},
+            {data: 'cc-code'},
             {data: 'e-driverLicense'},
             {data: 'e-driverLicenseExpire'},
             {data: 'e-email'},
