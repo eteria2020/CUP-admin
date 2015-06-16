@@ -61,7 +61,7 @@ $(function() {
             {data: 'cu-surname'},
             {data: 'cu-name'},
             {data: 'cu-mobile'},
-            {data: 'cu-cardCode'},
+            {data: 'cc-code'},
             {data: 'c-plate'},
             {data: 'c-label'},
             {data: 'e-kmBeginning'},
