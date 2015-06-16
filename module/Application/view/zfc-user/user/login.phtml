@@ -9,7 +9,7 @@ $form->setAttribute('method', 'post');
 $as_errorsIdentity = array();
 if ($form->get('identity') instanceof Zend\Form\Element &&
     count($form->get('identity')->getMessages())>0 ) {
-    $as_errorsIdentity = array("Nome utente o password errati. Ti preghiamo di verificare i dati inseriti e riprovare.");
+    $as_errorsIdentity = array("Nome utente o password errati");
 }
 
 $as_errors = array_merge($as_errorsIdentity,
