@@ -10,6 +10,7 @@
 
     <!-- Le styles -->
     <?php echo $this->headLink(array('rel' => 'shortcut icon', 'type' => 'image/vnd.microsoft.icon', 'href' => $this->basePath() . '/img/favicon.ico'))
+        ->prependStylesheet($this->basePath('css/palette.css'))
         ->prependStylesheet($this->basePath('css/custom.css'))
         ->prependStylesheet($this->basePath('css/themes/green.css'))
         ->prependStylesheet($this->basePath('css/layout.css'))
@@ -20,7 +21,6 @@
         ->prependStylesheet($this->basePath('css/bootstrap.min.css'))
         ->prependStylesheet($this->basePath('plugins/simple-line-icons/simple-line-icons.min.css'))
         ->prependStylesheet($this->basePath('css/font-awesome.min.css'))
-        ->prependStylesheet($this->basePath('css/palette.css'))
         ->prependStylesheet('http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700&subset=all') ?>
 
     <!-- Scripts -->
@@ -35,7 +35,7 @@
     ; ?>
 </head>
 
-<body id="login-background" class="login">
+<body class="palette-change login">
 
 <div class="logo">
     <a href="#">
@@ -48,7 +48,7 @@
 </div>
 
 
-<div id="login-copyright" class="copyright">
+<div class="copyright">
     <?php echo date('Y') ?> &copy; Sharengo.
 </div>
 
