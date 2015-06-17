@@ -1,11 +1,10 @@
 <?php
 namespace Application\Form;
 
-use SharengoCore\Service\UsersService;
+use SharengoCore\Entity\Webuser;
 use Zend\Form\Fieldset;
 use Zend\InputFilter\InputFilterProviderInterface;
 use Zend\Stdlib\Hydrator\HydratorInterface;
-use Application\Entity\Webuser;
 
 /**
  * Class UserFieldset
