@@ -33,21 +33,33 @@ $form = $this->carForm->prepare();
                     <div class="col-lg-3">
                         <div class="form-group">
                             <label for="name">Costruttore</label>
-                            <?= $this->formRow($form->get('car')->get('manufactures')); ?>
+                            <?php
+                            $manufactures = $form->get('car')->get('manufactures');
+                            echo $this->formElement($manufactures);
+                            echo $this->formElementErrors($manufactures, array('class' => 'text-danger list-unstyled'));
+                            ?>
                         </div>
                     </div>
 
                     <div class="col-lg-3">
                         <div class="form-group">
                             <label for="surname">Modello</label>
-                            <?= $this->formRow($form->get('car')->get('model')); ?>
+                            <?php
+                            $model = $form->get('car')->get('model');
+                            echo $this->formElement($model);
+                            echo $this->formElementErrors($model, array('class' => 'text-danger list-unstyled'));
+                            ?>
                         </div>
                     </div>
 
                     <div class="col-lg-3">
                         <div class="form-group">
                             <label for="surname">Identificativo</label>
-                            <?= $this->formRow($form->get('car')->get('label')); ?>
+                            <?php
+                            $label = $form->get('car')->get('label');
+                            echo $this->formElement($label);
+                            echo $this->formElementErrors($label, array('class' => 'text-danger list-unstyled'));
+                            ?>
                         </div>
                     </div>
                 </div>

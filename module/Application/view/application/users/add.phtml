@@ -23,14 +23,18 @@ $form = $this->userForm->prepare();
                 <div class="row">
                     <div class="col-md-12">
                         <?= $this->form()->openTag($form); ?>
+
                             <div class="row">
                                 <div class="col-lg-12">
                                     <div class="form-group">
                                         <label for="displayName">Nome & Cognome</label>
-                                        <?= $this->formRow($form->get('user')->get('displayName')); ?>
+                                        <?php
+                                        $displayName = $form->get('user')->get('displayName');
+                                        echo $this->formElement($displayName);
+                                        echo $this->formElementErrors($displayName, array('class' => 'text-danger list-unstyled'));
+                                        ?>
                                     </div>
                                 </div>
-
                             </div>
 
                             <div class="row">
@@ -38,28 +42,44 @@ $form = $this->userForm->prepare();
                                 <div class="col-lg-3">
                                     <div class="form-group">
                                         <label for="email">Email</label>
-                                        <?= $this->formRow($form->get('user')->get('email')); ?>
+                                        <?php
+                                        $email = $form->get('user')->get('email');
+                                        echo $this->formElement($email);
+                                        echo $this->formElementErrors($email, array('class' => 'text-danger list-unstyled'));
+                                        ?>
                                     </div>
                                 </div>
 
                                 <div class="col-lg-3">
                                     <div class="form-group">
                                         <label for="email">Ripeti Email</label>
-                                        <?= $this->formRow($form->get('user')->get('email2')); ?>
+                                        <?php
+                                        $email2 = $form->get('user')->get('email2');
+                                        echo $this->formElement($email2);
+                                        echo $this->formElementErrors($email2, array('class' => 'text-danger list-unstyled'));
+                                        ?>
                                     </div>
                                 </div>
 
                                 <div class="col-lg-3">
                                     <div class="form-group">
                                         <label for="password">Password</label>
-                                        <?= $this->formRow($form->get('user')->get('password')->setAttribute('required', 'required')); ?>
+                                        <?php
+                                        $password= $form->get('user')->get('password');
+                                        echo $this->formElement($password);
+                                        echo $this->formElementErrors($password, array('class' => 'text-danger list-unstyled'));
+                                        ?>
                                     </div>
                                 </div>
 
                                 <div class="col-lg-3">
                                     <div class="form-group">
                                         <label for="password">Ripeti Password</label>
-                                        <?= $this->formRow($form->get('user')->get('password2')->setAttribute('required', 'required')); ?>
+                                        <?php
+                                        $password2= $form->get('user')->get('password2');
+                                        echo $this->formElement($password2);
+                                        echo $this->formElementErrors($password2, array('class' => 'text-danger list-unstyled'));
+                                        ?>
                                     </div>
                                 </div>
                             </div>

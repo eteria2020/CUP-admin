@@ -152,7 +152,17 @@ class CarFieldset extends Fieldset implements InputFilterProviderInterface
                     [
                         'name' => 'StringTrim'
                     ]
-                ]
+                ],
+                'validators' => [
+                    [
+                        'name' =>'NotEmpty',
+                        'options' => [
+                            'messages' => [
+                                \Zend\Validator\NotEmpty::IS_EMPTY => 'La Targa non può essere lasciata vuota'
+                            ],
+                        ],
+                    ]
+                ],
             ],
             'manufactures' => [
                 'required' => true,
@@ -160,7 +170,17 @@ class CarFieldset extends Fieldset implements InputFilterProviderInterface
                     [
                         'name' => 'StringTrim'
                     ]
-                ]
+                ],
+                'validators' => [
+                    [
+                        'name' =>'NotEmpty',
+                        'options' => [
+                            'messages' => [
+                                \Zend\Validator\NotEmpty::IS_EMPTY => 'Il costruttore non può essere lasciato vuoto'
+                            ],
+                        ],
+                    ]
+                ],
             ],
             'model'        => [
                 'required' => true,
@@ -168,7 +188,17 @@ class CarFieldset extends Fieldset implements InputFilterProviderInterface
                     [
                         'name' => 'StringTrim'
                     ]
-                ]
+                ],
+                'validators' => [
+                    [
+                        'name' =>'NotEmpty',
+                        'options' => [
+                            'messages' => [
+                                \Zend\Validator\NotEmpty::IS_EMPTY => 'Il modello non può essere lasciato vuoto'
+                            ],
+                        ],
+                    ]
+                ],
             ],
             'label'        => [
                 'required' => true,
@@ -176,7 +206,17 @@ class CarFieldset extends Fieldset implements InputFilterProviderInterface
                     [
                         'name' => 'StringTrim'
                     ]
-                ]
+                ],
+                'validators' => [
+                    [
+                        'name' =>'NotEmpty',
+                        'options' => [
+                            'messages' => [
+                                \Zend\Validator\NotEmpty::IS_EMPTY => "L'identificativo non può essere lasciato vuoto"
+                            ],
+                        ],
+                    ]
+                ],
             ],
             'notes'        => [
                 'required' => false,
