@@ -192,6 +192,30 @@ return array(
                         ],
                     ]
                 ],
+            ],
+            'reservations' => [
+                'type' => 'Literal',
+                'options' => [
+                    'route' => '/reservations',
+                    'defaults' => [
+                        'controller' => 'Application\Controller\Reservations',
+                        'action' => 'index'
+                    ]
+                ],
+                'may_terminate' => true,
+                'child_routes' => [
+                    'datatable' => [
+                        'type'    => 'Literal',
+                        'options' => [
+                            'route'    => '/datatable',
+                            'defaults' => [
+                                '__NAMESPACE__' => 'Application\Controller',
+                                'controller'    => 'Reservations',
+                                'action'        => 'datatable',
+                            ],
+                        ],
+                    ],
+                ],
             ]
         ),
     ),
@@ -210,18 +234,19 @@ return array(
             'CarForm' => 'Application\Form\CarFormFactory',
         ]
     ),
-    'controllers' => array(
-        'invokables' => array(
+    'controllers' => [
+        'invokables' => [
             'Application\Controller\Index' => 'Application\Controller\IndexController',
-        ),
+        ],
         'factories' => [
-            'Application\Controller\ConsoleUser' => 'Application\Controller\ConsoleUserControllerFactory',
-            'Application\Controller\Trips' => 'Application\Controller\TripsControllerFactory',
-            'Application\controller\Users' => 'Application\Controller\UsersControllerFactory',
-            'Application\Controller\Cars' => 'Application\Controller\CarsControllerFactory',
-            'Application\Controller\Customers' => 'Application\Controller\CustomersControllerFactory'
+            'Application\Controller\ConsoleUser'  => 'Application\Controller\ConsoleUserControllerFactory',
+            'Application\Controller\Trips'        => 'Application\Controller\TripsControllerFactory',
+            'Application\controller\Users'        => 'Application\Controller\UsersControllerFactory',
+            'Application\Controller\Cars'         => 'Application\Controller\CarsControllerFactory',
+            'Application\Controller\Customers'    => 'Application\Controller\CustomersControllerFactory',
+            'Application\Controller\Reservations' => 'Application\Controller\ReservationsControllerFactory'
         ]
-    ),
+    ],
     'translator'         => [
         'locale'                    => 'it',
         'translation_file_patterns' => [
@@ -294,7 +319,8 @@ return array(
                 ['controller' => 'Application\Controller\Trips', 'roles' => ['user']],
                 ['controller' => 'Application\Controller\Cars', 'roles' => ['user']],
                 ['controller' => 'Application\Controller\ConsoleUser', 'roles' => []],
-                ['controller' => 'Application\Controller\Users', 'roles' => ['user']]
+                ['controller' => 'Application\Controller\Users', 'roles' => ['user']],
+                ['controller' => 'Application\Controller\Reservations', 'roles' => ['user']]
             ),
         ),
     ),
@@ -356,6 +382,20 @@ return array(
                     [
                         'label' => 'Elenco',
                         'route' => 'trips',
+                        'isVisible' => true
+                    ]
+                ],
+            ],
+            [
+                'label'     => 'Prenotazioni',
+                'route'     => 'reservations',
+                'icon'      => 'fa fa-calendar',
+                'resource'  => 'admin',
+                'isRouteJs' => true,
+                'pages'     => [
+                    [
+                        'label' => 'Elenco',
+                        'route' => 'reservations',
                         'isVisible' => true
                     ]
                 ],

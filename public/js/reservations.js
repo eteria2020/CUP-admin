@@ -1,8 +1,9 @@
 $(function() {
 
-    var table    = $('#js-customers-table');
+    var table    = $('#js-reservations-table');
     var search   = $('#js-value');
     var column   = $('#js-column');
+    var filterDate = false;
     search.val('');
     column.val('select');
 
@@ -11,62 +12,51 @@ $(function() {
         "serverSide": true,
         "bStateSave": false,
         "bFilter": false,
-        "sAjaxSource": "/customers/datatable",
+        "sAjaxSource": "/reservations/datatable",
         "fnServerData": function ( sSource, aoData, fnCallback, oSettings ) {
             oSettings.jqXHR = $.ajax( {
                 "dataType": 'json',
                 "type": "POST",
                 "url": sSource,
                 "data": aoData,
-                "success": fnCallback,
-                "error": function(jqXHR, textStatus, errorThrown) {
-
-                    /*
-                    if (jqXHR.status == '200' &&
-                        textStatus == 'parsererror') {
-
-                        bootbox.alert('La tua sessione è scaduta, clicca sul pulsante OK per tornare alla pagina di login.', function(r) {
-                            document.location.href = '/user/login';
-                        });
-
-                        //@tofix user come here also if the response is wrong
-
-                    }*/
-                }
+                "success": fnCallback
             } );
         },
         "fnServerParams": function ( aoData ) {
-            aoData.push({ "name": "column", "value": $(column).val()});
-            aoData.push({ "name": "searchValue", "value": search.val().trim()});
+
+            if(filterDate) {
+                aoData.push({ "name": "column", "value": ''});
+                aoData.push({ "name": "searchValue", "value": ''});
+                aoData.push({ "name": "from", "value": search.val().trim()});
+                aoData.push({ "name": "to", "value": search.val().trim()});
+                aoData.push({ "name": "columnFromDate", "value": "e.beginningTs"});
+                aoData.push({ "name": "columnFromEnd", "value": "e.beginningTs"});
+            } else {
+                aoData.push({ "name": "column", "value": $(column).val()});
+                aoData.push({ "name": "searchValue", "value": search.val().trim()});
+            }
         },
         "order": [[0, 'desc']],
         "columns": [
             {data: 'e.id'},
-            {data: 'e.name'},
-            {data: 'e.surname'},
-            {data: 'e.mobile'},
-            {data: 'cc.code'},
-            {data: 'e.driverLicense'},
-            {data: 'e.driverLicenseExpire'},
-            {data: 'e.email'},
-            {data: 'e.taxCode'},
-            {data: 'e.registration'},
-            {data: 'button'}
+            {data: 'e.carPlate'},
+            {data: 'e.customer'},
+            {data: 'e.cards'},
+            {data: 'e.active'}
         ],
+
         "columnDefs": [
             {
-                targets: 9,
-                searchable: false,
+                targets: 0,
                 sortable: false
             },
             {
-                targets: 10,
-                data: 'button',
-                searchable: false,
-                sortable: false,
-                render: function (data, type, row) {
-                    return'<a href="/customers/edit/' + data + '" class="btn btn-default btn-xs">Modifica</a>';
-                }
+                targets: 1,
+                sortable: false
+            },
+            {
+                targets: 2,
+                sortable: false
             }
         ],
         "lengthMenu": [
@@ -111,7 +101,28 @@ $(function() {
 
     $('.date-picker').datepicker({
         autoclose: true,
-        format: 'dd-mm-yy',
+        format: 'yyyy-mm-dd',
         weekStart: 1
     });
+
+    $(column).change(function() {
+        var value = $(this).val();
+
+        if(value == 'beginningTs') {
+            filterDate = true;
+            search.val('');
+            $(search).datepicker({
+                autoclose: true,
+                format: 'yyyy-mm-dd',
+                weekStart: 1
+            });
+
+        } else {
+            filterDate = false;
+            search.val('');
+            $(search).datepicker("remove");
+        }
+
+    });
+
 });

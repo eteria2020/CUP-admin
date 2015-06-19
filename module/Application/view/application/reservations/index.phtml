@@ -1,16 +1,20 @@
 <?php
-$this->headLink()->appendStylesheet('/js/datatables/plugins/bootstrap/dataTables.bootstrap.css');
+$this->headLink()
+    ->appendStylesheet('/js/datatables/plugins/bootstrap/dataTables.bootstrap.css')
+    ->appendStylesheet('/plugins/bootstrap-datepicker/css/datepicker3.css');
+
 $this->headScript()
     ->appendFile('/js/datatables/media/js/jquery.dataTables.min.js')
     ->appendFile('/js/datatables/plugins/bootstrap/dataTables.bootstrap.js')
-    ->appendFile($this->basePath() .'/js/cars.js');
+    ->appendFile('/plugins/bootstrap-datepicker/js/bootstrap-datepicker.js')
+    ->appendFile($this->basePath() .'/js/reservations.js');
 ?>
 <div class="page-content-wrapper">
     <div class="page-content">
 
         <!-- BEGIN PAGE HEADER-->
         <h3 class="page-title">
-            ELENCO AUTO <small>ricerca</small>
+            ELENCO PRENOTAZIONI <small>ricerca</small>
         </h3>
 
         <div class="page-bar">
@@ -27,29 +31,16 @@ $this->headScript()
                             <div class="form-group">
                                 <select name="column" id="js-column" class="form-control">
                                     <option value="select" selected>-- Seleziona --</option>
-                                    <option value="e.plate">Targa</option>
-                                    <option value="e.label">Identificativo</option>
-                                    <option value="e.intCleanliness">Pulizia Interna</option>
-                                    <option value="e.extCleanliness">Pulizia Esterna</option>
-                                    <option value="e.running">In Corsa</option>
-                                    <option value="e.hidden">Nascosta</option>
-                                    <option value="e.active">Attiva</option>
-                                    <option value="e.statusMaintenance">Stato manutenzione</option>
-                                    <option value="e.statusOperative">Stato operativa</option>
-                                    <option value="e.statusNotOperative">Stato non operativa</option>
-                                    <option value="e.busy">Occupata</option>
+                                    <option value="beginningTs">Data</option>
+                                    <option value="c.plate">Targa</option>
+                                    <option value="cu.taxCode">Codice Fiscale</option>
                                 </select>
                             </div>
                             <div class="form-group">
-                                <select name="js-clean-type" id="js-clean-type" class="form-control" style="display: none;">
-                                    <option value="clean">Pulito</option>
-                                    <option value="average">Media</option>
-                                    <option value="dirty">Sporco</option>
-                                </select>
                                 <input type="text" name="value" value="" class="form-control" id="js-value" placeholder="Filtra...">
                             </div>
                             <div class="btn-group">
-                                <button type="button" class="btn green js-search" id="js-search"><i class="fa fa-search"></i> Cerca</button>
+                                <button type="button" class="btn green" id="js-search"><i class="fa fa-search"></i> Cerca</button>
                                 <button type="button" class="btn green dropdown-toggle" data-toggle="dropdown"><i class="fa fa-angle-down"></i></button>
                                 <ul class="dropdown-menu" role="menu">
                                     <li>
@@ -59,9 +50,7 @@ $this->headScript()
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-4">
-                        <a href="<?= $this->url('cars/add'); ?>" class="btn green pull-right"><i class="fa fa-plus"></i> Aggiungi Auto</a>
-                    </div>
+                    <div class="col-md-4"></div>
                 </div>
 
                 <hr>
@@ -70,23 +59,18 @@ $this->headScript()
                 <div class="portlet box green">
                     <div class="portlet-title">
                         <div class="caption">
-                            <i class="fa fa-cogs"></i>Elenco Auto
+                            <i class="fa fa-cogs"></i>Elenco Prenotazioni
                         </div>
                     </div>
                     <div class="portlet-body">
-                        <table class="table table-striped table-bordered table-hover" id="js-cars-table">
+                        <table class="table table-striped table-bordered table-hover" id="js-reservations-table">
                             <thead>
                             <tr>
+                                <th>ID</th>
                                 <th>Targa</th>
-                                <th>Identificativo</th>
-                                <th>Batteria</th>
-                                <th>Ultimo Contatto</th>
-                                <th>Km</th>
-                                <th>Pulizia</th>
-                                <th>Posizione</th>
-                                <th>Stato</th>
-                                <th>Posizione</th>
-                                <th>Azione</th>
+                                <th>Cliente</th>
+                                <th>Card</th>
+                                <th>Attiva</th>
                             </tr>
                             </thead>
                         </table>

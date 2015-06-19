@@ -44,12 +44,12 @@ class CarsController extends AbstractActionController
         $as_filters = $this->params()->fromPost();
         $as_filters['withLimit'] = true;
         $as_dataDataTable = $this->I_carsService->getDataDataTable($as_filters);
-        $i_userCar = $this->I_carsService->getTotalCars();
-        $i_recordsFiltered = $this->_getRecordsFiltered($as_filters, $i_userCar);
+        $i_totalCars = $this->I_carsService->getTotalCars();
+        $i_recordsFiltered = $this->_getRecordsFiltered($as_filters, $i_totalCars);
 
         return new JsonModel(array(
             'draw'            => $this->params()->fromQuery('sEcho', 0),
-            'recordsTotal'    => $i_userCar,
+            'recordsTotal'    => $i_totalCars,
             'recordsFiltered' => $i_recordsFiltered,
             'data'            => $as_dataDataTable
         ));
@@ -158,11 +158,11 @@ class CarsController extends AbstractActionController
 
     }
 
-    protected function _getRecordsFiltered($as_filters, $i_totalCustomer)
+    protected function _getRecordsFiltered($as_filters, $i_totalCars)
     {
-        if (empty($as_filters['searchValue'])) {
+        if (empty($as_filters['searchValue']) && !isset($as_filters['columnValueWithoutLike'])) {
 
-            return $i_totalCustomer;
+            return $i_totalCars;
 
         } else {
 

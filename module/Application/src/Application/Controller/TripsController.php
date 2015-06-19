@@ -47,7 +47,7 @@ class TripsController extends AbstractActionController
 
     protected function _getRecordsFiltered($as_filters, $i_tripsTotal)
     {
-        if (empty($as_filters['searchValue'])) {
+        if (empty($as_filters['searchValue']) && !isset($as_filters['columnNull'])) {
 
             return $i_tripsTotal;
 
