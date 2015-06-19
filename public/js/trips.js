@@ -71,7 +71,7 @@ $(function() {
             {data: 'duration'},
             {data: 'e.parkSeconds'},
             {data: 'price'},
-            {data: 'statePanel'},
+            {data: 'c.keyStatus'},
             {data: 'c.parking'},
             {data: 'e.payable'}
         ],
