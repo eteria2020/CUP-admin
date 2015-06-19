@@ -156,11 +156,6 @@ class CarFieldset extends Fieldset implements InputFilterProviderInterface
                 'validators' => [
                     [
                         'name' =>'NotEmpty',
-                        'options' => [
-                            'messages' => [
-                                \Zend\Validator\NotEmpty::IS_EMPTY => 'La Targa non può essere lasciata vuota'
-                            ],
-                        ],
                     ]
                 ],
             ],
@@ -174,11 +169,6 @@ class CarFieldset extends Fieldset implements InputFilterProviderInterface
                 'validators' => [
                     [
                         'name' =>'NotEmpty',
-                        'options' => [
-                            'messages' => [
-                                \Zend\Validator\NotEmpty::IS_EMPTY => 'Il costruttore non può essere lasciato vuoto'
-                            ],
-                        ],
                     ]
                 ],
             ],
@@ -192,11 +182,6 @@ class CarFieldset extends Fieldset implements InputFilterProviderInterface
                 'validators' => [
                     [
                         'name' =>'NotEmpty',
-                        'options' => [
-                            'messages' => [
-                                \Zend\Validator\NotEmpty::IS_EMPTY => 'Il modello non può essere lasciato vuoto'
-                            ],
-                        ],
                     ]
                 ],
             ],
@@ -209,12 +194,7 @@ class CarFieldset extends Fieldset implements InputFilterProviderInterface
                 ],
                 'validators' => [
                     [
-                        'name' =>'NotEmpty',
-                        'options' => [
-                            'messages' => [
-                                \Zend\Validator\NotEmpty::IS_EMPTY => "L'identificativo non può essere lasciato vuoto"
-                            ],
-                        ],
+                        'name' =>'NotEmpty'
                     ]
                 ],
             ],

@@ -200,6 +200,9 @@ return array(
             'Zend\Cache\Service\StorageCacheAbstractServiceFactory',
             'Zend\Log\LoggerAbstractServiceFactory',
         ),
+        'aliases' => array(
+            'translator' => 'MvcTranslator',
+        ),
         'factories' => [
             'navigation' => 'Zend\Navigation\Service\DefaultNavigationFactory',
             'CustomerForm' => 'Application\Form\CustomerFormFactory',
@@ -219,6 +222,17 @@ return array(
             'Application\Controller\Customers' => 'Application\Controller\CustomersControllerFactory'
         ]
     ),
+    'translator'         => [
+        'locale'                    => 'it',
+        'translation_file_patterns' => [
+            [
+                'type'          => 'phpArray',
+                'base_dir'      => 'vendor/zendframework/zendframework/resources/languages',
+                'pattern'       => '%s/Zend_Validate.php',
+                'text_domain'   => 'zend_validate',
+            ]
+        ],
+    ],
     'view_manager' => array(
         'display_not_found_reason' => true,
         'display_exceptions'       => true,

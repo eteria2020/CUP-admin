@@ -92,28 +92,10 @@ class UserFieldset extends Fieldset implements InputFilterProviderInterface
                 'validators' => [
                     [
                         'name' =>'NotEmpty',
-                        'options' => [
-                            'messages' => [
-                                \Zend\Validator\NotEmpty::IS_EMPTY => "Il campo email non può essere vuoto"
-                            ],
-                        ],
                     ],
                     [
                         'name' => 'EmailAddress',
                         'break_chain_on_failure' => true,
-                        'options' => [
-                            'messages' => [
-                                \Zend\Validator\EmailAddress::INVALID_FORMAT     => self::EMAIL_NOT_VALID,
-                                \Zend\Validator\EmailAddress::INVALID            => self::EMAIL_NOT_VALID,
-                                \Zend\Validator\EmailAddress::INVALID_HOSTNAME   => self::EMAIL_NOT_VALID,
-                                \Zend\Validator\EmailAddress::INVALID_LOCAL_PART => self::EMAIL_NOT_VALID,
-                                \Zend\Validator\EmailAddress::INVALID_MX_RECORD  => self::EMAIL_NOT_VALID,
-                                \Zend\Validator\EmailAddress::DOT_ATOM           => self::EMAIL_NOT_VALID,
-                                \Zend\Validator\EmailAddress::INVALID_SEGMENT    => self::EMAIL_NOT_VALID,
-                                \Zend\Validator\EmailAddress::QUOTED_STRING      => self::EMAIL_NOT_VALID,
-                                \Zend\Validator\EmailAddress::LENGTH_EXCEEDED    => self::EMAIL_NOT_VALID,
-                            ],
-                        ],
                     ]
                 ]
             ],
@@ -122,36 +104,15 @@ class UserFieldset extends Fieldset implements InputFilterProviderInterface
                 'validators' => [
                     [
                         'name' =>'NotEmpty',
-                        'options' => [
-                            'messages' => [
-                                \Zend\Validator\NotEmpty::IS_EMPTY => "Il campo email non può essere vuoto"
-                            ],
-                        ],
                     ],
                     [
                         'name' => 'EmailAddress',
                         'break_chain_on_failure' => true,
-                        'options' => [
-                            'messages' => [
-                                \Zend\Validator\EmailAddress::INVALID_FORMAT     => self::EMAIL_NOT_VALID,
-                                \Zend\Validator\EmailAddress::INVALID            => self::EMAIL_NOT_VALID,
-                                \Zend\Validator\EmailAddress::INVALID_HOSTNAME   => self::EMAIL_NOT_VALID,
-                                \Zend\Validator\EmailAddress::INVALID_LOCAL_PART => self::EMAIL_NOT_VALID,
-                                \Zend\Validator\EmailAddress::INVALID_MX_RECORD  => self::EMAIL_NOT_VALID,
-                                \Zend\Validator\EmailAddress::DOT_ATOM           => self::EMAIL_NOT_VALID,
-                                \Zend\Validator\EmailAddress::INVALID_SEGMENT    => self::EMAIL_NOT_VALID,
-                                \Zend\Validator\EmailAddress::QUOTED_STRING      => self::EMAIL_NOT_VALID,
-                                \Zend\Validator\EmailAddress::LENGTH_EXCEEDED    => self::EMAIL_NOT_VALID,
-                            ],
-                        ],
                     ],
                     [
                         'name' => 'Identical',
                         'options' => [
                             'token' => 'email',
-                            'messages' => [
-                                \Zend\Validator\Identical::NOT_SAME => "Le due email non coincidono"
-                            ],
                         ]
                     ]
                 ]
@@ -166,11 +127,6 @@ class UserFieldset extends Fieldset implements InputFilterProviderInterface
                 'validators' => [
                     [
                         'name' =>'NotEmpty',
-                        'options' => [
-                            'messages' => [
-                                \Zend\Validator\NotEmpty::IS_EMPTY => "Il campo nome & cognome non può essere lasciato vuoto"
-                            ],
-                        ],
                     ]
                 ],
             ],
@@ -184,20 +140,9 @@ class UserFieldset extends Fieldset implements InputFilterProviderInterface
                 'validators' => [
                     [
                         'name' =>'NotEmpty',
-                        'options' => [
-                            'messages' => [
-                                \Zend\Validator\NotEmpty::IS_EMPTY => "La password non può essere lasciata vuota"
-                            ],
-                        ],
                     ],
                     [
                         'name' => 'StringLength',
-                        'options' => [
-                            'min' => 8,
-                            'messages' => [
-                                \Zend\Validator\StringLength::TOO_SHORT => "La password deve essere min 8 caratteri"
-                            ],
-                        ]
                     ]
                 ]
             ],
@@ -211,19 +156,11 @@ class UserFieldset extends Fieldset implements InputFilterProviderInterface
                 'validators' => [
                     [
                         'name' =>'NotEmpty',
-                        'options' => [
-                            'messages' => [
-                                \Zend\Validator\NotEmpty::IS_EMPTY => "La password non può essere lasciata vuota"
-                            ],
-                        ],
                     ],
                     [
                         'name' => 'StringLength',
                         'options' => [
                             'min' => 8,
-                            'messages' => [
-                                \Zend\Validator\StringLength::TOO_SHORT => "La password deve essere min 8 caratteri"
-                            ],
                         ],
                         'break_chain_on_failure' => true
                     ],
@@ -231,9 +168,6 @@ class UserFieldset extends Fieldset implements InputFilterProviderInterface
                         'name' => 'Identical',
                         'options' => [
                             'token' => 'password',
-                            'messages' => [
-                                \Zend\Validator\Identical::NOT_SAME => "Le due password non coincidono"
-                            ],
                         ]
                     ]
                 ]
