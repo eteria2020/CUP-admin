@@ -1,0 +1,54 @@
+/* General */
+
+.palette-change {
+	background-color: #43a34c !important;
+}
+
+.palette-change-dark {
+	background-color: #33933c !important;
+}
+
+.palette-change-light {
+	background-color: #52e25f !important;
+}
+
+/* Login page */
+
+.login-button {
+	width: 340px !important;
+}
+
+.login-button:hover,
+.login-button:focus {
+	background-color: #33933c !important;
+}
+
+.copyright {
+	color: #7aca8c !important;
+}
+
+/* Admin page */
+
+.portlet.box.green > .portlet-title {
+	background-color: #43a34c !important; /* 4B8DF8 */
+}
+
+.js-search {
+	background-color: #43a34c !important;
+}
+
+button.dropdown-toggle {
+	background-color: #43a34c !important;
+}
+
+.portlet > .portlet-body.green, .portlet.green {
+	background-color: #43a34c !important;
+}
+
+.portlet.box.green {
+	border: 1px solid #43a34c !important;
+}
+
+.btn-success {
+	background-color: #43a34c !important;
+}
