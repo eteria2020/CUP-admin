@@ -142,7 +142,10 @@ class UserFieldset extends Fieldset implements InputFilterProviderInterface
                         'name' =>'NotEmpty',
                     ],
                     [
-                        'name' => 'StringLength',
+                        'name'    => 'StringLength',
+                        'options' => [
+                            'min' => 8
+                        ]
                     ]
                 ]
             ],
