@@ -12,6 +12,7 @@ use Zend\Stdlib\Hydrator\HydratorInterface;
  */
 class UserFieldset extends Fieldset implements InputFilterProviderInterface
 {
+    const EMAIL_NOT_VALID = 'Formato email non valido';
 
     /**
      * @param string $name
@@ -90,8 +91,11 @@ class UserFieldset extends Fieldset implements InputFilterProviderInterface
                 'required' => true,
                 'validators' => [
                     [
+                        'name' =>'NotEmpty',
+                    ],
+                    [
                         'name' => 'EmailAddress',
-                        'break_chain_on_failure' => true
+                        'break_chain_on_failure' => true,
                     ]
                 ]
             ],
@@ -99,13 +103,16 @@ class UserFieldset extends Fieldset implements InputFilterProviderInterface
                 'required' => true,
                 'validators' => [
                     [
+                        'name' =>'NotEmpty',
+                    ],
+                    [
                         'name' => 'EmailAddress',
-                        'break_chain_on_failure' => true
+                        'break_chain_on_failure' => true,
                     ],
                     [
                         'name' => 'Identical',
                         'options' => [
-                            'token' => 'email'
+                            'token' => 'email',
                         ]
                     ]
                 ]
@@ -116,7 +123,12 @@ class UserFieldset extends Fieldset implements InputFilterProviderInterface
                     [
                         'name' => 'StringTrim'
                     ]
-                ]
+                ],
+                'validators' => [
+                    [
+                        'name' =>'NotEmpty',
+                    ]
+                ],
             ],
             'password' => [
                 'required' => true,
@@ -127,7 +139,10 @@ class UserFieldset extends Fieldset implements InputFilterProviderInterface
                 ],
                 'validators' => [
                     [
-                        'name' => 'StringLength',
+                        'name' =>'NotEmpty',
+                    ],
+                    [
+                        'name'    => 'StringLength',
                         'options' => [
                             'min' => 8
                         ]
@@ -143,16 +158,19 @@ class UserFieldset extends Fieldset implements InputFilterProviderInterface
                 ],
                 'validators' => [
                     [
+                        'name' =>'NotEmpty',
+                    ],
+                    [
                         'name' => 'StringLength',
                         'options' => [
-                            'min' => 8
+                            'min' => 8,
                         ],
                         'break_chain_on_failure' => true
                     ],
                     [
                         'name' => 'Identical',
                         'options' => [
-                            'token' => 'password'
+                            'token' => 'password',
                         ]
                     ]
                 ]

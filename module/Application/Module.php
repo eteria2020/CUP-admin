@@ -53,6 +53,9 @@ class Module
 
         $eventManager->attach($strategy);
 
+        $translator     = $serviceManager->get('translator');
+        \Zend\Validator\AbstractValidator::setDefaultTranslator($translator, 'zend_validate');
+
         // Add ACL information to Navigation view helper
         $authorize = $serviceManager->get('BjyAuthorize\Service\Authorize');
         try {

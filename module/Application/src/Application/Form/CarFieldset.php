@@ -152,7 +152,12 @@ class CarFieldset extends Fieldset implements InputFilterProviderInterface
                     [
                         'name' => 'StringTrim'
                     ]
-                ]
+                ],
+                'validators' => [
+                    [
+                        'name' =>'NotEmpty',
+                    ]
+                ],
             ],
             'manufactures' => [
                 'required' => true,
@@ -160,7 +165,12 @@ class CarFieldset extends Fieldset implements InputFilterProviderInterface
                     [
                         'name' => 'StringTrim'
                     ]
-                ]
+                ],
+                'validators' => [
+                    [
+                        'name' =>'NotEmpty',
+                    ]
+                ],
             ],
             'model'        => [
                 'required' => true,
@@ -168,7 +178,12 @@ class CarFieldset extends Fieldset implements InputFilterProviderInterface
                     [
                         'name' => 'StringTrim'
                     ]
-                ]
+                ],
+                'validators' => [
+                    [
+                        'name' =>'NotEmpty',
+                    ]
+                ],
             ],
             'label'        => [
                 'required' => true,
@@ -176,7 +191,12 @@ class CarFieldset extends Fieldset implements InputFilterProviderInterface
                     [
                         'name' => 'StringTrim'
                     ]
-                ]
+                ],
+                'validators' => [
+                    [
+                        'name' =>'NotEmpty'
+                    ]
+                ],
             ],
             'notes'        => [
                 'required' => false,

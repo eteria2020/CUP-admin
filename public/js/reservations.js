@@ -38,11 +38,11 @@ $(function() {
         },
         "order": [[0, 'desc']],
         "columns": [
-            {data: 'id'},
-            {data: 'carPlate'},
-            {data: 'customer'},
-            {data: 'cards'},
-            {data: 'active'}
+            {data: 'e.id'},
+            {data: 'e.carPlate'},
+            {data: 'e.customer'},
+            {data: 'e.cards'},
+            {data: 'e.active'}
         ],
 
         "columnDefs": [
