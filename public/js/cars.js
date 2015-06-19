@@ -3,6 +3,11 @@ $(function() {
     var table    = $('#js-cars-table');
     var search   = $('#js-value');
     var column   = $('#js-column');
+    var typeClean = $('#js-clean-type');
+    var filterWithoutLike = false;
+    var columnWithoutLike = false;
+    var columnValueWithoutLike  = false;
+
     search.val('');
     column.val('select');
 
@@ -22,42 +27,47 @@ $(function() {
             } );
         },
         "fnServerParams": function ( aoData ) {
-            aoData.push({ "name": "column", "value": $(column).val()});
-            aoData.push({ "name": "searchValue", "value": search.val().trim()});
+
+            if(filterWithoutLike) {
+                aoData.push({ "name": "column", "value": ''});
+                aoData.push({ "name": "searchValue", "value": ''});
+                aoData.push({ "name": "columnWithoutLike", "value": columnWithoutLike});
+                aoData.push({ "name": "columnValueWithoutLike", "value": columnValueWithoutLike});
+            } else {
+                aoData.push({ "name": "column", "value": $(column).val()});
+                aoData.push({ "name": "searchValue", "value": search.val().trim()});
+            }
+
         },
         "order": [[0, 'desc']],
         "columns": [
-            {data: 'plate'},
-            {data: 'label'},
-            {data: 'manufactures'},
-            {data: 'model'},
+            {data: 'e.plate'},
+            {data: 'e.label'},
+            {data: 'e.battery'},
+            {data: 'e.lastContact'},
+            {data: 'e.km'},
             {data: 'clean'},
             {data: 'position'},
-            {data: 'lastContact'},
-            {data: 'rpm'},
-            {data: 'speed'},
-            {data: 'km'},
-            {data: 'running'},
-            {data: 'parking'},
-            {data: 'hidden'},
-            {data: 'active'},
-            {data: 'status'},
-            {data: 'busy'},
-            {data: 'notes'},
+            {data: 'e.status'},
+            {data: 'positionLink'},
             {data: 'button'}
         ],
 
         "columnDefs": [
             {
-                targets: 4,
-                sortable: false
-            },
-            {
                 targets: 5,
                 sortable: false
             },
             {
-                targets: 17,
+                targets: 6,
+                sortable: false
+            },
+            {
+                targets: 8,
+                sortable: false
+            },
+            {
+                targets: 9,
                 data: 'button',
                 searchable: false,
                 sortable: false,
@@ -106,11 +116,79 @@ $(function() {
 
     $('#js-clear').click(function() {
         search.val('');
+        search.prop('disabled', false);
+        typeClean.hide();
+        search.show();
         column.val('select');
+        filterWithoutLike = false;
     });
     
     $('#js-cars-table').on('click', '.js-delete', function() {
         return confirm("Confermi l'eliminazione dell'auto? L'operazione non è annullabile");
     });
-    
+
+    $(column).change(function() {
+
+        var value = $(this).val();
+
+        if (value == 'e.plate' || value == 'e.label') {
+
+            filterWithoutLike = false;
+            search.val('');
+            search.prop('disabled', false);
+            typeClean.hide();
+            search.show();
+
+        } else {
+
+            filterWithoutLike = true;
+            search.val('');
+            search.prop('disabled', true);
+            typeClean.hide();
+            search.show();
+
+            switch (value) {
+
+                case 'e.running':
+                case 'e.hidden':
+                case 'e.active':
+                case 'e.busy':
+                    columnWithoutLike = value;
+                    columnValueWithoutLike = true;
+                    break;
+                case 'e.intCleanliness':
+                    typeClean.show();
+                    search.hide();
+                    columnWithoutLike = value;
+                    columnValueWithoutLike = typeClean.val();
+                    $(typeClean).change(function() {
+                        columnValueWithoutLike = typeClean.val();
+                    });
+                    break;
+                case 'e.extCleanliness':
+                    typeClean.show();
+                    search.hide();
+                    columnWithoutLike = value;
+                    columnValueWithoutLike = typeClean.val();
+                    $(typeClean).change(function() {
+                        columnValueWithoutLike = typeClean.val();
+                    });
+                    break;
+                case 'e.statusMaintenance':
+                    columnWithoutLike = 'e.status';
+                    columnValueWithoutLike = 'maintenance';
+                    break;
+
+                case 'e.statusOperative':
+                    columnWithoutLike = 'e.status';
+                    columnValueWithoutLike = 'operative';
+                    break;
+                case 'e.statusNotOperative':
+                    columnWithoutLike = 'e.status';
+                    columnValueWithoutLike = 'out_of_order';
+                    break;
+            }
+        }
+    });
+
 });

@@ -28,9 +28,24 @@ $this->headScript()
                                 <select name="column" id="js-column" class="form-control">
                                     <option value="select" selected>-- Seleziona --</option>
                                     <option value="e.plate">Targa</option>
+                                    <option value="e.label">Identificativo</option>
+                                    <option value="e.intCleanliness">Pulizia Interna</option>
+                                    <option value="e.extCleanliness">Pulizia Esterna</option>
+                                    <option value="e.running">In Corsa</option>
+                                    <option value="e.hidden">Nascosta</option>
+                                    <option value="e.active">Attiva</option>
+                                    <option value="e.statusMaintenance">Stato manutenzione</option>
+                                    <option value="e.statusOperative">Stato operativa</option>
+                                    <option value="e.statusNotOperative">Stato non operativa</option>
+                                    <option value="e.busy">Occupata</option>
                                 </select>
                             </div>
                             <div class="form-group">
+                                <select name="js-clean-type" id="js-clean-type" class="form-control" style="display: none;">
+                                    <option value="clean">Pulito</option>
+                                    <option value="average">Media</option>
+                                    <option value="dirty">Sporco</option>
+                                </select>
                                 <input type="text" name="value" value="" class="form-control" id="js-value" placeholder="Filtra...">
                             </div>
                             <div class="btn-group">
@@ -64,21 +79,13 @@ $this->headScript()
                             <tr>
                                 <th>Targa</th>
                                 <th>Identificativo</th>
-                                <th>Marca</th>
-                                <th>Modello</th>
+                                <th>Batteria</th>
+                                <th>Ultimo Contatto</th>
+                                <th>Km</th>
                                 <th>Pulizia</th>
                                 <th>Posizione</th>
-                                <th>Ultimo Contatto</th>
-                                <th>RPM</th>
-                                <th>Velocita</th>
-                                <th>Km</th>
-                                <th>In Corsa</th>
-                                <th>Parcheggio</th>
-                                <th>Nascosta</th>
-                                <th>Attiva></th>
                                 <th>Stato</th>
-                                <th>Occupata</th>
-                                <th>Note</th>
+                                <th>Posizione</th>
                                 <th>Azione</th>
                             </tr>
                             </thead>
