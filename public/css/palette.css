@@ -29,24 +29,24 @@
 
 /* Admin page */
 
-.portlet.box.blue > .portlet-title {
-	background-color: #52e25f !important; /* 4B8DF8 */
+.portlet.box.green > .portlet-title {
+	background-color: #43a34c !important; /* 4B8DF8 */
 }
 
 .js-search {
-	background-color: #52e25f !important;
+	background-color: #43a34c !important;
 }
 
 button.dropdown-toggle {
-	background-color: #52e25f !important;
+	background-color: #43a34c !important;
 }
 
-.portlet > .portlet-body.blue, .portlet.blue {
-	background-color: #52e25f !important;
+.portlet > .portlet-body.green, .portlet.green {
+	background-color: #43a34c !important;
 }
 
-.portlet.box.blue {
-	border: 1px solid #52e25f !important;
+.portlet.box.green {
+	border: 1px solid #43a34c !important;
 }
 
 .btn-success {
