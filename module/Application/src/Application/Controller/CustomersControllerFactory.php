@@ -19,9 +19,11 @@ class CustomersControllerFactory implements FactoryInterface
         $entityManager = $serviceLocator->getServiceLocator()->get('doctrine.entitymanager.orm_default');
         $I_clientService = $serviceLocator->getServiceLocator()->get('SharengoCore\Service\CustomersService');
         $I_customerForm = $serviceLocator->getServiceLocator()->get('CustomerForm');
+        $I_driverForm = $serviceLocator->getServiceLocator()->get('DriverForm');
+        $I_settingForm = $serviceLocator->getServiceLocator()->get('SettingForm');
         $hydrator = new DoctrineHydrator($entityManager);
 
         // Controller is constructed, dependencies are injected (IoC in action)
-        return new CustomersController($I_clientService, $I_customerForm, $hydrator);
+        return new CustomersController($I_clientService, $I_customerForm, $I_driverForm, $I_settingForm, $hydrator);
     }
 }
