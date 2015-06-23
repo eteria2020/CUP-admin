@@ -66,17 +66,9 @@ class CustomersController extends AbstractActionController
 
     public function editAction()
     {
-        $id = $this->params()->fromRoute('id', 0);
-
         /** @var Customers $I_customer */
-        $I_customer = $this->I_customerService->findById($id);
-
-        if (is_null($I_customer)) {
-            $this->getResponse()->setStatusCode(Response::STATUS_CODE_404);
-
-            return false;
-        }
-
+        $I_customer = $this->getCustomer();
+        
         $form = null;
 
         if ($this->getRequest()->isPost()) {
@@ -148,16 +140,8 @@ class CustomersController extends AbstractActionController
 
     public function infoTabAction()
     {
-        $id = $this->params()->fromRoute('id', 0);
-
         /** @var Customers $I_customer */
-        $I_customer = $this->I_customerService->findById($id);
-
-        if (is_null($I_customer)) {
-            $this->getResponse()->setStatusCode(Response::STATUS_CODE_404);
-
-            return false;
-        }
+        $I_customer = $this->getCustomer();
 
         $form = $this->I_customerForm;
         $formDriver = $this->I_driverForm;
@@ -180,16 +164,8 @@ class CustomersController extends AbstractActionController
 
     public function editTabAction()
     {
-        $id = $this->params()->fromRoute('id', 0);
-
         /** @var Customers $I_customer */
-        $I_customer = $this->I_customerService->findById($id);
-
-        if (is_null($I_customer)) {
-            $this->getResponse()->setStatusCode(Response::STATUS_CODE_404);
-
-            return false;
-        }
+        $I_customer = $this->getCustomer();
 
         $form = $this->I_customerForm;
         $formDriver = $this->I_driverForm;
@@ -212,8 +188,16 @@ class CustomersController extends AbstractActionController
 
     public function bonusTabAction()
     {
-        $view = new ViewModel();
+        /** @var Customers $I_customer */
+        $I_customer = $this->getCustomer();
+
+        $view = new ViewModel([
+            'customer'  => $I_customer,
+            'listBonus' => $this->I_customerService->getAllBonus($I_customer)
+
+        ]);
         $view->setTerminal(true);
+
         return $view;
     }
 
@@ -229,5 +213,21 @@ class CustomersController extends AbstractActionController
 
             return count($this->I_customerService->getDataDataTable($as_filters));
         }
+    }
+
+    protected function getCustomer()
+    {
+        $id = $this->params()->fromRoute('id', 0);
+
+        /** @var Customers $I_customer */
+        $I_customer = $this->I_customerService->findById($id);
+
+        if (is_null($I_customer)) {
+            $this->getResponse()->setStatusCode(Response::STATUS_CODE_404);
+
+            return false;
+        }
+
+        return $I_customer;
     }
 }
