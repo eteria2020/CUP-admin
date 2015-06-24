@@ -27,7 +27,6 @@ class CustomerFieldset extends Fieldset implements InputFilterProviderInterface
         CustomersService $customersService,
         CountriesService $countriesService,
         ProvincesService $provincesService,
-        AuthorityService $authorityService,
         HydratorInterface $hydrator
     ) {
         $this->customersService = $customersService;
@@ -249,91 +248,6 @@ class CustomerFieldset extends Fieldset implements InputFilterProviderInterface
                 'class'     => 'form-control',
             ]
         ]);
-
-        $this->add([
-            'name'       => 'driverLicense',
-            'type'       => 'Zend\Form\Element\Text',
-            'attributes' => [
-                'id'    => 'driverLicense',
-                'class' => 'form-control',
-                'required' => 'required'
-            ]
-        ]);
-
-        $this->add([
-            'name'       => 'driverLicenseAuthority',
-            'type'       => 'Zend\Form\Element\Select',
-            'attributes' => [
-                'id'          => 'driverLicenseAuthority',
-                'placeholder' => 'UCO',
-                'class'       => 'form-control',
-                'required' => 'required'
-            ],
-            'options' => [
-                'value_options' => $authorityService->getAllAuthorities()
-            ]
-        ]);
-
-        $this->add([
-            'name'       => 'driverLicenseReleaseDate',
-            'type'       => 'Zend\Form\Element\Date',
-            'attributes' => [
-                'id'    => 'driverLicenseReleaseDate',
-                'class' => 'form-control date-picker',
-                'max'   => date_create()->format('d-m-Y'),
-                'type'  => 'text',
-                'required' => 'required'
-            ]
-        ]);
-
-        $this->add([
-            'name'       => 'driverLicenseName',
-            'type'       => 'Zend\Form\Element\Text',
-            'attributes' => [
-                'id'    => 'driverLicenseName',
-                'class' => 'form-control',
-                'required' => 'required'
-            ]
-        ]);
-
-        $this->add([
-            'name'       => 'driverLicenseCountry',
-            'type'       => 'Zend\Form\Element\Select',
-            'attributes' => [
-                'id'    => 'driverLicenseCountry',
-                'class' => 'form-control',
-                'required' => 'required'
-            ],
-            'options'    => [
-                'value_options' => $countriesService->getAllCountries()
-            ]
-        ]);
-
-        $this->add([
-            'name'       => 'driverLicenseExpire',
-            'type'       => 'Zend\Form\Element\Date',
-            'attributes' => [
-                'id'    => 'driverLicenseExpire',
-                'class' => 'form-control date-picker',
-                'type'  => 'text',
-                'required' => 'required'
-            ]
-        ]);
-
-        $this->add([
-            'name'       => 'registrationCompleted',
-            'type'       => 'Zend\Form\Element\Select',
-            'attributes' => [
-                'id'    => 'registrationCompleted',
-                'class' => 'form-control',
-            ],
-            'options'    => [
-                'value_options' => [
-                    0 => "Da Confermare",
-                    1 => "Confermata"
-                ]
-            ]
-        ]);
     }
 
     public function getInputFilterSpecification()
@@ -490,80 +404,6 @@ class CustomerFieldset extends Fieldset implements InputFilterProviderInterface
                             'min' => 3
                         ]
                     ]
-                ]
-            ],
-            'driverLicense' => [
-                'required' => true,
-                'filters' => [
-                    [
-                        'name' => 'StringTrim'
-                    ]
-                ],
-                'validators' => [
-                    [
-                        'name' => 'StringLength',
-                        'break_chain_on_failure' => true,
-                        'options' => [
-                            'min' => 6,
-                            'max' => 32
-                        ]
-                    ]
-                ]
-            ],
-            'driverLicenseAuthority' => [
-                'required' => true,
-                'filters' => [
-                    [
-                        'name' => 'StringTrim'
-                    ]
-                ],
-                'validators' => [
-                    [
-                        'name' => 'StringLength',
-                        'options' => [
-                            'min' => 2,
-                            'max' => 3
-                        ]
-                    ]
-                ]
-            ],
-            'driverLicenseReleaseDate' => [
-                'required' => true,
-                'validators' => [
-                    [
-                        'name' => 'Date'
-                    ],
-                    [
-                        'name' => 'Application\Form\Validator\OneYearDate'
-                    ]
-                ]
-            ],
-            'driverLicenseName' => [
-                'required' => true,
-                'filters' => [
-                    [
-                        'name' => 'StringTrim'
-                    ]
-                ],
-                'validators' => [
-                    [
-                        'name' => 'StringLength',
-                        'options' => [
-                            'min' => 6,
-                            'max' => 32
-                        ]
-                    ]
-                ]
-            ],
-            'driverLicenseCountry' => [
-                'required' => true
-            ],
-            'driverLicenseExpire' => [
-                'required' => true,
-                'validators' => [
-                    [
-                        'name' => 'Date'
-                    ],
                 ]
             ]
         ];

@@ -55,6 +55,39 @@ return array(
                             ],
                         ],
                     ],
+                    'ajax-tab-info' => [
+                        'type'    => 'Segment',
+                        'options' => [
+                            'route'    => '/ajax-tab/info/:id',
+                            'defaults' => [
+                                '__NAMESPACE__' => 'Application\Controller',
+                                'controller'    => 'Customers',
+                                'action'        => 'info-tab',
+                            ],
+                        ],
+                    ],
+                    'ajax-tab-edit' => [
+                        'type'    => 'Segment',
+                        'options' => [
+                            'route'    => '/ajax-tab/edit/:id',
+                            'defaults' => [
+                                '__NAMESPACE__' => 'Application\Controller',
+                                'controller'    => 'Customers',
+                                'action'        => 'edit-tab',
+                            ],
+                        ],
+                    ],
+                    'ajax-tab-bonus' => [
+                        'type'    => 'Segment',
+                        'options' => [
+                            'route'    => '/ajax-tab/bonus/:id',
+                            'defaults' => [
+                                '__NAMESPACE__' => 'Application\Controller',
+                                'controller'    => 'Customers',
+                                'action'        => 'bonus-tab',
+                            ],
+                        ],
+                    ],
                 ],
             ],
             'cars' => [
@@ -232,6 +265,8 @@ return array(
             'CustomerForm' => 'Application\Form\CustomerFormFactory',
             'UserForm' => 'Application\Form\UserFormFactory',
             'CarForm' => 'Application\Form\CarFormFactory',
+            'DriverForm' => 'Application\Form\DriverFormFactory',
+            'SettingForm' => 'Application\Form\SettingFormFactory',
         ]
     ),
     'controllers' => [

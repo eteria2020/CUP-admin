@@ -19,6 +19,7 @@ class CustomerForm extends Form
 
         parent::__construct('customer');
         $this->setAttribute('method', 'post');
+        $this->setAttribute('id', 'customerForm');
 
         $this->add($userFieldset);
 
