@@ -261,7 +261,7 @@ class CustomersController extends AbstractActionController
             try {
 
                 $postData = $this->getRequest()->getPost()->toArray();
-                $I_card = $this->I_cardsService->getCard($postData['rfid']);
+                $I_card = $this->I_cardsService->getCard($postData['code']);
 
                 $this->I_customerService->assignCard($I_customer, $I_card, true);
                 $status = 'success';
