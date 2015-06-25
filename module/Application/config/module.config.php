@@ -55,6 +55,28 @@ return array(
                             ],
                         ],
                     ],
+                    'remove-card' => [
+                        'type'    => 'Segment',
+                        'options' => [
+                            'route'    => '/remove-card/:id',
+                            'defaults' => [
+                                '__NAMESPACE__' => 'Application\Controller',
+                                'controller'    => 'Customers',
+                                'action'        => 'remove-card',
+                            ],
+                        ],
+                    ],
+                    'assign-card' => [
+                        'type'    => 'Segment',
+                        'options' => [
+                            'route'    => '/assign-card/:id',
+                            'defaults' => [
+                                '__NAMESPACE__' => 'Application\Controller',
+                                'controller'    => 'Customers',
+                                'action'        => 'assign-card',
+                            ],
+                        ],
+                    ],
                     'ajax-tab-info' => [
                         'type'    => 'Segment',
                         'options' => [
@@ -85,6 +107,28 @@ return array(
                                 '__NAMESPACE__' => 'Application\Controller',
                                 'controller'    => 'Customers',
                                 'action'        => 'bonus-tab',
+                            ],
+                        ],
+                    ],
+                    'ajax-tab-card' => [
+                        'type'    => 'Segment',
+                        'options' => [
+                            'route'    => '/ajax-tab/card/:id',
+                            'defaults' => [
+                                '__NAMESPACE__' => 'Application\Controller',
+                                'controller'    => 'Customers',
+                                'action'        => 'card-tab',
+                            ],
+                        ],
+                    ],
+                    'ajax-card-code' => [
+                        'type'    => 'Literal',
+                        'options' => [
+                            'route'    => '/ajax-card-code-autocomplete',
+                            'defaults' => [
+                                '__NAMESPACE__' => 'Application\Controller',
+                                'controller'    => 'Customers',
+                                'action'        => 'ajax-card-code',
                             ],
                         ],
                     ],

@@ -114,4 +114,27 @@ $(function() {
         format: 'dd-mm-yy',
         weekStart: 1
     });
+
+    $(document).on('click','#js-remove-card',function(e) {
+        var customer = $(this).data('id');
+
+        $.ajax({
+            url: '/customers/remove-card/' + customer,
+            type: 'POST',
+            data: {},
+            processData: false,
+            contentType: false,
+            dataType: 'json',
+            cache: false,
+            statusCode: {
+                200: function (response) {
+                    $('#js-with-code').hide();
+                    $('#js-no-code').show();
+                },
+                500: function (response) {
+                    alert('Qualcosa è andato storto, riprova!');
+                }
+            }
+        });
+    });
 });

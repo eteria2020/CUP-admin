@@ -1,0 +1,87 @@
+<div class="row">
+    <div class="col-lg-12">
+        <?php if(is_object($this->customer->getCard())): ?>
+            <div id="js-with-code">
+                <div class="row">
+                    <div class="col-lg-5">
+                        <h1>Codice Card: <?= $this->customer->getCard()->getCode(); ?></h1>
+                    </div>
+                    <div class="col-lg-7" style="margin-top: 20px;">
+                        <a href="javascript:void(0);" id="js-remove-card" data-id="<?= $this->customer->getId(); ?>" class="btn btn-danger"><i class="fa fa-remove"></i> Rimuovi Card</i></a>
+                    </div>
+                </div>
+            </div>
+            <div id="js-no-code" style="display: none;">
+                <div class="col-lg-6">
+                    <div class="alert alert-info">
+                        Nessun codice card assegnato per questo utente.
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="col-lg-9">
+                        <input id="typeahead-input" type="text" class="form-control" placeholder="Aggiungi Codice Card..." autocomplete="off" />
+                    </div>
+                    <div class="col-lg-3">
+                        <a href="javascript:void(0);" id="js-assign-card" data-code="" data-id="<?= $this->customer->getId(); ?>" class="btn btn-success" style="display: none;"><i class="fa fa-plus"></i> Salva Codice</i></a>
+                    </div>
+                </div>
+            </div>
+        <?php else: ?>
+            <div class="col-lg-6">
+                <div class="alert alert-info">
+                    Nessun codice card assegnato per questo utente.
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="col-lg-9">
+                    <input id="typeahead-input" type="text" class="form-control" placeholder="Aggiungi Codice Card..." autocomplete="off" />
+                </div>
+                <div class="col-lg-3">
+                    <a href="javascript:void(0);" id="js-assign-card" data-code="" data-id="<?= $this->customer->getId(); ?>" class="btn btn-success" style="display: none;"><i class="fa fa-plus"></i> Salva Codice</i></a>
+                </div>
+            </div>
+        <?php endif; ?>
+    </div>
+</div>
+<script src="/js/bootstrap-typeahead.js" type="text/javascript"></script>
+<script type="text/javascript">
+    $(document).ready(function() {
+
+        var assignButton = $('#js-assign-card');
+
+        $("#typeahead-input").typeahead({
+            onSelect: function(item) {
+                $(assignButton).data('code', item.value);
+                $(assignButton).show();
+            },
+            ajax: {
+                url: "/customers/ajax-card-code-autocomplete",
+                triggerLength: 4,
+                method: "get"
+            }
+        });
+
+        $('#js-assign-card').click(function() {
+            var customer = $(this).data('id');
+            var code = $(this).data('code');
+            $.ajax({
+                url: '/customers/assign-card/' + customer,
+                type: 'POST',
+                data: {
+                    rfid: code
+                },
+                cache: false,
+                statusCode: {
+                    200: function (response) {
+                        $(assignButton).hide();
+                        window.location.href = "/customers/edit/" + customer;
+                    },
+                    500: function (response) {
+                        alert('Qualcosa è andato storto, riprova!');
+                    }
+                }
+            });
+
+        });
+    })
+</script>
