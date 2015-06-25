@@ -5,6 +5,8 @@ $formSetting = $this->settingForm->prepare();
 ?>
 <div class="row">
     <div class="col-lg-9">
+
+        <?php echo $this->partial('partials/flash-messages.phtml', []); ?>
         <div class="panel panel-default">
             <div class="panel-heading">Anagrafica</div>
             <div class="panel-body">
@@ -202,59 +204,58 @@ $formSetting = $this->settingForm->prepare();
 
     <div class="col-lg-3">
         <div class="panel panel-default">
-            <div class="panel-heading">Stato Iscrizione</div>
+
+            <div class="panel-heading">Altri dati</div>
             <div class="panel-body">
+                    
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="form-group">
+                            <label for="gender">Stato Iscrizione</label>
+                            <?php if($this->customer->getRegistrationCompleted()): ?>
+                                <div class="alert alert-success">Registrazione Confermata</div>
+                            <?php else: ?>
+                                <div class="alert alert-danger">Registrazione Non Confermata</div>
+                            <?php endif; ?>
+                        </div>
+                    </div>
+                </div>
 
                 <div class="row">
                     <div class="col-lg-12">
-                        <?php if($this->customer->getRegistrationCompleted()): ?>
-                            <div class="alert alert-success">Registrazione Confermata</div>
-                        <?php else: ?>
-                            <div class="alert alert-danger">Registrazione Non Confermata</div>
-                        <?php endif; ?>
+                        <div class="form-group">
+                            <label for="gender">Stato Primo Pagamento</label>
+                            <?php if($this->customer->getFirstPaymentCompleted()): ?>
+                                <div class="alert alert-success">Pagamento Effettuato</div>
+                            <?php else: ?>
+                                <div class="alert alert-danger">Pagamento Non Ancora Effettuato</div>
+                            <?php endif; ?>
+                        </div>
                     </div>
                 </div>
-            </div>
-        </div>
-
-        <div class="panel panel-default">
-            <div class="panel-heading">Stato Primo Pagamento</div>
-            <div class="panel-body">
 
                 <div class="row">
                     <div class="col-lg-12">
-                        <?php if($this->customer->getFirstPaymentCompleted()): ?>
-                            <div class="alert alert-success">Pagamento Effettuato</div>
-                        <?php else: ?>
-                            <div class="alert alert-danger">Pagamento Non Ancora Effettuato</div>
-                        <?php endif; ?>
+                        <div class="form-group">
+                            <label for="gender">Percentuale Sconto</label>
+                            <h1 class="text-center"><?= is_null($this->customer->getDiscountRate()) ? '0' : $this->customer->getDiscountRate(); ?>%</h1>
+                        </div>
                     </div>
                 </div>
-            </div>
-        </div>
-
-        <div class="panel panel-default">
-            <div class="panel-heading">Percentuale Sconto</div>
-            <div class="panel-body">
 
                 <div class="row">
                     <div class="col-lg-12">
-                        <h1 class="text-center"><?= is_null($this->customer->getDiscountRate()) ? '0' : $this->customer->getDiscountRate(); ?>%</h1>
+                        <div class="form-group">
+                            <label for="gender">Data/Ora</label>
+                            <h4>Iscrizione:<br><?= is_object($this->customer->getInsertedTs()) ? $this->customer->getInsertedTs()->format('d-m-Y - H:i:s') : ''; ?></h4>
+                            <h4><?= is_object($this->customer->getUpdateTs()) ? 'Ultima Modifica: ' . $this->customer->getUpdateTs()->format('d-m-Y - H:i:s') : ''; ?></h4>
+                        </div>
                     </div>
                 </div>
-            </div>
-        </div>
 
-        <div class="panel panel-default">
-            <div class="panel-heading">Data/Ora</div>
-            <div class="panel-body">
-                <div class="row">
-                    <div class="col-lg-12">
-                        <h4>Iscrizione: <small><?= is_object($this->customer->getInsertedTs()) ? $this->customer->getInsertedTs()->format('d-m-Y - H:i:s') : ''; ?></small></h4>
-                        <h4>Ultima Modifica: <small><?= is_object($this->customer->getUpdateTs()) ? $this->customer->getUpdateTs()->format('d-m-Y - H:i:s') : ''; ?></small></h4>
-                    </div>
-                </div>
             </div>
+
         </div>
     </div>
+
 </div>

@@ -113,7 +113,11 @@ class CustomersController extends AbstractActionController
                     $this->flashMessenger()->addErrorMessage($e->getMessage());
                 }
 
-                return $this->redirect()->toRoute('customers');
+                return $this->redirect()->toRoute('customers/edit', array(
+                   'controller' => 'Customers',
+                   'action' =>  'edit',
+                       'id' => $I_customer->getId()
+                   ));
             }
         }
 
