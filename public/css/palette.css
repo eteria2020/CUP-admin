@@ -52,3 +52,12 @@ button.dropdown-toggle {
 .btn-success {
 	background-color: #43a34c !important;
 }
+
+.panel-default > .panel-heading {
+    background-image: none !important;
+	background-color: #43a34c !important;
+}
+
+.panel-default {
+	border-color: #43a34c;
+}

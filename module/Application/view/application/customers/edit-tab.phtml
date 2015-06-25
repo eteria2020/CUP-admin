@@ -228,50 +228,52 @@ $formSetting->setAttribute('action', $this->url('customers/edit', ['id' => $this
         <?= $this->form()->openTag($formSetting); ?>
             <input type="hidden" name="type" value="setting">
 
-            <div class="panel panel-default">
-                <div class="panel-heading">Stato Iscrizione</div>
-                <div class="panel-body">
+        <div class="panel panel-default">
 
-                    <div class="row">
-                        <div class="col-lg-12">
+            <div class="panel-heading">Altri dati</div>
+            <div class="panel-body">
+                    
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="form-group">
+                            <label for="gender">Stato Iscrizione</label>
                             <?= $this->formRow($formSetting->get('setting')->get('registrationCompleted'));?>
                         </div>
                     </div>
                 </div>
-            </div>
 
-            <div class="panel panel-default">
-                <div class="panel-heading">Stato Pagamento</div>
-                <div class="panel-body">
-
-                    <div class="row">
-                        <div class="col-lg-12">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="form-group">
+                            <label for="gender">Stato Primo Pagamento</label>
                             <?= $this->formRow($formSetting->get('setting')->get('firstPaymentCompleted'));?>
                         </div>
                     </div>
                 </div>
-            </div>
 
-            <div class="panel panel-default">
-                <div class="panel-heading">Percentuale Sconto</div>
-                <div class="panel-body">
-
-                    <div class="row">
-                        <div class="col-lg-12">
-                            <?= $this->formRow($formSetting->get('setting')->get('discountRate'));?>
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="form-group">
+                            <label for="gender">Percentuale Sconto</label>
+                            <?= $this->formRow(is_null($formSetting->get('setting')->get('discountRate')) ? '0' : $formSetting->get('setting')->get('discountRate'));?>
                         </div>
                     </div>
                 </div>
+
+                <div class="row">
+                    <div class="col-lg-12">
+                        <button type="submit" class="btn btn-success">Salva Dati</button>
+                    </div>
+                </div>
+
             </div>
 
-            <div class="row">
-                <div class="col-lg-12">
-                    <button type="submit" class="btn btn-success">Salva Dati</button>
-                </div>
-            </div>
+        </div>
+
         <?php echo $this->form()->closeTag(); ?>
     </div>
 </div>
+
 <style>
     .error {color: red;}
 </style>
