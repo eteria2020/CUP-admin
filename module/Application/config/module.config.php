@@ -128,7 +128,7 @@ return array(
                             'defaults' => [
                                 '__NAMESPACE__' => 'Application\Controller',
                                 'controller'    => 'Customers',
-                                'action'        => 'ajax-card-code',
+                                'action'        => 'ajax-card-code-autocomplete',
                             ],
                         ],
                     ],

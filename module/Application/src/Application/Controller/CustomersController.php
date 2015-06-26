@@ -277,10 +277,10 @@ class CustomersController extends AbstractActionController
         ]);
     }
 
-    public function ajaxCardCodeAction()
+    public function ajaxCardCodeAutocompleteAction()
     {
         $query = $this->params()->fromQuery('query', '');
-        return new JsonModel($this->I_cardsService->autoCompleteAjax($query));
+        return new JsonModel($this->I_cardsService->ajaxCardCodeAutocomplete($query));
     }
 
     protected function _getRecordsFiltered($as_filters, $i_totalCustomer)
