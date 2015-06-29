@@ -8,7 +8,9 @@ return array(
         'ZfcUser',
         'ZfcUserDoctrineORM',
         'BjyAuthorize',
+        'AssetManager',
 
+        'CallCenter',
         'SharengoCore',
         'Application',
     ),

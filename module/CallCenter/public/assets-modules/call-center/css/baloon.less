@@ -1,0 +1,145 @@
+//
+// Baloon
+// --------------------------------------------------
+
+@brand-primary:         #0098ce;
+
+.baloon {
+    position: relative;
+    display: table;
+
+    a { color: #000; }
+    hr {
+        border-color: #fff;
+        margin: 10px 0;
+    }
+
+    &:after {
+        content: '';
+        position: absolute;
+        width: 0;
+        height: 0;
+        top: 0;
+        left: 0;
+        border-top: 50px solid transparent;
+        border-left: 20px solid @brand-primary;
+        z-index: 1;
+        //TODO: use mixin
+        transform-origin: top left;
+        transform: rotate(-30deg);
+        -webkit-transform-origin: top left;
+        -webkit-transform: rotate(-30deg);
+        -moz-transform-origin: top left;
+        -moz-transform: rotate(-30deg);
+        -ms-transform-origin: top left;
+        -ms-transform: rotate(-30deg);
+    }
+}
+
+.baloon__wrapper {
+    display: table-cell;
+    vertical-align: middle;
+    position: relative;
+    width: 200px;
+    height: 200px;
+    border-radius: 100%;
+    background-color: @brand-primary;
+    color: #fff;
+    text-align: center;
+    font-size: 12px;
+    padding: 5px 15px;
+    z-index: 2;
+}
+
+.baloon__car {
+    position: relative;
+    display: block;
+    margin: 0 auto;
+    width: 95px;
+    height: 60px;
+    color: #fc0;
+    background: url(../images/baloon__car.png) no-repeat 50% 50%;
+
+    span {
+        position: absolute;
+        width: 100%;
+        height: auto;
+        top: 27px;
+        left: 0;
+        font-weight: bold;
+        font-size: 120%;
+    }
+}
+
+.baloon__close {
+    position: absolute;
+    bottom: -108px;
+    right: -20px;
+    font-size: 200%;
+    position: 0 .25em;
+
+    &:hover {
+        text-decoration: none;
+        opacity: .6;
+    }
+}
+
+.baloon__vote {
+    overflow: hidden;
+}
+
+.baloon__question {
+    font-size: 140%;
+    line-height: 1.2;
+}
+
+.baloon__inside {
+    float: left;
+    width: 50%;
+}
+.baloon__outside {
+    float: right;
+    width: 50%;
+}
+
+.semaphore {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+
+    li {
+        display: inline-block;
+        width: 20px;
+        height: 20px;
+        padding: 0;
+        margin: 0;
+        background-color: transparent;
+        border: 2px solid #fff;
+        border-radius: 100%;
+        margin-right: 1px;
+    }
+
+    li:nth-child(1).active { background-color: #f00; }
+    li:nth-child(2).active { background-color: #fc0; }
+    li:nth-child(3).active { background-color: #3CD52E; }
+}
+
+.baloon__btn {
+    img {
+        display: block;
+        margin: 0 auto;
+        opacity: .6;
+    }
+
+    &:hover {
+        text-decoration: none;
+    }
+}
+
+.infoBox img {
+    position: absolute !important;
+    z-index: 10;
+    bottom: 30px;
+    right: 35px;
+    height: 15px;
+}
