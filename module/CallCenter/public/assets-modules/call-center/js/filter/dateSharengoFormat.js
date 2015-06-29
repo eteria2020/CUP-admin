@@ -1,15 +1,22 @@
 'use strict';
 
 angular.module('SharengoCsApp').filter('dateSharengoFormat', function dateTwist(){
-    return function(date, format){
+    return function(date, format, zone){
 
-        var formatDate;
+        var formatDate,zoneOffset;
 
         if (format !== undefined) {
             formatDate = format;
         } else {
-            formatDate = 'DD-MM-YYYY HH:m:ss';
+            formatDate = 'DD-MM-YYYY HH:mm:ss';
         }
-        return moment(date).format(formatDate);
+
+        if (zone !== undefined) {
+        	zoneOffset = zone; 
+        }else{
+            zoneOffset = '+02:00';
+        } 
+
+        return moment.utc(date).zone(zoneOffset).format(formatDate);
     }
 });

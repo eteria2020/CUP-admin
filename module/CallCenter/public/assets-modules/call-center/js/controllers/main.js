@@ -180,7 +180,6 @@ angular.module('SharengoCsApp').controller('SharengoCsController', function (
     };
 
     function searchCar(value, unit) {
-        
         var cars,
             car;
 
@@ -306,7 +305,6 @@ angular.module('SharengoCsApp').controller('SharengoCsController', function (
                 $scope.loadCars().then(function () {
                 $scope.trip = trip.trip;
                 $scope.accordionStatus.hideTripData = false;
-                console.log(trip.data[0].car);
                 $scope.onCarSelection(trip.data[0].car);
                 $scope.accordionStatus.hideCarData = false;
                 carsFactory.getLastClosedTrip(trip.data[0].car).success(function (trip) {

@@ -258,8 +258,8 @@
 
                 <div class="col-md-9" style="font-size: 12px;">
                     <span ng-repeat="trip in customer.lastTrips">
-                        <strong>Targa:</strong> {{trip.trip.car}} <strong>Inizio:</strong> {{trip.trip.timestampBeginning.date | dateSharengoFormat:'DD-MM-YYYY'}} 
-                        <button tooltip-placement="left" tooltip-html-unsafe="<b>Inizio:</b> {{trip.trip.timestampBeginning.date | dateSharengoFormat}} <br /><b>Fine:</b> {{trip.trip.timestampEnd.date | dateSharengoFormat}}" class="btn btn-default btn-xs">
+                        <strong>Targa:</strong> {{trip.car.plate}} <strong>Inizio:</strong> {{trip.beginningTx.date | dateSharengoFormat:'DD-MM-YYYY'}} 
+                        <button tooltip-placement="left" tooltip-html-unsafe="<b>Inizio:</b> {{trip.timestampBeginning.date | dateSharengoFormat}} <br /><b>Fine:</b> {{trip.timestampEnd.date | dateSharengoFormat}}" class="btn btn-default btn-xs">
                             <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
                         </button>
                         <br>

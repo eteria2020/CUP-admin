@@ -16,7 +16,7 @@ angular.module('SharengoCsApp').factory('usersFactory', function ($http, ENV) {
             query += '&surname=' + surname;
         }
         if (card) {
-            query += '&card=' + card;
+            query += '&card_code=' + card;
         }
 
         return $http.get(ENV.apiEndpoint + 'users?' + query);
