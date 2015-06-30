@@ -27,7 +27,8 @@
                 <li><span class="block green"></span> LIBERE</li>
                 <li><span class="block yellow"></span> IN USO</li>
                 <li><span class="block black"></span> PRENOTATE</li>
-                <li><span class="block red"></span> NON OPERATIVE/IN MANUTENZIONE</li>
+                <li><span class="block red"></span> IN MANUTENZIONE</li>
+                <li><span class="block orange"></span> NON OPERATIVE</li>
             </ul>
         </div>
 
@@ -471,7 +472,7 @@
     </accordion> -->
 </div>
 <ui-gmap-google-map center="mapOptions.center" zoom="mapOptions.zoom" events="mapEvents">
-    <ui-gmap-markers models="cars" coords="'self'" icon="'carIcon'"  doCluster="mapOptions.doCluster"  clusterOptions="clusterOptions" events="markerEvents">
+    <ui-gmap-markers models="cars" coords="'self'" icon="'carIcon'" events="markerEvents">
     </ui-gmap-markers>
     <ui-gmap-polygon
         static="true"

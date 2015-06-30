@@ -95,8 +95,13 @@ angular.module('SharengoCsApp').controller('SharengoCsController', function (
                 car.carIcon = "/assets-modules/call-center/images/marker-s-blue.png";
                 car.iconSelected = "/assets-modules/call-center/images/marker-s-blue-selected.png";
                 if(car.status!='operative'){
-                    car.carIcon = "/assets-modules/call-center/images/marker-s-red.png";
-                    car.iconSelected = "/assets-modules/call-center/images/marker-s-red-selected.png";
+                    if(car.status=='maintenance'){
+                        car.carIcon = "/assets-modules/call-center/images/marker-s-red.png";
+                        car.iconSelected = "/assets-modules/call-center/images/marker-s-red-selected.png";
+                    }else{
+                        car.carIcon = "/assets-modules/call-center/images/marker-s-orange.png";
+                        car.iconSelected = "/assets-modules/call-center/images/marker-s-orange-selected.png";
+                    }
                 }else if(car.busy){
                     car.carIcon = "/assets-modules/call-center/images/marker-s-yellow.png";
                     car.iconSelected = "/assets-modules/call-center/images/marker-s-yellow-selected.png";
