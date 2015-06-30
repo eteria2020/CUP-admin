@@ -18,19 +18,24 @@ html, body, .angular-google-map, .angular-google-map-container {
     position:fixed;
     bottom:10px;
     left:100px;
-    height:40px;
-    width:615px;
+    min-height:40px;
     z-index:100;
     padding:10px 10px 10px 15px;
     background-color: white;
     border-radius:4px;
     box-shadow:0 2px 8px #aaa;
+    max-width:40%;
+
+    .list-inline {margin-bottom:0}
+
+    li {margin-bottom:10px;}
 
     .block {
       display: inline-block;
       width: 15px;
       height: 15px;
       vertical-align: middle;
+      
 
       &.blue {
         background: #18A0D1;
