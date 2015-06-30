@@ -40,9 +40,8 @@
             <div class="row">
                 <div class="col-md-6">
                     <div class="form-input">
-                        <label>Ricerca per Targa</label>
-                        <div class="input-group">
-                            <input type="text" class="form-control" ng-model="search.plate" placeholder="Auto">
+                         <div class="input-group">
+                            <input type="text" class="form-control" ng-model="search.plate" placeholder="Targa">
                             <span class="input-group-btn">
                                 <button class="btn btn-green" ng-click="plateChange(search.plate, false)" type="button">
                                     <i class="fa fa-search"></i>
@@ -53,7 +52,6 @@
                 </div>
                 <div class="col-md-6">
                     <div class="form-input">
-                        <label>Ricerca per N°.Unità</label>
                         <div class="input-group">
                             <input type="text" class="form-control" ng-model="search.label" placeholder="N°.Unità">
                             <span class="input-group-btn">
@@ -80,14 +78,12 @@
             <div class="row">
                 <div class="col-md-6">
                     <div class="form-input">
-                        <label>Nome</label>
-                        <input type="text" ng-model="search.name" class="form-control">
+                        <input type="text" ng-model="search.name" class="form-control" placeholder="Nome">
                     </div>
                 </div>
                 <div class="col-md-6">
                     <div class="form-input">
-                        <label>N° Card</label>
-                        <input type="text" ng-model="search.card" class="form-control">
+                        <input type="text" ng-model="search.card" class="form-control" placeholder="N° Card">
                     </div>
                 </div>
             </div>
@@ -95,14 +91,12 @@
             <div class="row">
                 <div class="col-md-6">
                     <div class="form-input">
-                        <label>Cognome</label>
-                        <input type="text" ng-model="search.surname" class="form-control">
+                        <input type="text" ng-model="search.surname" class="form-control" placeholder="Cognome">
                     </div>
                 </div>
                 <div class="col-md-6">
                     <div class="form-input">
-                        <label>Cellulare</label>
-                        <input type="text" ng-model="search.mobile" class="form-control">
+                        <input type="text" ng-model="search.mobile" class="form-control" placeholder="Cellulare">
                     </div>
                 </div>
             </div>
@@ -131,14 +125,12 @@
             <div class="row">
                 <div class="col-md-9">
                     <div class="form-input">
-                        <label>Indirizzo</label>
-                        <input type="text" ng-model="searchAddress.address" class="form-control">
+                        <input type="text" ng-model="searchAddress.address" class="form-control" placeholder="Indirizzo">
                     </div>
                 </div>
                 <div class="col-md-3">
                     <div class="form-input">
-                        <label>N. civico</label>
-                        <input type="text" ng-model="searchAddress.number" class="form-control">
+                        <input type="text" ng-model="searchAddress.number" class="form-control" placeholder="Civico">
                     </div>
                 </div>
             </div>
@@ -146,8 +138,7 @@
             <div class="row">
                 <div class="col-md-12">
                     <div class="form-input">
-                        <label>Città</label>
-                        <input type="text" ng-model="searchAddress.city" class="form-control">
+                        <input type="text" ng-model="searchAddress.city" class="form-control" placeholder="Città">
                     </div>
                 </div>
             </div>
@@ -175,12 +166,12 @@
                     <th>Nome</th>
                     <th>Cognome</th>
                     <th>Telefono</th>
-                    <th>Codice fiscale</th>
+                    <th>C.F.</th>
                 </tr>
                 </thead>
                 <tbody>
                 <tr ng-repeat="customer in customers">
-                    <td><button type="button" class="btn btn-default btn-xs" ng-click="selectCustomer(customer)">Seleziona</button></td>
+                    <td><button type="button" class="btn btn-default btn-xs" ng-click="selectCustomer(customer)"><i class="fa fa-info"></i> Seleziona</button></td>
                     <td>{{customer.name | lowercase}}</td>
                     <td>{{customer.surname | lowercase}}</td>
                     <td>{{customer.phone}}</td>
@@ -189,7 +180,7 @@
                 </tbody>
             </table>
         </accordion-group>
-        <accordion-group heading="Dati cliente" id="customerData" ng-hide="accordionStatus.hideCustomerData" is-open="accordionStatus.customerDataOpen">
+        <accordion-group heading="Dati cliente" id="customerData" ng-hide="accordionStatus.hideCustomerData" is-open="accordionStatus.customerDataOpen" class="acc-user-data">
             <div class="row">
                 <div class="col-md-3">
                     <label>Nome</label>
@@ -261,7 +252,7 @@
                 </div>
             </div>
         </accordion-group>
-        <accordion-group heading="Dati auto" ng-hide="accordionStatus.hideCarData" is-open="accordionStatus.carDataOpen">
+        <accordion-group heading="Dati auto" ng-hide="accordionStatus.hideCarData" is-open="accordionStatus.carDataOpen" class="acc-car-data">
             <div class="row">
                 <div class="col-md-3">
                     <label>Targa</label>
@@ -342,7 +333,7 @@
                 </div>
             </div>
         </accordion-group> -->
-        <accordion-group heading="Dati ultima corsa chiusa" ng-hide="accordionStatus.hideLastTripData" is-open="accordionStatus.lastTripDataOpen">
+        <accordion-group heading="Dati ultima corsa chiusa" ng-hide="accordionStatus.hideLastTripData" is-open="accordionStatus.lastTripDataOpen" class="acc-run-data">
 
             <div class="row">
                 <div class="col-md-3">
