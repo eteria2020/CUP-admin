@@ -13,22 +13,42 @@ html, body, .angular-google-map, .angular-google-map-container {
   padding: 20px;
   font-size: 16px;
 }
+#top-actions {
+    position:fixed;
+    top:0px;
+    right:140px;
+    width:157px;
+    height:40px;
+    z-index:100;
+    background-color:#fff;
+    padding:10px;
+    text-align:center;
+    border-radius:0 0 4px 4px;
+    box-shadow:0 2px 8px #aaa;
+    opacity:0.85;
 
+    &:hover {
+        opacity:1;
+    }
+}
 #bottom-area {
     position:fixed;
     bottom:10px;
-    left:100px;
+    left:0px;
     min-height:40px;
     z-index:100;
-    padding:10px 10px 10px 15px;
+    padding:10px 10px 0px 15px;
     background-color: white;
-    border-radius:4px;
+    border-radius: 0 4px 4px 0;
     box-shadow:0 2px 8px #aaa;
-    max-width:40%;
+    max-width:45%;
 
     .list-inline {margin-bottom:0}
 
-    li {margin-bottom:10px;}
+    li {
+        margin-bottom:10px;
+        font-size:12px;
+    }
 
     .block {
       display: inline-block;
@@ -59,14 +79,14 @@ html, body, .angular-google-map, .angular-google-map-container {
 }
 #top-area {
     position:fixed;
-    top:10px;
-    left:150px;
+    top:0px;
+    left:100px;
     width:400px;
     min-height:120px;
     background-color:#fff;
     z-index:100;
     padding:10px;
-    border-radius:5px;
+    border-radius:0 0 4px 4px;
     box-shadow:0 2px 8px #aaa;
     opacity:0.85;
     -webkit-transition:opacity 0.5s;
@@ -90,7 +110,7 @@ html, body, .angular-google-map, .angular-google-map-container {
     right: 0;
     bottom:0;
     top: auto;
-    bottom: 0;
+    bottom: 10px;
     padding: 10px;
     background-color: white;
     z-index: 100;
@@ -98,9 +118,9 @@ html, body, .angular-google-map, .angular-google-map-container {
     overflow-y: auto;
     -webkit-transition:opacity 0.5s;
     transition:opacity 0.5s;
-    border-top-left-radius:4px;
     box-shadow:0 2px 8px #aaa;
-    min-height:100px;
+    min-height:30px;
+    border-radius:4px 0 0 4px;
 
 
     &:hover {opacity:1;}
@@ -621,7 +641,7 @@ html, body, .angular-google-map, .angular-google-map-container {
     margin-bottom: 5px;
 }
 .block-label-status {float:left;width:45%;margin-right:3%;margin-left:2%}
-.block-image {margin-bottom:15px !important;float:left;background-color:white;padding:10px;border: 1px solid #cab601;}
+.block-image {margin-bottom:15px !important;float:left;background-color:white;padding:10px;border: 1px solid #cab601;max-width:100%;}
 .panel-heading {background-color:#D2EED2 !important}
 .module-pop-up .block-heading .block-info {display:none}
 .module-pop-up .block-heading h1 {margin-bottom:10px !important}
