@@ -225,7 +225,7 @@ angular.module('SharengoCsApp').controller('SharengoCsController', function (
                         $scope.accordionStatus.hideCustomerData = true;
                     });
                     carsFactory.getLastClosedTrip(car).success(function (trip) {
-                        $scope.lastTrip = trip.data[0].trip;
+                        $scope.lastTrip = trip.data[0];
                         $scope.lastTripUser = trip.data[0].customer;
                         $scope.accordionStatus.hideLastTripData = false;
                     }).error(function () {
@@ -313,7 +313,7 @@ angular.module('SharengoCsApp').controller('SharengoCsController', function (
                 $scope.onCarSelection(trip.data[0].car);
                 $scope.accordionStatus.hideCarData = false;
                 carsFactory.getLastClosedTrip(trip.data[0].car).success(function (trip) {
-                    $scope.lastTrip = trip.data[0].trip;
+                    $scope.lastTrip = trip.data[0];
                     $scope.lastTripUser = trip.data[0].customer;
                     $scope.accordionStatus.hideLastTripData = false;
                 }).error(function () {
