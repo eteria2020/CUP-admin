@@ -1,8 +1,11 @@
 <?php
 namespace Application\Controller;
 
+use Application\Form\CarForm;
 use SharengoCore\Entity\Cars;
+use SharengoCore\Entity\UpdateCars;
 use SharengoCore\Service\CarsService;
+use SharengoCore\Utility\StatusCar;
 use Zend\Form\Form;
 use Zend\Http\Response;
 use Zend\Mvc\Controller\AbstractActionController;
@@ -47,12 +50,12 @@ class CarsController extends AbstractActionController
         $i_totalCars = $this->I_carsService->getTotalCars();
         $i_recordsFiltered = $this->_getRecordsFiltered($as_filters, $i_totalCars);
 
-        return new JsonModel(array(
+        return new JsonModel([
             'draw'            => $this->params()->fromQuery('sEcho', 0),
             'recordsTotal'    => $i_totalCars,
             'recordsFiltered' => $i_recordsFiltered,
             'data'            => $as_dataDataTable
-        ));
+        ]);
     }
 
     public function addAction()
@@ -97,20 +100,34 @@ class CarsController extends AbstractActionController
             return false;
         }
 
+        /** @var UpdateCars $lastUpdateCar */
+        $lastUpdateCar = $this->I_carsService->getLastUpdateCar($I_car->getPlate());
+
+        /** @var CarForm $form */
         $form = $this->I_carForm;
+        $form->setStatus($this->I_carsService->getStatusCarAvailable($I_car->getStatus()));
         $carData = $this->hydrator->extract($I_car);
-        $form->setData(['car' => $carData]);
+        $data = [];
+        $data['car'] = $carData;
+
+        if(!is_null($lastUpdateCar) && $I_car->getStatus() == StatusCar::MAINTENANCE) {
+            $data['location'] = $lastUpdateCar->getLocation();
+            $data['note'] = $lastUpdateCar->getNote();
+        }
+
+        $form->setData($data);
+        $lastStatus = $I_car->getStatus();
 
         if ($this->getRequest()->isPost()) {
             $postData = $this->getRequest()->getPost()->toArray();
             $postData['car']['plate'] = $I_car->getPlate();
-
             $form->setData($postData);
 
             if ($form->isValid()) {
 
                 try {
 
+                    $this->I_carsService->updateCar($form->getData(), $lastStatus, $postData);
                     $this->I_carsService->saveData($form->getData(), false);
                     $this->flashMessenger()->addSuccessMessage('Auto modificata con successo!');
 

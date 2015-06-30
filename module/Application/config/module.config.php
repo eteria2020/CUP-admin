@@ -312,6 +312,13 @@ return array(
             'ViewJsonStrategy',
         ),
     ),
+
+    'view_helpers'    => array(
+        'invokables' => array(
+            'Status' => 'Application\View\Helper\Status',
+        )
+    ),
+
     // Placeholder for console routes
     'console' => [
         'router' => [

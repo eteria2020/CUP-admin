@@ -72,9 +72,20 @@ $(function() {
                 searchable: false,
                 sortable: false,
                 render: function (data) {
-                    return' <div class="btn-group" role="group">' +
-                        '<a href="/cars/edit/' + data + '" class="btn btn-default btn-xs">Modifica</a>' +
-                        '<a href="/cars/delete/' + data + '" class="btn btn-default btn-xs js-delete">Elimina</a>' +
+                    var externalUrl = 'http://84.247.195.41/cartasi/template/form/car_action_2.php?targa='+data;
+                    return '<div class="btn-group">' +
+                        '<a href="/cars/edit/' + data + '" type="button" class="btn btn-default">Modifica</a> ' +
+                        '<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown"><i class="fa fa-angle-down"></i></button> ' +
+                        '<ul class="dropdown-menu" role="menu">' +
+                        '<li><a href="/cars/delete/' + data + '" class="js-delete">Elimina</a></li>' +
+                        '<li><a href="'+externalUrl+'">Scarica Whitelist</a></li>' +
+                        '<li><a href="'+externalUrl+'">Cancella e riscarica Whitelist</a></li>' +
+                        '<li><a href="'+externalUrl+'">Apri Portiere</a></li>' +
+                        '<li><a href="'+externalUrl+'">Chiudi Portiere</a></li>' +
+                        '<li><a href="'+externalUrl+'">Abilita Motore</a></li>' +
+                        '<li><a href="'+externalUrl+'">Disabilita Motore</a></li>' +
+                        '<li><a href="'+externalUrl+'">Rispedisci corse </a></li>' +
+                        '</ul>' +
                         '</div>';
                 }
             }

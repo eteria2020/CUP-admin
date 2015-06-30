@@ -99,29 +99,7 @@ class CarFieldset extends Fieldset implements InputFilterProviderInterface
             'type'       => 'Zend\Form\Element\Select',
             'attributes' => [
                 'id'    => 'active',
-                'class' => 'form-control',
-            ],
-            'options'    => [
-                'value_options' => [
-                    "operative" => "Operativa",
-                    "out_of_order" => "Non Operativa",
-                    "maintenance" => "Manutenzione",
-                ]
-            ]
-        ]);
-
-        $this->add([
-            'name'       => 'busy',
-            'type'       => 'Zend\Form\Element\Select',
-            'attributes' => [
-                'id'    => 'busy',
-                'class' => 'form-control',
-            ],
-            'options'    => [
-                'value_options' => [
-                    0 => "Non Occupata",
-                    1 => "Occupata"
-                ]
+                'class' => 'form-control js-status',
             ]
         ]);
 
@@ -214,14 +192,6 @@ class CarFieldset extends Fieldset implements InputFilterProviderInterface
                 ]
             ],
             'status'        => [
-                'required' => true,
-                'filters'  => [
-                    [
-                        'name' => 'StringTrim'
-                    ]
-                ]
-            ],
-            'busy'        => [
                 'required' => true,
                 'filters'  => [
                     [
