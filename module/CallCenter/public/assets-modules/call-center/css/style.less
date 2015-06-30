@@ -13,18 +13,117 @@ html, body, .angular-google-map, .angular-google-map-container {
   padding: 20px;
   font-size: 16px;
 }
+#top-actions {
+    position:fixed;
+    top:0px;
+    right:140px;
+    width:157px;
+    height:40px;
+    z-index:100;
+    background-color:#fff;
+    padding:10px;
+    text-align:center;
+    border-radius:0 0 4px 4px;
+    box-shadow:0 2px 8px #aaa;
+    opacity:0.85;
+
+    &:hover {
+        opacity:1;
+    }
+}
+#bottom-area {
+    position:fixed;
+    bottom:10px;
+    left:0px;
+    min-height:40px;
+    z-index:100;
+    padding:10px 10px 0px 15px;
+    background-color: white;
+    border-radius: 0 4px 4px 0;
+    box-shadow:0 2px 8px #aaa;
+    max-width:45%;
+
+    .list-inline {margin-bottom:0}
+
+    li {
+        margin-bottom:10px;
+        font-size:12px;
+    }
+
+    .block {
+      display: inline-block;
+      width: 15px;
+      height: 15px;
+      vertical-align: middle;
+      
+
+      &.blue {
+        background: #18A0D1;
+      }
+      &.yellow {
+        background: #FFC926;
+      }
+      &.red {
+        background: #D90000;
+      }
+      &.black {
+        background: #333333;
+      }
+      &.green {
+        background: #43A34C;
+      }
+      &.orange {
+        background: #EC9416;
+      }
+    }
+}
+#top-area {
+    position:fixed;
+    top:0px;
+    left:100px;
+    width:400px;
+    min-height:120px;
+    background-color:#fff;
+    z-index:100;
+    padding:10px;
+    border-radius:0 0 4px 4px;
+    box-shadow:0 2px 8px #aaa;
+    opacity:0.85;
+    -webkit-transition:opacity 0.5s;
+    transition:opacity 0.5s;
+
+    &:hover {opacity:1}
+
+    .btn-block {margin-top:10px;}
+
+    .btn-green {
+        color: #fff;
+        background-color: #55C754;
+        border-color: #35B535;
+    }
+}
+
 
 #controls {
     position: fixed;
     width: 500px;
     right: 0;
-    top: 50px;
-    bottom: 0;
+    bottom:0;
+    top: auto;
+    bottom: 10px;
     padding: 10px;
     background-color: white;
     z-index: 100;
     opacity: 0.9;
     overflow-y: auto;
+    -webkit-transition:opacity 0.5s;
+    transition:opacity 0.5s;
+    box-shadow:0 2px 8px #aaa;
+    min-height:30px;
+    border-radius:4px 0 0 4px;
+
+
+    &:hover {opacity:1;}
 
     .block {
       display: inline-block;
@@ -46,6 +145,9 @@ html, body, .angular-google-map, .angular-google-map-container {
       }
       &.green {
         background: #43A34C;
+      }
+      &.orange {
+        background: #EC9416;
       }
     }
 
@@ -99,8 +201,15 @@ html, body, .angular-google-map, .angular-google-map-container {
         display: inline-table;
     }
 
+    tr:hover > td {
+        background-color:#eee;
+
+        button {background-color:#fff;box-shadow:0 2px 4px #aaa}
+    }
+
     td {
         padding: 3px;
+        border-bottom:1px solid #eee;
     }
 
     textarea {
@@ -452,13 +561,13 @@ html, body, .angular-google-map, .angular-google-map-container {
 
 .module-pop-up {
     width: 100%;
-    max-width: 600px;
+    max-width: 500px;
     background: #FEEF66;
     border-radius: 4px;
     -moz-border-radius: 4px;
     -webkit-border-radius: 4px;
     position: relative;
-    box-shadow: 0 0 2px #000
+    box-shadow:0 2px 20px #aaa;
 }
 
 .module-pop-up .btn-close {
@@ -516,7 +625,7 @@ html, body, .angular-google-map, .angular-google-map-container {
     background: white;
 }
 
-.block-car-data .block-wrapper-car-data-info .block-car-data-info{margin-bottom:20px;border:1px solid #cab601;border-radius:4px;-moz-border-radius:4px;-webkit-border-radius:4px;padding:12.36093943px;background:white;font-size:16px}
+.block-car-data .block-wrapper-car-data-info .block-car-data-info{margin-bottom:10px;border:1px solid #cab601;border-radius:4px;-moz-border-radius:4px;-webkit-border-radius:4px;padding:12.36093943px;background:white;font-size:16px}
 .block-car-data .block-wrapper-car-data-info .block-car-data-info .block-data-name{display:block;font-weight:700;font-size:1.5rem;line-height:2.02228707;line-height:1em;margin-bottom:5px}
 .block-car-data .block-wrapper-car-data-info .block-car-data-info .btn-link.small{padding-left:12.36093943px;padding-right:12.36093943px;padding-top:4.12031314px;padding-bottom:4.12031314px}
 .block-car-data .block-wrapper-car-data-info .block-car-data-info .link{color:#43a34c}
@@ -532,8 +641,40 @@ html, body, .angular-google-map, .angular-google-map-container {
 .block-car-data .block-wrapper-car-data-info .block-car-data-info .block-data-name {
     display: block;
     font-weight: 700;
-    font-size: 2rem !important;
+    font-size:1.6rem !important;
+    text-transform:uppercase;
     line-height: 2.02228707;
     line-height: 1em;
     margin-bottom: 5px;
+}
+.block-label-status {float:left;width:45%;margin-right:3%;margin-left:2%}
+.block-image {margin-bottom:15px !important;float:left;background-color:white;padding:10px;border: 1px solid #cab601;max-width:100%;}
+.panel-heading {background-color:#D2EED2 !important}
+.module-pop-up .block-heading .block-info {display:none}
+.module-pop-up .block-heading h1 {margin-bottom:10px !important}
+#left-info {float:left;clear:both;width:99%}
+.tab-pane {padding-top:15px}
+.nav>li>a {padding:5px 10px}
+.tab-pane .row {margin-bottom:10px}
+
+.acc-user-data .panel-title:before {
+    font-family: 'FontAwesome'; 
+    content: "\f007";        
+    color: #303030;
+    font-size: 16px;
+    margin-right: 10px;      
+}
+.acc-car-data .panel-title:before {
+    font-family: 'FontAwesome'; 
+    content: "\f1b9";        
+    color: #303030;
+    font-size: 16px;
+    margin-right: 10px;      
+}
+.acc-run-data .panel-title:before {
+    font-family: 'FontAwesome'; 
+    content: "\f018";        
+    color: #303030;
+    font-size: 16px;
+    margin-right: 10px;      
 }

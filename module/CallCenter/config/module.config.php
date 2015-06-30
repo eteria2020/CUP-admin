@@ -99,7 +99,7 @@ return array(
         'guards' => array(
             'BjyAuthorize\Guard\Controller' => array(
 
-                array('controller' => 'CallCenter\Controller\Index', 'roles' => array('admin'))
+                array('controller' => 'CallCenter\Controller\Index', 'roles' => array('admin','callcenter'))
 
             ),
         ),

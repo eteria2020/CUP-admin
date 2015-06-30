@@ -232,6 +232,16 @@ return array(
                     ]
                 ]
             ],
+            'unauthorized' => [
+                'type'    => 'Literal',
+                'options' => [
+                    'route'    => '/unauthorized',
+                    'defaults' => [
+                        'controller' => 'Application\Controller\Error',
+                        'action'     => 'unauthorized',
+                    ],
+                ],
+            ],
             'users' => [
                 'type' => 'Literal',
                 'options' => [
@@ -316,6 +326,7 @@ return array(
     'controllers' => [
         'invokables' => [
             'Application\Controller\Index' => 'Application\Controller\IndexController',
+            'Application\Controller\Error' => 'Application\Controller\ErrorController',
         ],
         'factories' => [
             'Application\Controller\ConsoleUser'  => 'Application\Controller\ConsoleUserControllerFactory',
@@ -348,6 +359,7 @@ return array(
             'application/index/index' => __DIR__ . '/../view/application/index/index.phtml',
             'error/404'               => __DIR__ . '/../view/error/404.phtml',
             'error/index'             => __DIR__ . '/../view/error/index.phtml',
+            'error/unauthorized'      => __DIR__ . '/../view/error/unauthorized.phtml',
         ),
         'template_path_stack' => array(
             __DIR__ . '/../view',
@@ -380,26 +392,29 @@ return array(
         'resource_providers' => [
             'BjyAuthorize\Provider\Resource\Config' => [
                 'admin' => [],
+                'callcenter' => [],
             ],
         ],
         'rule_providers' => [
             'BjyAuthorize\Provider\Rule\Config' => [
                 'allow' => [
-                    [['user'], 'admin']
+                    [['admin'], 'admin'],
+                    [['admin','callcenter'], 'callcenter'],
                 ],
             ],
         ],
         'guards' => array(
             'BjyAuthorize\Guard\Controller' => array(
                 // Enable access to ZFC User pages
-                array('controller' => 'zfcuser', 'roles' => array()),
-                array('controller' => 'Application\Controller\Index', 'roles' => array('user')),
-                ['controller' => 'Application\Controller\Customers', 'roles' => ['user']],
-                ['controller' => 'Application\Controller\Trips', 'roles' => ['user']],
-                ['controller' => 'Application\Controller\Cars', 'roles' => ['user']],
+                ['controller' => 'zfcuser', 'roles' => []],
+                ['controller' => 'Application\Controller\Error', 'roles' => []],
+                ['controller' => 'Application\Controller\Index', 'roles' => ['admin','callcenter']],
+                ['controller' => 'Application\Controller\Customers', 'roles' => ['admin']],
+                ['controller' => 'Application\Controller\Trips', 'roles' => ['admin']],
+                ['controller' => 'Application\Controller\Cars', 'roles' => ['admin']],
                 ['controller' => 'Application\Controller\ConsoleUser', 'roles' => []],
-                ['controller' => 'Application\Controller\Users', 'roles' => ['user']],
-                ['controller' => 'Application\Controller\Reservations', 'roles' => ['user']]
+                ['controller' => 'Application\Controller\Users', 'roles' => ['admin']],
+                ['controller' => 'Application\Controller\Reservations', 'roles' => ['admin']]
             ),
         ),
     ),
@@ -478,6 +493,12 @@ return array(
                         'isVisible' => true
                     ]
                 ],
+            ],
+            [
+                'label'     => 'Call center',
+                'route'     => 'call-center',
+                'icon'      => 'fa fa-map-marker',
+                'resource'  => 'callcenter',
             ],
         ]
     ]

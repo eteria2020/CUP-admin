@@ -95,8 +95,13 @@ angular.module('SharengoCsApp').controller('SharengoCsController', function (
                 car.carIcon = "/assets-modules/call-center/images/marker-s-blue.png";
                 car.iconSelected = "/assets-modules/call-center/images/marker-s-blue-selected.png";
                 if(car.status!='operative'){
-                    car.carIcon = "/assets-modules/call-center/images/marker-s-red.png";
-                    car.iconSelected = "/assets-modules/call-center/images/marker-s-red-selected.png";
+                    if(car.status=='maintenance'){
+                        car.carIcon = "/assets-modules/call-center/images/marker-s-red.png";
+                        car.iconSelected = "/assets-modules/call-center/images/marker-s-red-selected.png";
+                    }else{
+                        car.carIcon = "/assets-modules/call-center/images/marker-s-orange.png";
+                        car.iconSelected = "/assets-modules/call-center/images/marker-s-orange-selected.png";
+                    }
                 }else if(car.busy){
                     car.carIcon = "/assets-modules/call-center/images/marker-s-yellow.png";
                     car.iconSelected = "/assets-modules/call-center/images/marker-s-yellow-selected.png";
@@ -220,7 +225,7 @@ angular.module('SharengoCsApp').controller('SharengoCsController', function (
                         $scope.accordionStatus.hideCustomerData = true;
                     });
                     carsFactory.getLastClosedTrip(car).success(function (trip) {
-                        $scope.lastTrip = trip.data[0].trip;
+                        $scope.lastTrip = trip.data[0];
                         $scope.lastTripUser = trip.data[0].customer;
                         $scope.accordionStatus.hideLastTripData = false;
                     }).error(function () {
@@ -308,7 +313,7 @@ angular.module('SharengoCsApp').controller('SharengoCsController', function (
                 $scope.onCarSelection(trip.data[0].car);
                 $scope.accordionStatus.hideCarData = false;
                 carsFactory.getLastClosedTrip(trip.data[0].car).success(function (trip) {
-                    $scope.lastTrip = trip.data[0].trip;
+                    $scope.lastTrip = trip.data[0];
                     $scope.lastTripUser = trip.data[0].customer;
                     $scope.accordionStatus.hideLastTripData = false;
                 }).error(function () {
@@ -402,13 +407,13 @@ angular.module('SharengoCsApp').controller('SharengoCsController', function (
             infoBoxOptions = {
                 alignBottom: false,
                 disableAutoPan: false,
-                pixelOffset: new google.maps.Size(-300, 0),
+                pixelOffset: new google.maps.Size(-250, 0),
                 infoBoxClearance: new google.maps.Size(1, 1),
                 isHidden: false,
                 pane: "floatPane",
                 enableEventPropagation: true,
                 boxStyle: { 
-                  width: "600px"
+                  width: "500px"
                  },
                 closeBoxMargin: "10px 2px 2px 2px",
                /* closeBoxURL: "http://www.google.com/intl/en_us/mapfiles/close.gif"*/
@@ -427,14 +432,15 @@ angular.module('SharengoCsApp').controller('SharengoCsController', function (
 "<div class=\"block-content clearfix\">",
 "<div id=\"left-column\" class=\"block-column bw-f w-2-4\">",
 "<div class=\"block-image\"><img src=\"assets-modules/call-center/images/car.png\" alt=\"\"></div>",
-"<div class=\"block-label-status\"><span class=\"block-info\">Stato interni</span><div class=\"block-bar\"><div id=\"int_cleanliness\" class=\"block-bar-value\">",
+"<div id=\"left-info\"><div class=\"block-label-status\"><span class=\"block-info\">Stato interni</span><div class=\"block-bar\"><div id=\"int_cleanliness\" class=\"block-bar-value\">",
 "<div class=\"block-bar\"><div id=\"int_cleanliness\" class=\"block-bar-value {{int0}}\"></div></div></div></div></div>",
 "<div class=\"block-label-status\"><span class=\"block-info\">Stato esterni</span><div class=\"block-bar\"><div id=\"ext_cleanliness\" class=\"block-bar-value\">",
-"<div id=\"ext_cleanliness\" class=\"block-bar-value {{est0}}\"></div></div></div></div></div>",
+"<div id=\"ext_cleanliness\" class=\"block-bar-value {{est0}}\"></div></div></div></div></div></div>",
 "<div id=\"right-column\" class=\"block-column last bw-f w-2-4\">",
 "<div class=\"block-wrapper-car-data-info bg-ct4\">",
 "<div id=\"block-right-top\" class=\"block-car-data-info\"><span class=\"block-data-name\"><i class=\"fa fa-map-marker\"></i> Dove si trova</span><span id=\"location\" class=\"block-data-value\">{{latitude}}, {{longitude}} <reverse-geocode lat=\"latitude\" lng=\"longitude\"></reverse-geocode></span></div>",
-"<div class=\"block-car-data-info\"><span id=\"block-right-bottom-title\" class=\"block-data-name\"><i id=\"circle-icon\" class=\"fa fa-sun-o\"></i>Autonomia</span><span id=\"block-right-bottom-text\" class=\"block-data-value\">{{battery}} % batteria</span></div>",
+"<div class=\"block-car-data-info\"><span id=\"block-right-bottom-title\" class=\"block-data-name\"><i id=\"circle-icon\" class=\"fa fa-sun-o\"></i> Autonomia</span><span id=\"block-right-bottom-text\" class=\"block-data-value\">{{battery}} % batteria</span></div>",
+"<div class=\"block-car-data-info\"><span id=\"block-right-bottom-title\" class=\"block-data-name\"><i id=\"circle-icon\" class=\"fa fa-clock-o\"></i> Ultimo contatto</span><span id=\"block-right-bottom-text\" class=\"block-data-value\">{{lastContact.date | dateSharengoFormat}}</span></div>",
 "<div id=\"btn-reserve\" class=\"block-wrapper-btn\" style=\"display:none\"><a id=\"reserve-text\" href=\"/login\" class=\"btn-link ct3\"><i class=\"fa fa-circle-o-notch fa-spin\"></i></a></div>",
 "<div id=\"step2-buttons\" class=\"block-wrapper-btn\" style=\"display:none\"><button id=\"btn-back\" class=\"reset pull-left\"><i class=\"fa fa-angle-left\"></i> Annulla</button><button id=\"btn-confirm\" class=\"pull-right ct2\">Conferma <i class=\"fa fa-angle-right\"></i></button></div><div>",
 "<button id=\"btn-done\" class=\"ct2\" style=\"display:none; margin:0 auto;\">Chiudi <i class=\"fa fa-check\"></i></button>",

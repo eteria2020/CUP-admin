@@ -17,6 +17,6 @@ angular.module('SharengoCsApp').filter('dateSharengoFormat', function dateTwist(
             zoneOffset = '+02:00';
         } 
 
-        return moment.utc(date).zone(zoneOffset).format(formatDate);
+        return moment.utc(date).utcOffset(zoneOffset).format(formatDate);
     }
 });

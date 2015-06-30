@@ -3,6 +3,7 @@ nbproject
 .~lock.*
 .buildpath
 .DS_Store
+Thumbs.db
 .idea
 .project
 .settings
