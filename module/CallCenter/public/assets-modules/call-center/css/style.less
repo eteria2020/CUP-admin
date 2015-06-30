@@ -52,12 +52,33 @@ html, body, .angular-google-map, .angular-google-map-container {
       }
     }
 }
+#top-area {
+    position:fixed;
+    top:10px;
+    left:150px;
+    width:400px;
+    min-height:120px;
+    background-color:#fff;
+    z-index:100;
+    padding:10px;
+    border-radius:5px;
+    box-shadow:0 2px 8px #aaa;
+    opacity:0.85;
+    -webkit-transition:opacity 0.5s;
+    transition:opacity 0.5s;
+
+    &:hover {opacity:1}
+
+    .btn-block {margin-top:10px;}
+}
+
 
 #controls {
     position: fixed;
     width: 500px;
     right: 0;
-    top: 50px;
+    bottom:0;
+    top: auto;
     bottom: 0;
     padding: 10px;
     background-color: white;
@@ -68,6 +89,8 @@ html, body, .angular-google-map, .angular-google-map-container {
     transition:opacity 0.5s;
     border-top-left-radius:4px;
     box-shadow:0 2px 8px #aaa;
+    min-height:200px;
+
 
     &:hover {opacity:1;}
 

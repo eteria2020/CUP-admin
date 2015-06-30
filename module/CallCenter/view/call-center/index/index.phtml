@@ -20,6 +20,138 @@
     Caricamento mappa in corso...
 </div>
 
+<div id="top-area">
+<tabset>
+    <tab heading="Per auto">
+
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-input">
+                    <label>Ricerca per Auto</label>
+                    <div class="input-group">
+                        <input type="text" class="form-control" ng-model="search.plate" placeholder="Auto">
+                        <span class="input-group-btn">
+                            <button class="btn btn-warning" ng-click="plateChange(search.plate, false)" type="button">
+                                <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+                            </button>
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-input">
+                    <label>Ricerca per N°.Unità</label>
+                    <div class="input-group">
+                        <input type="text" class="form-control" ng-model="search.label" placeholder="N°.Unità">
+                        <span class="input-group-btn">
+                            <button class="btn btn-warning" ng-click="plateChange(search.label, true)" type="button">
+                                <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+                            </button>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-12">
+                <div class="alert alert-warning" style="margin-top: 10px;" ng-show="accordionStatus.showNoResult"  role="alert">
+                    <span class="glyphicon glyphicon-warning-sign" aria-hidden="true"></span> Nessun risultato trovato, riprova con {{noResult}}.
+                </div>
+            </div>
+        </div>
+
+    </tab>
+    <tab heading="Per cliente">
+
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-input">
+                    <label>Nome</label>
+                    <input type="text" ng-model="search.name" class="form-control">
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-input">
+                    <label>N° Card</label>
+                    <input type="text" ng-model="search.card" class="form-control">
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-input">
+                    <label>Cognome</label>
+                    <input type="text" ng-model="search.surname" class="form-control">
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-input">
+                    <label>Cellulare</label>
+                    <input type="text" ng-model="search.mobile" class="form-control">
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-12">
+                <div class="form-input">
+                    <button class="btn btn-warning btn-block" ng-click="userChange(search.mobile, search.name, search.surname, search.card)">
+                    <span class="glyphicon glyphicon-search" aria-hidden="true"></span> Cerca</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-12">
+                <div class="alert alert-warning" style="margin-top: 10px;" ng-show="accordionStatus.showNoResultByCustomer"  role="alert">
+                    <span class="glyphicon glyphicon-warning-sign" aria-hidden="true"></span> Nessun risultato trovato, riprova.
+                </div>
+            </div>
+        </div>
+
+    </tab>
+
+    <tab heading="Per indirizzo">
+
+        <div class="row">
+            <div class="col-md-9">
+                <div class="form-input">
+                    <label>Indirizzo</label>
+                    <input type="text" ng-model="searchAddress.address" class="form-control">
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="form-input">
+                    <label>N. civico</label>
+                    <input type="text" ng-model="searchAddress.number" class="form-control">
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-12">
+                <div class="form-input">
+                    <label>Città</label>
+                    <input type="text" ng-model="searchAddress.city" class="form-control">
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-12">
+                <div class="form-input">
+                    <button class="btn btn-warning btn-block" ng-click="searchAddress.search()">
+                    <span class="glyphicon glyphicon-search" aria-hidden="true"></span> Cerca</button>
+                </div>
+            </div>
+        </div>
+
+    </tab>
+</tabset>
+</div>
+
 <div id="controls">
     <div class="heading clearfix">
         <div class="pull-right actions">
@@ -33,137 +165,6 @@
     </div>
 
     <accordion close-others="false">
-        <accordion-group heading="Ricerca" is-open="accordionStatus.researchOpen">
-            <tabset>
-                <tab heading="Per auto">
-
-                    <div class="row">
-                        <div class="col-md-6">
-                            <div class="form-input">
-                                <label>Ricerca per Auto</label>
-                                <div class="input-group">
-                                    <input type="text" class="form-control" ng-model="search.plate" placeholder="Auto">
-                                    <span class="input-group-btn">
-                                        <button class="btn btn-warning" ng-click="plateChange(search.plate, false)" type="button">
-                                            <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
-                                        </button>
-                                    </span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="form-input">
-                                <label>Ricerca per N°.Unità</label>
-                                <div class="input-group">
-                                    <input type="text" class="form-control" ng-model="search.label" placeholder="N°.Unità">
-                                    <span class="input-group-btn">
-                                        <button class="btn btn-warning" ng-click="plateChange(search.label, true)" type="button">
-                                            <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
-                                        </button>
-                                    </span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="alert alert-warning" style="margin-top: 10px;" ng-show="accordionStatus.showNoResult"  role="alert">
-                                <span class="glyphicon glyphicon-warning-sign" aria-hidden="true"></span> Nessun risultato trovato, riprova con {{noResult}}.
-                            </div>
-                        </div>
-                    </div>
-
-                </tab>
-                <tab heading="Per cliente">
-
-                    <div class="row">
-                        <div class="col-md-6">
-                            <div class="form-input">
-                                <label>Nome</label>
-                                <input type="text" ng-model="search.name" class="form-control">
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="form-input">
-                                <label>N° Card</label>
-                                <input type="text" ng-model="search.card" class="form-control">
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="row">
-                        <div class="col-md-6">
-                            <div class="form-input">
-                                <label>Cognome</label>
-                                <input type="text" ng-model="search.surname" class="form-control">
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="form-input">
-                                <label>Cellulare</label>
-                                <input type="text" ng-model="search.mobile" class="form-control">
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="form-input">
-                                <button class="btn btn-warning btn-block" ng-click="userChange(search.mobile, search.name, search.surname, search.card)">
-                                <span class="glyphicon glyphicon-search" aria-hidden="true"></span> Cerca</button>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="alert alert-warning" style="margin-top: 10px;" ng-show="accordionStatus.showNoResultByCustomer"  role="alert">
-                                <span class="glyphicon glyphicon-warning-sign" aria-hidden="true"></span> Nessun risultato trovato, riprova.
-                            </div>
-                        </div>
-                    </div>
-
-                </tab>
-
-                <tab heading="Per indirizzo">
-
-                    <div class="row">
-                        <div class="col-md-9">
-                            <div class="form-input">
-                                <label>Indirizzo</label>
-                                <input type="text" ng-model="searchAddress.address" class="form-control">
-                            </div>
-                        </div>
-                        <div class="col-md-3">
-                            <div class="form-input">
-                                <label>N. civico</label>
-                                <input type="text" ng-model="searchAddress.number" class="form-control">
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="form-input">
-                                <label>Città</label>
-                                <input type="text" ng-model="searchAddress.city" class="form-control">
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="form-input">
-                                <button class="btn btn-warning btn-block" ng-click="searchAddress.search()">
-                                <span class="glyphicon glyphicon-search" aria-hidden="true"></span> Cerca</button>
-                            </div>
-                        </div>
-                    </div>
-
-                </tab>
-            </tabset>
-        </accordion-group>
         <accordion-group heading="Seleziona cliente" ng-hide="accordionStatus.hideCustomerSelect" is-open="accordionStatus.customerSelectOpen">
             <table>
                 <thead>
