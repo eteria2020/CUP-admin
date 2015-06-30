@@ -407,13 +407,13 @@ angular.module('SharengoCsApp').controller('SharengoCsController', function (
             infoBoxOptions = {
                 alignBottom: false,
                 disableAutoPan: false,
-                pixelOffset: new google.maps.Size(-300, 0),
+                pixelOffset: new google.maps.Size(-250, 0),
                 infoBoxClearance: new google.maps.Size(1, 1),
                 isHidden: false,
                 pane: "floatPane",
                 enableEventPropagation: true,
                 boxStyle: { 
-                  width: "600px"
+                  width: "500px"
                  },
                 closeBoxMargin: "10px 2px 2px 2px",
                /* closeBoxURL: "http://www.google.com/intl/en_us/mapfiles/close.gif"*/
@@ -432,10 +432,10 @@ angular.module('SharengoCsApp').controller('SharengoCsController', function (
 "<div class=\"block-content clearfix\">",
 "<div id=\"left-column\" class=\"block-column bw-f w-2-4\">",
 "<div class=\"block-image\"><img src=\"assets-modules/call-center/images/car.png\" alt=\"\"></div>",
-"<div class=\"block-label-status\"><span class=\"block-info\">Stato interni</span><div class=\"block-bar\"><div id=\"int_cleanliness\" class=\"block-bar-value\">",
+"<div id=\"left-info\"><div class=\"block-label-status\"><span class=\"block-info\">Stato interni</span><div class=\"block-bar\"><div id=\"int_cleanliness\" class=\"block-bar-value\">",
 "<div class=\"block-bar\"><div id=\"int_cleanliness\" class=\"block-bar-value {{int0}}\"></div></div></div></div></div>",
 "<div class=\"block-label-status\"><span class=\"block-info\">Stato esterni</span><div class=\"block-bar\"><div id=\"ext_cleanliness\" class=\"block-bar-value\">",
-"<div id=\"ext_cleanliness\" class=\"block-bar-value {{est0}}\"></div></div></div></div></div>",
+"<div id=\"ext_cleanliness\" class=\"block-bar-value {{est0}}\"></div></div></div></div></div></div>",
 "<div id=\"right-column\" class=\"block-column last bw-f w-2-4\">",
 "<div class=\"block-wrapper-car-data-info bg-ct4\">",
 "<div id=\"block-right-top\" class=\"block-car-data-info\"><span class=\"block-data-name\"><i class=\"fa fa-map-marker\"></i> Dove si trova</span><span id=\"location\" class=\"block-data-value\">{{latitude}}, {{longitude}} <reverse-geocode lat=\"latitude\" lng=\"longitude\"></reverse-geocode></span></div>",
