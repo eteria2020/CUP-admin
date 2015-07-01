@@ -104,6 +104,7 @@ class CarFieldset extends Fieldset implements InputFilterProviderInterface
             'options'    => [
                 'value_options' => [
                     "operative" => "Operativa",
+                    ['attributes'=>['data-key'=>'out_of_order'],'value'=>'out_of_order', 'disabled'=>'true', 'label'=>'Non operativa'],
                     "maintenance" => "Manutenzione",
                 ]
             ]
