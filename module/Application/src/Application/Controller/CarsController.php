@@ -105,6 +105,11 @@ class CarsController extends AbstractActionController
             $postData = $this->getRequest()->getPost()->toArray();
             $postData['car']['plate'] = $I_car->getPlate();
 
+            // hack to allow disabling `out_of_order` option
+            if (!isset($postData['car']['status'])) {
+                $postData['car']['status'] = 'out_of_order';
+            }
+
             $form->setData($postData);
 
             if ($form->isValid()) {
