@@ -61,10 +61,12 @@ class CarsController extends AbstractActionController
     public function addAction()
     {
         $form = $this->I_carForm;
+        $form->setStatus([StatusCar::OPERATIVE => StatusCar::OPERATIVE]);
 
         if ($this->getRequest()->isPost()) {
             $postData = $this->getRequest()->getPost()->toArray();
             $form->setData($postData);
+            $form->getInputFilter()->get('location')->setRequired(false);
 
             if ($form->isValid()) {
 
@@ -80,6 +82,8 @@ class CarsController extends AbstractActionController
                 }
 
                 return $this->redirect()->toRoute('cars');
+            } else {
+                print_r($form->getMessages());
             }
         }
 
