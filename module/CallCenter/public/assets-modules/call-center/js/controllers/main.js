@@ -18,6 +18,7 @@ angular.module('SharengoCsApp').controller('SharengoCsController', function (
 
     var searchByCar = false;
     var searchByCustomer = false;
+    var reservationContent,infoBoxOptions,infoBox,mainMaps;
 
     $scope.accordionStatus = {
         researchOpen: true,
@@ -403,8 +404,9 @@ angular.module('SharengoCsApp').controller('SharengoCsController', function (
     };
 
     uiGmapIsReady.promise().then(function (maps) {
-        var reservationContent = document.createElement("div"),
-            infoBoxOptions = {
+        mainMaps = maps;
+        reservationContent = document.createElement("div");
+        infoBoxOptions = {
                 alignBottom: false,
                 disableAutoPan: false,
                 pixelOffset: new google.maps.Size(-250, 0),
@@ -420,8 +422,8 @@ angular.module('SharengoCsApp').controller('SharengoCsController', function (
             };
 
         infoBox = new InfoBox();
-
-        $scope.markerEvents = {
+    });
+    $scope.markerEvents = {
             click: function (marker, event, car) {
                 searchCar(car.plate, false);
 
@@ -463,11 +465,9 @@ angular.module('SharengoCsApp').controller('SharengoCsController', function (
                 infoBoxOptions.content = reservationContent;
                 infoBox.close();
                 infoBox.setOptions(infoBoxOptions);
-                infoBox.open(maps[0].map, marker);
+                infoBox.open(mainMaps[0].map, marker);
             }
         };
-    });
-
     /*uiGmapGoogleMapApi.then(function (maps) {
         
     });*/
