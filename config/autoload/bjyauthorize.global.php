@@ -39,6 +39,7 @@ return [
                 'guest' => [],
                 'admin' => [],
                 'callcenter' => [],
+                'user' => [],
             ]
         ],
 
