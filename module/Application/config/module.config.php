@@ -150,7 +150,22 @@ return array(
                                 'action'        => 'delete',
                             ],
                         ],
-                    ]
+                    ],
+                    'send-command' => [
+                        'type'    => 'Segment',
+                        'options' => [
+                            'route'    => '/send-command/:plate/:command',
+                            'constraints' => array(
+                                'plate' => '[a-zA-Z0-9]*',
+                                'command' => '[0-9]*'
+                            ),
+                            'defaults' => [
+                                '__NAMESPACE__' => 'Application\Controller',
+                                'controller'    => 'Cars',
+                                'action'        => 'send-command',
+                            ],
+                        ],
+                    ],
                 ],
             ],
             'trips' => [

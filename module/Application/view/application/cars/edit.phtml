@@ -20,6 +20,8 @@ $form = $this->carForm->prepare();
         <div class="row">
             <div class="col-md-12">
 
+                <?php echo $this->partial('partials/flash-messages.phtml', []); ?>
+
                 <?= $this->form()->openTag($form); ?>
 
                 <div class="row">
@@ -127,6 +129,26 @@ $form = $this->carForm->prepare();
 
             </div>
         </div>
+
+
+        <hr>
+        <h3 class="page-title">LANCIA COMANDI AUTO:</h3>
+        <div class="btn-group">
+            <button type="button" class="btn btn-default">Comandi</button>
+            <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown"><i class="fa fa-angle-down"></i></button>
+            <ul class="dropdown-menu" role="menu">
+                <?php foreach($this->commands as $key => $command): ?>
+                    <li>
+                        <a href="<?= $this->url('cars/send-command', ['plate' => $this->car->getPlate(), 'command' => $key]); ?>" onclick="return confirm('Sei sicuro di voler lanciare questo comando?')">
+                            <?= $command; ?>
+                        </a>
+                    </li>
+                <?php endforeach; ?>
+            </ul>
+        </div>
+
+
+
     </div>
 </div>
 

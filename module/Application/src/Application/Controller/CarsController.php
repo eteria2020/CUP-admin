@@ -3,8 +3,10 @@ namespace Application\Controller;
 
 use Application\Form\CarForm;
 use SharengoCore\Entity\Cars;
-use SharengoCore\Entity\UpdateCars;
+use SharengoCore\Entity\CarsMaintenance;
+use SharengoCore\Entity\Commands;
 use SharengoCore\Service\CarsService;
+use SharengoCore\Service\CommandsService;
 use SharengoCore\Utility\StatusCar;
 use Zend\Form\Form;
 use Zend\Http\Response;
@@ -18,7 +20,10 @@ class CarsController extends AbstractActionController
     /**
      * @var CarsService
      */
-    public $I_carsService;
+    private $I_carsService;
+
+    /** @var  CommandsService */
+    private $I_commandsService;
 
     /**
      * @var
@@ -30,9 +35,14 @@ class CarsController extends AbstractActionController
      */
     private $hydrator;
 
-    public function __construct(CarsService $I_carsService, Form $I_carForm, HydratorInterface $hydrator)
+    public function __construct(
+        CarsService $I_carsService,
+        CommandsService $I_commandsService,
+        Form $I_carForm,
+        HydratorInterface $hydrator)
     {
         $this->I_carsService = $I_carsService;
+        $this->I_commandsService = $I_commandsService;
         $this->I_carForm = $I_carForm;
         $this->hydrator = $hydrator;
     }
@@ -104,8 +114,8 @@ class CarsController extends AbstractActionController
             return false;
         }
 
-        /** @var UpdateCars $lastUpdateCar */
-        $lastUpdateCar = $this->I_carsService->getLastUpdateCar($I_car->getPlate());
+        /** @var CarsMaintenance $lastUpdateCar */
+        $lastCarsMaintenance = $this->I_carsService->getLastCarsMaintenance($I_car->getPlate());
 
         /** @var CarForm $form */
         $form = $this->I_carForm;
@@ -114,9 +124,9 @@ class CarsController extends AbstractActionController
         $data = [];
         $data['car'] = $carData;
 
-        if(!is_null($lastUpdateCar) && $I_car->getStatus() == StatusCar::MAINTENANCE) {
-            $data['location'] = $lastUpdateCar->getLocation();
-            $data['note'] = $lastUpdateCar->getNote();
+        if(!is_null($lastCarsMaintenance) && $I_car->getStatus() == StatusCar::MAINTENANCE) {
+            $data['location'] = $lastCarsMaintenance->getLocation();
+            $data['note'] = $lastCarsMaintenance->getNotes();
         }
 
         $form->setData($data);
@@ -146,8 +156,9 @@ class CarsController extends AbstractActionController
         }
 
         return new ViewModel([
-            'car'     => $I_car,
-            'carForm' => $form
+            'car'      => $I_car,
+            'carForm'  => $form,
+            'commands' => Commands::getCommandCodes()
         ]);
     }
 
@@ -177,6 +188,32 @@ class CarsController extends AbstractActionController
 
         return $this->redirect()->toRoute('cars');
 
+    }
+
+    public function sendCommandAction()
+    {
+        $plate = $this->params()->fromRoute('plate', 0);
+        $commandIndex = $this->params()->fromRoute('command', 0);
+        $I_car = $this->I_carsService->getCarByPlate($plate);
+
+        if (is_null($I_car)) {
+            $this->getResponse()->setStatusCode(Response::STATUS_CODE_404);
+
+            return false;
+        }
+
+        try {
+
+            $this->I_commandsService->sendCommand($I_car, $commandIndex);
+            $this->flashMessenger()->addSuccessMessage('Comando lanciato con successo');
+
+        } catch (\Exception $e) {
+
+            $this->flashMessenger()->addErrorMessage('Errore nel lanciare il comando');
+
+        }
+
+        return $this->redirect()->toRoute('cars/edit', ['plate' => $I_car->getPlate()]);
     }
 
     protected function _getRecordsFiltered($as_filters, $i_totalCars)
