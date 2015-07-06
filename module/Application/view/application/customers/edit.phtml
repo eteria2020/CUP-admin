@@ -34,12 +34,14 @@ $this->headScript()
                     <li role="presentation" class="active"><a href="<?= $this->url('customers/ajax-tab-info', ['id' => $this->customer->getId()]); ?>" data-target="#info" role="tab" data-toggle="tab">Informazioni</a></li>
                     <li role="presentation"><a href="<?= $this->url('customers/ajax-tab-edit', ['id' => $this->customer->getId()]); ?>" data-target="#edit" role="tab" data-toggle="tab">Modifica</a></li>
                     <li role="presentation"><a href="<?= $this->url('customers/ajax-tab-bonus', ['id' => $this->customer->getId()]); ?>" data-target="#bonus" role="tab" data-toggle="tab">Bonus</a></li>
+                    <li role="presentation"><a href="<?= $this->url('customers/ajax-tab-card', ['id' => $this->customer->getId()]); ?>" data-target="#card" role="tab" data-toggle="tab">Card</a></li>
                 </ul>
 
                 <div class="tab-content">
                     <div role="tabpanel" class="tab-pane active" id="info"></div>
                     <div role="tabpanel" class="tab-pane" id="edit"></div>
                     <div role="tabpanel" class="tab-pane" id="bonus"></div>
+                    <div role="tabpanel" class="tab-pane" id="card"></div>
                 </div>
             </div>
         </div>

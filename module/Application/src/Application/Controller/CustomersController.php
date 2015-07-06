@@ -4,6 +4,7 @@ namespace Application\Controller;
 use Application\Form\CustomerForm;
 use Application\Form\DriverForm;
 use SharengoCore\Entity\Customers;
+use SharengoCore\Service\CardsService;
 use SharengoCore\Service\CustomersService;
 use Zend\Form\Form;
 use Zend\Http\Response;
@@ -18,6 +19,11 @@ class CustomersController extends AbstractActionController
      * @var CustomersService
      */
     private $I_customerService;
+
+    /**
+     * @var CardsService
+     */
+    private $I_cardsService;
 
     /**
      * @var
@@ -45,12 +51,14 @@ class CustomersController extends AbstractActionController
      */
     public function __construct(
         CustomersService $I_customerService,
+        CardsService $I_cardsService,
         Form $I_customerForm,
         Form $I_driverForm,
         Form $I_settingForm,
         HydratorInterface $hydrator
     ) {
         $this->I_customerService = $I_customerService;
+        $this->I_cardsService = $I_cardsService;
         $this->I_customerForm = $I_customerForm;
         $this->I_driverForm = $I_driverForm;
         $this->I_settingForm = $I_settingForm;
@@ -113,16 +121,16 @@ class CustomersController extends AbstractActionController
                     $this->flashMessenger()->addErrorMessage($e->getMessage());
                 }
 
-                return $this->redirect()->toRoute('customers/edit', array(
+                return $this->redirect()->toRoute('customers/edit', [
                    'controller' => 'Customers',
                    'action' =>  'edit',
                        'id' => $I_customer->getId()
-                   ));
+                   ]);
             }
         }
 
         return new ViewModel([
-            'customer'     => $I_customer,
+            'customer' => $I_customer,
         ]);
     }
 
@@ -203,6 +211,76 @@ class CustomersController extends AbstractActionController
         $view->setTerminal(true);
 
         return $view;
+    }
+
+    public function cardTabAction()
+    {
+        /** @var Customers $I_customer */
+        $I_customer = $this->getCustomer();
+
+        $view = new ViewModel([
+            'customer'  => $I_customer,
+        ]);
+        $view->setTerminal(true);
+
+        return $view;
+    }
+
+    public function removeCardAction()
+    {
+        /** @var Customers $I_customer */
+        $I_customer = $this->getCustomer();
+        $status = 'error';
+
+        if ($this->getRequest()->isPost()) {
+
+            try {
+
+                $this->I_customerService->removeCard($I_customer);
+                $status = 'success';
+
+            } catch (\Exception $e) {
+
+                $this->getResponse()->setStatusCode(Response::STATUS_CODE_500);
+            }
+        }
+
+        return new JsonModel([
+            'status' => $status
+        ]);
+    }
+
+    public function assignCardAction()
+    {
+        /** @var Customers $I_customer */
+        $I_customer = $this->getCustomer();
+        $status = 'error';
+
+        if ($this->getRequest()->isPost()) {
+
+            try {
+
+                $postData = $this->getRequest()->getPost()->toArray();
+                $I_card = $this->I_cardsService->getCard($postData['code']);
+
+                $this->I_customerService->assignCard($I_customer, $I_card, true);
+                $status = 'success';
+
+            } catch (\Exception $e) {
+
+                $this->getResponse()->setStatusCode(Response::STATUS_CODE_500);
+            }
+        }
+
+        return new JsonModel([
+            'status' => $status
+        ]);
+    }
+
+    public function ajaxCardCodeAutocompleteAction()
+    {
+        $query = $this->params()->fromQuery('query', '');
+        return new JsonModel($this->I_cardsService->ajaxCardCodeAutocomplete($query));
     }
 
     protected function _getRecordsFiltered($as_filters, $i_totalCustomer)
