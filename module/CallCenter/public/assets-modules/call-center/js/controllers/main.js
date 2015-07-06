@@ -93,7 +93,10 @@ angular.module('SharengoCsApp').controller('SharengoCsController', function (
                 car.id = car.plate; //Date.parse(car.vettura_id.replace(' ', 'T'));
                /* car.latitude = car.vettura_lat;
                 car.longitude = car.vettura_lon;*/
+                car.options = [];
+
                 car.carIcon = "/assets-modules/call-center/images/marker-s-blue.png";
+
                 car.iconSelected = "/assets-modules/call-center/images/marker-s-blue-selected.png";
                 if(car.status!='operative'){
                     if(car.status=='maintenance'){
@@ -109,7 +112,14 @@ angular.module('SharengoCsApp').controller('SharengoCsController', function (
                 }else if(car.reservation){
                     car.carIcon = "/assets-modules/call-center/images/marker-s-black.png";
                     car.iconSelected = "/assets-modules/call-center/images/marker-s-black-selected.png";
+                }else if(car.charging){
+                    car.carIcon = "/assets-modules/call-center/images/marker-charging.png";
+                    car.iconSelected = "/assets-modules/call-center/images/marker-charging.png";
+                    car.options.labelClass='marker_labels';
+                    //car.options.labelAnchor='12 32';
+                    car.options.labelContent=car.battery+'% <i class="fa fa-plug"></i>';
                 }
+
             });
             $scope.cars = cars;
             $scope.mapLoader = false;
@@ -216,19 +226,29 @@ angular.module('SharengoCsApp').controller('SharengoCsController', function (
                     $scope.onCarSelection(car);
 
                     $scope.accordionStatus.hideCarData = false;
+
                     carsFactory.getTrip(car).success(function (trip) {
+                        if(typeof trip.data[0] !== 'undefined'){
+                            $scope.onCustomerSelection(trip.data[0].customer);
+                            $scope.accordionStatus.hideTripData = false;                        
+                            $scope.accordionStatus.hideCustomerData = true;
+                        }else{
+                            $scope.accordionStatus.hideTripData = true;
+                            $scope.accordionStatus.hideCustomerData = true;     
+                        }
                         $scope.trip = trip.trip;
-                        $scope.accordionStatus.hideTripData = false;
-                        $scope.onCustomerSelection(trip.data[0].customer);
-                        $scope.accordionStatus.hideCustomerData = true;
                     }).error(function () {
                         $scope.accordionStatus.hideTripData = true;
                         $scope.accordionStatus.hideCustomerData = true;
                     });
                     carsFactory.getLastClosedTrip(car).success(function (trip) {
-                        $scope.lastTrip = trip.data[0];
-                        $scope.lastTripUser = trip.data[0].customer;
-                        $scope.accordionStatus.hideLastTripData = false;
+                        if(typeof trip.data[0] !== 'undefined') {
+                            $scope.lastTrip = trip.data[0];
+                            $scope.lastTripUser = trip.data[0].customer;
+                            $scope.accordionStatus.hideLastTripData = false;
+                        }else{
+                            $scope.accordionStatus.hideLastTripData = true;
+                        }
                     }).error(function () {
                         $scope.accordionStatus.hideLastTripData = true;
                     });
