@@ -20,6 +20,7 @@
         "zf-commons/zfc-user-doctrine-orm": "^1.0",
         "creof/doctrine2-spatial": "^0.0.1",
         "rwoverdijk/assetmanager": "1.*",
+        "mvlabs/sharengo-coremodule": "dev-master",
         "leafo/lessphp": "0.5.*"
     }
 }

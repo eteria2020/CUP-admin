@@ -114,4 +114,57 @@ $(function() {
         format: 'dd-mm-yy',
         weekStart: 1
     });
+
+    $(document).on('click','#js-remove-card',function(e) {
+
+        var removeCardConfrim = confirm("Sei sicuro di voler rimuovere questo codice card?");
+
+        if(removeCardConfrim) {
+            var customer = $(this).data('id');
+
+            $.ajax({
+                url: '/customers/remove-card/' + customer,
+                type: 'POST',
+                data: {},
+                processData: false,
+                contentType: false,
+                dataType: 'json',
+                cache: false,
+                statusCode: {
+                    200: function (response) {
+                        $('#js-with-code').hide();
+                        $('#js-no-code').show();
+                    },
+                    500: function (response) {
+                        alert('Qualcosa è andato storto, riprova!');
+                    }
+                }
+            });
+        }
+    });
+
+    $(document).on('click', '#js-assign-card', function(e) {
+        var customer = $(this).data('id');
+        var code = $(this).data('code');
+        $.ajax({
+            url: '/customers/assign-card/' + customer,
+            type: 'POST',
+            data: {
+                code: code
+            },
+            cache: false,
+            statusCode: {
+                200: function (response) {
+                    $('#js-assign-card').hide();
+                    $('#js-no-code').hide();
+                    $('#js-with-code').show();
+                    $('#js-code').text(code);
+                    $('#typeahead-input').val('');
+                },
+                500: function (response) {
+                    alert('Qualcosa è andato storto, riprova!');
+                }
+            }
+        });
+    });
 });

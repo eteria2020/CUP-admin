@@ -20,6 +20,8 @@ $form = $this->carForm->prepare();
         <div class="row">
             <div class="col-md-12">
 
+                <?php echo $this->partial('partials/flash-messages.phtml', []); ?>
+
                 <?= $this->form()->openTag($form); ?>
 
                 <div class="row">
@@ -65,7 +67,7 @@ $form = $this->carForm->prepare();
                 </div>
 
                 <div class="row">
-                    <div class="col-lg-4">
+                    <div class="col-lg-3">
                         <div class="form-group">
                             <label for="gender">Note</label>
                             <?= $this->formRow($form->get('car')->get('notes')); ?>
@@ -79,17 +81,29 @@ $form = $this->carForm->prepare();
                         </div>
                     </div>
 
-                    <div class="col-lg-2">
+                    <div class="col-lg-1">
                         <div class="form-group">
-                            <label for="surname">Stato</label>
-                            <?= $this->formRow($form->get('car')->get('status')); ?>
+                            <label for="surname">Stato</label><br />
+                            <?= $this->CarStatus($form->get('car')->get('status')->getValue()); ?>
                         </div>
                     </div>
 
-                    <div class="col-lg-2">
-                        <div class="form-group">
-                            <label for="surname">Occupata</label>
-                            <?= $this->formRow($form->get('car')->get('busy')); ?>
+                    <div class="col-lg-4">
+                        <div class="col-lg-6">
+                            <div class="form-group">
+                                <label for="surname">Aggiorna stato auto</label>
+                                <?= $this->formRow($form->get('car')->get('status')); ?>
+                            </div>
+                        </div>
+                        <div class="col-lg-6" id="js-list-ricovery-car" style="display: none;">
+                            <div class="form-group">
+                                <label for="surname">Sede di ricovero auto</label>
+                                <?php if($this->disableInputStatusMaintenance): ?>
+                                    <?= $this->formRow($form->get('location')->setAttribute('disabled', 'true')); ?>
+                                <?php else: ?>
+                                    <?= $this->formRow($form->get('location')); ?>
+                                <?php endif; ?>
+                            </div>
                         </div>
                     </div>
 
@@ -98,6 +112,18 @@ $form = $this->carForm->prepare();
                             <label for="surname">Nascosta</label>
                             <?= $this->formRow($form->get('car')->get('hidden')); ?>
                         </div>
+                    </div>
+                </div>
+
+                <div class="row" style="display: none;" id="js-note">
+                    <div class="col-lg-12">
+                        <label for="note">Note</label>
+                        <?php if($this->disableInputStatusMaintenance): ?>
+                            <?= $this->formRow($form->get('note')->setAttribute('readonly', 'true')); ?>
+                        <?php else: ?>
+                            <?= $this->formRow($form->get('note')); ?>
+                        <?php endif; ?>
+                        <br /><br />
                     </div>
                 </div>
 
@@ -112,5 +138,49 @@ $form = $this->carForm->prepare();
             </div>
         </div>
 
+
+        <hr>
+        <h3 class="page-title">LANCIA COMANDI AUTO:</h3>
+        <div class="btn-group">
+            <button type="button" class="btn btn-default">Comandi</button>
+            <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown"><i class="fa fa-angle-down"></i></button>
+            <ul class="dropdown-menu" role="menu">
+                <?php foreach($this->commands as $key => $command): ?>
+                    <li>
+                        <a href="<?= $this->url('cars/send-command', ['plate' => $this->car->getPlate(), 'command' => $key]); ?>" onclick="return confirm('Sei sicuro di voler lanciare questo comando?')">
+                            <?= $command; ?>
+                        </a>
+                    </li>
+                <?php endforeach; ?>
+            </ul>
+        </div>
+
+
+
     </div>
 </div>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        var listRecovery = $('#js-list-ricovery-car');
+        var selectStatus = $('.js-status');
+        var noteInput = $('#js-note');
+
+        showListRecovery(selectStatus.val());
+
+        $(selectStatus).change(function() {
+            var value = $(this).val();
+            showListRecovery(value);
+        });
+
+        function showListRecovery(value) {
+            if(value == '<?= \SharengoCore\Utility\CarStatus::MAINTENANCE; ?>') {
+                listRecovery.show();
+                noteInput.show();
+            } else {
+                listRecovery.hide();
+                noteInput.hide();
+            }
+        }
+    });
+</script>

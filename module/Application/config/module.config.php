@@ -55,6 +55,28 @@ return array(
                             ],
                         ],
                     ],
+                    'remove-card' => [
+                        'type'    => 'Segment',
+                        'options' => [
+                            'route'    => '/remove-card/:id',
+                            'defaults' => [
+                                '__NAMESPACE__' => 'Application\Controller',
+                                'controller'    => 'Customers',
+                                'action'        => 'remove-card',
+                            ],
+                        ],
+                    ],
+                    'assign-card' => [
+                        'type'    => 'Segment',
+                        'options' => [
+                            'route'    => '/assign-card/:id',
+                            'defaults' => [
+                                '__NAMESPACE__' => 'Application\Controller',
+                                'controller'    => 'Customers',
+                                'action'        => 'assign-card',
+                            ],
+                        ],
+                    ],
                     'ajax-tab-info' => [
                         'type'    => 'Segment',
                         'options' => [
@@ -85,6 +107,28 @@ return array(
                                 '__NAMESPACE__' => 'Application\Controller',
                                 'controller'    => 'Customers',
                                 'action'        => 'bonus-tab',
+                            ],
+                        ],
+                    ],
+                    'ajax-tab-card' => [
+                        'type'    => 'Segment',
+                        'options' => [
+                            'route'    => '/ajax-tab/card/:id',
+                            'defaults' => [
+                                '__NAMESPACE__' => 'Application\Controller',
+                                'controller'    => 'Customers',
+                                'action'        => 'card-tab',
+                            ],
+                        ],
+                    ],
+                    'ajax-card-code' => [
+                        'type'    => 'Literal',
+                        'options' => [
+                            'route'    => '/ajax-card-code-autocomplete',
+                            'defaults' => [
+                                '__NAMESPACE__' => 'Application\Controller',
+                                'controller'    => 'Customers',
+                                'action'        => 'ajax-card-code-autocomplete',
                             ],
                         ],
                     ],
@@ -150,7 +194,22 @@ return array(
                                 'action'        => 'delete',
                             ],
                         ],
-                    ]
+                    ],
+                    'send-command' => [
+                        'type'    => 'Segment',
+                        'options' => [
+                            'route'    => '/send-command/:plate/:command',
+                            'constraints' => array(
+                                'plate' => '[a-zA-Z0-9]*',
+                                'command' => '[0-9]*'
+                            ),
+                            'defaults' => [
+                                '__NAMESPACE__' => 'Application\Controller',
+                                'controller'    => 'Cars',
+                                'action'        => 'send-command',
+                            ],
+                        ],
+                    ],
                 ],
             ],
             'trips' => [
@@ -187,6 +246,16 @@ return array(
                         ]
                     ]
                 ]
+            ],
+            'unauthorized' => [
+                'type'    => 'Literal',
+                'options' => [
+                    'route'    => '/unauthorized',
+                    'defaults' => [
+                        'controller' => 'Application\Controller\Error',
+                        'action'     => 'unauthorized',
+                    ],
+                ],
             ],
             'users' => [
                 'type' => 'Literal',
@@ -272,6 +341,7 @@ return array(
     'controllers' => [
         'invokables' => [
             'Application\Controller\Index' => 'Application\Controller\IndexController',
+            'Application\Controller\Error' => 'Application\Controller\ErrorController',
         ],
         'factories' => [
             'Application\Controller\ConsoleUser'  => 'Application\Controller\ConsoleUserControllerFactory',
@@ -304,6 +374,7 @@ return array(
             'application/index/index' => __DIR__ . '/../view/application/index/index.phtml',
             'error/404'               => __DIR__ . '/../view/error/404.phtml',
             'error/index'             => __DIR__ . '/../view/error/index.phtml',
+            'error/unauthorized'      => __DIR__ . '/../view/error/unauthorized.phtml',
         ),
         'template_path_stack' => array(
             __DIR__ . '/../view',
@@ -312,6 +383,13 @@ return array(
             'ViewJsonStrategy',
         ),
     ),
+
+    'view_helpers'    => array(
+        'invokables' => array(
+            'CarStatus' => 'Application\View\Helper\CarStatus',
+        )
+    ),
+
     // Placeholder for console routes
     'console' => [
         'router' => [
@@ -336,26 +414,29 @@ return array(
         'resource_providers' => [
             'BjyAuthorize\Provider\Resource\Config' => [
                 'admin' => [],
+                'callcenter' => [],
             ],
         ],
         'rule_providers' => [
             'BjyAuthorize\Provider\Rule\Config' => [
                 'allow' => [
-                    [['user'], 'admin']
+                    [['admin'], 'admin'],
+                    [['admin','callcenter'], 'callcenter'],
                 ],
             ],
         ],
         'guards' => array(
             'BjyAuthorize\Guard\Controller' => array(
                 // Enable access to ZFC User pages
-                array('controller' => 'zfcuser', 'roles' => array()),
-                array('controller' => 'Application\Controller\Index', 'roles' => array('user')),
-                ['controller' => 'Application\Controller\Customers', 'roles' => ['user']],
-                ['controller' => 'Application\Controller\Trips', 'roles' => ['user']],
-                ['controller' => 'Application\Controller\Cars', 'roles' => ['user']],
+                ['controller' => 'zfcuser', 'roles' => []],
+                ['controller' => 'Application\Controller\Error', 'roles' => []],
+                ['controller' => 'Application\Controller\Index', 'roles' => ['admin','callcenter']],
+                ['controller' => 'Application\Controller\Customers', 'roles' => ['admin']],
+                ['controller' => 'Application\Controller\Trips', 'roles' => ['admin']],
+                ['controller' => 'Application\Controller\Cars', 'roles' => ['admin']],
                 ['controller' => 'Application\Controller\ConsoleUser', 'roles' => []],
-                ['controller' => 'Application\Controller\Users', 'roles' => ['user']],
-                ['controller' => 'Application\Controller\Reservations', 'roles' => ['user']]
+                ['controller' => 'Application\Controller\Users', 'roles' => ['admin']],
+                ['controller' => 'Application\Controller\Reservations', 'roles' => ['admin']]
             ),
         ),
     ),
@@ -434,6 +515,12 @@ return array(
                         'isVisible' => true
                     ]
                 ],
+            ],
+            [
+                'label'     => 'Call center',
+                'route'     => 'call-center',
+                'icon'      => 'fa fa-map-marker',
+                'resource'  => 'callcenter',
             ],
         ]
     ]
