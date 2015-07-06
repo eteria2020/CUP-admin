@@ -350,7 +350,7 @@
                     <label>Fine corsa</label>
                 </div>
 
-                <div class="col-md-9">
+                <div class="col-md-9" ng-if="lastTrip.timestampEnd.date">
                     <span>{{lastTrip.timestampEnd.date | dateSharengoFormat}}</span>
                 </div>
             </div>
