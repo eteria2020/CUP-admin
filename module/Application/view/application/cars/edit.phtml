@@ -84,7 +84,7 @@ $form = $this->carForm->prepare();
                     <div class="col-lg-1">
                         <div class="form-group">
                             <label for="surname">Stato</label><br />
-                            <?= $this->Status($form->get('car')->get('status')->getValue()); ?>
+                            <?= $this->CarStatus($form->get('car')->get('status')->getValue()); ?>
                         </div>
                     </div>
 
@@ -98,7 +98,11 @@ $form = $this->carForm->prepare();
                         <div class="col-lg-6" id="js-list-ricovery-car" style="display: none;">
                             <div class="form-group">
                                 <label for="surname">Sede di ricovero auto</label>
-                                <?= $this->formRow($form->get('location')); ?>
+                                <?php if($this->disableInputStatusMaintenance): ?>
+                                    <?= $this->formRow($form->get('location')->setAttribute('disabled', 'true')); ?>
+                                <?php else: ?>
+                                    <?= $this->formRow($form->get('location')); ?>
+                                <?php endif; ?>
                             </div>
                         </div>
                     </div>
@@ -114,7 +118,11 @@ $form = $this->carForm->prepare();
                 <div class="row" style="display: none;" id="js-note">
                     <div class="col-lg-12">
                         <label for="note">Note</label>
-                        <?= $this->formRow($form->get('note')); ?>
+                        <?php if($this->disableInputStatusMaintenance): ?>
+                            <?= $this->formRow($form->get('note')->setAttribute('readonly', 'true')); ?>
+                        <?php else: ?>
+                            <?= $this->formRow($form->get('note')); ?>
+                        <?php endif; ?>
                         <br /><br />
                     </div>
                 </div>
@@ -166,7 +174,7 @@ $form = $this->carForm->prepare();
         });
 
         function showListRecovery(value) {
-            if(value == '<?= \SharengoCore\Utility\StatusCar::MAINTENANCE; ?>') {
+            if(value == '<?= \SharengoCore\Utility\CarStatus::MAINTENANCE; ?>') {
                 listRecovery.show();
                 noteInput.show();
             } else {

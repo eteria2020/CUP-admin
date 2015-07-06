@@ -386,7 +386,7 @@ return array(
 
     'view_helpers'    => array(
         'invokables' => array(
-            'Status' => 'Application\View\Helper\Status',
+            'CarStatus' => 'Application\View\Helper\CarStatusHelper',
         )
     ),
 

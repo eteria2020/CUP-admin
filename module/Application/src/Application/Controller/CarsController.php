@@ -7,7 +7,7 @@ use SharengoCore\Entity\CarsMaintenance;
 use SharengoCore\Entity\Commands;
 use SharengoCore\Service\CarsService;
 use SharengoCore\Service\CommandsService;
-use SharengoCore\Utility\StatusCar;
+use SharengoCore\Utility\CarStatus;
 use Zend\Form\Form;
 use Zend\Http\Response;
 use Zend\Mvc\Controller\AbstractActionController;
@@ -71,7 +71,7 @@ class CarsController extends AbstractActionController
     public function addAction()
     {
         $form = $this->I_carForm;
-        $form->setStatus([StatusCar::OPERATIVE => StatusCar::OPERATIVE]);
+        $form->setStatus([CarStatus::OPERATIVE => CarStatus::OPERATIVE]);
 
         if ($this->getRequest()->isPost()) {
             $postData = $this->getRequest()->getPost()->toArray();
@@ -92,8 +92,6 @@ class CarsController extends AbstractActionController
                 }
 
                 return $this->redirect()->toRoute('cars');
-            } else {
-                print_r($form->getMessages());
             }
         }
 
@@ -105,8 +103,8 @@ class CarsController extends AbstractActionController
     public function editAction()
     {
         $plate = $this->params()->fromRoute('plate', 0);
-
         $I_car = $this->I_carsService->getCarByPlate($plate);
+        $disableInputStatusMaintenance = false;
 
         if (is_null($I_car)) {
             $this->getResponse()->setStatusCode(Response::STATUS_CODE_404);
@@ -124,9 +122,10 @@ class CarsController extends AbstractActionController
         $data = [];
         $data['car'] = $carData;
 
-        if(!is_null($lastCarsMaintenance) && $I_car->getStatus() == StatusCar::MAINTENANCE) {
+        if(!is_null($lastCarsMaintenance) && $I_car->getStatus() == CarStatus::MAINTENANCE) {
             $data['location'] = $lastCarsMaintenance->getLocation();
             $data['note'] = $lastCarsMaintenance->getNotes();
+            $disableInputStatusMaintenance = true;
         }
 
         $form->setData($data);
@@ -136,6 +135,7 @@ class CarsController extends AbstractActionController
             $postData = $this->getRequest()->getPost()->toArray();
             $postData['car']['plate'] = $I_car->getPlate();
             $form->setData($postData);
+            $form->getInputFilter()->get('location')->setRequired(false);
 
             if ($form->isValid()) {
 
@@ -156,9 +156,10 @@ class CarsController extends AbstractActionController
         }
 
         return new ViewModel([
-            'car'      => $I_car,
-            'carForm'  => $form,
-            'commands' => Commands::getCommandCodes()
+            'car'                           => $I_car,
+            'carForm'                       => $form,
+            'commands'                      => Commands::getCommandCodes(),
+            'disableInputStatusMaintenance' => $disableInputStatusMaintenance
         ]);
     }
 
