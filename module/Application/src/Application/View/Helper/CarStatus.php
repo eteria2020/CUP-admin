@@ -1,13 +1,14 @@
 <?php
 namespace Application\View\Helper;
-use SharengoCore\Utility\CarStatus;
+
+use SharengoCore\Utility\CarStatus as CarStatusUtility;
 use Zend\View\Helper\AbstractHelper;
 
 /**
  * Class Status
  * @package Application\View\Helper
  */
-class CarStatusHelper extends AbstractHelper
+class CarStatus extends AbstractHelper
 {
     /**
      * @param array $awards
@@ -16,17 +17,17 @@ class CarStatusHelper extends AbstractHelper
     function __invoke($status)
     {
         $label = '';
-        switch($status){
+        switch ($status) {
 
-            case CarStatus::OPERATIVE:
+            case CarStatusUtility::OPERATIVE:
                 $label = 'Operativa';
                 break;
 
-            case CarStatus::MAINTENANCE:
+            case CarStatusUtility::MAINTENANCE:
                 $label = 'In manutenzione';
                 break;
 
-            case CarStatus::OUT_OF_ORDER:
+            case CarStatusUtility::OUT_OF_ORDER:
                 $label = 'Non operativa';
                 break;
         }
