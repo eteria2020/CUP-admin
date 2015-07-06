@@ -72,9 +72,9 @@ $(function() {
                 searchable: false,
                 sortable: false,
                 render: function (data) {
-                    return' <div class="btn-group" role="group">' +
-                        '<a href="/cars/edit/' + data + '" class="btn btn-default btn-xs">Modifica</a>' +
-                        '<a href="/cars/delete/' + data + '" class="btn btn-default btn-xs js-delete">Elimina</a>' +
+                    return '<div class="btn-group">' +
+                        '<a href="/cars/edit/' + data + '" class="btn btn-default">Modifica</a> ' +
+                        '<a href="/cars/delete/' + data + '" class="btn btn-default js-delete">Elimina</a>' +
                         '</div>';
                 }
             }
