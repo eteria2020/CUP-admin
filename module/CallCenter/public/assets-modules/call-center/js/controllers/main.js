@@ -94,30 +94,31 @@ angular.module('SharengoCsApp').controller('SharengoCsController', function (
                /* car.latitude = car.vettura_lat;
                 car.longitude = car.vettura_lon;*/
                 car.options = [];
-
-                car.carIcon = "/assets-modules/call-center/images/marker-s-blue.png";
-
-                car.iconSelected = "/assets-modules/call-center/images/marker-s-blue-selected.png";
-                if(car.status!='operative'){
-                    if(car.status=='maintenance'){
-                        car.carIcon = "/assets-modules/call-center/images/marker-s-red.png";
-                        car.iconSelected = "/assets-modules/call-center/images/marker-s-red-selected.png";
-                    }else{
-                        car.carIcon = "/assets-modules/call-center/images/marker-s-orange.png";
-                        car.iconSelected = "/assets-modules/call-center/images/marker-s-orange-selected.png";
-                    }
-                }else if(car.busy){
-                    car.carIcon = "/assets-modules/call-center/images/marker-s-yellow.png";
-                    car.iconSelected = "/assets-modules/call-center/images/marker-s-yellow-selected.png";
-                }else if(car.reservation){
-                    car.carIcon = "/assets-modules/call-center/images/marker-s-black.png";
-                    car.iconSelected = "/assets-modules/call-center/images/marker-s-black-selected.png";
-                }else if(car.charging){
-                    car.carIcon = "/assets-modules/call-center/images/marker-charging.png";
-                    car.iconSelected = "/assets-modules/call-center/images/marker-charging.png";
+                var carCharging = '';
+                if(car.charging){
+                    carCharging = '-charging';
                     car.options.labelClass='marker_labels';
                     //car.options.labelAnchor='12 32';
                     car.options.labelContent=car.battery+'% <i class="fa fa-plug"></i>';
+                }
+
+                car.carIcon = "/assets-modules/call-center/images/marker-s-blue"+carCharging+".png";
+
+                car.iconSelected = "/assets-modules/call-center/images/marker-s-blue-selected"+carCharging+".png";
+                if(car.status!='operative'){
+                    if(car.status=='maintenance'){
+                        car.carIcon = "/assets-modules/call-center/images/marker-s-red"+carCharging+".png";
+                        car.iconSelected = "/assets-modules/call-center/images/marker-s-red-selected"+carCharging+".png";
+                    }else{
+                        car.carIcon = "/assets-modules/call-center/images/marker-s-orange.png";
+                        car.iconSelected = "/assets-modules/call-center/images/marker-s-orange-selected"+carCharging+".png";
+                    }
+                }else if(car.busy){
+                    car.carIcon = "/assets-modules/call-center/images/marker-s-yellow"+carCharging+".png";
+                    car.iconSelected = "/assets-modules/call-center/images/marker-s-yellow-selected"+carCharging+".png";
+                }else if(car.reservation){
+                    car.carIcon = "/assets-modules/call-center/images/marker-s-black"+carCharging+".png";
+                    car.iconSelected = "/assets-modules/call-center/images/marker-s-black-selected"+carCharging+".png";
                 }
 
             });
