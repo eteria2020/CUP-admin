@@ -95,11 +95,14 @@ angular.module('SharengoCsApp').controller('SharengoCsController', function (
                 car.longitude = car.vettura_lon;*/
                 car.options = [];
                 var carCharging = '';
+                
+                carCharging = '-charging';
+                car.options.labelClass='marker_labels';
+                //car.options.labelAnchor='12 32';
                 if(car.charging){
-                    carCharging = '-charging';
-                    car.options.labelClass='marker_labels';
-                    //car.options.labelAnchor='12 32';
                     car.options.labelContent=car.battery+'% <i class="fa fa-plug"></i>';
+                }else{
+                    car.options.labelContent=car.battery+'%';
                 }
 
                 car.carIcon = "/assets-modules/call-center/images/marker-s-blue"+carCharging+".png";
@@ -110,7 +113,7 @@ angular.module('SharengoCsApp').controller('SharengoCsController', function (
                         car.carIcon = "/assets-modules/call-center/images/marker-s-red"+carCharging+".png";
                         car.iconSelected = "/assets-modules/call-center/images/marker-s-red-selected"+carCharging+".png";
                     }else{
-                        car.carIcon = "/assets-modules/call-center/images/marker-s-orange.png";
+                        car.carIcon = "/assets-modules/call-center/images/marker-s-orange"+carCharging+".png";
                         car.iconSelected = "/assets-modules/call-center/images/marker-s-orange-selected"+carCharging+".png";
                     }
                 }else if(car.busy){
