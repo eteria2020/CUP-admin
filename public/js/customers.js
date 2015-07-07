@@ -167,4 +167,37 @@ $(function() {
             }
         });
     });
+
+    $(document).on('click', '#js-remove-bonus', function(e) {
+        var removeBonus = confirm("Sei sicuro di voler rimuovere questo bonus?");
+
+        if(removeBonus) {
+
+            var customer = $(this).data('id');
+            var bonus = $(this).data('bonus');
+
+            $.ajax({
+                url: '/customers/remove-bonus/' + customer,
+                type: 'POST',
+                data: {
+                    bonus: bonus
+                },
+                cache: false,
+                statusCode: {
+                    200: function (response) {
+                        $('#js-row-bonus-' + bonus).hide();
+                        $('#js-message').show();
+
+                        setTimeout(function(){
+                            $('#js-message').hide();
+                        }, 3000);
+                    },
+                    500: function (response) {
+                        alert('Qualcosa è andato storto, riprova!');
+                    }
+                }
+            });
+
+        }
+    });
 });

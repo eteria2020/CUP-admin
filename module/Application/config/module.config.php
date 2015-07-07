@@ -132,6 +132,39 @@ return array(
                             ],
                         ],
                     ],
+                    'assign-bonus' => [
+                        'type'    => 'Segment',
+                        'options' => [
+                            'route'    => '/assign-bonus/:id',
+                            'defaults' => [
+                                '__NAMESPACE__' => 'Application\Controller',
+                                'controller'    => 'Customers',
+                                'action'        => 'assign-bonus',
+                            ],
+                        ],
+                    ],
+                    'add-bonus' => [
+                        'type'    => 'Segment',
+                        'options' => [
+                            'route'    => '/add-card/:id',
+                            'defaults' => [
+                                '__NAMESPACE__' => 'Application\Controller',
+                                'controller'    => 'Customers',
+                                'action'        => 'add-bonus',
+                            ],
+                        ],
+                    ],
+                    'remove-bonus' => [
+                        'type'    => 'Segment',
+                        'options' => [
+                            'route'    => '/remove-bonus/:id',
+                            'defaults' => [
+                                '__NAMESPACE__' => 'Application\Controller',
+                                'controller'    => 'Customers',
+                                'action'        => 'remove-bonus',
+                            ],
+                        ],
+                    ],
                 ],
             ],
             'cars' => [
@@ -336,6 +369,8 @@ return array(
             'CarForm' => 'Application\Form\CarFormFactory',
             'DriverForm' => 'Application\Form\DriverFormFactory',
             'SettingForm' => 'Application\Form\SettingFormFactory',
+            'PromoCodeForm' => 'Application\Form\PromoCodeFormFactory',
+            'CustomerBonusForm' => 'Application\Form\CustomerBonusFormFactory',
         ]
     ),
     'controllers' => [
@@ -460,6 +495,14 @@ return array(
                         'route' => 'customers/edit',
                         'isVisible' => false
                     ],
+                    [
+                        'route' => 'customers/assign-bonus',
+                        'isVisible' => false
+                    ],
+                    [
+                        'route' => 'customers/add-bonus',
+                        'isVisible' => false
+                    ]
                 ],
             ],
             [

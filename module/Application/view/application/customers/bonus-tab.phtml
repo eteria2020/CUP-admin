@@ -1,6 +1,16 @@
 <div class="row">
     <div class="col-lg-12">
 
+        <div class="alert alert-success" style="display: none;" id="js-message">
+            <p>Operazione eseguita con successo</p>
+        </div>
+
+        <div class="btn-group btn-group-sm btn-group-solid margin-bottom-10">
+            <a href="<?= $this->url('customers/assign-bonus', ['id' => $this->customer->getId()]); ?>" class="btn green"><i class="fa fa-arrow-circle-o-right"></i> Associa promo code</a>
+            <a href="<?= $this->url('customers/add-bonus', ['id' => $this->customer->getId()]); ?>" class="btn green"><i class="fa fa-plus"></i> Aggiungi bonus</a>
+        </div>
+
+
         <?php if(count($this->listBonus) > 0): ?>
 
         <table class="table table-bordered">
@@ -12,19 +22,27 @@
                 <th>Valido Fino al</th>
                 <th>Tipologia</th>
                 <th>Descrizione</th>
+                <th>Operazione</th>
             </tr>
             </thead>
             <tbody>
             <?php
             /** @var \SharengoCore\Entity\CustomersBonus $bonus */
             foreach($this->listBonus as $bonus): ?>
-                <tr>
+                <tr id="js-row-bonus-<?= $bonus->getId(); ?>">
                     <th style="font-weight: normal;"><?= $bonus->getTotal(); ?></th>
                     <td><?= $bonus->getResidual(); ?></td>
                     <td><?= is_object($bonus->getValidFrom()) ? $bonus->getValidFrom()->format('d-m-Y H:i:s') : ''; ?></td>
                     <td><?= is_object($bonus->getValidTo()) ? $bonus->getValidTo()->format('d-m-Y H:i:s') : ''; ?></td>
                     <th style="font-weight: normal;"><?= $bonus->getType(); ?></th>
                     <th style="font-weight: normal;"><?= $bonus->getDescription(); ?></th>
+                    <th>
+                        <?php if($bonus->getTotal() == $bonus->getResidual()): ?>
+                            <a href="javascript:void(0);" data-id="<?= $this->customer->getId(); ?>" data-bonus="<?= $bonus->getId(); ?>" class="btn btn-default" id="js-remove-bonus">Elimina</a>
+                        <?php else: ?>
+                        n.d
+                        <?php endif; ?>
+                    </th>
                 </tr>
             <?php endforeach; ?>
             </tbody>
