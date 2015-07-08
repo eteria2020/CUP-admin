@@ -48,6 +48,9 @@ return array(
                         'type'    => 'Segment',
                         'options' => [
                             'route'    => '/edit/:id',
+                            'constraints' => array(
+                                'id' => '[0-9]*'
+                            ),
                             'defaults' => [
                                 '__NAMESPACE__' => 'Application\Controller',
                                 'controller'    => 'Customers',
@@ -59,6 +62,9 @@ return array(
                         'type'    => 'Segment',
                         'options' => [
                             'route'    => '/remove-card/:id',
+                            'constraints' => array(
+                                'id' => '[0-9]*'
+                            ),
                             'defaults' => [
                                 '__NAMESPACE__' => 'Application\Controller',
                                 'controller'    => 'Customers',
@@ -70,6 +76,9 @@ return array(
                         'type'    => 'Segment',
                         'options' => [
                             'route'    => '/assign-card/:id',
+                            'constraints' => array(
+                                'id' => '[0-9]*'
+                            ),
                             'defaults' => [
                                 '__NAMESPACE__' => 'Application\Controller',
                                 'controller'    => 'Customers',
@@ -81,6 +90,9 @@ return array(
                         'type'    => 'Segment',
                         'options' => [
                             'route'    => '/ajax-tab/info/:id',
+                            'constraints' => array(
+                                'id' => '[0-9]*'
+                            ),
                             'defaults' => [
                                 '__NAMESPACE__' => 'Application\Controller',
                                 'controller'    => 'Customers',
@@ -92,6 +104,9 @@ return array(
                         'type'    => 'Segment',
                         'options' => [
                             'route'    => '/ajax-tab/edit/:id',
+                            'constraints' => array(
+                                'id' => '[0-9]*'
+                            ),
                             'defaults' => [
                                 '__NAMESPACE__' => 'Application\Controller',
                                 'controller'    => 'Customers',
@@ -103,6 +118,9 @@ return array(
                         'type'    => 'Segment',
                         'options' => [
                             'route'    => '/ajax-tab/bonus/:id',
+                            'constraints' => array(
+                                'id' => '[0-9]*'
+                            ),
                             'defaults' => [
                                 '__NAMESPACE__' => 'Application\Controller',
                                 'controller'    => 'Customers',
@@ -114,6 +132,9 @@ return array(
                         'type'    => 'Segment',
                         'options' => [
                             'route'    => '/ajax-tab/card/:id',
+                            'constraints' => array(
+                                'id' => '[0-9]*'
+                            ),
                             'defaults' => [
                                 '__NAMESPACE__' => 'Application\Controller',
                                 'controller'    => 'Customers',
@@ -136,6 +157,9 @@ return array(
                         'type'    => 'Segment',
                         'options' => [
                             'route'    => '/assign-bonus/:id',
+                            'constraints' => array(
+                                'id' => '[0-9]*'
+                            ),
                             'defaults' => [
                                 '__NAMESPACE__' => 'Application\Controller',
                                 'controller'    => 'Customers',
@@ -146,7 +170,10 @@ return array(
                     'add-bonus' => [
                         'type'    => 'Segment',
                         'options' => [
-                            'route'    => '/add-card/:id',
+                            'route'    => '/add-bonus/:id',
+                            'constraints' => array(
+                                'id' => '[0-9]*'
+                            ),
                             'defaults' => [
                                 '__NAMESPACE__' => 'Application\Controller',
                                 'controller'    => 'Customers',
@@ -158,6 +185,9 @@ return array(
                         'type'    => 'Segment',
                         'options' => [
                             'route'    => '/remove-bonus/:id',
+                            'constraints' => array(
+                                'id' => '[0-9]*'
+                            ),
                             'defaults' => [
                                 '__NAMESPACE__' => 'Application\Controller',
                                 'controller'    => 'Customers',

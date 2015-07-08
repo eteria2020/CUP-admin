@@ -10,6 +10,7 @@
             <a href="<?= $this->url('customers/add-bonus', ['id' => $this->customer->getId()]); ?>" class="btn green"><i class="fa fa-plus"></i> Aggiungi bonus</a>
         </div>
 
+        <?php echo $this->partial('partials/flash-messages.phtml', []); ?>
 
         <?php if(count($this->listBonus) > 0): ?>
 

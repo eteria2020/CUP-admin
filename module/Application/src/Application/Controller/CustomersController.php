@@ -97,13 +97,14 @@ class CustomersController extends AbstractActionController
     {
         /** @var Customers $I_customer */
         $I_customer = $this->getCustomer();
-        
+        $tab = $this->params()->fromQuery('tab', 'info');
+
         $form = null;
 
         if ($this->getRequest()->isPost()) {
             $postData = $this->getRequest()->getPost()->toArray();
 
-            switch($postData['type']) {
+            switch ($postData['type']) {
 
                 case 'customer':
                     $form = $this->I_customerForm;
@@ -142,16 +143,13 @@ class CustomersController extends AbstractActionController
                     $this->flashMessenger()->addErrorMessage($e->getMessage());
                 }
 
-                return $this->redirect()->toRoute('customers/edit', [
-                   'controller' => 'Customers',
-                   'action' =>  'edit',
-                       'id' => $I_customer->getId()
-                   ]);
+                return $this->redirect()->toRoute('customers/edit', ['id' => $I_customer->getId()]);
             }
         }
 
         return new ViewModel([
             'customer' => $I_customer,
+            'tab'      => $tab
         ]);
     }
 
@@ -339,7 +337,7 @@ class CustomersController extends AbstractActionController
 
                 }
 
-                return $this->redirect()->toRoute('customers/edit', ['id' => $I_customer->getId()]);
+                return $this->redirect()->toRoute('customers/edit', ['id' => $I_customer->getId()], ['query' => ['tab' => 'bonus']]);
             }
         }
 
@@ -377,7 +375,7 @@ class CustomersController extends AbstractActionController
 
                 }
 
-                return $this->redirect()->toRoute('customers/edit', ['id' => $I_customer->getId()]);
+                return $this->redirect()->toRoute('customers/edit', ['id' => $I_customer->getId()], ['query' => ['tab' => 'bonus']]);
             }
         }
 

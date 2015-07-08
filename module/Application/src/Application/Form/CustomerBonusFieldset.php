@@ -56,7 +56,6 @@ class CustomerBonusFieldset extends Fieldset implements InputFilterProviderInter
             'attributes' => [
                 'id'       => 'valid_from',
                 'class'    => 'form-control date-picker',
-                'required' => 'required'
             ]
         ]);
 
@@ -66,7 +65,6 @@ class CustomerBonusFieldset extends Fieldset implements InputFilterProviderInter
             'attributes' => [
                 'id'       => 'valid_to',
                 'class'    => 'form-control date-picker',
-                'required' => 'required'
             ]
         ]);
 
@@ -89,6 +87,11 @@ class CustomerBonusFieldset extends Fieldset implements InputFilterProviderInter
                     [
                         'name' => 'StringTrim'
                     ]
+                ],
+                'validators' => [
+                    [
+                        'name' => 'Int'
+                    ]
                 ]
             ],
             'type' => [
@@ -108,25 +111,44 @@ class CustomerBonusFieldset extends Fieldset implements InputFilterProviderInter
                 ]
             ],
             'validFrom' => [
-                'required' => true,
+                'required' => false,
                 'validators' => [
                     [
-                        'name' => 'Date'
-                    ],
+                        'name' => 'Date',
+                        'options' => [
+                            'format' => 'Y-m-d'
+                        ],
+                    ]
                 ]
             ],
             'validTo' => [
-                'required' => true,
+                'required' => false,
                 'validators' => [
                     [
-                        'name' => 'Date'
+                        'name' => 'Date',
+                        'options' => [
+                            'format' => 'Y-m-d'
+                        ],
+                    ],
+                    [
+                        'name'    => 'Callback',
+                        'options' => [
+                            'messages' => [
+                                \Zend\Validator\Callback::INVALID_VALUE => 'La data di validità deve essere maggiore della partenza',
+                            ],
+                            'callback' => function ($value, $context) {
+                                $validFrom = date_create($context['validFrom']);
+                                $validTo = date_create($value);
+
+                                return $validFrom < $validTo ? true : false;
+                            },
+                        ],
                     ],
                 ]
             ],
             'durationDays' => [
                 'required' => false
             ],
-
         ];
     }
 }

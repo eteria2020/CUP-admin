@@ -37,7 +37,7 @@ class PromoCodeFieldset extends Fieldset implements InputFilterProviderInterface
                 'required' => false,
                 'validators' => [
                     [
-                        'name' => 'Application\Form\Validator\PromoCode',
+                        'name' => 'SharengoCore\Form\Validator\PromoCode',
                         'options' => [
                             'promoCodesService' => $this->promoCodesService
                         ]

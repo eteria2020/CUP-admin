@@ -12,7 +12,7 @@ $form = $this->promoCodeForm->prepare();
                 </div>
 
                 <div class="col-lg-6">
-                    <a href="<?php echo $this->url('customers/edit', ['id' => $this->customer->getId()]); ?>" class="btn btn-success pull-right"><i class="fa fa-arrow-left"></i> Torna alla lista</a>
+                    <a href="<?= $this->url('customers/edit', ['id' => $this->customer->getId()], ['query' => ['tab' => 'bonus']]); ?>" class="btn btn-success pull-right"><i class="fa fa-arrow-left"></i> Torna alla lista</a>
                 </div>
             </div>
 
