@@ -153,17 +153,17 @@ return array(
                             ],
                         ],
                     ],
-                    'assign-bonus' => [
+                    'assign-promo-code' => [
                         'type'    => 'Segment',
                         'options' => [
-                            'route'    => '/assign-bonus/:id',
+                            'route'    => '/assign-promo-code/:id',
                             'constraints' => array(
                                 'id' => '[0-9]*'
                             ),
                             'defaults' => [
                                 '__NAMESPACE__' => 'Application\Controller',
                                 'controller'    => 'Customers',
-                                'action'        => 'assign-bonus',
+                                'action'        => 'assign-promo-code',
                             ],
                         ],
                     ],

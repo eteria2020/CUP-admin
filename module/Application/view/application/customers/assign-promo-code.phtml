@@ -7,7 +7,7 @@ $form = $this->promoCodeForm->prepare();
             <div class="row">
                 <div class="col-lg-6">
                     <h3 class="page-title">
-                        ASSEGNA BONUS CLIENTE <small><?= $this->customer->getName() . ' ' . $this->customer->getSurname(); ?></small>
+                        ASSOCIA PROMO CODE CLIENTE <small><?= $this->customer->getName() . ' ' . $this->customer->getSurname(); ?></small>
                     </h3>
                 </div>
 
@@ -34,7 +34,7 @@ $form = $this->promoCodeForm->prepare();
                         ?>
                     </p>
 
-                    <input type=submit name="" class="btn btn-success" value="<?= $this->translate('Aggiungi Bonus'); ?>">
+                    <input type=submit name="" class="btn btn-success" value="<?= $this->translate('Associa Promo'); ?>">
 
                     <?php echo $this->form()->closeTag(); ?>
                 </div>

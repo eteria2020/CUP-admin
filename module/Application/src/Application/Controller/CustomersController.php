@@ -301,7 +301,7 @@ class CustomersController extends AbstractActionController
         return new JsonModel($this->I_cardsService->ajaxCardCodeAutocomplete($query));
     }
 
-    public function assignBonusAction()
+    public function assignPromoCodeAction()
     {
         $I_customer = $this->getCustomer();
         $form = $this->promoCodeForm;
