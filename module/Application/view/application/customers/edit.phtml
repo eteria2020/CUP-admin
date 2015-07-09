@@ -7,6 +7,7 @@ $this->headScript()
     ->appendFile('/js/datatables/plugins/bootstrap/dataTables.bootstrap.js')
     ->appendFile('/plugins/bootstrap-datepicker/js/bootstrap-datepicker.js')
     ->prependFile('/js/jquery.validate-messages-it.js')
+    ->prependFile('/js/spin.min.js')
     ->prependFile('/js/jquery.validate.min.js')
     ->appendFile($this->basePath() .'/js/customers.js');
 ?>
@@ -38,6 +39,7 @@ $this->headScript()
                 </ul>
 
                 <div class="tab-content">
+                    <div id="spinner-loader"></div>
                     <div role="tabpanel" class="tab-pane" id="tab-info"></div>
                     <div role="tabpanel" class="tab-pane" id="tab-edit"></div>
                     <div role="tabpanel" class="tab-pane" id="tab-bonus"></div>
@@ -49,12 +51,35 @@ $this->headScript()
         <!-- END PAGE CONTENT-->
     </div>
 </div>
-
 <?php
 echo $this->inlineScript()->captureStart();
 echo <<<JS
 $(document).ready(function () {
 
+    var opts = {
+      lines: 13 // The number of lines to draw
+        , length: 28 // The length of each line
+        , width: 14 // The line thickness
+        , radius: 42 // The radius of the inner circle
+        , scale: 0.25 // Scales overall size of the spinner
+        , corners: 1 // Corner roundness (0..1)
+        , color: '#000' // #rgb or #rrggbb or array of colors
+        , opacity: 0.25 // Opacity of the lines
+        , rotate: 0 // The rotation offset
+        , direction: 1 // 1: clockwise, -1: counterclockwise
+        , speed: 1 // Rounds per second
+        , trail: 60 // Afterglow percentage
+        , fps: 20 // Frames per second when using setTimeout() as a fallback for CSS
+        , zIndex: 2e9 // The z-index (defaults to 2000000000)
+        , className: 'spinner' // The CSS class to assign to the spinner
+        , top: '50%' // Top position relative to parent
+        , left: '50%' // Left position relative to parent
+        , shadow: false // Whether to render a shadow
+        , hwaccel: false // Whether to use hardware acceleration
+        , position: 'absolute' // Element positioning
+    }
+    var target = document.getElementById('spinner-loader')
+    var spinner = new Spinner(opts).spin(target);
     var tab = '{$this->tab}';
     var idTab = '#tab-' + tab;
     $('#menu-' + tab).addClass('active');
@@ -64,15 +89,18 @@ $(document).ready(function () {
 
     $(idTab).load(href,function(e){
       $('#js-tabs .active a').tab('show');
+      spinner.stop();
     });
 
     $('#js-tabs a').click(function(e) {
+        var spinner = new Spinner(opts).spin(target);
         var _this = $(this);
         var loadurl = _this.attr('href');
         var targ = _this.attr('data-target');
 
         $.get(loadurl, function(data) {
             $(targ).html(data);
+            spinner.stop();
         });
 
         _this.tab('show');
