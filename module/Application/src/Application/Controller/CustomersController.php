@@ -333,7 +333,7 @@ class CustomersController extends AbstractActionController
 
                     $this->flashMessenger()->addErrorMessage($e->getMessage());
 
-                    return $this->redirect()->toRoute('customers/assign-bonus', ['id' => $I_customer->getId()]);
+                    return $this->redirect()->toRoute('customers/assign-promo-code', ['id' => $I_customer->getId()]);
 
                 }
 
