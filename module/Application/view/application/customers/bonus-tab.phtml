@@ -5,7 +5,7 @@
             <p>Operazione eseguita con successo</p>
         </div>
 
-        <div class="btn-group btn-group-sm btn-group-solid margin-bottom-10">
+        <div class="btn-group btn-group-sm btn-group-solid margin-bottom-10 btn-group-spaced">
             <a href="<?= $this->url('customers/assign-promo-code', ['id' => $this->customer->getId()]); ?>" class="btn green"><i class="fa fa-arrow-circle-o-right"></i> Associa promo code</a>
             <a href="<?= $this->url('customers/add-bonus', ['id' => $this->customer->getId()]); ?>" class="btn green"><i class="fa fa-plus"></i> Aggiungi bonus</a>
         </div>
@@ -23,7 +23,7 @@
                 <th>Valido Fino al</th>
                 <th>Tipologia</th>
                 <th>Descrizione</th>
-                <th>Operazione</th>
+                <th>Azioni</th>
             </tr>
             </thead>
             <tbody>
@@ -40,8 +40,6 @@
                     <th>
                         <?php if($bonus->getTotal() == $bonus->getResidual()): ?>
                             <a href="javascript:void(0);" data-id="<?= $this->customer->getId(); ?>" data-bonus="<?= $bonus->getId(); ?>" class="btn btn-default" id="js-remove-bonus">Elimina</a>
-                        <?php else: ?>
-                        n.d
                         <?php endif; ?>
                     </th>
                 </tr>
@@ -50,7 +48,7 @@
         </table>
 
         <?php else: ?>
-            <div class="alert alert-info">Al momento il cliente <strong><?= $this->customer->getName() . ' ' . $this->customer->getSurname(); ?></strong> non ha nessun bonus assegnato.</div>
+            <div class="alert alert-info">Il cliente non ha alcun bonus assegnato.</div>
         <?php endif; ?>
     </div>
 </div>

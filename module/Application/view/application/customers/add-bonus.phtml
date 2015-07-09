@@ -11,12 +11,12 @@ $this->headScript()
             <div class="row">
                 <div class="col-lg-6">
                     <h3 class="page-title">
-                        AGGIUNGI BONUS AL CLIENTE <small><?= $this->customer->getName() . ' ' . $this->customer->getSurname(); ?></small>
+                        AGGIUNGI BONUS <small><?= $this->customer->getName() . ' ' . $this->customer->getSurname(); ?></small>
                     </h3>
                 </div>
 
                 <div class="col-lg-6">
-                    <a href="<?= $this->url('customers/edit', ['id' => $this->customer->getId()], ['query' => ['tab' => 'bonus']]); ?>" class="btn btn-success pull-right"><i class="fa fa-arrow-left"></i> Torna alla lista</a>
+                    <a href="<?= $this->url('customers/edit', ['id' => $this->customer->getId()], ['query' => ['tab' => 'bonus']]); ?>" class="btn btn-success pull-right"><i class="fa fa-arrow-left"></i> Torna alla scheda cliente</a>
                 </div>
             </div>
 
@@ -32,14 +32,10 @@ $this->headScript()
 
                     <div class="row">
                         <div class="col-lg-4">
-                            <label>Totale</label>
+                            <label>Numero minuti</label>
                             <?= $this->formRow($form->get('customer-bonus')->get('total')); ?>
                         </div>
-                        <div class="col-lg-4">
-                            <label>Tipo</label>
-                            <?= $this->formRow($form->get('customer-bonus')->get('type')); ?>
-                        </div>
-                        <div class="col-lg-4">
+                        <div class="col-lg-8">
                             <label>Descrizione</label>
                             <?= $this->formRow($form->get('customer-bonus')->get('description')); ?>
                         </div>
@@ -47,16 +43,12 @@ $this->headScript()
 
                     <div class="row" style="margin-top: 10px;">
                         <div class="col-lg-4">
-                            <label>Valido Da</label>
+                            <label>Utilizzabile dal</label>
                             <?= $this->formRow($form->get('customer-bonus')->get('validFrom')); ?>
                         </div>
                         <div class="col-lg-4">
-                            <label>Valido Al</label>
+                            <label>Utilizzabile fino al</label>
                             <?= $this->formRow($form->get('customer-bonus')->get('validTo')); ?>
-                        </div>
-                        <div class="col-lg-2">
-                            <label>Durata Giorni</label>
-                            <?= $this->formRow($form->get('customer-bonus')->get('durationDays')->setAttribute('class', 'form-control')); ?>
                         </div>
                     </div>
 

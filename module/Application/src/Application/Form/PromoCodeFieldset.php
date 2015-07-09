@@ -24,7 +24,7 @@ class PromoCodeFieldset extends Fieldset implements InputFilterProviderInterface
             'attributes' => [
                 'id' => 'name',
                 'maxlength' => 5,
-                'placeholder' => 'Promo code',
+                'placeholder' => 'Codice promo',
             ]
         ]);
 

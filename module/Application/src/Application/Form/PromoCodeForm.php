@@ -10,6 +10,7 @@ class PromoCodeForm extends Form
 
         parent::__construct('promo-form');
         $this->setAttribute('method', 'post');
+        $this->setAttribute('class', 'form-inline');
 
         $this->add($promoCodeFieldset);
     }

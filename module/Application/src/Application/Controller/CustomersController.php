@@ -322,7 +322,7 @@ class CustomersController extends AbstractActionController
                     }
 
                     if($this->I_customerService->checkUsedPromoCode($I_customer, $promoCode)) {
-                        throw new \Exception('Codice bonus già associato a questo account.');
+                        throw new \Exception('Codice promo già associato a questo utente.');
                     }
 
                     $this->I_customerService->addBonusFromPromoCode($I_customer, $promoCode);
@@ -355,8 +355,6 @@ class CustomersController extends AbstractActionController
 
         if ($this->getRequest()->isPost()) {
             $postData = $this->getRequest()->getPost()->toArray();
-            $durationDays = $postData['customer-bonus']['durationDays'];
-            $postData['customer-bonus']['durationDays'] = empty($durationDays) ? null : $durationDays;
             $form->setData($postData);
 
             if ($form->isValid()) {

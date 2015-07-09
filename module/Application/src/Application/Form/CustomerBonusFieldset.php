@@ -22,19 +22,9 @@ class CustomerBonusFieldset extends Fieldset implements InputFilterProviderInter
 
         $this->add([
             'name'       => 'total',
-            'type'       => 'Zend\Form\Element\Text',
+            'type'       => 'Zend\Form\Element\Number',
             'attributes' => [
                 'id'       => 'total',
-                'class'    => 'form-control',
-                'required' => 'required'
-            ]
-        ]);
-
-        $this->add([
-            'name'       => 'type',
-            'type'       => 'Zend\Form\Element\Text',
-            'attributes' => [
-                'id'       => 'type',
                 'class'    => 'form-control',
                 'required' => 'required'
             ]
@@ -68,14 +58,6 @@ class CustomerBonusFieldset extends Fieldset implements InputFilterProviderInter
             ]
         ]);
 
-        $this->add([
-            'name'       => 'durationDays',
-            'type'       => 'Zend\Form\Element\Number',
-            'attributes' => [
-                'id'       => 'valid_to',
-                'class'    => 'form-control',
-            ]
-        ]);
     }
 
     public function getInputFilterSpecification()
@@ -91,14 +73,6 @@ class CustomerBonusFieldset extends Fieldset implements InputFilterProviderInter
                 'validators' => [
                     [
                         'name' => 'Int'
-                    ]
-                ]
-            ],
-            'type' => [
-                'required' => true,
-                'filters'  => [
-                    [
-                        'name' => 'StringTrim'
                     ]
                 ]
             ],
@@ -134,7 +108,7 @@ class CustomerBonusFieldset extends Fieldset implements InputFilterProviderInter
                         'name'    => 'Callback',
                         'options' => [
                             'messages' => [
-                                \Zend\Validator\Callback::INVALID_VALUE => 'La data di validità deve essere maggiore della partenza',
+                                \Zend\Validator\Callback::INVALID_VALUE => 'La data di fine validità deve essere posteriore alla data di inizio',
                             ],
                             'callback' => function ($value, $context) {
                                 $validFrom = date_create($context['validFrom']);
@@ -145,10 +119,7 @@ class CustomerBonusFieldset extends Fieldset implements InputFilterProviderInter
                         ],
                     ],
                 ]
-            ],
-            'durationDays' => [
-                'required' => false
-            ],
+            ]
         ];
     }
 }
