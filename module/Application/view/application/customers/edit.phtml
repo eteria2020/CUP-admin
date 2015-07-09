@@ -31,17 +31,17 @@ $this->headScript()
         <div class="row">
             <div class="col-md-12">
                 <ul class="nav nav-tabs" id="js-tabs" role="tablist">
-                    <li role="presentation" class="active"><a href="<?= $this->url('customers/ajax-tab-info', ['id' => $this->customer->getId()]); ?>" data-target="#info" role="tab" data-toggle="tab">Informazioni</a></li>
-                    <li role="presentation"><a href="<?= $this->url('customers/ajax-tab-edit', ['id' => $this->customer->getId()]); ?>" data-target="#edit" role="tab" data-toggle="tab">Modifica</a></li>
-                    <li role="presentation"><a href="<?= $this->url('customers/ajax-tab-bonus', ['id' => $this->customer->getId()]); ?>" data-target="#bonus" role="tab" data-toggle="tab">Bonus</a></li>
-                    <li role="presentation"><a href="<?= $this->url('customers/ajax-tab-card', ['id' => $this->customer->getId()]); ?>" data-target="#card" role="tab" data-toggle="tab">Card</a></li>
+                    <li role="presentation" id="menu-info"><a href="<?= $this->url('customers/ajax-tab-info', ['id' => $this->customer->getId()]); ?>" data-target="#tab-info" role="tab" data-toggle="tab">Informazioni</a></li>
+                    <li role="presentation" id="menu-edit"><a href="<?= $this->url('customers/ajax-tab-edit', ['id' => $this->customer->getId()]); ?>" data-target="#tab-edit" role="tab" data-toggle="tab">Modifica</a></li>
+                    <li role="presentation" id="menu-bonus"><a href="<?= $this->url('customers/ajax-tab-bonus', ['id' => $this->customer->getId()]); ?>" data-target="#tab-bonus" role="tab" data-toggle="tab">Bonus</a></li>
+                    <li role="presentation" id="menu-card"><a href="<?= $this->url('customers/ajax-tab-card', ['id' => $this->customer->getId()]); ?>" data-target="#tab-card" role="tab" data-toggle="tab">Card</a></li>
                 </ul>
 
                 <div class="tab-content">
-                    <div role="tabpanel" class="tab-pane active" id="info"></div>
-                    <div role="tabpanel" class="tab-pane" id="edit"></div>
-                    <div role="tabpanel" class="tab-pane" id="bonus"></div>
-                    <div role="tabpanel" class="tab-pane" id="card"></div>
+                    <div role="tabpanel" class="tab-pane" id="tab-info"></div>
+                    <div role="tabpanel" class="tab-pane" id="tab-edit"></div>
+                    <div role="tabpanel" class="tab-pane" id="tab-bonus"></div>
+                    <div role="tabpanel" class="tab-pane" id="tab-card"></div>
                 </div>
             </div>
         </div>
@@ -55,9 +55,14 @@ echo $this->inlineScript()->captureStart();
 echo <<<JS
 $(document).ready(function () {
 
-    var href = $('#js-tabs .active a').attr("href");
+    var tab = '{$this->tab}';
+    var idTab = '#tab-' + tab;
+    $('#menu-' + tab).addClass('active');
+    $(idTab).addClass('active');
 
-    $('#info').load(href,function(e){
+    var href = $(document).find('#js-tabs .active a').attr("href");
+
+    $(idTab).load(href,function(e){
       $('#js-tabs .active a').tab('show');
     });
 

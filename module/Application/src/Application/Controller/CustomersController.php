@@ -4,8 +4,10 @@ namespace Application\Controller;
 use Application\Form\CustomerForm;
 use Application\Form\DriverForm;
 use SharengoCore\Entity\Customers;
+use SharengoCore\Entity\PromoCodes;
 use SharengoCore\Service\CardsService;
 use SharengoCore\Service\CustomersService;
+use SharengoCore\Service\PromoCodesService;
 use Zend\Form\Form;
 use Zend\Http\Response;
 use Zend\Mvc\Controller\AbstractActionController;
@@ -42,9 +44,22 @@ class CustomersController extends AbstractActionController
     private $I_settingForm;
 
     /**
+     * @var
+     */
+    private $promoCodeForm;
+
+    /**
+     * @var
+     */
+    private $customerBonusForm;
+
+    /**
      * @var \Zend\Stdlib\Hydrator\HydratorInterface
      */
     private $hydrator;
+
+    /** @var  PromoCodesService */
+    private $I_promoCodeService;
 
     /**
      * @param CustomersService $I_customerService
@@ -52,16 +67,22 @@ class CustomersController extends AbstractActionController
     public function __construct(
         CustomersService $I_customerService,
         CardsService $I_cardsService,
+        PromoCodesService $I_promoCodeService,
         Form $I_customerForm,
         Form $I_driverForm,
         Form $I_settingForm,
+        Form $I_promoCodeForm,
+        Form $I_customerBonusForm,
         HydratorInterface $hydrator
     ) {
         $this->I_customerService = $I_customerService;
         $this->I_cardsService = $I_cardsService;
+        $this->I_promoCodeService =  $I_promoCodeService;
         $this->I_customerForm = $I_customerForm;
         $this->I_driverForm = $I_driverForm;
         $this->I_settingForm = $I_settingForm;
+        $this->promoCodeForm = $I_promoCodeForm;
+        $this->customerBonusForm = $I_customerBonusForm;
         $this->hydrator = $hydrator;
     }
 
@@ -76,13 +97,14 @@ class CustomersController extends AbstractActionController
     {
         /** @var Customers $I_customer */
         $I_customer = $this->getCustomer();
-        
+        $tab = $this->params()->fromQuery('tab', 'info');
+
         $form = null;
 
         if ($this->getRequest()->isPost()) {
             $postData = $this->getRequest()->getPost()->toArray();
 
-            switch($postData['type']) {
+            switch ($postData['type']) {
 
                 case 'customer':
                     $form = $this->I_customerForm;
@@ -121,16 +143,13 @@ class CustomersController extends AbstractActionController
                     $this->flashMessenger()->addErrorMessage($e->getMessage());
                 }
 
-                return $this->redirect()->toRoute('customers/edit', [
-                   'controller' => 'Customers',
-                   'action' =>  'edit',
-                       'id' => $I_customer->getId()
-                   ]);
+                return $this->redirect()->toRoute('customers/edit', ['id' => $I_customer->getId()]);
             }
         }
 
         return new ViewModel([
             'customer' => $I_customer,
+            'tab'      => $tab
         ]);
     }
 
@@ -204,9 +223,8 @@ class CustomersController extends AbstractActionController
         $I_customer = $this->getCustomer();
 
         $view = new ViewModel([
-            'customer'  => $I_customer,
-            'listBonus' => $this->I_customerService->getAllBonus($I_customer)
-
+            'customer'      => $I_customer,
+            'listBonus'     => $this->I_customerService->getAllBonus($I_customer),
         ]);
         $view->setTerminal(true);
 
@@ -281,6 +299,115 @@ class CustomersController extends AbstractActionController
     {
         $query = $this->params()->fromQuery('query', '');
         return new JsonModel($this->I_cardsService->ajaxCardCodeAutocomplete($query));
+    }
+
+    public function assignPromoCodeAction()
+    {
+        $I_customer = $this->getCustomer();
+        $form = $this->promoCodeForm;
+
+        if ($this->getRequest()->isPost()) {
+            $postData = $this->getRequest()->getPost()->toArray();
+            $form->setData($postData);
+
+            if ($form->isValid()) {
+
+                try {
+
+                    /** @var PromoCodes $promoCode */
+                    $promoCode = $this->I_promoCodeService->getPromoCode($postData['promocode']['promocode']);
+
+                    if(is_null($promoCode)) {
+                        throw new \Exception('Codice promo non valido.');
+                    }
+
+                    if($this->I_customerService->checkUsedPromoCode($I_customer, $promoCode)) {
+                        throw new \Exception('Codice bonus già associato a questo account.');
+                    }
+
+                    $this->I_customerService->addBonusFromPromoCode($I_customer, $promoCode);
+
+                    $this->flashMessenger()->addSuccessMessage('Operazione completata con successo!');
+
+                } catch (\Exception $e) {
+
+                    $this->flashMessenger()->addErrorMessage($e->getMessage());
+
+                    return $this->redirect()->toRoute('customers/assign-bonus', ['id' => $I_customer->getId()]);
+
+                }
+
+                return $this->redirect()->toRoute('customers/edit', ['id' => $I_customer->getId()], ['query' => ['tab' => 'bonus']]);
+            }
+        }
+
+        return new ViewModel([
+            'customer' => $I_customer,
+            'promoCodeForm' => $form
+        ]);
+    }
+
+    public function addBonusAction()
+    {
+        /** @var Customers $I_customer */
+        $I_customer = $this->getCustomer();
+        $form = $this->customerBonusForm;
+
+        if ($this->getRequest()->isPost()) {
+            $postData = $this->getRequest()->getPost()->toArray();
+            $durationDays = $postData['customer-bonus']['durationDays'];
+            $postData['customer-bonus']['durationDays'] = empty($durationDays) ? null : $durationDays;
+            $form->setData($postData);
+
+            if ($form->isValid()) {
+
+                try {
+
+                    $this->I_customerService->addBonusFromWebUser($I_customer, $form->getData());
+
+                    $this->flashMessenger()->addSuccessMessage('Operazione completata con successo!');
+
+                } catch (\Exception $e) {
+
+                    $this->flashMessenger()->addErrorMessage($e->getMessage());
+
+                    return $this->redirect()->toRoute('customers/add-bonus', ['id' => $I_customer->getId()]);
+
+                }
+
+                return $this->redirect()->toRoute('customers/edit', ['id' => $I_customer->getId()], ['query' => ['tab' => 'bonus']]);
+            }
+        }
+
+        return new ViewModel([
+            'customer' => $I_customer,
+            'promoCodeForm' => $form
+        ]);
+    }
+
+    public function removeBonusAction()
+    {
+        $status = 'error';
+
+        if ($this->getRequest()->isPost()) {
+            try {
+
+                $postData = $this->getRequest()->getPost()->toArray();
+                $I_bonus = $this->I_customerService->findBonus($postData['bonus']);
+
+                if ($this->I_customerService->removeBonus($I_bonus)) {
+                    $status = 'success';
+                }
+
+            } catch (\Exception $e) {
+
+                $this->getResponse()->setStatusCode(Response::STATUS_CODE_500);
+            }
+        }
+
+        return new JsonModel([
+            'status' => $status
+        ]);
     }
 
     protected function _getRecordsFiltered($as_filters, $i_totalCustomer)

@@ -48,6 +48,9 @@ return array(
                         'type'    => 'Segment',
                         'options' => [
                             'route'    => '/edit/:id',
+                            'constraints' => array(
+                                'id' => '[0-9]*'
+                            ),
                             'defaults' => [
                                 '__NAMESPACE__' => 'Application\Controller',
                                 'controller'    => 'Customers',
@@ -59,6 +62,9 @@ return array(
                         'type'    => 'Segment',
                         'options' => [
                             'route'    => '/remove-card/:id',
+                            'constraints' => array(
+                                'id' => '[0-9]*'
+                            ),
                             'defaults' => [
                                 '__NAMESPACE__' => 'Application\Controller',
                                 'controller'    => 'Customers',
@@ -70,6 +76,9 @@ return array(
                         'type'    => 'Segment',
                         'options' => [
                             'route'    => '/assign-card/:id',
+                            'constraints' => array(
+                                'id' => '[0-9]*'
+                            ),
                             'defaults' => [
                                 '__NAMESPACE__' => 'Application\Controller',
                                 'controller'    => 'Customers',
@@ -81,6 +90,9 @@ return array(
                         'type'    => 'Segment',
                         'options' => [
                             'route'    => '/ajax-tab/info/:id',
+                            'constraints' => array(
+                                'id' => '[0-9]*'
+                            ),
                             'defaults' => [
                                 '__NAMESPACE__' => 'Application\Controller',
                                 'controller'    => 'Customers',
@@ -92,6 +104,9 @@ return array(
                         'type'    => 'Segment',
                         'options' => [
                             'route'    => '/ajax-tab/edit/:id',
+                            'constraints' => array(
+                                'id' => '[0-9]*'
+                            ),
                             'defaults' => [
                                 '__NAMESPACE__' => 'Application\Controller',
                                 'controller'    => 'Customers',
@@ -103,6 +118,9 @@ return array(
                         'type'    => 'Segment',
                         'options' => [
                             'route'    => '/ajax-tab/bonus/:id',
+                            'constraints' => array(
+                                'id' => '[0-9]*'
+                            ),
                             'defaults' => [
                                 '__NAMESPACE__' => 'Application\Controller',
                                 'controller'    => 'Customers',
@@ -114,6 +132,9 @@ return array(
                         'type'    => 'Segment',
                         'options' => [
                             'route'    => '/ajax-tab/card/:id',
+                            'constraints' => array(
+                                'id' => '[0-9]*'
+                            ),
                             'defaults' => [
                                 '__NAMESPACE__' => 'Application\Controller',
                                 'controller'    => 'Customers',
@@ -129,6 +150,48 @@ return array(
                                 '__NAMESPACE__' => 'Application\Controller',
                                 'controller'    => 'Customers',
                                 'action'        => 'ajax-card-code-autocomplete',
+                            ],
+                        ],
+                    ],
+                    'assign-promo-code' => [
+                        'type'    => 'Segment',
+                        'options' => [
+                            'route'    => '/assign-promo-code/:id',
+                            'constraints' => array(
+                                'id' => '[0-9]*'
+                            ),
+                            'defaults' => [
+                                '__NAMESPACE__' => 'Application\Controller',
+                                'controller'    => 'Customers',
+                                'action'        => 'assign-promo-code',
+                            ],
+                        ],
+                    ],
+                    'add-bonus' => [
+                        'type'    => 'Segment',
+                        'options' => [
+                            'route'    => '/add-bonus/:id',
+                            'constraints' => array(
+                                'id' => '[0-9]*'
+                            ),
+                            'defaults' => [
+                                '__NAMESPACE__' => 'Application\Controller',
+                                'controller'    => 'Customers',
+                                'action'        => 'add-bonus',
+                            ],
+                        ],
+                    ],
+                    'remove-bonus' => [
+                        'type'    => 'Segment',
+                        'options' => [
+                            'route'    => '/remove-bonus/:id',
+                            'constraints' => array(
+                                'id' => '[0-9]*'
+                            ),
+                            'defaults' => [
+                                '__NAMESPACE__' => 'Application\Controller',
+                                'controller'    => 'Customers',
+                                'action'        => 'remove-bonus',
                             ],
                         ],
                     ],
@@ -336,6 +399,8 @@ return array(
             'CarForm' => 'Application\Form\CarFormFactory',
             'DriverForm' => 'Application\Form\DriverFormFactory',
             'SettingForm' => 'Application\Form\SettingFormFactory',
+            'PromoCodeForm' => 'Application\Form\PromoCodeFormFactory',
+            'CustomerBonusForm' => 'Application\Form\CustomerBonusFormFactory',
         ]
     ),
     'controllers' => [
@@ -460,6 +525,14 @@ return array(
                         'route' => 'customers/edit',
                         'isVisible' => false
                     ],
+                    [
+                        'route' => 'customers/assign-bonus',
+                        'isVisible' => false
+                    ],
+                    [
+                        'route' => 'customers/add-bonus',
+                        'isVisible' => false
+                    ]
                 ],
             ],
             [
