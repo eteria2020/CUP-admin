@@ -35,17 +35,19 @@
                                 <th>Id</th>
                                 <th>Nome & Cognome</th>
                                 <th>Email</th>
+                                <th>Ruolo</th>
                                 <th>Azione</th>
                             </tr>
                             </thead>
                             <tbody>
                             <?php
-                            /** @var \ZfcUserDoctrineORM\Entity\User $I_user */
+                            /** @var \SharengoCore\Entity\Webuser $I_user */
                             foreach($this->users as $I_user): ?>
                             <tr>
                                 <td><?= $I_user->getId(); ?></td>
                                 <td><?= $I_user->getDisplayName(); ?></td>
                                 <td><?= $I_user->getEmail(); ?></td>
+                                <td><?= $I_user->getRole(); ?></td>
                                 <td><a href="<?= $this->url('users/edit', ['id' => $I_user->getId()]); ?>" class="btn btn-sm btn-success">Modifica</a> </td>
                             </tr>
                             <?php endforeach; ?>

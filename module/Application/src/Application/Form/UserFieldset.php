@@ -82,6 +82,22 @@ class UserFieldset extends Fieldset implements InputFilterProviderInterface
                 'class'    => 'form-control',
             ]
         ]);
+
+        $this->add([
+            'name'       => 'role',
+            'type'       => 'Zend\Form\Element\Select',
+            'attributes' => [
+                'id'       => 'displayName',
+                'class'    => 'form-control',
+                'required' => 'required'
+            ],
+            'options'    => [
+                'value_options' => [
+                    'admin' => 'admin',
+                    'callcenter' => 'callcenter'
+                ]
+            ]
+        ]);
     }
 
     public function getInputFilterSpecification()
@@ -174,6 +190,19 @@ class UserFieldset extends Fieldset implements InputFilterProviderInterface
                         ]
                     ]
                 ]
+            ],
+            'role' => [
+                'required' => true,
+                'filters'  => [
+                    [
+                        'name' => 'StringTrim'
+                    ]
+                ],
+                'validators' => [
+                    [
+                        'name' =>'NotEmpty',
+                    ]
+                ],
             ],
         ];
     }
