@@ -87,7 +87,7 @@ class UserFieldset extends Fieldset implements InputFilterProviderInterface
             'name'       => 'role',
             'type'       => 'Zend\Form\Element\Select',
             'attributes' => [
-                'id'       => 'displayName',
+                'id'       => 'role',
                 'class'    => 'form-control',
                 'required' => 'required'
             ],
