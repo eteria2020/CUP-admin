@@ -140,7 +140,7 @@ class CustomersController extends AbstractActionController
                     $this->flashMessenger()->addSuccessMessage('Modifica effettuta con successo!');
 
                 } catch (\Exception $e) {
-                    $this->flashMessenger()->addErrorMessage($e->getMessage());
+                    $this->flashMessenger()->addErrorMessage('Si è verificato un errore applicativo. L\'assistenza tecnica è già al corrente, ci scusiamo per l\'inconveniente');
                 }
 
                 return $this->redirect()->toRoute('customers/edit', ['id' => $I_customer->getId()]);
@@ -331,7 +331,7 @@ class CustomersController extends AbstractActionController
 
                 } catch (\Exception $e) {
 
-                    $this->flashMessenger()->addErrorMessage($e->getMessage());
+                    $this->flashMessenger()->addErrorMessage('Si è verificato un errore applicativo. L\'assistenza tecnica è già al corrente, ci scusiamo per l\'inconveniente');
 
                     return $this->redirect()->toRoute('customers/assign-promo-code', ['id' => $I_customer->getId()]);
 
@@ -367,7 +367,7 @@ class CustomersController extends AbstractActionController
 
                 } catch (\Exception $e) {
 
-                    $this->flashMessenger()->addErrorMessage($e->getMessage());
+                    $this->flashMessenger()->addErrorMessage('Si è verificato un errore applicativo. L\'assistenza tecnica è già al corrente, ci scusiamo per l\'inconveniente');
 
                     return $this->redirect()->toRoute('customers/add-bonus', ['id' => $I_customer->getId()]);
 
