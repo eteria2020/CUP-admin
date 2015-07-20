@@ -79,6 +79,42 @@ return [
                             ],
                         ],
                     ],
+                    'list-card' => [
+                        'type'    => 'Segment',
+                        'options' => [
+                            'route'    => '/card',
+                            'defaults' => [
+                                '__NAMESPACE__' => 'Application\Controller',
+                                'controller'    => 'Customers',
+                                'action'        => 'list-card',
+                            ],
+                        ],
+                        'may_terminate' => true,
+                        'child_routes' => [
+                            'add' => [
+                                'type'    => 'Literal',
+                                'options' => [
+                                    'route'    => '/add',
+                                    'defaults' => [
+                                        '__NAMESPACE__' => 'Application\Controller',
+                                        'controller'    => 'Customers',
+                                        'action'        => 'add-card',
+                                    ],
+                                ],
+                            ],
+                            'datatable' => [
+                                'type'    => 'Literal',
+                                'options' => [
+                                    'route'    => '/datatable',
+                                    'defaults' => [
+                                        '__NAMESPACE__' => 'Application\Controller',
+                                        'controller'    => 'Customers',
+                                        'action'        => 'list-cards-datatable',
+                                    ],
+                                ],
+                            ],
+                        ]
+                    ],
                     'ajax-tab-info' => [
                         'type'    => 'Segment',
                         'options' => [
@@ -903,6 +939,7 @@ return [
             'UserForm' => 'Application\Form\UserFormFactory',
             'CarForm' => 'Application\Form\CarFormFactory',
             'PoiForm' => 'Application\Form\PoiFormFactory',
+            'CardForm' => 'Application\Form\CardFormFactory',
             'DriverForm' => 'Application\Form\DriverFormFactory',
             'SettingForm' => 'Application\Form\SettingFormFactory',
             'PromoCodeForm' => 'Application\Form\PromoCodeFormFactory',
@@ -1052,6 +1089,16 @@ return [
                         'label' => 'Elenco',
                         'route' => 'customers',
                         'isVisible' => true
+                    ],
+                    [
+                        'label' => 'Card',
+                        'route' => 'customers/list-card',
+                        'isVisible' => true
+                    ],
+                    [
+                        'label' => 'Card',
+                        'route' => 'customers/list-card/add',
+                        'isVisible' => false
                     ],
                     [
                         'route' => 'customers/edit',

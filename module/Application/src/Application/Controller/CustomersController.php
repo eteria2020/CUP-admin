@@ -59,6 +59,11 @@ class CustomersController extends AbstractActionController
     private $customerBonusForm;
 
     /**
+     * @var
+     */
+    private $cardForm;
+
+    /**
      * @var \Zend\Stdlib\Hydrator\HydratorInterface
      */
     private $hydrator;
@@ -98,6 +103,7 @@ class CustomersController extends AbstractActionController
         Form $settingForm,
         Form $promoCodeForm,
         Form $customerBonusForm,
+        Form $cardForm,
         HydratorInterface $hydrator,
         CartasiContractsService $cartasiContractsService,
         DisableContractService $disableContractService
@@ -110,6 +116,7 @@ class CustomersController extends AbstractActionController
         $this->settingForm = $settingForm;
         $this->promoCodeForm = $promoCodeForm;
         $this->customerBonusForm = $customerBonusForm;
+        $this->cardForm = $cardForm;
         $this->hydrator = $hydrator;
         $this->cartasiContractsService = $cartasiContractsService;
         $this->disableContractService = $disableContractService;
@@ -425,14 +432,82 @@ class CustomersController extends AbstractActionController
         ]);
     }
 
-    protected function _getRecordsFiltered($as_filters, $totalCustomer)
+    public function listCardAction()
+    {
+        return new ViewModel([]);
+    }
+
+    public function listCardsDatatableAction()
+    {
+        $filters = $this->params()->fromPost();
+        $filters['withLimit'] = true;
+        $dataDataTable = $this->cardsService->getDataDataTable($filters);
+        $cardsTotal = $this->cardsService->getTotalCards();
+        $recordsFiltered = $this->_getRecordsFilteredCards($filters, $cardsTotal);
+
+        return new JsonModel([
+            'draw' => $this->params()->fromQuery('sEcho', 0),
+            'recordsTotal' => $cardsTotal,
+            'recordsFiltered' => $recordsFiltered,
+            'data' => $dataDataTable
+        ]);
+    }
+
+    public function addCardAction()
+    {
+        $customer = null;
+        $customerId = $this->params()->fromQuery('customer', 0);
+
+        if ($customerId) {
+            $customer = $this->customerService->findById($customerId);
+            if (is_null($customer)) {
+                $this->getResponse()->setStatusCode(Response::STATUS_CODE_404);
+
+                return false;
+            }
+        }
+
+        if ($this->getRequest()->isPost()) {
+            $postData = $this->getRequest()->getPost()->toArray();
+            $form->setData($postData);
+
+            if ($this->cardForm->isValid()) {
+                try {
+                    $this->cardsService->createCard($this->cardForm->getData(), $customer);
+                    $this->flashMessenger()->addSuccessMessage('Operazione completata con successo!');
+                } catch (\Exception $e) {
+                    $this->flashMessenger()->addErrorMessage('Qualcosa è andata storto durante la creazione');
+                }
+
+                return $this->redirect()->toRoute('customers/list-card');
+            }
+        }
+
+        return new ViewModel([
+            'customer' => $customer,
+            'cardForm' => $this->cardForm
+        ]);
+    }
+
+    protected function _getRecordsFiltered($filters, $totalCustomer)
+    {
+        if (empty($filters['searchValue'])) {
+            return $totalCustomer;
+        } else {
+            $filters['withLimit'] = false;
+
+            return count($this->customersService->getDataDataTable($filters));
+        }
+    }
+
+    protected function _getRecordsFilteredCards($as_filters, $i_totalCards)
     {
         if (empty($as_filters['searchValue'])) {
-            return $totalCustomer;
+            return $i_totalCards;
         } else {
             $as_filters['withLimit'] = false;
 
-            return count($this->customersService->getDataDataTable($as_filters));
+            return count($this->I_cardsService->getDataDataTable($as_filters));
         }
     }
 

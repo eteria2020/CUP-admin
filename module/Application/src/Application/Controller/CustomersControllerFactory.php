@@ -27,6 +27,7 @@ class CustomersControllerFactory implements FactoryInterface
         $settingForm = $sharedLocator->get('SettingForm');
         $promoCodeForm = $sharedLocator->get('PromoCodeForm');
         $customerBonusForm = $sharedLocator->get('CustomerBonusForm');
+        $cardForm = $sharedLocator->get('CardForm');
 
         $hydrator = new DoctrineHydrator($entityManager);
 
@@ -43,6 +44,7 @@ class CustomersControllerFactory implements FactoryInterface
             $settingForm,
             $promoCodeForm,
             $customerBonusForm,
+            $cardForm,
             $hydrator,
             $cartasiContractsService,
             $disableContractService
