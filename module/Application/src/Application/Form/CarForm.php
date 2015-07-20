@@ -30,6 +30,8 @@ class CarForm extends Form
             ],
             'options'    => [
                 'value_options' => [
+                    'garage velasca' => 'Garage Velasca',
+                    'garage sant\'ambrogio' => 'Garage Sant\'Ambrogio',
                     'livorno' => 'Livorno',
                     'milano'  => 'Milano',
                     'philcar' => 'Philcar'
