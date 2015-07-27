@@ -63,6 +63,21 @@ class SettingFieldset extends Fieldset implements InputFilterProviderInterface
         ]);
 
         $this->add([
+            'name'       => 'enabled',
+            'type'       => 'Zend\Form\Element\Select',
+            'attributes' => [
+                'id'    => 'enabled',
+                'class' => 'form-control',
+            ],
+            'options'    => [
+                'value_options' => [
+                    0 => "No",
+                    1 => "Si"
+                ]
+            ]
+        ]);
+
+        $this->add([
             'name'       => 'firstPaymentCompleted',
             'type'       => 'Zend\Form\Element\Select',
             'attributes' => [
@@ -105,6 +120,9 @@ class SettingFieldset extends Fieldset implements InputFilterProviderInterface
                         'name' => 'StringTrim'
                     ]
                 ]
+            ],
+            'enabled' => [
+                'required' => true
             ],
             'firstPaymentCompleted' => [
                 'required' => true
