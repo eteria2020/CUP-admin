@@ -52,7 +52,12 @@
                 }
 
                 $isRouteJs = $page->get('isRouteJs');
-                $s_menu .= sprintf('<a href="%s">', isset($isRouteJs) ? 'javascript:;' : $page->getHref());
+
+                if ($page->get('openOnNewWindow')) {
+                    $s_menu .= sprintf('<a href="%s" target="_blank">', isset($isRouteJs) ? 'javascript:;' : $page->getHref());
+                } else {
+                    $s_menu .= sprintf('<a href="%s">', isset($isRouteJs) ? 'javascript:;' : $page->getHref());
+                }
                 $s_menu .= sprintf('<i class="%s"></i>', $page->get('icon'));
                 $s_menu .= sprintf('<span class="title">%s</span>', $page->getLabel());
 

@@ -590,10 +590,11 @@ return array(
                 ],
             ],
             [
-                'label'     => 'Call center',
-                'route'     => 'call-center',
-                'icon'      => 'fa fa-map-marker',
-                'resource'  => 'callcenter',
+                'label'           => 'Call center',
+                'route'           => 'call-center',
+                'icon'            => 'fa fa-map-marker',
+                'resource'        => 'callcenter',
+                'openOnNewWindow' => true,
             ],
         ]
     ]
