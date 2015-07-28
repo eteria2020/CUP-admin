@@ -103,11 +103,15 @@ angular.module('SharengoCsApp').controller('SharengoCsController', function (
                     car.options.labelContent=car.battery+'% <i class="fa fa-plug"></i>';
                 }else{
                     car.options.labelContent=car.battery+'%';
+                }     
+                
+                if(car.sinceLastTrip && car.sinceLastTrip>60){
+                    car.carIcon = "/assets-modules/call-center/images/marker-s-azzure"+carCharging+".png";
+                    car.iconSelected = "/assets-modules/call-center/images/marker-s-azzure-selected"+carCharging+".png";   
+                }else{
+                    car.carIcon = "/assets-modules/call-center/images/marker-s-blue"+carCharging+".png";
+                    car.iconSelected = "/assets-modules/call-center/images/marker-s-blue-selected"+carCharging+".png";
                 }
-
-                car.carIcon = "/assets-modules/call-center/images/marker-s-blue"+carCharging+".png";
-
-                car.iconSelected = "/assets-modules/call-center/images/marker-s-blue-selected"+carCharging+".png";
                 if(car.status!='operative'){
                     if(car.status=='maintenance'){
                         car.carIcon = "/assets-modules/call-center/images/marker-s-red"+carCharging+".png";
