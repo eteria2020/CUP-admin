@@ -207,7 +207,20 @@ $formSetting = $this->settingForm->prepare();
 
             <div class="panel-heading">Altri dati</div>
             <div class="panel-body">
-                    
+
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="form-group">
+                            <label for="gender">Abilitato</label>
+                            <?php if($this->customer->getEnabled()): ?>
+                                <div class="alert alert-success">Abilitato</div>
+                            <?php else: ?>
+                                <div class="alert alert-danger">Non Abilitato</div>
+                            <?php endif; ?>
+                        </div>
+                    </div>
+                </div>
+
                 <div class="row">
                     <div class="col-lg-12">
                         <div class="form-group">
