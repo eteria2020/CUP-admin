@@ -33,6 +33,14 @@
     </div>
 </div>
 
+<div id="markers-control">
+    <div class="pull-right actions">
+        <a href="javascript:;" ng-click="poisVisible = !poisVisible;" class="btn btn-xs" ng-class="{'deactive': !poisVisible }">
+            <i class="fa fa-plug"></i> &nbsp; POIS
+        </a>
+    </div>
+</div>
+    
 <div id="top-area">
     <tabset>
         <tab heading="Auto">
@@ -470,8 +478,8 @@
 </div>
 
 <ui-gmap-google-map center="mapOptions.center" zoom="mapOptions.zoom" events="mapEvents">
-    <ui-gmap-markers models="cars" coords="'self'" icon="'carIcon'" events="markerEvents" options="'options'">
-    </ui-gmap-markers>
+    <ui-gmap-markers models="cars" coords="'self'" icon="'carIcon'" events="markerEvents" options="'options'"></ui-gmap-markers>
+    <ui-gmap-markers ng-if="poisVisible" models="pois" coords="'self'" icon="'poiIcon'" options="'options'"></ui-gmap-markers>
     <ui-gmap-polygon
         static="true"
         ng-repeat="p in polygons track by p.id"

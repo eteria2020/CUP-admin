@@ -5,6 +5,7 @@ angular.module('SharengoCsApp').controller('SharengoCsController', function (
     $interpolate,
     carsFactory,
     usersFactory,
+    poisFactory,
     //mapFactory,
     ticketsFactory,
     uiGmapGoogleMapApi,
@@ -14,11 +15,13 @@ angular.module('SharengoCsApp').controller('SharengoCsController', function (
     var infoBox;
     //necessary to avoid errors with network delay
     $scope.cars = [];
+    $scope.pois = [];
     $scope.mapLoader = true;
 
     var searchByCar = false;
     var searchByCustomer = false;
     var reservationContent,infoBoxOptions,infoBox,mainMaps;
+    $scope.poisVisible = true;
 
     $scope.accordionStatus = {
         researchOpen: true,
@@ -133,8 +136,31 @@ angular.module('SharengoCsApp').controller('SharengoCsController', function (
             $scope.mapLoader = false;
         });
     };
+    
+    $scope.loadPois = function () {
+        $scope.mapLoader = true;
+        return poisFactory.getPois().success(function (pois) {
+            pois = pois.data;
+            pois.forEach(function (poi) {
+                poi.options = [];
+                poi.latitude = poi.lat;
+                poi.longitude = poi.lon;
+                poi.options.labelClass='pois_labels';
+                poi.options.labelContent = '<i class="fa fa-plug"></i>';
+                poi.poiIcon = '/assets-modules/call-center/images/blank.png';
+                poi.options.visible = $scope.poisVisible;
+            });
+            $scope.pois = pois;
+            $scope.mapLoader = false;
+        });
+    };    
 
     $scope.loadCars();
+    $scope.loadPois();
+    
+    $scope.togglePois = function(){
+        
+    }
 
     $scope.zoom = function (center, zoom) {
         $scope.mapOptions.center = {
@@ -335,8 +361,8 @@ angular.module('SharengoCsApp').controller('SharengoCsController', function (
         $scope.accordionStatus.hideRequest = false;
         searchByCar = false;
         searchByCustomer = true;
-                usersFactory.getTrip(customer).success(function (trip) {
-                $scope.loadCars().then(function () {
+        usersFactory.getTrip(customer).success(function (trip) {
+            $scope.loadCars().then(function () {
                 $scope.trip = trip.trip;
                 $scope.accordionStatus.hideTripData = false;
                 $scope.onCarSelection(trip.data[0].car);
@@ -443,8 +469,8 @@ angular.module('SharengoCsApp').controller('SharengoCsController', function (
                 pane: "floatPane",
                 enableEventPropagation: true,
                 boxStyle: { 
-                  width: "500px"
-                 },
+                    width: "500px"
+                },
                 closeBoxMargin: "10px 2px 2px 2px",
                /* closeBoxURL: "http://www.google.com/intl/en_us/mapfiles/close.gif"*/
             };

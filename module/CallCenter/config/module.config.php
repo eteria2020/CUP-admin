@@ -70,7 +70,7 @@ return array(
                     'assets-modules/call-center/js/config/gmapconfig.js',
                     'assets-modules/call-center/js/factories/carsFactory.js',
                     'assets-modules/call-center/js/factories/usersFactory.js',
-                    //'assets-modules/call-center/js/factories/mapFactory.js',
+                    'assets-modules/call-center/js/factories/poisFactory.js',
                     'assets-modules/call-center/js/factories/ticketsFactory.js',
                     'assets-modules/call-center/js/directives/angular-reverse-geocode.js',
                     'assets-modules/call-center/js/filter/dateSharengoFormat.js',
