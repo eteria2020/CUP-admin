@@ -252,7 +252,7 @@ angular.module('SharengoCsApp').controller('SharengoCsController', function (
                 if (cars && cars.length === 1) {
                     car = cars[0];
                     $scope.accordionStatus.hideCarsSelect = true;
-                }else{
+                }else if (cars && cars.length > 1){
                     $scope.accordionStatus.hideCarsSelect = false;
                     return true;
                 }
