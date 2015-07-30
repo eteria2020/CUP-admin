@@ -26,7 +26,9 @@ angular.module('SharengoCsApp').controller('SharengoCsController', function (
     $scope.accordionStatus = {
         researchOpen: true,
         hideCustomerData: true,
-        customerDataOpen: true,
+        customerDataOpen: true,        
+        hideCarsSelect: true,
+        carsSelectOpen: true,        
         hideCustomerSelect: true,
         customerSelectOpen: true,
         hideCarData: true,
@@ -242,11 +244,17 @@ angular.module('SharengoCsApp').controller('SharengoCsController', function (
                         return parseInt(car.label,10)===parseInt(value, 10);
                     }
 
-                    return car.plate.toUpperCase() === value.toUpperCase();
+                    return car.plate.toUpperCase().search(value.toUpperCase())!==-1;
                 });
+                
+                $scope.carsFound = cars;
 
                 if (cars && cars.length === 1) {
                     car = cars[0];
+                    $scope.accordionStatus.hideCarsSelect = true;
+                }else{
+                    $scope.accordionStatus.hideCarsSelect = false;
+                    return true;
                 }
 
                 if (car) {

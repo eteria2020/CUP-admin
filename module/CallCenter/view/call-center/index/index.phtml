@@ -188,6 +188,21 @@
                 </tbody>
             </table>
         </accordion-group>
+        <accordion-group class="resultsCars" heading="Veicoli trovati" ng-hide="accordionStatus.hideCarsSelect" is-open="accordionStatus.carsSelectOpen">
+            <table>
+                <thead>
+                <tr>
+                    <th>Seleziona</th>
+                    <th>Targa</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr ng-repeat="car in carsFound">
+                    <td><button type="button" class="btn btn-default btn-xs" ng-click="plateChange(car.plate,false)"><i class="fa fa-info"></i> Seleziona</button></td>
+                    <td>{{car.plate | uppercase}}</td>
+                </tbody>
+            </table>
+        </accordion-group>        
         <accordion-group heading="Dati cliente" id="customerData" ng-hide="accordionStatus.hideCustomerData" is-open="accordionStatus.customerDataOpen" class="acc-user-data">
             <div class="row">
                 <div class="col-md-3">
