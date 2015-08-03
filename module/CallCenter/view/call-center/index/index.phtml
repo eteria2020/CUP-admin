@@ -33,6 +33,14 @@
     </div>
 </div>
 
+<div id="markers-control">
+    <div class="pull-right actions">
+        <a href="javascript:;" ng-click="poisVisible = !poisVisible;" class="btn btn-xs" ng-class="{'deactive': !poisVisible }">
+            <i class="fa fa-plug"></i> &nbsp; POIS
+        </a>
+    </div>
+</div>
+    
 <div id="top-area">
     <tabset>
         <tab heading="Auto">
@@ -180,6 +188,21 @@
                 </tbody>
             </table>
         </accordion-group>
+        <accordion-group class="resultsCars" heading="Veicoli trovati" ng-hide="accordionStatus.hideCarsSelect" is-open="accordionStatus.carsSelectOpen">
+            <table>
+                <thead>
+                <tr>
+                    <th>Seleziona</th>
+                    <th>Targa</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr ng-repeat="car in carsFound">
+                    <td><button type="button" class="btn btn-default btn-xs" ng-click="plateChange(car.plate,false)"><i class="fa fa-info"></i> Seleziona</button></td>
+                    <td>{{car.plate | uppercase}}</td>
+                </tbody>
+            </table>
+        </accordion-group>        
         <accordion-group heading="Dati cliente" id="customerData" ng-hide="accordionStatus.hideCustomerData" is-open="accordionStatus.customerDataOpen" class="acc-user-data">
             <div class="row">
                 <div class="col-md-3">
@@ -464,13 +487,14 @@
             <li><span class="block black"></span> PRENOTATE</li>
             <li><span class="block red"></span> IN MANUTENZIONE</li>
             <li><span class="block orange"></span> NON OPERATIVE</li>
+            <li><span class="block azzure"></span> +24hh</li>
         </ul>
     </div>
 </div>
 
 <ui-gmap-google-map center="mapOptions.center" zoom="mapOptions.zoom" events="mapEvents">
-    <ui-gmap-markers models="cars" coords="'self'" icon="'carIcon'" events="markerEvents" options="'options'">
-    </ui-gmap-markers>
+    <ui-gmap-markers models="cars" coords="'self'" icon="'carIcon'" events="markerEvents" options="'options'"></ui-gmap-markers>
+    <ui-gmap-markers ng-if="poisVisible" models="pois" coords="'self'" icon="'poiIcon'" options="'options'"></ui-gmap-markers>
     <ui-gmap-polygon
         static="true"
         ng-repeat="p in polygons track by p.id"

@@ -5,6 +5,7 @@ angular.module('SharengoCsApp').controller('SharengoCsController', function (
     $interpolate,
     carsFactory,
     usersFactory,
+    poisFactory,
     //mapFactory,
     ticketsFactory,
     uiGmapGoogleMapApi,
@@ -14,16 +15,20 @@ angular.module('SharengoCsApp').controller('SharengoCsController', function (
     var infoBox;
     //necessary to avoid errors with network delay
     $scope.cars = [];
+    $scope.pois = [];
     $scope.mapLoader = true;
 
     var searchByCar = false;
     var searchByCustomer = false;
     var reservationContent,infoBoxOptions,infoBox,mainMaps;
+    $scope.poisVisible = true;
 
     $scope.accordionStatus = {
         researchOpen: true,
         hideCustomerData: true,
-        customerDataOpen: true,
+        customerDataOpen: true,        
+        hideCarsSelect: true,
+        carsSelectOpen: true,        
         hideCustomerSelect: true,
         customerSelectOpen: true,
         hideCarData: true,
@@ -103,11 +108,15 @@ angular.module('SharengoCsApp').controller('SharengoCsController', function (
                     car.options.labelContent=car.battery+'% <i class="fa fa-plug"></i>';
                 }else{
                     car.options.labelContent=car.battery+'%';
+                }     
+                
+                if(car.sinceLastTrip && car.sinceLastTrip>1440){
+                    car.carIcon = "/assets-modules/call-center/images/marker-s-azzure"+carCharging+".png";
+                    car.iconSelected = "/assets-modules/call-center/images/marker-s-azzure-selected"+carCharging+".png";   
+                }else{
+                    car.carIcon = "/assets-modules/call-center/images/marker-s-blue"+carCharging+".png";
+                    car.iconSelected = "/assets-modules/call-center/images/marker-s-blue-selected"+carCharging+".png";
                 }
-
-                car.carIcon = "/assets-modules/call-center/images/marker-s-blue"+carCharging+".png";
-
-                car.iconSelected = "/assets-modules/call-center/images/marker-s-blue-selected"+carCharging+".png";
                 if(car.status!='operative'){
                     if(car.status=='maintenance'){
                         car.carIcon = "/assets-modules/call-center/images/marker-s-red"+carCharging+".png";
@@ -129,8 +138,31 @@ angular.module('SharengoCsApp').controller('SharengoCsController', function (
             $scope.mapLoader = false;
         });
     };
+    
+    $scope.loadPois = function () {
+        $scope.mapLoader = true;
+        return poisFactory.getPois().success(function (pois) {
+            pois = pois.data;
+            pois.forEach(function (poi) {
+                poi.options = [];
+                poi.latitude = poi.lat;
+                poi.longitude = poi.lon;
+                poi.options.labelClass='pois_labels';
+                poi.options.labelContent = '<i class="fa fa-plug"></i>';
+                poi.poiIcon = '/assets-modules/call-center/images/blank.png';
+                poi.options.visible = $scope.poisVisible;
+            });
+            $scope.pois = pois;
+            $scope.mapLoader = false;
+        });
+    };    
 
     $scope.loadCars();
+    $scope.loadPois();
+    
+    $scope.togglePois = function(){
+        
+    }
 
     $scope.zoom = function (center, zoom) {
         $scope.mapOptions.center = {
@@ -212,11 +244,17 @@ angular.module('SharengoCsApp').controller('SharengoCsController', function (
                         return parseInt(car.label,10)===parseInt(value, 10);
                     }
 
-                    return car.plate.toUpperCase() === value.toUpperCase();
+                    return car.plate.toUpperCase().search(value.toUpperCase())!==-1;
                 });
+                
+                $scope.carsFound = cars;
 
                 if (cars && cars.length === 1) {
                     car = cars[0];
+                    $scope.accordionStatus.hideCarsSelect = true;
+                }else if (cars && cars.length > 1){
+                    $scope.accordionStatus.hideCarsSelect = false;
+                    return true;
                 }
 
                 if (car) {
@@ -331,8 +369,8 @@ angular.module('SharengoCsApp').controller('SharengoCsController', function (
         $scope.accordionStatus.hideRequest = false;
         searchByCar = false;
         searchByCustomer = true;
-                usersFactory.getTrip(customer).success(function (trip) {
-                $scope.loadCars().then(function () {
+        usersFactory.getTrip(customer).success(function (trip) {
+            $scope.loadCars().then(function () {
                 $scope.trip = trip.trip;
                 $scope.accordionStatus.hideTripData = false;
                 $scope.onCarSelection(trip.data[0].car);
@@ -439,8 +477,8 @@ angular.module('SharengoCsApp').controller('SharengoCsController', function (
                 pane: "floatPane",
                 enableEventPropagation: true,
                 boxStyle: { 
-                  width: "500px"
-                 },
+                    width: "500px"
+                },
                 closeBoxMargin: "10px 2px 2px 2px",
                /* closeBoxURL: "http://www.google.com/intl/en_us/mapfiles/close.gif"*/
             };

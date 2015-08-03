@@ -75,6 +75,9 @@ html, body, .angular-google-map, .angular-google-map-container {
       &.orange {
         background: #EC9416;
       }
+      &.azzure {
+        background: #0338FF;
+      }
     }
 }
 #top-area {
@@ -696,7 +699,85 @@ html, body, .angular-google-map, .angular-google-map-container {
         font-size:16px;
     }
 }
+.pois_labels{
+    color: white;
+    font-size: 12px;
+    font-weight: bold;
+    margin-left:-11px !important;
+    margin-top:-32px !important;
+    overflow:visible !important;
+    
+    .fa {
+        position:absolute;
+        top:10px;
+        left:10px;
+        color:#fff;
+        text-shadow:0 0 1px #fff;
+        font-size:15px;
+        z-index:20;
+        
+        &:after {
+            content:'';
+            background-color:#296FFF;
+            width:30px;
+            height:30px;
+            display:block;
+            position:absolute;
+            bottom:-8px;
+            left:-8px;
+            border-radius:20px;
+            z-index:-1;
+            border:2px solid #fff;
+            box-shadow:-2px -2px 4px #56a;
+        }
+    }
+    
+}
+
 .panel-body .fa-plug,.block-car-data-info .fa-plug {
     font-size:13px; 
     margin-left:5px;
+}
+
+#markers-control {
+
+    position: absolute;
+    top: 60px;
+    right: -40px;
+    z-index: 10;
+    box-shadow: 0 5px 8px #aaa;
+    border: 1px solid #aaa;
+    border-top-left-radius:3px;
+    border-bottom-left-radius:3px;
+    border-right:none;
+    transition: right 0.5s;
+    text-align:left;
+    
+    &:hover {
+        right:0;
+    }
+    
+    a {
+        background-color:#55C754;
+        background-color:rgba(41,111,255,.8);
+        width:70px;
+        color:#fff;
+        transition: background-color 0.5s;
+        
+        &:hover {
+            background-color:#fff;
+            background-color:rgba(41,111,255,1);
+        }
+        
+        span {color:#fff !important;}
+        
+        &.deactive {
+            background-color:#c9302c;
+            background-color:rgba(201,48,44,1);
+        }
+    }
+}
+.resultsCars .panel-body  {
+    max-height:500px;
+    overflow:auto;
 }
