@@ -26,7 +26,8 @@ $(function() {
         "fnServerParams": function ( aoData ) {
             aoData.push({ "name": "column", "value": $(column).val()});
             aoData.push({ "name": "searchValue", "value": formatData().trim()});
-            aoData.push({ "name": "customerId", "value": customerId});
+            aoData.push({ "name": "idColumn", "value": "e.customer"});
+            aoData.push({ "name": "idValue", "value": customerId});
         },
         "order": [[0, 'asc']],
         "columns": [
