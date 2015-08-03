@@ -26,8 +26,10 @@ $(function() {
         "fnServerParams": function ( aoData ) {
             aoData.push({ "name": "column", "value": $(column).val()});
             aoData.push({ "name": "searchValue", "value": formatData().trim()});
-            aoData.push({ "name": "idColumn", "value": "e.customer"});
-            aoData.push({ "name": "idValue", "value": customerId});
+            aoData.push({ "name": "fixedColumn", "value": "e.customer"});
+            aoData.push({ "name": "fixedValue", "value": customerId});
+            aoData.push({ "name": "fixedLike", "value": false});
+            aoData.push({ "name": "fixedId", "value": true});
         },
         "order": [[0, 'asc']],
         "columns": [
