@@ -110,7 +110,7 @@ angular.module('SharengoCsApp').controller('SharengoCsController', function (
                     car.options.labelContent=car.battery+'%';
                 }     
                 
-                if(car.sinceLastTrip && car.sinceLastTrip>60){
+                if(car.sinceLastTrip && car.sinceLastTrip>1440){
                     car.carIcon = "/assets-modules/call-center/images/marker-s-azzure"+carCharging+".png";
                     car.iconSelected = "/assets-modules/call-center/images/marker-s-azzure-selected"+carCharging+".png";   
                 }else{
