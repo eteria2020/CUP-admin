@@ -460,6 +460,7 @@ class CustomersController extends AbstractActionController
 
         if ($customerId) {
             $customer = $this->customerService->findById($customerId);
+
             if (is_null($customer)) {
                 $this->getResponse()->setStatusCode(Response::STATUS_CODE_404);
 
@@ -477,6 +478,10 @@ class CustomersController extends AbstractActionController
                     $this->flashMessenger()->addSuccessMessage('Operazione completata con successo!');
                 } catch (\Exception $e) {
                     $this->flashMessenger()->addErrorMessage('Qualcosa è andata storto durante la creazione');
+                }
+
+                if (!is_null($customer)) {
+                    return $this->redirect()->toRoute('customers/edit', ['id' => $customer->getId()], ['query' => ['tab' => 'card']]);
                 }
 
                 return $this->redirect()->toRoute('customers/list-card');

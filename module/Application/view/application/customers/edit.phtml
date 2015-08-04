@@ -85,7 +85,7 @@ $(document).ready(function () {
         , position: 'absolute' // Element positioning
     }
     var target = document.getElementById('spinner-loader')
-    //var spinner = new Spinner(opts).spin(target);
+    var spinner = new Spinner(opts).spin(target);
     var tab = '{$this->tab}';
     var idTab = '#tab-' + tab;
     $('#menu-' + tab).addClass('active');
@@ -99,7 +99,7 @@ $(document).ready(function () {
     });
 
     $('#js-tabs a').click(function(e) {
-        //var spinner = new Spinner(opts).spin(target);
+        var spinner = new Spinner(opts).spin(target);
         var _this = $(this);
         var loadurl = _this.attr('href');
         var targ = _this.attr('data-target');

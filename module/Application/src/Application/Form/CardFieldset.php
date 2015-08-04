@@ -61,6 +61,12 @@ class CardFieldset extends Fieldset implements InputFilterProviderInterface
                         'options' => [
                             'service' => $this->cardService
                         ]
+                    ],
+                    [
+                        'name'    => 'StringLength',
+                        'options' => [
+                            'max' => 8
+                        ]
                     ]
                 ],
             ]

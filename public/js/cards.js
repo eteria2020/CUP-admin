@@ -26,13 +26,7 @@ $(function() {
             {data: 'e.isAssigned'},
             {data: 'e.notes'},
             {data: 'e.assignable'},
-            {data: 'e.customer'}
-        ],
-        "columnDefs": [
-            {
-                targets: 4,
-                sortable: false
-            }
+            {data: 'cu.surname'}
         ],
         "lengthMenu": [
             [100, 200, 300],
