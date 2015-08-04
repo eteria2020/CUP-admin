@@ -29,7 +29,6 @@ $(function() {
             aoData.push({ "name": "fixedColumn", "value": "e.customer"});
             aoData.push({ "name": "fixedValue", "value": customerId});
             aoData.push({ "name": "fixedLike", "value": false});
-            aoData.push({ "name": "fixedId", "value": true});
         },
         "order": [[0, 'asc']],
         "columns": [
