@@ -538,7 +538,7 @@ return array(
             [
                 'label'     => 'Auto',
                 'route'     => 'cars',
-                'icon'      => 'fa fa-users',
+                'icon'      => 'fa fa-car',
                 'resource'  => 'admin',
                 'isRouteJs' => true,
                 'pages'     => [
@@ -564,7 +564,7 @@ return array(
             [
                 'label'     => 'Corse',
                 'route'     => 'trips',
-                'icon'      => 'fa fa-users',
+                'icon'      => 'fa fa-road',
                 'resource'  => 'admin',
                 'isRouteJs' => true,
                 'pages'     => [
