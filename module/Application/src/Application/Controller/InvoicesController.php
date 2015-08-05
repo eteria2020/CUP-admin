@@ -32,7 +32,7 @@ class InvoicesController extends AbstractActionController
         $filters['withLimit'] = true;
         // get data for datatable from service
         $dataDataTable = $this->invoicesService->getDataDataTable($filters);
-        $totalInvoices = $this->invoicesService->getTotalInvoices();
+        $totalInvoices = $this->invoicesService->getTotalDatatableInvoices($filters);
         $recordsFiltered = $this->getRecordsFiltered($filters, $totalInvoices);
 
         return new JsonModel([
