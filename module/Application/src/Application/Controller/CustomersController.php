@@ -437,4 +437,17 @@ class CustomersController extends AbstractActionController
 
         return $I_customer;
     }
+
+    public function invoicesTabAction()
+    {
+        $customer = $this->getCustomer();
+
+        $view = new ViewModel([
+            'customer'  => $customer,
+        ]);
+
+        $view->setTerminal(true);
+
+        return $view;
+    }
 }

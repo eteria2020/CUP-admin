@@ -142,6 +142,20 @@ return array(
                             ],
                         ],
                     ],
+                    'ajax-tab-invoices' => [
+                        'type'    => 'Segment',
+                        'options' => [
+                            'route'    => '/ajax-tab/invoices/:id',
+                            'constraints' => [
+                                'id' => '[0-9]*'
+                            ],
+                            'defaults' => [
+                                '__NAMESPACE__' => 'Application\Controller',
+                                'controller'    => 'Customers',
+                                'action'        => 'invoices-tab',
+                            ],
+                        ],
+                    ],
                     'ajax-card-code' => [
                         'type'    => 'Literal',
                         'options' => [
@@ -270,6 +284,30 @@ return array(
                                 '__NAMESPACE__' => 'Application\Controller',
                                 'controller'    => 'Cars',
                                 'action'        => 'send-command',
+                            ],
+                        ],
+                    ],
+                ],
+            ],
+            'invoices' => [
+                'type' => 'Literal',
+                'options' => [
+                    'route' => '/invoices',
+                    'defaults' => [
+                        'controller' => 'Application\Controller\Invoices',
+                        'action' => 'index'
+                    ]
+                ],
+                'may_terminate' => true,
+                'child_routes' => [
+                    'datatable' => [
+                        'type'    => 'Literal',
+                        'options' => [
+                            'route'    => '/datatable',
+                            'defaults' => [
+                                '__NAMESPACE__' => 'Application\Controller',
+                                'controller'    => 'Invoices',
+                                'action'        => 'datatable',
                             ],
                         ],
                     ],
@@ -414,7 +452,8 @@ return array(
             'Application\controller\Users'        => 'Application\Controller\UsersControllerFactory',
             'Application\Controller\Cars'         => 'Application\Controller\CarsControllerFactory',
             'Application\Controller\Customers'    => 'Application\Controller\CustomersControllerFactory',
-            'Application\Controller\Reservations' => 'Application\Controller\ReservationsControllerFactory'
+            'Application\Controller\Reservations' => 'Application\Controller\ReservationsControllerFactory',
+            'Application\Controller\Invoices' => 'Application\Controller\InvoicesControllerFactory'
         ]
     ],
     'translator'         => [
@@ -501,7 +540,8 @@ return array(
                 ['controller' => 'Application\Controller\Cars', 'roles' => ['admin']],
                 ['controller' => 'Application\Controller\ConsoleUser', 'roles' => []],
                 ['controller' => 'Application\Controller\Users', 'roles' => ['admin']],
-                ['controller' => 'Application\Controller\Reservations', 'roles' => ['admin']]
+                ['controller' => 'Application\Controller\Reservations', 'roles' => ['admin']],
+                ['controller' => 'Application\Controller\Invoices', 'roles' => ['admin']]
             ),
         ),
     ),
