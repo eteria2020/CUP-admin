@@ -481,22 +481,22 @@
         },
         {
             "name": "doctrine/doctrine-module",
-            "version": "0.8.1",
+            "version": "0.9.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/DoctrineModule.git",
-                "reference": "83d422b98eb183d206f2a4b568ab488a98d2a74f"
+                "reference": "81fd6a95609d88c2a059117ba18346240f2cc8d2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/DoctrineModule/zipball/83d422b98eb183d206f2a4b568ab488a98d2a74f",
-                "reference": "83d422b98eb183d206f2a4b568ab488a98d2a74f",
+                "url": "https://api.github.com/repos/doctrine/DoctrineModule/zipball/81fd6a95609d88c2a059117ba18346240f2cc8d2",
+                "reference": "81fd6a95609d88c2a059117ba18346240f2cc8d2",
                 "shasum": ""
             },
             "require": {
                 "doctrine/common": ">=2.4,<2.6-dev",
-                "php": ">=5.3.23",
-                "symfony/console": "~2.3",
+                "php": ">=5.4",
+                "symfony/console": "~2.3|~3.0",
                 "zendframework/zend-authentication": "~2.3",
                 "zendframework/zend-cache": "~2.3",
                 "zendframework/zend-mvc": "~2.3",
@@ -506,8 +506,9 @@
                 "zendframework/zend-validator": "~2.3"
             },
             "require-dev": {
-                "phpunit/phpunit": "~3.7",
-                "squizlabs/php_codesniffer": "1.5.*",
+                "doctrine/coding-standard": "dev-master",
+                "phpunit/phpunit": "~4.0",
+                "squizlabs/php_codesniffer": "~2",
                 "zendframework/zendframework": "~2.3"
             },
             "suggest": {
@@ -517,11 +518,6 @@
                 "bin/doctrine-module"
             ],
             "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "0.9.x-dev"
-                }
-            },
             "autoload": {
                 "psr-0": {
                     "DoctrineModule\\": "src/"
@@ -559,7 +555,7 @@
                 "module",
                 "zf2"
             ],
-            "time": "2015-04-15 20:43:34"
+            "time": "2015-07-14 16:36:19"
         },
         {
             "name": "doctrine/doctrine-orm-module",
@@ -892,6 +888,107 @@
             "time": "2015-04-02 20:40:18"
         },
         {
+            "name": "h4cc/wkhtmltopdf-amd64",
+            "version": "0.12.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/h4cc/wkhtmltopdf-amd64.git",
+                "reference": "ebaa56a8ba0ae70a147ee70d544abf743db290d3"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/h4cc/wkhtmltopdf-amd64/zipball/ebaa56a8ba0ae70a147ee70d544abf743db290d3",
+                "reference": "ebaa56a8ba0ae70a147ee70d544abf743db290d3",
+                "shasum": ""
+            },
+            "bin": [
+                "bin/wkhtmltopdf-amd64"
+            ],
+            "type": "library",
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "LGPL Version 3"
+            ],
+            "authors": [
+                {
+                    "name": "Julius Beckmann",
+                    "email": "github@h4cc.de"
+                }
+            ],
+            "description": "Convert html to pdf using webkit (qtwebkit). Static linked linux binary for amd64 systems.",
+            "homepage": "http://wkhtmltopdf.org/",
+            "keywords": [
+                "binary",
+                "convert",
+                "pdf",
+                "snapshot",
+                "thumbnail",
+                "wkhtmltopdf"
+            ],
+            "time": "2014-02-11 21:33:07"
+        },
+        {
+            "name": "knplabs/knp-snappy",
+            "version": "0.3.4",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/KnpLabs/snappy.git",
+                "reference": "f29edc4e53429deec2b394926a8f743a0ad2e28e"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/KnpLabs/snappy/zipball/f29edc4e53429deec2b394926a8f743a0ad2e28e",
+                "reference": "f29edc4e53429deec2b394926a8f743a0ad2e28e",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.0"
+            },
+            "require-dev": {
+                "symfony/process": "~2.1"
+            },
+            "suggest": {
+                "h4cc/wkhtmltopdf-amd64": "Provide wkhtmltopdf-amd64 binary, use version `0.12.0` as dependency",
+                "h4cc/wkhtmltopdf-i386": "Provide wkhtmltopdf-i386 binary, use version `0.12.0` as dependency"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "0.3.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-0": {
+                    "Knp\\Snappy": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "KnpLabs Team",
+                    "homepage": "http://knplabs.com"
+                },
+                {
+                    "name": "Symfony Community",
+                    "homepage": "http://github.com/KnpLabs/snappy/contributors"
+                }
+            ],
+            "description": "PHP5 library allowing thumbnail, snapshot or PDF generation from a url or a html page. Wrapper for wkhtmltopdf/wkhtmltoimage.",
+            "homepage": "http://github.com/KnpLabs/snappy",
+            "keywords": [
+                "knp",
+                "knplabs",
+                "pdf",
+                "snapshot",
+                "thumbnail",
+                "wkhtmltopdf"
+            ],
+            "time": "2015-05-07 07:43:07"
+        },
+        {
             "name": "kriswallsmith/assetic",
             "version": "v1.2.1",
             "source": {
@@ -1007,15 +1104,71 @@
             "time": "2014-11-24 18:39:20"
         },
         {
+            "name": "mvlabs/mvlabs-snappy",
+            "version": "0.2.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/mvlabs/MvlabsSnappy.git",
+                "reference": "7e0e14cecef9f4a63565d84b0a969452b28ab1fd"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/mvlabs/MvlabsSnappy/zipball/7e0e14cecef9f4a63565d84b0a969452b28ab1fd",
+                "reference": "7e0e14cecef9f4a63565d84b0a969452b28ab1fd",
+                "shasum": ""
+            },
+            "require": {
+                "knplabs/knp-snappy": "0.3.*",
+                "php": ">=5.3.3",
+                "zendframework/zendframework": "2.*"
+            },
+            "type": "zf2-module",
+            "autoload": {
+                "psr-0": {
+                    "MvlabsSnappy": "src/"
+                },
+                "classmap": [
+                    "./Module.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Diego Drigani",
+                    "email": "d.drigani@mvlabs.it",
+                    "homepage": "http://www.mvlabs.it/en/"
+                }
+            ],
+            "description": "MvlabsSnappy is a ZF2 module that allow easy to thumbnail, snapshot or PDF generation from a url or a html page using Snappy PHP (5.3+) wrapper for the  wkhtmltopdf/wkhtmltoimage conversion utility.",
+            "homepage": "https://github.com/mvlabs/MvlabsSnappy.git",
+            "keywords": [
+                "MvLabs",
+                "MvaAssociati",
+                "pdf",
+                "snappy",
+                "snapshot",
+                "thumbnail",
+                "wkhtmltoimage",
+                "wkhtmltopdf",
+                "zf2"
+            ],
+            "time": "2015-03-30 15:54:03"
+        },
+        {
             "name": "mvlabs/sharengo-coremodule",
             "version": "dev-master",
             "source": {
                 "type": "git",
                 "url": "ssh://git@git.mvlabs.it:4222/clients/sharengo-coremodule.git",
-                "reference": "6c58cf2b978afbbb4a2d192fdfd10a7f77786192"
+                "reference": "596be87a1c35ac092c332d95bed87244bd3bde34"
             },
             "require": {
                 "doctrine/doctrine-orm-module": "0.*",
+                "h4cc/wkhtmltopdf-amd64": "0.12.0",
+                "mvlabs/mvlabs-snappy": "0.2.*",
                 "php": ">=5.4.0",
                 "zendframework/zendframework": "2.4.*"
             },
@@ -1026,7 +1179,7 @@
                 }
             },
             "description": "Core ZF2 module for Sharengo apps",
-            "time": "2015-06-30 07:40:57"
+            "time": "2015-08-05 07:42:55"
         },
         {
             "name": "rwoverdijk/assetmanager",
@@ -1091,16 +1244,16 @@
         },
         {
             "name": "symfony/console",
-            "version": "v2.7.1",
+            "version": "v2.7.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/Console.git",
-                "reference": "564398bc1f33faf92fc2ec86859983d30eb81806"
+                "reference": "d6cf02fe73634c96677e428f840704bfbcaec29e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/Console/zipball/564398bc1f33faf92fc2ec86859983d30eb81806",
-                "reference": "564398bc1f33faf92fc2ec86859983d30eb81806",
+                "url": "https://api.github.com/repos/symfony/Console/zipball/d6cf02fe73634c96677e428f840704bfbcaec29e",
+                "reference": "d6cf02fe73634c96677e428f840704bfbcaec29e",
                 "shasum": ""
             },
             "require": {
@@ -1144,20 +1297,20 @@
             ],
             "description": "Symfony Console Component",
             "homepage": "https://symfony.com",
-            "time": "2015-06-10 15:30:22"
+            "time": "2015-07-28 15:18:12"
         },
         {
             "name": "symfony/process",
-            "version": "v2.7.1",
+            "version": "v2.7.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/Process.git",
-                "reference": "552d8efdc80980cbcca50b28d626ac8e36e3cdd1"
+                "reference": "48aeb0e48600321c272955132d7606ab0a49adb3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/Process/zipball/552d8efdc80980cbcca50b28d626ac8e36e3cdd1",
-                "reference": "552d8efdc80980cbcca50b28d626ac8e36e3cdd1",
+                "url": "https://api.github.com/repos/symfony/Process/zipball/48aeb0e48600321c272955132d7606ab0a49adb3",
+                "reference": "48aeb0e48600321c272955132d7606ab0a49adb3",
                 "shasum": ""
             },
             "require": {
@@ -1193,25 +1346,25 @@
             ],
             "description": "Symfony Process Component",
             "homepage": "https://symfony.com",
-            "time": "2015-06-08 09:37:21"
+            "time": "2015-07-01 11:25:50"
         },
         {
             "name": "zendframework/zendframework",
-            "version": "2.4.3",
+            "version": "2.4.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/zendframework/zf2.git",
-                "reference": "eb6275e9227e9ed1995d326087488d3ea25811b5"
+                "reference": "e0fc119111bace89e0ab7da57ab24d49713a17d1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/zendframework/zf2/zipball/eb6275e9227e9ed1995d326087488d3ea25811b5",
-                "reference": "eb6275e9227e9ed1995d326087488d3ea25811b5",
+                "url": "https://api.github.com/repos/zendframework/zf2/zipball/e0fc119111bace89e0ab7da57ab24d49713a17d1",
+                "reference": "e0fc119111bace89e0ab7da57ab24d49713a17d1",
                 "shasum": ""
             },
             "require": {
                 "php": ">=5.3.23",
-                "zendframework/zendxml": "~1.0-dev"
+                "zendframework/zendxml": "^1.0.1"
             },
             "replace": {
                 "zendframework/zend-authentication": "self.version",
@@ -1310,28 +1463,28 @@
                 "framework",
                 "zf2"
             ],
-            "time": "2015-06-17 19:32:51"
+            "time": "2015-08-03 15:03:22"
         },
         {
             "name": "zendframework/zendxml",
-            "version": "1.0.0",
+            "version": "1.0.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/zendframework/ZendXml.git",
-                "reference": "559b34f426d33a11c3db118e00ce14bb8dc64e5f"
+                "reference": "54edb3875aba5b45f02824f65f311c9fb2743a38"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/zendframework/ZendXml/zipball/559b34f426d33a11c3db118e00ce14bb8dc64e5f",
-                "reference": "559b34f426d33a11c3db118e00ce14bb8dc64e5f",
+                "url": "https://api.github.com/repos/zendframework/ZendXml/zipball/54edb3875aba5b45f02824f65f311c9fb2743a38",
+                "reference": "54edb3875aba5b45f02824f65f311c9fb2743a38",
                 "shasum": ""
             },
             "require": {
                 "php": ">=5.3.3"
             },
             "require-dev": {
-                "fabpot/php-cs-fixer": "*@dev",
-                "phpunit/phpunit": "~3.7"
+                "phpunit/phpunit": "~3.7",
+                "squizlabs/php_codesniffer": "~1.5"
             },
             "type": "library",
             "extra": {
@@ -1341,7 +1494,7 @@
             },
             "autoload": {
                 "psr-0": {
-                    "ZendXml": "library/"
+                    "ZendXml\\": "library/"
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -1355,7 +1508,7 @@
                 "xml",
                 "zf2"
             ],
-            "time": "2014-03-05 22:25:44"
+            "time": "2015-08-03 14:50:10"
         },
         {
             "name": "zf-commons/zfc-base",
@@ -1489,16 +1642,16 @@
         },
         {
             "name": "zf-commons/zfc-user-doctrine-orm",
-            "version": "1.0.0",
+            "version": "1.0.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/ZF-Commons/ZfcUserDoctrineORM.git",
-                "reference": "9a2e148c9a5a03ca8592b93ea28a21e37b06e053"
+                "reference": "252d77f55e64312184f3bcd4168292d919f11ceb"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/ZF-Commons/ZfcUserDoctrineORM/zipball/9a2e148c9a5a03ca8592b93ea28a21e37b06e053",
-                "reference": "9a2e148c9a5a03ca8592b93ea28a21e37b06e053",
+                "url": "https://api.github.com/repos/ZF-Commons/ZfcUserDoctrineORM/zipball/252d77f55e64312184f3bcd4168292d919f11ceb",
+                "reference": "252d77f55e64312184f3bcd4168292d919f11ceb",
                 "shasum": ""
             },
             "require": {
@@ -1541,7 +1694,7 @@
             "keywords": [
                 "zf2"
             ],
-            "time": "2014-04-18 10:21:19"
+            "time": "2015-07-20 20:10:49"
         }
     ],
     "packages-dev": [],

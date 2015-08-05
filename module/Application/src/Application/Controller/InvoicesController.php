@@ -33,7 +33,7 @@ class InvoicesController extends AbstractActionController
         // get data for datatable from service
         $dataDataTable = $this->invoicesService->getDataDataTable($filters);
         $totalInvoices = $this->invoicesService->getTotalInvoices();
-        $recordsFiltered = $this->_getRecordsFiltered($filters, $totalInvoices);
+        $recordsFiltered = $this->getRecordsFiltered($filters, $totalInvoices);
 
         return new JsonModel([
             'draw'            => $this->params()->fromQuery('sEcho', 0),
@@ -43,7 +43,7 @@ class InvoicesController extends AbstractActionController
         ]);
     }
 
-    protected function _getRecordsFiltered($filters, $totalInvoices)
+    protected function getRecordsFiltered($filters, $totalInvoices)
     {
         if (empty($filters['searchValue']) && !isset($filters['columnValueWithoutLike'])) {
 

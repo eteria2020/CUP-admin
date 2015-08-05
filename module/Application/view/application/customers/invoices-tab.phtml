@@ -94,6 +94,7 @@
 </div>
 
 <script>
-var customerId = "<?= $this->customer->getId() ?>";
+var customerId = "<?= $this->customer->getId(); ?>";
+var pdfPath = "<?= $this->url('pdf/invoices'); ?>/";
 </script>
 <script type="text/javascript" src="<?= $this->basePath() ?>/js/invoices.js"></script>

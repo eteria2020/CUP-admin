@@ -59,7 +59,10 @@ $(function() {
             },
             {
                 targets: 4,
-                sortable: false
+                sortable: false,
+                "render": function ( data, type, row ) {
+                    return renderLink(data);
+                }
             }
         ],
         "lengthMenu": [
@@ -165,6 +168,11 @@ $(function() {
             case 'PENALTY':
                 return 'Sanzione';
         }
+    }
+
+    function renderLink(id)
+    {
+        return '<a href=' + pdfPath + id + '><i class="fa fa-download"></i></a>';
     }
 
     function toStringKeepZero(value)

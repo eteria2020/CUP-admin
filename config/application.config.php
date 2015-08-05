@@ -9,6 +9,7 @@ return array(
         'ZfcUserDoctrineORM',
         'BjyAuthorize',
         'AssetManager',
+        'MvlabsSnappy',
 
         'CallCenter',
         'SharengoCore',
