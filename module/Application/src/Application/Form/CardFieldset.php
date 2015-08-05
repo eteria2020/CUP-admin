@@ -34,7 +34,8 @@ class CardFieldset extends Fieldset implements InputFilterProviderInterface
             'attributes' => [
                 'id'       => 'code',
                 'class'    => 'form-control',
-                'required' => 'required'
+                'required' => 'required',
+                'maxlength' => 8
             ]
         ]);
     }
