@@ -419,7 +419,31 @@ return array(
                         ],
                     ],
                 ],
-            ]
+            ],
+            'invoices' => [
+                'type' => 'Literal',
+                'options' => [
+                    'route' => '/invoices',
+                    'defaults' => [
+                        'controller' => 'Application\Controller\Invoices',
+                        'action' => 'index'
+                    ]
+                ],
+                'may_terminate' => true,
+                'child_routes' => [
+                    'datatable' => [
+                        'type'    => 'Literal',
+                        'options' => [
+                            'route'    => '/datatable',
+                            'defaults' => [
+                                '__NAMESPACE__' => 'Application\Controller',
+                                'controller'    => 'Invoices',
+                                'action'        => 'datatable',
+                            ],
+                        ],
+                    ],
+                ],
+            ],
         ),
     ),
     'service_manager' => array(
@@ -625,6 +649,20 @@ return array(
                     [
                         'label' => 'Elenco',
                         'route' => 'reservations',
+                        'isVisible' => true
+                    ]
+                ],
+            ],
+            [
+                'label'     => 'Fatture',
+                'route'     => 'invoices',
+                'icon'      => 'fa fa-file-o',
+                'resource'  => 'admin',
+                'isRouteJs' => true,
+                'pages'     => [
+                    [
+                        'label' => 'Elenco',
+                        'route' => 'invoices',
                         'isVisible' => true
                     ]
                 ],
