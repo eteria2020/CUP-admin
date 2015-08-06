@@ -3,7 +3,7 @@ $(function() {
     var table    = $('#js-invoices-table');
     var search   = $('#js-value');
     var column   = $('#js-column');
-    var typePayment = $('#js-payment-type');
+    var typeClean = $('#js-clean-type');
 
     search.val('');
     column.val('select');
@@ -26,13 +26,14 @@ $(function() {
         "fnServerParams": function ( aoData ) {
             aoData.push({ "name": "column", "value": $(column).val()});
             aoData.push({ "name": "searchValue", "value": formatData().trim()});
+            aoData.push({ "name": "fixedColumn", "value": "e.customer"});
+            aoData.push({ "name": "fixedValue", "value": customerId});
+            aoData.push({ "name": "fixedLike", "value": false});
         },
         "order": [[0, 'asc']],
         "columns": [
             {data: 'e.invoiceNumber'},
             {data: 'e.invoiceDate'},
-            {data: 'e.customerName'},
-            {data: 'e.customerSurname'},
             {data: 'e.type'},
             {data: 'e.amount'},
             {data: 'link'}
@@ -45,19 +46,19 @@ $(function() {
                 }
             },
             {
-                targets: 4,
+                targets: 2,
                 "render": function ( data, type, row ) {
                     return renderType(data);
                 }
             },
             {
-                targets: 5,
+                targets: 3,
                 "render": function ( data, type, row ) {
                     return renderAmount(data);
                 }
             },
             {
-                targets: 6,
+                targets: 4,
                 sortable: false,
                 "render": function ( data, type, row ) {
                     return renderLink(data);
@@ -111,7 +112,7 @@ $(function() {
     $(column).change(function() {
         var value = $(this).val();
         search.val('');
-        typePayment.hide();
+        typeClean.hide();
         search.show();
     });
 
