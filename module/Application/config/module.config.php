@@ -318,7 +318,8 @@ return array(
                 'options' => [
                     'route' => '/trips',
                     'defaults' => [
-                        'controller' => 'Application\Controller\Trips',
+                        '__NAMESPACE__' => 'Application\Controller',
+                        'controller' => 'Trips',
                         'action' => 'index'
                     ]
                 ],
@@ -329,11 +330,27 @@ return array(
                         'options' => [
                             'route'    => '/datatable',
                             'defaults' => [
-                                '__NAMESPACE__' => 'Application\Controller',
-                                'controller'    => 'Trips',
                                 'action'        => 'datatable',
                             ],
                         ],
+                    ],
+                    'cost' => [
+                        'type' => 'Literal',
+                        'options' => [
+                            'route' => '/cost',
+                            'defaults' => [
+                                'action' => 'trip-cost',
+                            ],
+                        ]
+                    ],
+                    'cost-computation' => [
+                        'type' => 'Literal',
+                        'options' => [
+                            'route' => '/cost-computation',
+                            'defaults' => [
+                                'action' => 'trip-cost-computation'
+                            ]
+                        ]
                     ]
                 ],
              ],
@@ -463,6 +480,7 @@ return array(
             'SettingForm' => 'Application\Form\SettingFormFactory',
             'PromoCodeForm' => 'Application\Form\PromoCodeFormFactory',
             'CustomerBonusForm' => 'Application\Form\CustomerBonusFormFactory',
+            'TripCostForm' => 'Application\Form\TripCostFormFactory'
         ]
     ),
     'controllers' => [
@@ -635,6 +653,11 @@ return array(
                     [
                         'label' => 'Elenco',
                         'route' => 'trips',
+                        'isVisible' => true
+                    ],
+                    [
+                        'label' => 'Costo corsa',
+                        'route' => 'trips/cost',
                         'isVisible' => true
                     ]
                 ],

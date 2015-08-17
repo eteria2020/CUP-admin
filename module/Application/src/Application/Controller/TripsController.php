@@ -1,14 +1,11 @@
 <?php
 namespace Application\Controller;
 
-use Application\Form\CustomerForm;
-use SharengoCore\Entity\Customers;
-use SharengoCore\Service\CustomersService;
+use Application\Form\TripCostForm;
 use SharengoCore\Service\TripsService;
-use Zend\Form\Form;
-use Zend\Http\Response;
+use SharengoCore\Service\TripCostComputerService;
+
 use Zend\Mvc\Controller\AbstractActionController;
-use Zend\Stdlib\Hydrator\HydratorInterface;
 use Zend\View\Model\JsonModel;
 use Zend\View\Model\ViewModel;
 
@@ -19,12 +16,27 @@ class TripsController extends AbstractActionController
      */
     private $I_tripsService;
 
-    public function __construct(TripsService $I_tripsService)
-    {
+    /**
+     * @var TripCostForm
+     */
+    private $tripCostForm;
+
+    /**
+     * @var TripCostComputerService
+     */
+    private $tripCostComputerService;
+
+    public function __construct(
+        TripsService $I_tripsService,
+        TripCostForm $tripCostForm,
+        TripCostComputerService $tripCostComputerService
+    ) {
         $this->I_tripsService = $I_tripsService;
+        $this->tripCostForm = $tripCostForm;
+        $this->tripCostComputerService = $tripCostComputerService;
     }
 
-    public function indexction()
+    public function indexAction()
     {
         return new ViewModel();
     }
@@ -57,5 +69,33 @@ class TripsController extends AbstractActionController
 
             return count($this->I_tripsService->getDataDataTable($as_filters));
         }
+    }
+
+    public function tripCostAction()
+    {
+        return new ViewModel([
+            'form' => $this->tripCostForm
+        ]);
+    }
+
+    public function tripCostComputationAction()
+    {
+        $tripBeginning = date_create_from_format('Y/m/d H:i:s', $this->params()->fromPost('tripBeginning'));
+        $tripEnd = date_create_from_format('Y/m/d H:i:s', $this->params()->fromPost('tripEnd'));
+        $tripParkSeconds = (int) $this->params()->fromPost('tripParkSeconds');
+        $customerGender = $this->params()->fromPost('customerGender');
+        $customerBonus = (int) $this->params()->fromPost('customerBonus');
+
+        $tripCost = $this->tripCostComputerService->computeCost(
+            $tripBeginning,
+            $tripEnd,
+            $tripParkSeconds,
+            $customerGender,
+            $customerBonus
+        );
+
+        return new JsonModel([
+            'cost' => $tripCost
+        ]);
     }
 }
