@@ -70,7 +70,6 @@ $(function() {
             {data: 'e.timestampEnd'},
             {data: 'duration'},
             {data: 'e.parkSeconds'},
-            {data: 'price'},
             {data: 'c.keyStatus'},
             {data: 'c.parking'},
             {data: 'e.payable'}
