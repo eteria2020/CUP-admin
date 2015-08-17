@@ -18,8 +18,5 @@ return array(
         'X-Mailer' => 'Sharengo agent',
         'sharengoNotices' => 'webmaster@philcartechnology.eu',
         'registrationBcc' => 'webmaster@philcartechnology.eu'
-    ],
-    'simple-logger' => [
-        'environment' => 'production'
     ]
 );
