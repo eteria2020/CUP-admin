@@ -11,5 +11,15 @@
  * credentials from accidentally being committed into version control.
  */
 
-return array(
-);
+return [
+    'emailSettings' => [
+        'from' => '',
+        'replyTo' => '',
+        'X-Mailer' => '',
+        'sharengoNotices' => '',
+        'registrationBcc' => ''
+    ],
+    'simple-logger' => [
+        'environment' => 'development'
+    ]
+];
