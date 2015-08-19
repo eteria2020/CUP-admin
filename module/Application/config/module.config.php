@@ -461,6 +461,61 @@ return array(
                     ],
                 ],
             ],
+            'payments' => [
+                'type' => 'Literal',
+                'options' => [
+                    'route' => '/payments',
+                    'defaults' => [
+                        '__NAMESPACE__' => 'Application\Controller',
+                        'controller' => 'Payments'
+                    ]
+                ],
+                'may_terminate' => false,
+                'child_routes' => [
+                    'retry' => [
+                        'type' => 'Segment',
+                        'options' => [
+                            'route' => '/retry/:id',
+                            'constraints' => [
+                                'id'    => '[0-9]*'
+                            ],
+                            'defaults' => [
+                                'action' => 'retry'
+                            ]
+                        ]
+                    ],
+                    'do-retry' => [
+                        'type' => 'Segment',
+                        'options' => [
+                            'route' => '/do-retry/:id',
+                            'constraints' => [
+                                'id'    => '[0-9]*'
+                            ],
+                            'defaults' => [
+                                'action' => 'do-retry'
+                            ]
+                        ]
+                    ],
+                    'failed-payments' => [
+                        'type' => 'Literal',
+                        'options' => [
+                            'route' => '/failed-payments',
+                            'defaults' => [
+                                'action' => 'failed-payments'
+                            ]
+                        ]
+                    ],
+                    'failed-payments-datatable' => [
+                        'type' => 'Literal',
+                        'options' => [
+                            'route' => '/failed-payments-datatable',
+                            'defaults' => [
+                                'action' => 'failed-payments-datatable'
+                            ]
+                        ]
+                    ]
+                ]
+            ]
         ),
     ),
     'service_manager' => array(
@@ -495,7 +550,8 @@ return array(
             'Application\Controller\Cars'         => 'Application\Controller\CarsControllerFactory',
             'Application\Controller\Customers'    => 'Application\Controller\CustomersControllerFactory',
             'Application\Controller\Reservations' => 'Application\Controller\ReservationsControllerFactory',
-            'Application\Controller\Invoices' => 'Application\Controller\InvoicesControllerFactory'
+            'Application\Controller\Invoices' => 'Application\Controller\InvoicesControllerFactory',
+            'Application\Controller\Payments' => 'Application\Controller\PaymentsControllerFactory'
         ]
     ],
     'translator'         => [
@@ -583,7 +639,8 @@ return array(
                 ['controller' => 'Application\Controller\ConsoleUser', 'roles' => []],
                 ['controller' => 'Application\Controller\Users', 'roles' => ['admin']],
                 ['controller' => 'Application\Controller\Reservations', 'roles' => ['admin']],
-                ['controller' => 'Application\Controller\Invoices', 'roles' => ['admin']]
+                ['controller' => 'Application\Controller\Invoices', 'roles' => ['admin']],
+                ['controller' => 'Application\Controller\Payments', 'roles' => ['admin']]
             ),
         ),
     ),
@@ -689,6 +746,20 @@ return array(
                         'isVisible' => true
                     ]
                 ],
+            ],
+            [
+                'label' => 'Pagamenti',
+                'route' => 'payments',
+                'icon' => 'fa fa-money',
+                'resource' => 'admin',
+                'isRouteJs' => true,
+                'pages' => [
+                    [
+                        'label' => 'Pagamenti falliti',
+                        'route' => 'payments/failed-payments',
+                        'isVisible' => true
+                    ]
+                ]
             ],
             [
                 'label'           => 'Call center',

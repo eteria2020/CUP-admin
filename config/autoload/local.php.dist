@@ -21,5 +21,8 @@ return [
     ],
     'simple-logger' => [
         'environment' => 'development'
+    ],
+    'website' => [
+        'uri' => 'http://www.dev.sharengo.eu'
     ]
 ];
