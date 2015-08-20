@@ -4,6 +4,7 @@ namespace Application\Controller;
 
 use SharengoCore\Service\TripPaymentsService;
 use SharengoCore\Service\PaymentsService;
+use SharengoCore\Service\CustomersService;
 
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\JsonModel;
@@ -21,12 +22,19 @@ class PaymentsController extends AbstractActionController
      */
     private $paymentsService;
 
+    /**
+     * @var CustomersService
+     */
+    private $customersService;
+
     public function __construct(
         TripPaymentsService $tripPaymentsService,
-        PaymentsService $paymentsService
+        PaymentsService $paymentsService,
+        CustomersService $customersService
     ) {
         $this->tripPaymentsService = $tripPaymentsService;
         $this->paymentsService = $paymentsService;
+        $this->customersService = $customersService;
     }
 
     public function failedPaymentsAction()
@@ -74,8 +82,12 @@ class PaymentsController extends AbstractActionController
 
         $tripPayment = $this->tripPaymentsService->getTripPaymentById($id);
 
-        // avoid sending email to customer
+        // the second parameter is needed to avoid sending an email to the customer
         $cartasiResponse = $this->paymentsService->tryTripPayment($tripPayment, true);
+
+        if ($cartasiResponse->getOutcome() === 'OK') {
+            $this->customersService->setCustomerPaymentAble($tripPayment->getCustomer());
+        }
 
         return new JsonModel([
             'outcome' => $cartasiResponse->getOutcome(),

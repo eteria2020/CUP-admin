@@ -13,7 +13,12 @@ class PaymentsControllerFactory implements FactoryInterface
 
         $tripPaymentsService = $sharedServiceManager->get('SharengoCore\Service\TripPaymentsService');
         $paymentsService = $sharedServiceManager->get('SharengoCore\Service\PaymentsService');
+        $customersService = $sharedServiceManager->get('SharengoCore\Service\customersService');
 
-        return new PaymentsController($tripPaymentsService, $paymentsService);
+        return new PaymentsController(
+            $tripPaymentsService,
+            $paymentsService,
+            $customersService
+        );
     }
 }
