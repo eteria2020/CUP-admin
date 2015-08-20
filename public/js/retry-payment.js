@@ -1,4 +1,4 @@
-/* global $ retryUrl tripPaymentId */
+/* global $ retryUrl abilitateUrl tripPaymentId alert */
 
 $(function () {
     "use strict";
@@ -7,6 +7,7 @@ $(function () {
         $.post(retryUrl, {
             tripPaymentId: tripPaymentId
         }, function (data) {
+            $('#js-new-try').hide();
             if (data.outcome === 'OK') {
                 $('#js-completed-message').removeClass('hidden');
             } else {
@@ -15,6 +16,14 @@ $(function () {
                     $('#js-wrong-reason').html(data.message);
                 }
             }
+        });
+    });
+
+    $('#js-abilitate-customer').click(function() {
+        $.post(abilitateUrl, {
+            sendMail: $('#send-mail').is(':checked')
+        }).done(function () {
+            alert('utente riattivato');
         });
     });
 });

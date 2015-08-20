@@ -55,11 +55,16 @@ class PaymentsController extends AbstractActionController
 
         $tripPayment = $this->tripPaymentsService->getTripPaymentById($id);
 
+        if (!$tripPayment->isWrongPayment()) {
+            return $this->notFoundAction();
+        }
+
         $tripPaymentTries = $tripPayment->getTripPaymentTries();
 
         return new ViewModel([
             'tripPayment' => $tripPayment,
-            'tripPaymentTries' => $tripPaymentTries
+            'tripPaymentTries' => $tripPaymentTries,
+            'customer' => $tripPayment->getCustomer()
         ]);
     }
 

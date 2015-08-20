@@ -27,7 +27,8 @@ return array(
                 'options' => [
                     'route' => '/customers',
                     'defaults' => [
-                        'controller' => 'Application\Controller\Customers',
+                        '__NAMESPACE__' => 'Application\Controller',
+                        'controller'    => 'Customers',
                         'action' => 'list'
                     ]
                 ],
@@ -38,8 +39,6 @@ return array(
                         'options' => [
                             'route'    => '/datatable',
                             'defaults' => [
-                                '__NAMESPACE__' => 'Application\Controller',
-                                'controller'    => 'Customers',
                                 'action'        => 'datatable',
                             ],
                         ],
@@ -52,8 +51,6 @@ return array(
                                 'id' => '[0-9]*'
                             ),
                             'defaults' => [
-                                '__NAMESPACE__' => 'Application\Controller',
-                                'controller'    => 'Customers',
                                 'action'        => 'edit',
                             ],
                         ],
@@ -66,8 +63,6 @@ return array(
                                 'id' => '[0-9]*'
                             ),
                             'defaults' => [
-                                '__NAMESPACE__' => 'Application\Controller',
-                                'controller'    => 'Customers',
                                 'action'        => 'remove-card',
                             ],
                         ],
@@ -80,8 +75,6 @@ return array(
                                 'id' => '[0-9]*'
                             ),
                             'defaults' => [
-                                '__NAMESPACE__' => 'Application\Controller',
-                                'controller'    => 'Customers',
                                 'action'        => 'assign-card',
                             ],
                         ],
@@ -94,8 +87,6 @@ return array(
                                 'id' => '[0-9]*'
                             ),
                             'defaults' => [
-                                '__NAMESPACE__' => 'Application\Controller',
-                                'controller'    => 'Customers',
                                 'action'        => 'info-tab',
                             ],
                         ],
@@ -108,8 +99,6 @@ return array(
                                 'id' => '[0-9]*'
                             ),
                             'defaults' => [
-                                '__NAMESPACE__' => 'Application\Controller',
-                                'controller'    => 'Customers',
                                 'action'        => 'edit-tab',
                             ],
                         ],
@@ -122,8 +111,6 @@ return array(
                                 'id' => '[0-9]*'
                             ),
                             'defaults' => [
-                                '__NAMESPACE__' => 'Application\Controller',
-                                'controller'    => 'Customers',
                                 'action'        => 'bonus-tab',
                             ],
                         ],
@@ -136,8 +123,6 @@ return array(
                                 'id' => '[0-9]*'
                             ),
                             'defaults' => [
-                                '__NAMESPACE__' => 'Application\Controller',
-                                'controller'    => 'Customers',
                                 'action'        => 'card-tab',
                             ],
                         ],
@@ -150,8 +135,6 @@ return array(
                                 'id' => '[0-9]*'
                             ],
                             'defaults' => [
-                                '__NAMESPACE__' => 'Application\Controller',
-                                'controller'    => 'Customers',
                                 'action'        => 'invoices-tab',
                             ],
                         ],
@@ -161,8 +144,6 @@ return array(
                         'options' => [
                             'route'    => '/ajax-card-code-autocomplete',
                             'defaults' => [
-                                '__NAMESPACE__' => 'Application\Controller',
-                                'controller'    => 'Customers',
                                 'action'        => 'ajax-card-code-autocomplete',
                             ],
                         ],
@@ -175,8 +156,6 @@ return array(
                                 'id' => '[0-9]*'
                             ),
                             'defaults' => [
-                                '__NAMESPACE__' => 'Application\Controller',
-                                'controller'    => 'Customers',
                                 'action'        => 'assign-promo-code',
                             ],
                         ],
@@ -189,8 +168,6 @@ return array(
                                 'id' => '[0-9]*'
                             ),
                             'defaults' => [
-                                '__NAMESPACE__' => 'Application\Controller',
-                                'controller'    => 'Customers',
                                 'action'        => 'add-bonus',
                             ],
                         ],
@@ -203,12 +180,22 @@ return array(
                                 'id' => '[0-9]*'
                             ),
                             'defaults' => [
-                                '__NAMESPACE__' => 'Application\Controller',
-                                'controller'    => 'Customers',
                                 'action'        => 'remove-bonus',
                             ],
                         ],
                     ],
+                    'activate' => [
+                        'type' => 'Segment',
+                        'options' => [
+                            'route' => '/activate/:id',
+                            'constraints' => array(
+                                'id' => '[0-9]*'
+                            ),
+                            'defaults' => [
+                                'action' => 'activate',
+                            ]
+                        ]
+                    ]
                 ],
             ],
             'cars' => [
