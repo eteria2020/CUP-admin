@@ -317,11 +317,11 @@ class CustomersController extends AbstractActionController
                     /** @var PromoCodes $promoCode */
                     $promoCode = $this->I_promoCodeService->getPromoCode($postData['promocode']['promocode']);
 
-                    if(is_null($promoCode)) {
+                    if (is_null($promoCode)) {
                         throw new \Exception('Codice promo non valido.');
                     }
 
-                    if($this->I_customerService->checkUsedPromoCode($I_customer, $promoCode)) {
+                    if ($this->I_customerService->checkUsedPromoCode($I_customer, $promoCode)) {
                         throw new \Exception('Codice promo già associato a questo utente.');
                     }
 
@@ -449,5 +449,15 @@ class CustomersController extends AbstractActionController
         $view->setTerminal(true);
 
         return $view;
+    }
+
+    public function activateAction()
+    {
+        $customer = $this->getCustomer();
+        $sendMail = $this->params()->fromPost('sendMail');
+
+        $this->I_customerService->enableCustomer($customer, $sendMail);
+
+        return new JsonModel();
     }
 }

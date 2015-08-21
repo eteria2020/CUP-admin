@@ -12,5 +12,11 @@
  */
 
 return array(
-    // ...
+    'emailSettings' => [
+        'from' => 'servizioclienti@sharengo.eu',
+        'replyTo' => 'servizioclienti@sharengo.ue',
+        'X-Mailer' => 'Sharengo agent',
+        'sharengoNotices' => 'webmaster@philcartechnology.eu',
+        'registrationBcc' => 'webmaster@philcartechnology.eu'
+    ]
 );

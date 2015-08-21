@@ -1,0 +1,82 @@
+<?php
+    $this->headLink()
+        ->appendStylesheet('/js/plugins/bootstrap-datetimepicker/css/bootstrap-datetimepicker.min.css');
+    $this->headScript()
+        ->appendFile('/js/moment.min.js')
+        ->appendFile('/js/bootstrap.min.js')
+        ->appendFile('/js/plugins/bootstrap-datetimepicker/js/bootstrap-datetimepicker.min.js')
+        ->appendFile($this->basePath().'/js/trip-cost.js');
+
+    $form = $this->form->prepare();
+?>
+
+<div class="page-content-wrapper">
+    <div class="page-content">
+
+        <!-- BEGIN PAGE HEADER-->
+        <h3 class="page-title">
+            COSTO CORSA
+        </h3>
+
+        <div class="page-bar"></div>
+
+        <?= $this->form()->openTag($form); ?>
+
+            <div class="col-lg-4">
+                <div class="form-group">
+                    <label for="gender">Inizio corsa</label>
+                    <?= $this->formRow($form->get('tripCost')->get('tripBeginning')); ?>
+                </div>
+            </div>
+
+            <div class="col-lg-4">
+                <div class="form-group">
+                    <label for="gender">Fine corsa</label>
+                    <?= $this->formRow($form->get('tripCost')->get('tripEnd')); ?>
+                </div>
+            </div>
+
+            <div class="col-lg-4">
+                <div class="form-group">
+                    <label for="gender">Durata corsa</label>
+                    <?= $this->formRow($form->get('tripCost')->get('tripLength')); ?>
+                </div>
+            </div>
+
+            <div class="col-lg-4">
+                <div class="form-group">
+                    <label for="gender">Secondi di sosta</label>
+                    <?= $this->formRow($form->get('tripCost')->get('tripParkSeconds')); ?>
+                </div>
+            </div>
+
+            <div class="col-lg-4">
+                <div class="form-group">
+                    <label for="gender">Sesso del cliente</label>
+                    <?= $this->formRow($form->get('tripCost')->get('customerGender')); ?>
+                </div>
+            </div>
+
+            <div class="col-lg-4">
+                <div class="form-group">
+                    <label for="gender">Minuti bonus</label>
+                    <?= $this->formRow($form->get('tripCost')->get('customerBonus')); ?>
+                </div>
+            </div>
+
+            <div class="page-bar"></div>
+
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                    <button type="submit" class="btn btn-success">Calcola costo</button>
+                </div>
+            </div>
+        <?= $this->form()->closeTag(); ?>
+
+        <div class="row">
+            <h1 class="col-lg-12 text-center">
+                Il costo della corsa è di <span id="trip-cost">0.00</span> €
+            </h1>
+        </div>
+    </div>
+</div>

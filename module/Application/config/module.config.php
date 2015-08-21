@@ -27,7 +27,8 @@ return array(
                 'options' => [
                     'route' => '/customers',
                     'defaults' => [
-                        'controller' => 'Application\Controller\Customers',
+                        '__NAMESPACE__' => 'Application\Controller',
+                        'controller'    => 'Customers',
                         'action' => 'list'
                     ]
                 ],
@@ -38,8 +39,6 @@ return array(
                         'options' => [
                             'route'    => '/datatable',
                             'defaults' => [
-                                '__NAMESPACE__' => 'Application\Controller',
-                                'controller'    => 'Customers',
                                 'action'        => 'datatable',
                             ],
                         ],
@@ -52,8 +51,6 @@ return array(
                                 'id' => '[0-9]*'
                             ),
                             'defaults' => [
-                                '__NAMESPACE__' => 'Application\Controller',
-                                'controller'    => 'Customers',
                                 'action'        => 'edit',
                             ],
                         ],
@@ -66,8 +63,6 @@ return array(
                                 'id' => '[0-9]*'
                             ),
                             'defaults' => [
-                                '__NAMESPACE__' => 'Application\Controller',
-                                'controller'    => 'Customers',
                                 'action'        => 'remove-card',
                             ],
                         ],
@@ -80,8 +75,6 @@ return array(
                                 'id' => '[0-9]*'
                             ),
                             'defaults' => [
-                                '__NAMESPACE__' => 'Application\Controller',
-                                'controller'    => 'Customers',
                                 'action'        => 'assign-card',
                             ],
                         ],
@@ -94,8 +87,6 @@ return array(
                                 'id' => '[0-9]*'
                             ),
                             'defaults' => [
-                                '__NAMESPACE__' => 'Application\Controller',
-                                'controller'    => 'Customers',
                                 'action'        => 'info-tab',
                             ],
                         ],
@@ -108,8 +99,6 @@ return array(
                                 'id' => '[0-9]*'
                             ),
                             'defaults' => [
-                                '__NAMESPACE__' => 'Application\Controller',
-                                'controller'    => 'Customers',
                                 'action'        => 'edit-tab',
                             ],
                         ],
@@ -122,8 +111,6 @@ return array(
                                 'id' => '[0-9]*'
                             ),
                             'defaults' => [
-                                '__NAMESPACE__' => 'Application\Controller',
-                                'controller'    => 'Customers',
                                 'action'        => 'bonus-tab',
                             ],
                         ],
@@ -136,8 +123,6 @@ return array(
                                 'id' => '[0-9]*'
                             ),
                             'defaults' => [
-                                '__NAMESPACE__' => 'Application\Controller',
-                                'controller'    => 'Customers',
                                 'action'        => 'card-tab',
                             ],
                         ],
@@ -150,8 +135,6 @@ return array(
                                 'id' => '[0-9]*'
                             ],
                             'defaults' => [
-                                '__NAMESPACE__' => 'Application\Controller',
-                                'controller'    => 'Customers',
                                 'action'        => 'invoices-tab',
                             ],
                         ],
@@ -161,8 +144,6 @@ return array(
                         'options' => [
                             'route'    => '/ajax-card-code-autocomplete',
                             'defaults' => [
-                                '__NAMESPACE__' => 'Application\Controller',
-                                'controller'    => 'Customers',
                                 'action'        => 'ajax-card-code-autocomplete',
                             ],
                         ],
@@ -175,8 +156,6 @@ return array(
                                 'id' => '[0-9]*'
                             ),
                             'defaults' => [
-                                '__NAMESPACE__' => 'Application\Controller',
-                                'controller'    => 'Customers',
                                 'action'        => 'assign-promo-code',
                             ],
                         ],
@@ -189,8 +168,6 @@ return array(
                                 'id' => '[0-9]*'
                             ),
                             'defaults' => [
-                                '__NAMESPACE__' => 'Application\Controller',
-                                'controller'    => 'Customers',
                                 'action'        => 'add-bonus',
                             ],
                         ],
@@ -203,12 +180,22 @@ return array(
                                 'id' => '[0-9]*'
                             ),
                             'defaults' => [
-                                '__NAMESPACE__' => 'Application\Controller',
-                                'controller'    => 'Customers',
                                 'action'        => 'remove-bonus',
                             ],
                         ],
                     ],
+                    'activate' => [
+                        'type' => 'Segment',
+                        'options' => [
+                            'route' => '/activate/:id',
+                            'constraints' => array(
+                                'id' => '[0-9]*'
+                            ),
+                            'defaults' => [
+                                'action' => 'activate',
+                            ]
+                        ]
+                    ]
                 ],
             ],
             'cars' => [
@@ -318,7 +305,8 @@ return array(
                 'options' => [
                     'route' => '/trips',
                     'defaults' => [
-                        'controller' => 'Application\Controller\Trips',
+                        '__NAMESPACE__' => 'Application\Controller',
+                        'controller' => 'Trips',
                         'action' => 'index'
                     ]
                 ],
@@ -329,11 +317,27 @@ return array(
                         'options' => [
                             'route'    => '/datatable',
                             'defaults' => [
-                                '__NAMESPACE__' => 'Application\Controller',
-                                'controller'    => 'Trips',
                                 'action'        => 'datatable',
                             ],
                         ],
+                    ],
+                    'cost' => [
+                        'type' => 'Literal',
+                        'options' => [
+                            'route' => '/cost',
+                            'defaults' => [
+                                'action' => 'trip-cost',
+                            ],
+                        ]
+                    ],
+                    'cost-computation' => [
+                        'type' => 'Literal',
+                        'options' => [
+                            'route' => '/cost-computation',
+                            'defaults' => [
+                                'action' => 'trip-cost-computation'
+                            ]
+                        ]
                     ]
                 ],
              ],
@@ -444,6 +448,61 @@ return array(
                     ],
                 ],
             ],
+            'payments' => [
+                'type' => 'Literal',
+                'options' => [
+                    'route' => '/payments',
+                    'defaults' => [
+                        '__NAMESPACE__' => 'Application\Controller',
+                        'controller' => 'Payments'
+                    ]
+                ],
+                'may_terminate' => false,
+                'child_routes' => [
+                    'retry' => [
+                        'type' => 'Segment',
+                        'options' => [
+                            'route' => '/retry/:id',
+                            'constraints' => [
+                                'id'    => '[0-9]*'
+                            ],
+                            'defaults' => [
+                                'action' => 'retry'
+                            ]
+                        ]
+                    ],
+                    'do-retry' => [
+                        'type' => 'Segment',
+                        'options' => [
+                            'route' => '/do-retry/:id',
+                            'constraints' => [
+                                'id'    => '[0-9]*'
+                            ],
+                            'defaults' => [
+                                'action' => 'do-retry'
+                            ]
+                        ]
+                    ],
+                    'failed-payments' => [
+                        'type' => 'Literal',
+                        'options' => [
+                            'route' => '/failed-payments',
+                            'defaults' => [
+                                'action' => 'failed-payments'
+                            ]
+                        ]
+                    ],
+                    'failed-payments-datatable' => [
+                        'type' => 'Literal',
+                        'options' => [
+                            'route' => '/failed-payments-datatable',
+                            'defaults' => [
+                                'action' => 'failed-payments-datatable'
+                            ]
+                        ]
+                    ]
+                ]
+            ]
         ),
     ),
     'service_manager' => array(
@@ -463,6 +522,7 @@ return array(
             'SettingForm' => 'Application\Form\SettingFormFactory',
             'PromoCodeForm' => 'Application\Form\PromoCodeFormFactory',
             'CustomerBonusForm' => 'Application\Form\CustomerBonusFormFactory',
+            'TripCostForm' => 'Application\Form\TripCostFormFactory'
         ]
     ),
     'controllers' => [
@@ -477,7 +537,8 @@ return array(
             'Application\Controller\Cars'         => 'Application\Controller\CarsControllerFactory',
             'Application\Controller\Customers'    => 'Application\Controller\CustomersControllerFactory',
             'Application\Controller\Reservations' => 'Application\Controller\ReservationsControllerFactory',
-            'Application\Controller\Invoices' => 'Application\Controller\InvoicesControllerFactory'
+            'Application\Controller\Invoices' => 'Application\Controller\InvoicesControllerFactory',
+            'Application\Controller\Payments' => 'Application\Controller\PaymentsControllerFactory'
         ]
     ],
     'translator'         => [
@@ -565,7 +626,8 @@ return array(
                 ['controller' => 'Application\Controller\ConsoleUser', 'roles' => []],
                 ['controller' => 'Application\Controller\Users', 'roles' => ['admin']],
                 ['controller' => 'Application\Controller\Reservations', 'roles' => ['admin']],
-                ['controller' => 'Application\Controller\Invoices', 'roles' => ['admin']]
+                ['controller' => 'Application\Controller\Invoices', 'roles' => ['admin']],
+                ['controller' => 'Application\Controller\Payments', 'roles' => ['admin']]
             ),
         ),
     ),
@@ -636,6 +698,11 @@ return array(
                         'label' => 'Elenco',
                         'route' => 'trips',
                         'isVisible' => true
+                    ],
+                    [
+                        'label' => 'Costo corsa',
+                        'route' => 'trips/cost',
+                        'isVisible' => true
                     ]
                 ],
             ],
@@ -666,6 +733,20 @@ return array(
                         'isVisible' => true
                     ]
                 ],
+            ],
+            [
+                'label' => 'Pagamenti',
+                'route' => 'payments',
+                'icon' => 'fa fa-money',
+                'resource' => 'admin',
+                'isRouteJs' => true,
+                'pages' => [
+                    [
+                        'label' => 'Pagamenti falliti',
+                        'route' => 'payments/failed-payments',
+                        'isVisible' => true
+                    ]
+                ]
             ],
             [
                 'label'           => 'Call center',
