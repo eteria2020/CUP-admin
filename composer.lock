@@ -562,12 +562,12 @@
             "version": "0.9.1",
             "source": {
                 "type": "git",
-                "url": "https://github.com/doctrine/DoctrineORMModule.git",
+                "url": "git@github.com:doctrine/DoctrineORMModule.git",
                 "reference": "11cf6a34cd097b4d252a82d198ceed565ee3102c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/DoctrineORMModule/zipball/11cf6a34cd097b4d252a82d198ceed565ee3102c",
+                "url": "https://api.github.com/repos/doctrine/DoctrineORMModule/zipball/731ec00a3b5cb9fcf0def3abc42e0ac58f8d0265",
                 "reference": "11cf6a34cd097b4d252a82d198ceed565ee3102c",
                 "shasum": ""
             },
@@ -1273,7 +1273,7 @@
             "source": {
                 "type": "git",
                 "url": "ssh://git@git.mvlabs.it:4222/clients/sharengo-cartasi.git",
-                "reference": "c513f214fc06ff19914364ea02f79a4501fa662c"
+                "reference": "0db7a4091420922516fd248db8a9ab8efec51114"
             },
             "require": {
                 "doctrine/doctrine-orm-module": "0.*",
@@ -1287,7 +1287,7 @@
                 }
             },
             "description": "Cartasi module for Sharengo",
-            "time": "2015-08-21 12:30:08"
+            "time": "2015-09-02 12:00:12"
         },
         {
             "name": "mvlabs/sharengo-coremodule",
@@ -1295,7 +1295,7 @@
             "source": {
                 "type": "git",
                 "url": "ssh://git@git.mvlabs.it:4222/clients/sharengo-coremodule.git",
-                "reference": "ed4adbdddfc12566e16218491239c1572a0b8d76"
+                "reference": "0c5579b562e0de605daa8bac0c692ed3a55cee4c"
             },
             "require": {
                 "doctrine/doctrine-orm-module": "0.*",
@@ -1316,7 +1316,7 @@
                 }
             },
             "description": "Core ZF2 module for Sharengo apps",
-            "time": "2015-08-21 16:48:15"
+            "time": "2015-09-03 10:41:16"
         },
         {
             "name": "rwoverdijk/assetmanager",
