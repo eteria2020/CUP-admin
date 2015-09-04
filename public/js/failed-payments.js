@@ -71,7 +71,7 @@ $(function() {
                 sortable: false,
                 render: function (data) {
                     return '<div class="btn-group">' +
-                        '<a href="/payments/retry/' + data + '" class="btn btn-default">Ritenta pagamento</a> ' +
+                        '<a href="/payments/retry/' + data + '" class="btn btn-default">Prosegui</a> ' +
                         '</div>';
                 }
             }
