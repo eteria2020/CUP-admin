@@ -500,6 +500,24 @@ return array(
                                 'action' => 'failed-payments-datatable'
                             ]
                         ]
+                    ],
+                    'extra' => [
+                        'type' => 'Literal',
+                        'options' => [
+                            'route' => '/extra',
+                            'defaults' => [
+                                'action' => 'extra'
+                            ]
+                        ]
+                    ],
+                    'pay-extra' => [
+                        'type' => 'Literal',
+                        'options' => [
+                            'route' => '/pay-extra',
+                            'defaults' => [
+                                'action' => 'pay-extra'
+                            ]
+                        ]
                     ]
                 ]
             ]
@@ -522,7 +540,8 @@ return array(
             'SettingForm' => 'Application\Form\SettingFormFactory',
             'PromoCodeForm' => 'Application\Form\PromoCodeFormFactory',
             'CustomerBonusForm' => 'Application\Form\CustomerBonusFormFactory',
-            'TripCostForm' => 'Application\Form\TripCostFormFactory'
+            'TripCostForm' => 'Application\Form\TripCostFormFactory',
+            'ExtraPaymentsForm' => 'Application\Form\ExtraPaymentsFormFactory'
         ]
     ),
     'controllers' => [
@@ -744,6 +763,11 @@ return array(
                     [
                         'label' => 'Pagamenti falliti',
                         'route' => 'payments/failed-payments',
+                        'isVisible' => true
+                    ],
+                    [
+                        'label' => 'Addebita penale/extra',
+                        'route' => 'payments/extra',
                         'isVisible' => true
                     ]
                 ]
