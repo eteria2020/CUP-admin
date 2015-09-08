@@ -41,6 +41,22 @@ $this->headScript()
             </div>
 
             <div class="row">
+                <div id="penaltyField" class="col-lg-4">
+                    <div class="form-group">
+                        <label for="penalty">Penale</label>
+                        <select id="penalty" name="penalty" class="form-control">
+                            <option>---</option>
+                            <?php foreach($this->penalties as $penalty): ?>
+                                <option data-reason="<?= $penalty->getReason()?>" data-amount="<?= $penalty->getAmount() ?>">
+                                    <?= $penalty->getReason() ?> (<?= number_format($penalty->getAmount()/100, 2) ?> &euro;)
+                                </option>
+                            <?php endforeach; ?>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
                 <div class="col-lg-12">
                     <button id="js-extra-payment" type="submit" class="btn btn-success">Effettua pagamento</button>
                 </div>
