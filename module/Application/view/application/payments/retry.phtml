@@ -73,9 +73,10 @@ $this->headScript()
                             <thead>
                                 <tr>
                                     <th>Data del tentativo</th>
-                                    <th>Utente</th>
+                                    <th>Utente Admin</th>
                                     <th>Prodotto</th>
                                     <th>Esito</th>
+                                    <th>Risultato</th>
                                     <th>Messaggio</th>
                                 </tr>
                             </thead>
@@ -86,6 +87,7 @@ $this->headScript()
                                         <td><?= $try->getWebuserName() ?></td>
                                         <td><?= $try->getTransaction()->getProductType() ?></td>
                                         <td><?= $try->getOutcome() ?></td>
+                                        <td><?= $try->getTransaction()->getOutcome() ?></td>
                                         <td><?= $try->getTransaction()->getMessage() ?></td>
                                     </tr>
                                 <?php endforeach; ?>
