@@ -49,8 +49,12 @@ $(function() {
         "order": [[0, 'desc']],
         "columns": [
             {data: 'e.createdAt'},
+            {data: 'cu.id'},
             {data: 'cu.name'},
             {data: 'cu.surname'},
+            {data: 'cu.mobile'},
+            {data: 'cu.email'},
+            {data: 'e.tripId'},
             {data: 'e.tripMinutes'},
             {data: 'e.parkingMinutes'},
             {data: 'e.discountPercentage'},
@@ -59,13 +63,13 @@ $(function() {
         ],
         "columnDefs": [
             {
-                targets: 6,
+                targets: 10,
                 "render": function (data) {
                     return renderAmount(data);
                 }
             },
             {
-                targets: 7,
+                targets: 11,
                 data: 'button',
                 searchable: false,
                 sortable: false,
