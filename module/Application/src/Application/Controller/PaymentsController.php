@@ -80,13 +80,28 @@ class PaymentsController extends AbstractActionController
         $filters['withLimit'] = true;
         $dataDataTable = $this->tripPaymentsService->getFailedPaymentsData($filters);
         $totalFailedPayments = $this->tripPaymentsService->getTotalFailedPayments();
+        $recordsFiltered = $this->getRecordsFiltered($filters, $totalFailedPayments);
 
         return new JsonModel([
             'draw'            => $this->params()->fromQuery('sEcho', 0),
             'recordsTotal'    => $totalFailedPayments,
-            'recordsFiltered' => count($dataDataTable),
+            'recordsFiltered' => $recordsFiltered,
             'data'            => $dataDataTable
         ]);
+    }
+
+    protected function getRecordsFiltered($filters, $totalTripPayments)
+    {
+        if (empty($filters['searchValue']) && !isset($filters['columnValueWithoutLike'])) {
+
+            return $totalTripPayments;
+
+        } else {
+
+            $filters['withLimit'] = false;
+
+            return count($this->tripPaymentsService->tripPaymentsService->getFailedPaymentsData($filters));
+        }
     }
 
     public function retryAction()
