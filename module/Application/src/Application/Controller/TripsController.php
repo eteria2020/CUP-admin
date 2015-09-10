@@ -140,8 +140,12 @@ class TripsController extends AbstractActionController
     {
         $id = (int)$this->params()->fromRoute('id', 0);
 
+        $trip = $this->tripsService->getTripById($id);
+        $tripPayment = $this->tripPaymentsService->getTripPaymentForTrip($trip);
+
         $view = new ViewModel([
-            'trip' => $trip
+            'trip' => $trip,
+            'tripPayment' => $tripPayment
         ]);
         $view->setTerminal(true);
 

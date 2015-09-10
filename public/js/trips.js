@@ -73,6 +73,7 @@ $(function() {
             {data: 'c.keyStatus'},
             {data: 'c.parking'},
             {data: 'e.payable'},
+            {data: 'e.totalCost'},
             {data: 'e.idLink'}
         ],
         "columnDefs": [
@@ -90,6 +91,12 @@ $(function() {
             },
             {
                 targets: 16,
+                "render": function ( data, type, row ) {
+                    return renderCostButton(data);
+                }
+            },
+            {
+                targets: 17,
                 sortable: false,
                 "render": function ( data, type, row ) {
                     return renderInfoButton(data);
@@ -161,6 +168,16 @@ $(function() {
 
     });
 
+    function renderCostButton(data)
+    {
+        return data !== '' ? renderAmount(parseInt(data)) : '';
+        /*
+        return '<div class="btn-group">' +
+                    '<a href="' + data + '" class="btn btn-default">Dettagli</a> ' +
+                '</div>';
+        */
+    }
+
     function renderInfoButton(data)
     {
         return '<div class="btn-group">' +
@@ -168,11 +185,16 @@ $(function() {
                 '</div>';
     }
 
-    function renderCostButton(data)
+    function renderAmount(amount)
     {
-        return '<div class="btn-group">' +
-                    '<a href="' + data + '" class="btn btn-default">Dettagli</a> ' +
-                '</div>';
+        return (Math.floor(amount / 100)) +
+            ',' +
+            toStringKeepZero(amount % 100) +
+            ' \u20ac';
     }
 
+    function toStringKeepZero(value)
+    {
+        return ((value < 10) ? '0' : '') + value;
+    }
 });
