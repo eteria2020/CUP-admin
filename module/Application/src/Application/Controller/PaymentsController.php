@@ -100,7 +100,7 @@ class PaymentsController extends AbstractActionController
 
             $filters['withLimit'] = false;
 
-            return count($this->tripPaymentsService->tripPaymentsService->getFailedPaymentsData($filters));
+            return count($this->tripPaymentsService->getFailedPaymentsData($filters));
         }
     }
 
