@@ -4,6 +4,9 @@ namespace Application\Controller;
 use Application\Form\TripCostForm;
 use SharengoCore\Service\TripsService;
 use SharengoCore\Service\TripCostComputerService;
+use SharengoCore\Service\TripPaymentsService;
+use SharengoCore\Entity\TripPayments;
+use SharengoCore\Entity\Invoices;
 
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\JsonModel;
@@ -26,14 +29,21 @@ class TripsController extends AbstractActionController
      */
     private $tripCostComputerService;
 
+    /**
+     * @var TripPaymentsService
+     */
+    private $tripPaymentsService;
+
     public function __construct(
         TripsService $tripsService,
         TripCostForm $tripCostForm,
-        TripCostComputerService $tripCostComputerService
+        TripCostComputerService $tripCostComputerService,
+        TripPaymentsService $tripPaymentsService
     ) {
         $this->tripsService = $tripsService;
         $this->tripCostForm = $tripCostForm;
         $this->tripCostComputerService = $tripCostComputerService;
+        $this->tripPaymentsService = $tripPaymentsService;
     }
 
     public function indexAction()
@@ -115,15 +125,26 @@ class TripsController extends AbstractActionController
         $id = (int)$this->params()->fromRoute('id', 0);
 
         $trip = $this->tripsService->getTripById($id);
+        $tripPayment = $this->tripPaymentsService->getTripPaymentForTrip($trip);
 
-        return new ViewModel([
-            'trip' => $trip
+        $view = new ViewModel([
+            'trip' => $trip,
+            'tripPayment' => $tripPayment
         ]);
+        $view->setTerminal(true);
+
+        return $view;
     }
 
     public function costTabAction()
     {
         $id = (int)$this->params()->fromRoute('id', 0);
 
+        $view = new ViewModel([
+            'trip' => $trip
+        ]);
+        $view->setTerminal(true);
+
+        return $view;
     }
 }

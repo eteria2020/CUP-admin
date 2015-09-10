@@ -1,6 +1,35 @@
 <?php
+// Get data
 $trip = $this->trip;
+$tripPayment = $this->tripPayment;
 $customer = $trip->getCustomer();
+
+// Parse duration
+$beginningTs = $trip->getTimestampBeginning();
+$endTs = $trip->getTimestampEnd();
+$duration = '';
+if ($beginningTs !== null && $endTs !== null) {
+    $duration = $trip->getTimestampEnd()->diff($trip->getTimestampBeginning());
+    $duration = $duration->format('%dg %H:%I:%S');
+}
+
+// Parse payment
+$payed = 'NO';
+$invoiced = 'NO';
+
+if ($tripPayment !== null) {
+    $payed = $tripPayment->getPayedSuccessfullyAt() !== null ?
+        $tripPayment->getPayedSuccessfullyAt()->format('d-m-Y H:i:s') :
+        $payed;
+    $invoiced = $tripPayment->getInvoice() !== null ?
+        $tripPayment->getInvoicedAt()->format('d-m-Y H:i:s') .
+            ' <a href=' .
+            $this->url('pdf/invoices') . '/' .
+            $tripPayment->getInvoice()->getId() .
+            '><i class="fa fa-download"></i></a>' :
+        $invoiced;
+}
+
 ?>
 
 <div class="row">
@@ -15,19 +44,103 @@ $customer = $trip->getCustomer();
                     <div class="col-lg-4">
                         <div class="form-group">
                             <label>Id</label>
-                            <?= $trip->getId() ?>
+                            <div class="sng-info-box"><?= $trip->getId() ?></div>
                         </div>
                     </div>
                     <div class="col-lg-4">
                         <div class="form-group">
                             <label>Nome</label>
-                            <?= $customer->getName() ?>
+                            <div class="sng-info-box"><?= $customer->getName() ?></div>
                         </div>
                     </div>
                     <div class="col-lg-4">
                         <div class="form-group">
                             <label>Cognome</label>
-                            <?= $customer->getSurname() ?>
+                            <div class="sng-info-box"><?= $customer->getSurname() ?></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-lg-4">
+                        <div class="form-group">
+                            <label>Cellulare</label>
+                            <div class="sng-info-box"><?= $customer->getMobile() ?></div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="form-group">
+                            <label>RFID</label>
+                            <div class="sng-info-box"><?= $customer->getCard()->getRfid() ?></div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="form-group">
+                            <label>Targa</label>
+                            <div class="sng-info-box"><?= $trip->getCar()->getPlate() ?></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-lg-4">
+                        <div class="form-group">
+                            <label>Numero</label>
+                            <div class="sng-info-box"><?= 'nn' ?></div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="form-group">
+                            <label>Km Inizio</label>
+                            <div class="sng-info-box"><?= $trip->getKmBeginning() ?></div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="form-group">
+                            <label>Km Fine</label>
+                            <div class="sng-info-box"><?= $trip->getKmEnd() ?></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-lg-4">
+                        <div class="form-group">
+                            <label>Inizio</label>
+                            <div class="sng-info-box"><?= $trip->getTimestampBeginning()->format('d-m-Y H:i:s') ?></div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="form-group">
+                            <label>Fine</label>
+                            <div class="sng-info-box"><?= $trip->getTimestampEnd()->format('d-m-Y H:i:s') ?></div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="form-group">
+                            <label>Durata</label>
+                            <div class="sng-info-box"><?= $duration ?></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-lg-4">
+                        <div class="form-group">
+                            <label>Sosta</label>
+                            <div class="sng-info-box"><?= $trip->getParkSeconds() . ' .sec' ?></div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="form-group">
+                            <label>Stato Quadro</label>
+                            <div class="sng-info-box"><?= $trip->getCar()->getKeystatus() ?></div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="form-group">
+                            <label>In Sosta</label>
+                            <div class="sng-info-box"><?= $trip->getCar()->getParking() ? 'SI' : 'NO' ?></div>
                         </div>
                     </div>
                 </div>
@@ -47,7 +160,23 @@ $customer = $trip->getCustomer();
                     <div class="col-lg-12">
                         <div class="form-group">
                             <label>Pagabile</label>
-                            <?= $trip->getPayable() ? 'SI' : 'NO' ?>
+                            <div class="sng-info-box"><?= $trip->getPayable() ? 'SI' : 'NO' ?></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="form-group">
+                            <label>Pagata</label>
+                            <div class="sng-info-box"><?= $payed ?></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="form-group">
+                            <label>Fatturata</label>
+                            <div class="sng-info-box"><?= $invoiced ?></div>
                         </div>
                     </div>
                 </div>

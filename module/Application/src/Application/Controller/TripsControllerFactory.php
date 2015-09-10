@@ -20,12 +20,14 @@ class TripsControllerFactory implements FactoryInterface
         $tripsService = $sharedServiceLocator->get('SharengoCore\Service\TripsService');
         $tripCostForm = $sharedServiceLocator->get('TripCostForm');
         $tripCostComputerService = $sharedServiceLocator->get('SharengoCore\Service\TripCostComputerService');
+        $tripPaymentsService = $sharedServiceLocator->get('SharengoCore\Service\TripPaymentsService');
 
         // Controller is constructed, dependencies are injected (IoC in action)
         return new TripsController(
             $tripsService,
             $tripCostForm,
-            $tripCostComputerService
+            $tripCostComputerService,
+            $tripPaymentsService
         );
     }
 }
