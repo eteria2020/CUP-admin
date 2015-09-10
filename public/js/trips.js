@@ -72,10 +72,29 @@ $(function() {
             {data: 'e.parkSeconds'},
             {data: 'c.keyStatus'},
             {data: 'c.parking'},
-            {data: 'e.payable'}
+            {data: 'e.payable'},
+            {data: 'e.idLink'}
         ],
-        "aoColumnDefs": [
-            { 'bSortable': false, 'aTargets': [11,13,14]}
+        "columnDefs": [
+            {
+                targets: 11,
+                sortable: false
+            },
+            {
+                targets: 13,
+                sortable: false
+            },
+            {
+                targets: 14,
+                sortable: false
+            },
+            {
+                targets: 16,
+                sortable: false,
+                "render": function ( data, type, row ) {
+                    return renderInfoButton(data);
+                }
+            }
         ],
         "lengthMenu": [
             [100, 200, 300],
@@ -142,5 +161,18 @@ $(function() {
 
     });
 
+    function renderInfoButton(data)
+    {
+        return '<div class="btn-group">' +
+                    '<a href="/trips/details/' + data + '" class="btn btn-default">Dettagli</a> ' +
+                '</div>';
+    }
+
+    function renderCostButton(data)
+    {
+        return '<div class="btn-group">' +
+                    '<a href="' + data + '" class="btn btn-default">Dettagli</a> ' +
+                '</div>';
+    }
 
 });

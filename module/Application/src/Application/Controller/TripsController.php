@@ -14,7 +14,7 @@ class TripsController extends AbstractActionController
     /**
      * @var TripsService
      */
-    private $I_tripsService;
+    private $tripsService;
 
     /**
      * @var TripCostForm
@@ -27,11 +27,11 @@ class TripsController extends AbstractActionController
     private $tripCostComputerService;
 
     public function __construct(
-        TripsService $I_tripsService,
+        TripsService $tripsService,
         TripCostForm $tripCostForm,
         TripCostComputerService $tripCostComputerService
     ) {
-        $this->I_tripsService = $I_tripsService;
+        $this->tripsService = $tripsService;
         $this->tripCostForm = $tripCostForm;
         $this->tripCostComputerService = $tripCostComputerService;
     }
@@ -45,8 +45,8 @@ class TripsController extends AbstractActionController
     {
         $as_filters = $this->params()->fromPost();
         $as_filters['withLimit'] = true;
-        $as_dataDataTable = $this->I_tripsService->getDataDataTable($as_filters);
-        $i_tripsTotal = $this->I_tripsService->getTotalTrips();
+        $as_dataDataTable = $this->tripsService->getDataDataTable($as_filters);
+        $i_tripsTotal = $this->tripsService->getTotalTrips();
         $i_recordsFiltered = $this->_getRecordsFiltered($as_filters, $i_tripsTotal);
 
         return new JsonModel(array(
@@ -67,7 +67,7 @@ class TripsController extends AbstractActionController
 
             $as_filters['withLimit'] = false;
 
-            return count($this->I_tripsService->getDataDataTable($as_filters));
+            return count($this->tripsService->getDataDataTable($as_filters));
         }
     }
 
@@ -97,5 +97,33 @@ class TripsController extends AbstractActionController
         return new JsonModel([
             'cost' => $tripCost
         ]);
+    }
+
+    public function detailsAction()
+    {
+        $id = (int)$this->params()->fromRoute('id', 0);
+        $tab = $this->params()->fromQuery('tab', 'info');
+
+        return new ViewModel([
+            'tripId' => $id,
+            'tab'      => $tab
+        ]);
+    }
+
+    public function infoTabAction()
+    {
+        $id = (int)$this->params()->fromRoute('id', 0);
+
+        $trip = $this->tripsService->getTripById($id);
+
+        return new ViewModel([
+            'trip' => $trip
+        ]);
+    }
+
+    public function costTabAction()
+    {
+        $id = (int)$this->params()->fromRoute('id', 0);
+
     }
 }

@@ -1,0 +1,60 @@
+<?php
+$trip = $this->trip;
+$customer = $trip->getCustomer();
+?>
+
+<div class="row">
+    <div class="col-lg-9">
+
+        <?php echo $this->partial('partials/flash-messages.phtml', []); ?>
+        <div class="panel panel-default">
+            <div class="panel-heading">Dettagli Corsa</div>
+            <div class="panel-body">
+
+                <div class="row">
+                    <div class="col-lg-4">
+                        <div class="form-group">
+                            <label>Id</label>
+                            <?= $trip->getId() ?>
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="form-group">
+                            <label>Nome</label>
+                            <?= $customer->getName() ?>
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="form-group">
+                            <label>Cognome</label>
+                            <?= $customer->getSurname() ?>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+
+    <div class="col-lg-3">
+        <div class="panel panel-default">
+
+            <div class="panel-heading">Dati pagamento</div>
+            <div class="panel-body">
+
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="form-group">
+                            <label>Pagabile</label>
+                            <?= $trip->getPayable() ? 'SI' : 'NO' ?>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+
+</div>

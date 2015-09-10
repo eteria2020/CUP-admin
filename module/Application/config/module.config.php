@@ -338,6 +338,42 @@ return array(
                                 'action' => 'trip-cost-computation'
                             ]
                         ]
+                    ],
+                    'details' => [
+                        'type' => 'Segment',
+                        'options' => [
+                            'route' => '/details/:id',
+                            'constraints' => [
+                                'id'    => '[0-9]*'
+                            ],
+                            'defaults' => [
+                                'action' => 'details'
+                            ]
+                        ]
+                    ],
+                    'info-tab' => [
+                        'type' => 'Segment',
+                        'options' => [
+                            'route' => '/tab/info/:id',
+                            'constraints' => [
+                                'id'    => '[0-9]*'
+                            ],
+                            'defaults' => [
+                                'action' => 'info-tab'
+                            ]
+                        ]
+                    ],
+                    'cost-tab' => [
+                        'type' => 'Segment',
+                        'options' => [
+                            'route' => '/tab/cost/:id',
+                            'constraints' => [
+                                'id'    => '[0-9]*'
+                            ],
+                            'defaults' => [
+                                'action' => 'cost-tab'
+                            ]
+                        ]
                     ]
                 ],
              ],
