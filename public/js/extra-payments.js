@@ -3,6 +3,21 @@
 $(function() {
     "use strict";
 
+    $('#paymentType').change(function () {
+        $('#penaltyField').toggle();
+        $('#reason').val('');
+        $('#amount').val('');
+    });
+
+    $('#penalty').change(function () {
+        var selected = $(this).find('option:selected'),
+            reason = selected.data('reason') || '',
+            amount = selected.data('amount') || '';
+
+        $('#reason').val(reason);
+        $('#amount').val(amount);
+    });
+
     function sendPaymentRequest(customerId, paymentType, reason, amount) {
         $.post('/payments/pay-extra', {
             customerId: customerId,

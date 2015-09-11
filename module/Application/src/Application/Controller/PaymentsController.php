@@ -9,6 +9,7 @@ use SharengoCore\Service\CustomersService;
 use SharengoCore\Service\ExtraPaymentsService;
 use Cartasi\Service\CartasiContractsService;
 use Cartasi\Service\CartasiCustomerPayments;
+use SharengoCore\Service\PenaltiesService;
 
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\JsonModel;
@@ -51,6 +52,11 @@ class PaymentsController extends AbstractActionController
      */
     private $extraPaymentsService;
 
+    /**
+     * @var PenaltiesService
+     */
+    private $penaltiesService;
+
     public function __construct(
         TripPaymentsService $tripPaymentsService,
         PaymentsService $paymentsService,
@@ -58,7 +64,8 @@ class PaymentsController extends AbstractActionController
         ExtraPaymentsForm $extraPaymentsForm,
         CartasiContractsService $cartasiContractsService,
         CartasiCustomerPayments $cartasiCustomerPayments,
-        ExtraPaymentsService $extraPaymentsService
+        ExtraPaymentsService $extraPaymentsService,
+        PenaltiesService $penaltiesService
     ) {
         $this->tripPaymentsService = $tripPaymentsService;
         $this->paymentsService = $paymentsService;
@@ -67,6 +74,7 @@ class PaymentsController extends AbstractActionController
         $this->cartasiContractsService = $cartasiContractsService;
         $this->cartasiCustomerPayments = $cartasiCustomerPayments;
         $this->extraPaymentsService = $extraPaymentsService;
+        $this->penaltiesService = $penaltiesService;
     }
 
     public function failedPaymentsAction()
@@ -144,8 +152,11 @@ class PaymentsController extends AbstractActionController
 
     public function extraAction()
     {
+        $penalties = $this->penaltiesService->getAllPenalties();
+
         return new ViewModel([
-            'form' => $this->extraPaymentsForm
+            'form' => $this->extraPaymentsForm,
+            'penalties' => $penalties
         ]);
     }
 
@@ -190,6 +201,8 @@ class PaymentsController extends AbstractActionController
                 $paymentType,
                 $reason
             );
+
+            $this->extraPaymentsService->generateInvoice($customer, $reason, $amount);
 
             return new JsonModel([
                 'message' => 'Il tentativo di pagamento è andato a buon fine. Il cliente è stato notificato da Cartasi'
