@@ -344,7 +344,7 @@ return array(
                         'options' => [
                             'route' => '/details/:id',
                             'constraints' => [
-                                'id'    => '[0-9]*'
+                                'id' => '[0-9]*'
                             ],
                             'defaults' => [
                                 'action' => 'details'
@@ -356,7 +356,7 @@ return array(
                         'options' => [
                             'route' => '/tab/info/:id',
                             'constraints' => [
-                                'id'    => '[0-9]*'
+                                'id' => '[0-9]*'
                             ],
                             'defaults' => [
                                 'action' => 'info-tab'

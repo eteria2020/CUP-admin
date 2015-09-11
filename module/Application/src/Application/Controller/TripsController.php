@@ -5,6 +5,8 @@ use Application\Form\TripCostForm;
 use SharengoCore\Service\TripsService;
 use SharengoCore\Service\TripCostComputerService;
 use SharengoCore\Service\TripPaymentsService;
+use SharengoCore\Service\TripBonusesService;
+use SharengoCore\Service\TripFreeFaresService;
 use SharengoCore\Entity\TripPayments;
 use SharengoCore\Entity\Invoices;
 
@@ -34,16 +36,30 @@ class TripsController extends AbstractActionController
      */
     private $tripPaymentsService;
 
+    /**
+     * @var TripBonusesService
+     */
+    private $tripBonusesService;
+
+    /**
+     * @var TripFreeFaresService
+     */
+    private $tripFreeFaresService;
+
     public function __construct(
         TripsService $tripsService,
         TripCostForm $tripCostForm,
         TripCostComputerService $tripCostComputerService,
-        TripPaymentsService $tripPaymentsService
+        TripPaymentsService $tripPaymentsService,
+        TripBonusesService $tripBonusesService,
+        TripFreeFaresService $tripFreeFaresService
     ) {
         $this->tripsService = $tripsService;
         $this->tripCostForm = $tripCostForm;
         $this->tripCostComputerService = $tripCostComputerService;
         $this->tripPaymentsService = $tripPaymentsService;
+        $this->tripBonusesService = $tripBonusesService;
+        $this->tripFreeFaresService = $tripFreeFaresService;
     }
 
     public function indexAction()
@@ -112,7 +128,7 @@ class TripsController extends AbstractActionController
     public function detailsAction()
     {
         $id = (int)$this->params()->fromRoute('id', 0);
-        $tab = $this->params()->fromQuery('tab', 'info');
+        $tab = $this->params()->fromQuery('tab', 'cost');
 
         return new ViewModel([
             'tripId' => $id,
@@ -142,10 +158,14 @@ class TripsController extends AbstractActionController
 
         $trip = $this->tripsService->getTripById($id);
         $tripPayment = $this->tripPaymentsService->getTripPaymentForTrip($trip);
+        $tripFreeFares = $this->tripFreeFaresService->getFreeFaresByTrip($trip);
+        $tripBonuses = $this->tripBonusesService->getBonusesByTrip($trip);
 
         $view = new ViewModel([
             'trip' => $trip,
-            'tripPayment' => $tripPayment
+            'tripPayment' => $tripPayment,
+            'tripBonuses' => $tripBonuses,
+            'tripFreeFares' => $tripFreeFares
         ]);
         $view->setTerminal(true);
 

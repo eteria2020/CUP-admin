@@ -4,6 +4,10 @@ $trip = $this->trip;
 $tripPayment = $this->tripPayment;
 $customer = $trip->getCustomer();
 
+// parse card
+// must write something even if empty otherwise the box shrinks in height
+$rfid = $customer->getCard() !== null ? $customer->getCard()->getRfid() : 'n.a.';
+
 // Parse duration
 $beginningTs = $trip->getTimestampBeginning();
 $endTs = $trip->getTimestampEnd();
@@ -71,7 +75,7 @@ if ($tripPayment !== null) {
                     <div class="col-lg-4">
                         <div class="form-group">
                             <label>RFID</label>
-                            <div class="sng-info-box"><?= $customer->getCard()->getRfid() ?></div>
+                            <div class="sng-info-box"><?= $rfid ?></div>
                         </div>
                     </div>
                     <div class="col-lg-4">
@@ -86,7 +90,7 @@ if ($tripPayment !== null) {
                     <div class="col-lg-4">
                         <div class="form-group">
                             <label>Numero</label>
-                            <div class="sng-info-box"><?= 'nn' ?></div>
+                            <div class="sng-info-box"><?= $trip->getCar()->getLabel() ?></div>
                         </div>
                     </div>
                     <div class="col-lg-4">

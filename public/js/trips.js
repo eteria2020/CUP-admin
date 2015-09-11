@@ -91,6 +91,7 @@ $(function() {
             },
             {
                 targets: 16,
+                sortable: false,
                 "render": function ( data, type, row ) {
                     return renderCostButton(data);
                 }
@@ -170,7 +171,14 @@ $(function() {
 
     function renderCostButton(data)
     {
-        return data !== '' ? renderAmount(parseInt(data)) : '';
+        var amount = data['amount'];
+        if (amount !== 'FREE') {
+            return amount !== '' ?
+                '<a href="/trips/details/' + data['id'] + '?tab=cost">' + renderAmount(parseInt(amount)) + '</a>' :
+                '';
+        } else {
+            return amount;
+        }
         /*
         return '<div class="btn-group">' +
                     '<a href="' + data + '" class="btn btn-default">Dettagli</a> ' +
