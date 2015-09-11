@@ -191,10 +191,10 @@ angular.module('SharengoCsApp').controller('SharengoCsController', function (
         });*/
 
         $scope.car = car;
-        $scope.zoom({
+        /*$scope.zoom({
             latitude: car.latitude,
             longitude: parseFloat(car.longitude) + 0.00010
-        }, 21);
+        }, 21);*/
 
     };
 
