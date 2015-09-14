@@ -49,10 +49,9 @@ $(function() {
             alert('Formato id cliente non corretto');
             return;
         }
-        console.log("step 1");
+
         $.get('/customers/info/' + customerId)
             .done(function (data) {
-        console.log("step 2");
                 customer = data;
 
                 if (reason.length === 0) {
@@ -72,7 +71,6 @@ $(function() {
                 }
             })
             .fail(function (data) {
-        console.log("step 3");
                 var message = JSON.parse(data.responseText).error;
 
                 alert(message);
