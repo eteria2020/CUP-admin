@@ -776,12 +776,12 @@ return array(
                         'label' => 'Pagamenti falliti',
                         'route' => 'payments/failed-payments',
                         'isVisible' => true
-                    ]/*,
+                    ],
                     [
                         'label' => 'Addebita penale/extra',
                         'route' => 'payments/extra',
                         'isVisible' => true
-                    ]*/
+                    ]
                 ]
             ],
             [
