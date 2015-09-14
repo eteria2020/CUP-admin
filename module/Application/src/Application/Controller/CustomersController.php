@@ -460,4 +460,26 @@ class CustomersController extends AbstractActionController
 
         return new JsonModel();
     }
+
+    public function infoAction()
+    {
+        try {
+            $customer = $this->getCustomer();
+
+            if (!$customer) {
+                throw new \Exception();
+            }
+
+            return new JsonModel([
+                'id' => $customer->getId(),
+                'name' => $customer->getName(),
+                'surname' => $customer->getSurname()
+            ]);
+        } catch (\Exception $e) {
+            $this->getResponse()->setStatusCode(422);
+            return new JsonModel([
+                'error' => 'Non esiste un cliente per l\'id specificato'
+            ]);
+        }
+    }
 }

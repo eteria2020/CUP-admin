@@ -35,6 +35,7 @@ $(function() {
 
     $('#js-extra-payment').click(function (e) {
         var customerId = $('#customerId').val(),
+            customer = null,
             paymentType = $('#paymentType').val(),
             reason = $('#reason').val(),
             amount = $('#amount').val();
@@ -46,19 +47,30 @@ $(function() {
             return;
         }
 
-        if (reason.length === 0) {
-            alert('Inserire una causale valida');
-            return;
-        }
+        $.get('/customers/info/' + customerId)
+            .done(function (data) {
+                customer = data;
 
-        if (!amount || amount < 0 || amount !== String(parseInt(amount, 10))) {
-            alert('Inserire un importo valido in centesimi di euro');
-            return;
-        }
+                if (reason.length === 0) {
+                    alert('Inserire una causale valida');
+                    return;
+                }
 
-        if (confirm('Confermi il pagamento al cliente ' + customerId +
-            ' di un importo di ' + amount / 100 + ' euro')) {
-            sendPaymentRequest(customerId, paymentType, reason, amount);
-        }
+                if (!amount || amount < 0 || amount !== String(parseInt(amount, 10))) {
+                    alert('Inserire un importo valido in centesimi di euro');
+                    return;
+                }
+
+                if (confirm('Confermi il pagamento al cliente ' +
+                    customer.name + ' ' + customer.surname +
+                    ' di un importo di ' + amount / 100 + ' euro')) {
+                    sendPaymentRequest(customerId, paymentType, reason, amount);
+                }
+            })
+            .fail(function (data) {
+                var message = JSON.parse(data.responseText).error;
+
+                alert(message);
+            });
     });
 });

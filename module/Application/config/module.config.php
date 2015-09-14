@@ -152,9 +152,9 @@ return array(
                         'type'    => 'Segment',
                         'options' => [
                             'route'    => '/assign-promo-code/:id',
-                            'constraints' => array(
+                            'constraints' => [
                                 'id' => '[0-9]*'
-                            ),
+                            ],
                             'defaults' => [
                                 'action'        => 'assign-promo-code',
                             ],
@@ -164,9 +164,9 @@ return array(
                         'type'    => 'Segment',
                         'options' => [
                             'route'    => '/add-bonus/:id',
-                            'constraints' => array(
+                            'constraints' => [
                                 'id' => '[0-9]*'
-                            ),
+                            ],
                             'defaults' => [
                                 'action'        => 'add-bonus',
                             ],
@@ -176,9 +176,9 @@ return array(
                         'type'    => 'Segment',
                         'options' => [
                             'route'    => '/remove-bonus/:id',
-                            'constraints' => array(
+                            'constraints' => [
                                 'id' => '[0-9]*'
-                            ),
+                            ],
                             'defaults' => [
                                 'action'        => 'remove-bonus',
                             ],
@@ -188,11 +188,23 @@ return array(
                         'type' => 'Segment',
                         'options' => [
                             'route' => '/activate/:id',
-                            'constraints' => array(
+                            'constraints' => [
                                 'id' => '[0-9]*'
-                            ),
+                            ],
                             'defaults' => [
                                 'action' => 'activate',
+                            ]
+                        ]
+                    ],
+                    'info' => [
+                        'type' => 'Segment',
+                        'options' => [
+                            'route' => '/info/:id',
+                            'constraints' => [
+                                'id' => '[0-9]*'
+                            ],
+                            'defaults' => [
+                                'action' => 'info'
                             ]
                         ]
                     ]
