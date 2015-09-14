@@ -24,24 +24,10 @@ $this->headScript()
                         <?= $this->formRow($form->get('extra')->get('paymentType')); ?>
                     </div>
                 </div>
-
-                <div class="col-lg-4">
-                    <div class="form-group">
-                        <label for="reason">Causale</label>
-                        <?= $this->formRow($form->get('extra')->get('reason')); ?>
-                    </div>
-                </div>
-
-                <div class="col-lg-4">
-                    <div class="form-group">
-                        <label for="amount">Importo (&euro; cents)</label>
-                        <?= $this->formRow($form->get('extra')->get('amount')); ?>
-                    </div>
-                </div>
             </div>
 
             <div class="row">
-                <div id="penaltyField" class="col-lg-4">
+                <div id="penaltyField" class="col-lg-12">
                     <div class="form-group">
                         <label for="penalty">Penale</label>
                         <select id="penalty" name="penalty" class="form-control">
@@ -52,6 +38,24 @@ $this->headScript()
                                 </option>
                             <?php endforeach; ?>
                         </select>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="form-group">
+                        <label for="reason">Causale</label>
+                        <?= $this->formRow($form->get('extra')->get('reason')); ?>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-lg-4">
+                    <div class="form-group">
+                        <label for="amount">Importo (&euro;)</label>
+                        <?= $this->formRow($form->get('extra')->get('amount')); ?>
                     </div>
                 </div>
             </div>
