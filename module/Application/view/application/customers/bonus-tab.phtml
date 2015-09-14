@@ -38,7 +38,7 @@
                     <th style="font-weight: normal;"><?= $bonus->getType(); ?></th>
                     <th style="font-weight: normal;"><?= $bonus->getDescription(); ?></th>
                     <th>
-                        <?php if($bonus->getTotal() == $bonus->getResidual()): ?>
+                        <?php if ($bonus->canBeDeleted()): ?>
                             <a href="javascript:void(0);" data-id="<?= $this->customer->getId(); ?>" data-bonus="<?= $bonus->getId(); ?>" class="btn btn-default" id="js-remove-bonus">Elimina</a>
                         <?php endif; ?>
                     </th>
