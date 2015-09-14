@@ -12,7 +12,7 @@ $(function() {
     $('#penalty').change(function () {
         var selected = $(this).find('option:selected'),
             reason = selected.data('reason') || '',
-            amount = selected.data('amount') || '';
+            amount = parseFloat(selected.data('amount')) / 100 || '';
 
         $('#reason').val(reason);
         $('#amount').val(amount);
@@ -39,6 +39,9 @@ $(function() {
             paymentType = $('#paymentType').val(),
             reason = $('#reason').val(),
             amount = $('#amount').val();
+            amount = amount.replace(",", ".");
+            amount = parseFloat(amount);
+            amount = Math.floor(amount * 100);
 
         e.preventDefault();
 
@@ -56,8 +59,8 @@ $(function() {
                     return;
                 }
 
-                if (!amount || amount < 0 || amount !== String(parseInt(amount, 10))) {
-                    alert('Inserire un importo valido in centesimi di euro');
+                if (!amount || amount < 0) {
+                    alert('Inserire un importo valido in euro');
                     return;
                 }
 

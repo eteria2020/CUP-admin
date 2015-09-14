@@ -59,7 +59,7 @@ class ExtraPaymentsFieldset extends Fieldset
                 'id'    => 'amount',
                 'class' => 'form-control',
                 'min' => 0,
-                'step' => 1
+                'step' => 0.01
             ]
         ]);
     }
