@@ -172,7 +172,7 @@ angular.module('SharengoCsApp').controller('SharengoCsController', function (
         $scope.mapOptions.zoom = zoom;
     };
 
-    $scope.onCarSelection = function (car) {
+    $scope.onCarSelection = function (car,zoom) {
         $scope.cars.forEach(function (carl) {
             if (carl.plate === car.plate) {
                 carl.carIcon = car.iconSelected;
@@ -191,10 +191,12 @@ angular.module('SharengoCsApp').controller('SharengoCsController', function (
         });*/
 
         $scope.car = car;
-        /*$scope.zoom({
-            latitude: car.latitude,
-            longitude: parseFloat(car.longitude) + 0.00010
-        }, 21);*/
+        if(zoom){
+            $scope.zoom({
+                latitude: car.latitude,
+                longitude: parseFloat(car.longitude) + 0.00010
+            }, 21);
+        }
 
     };
 
@@ -231,7 +233,7 @@ angular.module('SharengoCsApp').controller('SharengoCsController', function (
         $scope.customer = customer;
     };
 
-    function searchCar(value, unit) {
+    function searchCar(value, unit, zoom) {
         var cars,
             car;
 
@@ -265,7 +267,7 @@ angular.module('SharengoCsApp').controller('SharengoCsController', function (
                     $scope.accordionStatus.hideRequest = false;
                     $scope.accordionStatus.researchOpen = false;
 
-                    $scope.onCarSelection(car);
+                    $scope.onCarSelection(car,zoom);
 
                     $scope.accordionStatus.hideCarData = false;
 
@@ -316,7 +318,7 @@ angular.module('SharengoCsApp').controller('SharengoCsController', function (
     }
 
     $scope.plateChange = function (value, unit) {
-                searchCar(value, unit);
+        searchCar(value, unit, true);
     };
 
     function clearSearch() {
@@ -373,7 +375,7 @@ angular.module('SharengoCsApp').controller('SharengoCsController', function (
             $scope.loadCars().then(function () {
                 $scope.trip = trip.trip;
                 $scope.accordionStatus.hideTripData = false;
-                $scope.onCarSelection(trip.data[0].car);
+                $scope.onCarSelection(trip.data[0].car,true);
                 $scope.accordionStatus.hideCarData = false;
                 carsFactory.getLastClosedTrip(trip.data[0].car).success(function (trip) {
                     $scope.lastTrip = trip.data[0];
@@ -487,7 +489,7 @@ angular.module('SharengoCsApp').controller('SharengoCsController', function (
     });
     $scope.markerEvents = {
             click: function (marker, event, car) {
-                searchCar(car.plate, false);
+                searchCar(car.plate, false,false);
 
                 var content = [
 "<div class=\"module-pop-up\" style=\"margin:0 auto;\">",
