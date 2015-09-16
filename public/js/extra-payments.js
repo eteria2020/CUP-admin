@@ -33,6 +33,15 @@ $(function() {
         });
     }
 
+    function clearFields() {
+        $('#customerId').val('');
+        $('#paymentType').val('extra');
+        $('#penaltyField').hide();
+        $('#penalty').prop('selectedIndex', 0);
+        $('#reason').val('');
+        $('#amount').val('');
+    }
+
     $('#js-extra-payment').click(function (e) {
         var customerId = $('#customerId').val(),
             customer = null,
@@ -68,12 +77,15 @@ $(function() {
                     customer.name + ' ' + customer.surname +
                     ' di un importo di ' + amount / 100 + ' euro')) {
                     sendPaymentRequest(customerId, paymentType, reason, amount);
+
+                    clearFields();
                 }
             })
             .fail(function (data) {
                 var message = JSON.parse(data.responseText).error;
 
                 alert(message);
+                clearFields();
             });
     });
 });
