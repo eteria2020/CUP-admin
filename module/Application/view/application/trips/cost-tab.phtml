@@ -1,10 +1,10 @@
 <?php
 // Get data
 $trip = $this->trip;
-$tripPayment = $this->tripPayment;
 $customer = $trip->getCustomer();
-$tripBonuses = $this->tripBonuses;
-$tripFreeFares = $this->tripFreeFares;
+$tripPayment = $trip->getTripPayments()[0];
+$tripFreeFares = $trip->getTripFreeFares();
+$tripBonuses = $trip->getTripBonuses();
 
 // Parse payment
 $tripFare = 'n.a.';
@@ -135,7 +135,7 @@ if ($tripPayment !== null) {
             <div class="panel-body">
 
                 <div class="row">
-                    <div class="col-lg-12">
+                    <div class="col-lg-6">
                         <div class="form-group">
                             <label>Importo</label>
                             <div class="sng-info-box"><?= $amount ?></div>
@@ -143,7 +143,7 @@ if ($tripPayment !== null) {
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-lg-12">
+                    <div class="col-lg-6">
                         <div class="form-group">
                             <label>Pagabile</label>
                             <div class="sng-info-box"><?= $trip->getPayable() ? 'SI' : 'NO' ?></div>

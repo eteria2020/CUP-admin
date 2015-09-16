@@ -4,9 +4,6 @@ namespace Application\Controller;
 use Application\Form\TripCostForm;
 use SharengoCore\Service\TripsService;
 use SharengoCore\Service\TripCostComputerService;
-use SharengoCore\Service\TripPaymentsService;
-use SharengoCore\Service\TripBonusesService;
-use SharengoCore\Service\TripFreeFaresService;
 use SharengoCore\Entity\TripPayments;
 use SharengoCore\Entity\Invoices;
 
@@ -31,35 +28,14 @@ class TripsController extends AbstractActionController
      */
     private $tripCostComputerService;
 
-    /**
-     * @var TripPaymentsService
-     */
-    private $tripPaymentsService;
-
-    /**
-     * @var TripBonusesService
-     */
-    private $tripBonusesService;
-
-    /**
-     * @var TripFreeFaresService
-     */
-    private $tripFreeFaresService;
-
     public function __construct(
         TripsService $tripsService,
         TripCostForm $tripCostForm,
-        TripCostComputerService $tripCostComputerService,
-        TripPaymentsService $tripPaymentsService,
-        TripBonusesService $tripBonusesService,
-        TripFreeFaresService $tripFreeFaresService
+        TripCostComputerService $tripCostComputerService
     ) {
         $this->tripsService = $tripsService;
         $this->tripCostForm = $tripCostForm;
         $this->tripCostComputerService = $tripCostComputerService;
-        $this->tripPaymentsService = $tripPaymentsService;
-        $this->tripBonusesService = $tripBonusesService;
-        $this->tripFreeFaresService = $tripFreeFaresService;
     }
 
     public function indexAction()
@@ -141,11 +117,9 @@ class TripsController extends AbstractActionController
         $id = (int)$this->params()->fromRoute('id', 0);
 
         $trip = $this->tripsService->getTripById($id);
-        $tripPayment = $this->tripPaymentsService->getTripPaymentForTrip($trip);
 
         $view = new ViewModel([
-            'trip' => $trip,
-            'tripPayment' => $tripPayment
+            'trip' => $trip
         ]);
         $view->setTerminal(true);
 
@@ -157,15 +131,9 @@ class TripsController extends AbstractActionController
         $id = (int)$this->params()->fromRoute('id', 0);
 
         $trip = $this->tripsService->getTripById($id);
-        $tripPayment = $this->tripPaymentsService->getTripPaymentForTrip($trip);
-        $tripFreeFares = $this->tripFreeFaresService->getFreeFaresByTrip($trip);
-        $tripBonuses = $this->tripBonusesService->getBonusesByTrip($trip);
 
         $view = new ViewModel([
-            'trip' => $trip,
-            'tripPayment' => $tripPayment,
-            'tripBonuses' => $tripBonuses,
-            'tripFreeFares' => $tripFreeFares
+            'trip' => $trip
         ]);
         $view->setTerminal(true);
 

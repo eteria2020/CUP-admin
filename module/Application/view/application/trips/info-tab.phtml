@@ -1,7 +1,7 @@
 <?php
 // Get data
 $trip = $this->trip;
-$tripPayment = $this->tripPayment;
+$tripPayment = $trip->getTripPayments()[0];
 $customer = $trip->getCustomer();
 
 // parse card
@@ -132,7 +132,7 @@ if ($tripPayment !== null) {
                     <div class="col-lg-4">
                         <div class="form-group">
                             <label>Sosta</label>
-                            <div class="sng-info-box"><?= $trip->getParkSeconds() . ' .sec' ?></div>
+                            <div class="sng-info-box"><?= $trip->getParkSeconds() . ' sec.' ?></div>
                         </div>
                     </div>
                     <div class="col-lg-4">
