@@ -1,0 +1,45 @@
+<?php
+$this->headLink()
+    ->appendStylesheet('/css/addons.css');
+$this->headScript()
+    ->prependFile('/js/tabs.js');
+?>
+<div class="page-content-wrapper">
+    <div class="page-content">
+
+        <div class="row">
+            <div class="col-lg-6">
+                <h3 class="page-title">
+                    DETTAGLI CORSA
+                </h3>
+            </div>
+
+            <div class="col-lg-6">
+                <a href="<?php echo $this->url('trips'); ?>" class="btn btn-success pull-right"><i class="fa fa-arrow-left"></i> Torna alla lista</a>
+            </div>
+        </div>
+
+        <div class="page-bar">
+        </div>
+
+        <div class="row">
+            <div class="col-md-12">
+                <ul class="nav nav-tabs" id="js-tabs" role="tablist">
+                    <li role="presentation" id="menu-info"><a href="<?= $this->url('trips/info-tab', ['id' => $this->tripId]); ?>" data-target="#tab-info" role="tab" data-toggle="tab">Informazioni</a></li>
+                    <li role="presentation" id="menu-cost"><a href="<?= $this->url('trips/cost-tab', ['id' => $this->tripId]); ?>" data-target="#tab-cost" role="tab" data-toggle="tab">Costo</a></li>
+                </ul>
+
+                <div class="tab-content">
+                    <div role="tabpanel" class="tab-pane" id="tab-info"></div>
+                    <div role="tabpanel" class="tab-pane" id="tab-cost"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- END PAGE CONTENT-->
+    </div>
+</div>
+
+<script>
+var tab = '<?= $this->tab ?>';
+</script>

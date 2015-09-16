@@ -72,10 +72,37 @@ $(function() {
             {data: 'e.parkSeconds'},
             {data: 'c.keyStatus'},
             {data: 'c.parking'},
-            {data: 'e.payable'}
+            {data: 'e.payable'},
+            {data: 'e.totalCost'},
+            {data: 'e.idLink'}
         ],
-        "aoColumnDefs": [
-            { 'bSortable': false, 'aTargets': [11,13,14]}
+        "columnDefs": [
+            {
+                targets: 11,
+                sortable: false
+            },
+            {
+                targets: 13,
+                sortable: false
+            },
+            {
+                targets: 14,
+                sortable: false
+            },
+            {
+                targets: 16,
+                sortable: false,
+                "render": function ( data, type, row ) {
+                    return renderCostButton(data);
+                }
+            },
+            {
+                targets: 17,
+                sortable: false,
+                "render": function ( data, type, row ) {
+                    return renderInfoButton(data);
+                }
+            }
         ],
         "lengthMenu": [
             [100, 200, 300],
@@ -142,5 +169,40 @@ $(function() {
 
     });
 
+    function renderCostButton(data)
+    {
+        var amount = data['amount'];
+        if (amount !== 'FREE') {
+            return amount !== '' ?
+                '<a href="/trips/details/' + data['id'] + '?tab=cost">' + renderAmount(parseInt(amount)) + '</a>' :
+                '';
+        } else {
+            return amount;
+        }
+        /*
+        return '<div class="btn-group">' +
+                    '<a href="' + data + '" class="btn btn-default">Dettagli</a> ' +
+                '</div>';
+        */
+    }
 
+    function renderInfoButton(data)
+    {
+        return '<div class="btn-group">' +
+                    '<a href="/trips/details/' + data + '" class="btn btn-default">Dettagli</a> ' +
+                '</div>';
+    }
+
+    function renderAmount(amount)
+    {
+        return (Math.floor(amount / 100)) +
+            ',' +
+            toStringKeepZero(amount % 100) +
+            ' \u20ac';
+    }
+
+    function toStringKeepZero(value)
+    {
+        return ((value < 10) ? '0' : '') + value;
+    }
 });
