@@ -8,15 +8,6 @@ $customer = $trip->getCustomer();
 // must write something even if empty otherwise the box shrinks in height
 $rfid = $customer->getCard() !== null ? $customer->getCard()->getRfid() : 'n.a.';
 
-// Parse duration
-$beginningTs = $trip->getTimestampBeginning();
-$endTs = $trip->getTimestampEnd();
-$duration = '';
-if ($beginningTs !== null && $endTs !== null) {
-    $duration = $trip->getTimestampEnd()->diff($trip->getTimestampBeginning());
-    $duration = $duration->format('%dg %H:%I:%S');
-}
-
 // Parse payment
 $payed = 'NO';
 $invoiced = 'NO';
@@ -35,7 +26,6 @@ if ($tripPayment !== null) {
 }
 
 ?>
-
 <div class="row">
     <div class="col-lg-9">
 
@@ -47,7 +37,7 @@ if ($tripPayment !== null) {
                 <div class="row">
                     <div class="col-lg-4">
                         <div class="form-group">
-                            <label>Id</label>
+                            <label>Id corsa</label>
                             <div class="sng-info-box"><?= $trip->getId() ?></div>
                         </div>
                     </div>
@@ -74,7 +64,7 @@ if ($tripPayment !== null) {
                     </div>
                     <div class="col-lg-4">
                         <div class="form-group">
-                            <label>RFID</label>
+                            <label>RFID cliente</label>
                             <div class="sng-info-box"><?= $rfid ?></div>
                         </div>
                     </div>
@@ -89,7 +79,7 @@ if ($tripPayment !== null) {
                 <div class="row">
                     <div class="col-lg-4">
                         <div class="form-group">
-                            <label>Numero</label>
+                            <label>Numero auto</label>
                             <div class="sng-info-box"><?= $trip->getCar()->getLabel() ?></div>
                         </div>
                     </div>
@@ -117,13 +107,13 @@ if ($tripPayment !== null) {
                     <div class="col-lg-4">
                         <div class="form-group">
                             <label>Fine</label>
-                            <div class="sng-info-box"><?= $trip->getTimestampEnd()->format('d-m-Y H:i:s') ?></div>
+                            <div class="sng-info-box"><?= (null != $trip->getTimestampEnd() ? $trip->getTimestampEnd()->format('d-m-Y H:i:s') : 'n.d.') ?></div>
                         </div>
                     </div>
                     <div class="col-lg-4">
                         <div class="form-group">
                             <label>Durata</label>
-                            <div class="sng-info-box"><?= $duration ?></div>
+                            <div class="sng-info-box"><?= $trip->getDurationMinutes() ?> minuti</div>
                         </div>
                     </div>
                 </div>

@@ -31,17 +31,17 @@
             /** @var \SharengoCore\Entity\CustomersBonus $bonus */
             foreach($this->listBonus as $bonus): ?>
                 <tr id="js-row-bonus-<?= $bonus->getId(); ?>">
-                    <th style="font-weight: normal;"><?= $bonus->getTotal(); ?></th>
+                    <td style="font-weight: normal;"><?= $bonus->getTotal(); ?></td>
                     <td><?= $bonus->getResidual(); ?></td>
                     <td><?= is_object($bonus->getValidFrom()) ? $bonus->getValidFrom()->format('d-m-Y H:i:s') : ''; ?></td>
                     <td><?= is_object($bonus->getValidTo()) ? $bonus->getValidTo()->format('d-m-Y H:i:s') : ''; ?></td>
-                    <th style="font-weight: normal;"><?= $bonus->getType(); ?></th>
-                    <th style="font-weight: normal;"><?= $bonus->getDescription(); ?></th>
-                    <th>
+                    <td style="font-weight: normal;"><?= $bonus->getType(); ?></td>
+                    <td style="font-weight: normal;"><?= $bonus->getDescription(); ?></td>
+                    <td>
                         <?php if ($bonus->canBeDeleted()): ?>
                             <a href="javascript:void(0);" data-id="<?= $this->customer->getId(); ?>" data-bonus="<?= $bonus->getId(); ?>" class="btn btn-default" id="js-remove-bonus">Elimina</a>
                         <?php endif; ?>
-                    </th>
+                    </td>
                 </tr>
             <?php endforeach; ?>
             </tbody>

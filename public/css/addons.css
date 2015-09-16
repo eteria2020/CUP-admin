@@ -5,3 +5,8 @@
     background-color: #EEEEEE;
     padding: 5px;
 }
+
+.panel-default > .panel-heading { 
+    color: white;
+    font-weight: bold;
+}

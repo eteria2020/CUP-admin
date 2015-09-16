@@ -63,7 +63,6 @@ $(function() {
             {data: 'cu.mobile'},
             {data: 'cc.code'},
             {data: 'c.plate'},
-            {data: 'c.label'},
             {data: 'e.kmBeginning'},
             {data: 'e.kmEnd'},
             {data: 'e.timestampBeginning'},
@@ -78,7 +77,11 @@ $(function() {
         ],
         "columnDefs": [
             {
-                targets: 11,
+                targets: 10,
+                sortable: false
+            },
+            {
+                targets: 12,
                 sortable: false
             },
             {
@@ -86,18 +89,14 @@ $(function() {
                 sortable: false
             },
             {
-                targets: 14,
-                sortable: false
-            },
-            {
-                targets: 16,
+                targets: 15,
                 sortable: false,
                 "render": function ( data, type, row ) {
                     return renderCostButton(data);
                 }
             },
             {
-                targets: 17,
+                targets: 16,
                 sortable: false,
                 "render": function ( data, type, row ) {
                     return renderInfoButton(data);

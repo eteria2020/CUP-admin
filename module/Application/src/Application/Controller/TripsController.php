@@ -104,11 +104,16 @@ class TripsController extends AbstractActionController
     public function detailsAction()
     {
         $id = (int)$this->params()->fromRoute('id', 0);
+
+        $trip = $this->tripsService->getTripById($id);
+        
         $tab = $this->params()->fromQuery('tab', 'info');
 
         return new ViewModel([
             'tripId' => $id,
-            'tab'      => $tab
+            'tab'    => $tab,
+            'trip'   => $trip,
+            'customer' => $trip->getCustomer()
         ]);
     }
 

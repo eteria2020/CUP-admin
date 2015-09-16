@@ -12,6 +12,10 @@ $parkingFare = 'n.a.';
 $amount = 'n.a.';
 $payed = 'NO';
 
+if ($trip->getIsaccounted()) {
+    $amount = 0;
+}
+
 if ($tripPayment !== null) {
     $fare = $tripPayment->getFare();
     $tripFare = $fare->getMotionCostPerMinute() . ' cent/min';
@@ -30,7 +34,7 @@ if ($tripPayment !== null) {
 <div class="row">
     <div class="col-lg-9">
 
-        <?php echo $this->partial('partials/flash-messages.phtml', []); ?>
+
         <div class="panel panel-default">
             <div class="panel-heading">Dettagli Corsa</div>
             <div class="panel-body">
@@ -38,20 +42,20 @@ if ($tripPayment !== null) {
                 <div class="row">
                     <div class="col-lg-4">
                         <div class="form-group">
-                            <label>Id</label>
-                            <div class="sng-info-box"><?= $trip->getId() ?></div>
+                            <label>Inizio</label>
+                            <div class="sng-info-box"><?= $trip->getTimestampBeginning()->format('d-m-Y H:i:s') ?></div>
                         </div>
                     </div>
                     <div class="col-lg-4">
                         <div class="form-group">
-                            <label>Nome</label>
-                            <div class="sng-info-box"><?= $customer->getName() ?></div>
+                            <label>Fine</label>
+                            <div class="sng-info-box"><?= (null != $trip->getTimestampEnd() ? $trip->getTimestampEnd()->format('d-m-Y H:i:s') : 'n.d.') ?></div>
                         </div>
                     </div>
                     <div class="col-lg-4">
                         <div class="form-group">
-                            <label>Cognome</label>
-                            <div class="sng-info-box"><?= $customer->getSurname() ?></div>
+                            <label>Durata</label>
+                            <div class="sng-info-box"><?= $trip->getDurationMinutes() ?> minuti</div>
                         </div>
                     </div>
                 </div>
@@ -71,60 +75,108 @@ if ($tripPayment !== null) {
                     </div>
                     <div class="col-lg-4">
                         <div class="form-group">
-                            <label>Sconto</label>
+                            <label>Sconto cliente</label>
                             <div class="sng-info-box"><?= $customer->getDiscountRate() . '%' ?></div>
                         </div>
                     </div>
                 </div>
 
-                <?php foreach ($tripFreeFares as $tripFreeFare): ?>
-                <div class="row">
-                    <div class="col-lg-4">
-                        <div class="form-group">
-                            <label>Descrizione</label>
-                            <div class="sng-info-box"><?= $tripFreeFare->getFreeFare()->getDescription() ?></div>
-                        </div>
-                    </div>
-                    <div class="col-lg-4">
-                        <div class="form-group">
-                            <label>Minuti</label>
-                            <div class="sng-info-box"><?= $tripFreeFare->getMinutes() . ' min.' ?></div>
-                        </div>
-                    </div>
-                    <div class="col-lg-4">
-                        <div class="form-group">
-                            <label>Sconto</label>
-                            <div class="sng-info-box"><?= '100%' ?></div>
-                        </div>
-                    </div>
-                </div>
-                <?php endforeach; ?>
+            </div>
+        </div>
 
-                <?php foreach ($tripBonuses as $tripBonus): ?>
-                <div class="row">
-                    <div class="col-lg-4">
-                        <div class="form-group">
-                            <label>Descrizione</label>
-                            <div class="sng-info-box"><?= 'Utilizzo minuti bonus' ?></div>
-                        </div>
-                    </div>
-                    <div class="col-lg-4">
-                        <div class="form-group">
-                            <label>Minuti</label>
-                            <div class="sng-info-box"><?= $tripBonus->getMinutes() . ' min.' ?></div>
-                        </div>
-                    </div>
-                    <div class="col-lg-4">
-                        <div class="form-group">
-                            <label>Sconto</label>
-                            <div class="sng-info-box"><?= '100%' ?></div>
-                        </div>
-                    </div>
-                </div>
-                <?php endforeach; ?>
+        <?php if(count($trip->getTripBills()) > 0) { ?>
+        <div class="panel panel-default">
+            <div class="panel-heading">Minuti addebitati</div>
+            <div class="panel-body">
+
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th>Dal</th>
+                            <th>Fino al</th>
+                            <th>Minuti</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    <?php
+                    /** @var \SharengoCore\Entity\TripBills $tripBill */
+                    foreach($trip->getTripBills() as $tripBill) { ?>
+                        <tr>
+                            <td><?= $tripBill->getTimestampBeginning()->format('d-m-Y H:i:s') ?></td>
+                            <td><?= $tripBill->getTimestampEnd()->format('d-m-Y H:i:s') ?></td>
+                            <td><?= $tripBill->getMinutes() ?></td>
+                        </tr>
+                    <?php } ?>
+                    </tbody>
+                </table>
 
             </div>
         </div>
+        <?php } ?>
+
+        <?php if(count($trip->getTripBonuses()) > 0) { ?>
+        <div class="panel panel-default">
+            <div class="panel-heading">Minuti bonus usufruiti</div>
+            <div class="panel-body">
+
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th>Dal</th>
+                            <th>Fino al</th>
+                            <th>Minuti</th>
+                            <th>Descrizione bonus</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    <?php
+                    /** @var \SharengoCore\Entity\TripBonuses $tripBonuses */
+                    foreach($trip->getTripBonuses() as $tripBonuses) { ?>
+                        <tr>
+                            <td><?= $tripBonuses->getTimestampBeginning()->format('d-m-Y H:i:s') ?></td>
+                            <td><?= $tripBonuses->getTimestampEnd()->format('d-m-Y H:i:s') ?></td>
+                            <td><?= $tripBonuses->getMinutes() ?></td>
+                            <td><?= $tripBonuses->getBonus()->getDescription() ?></td>
+                        </tr>
+                    <?php } ?>
+                    </tbody>
+                </table>
+
+            </div>
+        </div>
+        <?php } ?>
+
+        <?php if(count($trip->getTripFreeFares()) > 0) { ?>
+        <div class="panel panel-default">
+            <div class="panel-heading">Sconti / tariffe speciali</div>
+            <div class="panel-body">
+
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th>Dal</th>
+                            <th>Fino al</th>
+                            <th>Minuti</th>
+                            <th>Descrizione sconto / tariffa speciale</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    <?php
+                    /** @var \SharengoCore\Entity\TripFreeFares $tripFreeFare */
+                    foreach($trip->getTripFreeFares() as $tripFreeFare) { ?>
+                        <tr>
+                            <td><?= $tripFreeFare->getTimestampBeginning()->format('d-m-Y H:i:s') ?></td>
+                            <td><?= $tripFreeFare->getTimestampEnd()->format('d-m-Y H:i:s') ?></td>
+                            <td><?= $tripFreeFare->getMinutes() ?></td>
+                            <td><?= $tripFreeFare->getFreeFare()->getDescription() ?></td>
+                        </tr>
+                    <?php } ?>
+                    </tbody>
+                </table>
+
+            </div>
+        </div>
+        <?php } ?>
 
     </div>
 
