@@ -6,7 +6,16 @@
     padding: 5px;
 }
 
-.panel-default > .panel-heading { 
+.panel-default > .panel-heading {
     color: white;
     font-weight: bold;
+}
+.sng-dt-right:not(th) {
+    text-align: right;
+}
+.sng-dt-center:not(th) {
+    text-align: center;
+}
+.sng-no-wrap {
+    white-space: nowrap;
 }

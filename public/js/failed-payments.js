@@ -24,6 +24,16 @@ $(function() {
             ' \u20ac';
     }
 
+    function renderDiscount(discount)
+    {
+        return discount + "%";
+    }
+
+    function renderMin(min)
+    {
+        return min + " min.";
+    }
+
     table.dataTable({
         "processing": true,
         "serverSide": true,
@@ -63,7 +73,37 @@ $(function() {
         ],
         "columnDefs": [
             {
+                targets: 1,
+                className: "sng-dt-right"
+            },
+            {
+                targets: 6,
+                className: "sng-dt-right"
+            },
+            {
+                targets: 7,
+                className: "sng-dt-right sng-no-wrap",
+                "render": function (data) {
+                    return renderMin(data);
+                }
+            },
+            {
+                targets: 8,
+                className: "sng-dt-right",
+                "render": function (data) {
+                    return renderMin(data);
+                }
+            },
+            {
+                targets: 9,
+                className: "sng-dt-right",
+                "render": function (data) {
+                    return renderDiscount(data);
+                }
+            },
+            {
                 targets: 10,
+                className: "sng-dt-right sng-no-wrap",
                 "render": function (data) {
                     return renderAmount(data);
                 }

@@ -1,5 +1,6 @@
 <?php
-$this->headLink()->appendStylesheet('/js/datatables/plugins/bootstrap/dataTables.bootstrap.css');
+$this->headLink()->appendStylesheet('/js/datatables/plugins/bootstrap/dataTables.bootstrap.css')
+    ->headLink()->appendStylesheet('/css/addons.css');
 $this->headScript()
     ->appendFile('/js/datatables/media/js/jquery.dataTables.min.js')
     ->appendFile('/js/datatables/plugins/bootstrap/dataTables.bootstrap.js')
@@ -59,17 +60,17 @@ $this->headScript()
                         <table class="table table-striped table-bordered table-hover" id="js-payments-table">
                             <thead>
                             <tr>
-                                <th>Data del pagamento</th>
+                                <th>Data pagamento</th>
                                 <th>ID cliente</th>
                                 <th>Nome</th>
                                 <th>Cognome</th>
                                 <th>Cellulare</th>
                                 <th>Email</th>
                                 <th>ID Corsa</th>
-                                <th>Min. corsa</th>
-                                <th>Min. parcheggio</th>
-                                <th>% sconto</th>
-                                <th>Costo totale</th>
+                                <th>Corsa</th>
+                                <th>Parcheggio</th>
+                                <th>Sconto</th>
+                                <th>Costo</th>
                                 <th></th>
                             </tr>
                             </thead>

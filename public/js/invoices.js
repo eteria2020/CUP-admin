@@ -52,6 +52,7 @@ $(function() {
             },
             {
                 targets: 5,
+                className: "sng-dt-right",
                 "render": function ( data, type, row ) {
                     return renderAmount(data);
                 }
@@ -59,6 +60,7 @@ $(function() {
             {
                 targets: 6,
                 sortable: false,
+                className: "sng-dt-center",
                 "render": function ( data, type, row ) {
                     return renderLink(data);
                 }
@@ -119,26 +121,6 @@ $(function() {
     {
         var value = $(column).val();
         var searchValue = $(search).val();
-        /*
-        if (value == 'e.invoiceDate') {
-            // remove slash
-            searchValue.replace(/\//g, '');
-        } else if (value == 'e.amount') {
-            // remove comma, EUR symbol and spaces
-            searchValue.replace(/,|\u20ac|s+/g, '');
-        } else if (value == 'e.type') {
-            switch (searchValue) {
-                case 'Iscrizione':
-                    searchValue = 'FIRST_PAYMENT';
-                    break;
-                case 'Corse':
-                    searchValue = 'TRIP';
-                    break;
-                case 'Sanzione':
-                    searchValue = 'PENALTY';
-            }
-        }
-        */
         return searchValue;
     }
 
