@@ -137,17 +137,24 @@ class PaymentsController extends AbstractActionController
 
         $tripPayment = $this->tripPaymentsService->getTripPaymentById($id);
 
-        // the second parameter is needed to avoid sending an email to the customer
-        $cartasiResponse = $this->paymentsService->tryTripPayment($tripPayment, true, false, false, true);
+        if ($tripPayment->isWrongPayment()) {
+            // the second parameter is needed to avoid sending an email to the customer
+            $cartasiResponse = $this->paymentsService->tryTripPayment($tripPayment, true, false, false, true);
 
-        if ($cartasiResponse->getOutcome() === 'OK') {
-            $this->customersService->setCustomerPaymentAble($tripPayment->getCustomer());
+            if ($cartasiResponse->getOutcome() === 'OK') {
+                $this->customersService->setCustomerPaymentAble($tripPayment->getCustomer());
+            }
+
+            return new JsonModel([
+                'outcome' => $cartasiResponse->getOutcome(),
+                'message' => $cartasiResponse->getMessage()
+            ]);
+        } else {
+            return new JsonModel([
+                'outcome' => 'KO',
+                'message' => 'The trip is not anymore in wrong payment state'
+            ]);
         }
-
-        return new JsonModel([
-            'outcome' => $cartasiResponse->getOutcome(),
-            'message' => $cartasiResponse->getMessage()
-        ]);
     }
 
     public function extraAction()
