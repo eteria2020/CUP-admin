@@ -106,7 +106,7 @@ class TripsController extends AbstractActionController
         $id = (int)$this->params()->fromRoute('id', 0);
 
         $trip = $this->tripsService->getTripById($id);
-        
+
         $tab = $this->params()->fromQuery('tab', 'info');
 
         return new ViewModel([
@@ -132,6 +132,20 @@ class TripsController extends AbstractActionController
     }
 
     public function costTabAction()
+    {
+        $id = (int)$this->params()->fromRoute('id', 0);
+
+        $trip = $this->tripsService->getTripById($id);
+
+        $view = new ViewModel([
+            'trip' => $trip
+        ]);
+        $view->setTerminal(true);
+
+        return $view;
+    }
+
+    public function editTabAction()
     {
         $id = (int)$this->params()->fromRoute('id', 0);
 

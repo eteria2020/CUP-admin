@@ -407,6 +407,18 @@ return array(
                                 'action' => 'cost-tab'
                             ]
                         ]
+                    ],
+                    'edit-tab' => [
+                        'type' => 'Segment',
+                        'options' => [
+                            'route' => '/tab/edit/:id',
+                            'constraints' => [
+                                'id'    => '[0-9]*'
+                            ],
+                            'defaults' => [
+                                'action' => 'edit-tab'
+                            ]
+                        ]
                     ]
                 ],
              ],
