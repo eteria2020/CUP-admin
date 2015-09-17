@@ -1,10 +1,17 @@
 <?php
-$this->headLink()->appendStylesheet('/js/datatables/plugins/bootstrap/dataTables.bootstrap.css');
+$this->headLink()->appendStylesheet('/js/datatables/plugins/bootstrap/dataTables.bootstrap.css')
+    ->headLink()->appendStylesheet('/css/addons.css');
 $this->headScript()
     ->appendFile('/js/datatables/media/js/jquery.dataTables.min.js')
     ->appendFile('/js/datatables/plugins/bootstrap/dataTables.bootstrap.js')
     ->appendFile($this->basePath() .'/js/retry-payment.js');
 ?>
+
+<?php
+$tripPayment = $this->tripPayment;
+$customer = $this->customer;
+?>
+
 <div class="page-content-wrapper">
     <div class="page-content">
 
@@ -56,12 +63,85 @@ $this->headScript()
 
         <hr>
 
+        <!-- Details table -->
+        <div class="row">
+            <div class="col-lg-12">
+
+                <?php echo $this->partial('partials/flash-messages.phtml', []); ?>
+                <div class="portlet box green">
+                    <div class="portlet-title">
+                        <div class="caption">
+                            <i class="fa fa-server"></i>Riepilogo
+                        </div>
+                    </div>
+                    <div class="portlet-body">
+
+                        <div class="row">
+                            <div class="col-lg-3">
+                                <div class="form-group">
+                                    <label>ID Corsa</label>
+                                    <div class="sng-info-box"><?= $tripPayment->getTrip()->getId() ?></div>
+                                </div>
+                            </div>
+                            <div class="col-lg-3">
+                                <div class="form-group">
+                                    <label>Data</label>
+                                    <div class="sng-info-box"><?= $tripPayment->getCreatedAt()->format("d-m-Y H:i:s") ?></div>
+                                </div>
+                            </div>
+                            <div class="col-lg-3">
+                                <div class="form-group">
+                                    <label>Nome</label>
+                                    <div class="sng-info-box"><?= $customer->getName() ?></div>
+                                </div>
+                            </div>
+                            <div class="col-lg-3">
+                                <div class="form-group">
+                                    <label>Cognome</label>
+                                    <div class="sng-info-box"><?= $customer->getSurname() ?></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-lg-3">
+                                <div class="form-group">
+                                    <label>Corsa</label>
+                                    <div class="sng-info-box"><?= $tripPayment->getTripMinutes() . " min." ?></div>
+                                </div>
+                            </div>
+                            <div class="col-lg-3">
+                                <div class="form-group">
+                                    <label>Parcheggio</label>
+                                    <div class="sng-info-box"><?= $tripPayment->getParkingMinutes() . " min." ?></div>
+                                </div>
+                            </div>
+                            <div class="col-lg-3">
+                                <div class="form-group">
+                                    <label>Sconto</label>
+                                    <div class="sng-info-box"><?= $tripPayment->getDiscountPercentage() . "%" ?></div>
+                                </div>
+                            </div>
+                            <div class="col-lg-3">
+                                <div class="form-group">
+                                    <label>Costo</label>
+                                    <div class="sng-info-box"><?= $tripPayment->getFormattedTotalCost() ?></div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- details table -->
+
+        <!-- Retries list table -->
         <div class="row">
             <div class="col-md-12">
 
                 <?php echo $this->partial('partials/flash-messages.phtml', []); ?>
 
-                <!-- BEGIN EXAMPLE TABLE PORTLET-->
                 <div class="portlet box green">
                     <div class="portlet-title">
                         <div class="caption">
@@ -95,16 +175,15 @@ $this->headScript()
                         </table>
                     </div>
                 </div>
-                <!-- END EXAMPLE TABLE PORTLET-->
             </div>
         </div>
+        <!-- retries list table -->
 
         <!-- END PAGE CONTENT-->
     </div>
 </div>
 <script>
-    var tripPaymentId = "<?= $this->tripPayment->getId() ?>",
-        retryUrl = "<?= $this->url('payments/do-retry', ['id' => $this->tripPayment->getId()], ['force_canonical' => true]) ?>",
-        abilitateUrl = "<?= $this->url('customers/activate', ['id' => $this->customer->getId()], ['force_canonical' => true]) ?>";
-
+    var tripPaymentId = "<?= $tripPayment->getId() ?>",
+        retryUrl = "<?= $this->url('payments/do-retry', ['id' => $tripPayment->getId()], ['force_canonical' => true]) ?>",
+        abilitateUrl = "<?= $this->url('customers/activate', ['id' => $customer->getId()], ['force_canonical' => true]) ?>";
 </script>
