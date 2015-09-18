@@ -8,6 +8,9 @@ use SharengoCore\Entity\PromoCodes;
 use SharengoCore\Service\CardsService;
 use SharengoCore\Service\CustomersService;
 use SharengoCore\Service\PromoCodesService;
+use SharengoCore\Exception\CustomerNotFoundException;
+use Cartasi\Service\CartasiContractsService;
+
 use Zend\Form\Form;
 use Zend\Http\Response;
 use Zend\Mvc\Controller\AbstractActionController;
@@ -62,6 +65,11 @@ class CustomersController extends AbstractActionController
     private $I_promoCodeService;
 
     /**
+     * @var CartasiContractsService
+     */
+    private $cartsiContractsService;
+
+    /**
      * @param CustomersService $I_customerService
      */
     public function __construct(
@@ -73,7 +81,8 @@ class CustomersController extends AbstractActionController
         Form $I_settingForm,
         Form $I_promoCodeForm,
         Form $I_customerBonusForm,
-        HydratorInterface $hydrator
+        HydratorInterface $hydrator,
+        CartasiContractsService $cartasiContractsService
     ) {
         $this->I_customerService = $I_customerService;
         $this->I_cardsService = $I_cardsService;
@@ -84,6 +93,7 @@ class CustomersController extends AbstractActionController
         $this->promoCodeForm = $I_promoCodeForm;
         $this->customerBonusForm = $I_customerBonusForm;
         $this->hydrator = $hydrator;
+        $this->cartasiContractsService = $cartasiContractsService;
     }
 
     public function listAction()
@@ -301,6 +311,40 @@ class CustomersController extends AbstractActionController
         return new JsonModel($this->I_cardsService->ajaxCardCodeAutocomplete($query));
     }
 
+    public function contractTabAction()
+    {
+        $customer = $this->getCustomer();
+        $contract = $this->cartasiContractsService->getCartasiContract($customer);
+
+        $view = new ViewModel([
+            'customer' => $customer,
+            'contract' => $contract
+        ]);
+        $view->setTerminal(true);
+
+        return $view;
+    }
+
+    public function disableContractAction()
+    {
+        $contractId = $this->params()->fromPost('contractId');
+
+        $contract = $this->cartasiContractsService->getContractById($contractId);
+
+        try {
+            $result = $this->cartasiContractsService->disableContract();
+
+            return new JsonModel([
+                'result' => $result
+            ]);
+        } catch (\Exception $e) {
+            $this->response->setStatusCode(Response::STATUS_CODE_500);
+            return new JsonModel([
+                'error' => 'C\'è stato un errore durante la disabilitazione del contratto'
+            ]);
+        }
+    }
+
     public function assignPromoCodeAction()
     {
         $I_customer = $this->getCustomer();
@@ -432,7 +476,7 @@ class CustomersController extends AbstractActionController
         if (is_null($I_customer)) {
             $this->getResponse()->setStatusCode(Response::STATUS_CODE_404);
 
-            return false;
+            throw new CustomerNotFoundException();
         }
 
         return $I_customer;

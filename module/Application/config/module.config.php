@@ -139,6 +139,18 @@ return array(
                             ],
                         ],
                     ],
+                    'ajax-tab-contract' => [
+                        'type'    => 'Segment',
+                        'options' => [
+                            'route'    => '/ajax-tab/contract/:id',
+                            'constraints' => [
+                                'id' => '[0-9]*'
+                            ],
+                            'defaults' => [
+                                'action'        => 'contract-tab',
+                            ],
+                        ],
+                    ],
                     'ajax-card-code' => [
                         'type'    => 'Literal',
                         'options' => [
@@ -205,6 +217,15 @@ return array(
                             ],
                             'defaults' => [
                                 'action' => 'info'
+                            ]
+                        ]
+                    ],
+                    'disable-contract' => [
+                        'type' => 'Segment',
+                        'options' => [
+                            'route' => '/disable-contract',
+                            'defaults' => [
+                                'action' => 'disable-contract'
                             ]
                         ]
                     ]
