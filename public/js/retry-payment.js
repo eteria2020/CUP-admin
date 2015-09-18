@@ -17,6 +17,8 @@ $(function () {
                 }
             }
         });
+
+        $('#js-new-try').attr('disabled', true);
     });
 
     $('#js-abilitate-customer').click(function() {
