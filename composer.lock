@@ -1273,7 +1273,7 @@
             "source": {
                 "type": "git",
                 "url": "ssh://git@git.mvlabs.it:4222/clients/sharengo-cartasi.git",
-                "reference": "7637f643003d82eb830ad84b536b95b4bd567c02"
+                "reference": "39b1a0d39121664bcb4f6bacbaa78cdcf29c9349"
             },
             "require": {
                 "doctrine/doctrine-orm-module": "0.*",
@@ -1287,7 +1287,7 @@
                 }
             },
             "description": "Cartasi module for Sharengo",
-            "time": "2015-09-14 14:38:55"
+            "time": "2015-09-18 09:38:23"
         },
         {
             "name": "mvlabs/sharengo-coremodule",
@@ -1295,7 +1295,7 @@
             "source": {
                 "type": "git",
                 "url": "ssh://git@git.mvlabs.it:4222/clients/sharengo-coremodule.git",
-                "reference": "d11ecd89dc85a0dffebeb5f2e0debceea19ed814"
+                "reference": "f397d72a5665ee7f2a1d961395fb960889bdb247"
             },
             "require": {
                 "doctrine/doctrine-orm-module": "0.*",
@@ -1316,7 +1316,7 @@
                 }
             },
             "description": "Core ZF2 module for Sharengo apps",
-            "time": "2015-09-17 12:56:07"
+            "time": "2015-09-18 10:20:25"
         },
         {
             "name": "rwoverdijk/assetmanager",
