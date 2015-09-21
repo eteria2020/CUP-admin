@@ -622,7 +622,8 @@ return array(
             'PromoCodeForm' => 'Application\Form\PromoCodeFormFactory',
             'CustomerBonusForm' => 'Application\Form\CustomerBonusFormFactory',
             'TripCostForm' => 'Application\Form\TripCostFormFactory',
-            'ExtraPaymentsForm' => 'Application\Form\ExtraPaymentsFormFactory'
+            'ExtraPaymentsForm' => 'Application\Form\ExtraPaymentsFormFactory',
+            'EditTripForm' => 'Application\Form\EditTripFormFactory'
         ]
     ),
     'controllers' => [

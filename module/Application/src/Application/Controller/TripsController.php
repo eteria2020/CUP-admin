@@ -2,8 +2,10 @@
 namespace Application\Controller;
 
 use Application\Form\TripCostForm;
+use Application\Form\EditTripForm;
 use SharengoCore\Service\TripsService;
 use SharengoCore\Service\TripCostComputerService;
+use SharengoCore\Service\EventsService;
 use SharengoCore\Entity\TripPayments;
 use SharengoCore\Entity\Invoices;
 
@@ -28,14 +30,28 @@ class TripsController extends AbstractActionController
      */
     private $tripCostComputerService;
 
+    /**
+     * @var EventsService
+     */
+    private $eventsService;
+
+    /**
+     * @var EditTripForm
+     */
+    private $editTripForm;
+
     public function __construct(
         TripsService $tripsService,
         TripCostForm $tripCostForm,
-        TripCostComputerService $tripCostComputerService
+        TripCostComputerService $tripCostComputerService,
+        EventsService $eventsService,
+        EditTripForm $editTripForm
     ) {
         $this->tripsService = $tripsService;
         $this->tripCostForm = $tripCostForm;
         $this->tripCostComputerService = $tripCostComputerService;
+        $this->eventsService = $eventsService;
+        $this->editTripForm = $editTripForm;
     }
 
     public function indexAction()
@@ -107,7 +123,7 @@ class TripsController extends AbstractActionController
 
         $trip = $this->tripsService->getTripById($id);
 
-        $tab = $this->params()->fromQuery('tab', 'info');
+        $tab = $this->params()->fromQuery('tab', 'edit');
 
         return new ViewModel([
             'tripId' => $id,
@@ -150,9 +166,12 @@ class TripsController extends AbstractActionController
         $id = (int)$this->params()->fromRoute('id', 0);
 
         $trip = $this->tripsService->getTripById($id);
+        $events = $this->eventsService->getEventsByTrip($trip);
 
         $view = new ViewModel([
-            'trip' => $trip
+            'trip' => $trip,
+            'events' => $events,
+            'editTripForm' => $this->editTripForm
         ]);
         $view->setTerminal(true);
 

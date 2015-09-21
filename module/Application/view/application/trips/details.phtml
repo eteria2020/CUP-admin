@@ -1,8 +1,13 @@
 <?php
 $this->headLink()
-    ->appendStylesheet('/css/addons.css');
+    ->appendStylesheet('/css/addons.css')
+    ->appendStylesheet('/js/datatables/plugins/bootstrap/dataTables.bootstrap.css')
+    ->appendStylesheet('/js/plugins/bootstrap-datetimepicker/css/bootstrap-datetimepicker.min.css');
 $this->headScript()
-    ->prependFile('/js/tabs.js');
+    ->prependFile('/js/tabs.js')
+    ->appendFile('/js/moment.min.js')
+    ->appendFile('/js/bootstrap.min.js')
+    ->appendFile('/js/plugins/bootstrap-datetimepicker/js/bootstrap-datetimepicker.min.js');
 ?>
 <div class="page-content-wrapper">
     <div class="page-content">
