@@ -332,7 +332,7 @@ class CustomersController extends AbstractActionController
         $contract = $this->cartasiContractsService->getContractById($contractId);
 
         try {
-            $result = $this->cartasiContractsService->disableContract();
+            $result = $this->cartasiContractsService->disableContract($contract);
 
             return new JsonModel([
                 'result' => $result

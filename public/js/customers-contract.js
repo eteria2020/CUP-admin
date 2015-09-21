@@ -1,4 +1,4 @@
-/* global $ */
+/* global $ alert */
 
 $(function () {
     "use strict";
@@ -6,14 +6,14 @@ $(function () {
     $('#disable-contract').click(function () {
         var contractId = $(this).data('contract-id');
 
-        $(this).attr('disabled');
+        $(this).attr('disabled', 'disabled');
 
         $.post('/customers/disable-contract', {
             contractId: contractId
-        }).done(function (data) {
-            console.log(data);
+        }).done(function () {
+            alert('Contratto disabilitato');
         }).fail(function (data) {
-            console.log('fail', data);
+            alert(data.responseJSON.error);
         });
     });
 });
