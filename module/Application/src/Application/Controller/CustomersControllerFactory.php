@@ -15,18 +15,23 @@ class CustomersControllerFactory implements FactoryInterface
      */
     public function createService(ServiceLocatorInterface $serviceLocator)
     {
+        $sharedLocator = $serviceLocator->getServiceLocator();
+
         // dependency is fetched from Service Manager
-        $entityManager = $serviceLocator->getServiceLocator()->get('doctrine.entitymanager.orm_default');
-        $I_clientService = $serviceLocator->getServiceLocator()->get('SharengoCore\Service\CustomersService');
-        $I_cardsService = $serviceLocator->getServiceLocator()->get('SharengoCore\Service\CardsService');
-        $I_promoCodeService = $serviceLocator->getServiceLocator()->get('SharengoCore\Service\PromoCodesService');
-        $I_customerForm = $serviceLocator->getServiceLocator()->get('CustomerForm');
-        $I_driverForm = $serviceLocator->getServiceLocator()->get('DriverForm');
-        $I_settingForm = $serviceLocator->getServiceLocator()->get('SettingForm');
-        $I_promoCodeForm = $serviceLocator->getServiceLocator()->get('PromoCodeForm');
-        $I_customerBonusForm = $serviceLocator->getServiceLocator()->get('CustomerBonusForm');
+        $entityManager = $sharedLocator->get('doctrine.entitymanager.orm_default');
+        $I_clientService = $sharedLocator->get('SharengoCore\Service\CustomersService');
+        $I_cardsService = $sharedLocator->get('SharengoCore\Service\CardsService');
+        $I_promoCodeService = $sharedLocator->get('SharengoCore\Service\PromoCodesService');
+        $I_customerForm = $sharedLocator->get('CustomerForm');
+        $I_driverForm = $sharedLocator->get('DriverForm');
+        $I_settingForm = $sharedLocator->get('SettingForm');
+        $I_promoCodeForm = $sharedLocator->get('PromoCodeForm');
+        $I_customerBonusForm = $sharedLocator->get('CustomerBonusForm');
 
         $hydrator = new DoctrineHydrator($entityManager);
+
+        $cartasiContractsService = $sharedLocator->get('Cartasi\Service\CartasiContracts');
+        $disableContractService = $sharedLocator->get('SharengoCore\Service\DisableContractService');
 
         // Controller is constructed, dependencies are injected (IoC in action)
         return new CustomersController(
@@ -38,7 +43,9 @@ class CustomersControllerFactory implements FactoryInterface
             $I_settingForm,
             $I_promoCodeForm,
             $I_customerBonusForm,
-            $hydrator
+            $hydrator,
+            $cartasiContractsService,
+            $disableContractService
         );
     }
 }
