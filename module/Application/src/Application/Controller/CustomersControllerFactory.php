@@ -31,6 +31,7 @@ class CustomersControllerFactory implements FactoryInterface
         $hydrator = new DoctrineHydrator($entityManager);
 
         $cartasiContractsService = $sharedLocator->get('Cartasi\Service\CartasiContracts');
+        $disableContractService = $sharedLocator->get('SharengoCore\Service\DisableContractService');
 
         // Controller is constructed, dependencies are injected (IoC in action)
         return new CustomersController(
@@ -43,7 +44,8 @@ class CustomersControllerFactory implements FactoryInterface
             $I_promoCodeForm,
             $I_customerBonusForm,
             $hydrator,
-            $cartasiContractsService
+            $cartasiContractsService,
+            $disableContractService
         );
     }
 }

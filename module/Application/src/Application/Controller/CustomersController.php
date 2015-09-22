@@ -8,6 +8,7 @@ use SharengoCore\Entity\PromoCodes;
 use SharengoCore\Service\CardsService;
 use SharengoCore\Service\CustomersService;
 use SharengoCore\Service\PromoCodesService;
+use SharengoCore\Service\DisableContractService;
 use SharengoCore\Exception\CustomerNotFoundException;
 use Cartasi\Service\CartasiContractsService;
 
@@ -70,6 +71,11 @@ class CustomersController extends AbstractActionController
     private $cartsiContractsService;
 
     /**
+     * @var DisableContractService
+     */
+    private $disableContractService;
+
+    /**
      * @param CustomersService $I_customerService
      */
     public function __construct(
@@ -82,7 +88,8 @@ class CustomersController extends AbstractActionController
         Form $I_promoCodeForm,
         Form $I_customerBonusForm,
         HydratorInterface $hydrator,
-        CartasiContractsService $cartasiContractsService
+        CartasiContractsService $cartasiContractsService,
+        DisableContractService $disableContractService
     ) {
         $this->I_customerService = $I_customerService;
         $this->I_cardsService = $I_cardsService;
@@ -94,6 +101,7 @@ class CustomersController extends AbstractActionController
         $this->customerBonusForm = $I_customerBonusForm;
         $this->hydrator = $hydrator;
         $this->cartasiContractsService = $cartasiContractsService;
+        $this->disableContractService = $disableContractService;
     }
 
     public function listAction()
@@ -332,7 +340,7 @@ class CustomersController extends AbstractActionController
         $contract = $this->cartasiContractsService->getContractById($contractId);
 
         try {
-            $result = $this->cartasiContractsService->disableContract($contract);
+            $result = $this->disableContractService->disableContract($contract);
 
             return new JsonModel([
                 'result' => $result
