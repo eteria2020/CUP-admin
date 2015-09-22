@@ -24,11 +24,8 @@ class EditTripFieldset extends Fieldset
             'type'       => 'Zend\Form\Element\Date',
             'attributes' => [
                 'id'       => 'timestampEnd',
-                'class'    => 'form-control datetime-picker',
+                'class'    => 'form-control',
                 'type'     => 'text'
-            ],
-            'options' => [
-                'label' => 'Data fine'
             ]
         ]);
 
@@ -37,10 +34,9 @@ class EditTripFieldset extends Fieldset
             'type' => 'Zend\Form\Element\Checkbox',
             'attributes' => [
                 'id'    => 'payable',
-                'class' => 'form-control',
+                'class' => 'form-control'
             ],
             'options' => [
-                'label' => 'Pagabile',
                 'use_hidden_element' => true,
                 'checked_value' => 'si',
                 'unchecked_value' => 'no'

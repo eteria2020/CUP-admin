@@ -2,17 +2,20 @@
 
 namespace Application\Form;
 
+use Application\Form\EditTripFieldset;
 use Zend\Form\Form;
 
 class EditTripForm extends Form
 {
-    public function __construct($fieldset)
+    /**
+     * @param EditTripFieldset $fieldset
+     */
+    public function __construct(EditTripFieldset $editTripFieldset)
     {
         parent::__construct('trip');
-        $this->setAttribute('method', 'post');
         $this->setAttribute('id', 'editTripForm');
 
-        $this->add($fieldset);
+        $this->add($editTripFieldset);
 
         $this->add([
             'name'       => 'submit',

@@ -1,4 +1,5 @@
 <?php
+$timestampEnd = '';
 // if trip is not yet closed
 if ($this->trip->getTimestampEnd() === null) {
 ?>
@@ -26,6 +27,8 @@ if ($this->trip->getTimestampEnd() === null) {
 } else {
     $form = $this->editTripForm->prepare();
     $form->setAttribute('action', $this->url('trips/edit-tab', ['id' => $this->trip->getId()]));
+    $trip = $this->trip;
+    $timestampEnd = $trip->getTimestampEnd()->format('d-m-Y H:i:s');
 ?>
 
 <?= $this->form()->openTag($form); ?>
@@ -45,11 +48,19 @@ if ($this->trip->getTimestampEnd() === null) {
                 <div class="row">
                     <div class="col-lg-4">
                         <div class="form-group">
+                            <label>Data fine attuale</label>
+                            <div class="sng-info-box"><?= $timestampEnd ?></div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="form-group">
+                            <label>Nuova data fine <span class="sng-hint">(non precedente a quella attuale)</span></label>
                             <?= $this->formRow($form->get('trip')->get('timestampEnd')); ?>
                         </div>
                     </div>
                     <div class="col-lg-4">
                         <div class="form-group">
+                            <label>Pagabile</label>
                             <?= $this->formRow($form->get('trip')->get('payable')); ?>
                         </div>
                     </div>
@@ -124,12 +135,8 @@ if ($this->trip->getTimestampEnd() === null) {
 // close editable trip section
 }
 ?>
-
 <script>
-$(function() {
-    'use strict';
-    $('.datetime-picker').datetimepicker({
-        format: "DD-MM-YYYY HH:mm:ss"
-    });
-});
+var timestampEnd = '<?= $timestampEnd ?>';
+var payable = <?= $trip->getPayable() ? 'true' : 'false' ?>;
 </script>
+<script type="text/javascript" src="/js/edit-trip.js"></script>
