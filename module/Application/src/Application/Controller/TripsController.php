@@ -12,6 +12,7 @@ use SharengoCore\Entity\Invoices;
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\JsonModel;
 use Zend\View\Model\ViewModel;
+use DoctrineModule\Stdlib\Hydrator\DoctrineObject as DoctrineHydrator;
 
 class TripsController extends AbstractActionController
 {
@@ -40,18 +41,25 @@ class TripsController extends AbstractActionController
      */
     private $editTripForm;
 
+    /**
+     * @var DoctrineHydrator
+     */
+    private $hydrator;
+
     public function __construct(
         TripsService $tripsService,
         TripCostForm $tripCostForm,
         TripCostComputerService $tripCostComputerService,
         EventsService $eventsService,
-        EditTripForm $editTripForm
+        EditTripForm $editTripForm,
+        DoctrineHydrator $hydrator
     ) {
         $this->tripsService = $tripsService;
         $this->tripCostForm = $tripCostForm;
         $this->tripCostComputerService = $tripCostComputerService;
         $this->eventsService = $eventsService;
         $this->editTripForm = $editTripForm;
+        $this->hydrator = $hydrator;
     }
 
     public function indexAction()
@@ -167,6 +175,10 @@ class TripsController extends AbstractActionController
 
         $trip = $this->tripsService->getTripById($id);
         $events = $this->eventsService->getEventsByTrip($trip);
+
+        $tripArray = $trip->toArray($this->hydrator, []);
+        $tripArray['timestampEnd'] = $tripArray['timestampEnd']->format('d-m-Y H:i:s');
+        $this->editTripForm->setData(['trip' => $tripArray]);
 
         $view = new ViewModel([
             'trip' => $trip,

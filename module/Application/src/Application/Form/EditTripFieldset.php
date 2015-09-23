@@ -35,11 +35,6 @@ class EditTripFieldset extends Fieldset
             'attributes' => [
                 'id'    => 'payable',
                 'class' => 'form-control'
-            ],
-            'options' => [
-                'use_hidden_element' => true,
-                'checked_value' => 'si',
-                'unchecked_value' => 'no'
             ]
         ]);
     }

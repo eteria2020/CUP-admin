@@ -4,6 +4,7 @@ namespace Application\Controller;
 
 use Zend\ServiceManager\FactoryInterface;
 use Zend\ServiceManager\ServiceLocatorInterface;
+use DoctrineModule\Stdlib\Hydrator\DoctrineObject as DoctrineHydrator;
 
 class TripsControllerFactory implements FactoryInterface
 {
@@ -22,6 +23,8 @@ class TripsControllerFactory implements FactoryInterface
         $tripCostComputerService = $sharedServiceLocator->get('SharengoCore\Service\TripCostComputerService');
         $eventsService = $sharedServiceLocator->get('SharengoCore\Service\EventsService');
         $editTripForm = $sharedServiceLocator->get('EditTripForm');
+        $entityManager = $sharedServiceLocator->get('doctrine.entitymanager.orm_default');
+        $hydrator = new DoctrineHydrator($entityManager);
 
         // Controller is constructed, dependencies are injected (IoC in action)
         return new TripsController(
@@ -29,7 +32,8 @@ class TripsControllerFactory implements FactoryInterface
             $tripCostForm,
             $tripCostComputerService,
             $eventsService,
-            $editTripForm
+            $editTripForm,
+            $hydrator
         );
     }
 }
