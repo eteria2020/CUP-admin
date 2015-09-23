@@ -61,8 +61,14 @@ if ($this->trip->getTimestampEnd() === null) {
                     </div>
                     <div class="col-lg-4">
                         <div class="form-group">
-                            <label>Pagabile</label>
-                            <?= $this->formRow($form->get('trip')->get('payable')); ?>
+                            <label>Pagabile <span class="sng-hint">(impostabile solo a non pagabile)</span></label>
+                            <?php
+                            if ($trip->getPayable()) {
+                                echo $this->formRow($form->get('trip')->get('payable'));
+                            } else {
+                                echo '<div class="sng-info-box">NO</div>';
+                            }
+                            ?>
                         </div>
                     </div>
                 </div>

@@ -200,11 +200,13 @@ class TripsController extends AbstractActionController
                 $this->flashMessenger()->addErrorMessage('La corsa non può essere modificata perché non è conclusa o il processo di pagamento è già iniziato.');
             } catch (EditTripWrongDateException $e) {
                 $this->flashMessenger()->addErrorMessage('La data specificata non può essere precedente alla data di inizio della corsa');
+            } catch (EditTripNotDateTimeException $e) {
+                $this->flashMessenger()->addErrorMessage('La data specificata non è nel formato corretto. Verifica i dati inseriti.');
             } catch (\Exception $e) {
                 $this->flashMessenger()->addErrorMessage('Si è verificato un errore applicativo. L\'assistenza tecnica è già al corrente, ci scusiamo per l\'inconveniente');
             }
 
-            return $this->redirect()->toRoute('trips/details', ['id' => $trip->getId()]);
+            return $this->redirect()->toUrl('/trips/details/' . $trip->getId() . '?tab=edit');
         }
 
         $events = $this->eventsService->getEventsByTrip($trip);
