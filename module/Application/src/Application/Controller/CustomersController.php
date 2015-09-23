@@ -10,6 +10,7 @@ use SharengoCore\Service\CustomersService;
 use SharengoCore\Service\PromoCodesService;
 use SharengoCore\Service\DisableContractService;
 use SharengoCore\Exception\CustomerNotFoundException;
+use SharengoCore\Exception\BonusAssignmentException;
 use Cartasi\Service\CartasiContractsService;
 
 use Zend\Form\Form;
@@ -369,17 +370,13 @@ class CustomersController extends AbstractActionController
                     /** @var PromoCodes $promoCode */
                     $promoCode = $this->I_promoCodeService->getPromoCode($postData['promocode']['promocode']);
 
-                    if (is_null($promoCode)) {
-                        throw new \Exception('Codice promo non valido.');
-                    }
-
-                    if ($this->I_customerService->checkUsedPromoCode($I_customer, $promoCode)) {
-                        throw new \Exception('Codice promo già associato a questo utente.');
-                    }
-
                     $this->I_customerService->addBonusFromPromoCode($I_customer, $promoCode);
 
                     $this->flashMessenger()->addSuccessMessage('Operazione completata con successo!');
+
+                } catch (BonusAssignmentException $e) {
+
+                    $this->flashMessenger()->addErrorMessage($e->getMessage());
 
                 } catch (\Exception $e) {
 
