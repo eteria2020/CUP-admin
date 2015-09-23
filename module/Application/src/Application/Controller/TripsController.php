@@ -6,8 +6,12 @@ use Application\Form\EditTripForm;
 use SharengoCore\Service\TripsService;
 use SharengoCore\Service\TripCostComputerService;
 use SharengoCore\Service\EventsService;
+use SharengoCore\Service\EditTripsService;
 use SharengoCore\Entity\TripPayments;
 use SharengoCore\Entity\Invoices;
+use SharengoCore\Exception\EditTripDeniedException;
+use SharengoCore\Exception\EditTripWrongDateException;
+use SharengoCore\Exception\EditTripNotDateTimeException;
 
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\JsonModel;
@@ -37,6 +41,11 @@ class TripsController extends AbstractActionController
     private $eventsService;
 
     /**
+     * @var EditTripsService
+     */
+    private $editTripsService;
+
+    /**
      * @var EditTripForm
      */
     private $editTripForm;
@@ -51,6 +60,7 @@ class TripsController extends AbstractActionController
         TripCostForm $tripCostForm,
         TripCostComputerService $tripCostComputerService,
         EventsService $eventsService,
+        EditTripsService $editTripsService,
         EditTripForm $editTripForm,
         DoctrineHydrator $hydrator
     ) {
@@ -58,6 +68,7 @@ class TripsController extends AbstractActionController
         $this->tripCostForm = $tripCostForm;
         $this->tripCostComputerService = $tripCostComputerService;
         $this->eventsService = $eventsService;
+        $this->editTripsService = $editTripsService;
         $this->editTripForm = $editTripForm;
         $this->hydrator = $hydrator;
     }
@@ -131,7 +142,7 @@ class TripsController extends AbstractActionController
 
         $trip = $this->tripsService->getTripById($id);
 
-        $tab = $this->params()->fromQuery('tab', 'edit');
+        $tab = $this->params()->fromQuery('tab', 'info');
 
         return new ViewModel([
             'tripId' => $id,
@@ -174,6 +185,28 @@ class TripsController extends AbstractActionController
         $id = (int)$this->params()->fromRoute('id', 0);
 
         $trip = $this->tripsService->getTripById($id);
+
+        if ($this->getRequest()->isPost()) {
+            $postData = $this->getRequest()->getPost()->toArray();
+
+            try {
+                $this->editTripsService->editTrip(
+                    $trip,
+                    !$postData['trip']['payable'],
+                    date_create_from_format('d-m-Y H:i:s', $postData['trip']['timestampEnd'])
+                );
+                $this->flashMessenger()->addSuccessMessage('Modifica effettuta con successo!');
+            } catch (EditTripDeniedException $e) {
+                $this->flashMessenger()->addErrorMessage('La corsa non può essere modificata perché non è conclusa o il processo di pagamento è già iniziato.');
+            } catch (EditTripWrongDateException $e) {
+                $this->flashMessenger()->addErrorMessage('La data specificata non può essere precedente alla data di inizio della corsa');
+            } catch (\Exception $e) {
+                $this->flashMessenger()->addErrorMessage('Si è verificato un errore applicativo. L\'assistenza tecnica è già al corrente, ci scusiamo per l\'inconveniente');
+            }
+
+            return $this->redirect()->toRoute('trips/details', ['id' => $trip->getId()]);
+        }
+
         $events = $this->eventsService->getEventsByTrip($trip);
 
         $tripArray = $trip->toArray($this->hydrator, []);

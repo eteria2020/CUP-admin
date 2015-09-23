@@ -22,6 +22,7 @@ class TripsControllerFactory implements FactoryInterface
         $tripCostForm = $sharedServiceLocator->get('TripCostForm');
         $tripCostComputerService = $sharedServiceLocator->get('SharengoCore\Service\TripCostComputerService');
         $eventsService = $sharedServiceLocator->get('SharengoCore\Service\EventsService');
+        $editTripsService = $sharedServiceLocator->get('SharengoCore\Service\EditTripsService');
         $editTripForm = $sharedServiceLocator->get('EditTripForm');
         $entityManager = $sharedServiceLocator->get('doctrine.entitymanager.orm_default');
         $hydrator = new DoctrineHydrator($entityManager);
@@ -32,6 +33,7 @@ class TripsControllerFactory implements FactoryInterface
             $tripCostForm,
             $tripCostComputerService,
             $eventsService,
+            $editTripsService,
             $editTripForm,
             $hydrator
         );

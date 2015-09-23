@@ -1,5 +1,5 @@
 <?php
-$timestampEnd = '';
+$timestampBeginning = '';
 // if trip is not yet closed
 if ($this->trip->getTimestampEnd() === null) {
 ?>
@@ -28,13 +28,14 @@ if ($this->trip->getTimestampEnd() === null) {
     $form = $this->editTripForm->prepare();
     $form->setAttribute('action', $this->url('trips/edit-tab', ['id' => $this->trip->getId()]));
     $trip = $this->trip;
-    $timestampEnd = $trip->getTimestampEnd()->format('d-m-Y H:i:s');
+    $timestampBeginning = $trip->getTimestampBeginning()->format('d-m-Y H:i:s');
 ?>
 
 <?= $this->form()->openTag($form); ?>
 <!-- Edit table -->
 <div class="row">
     <div class="col-lg-12">
+        <?php echo $this->partial('partials/flash-messages.phtml', []); ?>
         <div class="portlet box green">
             <!-- Header -->
             <div class="portlet-title">
@@ -48,13 +49,13 @@ if ($this->trip->getTimestampEnd() === null) {
                 <div class="row">
                     <div class="col-lg-4">
                         <div class="form-group">
-                            <label>Data fine attuale</label>
-                            <div class="sng-info-box"><?= $timestampEnd ?></div>
+                            <label>Data inizio</label>
+                            <div class="sng-info-box"><?= $timestampBeginning ?></div>
                         </div>
                     </div>
                     <div class="col-lg-4">
                         <div class="form-group">
-                            <label>Nuova data fine <span class="sng-hint">(non precedente a quella attuale)</span></label>
+                            <label>Data fine <span class="sng-hint">(non precedente a quella di inizio)</span></label>
                             <?= $this->formRow($form->get('trip')->get('timestampEnd')); ?>
                         </div>
                     </div>
@@ -135,8 +136,4 @@ if ($this->trip->getTimestampEnd() === null) {
 // close editable trip section
 }
 ?>
-<script>
-var timestampEnd = '<?= $timestampEnd ?>';
-var payable = <?= $trip->getPayable() ? 'true' : 'false' ?>;
-</script>
 <script type="text/javascript" src="/js/edit-trip.js"></script>
