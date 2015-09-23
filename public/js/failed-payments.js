@@ -54,7 +54,7 @@ $(function() {
             {data: 'cu.surname'},
             {data: 'cu.mobile'},
             {data: 'cu.email'},
-            {data: 'e.tripId'},
+            {data: 'e.trip'},
             {data: 'e.tripMinutes'},
             {data: 'e.parkingMinutes'},
             {data: 'e.discountPercentage'},
