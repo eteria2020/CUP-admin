@@ -14,7 +14,8 @@ return array(
         'CallCenter',
         'SharengoCore',
         'Application',
-        'Cartasi'
+        'Cartasi',
+        'EventLogger',
     ),
 
     // These are various options for the listeners attached to the ModuleManager

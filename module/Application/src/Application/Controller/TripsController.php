@@ -10,6 +10,7 @@ use SharengoCore\Entity\Invoices;
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\JsonModel;
 use Zend\View\Model\ViewModel;
+use Zend\EventManager\EventManager;
 
 class TripsController extends AbstractActionController
 {
@@ -40,6 +41,16 @@ class TripsController extends AbstractActionController
 
     public function indexAction()
     {
+
+        $eventManager = new EventManager();
+        $eventManager->setIdentifiers(['EventLogger']);
+
+        $eventManager->trigger('notify', $this, [
+            'test' => true
+        ]);
+
+
+        
         return new ViewModel();
     }
 
