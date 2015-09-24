@@ -48,7 +48,7 @@ $(function() {
         },
         "order": [[0, 'desc']],
         "columns": [
-            {data: 'e.createdAt'},
+            {data: 'e.firstPaymentTryTs'},
             {data: 'cu.id'},
             {data: 'cu.name'},
             {data: 'cu.surname'},
