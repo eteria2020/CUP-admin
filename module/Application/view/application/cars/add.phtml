@@ -69,10 +69,11 @@ $form = $this->carForm->prepare();
                 </div>
 
                 <div class="row">
+
                     <div class="col-lg-4">
                         <div class="form-group">
-                            <label for="gender">Note</label>
-                            <?= $this->formRow($form->get('car')->get('notes')); ?>
+                            <label for="name">Flotta</label>
+                            <?= $this->formRow($form->get('car')->get('fleet')); ?>
                         </div>
                     </div>
 
@@ -94,6 +95,15 @@ $form = $this->carForm->prepare();
                         <div class="form-group">
                             <label for="surname">Nascosta</label>
                             <?= $this->formRow($form->get('car')->get('hidden')); ?>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="form-group">
+                            <label for="gender">Note</label>
+                            <?= $this->formRow($form->get('car')->get('notes')); ?>
                         </div>
                     </div>
                 </div>

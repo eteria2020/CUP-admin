@@ -61,4 +61,19 @@ class CarForm extends Form
     {
         $this->get('car')->get('status')->setValueOptions($status);
     }
+
+    /**
+     *
+     * @param array $fleets list of Fleet instances
+     */
+    public function setFleets(array $fleets)
+    {
+        $fleetsPlainArray = [];
+        foreach($fleets as $fleet) {
+            $fleetsPlainArray[$fleet->getId()] = $fleet->getName();
+        }
+
+        $this->get('car')->get('fleet')->setValueOptions($fleetsPlainArray);
+    }
+    
 }

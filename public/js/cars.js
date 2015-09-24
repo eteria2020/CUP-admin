@@ -43,6 +43,7 @@ $(function() {
         "columns": [
             {data: 'e.plate'},
             {data: 'e.label'},
+            {data: 'f.name'},
             {data: 'e.battery'},
             {data: 'e.lastContact'},
             {data: 'e.km'},
@@ -55,19 +56,19 @@ $(function() {
 
         "columnDefs": [
             {
-                targets: 5,
-                sortable: false
-            },
-            {
                 targets: 6,
                 sortable: false
             },
             {
-                targets: 8,
+                targets: 7,
                 sortable: false
             },
             {
                 targets: 9,
+                sortable: false
+            },
+            {
+                targets: 10,
                 data: 'button',
                 searchable: false,
                 sortable: false,
@@ -131,7 +132,7 @@ $(function() {
 
         var value = $(this).val();
 
-        if (value == 'e.plate' || value == 'e.label') {
+        if (value == 'e.plate' || value == 'e.label' || value == 'f.name') {
 
             filterWithoutLike = false;
             search.val('');
