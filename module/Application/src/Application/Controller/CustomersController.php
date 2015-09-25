@@ -341,17 +341,14 @@ class CustomersController extends AbstractActionController
         $contract = $this->cartasiContractsService->getContractById($contractId);
 
         try {
-            $result = $this->disableContractService->disableContract($contract);
+            $this->disableContractService->disableContract($contract);
 
-            return new JsonModel([
-                'result' => $result
-            ]);
+            $this->flashMessenger()->addSuccessMessage('Contratto disabilitato correttamente!');
         } catch (\Exception $e) {
-            $this->response->setStatusCode(Response::STATUS_CODE_500);
-            return new JsonModel([
-                'error' => 'C\'è stato un errore durante la disabilitazione del contratto'
-            ]);
+            $this->flashMessenger()->addErrorMessage('Errore durante la disabilitazione del contratto');
         }
+
+        return new JsonModel();
     }
 
     public function assignPromoCodeAction()
@@ -505,7 +502,13 @@ class CustomersController extends AbstractActionController
         $customer = $this->getCustomer();
         $sendMail = $this->params()->fromPost('sendMail');
 
-        $this->I_customerService->enableCustomer($customer, $sendMail);
+        try {
+            $this->I_customerService->enableCustomer($customer, $sendMail);
+
+            $this->flashMessenger()->addSuccessMessage('Utente riabilitato con successo!');
+        } catch (\Exception $e) {
+            $this->flashMessenger()->addErrorMessage('Errore durante la riabilitazione dell\'utente');
+        }
 
         return new JsonModel();
     }
