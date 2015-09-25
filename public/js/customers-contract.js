@@ -1,4 +1,4 @@
-/* global $ alert */
+/* global $ window infoUrl */
 
 $(function () {
     "use strict";
@@ -11,9 +11,7 @@ $(function () {
         $.post('/customers/disable-contract', {
             contractId: contractId
         }).done(function () {
-            alert('Contratto disabilitato');
-        }).fail(function (data) {
-            alert(data.responseJSON.error);
+            window.location.replace(infoUrl);
         });
     });
 });

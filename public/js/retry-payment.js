@@ -1,4 +1,4 @@
-/* global $ retryUrl abilitateUrl tripPaymentId alert */
+/* global $ retryUrl abilitateUrl tripPaymentId window listUrl */
 
 $(function () {
     "use strict";
@@ -25,7 +25,7 @@ $(function () {
         $.post(abilitateUrl, {
             sendMail: $('#send-mail').is(':checked')
         }).done(function () {
-            alert('utente riattivato');
+            window.location.replace(listUrl);
         });
     });
 });

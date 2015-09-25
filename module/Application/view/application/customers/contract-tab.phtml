@@ -1,27 +1,56 @@
 <div class="row">
     <div class="col-lg-12">
-        <?php if ($this->contract): ?>
-            <div class="row col-lg-12">
-                <h1>Contratto:</h1>
-            </div><br>
-            <div class="row">
-                <div class="col-lg-12">Codice contratto: <span><?= $this->contract->getId(); ?></span></div>
-            </div><br>
-            <div class="row">
-                <div class="col-lg-12">Pan: <span><?= $this->contract->getPan(); ?></span></div>
-            </div><br>
-            <div class="row">
-                <div class="col-lg-12">Scadenza Pan: <span><?= $this->contract->getPanExpiry(); ?></span></div>
-            </div><br>
-            <div class="row">
-                <div class="col-lg-12">
-                    <?php if ($this->contract->getDisabledDate()): ?>
-                        Data di disabilitazione: <span><?= $this->contract->getDisabledDate()->format('Y-m-d H:i:s'); ?></span>
-                    <?php else: ?>
-                        <button id="disable-contract" class="btn btn-danger" data-contract-id="<?= $this->contract->getId(); ?>">
-                            <i class="fa fa-ban"></i> Disabilita contratto
-                        </button>
-                    <?php endif; ?>
+       <?php if ($this->contract): ?>
+            <div class="portlet box green">
+                <div class="portlet-title">
+                    <div class="caption">
+                        <i class="fa fa-credit-card"></i>Contratto cliente
+                    </div>
+                </div>
+                <div class="portlet-body">
+                    <div class="row">
+                        <div class="col-lg-4">
+                            <div class="form-group">
+                                <label>Codice contratto</label>
+                                <div class="form-control" disabled><?= $this->contract->getId(); ?></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-4">
+                            <div class="form-group">
+                                <label>Data attivazione contratto</label>
+                                <div class="form-control" disabled><?= $this->contract->getInsertedTs()->format('d/m/Y'); ?></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-4">
+                            <div class="form-group">
+                                <label>Carta di credito inserita</label>
+                                <div class="form-control" disabled><?= $this->contract->getPan(); ?></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-4">
+                            <div class="form-group">
+                                <label>Scadenza carta di credito</label>
+                                <div class="form-control" disabled><?= implode('/', str_split($this->contract->getPanExpiry(), 4)); ?></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <?php if ($this->contract->getDisabledDate()): ?>
+                                Data di disabilitazione: <span><?= $this->contract->getDisabledDate()->format('Y-m-d H:i:s'); ?></span>
+                            <?php else: ?>
+                                <button id="disable-contract" class="btn btn-danger" data-contract-id="<?= $this->contract->getId(); ?>">
+                                    <i class="fa fa-ban"></i> Disabilita contratto
+                                </button>
+                            <?php endif; ?>
+                        </div>
+                    </div>
                 </div>
             </div>
         <?php else: ?>
@@ -30,3 +59,6 @@
     </div>
 </div>
 <script type="text/javascript" src="<?= $this->basePath() .'/js/customers-contract.js'; ?>"></script>
+<script>
+    var infoUrl = "<?= $this->url('customers/edit', ['id' => $this->customer->getId()], ['force_canonical' => true]) ?>";
+</script>
