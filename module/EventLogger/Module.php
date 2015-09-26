@@ -20,14 +20,21 @@ class Module
     {
         $application = $e->getApplication();
         $eventManager = $application->getEventManager();
-        
-
-        
-        $sharedEventManager = $eventManager->getSharedManager();
-        $sharedEventManager->attachAggregate(new \EventLogger\Listener\UserEventListener());
+        $serviceManager = $application->getServiceManager();
 
 
+        // attach event logger listener (only if a user is logged)
+        $auth = $serviceManager->get('zfcuser_auth_service');
+        if ($auth->hasIdentity()) {
+            $sharedEventManager = $eventManager->getSharedManager();
+            $sharedEventManager->attachAggregate($serviceManager->get('EventLogger\Listener\UserEventListener'));
+        }
         
+    }
+
+    public function getConfig()
+    {
+        return include __DIR__ . '/config/module.config.php';
     }
 
     public function getAutoloaderConfig()

@@ -6,6 +6,10 @@ use Zend\EventManager\Event;
 use Zend\EventManager\SharedEventManagerInterface;
 use Zend\EventManager\SharedListenerAggregateInterface;
 
+use Doctrine\ORM\EntityManager;
+use SharengoCore\Entity\Webuser;
+use EventLogger\Entity\UserEvent;
+
 class UserEventListener implements SharedListenerAggregateInterface
 {
 
@@ -14,8 +18,24 @@ class UserEventListener implements SharedListenerAggregateInterface
      */
     protected $listeners = [];
 
-    public function __construct($loggedUser) {
-        
+    /**
+     *
+     * @var Webuser
+     */
+    private $loggedUser;
+
+    /**
+     *
+     * @var EntityManager
+     */
+    private $entityManager;
+
+    public function __construct(
+        Webuser $loggedUser,
+        EntityManager $entityManager)
+    {
+        $this->loggedUser = $loggedUser;
+        $this->entityManager = $entityManager;
     }
 
     /**
@@ -37,8 +57,13 @@ class UserEventListener implements SharedListenerAggregateInterface
 
     public function onUserEvent(Event $e)
     {
-        echo $e->getName();
-        exit;
+        $params = $e->getParams();
+
+        $event = new UserEvent($this->loggedUser, $params['topic'], $e->getName(), $params);
+
+        $this->entityManager->persist($event);
+        $this->entityManager->flush();
+        
     }
 
 }
