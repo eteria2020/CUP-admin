@@ -122,8 +122,7 @@ if (!$this->trip->isEnded()) {
                                 <td><?= $event->getIntval() ?></td>
                                 <td>
                                     <a href="http://maps.google.com/?q=<?= $event->getLat() ?>,<?= $event->getLon() ?>" target="_blank">
-                                        <?= 'Lat: ' . $event->getLat() . '<br>' .
-                                        'Lon: ' . $event->getLon() ?>
+                                        <?= 'Lat/Lon: ' . $event->getLat() . ' ' . $event->getLon() ?>
                                     </a>
                                 </td>
                             </tr>
