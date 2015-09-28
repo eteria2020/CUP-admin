@@ -6,6 +6,7 @@ angular.module('SharengoCsApp').controller('SharengoCsController', function (
     carsFactory,
     usersFactory,
     poisFactory,
+    fleetsFactory,
     //mapFactory,
     ticketsFactory,
     uiGmapGoogleMapApi,
@@ -16,6 +17,8 @@ angular.module('SharengoCsApp').controller('SharengoCsController', function (
     //necessary to avoid errors with network delay
     $scope.cars = [];
     $scope.pois = [];
+    $scope.fleets = [];
+    $scope.defaultFleet = false;
     $scope.mapLoader = true;
 
     var searchByCar = false;
@@ -45,6 +48,15 @@ angular.module('SharengoCsApp').controller('SharengoCsController', function (
     };
     $scope.search = {};
 
+    $scope.mapOptions = {
+        center: {
+            latitude: 44.5563793,
+            longitude: 11.3180998
+        },
+        zoom: 7,
+        doCluster: true
+    };
+
     //$scope.polygons = mapFactory.getPolygon();
 
     var geocoder, map, marker;
@@ -66,7 +78,7 @@ angular.module('SharengoCsApp').controller('SharengoCsController', function (
     $scope.searchAddress = {
         address: '',
         number: '',
-        city: 'Milano',
+        city: $scope.defaultFleet.name,
         search: function () {
             $scope.mapLoader = true;
             if (!geocoder) {
@@ -92,6 +104,7 @@ angular.module('SharengoCsApp').controller('SharengoCsController', function (
 
     $scope.loadCars = function () {
         $scope.mapLoader = true;
+
         return carsFactory.getCars().success(function (cars) {
             cars = cars.data;
             cars.forEach(function (car) {
@@ -156,9 +169,25 @@ angular.module('SharengoCsApp').controller('SharengoCsController', function (
             $scope.mapLoader = false;
         });
     };    
+    $scope.loadFleets = function(){
+        fleetsFactory.getFleets().success(function (fleets) {
+            $scope.fleets = fleets.data;
+            var defaultFleet = fleets.data.filter(function(fleet) {
+                return fleet.isDefault;
+            });
+            $scope.defaultFleet = defaultFleet.length > 0 ? defaultFleet.shift() : false;
+            $scope.zoomOut();
+        });
+    };
+    
+    $scope.changeFleet = function(){
+        $scope.zoomOut();
+    };
 
+    $scope.loadFleets();
     $scope.loadCars();
     $scope.loadPois();
+
     
     $scope.togglePois = function(){
         
@@ -195,21 +224,31 @@ angular.module('SharengoCsApp').controller('SharengoCsController', function (
             latitude: car.latitude,
             longitude: parseFloat(car.longitude) + 0.00010
         }, 21);
-
+        $scope.searchAddress.city = car.fleet.name;
+        $scope.defaultFleet = car.fleet;
+        $scope.changeFleet();
+        console.log($scope.defaultFleet);
     };
 
-    //TODO: avoid data repetition, bettermove then out of here
     $scope.zoomOut = function () {
-        /* 
-        $scope.cars.forEach(function (carl) {
-            carl.carIcon = carl.icon;
-        });
-        */
-
-        $scope.zoom({
-            latitude: 45.46,
-            longitude: 9.25
-        }, 12);
+        if(!$scope.defaultFleet){
+            $scope.zoom(
+                {
+                    latitude: $scope.mapOptions.center.latitude,
+                    longitude: $scope.mapOptions.center.longitude
+                }, 
+                $scope.mapOptions.zoom
+            );
+        }else{
+            $scope.zoom(
+                {
+                    latitude: $scope.defaultFleet.latitude,
+                    longitude: $scope.defaultFleet.longitude
+                }, 
+                $scope.defaultFleet.zoomLevel
+            );
+            $scope.searchAddress.city = $scope.defaultFleet.name;
+        }
 
         if (infoBox) {
             infoBox.close();
@@ -426,15 +465,6 @@ angular.module('SharengoCsApp').controller('SharengoCsController', function (
 
         }).error(function () {
         });
-    };
-
-    $scope.mapOptions = {
-        center: {
-            latitude: 45.46,
-            longitude: 9.25
-        },
-        zoom: 12,
-        doCluster: true
     };
 
     $scope.clusterOptions = {
