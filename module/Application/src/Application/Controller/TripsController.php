@@ -212,7 +212,11 @@ class TripsController extends AbstractActionController
         $events = $this->eventsService->getEventsByTrip($trip);
 
         $tripArray = $trip->toArray($this->hydrator, []);
-        $tripArray['timestampEnd'] = $tripArray['timestampEnd']->format('d-m-Y H:i:s');
+
+        if ($trip->isEnded()) {
+            $tripArray['timestampEnd'] = $tripArray['timestampEnd']->format('d-m-Y H:i:s');
+        }
+
         $this->editTripForm->setData(['trip' => $tripArray]);
 
         $view = new ViewModel([
