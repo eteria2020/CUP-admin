@@ -136,6 +136,7 @@ class CarsController extends AbstractActionController
             $postData = $this->getRequest()->getPost()->toArray();
             $postData['car']['plate'] = $car->getPlate();
             $form->setData($postData);
+            $form->get('car')->remove('fleet'); // setValue($car->getFleet()->getId());
             $form->getInputFilter()->get('location')->setRequired(false);
 
             if ($form->isValid()) {
