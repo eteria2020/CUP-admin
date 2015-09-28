@@ -16,6 +16,7 @@ use SharengoCore\Exception\EditTripNotDateTimeException;
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\JsonModel;
 use Zend\View\Model\ViewModel;
+use Zend\EventManager\EventManager;
 use DoctrineModule\Stdlib\Hydrator\DoctrineObject as DoctrineHydrator;
 
 class TripsController extends AbstractActionController
@@ -55,6 +56,11 @@ class TripsController extends AbstractActionController
      */
     private $hydrator;
 
+    /**
+     * @var EventManager
+     */
+    private $eventManager;
+
     public function __construct(
         TripsService $tripsService,
         TripCostForm $tripCostForm,
@@ -62,6 +68,7 @@ class TripsController extends AbstractActionController
         EventsService $eventsService,
         EditTripsService $editTripsService,
         EditTripForm $editTripForm,
+        EventManager $eventManager,
         DoctrineHydrator $hydrator
     ) {
         $this->tripsService = $tripsService;
@@ -70,6 +77,7 @@ class TripsController extends AbstractActionController
         $this->eventsService = $eventsService;
         $this->editTripsService = $editTripsService;
         $this->editTripForm = $editTripForm;
+        $this->eventManager = $eventManager;
         $this->hydrator = $hydrator;
     }
 
@@ -195,6 +203,13 @@ class TripsController extends AbstractActionController
                     !$postData['trip']['payable'],
                     date_create_from_format('d-m-Y H:i:s', $postData['trip']['timestampEnd'])
                 );
+
+                $this->eventManager->trigger('trip-edited', $this, [
+                    'topic' => 'trips',
+                    'trip_id' => $trip->getId(),
+                    'action' => 'Edit trip data: payable ' . ($postData['trip']['payable'] ? 'true' : 'false') . ', end date ' . $postData['trip']['timestampEnd']
+                ]);
+
                 $this->flashMessenger()->addSuccessMessage('Modifica effettuta con successo!');
             } catch (EditTripDeniedException $e) {
                 $this->flashMessenger()->addErrorMessage('La corsa non può essere modificata perché non è conclusa o il processo di pagamento è già iniziato.');
