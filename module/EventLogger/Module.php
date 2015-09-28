@@ -19,14 +19,13 @@ class Module
     public function onBootstrap(MvcEvent $e)
     {
         $application = $e->getApplication();
-        $eventManager = $application->getEventManager();
         $serviceManager = $application->getServiceManager();
 
 
         // attach event logger listener (only if a user is logged)
         $auth = $serviceManager->get('zfcuser_auth_service');
         if ($auth->hasIdentity()) {
-            $sharedEventManager = $eventManager->getSharedManager();
+            $sharedEventManager = $application->getEventManager()->getSharedManager();
             $sharedEventManager->attachAggregate($serviceManager->get('EventLogger\Listener\UserEventListener'));
         }
         
@@ -39,12 +38,12 @@ class Module
 
     public function getAutoloaderConfig()
     {
-        return array(
-            'Zend\Loader\StandardAutoloader' => array(
-                'namespaces' => array(
+        return [
+            'Zend\Loader\StandardAutoloader' => [
+                'namespaces' => [
                     __NAMESPACE__ => __DIR__ . '/src/' . __NAMESPACE__,
-                ),
-            ),
-        );
+                ],
+            ],
+        ];
     }
 }

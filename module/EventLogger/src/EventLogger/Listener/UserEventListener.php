@@ -5,9 +5,9 @@ namespace EventLogger\Listener;
 use Zend\EventManager\Event;
 use Zend\EventManager\SharedEventManagerInterface;
 use Zend\EventManager\SharedListenerAggregateInterface;
+use Zend\Authentication\AuthenticationServiceInterface;
 
 use Doctrine\ORM\EntityManager;
-use SharengoCore\Entity\Webuser;
 use EventLogger\Entity\UserEvent;
 
 class UserEventListener implements SharedListenerAggregateInterface
@@ -20,9 +20,9 @@ class UserEventListener implements SharedListenerAggregateInterface
 
     /**
      *
-     * @var Webuser
+     * @var AuthenticationServiceInterface
      */
-    private $loggedUser;
+    private $authService;
 
     /**
      *
@@ -31,10 +31,10 @@ class UserEventListener implements SharedListenerAggregateInterface
     private $entityManager;
 
     public function __construct(
-        Webuser $loggedUser,
+        AuthenticationServiceInterface $authService,
         EntityManager $entityManager)
     {
-        $this->loggedUser = $loggedUser;
+        $this->authService = $authService;
         $this->entityManager = $entityManager;
     }
 
@@ -43,7 +43,7 @@ class UserEventListener implements SharedListenerAggregateInterface
      */
     public function attachShared(SharedEventManagerInterface $events)
     {
-        $this->listeners[] = $events->attach('EventLogger', '*', array($this, 'onUserEvent'), 100);
+        $this->listeners[] = $events->attach('EventLogger', '*', [$this, 'onUserEvent']);
     }
 
     public function detachShared(SharedEventManagerInterface $events)
@@ -57,12 +57,15 @@ class UserEventListener implements SharedListenerAggregateInterface
 
     public function onUserEvent(Event $e)
     {
-        $params = $e->getParams();
+        if ($this->authService->hasIdentity())
+        {
+            $params = $e->getParams();
 
-        $event = new UserEvent($this->loggedUser, $params['topic'], $e->getName(), $params);
+            $event = new UserEvent($this->authService->getIdentity(), $params['topic'], $e->getName(), $params);
 
-        $this->entityManager->persist($event);
-        $this->entityManager->flush();
+            $this->entityManager->persist($event);
+            $this->entityManager->flush();
+        }
         
     }
 

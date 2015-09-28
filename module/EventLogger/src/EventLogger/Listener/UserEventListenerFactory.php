@@ -12,6 +12,6 @@ class UserEventListenerFactory implements FactoryInterface
         $authService = $serviceLocator->get('zfcuser_auth_service');
         $entityManager = $serviceLocator->get('doctrine.entitymanager.orm_default');
 
-        return new UserEventListener($authService->getIdentity(), $entityManager);
+        return new UserEventListener($authService, $entityManager);
     }
 }
