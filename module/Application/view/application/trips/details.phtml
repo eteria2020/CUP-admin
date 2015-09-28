@@ -1,8 +1,11 @@
 <?php
 $this->headLink()
-    ->appendStylesheet('/css/addons.css');
+    ->appendStylesheet('/js/datatables/plugins/bootstrap/dataTables.bootstrap.css')
+    ->appendStylesheet('/js/plugins/bootstrap-datetimepicker/css/bootstrap-datetimepicker.min.css');
 $this->headScript()
-    ->prependFile('/js/tabs.js');
+    ->prependFile('/js/tabs.js')
+    ->appendFile('/js/moment.min.js')
+    ->appendFile('/js/plugins/bootstrap-datetimepicker/js/bootstrap-datetimepicker.min.js');
 ?>
 <div class="page-content-wrapper">
     <div class="page-content">
@@ -28,11 +31,13 @@ $this->headScript()
                 <ul class="nav nav-tabs" id="js-tabs" role="tablist">
                     <li role="presentation" id="menu-info"><a href="<?= $this->url('trips/info-tab', ['id' => $this->tripId]); ?>" data-target="#tab-info" role="tab" data-toggle="tab">Informazioni</a></li>
                     <li role="presentation" id="menu-cost"><a href="<?= $this->url('trips/cost-tab', ['id' => $this->tripId]); ?>" data-target="#tab-cost" role="tab" data-toggle="tab">Costo</a></li>
+                    <li role="presentation" id="menu-edit"><a href="<?= $this->url('trips/edit-tab', ['id' => $this->tripId]); ?>" data-target="#tab-edit" role="tab" data-toggle="tab">Modifica corsa</a></li>
                 </ul>
 
                 <div class="tab-content">
                     <div role="tabpanel" class="tab-pane" id="tab-info"></div>
                     <div role="tabpanel" class="tab-pane" id="tab-cost"></div>
+                    <div role="tabpanel" class="tab-pane" id="tab-edit"></div>
                 </div>
             </div>
         </div>

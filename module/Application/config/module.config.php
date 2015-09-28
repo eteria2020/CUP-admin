@@ -407,6 +407,18 @@ return array(
                                 'action' => 'cost-tab'
                             ]
                         ]
+                    ],
+                    'edit-tab' => [
+                        'type' => 'Segment',
+                        'options' => [
+                            'route' => '/tab/edit/:id',
+                            'constraints' => [
+                                'id'    => '[0-9]*'
+                            ],
+                            'defaults' => [
+                                'action' => 'edit-tab'
+                            ]
+                        ]
                     ]
                 ],
              ],
@@ -610,7 +622,8 @@ return array(
             'PromoCodeForm' => 'Application\Form\PromoCodeFormFactory',
             'CustomerBonusForm' => 'Application\Form\CustomerBonusFormFactory',
             'TripCostForm' => 'Application\Form\TripCostFormFactory',
-            'ExtraPaymentsForm' => 'Application\Form\ExtraPaymentsFormFactory'
+            'ExtraPaymentsForm' => 'Application\Form\ExtraPaymentsFormFactory',
+            'EditTripForm' => 'Application\Form\EditTripFormFactory'
         ]
     ),
     'controllers' => [

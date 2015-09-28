@@ -5,7 +5,6 @@
     background-color: #EEEEEE;
     padding: 5px;
 }
-
 .panel-default > .panel-heading {
     color: white;
     font-weight: bold;
@@ -18,4 +17,7 @@
 }
 .sng-no-wrap {
     white-space: nowrap;
+}
+.sng-hint {
+    font-size: 12px;
 }
