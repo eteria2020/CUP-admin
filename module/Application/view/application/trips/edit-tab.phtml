@@ -12,8 +12,7 @@ if (!$this->trip->isEnded()) {
 
 <?php
 // if trip has been payed (or even just tried)
-} elseif (count($this->trip->getTripPayments()) != 0 &&
-    count($this->trip->getTripPayments()[0]->getTripPaymentTries()) != 0) {
+} elseif ($this->trip->isPaymentTried()) {
 ?>
 
 <div class="row">
