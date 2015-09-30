@@ -168,7 +168,7 @@ angular.module('SharengoCsApp').controller('SharengoCsController', function (
             $scope.pois = pois;
             $scope.mapLoader = false;
         });
-    };
+    };    
     $scope.loadFleets = function(){
         fleetsFactory.getFleets().success(function (fleets) {
             $scope.fleets = fleets.data;
@@ -187,7 +187,6 @@ angular.module('SharengoCsApp').controller('SharengoCsController', function (
     $scope.loadFleets();
     $scope.loadCars();
     $scope.loadPois();
-
 
     $scope.togglePois = function(){
 
@@ -220,7 +219,6 @@ angular.module('SharengoCsApp').controller('SharengoCsController', function (
         });*/
 
         $scope.car = car;
-
         if(zoom){
           $scope.zoom({
               latitude: car.latitude,
@@ -230,6 +228,7 @@ angular.module('SharengoCsApp').controller('SharengoCsController', function (
         $scope.searchAddress.city = car.fleet.name;
         $scope.defaultFleet = car.fleet;
         $scope.changeFleet();
+
     };
 
     $scope.zoomOut = function () {
@@ -238,7 +237,7 @@ angular.module('SharengoCsApp').controller('SharengoCsController', function (
                 {
                     latitude: $scope.mapOptions.center.latitude,
                     longitude: $scope.mapOptions.center.longitude
-                },
+                }, 
                 $scope.mapOptions.zoom
             );
         }else{
@@ -246,7 +245,7 @@ angular.module('SharengoCsApp').controller('SharengoCsController', function (
                 {
                     latitude: $scope.defaultFleet.latitude,
                     longitude: $scope.defaultFleet.longitude
-                },
+                }, 
                 $scope.defaultFleet.zoomLevel
             );
             $scope.searchAddress.city = $scope.defaultFleet.name;
