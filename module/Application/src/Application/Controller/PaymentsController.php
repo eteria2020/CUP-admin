@@ -10,6 +10,8 @@ use SharengoCore\Service\ExtraPaymentsService;
 use Cartasi\Service\CartasiContractsService;
 use Cartasi\Service\CartasiCustomerPayments;
 use SharengoCore\Service\PenaltiesService;
+use SharengoCore\Exception\FleetNotFoundException;
+use SharengoCore\Service\FleetService;
 
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\JsonModel;
@@ -57,6 +59,11 @@ class PaymentsController extends AbstractActionController
      */
     private $penaltiesService;
 
+    /**
+     * @var FleetService
+     */
+    private $fleetService;
+
     public function __construct(
         TripPaymentsService $tripPaymentsService,
         PaymentsService $paymentsService,
@@ -65,7 +72,8 @@ class PaymentsController extends AbstractActionController
         CartasiContractsService $cartasiContractsService,
         CartasiCustomerPayments $cartasiCustomerPayments,
         ExtraPaymentsService $extraPaymentsService,
-        PenaltiesService $penaltiesService
+        PenaltiesService $penaltiesService,
+        FleetService $fleetService
     ) {
         $this->tripPaymentsService = $tripPaymentsService;
         $this->paymentsService = $paymentsService;
@@ -75,6 +83,7 @@ class PaymentsController extends AbstractActionController
         $this->cartasiCustomerPayments = $cartasiCustomerPayments;
         $this->extraPaymentsService = $extraPaymentsService;
         $this->penaltiesService = $penaltiesService;
+        $this->fleetService = $fleetService;
     }
 
     public function failedPaymentsAction()
@@ -170,6 +179,7 @@ class PaymentsController extends AbstractActionController
     public function payExtraAction()
     {
         $customerId = $this->params()->fromPost('customerId');
+        $fleetId = $this->params()->fromPost('fleetId');
         $paymentType = $this->params()->fromPost('paymentType');
         $reason = $this->params()->fromPost('reason');
         $amount = $this->params()->fromPost('amount');
@@ -193,6 +203,15 @@ class PaymentsController extends AbstractActionController
                 ]);
             }
 
+            try {
+                $fleet = $this->fleetService->getFleetById($fleetId);
+            } catch (FleetNotFoundException $e) {
+                $this->getResponse()->setStatusCode(422);
+                return new JsonModel([
+                    'error' => 'La flotta selezionata non è valida'
+                ]);
+            }
+
             $response = $this->cartasiCustomerPayments->sendPaymentRequest($customer, $amount);
 
             if (!$response->getCompletedCorrectly()) {
@@ -204,6 +223,7 @@ class PaymentsController extends AbstractActionController
 
             $extraPayment = $this->extraPaymentsService->registerExtraPayment(
                 $customer,
+                $fleet,
                 $amount,
                 $paymentType,
                 $reason

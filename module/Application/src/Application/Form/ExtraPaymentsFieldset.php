@@ -1,6 +1,8 @@
 <?php
 namespace Application\Form;
 
+use SharengoCore\Service\FleetService;
+
 use Zend\Form\Fieldset;
 
 /**
@@ -13,7 +15,7 @@ class ExtraPaymentsFieldset extends Fieldset
      * @param string $name
      * @param array  $options
      */
-    public function __construct()
+    public function __construct(FleetService $fleetService)
     {
         parent::__construct('extra', [
             'use_as_base_fieldset' => true
@@ -25,6 +27,18 @@ class ExtraPaymentsFieldset extends Fieldset
             'attributes' => [
                 'id' => 'customerId',
                 'class' => 'form-control'
+            ]
+        ]);
+
+        $this->add([
+            'name' => 'fleet',
+            'type' => 'Zend\Form\Element\Select',
+            'attributes' => [
+                'id' => 'fleet',
+                'class' => 'form-control'
+            ],
+            'options' => [
+                'value_options' => $fleetService->getFleetsSelectorArray()
             ]
         ]);
 

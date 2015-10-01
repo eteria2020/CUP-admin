@@ -18,9 +18,10 @@ $(function() {
         $('#amount').val(amount);
     });
 
-    function sendPaymentRequest(customerId, paymentType, reason, amount) {
+    function sendPaymentRequest(customerId, fleetId, paymentType, reason, amount) {
         $.post('/payments/pay-extra', {
             customerId: customerId,
+            fleetId: fleetId,
             paymentType: paymentType,
             reason: reason,
             amount: amount
@@ -35,6 +36,7 @@ $(function() {
 
     function clearFields() {
         $('#customerId').val('');
+        $('#fleet').prop('selectedIndex', 0);
         $('#paymentType').val('extra');
         $('#penaltyField').hide();
         $('#penalty').prop('selectedIndex', 0);
@@ -44,6 +46,7 @@ $(function() {
 
     $('#js-extra-payment').click(function (e) {
         var customerId = $('#customerId').val(),
+            fleetId = parseInt($('#fleet').val()),
             customer = null,
             paymentType = $('#paymentType').val(),
             reason = $('#reason').val(),
@@ -63,6 +66,11 @@ $(function() {
             .done(function (data) {
                 customer = data;
 
+                if (fleetId <= 0) {
+                    alert('Selezionare una flotta');
+                    return;
+                }
+
                 if (reason.length === 0) {
                     alert('Inserire una causale valida');
                     return;
@@ -76,7 +84,7 @@ $(function() {
                 if (confirm('Confermi il pagamento al cliente ' +
                     customer.name + ' ' + customer.surname +
                     ' di un importo di ' + amount / 100 + ' euro')) {
-                    sendPaymentRequest(customerId, paymentType, reason, amount);
+                    sendPaymentRequest(customerId, fleetId, paymentType, reason, amount);
 
                     clearFields();
                 }

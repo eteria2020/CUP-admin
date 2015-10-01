@@ -17,7 +17,8 @@ class ExtraPaymentsFormFactory implements FactoryInterface
      */
     public function createService(ServiceLocatorInterface $serviceLocator)
     {
-        $fieldset = new ExtraPaymentsFieldset();
+        $fleetService = $serviceLocator->get('SharengoCore\Service\FleetService');
+        $fieldset = new ExtraPaymentsFieldset($fleetService);
 
         return new ExtraPaymentsForm($fieldset);
     }

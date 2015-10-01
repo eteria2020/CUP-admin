@@ -20,6 +20,13 @@ $this->headScript()
 
                 <div class="col-lg-2">
                     <div class="form-group">
+                        <label for="customerId">Flotta</label>
+                        <?= $this->formRow($form->get('extra')->get('fleet')); ?>
+                    </div>
+                </div>
+
+                <div class="col-lg-2">
+                    <div class="form-group">
                         <label for="paymentType">Tipologia</label>
                         <?= $this->formRow($form->get('extra')->get('paymentType')); ?>
                     </div>
