@@ -6,6 +6,7 @@ angular.module('SharengoCsApp').controller('SharengoCsController', function (
     carsFactory,
     usersFactory,
     poisFactory,
+    fleetsFactory,
     //mapFactory,
     ticketsFactory,
     uiGmapGoogleMapApi,
@@ -16,6 +17,8 @@ angular.module('SharengoCsApp').controller('SharengoCsController', function (
     //necessary to avoid errors with network delay
     $scope.cars = [];
     $scope.pois = [];
+    $scope.fleets = [];
+    $scope.defaultFleet = false;
     $scope.mapLoader = true;
 
     var searchByCar = false;
@@ -26,9 +29,9 @@ angular.module('SharengoCsApp').controller('SharengoCsController', function (
     $scope.accordionStatus = {
         researchOpen: true,
         hideCustomerData: true,
-        customerDataOpen: true,        
+        customerDataOpen: true,
         hideCarsSelect: true,
-        carsSelectOpen: true,        
+        carsSelectOpen: true,
         hideCustomerSelect: true,
         customerSelectOpen: true,
         hideCarData: true,
@@ -44,6 +47,15 @@ angular.module('SharengoCsApp').controller('SharengoCsController', function (
         showNoResult: false
     };
     $scope.search = {};
+
+    $scope.mapOptions = {
+        center: {
+            latitude: 44.5563793,
+            longitude: 11.3180998
+        },
+        zoom: 7,
+        doCluster: true
+    };
 
     //$scope.polygons = mapFactory.getPolygon();
 
@@ -66,7 +78,7 @@ angular.module('SharengoCsApp').controller('SharengoCsController', function (
     $scope.searchAddress = {
         address: '',
         number: '',
-        city: 'Milano',
+        city: $scope.defaultFleet.name,
         search: function () {
             $scope.mapLoader = true;
             if (!geocoder) {
@@ -92,6 +104,7 @@ angular.module('SharengoCsApp').controller('SharengoCsController', function (
 
     $scope.loadCars = function () {
         $scope.mapLoader = true;
+
         return carsFactory.getCars().success(function (cars) {
             cars = cars.data;
             cars.forEach(function (car) {
@@ -100,7 +113,7 @@ angular.module('SharengoCsApp').controller('SharengoCsController', function (
                 car.longitude = car.vettura_lon;*/
                 car.options = [];
                 var carCharging = '';
-                
+
                 carCharging = '-charging';
                 car.options.labelClass='marker_labels';
                 //car.options.labelAnchor='12 32';
@@ -108,11 +121,11 @@ angular.module('SharengoCsApp').controller('SharengoCsController', function (
                     car.options.labelContent=car.battery+'% <i class="fa fa-plug"></i>';
                 }else{
                     car.options.labelContent=car.battery+'%';
-                }     
-                
+                }
+
                 if(car.sinceLastTrip && car.sinceLastTrip>1440){
                     car.carIcon = "/assets-modules/call-center/images/marker-s-azzure"+carCharging+".png";
-                    car.iconSelected = "/assets-modules/call-center/images/marker-s-azzure-selected"+carCharging+".png";   
+                    car.iconSelected = "/assets-modules/call-center/images/marker-s-azzure-selected"+carCharging+".png";
                 }else{
                     car.carIcon = "/assets-modules/call-center/images/marker-s-blue"+carCharging+".png";
                     car.iconSelected = "/assets-modules/call-center/images/marker-s-blue-selected"+carCharging+".png";
@@ -138,7 +151,7 @@ angular.module('SharengoCsApp').controller('SharengoCsController', function (
             $scope.mapLoader = false;
         });
     };
-    
+
     $scope.loadPois = function () {
         $scope.mapLoader = true;
         return poisFactory.getPois().success(function (pois) {
@@ -156,12 +169,27 @@ angular.module('SharengoCsApp').controller('SharengoCsController', function (
             $scope.mapLoader = false;
         });
     };    
+    $scope.loadFleets = function(){
+        fleetsFactory.getFleets().success(function (fleets) {
+            $scope.fleets = fleets.data;
+            var defaultFleet = fleets.data.filter(function(fleet) {
+                return fleet.isDefault;
+            });
+            $scope.defaultFleet = defaultFleet.length > 0 ? defaultFleet.shift() : false;
+            $scope.zoomOut();
+        });
+    };
 
+    $scope.changeFleet = function(){
+        $scope.zoomOut();
+    };
+
+    $scope.loadFleets();
     $scope.loadCars();
     $scope.loadPois();
-    
+
     $scope.togglePois = function(){
-        
+
     }
 
     $scope.zoom = function (center, zoom) {
@@ -192,26 +220,36 @@ angular.module('SharengoCsApp').controller('SharengoCsController', function (
 
         $scope.car = car;
         if(zoom){
-            $scope.zoom({
-                latitude: car.latitude,
-                longitude: parseFloat(car.longitude) + 0.00010
-            }, 21);
+          $scope.zoom({
+              latitude: car.latitude,
+              longitude: parseFloat(car.longitude) + 0.00010
+          }, 21);
         }
+        $scope.searchAddress.city = car.fleet.name;
+        $scope.defaultFleet = car.fleet;
+        //$scope.changeFleet();
 
     };
 
-    //TODO: avoid data repetition, bettermove then out of here
     $scope.zoomOut = function () {
-        /* 
-        $scope.cars.forEach(function (carl) {
-            carl.carIcon = carl.icon;
-        });
-        */
-
-        $scope.zoom({
-            latitude: 45.46,
-            longitude: 9.25
-        }, 12);
+        if(!$scope.defaultFleet){
+            $scope.zoom(
+                {
+                    latitude: $scope.mapOptions.center.latitude,
+                    longitude: $scope.mapOptions.center.longitude
+                }, 
+                $scope.mapOptions.zoom
+            );
+        }else{
+            $scope.zoom(
+                {
+                    latitude: $scope.defaultFleet.latitude,
+                    longitude: $scope.defaultFleet.longitude
+                }, 
+                $scope.defaultFleet.zoomLevel
+            );
+            $scope.searchAddress.city = $scope.defaultFleet.name;
+        }
 
         if (infoBox) {
             infoBox.close();
@@ -248,7 +286,7 @@ angular.module('SharengoCsApp').controller('SharengoCsController', function (
 
                     return car.plate.toUpperCase().search(value.toUpperCase())!==-1;
                 });
-                
+
                 $scope.carsFound = cars;
 
                 if (cars && cars.length === 1) {
@@ -274,11 +312,11 @@ angular.module('SharengoCsApp').controller('SharengoCsController', function (
                     carsFactory.getTrip(car).success(function (trip) {
                         if(typeof trip.data[0] !== 'undefined'){
                             $scope.onCustomerSelection(trip.data[0].customer);
-                            $scope.accordionStatus.hideTripData = false;                        
+                            $scope.accordionStatus.hideTripData = false;
                             $scope.accordionStatus.hideCustomerData = true;
                         }else{
                             $scope.accordionStatus.hideTripData = true;
-                            $scope.accordionStatus.hideCustomerData = true;     
+                            $scope.accordionStatus.hideCustomerData = true;
                         }
                         $scope.trip = trip.trip;
                     }).error(function () {
@@ -430,15 +468,6 @@ angular.module('SharengoCsApp').controller('SharengoCsController', function (
         });
     };
 
-    $scope.mapOptions = {
-        center: {
-            latitude: 45.46,
-            longitude: 9.25
-        },
-        zoom: 12,
-        doCluster: true
-    };
-
     $scope.clusterOptions = {
         styles: [
             {
@@ -478,7 +507,7 @@ angular.module('SharengoCsApp').controller('SharengoCsController', function (
                 isHidden: false,
                 pane: "floatPane",
                 enableEventPropagation: true,
-                boxStyle: { 
+                boxStyle: {
                     width: "500px"
                 },
                 closeBoxMargin: "10px 2px 2px 2px",
@@ -522,7 +551,7 @@ angular.module('SharengoCsApp').controller('SharengoCsController', function (
                     case 'clean':car.est0 = 'w100';break;
                     case 'average':car.est0 = 'w75';break;
                     case 'dirty':car.est0 = 'w25';break;
-                }         
+                }
 
                 reservationContent.innerHTML = $interpolate(content)(car);
 
@@ -533,6 +562,6 @@ angular.module('SharengoCsApp').controller('SharengoCsController', function (
             }
         };
     /*uiGmapGoogleMapApi.then(function (maps) {
-        
+
     });*/
 });

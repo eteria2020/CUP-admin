@@ -1,7 +1,9 @@
 html, body, .angular-google-map, .angular-google-map-container {
     height: 100%;
 }
-
+body {
+    overflow:hidden;
+}
 #map-loader {
   position: absolute;
   top: 40%;
@@ -18,7 +20,7 @@ html, body, .angular-google-map, .angular-google-map-container {
     top:0px;
     right:140px;
     width:157px;
-    height:40px;
+    height:90px;
     z-index:100;
     background-color:#fff;
     padding:10px;
@@ -29,6 +31,15 @@ html, body, .angular-google-map, .angular-google-map-container {
 
     &:hover {
         opacity:1;
+    }
+    
+    .fleets {
+        select {
+            margin-top:5px;
+            margin-bottom:10px;
+            width:100%;
+            display:inline-block;
+        }
     }
 }
 #bottom-area {
