@@ -227,7 +227,7 @@ angular.module('SharengoCsApp').controller('SharengoCsController', function (
         }
         $scope.searchAddress.city = car.fleet.name;
         $scope.defaultFleet = car.fleet;
-        $scope.changeFleet();
+        //$scope.changeFleet();
 
     };
 
