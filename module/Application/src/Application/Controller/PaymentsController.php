@@ -229,7 +229,12 @@ class PaymentsController extends AbstractActionController
                 $reason
             );
 
-            $this->extraPaymentsService->generateInvoice($customer, $reason, $amount);
+            $this->extraPaymentsService->generateInvoice(
+                $customer,
+                $fleet,
+                $reason,
+                $amount
+            );
 
             return new JsonModel([
                 'message' => 'Il tentativo di pagamento è andato a buon fine. Il cliente è stato notificato da Cartasi'
