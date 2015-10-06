@@ -134,6 +134,11 @@ class CustomersController extends AbstractActionController
                     $postData['customer']['taxCode'] = $I_customer->getTaxCode();
                     $postData['customer']['birthDate'] = $I_customer->getBirthDate()->format('Y-m-d');
 
+                    // ensure vat is not NULL but a string
+                    if (is_null($postData['customer']['vat'])) {
+                        $postData['customer']['birthDate'] = '';
+                    }
+
                     $this->I_customerService->setValidatorEmail($I_customer->getEmail());
                     $this->I_customerService->setValidatorTaxCode($I_customer->getTaxCode());
                     break;
