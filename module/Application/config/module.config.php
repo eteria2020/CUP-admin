@@ -599,6 +599,15 @@ return array(
                                 'action' => 'pay-extra'
                             ]
                         ]
+                    ],
+                    'recap' => [
+                        'type' => 'Segment',
+                        'options' => [
+                            'route' => '/recap',
+                            'defaults' => [
+                                'action' => 'recap'
+                            ]
+                        ]
                     ]
                 ]
             ]
@@ -850,6 +859,11 @@ return array(
                     [
                         'label' => 'Addebita penale/extra',
                         'route' => 'payments/extra',
+                        'isVisible' => true
+                    ],
+                    [
+                        'label' => 'Competenze',
+                        'route' => 'payments/recap',
                         'isVisible' => true
                     ]
                 ]

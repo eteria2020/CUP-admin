@@ -1,0 +1,49 @@
+<?php
+
+$fleets = $this->fleets;
+$days = $this->days;
+
+?>
+
+<!-- Daily table -->
+<div class="row">
+    <div class="col-md-12">
+        <div class="portlet box green">
+
+            <!-- Header -->
+            <div class="portlet-title">
+                <div class="caption">
+                    <i class="fa fa-cogs"></i>Riepilogo giornaliero
+                </div>
+            </div>
+            <!-- header -->
+
+            <!-- Body -->
+            <div class="portlet-body">
+                <table class="table table-striped table-bordered table-hover">
+                    <thead>
+                        <tr>
+                            <th>Data</th>
+                            <?php foreach($fleets as $fleet): ?>
+                            <th><?= $fleet->getName() ?></th>
+                            <?php endforeach; ?>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php foreach($this->days as $day): ?>
+                            <tr>
+                            <?php foreach ($day as $city): ?>
+                                <td><?= $event->getId() ?></td>
+                            <?php endforeach; ?>
+                            </tr>
+                        <?php endforeach; ?>
+                    </tbody>
+                </table>
+            </div>
+            <!-- body -->
+        </div>
+    </div>
+</div>
+<!-- Daily table -->
+
+<script type="text/javascript" src="/js/edit-trip.js"></script>

@@ -239,4 +239,14 @@ class PaymentsController extends AbstractActionController
             ]);
         }
     }
+
+    public function recapAction()
+    {
+        $fleets = $this->fleetService->getAllFleets();
+        $dailyDates = $this->tripPaymentsService->getDailyIncomeForMonth(date_create());
+
+        return new ViewModel([
+            'fleets' => $fleets
+        ]);
+    }
 }
