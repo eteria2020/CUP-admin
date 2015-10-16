@@ -242,11 +242,25 @@ class PaymentsController extends AbstractActionController
 
     public function recapAction()
     {
+        // Get the selected month or default to current
+        $date = '';
+        if (is_null($this->params()->fromPost('date'))) {
+            $date = date_create()->format('m-Y');
+        } else {
+            $date = $this->params()->fromPost('date');
+        }
+
+        // Get months
+        $months = $this->tripPaymentsService->getAvailableMonths();
+        // Get all fleets
         $fleets = $this->fleetService->getAllFleets();
-        $dailyDates = $this->tripPaymentsService->getDailyIncomeForMonth(date_create());
+        // Get income for each day of the selected month
+        $dailyIncome = $this->tripPaymentsService->getDailyIncomeForMonth($date);
 
         return new ViewModel([
-            'fleets' => $fleets
+            'months' => $months,
+            'fleets' => $fleets,
+            'daily' => $dailyIncome
         ]);
     }
 }
