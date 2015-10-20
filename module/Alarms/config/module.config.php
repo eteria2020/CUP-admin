@@ -50,7 +50,7 @@ return array(
         'resolver_configs' => array(
             'collections' => array(
                 'assets-modules/alarms/css/vendors.css' => array(
-                    'bootstrap/dist/css/bootstrap.min.css'
+                    'bootstrap/dist/css/bootstrap.min.css',
                 ),
                 'assets-modules/alarms/css/style.css' => array(
                     'assets-modules/alarms/css/style.less'

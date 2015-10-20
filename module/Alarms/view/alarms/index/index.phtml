@@ -49,7 +49,7 @@
         </a>
     </div>
 </div>
-    
+<!--
 <div id="top-area">
     <tabset>
         <tab heading="Auto">
@@ -171,8 +171,8 @@
 
         </tab>
     </tabset>
-</div>
-
+</div>-->
+<!--
 <div id="controls">
     <accordion close-others="false">
         <accordion-group heading="Seleziona cliente" ng-hide="accordionStatus.hideCustomerSelect" is-open="accordionStatus.customerSelectOpen">
@@ -251,22 +251,6 @@
                 </div>
             </div>
 
-            <!--<div class="row">
-                <div class="col-sm-3">
-                    <label>Ultimi ticket</label>
-                </div>
-
-                <div class="col-sm-9">
-                     <span ng-show="customer.lastTickets.length == 0" class="label label-default">Attualmente non ci sono ticket</span>
-                     <span ng-repeat="ticket in customer.lastTickets">
-                        {{ticket.ora | dateSharengoFormat}}
-                        <button tooltip-placement="left" tooltip-html-unsafe="<b>Tipo chiamata:</b> {{ticket.tipo_chiamata}}<br /> <b>Descrizione:</b><br /> {{ticket.descrizione}}<br />" class="btn btn-default btn-xs">
-                            <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
-                        </button>
-                        <br>
-                    </span>
-                </div>
-            </div> -->
 
             <div class="row">
                 <div class="col-sm-3 noPaddingRight">
@@ -326,45 +310,7 @@
                     <span>{{car.battery}} % <i ng-if="car.charging" class="fa fa-plug"></i></span>
                 </div>
             </div>
-
-           <!-- <div class="row">
-                <div class="col-md-3">
-                    <label>Ultimi ticket</label>
-                </div>
-
-                <div class="col-md-9">
-                    <span ng-show="car.lastTickets.length == 0" class="label label-default">Attualmente non ci sono ticket</span>
-                    <span ng-repeat="ticket in car.lastTickets">
-                        {{ticket.ora | dateSharengoFormat}}
-                        <button tooltip-placement="left" tooltip-html-unsafe="<b>Tipo chiamata:</b> {{ticket.tipo_chiamata}}<br /> <b>Descrizione:</b><br /> {{ticket.descrizione}}<br />" class="btn btn-default btn-xs">
-                            <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
-                        </button>
-                        <br>
-                    </span>
-                </div>
-            </div> -->
-
         </accordion-group>
-       <!-- <accordion-group heading="Dati corsa" ng-hide="accordionStatus.hideTripData" is-open="accordionStatus.tripDataOpen">
-            <div class="row">
-                <div class="col-md-3">
-                    <label>Inizio corsa</label>
-                </div>
-
-                <div class="col-md-9">
-                    <span>{{trip.trip | dateSharengoFormat:'DD-MM-YYYY'}}</span>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-3">
-                    <label>Eventi</label>
-                </div>
-
-                <div class="col-md-9">
-                    <span>{{trip.events}}</span>
-                </div>
-            </div>
-        </accordion-group> -->
         <accordion-group heading="Dati ultima corsa chiusa" ng-hide="accordionStatus.hideLastTripData" is-open="accordionStatus.lastTripDataOpen" class="acc-run-data">
 
             <div class="row">
@@ -427,76 +373,26 @@
                 </div>
             </div>
         </accordion-group>
-        <!--<accordion-group heading="Richiesta di supporto" ng-hide="accordionStatus.hideRequest" is-open="accordionStatus.requestOpen">
-
-            <div class="alert alert-success" ng-show="accordionStatus.showSuccessMessageTicket"  role="alert">
-                Ticket creato con successo!
-            </div>
-
-            <div ng-show="accordionStatus.showFormTicket">
-                <form name="form" id="form" novalidate ng-submit="submitRequest()">
-                    <div class="form-input">
-                        <div class="row">
-                            <div class="col-md-3">
-                                <label>Tipo di chiamata</label>
-                            </div>
-                            <div class="col-md-9">
-                                <select ng-required="true" ng-model="contact.callType">
-                                    <option value="">--seleziona--</option>
-                                    <option value="1">Istruzioni utilizzo</option>
-                                    <option value="2">Guasto auto</option>
-                                    <option value="3">Altro</option>
-                                </select>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="form-input">
-                        <div class="row">
-                            <div class="col-md-3">
-                                <label>Azione eseguita</label>
-                            </div>
-                            <div class="col-md-9">
-                                <select ng-required="true" ng-model="contact.actionDone">
-                                    <option value="">--seleziona--</option>
-                                    <option value="1">Inoltrata telefonata alla ControlRoom</option>
-                                    <option value="2">Spiegazioni telefoniche all'utente</option>
-                                    <option value="3">Altro</option>
-                                </select>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="form-input">
-                        <div class="row">
-                            <div class="col-md-3">
-                                <label>Descrizione</label>
-                            </div>
-                            <div class="col-md-9">
-                                <textarea ng-required="true" ng-model="contact.description" ng-trim="false" maxlength="250"></textarea>
-                                <br />
-                                <span><small><strong>{{250 - contact.description.length}} caratteri disponibili</strong></small></span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="form-input">
-                        <button type="submit" class="btn btn-sm btn-success" id="buttonSumbit" ng-disabled="form.$invalid">Invia richiesta</button>
-                        <small><em><strong>Tutti i campi sono obbligatori</strong></em></small>
-                    </div>
-                </form>
-            </div>
-        </accordion-group>
-
-    </accordion> -->
 </div>
-
-<div id="bottom-area">
+-->
+<div id="left-area">
     <div class="pull-left">
         <ul class="list-inline">
-            <li><span class="block green"></span> LIBERE</li>
-            <li><span class="block yellow"></span> IN USO</li>
-            <li><span class="block black"></span> PRENOTATE</li>
-            <li><span class="block red"></span> IN MANUTENZIONE</li>
-            <li><span class="block orange"></span> NON OPERATIVE</li>
-            <li><span class="block azzure"></span> +24hh</li>
+            <li><span class="block green"></span><span class="qta"></span> LIBERE</li>
+            <li><span class="block black"></span><span class="qta"></span> PRENOTATE</li>
+            <li><span class="block yellow"></span><span class="qta"></span> IN USO</li>
+            <li><span class="block red"></span><span class="qta"></span>IN MANUTENZIONE</li> 
+            <li><span class="block orange"></span><span class="qta"></span> NON OPERATIVE</li>
+            <li><span class="block azzure"></span><span class="qta"></span> +24hh</li>
+            
+            <li><span class="block brown"></span><span class="qta"></span> N.O. 3G</li>
+            <li><span class="block brown"></span><span class="qta"></span> N.O. Batt</li>
+            <li><span class="block brown"></span><span class="qta"></span> N.O. GPS</li>
+            <li><span class="block white"></span><span class="qta"></span> In Ricarica</li>
+            
+            <li><span class="block purple"></span><span class="qta"></span> Sporca</li>
+            
+            <li><span class="block azzure"></span><span class="qta"></span> Ricarica</li>
         </ul>
     </div>
 </div>
