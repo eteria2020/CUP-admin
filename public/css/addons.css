@@ -21,3 +21,9 @@
 .sng-hint {
     font-size: 12px;
 }
+.sng-margin-top {
+    margin-top: 10px;
+}
+.sng-overflow-scroll {
+    overflow: scroll;
+}

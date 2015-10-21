@@ -244,10 +244,10 @@ class PaymentsController extends AbstractActionController
     {
         // Get the selected month or default to current
         $date = '';
-        if (is_null($this->params()->fromPost('date'))) {
+        if (is_null($this->params()->fromQuery('date'))) {
             $date = date_create()->format('m-Y');
         } else {
-            $date = $this->params()->fromPost('date');
+            $date = $this->params()->fromQuery('date');
         }
 
         // Get months
@@ -256,11 +256,18 @@ class PaymentsController extends AbstractActionController
         $fleets = $this->fleetService->getAllFleets();
         // Get income for each day of the selected month
         $dailyIncome = $this->tripPaymentsService->getDailyIncomeForMonth($date);
+        // Get income for last 4 weeks
+        $weeklyIncome = $this->tripPaymentsService->getWeeklyIncome();
+        // Get income for last 12 months
+        $monthlyIncome = $this->tripPaymentsService->getMonthlyIncome();
 
         return new ViewModel([
             'months' => $months,
+            'selectedMonth' => $date,
             'fleets' => $fleets,
-            'daily' => $dailyIncome
+            'daily' => $dailyIncome,
+            'weekly' => $weeklyIncome,
+            'monthly' => $monthlyIncome
         ]);
     }
 }

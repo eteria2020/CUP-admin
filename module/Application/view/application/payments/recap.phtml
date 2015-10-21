@@ -13,13 +13,13 @@ $daily = $this->daily;
 
         <!-- Daily table -->
         <div class="row">
-            <div class="col-md-4">
-                <div class="portlet box green">
+            <div class="col-md-12">
+                <div class="portlet box green sng-overflow-scroll">
 
                     <!-- Header -->
                     <div class="portlet-title">
                         <div class="caption">
-                            <i class="fa fa-cogs"></i>Riepilogo giornaliero
+                            <i class="fa fa-cogs"></i>Riepilogo giornaliero (ultimo mese)
                         </div>
                     </div>
                     <!-- header -->
@@ -27,13 +27,13 @@ $daily = $this->daily;
                     <!-- Body -->
                     <div class="portlet-body">
 
-                        <select>
+                        <select id="month-selector">
                             <?php foreach($this->months as $month): ?>
-                                <option value="volvo"><?= $month['tp_date'] ?></option>
+                                <option value="<?= $month['tp_date'] ?>"><?= $month['tp_date'] ?></option>
                             <?php endforeach; ?>
                         </select>
 
-                        <table class="table table-striped table-bordered table-hover">
+                        <table class="table table-striped table-bordered table-hover sng-margin-top">
                             <thead>
                                 <tr>
                                     <th>Data</th>
@@ -66,5 +66,115 @@ $daily = $this->daily;
         </div>
         <!-- Daily table -->
 
+        <!-- Weekly table -->
+        <div class="row">
+            <div class="col-md-12">
+                <div class="portlet box green">
+
+                    <!-- Header -->
+                    <div class="portlet-title">
+                        <div class="caption">
+                            <i class="fa fa-cogs"></i>Riepilogo settimanale (ultime 4 settimane)
+                        </div>
+                    </div>
+                    <!-- header -->
+
+                    <!-- Body -->
+                    <div class="portlet-body">
+
+                        <table class="table table-striped table-bordered table-hover sng-margin-top">
+                            <thead>
+                                <tr>
+                                    <th>Data</th>
+                                    <?php foreach($this->fleets as $fleet): ?>
+                                    <th><?= $fleet->getName() ?></th>
+                                    <?php endforeach; ?>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php foreach($weekly as $week => $amounts): ?>
+                                    <tr>
+                                        <?php
+                                        $interval = new \DateInterval('P7D');
+                                        $weekStart = date_create(substr($week, 0, 5) . "W" . substr($week, 5, 2));
+                                        $weekEnd = clone($weekStart);
+                                        $weekEnd->add($interval);
+                                        echo "<td>" . $weekStart->format('d-m') . " / " . $weekEnd->format('d-m') . "</td>";
+
+                                        foreach($this->fleets as $fleet) {
+                                            $entry = 'n.d.';
+                                            if (array_key_exists($fleet->getName(), $amounts)) {
+                                                $entry = sprintf('%.2f €', $amounts[$fleet->getName()] / 100);
+                                            }
+                                            echo '<td class="sng-dt-right">' . $entry . "</td>";
+                                        }
+                                        ?>
+                                    </tr>
+                                <?php endforeach;?>
+                            </tbody>
+                        </table>
+                    </div>
+                    <!-- body -->
+                </div>
+            </div>
+        </div>
+        <!-- Weekly table -->
+
+        <!-- Monthly table -->
+        <div class="row">
+            <div class="col-md-12">
+                <div class="portlet box green">
+
+                    <!-- Header -->
+                    <div class="portlet-title">
+                        <div class="caption">
+                            <i class="fa fa-cogs"></i>Riepilogo mensile (ultimi 12 mesi)
+                        </div>
+                    </div>
+                    <!-- header -->
+
+                    <!-- Body -->
+                    <div class="portlet-body">
+
+                        <table class="table table-striped table-bordered table-hover sng-margin-top">
+                            <thead>
+                                <tr>
+                                    <th>Data</th>
+                                    <?php foreach($this->fleets as $fleet): ?>
+                                    <th><?= $fleet->getName() ?></th>
+                                    <?php endforeach; ?>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php foreach($monthly as $month => $amounts): ?>
+                                    <tr>
+                                        <td><?= $month ?></td>
+                                        <?php
+                                        foreach($this->fleets as $fleet) {
+                                            $entry = 'n.d.';
+                                            if (array_key_exists($fleet->getName(), $amounts)) {
+                                                $entry = sprintf('%.2f €', $amounts[$fleet->getName()] / 100);
+                                            }
+                                            echo '<td class="sng-dt-right">' . $entry . "</td>";
+                                        }
+                                        ?>
+                                    </tr>
+                                <?php endforeach; ?>
+                            </tbody>
+                        </table>
+                    </div>
+                    <!-- body -->
+                </div>
+            </div>
+        </div>
+        <!-- Monthly table -->
+
     </div>
 </div>
+
+<!-- JavaScript -->
+<script type="text/javascript">
+var reloadUrl = "<?= $this->url('payments/recap'); ?>";
+var selectedMonth = "<?= $this->selectedMonth ?>";
+</script>
+<script type="text/javascript" src="<?= $this->basePath(); ?>/js/payments-recap.js"></script>
