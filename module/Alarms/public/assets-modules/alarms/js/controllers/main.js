@@ -26,6 +26,18 @@ angular.module('SharengoCsApp').controller('SharengoCsController', function (
     var reservationContent,infoBoxOptions,infoBox,mainMaps;
     $scope.poisVisible = true;
 
+    var markerColors = {
+        green: "#43A34C",
+        red: "#D90000",
+        yellow: "#FFC926",
+        brown: "#BF8F00",
+        orange: "#EC9416",
+        white: "#FFFFFF",
+        purple: "#7030A0",
+        azzure: "#0338FF",
+        black: "#000000"
+    }
+
     $scope.accordionStatus = {
         researchOpen: true,
         hideCustomerData: true,
@@ -105,8 +117,19 @@ angular.module('SharengoCsApp').controller('SharengoCsController', function (
     $scope.loadCars = function () {
         $scope.mapLoader = true;
 
+        
         return carsFactory.getCars().success(function (cars) {
             cars = cars.data;
+            var markerIcon = {
+                path: "m12 0.17197c-2.1153-0.02006-4.1832 1.1007-5.353 2.8575h-5.8194c-0.87431 0.03867-0.62803 1.0025-0.66208 1.588v7.2926c0.12395 0.818 1.0743 0.54221 1.6589 0.59125h6.5752c1.8937 3.0788 3.2217 6.5719 3.5598 10.185 0.17907-0.11908 0.20248-1.7168 0.43776-2.366 0.63275-2.7555 1.6947-5.4243 3.2034-7.8189h7.572c0.87431-0.03867 0.62803-1.0025 0.66208-1.588v-7.2926c-0.12395-0.818-1.0743-0.54221-1.6589-0.59125h-4.8226c-1.174-1.7594-3.233-2.876-5.353-2.8578z",
+                fillColor: '#43A34C',
+                fillOpacity: 1,
+                strokeWeight: 1,
+                strokeColor:'#000000',
+                strokeOpacity:1,
+                scale: 1.4,
+                anchor: new google.maps.Point(11,25)
+            };
             cars.forEach(function (car) {
                 car.id = car.plate; //Date.parse(car.vettura_id.replace(' ', 'T'));
                /* car.latitude = car.vettura_lat;
@@ -122,30 +145,33 @@ angular.module('SharengoCsApp').controller('SharengoCsController', function (
                 }else{
                     car.options.labelContent=car.battery+'%';
                 }
+                
+                car.carIcon = JSON.parse(JSON.stringify(markerIcon)); // fast clone
+                car.iconSelected = car.carIcon;
 
                 if(car.sinceLastTrip && car.sinceLastTrip>1440){
-                    car.carIcon = "/assets-modules/call-center/images/marker-s-azzure"+carCharging+".png";
-                    car.iconSelected = "/assets-modules/call-center/images/marker-s-azzure-selected"+carCharging+".png";
+                    car.carIcon['fillColor'] = markerColors['azzure'];
+                    car.iconSelected = car.carIcon;
                 }else{
-                    car.carIcon = "/assets-modules/call-center/images/marker-s-blue"+carCharging+".png";
-                    car.iconSelected = "/assets-modules/call-center/images/marker-s-blue-selected"+carCharging+".png";
+                    car.carIcon['fillColor'] = markerColors['green'];
+                    car.iconSelected = car.carIcon;
                 }
                 if(car.status!='operative'){
                     if(car.status=='maintenance'){
-                        car.carIcon = "/assets-modules/call-center/images/marker-s-red"+carCharging+".png";
-                        car.iconSelected = "/assets-modules/call-center/images/marker-s-red-selected"+carCharging+".png";
+                        car.carIcon['fillColor'] = markerColors['red'];
+                        car.iconSelected = car.carIcon;
                     }else{
-                        car.carIcon = "/assets-modules/call-center/images/marker-s-orange"+carCharging+".png";
-                        car.iconSelected = "/assets-modules/call-center/images/marker-s-orange-selected"+carCharging+".png";
+                        car.carIcon['fillColor'] = markerColors['orange'];
+                        car.iconSelected = car.carIcon;
                     }
                 }else if(car.busy){
-                    car.carIcon = "/assets-modules/call-center/images/marker-s-yellow"+carCharging+".png";
-                    car.iconSelected = "/assets-modules/call-center/images/marker-s-yellow-selected"+carCharging+".png";
+                    car.carIcon['fillColor'] = markerColors['yellow'];
+                    car.iconSelected = car.carIcon;
+                    
                 }else if(car.reservation){
-                    car.carIcon = "/assets-modules/call-center/images/marker-s-black"+carCharging+".png";
-                    car.iconSelected = "/assets-modules/call-center/images/marker-s-black-selected"+carCharging+".png";
+                    car.carIcon['fillColor'] = markerColors['black'];
+                    car.iconSelected = car.carIcon;
                 }
-
             });
             $scope.cars = cars;
             $scope.mapLoader = false;
