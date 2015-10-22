@@ -829,6 +829,8 @@ body {
         &:first-child {
             border-top:none;
         }
+
+        &.active .block {opacity:1}
     }
     .qta {
         width:30px;
@@ -845,7 +847,8 @@ body {
       width: 50px;
       height: 20px;
       vertical-align: middle;
-      
+      cursor:pointer;
+      opacity:0.3;
 
       &.blue {
         background: #296FFF;

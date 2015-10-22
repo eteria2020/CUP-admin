@@ -40,13 +40,20 @@ angular.module('SharengoCsApp').controller('SharengoCsController', function (
     }
     $scope.markerFilters = {
         libere: true,
-        prenoate: true,
+        prenotate: true,
         h24: true,
         manut: true,
         nonoper: true,
         inuso: true,
     }
-     
+    $scope.markerCounters = {
+        libere: 0,
+        prenotate: 0,
+        h24: 0,
+        manut: 0,
+        nonoper: 0,
+        inuso: 0,
+    } 
     
     $scope.accordionStatus = {
         researchOpen: true,
@@ -189,6 +196,7 @@ angular.module('SharengoCsApp').controller('SharengoCsController', function (
                     car.options.group = 'prenotate';
                     car.iconSelected = car.carIcon;
                 }
+                $scope.markerCounters[car.options.group] +=1;
             });
             $scope.cars = cars;
             $scope.mapLoader = false;
