@@ -378,23 +378,23 @@
 <div id="left-area">
     <div class="pull-left">
         <ul class="list-inline">
-            <li><span class="block green"></span><span class="qta"></span> LIBERE</li>
-            <li><span class="block black"></span><span class="qta"></span> PRENOTATE</li>
-            <li><span class="block yellow"></span><span class="qta"></span> IN USO</li>
-            <li><span class="block red"></span><span class="qta"></span>IN MANUTENZIONE</li> 
-            <li><span class="block orange"></span><span class="qta"></span> NON OPERATIVE</li>
-            <li><span class="block azzure"></span><span class="qta"></span> +24hh</li>
-            <li><span class="block brown"></span><span class="qta"></span> N.O. 3G</li>
-            <li><span class="block brown"></span><span class="qta"></span> N.O. Batt</li>
-            <li><span class="block brown"></span><span class="qta"></span> N.O. GPS</li>
-            <li><span class="block white"></span><span class="qta"></span> In Ricarica</li>
-            <li><span class="block purple"></span><span class="qta"></span> Sporca</li>
+            <li ng-click="markerFilters['libere'] = !markerFilters['libere'];" ng-class="{'active': markerFilters['libere']}" ><span class="block" style="background-color:{{markerColors['green']}}"></span><span class="qta"></span> LIBERE</li>
+            <li  ng-click="markerFilters['prenotate'] = !markerFilters['prenotate'];" ng-class="{'active': markerFilters['prenotate']}"><span class="block" style="background-color:{{markerColors['black']}}"></span><span class="qta"></span> PRENOTATE</li>
+            <li  ng-click="markerFilters['inuso'] = !markerFilters['inuso'];" ng-class="{'active': markerFilters['inuso']}"><span class="block" style="background-color:{{markerColors['yellow']}}"></span><span class="qta"></span> IN USO</li>
+            <li  ng-click="markerFilters['manut'] = !markerFilters['manut'];" ng-class="{'active': markerFilters['manut']}"><span class="block" style="background-color:{{markerColors['red']}}"></span><span class="qta"></span>IN MANUTENZIONE</li> 
+            <li  ng-click="markerFilters['nonoper'] = !markerFilters['nonoper'];" ng-class="{'active': markerFilters['nonoper']}"><span class="block" style="background-color:{{markerColors['orange']}}"></span><span class="qta"></span> NON OPERATIVE</li>
+            <li  ng-click="markerFilters['h24'] = !markerFilters['h24'];" ng-class="{'active': markerFilters['h24']}"><span class="block" style="background-color:{{markerColors['azzure']}}"></span><span class="qta"></span> +24hh</li>
+            <li  ng-click="markerFilters['no3g'] = !markerFilters['no3g'];" ng-class="{'active': markerFilters['no3g']}"><span class="block" style="background-color:{{markerColors['brown']}}"></span><span class="qta"></span> N.O. 3G</li>
+            <li  ng-click="markerFilters['nobatt'] = !markerFilters['nobatt'];" ng-class="{'active': markerFilters['nobatt']}"><span class="block" style="background-color:{{markerColors['brown']}}"></span><span class="qta"></span> N.O. Batt</li>
+            <li  ng-click="markerFilters['nogps'] = !markerFilters['nogps'];" ng-class="{'active': markerFilters['nogps']}"><span class="block" style="background-color:{{markerColors['brown']}}"></span><span class="qta"></span> N.O. GPS</li>
+            <li  ng-click="markerFilters['ricarica'] = !markerFilters['ricarica'];" ng-class="{'active': markerFilters['ricarica']}"><span class="block" style="background-color:{{markerColors['white']}}"></span><span class="qta"></span> In Ricarica</li>
+            <li  ng-click="markerFilters['sporche'] = !markerFilters['sporche'];" ng-class="{'active': markerFilters['sporche']}"><span class="block" style="background-color:{{markerColors['purple']}}"></span><span class="qta"></span> Sporca</li>
         </ul>
     </div>
 </div>
 
-<ui-gmap-google-map center="mapOptions.center" zoom="mapOptions.zoom" events="mapEvents">
-    <ui-gmap-markers models="cars" coords="'self'" icon="'carIcon'" events="markerEvents" options="'options'"></ui-gmap-markers>
+<ui-gmap-google-map center="mapOptions.center" zoom="mapOptions.zoom" events="mapEvents" control="mapOptions.control">
+    <ui-gmap-markers models="cars" coords="'self'" icon="'carIcon'" events="markerEvents" options="'options'" doRebuildAll="true" modelsbyref="true"></ui-gmap-markers>
     <ui-gmap-markers ng-if="poisVisible" models="pois" coords="'self'" icon="'poiIcon'" options="'options'"></ui-gmap-markers>
     <ui-gmap-polygon
         static="true"

@@ -2,6 +2,7 @@
 
 angular.module('SharengoCsApp').controller('SharengoCsController', function (
     $scope,
+    $filter,
     $interpolate,
     carsFactory,
     usersFactory,
@@ -26,7 +27,7 @@ angular.module('SharengoCsApp').controller('SharengoCsController', function (
     var reservationContent,infoBoxOptions,infoBox,mainMaps;
     $scope.poisVisible = true;
 
-    var markerColors = {
+    $scope.markerColors = {
         green: "#43A34C",
         red: "#D90000",
         yellow: "#FFC926",
@@ -37,7 +38,16 @@ angular.module('SharengoCsApp').controller('SharengoCsController', function (
         azzure: "#0338FF",
         black: "#000000"
     }
-
+    $scope.markerFilters = {
+        libere: true,
+        prenoate: true,
+        h24: true,
+        manut: true,
+        nonoper: true,
+        inuso: true,
+    }
+     
+    
     $scope.accordionStatus = {
         researchOpen: true,
         hideCustomerData: true,
@@ -66,7 +76,8 @@ angular.module('SharengoCsApp').controller('SharengoCsController', function (
             longitude: 11.3180998
         },
         zoom: 7,
-        doCluster: true
+        doCluster: true,
+        control: {}
     };
 
     //$scope.polygons = mapFactory.getPolygon();
@@ -128,13 +139,13 @@ angular.module('SharengoCsApp').controller('SharengoCsController', function (
                 strokeColor:'#000000',
                 strokeOpacity:1,
                 scale: 1.4,
-                anchor: new google.maps.Point(11,25)
+                anchor: new google.maps.Point(12,25)
             };
             cars.forEach(function (car) {
                 car.id = car.plate; //Date.parse(car.vettura_id.replace(' ', 'T'));
                /* car.latitude = car.vettura_lat;
                 car.longitude = car.vettura_lon;*/
-                car.options = [];
+                car.options = {};
                 var carCharging = '';
 
                 carCharging = '-charging';
@@ -145,36 +156,54 @@ angular.module('SharengoCsApp').controller('SharengoCsController', function (
                 }else{
                     car.options.labelContent=car.battery+'%';
                 }
-                
+     
                 car.carIcon = JSON.parse(JSON.stringify(markerIcon)); // fast clone
                 car.iconSelected = car.carIcon;
 
                 if(car.sinceLastTrip && car.sinceLastTrip>1440){
-                    car.carIcon['fillColor'] = markerColors['azzure'];
+                    car.carIcon['fillColor'] = $scope.markerColors['azzure'];
+                    car.options.group = 'h24';
                     car.iconSelected = car.carIcon;
                 }else{
-                    car.carIcon['fillColor'] = markerColors['green'];
+                    car.carIcon['fillColor'] = $scope.markerColors['green'];
+                    car.options.group = 'libere';
                     car.iconSelected = car.carIcon;
                 }
                 if(car.status!='operative'){
                     if(car.status=='maintenance'){
-                        car.carIcon['fillColor'] = markerColors['red'];
+                        car.carIcon['fillColor'] = $scope.markerColors['red'];
+                        car.options.group = 'manut';
                         car.iconSelected = car.carIcon;
                     }else{
-                        car.carIcon['fillColor'] = markerColors['orange'];
+                        car.carIcon['fillColor'] = $scope.markerColors['orange'];
+                        car.options.group = 'nonoper';
                         car.iconSelected = car.carIcon;
                     }
                 }else if(car.busy){
-                    car.carIcon['fillColor'] = markerColors['yellow'];
+                    car.carIcon['fillColor'] = $scope.markerColors['yellow'];
+                    car.options.group = 'inuso';
                     car.iconSelected = car.carIcon;
                     
                 }else if(car.reservation){
-                    car.carIcon['fillColor'] = markerColors['black'];
+                    car.carIcon['fillColor'] = $scope.markerColors['black'];
+                    car.options.group = 'prenotate';
                     car.iconSelected = car.carIcon;
                 }
             });
             $scope.cars = cars;
             $scope.mapLoader = false;
+            
+            $scope.$watch("markerFilters", function(filt){
+                cars.forEach(function (carl) {
+                    if ($scope.markerFilters[carl.options.group]) {
+                        carl.options.visible = true;
+                    } else {
+                        carl.options.visible = false;
+                    }
+                });
+                $scope.mapOptions.control.refresh();
+            },true);              
+            
         });
     };
 
