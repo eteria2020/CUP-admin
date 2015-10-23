@@ -25,5 +25,12 @@
     margin-top: 10px;
 }
 .sng-overflow-scroll {
+
     overflow: scroll;
+}
+.sng-date-column {
+    width: 130px;
+}
+.sng-fleet-column {
+    width: 80px;
 }
