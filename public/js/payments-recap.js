@@ -1,5 +1,6 @@
 $(document).ready(function() {
     selectMonth(selectedMonth);
+    highlightLastRows();
 });
 
 $("#month-selector").change(function()
@@ -18,4 +19,18 @@ function reloadPageWithMonth(month)
 function selectMonth(month)
 {
     $("#month-selector").val(month);
+}
+
+// Changes the background color of the last row of each table
+function highlightLastRows()
+{
+    var tableBodies = document.getElementsByTagName('tbody');
+    for(var i = tableBodies.length - 1; i >= 0; i--) {
+        var rows = tableBodies[i].getElementsByTagName('tr');
+        var lastRow = rows[rows.length - 1];
+        var elements = lastRow.getElementsByTagName('td');
+        for(var j = elements.length - 1; j >= 0; j--) {
+            elements[j].className = elements[j].className + " sng-last-row";
+        }
+    }
 }
