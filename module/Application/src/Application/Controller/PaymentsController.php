@@ -239,4 +239,36 @@ class PaymentsController extends AbstractActionController
             ]);
         }
     }
+
+    public function recapAction()
+    {
+        // Get months
+        $months = $this->tripPaymentsService->getAvailableMonths();
+
+        // Get the selected month or default to last available
+        $date = '';
+        if (is_null($this->params()->fromQuery('date'))) {
+            $date = $months[0]['tp_date'];
+        } else {
+            $date = $this->params()->fromQuery('date');
+        }
+
+        // Get all fleets
+        $fleets = $this->fleetService->getAllFleets();
+        // Get income for each day of the selected month
+        $dailyIncome = $this->tripPaymentsService->getDailyIncomeForMonth($date);
+        // Get income for last 4 weeks
+        $weeklyIncome = $this->tripPaymentsService->getWeeklyIncome();
+        // Get income for last 12 months
+        $monthlyIncome = $this->tripPaymentsService->getMonthlyIncome();
+
+        return new ViewModel([
+            'months' => $months,
+            'selectedMonth' => $date,
+            'fleets' => $fleets,
+            'daily' => $dailyIncome,
+            'weekly' => $weeklyIncome,
+            'monthly' => $monthlyIncome
+        ]);
+    }
 }
