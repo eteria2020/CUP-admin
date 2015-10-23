@@ -242,16 +242,17 @@ class PaymentsController extends AbstractActionController
 
     public function recapAction()
     {
-        // Get the selected month or default to current
+        // Get months
+        $months = $this->tripPaymentsService->getAvailableMonths();
+
+        // Get the selected month or default to last available
         $date = '';
         if (is_null($this->params()->fromQuery('date'))) {
-            $date = date_create()->format('m-Y');
+            $date = $months[0]['tp_date'];
         } else {
             $date = $this->params()->fromQuery('date');
         }
 
-        // Get months
-        $months = $this->tripPaymentsService->getAvailableMonths();
         // Get all fleets
         $fleets = $this->fleetService->getAllFleets();
         // Get income for each day of the selected month
