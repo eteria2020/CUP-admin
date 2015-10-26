@@ -77,6 +77,12 @@ $(function() {
         ],
         "columnDefs": [
             {
+                targets: [1, 2],
+                "render": function (data, type, row) {
+                    return '<a href="/customers/edit/'+row.cu.id+'" title="Visualizza profilo di '+row.cu.name+' '+row.cu.surname+' ">'+data+'</a>';
+                }
+            },
+            {
                 targets: 10,
                 sortable: false
             },

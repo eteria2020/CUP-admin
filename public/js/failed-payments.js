@@ -78,7 +78,16 @@ $(function() {
             },
             {
                 targets: 6,
-                className: "sng-dt-right"
+                className: "sng-dt-right",
+                "render": function (data, type, row) {
+                    return '<a href="/trips/details/'+data+'" title="Visualizza corsa ID '+data+' ">'+data+'</a>';
+                }
+            },
+            {
+                targets: [1, 2,3],
+                "render": function (data, type, row) {
+                    return '<a href="/customers/edit/'+row.cu.id+'" title="Visualizza profilo di '+row.cu.name+' '+row.cu.surname+' ">'+data+'</a>';
+                }
             },
             {
                 targets: 7,

@@ -52,11 +52,21 @@ $(function() {
             },
             {
                 targets: 1,
-                sortable: false
+                sortable: false,
+                "render": function (data, type, row) {
+                    return '<a href="/cars/edit/'+row.e.carPlate+'" title="Visualizza auto targata '+data+'">'+data+'</a>';
+                }
             },
             {
                 targets: 2,
-                sortable: false
+                sortable: false,
+                "render": function (data, type, row) {
+                    if (data !== '') {
+                        return '<a href="/customers/edit/'+row.e.customerId+'" title="Visualizza profilo di '+data+'">'+data+'</a>';
+                    } else {
+                        return '';
+                    }
+                }
             }
         ],
         "lengthMenu": [
