@@ -307,6 +307,42 @@ return array(
                             ],
                         ],
                     ],
+                    'ajax-tab-edit' => [
+                        'type'    => 'Segment',
+                        'options' => [
+                            'route'    => '/ajax-tab/edit/:plate',
+                            'constraints' => array(
+                                'plate' => '[a-zA-Z0-9]*',
+                            ),
+                            'defaults' => [
+                                'action'        => 'edit-tab',
+                            ],
+                        ],
+                    ],
+                    'ajax-tab-commands' => [
+                        'type'    => 'Segment',
+                        'options' => [
+                            'route'    => '/ajax-tab/commands/:plate',
+                            'constraints' => array(
+                                'plate' => '[a-zA-Z0-9]*',
+                            ),
+                            'defaults' => [
+                                'action'        => 'commands-tab',
+                            ],
+                        ],
+                    ],
+                    'ajax-tab-damages' => [
+                        'type'    => 'Segment',
+                        'options' => [
+                            'route'    => '/ajax-tab/damages/:plate',
+                            'constraints' => array(
+                                'plate' => '[a-zA-Z0-9]*',
+                            ),
+                            'defaults' => [
+                                'action'        => 'damages-tab',
+                            ],
+                        ],
+                    ],
                 ],
             ],
             'invoices' => [

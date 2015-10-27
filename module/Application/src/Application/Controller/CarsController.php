@@ -6,6 +6,7 @@ use SharengoCore\Entity\Cars;
 use SharengoCore\Entity\CarsMaintenance;
 use SharengoCore\Entity\Commands;
 use SharengoCore\Service\CarsService;
+use SharengoCore\Service\CarsDamagesService;
 use SharengoCore\Service\CommandsService;
 use SharengoCore\Utility\CarStatus;
 use Zend\Form\Form;
@@ -22,6 +23,11 @@ class CarsController extends AbstractActionController
      */
     private $carsService;
 
+    /**
+     * @var CarsDamagesService
+     */
+    private $carsDamagesService;
+
     /** @var  CommandsService */
     private $commandsService;
 
@@ -37,11 +43,13 @@ class CarsController extends AbstractActionController
 
     public function __construct(
         CarsService $carsService,
+        CarsDamagesService $carsDamagesService,
         CommandsService $commandsService,
         Form $carForm,
         HydratorInterface $hydrator)
     {
         $this->carsService = $carsService;
+        $this->carsDamagesService = $carsDamagesService;
         $this->commandsService = $commandsService;
         $this->carForm = $carForm;
         $this->hydrator = $hydrator;
@@ -101,7 +109,18 @@ class CarsController extends AbstractActionController
         ]);
     }
 
-    public function editAction()
+    public function editAction () {
+        $plate = $this->params()->fromRoute('plate', 0);
+        $car = $this->carsService->getCarByPlate($plate);
+        $tab = $this->params()->fromQuery('tab', 'edit');
+
+        return new ViewModel([
+            'car'       => $car,
+            'tab'       => $tab
+        ]);
+    }
+
+    public function editTabAction()
     {
         $plate = $this->params()->fromRoute('plate', 0);
         $car = $this->carsService->getCarByPlate($plate);
@@ -153,16 +172,55 @@ class CarsController extends AbstractActionController
 
                 }
 
-                return $this->redirect()->toRoute('cars');
+                $url = $this->url()->fromRoute('cars/edit', ['plate' => $car->getPlate()]).'#edit';
+                return $this->redirect()->toUrl($url);
             }
         }
 
-        return new ViewModel([
+        $view = new ViewModel([
             'car'                           => $car,
             'carForm'                       => $form,
-            'commands'                      => Commands::getCommandCodes(),
             'disableInputStatusMaintenance' => $disableInputStatusMaintenance
         ]);
+        $view->setTerminal(true);
+        return $view;
+    }
+
+    public function commandsTabAction () {
+        $plate = $this->params()->fromRoute('plate', 0);
+        $car = $this->carsService->getCarByPlate($plate);
+        $view = new ViewModel([
+            'commands' => Commands::getCommandCodes(),
+            'car'      => $car,
+        ]);
+        $view->setTerminal(true);
+        return $view;
+    }
+
+    public function damagesTabAction () {
+        $plate = $this->params()->fromRoute('plate', 0);
+        $car = $this->carsService->getCarByPlate($plate);
+        if ($this->getRequest()->isPost()) {
+            $postData = $this->getRequest()->getPost()->toArray();
+            $damages = json_encode($postData['damages']);
+            try {
+                $this->carsService->updateDamages($car, $damages);
+                $this->flashMessenger()->addSuccessMessage('Danni auto modificati con successo!');
+            } catch (\Exception $e) {
+                $this->flashMessenger()->addErrorMessage('Si è verificato un errore applicativo. L\'assistenza tecnica è già al corrente, ci scusiamo per l\'inconveniente');
+            }
+
+            $url = $this->url()->fromRoute('cars/edit', ['plate' => $car->getPlate()]).'#damages';
+            return $this->redirect()->toUrl($url);
+        }
+
+        $view = new ViewModel([
+            'damages'        => $this->carsDamagesService->getAll(),
+            'car'            => $car,
+            'carDamages'     => json_decode($car->getDamages(), true)
+        ]);
+        $view->setTerminal(true);
+        return $view;
     }
 
     public function deleteAction()
@@ -216,7 +274,8 @@ class CarsController extends AbstractActionController
 
         }
 
-        return $this->redirect()->toRoute('cars/edit', ['plate' => $car->getPlate()]);
+        $url = $this->url()->fromRoute('cars/edit', ['plate' => $car->getPlate()]).'#commands';
+        return $this->redirect()->toUrl($url);
     }
 
     protected function _getRecordsFiltered($as_filters, $i_totalCars)

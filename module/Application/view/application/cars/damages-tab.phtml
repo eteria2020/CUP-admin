@@ -1,0 +1,14 @@
+<h4>SEGNALA I DANNI DELL'AUTO</h4>
+
+<?php echo $this->partial('partials/flash-messages.phtml', []); ?>
+
+<form method="POST" action="<?php echo $this->url('cars/ajax-tab-damages', ['plate' => $this->car->getPlate()]) ?>">
+    <?php foreach($this->damages AS $damage): ?>
+        <div class="checkbox" style="padding-left: 20px">
+            <label>
+                <input type="checkbox" name="damages[]" <?php echo (in_array($damage->getName(), $this->carDamages)) ? 'checked' : '' ?> value="<?php echo $damage->getName() ?>" /> <?php echo $damage->getName() ?>
+            </label>
+        </div>
+    <?php endforeach; ?>
+    <button type="submit" class="btn btn-success">Salva</button>
+</form>
