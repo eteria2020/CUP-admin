@@ -4,6 +4,7 @@ return array(
     'modules' => array(
         'DoctrineModule',
         'DoctrineORMModule',
+        'DoctrineMongoODMModule',
         'ZfcBase',
         'ZfcUser',
         'ZfcUserDoctrineORM',
