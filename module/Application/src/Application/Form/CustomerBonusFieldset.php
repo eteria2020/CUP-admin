@@ -11,8 +11,8 @@ use Zend\InputFilter\InputFilterProviderInterface;
 class CustomerBonusFieldset extends Fieldset implements InputFilterProviderInterface
 {
 
-    public function __construct(HydratorInterface $hydrator) {
-
+    public function __construct(HydratorInterface $hydrator)
+    {
         parent::__construct('customer-bonus', [
             'use_as_base_fieldset' => true
         ]);
@@ -42,7 +42,7 @@ class CustomerBonusFieldset extends Fieldset implements InputFilterProviderInter
 
         $this->add([
             'name'       => 'validFrom',
-            'type'       => 'Zend\Form\Element\Date',
+            'type'       => 'Zend\Form\Element\Text',
             'attributes' => [
                 'id'       => 'valid_from',
                 'class'    => 'form-control date-picker',
@@ -51,7 +51,7 @@ class CustomerBonusFieldset extends Fieldset implements InputFilterProviderInter
 
         $this->add([
             'name'       => 'validTo',
-            'type'       => 'Zend\Form\Element\Date',
+            'type'       => 'Zend\Form\Element\Text',
             'attributes' => [
                 'id'       => 'valid_to',
                 'class'    => 'form-control date-picker',
@@ -121,5 +121,13 @@ class CustomerBonusFieldset extends Fieldset implements InputFilterProviderInter
                 ]
             ]
         ];
+    }
+
+    public function bindValues(array $values = [])
+    {
+        // the bonus is valid until the end of the day
+        $values['validTo'] .= ' 23:59:59';
+
+        return parent::bindValues($values);
     }
 }
