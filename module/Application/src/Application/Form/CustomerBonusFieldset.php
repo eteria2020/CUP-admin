@@ -42,7 +42,7 @@ class CustomerBonusFieldset extends Fieldset implements InputFilterProviderInter
 
         $this->add([
             'name'       => 'validFrom',
-            'type'       => 'Zend\Form\Element\Date',
+            'type'       => 'Zend\Form\Element\Text',
             'attributes' => [
                 'id'       => 'valid_from',
                 'class'    => 'form-control date-picker',
@@ -51,7 +51,7 @@ class CustomerBonusFieldset extends Fieldset implements InputFilterProviderInter
 
         $this->add([
             'name'       => 'validTo',
-            'type'       => 'Zend\Form\Element\Date',
+            'type'       => 'Zend\Form\Element\Text',
             'attributes' => [
                 'id'       => 'valid_to',
                 'class'    => 'form-control date-picker',
