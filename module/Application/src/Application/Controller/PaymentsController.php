@@ -226,6 +226,7 @@ class PaymentsController extends AbstractActionController
             $extraPayment = $this->extraPaymentsService->registerExtraPayment(
                 $customer,
                 $fleet,
+                $response->getTransaction(),
                 $amount,
                 $paymentType,
                 $reason
