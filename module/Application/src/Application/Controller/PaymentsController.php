@@ -144,7 +144,7 @@ class PaymentsController extends AbstractActionController
     {
         $id = (int)$this->params()->fromRoute('id', 0);
 
-        $webuser = $this->getIdentity();
+        $webuser = $this->identity();
 
         $tripPayment = $this->tripPaymentsService->getTripPaymentById($id);
 
