@@ -1,4 +1,4 @@
-<h4>SEGNALA I DANNI DELL'AUTO</h4>
+<h4>Segnala danni auto</h4>
 
 <?php echo $this->partial('partials/flash-messages.phtml', []); ?>
 
@@ -6,7 +6,7 @@
     <?php foreach($this->damages AS $damage): ?>
         <div class="checkbox" style="padding-left: 20px">
             <label>
-                <input type="checkbox" name="damages[]" <?php echo (in_array($damage->getName(), $this->carDamages)) ? 'checked' : '' ?> value="<?php echo $damage->getName() ?>" /> <?php echo $damage->getName() ?>
+                <input type="checkbox" name="damages[]" <?php if (is_array($this->carDamages)) { echo (in_array($damage->getName(), $this->carDamages)) ? 'checked' : ''; } ?> value="<?php echo $damage->getName() ?>" /> <?php echo $damage->getName() ?>
             </label>
         </div>
     <?php endforeach; ?>

@@ -23,11 +23,6 @@ class CarsController extends AbstractActionController
      */
     private $carsService;
 
-    /**
-     * @var CarsDamagesService
-     */
-    private $carsDamagesService;
-
     /** @var  CommandsService */
     private $commandsService;
 
@@ -43,13 +38,11 @@ class CarsController extends AbstractActionController
 
     public function __construct(
         CarsService $carsService,
-        CarsDamagesService $carsDamagesService,
         CommandsService $commandsService,
         Form $carForm,
         HydratorInterface $hydrator)
     {
         $this->carsService = $carsService;
-        $this->carsDamagesService = $carsDamagesService;
         $this->commandsService = $commandsService;
         $this->carForm = $carForm;
         $this->hydrator = $hydrator;
@@ -202,9 +195,8 @@ class CarsController extends AbstractActionController
         $car = $this->carsService->getCarByPlate($plate);
         if ($this->getRequest()->isPost()) {
             $postData = $this->getRequest()->getPost()->toArray();
-            $damages = json_encode($postData['damages']);
             try {
-                $this->carsService->updateDamages($car, $damages);
+                $this->carsService->updateDamages($car, $postData['damages']);
                 $this->flashMessenger()->addSuccessMessage('Danni auto modificati con successo!');
             } catch (\Exception $e) {
                 $this->flashMessenger()->addErrorMessage('Si è verificato un errore applicativo. L\'assistenza tecnica è già al corrente, ci scusiamo per l\'inconveniente');
@@ -215,7 +207,7 @@ class CarsController extends AbstractActionController
         }
 
         $view = new ViewModel([
-            'damages'        => $this->carsDamagesService->getAll(),
+            'damages'        => $this->carsService->getDamagesList(),
             'car'            => $car,
             'carDamages'     => json_decode($car->getDamages(), true)
         ]);
