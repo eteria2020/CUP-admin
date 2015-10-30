@@ -123,7 +123,7 @@ $(function() {
         column.val('select');
         filterWithoutLike = false;
     });
-    
+
     $('#js-cars-table').on('click', '.js-delete', function() {
         return confirm("Confermi l'eliminazione dell'auto? L'operazione non è annullabile");
     });
