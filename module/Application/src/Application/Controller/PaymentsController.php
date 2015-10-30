@@ -144,11 +144,13 @@ class PaymentsController extends AbstractActionController
     {
         $id = (int)$this->params()->fromRoute('id', 0);
 
+        $webuser = $this->getIdentity();
+
         $tripPayment = $this->tripPaymentsService->getTripPaymentById($id);
 
         if ($tripPayment->isWrongPayment()) {
             // the second parameter is needed to avoid sending an email to the customer
-            $cartasiResponse = $this->paymentsService->tryTripPayment($tripPayment, true, false, false, true);
+            $cartasiResponse = $this->paymentsService->tryTripPayment($tripPayment, $webuser, true, false, false, true);
 
             if ($cartasiResponse->getOutcome() === 'OK') {
                 $this->customersService->setCustomerPaymentAble($tripPayment->getCustomer());
