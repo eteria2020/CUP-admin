@@ -656,6 +656,7 @@ return array(
         ),
         'aliases' => array(
             'translator' => 'MvcTranslator',
+            'Zend\Authentication\AuthenticationService' => 'zfcuser_auth_service'
         ),
         'factories' => [
             'navigation' => 'Zend\Navigation\Service\DefaultNavigationFactory',
