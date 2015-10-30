@@ -792,7 +792,9 @@ body {
     max-height:500px;
     overflow:auto;
 }
+.marker-icons {
 
+}
 #left-area {
     position:fixed;
     width:230px;
@@ -814,6 +816,12 @@ body {
         float:left;
         clear:both;
     }
+
+    .fa-plug {
+        color:#296FFF;
+    }
+
+
 
     li {
         margin-bottom:10px;
@@ -849,6 +857,11 @@ body {
       vertical-align: middle;
       cursor:pointer;
       opacity:0.3;
+      text-align:center;
+
+      i {
+        vertical-align:middle;
+        }
 
       &.blue {
         background: #296FFF;
@@ -880,5 +893,21 @@ body {
       &.purple {
         background: #7030A0;
       }
+
+
+        .fa-battery-half {
+            color:#D90000;
+            background-color:#fff;
+            padding:2px 2px 1px 2px;
+        }
     }
+}
+
+.marker_labels .fa-battery-half {
+        top:-15px !important;
+        color:#D90000;
+    }
+
+.marker-icons-gps, .marker-icons-3g {
+    color:#D90000;
 }

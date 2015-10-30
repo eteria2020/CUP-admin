@@ -45,6 +45,8 @@ angular.module('SharengoCsApp').controller('SharengoCsController', function (
         manut: true,
         nonoper: true,
         inuso: true,
+        nobatt: true,
+        sporche: true
     }
     $scope.markerCounters = {
         libere: 0,
@@ -53,6 +55,8 @@ angular.module('SharengoCsApp').controller('SharengoCsController', function (
         manut: 0,
         nonoper: 0,
         inuso: 0,
+        nobatt: 0,
+        sporche: 0
     } 
     
     $scope.accordionStatus = {
@@ -176,15 +180,23 @@ angular.module('SharengoCsApp').controller('SharengoCsController', function (
                     car.options.group = 'libere';
                     car.iconSelected = car.carIcon;
                 }
+             
                 if(car.status!='operative'){
                     if(car.status=='maintenance'){
                         car.carIcon['fillColor'] = $scope.markerColors['red'];
                         car.options.group = 'manut';
                         car.iconSelected = car.carIcon;
                     }else{
-                        car.carIcon['fillColor'] = $scope.markerColors['orange'];
-                        car.options.group = 'nonoper';
-                        car.iconSelected = car.carIcon;
+                        if(car.battery<20){
+                            car.options.labelContent=car.battery+'% <i class="fa fa-battery-half"></i>';
+                            car.carIcon['fillColor'] = $scope.markerColors['brown'];
+                            car.options.group = 'nobatt';
+                            car.iconSelected = car.carIcon;
+                        }else{
+                            car.carIcon['fillColor'] = $scope.markerColors['orange'];
+                            car.options.group = 'nonoper';
+                            car.iconSelected = car.carIcon;                            
+                        }
                     }
                 }else if(car.busy){
                     car.carIcon['fillColor'] = $scope.markerColors['yellow'];
@@ -196,6 +208,11 @@ angular.module('SharengoCsApp').controller('SharengoCsController', function (
                     car.options.group = 'prenotate';
                     car.iconSelected = car.carIcon;
                 }
+                if(car.extCleanliness=='dirty' || car.intCleanliness=='dirty'){
+                    car.carIcon['fillColor'] = $scope.markerColors['purple'];
+                    car.options.group = 'sporche';
+                    car.iconSelected = car.carIcon;
+                }   
                 $scope.markerCounters[car.options.group] +=1;
             });
             $scope.cars = cars;
