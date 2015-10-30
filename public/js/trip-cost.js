@@ -41,7 +41,8 @@ $(function() {
             tripLength = $('#trip-length').val(),
             tripParkSeconds = $('#trip-park-seconds').val(),
             customerGender = $('#customer-gender').val(),
-            customerBonus = $('#customer-bonus').val();
+            customerBonus = $('#customer-bonus').val(),
+            customerDiscount = $('#customer-discount').val();
 
         e.preventDefault();
 
@@ -56,10 +57,12 @@ $(function() {
                     tripLength: tripLength,
                     tripParkSeconds: tripParkSeconds,
                     customerGender: customerGender,
-                    customerBonus: customerBonus
+                    customerBonus: customerBonus,
                 },
                 function (data) {
+                    var costDiscounted = data.cost*(1-(customerDiscount/100));
                     $('#trip-cost').html(parseFloat(data.cost / 100).toFixed(2));
+                    $('#trip-cost-discounted').html(parseFloat(costDiscounted/100).toFixed(2));
                 }
             );
         }
