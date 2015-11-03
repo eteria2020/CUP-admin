@@ -38,6 +38,7 @@ $this->headScript()
                     <li role="presentation" id="menu-card"><a href="<?= $this->url('customers/ajax-tab-card', ['id' => $this->customer->getId()]); ?>" data-target="#tab-card" role="tab" data-toggle="tab">Card</a></li>
                     <li role="presentation" id="menu-invoices"><a href="<?= $this->url('customers/ajax-tab-invoices', ['id' => $this->customer->getId()]); ?>" data-target="#tab-invoices" role="tab" data-toggle="tab">Fatture</a></li>
                     <li role="presentation" id="menu-contract"><a href="<?= $this->url('customers/ajax-tab-contract', ['id' => $this->customer->getId()]); ?>" data-target="#tab-contract" role="tab" data-toggle="tab">Contratto</a></li>
+                    <li role="presentation" id="menu-notes"><a href="<?= $this->url('customers/ajax-tab-notes', ['id' => $this->customer->getId()]); ?>" data-target="#tab-notes" role="tab" data-toggle="tab">Note</a></li>
                 </ul>
 
                 <div class="tab-content">
@@ -48,6 +49,7 @@ $this->headScript()
                     <div role="tabpanel" class="tab-pane" id="tab-card"></div>
                     <div role="tabpanel" class="tab-pane" id="tab-invoices"></div>
                     <div role="tabpanel" class="tab-pane" id="tab-contract"></div>
+                    <div role="tabpanel" class="tab-pane" id="tab-notes"></div>
                 </div>
             </div>
         </div>

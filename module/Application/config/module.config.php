@@ -151,6 +151,18 @@ return array(
                             ],
                         ],
                     ],
+                    'ajax-tab-notes' => [
+                        'type'    => 'Segment',
+                        'options' => [
+                            'route'    => '/ajax-tab/notes/:id',
+                            'constraints' => [
+                                'id' => '[0-9]*'
+                            ],
+                            'defaults' => [
+                                'action'        => 'notes-tab',
+                            ],
+                        ],
+                    ],
                     'ajax-card-code' => [
                         'type'    => 'Literal',
                         'options' => [

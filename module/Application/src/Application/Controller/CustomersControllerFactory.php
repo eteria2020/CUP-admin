@@ -19,33 +19,35 @@ class CustomersControllerFactory implements FactoryInterface
 
         // dependency is fetched from Service Manager
         $entityManager = $sharedLocator->get('doctrine.entitymanager.orm_default');
-        $I_clientService = $sharedLocator->get('SharengoCore\Service\CustomersService');
-        $I_cardsService = $sharedLocator->get('SharengoCore\Service\CardsService');
-        $I_promoCodeService = $sharedLocator->get('SharengoCore\Service\PromoCodesService');
-        $I_customerForm = $sharedLocator->get('CustomerForm');
-        $I_driverForm = $sharedLocator->get('DriverForm');
-        $I_settingForm = $sharedLocator->get('SettingForm');
-        $I_promoCodeForm = $sharedLocator->get('PromoCodeForm');
-        $I_customerBonusForm = $sharedLocator->get('CustomerBonusForm');
+        $clientService = $sharedLocator->get('SharengoCore\Service\CustomersService');
+        $cardsService = $sharedLocator->get('SharengoCore\Service\CardsService');
+        $promoCodeService = $sharedLocator->get('SharengoCore\Service\PromoCodesService');
+        $customerForm = $sharedLocator->get('CustomerForm');
+        $driverForm = $sharedLocator->get('DriverForm');
+        $settingForm = $sharedLocator->get('SettingForm');
+        $promoCodeForm = $sharedLocator->get('PromoCodeForm');
+        $customerBonusForm = $sharedLocator->get('CustomerBonusForm');
 
         $hydrator = new DoctrineHydrator($entityManager);
 
         $cartasiContractsService = $sharedLocator->get('Cartasi\Service\CartasiContracts');
         $disableContractService = $sharedLocator->get('SharengoCore\Service\DisableContractService');
+        $customersNoteService = $sharedLocator->get('SharengoCore\Service\CustomersNoteService');
 
         // Controller is constructed, dependencies are injected (IoC in action)
         return new CustomersController(
-            $I_clientService,
-            $I_cardsService,
-            $I_promoCodeService,
-            $I_customerForm,
-            $I_driverForm,
-            $I_settingForm,
-            $I_promoCodeForm,
-            $I_customerBonusForm,
+            $clientService,
+            $cardsService,
+            $promoCodeService,
+            $customerForm,
+            $driverForm,
+            $settingForm,
+            $promoCodeForm,
+            $customerBonusForm,
             $hydrator,
             $cartasiContractsService,
-            $disableContractService
+            $disableContractService,
+            $customersNoteService
         );
     }
 }
