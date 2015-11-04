@@ -12,6 +12,7 @@ return array(
         'MvlabsSnappy',
 
         'CallCenter',
+        'Alarms',
         'SharengoCore',
         'Application',
         'Cartasi',
