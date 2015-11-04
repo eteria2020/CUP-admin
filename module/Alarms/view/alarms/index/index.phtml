@@ -1,0 +1,86 @@
+<!doctype html>
+<html ng-app="SharengoCsApp">
+<head>
+    <meta charset="UTF-8">
+    <?php  echo $this->headLink()
+            ->appendStylesheet($this->basePath() . '/assets-modules/alarms/css/vendors.css')
+            ->appendStylesheet($this->basePath() . '/assets-modules/alarms/css/style.css');
+    ?>
+    <?php 
+        echo $this->headScript()
+            ->appendFile($this->basePath() . '/assets-modules/alarms/js/vendors.js')
+            ->appendFile($this->basePath() . '/assets-modules/alarms/js/scripts.js');
+    ?>
+</head>
+<body ng-controller="SharengoCsController">
+
+<div id="map-loader" ng-show="mapLoader">
+    <p><i class="fa fa-refresh"></i></p>
+    Caricamento mappa in corso...
+</div>
+
+<div id="top-actions">
+    <div class="heading clearfix">
+        <div class="fleets">
+            <select 
+                class="form-control"
+                ng-change="changeFleet()"
+                ng-model="defaultFleet"
+                ng-options="fleet as fleet.name for fleet in fleets">
+                <option>--</option>
+            </select>
+        </div>
+        <div class="pull-right actions">
+            <a href="javascript:;" ng-click="loadCars()" class="btn btn-success btn-xs">
+                <i class="fa fa-refresh"></i> Agggiorna
+            </a>
+            <a href="/user/logout" class="btn btn-danger btn-xs">
+                <i class="fa fa-sign-out"></i> Esci
+            </a>
+        </div>
+    </div>
+</div>
+
+<div id="markers-control">
+    <div class="pull-right actions">
+        <a href="javascript:;" ng-click="poisVisible = !poisVisible;" class="btn btn-xs" ng-class="{'deactive': !poisVisible }">
+            <i class="fa fa-plug"></i> &nbsp; POIS
+        </a>
+    </div>
+</div>
+
+<div id="left-area">
+    <div class="pull-left">
+        <ul class="list-inline">
+            <li ng-click="markerFilters['libere'] = !markerFilters['libere'];" ng-class="{'active': markerFilters['libere']}" ><span class="block" style="background-color:{{markerColors['green']}}"></span><span class="qta">{{markerCounters['libere']}}</span> LIBERE</li>
+            <li  ng-click="markerFilters['prenotate'] = !markerFilters['prenotate'];" ng-class="{'active': markerFilters['prenotate']}"><span class="block" style="background-color:{{markerColors['black']}}"></span><span class="qta">{{markerCounters['prenotate']}}</span> PRENOTATE</li>
+            <li  ng-click="markerFilters['inuso'] = !markerFilters['inuso'];" ng-class="{'active': markerFilters['inuso']}"><span class="block" style="background-color:{{markerColors['yellow']}}"></span><span class="qta">{{markerCounters['inuso']}}</span> IN USO</li>
+            <li  ng-click="markerFilters['manut'] = !markerFilters['manut'];" ng-class="{'active': markerFilters['manut']}"><span class="block" style="background-color:{{markerColors['red']}}"></span><span class="qta">{{markerCounters['manut']}}</span>IN MANUTENZIONE</li> 
+            <li  ng-click="markerFilters['nonoper'] = !markerFilters['nonoper'];" ng-class="{'active': markerFilters['nonoper']}"><span class="block" style="background-color:{{markerColors['orange']}}"></span><span class="qta">{{markerCounters['nonoper']}}</span> NON OPERATIVE</li>
+            <li  ng-click="markerFilters['h24'] = !markerFilters['h24'];" ng-class="{'active': markerFilters['h24']}"><span class="block" style="background-color:{{markerColors['azzure']}}"></span><span class="qta">{{markerCounters['h24']}}</span> +24hh</li>
+            <!-- <li  ng-click="markerFilters['no3g'] = !markerFilters['no3g'];" ng-class="{'active': markerFilters['no3g']}"><span class="block" style="background-color:{{markerColors['brown']}}"></span><span class="qta">{{markerCounters['no3g']}}</span> N.O. 3G</li> -->
+            <li  ng-click="markerFilters['nobatt'] = !markerFilters['nobatt'];" ng-class="{'active': markerFilters['nobatt']}"><span class="block" style="background-color:{{markerColors['brown']}}"><i class="fa fa-battery-half"></i></span><span class="qta">{{markerCounters['nobatt']}}</span> N.O. Batt</li>
+            <!-- <li  ng-click="markerFilters['nogps'] = !markerFilters['nogps'];" ng-class="{'active': markerFilters['nogps']}"><span class="block" style="background-color:{{markerColors['brown']}}"></span><span class="qta">{{markerCounters['nogps']}}</span> N.O. GPS</li> -->
+            <li  ng-click="markerFilters['ricarica'] = !markerFilters['ricarica'];" ng-class="{'active': markerFilters['ricarica']}"><span class="block" style="background-color:{{markerColors['white']}}"><i class="fa fa-plug"></i></span><span class="qta">{{markerCounters['ricarica']}}</span> In Ricarica</li>
+            <li  ng-click="markerFilters['sporche'] = !markerFilters['sporche'];" ng-class="{'active': markerFilters['sporche']}"><span class="block" style="background-color:{{markerColors['purple']}}"></span><span class="qta">{{markerCounters['sporche']}}</span> Sporca</li>
+        </ul>
+    </div>
+</div>
+
+<ui-gmap-google-map center="mapOptions.center" zoom="mapOptions.zoom" events="mapEvents" control="mapOptions.control">
+    <ui-gmap-markers models="cars" coords="'self'" icon="'carIcon'" events="markerEvents" options="'options'" doRebuildAll="true" modelsbyref="true"></ui-gmap-markers>
+    <ui-gmap-markers ng-if="poisVisible" models="pois" coords="'self'" icon="'poiIcon'" options="'options'"></ui-gmap-markers>
+    <ui-gmap-polygon
+        static="true"
+        ng-repeat="p in polygons track by p.id"
+        path="p.path"
+        stroke="p.stroke"
+        visible="p.visible"
+        geodesic="p.geodesic"
+        fill="p.fill"
+        fit="false"
+        editable="p.editable"
+        draggable="p.draggable"></ui-gmap-polygon>
+</ui-gmap-google-map>
+</body>
+</html>
