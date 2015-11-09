@@ -12,6 +12,8 @@ use SharengoCore\Entity\Invoices;
 use SharengoCore\Exception\EditTripDeniedException;
 use SharengoCore\Exception\EditTripWrongDateException;
 use SharengoCore\Exception\EditTripNotDateTimeException;
+use SharengoCore\Entity\Trips;
+use SharengoCore\Exception\TripNotFoundException;
 
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\JsonModel;
@@ -105,11 +107,8 @@ class TripsController extends AbstractActionController
     protected function _getRecordsFiltered($as_filters, $i_tripsTotal)
     {
         if (empty($as_filters['searchValue']) && !isset($as_filters['columnNull'])) {
-
             return $i_tripsTotal;
-
         } else {
-
             $as_filters['withLimit'] = false;
 
             return count($this->tripsService->getDataDataTable($as_filters));
@@ -242,5 +241,30 @@ class TripsController extends AbstractActionController
         $view->setTerminal(true);
 
         return $view;
+    }
+
+    public function closeTabAction()
+    {
+        $id = $this->params()->fromRoute('id', 0);
+
+        $trip = $this->tripsService->getTripById($id);
+
+        if (!$trip instanceof Trips) {
+            throw new TripNotFoundException();
+        }
+
+        $view = new ViewModel([
+            'trip' => $trip
+        ]);
+        $view->setTerminal(true);
+
+        return $view;
+    }
+
+    public function doCloseAction()
+    {
+        $tripId = $this->params()->fromPost('id');
+
+        return $this->redirect()->toRoute('trips/details', ['id' => $tripId], ['query' => ['tab' => 'close']]);
     }
 }

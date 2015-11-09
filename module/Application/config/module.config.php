@@ -481,6 +481,36 @@ return [
                                 'action' => 'edit-tab'
                             ]
                         ]
+                    ],
+                    'close-tab' => [
+                        'type' => 'Segment',
+                        'options' => [
+                            'route' => '/tab/close/:id',
+                            'constraints' => [
+                                'id' => '[0-9]*'
+                            ],
+                            'defaults' => [
+                                'action' => 'close-tab'
+                            ]
+                        ]
+                    ],
+                    'do-close' => [
+                        'type' => 'Literal',
+                        'options' => [
+                            'route' => '/do-close',
+                            'defaults' => [
+                                'action' => 'do-close'
+                            ]
+                        ],
+                        'may_terminate' => false,
+                        'child_routes' => [
+                            'post' => [
+                                'type' => 'Method',
+                                'options' => [
+                                    'verb' => 'post'
+                                ]
+                            ]
+                        ]
                     ]
                 ],
              ],
