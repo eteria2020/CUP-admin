@@ -37,7 +37,8 @@ angular.module('SharengoCsApp').controller('SharengoCsController', function (
         purple: "#7030A0",
         azzure: "#0338FF",
         black: "#000000"
-    }
+    };
+    
     $scope.markerFilters = {
         libere: true,
         prenotate: true,
@@ -48,16 +49,7 @@ angular.module('SharengoCsApp').controller('SharengoCsController', function (
         nobatt: true,
         sporche: true
     }
-    $scope.markerCounters = {
-        libere: 0,
-        prenotate: 0,
-        h24: 0,
-        manut: 0,
-        nonoper: 0,
-        inuso: 0,
-        nobatt: 0,
-        sporche: 0
-    } 
+    $scope.markerCounters = {};
     
     $scope.accordionStatus = {
         researchOpen: true,
@@ -80,13 +72,16 @@ angular.module('SharengoCsApp').controller('SharengoCsController', function (
         showNoResult: false
     };
     $scope.search = {};
-
-    $scope.mapOptions = {
-        center: {
+    $scope.initial = {
+        mapCenter: {
             latitude: 44.5563793,
-            longitude: 11.3180998
+            longitude: 11.3180998       
         },
-        zoom: 7,
+        mapZoom: 7
+    }
+    $scope.mapOptions = {
+        center: $scope.initial.mapCenter,
+        zoom: $scope.initial.mapZoom,
         doCluster: true,
         control: {}
     };
@@ -107,7 +102,7 @@ angular.module('SharengoCsApp').controller('SharengoCsController', function (
             position: myLatlng,
             map: map
         });
-    }
+    };
 
     $scope.searchAddress = {
         address: '',
@@ -118,13 +113,13 @@ angular.module('SharengoCsApp').controller('SharengoCsController', function (
             if (!geocoder) {
                 geocoder = new google.maps.Geocoder();
             }
-            var address = $scope.searchAddress.number+', '+$scope.searchAddress.address+', '+$scope.searchAddress.city
+            var address = $scope.searchAddress.number+', '+$scope.searchAddress.address+', '+$scope.searchAddress.city;
             geocoder.geocode( { 'address': address}, function(results, status) {
                 if (status == google.maps.GeocoderStatus.OK) {
                     $scope.mapOptions.center = {
                         latitude: results[0].geometry.location.lat(),
                         longitude: results[0].geometry.location.lng() + 0.00010
-                    }
+                    };
                     $scope.mapOptions.zoom = 14;
                     addMarker($scope.mapOptions.center.latitude, $scope.mapOptions.center.longitude);
                 } else {
@@ -134,7 +129,7 @@ angular.module('SharengoCsApp').controller('SharengoCsController', function (
                 $scope.$digest();
             });
         }
-    }
+    };
 
     $scope.loadCars = function () {
         $scope.mapLoader = true;
@@ -151,6 +146,16 @@ angular.module('SharengoCsApp').controller('SharengoCsController', function (
                 strokeOpacity:1,
                 scale: 1.4,
                 anchor: new google.maps.Point(12,25)
+            };
+            $scope.markerCounters = {
+                libere: 0,
+                prenotate: 0,
+                h24: 0,
+                manut: 0,
+                nonoper: 0,
+                inuso: 0,
+                nobatt: 0,
+                sporche: 0
             };
             cars.forEach(function (car) {
                 car.id = car.plate; //Date.parse(car.vettura_id.replace(' ', 'T'));
@@ -251,7 +256,18 @@ angular.module('SharengoCsApp').controller('SharengoCsController', function (
     };    
     $scope.loadFleets = function(){
         fleetsFactory.getFleets().success(function (fleets) {
-            $scope.fleets = fleets.data;
+            var firstOption = {
+                code: "XX",
+                id: 0,
+                name: "Tutti",
+                zoomLevel: $scope.initial.mapZoom,
+                latitude: $scope.initial.mapCenter.latitude,
+                longitude: $scope.initial.mapCenter.longitude,
+                isDefalt: false                
+            };
+            $scope.fleets.push(firstOption);
+            $scope.fleets = $scope.fleets.concat(fleets.data);
+
             var defaultFleet = fleets.data.filter(function(fleet) {
                 return fleet.isDefault;
             });
@@ -307,18 +323,16 @@ angular.module('SharengoCsApp').controller('SharengoCsController', function (
         }
         $scope.searchAddress.city = car.fleet.name;
         $scope.defaultFleet = car.fleet;
-        //$scope.changeFleet();
-
     };
 
     $scope.zoomOut = function () {
         if(!$scope.defaultFleet){
             $scope.zoom(
                 {
-                    latitude: $scope.mapOptions.center.latitude,
-                    longitude: $scope.mapOptions.center.longitude
+                    latitude: $scope.defaultFleet.latitude,
+                    longitude: $scope.defaultFleet.longitude
                 }, 
-                $scope.mapOptions.zoom
+                $scope.defaultFleet.mapZoom
             );
         }else{
             $scope.zoom(
