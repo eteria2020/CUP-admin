@@ -264,6 +264,10 @@ class TripsController extends AbstractActionController
     public function doCloseAction()
     {
         $tripId = $this->params()->fromPost('id');
+        $dateTime = $this->params()->fromPost('datetime');
+        $payable = $this->params()->fromPost('payable');
+
+        var_dump($this->params()->fromPost());die;
 
         return $this->redirect()->toRoute('trips/details', ['id' => $tripId], ['query' => ['tab' => 'close']]);
     }
