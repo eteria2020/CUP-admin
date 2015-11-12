@@ -14,6 +14,9 @@ use SharengoCore\Exception\EditTripWrongDateException;
 use SharengoCore\Exception\EditTripNotDateTimeException;
 use SharengoCore\Entity\Trips;
 use SharengoCore\Exception\TripNotFoundException;
+use Application\Form\InputFilter\CloseTripFilter;
+use Application\Form\InputData\CloseTripDataFactory;
+use Application\Command\CloseTrip;
 
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\JsonModel;
@@ -63,6 +66,16 @@ class TripsController extends AbstractActionController
      */
     private $eventManager;
 
+    /**
+     * @var CloseTripFilter
+     */
+    private $closeTripFilter;
+
+    /**
+     * @var CloseTripDataFactory
+     */
+    private $closeTripDataFactory;
+
     public function __construct(
         TripsService $tripsService,
         TripCostForm $tripCostForm,
@@ -71,7 +84,9 @@ class TripsController extends AbstractActionController
         EditTripsService $editTripsService,
         EditTripForm $editTripForm,
         EventManager $eventManager,
-        DoctrineHydrator $hydrator
+        DoctrineHydrator $hydrator,
+        CloseTripFilter $closeTripFilter,
+        CloseTripDataFactory $closeTripDataFactory
     ) {
         $this->tripsService = $tripsService;
         $this->tripCostForm = $tripCostForm;
@@ -81,6 +96,8 @@ class TripsController extends AbstractActionController
         $this->editTripForm = $editTripForm;
         $this->eventManager = $eventManager;
         $this->hydrator = $hydrator;
+        $this->closeTripFilter = $closeTripFilter;
+        $this->closeTripDataFactory = $closeTripDataFactory;
     }
 
     public function indexAction()
@@ -253,8 +270,11 @@ class TripsController extends AbstractActionController
             throw new TripNotFoundException();
         }
 
+        $events = $this->eventsService->getEventsByTrip($trip);
+
         $view = new ViewModel([
-            'trip' => $trip
+            'trip' => $trip,
+            'events' => $events
         ]);
         $view->setTerminal(true);
 
@@ -263,12 +283,22 @@ class TripsController extends AbstractActionController
 
     public function doCloseAction()
     {
-        $tripId = $this->params()->fromPost('id');
-        $dateTime = $this->params()->fromPost('datetime');
-        $payable = $this->params()->fromPost('payable');
+        $data = $this->params()->fromPost();
+        $this->closeTripFilter->setData($data);
 
-        var_dump($this->params()->fromPost());die;
+        if ($this->closeTripFilter->isValid()) {
+            $data = $this->closeTripFilter->getValues();
+            $inputData = $this->closeTripDataFactory->createFromArray($data);
 
-        return $this->redirect()->toRoute('trips/details', ['id' => $tripId], ['query' => ['tab' => 'close']]);
+            $command = new CloseTrip($inputData);
+
+            /*$this->commandHandler->handle($command);
+
+            $this->flashMessenger()->addSuccessMessage('Corsa chiusa con successo');*/
+        } else {
+            $this->flashMessenger()->addErrorMessage('Non è stato possibile chiudere la corsa. Assicurarsi di aver complilato i campi');
+        }
+
+        return $this->redirect()->toRoute('trips/details', ['id' => $data['id']], ['query' => ['tab' => 'close']]);
     }
 }

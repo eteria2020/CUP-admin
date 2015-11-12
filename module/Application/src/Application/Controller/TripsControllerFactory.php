@@ -2,6 +2,8 @@
 
 namespace Application\Controller;
 
+use Application\Form\InputData\CloseTripDataFactory;
+
 use Zend\ServiceManager\FactoryInterface;
 use Zend\ServiceManager\ServiceLocatorInterface;
 use DoctrineModule\Stdlib\Hydrator\DoctrineObject as DoctrineHydrator;
@@ -27,6 +29,9 @@ class TripsControllerFactory implements FactoryInterface
         $eventManager = $sharedServiceLocator->get('EventLogger\EventManager\EventManager');
         $entityManager = $sharedServiceLocator->get('doctrine.entitymanager.orm_default');
         $hydrator = new DoctrineHydrator($entityManager);
+        $tripCloseFilter = $sharedServiceLocator->get('InputFilterManager')->get('close-trip');
+        $tripsRepository = $entityManager->getRepository('SharengoCore\Entity\Trips');
+        $closeTripDataFactory = new CloseTripDataFactory($tripsRepository);
 
         // Controller is constructed, dependencies are injected (IoC in action)
         return new TripsController(
@@ -37,7 +42,9 @@ class TripsControllerFactory implements FactoryInterface
             $editTripsService,
             $editTripForm,
             $eventManager,
-            $hydrator
+            $hydrator,
+            $tripCloseFilter,
+            $closeTripDataFactory
         );
     }
 }
