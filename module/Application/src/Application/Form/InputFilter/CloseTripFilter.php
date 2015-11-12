@@ -17,10 +17,20 @@ class CloseTripFilter extends InputFilter
         ]);
         $this->add([
             'name' => 'datetime',
+            'required' => true
+        ]);
+        $this->add([
+            'name' => 'payable',
             'required' => true,
             'validators' => [
                 [
-                    
+                    'name' => 'in_array',
+                    'options' => [
+                        'haystack' => [
+                            'yes',
+                            'no'
+                        ]
+                    ]
                 ]
             ]
         ]);

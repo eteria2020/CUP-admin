@@ -894,6 +894,11 @@ return [
             'Application\Controller\Zones' => 'Application\Controller\ZonesControllerFactory'
         ]
     ],
+    'input_filters' => [
+        'invokables' => [
+            'close-trip' => 'Application\Form\InputFilter\CloseTripFilter'
+        ]
+    ],
     'translator' => [
         'locale' => 'it',
         'translation_file_patterns' => [
