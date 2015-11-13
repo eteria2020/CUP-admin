@@ -59,11 +59,11 @@ class CustomerNoteController extends AbstractActionController
             try {
                 $postData = $this->getRequest()->getPost()->toArray();
                 $this->customerNoteService->addNote($customer, $this->identity(), $postData['new-note']);
-                $this->flashMessenger()->addSuccessMessage('OK');
+                $this->flashMessenger()->addSuccessMessage('Nota aggiunta con successo');
                 $status = 'ok';
             } catch (\Exception $e) {
                 $this->getResponse()->setStatusCode(Response::STATUS_CODE_500);
-                $this->flashMessenger()->addErrorMessage('KO');
+                $this->flashMessenger()->addErrorMessage('Errore nell\'inserimento della nota');
             }
         }
 
