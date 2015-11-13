@@ -12,6 +12,7 @@ use Cartasi\Service\CartasiCustomerPayments;
 use SharengoCore\Service\PenaltiesService;
 use SharengoCore\Exception\FleetNotFoundException;
 use SharengoCore\Service\FleetService;
+use SharengoCore\Service\RecapService;
 
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\JsonModel;
@@ -64,6 +65,11 @@ class PaymentsController extends AbstractActionController
      */
     private $fleetService;
 
+    /**
+     * @var RecapService
+     */
+    private $recapService;
+
     public function __construct(
         TripPaymentsService $tripPaymentsService,
         PaymentsService $paymentsService,
@@ -73,7 +79,8 @@ class PaymentsController extends AbstractActionController
         CartasiCustomerPayments $cartasiCustomerPayments,
         ExtraPaymentsService $extraPaymentsService,
         PenaltiesService $penaltiesService,
-        FleetService $fleetService
+        FleetService $fleetService,
+        RecapService $recapService
     ) {
         $this->tripPaymentsService = $tripPaymentsService;
         $this->paymentsService = $paymentsService;
@@ -84,6 +91,7 @@ class PaymentsController extends AbstractActionController
         $this->extraPaymentsService = $extraPaymentsService;
         $this->penaltiesService = $penaltiesService;
         $this->fleetService = $fleetService;
+        $this->recapService = $recapService;
     }
 
     public function failedPaymentsAction()
@@ -246,12 +254,12 @@ class PaymentsController extends AbstractActionController
     public function recapAction()
     {
         // Get months
-        $months = $this->tripPaymentsService->getAvailableMonths();
+        $months = $this->recapService->getAvailableMonths();
 
         // Get the selected month or default to last available
         $date = '';
         if (is_null($this->params()->fromQuery('date'))) {
-            $date = $months[0]['tp_date'];
+            $date = $months[0]['date'];
         } else {
             $date = $this->params()->fromQuery('date');
         }
@@ -259,11 +267,11 @@ class PaymentsController extends AbstractActionController
         // Get all fleets
         $fleets = $this->fleetService->getAllFleets();
         // Get income for each day of the selected month
-        $dailyIncome = $this->tripPaymentsService->getDailyIncomeForMonth($date);
+        $dailyIncome = $this->recapService->getDailyIncomeForMonth($date);
         // Get income for last 4 weeks
-        $weeklyIncome = $this->tripPaymentsService->getWeeklyIncome();
+        $weeklyIncome = $this->recapService->getWeeklyIncome();
         // Get income for last 12 months
-        $monthlyIncome = $this->tripPaymentsService->getMonthlyIncome();
+        $monthlyIncome = $this->recapService->getMonthlyIncome();
 
         return new ViewModel([
             'months' => $months,

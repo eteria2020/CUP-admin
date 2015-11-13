@@ -20,6 +20,7 @@ class PaymentsControllerFactory implements FactoryInterface
         $extraPaymentsService = $sharedServiceManager->get('SharengoCore\Service\ExtraPaymentsService');
         $penaltiesService = $sharedServiceManager->get('SharengoCore\Service\PenaltiesService');
         $fleetService = $sharedServiceManager->get('SharengoCore\Service\FleetService');
+        $recapService = $sharedServiceManager->get('SharengoCore\Service\RecapService');
 
         return new PaymentsController(
             $tripPaymentsService,
@@ -30,7 +31,8 @@ class PaymentsControllerFactory implements FactoryInterface
             $cartasiCustomerPayments,
             $extraPaymentsService,
             $penaltiesService,
-            $fleetService
+            $fleetService,
+            $recapService
         );
     }
 }
