@@ -17,12 +17,18 @@
                             <i class="fa fa-paperclip"></i>Nuova nota
                         </div>
                     </div>
-                    <div class="portlet-body">
+                    <form class="portlet-body"
+                        action="<?= $this->url('customers/add-note', ['id' => $this->customer->getId()]); ?>"
+                        method="post">
 
                         <textarea id="new-note" name="new-note" style="width: 100%" rows="5"></textarea><br><br>
-                        <a href="" class="btn btn-default btn-xs">Aggiungi</a>
+                        <input id="add-button"
+                            class="btn btn-default btn-xs"
+                            type="submit"
+                            value="Aggiungi">
+                        </input>
 
-                    </div>
+                    </form>
                 </div>
                 <!-- input container -->
 
@@ -47,7 +53,7 @@
                             <tbody>
                                 <?php foreach ($this->notes as $note): ?>
                                 <tr>
-                                    <td><?= $note->getInsertedTs()->format('d-m-Y H:i:s'); ?></td>
+                                    <td class="sng-date-column"><?= $note->getInsertedTs()->format('d-m-Y H:i:s'); ?></td>
                                     <td><?= $note->getWebuser()->getId(); ?></td>
                                     <td><?= $note->getNote(); ?></td>
                                 </tr>
@@ -64,9 +70,4 @@
         </div>
     </div>
 </div>
-
-<script>
-$(document).ready(function() {
-    $('#notes-table').DataTable();
-} );
-</script>
+<script type="text/javascript" src="<?= $this->basePath() .'/js/customer-notes.js'; ?>"></script>

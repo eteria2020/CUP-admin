@@ -32,7 +32,6 @@ class CustomersControllerFactory implements FactoryInterface
 
         $cartasiContractsService = $sharedLocator->get('Cartasi\Service\CartasiContracts');
         $disableContractService = $sharedLocator->get('SharengoCore\Service\DisableContractService');
-        $customersNoteService = $sharedLocator->get('SharengoCore\Service\CustomersNoteService');
 
         // Controller is constructed, dependencies are injected (IoC in action)
         return new CustomersController(
@@ -46,8 +45,7 @@ class CustomersControllerFactory implements FactoryInterface
             $customerBonusForm,
             $hydrator,
             $cartasiContractsService,
-            $disableContractService,
-            $customersNoteService
+            $disableContractService
         );
     }
 }

@@ -9,7 +9,6 @@ use SharengoCore\Service\CardsService;
 use SharengoCore\Service\CustomersService;
 use SharengoCore\Service\PromoCodesService;
 use SharengoCore\Service\DisableContractService;
-use SharengoCore\Service\CustomersNoteService;
 use SharengoCore\Exception\CustomerNotFoundException;
 use SharengoCore\Exception\BonusAssignmentException;
 use Cartasi\Service\CartasiContractsService;
@@ -78,11 +77,6 @@ class CustomersController extends AbstractActionController
     private $disableContractService;
 
     /**
-     * @var CustomersNoteService
-     */
-    private $customersNoteService;
-
-    /**
      * @param CustomersService $customersService
      * @param CardsService $cardsService
      * @param PromoCodesService $promoCodeService
@@ -94,7 +88,6 @@ class CustomersController extends AbstractActionController
      * @param HydratorInterface $hydrator
      * @param CartasiContractsService $cartasiContractsService
      * @param DisableContractService $disableContractService
-     * @param CustomersNoteService $customersNoteService
      */
     public function __construct(
         CustomersService $customersService,
@@ -107,8 +100,7 @@ class CustomersController extends AbstractActionController
         Form $customerBonusForm,
         HydratorInterface $hydrator,
         CartasiContractsService $cartasiContractsService,
-        DisableContractService $disableContractService,
-        CustomersNoteService $customersNoteService
+        DisableContractService $disableContractService
     ) {
         $this->customersService = $customersService;
         $this->cardsService = $cardsService;
@@ -121,7 +113,6 @@ class CustomersController extends AbstractActionController
         $this->hydrator = $hydrator;
         $this->cartasiContractsService = $cartasiContractsService;
         $this->disableContractService = $disableContractService;
-        $this->customersNoteService = $customersNoteService;
     }
 
     public function listAction()
@@ -352,20 +343,6 @@ class CustomersController extends AbstractActionController
         $view = new ViewModel([
             'customer' => $customer,
             'contract' => $contract
-        ]);
-        $view->setTerminal(true);
-
-        return $view;
-    }
-
-    public function notesTabAction()
-    {
-        $customer = $this->getCustomer();
-        $notes = $this->customersNoteService->getByCustomer($customer);
-
-        $view = new ViewModel([
-            'customer' => $customer,
-            'notes' => $notes
         ]);
         $view->setTerminal(true);
 
