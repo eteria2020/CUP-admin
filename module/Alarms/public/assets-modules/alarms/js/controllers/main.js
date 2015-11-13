@@ -37,7 +37,8 @@ angular.module('SharengoCsApp').controller('SharengoCsController', function (
         purple: "#7030A0",
         azzure: "#0338FF",
         black: "#000000"
-    }
+    };
+    
     $scope.markerFilters = {
         libere: true,
         prenotate: true,
@@ -46,8 +47,12 @@ angular.module('SharengoCsApp').controller('SharengoCsController', function (
         nonoper: true,
         inuso: true,
         nobatt: true,
-        sporche: true
+        no3g: true,
+        nogps: true,
+        sporche: true,
+        ricarica: true
     }
+    
     $scope.markerCounters = {
         libere: 0,
         prenotate: 0,
@@ -56,8 +61,11 @@ angular.module('SharengoCsApp').controller('SharengoCsController', function (
         nonoper: 0,
         inuso: 0,
         nobatt: 0,
-        sporche: 0
-    } 
+        no3g:0,
+        nogps:0,
+        sporche: 0,
+        ricarica: 0
+    };
     
     $scope.accordionStatus = {
         researchOpen: true,
@@ -80,13 +88,16 @@ angular.module('SharengoCsApp').controller('SharengoCsController', function (
         showNoResult: false
     };
     $scope.search = {};
-
-    $scope.mapOptions = {
-        center: {
+    $scope.initial = {
+        mapCenter: {
             latitude: 44.5563793,
-            longitude: 11.3180998
+            longitude: 11.3180998       
         },
-        zoom: 7,
+        mapZoom: 7
+    }
+    $scope.mapOptions = {
+        center: $scope.initial.mapCenter,
+        zoom: $scope.initial.mapZoom,
         doCluster: true,
         control: {}
     };
@@ -107,7 +118,7 @@ angular.module('SharengoCsApp').controller('SharengoCsController', function (
             position: myLatlng,
             map: map
         });
-    }
+    };
 
     $scope.searchAddress = {
         address: '',
@@ -118,13 +129,13 @@ angular.module('SharengoCsApp').controller('SharengoCsController', function (
             if (!geocoder) {
                 geocoder = new google.maps.Geocoder();
             }
-            var address = $scope.searchAddress.number+', '+$scope.searchAddress.address+', '+$scope.searchAddress.city
+            var address = $scope.searchAddress.number+', '+$scope.searchAddress.address+', '+$scope.searchAddress.city;
             geocoder.geocode( { 'address': address}, function(results, status) {
                 if (status == google.maps.GeocoderStatus.OK) {
                     $scope.mapOptions.center = {
                         latitude: results[0].geometry.location.lat(),
                         longitude: results[0].geometry.location.lng() + 0.00010
-                    }
+                    };
                     $scope.mapOptions.zoom = 14;
                     addMarker($scope.mapOptions.center.latitude, $scope.mapOptions.center.longitude);
                 } else {
@@ -134,7 +145,26 @@ angular.module('SharengoCsApp').controller('SharengoCsController', function (
                 $scope.$digest();
             });
         }
+    };
+    
+    function resetMarkerCounters(){
+        for(var counter in $scope.markerCounters){
+            if($scope.markerCounters.hasOwnProperty(counter)){
+                $scope.markerCounters[counter] = 0;
+            }
+        };
     }
+
+    function resetMarkerFilters(){
+        for(var filter in $scope.markerFilters){
+            if($scope.markerFilters.hasOwnProperty(filter)){
+                $scope.markerFilters[filter] = true;
+            }
+        };
+    }
+    
+    resetMarkerCounters();
+    resetMarkerFilters();
 
     $scope.loadCars = function () {
         $scope.mapLoader = true;
@@ -152,6 +182,9 @@ angular.module('SharengoCsApp').controller('SharengoCsController', function (
                 scale: 1.4,
                 anchor: new google.maps.Point(12,25)
             };
+            resetMarkerCounters();
+
+            var now = new Date().getTime();
             cars.forEach(function (car) {
                 car.id = car.plate; //Date.parse(car.vettura_id.replace(' ', 'T'));
                /* car.latitude = car.vettura_lat;
@@ -164,8 +197,11 @@ angular.module('SharengoCsApp').controller('SharengoCsController', function (
                 //car.options.labelAnchor='12 32';
                 if(car.charging){
                     car.options.labelContent=car.battery+'% <i class="fa fa-plug"></i>';
+                    car.options.charging = true;
+                    $scope.markerCounters['ricarica'] +=1;
                 }else{
                     car.options.labelContent=car.battery+'%';
+                    car.options.charging = false;
                 }
      
                 car.carIcon = JSON.parse(JSON.stringify(markerIcon)); // fast clone
@@ -180,7 +216,9 @@ angular.module('SharengoCsApp').controller('SharengoCsController', function (
                     car.options.group = 'libere';
                     car.iconSelected = car.carIcon;
                 }
-             
+                var date = car.lastContact?new Date(car.lastContact.date).getTime():null;
+                var now
+
                 if(car.status!='operative'){
                     if(car.status=='maintenance'){
                         car.carIcon['fillColor'] = $scope.markerColors['red'];
@@ -191,6 +229,16 @@ angular.module('SharengoCsApp').controller('SharengoCsController', function (
                             car.options.labelContent=car.battery+'% <i class="fa fa-battery-half"></i>';
                             car.carIcon['fillColor'] = $scope.markerColors['brown'];
                             car.options.group = 'nobatt';
+                            car.iconSelected = car.carIcon;
+                        }else if(car.gps_ok == false){
+                            car.options.labelContent=car.battery+'% <span class="txt-label">GPS</span>';
+                            car.carIcon['fillColor'] = $scope.markerColors['brown'];
+                            car.options.group = 'nobatt';
+                            car.iconSelected = car.carIcon;
+                        }else if(!car.lastContact || car.lastContact.date>(now+3600)){
+                            car.options.labelContent=car.battery+'% <span class="txt-label">3G</span>';
+                            car.carIcon['fillColor'] = $scope.markerColors['brown'];
+                            car.options.group = 'no3g';
                             car.iconSelected = car.carIcon;
                         }else{
                             car.carIcon['fillColor'] = $scope.markerColors['orange'];
@@ -218,13 +266,18 @@ angular.module('SharengoCsApp').controller('SharengoCsController', function (
             $scope.cars = cars;
             $scope.mapLoader = false;
             
+            
             $scope.$watch("markerFilters", function(filt){
                 cars.forEach(function (carl) {
+                    var toSet = false;
                     if ($scope.markerFilters[carl.options.group]) {
-                        carl.options.visible = true;
-                    } else {
-                        carl.options.visible = false;
+                        toSet = true;
                     }
+                    if ($scope.markerFilters['ricarica'] && carl.options.charging) {
+                        toSet = true;
+                    }
+                    carl.options.visible = toSet;
+                    
                 });
                 $scope.mapOptions.control.refresh();
             },true);              
@@ -251,7 +304,18 @@ angular.module('SharengoCsApp').controller('SharengoCsController', function (
     };    
     $scope.loadFleets = function(){
         fleetsFactory.getFleets().success(function (fleets) {
-            $scope.fleets = fleets.data;
+            var firstOption = {
+                code: "XX",
+                id: 0,
+                name: "Tutti",
+                zoomLevel: $scope.initial.mapZoom,
+                latitude: $scope.initial.mapCenter.latitude,
+                longitude: $scope.initial.mapCenter.longitude,
+                isDefalt: false                
+            };
+            $scope.fleets.push(firstOption);
+            $scope.fleets = $scope.fleets.concat(fleets.data);
+
             var defaultFleet = fleets.data.filter(function(fleet) {
                 return fleet.isDefault;
             });
@@ -289,15 +353,6 @@ angular.module('SharengoCsApp').controller('SharengoCsController', function (
             }
         });
 
-        /*ticketsFactory.getLastCarTickets(car.plate).success(function (tickets) {
-
-            tickets.forEach(function (ticket) {
-                ticket.tipo_chiamata = ticketsFactory.getTypeCall(ticket.tipo_chiamata);
-            });
-
-            car.lastTickets = tickets;
-        });*/
-
         $scope.car = car;
         if(zoom){
           $scope.zoom({
@@ -307,18 +362,16 @@ angular.module('SharengoCsApp').controller('SharengoCsController', function (
         }
         $scope.searchAddress.city = car.fleet.name;
         $scope.defaultFleet = car.fleet;
-        //$scope.changeFleet();
-
     };
 
     $scope.zoomOut = function () {
         if(!$scope.defaultFleet){
             $scope.zoom(
                 {
-                    latitude: $scope.mapOptions.center.latitude,
-                    longitude: $scope.mapOptions.center.longitude
+                    latitude: $scope.defaultFleet.latitude,
+                    longitude: $scope.defaultFleet.longitude
                 }, 
-                $scope.mapOptions.zoom
+                $scope.defaultFleet.mapZoom
             );
         }else{
             $scope.zoom(
@@ -337,14 +390,6 @@ angular.module('SharengoCsApp').controller('SharengoCsController', function (
     };
 
     $scope.onCustomerSelection = function (customer) {
-               /* ticketsFactory.getLastUserTickets(customer).success(function (tickets) {
-
-            tickets.forEach(function (ticket) {
-                ticket.tipo_chiamata = ticketsFactory.getTypeCall(ticket.tipo_chiamata);
-            });
-
-            customer.lastTickets = tickets;
-        });*/
         usersFactory.getLastTrips(customer).success(function (trips) {
             customer.lastTrips = trips.data;
         });
@@ -354,7 +399,9 @@ angular.module('SharengoCsApp').controller('SharengoCsController', function (
     function searchCar(value, unit, zoom) {
         var cars,
             car;
-
+        
+        resetMarkerFilters();
+        
         if (value !== undefined) {
             $scope.accordionStatus.hideCustomerSelect = true;
 
@@ -493,15 +540,19 @@ angular.module('SharengoCsApp').controller('SharengoCsController', function (
             $scope.loadCars().then(function () {
                 $scope.trip = trip.trip;
                 $scope.accordionStatus.hideTripData = false;
-                $scope.onCarSelection(trip.data[0].car,true);
                 $scope.accordionStatus.hideCarData = false;
-                carsFactory.getLastClosedTrip(trip.data[0].car).success(function (trip) {
-                    $scope.lastTrip = trip.data[0];
-                    $scope.lastTripUser = trip.data[0].customer;
+                if(typeof trip.data[0] !== 'undefined'){
+                    $scope.onCarSelection(trip.data[0].car,true);
+                    carsFactory.getLastClosedTrip(trip.data[0].car).success(function (trip) {
+                        $scope.lastTrip = trip.data[0];
+                        $scope.lastTripUser = trip.data[0].customer;
+                        $scope.accordionStatus.hideLastTripData = false;
+                    }).error(function () {
+                        $scope.accordionStatus.hideLastTripData = true;
+                    });
+                }else{
                     $scope.accordionStatus.hideLastTripData = false;
-                }).error(function () {
-                    $scope.accordionStatus.hideLastTripData = true;
-                });
+                }
             });
         }).error(function () {
             $scope.accordionStatus.hideTripData = true;
@@ -562,6 +613,20 @@ angular.module('SharengoCsApp').controller('SharengoCsController', function (
         maxZoom: 17
     };
 
+    $scope.updateCounters = function(){
+        if(typeof mainMaps !== 'undefined'){
+            var mapBounds = mainMaps[0].map.getBounds();
+            resetMarkerCounters();
+
+            $scope.cars.forEach(function (car) {
+                if(mapBounds.contains(new google.maps.LatLng(car.latitude, car.longitude))){
+                    $scope.markerCounters[car.options.group] += 1;
+                    if(car.options.charging) $scope.markerCounters['ricarica'] += 1;
+                }
+            });   
+        }
+    };
+
     $scope.mapEvents = {
         zoom_changed: function (map) {
 
@@ -573,6 +638,9 @@ angular.module('SharengoCsApp').controller('SharengoCsController', function (
             } else {
                 $scope.mapOptions.doCluster = true;
             }
+        },
+        idle: function(map){
+            $scope.updateCounters();
         }
     };
 
@@ -595,6 +663,7 @@ angular.module('SharengoCsApp').controller('SharengoCsController', function (
             };
 
         infoBox = new InfoBox();
+        $scope.updateCounters();
     });
     $scope.markerEvents = {
             click: function (marker, event, car) {
