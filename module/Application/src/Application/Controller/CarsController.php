@@ -182,8 +182,10 @@ class CarsController extends AbstractActionController
     public function commandsTabAction () {
         $plate = $this->params()->fromRoute('plate', 0);
         $car = $this->carsService->getCarByPlate($plate);
+        $commands = Commands::getCommandCodes();
+        unset($commands[Commands::CLOSE_TRIP]);
         $view = new ViewModel([
-            'commands' => Commands::getCommandCodes(),
+            'commands' => $commands,
             'car'      => $car,
         ]);
         $view->setTerminal(true);

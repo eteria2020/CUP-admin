@@ -29,7 +29,6 @@ class TripsControllerFactory implements FactoryInterface
         $eventManager = $sharedServiceLocator->get('EventLogger\EventManager\EventManager');
         $entityManager = $sharedServiceLocator->get('doctrine.entitymanager.orm_default');
         $hydrator = new DoctrineHydrator($entityManager);
-        $tripCloseFilter = $sharedServiceLocator->get('InputFilterManager')->get('close-trip');
         $tripsRepository = $entityManager->getRepository('SharengoCore\Entity\Trips');
         $closeTripDataFactory = new CloseTripDataFactory($tripsRepository);
 
@@ -43,7 +42,6 @@ class TripsControllerFactory implements FactoryInterface
             $editTripForm,
             $eventManager,
             $hydrator,
-            $tripCloseFilter,
             $closeTripDataFactory
         );
     }

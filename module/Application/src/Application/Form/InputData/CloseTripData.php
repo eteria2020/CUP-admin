@@ -54,4 +54,12 @@ class CloseTripData
     {
         return $this->payable;
     }
+
+    /**
+     * @return Cars
+     */
+    public function car()
+    {
+        return $this->trip->getCar();
+    }
 }

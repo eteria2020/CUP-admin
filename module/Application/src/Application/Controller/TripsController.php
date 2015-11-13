@@ -14,9 +14,8 @@ use SharengoCore\Exception\EditTripWrongDateException;
 use SharengoCore\Exception\EditTripNotDateTimeException;
 use SharengoCore\Entity\Trips;
 use SharengoCore\Exception\TripNotFoundException;
-use Application\Form\InputFilter\CloseTripFilter;
 use Application\Form\InputData\CloseTripDataFactory;
-use Application\Command\CloseTrip;
+use SharengoCore\Exception\InvalidFormInputData;
 
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\JsonModel;
@@ -67,11 +66,6 @@ class TripsController extends AbstractActionController
     private $eventManager;
 
     /**
-     * @var CloseTripFilter
-     */
-    private $closeTripFilter;
-
-    /**
      * @var CloseTripDataFactory
      */
     private $closeTripDataFactory;
@@ -85,7 +79,6 @@ class TripsController extends AbstractActionController
         EditTripForm $editTripForm,
         EventManager $eventManager,
         DoctrineHydrator $hydrator,
-        CloseTripFilter $closeTripFilter,
         CloseTripDataFactory $closeTripDataFactory
     ) {
         $this->tripsService = $tripsService;
@@ -96,7 +89,6 @@ class TripsController extends AbstractActionController
         $this->editTripForm = $editTripForm;
         $this->eventManager = $eventManager;
         $this->hydrator = $hydrator;
-        $this->closeTripFilter = $closeTripFilter;
         $this->closeTripDataFactory = $closeTripDataFactory;
     }
 
@@ -284,21 +276,19 @@ class TripsController extends AbstractActionController
     public function doCloseAction()
     {
         $data = $this->params()->fromPost();
-        $this->closeTripFilter->setData($data);
 
-        if ($this->closeTripFilter->isValid()) {
-            $data = $this->closeTripFilter->getValues();
+        try {
             $inputData = $this->closeTripDataFactory->createFromArray($data);
 
-            $command = new CloseTrip($inputData);
+            $this->tripsService->closeTrip($inputData, $this->identity());
 
-            /*$this->commandHandler->handle($command);
+            $this->flashMessenger()->addSuccessMessage('Corsa chiusa con successo');
 
-            $this->flashMessenger()->addSuccessMessage('Corsa chiusa con successo');*/
-        } else {
-            $this->flashMessenger()->addErrorMessage('Non è stato possibile chiudere la corsa. Assicurarsi di aver complilato i campi');
+            return $this->redirect()->toRoute('trips/details', ['id' => $data['id']]);
+        } catch (InvalidFormInputData $e) {
+            $this->flashMessenger()->addErrorMessage($e->getMessage());
+
+            return $this->redirect()->toRoute('trips/details', ['id' => $data['id']], ['query' => ['tab' => 'close']]);
         }
-
-        return $this->redirect()->toRoute('trips/details', ['id' => $data['id']], ['query' => ['tab' => 'close']]);
     }
 }
