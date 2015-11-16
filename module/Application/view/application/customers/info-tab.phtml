@@ -142,6 +142,16 @@ $formSetting = $this->settingForm->prepare();
                     </div>
 
                     <div class="col-lg-4">
+                        <div class="form-group">
+                            <label for="id">Id</label>
+                            <?php $idElement = $form->get('customer')->get('id');
+                                $idElement->setAttributes(['type'=>'text','readonly'=>'true','class'=>'form-control']);
+                            ?>
+                            <?= $this->formRow($idElement); ?>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-4">
                     </div>
                 </div>
 
