@@ -36,3 +36,13 @@
 .sng-full-width {
     width: 100%;
 }
+.sng-payment-row {
+    border-style: solid;
+    border-width: 2px;
+    border-color: #E5E5E5;
+    margin-top: 10px;
+    padding: 10px;
+}
+.sng-close-payment {
+    float: right;
+}

@@ -5,74 +5,76 @@ $this->headScript()
 <div class="page-content-wrapper">
     <div class="page-content">
 
-        <h3 class="page-title">
-            ADDEBITI EXTRA/PENALI
-        </h3>
+        <!-- TITLE -->
+        <h3 class="page-title">ADDEBITI EXTRA/PENALI</h3>
 
-        <?= $this->form()->openTag($form); ?>
-            <div class="row">
-                <div class="col-lg-2">
-                    <div class="form-group">
-                        <label for="customerId">Id Cliente</label>
-                        <?= $this->formRow($form->get('extra')->get('customerId')); ?>
-                    </div>
-                </div>
+        <!-- BEGIN TOP INPUT ROW -->
+        <div class="row">
 
-                <div class="col-lg-2">
-                    <div class="form-group">
-                        <label for="customerId">Flotta</label>
-                        <?= $this->formRow($form->get('extra')->get('fleet')); ?>
-                    </div>
-                </div>
-
-                <div class="col-lg-2">
-                    <div class="form-group">
-                        <label for="paymentType">Tipologia</label>
-                        <?= $this->formRow($form->get('extra')->get('paymentType')); ?>
-                    </div>
-                </div>
+            <!-- INPUT CUSTOMER ID -->
+            <div class="col-lg-2">
+                <label>Id Cliente</label>
+                <input id="customer" class="form-control" type="text"></input>
             </div>
 
-            <div class="row">
-                <div id="penaltyField" class="col-lg-12">
-                    <div class="form-group">
-                        <label for="penalty">Penale</label>
-                        <select id="penalty" name="penalty" class="form-control">
-                            <option>---</option>
-                            <?php foreach($this->penalties as $penalty): ?>
-                                <option data-reason="<?= $penalty->getReason()?>" data-amount="<?= $penalty->getAmount() ?>">
-                                    <?= $penalty->getReason() ?> (<?= number_format($penalty->getAmount()/100, 2) ?> &euro;)
-                                </option>
-                            <?php endforeach; ?>
-                        </select>
-                    </div>
-                </div>
+            <!-- SELECT FLEET -->
+            <div class="col-lg-2">
+                <label>Flotta</label>
+                <select id="fleet" class="form-control">
+                    <option id="fleet-option-null">---</option>
+                    <?php foreach ($this->fleets as $fleet): ?>
+                    <option value="<?= $fleet->getId() ?>"><?= $fleet->getName() ?></option>
+                    <?php endforeach; ?>
+                </select>
             </div>
 
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="form-group">
-                        <label for="reason">Causale</label>
-                        <?= $this->formRow($form->get('extra')->get('reason')); ?>
-                    </div>
-                </div>
+            <!-- SELECT TYPE -->
+            <div class="col-lg-2">
+                <label>Tipologia</label>
+                <select id="type" class="form-control">
+                    <option id="type-option-null">---</option>
+                    <?php foreach ($this->types as $type): ?>
+                    <option value="<?= $type ?>"><?= $type ?></option>
+                    <?php endforeach; ?>
+                </select>
             </div>
+        </div>
+        <!-- END TOP INPUT ROW -->
 
-            <div class="row">
-                <div class="col-lg-4">
-                    <div class="form-group">
-                        <label for="amount">Importo (&euro;)</label>
-                        <?= $this->formRow($form->get('extra')->get('amount')); ?>
-                    </div>
-                </div>
+        <!-- PAYMENT ROWS CONTAINER -->
+        <div id="payment-rows"></div>
+
+        <!-- ADD PAYMENT ROW BUTTON -->
+        <div class="row sng-margin-top">
+            <div class="col-lg-2">
+                <button id="js-add-row"></i> Aggiungi addebito</button>
             </div>
+        </div>
 
-            <div class="row">
-                <div class="col-lg-12">
-                    <button id="js-extra-payment" type="submit" class="btn btn-success">Effettua pagamento</button>
-                </div>
+        <!-- SUBMIT BUTTON -->
+        <div class="row sng-margin-top">
+            <div class="col-lg-12 sng-margin-top">
+                <button id="js-extra-payment" class="btn btn-success">Effettua pagamento</button>
             </div>
+        </div>
 
-        <?php echo $this->form()->closeTag(); ?>
     </div>
 </div>
+
+<script>
+<?php
+/**
+ * This code creates a js variable that holds all the options for the penalties
+ * selector. The generated variable contains a string that is ready to be added
+ * to the html of a selector.
+ */
+echo 'var penaltyOptions = "';
+echo '<option>---</option>';
+foreach($this->penalties as $penalty) {
+    echo '<option data-reason=\"' . $penalty->getReason() . '\" data-amount=\"' . $penalty->getAmount() . '\">' .
+        $penalty->getReason() . ' (' .number_format($penalty->getAmount()/100, 2) . '\u20ac)' .
+        '</option>';
+}
+echo '"';
+?>
+</script>
