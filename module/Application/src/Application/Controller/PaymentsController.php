@@ -2,7 +2,6 @@
 
 namespace Application\Controller;
 
-use Application\Form\ExtraPaymentsForm;
 use Application\Form\FaresForm;
 use SharengoCore\Service\FaresService;
 use SharengoCore\Service\TripPaymentsService;
@@ -36,11 +35,6 @@ class PaymentsController extends AbstractActionController
      * @var CustomersService
      */
     private $customersService;
-
-    /**
-     * @var ExtraPaymentsForm
-     */
-    private $extraPaymentsForm;
 
     /**
      * @var CartasiContractsService
@@ -86,7 +80,6 @@ class PaymentsController extends AbstractActionController
         TripPaymentsService $tripPaymentsService,
         PaymentsService $paymentsService,
         CustomersService $customersService,
-        ExtraPaymentsForm $extraPaymentsForm,
         CartasiContractsService $cartasiContractsService,
         CartasiCustomerPayments $cartasiCustomerPayments,
         ExtraPaymentsService $extraPaymentsService,
@@ -99,7 +92,6 @@ class PaymentsController extends AbstractActionController
         $this->tripPaymentsService = $tripPaymentsService;
         $this->paymentsService = $paymentsService;
         $this->customersService = $customersService;
-        $this->extraPaymentsForm = $extraPaymentsForm;
         $this->cartasiContractsService = $cartasiContractsService;
         $this->cartasiCustomerPayments = $cartasiCustomerPayments;
         $this->extraPaymentsService = $extraPaymentsService;
@@ -199,7 +191,6 @@ class PaymentsController extends AbstractActionController
         $types = $this->extraPaymentsService->getAllTypes();
 
         return new ViewModel([
-            'form' => $this->extraPaymentsForm,
             'fleets' => $fleets,
             'types' => $types,
             'penalties' => $penalties

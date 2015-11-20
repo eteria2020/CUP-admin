@@ -292,6 +292,7 @@ function removePaymentBlocks()
     for (var i = paymentBlocks.length - 1; i >= 0; i--) {
         paymentBlocks[i].remove();
     }
+    window.scrollTo(0, 0);
 }
 
 /**
