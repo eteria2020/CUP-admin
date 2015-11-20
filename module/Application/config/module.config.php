@@ -9,19 +9,19 @@ namespace Application;
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
 
-return array(
-    'router' => array(
-        'routes' => array(
-            'home' => array(
+return [
+    'router' => [
+        'routes' => [
+            'home' => [
                 'type' => 'Literal',
-                'options' => array(
+                'options' => [
                     'route'    => '/',
-                    'defaults' => array(
+                    'defaults' => [
                         'controller' => 'Application\Controller\Index',
                         'action'     => 'index',
-                    ),
-                ),
-            ),
+                    ],
+                ],
+            ],
             'customers' => [
                 'type' => 'Literal',
                 'options' => [
@@ -47,9 +47,9 @@ return array(
                         'type'    => 'Segment',
                         'options' => [
                             'route'    => '/edit/:id',
-                            'constraints' => array(
+                            'constraints' => [
                                 'id' => '[0-9]*'
-                            ),
+                            ],
                             'defaults' => [
                                 'action'        => 'edit',
                             ],
@@ -59,9 +59,9 @@ return array(
                         'type'    => 'Segment',
                         'options' => [
                             'route'    => '/remove-card/:id',
-                            'constraints' => array(
+                            'constraints' => [
                                 'id' => '[0-9]*'
-                            ),
+                            ],
                             'defaults' => [
                                 'action'        => 'remove-card',
                             ],
@@ -71,9 +71,9 @@ return array(
                         'type'    => 'Segment',
                         'options' => [
                             'route'    => '/assign-card/:id',
-                            'constraints' => array(
+                            'constraints' => [
                                 'id' => '[0-9]*'
-                            ),
+                            ],
                             'defaults' => [
                                 'action'        => 'assign-card',
                             ],
@@ -83,9 +83,9 @@ return array(
                         'type'    => 'Segment',
                         'options' => [
                             'route'    => '/ajax-tab/info/:id',
-                            'constraints' => array(
+                            'constraints' => [
                                 'id' => '[0-9]*'
-                            ),
+                            ],
                             'defaults' => [
                                 'action'        => 'info-tab',
                             ],
@@ -95,9 +95,9 @@ return array(
                         'type'    => 'Segment',
                         'options' => [
                             'route'    => '/ajax-tab/edit/:id',
-                            'constraints' => array(
+                            'constraints' => [
                                 'id' => '[0-9]*'
-                            ),
+                            ],
                             'defaults' => [
                                 'action'        => 'edit-tab',
                             ],
@@ -107,9 +107,9 @@ return array(
                         'type'    => 'Segment',
                         'options' => [
                             'route'    => '/ajax-tab/bonus/:id',
-                            'constraints' => array(
+                            'constraints' => [
                                 'id' => '[0-9]*'
-                            ),
+                            ],
                             'defaults' => [
                                 'action'        => 'bonus-tab',
                             ],
@@ -119,9 +119,9 @@ return array(
                         'type'    => 'Segment',
                         'options' => [
                             'route'    => '/ajax-tab/card/:id',
-                            'constraints' => array(
+                            'constraints' => [
                                 'id' => '[0-9]*'
-                            ),
+                            ],
                             'defaults' => [
                                 'action'        => 'card-tab',
                             ],
@@ -148,6 +148,32 @@ return array(
                             ],
                             'defaults' => [
                                 'action'        => 'contract-tab',
+                            ],
+                        ],
+                    ],
+                    'ajax-tab-notes' => [
+                        'type'    => 'Segment',
+                        'options' => [
+                            'route'    => '/ajax-tab/notes/:id',
+                            'constraints' => [
+                                'id' => '[0-9]*'
+                            ],
+                            'defaults' => [
+                                'controller' => 'CustomerNote',
+                                'action' => 'notes-tab',
+                            ],
+                        ],
+                    ],
+                    'add-note' => [
+                        'type'    => 'Segment',
+                        'options' => [
+                            'route'    => '/note/:id',
+                            'constraints' => [
+                                'id' => '[0-9]*'
+                            ],
+                            'defaults' => [
+                                'controller' => 'CustomerNote',
+                                'action'        => 'add-note',
                             ],
                         ],
                     ],
@@ -268,9 +294,9 @@ return array(
                         'type'    => 'Segment',
                         'options' => [
                             'route'    => '/edit/:plate',
-                            'constraints' => array(
+                            'constraints' => [
                                 'plate' => '[a-zA-Z0-9]*'
-                            ),
+                            ],
                             'defaults' => [
                                 '__NAMESPACE__' => 'Application\Controller',
                                 'controller'    => 'Cars',
@@ -282,9 +308,9 @@ return array(
                         'type'    => 'Segment',
                         'options' => [
                             'route'    => '/delete/:plate',
-                            'constraints' => array(
+                            'constraints' => [
                                 'plate' => '[A-Z0-9]*'
-                            ),
+                            ],
                             'defaults' => [
                                 '__NAMESPACE__' => 'Application\Controller',
                                 'controller'    => 'Cars',
@@ -296,10 +322,10 @@ return array(
                         'type'    => 'Segment',
                         'options' => [
                             'route'    => '/send-command/:plate/:command',
-                            'constraints' => array(
+                            'constraints' => [
                                 'plate' => '[a-zA-Z0-9]*',
                                 'command' => '[0-9]*'
-                            ),
+                            ],
                             'defaults' => [
                                 '__NAMESPACE__' => 'Application\Controller',
                                 'controller'    => 'Cars',
@@ -311,9 +337,9 @@ return array(
                         'type'    => 'Segment',
                         'options' => [
                             'route'    => '/ajax-tab/edit/:plate',
-                            'constraints' => array(
+                            'constraints' => [
                                 'plate' => '[a-zA-Z0-9]*',
-                            ),
+                            ],
                             'defaults' => [
                                 'action'        => 'edit-tab',
                             ],
@@ -323,9 +349,9 @@ return array(
                         'type'    => 'Segment',
                         'options' => [
                             'route'    => '/ajax-tab/commands/:plate',
-                            'constraints' => array(
+                            'constraints' => [
                                 'plate' => '[a-zA-Z0-9]*',
-                            ),
+                            ],
                             'defaults' => [
                                 'action'        => 'commands-tab',
                             ],
@@ -335,9 +361,9 @@ return array(
                         'type'    => 'Segment',
                         'options' => [
                             'route'    => '/ajax-tab/damages/:plate',
-                            'constraints' => array(
+                            'constraints' => [
                                 'plate' => '[a-zA-Z0-9]*',
-                            ),
+                            ],
                             'defaults' => [
                                 'action'        => 'damages-tab',
                             ],
@@ -647,17 +673,17 @@ return array(
                     ]
                 ]
             ]
-        ),
-    ),
-    'service_manager' => array(
-        'abstract_factories' => array(
+        ],
+    ],
+    'service_manager' => [
+        'abstract_factories' => [
             'Zend\Cache\Service\StorageCacheAbstractServiceFactory',
             'Zend\Log\LoggerAbstractServiceFactory',
-        ),
-        'aliases' => array(
+        ],
+        'aliases' => [
             'translator' => 'MvcTranslator',
             'Zend\Authentication\AuthenticationService' => 'zfcuser_auth_service'
-        ),
+        ],
         'factories' => [
             'navigation' => 'Zend\Navigation\Service\DefaultNavigationFactory',
             'CustomerForm' => 'Application\Form\CustomerFormFactory',
@@ -671,60 +697,61 @@ return array(
             'ExtraPaymentsForm' => 'Application\Form\ExtraPaymentsFormFactory',
             'EditTripForm' => 'Application\Form\EditTripFormFactory'
         ]
-    ),
+    ],
     'controllers' => [
         'invokables' => [
             'Application\Controller\Index' => 'Application\Controller\IndexController',
             'Application\Controller\Error' => 'Application\Controller\ErrorController',
         ],
         'factories' => [
-            'Application\Controller\ConsoleUser'  => 'Application\Controller\ConsoleUserControllerFactory',
-            'Application\Controller\Trips'        => 'Application\Controller\TripsControllerFactory',
-            'Application\controller\Users'        => 'Application\Controller\UsersControllerFactory',
-            'Application\Controller\Cars'         => 'Application\Controller\CarsControllerFactory',
-            'Application\Controller\Customers'    => 'Application\Controller\CustomersControllerFactory',
+            'Application\Controller\ConsoleUser' => 'Application\Controller\ConsoleUserControllerFactory',
+            'Application\Controller\Trips' => 'Application\Controller\TripsControllerFactory',
+            'Application\controller\Users' => 'Application\Controller\UsersControllerFactory',
+            'Application\Controller\Cars' => 'Application\Controller\CarsControllerFactory',
+            'Application\Controller\Customers' => 'Application\Controller\CustomersControllerFactory',
             'Application\Controller\Reservations' => 'Application\Controller\ReservationsControllerFactory',
             'Application\Controller\Invoices' => 'Application\Controller\InvoicesControllerFactory',
-            'Application\Controller\Payments' => 'Application\Controller\PaymentsControllerFactory'
+            'Application\Controller\Payments' => 'Application\Controller\PaymentsControllerFactory',
+            'Application\Controller\CustomerNote' => 'Application\Controller\CustomerNoteControllerFactory'
         ]
     ],
-    'translator'         => [
-        'locale'                    => 'it',
+    'translator' => [
+        'locale' => 'it',
         'translation_file_patterns' => [
             [
-                'type'          => 'phpArray',
-                'base_dir'      => 'vendor/zendframework/zendframework/resources/languages',
-                'pattern'       => '%s/Zend_Validate.php',
-                'text_domain'   => 'zend_validate',
+                'type' => 'phpArray',
+                'base_dir' => 'vendor/zendframework/zendframework/resources/languages',
+                'pattern' => '%s/Zend_Validate.php',
+                'text_domain' => 'zend_validate',
             ]
         ],
     ],
-    'view_manager' => array(
+    'view_manager' => [
         'display_not_found_reason' => true,
         'display_exceptions'       => true,
         'doctype'                  => 'HTML5',
         'not_found_template'       => 'error/404',
         'exception_template'       => 'error/index',
-        'template_map' => array(
+        'template_map' => [
             'layout/layout'           => __DIR__ . '/../view/layout/layout.phtml',
             'application/index/index' => __DIR__ . '/../view/application/index/index.phtml',
             'error/404'               => __DIR__ . '/../view/error/404.phtml',
             'error/index'             => __DIR__ . '/../view/error/index.phtml',
             'error/unauthorized'      => __DIR__ . '/../view/error/unauthorized.phtml',
-        ),
-        'template_path_stack' => array(
+        ],
+        'template_path_stack' => [
             __DIR__ . '/../view',
-        ),
-        'strategies' => array(
+        ],
+        'strategies' => [
             'ViewJsonStrategy',
-        ),
-    ),
+        ],
+    ],
 
-    'view_helpers'    => array(
-        'invokables' => array(
+    'view_helpers'    => [
+        'invokables' => [
             'CarStatus' => 'Application\View\Helper\CarStatus',
-        )
-    ),
+        ]
+    ],
 
     // Placeholder for console routes
     'console' => [
@@ -746,7 +773,7 @@ return array(
     ],
 
     // ACL
-    'bjyauthorize' => array(
+    'bjyauthorize' => [
         'resource_providers' => [
             'BjyAuthorize\Provider\Resource\Config' => [
                 'admin' => [],
@@ -761,8 +788,8 @@ return array(
                 ],
             ],
         ],
-        'guards' => array(
-            'BjyAuthorize\Guard\Controller' => array(
+        'guards' => [
+            'BjyAuthorize\Guard\Controller' => [
                 // Enable access to ZFC User pages
                 ['controller' => 'zfcuser', 'roles' => []],
                 ['controller' => 'Application\Controller\Error', 'roles' => []],
@@ -774,10 +801,11 @@ return array(
                 ['controller' => 'Application\Controller\Users', 'roles' => ['admin']],
                 ['controller' => 'Application\Controller\Reservations', 'roles' => ['admin']],
                 ['controller' => 'Application\Controller\Invoices', 'roles' => ['admin']],
-                ['controller' => 'Application\Controller\Payments', 'roles' => ['admin']]
-            ),
-        ),
-    ),
+                ['controller' => 'Application\Controller\Payments', 'roles' => ['admin']],
+                ['controller' => 'Application\Controller\CustomerNote', 'roles' => ['admin']]
+            ],
+        ],
+    ],
 
     // navigation
     'navigation' => [
@@ -914,4 +942,4 @@ return array(
             ],
         ]
     ]
-);
+];

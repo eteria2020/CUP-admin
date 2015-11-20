@@ -25,28 +25,28 @@ class CustomersController extends AbstractActionController
     /**
      * @var CustomersService
      */
-    private $I_customerService;
+    private $customersService;
 
     /**
      * @var CardsService
      */
-    private $I_cardsService;
+    private $cardsService;
 
     /**
      * @var
      */
-    private $I_customerForm;
+    private $customerForm;
 
     /**
      * @var
      */
-    private $I_driverForm;
+    private $driverForm;
 
 
     /**
      * @var
      */
-    private $I_settingForm;
+    private $settingForm;
 
     /**
      * @var
@@ -64,7 +64,7 @@ class CustomersController extends AbstractActionController
     private $hydrator;
 
     /** @var  PromoCodesService */
-    private $I_promoCodeService;
+    private $promoCodeService;
 
     /**
      * @var CartasiContractsService
@@ -77,29 +77,39 @@ class CustomersController extends AbstractActionController
     private $disableContractService;
 
     /**
-     * @param CustomersService $I_customerService
+     * @param CustomersService $customersService
+     * @param CardsService $cardsService
+     * @param PromoCodesService $promoCodeService
+     * @param Form $customerForm
+     * @param Form $driverForm
+     * @param Form $settingForm
+     * @param Form $promoCodeForm
+     * @param Form customerBonusForm
+     * @param HydratorInterface $hydrator
+     * @param CartasiContractsService $cartasiContractsService
+     * @param DisableContractService $disableContractService
      */
     public function __construct(
-        CustomersService $I_customerService,
-        CardsService $I_cardsService,
-        PromoCodesService $I_promoCodeService,
-        Form $I_customerForm,
-        Form $I_driverForm,
-        Form $I_settingForm,
-        Form $I_promoCodeForm,
-        Form $I_customerBonusForm,
+        CustomersService $customersService,
+        CardsService $cardsService,
+        PromoCodesService $promoCodeService,
+        Form $customerForm,
+        Form $driverForm,
+        Form $settingForm,
+        Form $promoCodeForm,
+        Form $customerBonusForm,
         HydratorInterface $hydrator,
         CartasiContractsService $cartasiContractsService,
         DisableContractService $disableContractService
     ) {
-        $this->I_customerService = $I_customerService;
-        $this->I_cardsService = $I_cardsService;
-        $this->I_promoCodeService =  $I_promoCodeService;
-        $this->I_customerForm = $I_customerForm;
-        $this->I_driverForm = $I_driverForm;
-        $this->I_settingForm = $I_settingForm;
-        $this->promoCodeForm = $I_promoCodeForm;
-        $this->customerBonusForm = $I_customerBonusForm;
+        $this->customersService = $customersService;
+        $this->cardsService = $cardsService;
+        $this->promoCodeService =  $promoCodeService;
+        $this->customerForm = $customerForm;
+        $this->driverForm = $driverForm;
+        $this->settingForm = $settingForm;
+        $this->promoCodeForm = $promoCodeForm;
+        $this->customerBonusForm = $customerBonusForm;
         $this->hydrator = $hydrator;
         $this->cartasiContractsService = $cartasiContractsService;
         $this->disableContractService = $disableContractService;
@@ -108,14 +118,14 @@ class CustomersController extends AbstractActionController
     public function listAction()
     {
         return new ViewModel([
-            'totalCustomers' => $this->I_customerService->getTotalCustomers()
+            'totalCustomers' => $this->customersService->getTotalCustomers()
         ]);
     }
 
     public function editAction()
     {
-        /** @var Customers $I_customer */
-        $I_customer = $this->getCustomer();
+        /** @var Customers $customer */
+        $customer = $this->getCustomer();
         $tab = $this->params()->fromQuery('tab', 'info');
 
         $form = null;
@@ -126,31 +136,31 @@ class CustomersController extends AbstractActionController
             switch ($postData['type']) {
 
                 case 'customer':
-                    $form = $this->I_customerForm;
-                    $postData['customer']['id'] = $I_customer->getId();
-                    $postData['customer']['name'] = $I_customer->getName();
-                    $postData['customer']['surname'] = $I_customer->getSurname();
-                    $postData['customer']['email'] = $I_customer->getEmail();
-                    $postData['customer']['taxCode'] = $I_customer->getTaxCode();
-                    $postData['customer']['birthDate'] = $I_customer->getBirthDate()->format('Y-m-d');
+                    $form = $this->customerForm;
+                    $postData['customer']['id'] = $customer->getId();
+                    $postData['customer']['name'] = $customer->getName();
+                    $postData['customer']['surname'] = $customer->getSurname();
+                    $postData['customer']['email'] = $customer->getEmail();
+                    $postData['customer']['taxCode'] = $customer->getTaxCode();
+                    $postData['customer']['birthDate'] = $customer->getBirthDate()->format('Y-m-d');
 
                     // ensure vat is not NULL but a string
                     if (is_null($postData['customer']['vat'])) {
                         $postData['customer']['birthDate'] = '';
                     }
 
-                    $this->I_customerService->setValidatorEmail($I_customer->getEmail());
-                    $this->I_customerService->setValidatorTaxCode($I_customer->getTaxCode());
+                    $this->customersService->setValidatorEmail($customer->getEmail());
+                    $this->customersService->setValidatorTaxCode($customer->getTaxCode());
                     break;
 
                 case 'driver':
-                    $form = $this->I_driverForm;
-                    $postData['driver']['id'] = $I_customer->getId();
+                    $form = $this->driverForm;
+                    $postData['driver']['id'] = $customer->getId();
                     break;
 
                 case 'setting':
-                    $form = $this->I_settingForm;
-                    $postData['setting']['id'] = $I_customer->getId();
+                    $form = $this->settingForm;
+                    $postData['setting']['id'] = $customer->getId();
                     break;
             }
 
@@ -160,19 +170,19 @@ class CustomersController extends AbstractActionController
 
                 try {
 
-                    $this->I_customerService->saveData($form->getData());
+                    $this->customersService->saveData($form->getData());
                     $this->flashMessenger()->addSuccessMessage('Modifica effettuta con successo!');
 
                 } catch (\Exception $e) {
                     $this->flashMessenger()->addErrorMessage('Si è verificato un errore applicativo. L\'assistenza tecnica è già al corrente, ci scusiamo per l\'inconveniente');
                 }
 
-                return $this->redirect()->toRoute('customers/edit', ['id' => $I_customer->getId()]);
+                return $this->redirect()->toRoute('customers/edit', ['id' => $customer->getId()]);
             }
         }
 
         return new ViewModel([
-            'customer' => $I_customer,
+            'customer' => $customer,
             'tab'      => $tab
         ]);
     }
@@ -181,33 +191,33 @@ class CustomersController extends AbstractActionController
     {
         $as_filters = $this->params()->fromPost();
         $as_filters['withLimit'] = true;
-        $as_dataDataTable = $this->I_customerService->getDataDataTable($as_filters);
-        $i_userTotal = $this->I_customerService->getTotalCustomers();
-        $i_recordsFiltered = $this->_getRecordsFiltered($as_filters, $i_userTotal);
+        $as_dataDataTable = $this->customersService->getDataDataTable($as_filters);
+        $userTotal = $this->customersService->getTotalCustomers();
+        $recordsFiltered = $this->_getRecordsFiltered($as_filters, $userTotal);
 
         return new JsonModel([
             'draw'            => $this->params()->fromQuery('sEcho', 0),
-            'recordsTotal'    => $i_userTotal,
-            'recordsFiltered' => $i_recordsFiltered,
+            'recordsTotal'    => $userTotal,
+            'recordsFiltered' => $recordsFiltered,
             'data'            => $as_dataDataTable
         ]);
     }
 
     public function infoTabAction()
     {
-        /** @var Customers $I_customer */
-        $I_customer = $this->getCustomer();
+        /** @var Customers $customer */
+        $customer = $this->getCustomer();
 
-        $form = $this->I_customerForm;
-        $formDriver = $this->I_driverForm;
-        $formSetting = $this->I_settingForm;
-        $customerData = $this->hydrator->extract($I_customer);
+        $form = $this->customerForm;
+        $formDriver = $this->driverForm;
+        $formSetting = $this->settingForm;
+        $customerData = $this->hydrator->extract($customer);
         $form->setData(['customer' => $customerData]);
         $formDriver->setData(['driver' => $customerData]);
         $formSetting->setData(['setting' => $customerData]);
 
         $view = new ViewModel([
-            'customer'     => $I_customer,
+            'customer'     => $customer,
             'customerForm' => $form,
             'driverForm'   => $formDriver,
             'settingForm'  => $formSetting
@@ -219,19 +229,19 @@ class CustomersController extends AbstractActionController
 
     public function editTabAction()
     {
-        /** @var Customers $I_customer */
-        $I_customer = $this->getCustomer();
+        /** @var Customers $customer */
+        $customer = $this->getCustomer();
 
-        $form = $this->I_customerForm;
-        $formDriver = $this->I_driverForm;
-        $formSetting = $this->I_settingForm;
-        $customerData = $this->hydrator->extract($I_customer);
+        $form = $this->customerForm;
+        $formDriver = $this->driverForm;
+        $formSetting = $this->settingForm;
+        $customerData = $this->hydrator->extract($customer);
         $form->setData(['customer' => $customerData]);
         $formDriver->setData(['driver' => $customerData]);
         $formSetting->setData(['setting' => $customerData]);
 
         $view = new ViewModel([
-            'customer'     => $I_customer,
+            'customer'     => $customer,
             'customerForm' => $form,
             'driverForm'   => $formDriver,
             'settingForm'  => $formSetting
@@ -243,12 +253,12 @@ class CustomersController extends AbstractActionController
 
     public function bonusTabAction()
     {
-        /** @var Customers $I_customer */
-        $I_customer = $this->getCustomer();
+        /** @var Customers $customer */
+        $customer = $this->getCustomer();
 
         $view = new ViewModel([
-            'customer'      => $I_customer,
-            'listBonus'     => $this->I_customerService->getAllBonus($I_customer),
+            'customer'      => $customer,
+            'listBonus'     => $this->customersService->getAllBonus($customer),
         ]);
         $view->setTerminal(true);
 
@@ -257,11 +267,11 @@ class CustomersController extends AbstractActionController
 
     public function cardTabAction()
     {
-        /** @var Customers $I_customer */
-        $I_customer = $this->getCustomer();
+        /** @var Customers $customer */
+        $customer = $this->getCustomer();
 
         $view = new ViewModel([
-            'customer'  => $I_customer,
+            'customer'  => $customer,
         ]);
         $view->setTerminal(true);
 
@@ -270,15 +280,15 @@ class CustomersController extends AbstractActionController
 
     public function removeCardAction()
     {
-        /** @var Customers $I_customer */
-        $I_customer = $this->getCustomer();
+        /** @var Customers $customer */
+        $customer = $this->getCustomer();
         $status = 'error';
 
         if ($this->getRequest()->isPost()) {
 
             try {
 
-                $this->I_customerService->removeCard($I_customer);
+                $this->customersService->removeCard($customer);
                 $status = 'success';
 
             } catch (\Exception $e) {
@@ -294,8 +304,8 @@ class CustomersController extends AbstractActionController
 
     public function assignCardAction()
     {
-        /** @var Customers $I_customer */
-        $I_customer = $this->getCustomer();
+        /** @var Customers $customer */
+        $customer = $this->getCustomer();
         $status = 'error';
 
         if ($this->getRequest()->isPost()) {
@@ -303,9 +313,9 @@ class CustomersController extends AbstractActionController
             try {
 
                 $postData = $this->getRequest()->getPost()->toArray();
-                $I_card = $this->I_cardsService->getCard($postData['code']);
+                $card = $this->cardsService->getCard($postData['code']);
 
-                $this->I_customerService->assignCard($I_customer, $I_card, true);
+                $this->customersService->assignCard($customer, $card, true);
                 $status = 'success';
 
             } catch (\Exception $e) {
@@ -322,7 +332,7 @@ class CustomersController extends AbstractActionController
     public function ajaxCardCodeAutocompleteAction()
     {
         $query = $this->params()->fromQuery('query', '');
-        return new JsonModel($this->I_cardsService->ajaxCardCodeAutocomplete($query));
+        return new JsonModel($this->cardsService->ajaxCardCodeAutocomplete($query));
     }
 
     public function contractTabAction()
@@ -358,7 +368,7 @@ class CustomersController extends AbstractActionController
 
     public function assignPromoCodeAction()
     {
-        $I_customer = $this->getCustomer();
+        $customer = $this->getCustomer();
         $form = $this->promoCodeForm;
 
         if ($this->getRequest()->isPost()) {
@@ -370,9 +380,9 @@ class CustomersController extends AbstractActionController
                 try {
 
                     /** @var PromoCodes $promoCode */
-                    $promoCode = $this->I_promoCodeService->getPromoCode($postData['promocode']['promocode']);
+                    $promoCode = $this->promoCodeService->getPromoCode($postData['promocode']['promocode']);
 
-                    $this->I_customerService->addBonusFromPromoCode($I_customer, $promoCode);
+                    $this->customersService->addBonusFromPromoCode($customer, $promoCode);
 
                     $this->flashMessenger()->addSuccessMessage('Operazione completata con successo!');
 
@@ -384,24 +394,24 @@ class CustomersController extends AbstractActionController
 
                     $this->flashMessenger()->addErrorMessage('Si è verificato un errore applicativo. L\'assistenza tecnica è già al corrente, ci scusiamo per l\'inconveniente');
 
-                    return $this->redirect()->toRoute('customers/assign-promo-code', ['id' => $I_customer->getId()]);
+                    return $this->redirect()->toRoute('customers/assign-promo-code', ['id' => $customer->getId()]);
 
                 }
 
-                return $this->redirect()->toRoute('customers/edit', ['id' => $I_customer->getId()], ['query' => ['tab' => 'bonus']]);
+                return $this->redirect()->toRoute('customers/edit', ['id' => $customer->getId()], ['query' => ['tab' => 'bonus']]);
             }
         }
 
         return new ViewModel([
-            'customer' => $I_customer,
+            'customer' => $customer,
             'promoCodeForm' => $form
         ]);
     }
 
     public function addBonusAction()
     {
-        /** @var Customers $I_customer */
-        $I_customer = $this->getCustomer();
+        /** @var Customers $customer */
+        $customer = $this->getCustomer();
         $form = $this->customerBonusForm;
 
         if ($this->getRequest()->isPost()) {
@@ -412,7 +422,7 @@ class CustomersController extends AbstractActionController
 
                 try {
 
-                    $this->I_customerService->addBonusFromWebUser($I_customer, $form->getData());
+                    $this->customersService->addBonusFromWebUser($customer, $form->getData());
 
                     $this->flashMessenger()->addSuccessMessage('Operazione completata con successo!');
 
@@ -420,16 +430,16 @@ class CustomersController extends AbstractActionController
 
                     $this->flashMessenger()->addErrorMessage('Si è verificato un errore applicativo. L\'assistenza tecnica è già al corrente, ci scusiamo per l\'inconveniente');
 
-                    return $this->redirect()->toRoute('customers/add-bonus', ['id' => $I_customer->getId()]);
+                    return $this->redirect()->toRoute('customers/add-bonus', ['id' => $customer->getId()]);
 
                 }
 
-                return $this->redirect()->toRoute('customers/edit', ['id' => $I_customer->getId()], ['query' => ['tab' => 'bonus']]);
+                return $this->redirect()->toRoute('customers/edit', ['id' => $customer->getId()], ['query' => ['tab' => 'bonus']]);
             }
         }
 
         return new ViewModel([
-            'customer' => $I_customer,
+            'customer' => $customer,
             'promoCodeForm' => $form
         ]);
     }
@@ -442,9 +452,9 @@ class CustomersController extends AbstractActionController
             try {
 
                 $postData = $this->getRequest()->getPost()->toArray();
-                $I_bonus = $this->I_customerService->findBonus($postData['bonus']);
+                $bonus = $this->customersService->findBonus($postData['bonus']);
 
-                if ($this->I_customerService->removeBonus($I_bonus)) {
+                if ($this->customersService->removeBonus($bonus)) {
                     $status = 'success';
                 }
 
@@ -459,17 +469,17 @@ class CustomersController extends AbstractActionController
         ]);
     }
 
-    protected function _getRecordsFiltered($as_filters, $i_totalCustomer)
+    protected function _getRecordsFiltered($as_filters, $totalCustomer)
     {
         if (empty($as_filters['searchValue'])) {
 
-            return $i_totalCustomer;
+            return $totalCustomer;
 
         } else {
 
             $as_filters['withLimit'] = false;
 
-            return count($this->I_customerService->getDataDataTable($as_filters));
+            return count($this->customersService->getDataDataTable($as_filters));
         }
     }
 
@@ -477,16 +487,15 @@ class CustomersController extends AbstractActionController
     {
         $id = $this->params()->fromRoute('id', 0);
 
-        /** @var Customers $I_customer */
-        $I_customer = $this->I_customerService->findById($id);
+        $customer = $this->customersService->findById($id);
 
-        if (is_null($I_customer)) {
+        if (is_null($customer)) {
             $this->getResponse()->setStatusCode(Response::STATUS_CODE_404);
 
             throw new CustomerNotFoundException();
         }
 
-        return $I_customer;
+        return $customer;
     }
 
     public function invoicesTabAction()
@@ -508,7 +517,7 @@ class CustomersController extends AbstractActionController
         $sendMail = $this->params()->fromPost('sendMail');
 
         try {
-            $this->I_customerService->enableCustomer($customer, $sendMail);
+            $this->customersService->enableCustomer($customer, $sendMail);
 
             $this->flashMessenger()->addSuccessMessage('Utente riabilitato con successo!');
         } catch (\Exception $e) {
