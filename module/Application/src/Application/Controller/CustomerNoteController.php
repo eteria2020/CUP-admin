@@ -58,8 +58,7 @@ class CustomerNoteController extends AbstractActionController
         if ($this->getRequest()->isPost()) {
             try {
                 $postData = $this->getRequest()->getPost()->toArray();
-                $content = strip_tags($postData['new-note']);
-                $this->customerNoteService->verifyContent($content);
+                $content = $postData['new-note'];
                 $this->customerNoteService->addNote($customer, $this->identity(), $content);
                 $this->flashMessenger()->addSuccessMessage('Nota aggiunta con successo');
             } catch (NoteContentNotValidException $e) {
