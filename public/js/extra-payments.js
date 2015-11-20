@@ -1,4 +1,5 @@
-var currentType = $("#type option:selected").text();
+var currentType;
+setCurrentPaymentType();
 var paymentContainerClass = "sng-payment-row";
 
 /**
@@ -94,30 +95,24 @@ function checkAndFormatFields(customerId, fleetId, type, reasons, amounts)
         return false;
     }
 
-    // Ensure that at least one valid entry is submitted before ignoring empty
-    // payment blocks
-    var hasOneValidEntry = false;
     // Check all payment blocks for errors or omissions
     for (var i = 0; i < reasons.length; i++) {
         var reason = reasons[i];
         var amount = amounts[i];
-        if (!hasOneValidEntry || reason.length !== 0 || amount.length !== 0) {
-            if (reason.length === 0) {
-                alert('Inserire una causale valida');
-                return false;
-            }
-            amount = amount.replace(",", ".");
-            amount = parseFloat(amount);
-            amount = Math.floor(amount * 100);
-            if (!amount || amount < 0) {
-                alert('Inserire un importo valido in euro');
-                return false;
-            } else {
-                // If the amount is valid, sobstitute the formatted value in the
-                // array
-                amounts[i] = amount;
-            }
-            hasOneValidEntry = true;
+        if (reason.length === 0) {
+            alert('Inserire una causale valida');
+            return false;
+        }
+        amount = amount.replace(",", ".");
+        amount = parseFloat(amount);
+        amount = Math.floor(amount * 100);
+        if (!amount || amount < 0) {
+            alert('Inserire un importo valido in euro');
+            return false;
+        } else {
+            // If the amount is valid, sobstitute the formatted value in the
+            // array
+            amounts[i] = amount;
         }
     }
 
@@ -202,7 +197,6 @@ function clearFields() {
 function addPaymentRow(isPenalty)
 {
     var blockNumber = getNextBlockNumber();
-
     var removeButton = "<button id=\"remove-button" + blockNumber + "\" class=\"sng-close-payment\"><i class=\"fa fa-close\"></i></button>";
 
     // This is the html that corresponds to the penalty selector.
@@ -308,7 +302,7 @@ function removePaymentBlocks()
 function toggleFleetOptionNull(on)
 {
     if (on) {
-        $("#fleet").prepend("<option value='' selected='selected'>---</option>");
+        $("#fleet").prepend("<option id='fleet-option-null' value='' selected='selected'>---</option>");
     } else {
         $("#fleet-option-null").remove();
     }
@@ -322,7 +316,8 @@ function toggleFleetOptionNull(on)
 function toggleTypeOptionNull(on)
 {
     if (on) {
-        $("#type").prepend("<option value='' selected='selected'>---</option>");
+        $("#type").prepend("<option id='type-option-null' value='' selected='selected'>---</option>");
+        setCurrentPaymentType();
     } else {
         $("#type-option-null").remove();
     }
@@ -340,4 +335,9 @@ function toggleAddPaymentButton(on)
     } else {
         $('#js-add-row').hide();
     }
+}
+
+function setCurrentPaymentType()
+{
+    currentType = $("#type option:selected").text();
 }

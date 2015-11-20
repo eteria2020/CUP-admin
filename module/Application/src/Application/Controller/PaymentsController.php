@@ -267,8 +267,9 @@ class PaymentsController extends AbstractActionController
                 $fleet,
                 $response->getTransaction(),
                 $amount,
-                $paymentType,
-                $reason
+                $type,
+                $reasons,
+                $amounts
             );
 
             return new JsonModel([
