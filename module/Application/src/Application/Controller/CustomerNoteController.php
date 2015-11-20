@@ -3,6 +3,7 @@ namespace Application\Controller;
 
 use SharengoCore\Service\CustomerNoteService;
 use SharengoCore\Service\CustomersService;
+use SharengoCore\Exception\NoteContentNotValidException;
 
 use Zend\Http\Response;
 use Zend\Mvc\Controller\AbstractActionController;
@@ -53,14 +54,17 @@ class CustomerNoteController extends AbstractActionController
     {
         $id = $this->params()->fromRoute('id', 0);
         $customer = $this->customersService->findById($id);
-        $status = 'error';
 
         if ($this->getRequest()->isPost()) {
             try {
                 $postData = $this->getRequest()->getPost()->toArray();
-                $this->customerNoteService->addNote($customer, $this->identity(), $postData['new-note']);
+                $content = strip_tags($postData['new-note']);
+                $this->customerNoteService->verifyContent($content);
+                $this->customerNoteService->addNote($customer, $this->identity(), $content);
                 $this->flashMessenger()->addSuccessMessage('Nota aggiunta con successo');
-                $status = 'ok';
+            } catch (NoteContentNotValidException $e) {
+                $this->getResponse()->setStatusCode(Response::STATUS_CODE_500);
+                $this->flashMessenger()->addErrorMessage($e->getMessage());
             } catch (\Exception $e) {
                 $this->getResponse()->setStatusCode(Response::STATUS_CODE_500);
                 $this->flashMessenger()->addErrorMessage('Errore nell\'inserimento della nota');
