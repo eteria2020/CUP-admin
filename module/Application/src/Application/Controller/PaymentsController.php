@@ -276,6 +276,7 @@ class PaymentsController extends AbstractActionController
         return new ViewModel([
             'months' => $months,
             'selectedMonth' => $date,
+            'isLastMonth' => $date == $months[0]['date'],
             'fleets' => $fleets,
             'daily' => $dailyIncome,
             'weekly' => $weeklyIncome,

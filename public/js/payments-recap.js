@@ -26,6 +26,9 @@ function highlightLastRows()
 {
     var tableBodies = document.getElementsByTagName('tbody');
     for(var i = tableBodies.length - 1; i >= 0; i--) {
+        if (tableBodies[i].id == "daily-body" && !isLastMonth) {
+            continue;
+        }
         var rows = tableBodies[i].getElementsByTagName('tr');
         var lastRow = rows[rows.length - 1];
         var elements = lastRow.getElementsByTagName('td');
