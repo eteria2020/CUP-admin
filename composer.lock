@@ -5,7 +5,6 @@
         "This file is @generated automatically"
     ],
     "hash": "7c371becb0fea1618f27602ec908e3a6",
-    "content-hash": "a7bcc0e728d3aae09316b4a2eca8ff83",
     "packages": [
         {
             "name": "bjyoungblood/bjy-authorize",
@@ -82,12 +81,12 @@
             "version": "0.0.1",
             "source": {
                 "type": "git",
-                "url": "https://github.com/djlambert/doctrine2-spatial.git",
+                "url": "https://github.com/creof/doctrine2-spatial.git",
                 "reference": "be4ee9aeadb7c886caab2c07ab5b1f13c8b9999e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/djlambert/doctrine2-spatial/zipball/be4ee9aeadb7c886caab2c07ab5b1f13c8b9999e",
+                "url": "https://api.github.com/repos/creof/doctrine2-spatial/zipball/be4ee9aeadb7c886caab2c07ab5b1f13c8b9999e",
                 "reference": "be4ee9aeadb7c886caab2c07ab5b1f13c8b9999e",
                 "shasum": ""
             },
@@ -1274,7 +1273,7 @@
             "source": {
                 "type": "git",
                 "url": "ssh://git@git.mvlabs.it:4222/clients/sharengo-cartasi.git",
-                "reference": "d28e4c7b937f8f8f4094342b3bf4a1f6f8717f2d"
+                "reference": "9b29ebef74fd7bfa0a38df429e4613d898dd0195"
             },
             "require": {
                 "doctrine/doctrine-orm-module": "0.*",
@@ -1288,7 +1287,7 @@
                 }
             },
             "description": "Cartasi module for Sharengo",
-            "time": "2015-10-19 10:43:20"
+            "time": "2015-11-13 09:38:31"
         },
         {
             "name": "mvlabs/sharengo-coremodule",
@@ -1296,7 +1295,7 @@
             "source": {
                 "type": "git",
                 "url": "ssh://git@git.mvlabs.it:4222/clients/sharengo-coremodule.git",
-                "reference": "c0a5018528ed4e53580cf08e7ccfc3eebee3e040"
+                "reference": "4d59c60a83f50059496b12323c2b05e40b82185a"
             },
             "require": {
                 "doctrine/doctrine-orm-module": "0.*",
@@ -1317,7 +1316,7 @@
                 }
             },
             "description": "Core ZF2 module for Sharengo apps",
-            "time": "2015-10-13 10:45:07"
+            "time": "2015-11-20 10:07:23"
         },
         {
             "name": "rwoverdijk/assetmanager",

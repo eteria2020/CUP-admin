@@ -21,3 +21,15 @@
 .sng-hint {
     font-size: 12px;
 }
+.sng-margin-top {
+    margin-top: 10px;
+}
+.sng-date-column {
+    width: 130px;
+}
+.sng-last-row {
+    background-color: #FFEE99 !important;
+}
+.sng-full-width {
+    width: 100%;
+}

@@ -12,6 +12,7 @@ use Cartasi\Service\CartasiCustomerPayments;
 use SharengoCore\Service\PenaltiesService;
 use SharengoCore\Exception\FleetNotFoundException;
 use SharengoCore\Service\FleetService;
+use SharengoCore\Service\RecapService;
 
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\JsonModel;
@@ -64,6 +65,11 @@ class PaymentsController extends AbstractActionController
      */
     private $fleetService;
 
+    /**
+     * @var RecapService
+     */
+    private $recapService;
+
     public function __construct(
         TripPaymentsService $tripPaymentsService,
         PaymentsService $paymentsService,
@@ -73,7 +79,8 @@ class PaymentsController extends AbstractActionController
         CartasiCustomerPayments $cartasiCustomerPayments,
         ExtraPaymentsService $extraPaymentsService,
         PenaltiesService $penaltiesService,
-        FleetService $fleetService
+        FleetService $fleetService,
+        RecapService $recapService
     ) {
         $this->tripPaymentsService = $tripPaymentsService;
         $this->paymentsService = $paymentsService;
@@ -84,6 +91,7 @@ class PaymentsController extends AbstractActionController
         $this->extraPaymentsService = $extraPaymentsService;
         $this->penaltiesService = $penaltiesService;
         $this->fleetService = $fleetService;
+        $this->recapService = $recapService;
     }
 
     public function failedPaymentsAction()
@@ -144,11 +152,13 @@ class PaymentsController extends AbstractActionController
     {
         $id = (int)$this->params()->fromRoute('id', 0);
 
+        $webuser = $this->identity();
+
         $tripPayment = $this->tripPaymentsService->getTripPaymentById($id);
 
         if ($tripPayment->isWrongPayment()) {
             // the second parameter is needed to avoid sending an email to the customer
-            $cartasiResponse = $this->paymentsService->tryTripPayment($tripPayment, true, false, false, true);
+            $cartasiResponse = $this->paymentsService->tryTripPayment($tripPayment, $webuser, true, false, false, true);
 
             if ($cartasiResponse->getOutcome() === 'OK') {
                 $this->customersService->setCustomerPaymentAble($tripPayment->getCustomer());
@@ -224,6 +234,7 @@ class PaymentsController extends AbstractActionController
             $extraPayment = $this->extraPaymentsService->registerExtraPayment(
                 $customer,
                 $fleet,
+                $response->getTransaction(),
                 $amount,
                 $paymentType,
                 $reason
@@ -238,5 +249,37 @@ class PaymentsController extends AbstractActionController
                 'error' => 'C\'è stato un errore durante la procedura di pagamento: ' . $e->getMessage()
             ]);
         }
+    }
+
+    public function recapAction()
+    {
+        // Get months
+        $months = $this->recapService->getAvailableMonths();
+
+        // Get the selected month or default to last available
+        $date = '';
+        if (is_null($this->params()->fromQuery('date'))) {
+            $date = $months[0]['date'];
+        } else {
+            $date = $this->params()->fromQuery('date');
+        }
+
+        // Get all fleets
+        $fleets = $this->fleetService->getAllFleets();
+        // Get income for each day of the selected month
+        $dailyIncome = $this->recapService->getDailyIncomeForMonth($date);
+        // Get income for last 4 weeks
+        $weeklyIncome = $this->recapService->getWeeklyIncome();
+        // Get income for last 12 months
+        $monthlyIncome = $this->recapService->getMonthlyIncome();
+
+        return new ViewModel([
+            'months' => $months,
+            'selectedMonth' => $date,
+            'fleets' => $fleets,
+            'daily' => $dailyIncome,
+            'weekly' => $weeklyIncome,
+            'monthly' => $monthlyIncome
+        ]);
     }
 }

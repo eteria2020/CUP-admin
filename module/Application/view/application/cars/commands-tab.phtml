@@ -1,0 +1,17 @@
+<h4>Esegui comandi sull'auto</h4>
+
+<?php echo $this->partial('partials/flash-messages.phtml', []); ?>
+
+<div class="btn-group">
+    <button type="button" class="btn btn-default">Seleziona...</button>
+    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown"><i class="fa fa-angle-down"></i></button>
+    <ul class="dropdown-menu" role="menu">
+        <?php foreach($this->commands as $key => $command): ?>
+            <li>
+                <a href="<?= $this->url('cars/send-command', ['plate' => $this->car->getPlate(), 'command' => $key]); ?>" onclick="return confirm('Sei sicuro di voler eseguire questo comando?')">
+                    <?= $command; ?>
+                </a>
+            </li>
+        <?php endforeach; ?>
+    </ul>
+</div>

@@ -1,0 +1,161 @@
+<?php
+
+setlocale(LC_TIME, 'it_IT.UTF-8');
+$daily = $this->daily;
+
+?>
+
+<div class="page-content-wrapper">
+    <div class="page-content">
+
+        <!-- Title -->
+        <h3 class="page-title">COMPETENZE</h3>
+
+        <!-- BEGIN tabs container -->
+        <div class="portlet-body">
+            <div class="row-fluid">
+                <div class="span6">
+
+                    <!-- BEGIN tabs -->
+                    <div class="tabbable tabbable-custom">
+
+                        <!-- BEGIN tabs headers -->
+                        <ul class="nav nav-tabs">
+                            <li class="active"><a href="#tab_1_1" data-toggle="tab">Riepilogo giornaliero</a></li>
+                            <li><a href="#tab_1_2" data-toggle="tab">Riepilogo settimanale</a></li>
+                            <li><a href="#tab_1_3" data-toggle="tab">Riepilogo mensile</a></li>
+                        </ul>
+                        <!-- END tabs headers -->
+
+                        <div class="tab-content">
+
+                            <!-- BEGIN daily tab -->
+                            <div class="tab-pane active" id="tab_1_1">
+                                <select id="month-selector">
+                                    <?php foreach($this->months as $month): ?>
+                                        <option value="<?= $month['date'] ?>"><?= $month['date'] ?></option>
+                                    <?php endforeach; ?>
+                                </select>
+
+                                <table class="table table-striped table-bordered table-hover sng-margin-top">
+                                    <thead>
+                                        <tr>
+                                            <th class="sng-date-column">Data</th>
+                                            <?php foreach($this->fleets as $fleet): ?>
+                                            <th><?= $fleet->getName() ?></th>
+                                            <?php endforeach; ?>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <?php foreach($daily as $day => $amounts): ?>
+                                            <tr>
+                                                <td><?= $day ?></td>
+                                                <?php
+                                                foreach($this->fleets as $fleet) {
+                                                    $entry = 'n.d.';
+                                                    if (array_key_exists($fleet->getName(), $amounts)) {
+                                                        $entry = sprintf('%.2f €', $amounts[$fleet->getName()] / 100);
+                                                    }
+                                                    echo '<td class="sng-dt-right">' . $entry . "</td>";
+                                                }
+                                                ?>
+                                            </tr>
+                                        <?php endforeach; ?>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <!-- END daily tab -->
+
+                            <!-- BEGIN weekly tab -->
+                            <div class="tab-pane" id="tab_1_2">
+                                <table class="table table-striped table-bordered table-hover sng-margin-top">
+                                    <thead>
+                                        <tr>
+                                            <th class="sng-date-column">Data</th>
+                                            <?php foreach($this->fleets as $fleet): ?>
+                                            <th><?= $fleet->getName() ?></th>
+                                            <?php endforeach; ?>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <?php foreach($weekly as $week => $amounts): ?>
+                                            <tr>
+                                                <?php
+                                                $interval = new \DateInterval('P7D');
+                                                $weekStart = date_create(substr($week, 0, 5) . "W" . substr($week, 5, 2));
+                                                $weekEnd = clone($weekStart);
+                                                $weekEnd->add($interval);
+                                                echo "<td>" . strftime("%d %b", $weekStart->getTimestamp()) . " - " . strftime("%d %b", $weekEnd->getTimestamp()) . "</td>";
+
+                                                foreach($this->fleets as $fleet) {
+                                                    $entry = 'n.d.';
+                                                    if (array_key_exists($fleet->getName(), $amounts)) {
+                                                        $entry = sprintf('%.2f €', $amounts[$fleet->getName()] / 100);
+                                                    }
+                                                    echo '<td class="sng-dt-right">' . $entry . "</td>";
+                                                }
+                                                ?>
+                                            </tr>
+                                        <?php endforeach;?>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <!-- END weekly tab -->
+
+                            <!-- BEGIN monthly tab -->
+                            <div class="tab-pane" id="tab_1_3">
+                                <table class="table table-striped table-bordered table-hover sng-margin-top">
+                                    <thead>
+                                        <tr>
+                                            <th class="sng-date-column">Data</th>
+                                            <?php foreach($this->fleets as $fleet): ?>
+                                            <th><?= $fleet->getName() ?></th>
+                                            <?php endforeach; ?>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <?php
+                                        foreach($monthly as $month => $amounts):
+                                            $month = date_create_from_format("Y-m", $month);
+                                            $month = strftime("%B %G", $month->getTimestamp());
+                                        ?>
+                                            <tr>
+                                                <td><?= $month ?></td>
+                                                <?php
+                                                foreach($this->fleets as $fleet) {
+                                                    $entry = 'n.d.';
+                                                    if (array_key_exists($fleet->getName(), $amounts)) {
+                                                        $entry = sprintf('%.2f €', $amounts[$fleet->getName()] / 100);
+                                                    }
+                                                    echo '<td class="sng-dt-right">' . $entry . "</td>";
+                                                }
+                                                ?>
+                                            </tr>
+                                        <?php endforeach; ?>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <!-- END monthly tab -->
+
+                        </div>
+                    </div>
+                    <!-- END tabs -->
+                </div>
+
+            </div>
+        </div>
+        <!-- END tabs container -->
+
+    </div>
+</div>
+
+<?php
+setlocale(LC_TIME, 'en_EN.UTF-8');
+?>
+
+<!-- JavaScript -->
+<script type="text/javascript">
+var reloadUrl = "<?= $this->url('payments/recap'); ?>";
+var selectedMonth = "<?= $this->selectedMonth ?>";
+</script>
+<script type="text/javascript" src="<?= $this->basePath(); ?>/js/payments-recap.js"></script>
