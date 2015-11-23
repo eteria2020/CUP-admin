@@ -44,7 +44,6 @@ angular.module('SharengoCsApp').controller('SharengoCsController', function (
         prenotate: true,
         h24: true,
         manut: true,
-        nonoper: true,
         inuso: true,
         nobatt: true,
         no3g: true,
@@ -58,7 +57,6 @@ angular.module('SharengoCsApp').controller('SharengoCsController', function (
         prenotate: 0,
         h24: 0,
         manut: 0,
-        nonoper: 0,
         inuso: 0,
         nobatt: 0,
         no3g:0,
@@ -195,72 +193,69 @@ angular.module('SharengoCsApp').controller('SharengoCsController', function (
                 carCharging = '-charging';
                 car.options.labelClass='marker_labels';
                 //car.options.labelAnchor='12 32';
-                if(car.charging){
-                    car.options.labelContent=car.battery+'% <i class="fa fa-plug"></i>';
-                    car.options.charging = true;
-                    $scope.markerCounters['ricarica'] +=1;
-                }else{
-                    car.options.labelContent=car.battery+'%';
-                    car.options.charging = false;
-                }
+
+                car.options.labelContent=car.battery+'%';
+                car.options.charging = false;
      
                 car.carIcon = JSON.parse(JSON.stringify(markerIcon)); // fast clone
                 car.iconSelected = car.carIcon;
 
-                if(car.sinceLastTrip && car.sinceLastTrip>1440){
-                    car.carIcon['fillColor'] = $scope.markerColors['azzure'];
-                    car.options.group = 'h24';
-                    car.iconSelected = car.carIcon;
-                }else{
-                    car.carIcon['fillColor'] = $scope.markerColors['green'];
-                    car.options.group = 'libere';
-                    car.iconSelected = car.carIcon;
-                }
-                var date = car.lastContact?new Date(car.lastContact.date).getTime():null;
-                var now
+                var date = car.lastContact?new Date(car.lastContact.date).getTime()/1000:null;
+                var now  = new Date().getTime()/1000;
 
-                if(car.status!='operative'){
-                    if(car.status=='maintenance'){
-                        car.carIcon['fillColor'] = $scope.markerColors['red'];
-                        car.options.group = 'manut';
-                        car.iconSelected = car.carIcon;
-                    }else{
-                        if(car.battery<20){
-                            car.options.labelContent=car.battery+'% <i class="fa fa-battery-half"></i>';
-                            car.carIcon['fillColor'] = $scope.markerColors['brown'];
-                            car.options.group = 'nobatt';
-                            car.iconSelected = car.carIcon;
-                        }else if(car.gps_ok == false){
-                            car.options.labelContent=car.battery+'% <span class="txt-label">GPS</span>';
-                            car.carIcon['fillColor'] = $scope.markerColors['brown'];
-                            car.options.group = 'nobatt';
-                            car.iconSelected = car.carIcon;
-                        }else if(!car.lastContact || car.lastContact.date>(now+3600)){
-                            car.options.labelContent=car.battery+'% <span class="txt-label">3G</span>';
-                            car.carIcon['fillColor'] = $scope.markerColors['brown'];
-                            car.options.group = 'no3g';
-                            car.iconSelected = car.carIcon;
-                        }else{
-                            car.carIcon['fillColor'] = $scope.markerColors['orange'];
-                            car.options.group = 'nonoper';
-                            car.iconSelected = car.carIcon;                            
-                        }
-                    }
-                }else if(car.busy){
-                    car.carIcon['fillColor'] = $scope.markerColors['yellow'];
-                    car.options.group = 'inuso';
-                    car.iconSelected = car.carIcon;
-                    
+                if(car.status=='maintenance'){
+                    car.carIcon['fillColor'] = $scope.markerColors['red'];
+                    car.options.group = 'manut';
+                    car.iconSelected = car.carIcon;  
                 }else if(car.reservation){
                     car.carIcon['fillColor'] = $scope.markerColors['black'];
                     car.options.group = 'prenotate';
                     car.iconSelected = car.carIcon;
-                }
-                if(car.extCleanliness=='dirty' || car.intCleanliness=='dirty'){
-                    car.carIcon['fillColor'] = $scope.markerColors['purple'];
-                    car.options.group = 'sporche';
+                }else if(car.busy){
+                    car.carIcon['fillColor'] = $scope.markerColors['yellow'];
+                    car.options.group = 'inuso';
                     car.iconSelected = car.carIcon;
-                }   
+                }else if(car.status!='operative'){
+                    if(date === null || now>(date+3600)){
+                        car.options.labelContent=car.battery+'% <span class="txt-label">3G</span>';
+                        car.carIcon['fillColor'] = $scope.markerColors['brown'];
+                        car.options.group = 'no3g';
+                        car.iconSelected = car.carIcon;
+                    }else if(car.gps_ok == false){
+                        car.options.labelContent=car.battery+'% <span class="txt-label">GPS</span>';
+                        car.carIcon['fillColor'] = $scope.markerColors['brown'];
+                        car.options.group = 'nogps';
+                        car.iconSelected = car.carIcon;
+                    }else if(car.charging){
+                        car.options.labelContent=car.battery+'% <i class="fa fa-plug"></i>';
+                        car.options.charging = true;
+                        car.carIcon['fillColor'] = $scope.markerColors['white'];
+                        car.options.group = 'ricarica';
+                        car.iconSelected = car.carIcon;
+                        car.options.labelClass += ' invert-color';
+                    }else if(car.battery<20){
+                        car.options.labelContent=car.battery+'% <i class="fa fa-battery-half"></i>';
+                        car.carIcon['fillColor'] = $scope.markerColors['brown'];
+                        car.options.group = 'nobatt';
+                        car.iconSelected = car.carIcon;
+                    }else{
+                        console.log('nooper',car.plate);
+                    }
+                }else {
+                    if(car.sinceLastTrip && car.sinceLastTrip>1440){
+                        car.carIcon['fillColor'] = $scope.markerColors['azzure'];
+                        car.options.group = 'h24';
+                        car.iconSelected = car.carIcon;
+                    }else if(car.extCleanliness=='dirty' || car.intCleanliness=='dirty'){
+                        car.carIcon['fillColor'] = $scope.markerColors['purple'];
+                        car.options.group = 'sporche';
+                        car.iconSelected = car.carIcon;
+                    } else{
+                        car.carIcon['fillColor'] = $scope.markerColors['green'];
+                        car.options.group = 'libere';
+                        car.iconSelected = car.carIcon;
+                    }
+                }
                 $scope.markerCounters[car.options.group] +=1;
             });
             $scope.cars = cars;
@@ -273,9 +268,9 @@ angular.module('SharengoCsApp').controller('SharengoCsController', function (
                     if ($scope.markerFilters[carl.options.group]) {
                         toSet = true;
                     }
-                    if ($scope.markerFilters['ricarica'] && carl.options.charging) {
+                /*    if ($scope.markerFilters['ricarica'] && carl.options.charging) {
                         toSet = true;
-                    }
+                    }*/
                     carl.options.visible = toSet;
                     
                 });
@@ -621,7 +616,7 @@ angular.module('SharengoCsApp').controller('SharengoCsController', function (
             $scope.cars.forEach(function (car) {
                 if(mapBounds.contains(new google.maps.LatLng(car.latitude, car.longitude))){
                     $scope.markerCounters[car.options.group] += 1;
-                    if(car.options.charging) $scope.markerCounters['ricarica'] += 1;
+                 //   if(car.options.charging) $scope.markerCounters['ricarica'] += 1;
                 }
             });   
         }
