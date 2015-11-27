@@ -670,6 +670,15 @@ return [
                                 'action' => 'recap'
                             ]
                         ]
+                    ],
+                    'fares' => [
+                        'type' => 'Segment',
+                        'options' => [
+                            'route' => '/fares',
+                            'defaults' => [
+                                'action' => 'fares'
+                            ]
+                        ]
                     ]
                 ]
             ]
@@ -695,6 +704,7 @@ return [
             'CustomerBonusForm' => 'Application\Form\CustomerBonusFormFactory',
             'TripCostForm' => 'Application\Form\TripCostFormFactory',
             'ExtraPaymentsForm' => 'Application\Form\ExtraPaymentsFormFactory',
+            'FaresForm' => 'Application\Form\FaresFormFactory',
             'EditTripForm' => 'Application\Form\EditTripFormFactory'
         ]
     ],
@@ -930,7 +940,12 @@ return [
                         'label' => 'Competenze',
                         'route' => 'payments/recap',
                         'isVisible' => true
-                    ]
+                    ],
+                    [
+                        'label' => 'Tariffe',
+                        'route' => 'payments/fares',
+                        'isVisible' => true
+                    ],
                 ]
             ],
             [
