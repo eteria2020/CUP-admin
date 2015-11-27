@@ -56,3 +56,9 @@
     border-width: 0;
     padding: 5px;
 }
+.sng-move-right {
+    float: right;
+}
+.sng-margin-bottom {
+    margin-bottom: 10px;
+}

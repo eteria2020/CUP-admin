@@ -51,7 +51,7 @@ return [
                                 'id' => '[0-9]*'
                             ],
                             'defaults' => [
-                                'action'        => 'edit',
+                                'action' => 'edit',
                             ],
                         ],
                     ],
@@ -99,7 +99,34 @@ return [
                                 'id' => '[0-9]*'
                             ],
                             'defaults' => [
+                                'controller' => 'CustomersEdit',
                                 'action'        => 'edit-tab',
+                            ],
+                        ],
+                    ],
+                    'deactivate' => [
+                        'type' => 'Segment',
+                        'options' => [
+                            'route' => '/deactivate/:id',
+                            'constraints' => [
+                                'id' => '[0-9]*'
+                            ],
+                            'defaults' => [
+                                'controller' => 'CustomersEdit',
+                                'action' => 'deactivate',
+                            ],
+                        ],
+                    ],
+                    'edit-deactivation' => [
+                        'type' => 'Segment',
+                        'options' => [
+                            'route' => '/edit/deactivation/:id',
+                            'constraints' => [
+                                'id' => '[0-9]*'
+                            ],
+                            'defaults' => [
+                                'controller' => 'CustomersEdit',
+                                'action' => 'edit-deactivation',
                             ],
                         ],
                     ],
@@ -890,7 +917,8 @@ return [
             'Application\Controller\CustomerNote' => 'Application\Controller\CustomerNoteControllerFactory',
             'Application\Controller\Configurations' => 'Application\Controller\ConfigurationsControllerFactory',
             'Application\Controller\Pois' => 'Application\Controller\PoisControllerFactory',
-            'Application\Controller\Zones' => 'Application\Controller\ZonesControllerFactory'
+            'Application\Controller\Zones' => 'Application\Controller\ZonesControllerFactory',
+            'Application\Controller\CustomersEdit' => 'Application\Controller\CustomersEditControllerFactory'
         ]
     ],
     'input_filters' => [
@@ -992,6 +1020,7 @@ return [
                 ['controller' => 'Application\Controller\Configurations', 'roles' => ['admin']],
                 ['controller' => 'Application\Controller\Pois', 'roles' => ['superadmin']],
                 ['controller' => 'Application\Controller\Zones', 'roles' => ['superadmin']],
+                ['controller' => 'Application\Controller\CustomersEdit', 'roles' => ['admin']]
             ],
         ],
     ],

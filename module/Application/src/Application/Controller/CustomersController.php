@@ -227,30 +227,6 @@ class CustomersController extends AbstractActionController
         return $view;
     }
 
-    public function editTabAction()
-    {
-        /** @var Customers $customer */
-        $customer = $this->getCustomer();
-
-        $form = $this->customerForm;
-        $formDriver = $this->driverForm;
-        $formSetting = $this->settingForm;
-        $customerData = $this->hydrator->extract($customer);
-        $form->setData(['customer' => $customerData]);
-        $formDriver->setData(['driver' => $customerData]);
-        $formSetting->setData(['setting' => $customerData]);
-
-        $view = new ViewModel([
-            'customer'     => $customer,
-            'customerForm' => $form,
-            'driverForm'   => $formDriver,
-            'settingForm'  => $formSetting
-        ]);
-        $view->setTerminal(true);
-
-        return $view;
-    }
-
     public function bonusTabAction()
     {
         /** @var Customers $customer */

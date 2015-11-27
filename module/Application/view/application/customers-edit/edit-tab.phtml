@@ -7,8 +7,14 @@ $formDriver->setAttribute('action', $this->url('customers/edit', ['id' => $this-
 $formSetting->setAttribute('action', $this->url('customers/edit', ['id' => $this->customer->getId()]));
 ?>
 <div class="row">
+
+    <div class="col-lg-12">
+    <?php echo $this->partial('partials/flash-messages.phtml', []); ?>
+    </div>
+
     <div class="col-lg-9">
 
+        <!-- BEGIN Customer details -->
         <div class="panel panel-default">
             <div class="panel-heading">Anagrafica</div>
             <div class="panel-body">
@@ -159,7 +165,9 @@ $formSetting->setAttribute('action', $this->url('customers/edit', ['id' => $this
                 <?php echo $this->form()->closeTag(); ?>
             </div>
         </div>
+        <!-- END Customer details -->
 
+        <!-- BEGIN Driver's license details -->
         <div class="panel panel-default">
             <div class="panel-heading">Dati Patente</div>
             <div class="panel-body">
@@ -221,26 +229,19 @@ $formSetting->setAttribute('action', $this->url('customers/edit', ['id' => $this
                 <?php echo $this->form()->closeTag(); ?>
             </div>
         </div>
+        <!-- END Driver's license details -->
     </div>
 
     <div class="col-lg-3">
 
         <?= $this->form()->openTag($formSetting); ?>
-            <input type="hidden" name="type" value="setting">
+        <input type="hidden" name="type" value="setting">
 
+        <!-- BEGIN Other details -->
         <div class="panel panel-default">
 
             <div class="panel-heading">Altri dati</div>
             <div class="panel-body">
-
-                <div class="row">
-                    <div class="col-lg-12">
-                        <div class="form-group">
-                            <label for="gender">Abilitato</label>
-                            <?= $this->formRow($formSetting->get('setting')->get('enabled'));?>
-                        </div>
-                    </div>
-                </div>
 
                 <div class="row">
                     <div class="col-lg-12">
@@ -287,23 +288,87 @@ $formSetting->setAttribute('action', $this->url('customers/edit', ['id' => $this
             </div>
 
         </div>
-
+        <!-- END Other details -->
         <?php echo $this->form()->closeTag(); ?>
+
+        <!-- BEGIN Customer activation/deactivation -->
+        <?php
+            $isEnabled = $customer->getEnabled();
+            $deactivations = $this->deactivations;
+            $deactivationIds = [];
+        ?>
+        <div class="panel panel-default">
+            <div class="panel-heading">Abilitazione</div>
+            <div class="panel-body">
+
+                <div class="row">
+                    <div class="col-lg-12">
+                        <label class="sng-margin-top">Stato:</label>
+                        <label class="sng-info-box sng-move-right"><?= $isEnabled ? 'Abilitato' : 'Disabilitato';?></label>
+                    </div>
+                </div>
+
+                <?php if ($isEnabled): ?>
+
+                <div class="row sng-margin-top">
+                    <div class="col-lg-12">
+                        <button id="js-deactivate" type="submit" class="btn btn-success">Disabilita</button>
+                    </div>
+                </div>
+
+                <?php else: ?>
+
+                <div class="row sng-margin-top">
+                    <div class="col-lg-12">
+                        <label>Motivi:</label>
+                    </div>
+                </div>
+
+                <?php foreach ($deactivations as $deactivation): ?>
+
+                <div class="row sng-margin-bottom">
+                    <div class="col-lg-12">
+                        <label class="sng-info-box">
+                            <a class="sng-move-right" href="
+                                <?= $this->url(
+                                    'customers/edit-deactivation',
+                                    ['id' => $this->customer->getId()],
+                                    ['deactivations' => [$deactivation->getId()]]
+                                ); ?>">
+                                <i class="fa fa-trash"></i>
+                            </a>
+                            <?= $deactivation->getReasonTranslated(); ?>
+                        </label>
+                    </div>
+                </div>
+
+                <?php
+                    array_push($deactivationIds, $deactivation->getId());
+                    endforeach;
+                ?>
+
+                <div class="row sng-margin-top">
+                    <div class="col-lg-12">
+                        <button id="js-reactivate" type="submit" class="btn btn-success">Riabilita tutto</button>
+                    </div>
+                </div>
+
+                <?php endif; ?>
+
+            </div>
+        </div>
+        <!-- END Customer activation/deactivation -->
     </div>
 </div>
-
-<style>
-    .error {color: red;}
-</style>
-<script type="text/javascript">
-    $(document).ready(function () {
-        $("#customerForm").validate();
-        $("#driverForm").validate();
-        $("#settingForm").validate();
-        $('.date-picker').datepicker({
-            autoclose: true,
-            format: 'yyyy-mm-dd',
-            weekStart: 1
-        });
-    });
+<script>
+var deactivateUrl = "<?= $this->url(
+    'customers/deactivate',
+    ['id' => $this->customer->getId()]
+); ?>";
+var reactivateUrl = "<?= $this->url(
+    'customers/edit-deactivation',
+    ['id' => $this->customer->getId()],
+    ['deactivations' => $deactivationIds]
+); ?>";
 </script>
+<script type="text/javascript" src="<?= $this->basePath() .'/js/customers-edit.js'; ?>"></script>
