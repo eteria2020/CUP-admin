@@ -672,6 +672,28 @@ return [
                         ]
                     ]
                 ]
+            ],
+            'configurations' => [
+                'type' => 'Literal',
+                'options' => [
+                    'route' => '/configurations',
+                    'defaults' => [
+                        '__NAMESPACE__' => 'Application\Controller',
+                        'controller' => 'Configurations'
+                    ]
+                ],
+                'may_terminate' => false,
+                'child_routes' => [
+                    'manage-alarm' => [
+                        'type' => 'Segment',
+                        'options' => [
+                            'route' => '/manage-alarm/',
+                            'defaults' => [
+                                'action' => 'manageAlarm'
+                            ]
+                        ]
+                    ]
+                ]
             ]
         ],
     ],
@@ -695,7 +717,8 @@ return [
             'CustomerBonusForm' => 'Application\Form\CustomerBonusFormFactory',
             'TripCostForm' => 'Application\Form\TripCostFormFactory',
             'ExtraPaymentsForm' => 'Application\Form\ExtraPaymentsFormFactory',
-            'EditTripForm' => 'Application\Form\EditTripFormFactory'
+            'EditTripForm' => 'Application\Form\EditTripFormFactory',
+            'ConfigurationsForm' => 'Application\Form\ConfigurationsFormFactory'
         ]
     ],
     'controllers' => [
@@ -712,7 +735,8 @@ return [
             'Application\Controller\Reservations' => 'Application\Controller\ReservationsControllerFactory',
             'Application\Controller\Invoices' => 'Application\Controller\InvoicesControllerFactory',
             'Application\Controller\Payments' => 'Application\Controller\PaymentsControllerFactory',
-            'Application\Controller\CustomerNote' => 'Application\Controller\CustomerNoteControllerFactory'
+            'Application\Controller\CustomerNote' => 'Application\Controller\CustomerNoteControllerFactory',
+            'Application\Controller\Configurations' => 'Application\Controller\ConfigurationsControllerFactory',
         ]
     ],
     'translator' => [
@@ -802,7 +826,8 @@ return [
                 ['controller' => 'Application\Controller\Reservations', 'roles' => ['admin']],
                 ['controller' => 'Application\Controller\Invoices', 'roles' => ['admin']],
                 ['controller' => 'Application\Controller\Payments', 'roles' => ['admin']],
-                ['controller' => 'Application\Controller\CustomerNote', 'roles' => ['admin']]
+                ['controller' => 'Application\Controller\CustomerNote', 'roles' => ['admin']],
+                ['controller' => 'Application\Controller\Configurations', 'roles' => ['admin']]
             ],
         ],
     ],
@@ -929,6 +954,20 @@ return [
                     [
                         'label' => 'Competenze',
                         'route' => 'payments/recap',
+                        'isVisible' => true
+                    ]
+                ]
+            ],
+            [
+                'label' => 'Configurazione',
+                'route' => 'configurations',
+                'icon' => 'fa fa-cog',
+                'resource' => 'admin',
+                'isRouteJs' => true,
+                'pages' => [
+                    [
+                        'label' => 'Gestione soglie allarme',
+                        'route' => 'configurations/manage-alarm',
                         'isVisible' => true
                     ]
                 ]
