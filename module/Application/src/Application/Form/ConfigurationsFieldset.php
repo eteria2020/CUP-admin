@@ -1,9 +1,7 @@
 <?php
 namespace Application\Form;
 
-use SharengoCore\Entity\Cars;
 use SharengoCore\Entity\Configurations;
-use SharengoCore\Service\CarsService;
 use Zend\Form\Fieldset;
 use Zend\InputFilter\InputFilterProviderInterface;
 use Zend\Stdlib\Hydrator\HydratorInterface;

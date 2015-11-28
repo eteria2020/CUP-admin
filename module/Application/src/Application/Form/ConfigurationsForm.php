@@ -38,7 +38,6 @@ class ConfigurationsForm extends Form
             'type'    => 'Zend\Form\Element\Collection',
             'name'    => 'configurations',
             'options' => [
-                'label'          => 'my label',
                 'count'          => count($this->configurationsService->getConfigurationsBySlug(Configurations::ALARM)),
                 'target_element' => $configurationsFieldset,
                 'use_as_base_fieldset' => true,

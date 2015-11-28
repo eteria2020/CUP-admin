@@ -13,11 +13,9 @@ use DoctrineModule\Stdlib\Hydrator\DoctrineObject as DoctrineHydrator;
 class ConfigurationsFormFactory implements FactoryInterface
 {
     /**
-     * Create service
-     *
      * @param ServiceLocatorInterface $serviceLocator
      *
-     * @return CarForm
+     * @return ConfigurationsForm
      */
     public function createService(ServiceLocatorInterface $serviceLocator)
     {
