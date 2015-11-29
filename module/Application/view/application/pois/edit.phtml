@@ -1,0 +1,109 @@
+<?php
+$form = $this->poiForm->prepare();
+?>
+<div class="page-content-wrapper">
+    <div class="page-content">
+
+        <div class="row">
+            <div class="col-lg-6">
+                <h3 class="page-title">MODIFICA POI: <?= $this->poi->getName(); ?></h3>
+            </div>
+            <div class="col-lg-6">
+                <a href="<?php echo $this->url('configurations/manage-pois'); ?>" class="btn btn-success pull-right">
+                    <i class="fa fa-arrow-left"></i> Torna alla lista
+                </a>
+            </div>
+        </div>
+
+
+        <div class="page-bar">
+        </div>
+
+        <div class="row">
+            <div class="col-md-12">
+
+                <?= $this->form()->openTag($form); ?>
+
+                <div class="row">
+                    <div class="col-lg-3">
+                        <div class="form-group">
+                            <label for="gender">Tipo</label>
+                            <?php
+                            $type = $form->get('poi')->get('type');
+                            echo $this->formElement($type);
+                            ?>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-3">
+                        <div class="form-group">
+                            <label for="name">Codice</label>
+                            <?php
+                            $code = $form->get('poi')->get('code');
+                            echo $this->formElement($code);
+                            echo $this->formElementErrors($code, array('class' => 'text-danger list-unstyled'));
+                            ?>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-3">
+                        <div class="form-group">
+                            <label for="surname">Nome</label>
+                            <?php
+                            $name = $form->get('poi')->get('name');
+                            echo $this->formElement($name);
+                            echo $this->formElementErrors($name, array('class' => 'text-danger list-unstyled'));
+                            ?>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-3">
+                        <div class="form-group">
+                            <label for="surname">Indirizzo</label>
+                            <?php
+                            $address = $form->get('poi')->get('address');
+                            echo $this->formElement($address);
+                            echo $this->formElementErrors($address, array('class' => 'text-danger list-unstyled'));
+                            ?>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+
+                    <div class="col-lg-4">
+                        <div class="form-group">
+                            <label for="name">Città</label>
+                            <?= $this->formRow($form->get('poi')->get('town')); ?>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-2">
+                        <div class="form-group">
+                            <label for="name">CAP</label>
+                            <?= $this->formRow($form->get('poi')->get('zipCode')); ?>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-2">
+                        <div class="form-group">
+                            <label for="surname">Provincia</label>
+                            <?= $this->formRow($form->get('poi')->get('province')); ?>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="row">
+                    <div class="col-lg-12">
+                        <button type="submit" class="btn btn-success">Modifica Poi</button>
+                    </div>
+                </div>
+
+                <?= $this->form()->closeTag(); ?>
+
+            </div>
+        </div>
+
+    </div>
+</div>

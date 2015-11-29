@@ -672,6 +672,91 @@ return [
                         ]
                     ]
                 ]
+            ],
+            'configurations' => [
+                'type' => 'Literal',
+                'options' => [
+                    'route' => '/configurations',
+                    'defaults' => [
+                        '__NAMESPACE__' => 'Application\Controller',
+                        'controller' => 'Configurations'
+                    ]
+                ],
+                'may_terminate' => false,
+                'child_routes' => [
+                    'manage-alarm' => [
+                        'type' => 'Segment',
+                        'options' => [
+                            'route' => '/manage-alarm/',
+                            'defaults' => [
+                                'action' => 'manageAlarm'
+                            ]
+                        ]
+                    ],
+                    'manage-pois' => [
+                        'type' => 'Segment',
+                        'options' => [
+                            'route' => '/manage-pois',
+                            'defaults' => [
+                                'controller' => 'Pois',
+                                'action' => 'index'
+                            ]
+                        ],
+                        'may_terminate' => true,
+                        'child_routes' => [
+                            'datatable' => [
+                                'type'    => 'Literal',
+                                'options' => [
+                                    'route'    => '/datatable',
+                                    'defaults' => [
+                                        '__NAMESPACE__' => 'Application\Controller',
+                                        'controller'    => 'Pois',
+                                        'action'        => 'datatable',
+                                    ],
+                                ],
+                            ],
+                            'add' => [
+                                'type'    => 'Literal',
+                                'options' => [
+                                    'route'    => '/add',
+                                    'defaults' => [
+                                        '__NAMESPACE__' => 'Application\Controller',
+                                        'controller'    => 'Pois',
+                                        'action'        => 'add',
+                                    ],
+                                ],
+                            ],
+                            'edit' => [
+                                'type'    => 'Segment',
+                                'options' => [
+                                    'route'    => '/edit/:id',
+                                    'constraints' => [
+                                        'plate' => '[0-9]*'
+                                    ],
+                                    'defaults' => [
+                                        '__NAMESPACE__' => 'Application\Controller',
+                                        'controller'    => 'Pois',
+                                        'action'        => 'edit',
+                                    ],
+                                ],
+                            ],
+                            'delete' => [
+                                'type'    => 'Segment',
+                                'options' => [
+                                    'route'    => '/delete/:id',
+                                    'constraints' => [
+                                        'plate' => '[0-9]*'
+                                    ],
+                                    'defaults' => [
+                                        '__NAMESPACE__' => 'Application\Controller',
+                                        'controller'    => 'Pois',
+                                        'action'        => 'delete',
+                                    ],
+                                ],
+                            ],
+                        ]
+                    ]
+                ]
             ]
         ],
     ],
@@ -689,6 +774,7 @@ return [
             'CustomerForm' => 'Application\Form\CustomerFormFactory',
             'UserForm' => 'Application\Form\UserFormFactory',
             'CarForm' => 'Application\Form\CarFormFactory',
+            'PoiForm' => 'Application\Form\PoiFormFactory',
             'DriverForm' => 'Application\Form\DriverFormFactory',
             'SettingForm' => 'Application\Form\SettingFormFactory',
             'PromoCodeForm' => 'Application\Form\PromoCodeFormFactory',
@@ -712,7 +798,9 @@ return [
             'Application\Controller\Reservations' => 'Application\Controller\ReservationsControllerFactory',
             'Application\Controller\Invoices' => 'Application\Controller\InvoicesControllerFactory',
             'Application\Controller\Payments' => 'Application\Controller\PaymentsControllerFactory',
-            'Application\Controller\CustomerNote' => 'Application\Controller\CustomerNoteControllerFactory'
+            'Application\Controller\CustomerNote' => 'Application\Controller\CustomerNoteControllerFactory',
+            'Application\Controller\Configurations' => 'Application\Controller\ConfigurationsControllerFactory',
+            'Application\Controller\Pois' => 'Application\Controller\PoisControllerFactory',
         ]
     ],
     'translator' => [
@@ -802,7 +890,9 @@ return [
                 ['controller' => 'Application\Controller\Reservations', 'roles' => ['admin']],
                 ['controller' => 'Application\Controller\Invoices', 'roles' => ['admin']],
                 ['controller' => 'Application\Controller\Payments', 'roles' => ['admin']],
-                ['controller' => 'Application\Controller\CustomerNote', 'roles' => ['admin']]
+                ['controller' => 'Application\Controller\CustomerNote', 'roles' => ['admin']],
+                ['controller' => 'Application\Controller\Configurations', 'roles' => ['admin']],
+                ['controller' => 'Application\Controller\Pois', 'roles' => ['admin']]
             ],
         ],
     ],
@@ -929,6 +1019,25 @@ return [
                     [
                         'label' => 'Competenze',
                         'route' => 'payments/recap',
+                        'isVisible' => true
+                    ]
+                ]
+            ],
+            [
+                'label' => 'Configurazione',
+                'route' => 'configurations',
+                'icon' => 'fa fa-cog',
+                'resource' => 'admin',
+                'isRouteJs' => true,
+                'pages' => [
+                    [
+                        'label' => 'Gestione soglie allarme',
+                        'route' => 'configurations/manage-alarm',
+                        'isVisible' => true
+                    ],
+                    [
+                        'label' => 'Gestione POIS',
+                        'route' => 'configurations/manage-pois',
                         'isVisible' => true
                     ]
                 ]
