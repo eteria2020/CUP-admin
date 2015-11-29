@@ -2,7 +2,7 @@ var currentType;
 setCurrentPaymentType();
 var paymentContainerClass = "sng-payment-row";
 var paymentRowsNum = 0;
-var paymentBtnEnabled = true;
+var paymentBtnEnabled = false;
 
 /**
  * Set all listeners and setup
@@ -12,7 +12,6 @@ $(function() {
 
     // Remove add payment button
     toggleAddPaymentButton(false);
-    togglePaymentEnabled(false);
 
     // Respond to fleet change
     $('#fleet').change(function () {
