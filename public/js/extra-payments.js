@@ -1,6 +1,8 @@
 var currentType;
 setCurrentPaymentType();
 var paymentContainerClass = "sng-payment-row";
+var paymentRowsNum = 0;
+var paymentBtnEnabled = true;
 
 /**
  * Set all listeners and setup
@@ -10,6 +12,7 @@ $(function() {
 
     // Remove add payment button
     toggleAddPaymentButton(false);
+    togglePaymentEnabled(false);
 
     // Respond to fleet change
     $('#fleet').change(function () {
@@ -28,6 +31,7 @@ $(function() {
             addPaymentRow(newType == "penalty");
             currentType = newType;
             toggleAddPaymentButton(true);
+            togglePaymentEnabled(true);
         }
     });
 
@@ -40,7 +44,9 @@ $(function() {
 
     // Respond to pay button
     $('#js-extra-payment').click(function (e) {
-        startPaymentProcess();
+        if (paymentBtnEnabled == true) {
+            startPaymentProcess();
+        }
     });
 });
 
@@ -62,7 +68,14 @@ function startPaymentProcess()
         amounts[i] = $('#amount' + number).val();
     }
 
-    var canProceed = checkAndFormatFields(customerId, fleetId, type, reasons, amounts);
+    var canProceed = checkAndFormatFields(
+        customerId,
+        fleetId,
+        type,
+        reasons,
+        amounts
+    );
+
     if (canProceed) {
         proceedWithPayment(customerId, fleetId, type, reasons, amounts);
     }
@@ -92,6 +105,12 @@ function checkAndFormatFields(customerId, fleetId, type, reasons, amounts)
 
     if (type === "---") {
         alert('Selezionare una tipologia');
+        return false;
+    }
+
+    // This condition should never be met but it's good to check anyway
+    if (reasons.length < 1) {
+        alert('Aggiungere almeno un addebito');
         return false;
     }
 
@@ -185,6 +204,7 @@ function clearFields() {
     toggleTypeOptionNull(true);
     removePaymentBlocks();
     toggleAddPaymentButton(false);
+    togglePaymentEnabled(false);
 }
 
 /**
@@ -250,8 +270,13 @@ function addPaymentRow(isPenalty)
 
     // Remove block on removeButton press
     $('#remove-button' + blockNumber).click(function (e) {
-        $('#payment-row' + blockNumber).remove();
+        if (paymentRowsNum > 1) {
+            $('#payment-row' + blockNumber).remove();
+            paymentRowsNum--;
+        }
     });
+
+    paymentRowsNum++;
 }
 
 /**
@@ -293,6 +318,7 @@ function removePaymentBlocks()
         paymentBlocks[i].remove();
     }
     window.scrollTo(0, 0);
+    paymentRowsNum = 0;
 }
 
 /**
@@ -335,6 +361,22 @@ function toggleAddPaymentButton(on)
         $('#js-add-row').show();
     } else {
         $('#js-add-row').hide();
+    }
+}
+/**
+ * Show or fade the payment button
+ *
+ * @param boolean on if true show button and enable, otherwise fade and disable
+ */
+function togglePaymentEnabled(on)
+{
+    if (on != paymentBtnEnabled) {
+        if (on) {
+            $('#js-extra-payment').removeClass('sng-faded');
+        } else {
+            $('#js-extra-payment').addClass('sng-faded');
+        }
+        paymentBtnEnabled = on;
     }
 }
 
