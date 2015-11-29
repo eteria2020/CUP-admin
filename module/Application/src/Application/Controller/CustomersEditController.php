@@ -123,7 +123,7 @@ class CustomersEditController extends AbstractActionController
         $customer = $this->getCustomer();
         $webuser = $this->identity();
 
-        @try {
+        try {
             $this->deactivationService->deactivateByWebuser($customer, $webuser);
             $this->flashMessenger()->addSuccessMessage('Utente disattivato');
         } catch (Exception $e) {
@@ -141,7 +141,7 @@ class CustomersEditController extends AbstractActionController
         $customer = $this->getCustomer();
         $webuser = $this->identity();
 
-        @try {
+        try {
             $this->deactivationService->reactivateCustomer($customer, $webuser);
             $this->flashMessenger()->addSuccessMessage('Utente riattivato');
         } catch (Exception $e) {
@@ -160,7 +160,7 @@ class CustomersEditController extends AbstractActionController
         $webuser = $this->identity();
         $deactivationId = $this->params()->fromQuery('deactivationId', 0);
 
-        @try {
+        try {
             $deactivation = $this->deactivationService->getById($deactivationId);
             $this->deactivationService->reactivateByWebuser($deactivation, $webuser);
             $this->flashMessenger()->addSuccessMessage('Disattivazione rimossa');
