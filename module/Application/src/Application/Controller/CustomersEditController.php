@@ -99,45 +99,84 @@ class CustomersEditController extends AbstractActionController
     }
 
     /**
+     * @return Customers
      * @throws CustomerNotFoundException
      */
     protected function getCustomer()
     {
         $id = $this->params()->fromRoute('id', 0);
-
         $customer = $this->customersService->findById($id);
 
         if (is_null($customer)) {
             $this->getResponse()->setStatusCode(Response::STATUS_CODE_404);
-
             throw new CustomerNotFoundException();
         }
 
         return $customer;
     }
 
+    /**
+     * Creates a CustomerDeactivation for the current Customer
+     */
     public function deactivateAction()
     {
         $customer = $this->getCustomer();
+        $webuser = $this->identity();
 
-        $this->flashMessenger()->addSuccessMessage('deactivate action');
+        @try {
+            $this->deactivationService->deactivateByWebuser($customer, $webuser);
+            $this->flashMessenger()->addSuccessMessage('Utente disattivato');
+        } catch (Exception $e) {
+            $this->flashMessenger()->addErrorMessage('Operazione fallita');
+        }
 
-        return $this->reloadTab();
+        return $this->reloadTab($customer);
     }
 
+    /**
+     * Removes all CustomerDeactivations for the current Customer
+     */
+    public function reactivateAction()
+    {
+        $customer = $this->getCustomer();
+        $webuser = $this->identity();
+
+        @try {
+            $this->deactivationService->reactivateCustomer($customer, $webuser);
+            $this->flashMessenger()->addSuccessMessage('Utente riattivato');
+        } catch (Exception $e) {
+            $this->flashMessenger()->addErrorMessage('Operazione fallita');
+        }
+
+        return $this->reloadTab($customer);
+    }
+
+    /**
+     * Removes the specified CustomerDeactivation for the current Customer
+     */
     public function editDeactivationAction()
     {
         $customer = $this->getCustomer();
+        $webuser = $this->identity();
+        $deactivationId = $this->params()->fromQuery('deactivationId', 0);
 
-        $this->flashMessenger()->addSuccessMessage('edit deactivation action');
+        @try {
+            $deactivation = $this->deactivationService->getById($deactivationId);
+            $this->deactivationService->reactivateByWebuser($deactivation, $webuser);
+            $this->flashMessenger()->addSuccessMessage('Disattivazione rimossa');
+        } catch (Exception $e) {
+            $this->flashMessenger()->addErrorMessage('Operazione fallita');
+        }
 
-        return $this->reloadTab();
+        return $this->reloadTab($customer);
     }
 
     /**
      * Reloads the page keeping the selected tab
+     *
+     * @param Customers $customer
      */
-    private function reloadTab()
+    private function reloadTab(Customers $customer)
     {
         return $this->redirect()->toRoute(
             'customers/edit',

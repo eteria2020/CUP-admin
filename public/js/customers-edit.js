@@ -7,22 +7,25 @@ $(document).ready(function () {
         format: 'yyyy-mm-dd',
         weekStart: 1
     });
-
-    $('#js-deactivate').click(function (e) {
-        deactivate();
-    });
-
-    $('#js-reactivate').click(function (e) {
-        reactivate();
-    });
 });
 
-function deactivate()
+function deactivate(e)
 {
-    console.log(deactivateUrl);
+    if (!confirm('Disattivare utente?')) {
+        e.preventDefault();
+    }
 }
 
-function reactivate()
+function reactivate(e)
 {
-    console.log(reactivateUrl);
+    if (!confirm('Riattivare utente?')) {
+        e.preventDefault();
+    }
+}
+
+function removeDeactivation(e)
+{
+    if (!confirm('Rimuovere disattivazione?')) {
+        e.preventDefault();
+    }
 }

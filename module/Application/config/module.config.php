@@ -117,6 +117,19 @@ return [
                             ],
                         ],
                     ],
+                    'reactivate' => [
+                        'type' => 'Segment',
+                        'options' => [
+                            'route' => '/reactivate/:id',
+                            'constraints' => [
+                                'id' => '[0-9]*'
+                            ],
+                            'defaults' => [
+                                'controller' => 'CustomersEdit',
+                                'action' => 'reactivate',
+                            ],
+                        ],
+                    ],
                     'edit-deactivation' => [
                         'type' => 'Segment',
                         'options' => [

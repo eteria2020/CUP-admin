@@ -1,4 +1,7 @@
 <?php
+
+use SharengoCore\Entity\CustomerDeactivation;
+
 $form = $this->customerForm->prepare();
 $formDriver =  $this->driverForm->prepare();
 $formSetting = $this->settingForm->prepare();
@@ -295,7 +298,7 @@ $formSetting->setAttribute('action', $this->url('customers/edit', ['id' => $this
         <?php
             $isEnabled = $customer->getEnabled();
             $deactivations = $this->deactivations;
-            $deactivationIds = [];
+            $isManuallyDisabled = false;
         ?>
         <div class="panel panel-default">
             <div class="panel-heading">Abilitazione</div>
@@ -308,15 +311,7 @@ $formSetting->setAttribute('action', $this->url('customers/edit', ['id' => $this
                     </div>
                 </div>
 
-                <?php if ($isEnabled): ?>
-
-                <div class="row sng-margin-top">
-                    <div class="col-lg-12">
-                        <button id="js-deactivate" type="submit" class="btn btn-success">Disabilita</button>
-                    </div>
-                </div>
-
-                <?php else: ?>
+                <?php if (!$isEnabled): ?>
 
                 <div class="row sng-margin-top">
                     <div class="col-lg-12">
@@ -328,13 +323,14 @@ $formSetting->setAttribute('action', $this->url('customers/edit', ['id' => $this
 
                 <div class="row sng-margin-bottom">
                     <div class="col-lg-12">
-                        <label class="sng-info-box">
-                            <a class="sng-move-right" href="
-                                <?= $this->url(
+                        <label class="sng-info-box sng-full-width">
+                            <a class="sng-move-right sng-margin-left"
+                                href="<?= $this->url(
                                     'customers/edit-deactivation',
                                     ['id' => $this->customer->getId()],
-                                    ['deactivations' => [$deactivation->getId()]]
-                                ); ?>">
+                                    ['query' => ['deactivationId' => $deactivation->getId()]]
+                                ); ?>"
+                                onclick="removeDeactivation(event)">
                                 <i class="fa fa-trash"></i>
                             </a>
                             <?= $deactivation->getReasonTranslated(); ?>
@@ -343,13 +339,42 @@ $formSetting->setAttribute('action', $this->url('customers/edit', ['id' => $this
                 </div>
 
                 <?php
-                    array_push($deactivationIds, $deactivation->getId());
-                    endforeach;
+                    $isManuallyDisabled = $isManuallyDisabled || $deactivation->getReason() == CustomerDeactivation::DISABLED_BY_WEBUSER;
                 ?>
+
+                <?php endforeach; ?>
 
                 <div class="row sng-margin-top">
                     <div class="col-lg-12">
-                        <button id="js-reactivate" type="submit" class="btn btn-success">Riabilita tutto</button>
+                        <form class="portlet-body"
+                            action="<?= $this->url('customers/reactivate', ['id' => $this->customer->getId()]); ?>"
+                            method="post">
+                            <input id="js-reactivate"
+                                class="btn btn-success"
+                                type="submit"
+                                onclick="reactivate(event)"
+                                value="Riabilita">
+                            </input>
+                        </form>
+                    </div>
+                </div>
+
+                <?php endif; ?>
+
+                <?php if (!$isManuallyDisabled): ?>
+
+                <div class="row sng-margin-top">
+                    <div class="col-lg-12">
+                        <form class="portlet-body"
+                            action="<?= $this->url('customers/deactivate', ['id' => $this->customer->getId()]); ?>"
+                            method="post">
+                            <input id="js-reactivate"
+                                class="btn btn-success"
+                                type="submit"
+                                onclick="deactivate(event)"
+                                value="Disabilita manualmente">
+                            </input>
+                        </form>
                     </div>
                 </div>
 
@@ -360,15 +385,4 @@ $formSetting->setAttribute('action', $this->url('customers/edit', ['id' => $this
         <!-- END Customer activation/deactivation -->
     </div>
 </div>
-<script>
-var deactivateUrl = "<?= $this->url(
-    'customers/deactivate',
-    ['id' => $this->customer->getId()]
-); ?>";
-var reactivateUrl = "<?= $this->url(
-    'customers/edit-deactivation',
-    ['id' => $this->customer->getId()],
-    ['deactivations' => $deactivationIds]
-); ?>";
-</script>
 <script type="text/javascript" src="<?= $this->basePath() .'/js/customers-edit.js'; ?>"></script>
