@@ -31,6 +31,14 @@ class PoiFieldset extends Fieldset implements InputFilterProviderInterface
         ]);
 
         $this->add([
+            'name'       => 'id',
+            'type'       => 'Zend\Form\Element\Hidden',
+            'attributes' => [
+                'id' => 'id'
+            ]
+        ]);
+
+        $this->add([
             'name'       => 'type',
             'type'       => 'Zend\Form\Element\Select',
             'attributes' => [
@@ -112,6 +120,23 @@ class PoiFieldset extends Fieldset implements InputFilterProviderInterface
             ]
         ]);
 
+        $this->add([
+            'name'       => 'lat',
+            'type'       => 'Zend\Form\Element\Text',
+            'attributes' => [
+                'id'       => 'lat',
+                'class'    => 'form-control'
+            ]
+        ]);
+
+        $this->add([
+            'name'       => 'lon',
+            'type'       => 'Zend\Form\Element\Text',
+            'attributes' => [
+                'id'       => 'lon',
+                'class'    => 'form-control'
+            ]
+        ]);
     }
 
     public function getInputFilterSpecification()
@@ -165,6 +190,38 @@ class PoiFieldset extends Fieldset implements InputFilterProviderInterface
                 'validators' => [
                     [
                         'name' =>'NotEmpty'
+                    ]
+                ],
+            ],
+            'lat'        => [
+                'required' => false,
+                'filters'  => [
+                    [
+                        'name' => 'StringTrim'
+                    ],
+                    [
+                        'name' => 'ToNull'
+                    ]
+                ],
+                'validators' => [
+                    [
+                        'name' =>'IsFloat'
+                    ]
+                ],
+            ],
+            'lon'        => [
+                'required' => false,
+                'filters'  => [
+                    [
+                        'name' => 'StringTrim'
+                    ],
+                    [
+                        'name' => 'ToNull'
+                    ]
+                ],
+                'validators' => [
+                    [
+                        'name' =>'IsFloat'
                     ]
                 ],
             ],

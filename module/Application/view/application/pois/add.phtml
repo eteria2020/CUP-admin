@@ -6,7 +6,7 @@ $form = $this->poiForm->prepare();
 
         <div class="row">
             <div class="col-lg-6">
-                <h3 class="page-title">AGGIUNGI Poi</h3>
+                <h3 class="page-title">AGGIUNGI POI</h3>
             </div>
             <div class="col-lg-6">
                 <a href="<?php echo $this->url('configurations/manage-pois'); ?>" class="btn btn-success pull-right">
@@ -92,11 +92,25 @@ $form = $this->poiForm->prepare();
                         </div>
                     </div>
 
+                    <div class="col-lg-2">
+                        <div class="form-group">
+                            <label for="surname">Lat</label>
+                            <?= $this->formRow($form->get('poi')->get('lat')); ?>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-2">
+                        <div class="form-group">
+                            <label for="surname">Lon</label>
+                            <?= $this->formRow($form->get('poi')->get('lon')); ?>
+                        </div>
+                    </div>
+
                 </div>
 
                 <div class="row">
                     <div class="col-lg-12">
-                        <button type="submit" class="btn btn-success">Aggiungi Poi</button>
+                        <button type="submit" class="btn btn-success">Aggiungi POI</button>
                     </div>
                 </div>
 

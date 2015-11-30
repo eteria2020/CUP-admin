@@ -79,7 +79,7 @@ class PoisController extends AbstractActionController
             if ($form->isValid()) {
                 try {
                     $this->poisService->saveData($form->getData());
-                    $this->flashMessenger()->addSuccessMessage('Poi aggiunta con successo!');
+                    $this->flashMessenger()->addSuccessMessage('POI aggiunta con successo!');
 
                 } catch (\Exception $e) {
                     $this->flashMessenger()
@@ -109,6 +109,7 @@ class PoisController extends AbstractActionController
 
         /** @var PoiForm $form */
         $form = $this->poiForm;
+        $form->setFleets($this->carsService->getFleets());
 
         $poiData = $this->hydrator->extract($poi);
         $data = [];
@@ -125,8 +126,8 @@ class PoisController extends AbstractActionController
 
             if ($form->isValid()) {
                 try {
-                    $this->poisService->saveData($form->getData());
-                    $this->flashMessenger()->addSuccessMessage('Poi modificato con successo!');
+                    $this->poisService->saveData($form->getData(),true);
+                    $this->flashMessenger()->addSuccessMessage('POI modificato con successo!');
 
                 } catch (\Exception $e) {
                     $this->flashMessenger()
@@ -134,8 +135,7 @@ class PoisController extends AbstractActionController
                         L\'assistenza tecnica è già al corrente, ci scusiamo per l\'inconveniente');
                 }
 
-                $url = $this->url()->fromRoute('configurations/manage-pois/edit', ['id' => $poi->getId()]);
-                return $this->redirect()->toUrl($url);
+                return $this->redirect()->toRoute('configurations/manage-pois');
             }
         }
 
@@ -160,7 +160,7 @@ class PoisController extends AbstractActionController
 
         try {
             $this->poisService->deletePoi($poi);
-            $this->flashMessenger()->addSuccessMessage('Poi rimosso con successo!');
+            $this->flashMessenger()->addSuccessMessage('POI rimosso con successo!');
 
         } catch (\Exception $e) {
             $this->flashMessenger()

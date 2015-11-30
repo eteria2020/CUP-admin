@@ -31,7 +31,7 @@ class PoiForm extends Form
     {
         $fleetsPlainArray = [];
         foreach ($fleets as $fleet) {
-            $fleetsPlainArray[$fleet->getId()] = $fleet->getName();
+            $fleetsPlainArray[$fleet->getName()] = $fleet->getName();
         }
 
         $this->get('poi')->get('town')->setValueOptions($fleetsPlainArray);
