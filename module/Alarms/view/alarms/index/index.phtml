@@ -116,7 +116,7 @@
     </div>
 </div>
 
-<div id="controls">
+<div id="controls" ng-hide="accordionStatus.hideCustomerSelect && accordionStatus.hideCarsSelect && accordionStatus.hideCustomerData && accordionStatus.hideCarData && accordionStatus.hideLastTripData">
     <accordion close-others="false">
         <accordion-group heading="Seleziona cliente" ng-hide="accordionStatus.hideCustomerSelect" is-open="accordionStatus.customerSelectOpen">
             <table>
@@ -329,16 +329,15 @@
 <div id="left-area">
     <div class="pull-left">
         <ul class="list-inline">
-            <li ng-click="markerFilters['libere'] = !markerFilters['libere'];" ng-class="{'active': markerFilters['libere']}" ><span class="block" style="background-color:{{markerColors['green']}}"></span><span class="qta">{{markerCounters['libere']}}</span> LIBERE</li>
-            <li  ng-click="markerFilters['prenotate'] = !markerFilters['prenotate'];" ng-class="{'active': markerFilters['prenotate']}"><span class="block" style="background-color:{{markerColors['black']}}"></span><span class="qta">{{markerCounters['prenotate']}}</span> PRENOTATE</li>
-            <li  ng-click="markerFilters['inuso'] = !markerFilters['inuso'];" ng-class="{'active': markerFilters['inuso']}"><span class="block" style="background-color:{{markerColors['yellow']}}"></span><span class="qta">{{markerCounters['inuso']}}</span> IN USO</li>
-            <li  ng-click="markerFilters['manut'] = !markerFilters['manut'];" ng-class="{'active': markerFilters['manut']}"><span class="block" style="background-color:{{markerColors['red']}}"></span><span class="qta">{{markerCounters['manut']}}</span>IN MANUTENZIONE</li> 
-            <li  ng-click="markerFilters['h24'] = !markerFilters['h24'];" ng-class="{'active': markerFilters['h24']}"><span class="block" style="background-color:{{markerColors['azzure']}}"></span><span class="qta">{{markerCounters['h24']}}</span> +24hh</li>
-            <li  ng-click="markerFilters['no3g'] = !markerFilters['no3g'];" ng-class="{'active': markerFilters['no3g']}"><span class="block" style="background-color:{{markerColors['brown']}}"><small class="text-label">3G</small></span><span class="qta">{{markerCounters['no3g']}}</span> N.O. 3G</li>
-            <li  ng-click="markerFilters['nobatt'] = !markerFilters['nobatt'];" ng-class="{'active': markerFilters['nobatt']}"><span class="block" style="background-color:{{markerColors['brown']}}"><i class="fa fa-battery-half"></i></span><span class="qta">{{markerCounters['nobatt']}}</span> N.O. Batt</li>
-            <li  ng-click="markerFilters['nogps'] = !markerFilters['nogps'];" ng-class="{'active': markerFilters['nogps']}"><span class="block" style="background-color:{{markerColors['brown']}}"><small class="text-label">GPS</small></span><span class="qta">{{markerCounters['nogps']}}</span> N.O. GPS</li>
-            <li  ng-click="markerFilters['ricarica'] = !markerFilters['ricarica'];" ng-class="{'active': markerFilters['ricarica']}"><span class="block" style="background-color:{{markerColors['white']}}"><i class="fa fa-plug"></i></span><span class="qta">{{markerCounters['ricarica']}}</span> In Ricarica</li>
-            <li  ng-click="markerFilters['sporche'] = !markerFilters['sporche'];" ng-class="{'active': markerFilters['sporche']}"><span class="block" style="background-color:{{markerColors['purple']}}"></span><span class="qta">{{markerCounters['sporche']}}</span> Sporca</li>
+            <li ng-click="markerFilters['libere'] = !markerFilters['libere'];" ng-class="{'active': markerFilters['libere']}" ><span class="block" style="background-color:{{markerColors['green']}}"></span> LIBERE</li>
+            <li  ng-click="markerFilters['prenotate'] = !markerFilters['prenotate'];" ng-class="{'active': markerFilters['prenotate']}"><span class="block" style="background-color:{{markerColors['black']}}"></span> PRENOTATE</li>
+            <li  ng-click="markerFilters['inuso'] = !markerFilters['inuso'];" ng-class="{'active': markerFilters['inuso']}"><span class="block" style="background-color:{{markerColors['yellow']}}"></span> IN USO</li>
+            <li  ng-click="markerFilters['manut'] = !markerFilters['manut'];" ng-class="{'active': markerFilters['manut']}"><span class="block" style="background-color:{{markerColors['red']}}"></span> IN MANUTENZIONE</li> 
+            <li  ng-click="markerFilters['h24'] = !markerFilters['h24'];" ng-class="{'active': markerFilters['h24']}"><span class="block" style="background-color:{{markerColors['azzure']}}"></span> +24hh</li>
+            <li  ng-click="markerFilters['no3g'] = !markerFilters['no3g'];" ng-class="{'active': markerFilters['no3g']}"><span class="block" style="background-color:{{markerColors['brown']}}"><small class="text-label">3G</small></span> N.O. 3G</li>
+            <li  ng-click="markerFilters['nobatt'] = !markerFilters['nobatt'];" ng-class="{'active': markerFilters['nobatt']}"><span class="block" style="background-color:{{markerColors['brown']}}"><i class="fa fa-battery-half"></i></span> N.O. Batt</li>
+            <li  ng-click="markerFilters['nogps'] = !markerFilters['nogps'];" ng-class="{'active': markerFilters['nogps']}"><span class="block" style="background-color:{{markerColors['brown']}}"><small class="text-label">GPS</small></span> N.O. GPS</li>
+            <li  ng-click="markerFilters['sporche'] = !markerFilters['sporche'];" ng-class="{'active': markerFilters['sporche']}"><span class="block" style="background-color:{{markerColors['purple']}}"></span> Sporca</li>
         </ul>
     </div>
 </div>

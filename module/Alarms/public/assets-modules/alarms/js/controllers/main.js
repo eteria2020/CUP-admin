@@ -226,13 +226,6 @@ angular.module('SharengoCsApp').controller('SharengoCsController', function (
                         car.carIcon['fillColor'] = $scope.markerColors['brown'];
                         car.options.group = 'nogps';
                         car.iconSelected = car.carIcon;
-                    }else if(car.charging){
-                        car.options.labelContent=car.battery+'% <i class="fa fa-plug"></i>';
-                        car.options.charging = true;
-                        car.carIcon['fillColor'] = $scope.markerColors['white'];
-                        car.options.group = 'ricarica';
-                        car.iconSelected = car.carIcon;
-                        car.options.labelClass += ' invert-color';
                     }else if(car.battery<20){
                         car.options.labelContent=car.battery+'% <i class="fa fa-battery-half"></i>';
                         car.carIcon['fillColor'] = $scope.markerColors['brown'];
@@ -256,6 +249,12 @@ angular.module('SharengoCsApp').controller('SharengoCsController', function (
                         car.iconSelected = car.carIcon;
                     }
                 }
+                
+                if(car.charging){
+                    car.options.labelContent += '<i class="fa fa-plug"></i>';
+                    car.options.charging = true;
+                }                
+                
                 $scope.markerCounters[car.options.group] +=1;
             });
             $scope.cars = cars;
