@@ -778,6 +778,7 @@ return [
             'BjyAuthorize\Provider\Resource\Config' => [
                 'admin' => [],
                 'callcenter' => [],
+                'customer' => [],
             ],
         ],
         'rule_providers' => [
@@ -785,6 +786,7 @@ return [
                 'allow' => [
                     [['admin'], 'admin'],
                     [['admin','callcenter'], 'callcenter'],
+                    [['superadmin'], 'customer', 'manage-gold-list'],
                 ],
             ],
         ],
@@ -792,6 +794,7 @@ return [
             'BjyAuthorize\Guard\Controller' => [
                 // Enable access to ZFC User pages
                 ['controller' => 'zfcuser', 'roles' => []],
+
                 ['controller' => 'Application\Controller\Error', 'roles' => []],
                 ['controller' => 'Application\Controller\Index', 'roles' => ['admin','callcenter']],
                 ['controller' => 'Application\Controller\Customers', 'roles' => ['admin']],
