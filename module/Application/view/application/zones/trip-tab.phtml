@@ -1,0 +1,28 @@
+<div class="row">
+    <div class="col-lg-12">
+
+        <table class="table table-bordered">
+            <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Area</th>
+                <th>Azioni</th>
+            </tr>
+            </thead>
+            <tbody>
+            <?php
+            /** @var \SharengoCore\Entity\Zone $zone */
+            foreach($this->list as $zone): ?>
+                <tr>
+                    <td><?= $zone->getId(); ?></td>
+                    <td><?= $zone->getName(); ?></td>
+                    <td><?= substr($zone->getAreaUse(), 0, 50); ?>...</td>
+                    <td>mostra su mappa</td>
+                </tr>
+            <?php endforeach; ?>
+            </tbody>
+        </table>
+
+    </div>
+</div>

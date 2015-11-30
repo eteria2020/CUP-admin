@@ -1,0 +1,26 @@
+<div class="row">
+    <div class="col-lg-12">
+
+        <table class="table table-bordered">
+            <thead>
+            <tr>
+                <th>ID</th>
+                <th>Area</th>
+                <th>Azioni</th>
+            </tr>
+            </thead>
+            <tbody>
+            <?php
+            /** @var \SharengoCore\Entity\ZoneAlarms $zone */
+            foreach($this->list as $zone): ?>
+                <tr>
+                    <td><?= $zone->getId(); ?></td>
+                    <td><?= substr($zone->getGeo(), 0, 50); ?>...</td>
+                    <td>mostra su mappa</td>
+                </tr>
+            <?php endforeach; ?>
+            </tbody>
+        </table>
+
+    </div>
+</div>
