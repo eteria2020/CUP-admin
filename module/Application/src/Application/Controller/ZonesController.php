@@ -53,7 +53,9 @@ class ZonesController extends AbstractActionController
 
     public function groupsTabAction()
     {
-        $view = new ViewModel();
+        $view = new ViewModel([
+            'list' => $this->zoneService->getListZonesGroups()
+        ]);
         $view->setTerminal(true);
 
         return $view;
