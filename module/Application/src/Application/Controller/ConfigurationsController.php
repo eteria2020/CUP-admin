@@ -3,6 +3,7 @@ namespace Application\Controller;
 
 use Application\Form\ConfigurationsForm;
 use SharengoCore\Entity\Configurations;
+use SharengoCore\Exception\ConfigurationSaveAlarmException;
 use SharengoCore\Service\ConfigurationsService;
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
@@ -53,10 +54,10 @@ class ConfigurationsController extends AbstractActionController
 
                 try {
 
-                    $this->configurationsService->saveData($form->getData());
+                    $this->configurationsService->saveDataManageAlarm($form->getData());
                     $this->flashMessenger()->addSuccessMessage('Configurazione salvata con successo!');
 
-                } catch (\Exception $e) {
+                } catch (ConfigurationSaveAlarmException $e) {
 
                     $this->flashMessenger()->addErrorMessage('Si è verificato un errore applicativo. L\'assistenza tecnica è già al corrente, ci scusiamo per l\'inconveniente');
                 }
