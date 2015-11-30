@@ -1,26 +1,74 @@
+<div class="col-md-12">                
+    <div class="row row-filters">
+        <div class="col-md-5">
+            <div class="form-inline">
+                <div class="form-group">
+                    <select name="zone-sel" id="zone-sel" class="form-control">
+                        <option value="select" selected="">-- Seleziona --</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 <div class="row">
     <div class="col-lg-12">
-
-        <table class="table table-bordered">
-            <thead>
-            <tr>
-                <th>ID</th>
-                <th>Area</th>
-                <th>Azioni</th>
-            </tr>
-            </thead>
-            <tbody>
-            <?php
-            /** @var \SharengoCore\Entity\ZoneAlarms $zone */
-            foreach($this->list as $zone): ?>
-                <tr>
-                    <td><?= $zone->getId(); ?></td>
-                    <td><?= substr($zone->getGeo(), 0, 50); ?>...</td>
-                    <td>mostra su mappa</td>
-                </tr>
-            <?php endforeach; ?>
-            </tbody>
-        </table>
+        <div id="map"></div>
+        
+        <style>
+            #map {min-height: 400px; height: 40%;}
+            .row-filters {margin-bottom:30px;}
+        </style>
+        <script>
+            var geoPoly,data = {<?php
+                /** @var \SharengoCore\Entity\ZoneAlarms $zone */
+                foreach($this->list as $zone){ 
+                    echo $zone->getId().':[';
+                    $data = explode('),(',substr($zone->getGeo(),2,-2));
+                    foreach($data as $coord){
+                        $coord = explode(',',$coord);
+                        echo '{lat:'.$coord[1].',lng:'.$coord[0].'},';
+                    }
+                    echo '],';
+                } ?>};
+            
+            $(document).ready(function(){
+                $('#map').height($('.page-content').outerHeight()-$('#map').offset().top);
+                
+                $.each(data, function (i, item) {
+                    $('#zone-sel').append($('<option>', { 
+                        value: i,
+                        text : i 
+                    }));
+                });
+                
+                $('#zone-sel').on('change',function(e){
+                    if(typeof geoPoly !== 'undefined'){
+                        console.log(geoPoly);
+                        geoPoly.setMap(null);
+                    }
+                        
+                    geoPoly = new google.maps.Polygon({
+                        paths: data[$(this).val()],
+                        strokeColor: '#FF0000',
+                        strokeOpacity: 0.8,
+                        strokeWeight: 3,
+                        fillColor: '#FF0000',
+                        fillOpacity: 0.35
+                    });
+                    geoPoly.setMap(map);
+                    
+                });
+            });
+            function initMap(){
+                map = new google.maps.Map(document.getElementById('map'), {
+                    zoom: 7,
+                    center: {lat: 44.5563793, lng: 11.3180998}
+                });
+            }
+        </script>
+        <script async defer
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCHVZSbufdhNoMVU8uJHi1aTmvPoYN4ErY&signed_in=true&callback=initMap"></script>
 
     </div>
 </div>
