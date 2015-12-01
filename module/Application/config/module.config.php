@@ -858,9 +858,9 @@ return [
         'rule_providers' => [
             'BjyAuthorize\Provider\Rule\Config' => [
                 'allow' => [
-                    [['admin'], 'admin'],
-                    [['admin','callcenter'], 'callcenter'],
-                    [['admin','callcenter','superadmin'], 'superadmin'],
+                    [['superadmin','admin'], 'admin'],
+                    [['superadmin','admin','callcenter'], 'callcenter'],
+                    [['superadmin'], 'superadmin'],
                 ],
             ],
         ],
@@ -880,8 +880,8 @@ return [
                 ['controller' => 'Application\Controller\Invoices', 'roles' => ['admin']],
                 ['controller' => 'Application\Controller\Payments', 'roles' => ['admin']],
                 ['controller' => 'Application\Controller\CustomerNote', 'roles' => ['admin']],
-                ['controller' => 'Application\Controller\Configurations', 'roles' => ['admin']],
-                ['controller' => 'Application\Controller\Zones', 'roles' => ['admin']],
+                ['controller' => 'Application\Controller\Configurations', 'roles' => ['superadmin']],
+                ['controller' => 'Application\Controller\Zones', 'roles' => ['superadmin']],
             ],
         ],
     ],
@@ -1016,7 +1016,7 @@ return [
                 'label' => 'Configurazione',
                 'route' => 'configurations',
                 'icon' => 'fa fa-cog',
-                'resource' => 'admin',
+                'resource' => 'superadmin',
                 'isRouteJs' => true,
                 'pages' => [
                     [
