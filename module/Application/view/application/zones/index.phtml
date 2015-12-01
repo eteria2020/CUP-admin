@@ -24,14 +24,12 @@ $this->headScript()
             <div class="col-md-12">
                 <ul class="nav nav-tabs" id="js-tabs" role="tablist">
                     <li role="presentation" id="menu-trip"><a href="<?= $this->url('zones/ajax-tab-trip'); ?>" data-target="#tab-trip" role="tab" data-toggle="tab">Aree utilizzo</a></li>
-                    <li role="presentation" id="menu-alarms"><a href="<?= $this->url('zones/ajax-tab-alarms'); ?>" data-target="#tab-alarms" role="tab" data-toggle="tab">Aree d'allarme</a></li>
                     <li role="presentation" id="menu-groups"><a href="<?= $this->url('zones/ajax-tab-groups'); ?>" data-target="#tab-groups" role="tab" data-toggle="tab">Gruppi</a></li>
                     <li role="presentation" id="menu-prices"><a href="<?= $this->url('zones/ajax-tab-prices'); ?>" data-target="#tab-prices" role="tab" data-toggle="tab">Listini</a></li>
                 </ul>
 
                 <div class="tab-content">
                     <div role="tabpanel" class="tab-pane" id="tab-trip"></div>
-                    <div role="tabpanel" class="tab-pane" id="tab-alarms"></div>
                     <div role="tabpanel" class="tab-pane" id="tab-groups"></div>
                     <div role="tabpanel" class="tab-pane" id="tab-prices"></div>
                 </div>
@@ -70,7 +68,7 @@ $(document).ready(function () {
     }
     var target = document.getElementById('spinner-loader')
     //var spinner = new Spinner(opts).spin(target);
-    var tab = '{$this->tab}';
+    var tab = 'trip';
     var idTab = '#tab-' + tab;
     $('#menu-' + tab).addClass('active');
     $(idTab).addClass('active');

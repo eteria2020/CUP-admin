@@ -41,12 +41,11 @@ class ZonesController extends AbstractActionController
         return $view;
     }
 
-    public function alarmsTabAction()
+    public function zoneAlarmsAction()
     {
         $view = new ViewModel([
             'list' => $this->zoneService->getListZonesAlarms()
         ]);
-        $view->setTerminal(true);
 
         return $view;
     }

@@ -611,12 +611,12 @@ return [
                             ],
                         ],
                     ],
-                    'ajax-tab-alarms' => [
+                    'zone-alarms' => [
                         'type'    => 'Literal',
                         'options' => [
-                            'route' => '/ajax-tab-alarms',
+                            'route' => '/zone-alarms',
                             'defaults' => [
-                                'action' => 'alarms-tab',
+                                'action' => 'zone-alarms',
                             ],
                         ],
                     ],
@@ -828,7 +828,7 @@ return [
             'BjyAuthorize\Provider\Resource\Config' => [
                 'admin' => [],
                 'callcenter' => [],
-                'zone' => [],
+                'superadmin' => [],
             ],
         ],
         'rule_providers' => [
@@ -836,6 +836,7 @@ return [
                 'allow' => [
                     [['admin'], 'admin'],
                     [['admin','callcenter'], 'callcenter'],
+                    [['admin','callcenter','superadmin'], 'superadmin'],
                 ],
             ],
         ],
@@ -990,8 +991,20 @@ return [
                 'label'           => 'Aree',
                 'route'           => 'zones',
                 'icon'            => 'fa fa-map-marker',
-                'resource'        => 'zone',
+                'resource'        => 'superadmin',
                 'isRouteJs'       => true,
+                'pages' => [
+                    [
+                        'label' => 'Gestione aree',
+                        'route' => 'zones',
+                        'isVisible' => true
+                    ],
+                    [
+                        'label' => 'Aree d\'allarme',
+                        'route' => 'zones/zone-alarms',
+                        'isVisible' => true
+                    ]
+                ]
             ],
             [
                 'label'           => 'Call center',
