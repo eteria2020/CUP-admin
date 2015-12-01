@@ -1,0 +1,29 @@
+<div class="row">
+    <div class="col-lg-12">
+
+        <table class="table table-bordered">
+            <thead>
+            <tr>
+                <th>ID</th>
+                <th>Condizione</th>
+                <th>Costo</th>
+                <th>Bonus</th>
+            </tr>
+            </thead>
+            <tbody>
+            <?php
+            /** @var \SharengoCore\Entity\ZonePrices $zone */
+            foreach($this->list as $zone): ?>
+                <tr>
+                    <td><?= $zone->getId(); ?></td>
+                    <td>Inizio corsa <strong><?= $zone->getGroupOpen()->getDescription()?></strong><br />
+                        Fine corsa <strong><?= $zone->getGroupClose()->getDescription()?></strong></td>
+                    <td><?= $zone->getCost(); ?></td>
+                    <td><?= $zone->getBonus(); ?></td>
+                </tr>
+            <?php endforeach; ?>
+            </tbody>
+        </table>
+
+    </div>
+</div>

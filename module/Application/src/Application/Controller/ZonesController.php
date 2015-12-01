@@ -63,7 +63,9 @@ class ZonesController extends AbstractActionController
 
     public function pricesTabAction()
     {
-        $view = new ViewModel();
+        $view = new ViewModel([
+            'list' => $this->zoneService->getListZonesPrices()
+        ]);
         $view->setTerminal(true);
 
         return $view;
