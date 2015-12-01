@@ -1046,6 +1046,13 @@ return [
                 ]
             ],
             [
+                'label'           => 'Statistiche',
+                'icon'            => 'fa fa-line-chart',
+                'resource'        => 'superadmin',
+                'openOnNewWindow' => true,
+                'uri'             => 'http://core.sharengo.it/ui/reports/trips.php',
+            ],
+            [
                 'label'           => 'Call center',
                 'route'           => 'call-center',
                 'icon'            => 'fa fa-map-marker',
