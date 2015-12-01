@@ -1,0 +1,101 @@
+<?php
+$this->headLink()
+    ->appendStylesheet('/js/datatables/plugins/bootstrap/dataTables.bootstrap.css');
+$this->headScript()
+    ->appendFile('/js/datatables/media/js/jquery.dataTables.min.js')
+    ->appendFile('/js/datatables/plugins/bootstrap/dataTables.bootstrap.js')
+    ->appendFile($this->basePath() .'/js/zones.js');
+?>
+<div class="page-content-wrapper">
+    <div class="page-content">
+
+        <div class="row">
+            <div class="col-lg-6">
+                <h3 class="page-title">
+                    Gestione Aree
+                </h3>
+            </div>
+        </div>
+
+        <div class="page-bar">
+        </div>
+
+        <div class="row">
+            <div class="col-md-12">
+                <ul class="nav nav-tabs" id="js-tabs" role="tablist">
+                    <li role="presentation" id="menu-trip"><a href="<?= $this->url('zones/ajax-tab-trip'); ?>" data-target="#tab-trip" role="tab" data-toggle="tab">Aree utilizzo</a></li>
+                    <li role="presentation" id="menu-alarms"><a href="<?= $this->url('zones/ajax-tab-alarms'); ?>" data-target="#tab-alarms" role="tab" data-toggle="tab">Aree d'allarme</a></li>
+                    <li role="presentation" id="menu-groups"><a href="<?= $this->url('zones/ajax-tab-groups'); ?>" data-target="#tab-groups" role="tab" data-toggle="tab">Gruppi</a></li>
+                    <li role="presentation" id="menu-prices"><a href="<?= $this->url('zones/ajax-tab-prices'); ?>" data-target="#tab-prices" role="tab" data-toggle="tab">Listini</a></li>
+                </ul>
+
+                <div class="tab-content">
+                    <div role="tabpanel" class="tab-pane" id="tab-trip"></div>
+                    <div role="tabpanel" class="tab-pane" id="tab-alarms"></div>
+                    <div role="tabpanel" class="tab-pane" id="tab-groups"></div>
+                    <div role="tabpanel" class="tab-pane" id="tab-prices"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- END PAGE CONTENT-->
+    </div>
+</div>
+<?php
+echo $this->inlineScript()->captureStart();
+echo <<<JS
+$(document).ready(function () {
+
+    var opts = {
+      lines: 13 // The number of lines to draw
+        , length: 28 // The length of each line
+        , width: 14 // The line thickness
+        , radius: 42 // The radius of the inner circle
+        , scale: 0.25 // Scales overall size of the spinner
+        , corners: 1 // Corner roundness (0..1)
+        , color: '#000' // #rgb or #rrggbb or array of colors
+        , opacity: 0.25 // Opacity of the lines
+        , rotate: 0 // The rotation offset
+        , direction: 1 // 1: clockwise, -1: counterclockwise
+        , speed: 1 // Rounds per second
+        , trail: 60 // Afterglow percentage
+        , fps: 20 // Frames per second when using setTimeout() as a fallback for CSS
+        , zIndex: 2e9 // The z-index (defaults to 2000000000)
+        , className: 'spinner' // The CSS class to assign to the spinner
+        , top: '50%' // Top position relative to parent
+        , left: '50%' // Left position relative to parent
+        , shadow: false // Whether to render a shadow
+        , hwaccel: false // Whether to use hardware acceleration
+        , position: 'absolute' // Element positioning
+    }
+    var target = document.getElementById('spinner-loader')
+    //var spinner = new Spinner(opts).spin(target);
+    var tab = '{$this->tab}';
+    var idTab = '#tab-' + tab;
+    $('#menu-' + tab).addClass('active');
+    $(idTab).addClass('active');
+
+    var href = $(document).find('#js-tabs .active a').attr("href");
+
+    $(idTab).load(href,function(e){
+      $('#js-tabs .active a').tab('show');
+      //spinner.stop();
+    });
+
+    $('#js-tabs a').click(function(e) {
+        //var spinner = new Spinner(opts).spin(target);
+        var _this = $(this);
+        var loadurl = _this.attr('href');
+        var targ = _this.attr('data-target');
+
+        $.get(loadurl, function(data) {
+            $(targ).html(data);
+            //spinner.stop();
+        });
+
+        _this.tab('show');
+        return false;
+    });
+});
+JS;
+$this->inlineScript()->captureEnd(); ?>

@@ -591,6 +591,55 @@ return [
                     ],
                 ],
             ],
+            'zones' => [
+                'type' => 'Literal',
+                'options' => [
+                    'route' => '/zones',
+                    'defaults' => [
+                        'controller' => 'Application\Controller\Zones',
+                        'action' => 'index'
+                    ]
+                ],
+                'may_terminate' => true,
+                'child_routes' => [
+                    'ajax-tab-trip' => [
+                        'type'    => 'Literal',
+                        'options' => [
+                            'route' => '/ajax-tab-trip',
+                            'defaults' => [
+                                'action' => 'trip-tab',
+                            ],
+                        ],
+                    ],
+                    'ajax-tab-alarms' => [
+                        'type'    => 'Literal',
+                        'options' => [
+                            'route' => '/ajax-tab-alarms',
+                            'defaults' => [
+                                'action' => 'alarms-tab',
+                            ],
+                        ],
+                    ],
+                    'ajax-tab-groups' => [
+                        'type'    => 'Literal',
+                        'options' => [
+                            'route' => '/ajax-tab-groups',
+                            'defaults' => [
+                                'action' => 'groups-tab',
+                            ],
+                        ],
+                    ],
+                    'ajax-tab-prices' => [
+                        'type'    => 'Literal',
+                        'options' => [
+                            'route' => '/ajax-tab-prices',
+                            'defaults' => [
+                                'action' => 'prices-tab',
+                            ],
+                        ],
+                    ],
+                ],
+            ],
             'payments' => [
                 'type' => 'Literal',
                 'options' => [
@@ -712,7 +761,8 @@ return [
             'Application\Controller\Reservations' => 'Application\Controller\ReservationsControllerFactory',
             'Application\Controller\Invoices' => 'Application\Controller\InvoicesControllerFactory',
             'Application\Controller\Payments' => 'Application\Controller\PaymentsControllerFactory',
-            'Application\Controller\CustomerNote' => 'Application\Controller\CustomerNoteControllerFactory'
+            'Application\Controller\CustomerNote' => 'Application\Controller\CustomerNoteControllerFactory',
+            'Application\Controller\Zones' => 'Application\Controller\ZonesControllerFactory'
         ]
     ],
     'translator' => [
@@ -778,6 +828,7 @@ return [
             'BjyAuthorize\Provider\Resource\Config' => [
                 'admin' => [],
                 'callcenter' => [],
+                'zone' => [],
             ],
         ],
         'rule_providers' => [
@@ -803,7 +854,8 @@ return [
                 ['controller' => 'Application\Controller\Reservations', 'roles' => ['admin']],
                 ['controller' => 'Application\Controller\Invoices', 'roles' => ['admin']],
                 ['controller' => 'Application\Controller\Payments', 'roles' => ['admin']],
-                ['controller' => 'Application\Controller\CustomerNote', 'roles' => ['admin']]
+                ['controller' => 'Application\Controller\CustomerNote', 'roles' => ['admin']],
+                ['controller' => 'Application\Controller\Zones', 'roles' => ['admin']]
             ],
         ],
     ],
@@ -933,6 +985,13 @@ return [
                         'isVisible' => true
                     ]
                 ]
+            ],
+            [
+                'label'           => 'Aree',
+                'route'           => 'zones',
+                'icon'            => 'fa fa-map-marker',
+                'resource'        => 'zone',
+                'isRouteJs'       => true,
             ],
             [
                 'label'           => 'Call center',
