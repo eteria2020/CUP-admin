@@ -59,7 +59,7 @@ class ConfigurationsController extends AbstractActionController
 
                 } catch (ConfigurationSaveAlarmException $e) {
 
-                    $this->flashMessenger()->addErrorMessage('Si è verificato un errore applicativo. L\'assistenza tecnica è già al corrente, ci scusiamo per l\'inconveniente');
+                    $this->flashMessenger()->addErrorMessage($e->getMessage());
                 }
 
                 return $this->redirect()->toRoute('configurations/manage-alarm');
