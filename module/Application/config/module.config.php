@@ -778,7 +778,6 @@ return [
             'BjyAuthorize\Provider\Resource\Config' => [
                 'admin' => [],
                 'callcenter' => [],
-                'customer' => [],
             ],
         ],
         'rule_providers' => [
@@ -786,7 +785,6 @@ return [
                 'allow' => [
                     [['admin'], 'admin'],
                     [['admin','callcenter'], 'callcenter'],
-                    [['superadmin'], 'customer', 'manage-gold-list'],
                 ],
             ],
         ],
