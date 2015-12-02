@@ -1019,12 +1019,7 @@ return [
                         'label' => 'Competenze',
                         'route' => 'payments/recap',
                         'isVisible' => true
-                    ],
-                    [
-                        'label' => 'Tariffe',
-                        'route' => 'payments/fares',
-                        'isVisible' => true
-                    ],
+                    ]
                 ]
             ],
             [
@@ -1038,7 +1033,12 @@ return [
                         'label' => 'Gestione soglie allarme',
                         'route' => 'configurations/manage-alarm',
                         'isVisible' => true
-                    ]
+                    ],
+                    [
+                        'label' => 'Tariffe',
+                        'route' => 'payments/fares',
+                        'isVisible' => true
+                    ],
                 ]
             ],
             [
