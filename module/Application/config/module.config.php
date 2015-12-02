@@ -750,6 +750,69 @@ return [
                                 'action' => 'manageAlarm'
                             ]
                         ]
+                    ],
+                    'manage-pois' => [
+                        'type' => 'Segment',
+                        'options' => [
+                            'route' => '/manage-pois',
+                            'defaults' => [
+                                'controller' => 'Pois',
+                                'action' => 'index'
+                            ]
+                        ],
+                        'may_terminate' => true,
+                        'child_routes' => [
+                            'datatable' => [
+                                'type'    => 'Literal',
+                                'options' => [
+                                    'route'    => '/datatable',
+                                    'defaults' => [
+                                        '__NAMESPACE__' => 'Application\Controller',
+                                        'controller'    => 'Pois',
+                                        'action'        => 'datatable',
+                                    ],
+                                ],
+                            ],
+                            'add' => [
+                                'type'    => 'Literal',
+                                'options' => [
+                                    'route'    => '/add',
+                                    'defaults' => [
+                                        '__NAMESPACE__' => 'Application\Controller',
+                                        'controller'    => 'Pois',
+                                        'action'        => 'add',
+                                    ],
+                                ],
+                            ],
+                            'edit' => [
+                                'type'    => 'Segment',
+                                'options' => [
+                                    'route'    => '/edit/:id',
+                                    'constraints' => [
+                                        'plate' => '[0-9]*'
+                                    ],
+                                    'defaults' => [
+                                        '__NAMESPACE__' => 'Application\Controller',
+                                        'controller'    => 'Pois',
+                                        'action'        => 'edit',
+                                    ],
+                                ],
+                            ],
+                            'delete' => [
+                                'type'    => 'Segment',
+                                'options' => [
+                                    'route'    => '/delete/:id',
+                                    'constraints' => [
+                                        'plate' => '[0-9]*'
+                                    ],
+                                    'defaults' => [
+                                        '__NAMESPACE__' => 'Application\Controller',
+                                        'controller'    => 'Pois',
+                                        'action'        => 'delete',
+                                    ],
+                                ],
+                            ],
+                        ]
                     ]
                 ]
             ]
@@ -769,6 +832,7 @@ return [
             'CustomerForm' => 'Application\Form\CustomerFormFactory',
             'UserForm' => 'Application\Form\UserFormFactory',
             'CarForm' => 'Application\Form\CarFormFactory',
+            'PoiForm' => 'Application\Form\PoiFormFactory',
             'DriverForm' => 'Application\Form\DriverFormFactory',
             'SettingForm' => 'Application\Form\SettingFormFactory',
             'PromoCodeForm' => 'Application\Form\PromoCodeFormFactory',
@@ -796,6 +860,7 @@ return [
             'Application\Controller\Payments' => 'Application\Controller\PaymentsControllerFactory',
             'Application\Controller\CustomerNote' => 'Application\Controller\CustomerNoteControllerFactory',
             'Application\Controller\Configurations' => 'Application\Controller\ConfigurationsControllerFactory',
+            'Application\Controller\Pois' => 'Application\Controller\PoisControllerFactory',
             'Application\Controller\Zones' => 'Application\Controller\ZonesControllerFactory'
         ]
     ],
@@ -890,7 +955,8 @@ return [
                 ['controller' => 'Application\Controller\Invoices', 'roles' => ['admin']],
                 ['controller' => 'Application\Controller\Payments', 'roles' => ['admin']],
                 ['controller' => 'Application\Controller\CustomerNote', 'roles' => ['admin']],
-                ['controller' => 'Application\Controller\Configurations', 'roles' => ['superadmin']],
+                ['controller' => 'Application\Controller\Configurations', 'roles' => ['admin']],
+                ['controller' => 'Application\Controller\Pois', 'roles' => ['superadmin']],
                 ['controller' => 'Application\Controller\Zones', 'roles' => ['superadmin']],
             ],
         ],
@@ -1032,6 +1098,11 @@ return [
                     [
                         'label' => 'Gestione soglie allarme',
                         'route' => 'configurations/manage-alarm',
+                        'isVisible' => true
+                    ],
+                    [
+                        'label' => 'Gestione POIS',
+                        'route' => 'configurations/manage-pois',
                         'isVisible' => true
                     ],
                     [
