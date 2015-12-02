@@ -3,6 +3,8 @@
 namespace Application\Controller;
 
 use Application\Form\ExtraPaymentsForm;
+use Application\Form\FaresForm;
+use SharengoCore\Service\FaresService;
 use SharengoCore\Service\TripPaymentsService;
 use SharengoCore\Service\PaymentsService;
 use SharengoCore\Service\CustomersService;
@@ -70,6 +72,16 @@ class PaymentsController extends AbstractActionController
      */
     private $recapService;
 
+    /**
+     * @var FaresService
+     */
+    private $faresService;
+
+    /**
+     * @var FaresForm;
+     */
+    private $faresForm;
+
     public function __construct(
         TripPaymentsService $tripPaymentsService,
         PaymentsService $paymentsService,
@@ -80,7 +92,9 @@ class PaymentsController extends AbstractActionController
         ExtraPaymentsService $extraPaymentsService,
         PenaltiesService $penaltiesService,
         FleetService $fleetService,
-        RecapService $recapService
+        RecapService $recapService,
+        FaresService $faresService,
+        FaresForm $faresForm
     ) {
         $this->tripPaymentsService = $tripPaymentsService;
         $this->paymentsService = $paymentsService;
@@ -92,6 +106,8 @@ class PaymentsController extends AbstractActionController
         $this->penaltiesService = $penaltiesService;
         $this->fleetService = $fleetService;
         $this->recapService = $recapService;
+        $this->faresService = $faresService;
+        $this->faresForm = $faresForm;
     }
 
     public function failedPaymentsAction()
@@ -281,6 +297,35 @@ class PaymentsController extends AbstractActionController
             'daily' => $dailyIncome,
             'weekly' => $weeklyIncome,
             'monthly' => $monthlyIncome
+        ]);
+    }
+
+    public function faresAction()
+    {
+        $form = $this->faresForm;
+
+        if ($this->getRequest()->isPost()) {
+            $postData = $this->getRequest()->getPost()->toArray();
+            $form->setData($postData);
+
+            if ($form->isValid()) {
+                try {
+                    if ($this->faresService->saveData($form->getData())) {
+                        $this->flashMessenger()->addSuccessMessage('Tariffa creata con successo!');
+                    } else {
+                        $this->flashMessenger()->addInfoMessage('Tariffa invariata');
+                    }
+                } catch (\Exception $e) {
+                    $this->flashMessenger()->addErrorMessage('Si è verificato un errore applicativo. L\'assistenza tecnica è già al corrente, ci scusiamo per l\'inconveniente');
+
+                }
+
+                return $this->redirect()->toRoute('payments/fares');
+            }
+        }
+
+        return new ViewModel([
+            'faresForm' => $form
         ]);
     }
 }

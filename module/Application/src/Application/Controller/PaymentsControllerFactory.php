@@ -21,6 +21,8 @@ class PaymentsControllerFactory implements FactoryInterface
         $penaltiesService = $sharedServiceManager->get('SharengoCore\Service\PenaltiesService');
         $fleetService = $sharedServiceManager->get('SharengoCore\Service\FleetService');
         $recapService = $sharedServiceManager->get('SharengoCore\Service\RecapService');
+        $faresService = $sharedServiceManager->get('SharengoCore\Service\FaresService');
+        $faresForm = $sharedServiceManager->get('FaresForm');
 
         return new PaymentsController(
             $tripPaymentsService,
@@ -32,7 +34,9 @@ class PaymentsControllerFactory implements FactoryInterface
             $extraPaymentsService,
             $penaltiesService,
             $fleetService,
-            $recapService
+            $recapService,
+            $faresService,
+            $faresForm
         );
     }
 }
