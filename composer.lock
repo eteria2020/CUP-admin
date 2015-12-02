@@ -1295,7 +1295,7 @@
             "source": {
                 "type": "git",
                 "url": "ssh://git@git.mvlabs.it:4222/clients/sharengo-coremodule.git",
-                "reference": "b2857fdf589cd717729c21cfde54cea4272d3b4c"
+                "reference": "b96136f5022a59feb3dd31809e36fb7529ded376"
             },
             "require": {
                 "doctrine/doctrine-orm-module": "0.*",
@@ -1316,7 +1316,7 @@
                 }
             },
             "description": "Core ZF2 module for Sharengo apps",
-            "time": "2015-12-01 14:35:26"
+            "time": "2015-12-02 06:09:59"
         },
         {
             "name": "rwoverdijk/assetmanager",
