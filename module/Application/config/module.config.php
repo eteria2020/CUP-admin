@@ -1145,6 +1145,13 @@ return [
                 'resource'        => 'callcenter',
                 'openOnNewWindow' => true,
             ],
+            [
+                'label'           => 'Mappa Allarmi',
+                'route'           => 'alarms',
+                'icon'            => 'fa fa-map-marker',
+                'resource'        => 'callcenter',
+                'openOnNewWindow' => true,
+            ],
         ]
     ]
 ];
