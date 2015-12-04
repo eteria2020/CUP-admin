@@ -2,7 +2,6 @@
 
 namespace Application\Controller;
 
-use Application\Form\ExtraPaymentsForm;
 use Application\Form\FaresForm;
 use SharengoCore\Service\FaresService;
 use SharengoCore\Service\TripPaymentsService;
@@ -36,11 +35,6 @@ class PaymentsController extends AbstractActionController
      * @var CustomersService
      */
     private $customersService;
-
-    /**
-     * @var ExtraPaymentsForm
-     */
-    private $extraPaymentsForm;
 
     /**
      * @var CartasiContractsService
@@ -86,7 +80,6 @@ class PaymentsController extends AbstractActionController
         TripPaymentsService $tripPaymentsService,
         PaymentsService $paymentsService,
         CustomersService $customersService,
-        ExtraPaymentsForm $extraPaymentsForm,
         CartasiContractsService $cartasiContractsService,
         CartasiCustomerPayments $cartasiCustomerPayments,
         ExtraPaymentsService $extraPaymentsService,
@@ -99,7 +92,6 @@ class PaymentsController extends AbstractActionController
         $this->tripPaymentsService = $tripPaymentsService;
         $this->paymentsService = $paymentsService;
         $this->customersService = $customersService;
-        $this->extraPaymentsForm = $extraPaymentsForm;
         $this->cartasiContractsService = $cartasiContractsService;
         $this->cartasiCustomerPayments = $cartasiCustomerPayments;
         $this->extraPaymentsService = $extraPaymentsService;
@@ -195,20 +187,29 @@ class PaymentsController extends AbstractActionController
     public function extraAction()
     {
         $penalties = $this->penaltiesService->getAllPenalties();
+        $fleets = $this->fleetService->getAllFleets();
+        $types = $this->extraPaymentsService->getAllTypes();
 
         return new ViewModel([
-            'form' => $this->extraPaymentsForm,
+            'fleets' => $fleets,
+            'types' => $types,
             'penalties' => $penalties
         ]);
+
+        foreach($this->penalties as $penalty) {
+            echo '<option data-reason="' . $penalty->getReason() . '" data-amount="' . $penalty->getAmount() . '">' .
+                $penalty->getReason() . number_format($penalty->getAmount()/100, 2) . '&euro' .
+                '</option>';
+        }
     }
 
     public function payExtraAction()
     {
         $customerId = $this->params()->fromPost('customerId');
         $fleetId = $this->params()->fromPost('fleetId');
-        $paymentType = $this->params()->fromPost('paymentType');
-        $reason = $this->params()->fromPost('reason');
-        $amount = $this->params()->fromPost('amount');
+        $type = $this->params()->fromPost('type');
+        $reasons = $this->params()->fromPost('reasons');
+        $amounts = $this->params()->fromPost('amounts');
 
         try {
             $customer = $this->customersService->findById($customerId);
@@ -238,6 +239,11 @@ class PaymentsController extends AbstractActionController
                 ]);
             }
 
+
+            $amount = 0;
+            foreach ($amounts as $value) {
+                $amount += intval($value);
+            }
             $response = $this->cartasiCustomerPayments->sendPaymentRequest($customer, $amount);
 
             if (!$response->getCompletedCorrectly()) {
@@ -252,8 +258,9 @@ class PaymentsController extends AbstractActionController
                 $fleet,
                 $response->getTransaction(),
                 $amount,
-                $paymentType,
-                $reason
+                $type,
+                $reasons,
+                $amounts
             );
 
             return new JsonModel([

@@ -36,3 +36,23 @@
 .sng-full-width {
     width: 100%;
 }
+.sng-payment-row {
+    border-style: solid;
+    border-width: 2px;
+    border-color: #E5E5E5;
+    margin-top: 10px;
+    padding: 10px;
+}
+.sng-close-payment {
+    float: right;
+}
+.sng-faded {
+    filter: alpha(opacity=45);
+    opacity: 0.45;
+}
+.sng-green-btn {
+    background-color: #43A34C;
+    color: #FFFFFF;
+    border-width: 0;
+    padding: 5px;
+}

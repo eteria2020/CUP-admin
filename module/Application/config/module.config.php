@@ -868,10 +868,9 @@ return [
             'PromoCodeForm' => 'Application\Form\PromoCodeFormFactory',
             'CustomerBonusForm' => 'Application\Form\CustomerBonusFormFactory',
             'TripCostForm' => 'Application\Form\TripCostFormFactory',
-            'ExtraPaymentsForm' => 'Application\Form\ExtraPaymentsFormFactory',
             'FaresForm' => 'Application\Form\FaresFormFactory',
             'EditTripForm' => 'Application\Form\EditTripFormFactory',
-            'ConfigurationsForm' => 'Application\Form\ConfigurationsFormFactory',
+            'ConfigurationsForm' => 'Application\Form\ConfigurationsFormFactory'
         ]
     ],
     'controllers' => [
