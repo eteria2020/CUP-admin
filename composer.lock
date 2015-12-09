@@ -5,6 +5,7 @@
         "This file is @generated automatically"
     ],
     "hash": "7c371becb0fea1618f27602ec908e3a6",
+    "content-hash": "a7bcc0e728d3aae09316b4a2eca8ff83",
     "packages": [
         {
             "name": "bjyoungblood/bjy-authorize",
@@ -1295,7 +1296,7 @@
             "source": {
                 "type": "git",
                 "url": "ssh://git@git.mvlabs.it:4222/clients/sharengo-coremodule.git",
-                "reference": "032000fd4764f4014f440fa3bade7f2411521b73"
+                "reference": "1b4508b513b883dfbe9ce0a0bf99a856000bf2a7"
             },
             "require": {
                 "doctrine/doctrine-orm-module": "0.*",
@@ -1316,7 +1317,7 @@
                 }
             },
             "description": "Core ZF2 module for Sharengo apps",
-            "time": "2015-12-04 13:17:14"
+            "time": "2015-12-04 16:42:08"
         },
         {
             "name": "rwoverdijk/assetmanager",
