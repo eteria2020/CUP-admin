@@ -134,7 +134,6 @@ class CustomersController extends AbstractActionController
             $postData = $this->getRequest()->getPost()->toArray();
 
             switch ($postData['type']) {
-
                 case 'customer':
                     $form = $this->customerForm;
                     $postData['customer']['id'] = $customer->getId();
@@ -162,15 +161,16 @@ class CustomersController extends AbstractActionController
                     $form = $this->settingForm;
                     $postData['setting']['id'] = $customer->getId();
                     $postData['setting']['enabled'] = $customer->getEnabled() ? 'true' : 'false';
+                    $postData['setting']['goldList'] =
+                        $postData['setting']['goldList'] ||
+                        $postData['setting']['maintainer'];
                     break;
             }
 
             $form->setData($postData);
 
             if ($form->isValid()) {
-
                 try {
-
                     $this->customersService->saveData($form->getData());
                     $this->flashMessenger()->addSuccessMessage('Modifica effettuta con successo!');
 
@@ -264,14 +264,10 @@ class CustomersController extends AbstractActionController
         $status = 'error';
 
         if ($this->getRequest()->isPost()) {
-
             try {
-
                 $this->customersService->removeCard($customer);
                 $status = 'success';
-
             } catch (\Exception $e) {
-
                 $this->getResponse()->setStatusCode(Response::STATUS_CODE_500);
             }
         }
@@ -288,17 +284,13 @@ class CustomersController extends AbstractActionController
         $status = 'error';
 
         if ($this->getRequest()->isPost()) {
-
             try {
-
                 $postData = $this->getRequest()->getPost()->toArray();
                 $card = $this->cardsService->getCard($postData['code']);
 
                 $this->customersService->assignCard($customer, $card, true);
                 $status = 'success';
-
             } catch (\Exception $e) {
-
                 $this->getResponse()->setStatusCode(Response::STATUS_CODE_500);
             }
         }
@@ -355,26 +347,19 @@ class CustomersController extends AbstractActionController
             $form->setData($postData);
 
             if ($form->isValid()) {
-
                 try {
-
                     /** @var PromoCodes $promoCode */
                     $promoCode = $this->promoCodeService->getPromoCode($postData['promocode']['promocode']);
 
                     $this->customersService->addBonusFromPromoCode($customer, $promoCode);
 
                     $this->flashMessenger()->addSuccessMessage('Operazione completata con successo!');
-
                 } catch (BonusAssignmentException $e) {
-
                     $this->flashMessenger()->addErrorMessage($e->getMessage());
-
                 } catch (\Exception $e) {
-
                     $this->flashMessenger()->addErrorMessage('Si è verificato un errore applicativo. L\'assistenza tecnica è già al corrente, ci scusiamo per l\'inconveniente');
 
                     return $this->redirect()->toRoute('customers/assign-promo-code', ['id' => $customer->getId()]);
-
                 }
 
                 return $this->redirect()->toRoute('customers/edit', ['id' => $customer->getId()], ['query' => ['tab' => 'bonus']]);
@@ -398,19 +383,14 @@ class CustomersController extends AbstractActionController
             $form->setData($postData);
 
             if ($form->isValid()) {
-
                 try {
-
                     $this->customersService->addBonusFromWebUser($customer, $form->getData());
 
                     $this->flashMessenger()->addSuccessMessage('Operazione completata con successo!');
-
                 } catch (\Exception $e) {
-
                     $this->flashMessenger()->addErrorMessage('Si è verificato un errore applicativo. L\'assistenza tecnica è già al corrente, ci scusiamo per l\'inconveniente');
 
                     return $this->redirect()->toRoute('customers/add-bonus', ['id' => $customer->getId()]);
-
                 }
 
                 return $this->redirect()->toRoute('customers/edit', ['id' => $customer->getId()], ['query' => ['tab' => 'bonus']]);
@@ -429,16 +409,13 @@ class CustomersController extends AbstractActionController
 
         if ($this->getRequest()->isPost()) {
             try {
-
                 $postData = $this->getRequest()->getPost()->toArray();
                 $bonus = $this->customersService->findBonus($postData['bonus']);
 
                 if ($this->customersService->removeBonus($bonus)) {
                     $status = 'success';
                 }
-
             } catch (\Exception $e) {
-
                 $this->getResponse()->setStatusCode(Response::STATUS_CODE_500);
             }
         }
@@ -451,11 +428,8 @@ class CustomersController extends AbstractActionController
     protected function _getRecordsFiltered($as_filters, $totalCustomer)
     {
         if (empty($as_filters['searchValue'])) {
-
             return $totalCustomer;
-
         } else {
-
             $as_filters['withLimit'] = false;
 
             return count($this->customersService->getDataDataTable($as_filters));
