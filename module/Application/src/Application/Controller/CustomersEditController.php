@@ -83,7 +83,7 @@ class CustomersEditController extends AbstractActionController
         $form->setData(['customer' => $customerData]);
         $formDriver->setData(['driver' => $customerData]);
         $formSetting->setData(['setting' => $customerData]);
-        $deactivations = $this->deactivationService->getAll($customer);
+        $deactivations = $this->deactivationService->getAllActive($customer);
 
         $view = new ViewModel([
             'customer' => $customer,
