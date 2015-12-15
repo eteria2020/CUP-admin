@@ -178,6 +178,8 @@ class CustomersController extends AbstractActionController
                 }
 
                 return $this->redirect()->toRoute('customers/edit', ['id' => $customer->getId()]);
+            } else {
+                $this->flashMessenger()->addErrorMessage('Dati inseriti non validi');
             }
         }
 

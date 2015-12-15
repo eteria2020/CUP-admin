@@ -89,6 +89,16 @@ class DriverFieldset extends Fieldset implements InputFilterProviderInterface
         ]);
 
         $this->add([
+            'name'       => 'driverLicenseSurname',
+            'type'       => 'Zend\Form\Element\Text',
+            'attributes' => [
+                'id'    => 'driverLicenseSurname',
+                'class' => 'form-control',
+                'required' => 'required'
+            ]
+        ]);
+
+        $this->add([
             'name'       => 'driverLicenseCountry',
             'type'       => 'Zend\Form\Element\Select',
             'attributes' => [
@@ -173,7 +183,24 @@ class DriverFieldset extends Fieldset implements InputFilterProviderInterface
                     [
                         'name' => 'StringLength',
                         'options' => [
-                            'min' => 6,
+                            'min' => 3,
+                            'max' => 32
+                        ]
+                    ]
+                ]
+            ],
+            'driverLicenseSurname' => [
+                'required' => true,
+                'filters' => [
+                    [
+                        'name' => 'StringTrim'
+                    ]
+                ],
+                'validators' => [
+                    [
+                        'name' => 'StringLength',
+                        'options' => [
+                            'min' => 3,
                             'max' => 32
                         ]
                     ]

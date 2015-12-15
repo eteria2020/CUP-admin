@@ -196,11 +196,20 @@ $formSetting = $this->settingForm->prepare();
 
                     <div class="col-lg-4">
                         <div class="form-group">
+                            <label for="driverLicenseName">Cognome sulla patente</label>
+                            <?= $this->formRow($formDriver->get('driver')->get('driverLicenseSurname')->setAttribute('readonly', 'true')); ?>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-4">
+                        <div class="form-group">
                             <label for="driverLicenseCountry">Rilasciata da (nazione)</label>
                             <?= $this->formRow($formDriver->get('driver')->get('driverLicenseCountry')->setAttribute('disabled', 'true')); ?>
                         </div>
                     </div>
+                </div>
 
+                <div class="row">
                     <div class="col-lg-4">
                         <div class="form-group">
                             <label for="driverLicenseExpire">Data di scadenza</label>
