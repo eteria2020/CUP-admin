@@ -129,12 +129,7 @@ class SettingFieldset extends Fieldset implements InputFilterProviderInterface
                 ],
             ],
             'registrationCompleted' => [
-                'required' => true,
-                'filters' => [
-                    [
-                        'name' => 'StringTrim'
-                    ]
-                ]
+                'required' => true
             ],
             'enabled' => [
                 'required' => true
