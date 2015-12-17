@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Comtible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<meta name="description" content="">
+    <meta name="author" content="Omniaevo S.r.l.">
+
+	<!-- CSS -->
+</head>
+</head>
+
+	<body data-spy="scroll">
+
+	<!-- Fixed navbar -->
+	<nav class="navbar navbar-default" id="top-page">
+		<div class="container">
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+					<span class="sr-only">Toggle navigation</span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				</button>
+				<a class="navbar-brand" href="#">Data Reports</a>
+			</div>
+			<div id="navbar" class="collapse navbar-collapse">
+				<ul class="nav navbar-nav">
+					<?php echo "MENU ELEMENTS HERE";
+
+					/* Structure like:
+						<li class="active"><a href="this.php">This page</a></li>
+						<li><a href="bla1.php">Bla 1</a></li>
+						<li><a href="blablabla.php">blablabla</a></li>
+					*/
+					?>
+
+				</ul>
+			</div><!--/.nav-collapse -->
+		</div>
+	</nav>
+
+	<!-- Begin page content -->
+    <?php echo $this->content; ?>
+
+	<footer class="footer">
+		<div class="container">
+			<p class="text-muted">&reg;Omniaevo S.r.l. 2015</p>
+		</div>
+	</footer>
+
+	<!-- JS -->
+</body>
+</html>

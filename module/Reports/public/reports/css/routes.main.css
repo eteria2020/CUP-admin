@@ -1,0 +1,228 @@
+/**
+ *      journey2web.css			-			Style sheet
+ *      
+ *      Copyright © 2011, Florian Birée <florian@biree.name>
+ *      
+ *      This file is a part of Journey2web
+ *
+ *      Based on the design Innovation by Free CSS Templates
+ *      <http://www.freecsstemplates.org>
+ *      Released for free under a Creative Commons Attribution 2.5 License
+ *            
+**/
+
+/* Various elements:
+********************/
+
+html * {
+    margin: 0;
+    padding: 0;
+}
+html,body {
+    height:100%;
+    overflow: auto;
+}
+body {
+    font-family:"URW Bookman L","Bookman Old Style","Garamond","Hoefler Text","Georgia",serif;
+    font-size:90%;
+    color: #2F4600;
+    background: #FEEDB9;
+    height:100%;
+}
+
+
+/* Header:
+**********/
+#header {
+    position:absolute;
+    top:0;
+    margin: 0 9% 0 9%;
+    width: 82%;
+    padding-left: 75px;
+    height: 90px;
+    background: transparent;
+    z-index:40;
+}
+
+#header h1{
+    padding-top: 1ex;
+    padding-bottom: 0;
+    font-size: 2.3em;
+    font-weight: bold;
+    font-variant: small-caps;
+    width:50%;
+    line-height: 0.8;
+}
+#header h1 a {
+    color:#2F4600;
+    border:none;
+}
+#header h1 a:hover {
+    color: black;
+    border:none;
+}
+#header #intro{
+    position:absolute;
+    top:1ex;
+    left:51%;
+    width:45%;
+}
+#header .bothead {
+    position:absolute;
+    top:73px;
+    color:white;
+    font-size: 0.8em;
+}
+#header .bothead a, #header .bothead a:hover {
+    color: white;
+    border-color: white;
+}
+#header #infos {
+    left:5%;
+}
+#header #rights {
+    right:5%;
+    text-align:right;
+}
+
+.col-md-10.leftbar,.col-md-2.rightbar{
+height:100%;
+}
+
+.row.mainrow{
+	height:800px;
+}
+
+.map{
+	height: 800px;
+	width: 100%;
+background: transparent
+}
+
+.labeldate{
+	text-align: right;
+}
+
+.labeldate span{
+	vertical-align: middle;
+    line-height: 33px;
+}
+
+.dataslider{
+	text-align:left;
+}
+
+.dataslider span{
+	vertical-align: middle;
+    line-height: 33px;
+	margin-left: 20px;
+}
+
+
+/* Step list:
+*************/
+
+#steps{
+  	height: 100%;
+}
+
+#steps .panel-body{
+	padding: 0 !important;
+}
+
+#steps ol{
+    /*border: 1px solid #4E7301;
+    background: #ece29f; */
+    max-height:88%;
+    /*margin: 0;
+    padding: 0;*/
+    height:100%;
+    overflow: auto;
+    display: block;
+}
+#steps ol li {
+	/*
+    padding: 0;
+    margin: 0;
+    border: none;
+    display:block;
+    clear:both;*/
+}
+#steps .way{
+	/*
+    background: #a1b747;
+    border-top: 1px solid #4E7301;
+    border-bottom: 1px solid #4E7301;
+	*/
+}
+#steps .place{
+    background: #ece29f;
+}
+#steps .hover{
+    background: red !important;
+    color: black;
+}
+#steps .date{
+    display: block;
+    float: left;
+    margin-left:0;
+    width:3em;
+    text-align: center;
+    background:#a1b747;
+    border-right: 1px solid #4E7301;
+    border-bottom: 1px solid #4E7301;
+    padding-top: 0.3em;
+    margin-right: 0.5em;
+}
+#steps .date .day{
+    font-weight: bold;
+    font-size: 1.5em;
+    line-height: 0.7;
+}
+#steps .month, #steps .year{
+    font-variant: small-caps;
+    font-weight:bold;
+    font-size: 0.75em;
+    line-height: 0.7;
+}
+#steps .duration, #steps .distance, #steps .hdiff, #steps .gpx{
+    font-style: italic;
+    color:black;
+    font-size: 90%;
+}
+.gpx{
+    font-variant: small-caps;
+}
+
+/* Content:
+***********/
+
+#content {
+    margin-right: 16%;
+    padding-top:20px;
+    height: 90%;
+    z-index: 10;
+}
+
+#content #map{
+    height: 100%;
+    width: 100%;
+    background: white;
+}
+
+
+/* Footer :
+***********/
+
+#footer {
+    position:absolute;
+    bottom:0;
+    left:10%;
+    clear:both;
+    margin: 0;
+    padding: 1ex 4em;
+    background: #ECE29F;
+    text-align:center;
+    width:80%;
+    font-size:80%;
+}

@@ -1,0 +1,23 @@
+
+span.date-label{
+	font-size: 15px;
+    float: left;
+    margin-right: 20px;
+    line-height: 30px;
+	text-align: right;
+    width: 100%;
+}
+
+#element-counter{
+    float: right;
+}
+
+#element-counter .col-xs-10{
+    margin: 0;
+    width: 60%;
+    padding: 0;
+}
+
+#element-counter input{
+	text-align:center;
+}
