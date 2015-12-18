@@ -161,6 +161,7 @@ class CustomersController extends AbstractActionController
                 case 'setting':
                     $form = $this->settingForm;
                     $postData['setting']['id'] = $customer->getId();
+                    $postData['setting']['enabled'] = $customer->getEnabled() ? 'true' : 'false';
                     break;
             }
 
