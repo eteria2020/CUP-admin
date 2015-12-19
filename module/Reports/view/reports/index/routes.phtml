@@ -1,0 +1,43 @@
+<!-- Begin page content -->
+<div class="container col-md-12">
+	<div class="row mainrow">
+		<div class="col-md-12">
+				<div class="btn-toolbar" role="toolbar">
+                    <div class="col-md-2 labeldate">
+					   	<span>Verranno caricati le </span>
+					</div>
+					<div class="col-md-4 dataslider">
+						<input id="ex6" type="text" data-slider-min="50" data-slider-max="300" data-slider-step="25" data-slider-value="100"/>
+						<span id="ex6CurrentSliderValLabel"><span id="ex6SliderVal">100 corse prima di</span></span>
+					</div>
+                    <div class="col-md-3">
+						<div class='input-group date' id='datetimepicker1'>
+		                    <input type='text' class="form-control" />
+		                    <span class="input-group-addon">
+		                        <span class="glyphicon glyphicon-calendar"></span>
+		                    </span>
+		                </div>
+					</div>
+					<div class="col-md-2">
+					<button id="dataupdate" type="button" class="btn btn-default" aria-label="Left Align">
+						Aggiorna Dati
+					  <span class=" glyphicon glyphicon-refresh" aria-hidden="true"></span>
+					</button>
+					</div>
+				</div>
+			<div class="clearfix visible-xs-block"></div>
+		</div>
+        <div class="col-md-10 leftbar">
+			<div id="map" class="map"></div>
+
+		</div>
+        <div class="col-md-2 rightbar">
+        	<div id="steps" class="side   panel panel-default">
+				<div class="panel-heading">
+			    	<h3 class="panel-title">Trips </h3>
+		  		</div>
+				<ol class="list-group panel-body" id="trips"></ol>
+			</div>
+		</div>
+	</div>
+</div>

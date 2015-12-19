@@ -7,6 +7,9 @@
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
 
+// Getting the siteroot path ( = sharengo-admin folder)
+$baseDir = realpath(__DIR__ . '/../../../');
+
 return array(
     'router' => array(
         'routes' => array(
@@ -21,18 +24,51 @@ return array(
                 ),
                 'may_terminate' => true,
                 'child_routes' => array(
-                    'default' => array(
-                        'type'    => 'Segment',
-                        'options' => array(
-                            'route'    => '/[:controller[/:action]]',
-                            'constraints' => array(
-                                'controller' => '[a-zA-Z][a-zA-Z0-9_-]*',
-                                'action'     => '[a-zA-Z][a-zA-Z0-9_-]*',
-                            ),
-                            'defaults' => array(
-                            ),
-                        ),
-                    ),
+		            'trips' => [
+                        'type'    => 'Literal',
+                        'options' => [
+                            'route'    => '/trips',
+                            'defaults' => [
+                                'action' => 'trips',
+                            ],
+                        ],
+                    ],
+                    'map' => [
+                        'type'    => 'Literal',
+                        'options' => [
+                            'route'    => '/map',
+                            'defaults' => [
+                                'action' => 'map',
+                            ],
+                        ],
+                    ],
+                    'live' => [
+                        'type'    => 'Literal',
+                        'options' => [
+                            'route'    => '/live',
+                            'defaults' => [
+                                'action' => 'live',
+                            ],
+                        ],
+                    ],
+                    'routes' => [
+                        'type'    => 'Literal',
+                        'options' => [
+                            'route'    => '/routes',
+                            'defaults' => [
+                                'action' => 'routes',
+                            ],
+                        ],
+                    ],
+                    'tripscity' => [
+                        'type'    => 'Literal',
+                        'options' => [
+                            'route'    => '/tripscity',
+                            'defaults' => [
+                                'action' => 'tripscity',
+                            ],
+                        ],
+                    ],
                 ),
             ),
         ),
@@ -42,6 +78,36 @@ return array(
             'Reports\Controller\Index' => 'Reports\Controller\IndexController',
         ]
     ),
+    
+    'asset_manager' => [
+        'resolver_configs' => [
+            'collections' => [
+	            'assets-modules/reports/css/vendors.css' => array(
+                    'bootstrap/less/scaffolding.less',
+                    //'bootstrap/dist/css/bootstrap.min.css',
+                    //'font-awesome/css/font-awesome.css',
+                ),
+                
+				'assets-modules/reports/js/vendors.js' => [
+					'jquery/dist/jquery.js',
+					'bootstrap/dist/js/bootstrap.js',
+				]
+            ],
+            'paths' => array(
+                'reports' => __DIR__ . '/../public',
+                $baseDir. '/bower_components',
+            ),
+        ],
+        'filters' => array(
+	        // Converting less --> css
+	        'assets-modules/reports/css/vendors.css' => [
+		        [
+			        'filter' => 'Lessphp',
+		        ],
+		    ],
+        ),
+    ],
+	            
 
     'view_manager' => array(
         'template_map' => [

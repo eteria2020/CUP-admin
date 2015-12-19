@@ -19,6 +19,45 @@ class IndexController extends AbstractActionController
 
         $this->layout('layout/reports');
 
+        $viewModel = new ViewModel();
+        $viewModel->setVariables(array());
+        return $viewModel;
+    }
+    public function mapAction()
+    {
+
+        $this->layout('layout/reports');
+
+
+        $viewModel = new ViewModel();
+        $viewModel->setVariables(array());
+        return $viewModel;
+    }
+    public function routesAction()
+    {
+
+        $this->layout('layout/reports');
+
+
+        $viewModel = new ViewModel();
+        $viewModel->setVariables(array());
+        return $viewModel;
+    }
+    public function liveAction()
+    {
+
+        $this->layout('layout/reports');
+
+
+        $viewModel = new ViewModel();
+        $viewModel->setVariables(array());
+        return $viewModel;
+    }
+    public function tripscityAction()
+    {
+
+        $this->layout('layout/reports');
+
 
         $viewModel = new ViewModel();
         $viewModel->setVariables(array());
