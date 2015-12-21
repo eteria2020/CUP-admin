@@ -69,6 +69,45 @@ return array(
                             ],
                         ],
                     ],
+                    'api' => [
+	                    'type'	=> 'Literal',
+	                    'options'	=>	[
+		                    'route'    => '/api',
+		                    'defaults' => [
+			                    'controller' => 'Reports\Controller\Api',
+		                    ],
+	                    ],
+	                    'may_terminate' => true,
+						'child_routes' => [
+							'get-cities' => [
+		                        'type'    => 'Literal',
+		                        'options' => [
+		                            'route'    => '/get-cities',
+		                            'defaults' => [
+		                                'action' => 'get-cities',
+		                            ],
+		                        ],
+		                    ],
+		                    'get-all-trips' => [
+		                        'type'    => 'Literal',
+		                        'options' => [
+		                            'route'    => '/get-all-trips',
+		                            'defaults' => [
+		                                'action' => 'get-all-trips',
+		                            ],
+		                        ],
+		                    ],
+		                    'get-city-trips' => [
+		                        'type'    => 'Literal',
+		                        'options' => [
+		                            'route'    => '/get-city-trips',
+		                            'defaults' => [
+		                                'action' => 'get-city-trips',
+		                            ],
+		                        ],
+		                    ],	
+						],
+                    ],
                 ),
             ),
         ),
@@ -76,8 +115,17 @@ return array(
     'controllers' => array(
         'invokables' => [
             'Reports\Controller\Index' => 'Reports\Controller\IndexController',
-        ]
+        ],
+        'factories' => [
+			'Reports\Controller\Api' => 'Reports\Controller\ApiControllerFactory',
+        ],
     ),
+    
+    'service_manager' => [
+	    'factories' => [
+			'Reports\Service\Reports' => 'Reports\Service\ReportsServiceFactory',    
+	    ],
+    ],
     
     'asset_manager' => [
         'resolver_configs' => [
@@ -123,8 +171,8 @@ return array(
         'guards' => array(
             'BjyAuthorize\Guard\Controller' => array(
 
-                array('controller' => 'Reports\Controller\Index', 'roles' => array('admin','callcenter'))
-
+                ['controller' => 'Reports\Controller\Index', 'roles' => ['admin','callcenter']],
+				['controller' => 'Reports\Controller\Api', 'roles' => ['admin','callcenter']],
             ),
         ),
     ),
