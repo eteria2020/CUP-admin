@@ -17,8 +17,6 @@ class ReportsService
 	
 	public function getCities()
 	{
-		//$this->database->setFetchMode(PDO::FETCH_OBJ);
-		
 		$query = "
 			SELECT row_to_json(fc)
 			FROM (
@@ -36,7 +34,10 @@ class ReportsService
 			) AS fc
 		";
 		
+		// Fetch all rows (but in this case will always fetch just one row)
+		$cities = $this->database->fetchAll($query);
 		
-		return $this->database->fetchAll($query);
+		// Return the undecoded JSON
+		return $cities[0]['row_to_json'];
 	}
 }

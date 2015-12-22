@@ -23,9 +23,12 @@ class ApiController extends AbstractActionController
 
 	public function getCitiesAction()
 	{
+		// Get the cities, in JSON format
 		$cities = $this->reportsService->getCities();
-
-		return new JsonModel(json_decode($cities[0]['row_to_json'], true));
+		
+		// So, considering that JsonModel constructor convert an array to JSON
+		// we need to decode our json to an array before passing it as parameter to JsonModel constructor 
+		return new JsonModel(json_decode($cities, true));
 	}
 	
 	public function getAllTripsAction()
