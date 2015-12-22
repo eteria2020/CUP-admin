@@ -52,7 +52,7 @@ $form->setAttribute('action', $this->url('cars/ajax-tab-edit', ['plate' => $this
         </div>
 
         <div class="row">
-            <div class="col-lg-3">
+            <div class="col-lg-5">
                 <div class="form-group">
                     <label for="gender">Note</label>
                     <?= $this->formRow($form->get('car')->get('notes')); ?>
@@ -89,13 +89,6 @@ $form->setAttribute('action', $this->url('cars/ajax-tab-edit', ['plate' => $this
                             <?= $this->formRow($form->get('location')); ?>
                         <?php endif; ?>
                     </div>
-                </div>
-            </div>
-
-            <div class="col-lg-2">
-                <div class="form-group">
-                    <label for="surname">Nascosta</label>
-                    <?= $this->formRow($form->get('car')->get('hidden')); ?>
                 </div>
             </div>
         </div>

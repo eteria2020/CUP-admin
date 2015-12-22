@@ -104,21 +104,6 @@ class CarFieldset extends Fieldset implements InputFilterProviderInterface
         ]);
 
         $this->add([
-            'name'       => 'hidden',
-            'type'       => 'Zend\Form\Element\Select',
-            'attributes' => [
-                'id'    => 'busy',
-                'class' => 'form-control',
-            ],
-            'options'    => [
-                'value_options' => [
-                    0 => "Non Nascosta",
-                    1 => "Nascosta"
-                ]
-            ]
-        ]);
-
-        $this->add([
             'name'       => 'fleet',
             'type'       => 'Zend\Form\Element\Select',
             'attributes' => [
@@ -207,15 +192,7 @@ class CarFieldset extends Fieldset implements InputFilterProviderInterface
                         'name' => 'StringTrim'
                     ]
                 ]
-            ],
-            'hidden'        => [
-                'required' => true,
-                'filters'  => [
-                    [
-                        'name' => 'StringTrim'
-                    ]
-                ]
-            ],
+            ]
         ];
     }
 
