@@ -8,6 +8,7 @@ use SharengoCore\Entity\Customers;
 use SharengoCore\Exception\CustomerNotFoundException;
 use SharengoCore\Service\CustomerDeactivationService;
 use SharengoCore\Service\CustomersService;
+use SharengoCore\Service\TripPaymentTriesService;
 
 use DoctrineModule\Stdlib\Hydrator\DoctrineObject as DoctrineHydrator;
 use Zend\Form\Form;
@@ -51,6 +52,7 @@ class CustomersEditController extends AbstractActionController
     /**
      * @param CustomersService $customersService
      * @param CustomerDeactivationService $deactivationService
+     * @param TripPaymentTriesService $tripPaymentTriesService
      * @param DoctrineHydrator $hydrator
      * @param CustomerForm $customerForm
      * @param DriverForm $driverForm
@@ -59,6 +61,7 @@ class CustomersEditController extends AbstractActionController
     public function __construct(
         CustomersService $customersService,
         CustomerDeactivationService $deactivationService,
+        TripPaymentTriesService $tripPaymentTriesService,
         DoctrineHydrator $hydrator,
         CustomerForm $customerForm,
         DriverForm $driverForm,
@@ -66,6 +69,7 @@ class CustomersEditController extends AbstractActionController
     ) {
         $this->customersService = $customersService;
         $this->deactivationService = $deactivationService;
+        $this->tripPaymentTriesService = $tripPaymentTriesService;
         $this->hydrator = $hydrator;
         $this->customerForm = $customerForm;
         $this->driverForm = $driverForm;
@@ -133,7 +137,9 @@ class CustomersEditController extends AbstractActionController
     }
 
     /**
-     * Removes all CustomerDeactivations for the current Customer
+     * Removes all CustomerDeactivations for the current Customer.
+     * If a tripPaymentTries id is specified, it reactivates only FAILED_PAYMENT
+     * deactivations
      */
     public function reactivateAction()
     {
@@ -141,8 +147,32 @@ class CustomersEditController extends AbstractActionController
         $webuser = $this->identity();
 
         try {
-            $this->deactivationService->reactivateCustomer($customer, $webuser);
-            $this->flashMessenger()->addSuccessMessage('Utente riattivato');
+            /*
+             * If there is a TripPaymentTries id then reactivate only for that.
+             * This part has been added to expose this functionality without
+             * duplicating code
+             */
+            if ($this->params()->fromPost('tripPaymentTriesId') !== null) {
+                $tripPaymentTry = $this->tripPaymentTriesService->getById(
+                    $this->params()->fromPost('tripPaymentTriesId')
+                );
+                $this->deactivationService->reactivateCustomerForTripPaymentTry(
+                    $customer,
+                    $tripPaymentTry,
+                    $webuser
+                );
+                $this->flashMessenger()->addSuccessMessage(
+                    'Riattivazione per pagamento riuscito completata'
+                );
+                return new JsonModel();
+            /*
+             * If no params are provided, reactivate all.
+             * This is the part used by the customers-edit view
+             */
+            } else {
+                $this->deactivationService->reactivateCustomer($customer, $webuser);
+                $this->flashMessenger()->addSuccessMessage('Utente riattivato');
+            }
         } catch (Exception $e) {
             $this->flashMessenger()->addErrorMessage('Operazione fallita');
         }

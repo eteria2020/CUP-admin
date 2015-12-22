@@ -14,6 +14,7 @@ class CustomersEditControllerFactory implements FactoryInterface
 
         $customersService = $sharedLocator->get('SharengoCore\Service\CustomersService');
         $deactivationService = $sharedLocator->get('SharengoCore\Service\CustomerDeactivationService');
+        $tripPaymentTriesService = $sharedLocator->get('SharengoCore\Service\TripPaymentTriesService');
         $entityManager = $sharedLocator->get('doctrine.entitymanager.orm_default');
         $hydrator = new DoctrineHydrator($entityManager);
         $customerForm = $sharedLocator->get('CustomerForm');
@@ -23,6 +24,7 @@ class CustomersEditControllerFactory implements FactoryInterface
         return new CustomersEditController(
             $customersService,
             $deactivationService,
+            $tripPaymentTriesService,
             $hydrator,
             $customerForm,
             $driverForm,

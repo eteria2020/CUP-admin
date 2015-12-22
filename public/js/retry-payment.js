@@ -1,5 +1,7 @@
 /* global $ retryUrl abilitateUrl tripPaymentId window listUrl */
 
+var tripPaymentTryId = null;
+
 $(function () {
     "use strict";
 
@@ -10,6 +12,7 @@ $(function () {
             $('#js-new-try').hide();
             if (data.outcome === 'OK') {
                 $('#js-completed-message').removeClass('hidden');
+                tripPaymentTryId = data.tripPaymentTriesId;
             } else {
                 $('#js-refused-message').removeClass('hidden');
                 if (data.message.length > 0) {
@@ -23,7 +26,7 @@ $(function () {
 
     $('#js-abilitate-customer').click(function() {
         $.post(abilitateUrl, {
-            sendMail: $('#send-mail').is(':checked')
+            tripPaymentTriesId: tripPaymentTryId
         }).done(function () {
             window.location.replace(listUrl);
         });

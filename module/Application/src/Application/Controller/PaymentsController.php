@@ -174,7 +174,8 @@ class PaymentsController extends AbstractActionController
 
             return new JsonModel([
                 'outcome' => $cartasiResponse->getOutcome(),
-                'message' => $cartasiResponse->getMessage()
+                'message' => $cartasiResponse->getMessage(),
+                'tripPaymentTriesId' => $tripPayment->getTripPaymentTries()[0]->getId()
             ]);
         } else {
             return new JsonModel([

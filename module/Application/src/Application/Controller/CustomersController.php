@@ -490,22 +490,6 @@ class CustomersController extends AbstractActionController
         return $view;
     }
 
-    public function activateAction()
-    {
-        $customer = $this->getCustomer();
-        $sendMail = $this->params()->fromPost('sendMail');
-
-        try {
-            $this->customersService->enableCustomer($customer, $sendMail);
-
-            $this->flashMessenger()->addSuccessMessage('Utente riabilitato con successo!');
-        } catch (\Exception $e) {
-            $this->flashMessenger()->addErrorMessage('Errore durante la riabilitazione dell\'utente');
-        }
-
-        return new JsonModel();
-    }
-
     public function infoAction()
     {
         try {
