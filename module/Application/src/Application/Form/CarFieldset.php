@@ -192,15 +192,7 @@ class CarFieldset extends Fieldset implements InputFilterProviderInterface
                         'name' => 'StringTrim'
                     ]
                 ]
-            ],
-            'hidden'        => [
-                'required' => true,
-                'filters'  => [
-                    [
-                        'name' => 'StringTrim'
-                    ]
-                ]
-            ],
+            ]
         ];
     }
 
