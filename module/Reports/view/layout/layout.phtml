@@ -10,10 +10,15 @@
 
 	<!-- CSS -->
 	<?php echo $this->headLink()
+			->prependStylesheet($this->basePath()."/bootstrap/dist/css/bootstrap.css")
 			->prependStylesheet($this->basePath()."/assets-modules/reports/css/vendors.css");?>
 			
 </head>
-
+	<?php
+		$thisPageUrl = $this->getHelperPluginManager()->getServiceLocator()->get('Application')
+               ->getMvcEvent()->getRouteMatch()->getMatchedRouteName();	
+    
+    ?>	
 	<body data-spy="scroll">
 
 	<!-- Fixed navbar -->
@@ -30,7 +35,12 @@
 			</div>
 			<div id="navbar" class="collapse navbar-collapse">
 				<ul class="nav navbar-nav">
-					<?php echo "MENU ELEMENTS HERE";
+					<li><a href="trips">Trips</a></li>
+					<li><a href="map">Map</a></li>
+					<li><a href="routes">Routes</a></li>
+					<li><a href="live">Live</a></li>
+
+					<?php 
 
 					/* Structure like:
 						<li class="active"><a href="this.php">This page</a></li>
@@ -44,17 +54,10 @@
 		</div>
 	</nav>
 	
-	<div class="container bs-docs-container">
-	    <div class="page-header">
-	        <h1><?php echo "TITLE HERE"; ?></h1>
-	    </div>
 	
-	    <div class="row">
-			<!-- Begin page content -->
-		    <?php echo $this->content; ?>
-	    </div>
-	</div>
-
+	<!-- Begin page content -->
+    <?php echo $this->content; ?>
+	   
 	<footer class="footer">
 		<div class="container">
 			<p class="text-muted">&reg;Omniaevo S.r.l. 2015</p>
@@ -63,6 +66,7 @@
 
 	<!-- Scripts -->
     <?php echo $this->headScript()
-	    	->prependFile($this->basePath()."/assets-modules/reports/js/vendors.js"); ?>
+	    	->prependFile($this->basePath()."/assets-modules/reports/js/vendors.js")
+	    	->appendFile($this->basePath()."/bootstrap/dist/js/bootstrap.js"); ?>
 </body>
 </html>

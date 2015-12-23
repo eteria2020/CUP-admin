@@ -61,9 +61,12 @@ return array(
                         ],
                     ],
                     'tripscity' => [
-                        'type'    => 'Literal',
+                        'type'    => 'Segment',
                         'options' => [
-                            'route'    => '/tripscity',
+                            'route'    => '/tripscity/:id',
+                            'constraints' => [
+                                'id' => '[0-9]*'
+                            ],
                             'defaults' => [
                                 'action' => 'tripscity',
                             ],
@@ -105,6 +108,18 @@ return array(
 		                                'action' => 'get-city-trips',
 		                            ],
 		                        ],
+		                    ],
+		                    'get-urban-areas' => [
+		                        'type'    => 'Segment',
+		                        'options' => [
+				                    'route'    => '/get-urban-areas/:city',
+		                            'constraints' => [
+		                                'city' => '[0-9]*'
+		                            ],
+		                            'defaults' => [
+		                                'action' => 'get-urban-areas',
+		                            ],
+		                        ],
 		                    ],	
 						],
                     ],
@@ -129,31 +144,28 @@ return array(
     
     'asset_manager' => [
         'resolver_configs' => [
+	        'map' => [
+		    	'assets-modules/reports/js/dc.js.map' => $baseDir. '/bower_components/dcjs/dc.js.map',
+		    	'assets-modules/reports/js/dc.js' => $baseDir. '/bower_components/dcjs/dc.js',
+	        ],
             'collections' => [
-	            'assets-modules/reports/css/vendors.css' => array(
-                    'bootstrap/less/scaffolding.less',
-                    //'bootstrap/dist/css/bootstrap.min.css',
-                    //'font-awesome/css/font-awesome.css',
-                ),
-                
+	            'assets-modules/reports/css/vendors.css' => [
+                    'font-awesome/css/font-awesome.css',
+                    'dcjs/dc.css',
+                ],
 				'assets-modules/reports/js/vendors.js' => [
 					'jquery/dist/jquery.js',
-					'bootstrap/dist/js/bootstrap.js',
-				]
+					'assets-modules/reports/js/menu.js',
+					'crossfilter/crossfilter.js',
+					'd3/d3.js',
+					'dcjs/dc.js',
+				],
             ],
-            'paths' => array(
+            'paths' => [
                 'reports' => __DIR__ . '/../public',
                 $baseDir. '/bower_components',
-            ),
+            ],
         ],
-        'filters' => array(
-	        // Converting less --> css
-	        'assets-modules/reports/css/vendors.css' => [
-		        [
-			        'filter' => 'Lessphp',
-		        ],
-		    ],
-        ),
     ],
 	            
 

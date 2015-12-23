@@ -177,3 +177,7 @@ div.panel .chart-label{
 .bs-docs-sidebar.affix-top{
 		top: 80px;
 }
+
+.dc-chart > .reset{
+	display: none !important;
+}

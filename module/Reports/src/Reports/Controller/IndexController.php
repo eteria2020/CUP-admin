@@ -47,7 +47,7 @@ class IndexController extends AbstractActionController
     {
 
         $this->layout('layout/reports');
-
+        
 
         $viewModel = new ViewModel();
         $viewModel->setVariables(array());
@@ -55,12 +55,13 @@ class IndexController extends AbstractActionController
     }
     public function tripscityAction()
     {
-
+		
         $this->layout('layout/reports');
-
+		
+		$city = $this->params()->fromRoute('id', 0);
 
         $viewModel = new ViewModel();
-        $viewModel->setVariables(array());
+        $viewModel->setVariables(['city' => $city]);
         return $viewModel;
     }
 }

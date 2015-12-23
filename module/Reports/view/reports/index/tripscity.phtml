@@ -1,3 +1,20 @@
+<?
+	
+	/*$this->headScript()
+		->appendFile('/js/datatables/media/js/jquery.dataTables.min.js')
+		->appendFile('/js/datatables/plugins/bootstrap/dataTables.bootstrap.js')
+		->appendFile($this->basePath() .'/js/invoices.js');*/
+	
+	$this->headScript()
+		->appendFile('/assets-modules/reports/js/trips.city.min.js')
+		->prependScript('global["thiscity"]='.$this->city.';');			// Getting the actual city id (from the controller), and save it to js global vars
+	
+	$this->headLink()
+		->appendStylesheet($this->basePath() . '/assets-modules/reports/css/trips.main.css');
+		
+		//->prependStylesheet('https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css');
+		
+?>
 <!-- Begin page content -->
 <div class="container bs-docs-container">
 		<div class="page-header">
@@ -17,36 +34,38 @@
 			
 			<div class="panel panel-default  affix-top" id="data-range">
 				<div class="panel-heading">
-					Intervallo  (ultimi 28 giorni). Dal <span id="dateFrom"></span> Al <span id="dateTo"></span>
+					Intervallo (Ultimi 28 giorni)</span>
 				</div>
 				<div class="panel-body">
 					<div id="days-chart">
-						<a class="reset" href="javascript:daysChart.filterAll();dc.redrawAll();" style="display: none;"> Azzera </a>
-						<div class="clearfix"></div>
+						<span class="reset" style="display: none;"> filtro: <span class="filter"></span></span>
+				        	<a class="reset" href="javascript:global.charts.day.filterAll();dc.redrawAll();" style="display: none;"> Azzera </a>
+				        <div class="clearfix"></div>
 					</div>
 			  </div>
 			</div>
 
-				<div class="panel panel-default" id="day-of-week">
-					<div class="panel-heading">
-						Corse per giorno della settimana
-					</div>
-					<div class="panel-body">
-						<div id="day-of-week-chart">
-							<a class="reset" href="javascript:dayOfWeekChart.filterAll();dc.redrawAll();" style="display: none;"> Azzera </a>
-							<div class="clearfix"></div>
-						</div>
-					</div>
+			<div class="panel panel-default" id="day-of-week">
+				<div class="panel-heading">
+					Corse per giorno della settimana
 				</div>
-
+				<div class="panel-body">
+					<div id="day-of-week-chart">
+						<span class="reset" style="display: none;">filtro: <span class="filter"></span></span>
+				        	<a class="reset" href="javascript:global.charts.dayOfWeek.filterAll();dc.redrawAll();" style="display: none;"> Azzera </a>
+				        <div class="clearfix"></div>
+				    </div>
+				</div>
+			</div>
+			
 			<div class="panel panel-default" id="duration">
 				<div class="panel-heading">
 					Corse per durata (minuti)
 				</div>
 	            <div class="panel-body">
 	            	<div id="duration-chart">
-	                    <span class="reset" style="display: none;">intervallo: <span class="filter"></span></span>
-						<a class="reset" href="javascript:durationChart.filterAll();dc.redrawAll();" style="display: none;"> Azzera </a>
+	                    <span class="reset" style="display: none;">filtro: <span class="filter"></span></span>
+						<a class="reset" href="javascript:global.charts.durationChart.filterAll();dc.redrawAll();" style="display: none;"> Azzera </a>
 				        <div class="clearfix"></div>
 				    </div>
 				</div>
@@ -58,8 +77,8 @@
 				</div>
 				<div class="panel-body">
 				    <div id="beginning-hour-chart">
-				        <span class="reset" style="display: none;">intervallo: <span class="filter"></span></span>
-				        <a class="reset" href="javascript:hoursChart.filterAll();dc.redrawAll();" style="display: none;"> Azzera </a>
+				        <span class="reset" style="display: none;">filtro: <span class="filter"></span></span>
+				        <a class="reset" href="javascript:global.charts.beginningHour.filterAll();dc.redrawAll();" style="display: none;"> Azzera </a>
 				        <div class="clearfix"></div>
 				    </div>
 				</div>
@@ -74,7 +93,7 @@
 						<div class="panel-body">
 						    <div id="age-chart">
 						        <span class="reset" style="display: none;">range: <span class="filter"></span></span>
-						        <a class="reset" href="javascript:sexChart.filterAll();dc.redrawAll();" style="display: none;"> Azzera </a>
+						        <a class="reset" href="javascript:global.charts.age.filterAll();dc.redrawAll();" style="display: none;"> Azzera </a>
 						        <div class="clearfix"></div>
 							</div>
                             <div class="chart-label ">
@@ -92,8 +111,8 @@
 			            </div>
 						<div class="panel-body">
 						    <div id="gender-chart">
-						        <span class="reset" style="display: none;">range: <span class="filter"></span></span>
-						        <a class="reset" href="javascript:sexChart.filterAll();dc.redrawAll();" style="display: none;"> Azzera </a>
+						        <span class="reset" style="display: none;">filtro: <span class="filter"></span></span>
+						        <a class="reset" href="javascript:global.charts.gender.filterAll();dc.redrawAll();" style="display: none;"> Azzera </a>
 						        <div class="clearfix"></div>
 						    </div>
 						</div>
@@ -103,12 +122,12 @@
 
 			<div class="panel panel-default" id="area-map">
 				<div class="panel-heading">
-	            	Corse ora di inizio
+	            	Quartieri
 				</div>
 				<div class="panel-body">
 				    <div id="area-map-chart" class="area-chart">
-				        <span class="reset" style="display: none;">intervallo: <span class="filter"></span></span>
-				        <a class="reset" href="javascript:hoursChart.filterAll();dc.redrawAll();" style="display: none;"> Azzera </a>
+				        <span class="reset" style="display: none;">selezionati: <span class="filter"></span></span>
+				        <a class="reset" href="javascript:global.charts.areaChart.filterAll();dc.redrawAll();" style="display: none;"> Azzera </a>
 				        <div class="clearfix"></div>
 				    </div>
 				</div>
@@ -116,12 +135,12 @@
 
 			<div class="panel panel-default" id="area-list">
 				<div class="panel-heading">
-	            	Corse ora di inizio
+	            	Lista Quartieri
 				</div>
 				<div class="panel-body">
 				    <div id="area-list-chart">
-				        <span class="reset" style="display: none;">intervallo: <span class="filter"></span></span>
-				        <a class="reset" href="javascript:hoursChart.filterAll();dc.redrawAll();" style="display: none;"> Azzera </a>
+				        <span class="reset" style="display: none;">selezionati: <span class="filter"></span></span>
+				        <a class="reset" href="javascript:global.charts.areaListChart.filterAll();dc.redrawAll();" style="display: none;"> Azzera </a>
 				        <div class="clearfix"></div>
 				    </div>
 				</div>
