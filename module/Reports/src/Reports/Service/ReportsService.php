@@ -7,11 +7,16 @@ use PDO;
 
 class ReportsService
 {
+	// Doctrine Database
 	private $database;
 	
-	public function __construct(Connection $database) 
+	// MongoDB Database (settings in the ReportsServiceFactory)
+	private $mongodb;
+	
+	public function __construct(Connection $database,$mongodb) 
 	{
 		$this->database = $database;
+		$this->mongodb	= $mongodb;
 	}
 	
 	public function getCities()
@@ -34,6 +39,8 @@ class ReportsService
 		
 		// Fetch all rows (but in this case will always fetch just one row)
 		$cities = $this->database->fetchAll($query);
+		
+		var_dump($mongodb);
 		
 		// Return the undecoded JSON
 		return $cities[0]['row_to_json'];
@@ -120,5 +127,45 @@ class ReportsService
 		
 		// Return the undecoded JSON
 		return $urbanareas[0]['row_to_json'];
+	}
+	
+	/**
+	 * @param $start_date 	The start date to filter data
+	 * @param $end_date 	The end date to filter data
+	 * @param $begend		Determinate if return the trips beginning data, or the trips end data
+	 *						0 ==> Beginning ||  1 ==> End
+	 */
+	public function getTripsGeoData($start_date,$end_date,$begend)
+	{
+		$begend = $begend == 1 ? 'beginning' : 'end';
+		
+		$query = "
+			SELECT row_to_json(fc)
+			FROM (
+				SELECT 	'FeatureCollection' 		As type,
+					array_to_json(array_agg(f)) 	As features   
+				FROM (
+					SELECT 		'Feature' 								As type ,
+								ST_AsGeoJSON(ua.geo_".$begend.")::json 	As geometry
+								
+					FROM 		trips As ua
+		
+					LEFT JOIN 	customers c ON c.id = ua.customer_id
+		
+					WHERE 		ua.payable 						= true 	AND
+								c.gold_list 					= false AND
+								c.maintainer 					= false AND
+								ua.timestamp_end 				IS NOT NULL	AND
+								ua.timestamp_".$begend."		>= '".$start_date."'  	AND
+								ua.timestamp_".$begend."		<= '".$end_date."' 
+					ORDER BY 	ua.id DESC
+				) As f
+			)  As fc";
+		
+		// Fetch all rows (but in this case will always fetch just one row)
+		$geodata = $this->database->fetchAll($query);
+		
+		// Return the undecoded JSON
+		return $geodata[0]['row_to_json'];
 	}
 }

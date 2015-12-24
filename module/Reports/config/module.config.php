@@ -120,6 +120,15 @@ return array(
 		                                'action' => 'get-urban-areas',
 		                            ],
 		                        ],
+		                    ],
+		                    'get-trips-geo-data' => [
+		                        'type'    => 'Literal',
+		                        'options' => [
+		                            'route'    => '/get-trips-geo-data',
+		                            'defaults' => [
+		                                'action' => 'get-trips-geo-data',
+		                            ],
+		                        ],
 		                    ],	
 						],
                     ],
@@ -152,13 +161,28 @@ return array(
 	            'assets-modules/reports/css/vendors.css' => [
                     'font-awesome/css/font-awesome.css',
                     'dcjs/dc.css',
+                    'seiyria-bootstrap-slider/dist/css/bootstrap-slider.css',
+                    'bootstrap-datepicker/dist/css/bootstrap-datepicker3.css',
+                    'eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.css',
+                ],
+                //	Map Css
+                'assets-modules/reports/css/mapvendors.css' => [
+	                'ol3/ol.css',
                 ],
 				'assets-modules/reports/js/vendors.js' => [
 					'jquery/dist/jquery.js',
+                    'moment/moment.js',
 					'assets-modules/reports/js/menu.js',
 					'crossfilter/crossfilter.js',
 					'd3/d3.js',
 					'dcjs/dc.js',
+                    'seiyria-bootstrap-slider/dist/bootstrap-slider.min.js',
+                    'bootstrap-datepicker/dist/js/bootstrap-datepicker.js',
+                    'eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js',
+				],
+				//	Map Javascript
+				'assets-modules/reports/js/mapvendors.js' => [
+					'ol3/ol.js',
 				],
             ],
             'paths' => [

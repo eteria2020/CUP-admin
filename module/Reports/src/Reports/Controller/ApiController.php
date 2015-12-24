@@ -204,4 +204,47 @@ class ApiController extends AbstractActionController
 		
 		return $this->response;
 	}
+	
+	public function getTripsGeoDataAction()
+	{
+		$start_date = "";
+		$end_date	= "";
+		$begend		= -1;
+		
+		// Getting Post vars
+		if ($this->getRequest()->isPost()) {
+            $postData = $this->getRequest()->getPost()->toArray();
+            
+            if (!isset($postData["end_date"]) && !isset($postData["begend"])) {
+	            $this->getResponse()->setStatusCode(Response::STATUS_CODE_404);
+	            return false;
+	        }else{
+		        $end_date 	= $postData["end_date"];
+		        $begend 	= $postData["begend"];
+	        }
+	        
+	        // If the start_date is null, will set it with 30 days before the end_date
+	        if (!isset($postData["start_date"]) || $postData["start_date"] == "") {
+				$date  		= new DateTime($end_date);
+				$interval 	= new DateInterval('P30D');
+				
+				$date->sub($interval);
+				$start_date = $date->format('d-m-Y 23:59:59');
+	        }else{
+		        $start_date = $postData["start_date"];
+	        }
+
+	    }else{
+	        $this->getResponse()->setStatusCode(Response::STATUS_CODE_404);
+	        return false;
+        }   
+		
+		// Get the trips geo data, in JSON format
+		$tripsgeodata = $this->reportsService->getTripsGeoData($start_date,$end_date,$begend);
+		
+		// So, we don't need to use a JsonModel,but simply use an Http Response
+		$this->response->setContent($tripsgeodata);
+		
+		return $this->response;
+	}
 }
