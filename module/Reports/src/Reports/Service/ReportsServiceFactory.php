@@ -4,7 +4,10 @@ namespace Reports\Service;
 
 use Zend\ServiceManager\FactoryInterface;
 use Zend\ServiceManager\ServiceLocatorInterface;
-use MongoDB\Driver\Manager;
+
+
+use MongoDB;
+
 
 class ReportsServiceFactory implements FactoryInterface
 {
@@ -13,8 +16,7 @@ class ReportsServiceFactory implements FactoryInterface
 		//$database = $serviceLocator->get('doctrine.entitymanager.orm_default');
 		$database = $serviceLocator->get('doctrine.connection.orm_default');
 		
-		$mongodb = new Manager("mongodb://127.0.0.1:27017");
-		$mongodb = $mongodb->sharengo;
+		$mongodb = new MongoDB\Driver\Manager("mongodb://core.sharengo.it:27017");
 		
 		return new ReportsService($database,$mongodb);
 	}

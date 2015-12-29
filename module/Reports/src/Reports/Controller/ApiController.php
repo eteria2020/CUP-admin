@@ -247,4 +247,49 @@ class ApiController extends AbstractActionController
 		
 		return $this->response;
 	}
+	
+	public function getTripsFromLogsAction()
+	{
+		$start_date = "";
+		$end_date	= "";
+		
+		// Getting Post vars
+		/*if ($this->getRequest()->isPost()) {
+            $postData = $this->getRequest()->getPost()->toArray();
+            
+            if (!isset($postData["end_date"])) {
+	            $this->getResponse()->setStatusCode(Response::STATUS_CODE_404);
+	            return false;
+	        }else{
+		        $end_date 	= $postData["end_date"];
+	        }
+	        
+	        // If the start_date is null, will set it with 30 days before the end_date
+	        if (!isset($postData["start_date"]) || $postData["start_date"] == "") {
+				$date  		= new DateTime($end_date);
+				$interval 	= new DateInterval('P1D');
+				
+				$date->sub($interval);
+				$start_date = $date->format('d-m-Y 23:59:59');
+	        }else{
+		        $start_date = $postData["start_date"];
+	        }
+
+	    }else{
+	        $this->getResponse()->setStatusCode(Response::STATUS_CODE_404);
+	        return false;
+        }   
+        */
+        $start_date = "2015-12-01 00:00:00";
+        $end_date = "2015-12-02 00:00:00";
+        
+		// Get the trips data, in JSON format
+		$tripsdata = $this->reportsService->getTripsFromLogs($start_date,$end_date);
+		
+		// So, we don't need to use a JsonModel,but simply use an Http Response
+		$this->response->setContent($tripsdata);
+		
+		return $this->response;
+
+	}
 }

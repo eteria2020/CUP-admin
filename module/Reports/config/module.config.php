@@ -129,7 +129,16 @@ return array(
 		                                'action' => 'get-trips-geo-data',
 		                            ],
 		                        ],
-		                    ],	
+		                    ],
+		                    'get-trips-from-logs' => [
+		                        'type'    => 'Literal',
+		                        'options' => [
+		                            'route'    => '/get-trips-from-logs',
+		                            'defaults' => [
+		                                'action' => 'get-trips-from-logs',
+		                            ],
+		                        ],
+		                    ],		
 						],
                     ],
                 ),

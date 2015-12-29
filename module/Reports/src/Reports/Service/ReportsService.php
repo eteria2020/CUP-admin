@@ -4,6 +4,7 @@ namespace Reports\Service;
 
 use Doctrine\DBAL\Connection;
 use PDO;
+use MongoDB;
 
 class ReportsService
 {
@@ -40,7 +41,7 @@ class ReportsService
 		// Fetch all rows (but in this case will always fetch just one row)
 		$cities = $this->database->fetchAll($query);
 		
-		var_dump($mongodb);
+		//var_dump($mongodb);
 		
 		// Return the undecoded JSON
 		return $cities[0]['row_to_json'];
@@ -167,5 +168,72 @@ class ReportsService
 		
 		// Return the undecoded JSON
 		return $geodata[0]['row_to_json'];
+	}
+	
+	/**
+	 * @param $start_date 	The start date to filter data
+	 * @param $end_date 	The end date to filter data
+	 *
+	 */
+	public function getTripsFromLogs($start_date,$end_date)
+	{
+		
+		// Converting Dates
+		$end	= new MongoDB\BSON\UTCDateTime(strtotime($end_date)*1000);
+		$start	= new MongoDB\BSON\UTCDateTime(strtotime($start_date)*1000);
+		
+		$filter = [
+			
+			'id_trip' 	=> ['$ne' => 0],
+            'begin_trip'=> ['$ne' => 'null'],
+            'end_trip' 	=> ['$ne' => 'null'],
+			'lon'		=> ['$gt' => 0],
+			'lat'		=> ['$gt' => 0],
+		];
+
+		$pipeline = [
+			// STAGE 1
+	      	['$match' => [
+	        	'log_time'	=> ['$gte' => $start, '$lte' => $end],
+	        	'id_trip' 	=> array('$ne' => 0),
+	            'begin_trip'=> array('$ne' => 'null'),
+	            'end_trip' 	=> array('$ne' => 'null'),
+				'lon'		=> array('$gt' => 0),
+				'lat'		=> array('$gt' => 0),
+			]],
+	
+	        // STAGE 2
+	      	['$group' => [
+				'VIN'			=> array('$last' => '$VIN'),
+				'_id' 			=> '$id_trip' ,
+				'begin_trip' 	=> array('$first' => '$log_time'),
+				'end_trip' 		=> array('$last' => '$log_time'),
+				'points' 		=> array('$sum' => 1),
+		   	]],
+	
+			// STAGE 3
+			['$sort' => ['_id' => -1]],
+	
+			// STAGE 4
+		   	['$project' => [
+				'_id' => 1,
+	            'VIN' => 1,
+				'begin_trip' => 1,
+	            'end_trip' => 1,
+				'points' => 1,
+	        ]],
+	        
+	        ['$limit' => 1000000]
+        ];
+		
+		try {
+			$logs	= new MongoDB\Collection($this->mongodb,'sharengo.logs');
+			$cursor = $logs->aggregate($pipeline);
+
+		} catch(MongoDB\Driver\Exception $e) {
+		    return $e->getMessage();
+		}
+			
+		return json_encode($cursor->toArray());
 	}
 }
