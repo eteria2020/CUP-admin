@@ -1,11 +1,9 @@
 <?php
-$this->headScript()
-	->appendFile('/assets-modules/reports/js/mapvendors.js')
-	->appendFile('/assets-modules/reports/js/map.main.min.js');
+	$this->headScript()
+		->appendFile('/assets-modules/reports/js/vendor.map.js');
 		
-$this->headLink()
-	->appendStylesheet('/assets-modules/reports/css/mapvendors.css')
-	->appendStylesheet($this->basePath() . '/assets-modules/reports/css/map.main.css');
+	$this->headLink()
+		->appendStylesheet('/assets-modules/reports/css/vendor.map.css');
 ?>
 <!-- Begin page content -->
 <div class="container-fluid bs-docs-container">

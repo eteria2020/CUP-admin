@@ -7,8 +7,8 @@ if (typeof global === 'undefined') {
 	global.today	 	= new Date();
 	global.aMonthAgo 	= new Date(); global.aMonthAgo.setMonth(global.today.getMonth() - 1);
 
-	global.todayFormatted		= global.today.getFullYear() 	+ '-' + global.today.getMonth() + '-' + global.today.getDate();
-	global.aMonthAgoFormatted	= global.aMonthAgo.getFullYear() + '-' + global.aMonthAgo.getMonth() + '-' + global.aMonthAgo.getDate();
+	global.todayFormatted		= global.today.getFullYear() 	+ '-' + ("0" + (global.today.getMonth()+1)).slice(-2) + '-' + ("0" + global.today.getDate()).slice(-2);
+	global.aMonthAgoFormatted	= global.aMonthAgo.getFullYear() + '-' + ("0" + (global.aMonthAgo.getMonth()+1)).slice(-2) + '-' + ("0" + global.aMonthAgo.getDate()).slice(-2);
 
 	global.params = {
 		dateFrom 	: global.aMonthAgoFormatted,
@@ -32,6 +32,11 @@ if (typeof global === 'undefined') {
 $(document).ready(function(){
 	getCityData(createButtons);
 });
+
+$(window).load(function() {
+	doneResizing();
+});
+
 
 function createButtons(){
 	$.each(global.city,function(key,val){
@@ -69,15 +74,15 @@ global.vectorSource = new ol.source.Vector({
 	extractStyles: 	false,
 	projection: 	'EPSG:3857',
 	loader: 		function(extent, resolution, projection) {
-						
 						$.ajax({
 							method: 'POST',
-							url: 'api/get-trips-geo-data',
+							url: '/reports/api/get-trips-geo-data',
 							data: {
 								start_date:  	global.params.dateFrom,
 								end_date: 		global.params.dateTo,
 								begend:			global.params.begend
-							}
+							},
+							dataType: "json"
 						})
 						.success(function(response) {
 				            var format = new ol.format.GeoJSON();
@@ -223,3 +228,20 @@ $('.input-daterange').datepicker()
 			changeFilterDateTo($(e.target).val());
         }
 });
+
+
+// Window Resize Action Bind
+var id;
+$(window).resize(function() {
+    clearTimeout(id);
+    id = setTimeout(doneResizing, 500);
+});
+
+
+function doneResizing(){
+	var newHeight 			= $(window).height();
+    $(".row.mainrow").css("height", newHeight -280); //-110);
+    $(".map").css("height", newHeight -280);
+    map.updateSize();
+}
+

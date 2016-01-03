@@ -9,16 +9,18 @@
     <meta name="author" content="Omniaevo S.r.l.">
 
 	<!-- CSS -->
-	<?php echo $this->headLink()
-			->prependStylesheet($this->basePath()."/bootstrap/dist/css/bootstrap.css")
-			->prependStylesheet($this->basePath()."/assets-modules/reports/css/vendors.css");?>
-			
-</head>
 	<?php
+		// Get Page URL
 		$thisPageUrl = $this->getHelperPluginManager()->getServiceLocator()->get('Application')
                ->getMvcEvent()->getRouteMatch()->getMatchedRouteName();	
-    
-    ?>	
+			  
+		// Load Bootstrap
+		$this->headLink()->prependStylesheet($this->basePath()."/bootstrap/dist/css/bootstrap.css");
+		
+		echo $this->headLink();
+	?>
+			
+</head>
 	<body data-spy="scroll">
 
 	<!-- Fixed navbar -->
@@ -39,7 +41,6 @@
 					<li><a href="/reports/map">Map</a></li>
 					<li><a href="/reports/routes">Routes</a></li>
 					<li><a href="/reports/live">Live</a></li>
-
 					<?php 
 
 					/* Structure like:
@@ -65,8 +66,11 @@
 	</footer>
 
 	<!-- Scripts -->
-    <?php echo $this->headScript()
-	    	->prependFile($this->basePath()."/assets-modules/reports/js/vendors.js")
-	    	->appendFile($this->basePath()."/bootstrap/dist/js/bootstrap.js"); ?>
+    <?php 
+		// Load Bootstrap
+		$this->headScript()->appendFile($this->basePath()."/bootstrap/dist/js/bootstrap.js");   	
+	    
+		echo $this->headScript();    	
+	?>
 </body>
 </html>

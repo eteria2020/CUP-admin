@@ -1,17 +1,9 @@
 <?
-	
-	/*$this->headScript()
-		->appendFile('/js/datatables/media/js/jquery.dataTables.min.js')
-		->appendFile('/js/datatables/plugins/bootstrap/dataTables.bootstrap.js')
-		->appendFile($this->basePath() .'/js/invoices.js');*/
-	
 	$this->headScript()
-		->appendFile('/assets-modules/reports/js/trips.main.min.js');
-	
-	$this->headLink()
-		->appendStylesheet($this->basePath() . '/assets-modules/reports/css/trips.main.css');
+		->appendFile('/assets-modules/reports/js/vendor.trips.main.js');
 		
-		//->prependStylesheet('https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css');
+	$this->headLink()
+		->appendStylesheet('/assets-modules/reports/css/vendor.trips.main.css');
 ?>
 <!-- Begin page content -->
 <div class="container bs-docs-container">

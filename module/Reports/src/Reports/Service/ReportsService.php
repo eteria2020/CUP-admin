@@ -1,10 +1,20 @@
 <?php
-
+	
+	
 namespace Reports\Service;
 
 use Doctrine\DBAL\Connection;
 use PDO;
 use MongoDB;
+use DateTime;
+
+
+if(!class_exists("phpGpx"))
+{
+    include_once('phpGPX.php');
+}
+
+use phpGpx;
 
 class ReportsService
 {
@@ -170,6 +180,40 @@ class ReportsService
 		return $geodata[0]['row_to_json'];
 	}
 	
+	public function getCarsGeoData()
+	{
+		$query = "
+			SELECT row_to_json(fc)
+			FROM (
+				SELECT 	'FeatureCollection' 		As type,
+					array_to_json(array_agg(f)) 	As features
+				FROM (
+					SELECT 		'Feature' 							As type ,
+								ST_AsGeoJSON(ua.location)::json 	As geometry,
+		                       	row_to_json(lp) 					As properties
+					
+					FROM 		cars 								As ua
+		
+					INNER JOIN (
+							SELECT 	plate
+		    				FROM	cars
+		        	) As lp
+		
+				    ON ua.plate = lp.plate
+		
+					WHERE 		ua.active 					= true 	AND
+								ua.status 					= 'operative' AND
+		                        ua.running                  = 'true'
+				) As f
+			)  As fc";
+		
+		// Fetch all rows (but in this case will always fetch just one row)
+		$geodata = $this->database->fetchAll($query);
+		
+		// Return the undecoded JSON
+		return $geodata[0]['row_to_json'];
+	}
+	
 	/**
 	 * @param $start_date 	The start date to filter data
 	 * @param $end_date 	The end date to filter data
@@ -181,20 +225,11 @@ class ReportsService
 		// Converting Dates
 		$end	= new MongoDB\BSON\UTCDateTime(strtotime($end_date)*1000);
 		$start	= new MongoDB\BSON\UTCDateTime(strtotime($start_date)*1000);
-		
-		$filter = [
-			
-			'id_trip' 	=> ['$ne' => 0],
-            'begin_trip'=> ['$ne' => 'null'],
-            'end_trip' 	=> ['$ne' => 'null'],
-			'lon'		=> ['$gt' => 0],
-			'lat'		=> ['$gt' => 0],
-		];
 
 		$pipeline = [
 			// STAGE 1
 	      	['$match' => [
-	        	'log_time'	=> ['$gte' => $start, '$lte' => $end],
+	        	'log_time'	=> ['$gt' => $start, '$lte' => $end],
 	        	'id_trip' 	=> array('$ne' => 0),
 	            'begin_trip'=> array('$ne' => 'null'),
 	            'end_trip' 	=> array('$ne' => 'null'),
@@ -204,11 +239,11 @@ class ReportsService
 	
 	        // STAGE 2
 	      	['$group' => [
-				'VIN'			=> array('$last' => '$VIN'),
+				'VIN'			=> ['$last' => '$VIN'],
 				'_id' 			=> '$id_trip' ,
-				'begin_trip' 	=> array('$first' => '$log_time'),
-				'end_trip' 		=> array('$last' => '$log_time'),
-				'points' 		=> array('$sum' => 1),
+				'begin_trip' 	=> ['$first' => '$log_time'],
+				'end_trip' 		=> ['$last' => '$log_time'],
+				'points' 		=> ['$sum' => 1],
 		   	]],
 	
 			// STAGE 3
@@ -223,7 +258,7 @@ class ReportsService
 				'points' => 1,
 	        ]],
 	        
-	        ['$limit' => 1000000]
+	        ['$limit' => 300]
         ];
 		
 		try {
@@ -233,7 +268,97 @@ class ReportsService
 		} catch(MongoDB\Driver\Exception $e) {
 		    return $e->getMessage();
 		}
+
+		$json = [];
+					
+		foreach($cursor as $object){
+			array_push($json, [
+				'_id' 			=> $object->_id,
+				'VIN' 			=> $object->VIN,
+				'begin_trip'	=> $object->begin_trip->toDateTime(),//->format('Y-m-d H:i:s'),
+				'end_trip'		=> $object->end_trip->toDateTime(),//->format('Y-m-d H:i:s'),
+				'points'		=> $object->points,
+			]);
+		}
 			
-		return json_encode($cursor->toArray());
+		return json_encode($json);//json_encode($cursor->toArray());
+	}
+	
+	/**
+	 * @param $start_date 	The start date to filter data
+	 * @param $end_date 	The end date to filter data
+	 *
+	 */
+	public function getTripPointsFromLogs($id_trip)
+	{
+		$id_trip = is_array($id_trip) ? $id_trip : array($id_trip);
+		
+		$gpx = new phpGpx();
+		
+		foreach($id_trip as $trip){
+			
+	        error_log ("Trip -> $trip", 0);
+		
+			$filter = [
+	        	'id_trip' 	=> (int)$trip,
+	            'begin_trip'=> array('$ne' => 'null'),
+	            'end_trip' 	=> array('$ne' => 'null'),
+				'lon'		=> array('$gt' => 0),
+				'lat'		=> array('$gt' => 0),
+			];
+			
+			$options = [		
+				'$sort'		=> ['_id' => -1],
+				'$limit'	=> 10000,
+	        ];
+			
+			try {
+				$logs	= new MongoDB\Collection($this->mongodb,'sharengo.logs');
+				$cursor = $logs->find($filter,$options);
+			} catch(MongoDB\Driver\Exception $e) {
+			    return $e->getMessage();
+			    error_log ("\tErrore MongoQuery -> $e->getMessage()", 0);
+			}
+			
+			
+			$gpx->StartTrack($trip);
+						
+			$result = $cursor->toArray();
+			
+			// Controllo che latidutine e longitudine siano compresi
+			// all'interno dell'intervallo di estremi dell'Italia
+            $north 	= 47.08333;
+			$west	= 6.61666;
+			$east	= 18.51666;
+            $south 	= 35.48333;
+						
+			foreach($result as $object){				
+	        	$time	= $object->log_time->toDateTime()->format("Y-m-d\Th:i:s+0000");
+	        	$lat	= $object->lat;
+	        	$lon	= $object->lon;
+				
+				
+				
+				$mapurl = "<a href='http://maps.google.com/maps?q=$lat,$lon&z=16'>$lat , $lon</a>";
+	
+				if ($lat!=0 && $lon!=0) {
+	
+				//echo "OK  i= $i         --->       $lat - $lon";
+				if(
+					$lat <= $north &&
+					$lat >= $south &&
+					$lon <= $east &&
+					$lon >= $west ){
+						
+				
+		            	$gpx->addTrackPoint($time,$lat,$lon);
+		            }
+		        }
+			}
+			
+			$gpx->EndTrack();
+		}
+			
+		return $gpx->GetContentToString();
 	}
 }

@@ -130,6 +130,15 @@ return array(
 		                            ],
 		                        ],
 		                    ],
+		                    'get-cars-geo-data' => [
+		                        'type'    => 'Literal',
+		                        'options' => [
+		                            'route'    => '/get-cars-geo-data',
+		                            'defaults' => [
+		                                'action' => 'get-cars-geo-data',
+		                            ],
+		                        ],
+		                    ],
 		                    'get-trips-from-logs' => [
 		                        'type'    => 'Literal',
 		                        'options' => [
@@ -138,7 +147,16 @@ return array(
 		                                'action' => 'get-trips-from-logs',
 		                            ],
 		                        ],
-		                    ],		
+		                    ],
+		                    'get-trip-points-from-logs' => [
+		                        'type'    => 'Literal',
+		                        'options' => [
+		                            'route'    => '/get-trip-points-from-logs',
+		                            'defaults' => [
+		                                'action' => 'get-trip-points-from-logs',
+		                            ],
+		                        ],
+		                    ],			
 						],
                     ],
                 ),
@@ -167,36 +185,113 @@ return array(
 		    	'assets-modules/reports/js/dc.js' => $baseDir. '/bower_components/dcjs/dc.js',
 	        ],
             'collections' => [
-	            'assets-modules/reports/css/vendors.css' => [
-                    'font-awesome/css/font-awesome.css',
-                    'dcjs/dc.css',
-                    'seiyria-bootstrap-slider/dist/css/bootstrap-slider.css',
-                    'bootstrap-datepicker/dist/css/bootstrap-datepicker3.css',
-                    'eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.css',
-                ],
-                //	Map Css
-                'assets-modules/reports/css/mapvendors.css' => [
-	                'ol3/ol.css',
-                ],
-				'assets-modules/reports/js/vendors.js' => [
-					'jquery/dist/jquery.js',
-                    'moment/moment.js',
+				
+				// Specific Asset for Routes Page.
+				'assets-modules/reports/js/vendor.routes.js' =>[
+					'ol2/OpenLayers.js',					// OpenLayers
+					'assets-modules/reports/js/OpenStreetMap.js',
+       
+					'jquery-legacy/dist/jquery.js',			// Jquery 1.11.3
+					'jquery-migrate/jquery-migrate.js',		// Jquery Migrate 1.2.1
+					                    
+                    
+                    'jquery.scrollTo/jquery.scrollTo.js',	// ScrollTo
+                    'moment/moment.js',						// Moment.js
+                    'eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js',
+                    'seiyria-bootstrap-slider/js/bootstrap-slider.js',
+                    
+                    
 					'assets-modules/reports/js/menu.js',
+                    'assets-modules/reports/js/routes.js',
+				],
+				'assets-modules/reports/css/vendor.routes.css' => [
+                    'eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.css',
+                    'seiyria-bootstrap-slider/dist/css/bootstrap-slider.css',
+                    
+	                'ol2/theme/default/style.css',
+	                'ol2/theme/default/style.mobile.css',
+                ],
+                
+                
+                 // Specific Asset for Trips Page.
+				'assets-modules/reports/js/vendor.trips.main.js' =>[
+					'jquery/dist/jquery.js',
 					'crossfilter/crossfilter.js',
 					'd3/d3.js',
 					'dcjs/dc.js',
-                    'seiyria-bootstrap-slider/dist/bootstrap-slider.min.js',
-                    'bootstrap-datepicker/dist/js/bootstrap-datepicker.js',
-                    'eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js',
+					 
+					'assets-modules/reports/js/menu.js',
+                    'assets-modules/reports/js/trips.main.js',
 				],
-				//	Map Javascript
-				'assets-modules/reports/js/mapvendors.js' => [
-					'ol3/ol.js',
+                'assets-modules/reports/css/vendor.trips.main.css' => [
+	                'font-awesome/css/font-awesome.css',
+					'dcjs/dc.css',
+                    
+                    'assets-modules/reports/css/trips.main.css'
+                ],
+                
+                // Specific Asset for Trips Page.
+				'assets-modules/reports/js/vendor.trips.city.js' =>[
+					'jquery/dist/jquery.js',
+					'crossfilter/crossfilter.js',
+					'd3/d3.js',
+					'dcjs/dc.js',
+					 
+					'assets-modules/reports/js/menu.js',
+                    'assets-modules/reports/js/trips.city.js',
 				],
+                'assets-modules/reports/css/vendor.trips.city.css' => [
+	                'assets-modules/reports/css/vendor.trips.main.css'
+                ],
+                
+                
+                // Specific Asset for Live Page.
+				'assets-modules/reports/js/vendor.live.js' =>[
+					'jquery/dist/jquery.js',
+                    'jquery.scrollTo/jquery.scrollTo.js',
+                    'ol3/ol.js',
+                    'jquery-ui/jquery-ui.js',				// JqueryUI (need for tooltip)
+                    
+					'assets-modules/reports/js/menu.js',
+                    'assets-modules/reports/js/live.js',
+				],
+                'assets-modules/reports/css/vendor.live.css' => [
+	                'font-awesome/css/font-awesome.css',
+					'ol3/ol.css',
+                    'jquery-ui/themes/base/theme.css',	// JqueryUI
+                    
+                    'assets-modules/reports/css/live.css'
+                ],
+                
+                // Specific Asset for HeatMap Page.
+				'assets-modules/reports/js/vendor.map.js' =>[
+					'jquery/dist/jquery.js',
+                    'jquery.scrollTo/jquery.scrollTo.js',
+                    'ol3/ol.js',
+                    'seiyria-bootstrap-slider/js/bootstrap-slider.js',
+                    'bootstrap-datepicker/dist/js/bootstrap-datepicker.js',                   
+                    
+					'assets-modules/reports/js/menu.js',
+                    'assets-modules/reports/js/map.js',
+                    
+				],
+                'assets-modules/reports/css/vendor.map.css' => [
+	                'font-awesome/css/font-awesome.css',
+					'ol3/ol.css',
+                    'seiyria-bootstrap-slider/dist/css/bootstrap-slider.css',
+                    'bootstrap-datepicker/dist/css/bootstrap-datepicker3.css',
+                    
+                    'assets-modules/reports/css/map.css'
+                ],
+				
+				
             ],
             'paths' => [
                 'reports' => __DIR__ . '/../public',
                 $baseDir. '/bower_components',
+            ],
+            'aliases' => [
+	            'reports/lib' => $baseDir. '/bower_components/ol2-legacy/lib',
             ],
         ],
     ],

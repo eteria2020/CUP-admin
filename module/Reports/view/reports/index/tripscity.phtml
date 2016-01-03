@@ -1,19 +1,19 @@
 <?
-	
-	/*$this->headScript()
-		->appendFile('/js/datatables/media/js/jquery.dataTables.min.js')
-		->appendFile('/js/datatables/plugins/bootstrap/dataTables.bootstrap.js')
-		->appendFile($this->basePath() .'/js/invoices.js');*/
-	
 	$this->headScript()
-		->appendFile('/assets-modules/reports/js/trips.city.min.js')
-		->prependScript('global["thiscity"]='.$this->city.';');			// Getting the actual city id (from the controller), and save it to js global vars
-	
+		->appendFile('/assets-modules/reports/js/vendor.trips.city.js')
+		->prependScript('
+			// Check if var global has been declared
+			if (typeof global === "undefined") {
+			    var global = {};
+			}
+			
+			// Getting the actual city id (from the controller), and save it to js global vars
+			global["thiscity"]='.$this->city.';
+		');			
+		
 	$this->headLink()
-		->appendStylesheet($this->basePath() . '/assets-modules/reports/css/trips.main.css');
-		
-		//->prependStylesheet('https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css');
-		
+		->appendStylesheet('/assets-modules/reports/css/vendor.trips.city.css');	
+			
 ?>
 <!-- Begin page content -->
 <div class="container bs-docs-container">

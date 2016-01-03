@@ -248,13 +248,29 @@ class ApiController extends AbstractActionController
 		return $this->response;
 	}
 	
+	public function getCarsGeoDataAction()
+	{
+		if (!$this->getRequest()->isPost()) {
+			$this->getResponse()->setStatusCode(Response::STATUS_CODE_404);
+	        return false;
+        }   
+		
+		// Get the trips geo data, in JSON format
+		$carsgeodata = $this->reportsService->getCarsGeoData($start_date,$end_date,$begend);
+		
+		// So, we don't need to use a JsonModel,but simply use an Http Response
+		$this->response->setContent($carsgeodata);
+		
+		return $this->response;
+	}
+	
 	public function getTripsFromLogsAction()
 	{
 		$start_date = "";
 		$end_date	= "";
 		
 		// Getting Post vars
-		/*if ($this->getRequest()->isPost()) {
+		if ($this->getRequest()->isPost()) {
             $postData = $this->getRequest()->getPost()->toArray();
             
             if (!isset($postData["end_date"])) {
@@ -278,18 +294,52 @@ class ApiController extends AbstractActionController
 	    }else{
 	        $this->getResponse()->setStatusCode(Response::STATUS_CODE_404);
 	        return false;
-        }   
-        */
-        $start_date = "2015-12-01 00:00:00";
-        $end_date = "2015-12-02 00:00:00";
+        }
         
 		// Get the trips data, in JSON format
 		$tripsdata = $this->reportsService->getTripsFromLogs($start_date,$end_date);
 		
 		// So, we don't need to use a JsonModel,but simply use an Http Response
+		$this->response->setContent(print_r($tripsdata,true));
+		
+		return $this->response;
+	}
+	
+	public function getTripPointsFromLogsAction()
+	{
+		$trips_id = "";//"3942";
+		
+		// Getting Post vars
+		if ($this->getRequest()->isPost()) {
+            $postData = $this->getRequest()->getPost()->toArray();
+            
+            if (!isset($postData["trips_id"])) {
+	            $this->getResponse()->setStatusCode(Response::STATUS_CODE_404);
+	            return false;
+	        }else{
+		        $trips_id 	= $postData["trips_id"];
+	        }
+
+	    }else{
+	        $this->getResponse()->setStatusCode(Response::STATUS_CODE_404);
+	        return false;
+        } 
+        
+		// Get the trips data, in JSON format
+		$tripsdata = $this->reportsService->getTripPointsFromLogs($trips_id);
+		
+		$this->response->getHeaders()
+			->addHeaderLine('Accept-Ranges', 'bytes')
+			->addHeaderLine('Content-Length', strlen($tripsdata))
+			->addHeaderLine('Content-Type', 'application/force-download')
+			->addHeaderLine('Content-Disposition', "attachment; filename=\"GPX.gpx\"")
+			->addHeaderLine('Content-Transfer-Encoding', 'binary')
+			->addHeaderLine('Cache-Control', 'no-cache, must-revalidate')
+			;
+    		
+		// So, we don't need to use a JsonModel,but simply use an Http Response
 		$this->response->setContent($tripsdata);
 		
 		return $this->response;
-
 	}
 }
