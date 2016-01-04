@@ -4,9 +4,9 @@ if (typeof global === 'undefined') {
 }
 
 $.ajaxSetup({
-    async: true,
+    async: false,
     cache : false,
-    timeout: 30000,		// set to 10s
+    //timeout: 30000,		// set to 10s
     error: function (msg) { alert('error : ' + msg.d); console.log(msg); }
 });
 
@@ -90,22 +90,7 @@ function newTrack(features, ids, name) {
 				trips_id: 		ids
 			}
 		})
-		.success(function(data,status,jsonXHR) {
-			//xhr.setRequestHeader('Content-Type', 'text/xml');
-
-			// alert("xhr.responseXML is null");
-			// Always null except with firefox loaded from local files…
-			//var parser = new DOMParser();
-			//xmlDoc = parser.parseFromString(data, "text/xml");
-			// see http://stackoverflow.com/questions/3781387/responsexml-always-null
-		
-			console.log("DATA");
-			console.log(data);
-			console.log("STATUS");
-			console.log(status);
-			console.log("JXHR");
-			console.log(jsonXHR);
-			
+		.success(function(data,status,jsonXHR) {			
 			xmlDoc = jsonXHR.responseXML;
 			if (!xmlDoc) {
 				alert("xhr.responseXML is null");
@@ -120,7 +105,7 @@ function newTrack(features, ids, name) {
 			{
 				var f = new OpenLayers.Format.GPX();
 				// We suppose there is only one track on the gpx file
-				var tracks = f.read(xmlDoc);
+				tracks = f.read(xmlDoc);
 			} catch(err) {
 				txt = "GPX reading error: " + err.message + "\n\n";
 				alert(txt);
@@ -144,11 +129,11 @@ function newTrack(features, ids, name) {
 			}
 		
 		
-			// Check Errors
+			/* Check Errors
 		    $.each(featuresTrack, function(key,val)
 			{
 				console.log(val);
-			});
+			});*/
 		
 			map.zoomToExtent(bounds);
 		
@@ -205,11 +190,7 @@ function newPicture(features, lon, lat, thumb, pict, title) {
 }
 
 
-var urlDate = "",
-	urlLimit =	100,
-    urlTemplate1 ="",
-    urlTemplate2 ="",
-    urlTemplate3 ="";
+var urlDate = "";
 
 $(document).ready(function()
 	{
@@ -320,8 +301,8 @@ $(window).load(function(){
 		map.addLayer(layerTracks);
 		layerTracks.addFeatures(featuresTrack);
 
-		var featuresPlace =[]
-		loadPoints(featuresPlace);
+		var featuresPlace = [];
+		//loadPoints(featuresPlace);
 		
 		map.addLayer(layerPlaces);
 		layerPlaces.addFeatures(featuresPlace);
@@ -426,9 +407,14 @@ function addHover() {
 }
 
 
+var items =[];
+var trips =[];
+			
+
 
 function loadTracks(features) {
-	//layerTracks.removeAllFeatures();
+	
+	layerTracks.removeAllFeatures();
 
 	$.ajax({
 		method: 'POST',
@@ -442,23 +428,21 @@ function loadTracks(features) {
 			//console.log("DATA:");
         	//console.log(data);
 
-			var items =[];
-			var trips =[];
-			
-			console.log(data);
+			//console.log(data);
 			
 			$.each(data, function(key, val)
 				{
 					if (val._id>-1) {
-						var duration = Math.round((val.end_trip.sec - val.begin_trip.sec)/60);
+							
+						val.end_trip 	= moment(val.end_trip.date).format("X");
+						val.begin_trip 	= moment(val.begin_trip.date).format("X");
+						
+						var duration = Math.round((val.end_trip - val.begin_trip)/60);
 
 						//if (duration > 3 && val._id != 0) {
 							trips.push(val._id);
-							
-							console.log("DATA: "+val.begin_trip);
-							console.log(val.begin_trip);
 
-							var date = moment(val.begin_trip.sec*1000).format("DD/MM/YYYY HH:mm:ss");
+							var date = moment(val.begin_trip*1000).format("DD/MM/YYYY HH:mm");
 
 							items.push('<li href="#" class="list-group-item way" id="' + val._id + '">'+
 								'<h5 class="list-group-item-heading">'+ date +' <b>'+ val.VIN+'</b></h5>'+
@@ -468,7 +452,6 @@ function loadTracks(features) {
 								'</li>');
 						//}
 					}
-
 				}
 			);
 			//console.log("http://core.sharengo.it/ui/log-data.php?id_trip="+trips[1] );
