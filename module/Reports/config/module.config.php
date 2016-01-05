@@ -191,6 +191,11 @@ return array(
 					'ol2/OpenLayers.js',					// OpenLayers
 					'assets-modules/reports/js/OpenStreetMap.js',
        
+					//'ol3/ol.js',
+					
+					'ol3/ol-debug.js',
+					//'ol3-legacy/src/ol/featureoverlay.js',
+       
 					'jquery-legacy/dist/jquery.js',			// Jquery 1.11.3
 					'jquery-migrate/jquery-migrate.js',		// Jquery Migrate 1.2.1
 					                    
@@ -208,8 +213,12 @@ return array(
                     'eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.css',
                     'seiyria-bootstrap-slider/dist/css/bootstrap-slider.css',
                     
+					'ol3/ol.css',
+					
 	                'ol2/theme/default/style.css',
 	                'ol2/theme/default/style.mobile.css',
+	                
+	                'assets-modules/reports/css/routes.css',
                 ],
                 
                 

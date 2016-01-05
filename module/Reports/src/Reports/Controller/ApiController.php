@@ -266,8 +266,9 @@ class ApiController extends AbstractActionController
 	
 	public function getTripsFromLogsAction()
 	{
-		$start_date = "";
-		$end_date	= "";
+		$start_date 	= ''; //"2015-12-12";
+		$end_date		= ''; //"2016-01-01";
+		$trips_number	= 100;
 		
 		// Getting Post vars
 		if ($this->getRequest()->isPost()) {
@@ -278,6 +279,10 @@ class ApiController extends AbstractActionController
 	            return false;
 	        }else{
 		        $end_date 	= $postData["end_date"];
+	        }
+	        
+	        if (isset($postData["trips_number"])) {
+	            $trips_number = $postData["trips_number"];
 	        }
 	        
 	        // If the start_date is null, will set it with 30 days before the end_date
@@ -297,18 +302,19 @@ class ApiController extends AbstractActionController
         }
         
 		// Get the trips data, in JSON format
-		$tripsdata = $this->reportsService->getTripsFromLogs($start_date,$end_date);
+		$tripsdata = $this->reportsService->getTripsFromLogs($start_date,$end_date,$trips_number);
 		
 		// So, we don't need to use a JsonModel,but simply use an Http Response
-		$this->response->setContent(print_r($tripsdata,true));
+		$this->response->setContent($tripsdata);
 		
 		return $this->response;
 	}
 	
 	public function getTripPointsFromLogsAction()
 	{
-		$trips_id = "";//"3942";
-		
+		$trips_id = '';// ["113893","114005","113994","113927"];
+	
+	
 		// Getting Post vars
 		if ($this->getRequest()->isPost()) {
             $postData = $this->getRequest()->getPost()->toArray();
@@ -323,19 +329,18 @@ class ApiController extends AbstractActionController
 	    }else{
 	        $this->getResponse()->setStatusCode(Response::STATUS_CODE_404);
 	        return false;
-        } 
+        }
         
 		// Get the trips data, in JSON format
 		$tripsdata = $this->reportsService->getTripPointsFromLogs($trips_id);
 		
+		
 		$this->response->getHeaders()
 			->addHeaderLine('Accept-Ranges', 'bytes')
 			->addHeaderLine('Content-Length', strlen($tripsdata))
-			->addHeaderLine('Content-Type', 'application/force-download')
-			->addHeaderLine('Content-Disposition', "attachment; filename=\"GPX.gpx\"")
-			->addHeaderLine('Content-Transfer-Encoding', 'binary')
-			->addHeaderLine('Cache-Control', 'no-cache, must-revalidate')
-			;
+			->addHeaderLine('Content-Type', 'application/gpx')
+			->addHeaderLine('Content-Disposition', "attachment; filename=\"phpGPX.gpx\"")
+			->addHeaderLine('Content-Transfer-Encoding', 'binary');
     		
 		// So, we don't need to use a JsonModel,but simply use an Http Response
 		$this->response->setContent($tripsdata);

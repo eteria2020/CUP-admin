@@ -4,498 +4,493 @@ if (typeof global === 'undefined') {
 }
 
 $.ajaxSetup({
-    async: false,
+    async: true,
     cache : false,
-    //timeout: 30000,		// set to 10s
+    timeout: 180000,		// set to 2minutes
+    queue: false,
     error: function (msg) { alert('error : ' + msg.d); console.log(msg); }
 });
 
-var track_style,
-	track_style_h,
-	pictureStyleMap,
-	placeStyleMap,
-	placeBigStyleMap,
-	map,
-	tracks = new Object,
-	bounds,
-	placeFeatureIds = new Object,
-	trackFeatureIds = new Object,
-	highlightCtrl,
-	featuresTrack =[],
-	xmlDoc = {};
+$.extend($.scrollTo.defaults, {
+  axis: 'y',
+  duration: 500,
+  interrupt: true 		//  If true will cancel the animation if the user scrolls. Default is false
+  //easing: 'linear'
+});
 
+// Global Vars Definition {
+	global.today	 		= new Date();
+	global.todayFormatted	= global.today.getFullYear() 	+ '-' + ("0" + (global.today.getMonth()+1)).slice(-2) + '-' + ("0" + global.today.getDate()).slice(-2);
+
+	global.urlDate 			= "";
 	
-var bigStyleMap = {
-	graphicWidth: 40, graphicHeight: 40, graphicYOffset: -20, graphicXOffset: -20,
-	backgroundWidth: 48, backgroundHeight: 48,
-	backgroundXOffset: -20, backgroundYOffset: -20
-};
-
-// Distance in pixels on the map to consider pictures in the same gallery
-var clusterDistance = 20;
-
-
-function init(){
+	// Set the vector source; will contain the map data
+	global.vectorSource = {};
 	
-	// Define map objects properties
-	track_style = new OpenLayers.Style({strokeColor: "green", strokeWidth: 5, strokeOpacity: 0.5});
-	track_style_h = {strokeColor: "blue", strokeWidth: 6, strokeOpacity: 0.8};
+	// Set the features collection
+	global.tracks = {};
 	
-	// Extended Styles for thumbnails
-	pictureStyleMap = new OpenLayers.Style(
-	{
-		externalGraphic: "${thumb}",
-		graphicWidth: 20, graphicHeight: 20, graphicYOffset: -10, graphicXOffset: -10,
-		backgroundGraphic: "${galleryBorder}",
-		backgroundWidth: 24, backgroundHeight: 24,
-		backgroundXOffset: -10, backgroundYOffset: -10
-		}, {
-		context: {
-			thumb: function(feature) {
-					return (feature.cluster)? feature.cluster[0].attributes.thumb: feature.attributes.thumb;
-				},
-			galleryBorder: function(feature) {
-					return (feature.cluster)? 'include/img/gallery.png': "";
-				}
-			}
-	});
+	// The collection of features selected
+	global.featureOverlaySource = {}; 
 	
-	// Style for Waypoints
-	placeStyleMap = new OpenLayers.Style(
-	{
-		externalGraphic: "include/img/sign-big.png",
-		graphicWidth: 18, graphicHeight: 26, graphicYOffset: -26, graphicXOffset: -9
-	});
+	// The Ol3 Vector containing the selected overlay
+	global.featureOverlay;
+
+	// flag for Overlight features
+	global.highlightStyleCache;
+	global.highlight;
 	
-	placeBigStyleMap = {
-		graphicWidth: 34, graphicHeight: 48, graphicYOffset: -48, graphicXOffset: -17
-	};
+	// The loaded trips (id)
+	global.trips = [];
 	
+	// The HTML <li> of the trips
+	global.items = [];
 	
-	// Todo : sort pictures in galleries by time
+	// The loaded tracks (features)
+	global.features = [];
 	
-	bounds = new OpenLayers.Bounds();
-}
-
-// Define track constructor
-function newTrack(features, ids, name) {
-	try
-	{
-		$.ajax({
-			method:			'POST',
-			url:			'/reports/api/get-trip-points-from-logs',
-            processData:	true,
-            dataType:		'xml',
-			data: {
-				trips_id: 		ids
-			}
-		})
-		.success(function(data,status,jsonXHR) {			
-			xmlDoc = jsonXHR.responseXML;
-			if (!xmlDoc) {
-				alert("xhr.responseXML is null");
-				// Always null except with firefox loaded from local files…
-				var parser = new DOMParser();
-				var xmlDoc = parser.parseFromString(jsonXHR.responseText, "text/xml");
-				// see http://stackoverflow.com/questions/3781387/responsexml-always-null
-			}
-
-
-			try
-			{
-				var f = new OpenLayers.Format.GPX();
-				// We suppose there is only one track on the gpx file
-				tracks = f.read(xmlDoc);
-			} catch(err) {
-				txt = "GPX reading error: " + err.message + "\n\n";
-				alert(txt);
-				console.log(err);
-				return
-			}
-		
-			var points = 0;
-		
-			for(var idx in tracks)
-			{
-				var trackFeature = tracks[idx];
-		
-				trackFeature.geometry.transform(new OpenLayers.Projection("EPSG:4326"), map.getProjectionObject());
-				bounds.extend(trackFeature.geometry.getBounds());
-				trackFeature.attributes.id = trackFeature.attributes.name;
-				trackFeatureIds[trackFeature.attributes.name] = trackFeature.id;
-				features.push(trackFeature);
-		
-				points += trackFeature.geometry.components.length;
-			}
-		
-		
-			/* Check Errors
-		    $.each(featuresTrack, function(key,val)
-			{
-				console.log(val);
-			});*/
-		
-			map.zoomToExtent(bounds);
-		
-		
-			console.log("Lenght: " +tracks.length);
-		    console.log("Points: " + points );
-		
-			$("span#points").text(points);
-			$("span#trips").text(tracks.length);
-		});
-	}
-
-	catch(err)
-	{
-		txt = "XMLHttpRequest error: " + err.message + "\n\n";
-		alert(txt);
-		return
-	}
-
-
-
-
-	// Scrivo il numero di elementi caricati:
-}
-
-// Define waypoint constructor
-
-
-function newPoint(features, id, lon, lat) {
-	var lonLat = new OpenLayers.LonLat(lon, lat).transform(new OpenLayers.Projection("EPSG:4326"), map.getProjectionObject());
-	var point = new OpenLayers.Geometry.Point(lonLat.lon, lonLat.lat);
-
-	var iconFeature = new OpenLayers.Feature.Vector(point, {id: id});
-
-	bounds.extend(lonLat);
-
-	features.push(iconFeature);
-
-	placeFeatureIds[id] = iconFeature.id;
-
-}
-
-// Define picture constructor
-
-function newPicture(features, lon, lat, thumb, pict, title) {
-	var lonLat = new OpenLayers.LonLat(lon, lat).transform(new OpenLayers.Projection("EPSG:4326"), map.getProjectionObject());
-	var point = new OpenLayers.Geometry.Point(lonLat.lon, lonLat.lat);
-
-	var iconFeature = new OpenLayers.Feature.Vector(point, {title: title? title: "", thumb: thumb, pict: pict});
-	bounds.extend(lonLat);
-
-	features.push(iconFeature);
-
-}
-
-
-var urlDate = "";
+	// Flag to trigger the map mousehover listener 
+	global.listenHover = true;
+	
+	// The number of trips to load
+	global.tripsnumber = 0;
+// }
 
 $(document).ready(function()
-	{
-		init();
-    	doneResizing();
+{
+	
+	// DateTime Picker
+	$('#datetimepicker1').datetimepicker({
+	 	sideBySide: true,
+		maxDate:	Date(),
+		defaultDate: Date(),
+		format: 'YYYY-MM-DD HH:mm:ss'
+	});
+    
+    // Create The Slider
+	$("#ex6").slider();
 
-		// DateTime Picker
-		$('#datetimepicker1').datetimepicker({
-		 	sideBySide: true,
-			maxDate:	Date(),
-			defaultDate: Date(),
-			format: 'YYYY-MM-DD HH:mm:ss'
-		});
+	// Listen to Slider Change Value (Ther's also the on("slide" bind, that listen
+	// only the slide action, not also the click on a specific section of the
+	// slidebar.
+	$("#ex6").on("change", function(slideEvt) {
+		$("#ex6SliderVal").text(slideEvt.value.newValue+" corse prima di");
 
-	    urlDate 		= $("div.date input").val();
+		// Also update the urlLimit value
+		urlLimit = slideEvt.value.newValue;
+	});
+   
+    
+});
 
-        // Create The Slider
-		$("#ex6").slider();
-
-		// Listen to Slider Change Value (Ther's also the on("slide" bind, that listen
-		// only the slide action, not also the click on a specific section of the
-		// slidebar.
-		$("#ex6").on("change", function(slideEvt) {
-			console.log(slideEvt);
-			$("#ex6SliderVal").text(slideEvt.value.newValue+" corse prima di");
-
-			// Also update the urlLimit value
-			urlLimit = slideEvt.value.newValue;
-		});
-
-		// Build the map widget
-		OpenLayers.ImgPath = "http://js.mapbox.com/theme/dark/";
-		map = new OpenLayers.Map ({
-			div: 'map',
-			controls:[
-					new OpenLayers.Control.Navigation(),
-					new OpenLayers.Control.PanZoomBar()
-					//new OpenLayers.Control.LayerSwitcher(),
-					//new OpenLayers.Control.Attribution()
-			],
-			maxExtent: new OpenLayers.Bounds(-20037508.34, -20037508.34, 20037508.34, 20037508.34),
-			maxResolution: 156543.0399,
-			numZoomLevels: 19,
-			units: 'm',
-			projection: new OpenLayers.Projection("EPSG:900913"),
-			displayProjection: new OpenLayers.Projection("EPSG:4326")
-		});
-
-		// Define the main map layer
-
-		// Here we use a predefined layer that will be kept up to date with URL changes
-		layerMapnik = new OpenLayers.Layer.OSM.Mapnik("Mapnik");
-		map.addLayer(layerMapnik);
-		/*layerTilesAtHome = new OpenLayers.Layer.OSM.Osmarender("Osmarender");
-    map.addLayer(layerTilesAtHome);
-    layerCycleMap = new OpenLayers.Layer.OSM.CycleMap("CycleMap");
-    map.addLayer(layerCycleMap);*/
+$(window).load(function() {
+	
+	getCityData();
+	loadTracks();
+    
+    // Resize the MAP
+    doneResizing();
+    
+    activateHoverButton();
+});
 
 
-		var strategy = new OpenLayers.Strategy.Cluster({distance: clusterDistance, threshold: 2})
+var projection = ol.proj.get('EPSG:3857');
 
-		layerPictures = new OpenLayers.Layer.Vector("Pictures",
-			{
-				// projection: "EPSG:4326",
-			strategies:[strategy],
-			styleMap: new OpenLayers.StyleMap(
-					{
-					"default": pictureStyleMap,
-					"temporary": bigStyleMap,
-					"select": {}
-					}
-				)
-			}
-		);
-
-		layerPlaces = new OpenLayers.Layer.Vector("Places",
-			{
-				// projection: "EPSG:4326",
-			styleMap: new OpenLayers.StyleMap(
-					{
-					"default": placeStyleMap,
-					"temporary": placeBigStyleMap
-					}
-				)
-			}
-		);
-
-		layerTracks = new OpenLayers.Layer.Vector("Tracks",
-			{
-				// projection: "EPSG:4326",
-			styleMap: new OpenLayers.StyleMap(
-					{
-					"default": track_style,
-					"temporary": track_style_h
-					}
-				)
-			}
-		);
-		
-		//alert("ok");
-		console.log(layerTracks);
-  	}
-);
-
-$(window).load(function(){
-		loadTracks(featuresTrack);
-
-		map.addLayer(layerTracks);
-		layerTracks.addFeatures(featuresTrack);
-
-		var featuresPlace = [];
-		//loadPoints(featuresPlace);
-		
-		map.addLayer(layerPlaces);
-		layerPlaces.addFeatures(featuresPlace);
-
-		/*
-  var featuresPicture= []
-  loadPictures(featuresPicture);
-
-  map.addLayer(layerPictures);
-  layerPictures.addFeatures(featuresPicture);
-  */
+// The MAP
+var OSM = new ol.layer.Tile(
+{
+	source: new ol.source.OSM()
+});
 
 
-		highlightCtrl = new OpenLayers.Control.SelectFeature([layerPlaces, layerTracks],
-			{
-			hover: true,
-			highlightOnly: true,
-			renderIntent: "temporary",
-			eventListeners: {
-				featurehighlighted: function(e) {
-						if (e.feature.attributes.id) {
-							element = $("#" + e.feature.attributes.id);
-							if (!element.hasClass("list-group-item-success")) {
-								element.addClass("list-group-item-success");
-								element.parent().scrollTo(element, 800);
-							}
-						}
-					},
-				featureunhighlighted: function(e) {
-						if (e.feature.attributes.id) {
-							element = $("#" + e.feature.attributes.id);
-							element.removeClass("list-group-item-success");
-							element.parent().stop();
-						}
-					}
-				}
-			}
-		);
-		map.addControl(highlightCtrl);
-		highlightCtrl.activate();
+var style = {
+	'Point': [new ol.style.Style({
+		image: new ol.style.Circle({
+			fill: new ol.style.Fill({
+				color: 'rgba(255,255,0,0.4)'
+			}),
+			radius: 5,
+			stroke: new ol.style.Stroke({
+				color: '#ff0',
+				width: 1
+			})
+		})
+	})],
+	'LineString': [new ol.style.Style({
+		stroke: new ol.style.Stroke({
+			color: '#f00',
+			width: 3
+		})
+	})],
+	
+	// Tracks
+	'MultiLineString': [new ol.style.Style({
+		stroke: new ol.style.Stroke({
+			color: 'rgba(30,140,0,0.7)',
+			width: 5
+		})
+	})]
+};
+
+var hoverstyle = {
+	'Point': [new ol.style.Style({
+		image: new ol.style.Circle({
+			fill: new ol.style.Fill({
+				color: 'rgba(255,255,0,0.4)'
+			}),
+			radius: 5,
+			stroke: new ol.style.Stroke({
+				color: '#ff0',
+				width: 1
+			})
+		})
+	})],
+	'LineString': [new ol.style.Style({
+		stroke: new ol.style.Stroke({
+			color: '#f00',
+			width: 6
+		})
+	})],
+	
+	// Tracks
+	'MultiLineString': [new ol.style.Style({
+		stroke: new ol.style.Stroke({
+			color: 'rgba(140,30,0,0.8)',
+			width: 6
+		})
+	})]
+};
 
 
-		// add hover function to highlight way points
-		$(".place").hover(
-			function () {
-				var f = layerPlaces.getFeatureById(placeFeatureIds[$(this).attr("id")]);
-				$(this).addClass("list-group-item-success");
-				highlightCtrl.highlight(f);
-			},
-			function () {
-				var f = layerPlaces.getFeatureById(placeFeatureIds[$(this).attr("id")]);
-				highlightCtrl.unhighlight(f);
-				$(this).removeClass("list-group-item-success");
-			}
-		);
+global.vectorSource = new ol.source.Vector({
+	projection: 'EPSG:3857',
+	format: new ol.format.GPX()
+});
+
+global.tripslayer = new ol.layer.Vector(
+{
+	source:	global.vectorSource,
+    style :
+    	function(feature, resolution) {
+	    	return style[feature.getGeometry().getType()];
+		}
+});
+
+var view = new ol.View({
+	// the view's initial state
+	center: ol.proj.transform([9.185, 45.465], 'EPSG:4326', 'EPSG:3857'),
+	zoom: 12
+});
+
+global.map = new ol.Map({
+	layers: [OSM, global.tripslayer],
+	target: document.getElementById('map'),
+	view: view
+});
 
 
 
-		doneResizing();
+// Set the overlay (another layer) for the selected tracks
+global.featureOverlaySource = new ol.source.Vector({});
+global.featureOverlay = new ol.layer.Vector({
+	source: global.featureOverlaySource,
+	style: function(feature, resolution) {
+	    	return hoverstyle[feature.getGeometry().getType()];
+		}
+});
+// Add the overlay to the MAP ol.obj
+global.featureOverlay.setMap(global.map);
+	
+// Bind the entire map mouse moving
+global.map.on('pointermove', function(evt) {
+	if (evt.dragging) {
+		return;
 	}
-);
+	if (!global.listenHover){
+		return;
+	}
+	var pixel = global.map.getEventPixel(evt.originalEvent);
+	displayFeatureInfo(pixel);
+});
 
-var allowedZoom = true;
+// Bind the blick of the map
+global.map.on('click', function(evt) {
+	displayFeatureInfo(evt.pixel);
+});
+	
 
-function addHover() {
+// Map MouseMove Handler
+function displayFeatureInfo(pixel) {
+	var selectedfeatures = [];
+	
+	
+	global.map.forEachFeatureAtPixel(pixel, function(feature, layer) {
+		selectedfeatures.push(feature);
+	});
+	
+	
+	console.log("Selected Features");
+	console.log(selectedfeatures);
+	
+	if (selectedfeatures.length > 0) {
+		var info = [];
+		var i;
+		
+		for (i = 0 ; i <  selectedfeatures.length; ++i) {
+			info.push(selectedfeatures[i].get('name'));
+						
+			changeTrackColor(selectedfeatures[i]);
+		}
+		
+		//get the selected <li> track of the first selected
+		element = $("#" + selectedfeatures[0].id);
+		
+		// Remove the "green color class" to the others <li>
+		$(".way:not(#"+selectedfeatures[0].id+")").removeClass("list-group-item-success");
+
+		// If the feature is not selceted, the we select it
+		if (!element.hasClass("list-group-item-success")) {
+			element.removeClass("list-group-item-danger");
+			element.addClass("list-group-item-success");
+			
+			element.parent().stop();
+			element.parent().scrollTo(element);
+			console.log("SCROLL");
+		}
+		
+		
+		document.getElementById('info').innerHTML = info.join(', ') || '(unknown)';
+		global.map.getTarget().style.cursor = 'pointer';
+	} else {
+		document.getElementById('info').innerHTML = '&nbsp;';
+		global.map.getTarget().style.cursor = '';
+	}
+};
+
+
+function changeTrackColor(track)
+{
+	// Add the track selected to the selected overlay
+	if (track !== global.highlight) {
+		if (global.highlight) {
+			// Remove The Track from the selected tracks
+			global.featureOverlaySource.removeFeature(global.highlight);
+		}
+		if (track) {
+			// Add the Track from the selected tracks
+			global.featureOverlaySource.addFeature(track);
+		}
+		global.highlight = track;
+	}
+}
+
+
+function activateHoverButton()
+{
+	$('button#hoverenable').addClass("btn-success");
+	
+	$('button#hoverenable').click(
+		function () {
+		    if(global.listenHover){
+			    global.listenHover = false;
+			    
+		        $('button#hoverenable').removeClass("btn-success");
+		        $('button#hoverenable').addClass("btn-danger");
+		    }else{
+		        global.listenHover = true;
+			    
+		        $('button#hoverenable').addClass("btn-success");
+		        $('button#hoverenable').removeClass("btn-danger");
+		    }
+		}
+	);
+}
+
+
+function activateListActions()
+{
+	// Remove other bind events();
+	$('.way').off();
+	
 	// Add hover function to highlight tracks
 	$(".way").hover(
 		function () {
-
-
-			var f = layerTracks.getFeatureById(trackFeatureIds[$(this).attr("id")]);
-
-       	 	if(!f){
+			if (!global.listenHover){
+				return;
+			}
+			
+			var thisId= $(this).attr("id");
+			
+			// Remove the "green color class" to the others <li>
+			$(".way:not(#"+thisId+")").removeClass("list-group-item-success");
+		
+			var f = $.grep( global.features, function(e){ return parseInt(e.id) == parseInt(thisId); });
+			
+       	 	if(f.length != 1 ){
             	$(this).addClass("list-group-item-danger");
        	 	}else{
+	       	 	$(this).removeClass("list-group-item-danger");
 				$(this).addClass("list-group-item-success");
-				highlightCtrl.highlight(f);
+				changeTrackColor(f[0]);
             }
-		},
-		function () {
-			var f = layerTracks.getFeatureById(trackFeatureIds[$(this).attr("id")]);
-			highlightCtrl.unhighlight(f);
-			$(this).removeClass("list-group-item-success");
 		}
 	);
 
 	$(".way").click(
-		function() {
-			if (allowedZoom) {
-				var f = layerTracks.getFeatureById(trackFeatureIds[$(this).attr("id")]);
-				map.zoomToExtent(f.geometry.getBounds());
-			}
+		function () {
+			var thisId= $(this).attr("id");
+			
+			// Remove the "green color class" to the others <li>
+			$(".way:not(#"+thisId+")").removeClass("list-group-item-success");
+			
+			var f = $.grep( global.features, function(e){ return parseInt(e.id) == parseInt(thisId); });
+			
+       	 	if(f.length != 1 ){
+            	$(this).addClass("list-group-item-danger");
+       	 	}else{
+	       	 	$(this).removeClass("list-group-item-danger");
+				$(this).addClass("list-group-item-success");
+				var extent = f[0].getGeometry().getExtent();
+				global.map.getView().fit(extent , global.map.getSize());
+				changeTrackColor(f[0]);
+            }
 		}
 	);
-
-	// dirty trick not to zoom when clicking on a link inside a description
-	$("a").hover(
-		function() {allowedZoom = false;},
-		function() {allowedZoom = true;}
-	);
-
 }
 
 
-var items =[];
-var trips =[];
-			
+///////////////// LOAD DATA /////////////////
 
 
-function loadTracks(features) {
+function loadTracks() {
+	// Get The date from the DateTime Input
+	global.urlDate	= $("div.date input").val();
 	
-	layerTracks.removeAllFeatures();
+	// Get the number of trips to load
+	global.tripsnumber	= $("#ex6").slider().val();
+	
+	// Disable the Data Update Button to prevent error
+	$("button#dataupdate").prop('disabled', true);
+	
+	global.trips = [];
+	global.items = [];
 
 	$.ajax({
 		method: 'POST',
 		url: 'api/get-trips-from-logs',
 		dataType: "json",
 		data: {
-			end_date: 		urlDate
+			end_date: 		global.urlDate,
+			trips_number:	global.tripsnumber
 		}
 	})
 	.success(function(data) {
-			//console.log("DATA:");
-        	//console.log(data);
+		$.each(data, function(key, val)
+		{
+			if (val._id>-1) {
+				val.end_trip 	= moment(val.end_trip.date).format("X");
+				val.begin_trip 	= moment(val.begin_trip.date).format("X");
+				
+				var duration = Math.round((val.end_trip - val.begin_trip)/60);
 
-			//console.log(data);
-			
-			$.each(data, function(key, val)
-				{
-					if (val._id>-1) {
-							
-						val.end_trip 	= moment(val.end_trip.date).format("X");
-						val.begin_trip 	= moment(val.begin_trip.date).format("X");
-						
-						var duration = Math.round((val.end_trip - val.begin_trip)/60);
+				//if (duration > 3 && val._id != 0) {
+					global.trips.push(val._id);
 
-						//if (duration > 3 && val._id != 0) {
-							trips.push(val._id);
+					var date = moment(val.begin_trip*1000).format("DD/MM/YYYY HH:mm");
 
-							var date = moment(val.begin_trip*1000).format("DD/MM/YYYY HH:mm");
-
-							items.push('<li href="#" class="list-group-item way" id="' + val._id + '">'+
-								'<h5 class="list-group-item-heading">'+ date +' <b>'+ val.VIN+'</b></h5>'+
-								'<p class="list-group-item-text">'+
-								 val._id + ' ' + duration + 'min (' + val.points +')'+
-								'</p>'+
-								'</li>');
-						//}
-					}
-				}
-			);
-			//console.log("http://core.sharengo.it/ui/log-data.php?id_trip="+trips[1] );
-			//newTrack(features, ""+trips[1], "", "http://core.sharengo.it/ui/log-data.php?id_trip="+trips[1]);
-
-			
-			$("#trips").html(items.join(""));
-			newTrack(features, trips, "");
-			addHover();
-			layerTracks.addFeatures(features);
-		}
-	);
+					global.items.push('<li href="#" class="list-group-item way" id="' + val._id + '">'+
+						'<h5 class="list-group-item-heading">'+ date +' <b>'+ val.VIN+'</b></h5>'+
+						'<p class="list-group-item-text">'+
+						 val._id + ' ' + duration + 'min (' + val.points +')'+
+						'</p>'+
+						'</li>');
+				//}
+			}
+		});
+		
+		$("#trips").html(global.items.join(""));
+		getTripsData();
+		activateListActions();
+	});
 
 	//newTrack(features, "way_J10_vers_albine", "", "http://core.sharengo.it/ui/log-data.php?id_trip=4410");
 }
 
 
 
+function getTripsData() {
+	$.ajax({
+		method:			'POST',
+		url:			'/reports/api/get-trip-points-from-logs',
+        processData:	true,
+        dataType:		'xml',
+		data: {
+			trips_id: 		global.trips
+		},
+		timeout: 180000		// Timeout = 3 minutes (2 minutes ~= 300 tracks)
+	})
+	.success(function(data,status,jsonXHR) {
+		global.highlightStyleCache = null;
+		global.highlight = null;
+		
+		// Remove all Features
+		global.vectorSource.clear();
+		global.featureOverlaySource.clear();
+		
+		var format = new ol.format.GPX();
+		var points = 0;
+		
+		// Reading the xmlDoc
+		xmlDoc = jsonXHR.responseXML;
+		
+		global.features = [];
+        global.features = format.readFeatures(xmlDoc,  {featureProjection: 'EPSG:3857'});
+		
+		console.log("Features");
+		console.log(global.features);
 
-// Resize only if the window.resize is done
+        for (var i=0; i<global.features.length; i++) {
+	        var trackFeature = global.features[i];
+		
+			trackFeature.id = trackFeature.get('name');
+		    trackFeature.setGeometry(trackFeature.getGeometry());    
+			global.vectorSource.addFeature(trackFeature);
+			
+			//points += trackFeature.geometry.components.length;
+        }
+
+        // Determino il numero di elementi caricati
+        $("span#points").text(points);
+		$("span#trips").text(global.features.length);
+        
+        //console.log(features.length);
+        global.vectorSource.changed();
+       
+	})
+	.complete(function(){	
+		// Enable the Data Update Button
+		$("button#dataupdate").prop('disabled', false);
+		
+		// Bind its action
+		$("button#dataupdate").one('click','',function(event){
+			loadTracks();
+		});
+	});
+}
+
+
+// Window Resize Action Bind
 var id;
 $(window).resize(function() {
     clearTimeout(id);
     id = setTimeout(doneResizing, 500);
-
 });
 
 
 function doneResizing(){
-	var newHeight 				= $(window).height();
-    $(".row.mainrow").css("height", newHeight -150); //-110);
-    $(".map").css("height", newHeight -150);
-}
-
-// Bind dataUpdate Action
-$("button#dataupdate").click(function(){
-	updateTracks();
-});
-
-
-function updateTracks(){
-	// Update the date value
-	urlDate 		= 	$("div.date input").val();
-	
-	// Reload the tracks
-	loadTracks(featuresTrack);
+	var newHeight 			= $(window).height();
+    $(".row.mainrow").css("height", newHeight -280); //-110);
+    $(".map").css("height", newHeight -280);
+    global.map.updateSize();
 }

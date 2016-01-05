@@ -219,12 +219,15 @@ class ReportsService
 	 * @param $end_date 	The end date to filter data
 	 *
 	 */
-	public function getTripsFromLogs($start_date,$end_date)
+	public function getTripsFromLogs($start_date,$end_date,$trips_number)
 	{
 		
 		// Converting Dates
 		$end	= new MongoDB\BSON\UTCDateTime(strtotime($end_date)*1000);
 		$start	= new MongoDB\BSON\UTCDateTime(strtotime($start_date)*1000);
+		
+		// Limit the trips number
+		$limit = (intval($trips_number) > 0 && intval($trips_number) <= 300) ? intval($trips_number) : 100;
 
 		$pipeline = [
 			// STAGE 1
@@ -258,7 +261,7 @@ class ReportsService
 				'points' => 1,
 	        ]],
 	        
-	        ['$limit' => 300]
+	        ['$limit' => $limit]
         ];
 		
 		try {
@@ -291,14 +294,16 @@ class ReportsService
 	 */
 	public function getTripPointsFromLogs($id_trip)
 	{
+		// Set the memory limit
+		ini_set('memory_limit', '256M');
+		
 		$id_trip = is_array($id_trip) ? $id_trip : array($id_trip);
 		
 		$gpx = new phpGpx();
 		
 		foreach($id_trip as $trip){
+	        //error_log ("Trip\t\t$i di $total -> $trip", 0);
 			
-	        error_log ("Trip -> $trip", 0);
-		
 			$filter = [
 	        	'id_trip' 	=> (int)$trip,
 	            'begin_trip'=> array('$ne' => 'null'),
@@ -332,27 +337,23 @@ class ReportsService
 			$east	= 18.51666;
             $south 	= 35.48333;
 						
-			foreach($result as $object){				
-	        	$time	= $object->log_time->toDateTime()->format("Y-m-d\Th:i:s+0000");
-	        	$lat	= $object->lat;
-	        	$lon	= $object->lon;
+			foreach($result as $object){		
 				
-				
-				
-				$mapurl = "<a href='http://maps.google.com/maps?q=$lat,$lon&z=16'>$lat , $lon</a>";
-	
-				if ($lat!=0 && $lon!=0) {
-	
-				//echo "OK  i= $i         --->       $lat - $lon";
-				if(
-					$lat <= $north &&
-					$lat >= $south &&
-					$lon <= $east &&
-					$lon >= $west ){
-						
-				
-		            	$gpx->addTrackPoint($time,$lat,$lon);
-		            }
+				// Check if the object have all the needed properties
+				if(isset($object->log_time) && isset($object->lat) && isset($object->lon)){
+		        	$time	= $object->log_time->toDateTime()->format("Y-m-d\Th:i:s+0000");
+		        	$lat	= $object->lat;
+		        	$lon	= $object->lon;
+					
+					$mapurl = "<a href='http://maps.google.com/maps?q=$lat,$lon&z=16'>$lat , $lon</a>";
+		
+					if ($lat!=0 && $lon!=0) {
+						//echo "OK  i= $i         --->       $lat - $lon";
+						if( $lat <= $north && $lat >= $south &&	$lon <= $east && $lon >= $west )
+						{
+			            	$gpx->addTrackPoint($time,$lat,$lon);
+			            }
+			        }
 		        }
 			}
 			
