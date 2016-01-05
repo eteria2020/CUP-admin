@@ -139,6 +139,15 @@ return array(
 		                            ],
 		                        ],
 		                    ],
+		                    'get-trips' => [
+		                        'type'    => 'Literal',
+		                        'options' => [
+		                            'route'    => '/get-trips',
+		                            'defaults' => [
+		                                'action' => 'get-trips',
+		                            ],
+		                        ],
+		                    ],	                    
 		                    'get-trips-from-logs' => [
 		                        'type'    => 'Literal',
 		                        'options' => [

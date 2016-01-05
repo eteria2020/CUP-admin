@@ -216,7 +216,58 @@ class ReportsService
 	
 	/**
 	 * @param $start_date 	The start date to filter data
+	 * @param $end_date 	The end date to filter data	(DateTime)
+	 * @param $trips_number The number of trips to 		(DateTime)
+	 * @param $maintainer   The flag to get the mainteiner trips (true | false)
+	 *
+	 */
+	public function getTrips($start_date,$end_date,$trips_number,$maintainer)
+	{
+		// Limit the trips number
+		$limit = (intval($trips_number) > 0 && intval($trips_number) <= 300) ? intval($trips_number) : 100;
+		
+		$maint	= ($maintainer === true) ? 't' : 'f';
+		
+		$query = "
+		SELECT array_to_json(array_agg(fc))
+		FROM (
+			SELECT	
+				t.id 								as _id,
+				t.car_plate							as VIN,
+				t.timestamp_beginning::timestamp	as begin_trip,
+				t.timestamp_end::timestamp			as end_trip
+				
+			FROM			trips		t	
+			LEFT JOIN		customers 	c		ON	t.customer_id = c.id
+						
+			
+			WHERE		timestamp_beginning		>= '".$start_date."' 
+				AND		timestamp_beginning		<= '".$end_date."'
+				AND		timestamp_end		IS NOT NULL
+				AND		c.gold_list = '$maint'
+				AND		c.maintainer = '$maint'
+			
+			ORDER BY	timestamp_beginning	DESC
+						
+			LIMIT 		$limit
+			
+		) as fc
+
+		";
+		
+		// Fetch all rows (but in this case will always fetch just one row)
+		$trips = $this->database->fetchAll($query);
+		
+		//error_log ("Result -> ".$trips[0]['array_to_json'], 0);
+		
+		// Return the undecoded JSON
+		return $trips[0]['array_to_json'];
+	}
+	
+	/**
+	 * @param $start_date 	The start date to filter data
 	 * @param $end_date 	The end date to filter data
+	 * @param $trips_number The number of trips to 
 	 *
 	 */
 	public function getTripsFromLogs($start_date,$end_date,$trips_number)

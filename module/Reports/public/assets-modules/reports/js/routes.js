@@ -54,6 +54,9 @@ $.extend($.scrollTo.defaults, {
 	
 	// The number of trips to load
 	global.tripsnumber = 0;
+	
+	// Flag to get the maintainer trips or the customers one
+	global.maintainer = false;
 // }
 
 $(document).ready(function()
@@ -92,6 +95,7 @@ $(window).load(function() {
     doneResizing();
     
     activateHoverButton();
+    activateMaintainerButton();
 });
 
 
@@ -229,10 +233,6 @@ function displayFeatureInfo(pixel) {
 		selectedfeatures.push(feature);
 	});
 	
-	
-	console.log("Selected Features");
-	console.log(selectedfeatures);
-	
 	if (selectedfeatures.length > 0) {
 		var info = [];
 		var i;
@@ -256,7 +256,6 @@ function displayFeatureInfo(pixel) {
 			
 			element.parent().stop();
 			element.parent().scrollTo(element);
-			console.log("SCROLL");
 		}
 		
 		
@@ -307,11 +306,44 @@ function activateHoverButton()
 	);
 }
 
+function activateMaintainerButton()
+{
+	$('button#maintainer').addClass("btn-danger");
+	
+	$('button#maintainer').click(
+		function () {
+		    if(global.maintainer){
+			    global.maintainer = false;
+			    
+		        $('button#maintainer').removeClass("btn-success");
+		        $('button#maintainer').addClass("btn-danger");
+		    }else{
+		        global.maintainer = true;
+			    
+		        $('button#maintainer').addClass("btn-success");
+		        $('button#maintainer').removeClass("btn-danger");
+		    }
+		}
+	);
+}
+
+function deactiveListActions()
+{
+	// Set it as disabled
+	$("#steps").attr('disabled',true);
+	
+	// Remove other bind events();
+	$('.way').off();
+}
+
 
 function activateListActions()
 {
 	// Remove other bind events();
 	$('.way').off();
+	
+	// Set it as enabled
+	$("#steps").attr('disabled',false);
 	
 	// Add hover function to highlight tracks
 	$(".way").hover(
@@ -364,6 +396,8 @@ function activateListActions()
 
 
 function loadTracks() {
+	deactiveListActions();
+	
 	// Get The date from the DateTime Input
 	global.urlDate	= $("div.date input").val();
 	
@@ -371,47 +405,74 @@ function loadTracks() {
 	global.tripsnumber	= $("#ex6").slider().val();
 	
 	// Disable the Data Update Button to prevent error
-	$("button#dataupdate").prop('disabled', true);
+	$('button#dataupdate')
+		.prop('disabled', true)
+		.removeClass('btn-default')
+		.addClass('btn-warning');
+		
+	$('button#dataupdate span')
+		.removeClass('glyphicon-screenshot')
+		.addClass('glyphicon-refresh glyphicon-refresh-animate');
 	
 	global.trips = [];
 	global.items = [];
 
 	$.ajax({
 		method: 'POST',
-		url: 'api/get-trips-from-logs',
+		url: 'api/get-trips',
 		dataType: "json",
 		data: {
 			end_date: 		global.urlDate,
-			trips_number:	global.tripsnumber
+			trips_number:	global.tripsnumber,
+			maintainer:		global.maintainer
 		}
 	})
 	.success(function(data) {
-		$.each(data, function(key, val)
+		if(typeof(data) == "undefined" || data === null || data.count === 0)
 		{
-			if (val._id>-1) {
-				val.end_trip 	= moment(val.end_trip.date).format("X");
-				val.begin_trip 	= moment(val.begin_trip.date).format("X");
-				
-				var duration = Math.round((val.end_trip - val.begin_trip)/60);
-
-				//if (duration > 3 && val._id != 0) {
-					global.trips.push(val._id);
-
-					var date = moment(val.begin_trip*1000).format("DD/MM/YYYY HH:mm");
-
-					global.items.push('<li href="#" class="list-group-item way" id="' + val._id + '">'+
-						'<h5 class="list-group-item-heading">'+ date +' <b>'+ val.VIN+'</b></h5>'+
-						'<p class="list-group-item-text">'+
-						 val._id + ' ' + duration + 'min (' + val.points +')'+
-						'</p>'+
-						'</li>');
-				//}
-			}
-		});
-		
-		$("#trips").html(global.items.join(""));
-		getTripsData();
-		activateListActions();
+			alert("Non sono state trovate corse con i filtri selezionati");
+			
+			// Enable the Data Update Button
+			$("button#dataupdate").prop('disabled', false);
+			
+			// Bind its action
+			$("button#dataupdate").one('click','',function(event){
+				loadTracks();
+			});
+		}else{
+			$.each(data, function(key, val)
+			{
+				if (val._id>-1) {
+							
+					val.end_trip 	= (typeof val.end_trip 		== 'string') 	? val.end_trip 		: val.end_trip.date;
+					val.begin_trip  = (typeof val.begin_trip	== 'string') 	? val.begin_trip 	: val.begin_trip.date;
+										
+					val.end_trip 	= moment(val.end_trip).format("X");
+					val.begin_trip 	= moment(val.begin_trip).format("X");
+					
+					var duration = Math.round((val.end_trip - val.begin_trip)/60);
+	
+					//if (duration > 3 && val._id != 0) {
+						global.trips.push(val._id);
+						
+						val.VIN = val.VIN ? val.VIN : val.vin;
+	
+						var date = moment(val.begin_trip*1000).format("DD/MM/YYYY HH:mm");
+	
+						global.items.push('<li href="#" class="list-group-item way" id="' + val._id + '">'+
+							'<h5 class="list-group-item-heading">'+ date +' <b>'+ val.VIN+'</b></h5>'+
+							'<p class="list-group-item-text">'+
+							 val._id + ' ' + duration + 'min (' + val.points +')'+
+							'</p>'+
+							'</li>');
+					//}
+				}
+			});
+			
+			$("#trips").html(global.items.join(""));
+			
+			getTripsData();
+		}
 	});
 
 	//newTrack(features, "way_J10_vers_albine", "", "http://core.sharengo.it/ui/log-data.php?id_trip=4410");
@@ -470,12 +531,23 @@ function getTripsData() {
 	})
 	.complete(function(){	
 		// Enable the Data Update Button
-		$("button#dataupdate").prop('disabled', false);
+		$('button#dataupdate')
+			.prop('disabled', false)
+			.removeClass('btn-warning')
+			.addClass('btn-default');
+			
+		$('button#dataupdate span')
+			.removeClass('glyphicon-refresh glyphicon-refresh-animate')
+			.addClass('glyphicon-screenshot');
+
 		
 		// Bind its action
 		$("button#dataupdate").one('click','',function(event){
 			loadTracks();
 		});
+		
+		// Activate the list of trips
+		activateListActions();
 	});
 }
 
