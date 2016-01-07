@@ -206,6 +206,14 @@ return array(
 	],
     
     'asset_manager' => [
+	    'caching' => array(
+            'default' => array(
+                'cache'     => 'Assetic\\Cache\\FilesystemCache',
+                'options' => array(
+                    'dir' => 'public/cache', // path/to/cache
+                ),
+            ),
+        ),
         'resolver_configs' => [
 	        'map' => [
 		    	'assets-modules/reports/js/dc.js.map' => $baseDir. '/bower_components/dcjs/dc.js.map',
