@@ -232,7 +232,14 @@ angular.module('SharengoCsApp').controller('SharengoCsController', function (
                         car.options.group = 'nobatt';
                         car.iconSelected = car.carIcon;
                     }else{
-                        console.log('nooper',car.plate);
+                        if(car.charging){
+                            car.options.group = 'ricarica';
+                            car.iconSelected = car.carIcon;
+                            car.carIcon['fillColor'] = $scope.markerColors['brown'];
+                            car.carIcon['strokeColor'] = $scope.markerColors['azzure'];
+                        } else{
+                            console.log('nooper',car.plate,car);
+                        }                        
                     }
                 }else {
                     if(car.sinceLastTrip && car.sinceLastTrip>1440){
