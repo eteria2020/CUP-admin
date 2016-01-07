@@ -184,24 +184,7 @@ return array(
     'service_manager' => [
 	    'factories' => [
 			'Reports\Service\Reports' => 'Reports\Service\ReportsServiceFactory',    
-			
-			'obfuscator' => 
-		    	function($sm) {
-			    	// Initialize the Uglyfier
-	                $module = new \Assetic\Filter\UglifyJs2Filter(
-	                    realpath(__DIR__ . '/../../../').'/node_modules/uglify-js/bin/uglifyjs',
-						'/usr/local/bin/node'
-	                );
-	                
-	                // Set the params
-	                $module->setMangle(true);
-	                $module->setWrap(true);
-	                
-	                $module->setCompress("sequences=true, properties=true, dead_code=true, drop_debugger=true, conditionals=true, comparisons=true, evaluate=true, booleans=true, loops=true, unused=true, hoist_funs=true, hoist_vars=true, if_return=true, join_vars=true, cascade=true, side_effects=true, warnings=true ");	                
-	                
-	                // Return the Uglifier Parser
-	                return $module;
-	            },
+			'Reports\Service\Obfuscator' => 'Reports\Service\ObfuscatorFactory',
 	    ],
 	],
     
@@ -219,117 +202,119 @@ return array(
 		    	'assets-modules/reports/js/dc.js.map' => $baseDir. '/bower_components/dcjs/dc.js.map',
 		    	'assets-modules/reports/js/dc.js' => $baseDir. '/bower_components/dcjs/dc.js',
 	        ],
-            'collections' => [
-				
-				// Specific Asset for Routes Page.
-				'assets-modules/reports/js/vendor.routes.js' =>[
-					//'ol2/OpenLayers.js',					// OpenLayers
-					//'assets-modules/reports/js/OpenStreetMap.js',
-       
-					'ol3/ol.js',
-					
-					//'ol3/ol-debug.js',
-					//'ol3-legacy/src/ol/featureoverlay.js',
-       
-					'jquery-legacy/dist/jquery.js',			// Jquery 1.11.3
-					'jquery-migrate/jquery-migrate.js',		// Jquery Migrate 1.2.1
-					                    
-                    
-                    'jquery-scrollto/jquery.scrollTo.js',	// ScrollTo
-                    'moment/moment.js',						// Moment.js
-                    'eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js',
-                    'seiyria-bootstrap-slider/dist/bootstrap-slider.js',
-                    'bootstrap-switch/dist/js/bootstrap-switch.js',
-                    
-					'assets-modules/reports/js/menu.js',
-                    'assets-modules/reports/js/routes.js',
-				],
-				'assets-modules/reports/css/vendor.routes.css' => [
-                    'eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.css',
-                    'seiyria-bootstrap-slider/dist/css/bootstrap-slider.css',
-                    'bootstrap-switch/dist/css/bootstrap3/bootstrap-switch.css',
-                    
-					'ol3/ol.css',
-					
-	                //'ol2/theme/default/style.css',
-	                //'ol2/theme/default/style.mobile.css',
-	                
-	                'assets-modules/reports/css/routes.css',
-                ],
-                
-                
-                 // Specific Asset for Trips Page.
+            'collections' => [                
+                 // Specific Asset for Trips (main) Page.
 				'assets-modules/reports/js/vendor.trips.main.js' =>[
+					// Libs
 					'jquery/dist/jquery.js',
 					'crossfilter/crossfilter.js',
 					'd3/d3.js',
 					'dcjs/dc.js',
-					 
+					
+					// Code
 					'assets-modules/reports/js/menu.js',
                     'assets-modules/reports/js/trips.main.js',
 				],
                 'assets-modules/reports/css/vendor.trips.main.css' => [
+	                // Libs
 	                'font-awesome/css/font-awesome.css',
 					'dcjs/dc.css',
                     
+                    // Code
                     'assets-modules/reports/css/trips.main.css'
                 ],
                 
-                // Specific Asset for Trips Page.
+                // Specific Asset for Trips (city) Page.
 				'assets-modules/reports/js/vendor.trips.city.js' =>[
+					// Libs
 					'jquery/dist/jquery.js',
 					'crossfilter/crossfilter.js',
 					'd3/d3.js',
 					'dcjs/dc.js',
 					 
+					 // Code
 					'assets-modules/reports/js/menu.js',
                     'assets-modules/reports/js/trips.city.js',
 				],
                 'assets-modules/reports/css/vendor.trips.city.css' => [
+	                // Getting the trips.main libraries
 	                'assets-modules/reports/css/vendor.trips.main.css'
                 ],
                 
                 
                 // Specific Asset for Live Page.
 				'assets-modules/reports/js/vendor.live.js' =>[
+					// Libs
 					'jquery/dist/jquery.js',
                     'jquery-scrollto/jquery.scrollTo.js',
                     'ol3/ol.js',
                     'jquery-ui/jquery-ui.js',				// JqueryUI (need for tooltip)
                     
+                    // Code
 					'assets-modules/reports/js/menu.js',
                     'assets-modules/reports/js/live.js',
 				],
                 'assets-modules/reports/css/vendor.live.css' => [
+	                // Libs
 	                'font-awesome/css/font-awesome.css',
 					'ol3/ol.css',
-                    'jquery-ui/themes/base/theme.css',	// JqueryUI
+                    'jquery-ui/themes/base/theme.css',		// JqueryUI
                     
+                    // Code
                     'assets-modules/reports/css/live.css'
                 ],
                 
-                // Specific Asset for HeatMap Page.
+                // Specific Asset for Map Page.
 				'assets-modules/reports/js/vendor.map.js' =>[
+					// Libs
 					'jquery/dist/jquery.js',
                     'jquery-scrollto/jquery.scrollTo.js',
                     'ol3/ol.js',
                     'seiyria-bootstrap-slider/dist/bootstrap-slider.js',
                     'bootstrap-datepicker/dist/js/bootstrap-datepicker.js',                   
                     
+                    // Code
 					'assets-modules/reports/js/menu.js',
                     'assets-modules/reports/js/map.js',
-                    
 				],
                 'assets-modules/reports/css/vendor.map.css' => [
+	                // Libs
 	                'font-awesome/css/font-awesome.css',
 					'ol3/ol.css',
                     'seiyria-bootstrap-slider/dist/css/bootstrap-slider.css',
                     'bootstrap-datepicker/dist/css/bootstrap-datepicker3.css',
                     
+                    // Code
                     'assets-modules/reports/css/map.css'
                 ],
-				
-				
+                
+				// Specific Asset for Routes Page.
+				'assets-modules/reports/js/vendor.routes.js' =>[
+					// Libs
+					'ol3/ol.js',				
+					//'ol3/ol-debug.js',
+					'jquery-legacy/dist/jquery.js',			// Jquery 1.11.3
+					'jquery-migrate/jquery-migrate.js',		// Jquery Migrate 1.2.1
+                    'jquery-scrollto/jquery.scrollTo.js',	// ScrollTo
+                    'moment/moment.js',						// Moment.js
+                    'eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js',
+                    'seiyria-bootstrap-slider/dist/bootstrap-slider.js',
+                    'bootstrap-switch/dist/js/bootstrap-switch.js',
+                    
+                    // Code
+					'assets-modules/reports/js/menu.js',
+                    'assets-modules/reports/js/routes.js',
+				],
+				'assets-modules/reports/css/vendor.routes.css' => [
+                    // Libs
+                    'eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.css',
+                    'seiyria-bootstrap-slider/dist/css/bootstrap-slider.css',
+                    'bootstrap-switch/dist/css/bootstrap3/bootstrap-switch.css',
+					'ol3/ol.css',
+					
+	                // Code
+	                'assets-modules/reports/css/routes.css',
+                ],			
             ],
             'paths' => [
                 'reports' => __DIR__ . '/../public',
@@ -343,37 +328,37 @@ return array(
 	        // Obfuscate only specific files to prevent libs error
             'assets-modules/reports/js/routes.js' => [
             	[
-                	'service' => 'obfuscator',
+                	'service' => 'Reports\Service\Obfuscator',//'obfuscator',
                 ],
             ],
             
             'assets-modules/reports/js/menu.js' => [
             	[
-                	'service' => 'obfuscator',
+                	'service' => 'Reports\Service\Obfuscator',//'obfuscator',
                 ],
             ],
             
             'assets-modules/reports/js/trips.main.js' => [
             	[
-                	'service' => 'obfuscator',
+                	'service' => 'Reports\Service\Obfuscator',//'obfuscator',
                 ],
             ],
             
             'assets-modules/reports/js/trips.city.js' => [
             	[
-                	'service' => 'obfuscator',
+                	'service' => 'Reports\Service\Obfuscator',//'obfuscator',
                 ],
             ],
             
             'assets-modules/reports/js/live.js' => [
             	[
-                	'service' => 'obfuscator',
+                	'service' => 'Reports\Service\Obfuscator',//'obfuscator',
                 ],
             ],
             
             'assets-modules/reports/js/map.js' => [
             	[
-                	'service' => 'obfuscator',
+                	'service' => 'Reports\Service\Obfuscator',//'obfuscator',
                 ],
             ],
             
@@ -385,7 +370,7 @@ return array(
             ],
             
             // Minify All CSS 
-            'assets-modules/reports/css/routes.css' => [
+            'css' => [
             	[
                 	'filter' => 'CssMin',
                 ],
