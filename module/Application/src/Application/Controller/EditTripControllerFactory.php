@@ -2,13 +2,11 @@
 
 namespace Application\Controller;
 
-use Application\Form\InputData\CloseTripDataFactory;
-
 use DoctrineModule\Stdlib\Hydrator\DoctrineObject as DoctrineHydrator;
 use Zend\ServiceManager\FactoryInterface;
 use Zend\ServiceManager\ServiceLocatorInterface;
 
-class TripsControllerFactory implements FactoryInterface
+class EditTripControllerFactory implements FactoryInterface
 {
     /**
      * @see \Zend\ServiceManager\FactoryInterface::createService()
@@ -18,19 +16,20 @@ class TripsControllerFactory implements FactoryInterface
         $sharedServiceLocator = $serviceLocator->getServiceLocator();
 
         $tripsService = $sharedServiceLocator->get('SharengoCore\Service\TripsService');
-        $tripCostForm = $sharedServiceLocator->get('TripCostForm');
-        $tripCostComputerService = $sharedServiceLocator->get('SharengoCore\Service\TripCostComputerService');
         $eventsService = $sharedServiceLocator->get('SharengoCore\Service\EventsService');
+        $editTripsService = $sharedServiceLocator->get('SharengoCore\Service\EditTripsService');
+        $editTripForm = $sharedServiceLocator->get('EditTripForm');
+        $eventManager = $sharedServiceLocator->get('EventLogger\EventManager\EventManager');
         $entityManager = $sharedServiceLocator->get('doctrine.entitymanager.orm_default');
-        $tripsRepository = $entityManager->getRepository('SharengoCore\Entity\Trips');
-        $closeTripDataFactory = new CloseTripDataFactory($tripsRepository);
+        $hydrator = new DoctrineHydrator($entityManager);
 
-        return new TripsController(
+        return new EditTripController(
             $tripsService,
-            $tripCostForm,
-            $tripCostComputerService,
+            $editTripsService,
+            $eventManager,
             $eventsService,
-            $closeTripDataFactory
+            $hydrator,
+            $editTripForm
         );
     }
 }

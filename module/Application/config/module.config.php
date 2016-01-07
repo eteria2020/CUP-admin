@@ -554,7 +554,21 @@ return [
                                 'id'    => '[0-9]*'
                             ],
                             'defaults' => [
+                                'controller' => 'EditTrip',
                                 'action' => 'edit-tab'
+                            ]
+                        ]
+                    ],
+                    'remove-tries' => [
+                        'type' => 'Segment',
+                        'options' => [
+                            'route' => '/remove-tries/:id',
+                            'constraints' => [
+                                'id'    => '[0-9]*'
+                            ],
+                            'defaults' => [
+                                'controller' => 'EditTrip',
+                                'action' => 'remove-tries'
                             ]
                         ]
                     ],
@@ -968,7 +982,8 @@ return [
             'Application\Controller\Configurations' => 'Application\Controller\ConfigurationsControllerFactory',
             'Application\Controller\Pois' => 'Application\Controller\PoisControllerFactory',
             'Application\Controller\Zones' => 'Application\Controller\ZonesControllerFactory',
-            'Application\Controller\CustomersEdit' => 'Application\Controller\CustomersEditControllerFactory'
+            'Application\Controller\CustomersEdit' => 'Application\Controller\CustomersEditControllerFactory',
+            'Application\Controller\EditTrip' => 'Application\Controller\EditTripControllerFactory'
         ]
     ],
     'input_filters' => [
@@ -1070,7 +1085,8 @@ return [
                 ['controller' => 'Application\Controller\Configurations', 'roles' => ['admin']],
                 ['controller' => 'Application\Controller\Pois', 'roles' => ['superadmin']],
                 ['controller' => 'Application\Controller\Zones', 'roles' => ['superadmin']],
-                ['controller' => 'Application\Controller\CustomersEdit', 'roles' => ['admin']]
+                ['controller' => 'Application\Controller\CustomersEdit', 'roles' => ['admin']],
+                ['controller' => 'Application\Controller\EditTrip', 'roles' => ['admin']]
             ],
         ],
     ],
