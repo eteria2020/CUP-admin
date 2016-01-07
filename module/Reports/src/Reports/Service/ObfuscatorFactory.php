@@ -12,9 +12,14 @@ class ObfuscatorFactory implements FactoryInterface
 {
 	public function createService(ServiceLocatorInterface $serviceLocator)
 	{
-		
+		// Set the uglify path		
 		$uglifybin = realpath(__DIR__ . '/../../../../../').'/node_modules/uglify-js/bin/uglifyjs';
-		$nodejsbin = '/usr/local/bin/node';
+		
+		// Set the node.js path
+		$NodeJsOsXPath = '/usr/local/bin/node';
+		$NodeJsLinuxPath = '/usr/lib/nodejs';
+		
+		$nodejsbin = file_exists($NodeJsLinuxPath) ? $NodeJsLinuxPath : $NodeJsOsXPath;
 
 		$module =  new UglifyJs2Filter($uglifybin,$nodejsbin);
 		
