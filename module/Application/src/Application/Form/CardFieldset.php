@@ -48,6 +48,9 @@ class CardFieldset extends Fieldset implements InputFilterProviderInterface
                 'filters'  => [
                     [
                         'name' => 'StringTrim'
+                    ],
+                    [
+                        'name' => 'StringToUpper'
                     ]
                 ],
                 'validators' => [

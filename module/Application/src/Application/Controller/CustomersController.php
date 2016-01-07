@@ -459,7 +459,7 @@ class CustomersController extends AbstractActionController
         $customerId = $this->params()->fromQuery('customer', 0);
 
         if ($customerId) {
-            $customer = $this->customerService->findById($customerId);
+            $customer = $this->customersService->findById($customerId);
 
             if (is_null($customer)) {
                 $this->getResponse()->setStatusCode(Response::STATUS_CODE_404);
@@ -470,7 +470,7 @@ class CustomersController extends AbstractActionController
 
         if ($this->getRequest()->isPost()) {
             $postData = $this->getRequest()->getPost()->toArray();
-            $form->setData($postData);
+            $this->cardForm->setData($postData);
 
             if ($this->cardForm->isValid()) {
                 try {
