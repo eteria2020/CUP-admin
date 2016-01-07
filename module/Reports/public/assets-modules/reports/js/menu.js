@@ -1,9 +1,12 @@
-if (typeof global === 'undefined') {
-    var global = {
-	    city: {}
-    };
+if (typeof $.oe === 'undefined') {
+    $.extend({
+	    oe: {
+	    	city: {},
+	    	fn: {}
+    	}
+    });
 }else{
-	global.city = {};
+	$.oe.city = {};
 }
 
 
@@ -14,7 +17,7 @@ if (typeof global === 'undefined') {
  *	It also makes the Submenu and populate it.
  *
  */
-function getCityData(callback){
+$.oe.fn.getCityData = function(callback){
 	$.ajax({
 		method: "GET",
 		dataType: "json",
@@ -23,9 +26,9 @@ function getCityData(callback){
 		success: function(d){
 			$('#navbar li:eq(0)').after('<li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="true">City Trips <span class="caret"></span></a><ul class="dropdown-menu"></ul></li>')
 
-			global.city = d.city;
+			$.oe.city = d.city;
 
-            $.each( global.city, function( key, value ) {
+            $.each( $.oe.city, function( key, value ) {
 				$("#navbar ul.dropdown-menu").append('<li><a href="/reports/tripscity/' + value.fleet_id + '">' + value.fleet_name + '</a></li>');
 			});
 			

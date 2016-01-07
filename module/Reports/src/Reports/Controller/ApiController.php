@@ -268,7 +268,7 @@ class ApiController extends AbstractActionController
 	{
 		$start_date 	= '';//"2016-01-01";
 		$end_date		= '';//"2016-01-02";
-		$trips_number	= 100;
+		$trips_number	= 15;
 		$maintainer		= false;
 		
 		// Getting Post vars
@@ -320,7 +320,7 @@ class ApiController extends AbstractActionController
 	{
 		$start_date 	= '';//"2016-01-01";
 		$end_date		= '';//"2016-01-02";
-		$trips_number	= 100;
+		$trips_number	= 15;
 		
 		// Getting Post vars
 		if ($this->getRequest()->isPost()) {

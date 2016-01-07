@@ -1,16 +1,18 @@
-// Check if var global has been declared
-if (typeof global === 'undefined') {
-    var global = {};
+// Check if var $.oe has been declared
+if (typeof $.oe === 'undefined') {
+    $.extend({
+	    oe: {}
+    });
 }
 
-// Global Vars Definition
+// $.oe Vars Definition
 	// Obj containing the trips data
-	global.trips = {};
+	$.oe.trips = {};
 	
-	global.filters = {};
+	$.oe.filters = {};
 
 	// Charts definition
-	global.charts = {
+	$.oe.charts = {
 		day				: dc.barChart('#days-chart'),
 		dayOfWeek		: dc.rowChart('#day-of-week-chart'),
 		duration 		: dc.barChart('#duration-chart'),
@@ -21,13 +23,13 @@ if (typeof global === 'undefined') {
 	};
 
 	// Set the timeout needed for the page resize bind function
-	global.timeout = 0;
+	$.oe.timeout = 0;
 // }
 
 // The magic!
 $(document).ready(function(){
 
-	getCityData();
+	$.oe.fn.getCityData();
 	getCharts();
 	
 	// Print the DC.js version
@@ -37,8 +39,8 @@ $(document).ready(function(){
 
 // Window Resize Action Bind
 $(window).resize(function() {
-    clearTimeout(global.timeout);
-    global.timeout = setTimeout(resizeCharts, 500);
+    clearTimeout($.oe.timeout);
+    $.oe.timeout = setTimeout(resizeCharts, 500);
 });
 
 
@@ -64,38 +66,39 @@ function getCharts(){
 		});
 
 		// Create the crossfilter for the relevant dimensions and groups.
-			global.trips		= crossfilter(trips_record);
-			global.filters.all	= global.trips.groupAll();
+		$.oe.trips		= crossfilter(trips_record);
+		$.oe.filters.all	= $.oe.trips.groupAll();
+			
 		var
 			// dc.barChart('#days-chart')
-			date_beginning	= global.trips.dimension(function(d){return d.dd;}),
+			date_beginning	= $.oe.trips.dimension(function(d){return d.dd;}),
 			days			= date_beginning.group(d3.time.day),
 
 			// dc.rowChart('#day-of-week-chart')
-			dayOfWeek		= global.trips.dimension(function(d){
+			dayOfWeek		= $.oe.trips.dimension(function(d){
 				var name	= ['','0.Lun', '1.Mar', '2.Mer', '3.Gio', '4.Ven', '5.Sab', '6.Dom'];
 				return name[d.time_dow];
 			}),
 			dayOfWeeks		= dayOfWeek.group(),
 
 			// dc.barChart('#beginning-hour-chart')
-			beginningHour	= global.trips.dimension(function(d){return d.dd.getHours();}),
+			beginningHour	= $.oe.trips.dimension(function(d){return d.dd.getHours();}),
 			beginningHours	= beginningHour.group(),
 
 			// dc.barChart('#duration-chart')
-			duration		= global.trips.dimension(function(d){return Math.min(d.time_total_minute,61);}),
+			duration		= $.oe.trips.dimension(function(d){return Math.min(d.time_total_minute,61);}),
 			durations		= duration.group(),
 
 			// dc.pieChart('#gender-chart')
-			gender			= global.trips.dimension(function(d){return d.customer_gender;}),
+			gender			= $.oe.trips.dimension(function(d){return d.customer_gender;}),
 			genders			= gender.group(),
 
 			// dc.pieChart('#city-chart')
-		   	city			= global.trips.dimension(function(d){return d.fleet_id;}),
+		   	city			= $.oe.trips.dimension(function(d){return d.fleet_id;}),
 		   	citys			= city.group(),
 
 			// dc.pieChart('#age-chart')
-	        age				= global.trips.dimension(function(d){
+	        age				= $.oe.trips.dimension(function(d){
 		   		if (18 <= d.customer_age && d.customer_age <= 24 )		return 0;
 				else if(25 <= d.customer_age && d.customer_age <= 34 )	return 1;
 				else if(35 <= d.customer_age && d.customer_age <= 44 )	return 2;
@@ -108,7 +111,7 @@ function getCharts(){
 
 
 		date_beginning.filterAll();
-		global.charts.day.width(900)
+		$.oe.charts.day.width(900)
 	        .margins({top: 30, left: 40, right: 10, bottom: 20})
             .renderLabel(false)
             .x(d3.time.scale().domain(d3.extent(trips_record, function(d) { return d.dd; })))
@@ -128,10 +131,10 @@ function getCharts(){
 	        .on("filtered", function (chart) {
 		        rearrangeFilterHelper("#data-range");
             });
-		global.charts.day.yAxis().ticks(2);
+		$.oe.charts.day.yAxis().ticks(2);
 
 	    age.filterAll();
-		global.charts.age.width(180)
+		$.oe.charts.age.width(180)
 	        .height(180)
 	        .radius(80)
 	        .innerRadius(30)
@@ -149,7 +152,7 @@ function getCharts(){
 	        });
 
 	    gender.filterAll();
-		global.charts.gender.width(180)
+		$.oe.charts.gender.width(180)
 	        .height(180)
 	        .radius(80)
 	        .innerRadius(30)
@@ -159,10 +162,10 @@ function getCharts(){
 				var lbl 	= d.key == "male" ? 'Uomini ' : 'Donne ',
 					percent = 0;
 
-	            if (global.charts.gender.hasFilter() && !global.charts.gender.hasFilter(d.key)){
+	            if ($.oe.charts.gender.hasFilter() && !$.oe.charts.gender.hasFilter(d.key)){
 	            	percent = 0;
 	            }else{
-			   		percent = (d.value / global.trips.groupAll().reduceCount().value() * 100);
+			   		percent = (d.value / $.oe.trips.groupAll().reduceCount().value() * 100);
 				}
 
 				lbl += percent.toFixed(2) + "%";
@@ -172,31 +175,32 @@ function getCharts(){
 	        });
 
 		city.filterAll();
-		global.charts.city.width(180)
+		$.oe.charts.city.width(180)
 	        .height(180)
 	        .radius(80)
 	        .innerRadius(30)
 	        .dimension(city)
 	        .group(citys)
 			.label(function (d) {
-				var lbl 	=	$.grep(global.city, function(e){ return e.fleet_id == d.key; })[0].fleet_name,
+				
+				var lbl 	=	$.grep($.oe.city, function(e){ return e.fleet_id == d.key; })[0].fleet_name,
 					percent = 	0;
 					
 
-	            if (global.charts.city.hasFilter() && !global.charts.city.hasFilter(d.key)){
+	            if ($.oe.charts.city.hasFilter() && !$.oe.charts.city.hasFilter(d.key)){
 	            	percent = 0;
 	            }else{
-			   		percent = (d.value / global.trips.groupAll().reduceCount().value() * 100);
+			   		percent = (d.value / $.oe.trips.groupAll().reduceCount().value() * 100);
 				}
 
 				lbl += " "+ percent.toFixed(2) + "%";
 				
 				return lbl;				
-            	//return $.grep(global.city, function(e){ return e.fleet_id == d.data.key; })[0].fleet_name;
+            	//return $.grep($.oe.city, function(e){ return e.fleet_id == d.data.key; })[0].fleet_name;
 	        });
 
 		dayOfWeek.filterAll();
-		global.charts.dayOfWeek.width(400)
+		$.oe.charts.dayOfWeek.width(400)
 	        .height(250)
 	        .margins({top: 20, left: 10, right: 10, bottom: 20})
 	        .group(dayOfWeeks)
@@ -212,7 +216,7 @@ function getCharts(){
 
 
 		beginningHour.filterAll();
-		global.charts.beginningHour.width(450)
+		$.oe.charts.beginningHour.width(450)
 	        .height(250)
 	        .margins({top: 50, right: 10, bottom: 30, left: 50})
 			.dimension(beginningHour)
@@ -229,14 +233,14 @@ function getCharts(){
 	        .on("filtered", function (chart) {
 		        rearrangeFilterHelper("#beginning-hour");
             });
-	    global.charts.beginningHour.xAxis().tickFormat(
+	    $.oe.charts.beginningHour.xAxis().tickFormat(
 	    function (v) {
 			return v + 'h';
 		});
-	    global.charts.beginningHour.yAxis().ticks(5);
+	    $.oe.charts.beginningHour.yAxis().ticks(5);
 
 		duration.filterAll();
-		global.charts.duration.width(450)
+		$.oe.charts.duration.width(450)
 	        .height(250)
 	        .margins({top: 50, right: 10, bottom: 30, left: 50})
 			.dimension(duration)
@@ -254,15 +258,15 @@ function getCharts(){
 	        .on("filtered", function (chart) {
 		        rearrangeFilterHelper("#duration");
             });
-	    global.charts.duration.xAxis().tickFormat(
+	    $.oe.charts.duration.xAxis().tickFormat(
 		    function (v) {
 				return v + 'm';
 			});
-	    global.charts.duration.yAxis().ticks(5);
+	    $.oe.charts.duration.yAxis().ticks(5);
 
 	    dc.dataCount('#data-count')
-	        .dimension(global.trips)
-	        .group(global.filters.all)
+	        .dimension($.oe.trips)
+	        .group($.oe.filters.all)
 	        .html({
 	            some:'<strong>%filter-count</strong> selected out of <strong>%total-count</strong> records' +
 	                ' | <a href=\'javascript:dc.filterAll(); dc.renderAll();\'\'>Reset All</a>',
@@ -311,31 +315,31 @@ function resizeCharts(){
 		newRadiusChartsWidth	= $(".col-xs-12 .panel-body").width();
 
 
-	global.charts.day.width(newWidth)
+	$.oe.charts.day.width(newWidth)
 	.transitionDuration(0);
 
-    global.charts.dayOfWeek.width(newRadiusChartsWidth)
+    $.oe.charts.dayOfWeek.width(newRadiusChartsWidth)
 	.transitionDuration(0);
 
-	global.charts.beginningHour.width(newWidth)
+	$.oe.charts.beginningHour.width(newWidth)
 	.transitionDuration(0);
 
-	global.charts.duration.width(newWidth)
+	$.oe.charts.duration.width(newWidth)
 	.transitionDuration(0);
 
-	global.charts.city
+	$.oe.charts.city
 		.width(newRadiusChartsWidth-5)
 		.height(newRadiusChartsWidth-100)
 		.radius((newRadiusChartsWidth/2.2)-50)
 		.transitionDuration(0);
 
-	global.charts.age
+	$.oe.charts.age
 		.width(newRadiusChartsWidth-5)
 		.height(newRadiusChartsWidth-5)
 		.radius((newRadiusChartsWidth/2.2)-20)
 		.transitionDuration(0);
 
-	global.charts.gender
+	$.oe.charts.gender
 		.width(newRadiusChartsWidth-5)
 		.height(newRadiusChartsWidth-5)
 		.radius((newRadiusChartsWidth/2.2)-20)

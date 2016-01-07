@@ -1,36 +1,38 @@
-// Check if var global has been declared
-if (typeof global === 'undefined') {
-    var global = {};
+// Check if var $.oe has been declared
+if (typeof $.oe === 'undefined') {
+    $.extend({
+	    oe: {}
+    });
 }
 
-// Global Vars Definition
-	global.today	 	= new Date();
-	global.aMonthAgo 	= new Date(); global.aMonthAgo.setMonth(global.today.getMonth() - 1);
+// $.oe Vars Definition
+	$.oe.today	 	= new Date();
+	$.oe.aMonthAgo 	= new Date(); $.oe.aMonthAgo.setMonth($.oe.today.getMonth() - 1);
 
-	global.todayFormatted		= global.today.getFullYear() 	+ '-' + ("0" + (global.today.getMonth()+1)).slice(-2) + '-' + ("0" + global.today.getDate()).slice(-2);
-	global.aMonthAgoFormatted	= global.aMonthAgo.getFullYear() + '-' + ("0" + (global.aMonthAgo.getMonth()+1)).slice(-2) + '-' + ("0" + global.aMonthAgo.getDate()).slice(-2);
+	$.oe.todayFormatted		= $.oe.today.getFullYear() 	+ '-' + ("0" + ($.oe.today.getMonth()+1)).slice(-2) + '-' + ("0" + $.oe.today.getDate()).slice(-2);
+	$.oe.aMonthAgoFormatted	= $.oe.aMonthAgo.getFullYear() + '-' + ("0" + ($.oe.aMonthAgo.getMonth()+1)).slice(-2) + '-' + ("0" + $.oe.aMonthAgo.getDate()).slice(-2);
 
-	global.params = {
-		dateFrom 	: global.aMonthAgoFormatted,
-		dateTo		: global.todayFormatted,
+	$.oe.params = {
+		dateFrom 	: $.oe.aMonthAgoFormatted,
+		dateTo		: $.oe.todayFormatted,
 		begend		: 0, 	// 0 ==> Beginning Hour ||  1 ==> Ending Hour
 	    weight      : 0.192,
 	    base_weight : 0.4
 	}
 
 	// Set the timeout needed for the page resize bind function
-	global.timeout = 0;
+	$.oe.timeout = 0;
 	
 	// Set the vector source; will contain the map data
-	global.vectorSource = {};
+	$.oe.vectorSource = {};
 	
 	// Set the features collection
-	global.features = {};
+	$.oe.features = {};
 // }
 
 // The magic!
 $(document).ready(function(){
-	getCityData(createButtons);
+	$.oe.fn.getCityData(createButtons);
 });
 
 $(window).load(function() {
@@ -39,7 +41,7 @@ $(window).load(function() {
 
 
 function createButtons(){
-	$.each(global.city,function(key,val){
+	$.each($.oe.city,function(key,val){
 		// Create and populate the city prop
 		val.ol = {};
 		val.ol.coordinate = ol.proj.fromLonLat([val.params.center.longitude,val.params.center.latitude]);
@@ -66,11 +68,11 @@ function createButtons(){
 
 
 // Setting Up the star date to a month ago.
-$("#datepicker #end")	.val( global.todayFormatted );
-$("#datepicker #start")	.val( global.aMonthAgoFormatted );
+$("#datepicker #end")	.val( $.oe.todayFormatted );
+$("#datepicker #start")	.val( $.oe.aMonthAgoFormatted );
 
 
-global.vectorSource = new ol.source.Vector({
+$.oe.vectorSource = new ol.source.Vector({
 	extractStyles: 	false,
 	projection: 	'EPSG:3857',
 	loader: 		function(extent, resolution, projection) {
@@ -78,24 +80,24 @@ global.vectorSource = new ol.source.Vector({
 							method: 'POST',
 							url: '/reports/api/get-trips-geo-data',
 							data: {
-								start_date:  	global.params.dateFrom,
-								end_date: 		global.params.dateTo,
-								begend:			global.params.begend
+								start_date:  	$.oe.params.dateFrom,
+								end_date: 		$.oe.params.dateTo,
+								begend:			$.oe.params.begend
 							},
 							dataType: "json"
 						})
 						.success(function(response) {
 				            var format = new ol.format.GeoJSON();
 				            
-				            global.features = format.readFeatures(
+				            $.oe.features = format.readFeatures(
 				            	response,
 								{featureProjection: projection}
 							);
 				            
-				            global.vectorSource.addFeatures(global.features);
+				            $.oe.vectorSource.addFeatures($.oe.features);
 				
 							// Determino il numero di elementi caricati
-							$("#element-counter input").val(global.features.length);
+							$("#element-counter input").val($.oe.features.length);
 				        });
 	},
 	format: 		new ol.format.GeoJSON()
@@ -105,26 +107,26 @@ global.vectorSource = new ol.source.Vector({
 // This functions will change the source loader params to pass to the url
 // so we can make a specific ajax call
 function changeFilterDateFrom(dateFrom) {
-	global.params.dateFrom = dateFrom;
-	global.vectorSource.clear(true);
+	$.oe.params.dateFrom = dateFrom;
+	$.oe.vectorSource.clear(true);
 }
 function changeFilterDateTo(dateTo){
-	global.params.dateTo = dateTo;
-	global.vectorSource.clear(true);
+	$.oe.params.dateTo = dateTo;
+	$.oe.vectorSource.clear(true);
 }
 function changeFilterBegEnd(begend){
-	global.params.begend = begend;
-	global.vectorSource.clear(true);
+	$.oe.params.begend = begend;
+	$.oe.vectorSource.clear(true);
 }
 
 
 var vector = new ol.layer.Heatmap({
-	source:		global.vectorSource,
+	source:		$.oe.vectorSource,
 	radius: 	12,
     opacity: 	0.7,
     blur: 		14,
     weight: 	function(f) {
-      				return  global.params.base_weight + global.params.weight;
+      				return  $.oe.params.base_weight + $.oe.params.weight;
     			}
 });
 
@@ -162,7 +164,7 @@ function zoomChanged(){
 	
 	if (lastZoom!=zoom)	{
 		vector.setRadius(zoom*1.0);
-        global.params.weight =  (0.4*zoom/25);
+        $.oe.params.weight =  (0.4*zoom/25);
 		console.log(zoom);
 		lastZoom = zoom;
 
@@ -179,8 +181,8 @@ function animate(){
 	vector.getSource().addFeature(feats[cnt]);
     */
 
-    global.params.weight = 0.1*cnt;
-    console.log(global.params.weight);
+    $.oe.params.weight = 0.1*cnt;
+    console.log($.oe.params.weight);
     vector.getSource().changed();
     //map.renderSync();
 	cnt++;
@@ -193,7 +195,7 @@ function animate(){
 
 $('#weight').slider({
 	formatter: function(value) {
-        global.params.base_weight = value/10;
+        $.oe.params.base_weight = value/10;
         vector.getSource().changed();
       	return '' + value/10;
 	}
@@ -205,15 +207,15 @@ $("#change-begend").click(function()
     	return text === "Change to Ending Location" ? "Change to Beginning Location" : "Change to Ending Location";
     })
 
-	global.params.begend == 0 ? changeFilterBegEnd(1) : changeFilterBegEnd(0);
+	$.oe.params.begend == 0 ? changeFilterBegEnd(1) : changeFilterBegEnd(0);
 });
 
-console.log(global.today);
+console.log($.oe.today);
 
 $('.input-daterange').datepicker({
     format: "yyyy-mm-dd",
     language: "it",
-    endDate:	global.today,
+    endDate:	$.oe.today,
     orientation: "bottom auto",
     autoclose: true
 });

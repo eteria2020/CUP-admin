@@ -18,8 +18,8 @@ $this->headLink()
 					   	<span>Verranno caricati le </span>
 					</div>
 					<div class="col-md-4 dataslider">
-						<input id="ex6" type="text" data-slider-min="50" data-slider-max="300" data-slider-step="25" data-slider-value="100"/>
-						<span id="ex6CurrentSliderValLabel"><span id="ex6SliderVal">100 corse prima di</span></span>
+						<input id="ex6" type="text" data-slider-min="15" data-slider-max="300" data-slider-step="25" data-slider-value="15"/>
+						<span id="ex6CurrentSliderValLabel"><span id="ex6SliderVal">15 corse prima di</span></span>
 					</div>
                     <div class="col-md-3">
 						<div class='input-group date' id='datetimepicker1'>
@@ -30,19 +30,20 @@ $this->headLink()
 		                </div>
 					</div>
 					<div class="col-md-3">
-					<button id="dataupdate" type="button" class="btn btn-default" aria-label="Left Align">
-						Aggiorna Dati
-					  <span class=" glyphicon glyphicon-refresh" aria-hidden="true"></span>
-					</button>
-					
-					<button id="hoverenable" type="button" class="btn btn-default" aria-label="Left Align">
-						Hover
-					  <span class=" glyphicon glyphicon-screenshot" aria-hidden="true"></span>
-					</button>
-					<button id="maintainer" type="button" class="btn btn-default" aria-label="Left Align">
-						Manutentori
-					  <span class=" glyphicon glyphicon-wrench" aria-hidden="true"></span>
-					</button>
+						<button id="dataupdate" type="button" class="btn btn-default" aria-label="Left Align">
+							Aggiorna Dati
+						  <span class=" glyphicon glyphicon-refresh" aria-hidden="true"></span>
+						</button>
+						
+						<button id="hoverenable" type="button" class="btn btn-default" aria-label="Left Align">
+							Hover
+						  <span class=" glyphicon glyphicon-screenshot" aria-hidden="true"></span>
+						</button>
+						<!--<button id="maintainer" type="button" class="btn btn-default" aria-label="Left Align">
+							Manutentori
+						  <span class=" glyphicon glyphicon-wrench" aria-hidden="true"></span>
+						</button>-->
+						<input id="maintainer" type="checkbox" name="maintainer" data-on-text="Clienti" data-off-text="Manutentori" data-on-color="info" data-label-width="20" checked>
 					</div>
 				</div>
 			<div class="clearfix visible-xs-block"></div>

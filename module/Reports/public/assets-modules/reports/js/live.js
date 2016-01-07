@@ -1,18 +1,18 @@
-
-
-// Check if var global has been declared
-if (typeof global === 'undefined') {
-    var global = {};
+// Check if var $.oe has been declared
+if (typeof $.oe === 'undefined') {
+    $.extend({
+	    oe: {}
+    });
 }
 	
-// Global Vars Definition
+// $.oe Vars Definition
 	// Set the timeout needed for the page resize bind function
-	global.timeout = 0
+	$.oe.timeout = 0
 //}
 
 // The magic!
 $(document).ready(function(){
-	getCityData(createButtons);    
+	$.oe.fn.getCityData(createButtons);    
 });
 
 $(window).load(function() {
@@ -23,7 +23,7 @@ $(window).load(function() {
 
 
 function createButtons(){
-	$.each(global.city,function(key,val){
+	$.each($.oe.city,function(key,val){
 		// Create and populate the city prop
 		val.ol = {};
 		val.ol.coordinate = ol.proj.fromLonLat([val.params.center.longitude,val.params.center.latitude]);

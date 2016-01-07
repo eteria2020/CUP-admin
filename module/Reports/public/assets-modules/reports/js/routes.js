@@ -1,6 +1,8 @@
-// Check if var global has been declared
-if (typeof global === 'undefined') {
-    var global = {};
+// Check if var $.oe has been declared
+if (typeof $.oe === 'undefined') {
+    $.extend({
+	    oe: {}
+    });
 }
 
 $.ajaxSetup({
@@ -18,45 +20,46 @@ $.extend($.scrollTo.defaults, {
   //easing: 'linear'
 });
 
-// Global Vars Definition {
-	global.today	 		= new Date();
-	global.todayFormatted	= global.today.getFullYear() 	+ '-' + ("0" + (global.today.getMonth()+1)).slice(-2) + '-' + ("0" + global.today.getDate()).slice(-2);
+// $.oe Vars Definition {
+	$.oe.today	 		= new Date();
+	$.oe.todayFormatted	= $.oe.today.getFullYear() 	+ '-' + ("0" + ($.oe.today.getMonth()+1)).slice(-2) + '-' + ("0" + $.oe.today.getDate()).slice(-2);
 
-	global.urlDate 			= "";
+	$.oe.urlDate 			= "";
 	
 	// Set the vector source; will contain the map data
-	global.vectorSource = {};
+	$.oe.vectorSource = {};
 	
 	// Set the features collection
-	global.tracks = {};
+	$.oe.tracks = {};
 	
 	// The collection of features selected
-	global.featureOverlaySource = {}; 
+	$.oe.featureOverlaySource = {}; 
 	
 	// The Ol3 Vector containing the selected overlay
-	global.featureOverlay;
+	$.oe.featureOverlay;
 
 	// flag for Overlight features
-	global.highlightStyleCache;
-	global.highlight;
+	$.oe.highlightStyleCache;
+	$.oe.highlight;
 	
 	// The loaded trips (id)
-	global.trips = [];
+	$.oe.trips = [];
 	
 	// The HTML <li> of the trips
-	global.items = [];
+	$.oe.items = [];
 	
 	// The loaded tracks (features)
-	global.features = [];
+	$.oe.features = [];
 	
 	// Flag to trigger the map mousehover listener 
-	global.listenHover = true;
+	$.oe.listenHover = true;
 	
 	// The number of trips to load
-	global.tripsnumber = 0;
+	$.oe.tripsnumber = 0;
 	
 	// Flag to get the maintainer trips or the customers one
-	global.maintainer = false;
+	// true = maintainers | false = clients
+	$.oe.maintainer = false;
 // }
 
 $(document).ready(function()
@@ -84,11 +87,18 @@ $(document).ready(function()
 	});
    
     
+	// Init Bootstrap Switch
+	$('#maintainer')
+		.bootstrapSwitch()
+		.on('switchChange.bootstrapSwitch', 
+			function(event, state) {
+				$.oe.maintainer = !state; // true | false
+			});
 });
 
 $(window).load(function() {
 	
-	getCityData();
+	$.oe.fn.getCityData();
 	loadTracks();
     
     // Resize the MAP
@@ -167,14 +177,14 @@ var hoverstyle = {
 };
 
 
-global.vectorSource = new ol.source.Vector({
+$.oe.vectorSource = new ol.source.Vector({
 	projection: 'EPSG:3857',
 	format: new ol.format.GPX()
 });
 
-global.tripslayer = new ol.layer.Vector(
+$.oe.tripslayer = new ol.layer.Vector(
 {
-	source:	global.vectorSource,
+	source:	$.oe.vectorSource,
     style :
     	function(feature, resolution) {
 	    	return style[feature.getGeometry().getType()];
@@ -187,8 +197,8 @@ var view = new ol.View({
 	zoom: 12
 });
 
-global.map = new ol.Map({
-	layers: [OSM, global.tripslayer],
+$.oe.map = new ol.Map({
+	layers: [OSM, $.oe.tripslayer],
 	target: document.getElementById('map'),
 	view: view
 });
@@ -196,30 +206,30 @@ global.map = new ol.Map({
 
 
 // Set the overlay (another layer) for the selected tracks
-global.featureOverlaySource = new ol.source.Vector({});
-global.featureOverlay = new ol.layer.Vector({
-	source: global.featureOverlaySource,
+$.oe.featureOverlaySource = new ol.source.Vector({});
+$.oe.featureOverlay = new ol.layer.Vector({
+	source: $.oe.featureOverlaySource,
 	style: function(feature, resolution) {
 	    	return hoverstyle[feature.getGeometry().getType()];
 		}
 });
 // Add the overlay to the MAP ol.obj
-global.featureOverlay.setMap(global.map);
+$.oe.featureOverlay.setMap($.oe.map);
 	
 // Bind the entire map mouse moving
-global.map.on('pointermove', function(evt) {
+$.oe.map.on('pointermove', function(evt) {
 	if (evt.dragging) {
 		return;
 	}
-	if (!global.listenHover){
+	if (!$.oe.listenHover){
 		return;
 	}
-	var pixel = global.map.getEventPixel(evt.originalEvent);
+	var pixel = $.oe.map.getEventPixel(evt.originalEvent);
 	displayFeatureInfo(pixel);
 });
 
 // Bind the blick of the map
-global.map.on('click', function(evt) {
+$.oe.map.on('click', function(evt) {
 	displayFeatureInfo(evt.pixel);
 });
 	
@@ -229,7 +239,7 @@ function displayFeatureInfo(pixel) {
 	var selectedfeatures = [];
 	
 	
-	global.map.forEachFeatureAtPixel(pixel, function(feature, layer) {
+	$.oe.map.forEachFeatureAtPixel(pixel, function(feature, layer) {
 		selectedfeatures.push(feature);
 	});
 	
@@ -260,10 +270,10 @@ function displayFeatureInfo(pixel) {
 		
 		
 		document.getElementById('info').innerHTML = info.join(', ') || '(unknown)';
-		global.map.getTarget().style.cursor = 'pointer';
+		$.oe.map.getTarget().style.cursor = 'pointer';
 	} else {
 		document.getElementById('info').innerHTML = '&nbsp;';
-		global.map.getTarget().style.cursor = '';
+		$.oe.map.getTarget().style.cursor = '';
 	}
 };
 
@@ -271,16 +281,16 @@ function displayFeatureInfo(pixel) {
 function changeTrackColor(track)
 {
 	// Add the track selected to the selected overlay
-	if (track !== global.highlight) {
-		if (global.highlight) {
+	if (track !== $.oe.highlight) {
+		if ($.oe.highlight) {
 			// Remove The Track from the selected tracks
-			global.featureOverlaySource.removeFeature(global.highlight);
+			$.oe.featureOverlaySource.removeFeature($.oe.highlight);
 		}
 		if (track) {
 			// Add the Track from the selected tracks
-			global.featureOverlaySource.addFeature(track);
+			$.oe.featureOverlaySource.addFeature(track);
 		}
-		global.highlight = track;
+		$.oe.highlight = track;
 	}
 }
 
@@ -291,13 +301,13 @@ function activateHoverButton()
 	
 	$('button#hoverenable').click(
 		function () {
-		    if(global.listenHover){
-			    global.listenHover = false;
+		    if($.oe.listenHover){
+			    $.oe.listenHover = false;
 			    
 		        $('button#hoverenable').removeClass("btn-success");
 		        $('button#hoverenable').addClass("btn-danger");
 		    }else{
-		        global.listenHover = true;
+		        $.oe.listenHover = true;
 			    
 		        $('button#hoverenable').addClass("btn-success");
 		        $('button#hoverenable').removeClass("btn-danger");
@@ -308,23 +318,31 @@ function activateHoverButton()
 
 function activateMaintainerButton()
 {
-	$('button#maintainer').addClass("btn-danger");
+	/*$('button#maintainer').addClass("btn-danger");
 	
 	$('button#maintainer').click(
 		function () {
-		    if(global.maintainer){
-			    global.maintainer = false;
+		    if($.oe.maintainer){
+			    $.oe.maintainer = false;
 			    
 		        $('button#maintainer').removeClass("btn-success");
 		        $('button#maintainer').addClass("btn-danger");
 		    }else{
-		        global.maintainer = true;
+		        $.oe.maintainer = true;
 			    
 		        $('button#maintainer').addClass("btn-success");
 		        $('button#maintainer').removeClass("btn-danger");
 		    }
 		}
-	);
+	);*/
+}
+
+function activeMapInteraction(){
+	$('div#over').remove();
+}
+
+function deactiveMapInteraction(){
+	$('.map').after('<div id="over"><span class="glyphicon glyphicon-refresh glyphicon-refresh-animate" aria-hidden="true"></span></div>');
 }
 
 function deactiveListActions()
@@ -348,7 +366,7 @@ function activateListActions()
 	// Add hover function to highlight tracks
 	$(".way").hover(
 		function () {
-			if (!global.listenHover){
+			if (!$.oe.listenHover){
 				return;
 			}
 			
@@ -357,7 +375,7 @@ function activateListActions()
 			// Remove the "green color class" to the others <li>
 			$(".way:not(#"+thisId+")").removeClass("list-group-item-success");
 		
-			var f = $.grep( global.features, function(e){ return parseInt(e.id) == parseInt(thisId); });
+			var f = $.grep( $.oe.features, function(e){ return parseInt(e.id) == parseInt(thisId); });
 			
        	 	if(f.length != 1 ){
             	$(this).addClass("list-group-item-danger");
@@ -376,7 +394,7 @@ function activateListActions()
 			// Remove the "green color class" to the others <li>
 			$(".way:not(#"+thisId+")").removeClass("list-group-item-success");
 			
-			var f = $.grep( global.features, function(e){ return parseInt(e.id) == parseInt(thisId); });
+			var f = $.grep( $.oe.features, function(e){ return parseInt(e.id) == parseInt(thisId); });
 			
        	 	if(f.length != 1 ){
             	$(this).addClass("list-group-item-danger");
@@ -384,7 +402,7 @@ function activateListActions()
 	       	 	$(this).removeClass("list-group-item-danger");
 				$(this).addClass("list-group-item-success");
 				var extent = f[0].getGeometry().getExtent();
-				global.map.getView().fit(extent , global.map.getSize());
+				$.oe.map.getView().fit(extent , $.oe.map.getSize());
 				changeTrackColor(f[0]);
             }
 		}
@@ -397,12 +415,13 @@ function activateListActions()
 
 function loadTracks() {
 	deactiveListActions();
+	deactiveMapInteraction()
 	
 	// Get The date from the DateTime Input
-	global.urlDate	= $("div.date input").val();
+	$.oe.urlDate	= $("div.date input").val();
 	
 	// Get the number of trips to load
-	global.tripsnumber	= $("#ex6").slider().val();
+	$.oe.tripsnumber	= $("#ex6").slider().val();
 	
 	// Disable the Data Update Button to prevent error
 	$('button#dataupdate')
@@ -414,17 +433,17 @@ function loadTracks() {
 		.removeClass('glyphicon-screenshot')
 		.addClass('glyphicon-refresh glyphicon-refresh-animate');
 	
-	global.trips = [];
-	global.items = [];
+	$.oe.trips = [];
+	$.oe.items = [];
 
 	$.ajax({
 		method: 'POST',
 		url: 'api/get-trips',
 		dataType: "json",
 		data: {
-			end_date: 		global.urlDate,
-			trips_number:	global.tripsnumber,
-			maintainer:		global.maintainer
+			end_date: 		$.oe.urlDate,
+			trips_number:	$.oe.tripsnumber,
+			maintainer:		$.oe.maintainer
 		}
 	})
 	.success(function(data) {
@@ -453,23 +472,29 @@ function loadTracks() {
 					var duration = Math.round((val.end_trip - val.begin_trip)/60);
 	
 					//if (duration > 3 && val._id != 0) {
-						global.trips.push(val._id);
+						$.oe.trips.push(val._id);
 						
 						val.VIN = val.VIN ? val.VIN : val.vin;
 	
 						var date = moment(val.begin_trip*1000).format("DD/MM/YYYY HH:mm");
 	
-						global.items.push('<li href="#" class="list-group-item way" id="' + val._id + '">'+
+						var li = '<li href="#" class="list-group-item way" id="' + val._id + '">'+
 							'<h5 class="list-group-item-heading">'+ date +' <b>'+ val.VIN+'</b></h5>'+
 							'<p class="list-group-item-text">'+
-							 val._id + ' ' + duration + 'min (' + val.points +')'+
-							'</p>'+
-							'</li>');
+							 val._id + ' ' + duration + 'min';
+							 
+						if (typeof(val.points) != "undefined" && val.points !== null){
+							li += ' ('+ val.points +')';
+						} 
+						
+						li += '</p></li>';
+							
+						$.oe.items.push(li);
 					//}
 				}
 			});
 			
-			$("#trips").html(global.items.join(""));
+			$("#trips").html($.oe.items.join(""));
 			
 			getTripsData();
 		}
@@ -487,17 +512,17 @@ function getTripsData() {
         processData:	true,
         dataType:		'xml',
 		data: {
-			trips_id: 		global.trips
+			trips_id: 		$.oe.trips
 		},
 		timeout: 180000		// Timeout = 3 minutes (2 minutes ~= 300 tracks)
 	})
 	.success(function(data,status,jsonXHR) {
-		global.highlightStyleCache = null;
-		global.highlight = null;
+		$.oe.highlightStyleCache = null;
+		$.oe.highlight = null;
 		
 		// Remove all Features
-		global.vectorSource.clear();
-		global.featureOverlaySource.clear();
+		$.oe.vectorSource.clear();
+		$.oe.featureOverlaySource.clear();
 		
 		var format = new ol.format.GPX();
 		var points = 0;
@@ -505,28 +530,28 @@ function getTripsData() {
 		// Reading the xmlDoc
 		xmlDoc = jsonXHR.responseXML;
 		
-		global.features = [];
-        global.features = format.readFeatures(xmlDoc,  {featureProjection: 'EPSG:3857'});
+		$.oe.features = [];
+        $.oe.features = format.readFeatures(xmlDoc,  {featureProjection: 'EPSG:3857'});
 		
 		console.log("Features");
-		console.log(global.features);
+		console.log($.oe.features);
 
-        for (var i=0; i<global.features.length; i++) {
-	        var trackFeature = global.features[i];
+        for (var i=0; i<$.oe.features.length; i++) {
+	        var trackFeature = $.oe.features[i];
 		
 			trackFeature.id = trackFeature.get('name');
 		    trackFeature.setGeometry(trackFeature.getGeometry());    
-			global.vectorSource.addFeature(trackFeature);
+			$.oe.vectorSource.addFeature(trackFeature);
 			
 			//points += trackFeature.geometry.components.length;
         }
 
         // Determino il numero di elementi caricati
         $("span#points").text(points);
-		$("span#trips").text(global.features.length);
+		$("span#trips").text($.oe.features.length);
         
         //console.log(features.length);
-        global.vectorSource.changed();
+        $.oe.vectorSource.changed();
        
 	})
 	.complete(function(){	
@@ -548,6 +573,9 @@ function getTripsData() {
 		
 		// Activate the list of trips
 		activateListActions();
+		
+		// Activate the map
+		activeMapInteraction();
 	});
 }
 
@@ -564,5 +592,5 @@ function doneResizing(){
 	var newHeight 			= $(window).height();
     $(".row.mainrow").css("height", newHeight -280); //-110);
     $(".map").css("height", newHeight -280);
-    global.map.updateSize();
+    $.oe.map.updateSize();
 }

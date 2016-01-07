@@ -184,8 +184,26 @@ return array(
     'service_manager' => [
 	    'factories' => [
 			'Reports\Service\Reports' => 'Reports\Service\ReportsServiceFactory',    
+			
+			'obfuscator' => 
+		    	function($sm) {
+			    	// Initialize the Uglyfier
+	                $module = new \Assetic\Filter\UglifyJs2Filter(
+	                    '/usr/local/bin/uglifyjs',
+						'/usr/local/bin/node'
+	                );
+	                
+	                // Set the params
+	                $module->setMangle(true);
+	                $module->setWrap(true);
+	                
+	                $module->setCompress("sequences=true, properties=true, dead_code=true, drop_debugger=true, conditionals=true, comparisons=true, evaluate=true, booleans=true, loops=true, unused=true, hoist_funs=true, hoist_vars=true, if_return=true, join_vars=true, cascade=true, side_effects=true, warnings=true ");	                
+	                
+	                // Return the Uglifier Parser
+	                return $module;
+	            },
 	    ],
-    ],
+	],
     
     'asset_manager' => [
         'resolver_configs' => [
@@ -197,12 +215,12 @@ return array(
 				
 				// Specific Asset for Routes Page.
 				'assets-modules/reports/js/vendor.routes.js' =>[
-					'ol2/OpenLayers.js',					// OpenLayers
-					'assets-modules/reports/js/OpenStreetMap.js',
+					//'ol2/OpenLayers.js',					// OpenLayers
+					//'assets-modules/reports/js/OpenStreetMap.js',
        
-					//'ol3/ol.js',
+					'ol3/ol.js',
 					
-					'ol3/ol-debug.js',
+					//'ol3/ol-debug.js',
 					//'ol3-legacy/src/ol/featureoverlay.js',
        
 					'jquery-legacy/dist/jquery.js',			// Jquery 1.11.3
@@ -213,7 +231,7 @@ return array(
                     'moment/moment.js',						// Moment.js
                     'eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js',
                     'seiyria-bootstrap-slider/js/bootstrap-slider.js',
-                    
+                    'bootstrap-switch/dist/js/bootstrap-switch.js',
                     
 					'assets-modules/reports/js/menu.js',
                     'assets-modules/reports/js/routes.js',
@@ -221,6 +239,7 @@ return array(
 				'assets-modules/reports/css/vendor.routes.css' => [
                     'eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.css',
                     'seiyria-bootstrap-slider/dist/css/bootstrap-slider.css',
+                    'bootstrap-switch/dist/css/bootstrap3/bootstrap-switch.css',
                     
 					'ol3/ol.css',
 					
@@ -310,6 +329,58 @@ return array(
             ],
             'aliases' => [
 	            'reports/lib' => $baseDir. '/bower_components/ol2-legacy/lib',
+            ],
+        ],
+        'filters' => [
+	        // Obfuscate only specific files to prevent libs error
+            'assets-modules/reports/js/routes.js' => [
+            	[
+                	'service' => 'obfuscator',
+                ],
+            ],
+            
+            'assets-modules/reports/js/menu.js' => [
+            	[
+                	'service' => 'obfuscator',
+                ],
+            ],
+            
+            'assets-modules/reports/js/trips.main.js' => [
+            	[
+                	'service' => 'obfuscator',
+                ],
+            ],
+            
+            'assets-modules/reports/js/trips.city.js' => [
+            	[
+                	'service' => 'obfuscator',
+                ],
+            ],
+            
+            'assets-modules/reports/js/live.js' => [
+            	[
+                	'service' => 'obfuscator',
+                ],
+            ],
+            
+            'assets-modules/reports/js/map.js' => [
+            	[
+                	'service' => 'obfuscator',
+                ],
+            ],
+            
+            // Minify All JS 
+            'js' => [
+            	[
+                	'filter' => 'JSMin',
+                ],
+            ],
+            
+            // Minify All CSS 
+            'assets-modules/reports/css/routes.css' => [
+            	[
+                	'filter' => 'CssMin',
+                ],
             ],
         ],
     ],
