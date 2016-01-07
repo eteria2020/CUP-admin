@@ -12,3 +12,4 @@ module/SharengoCore
 module/Cartasi
 data/DoctrineORMModule
 public/cache
+node_modules

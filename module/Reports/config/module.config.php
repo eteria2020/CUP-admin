@@ -189,7 +189,7 @@ return array(
 		    	function($sm) {
 			    	// Initialize the Uglyfier
 	                $module = new \Assetic\Filter\UglifyJs2Filter(
-	                    '/usr/local/bin/uglifyjs',
+	                    realpath(__DIR__ . '/../../../').'/node_modules/uglify-js/bin/uglifyjs',
 						'/usr/local/bin/node'
 	                );
 	                
@@ -235,10 +235,10 @@ return array(
 					'jquery-migrate/jquery-migrate.js',		// Jquery Migrate 1.2.1
 					                    
                     
-                    'jquery.scrollTo/jquery.scrollTo.js',	// ScrollTo
+                    'jquery-scrollto/jquery.scrollTo.js',	// ScrollTo
                     'moment/moment.js',						// Moment.js
                     'eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js',
-                    'seiyria-bootstrap-slider/js/bootstrap-slider.js',
+                    'seiyria-bootstrap-slider/dist/bootstrap-slider.js',
                     'bootstrap-switch/dist/js/bootstrap-switch.js',
                     
 					'assets-modules/reports/js/menu.js',
@@ -251,8 +251,8 @@ return array(
                     
 					'ol3/ol.css',
 					
-	                'ol2/theme/default/style.css',
-	                'ol2/theme/default/style.mobile.css',
+	                //'ol2/theme/default/style.css',
+	                //'ol2/theme/default/style.mobile.css',
 	                
 	                'assets-modules/reports/css/routes.css',
                 ],
@@ -293,7 +293,7 @@ return array(
                 // Specific Asset for Live Page.
 				'assets-modules/reports/js/vendor.live.js' =>[
 					'jquery/dist/jquery.js',
-                    'jquery.scrollTo/jquery.scrollTo.js',
+                    'jquery-scrollto/jquery.scrollTo.js',
                     'ol3/ol.js',
                     'jquery-ui/jquery-ui.js',				// JqueryUI (need for tooltip)
                     
@@ -311,9 +311,9 @@ return array(
                 // Specific Asset for HeatMap Page.
 				'assets-modules/reports/js/vendor.map.js' =>[
 					'jquery/dist/jquery.js',
-                    'jquery.scrollTo/jquery.scrollTo.js',
+                    'jquery-scrollto/jquery.scrollTo.js',
                     'ol3/ol.js',
-                    'seiyria-bootstrap-slider/js/bootstrap-slider.js',
+                    'seiyria-bootstrap-slider/dist/bootstrap-slider.js',
                     'bootstrap-datepicker/dist/js/bootstrap-datepicker.js',                   
                     
 					'assets-modules/reports/js/menu.js',
