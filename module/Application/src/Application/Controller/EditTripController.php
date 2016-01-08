@@ -76,7 +76,7 @@ class EditTripController extends AbstractActionController
     public function editTabAction()
     {
         $id = (int)$this->params()->fromRoute('id', 0);
-
+        $webuser = $this->identity();
         $trip = $this->tripsService->getTripById($id);
 
         if ($this->getRequest()->isPost()) {
@@ -86,7 +86,8 @@ class EditTripController extends AbstractActionController
                 $this->editTripsService->editTrip(
                     $trip,
                     !$postData['trip']['payable'],
-                    date_create_from_format('d-m-Y H:i:s', $postData['trip']['timestampEnd'])
+                    date_create_from_format('d-m-Y H:i:s', $postData['trip']['timestampEnd']),
+                    $webuser
                 );
 
                 $this->eventManager->trigger('trip-edited', $this, [
@@ -97,13 +98,13 @@ class EditTripController extends AbstractActionController
 
                 $this->flashMessenger()->addSuccessMessage('Modifica effettuta con successo!');
             } catch (EditTripDeniedException $e) {
-                $this->flashMessenger()->addErrorMessage('La corsa non può essere modificata perché non è conclusa o il processo di pagamento è già iniziato.');
+                $this->flashMessenger()->addErrorMessage('La corsa non può essere modificata perché non è conclusa.');
             } catch (EditTripWrongDateException $e) {
                 $this->flashMessenger()->addErrorMessage('La data specificata non può essere precedente alla data di inizio della corsa');
             } catch (EditTripNotDateTimeException $e) {
                 $this->flashMessenger()->addErrorMessage('La data specificata non è nel formato corretto. Verifica i dati inseriti.');
             } catch (\Exception $e) {
-                $this->flashMessenger()->addErrorMessage('Si è verificato un errore applicativo. L\'assistenza tecnica è già al corrente, ci scusiamo per l\'inconveniente');
+                $this->flashMessenger()->addErrorMessage($e->getMessage());
             }
 
             return $this->redirect()->toUrl('/trips/details/' . $trip->getId() . '?tab=edit');
@@ -127,22 +128,5 @@ class EditTripController extends AbstractActionController
         $view->setTerminal(true);
 
         return $view;
-    }
-
-    public function removeTriesAction()
-    {
-        $id = $this->params()->fromRoute('id', 0);
-        $trip = $this->tripsService->getById($id);
-
-        if (!($trip instanceof Trips)) {
-            $this->getResponse()->setStatusCode(Response::STATUS_CODE_404);
-            throw new TripNotFoundException();
-        }
-
-        return $this->redirect()->toRoute(
-            'trips/details',
-            ['id' => $trip->getId()],
-            ['query' => ['tab' => 'edit']]
-        );
     }
 }

@@ -559,19 +559,6 @@ return [
                             ]
                         ]
                     ],
-                    'remove-tries' => [
-                        'type' => 'Segment',
-                        'options' => [
-                            'route' => '/remove-tries/:id',
-                            'constraints' => [
-                                'id'    => '[0-9]*'
-                            ],
-                            'defaults' => [
-                                'controller' => 'EditTrip',
-                                'action' => 'remove-tries'
-                            ]
-                        ]
-                    ],
                     'close-tab' => [
                         'type' => 'Segment',
                         'options' => [
