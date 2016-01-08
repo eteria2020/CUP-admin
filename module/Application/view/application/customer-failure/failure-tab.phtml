@@ -27,7 +27,7 @@
                             <tbody>
                                 <?php foreach ($this->tripPayments as $tripPayment): ?>
                                 <tr>
-                                    <td><?= '<a href="/trips/details/' . $tripPayment->getTrip()->getId() . '">' . $tripPayment->getTrip()->getId() . '</a>'; ?></td>
+                                    <td><a href="<?= $this->url('trips/details', ['id' => $tripPayment->getTrip()->getId()]); ?>"><?= $tripPayment->getTrip()->getId(); ?></a></td>
                                     <td class="sng-text-right"><?= sprintf('%01.2f €', $tripPayment->getTotalCost() / 100); ?></td>
                                     <td class="sng-date-column sng-text-center">
                                         <?php
