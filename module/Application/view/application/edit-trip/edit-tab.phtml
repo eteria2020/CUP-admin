@@ -1,7 +1,7 @@
 <?php
 $timestampBeginning = '';
 // if trip is not yet closed
-if (!$this->trip->isEnded()) {
+if (!$this->trip->isEnded()):
 ?>
 
 <div class="row">
@@ -11,19 +11,19 @@ if (!$this->trip->isEnded()) {
 </div>
 
 <?php
-// if trip has been payed (or even just tried)
-} elseif ($this->trip->isPaymentTried()) {
+// if trip has been payed successfully
+elseif ($this->trip->isPaymentCompleted()):
 ?>
 
 <div class="row">
     <div class="col-lg-12">
-        <p>La corsa non può essere modificata perché la procedura di pagamento è già iniziata.</p>
+        <p>La corsa non può essere modificata perché risulta già pagata.</p>
     </div>
 </div>
 
 <?php
 // if trip can be edited
-} else {
+else:
     $form = $this->editTripForm->prepare();
     $form->setAttribute('action', $this->url('trips/edit-tab', ['id' => $this->trip->getId()]));
     $trip = $this->trip;
@@ -73,7 +73,12 @@ if (!$this->trip->isEnded()) {
                 </div>
                 <div class="row">
                     <div class="col-lg-12">
-                        <button type="submit" class="btn btn-success">Salva Dati Corsa</button>
+                        <button
+                            type="submit"
+                            onClick="<?= $this->trip->isPaymentTried() ? "removeTries(event)" : ""; ?>"
+                            class="btn btn-success">
+                            Salva Dati Corsa
+                        </button>
                     </div>
                 </div>
             </div>
@@ -88,6 +93,6 @@ if (!$this->trip->isEnded()) {
 
 <?php
 // close editable trip section
-}
+endif;
 ?>
 <script type="text/javascript" src="/js/edit-trip.js"></script>
