@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "7c371becb0fea1618f27602ec908e3a6",
+    "hash": "8ad2ef1e30ebcc54c72e3f9ce9b5d6d3",
     "content-hash": "a7bcc0e728d3aae09316b4a2eca8ff83",
     "packages": [
         {
@@ -1296,7 +1296,7 @@
             "source": {
                 "type": "git",
                 "url": "ssh://git@git.mvlabs.it:4222/clients/sharengo-coremodule.git",
-                "reference": "acdaeda534b2aaa093b8b28c7445767ca19eeab6"
+                "reference": "d609583038aac487ceef8efb7976535e4843327f"
             },
             "require": {
                 "doctrine/doctrine-orm-module": "0.*",
@@ -1317,7 +1317,7 @@
                 }
             },
             "description": "Core ZF2 module for Sharengo apps",
-            "time": "2016-01-07 17:06:19"
+            "time": "2016-01-08 15:38:45"
         },
         {
             "name": "rwoverdijk/assetmanager",
