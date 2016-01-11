@@ -58,6 +58,7 @@ $(function() {
         "order": [[0, 'desc']],
         "columns": [
             {data: 'e.id'},
+            {data: 'cu.email'},
             {data: 'cu.surname'},
             {data: 'cu.name'},
             {data: 'cu.mobile'},
@@ -76,18 +77,18 @@ $(function() {
             {data: 'e.idLink'}
         ],
         "columnDefs": [
+	        {
+                targets: 1,
+                visible: false
+            },
             {
-                targets: [1, 2],
+                targets: [2, 3],
                 "render": function (data, type, row) {
                     return '<a href="/customers/edit/'+row.cu.id+'" title="Visualizza profilo di '+row.cu.name+' '+row.cu.surname+' ">'+data+'</a>';
                 }
             },
             {
-                targets: 10,
-                sortable: false
-            },
-            {
-                targets: 12,
+                targets: 11,
                 sortable: false
             },
             {
@@ -95,14 +96,18 @@ $(function() {
                 sortable: false
             },
             {
-                targets: 15,
+                targets: 14,
+                sortable: false
+            },
+            {
+                targets: 16,
                 sortable: false,
                 "render": function ( data, type, row ) {
                     return renderCostButton(data);
                 }
             },
             {
-                targets: 16,
+                targets: 17,
                 sortable: false,
                 "render": function ( data, type, row ) {
                     return renderInfoButton(data);
