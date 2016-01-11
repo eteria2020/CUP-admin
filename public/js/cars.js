@@ -50,6 +50,9 @@ $(function() {
             {data: 'clean'},
             {data: 'position'},
             {data: 'e.status'},
+            {data: 'ci.gps'},
+            {data: 'ci.fw_ver'},
+            {data: 'ci.sw_ver'},
             {data: 'positionLink'},
             {data: 'button'}
         ],
@@ -64,11 +67,11 @@ $(function() {
                 sortable: false
             },
             {
-                targets: 9,
+                targets: 12,
                 sortable: false
             },
             {
-                targets: 10,
+                targets: 13,
                 data: 'button',
                 searchable: false,
                 sortable: false,
