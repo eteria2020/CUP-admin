@@ -12,17 +12,15 @@ if (typeof $.oe === 'undefined') {
 
 // The magic!
 $(document).ready(function(){
-	$.oe.fn.getCityData(createButtons);    
+	$.oe.fn.getCityData($.oe.fn.createButtons);    
 });
 
 $(window).load(function() {
-	doneResizing();
-	getCarsGeoData();
+	$.oe.fn.doneResizing();
+	$.oe.fn.getCarsGeoData();
 });
 
-
-
-function createButtons(){
+$.oe.fn.createButtons = function(){
 	$.each($.oe.city,function(key,val){
 		// Create and populate the city prop
 		val.ol = {};
@@ -73,9 +71,6 @@ var vectorSource = new ol.source.Vector({
 	format: new ol.format.GeoJSON()
 });
 
-
-
-
 var vector = new ol.layer.Vector(
 	{
 	source:vectorSource,
@@ -110,16 +105,16 @@ var map = new ol.Map(
 	target: 'map',
 	view: view,
 	eventListeners:
-		{"zoomend": zoomChanged}
+		{"zoomend": $.oe.fn.zoomChanged}
 	
 });
 
 
-map.on("moveend", zoomChanged);
+map.on("moveend", $.oe.fn.zoomChanged);
 
 
 var lastZoom;
-function zoomChanged()
+$.oe.fn.zoomChanged = function()
 {
 	zoom = map.getView().getZoom();
 	if (lastZoom!=zoom)
@@ -194,7 +189,7 @@ $("#pan-to-florence").click(function()
 });
 
 
-function getCarsGeoData() {
+$.oe.fn.getCarsGeoData = function() {
     console.log("a");
 
 	$.ajax({
@@ -225,18 +220,18 @@ function getCarsGeoData() {
 }
 
 
-setInterval( getCarsGeoData, 2500);
+setInterval( $.oe.fn.getCarsGeoData, 2500);
 
 
 // Window Resize Action Bind
 var id;
 $(window).resize(function() {
     clearTimeout(id);
-    id = setTimeout(doneResizing, 500);
+    id = setTimeout($.oe.fn.doneResizing, 500);
 });
 
 
-function doneResizing(){
+$.oe.fn.doneResizing = function(){
 	var newHeight 			= $(window).height();
     $(".row.mainrow").css("height", newHeight -280); //-110);
     $(".map").css("height", newHeight -280);

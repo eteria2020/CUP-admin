@@ -36,11 +36,11 @@ $(document).ready(function(){
 });
 
 $(window).load(function() {
-	doneResizing();
+	$.oe.fn.doneResizing();
 });
 
 
-function createButtons(){
+$.oe.fn.createButtons(){
 	$.each($.oe.city,function(key,val){
 		// Create and populate the city prop
 		val.ol = {};
@@ -171,16 +171,8 @@ function zoomChanged(){
 	}
 }
 
-//console.log(vector);
-
 var cnt = 0;
 function animate(){
-    /*
-	feats = fsource.getFeatures();
-	console.log(feats[cnt]);
-	vector.getSource().addFeature(feats[cnt]);
-    */
-
     $.oe.params.weight = 0.1*cnt;
     console.log($.oe.params.weight);
     vector.getSource().changed();
@@ -189,8 +181,6 @@ function animate(){
     if (cnt>10) cnt=0;
 }
 
-
-//setInterval(animate,100);
 
 
 $('#weight').slider({
@@ -236,11 +226,11 @@ $('.input-daterange').datepicker()
 var id;
 $(window).resize(function() {
     clearTimeout(id);
-    id = setTimeout(doneResizing, 500);
+    id = setTimeout($.oe.fn.doneResizing, 500);
 });
 
 
-function doneResizing(){
+$.oe.fn.doneResizing = function(){
 	var newHeight 			= $(window).height();
     $(".row.mainrow").css("height", newHeight -280); //-110);
     $(".map").css("height", newHeight -280);

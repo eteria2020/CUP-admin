@@ -64,7 +64,6 @@ $.extend($.scrollTo.defaults, {
 
 $(document).ready(function()
 {
-	
 	// DateTime Picker
 	$('#datetimepicker1').datetimepicker({
 	 	sideBySide: true,
@@ -99,13 +98,12 @@ $(document).ready(function()
 $(window).load(function() {
 	
 	$.oe.fn.getCityData();
-	loadTracks();
+	$.oe.fn.loadTracks();
     
     // Resize the MAP
-    doneResizing();
+    $.oe.fn.doneResizing();
     
-    activateHoverButton();
-    activateMaintainerButton();
+    $.oe.fn.activateHoverButton();
 });
 
 
@@ -225,17 +223,17 @@ $.oe.map.on('pointermove', function(evt) {
 		return;
 	}
 	var pixel = $.oe.map.getEventPixel(evt.originalEvent);
-	displayFeatureInfo(pixel);
+	$.oe.fn.displayFeatureInfo(pixel);
 });
 
 // Bind the blick of the map
 $.oe.map.on('click', function(evt) {
-	displayFeatureInfo(evt.pixel);
+	$.oe.fn.displayFeatureInfo(evt.pixel);
 });
 	
 
 // Map MouseMove Handler
-function displayFeatureInfo(pixel) {
+$.oe.fn.displayFeatureInfo = function(pixel) {
 	var selectedfeatures = [];
 	
 	
@@ -250,7 +248,7 @@ function displayFeatureInfo(pixel) {
 		for (i = 0 ; i <  selectedfeatures.length; ++i) {
 			info.push(selectedfeatures[i].get('name'));
 						
-			changeTrackColor(selectedfeatures[i]);
+			$.oe.fn.changeTrackColor(selectedfeatures[i]);
 		}
 		
 		//get the selected <li> track of the first selected
@@ -278,7 +276,7 @@ function displayFeatureInfo(pixel) {
 };
 
 
-function changeTrackColor(track)
+$.oe.fn.changeTrackColor = function(track)
 {
 	// Add the track selected to the selected overlay
 	if (track !== $.oe.highlight) {
@@ -295,7 +293,7 @@ function changeTrackColor(track)
 }
 
 
-function activateHoverButton()
+$.oe.fn.activateHoverButton = function()
 {
 	$('button#hoverenable').addClass("btn-success");
 	
@@ -316,36 +314,15 @@ function activateHoverButton()
 	);
 }
 
-function activateMaintainerButton()
-{
-	/*$('button#maintainer').addClass("btn-danger");
-	
-	$('button#maintainer').click(
-		function () {
-		    if($.oe.maintainer){
-			    $.oe.maintainer = false;
-			    
-		        $('button#maintainer').removeClass("btn-success");
-		        $('button#maintainer').addClass("btn-danger");
-		    }else{
-		        $.oe.maintainer = true;
-			    
-		        $('button#maintainer').addClass("btn-success");
-		        $('button#maintainer').removeClass("btn-danger");
-		    }
-		}
-	);*/
-}
-
-function activeMapInteraction(){
+$.oe.fn.activeMapInteraction = function(){
 	$('div#over').remove();
 }
 
-function deactiveMapInteraction(){
+$.oe.fn.deactiveMapInteraction = function(){
 	$('.map').after('<div id="over"><span class="glyphicon glyphicon-refresh glyphicon-refresh-animate" aria-hidden="true"></span></div>');
 }
 
-function deactiveListActions()
+$.oe.fn.deactiveListActions = function()
 {
 	// Set it as disabled
 	$("#steps").attr('disabled',true);
@@ -355,7 +332,7 @@ function deactiveListActions()
 }
 
 
-function activateListActions()
+$.oe.fn.activateListActions = function()
 {
 	// Remove other bind events();
 	$('.way').off();
@@ -382,7 +359,7 @@ function activateListActions()
        	 	}else{
 	       	 	$(this).removeClass("list-group-item-danger");
 				$(this).addClass("list-group-item-success");
-				changeTrackColor(f[0]);
+				$.oe.fn.changeTrackColor(f[0]);
             }
 		}
 	);
@@ -403,7 +380,7 @@ function activateListActions()
 				$(this).addClass("list-group-item-success");
 				var extent = f[0].getGeometry().getExtent();
 				$.oe.map.getView().fit(extent , $.oe.map.getSize());
-				changeTrackColor(f[0]);
+				$.oe.fn.changeTrackColor(f[0]);
             }
 		}
 	);
@@ -413,9 +390,10 @@ function activateListActions()
 ///////////////// LOAD DATA /////////////////
 
 
-function loadTracks() {
-	deactiveListActions();
-	deactiveMapInteraction()
+$.oe.fn.loadTracks = function() 
+{
+	$.oe.fn.deactiveListActions();
+	$.oe.fn.deactiveMapInteraction()
 	
 	// Get The date from the DateTime Input
 	$.oe.urlDate	= $("div.date input").val();
@@ -456,7 +434,7 @@ function loadTracks() {
 			
 			// Bind its action
 			$("button#dataupdate").one('click','',function(event){
-				loadTracks();
+				$.oe.fn.loadTracks();
 			});
 		}else{
 			$.each(data, function(key, val)
@@ -496,7 +474,7 @@ function loadTracks() {
 			
 			$("#trips").html($.oe.items.join(""));
 			
-			getTripsData();
+			$.oe.fn.getTripsData();
 		}
 	});
 
@@ -505,7 +483,8 @@ function loadTracks() {
 
 
 
-function getTripsData() {
+$.oe.fn.getTripsData = function() 
+{
 	$.ajax({
 		method:			'POST',
 		url:			'/reports/api/get-trip-points-from-logs',
@@ -568,14 +547,14 @@ function getTripsData() {
 		
 		// Bind its action
 		$("button#dataupdate").one('click','',function(event){
-			loadTracks();
+			$.oe.fn.loadTracks();
 		});
 		
 		// Activate the list of trips
-		activateListActions();
+		$.oe.fn.activateListActions();
 		
 		// Activate the map
-		activeMapInteraction();
+		$.oe.fn.activeMapInteraction();
 	});
 }
 
@@ -584,11 +563,11 @@ function getTripsData() {
 var id;
 $(window).resize(function() {
     clearTimeout(id);
-    id = setTimeout(doneResizing, 500);
+    id = setTimeout($.oe.fn.doneResizing, 500);
 });
 
 
-function doneResizing(){
+$.oe.fn.doneResizing = function(){
 	var newHeight 			= $(window).height();
     $(".row.mainrow").css("height", newHeight -280); //-110);
     $(".map").css("height", newHeight -280);

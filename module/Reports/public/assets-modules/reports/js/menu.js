@@ -38,3 +38,17 @@ $.oe.fn.getCityData = function(callback){
 		}
 	});
 }
+
+/**
+ *  This function print the specified filter
+ *
+ *  @param  filter  A filter (d3.dimension)
+ *  @case   DEBUG
+ */
+$.oe.fn.printFilter = function(filter){
+    var f=eval(filter);
+    if (typeof(f.length) != "undefined") {}else{}
+    if (typeof(f.top) != "undefined") {f=f.top(Infinity);}else{}
+    if (typeof(f.dimension) != "undefined") {f=f.dimension(function(d) { return "";}).top(Infinity);}else{}
+    //console.log(filter+"("+f.length+") = "+JSON.stringify(f).replace("[","[\n\t").replace(/}\,/g,"},\n\t").replace("]","\n]"));
+}
