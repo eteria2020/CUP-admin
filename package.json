@@ -1,33 +1,33 @@
 {
-	"name": "sharengo-admin",
-	"description": "Admin module of ShareNGo.",
-	"homepage": "http://www.sharengo.it",
-	"author": {},
-	"contributors": [
-		{
-			"name": "Massimo De Luisa",
-			"email": "massimodeluisa@me.com",
-			"url": "http://www.omniaevo.it"
-		},
-		{
-			"name": "Stefano Valle",
-			"email": "s.valle@mvassociati.it",
-			"url": "http://mvassociati.it"
-		}
-	],
-	"dependencies": {
-		"uglify-js": "= 2.6.1"
-	},
-	"repository": {
-		"type": "git",
-		"url": "git://git.omniaevo.it/sharengo-admin"
-	},
-	"license": "MIT",
-	"readmeFilename": "README.md",
-	"scripts": {
-		"build": "gulp dist",
-		"test": "gulp test"
-	},
-	"npmName": "sharengo-admin",
-	"npmFileMap": []
+  "name": "sharengo-admin",
+  "description": "Admin module of ShareNGo.",
+  "homepage": "http://www.sharengo.it",
+  "author": {},
+  "contributors": [
+    {
+      "name": "Massimo De Luisa",
+      "email": "massimodeluisa@me.com",
+      "url": "http://www.omniaevo.it"
+    },
+    {
+      "name": "Stefano Valle",
+      "email": "s.valle@mvassociati.it",
+      "url": "http://mvassociati.it"
+    }
+  ],
+  "dependencies": {
+    "uglify-js": "= 2.6.1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://git.omniaevo.it/sharengo-admin"
+  },
+  "license": "MIT",
+  "readmeFilename": "README.md",
+  "scripts": {
+    "build": "gulp dist",
+    "test": "gulp test"
+  },
+  "npmName": "sharengo-admin",
+  "npmFileMap": []
 }

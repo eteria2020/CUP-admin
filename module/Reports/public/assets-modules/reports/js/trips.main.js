@@ -28,9 +28,7 @@ $.oe.timeout = 0;
 
 // The magic!
 $(document).ready(function(){
-
-    $.oe.fn.getCityData();
-    $.oe.fn.getCharts();
+    $.oe.fn.getCityData($.oe.fn.getCharts);
     
     // Print the DC.js version
     //console.log("Version:"+dc.version);
@@ -106,8 +104,7 @@ $.oe.fn.getCharts = function(){
                     else if(55 <= d.customer_age && d.customer_age <= 64 )  return 4;
                     else if( d.customer_age > 64 )                          return 5;
                 }),
-                   ages            = age.group()
-            ;
+                ages            = age.group();
     
     
             date_beginning.filterAll();
@@ -129,7 +126,7 @@ $.oe.fn.getCharts = function(){
                 .renderHorizontalGridLines(true)
                 .brushOn(true)
                 .on("filtered", function () {
-                    rearrangeFilterHelper("#data-range");
+                    $.oe.fn.rearrangeFilterHelper("#data-range");
                 });
             $.oe.charts.day.yAxis().ticks(2);
     
@@ -142,12 +139,12 @@ $.oe.fn.getCharts = function(){
                 .group(ages)
                 .label(function (d) {
                     switch(d.key){
-                        case 0: return "18-24";     break;
-                        case 1: return "25-34";        break;
-                        case 2: return "35-44";     break;
-                        case 3: return "45-54";        break;
-                        case 4: return "55-65";     break;
-                        case 5: return "Over 64";    break;
+                    case 0: return "18-24";
+                    case 1: return "25-34";
+                    case 2: return "35-44";
+                    case 3: return "45-54";
+                    case 4: return "55-65";
+                    case 5: return "Over 64";
                     }
                 });
     
@@ -165,7 +162,7 @@ $.oe.fn.getCharts = function(){
                     if ($.oe.charts.gender.hasFilter() && !$.oe.charts.gender.hasFilter(d.key)){
                         percent = 0;
                     }else{
-                           percent = (d.value / $.oe.trips.groupAll().reduceCount().value() * 100);
+                        percent = (d.value / $.oe.trips.groupAll().reduceCount().value() * 100);
                     }
     
                     lbl += percent.toFixed(2) + "%";
@@ -182,15 +179,14 @@ $.oe.fn.getCharts = function(){
                 .dimension(city)
                 .group(citys)
                 .label(function (d) {
-                    
-                    var lbl     =    $.grep($.oe.city, function(e){ return e.fleet_id == d.key; })[0].fleet_name,
-                        percent =     0;
+                    var lbl     =   $.grep($.oe.city, function(e){ return e.fleet_id == d.key; })[0].fleet_name,
+                        percent =   0;
                         
     
                     if ($.oe.charts.city.hasFilter() && !$.oe.charts.city.hasFilter(d.key)){
                         percent = 0;
                     }else{
-                           percent = (d.value / $.oe.trips.groupAll().reduceCount().value() * 100);
+                        percent = (d.value / $.oe.trips.groupAll().reduceCount().value() * 100);
                     }
     
                     lbl += " "+ percent.toFixed(2) + "%";
@@ -207,7 +203,7 @@ $.oe.fn.getCharts = function(){
                 .dimension(dayOfWeek)
                 .elasticX(true)
                 .label(function (d) {
-                     return d.key.split(".")[1];//return d.key;
+                    return d.key.split(".")[1];//return d.key;
                 })
                 .ordering(function() {return ["Lun", "Mar", "Mer", "Gio", "Ven", "Sab", "Dom"]; })
                 .title(function (d) {
@@ -231,7 +227,7 @@ $.oe.fn.getCharts = function(){
                 )
                 .renderHorizontalGridLines(true)
                 .on("filtered", function () {
-                    rearrangeFilterHelper("#beginning-hour");
+                    $.oe.fn.rearrangeFilterHelper("#beginning-hour");
                 });
             $.oe.charts.beginningHour.xAxis().tickFormat(
             function (v) {
@@ -256,7 +252,7 @@ $.oe.fn.getCharts = function(){
                 )
                 .renderHorizontalGridLines(true)
                 .on("filtered", function () {
-                    rearrangeFilterHelper("#duration");
+                    $.oe.fn.rearrangeFilterHelper("#duration");
                 });
             $.oe.charts.duration.xAxis().tickFormat(
                 function (v) {
@@ -288,7 +284,7 @@ $.oe.fn.getCharts = function(){
             //$("div.panel-body > div:not(.chart-label) >span, div.panel-body > div:not(.chart-label) > a")
             $("svg").on( "click", function(){
                 var parentID = "#"+$(this).parent().parent().parent().prop("id");
-                rearrangeFilterHelper(parentID);
+                $.oe.fn.rearrangeFilterHelper(parentID);
             });
                         
             // Coloring the Age Pie Chart Legend
@@ -303,7 +299,7 @@ $.oe.fn.getCharts = function(){
             //dc.renderAll();
         }
     );
-}
+};
 
 
 /**
@@ -348,7 +344,7 @@ $.oe.fn.resizeCharts = function(){
 
     // Render the charts
     dc.renderAll();
-}
+};
 
 /**
  *
@@ -362,4 +358,4 @@ $.oe.fn.rearrangeFilterHelper = function(parentID){
     
     // Clone the hidden helpers to the panel header 
     $(parentID+" .reset").clone().appendTo(parentID+" div.panel-heading");
-}
+};

@@ -1,14 +1,15 @@
 <?php
 /**
- * Zend Framework (http://framework.zend.com/)
+ * Zend Framework (http://framework.zend.com/).
  *
  * @link      http://github.com/zendframework/ZendSkeletonApplication for the canonical source repository
+ *
  * @copyright Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
 
 // Getting the siteroot path ( = sharengo-admin folder)
-$baseDir = realpath(__DIR__ . '/../../../');
+$baseDir = realpath(__DIR__.'/../../../');
 
 return [
     'router' => [
@@ -25,47 +26,47 @@ return [
                 'may_terminate' => true,
                 'child_routes' => [
                     'trips' => [
-                        'type'    => 'Literal',
+                        'type' => 'Literal',
                         'options' => [
-                            'route'    => '/trips',
+                            'route' => '/trips',
                             'defaults' => [
                                 'action' => 'trips',
                             ],
                         ],
                     ],
                     'map' => [
-                        'type'    => 'Literal',
+                        'type' => 'Literal',
                         'options' => [
-                            'route'    => '/map',
+                            'route' => '/map',
                             'defaults' => [
                                 'action' => 'map',
                             ],
                         ],
                     ],
                     'live' => [
-                        'type'    => 'Literal',
+                        'type' => 'Literal',
                         'options' => [
-                            'route'    => '/live',
+                            'route' => '/live',
                             'defaults' => [
                                 'action' => 'live',
                             ],
                         ],
                     ],
                     'routes' => [
-                        'type'    => 'Literal',
+                        'type' => 'Literal',
                         'options' => [
-                            'route'    => '/routes',
+                            'route' => '/routes',
                             'defaults' => [
                                 'action' => 'routes',
                             ],
                         ],
                     ],
                     'tripscity' => [
-                        'type'    => 'Segment',
+                        'type' => 'Segment',
                         'options' => [
-                            'route'    => '/tripscity/:id',
+                            'route' => '/tripscity/:id',
                             'constraints' => [
-                                'id' => '[0-9]*'
+                                'id' => '[0-9]*',
                             ],
                             'defaults' => [
                                 'action' => 'tripscity',
@@ -73,9 +74,9 @@ return [
                         ],
                     ],
                     'api' => [
-                        'type'    => 'Literal',
-                        'options'    =>    [
-                            'route'    => '/api',
+                        'type' => 'Literal',
+                        'options' => [
+                            'route' => '/api',
                             'defaults' => [
                                 'controller' => 'Reports\Controller\Api',
                             ],
@@ -83,38 +84,38 @@ return [
                         'may_terminate' => true,
                         'child_routes' => [
                             'get-cities' => [
-                                'type'    => 'Literal',
+                                'type' => 'Literal',
                                 'options' => [
-                                    'route'    => '/get-cities',
+                                    'route' => '/get-cities',
                                     'defaults' => [
                                         'action' => 'get-cities',
                                     ],
                                 ],
                             ],
                             'get-all-trips' => [
-                                'type'    => 'Literal',
+                                'type' => 'Literal',
                                 'options' => [
-                                    'route'    => '/get-all-trips',
+                                    'route' => '/get-all-trips',
                                     'defaults' => [
                                         'action' => 'get-all-trips',
                                     ],
                                 ],
                             ],
                             'get-city-trips' => [
-                                'type'    => 'Literal',
+                                'type' => 'Literal',
                                 'options' => [
-                                    'route'    => '/get-city-trips',
+                                    'route' => '/get-city-trips',
                                     'defaults' => [
                                         'action' => 'get-city-trips',
                                     ],
                                 ],
                             ],
                             'get-urban-areas' => [
-                                'type'    => 'Segment',
+                                'type' => 'Segment',
                                 'options' => [
-                                    'route'    => '/get-urban-areas/:city',
+                                    'route' => '/get-urban-areas/:city',
                                     'constraints' => [
-                                        'city' => '[0-9]*'
+                                        'city' => '[0-9]*',
                                     ],
                                     'defaults' => [
                                         'action' => 'get-urban-areas',
@@ -122,50 +123,50 @@ return [
                                 ],
                             ],
                             'get-trips-geo-data' => [
-                                'type'    => 'Literal',
+                                'type' => 'Literal',
                                 'options' => [
-                                    'route'    => '/get-trips-geo-data',
+                                    'route' => '/get-trips-geo-data',
                                     'defaults' => [
                                         'action' => 'get-trips-geo-data',
                                     ],
                                 ],
                             ],
                             'get-cars-geo-data' => [
-                                'type'    => 'Literal',
+                                'type' => 'Literal',
                                 'options' => [
-                                    'route'    => '/get-cars-geo-data',
+                                    'route' => '/get-cars-geo-data',
                                     'defaults' => [
                                         'action' => 'get-cars-geo-data',
                                     ],
                                 ],
                             ],
                             'get-trips' => [
-                                'type'    => 'Literal',
+                                'type' => 'Literal',
                                 'options' => [
-                                    'route'    => '/get-trips',
+                                    'route' => '/get-trips',
                                     'defaults' => [
                                         'action' => 'get-trips',
                                     ],
                                 ],
-                            ],                        
+                            ],
                             'get-trips-from-logs' => [
-                                'type'    => 'Literal',
+                                'type' => 'Literal',
                                 'options' => [
-                                    'route'    => '/get-trips-from-logs',
+                                    'route' => '/get-trips-from-logs',
                                     'defaults' => [
                                         'action' => 'get-trips-from-logs',
                                     ],
                                 ],
                             ],
                             'get-trip-points-from-logs' => [
-                                'type'    => 'Literal',
+                                'type' => 'Literal',
                                 'options' => [
-                                    'route'    => '/get-trip-points-from-logs',
+                                    'route' => '/get-trip-points-from-logs',
                                     'defaults' => [
                                         'action' => 'get-trip-points-from-logs',
                                     ],
                                 ],
-                            ],            
+                            ],
                         ],
                     ],
                 ],
@@ -180,18 +181,18 @@ return [
             'Reports\Controller\Api' => 'Reports\Controller\ApiControllerFactory',
         ],
     ],
-    
+
     'service_manager' => [
         'factories' => [
-            'Reports\Service\Reports' => 'Reports\Service\ReportsServiceFactory',    
+            'Reports\Service\Reports' => 'Reports\Service\ReportsServiceFactory',
             'Reports\Service\Obfuscator' => 'Reports\Service\ObfuscatorFactory',
         ],
     ],
-    
+
     'asset_manager' => [
         'caching' => [
             'default' => [
-                'cache'     => 'Assetic\\Cache\\FilesystemCache',
+                'cache' => 'Assetic\\Cache\\FilesystemCache',
                 'options' => [
                     'dir' => 'public/cache', // path/to/cache
                 ],
@@ -199,8 +200,8 @@ return [
         ],
         'resolver_configs' => [
             'map' => [
-                'assets-modules/reports/js/dc.js.map' => $baseDir. '/bower_components/dcjs/dc.js.map',
-                'assets-modules/reports/js/dc.js' => $baseDir. '/bower_components/dcjs/dc.js',
+                'assets-modules/reports/js/dc.js.map' => $baseDir.'/bower_components/dcjs/dc.js.map',
+                'assets-modules/reports/js/dc.js' => $baseDir.'/bower_components/dcjs/dc.js',
             ],
             'collections' => [
                 // Specific Asset for Trips (main] Page.
@@ -218,11 +219,11 @@ return [
                     // Libs
                     'font-awesome/css/font-awesome.css',
                     'dcjs/dc.css',
-                    
+
                     // Code
-                    'assets-modules/reports/css/trips.main.css'
+                    'assets-modules/reports/css/trips.main.css',
                 ],
-                
+
                 // Specific Asset for Trips (city] Page.
                 'assets-modules/reports/js/vendor.trips.city.js' => [
                     // Libs
@@ -230,17 +231,16 @@ return [
                     'crossfilter/crossfilter.js',
                     'd3/d3.js',
                     'dcjs/dc.js',
-                     
+
                      // Code
                     'assets-modules/reports/js/menu.js',
                     'assets-modules/reports/js/trips.city.js',
                 ],
                 'assets-modules/reports/css/vendor.trips.city.css' => [
                     // Getting the trips.main libraries
-                    'assets-modules/reports/css/vendor.trips.main.css'
+                    'assets-modules/reports/css/vendor.trips.main.css',
                 ],
-                
-                
+
                 // Specific Asset for Live Page.
                 'assets-modules/reports/js/vendor.live.js' => [
                     // Libs
@@ -248,7 +248,7 @@ return [
                     'jquery-scrollto/jquery.scrollTo.js',
                     'ol3/ol.js',
                     'jquery-ui/jquery-ui.js',                // JqueryUI (need for tooltip]
-                    
+
                     // Code
                     'assets-modules/reports/js/menu.js',
                     'assets-modules/reports/js/live.js',
@@ -258,11 +258,11 @@ return [
                     'font-awesome/css/font-awesome.css',
                     'ol3/ol.css',
                     'jquery-ui/themes/base/theme.css',        // JqueryUI
-                    
+
                     // Code
-                    'assets-modules/reports/css/live.css'
+                    'assets-modules/reports/css/live.css',
                 ],
-                
+
                 // Specific Asset for Map Page.
                 'assets-modules/reports/js/vendor.map.js' => [
                     // Libs
@@ -271,7 +271,7 @@ return [
                     'ol3/ol.js',
                     'seiyria-bootstrap-slider/dist/bootstrap-slider.js',
                     'bootstrap-datepicker/dist/js/bootstrap-datepicker.js',
-                    
+
                     // Code
                     'assets-modules/reports/js/menu.js',
                     'assets-modules/reports/js/map.js',
@@ -282,11 +282,11 @@ return [
                     'ol3/ol.css',
                     'seiyria-bootstrap-slider/dist/css/bootstrap-slider.css',
                     'bootstrap-datepicker/dist/css/bootstrap-datepicker3.css',
-                    
+
                     // Code
-                    'assets-modules/reports/css/map.css'
+                    'assets-modules/reports/css/map.css',
                 ],
-                
+
                 // Specific Asset for Routes Page.
                 'assets-modules/reports/js/vendor.routes.js' => [
                     // Libs
@@ -299,7 +299,7 @@ return [
                     'eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js',
                     'seiyria-bootstrap-slider/dist/bootstrap-slider.js',
                     'bootstrap-switch/dist/js/bootstrap-switch.js',
-                    
+
                     // Code
                     'assets-modules/reports/js/menu.js',
                     'assets-modules/reports/js/routes.js',
@@ -310,17 +310,17 @@ return [
                     'seiyria-bootstrap-slider/dist/css/bootstrap-slider.css',
                     'bootstrap-switch/dist/css/bootstrap3/bootstrap-switch.css',
                     'ol3/ol.css',
-                    
+
                     // Code
                     'assets-modules/reports/css/routes.css',
                 ],
             ],
             'paths' => [
-                'reports' => __DIR__ . '/../public',
-                $baseDir. '/bower_components',
+                'reports' => __DIR__.'/../public',
+                $baseDir.'/bower_components',
             ],
             'aliases' => [
-                'reports/lib' => $baseDir. '/bower_components/ol2-legacy/lib',
+                'reports/lib' => $baseDir.'/bower_components/ol2-legacy/lib',
             ],
         ],
         'filters' => [
@@ -355,14 +355,14 @@ return [
                     'service' => 'Reports\Service\Obfuscator', //'obfuscator',
                 ],
             ],
-            
+
             // Minify All JS 
             'js' => [
                 [
                     'filter' => 'JSMin',
                 ],
             ],
-            
+
             // Minify All CSS 
             'css' => [
                 [
@@ -373,11 +373,11 @@ return [
     ],
     'view_manager' => [
         'template_map' => [
-            'layout/reports'           => __DIR__ . '/../view/layout/layout.phtml',
+            'layout/reports' => __DIR__.'/../view/layout/layout.phtml',
         ],
         'template_path_stack' => [
-            __DIR__ . '/../view',
-        ]
+            __DIR__.'/../view',
+        ],
     ],
     // ACL
     'bjyauthorize' => [

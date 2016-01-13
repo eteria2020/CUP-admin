@@ -1,3 +1,6 @@
+// Define Glbal vars
+/* global OpenLayers:true */
+
 /**
  * Class: OpenLayers.Layer.OSM.Mapnik
  *
