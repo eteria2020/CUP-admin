@@ -7,10 +7,6 @@ use MongoDB;
 use DateTime;
 use PDO;
 
-if (!class_exists('phpGpx')) {
-    include_once 'phpGPX.php';
-}
-
 use phpGpx;
 
 class ReportsService

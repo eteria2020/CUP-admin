@@ -23,6 +23,7 @@ class IndexController extends AbstractActionController
 
         return $viewModel;
     }
+    
     public function mapAction()
     {
         $this->layout('layout/reports');
@@ -32,6 +33,7 @@ class IndexController extends AbstractActionController
 
         return $viewModel;
     }
+    
     public function routesAction()
     {
         $this->layout('layout/reports');
@@ -41,6 +43,7 @@ class IndexController extends AbstractActionController
 
         return $viewModel;
     }
+    
     public function liveAction()
     {
         $this->layout('layout/reports');
@@ -50,6 +53,7 @@ class IndexController extends AbstractActionController
 
         return $viewModel;
     }
+    
     public function tripscityAction()
     {
         $this->layout('layout/reports');
@@ -61,4 +65,5 @@ class IndexController extends AbstractActionController
 
         return $viewModel;
     }
+    
 }
