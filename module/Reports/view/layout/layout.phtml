@@ -7,20 +7,12 @@
 
     <meta name="description" content="">
     <meta name="author" content="Omniaevo S.r.l.">
-    
-    <!-- Scripts -->
-    <?php 
-        // Load Bootstrap
-        $this->headScript()->appendFile($this->basePath()."/bootstrap/dist/js/bootstrap.js");
         
-        echo $this->headScript();
-    ?>
-    
     <!-- CSS -->
     <?php
         // Load Bootstrap
         $this->headLink()->prependStylesheet($this->basePath()."/bootstrap/dist/css/bootstrap.css");
-        
+
         echo $this->headLink();
     ?>
 </head>
@@ -66,5 +58,13 @@
             <p class="text-muted">&reg;Omniaevo S.r.l. 2015</p>
         </div>
     </footer>
+    
+    <!-- Scripts -->
+    <?php 
+        // Load Bootstrap
+        $this->inlineScript()->appendFile($this->basePath()."/bootstrap/dist/js/bootstrap.js");
+
+        echo $this->inlineScript();
+    ?>
 </body>
 </html>
