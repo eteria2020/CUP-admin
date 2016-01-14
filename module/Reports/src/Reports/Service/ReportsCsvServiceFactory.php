@@ -1,17 +1,17 @@
 <?php
 
-namespace Reports\Controller;
+namespace Reports\Service;
 
 use Zend\ServiceManager\FactoryInterface;
 use Zend\ServiceManager\ServiceLocatorInterface;
 
-class ApiControllerFactory implements FactoryInterface
+class ReportsCsvServiceFactory implements FactoryInterface
 {
     public function createService(ServiceLocatorInterface $serviceLocator)
     {
         $reportsService = $serviceLocator->getServiceLocator()->get('Reports\Service\Reports');
-        $reportsCsvService = $serviceLocator->getServiceLocator()->get('Reports\Service\ReportsCsvService');
+        $database = $serviceLocator->get('doctrine.connection.orm_default');
 
-        return new ApiController($reportsService,$reportsCsvService);
+        return new ReportsCsvService($reportsService,$database);
     }
 }

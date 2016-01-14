@@ -23,6 +23,76 @@ class ReportsService
         $this->mongodb = $mongodb;
     }
 
+    /**
+     * This method return an Assoc Array containign the records of trips between 
+     * the given dates $startDate and $endDate.
+     *
+     * @param   \DateTime           $startDate      The start date.
+     * @param   \DateTime           $endDate        The end date.
+     *
+     * @return  array<string,mixed>
+     */
+    private function getAllTrips($startDate, $endDate)
+    {
+        $query = "
+            SELECT        *,
+                        to_char(time_beginning, 'YYYY-MM-DD HH24:MI:SS')             as time_beginning_parsed,
+                        to_char(time_end, 'YYYY-MM-DD HH24:MI:SS')                     as time_end_formatted,
+                        EXTRACT(HOUR    FROM time_beginning)                        as time_beginning_hour,
+                        EXTRACT(MINUTE    FROM time_beginning)                        as time_beginning_minute,
+                        EXTRACT(SECOND    FROM time_beginning)                        as time_beginning_second,
+                        EXTRACT(DAY        FROM time_beginning)                        as time_beginning_day,
+                        TRUNC(EXTRACT(EPOCH from  (time_end - time_beginning))/60)     as time_total_minute,
+                        EXTRACT(ISODOW from time_beginning)                         as time_dow
+    
+            FROM        view_bi_trips
+            WHERE       time_beginning >= '".$startDate->format('Y-m-d H:i:s')."' AND time_beginning    <= '".$endDate->format('Y-m-d H:i:s')."' AND area_id IS NOT NULL
+            ORDER BY    time_beginning
+        ";
+
+        $trips = $this->database->fetchAll($query);
+
+        return $trips;
+    }
+    
+    /**
+     * This method return an Assoc Array containign the records of trips between 
+     * the given dates $startDate and $endDate of a particular city.
+     *
+     * @param   \DateTime           $startDate      The start date.
+     * @param   \DateTime           $endDate        The end date.
+     * @param   integer             $city           The fleet_id of the city
+     *
+     * @return  array<string,mixed>
+     */
+    public function getCityTrips($startDate, $endDate, $city)
+    {
+        $query = "
+            SELECT        *,
+                        to_char(time_beginning, 'YYYY-MM-DD HH24:MI:SS')             as time_beginning_parsed,
+                        to_char(time_end, 'YYYY-MM-DD HH24:MI:SS')                     as time_end_formatted,
+                        EXTRACT(HOUR    FROM time_beginning)                        as time_beginning_hour,
+                        EXTRACT(MINUTE    FROM time_beginning)                        as time_beginning_minute,
+                        EXTRACT(SECOND    FROM time_beginning)                        as time_beginning_second,
+                        EXTRACT(DAY        FROM time_beginning)                        as time_beginning_day,
+                        TRUNC(EXTRACT(EPOCH from  (time_end - time_beginning))/60)     as time_total_minute,
+                        EXTRACT(ISODOW from time_beginning)                         as time_dow
+
+            FROM        view_bi_trips
+
+            WHERE        time_beginning     >= '".$startDate->format('Y-m-d H:i:s')."' 
+                AND        time_beginning    <= '".$endDate->format('Y-m-d H:i:s')."'  
+                AND        fleet_id         = ".$city.'
+                AND        area_id         IS NOT NULL
+
+            ORDER BY    time_beginning
+        ';
+
+        $trips = $this->database->fetchAll($query);
+
+        return $trips;
+    }
+
     public function getCities()
     {
         $query = '
@@ -50,70 +120,19 @@ class ReportsService
         return $cities[0]['row_to_json'];
     }
 
-    public function getAllTrips($startDate, $endDate)
-    {
-        $query = "
-            SELECT        *,
-                        to_char(time_beginning, 'YYYY-MM-DD HH24:MI:SS')             as time_beginning_parsed,
-                        to_char(time_end, 'YYYY-MM-DD HH24:MI:SS')                     as time_end_formatted,
-                        EXTRACT(HOUR    FROM time_beginning)                        as time_beginning_hour,
-                        EXTRACT(MINUTE    FROM time_beginning)                        as time_beginning_minute,
-                        EXTRACT(SECOND    FROM time_beginning)                        as time_beginning_second,
-                        EXTRACT(DAY        FROM time_beginning)                        as time_beginning_day,
-                        TRUNC(EXTRACT(EPOCH from  (time_end - time_beginning))/60)     as time_total_minute,
-                        EXTRACT(ISODOW from time_beginning)                         as time_dow
-    
-            FROM        view_bi_trips
-            WHERE        time_beginning >= '".$startDate."' AND time_beginning    <= '".$endDate."' AND area_id IS NOT NULL
-            ORDER BY    time_beginning
-        ";
-
-        $trips = $this->database->fetchAll($query);
-
-        return $trips;
-    }
-
-    public function getCityTrips($startDate, $endDate, $city)
-    {
-        $query = "
-            SELECT        *,
-                        to_char(time_beginning, 'YYYY-MM-DD HH24:MI:SS')             as time_beginning_parsed,
-                        to_char(time_end, 'YYYY-MM-DD HH24:MI:SS')                     as time_end_formatted,
-                        EXTRACT(HOUR    FROM time_beginning)                        as time_beginning_hour,
-                        EXTRACT(MINUTE    FROM time_beginning)                        as time_beginning_minute,
-                        EXTRACT(SECOND    FROM time_beginning)                        as time_beginning_second,
-                        EXTRACT(DAY        FROM time_beginning)                        as time_beginning_day,
-                        TRUNC(EXTRACT(EPOCH from  (time_end - time_beginning))/60)     as time_total_minute,
-                        EXTRACT(ISODOW from time_beginning)                         as time_dow
-    
-            FROM        view_bi_trips
-            
-            WHERE        time_beginning     >= '".$startDate."' 
-                AND        time_beginning    <= '".$endDate."'  
-                AND        fleet_id         = ".$city.'
-                AND        area_id         IS NOT NULL
-
-            ORDER BY    time_beginning
-        ';
-
-        $trips = $this->database->fetchAll($query);
-
-        return $trips;
-    }
-
     public function getUrbanAreas($city)
     {
         $query = "
             SELECT row_to_json(fc)
             FROM (     SELECT 'FeatureCollection'                 As type,
                             array_to_json(array_agg(f))     As features
-            
+
                     FROM (    SELECT 'Feature'                 As type,
                             ST_AsGeoJSON(ua.area)::json     As geometry,
                             row_to_json(lp)                 As properties
-            
+
                             FROM urban_areas         As ua
-            
+
                             INNER JOIN (
                                 SELECT     to_char(id_area,'FM999MI'),
                                         name ,
@@ -135,7 +154,7 @@ class ReportsService
 
     /**
      * @param $startDate     The start date to filter data
-     * @param $endDate      The end date to filter data
+     * @param $endDate       The end date to filter data
      * @param $begend        Determinate if return the trips beginning data, or the trips end data
      *                        0 ==> Beginning ||  1 ==> End
      */
@@ -153,15 +172,15 @@ class ReportsService
                                 ST_AsGeoJSON(ua.geo_".$begend.')::json     As geometry
                                 
                     FROM         trips As ua
-        
+
                     LEFT JOIN     customers c ON c.id = ua.customer_id
-        
+
                     WHERE         ua.payable                         = true     AND
                                 c.gold_list                     = false AND
                                 c.maintainer                     = false AND
                                 ua.timestamp_end                 IS NOT NULL    AND
-                                ua.timestamp_'.$begend."        >= '".$startDate."'      AND
-                                ua.timestamp_".$begend."        <= '".$endDate."' 
+                                ua.timestamp_'.$begend."        >= '".$startDate->format('Y-m-d H:i:s')."'      AND
+                                ua.timestamp_".$begend."        <= '".$endDate->format('Y-m-d H:i:s')."' 
                     ORDER BY     ua.id DESC
                 ) As f
             )  As fc";
@@ -186,14 +205,14 @@ class ReportsService
                                    row_to_json(lp)                     As properties
                     
                     FROM         cars                                 As ua
-        
+
                     INNER JOIN (
                             SELECT     plate
                             FROM    cars
                     ) As lp
-        
+
                     ON ua.plate = lp.plate
-        
+
                     WHERE         ua.active                     = true     AND
                                 ua.status                     = 'operative' AND
                                 ua.running                  = 'true'
@@ -208,7 +227,7 @@ class ReportsService
     }
 
     /**
-     * @param $startDate     The start date to filter data
+     * @param $startDate    The start date to filter data
      * @param $endDate      The end date to filter data    (DateTime)
      * @param $tripsNumber  The number of trips to         (DateTime)
      * @param $maintainer   The flag to get the mainteiner trips (true | false)
@@ -228,21 +247,21 @@ class ReportsService
                     t.car_plate                            as VIN,
                     t.timestamp_beginning::timestamp    as begin_trip,
                     t.timestamp_end::timestamp            as end_trip
-                    
+
                 FROM            trips        t    
                 LEFT JOIN        customers     c        ON    t.customer_id = c.id
                             
-                
-                WHERE        timestamp_beginning        >= '".$startDate."' 
-                    AND        timestamp_beginning        <= '".$endDate."'
+
+                WHERE        timestamp_beginning        >= '".$startDate->format('Y-m-d H:i:s')."' 
+                    AND        timestamp_beginning        <= '".$endDate->format('Y-m-d H:i:s')."'
                     AND        timestamp_end        IS NOT NULL
                     AND        c.gold_list = '$maint'
                     AND        c.maintainer = '$maint'
-                
+
                 ORDER BY    timestamp_beginning    DESC
-                            
+
                 LIMIT         $limit
-                
+
             ) as fc
         ";
 
