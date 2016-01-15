@@ -550,7 +550,7 @@ $.oe.fn.loadTracks = function()
 
     //newTrack(features, "way_J10_vers_albine", "", "http://core.sharengo.it/ui/log-data.php?id_trip=4410");
 };
-console.log("TUATTA");
+
 $.oe.fn.getTripsData = function(callback) 
 {
     $.ajax({

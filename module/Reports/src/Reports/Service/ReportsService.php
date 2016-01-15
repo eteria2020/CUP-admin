@@ -31,7 +31,7 @@ class ReportsService
      */
     public function getAllTrips($startDate, $endDate)
     {
-        error_log("Start: ".$startDate->format('Y-m-d H:i:s')." - End: ".$endDate->format('Y-m-d H:i:s'),0);
+        //error_log('Start: '.$startDate->format('Y-m-d H:i:s').' - End: '.$endDate->format('Y-m-d H:i:s'), 0);
         $query = "
             SELECT        *,
                         to_char(time_beginning, 'YYYY-MM-DD HH24:MI:SS')             as time_beginning_parsed,
@@ -225,7 +225,7 @@ class ReportsService
     }
 
     /**
-     * @param int       $tripsId     The trip ID
+     * @param int $tripsId The trip ID
      */
     public function getTrip($tripsId)
     {
@@ -252,7 +252,6 @@ class ReportsService
         // Return the undecoded JSON
         return $trips[0]['row_to_json'];
     }
-
 
     /**
      * @param \DateTime $startDate   The start date to filter data
@@ -403,8 +402,8 @@ class ReportsService
                 $logs = new MongoDB\Collection($this->mongodb, 'sharengo.logs');
                 $cursor = $logs->find($filter, $options);
             } catch (MongoDB\Driver\Exception $e) {
+                //error_log("\tErrore MongoQuery -> $e->getMessage()", 0);
                 return $e->getMessage();
-                error_log("\tErrore MongoQuery -> $e->getMessage()", 0);
             }
 
             $gpx->StartTrack($trip);
@@ -440,6 +439,5 @@ class ReportsService
         }
 
         return $gpx->GetContentToString();
-
     }
 }

@@ -38,7 +38,7 @@ class IndexController extends AbstractActionController
     {
         $this->layout('layout/reports');
 
-        $tripid = $this->params()->fromRoute('tripid', NULL);
+        $tripid = $this->params()->fromRoute('tripid', null);
 
         $viewModel = new ViewModel();
         $viewModel->setVariables(['tripid' => $tripid]);

@@ -5,14 +5,12 @@ namespace Reports\Controller;
 // Internal Modules
 use Reports\Service\ReportsService;
 use Reports\Service\ReportsCsvService;
-
 // External Modules
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\JsonModel;
 use Zend\Http\Response;
 use DateTime;
 use Exception;
-use Zend\Form\Form;
 use DateInterval;
 
 class ApiController extends AbstractActionController
@@ -43,7 +41,6 @@ class ApiController extends AbstractActionController
 
         // So, we don't need to use a JsonModel,but simply use an Http Response
         $this->getResponse()->setContent($cities);
-
         return $this->getResponse();
     }
 
@@ -61,7 +58,7 @@ class ApiController extends AbstractActionController
             $postData = $this->getRequest()->getPost();
 
             // Get $startDate and $endDate from POST action
-            list($startDate, $endDate) = $this->getDateInterval($postData,new DateInterval('P30D'));
+            list($startDate, $endDate) = $this->getDateInterval($postData, new DateInterval('P30D'));
 
             // Get the trips, in CSV string format
             $output = $this->reportsCsvService->getAllTripsCsv($startDate, $endDate);
@@ -86,7 +83,7 @@ class ApiController extends AbstractActionController
             $postData = $this->getRequest()->getPost();
 
             // Get $startDate and $endDate from POST action
-            list($startDate, $endDate) = $this->getDateInterval($postData,new DateInterval('P30D'));
+            list($startDate, $endDate) = $this->getDateInterval($postData, new DateInterval('P30D'));
 
             // Get $city from POST action
             $city = $this->getCity($postData);
@@ -110,7 +107,6 @@ class ApiController extends AbstractActionController
 
         if (!isset($city)) {
             $this->getResponse()->setStatusCode(Response::STATUS_CODE_404);
-
             return false;
         }
 
@@ -119,7 +115,6 @@ class ApiController extends AbstractActionController
 
         // So, we don't need to use a JsonModel,but simply use an Http Response
         $this->getResponse()->setContent($urbanareas);
-
         return $this->getResponse();
     }
 
@@ -137,7 +132,7 @@ class ApiController extends AbstractActionController
             $postData = $this->getRequest()->getPost();
 
             // Get $startDate and $endDate from POST action
-            list($startDate, $endDate) = $this->getDateInterval($postData,new DateInterval('P30D'));
+            list($startDate, $endDate) = $this->getDateInterval($postData, new DateInterval('P30D'));
 
             // Get $begend from POST action
             $begend = $this->getBegEnd($postData);
@@ -192,7 +187,6 @@ class ApiController extends AbstractActionController
 
             // So, we don't need to use a JsonModel,but simply use an Http Response
             $this->getResponse()->setContent($tripdata);
-
         } catch (\Exception $e) {
             //error_log('Errore: '.$e->getMessage());
             $this->flashMessenger()->addErrorMessage('Si è verificato un errore applicativo.');
@@ -200,7 +194,7 @@ class ApiController extends AbstractActionController
         }
         return $this->getResponse();
     }
-    
+
     /**
      * @return \Zend\Http\Response (JSON Format)
      */
@@ -215,16 +209,15 @@ class ApiController extends AbstractActionController
             $postData = $this->getRequest()->getPost();
 
             // Get vars from post action
-            list($startDate, $endDate) = $this->getDateInterval($postData,new DateInterval('P1D'));
+            list($startDate, $endDate) = $this->getDateInterval($postData, new DateInterval('P1D'));
             $tripsNumber = $this->getTripsNumber($postData);
             $maintainer = $this->getMaintainer($postData);
 
             // Get the trips data, in JSON format
-            $tripsdata = $this->reportsService->getTrips($startDate,$endDate, $tripsNumber, $maintainer);
+            $tripsdata = $this->reportsService->getTrips($startDate, $endDate, $tripsNumber, $maintainer);
 
             // So, we don't need to use a JsonModel,but simply use an Http Response
             $this->getResponse()->setContent($tripsdata);
-
         } catch (\Exception $e) {
             //error_log('Errore: '.$e->getMessage());
             $this->flashMessenger()->addErrorMessage('Si è verificato un errore applicativo.');
@@ -247,7 +240,7 @@ class ApiController extends AbstractActionController
             $postData = $this->getRequest()->getPost();
 
             // Get vars from post action
-            list($startDate, $endDate) = $this->getDateInterval($postData,new DateInterval('P1D'));
+            list($startDate, $endDate) = $this->getDateInterval($postData, new DateInterval('P1D'));
             $tripsNumber = $this->getTripsNumber($postData);
 
             // Get the trips data, in JSON format
@@ -255,7 +248,6 @@ class ApiController extends AbstractActionController
 
             // So, we don't need to use a JsonModel,but simply use an Http Response
             $this->getResponse()->setContent($tripsdata);
-
         } catch (\Exception $e) {
             $this->flashMessenger()->addErrorMessage('Si è verificato un errore applicativo.');
             return false;
@@ -281,7 +273,6 @@ class ApiController extends AbstractActionController
 
             // Get the trips data, in GPX format
             $tripsdata = $this->reportsService->getTripPointsFromLogs($getTripsId);
-
         } catch (\Exception $e) {
             $this->flashMessenger()->addErrorMessage('Si è verificato un errore applicativo.');
             return false;
@@ -295,17 +286,18 @@ class ApiController extends AbstractActionController
      * In case ther's a 'start_date' the returned Interval is calculated between those 
      * dates, otherwise the 'start_date' is the day before 'end_date'.
      *
-     * @param   array<string,mixed>     $postData       Post data array.
-     * @param   \DateInterval           $dateInterval   The Interval between the two date
-     *                                                  (used if there isn't a 'start_date') 
-     * @return  [\DateTime,\DateTime]
+     * @param array<string,mixed> $postData     Post data array.
+     * @param \DateInterval       $dateInterval The Interval between the two date
+     *                                          (used if there isn't a 'start_date') 
+     *
+     * @return [\DateTime,\DateTime]
      */
-    private function getDateInterval($postData,DateInterval $dateInterval)
+    private function getDateInterval($postData, DateInterval $dateInterval)
     {
         $dateInterval = isset($dateInterval) ? $dateInterval : new DateInterval('P28D');
 
         if (!isset($postData['end_date'])) {
-            throw new Exception('Missing end_date parameter.',0);
+            throw new Exception('Missing end_date parameter.', 0);
             return false;
         }
 
@@ -313,7 +305,7 @@ class ApiController extends AbstractActionController
             $endDate = new DateTime($postData['end_date']);
             $endDate = $endDate->format('H:i:s') == '00:00:00' ? $endDate->setTime(23, 59, 59) : $endDate;
         } catch (Exception $e) {
-            throw new Exception('The parameter end_date is not a correct DateTime.',1);
+            throw new Exception('The parameter end_date is not a correct DateTime.', 1);
             return false;
         }
 
@@ -326,16 +318,16 @@ class ApiController extends AbstractActionController
         }
 
         //error_log('start: '.$startDate->format('Y-m-d H:i:s').'  ---  end: '.$endDate->format('Y-m-d H:i:s'),0);
-        return [$startDate,$endDate];
+        return [$startDate, $endDate];
     }
 
     /**
      * $this method get a city (fleet_id) from a given $postData assoc array that 
      * MUST contain a 'city' property.
      *
-     * @param   array<string,mixed>     $postData       Post data array.
+     * @param array<string,mixed> $postData Post data array.
      * 
-     * @return  int
+     * @return int
      */
     private function getCity($postData)
     {
@@ -343,20 +335,21 @@ class ApiController extends AbstractActionController
             throw new Exception('Missing city parameter.');
             return false;
         }
-        if (!is_int((int)$postData['city'])) {
+        if (!is_int((int) $postData['city'])) {
             throw new Exception('The parameter city is not valid.');
             return false;
         }
-        return (int)$postData['city'];
+
+        return (int) $postData['city'];
     }
 
     /**
      * $this method get a tripsnumber from a given $postData assoc array that 
      * MUST contain a 'trips_number' property.
      *
-     * @param   array<string,mixed>     $postData       Post data array.
+     * @param array<string,mixed> $postData Post data array.
      * 
-     * @return  int
+     * @return int
      */
     private function getTripsNumber($postData)
     {
@@ -364,20 +357,21 @@ class ApiController extends AbstractActionController
             throw new Exception('Missing trips_id parameter.');
             return false;
         }
-        if (!is_int((int)$postData['trips_number'])) {
+        if (!is_int((int) $postData['trips_number'])) {
             throw new Exception('The parameter trips_number is not valid.');
             return false;
         }
-        return (int)$postData['trips_number'];
+
+        return (int) $postData['trips_number'];
     }
-    
+
     /**
      * $this method get a trip id from a given $postData assoc array that 
      * MUST contain a 'id' property.
      *
-     * @param   array<string,mixed>     $postData       Post data array.
+     * @param array<string,mixed> $postData Post data array.
      * 
-     * @return  int
+     * @return int
      */
     private function getTripId($postData)
     {
@@ -385,20 +379,21 @@ class ApiController extends AbstractActionController
             throw new Exception('Missing trips_id parameter.');
             return false;
         }
-        if (!is_int((int)$postData['id'])) {
+        if (!is_int((int) $postData['id'])) {
             throw new Exception('The parameter trips_number is not valid.');
             return false;
         }
-        return (int)$postData['id'];
+
+        return (int) $postData['id'];
     }
-    
+
     /**
      * $this method get the trips ids from a given $postData assoc array that 
      * MUST contain a 'trips_id' property.
      *
-     * @param   array<string,mixed>     $postData       Post data array.
+     * @param array<string,mixed> $postData Post data array.
      * 
-     * @return  array<string,mixed>
+     * @return array<string,mixed>
      */
     private function getTripsId($postData)
     {
@@ -410,6 +405,7 @@ class ApiController extends AbstractActionController
             throw new Exception('The parameter trips_id is not valid.');
             return false;
         }
+
         return $postData['trips_id'];
     }
 
@@ -417,18 +413,18 @@ class ApiController extends AbstractActionController
      * $this method get the bool value of mainteinter from a given $postData assoc array
      * that MUST contain a 'maintainer' property.
      *
-     * @param   array<string,mixed>     $postData       Post data array.
+     * @param array<string,mixed> $postData Post data array.
      * 
-     * @return  true|false
+     * @return true|false
      */
     private function getMaintainer($postData)
     {
         if (!isset($postData['maintainer'])) {
             throw new Exception('Missing trips_id parameter.');
         }
-        if (preg_match("/^(1|t)/i",$postData['maintainer'])) {
+        if (preg_match('/^(1|t)/i', $postData['maintainer'])) {
             return true;
-        } else if (!preg_match("/^(0|f)/i",$postData['maintainer'])) {
+        } elseif (!preg_match('/^(0|f)/i', $postData['maintainer'])) {
             throw new Exception('The parameter maintainer is not valid.');
         }
         return false;
@@ -438,9 +434,9 @@ class ApiController extends AbstractActionController
      * $this method get a  (fleet_id) from a given $postData assoc array that 
      * MUST contain a 'begend' property, that could be int, char or string.
      *
-     * @param   array<string,mixed>     $postData       Post data array.
+     * @param array<string,mixed> $postData Post data array.
      * 
-     * @return  int
+     * @return int
      */
     private function getBegEnd($postData)
     {
@@ -449,10 +445,10 @@ class ApiController extends AbstractActionController
             return false;
         }
 
-        if (preg_match("/^(0|b+e+g)/i",$postData['begend'])) {
+        if (preg_match('/^(0|b+e+g)/i', $postData['begend'])) {
             // Beginning Case
             return 0;
-        } else if (preg_match("/^(1|e+n+d)/i",$postData['begend'])) {
+        } elseif (preg_match('/^(1|e+n+d)/i', $postData['begend'])) {
             // Ending Case
             return 1;
         }
@@ -462,10 +458,11 @@ class ApiController extends AbstractActionController
     }
 
     /**
-     * $this method set the header to return an http csv response
+     * $this method set the header to return an http csv response.
      *
-     * @param   string              $csvData    String containing CSV data
-     * @return  Zend\Http\Response
+     * @param string $csvData String containing CSV data
+     *
+     * @return Zend\Http\Response
      */
     private function tripsCsvResponse($csvData)
     {
@@ -478,15 +475,15 @@ class ApiController extends AbstractActionController
             ->addHeaderLine('Content-Length', strlen($csvData));
 
         $response->setContent($csvData);
-
         return $response;
     }
 
     /**
-     * $this method set the header to return an http gpx response
+     * $this method set the header to return an http gpx response.
      *
-     * @param   string              $gpxData    String containing GPX data
-     * @return  Zend\Http\Response
+     * @param string $gpxData String containing GPX data
+     *
+     * @return Zend\Http\Response
      */
     private function tripsGpxResponse($gpxData)
     {
@@ -500,8 +497,6 @@ class ApiController extends AbstractActionController
             ->addHeaderLine('Content-Transfer-Encoding', 'binary');
 
         $response->setContent($gpxData);
-
         return $response;
     }
-
 }

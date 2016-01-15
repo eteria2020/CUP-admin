@@ -125,6 +125,15 @@ return [
                                     ],
                                 ],
                             ],
+                            'get-cars-geo-data' => [
+                                'type' => 'Literal',
+                                'options' => [
+                                    'route' => '/get-cars-geo-data',
+                                    'defaults' => [
+                                        'action' => 'get-cars-geo-data',
+                                    ],
+                                ],
+                            ],
                             'get-trips-geo-data' => [
                                 'type' => 'Literal',
                                 'options' => [

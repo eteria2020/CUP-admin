@@ -6,7 +6,7 @@ class ReportsCsvService
 {
     /** @var ReportsService */
     private $reportsService;
-    
+
     public function __construct(ReportsService $reportsService)
     {
         $this->reportsService = $reportsService;
@@ -44,6 +44,7 @@ class ReportsCsvService
             fclose($file);
         } catch (\Exception $e) {
             throw new Exception('Error trying to parse CSV data.');
+
             return false;
         }
 
@@ -83,6 +84,7 @@ class ReportsCsvService
             fclose($file);
         } catch (\Exception $e) {
             throw new Exception('Error trying to parse CSV data.');
+
             return false;
         }
 
