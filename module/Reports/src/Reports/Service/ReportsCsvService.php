@@ -13,7 +13,7 @@ class ReportsCsvService
     }
 
     /**
-     * This method return a string containign the CSV data records of trips between 
+     * This method return a string containign the CSV data records of trips between
      * the given dates $startDate and $endDate.
      *
      * @param \DateTime $startDate The start date.
@@ -43,16 +43,14 @@ class ReportsCsvService
             $output = stream_get_contents($file);
             fclose($file);
         } catch (\Exception $e) {
-            throw new Exception('Error trying to parse CSV data.');
-
-            return false;
+            throw new \Exception('Error trying to parse CSV data.');
         }
 
         return $output;
     }
 
     /**
-     * This method return a string containign the CSV data records of trips between 
+     * This method return a string containign the CSV data records of trips between
      * the given dates $startDate and $endDate of a particular city.
      *
      * @param \DateTime $startDate The start date.
@@ -83,9 +81,7 @@ class ReportsCsvService
             $output = stream_get_contents($file);
             fclose($file);
         } catch (\Exception $e) {
-            throw new Exception('Error trying to parse CSV data.');
-
-            return false;
+            throw new \Exception('Error trying to parse CSV data.');
         }
 
         return $output;

@@ -20,7 +20,13 @@ class ObfuscatorFactory implements FactoryInterface
         $module->setMangle(true);
         $module->setWrap(true);
 
-        $module->setCompress('sequences=true, properties=true, dead_code=true, drop_debugger=true, conditionals=true, comparisons=true, evaluate=true, booleans=true, loops=true, unused=true, hoist_funs=true, hoist_vars=true, if_return=true, join_vars=true, cascade=true, side_effects=true, warnings=true ');
+        $module->setCompress(
+            'sequences=true, properties=true, dead_code=true, ' .
+            'drop_debugger=true, conditionals=true, comparisons=true, ' .
+            'evaluate=true, booleans=true, loops=true, unused=true, ' .
+            'hoist_funs=true, hoist_vars=true, if_return=true, join_vars=true, ' .
+            'cascade=true, side_effects=true, warnings=true '
+        );
 
         return $module;
     }

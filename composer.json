@@ -9,11 +9,11 @@
     "homepage": "http://framework.zend.com/",
     "repositories": [
         {
-            "url": "ssh://git@git.omniaevo.it/sharengo-coremodule",
+            "url": "ssh://git@git.mvlabs.it:4222/clients/sharengo-coremodule.git",
             "type": "git"
         },
         {
-            "url": "ssh://git@git.omniaevo.it/sharengo-cartasi",
+            "url": "ssh://git@git.mvlabs.it:4222/clients/sharengo-cartasi.git",
             "type": "git"
         }
     ],

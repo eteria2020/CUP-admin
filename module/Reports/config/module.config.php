@@ -372,14 +372,14 @@ return [
                 ],
             ],
 
-            // Minify All JS 
+            // Minify All JS
             'js' => [
                 [
                     'filter' => 'JSMin',
                 ],
             ],
 
-            // Minify All CSS 
+            // Minify All CSS
             'css' => [
                 [
                     'filter' => 'CssMin',

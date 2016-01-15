@@ -21,7 +21,7 @@ class ReportsService
     }
 
     /**
-     * This method return an Assoc Array containign the records of trips between 
+     * This method return an Assoc Array containign the records of trips between
      * the given dates $startDate and $endDate.
      *
      * @param \DateTime $startDate The start date.
@@ -42,7 +42,7 @@ class ReportsService
                         EXTRACT(DAY        FROM time_beginning)                        as time_beginning_day,
                         TRUNC(EXTRACT(EPOCH from  (time_end - time_beginning))/60)     as time_total_minute,
                         EXTRACT(ISODOW from time_beginning)                         as time_dow
-    
+
             FROM        view_bi_trips
             WHERE       time_beginning >= '".$startDate->format('Y-m-d H:i:s')."' AND time_beginning    <= '".$endDate->format('Y-m-d H:i:s')."' AND area_id IS NOT NULL
             ORDER BY    time_beginning
@@ -54,7 +54,7 @@ class ReportsService
     }
 
     /**
-     * This method return an Assoc Array containign the records of trips between 
+     * This method return an Assoc Array containign the records of trips between
      * the given dates $startDate and $endDate of a particular city.
      *
      * @param \DateTime $startDate The start date.
@@ -78,8 +78,8 @@ class ReportsService
 
             FROM        view_bi_trips
 
-            WHERE        time_beginning     >= '".$startDate->format('Y-m-d H:i:s')."' 
-                AND        time_beginning    <= '".$endDate->format('Y-m-d H:i:s')."'  
+            WHERE        time_beginning     >= '".$startDate->format('Y-m-d H:i:s')."'
+                AND        time_beginning    <= '".$endDate->format('Y-m-d H:i:s')."'
                 AND        fleet_id         = ".$city.'
                 AND        area_id         IS NOT NULL
 
@@ -164,11 +164,11 @@ class ReportsService
             SELECT row_to_json(fc)
             FROM (
                 SELECT     'FeatureCollection'         As type,
-                    array_to_json(array_agg(f))     As features   
+                    array_to_json(array_agg(f))     As features
                 FROM (
                     SELECT         'Feature'                                 As type ,
                                 ST_AsGeoJSON(ua.geo_".$begend.')::json     As geometry
-                                
+
                     FROM         trips As ua
 
                     LEFT JOIN     customers c ON c.id = ua.customer_id
@@ -178,7 +178,7 @@ class ReportsService
                                 c.maintainer                     = false AND
                                 ua.timestamp_end                 IS NOT NULL    AND
                                 ua.timestamp_'.$begend."        >= '".$startDate->format('Y-m-d H:i:s')."'      AND
-                                ua.timestamp_".$begend."        <= '".$endDate->format('Y-m-d H:i:s')."' 
+                                ua.timestamp_".$begend."        <= '".$endDate->format('Y-m-d H:i:s')."'
                     ORDER BY     ua.id DESC
                 ) As f
             )  As fc";
@@ -201,7 +201,7 @@ class ReportsService
                     SELECT         'Feature'                             As type ,
                                 ST_AsGeoJSON(ua.location)::json     As geometry,
                                    row_to_json(lp)                     As properties
-                    
+
                     FROM         cars                                 As ua
 
                     INNER JOIN (
@@ -232,15 +232,15 @@ class ReportsService
         $query = "
             SELECT row_to_json(fc)
             FROM (
-                SELECT    
+                SELECT
                     t.id                                 as _id,
                     t.car_plate                            as VIN,
                     t.timestamp_beginning::timestamp    as begin_trip,
                     t.timestamp_end::timestamp            as end_trip
 
-                FROM            trips        t    
+                FROM            trips        t
                 LEFT JOIN        customers     c        ON    t.customer_id = c.id
-                            
+
 
                 WHERE           t.id = '$tripsId'
             ) as fc
@@ -255,7 +255,7 @@ class ReportsService
 
     /**
      * @param \DateTime $startDate   The start date to filter data
-     * @param \DateTime $endDate     The end date to filter data 
+     * @param \DateTime $endDate     The end date to filter data
      * @param int       $tripsNumber The number of trips to
      * @param bool      $maintainer  The flag to get the mainteiner trips
      */
@@ -269,17 +269,17 @@ class ReportsService
         $query = "
             SELECT array_to_json(array_agg(fc))
             FROM (
-                SELECT    
+                SELECT
                     t.id                                 as _id,
                     t.car_plate                            as VIN,
                     t.timestamp_beginning::timestamp    as begin_trip,
                     t.timestamp_end::timestamp            as end_trip
 
-                FROM            trips        t    
+                FROM            trips        t
                 LEFT JOIN        customers     c        ON    t.customer_id = c.id
-                            
 
-                WHERE        timestamp_beginning        >= '".$startDate->format('Y-m-d H:i:s')."' 
+
+                WHERE        timestamp_beginning        >= '".$startDate->format('Y-m-d H:i:s')."'
                     AND        timestamp_beginning        <= '".$endDate->format('Y-m-d H:i:s')."'
                     AND        timestamp_end        IS NOT NULL
                     AND        c.gold_list = '$maint'
@@ -302,7 +302,7 @@ class ReportsService
     /**
      * @param $startDate     The start date to filter data
      * @param $endDate      The end date to filter data
-     * @param $tripsNumber  The number of trips to 
+     * @param $tripsNumber  The number of trips to
      */
     public function getTripsFromLogs($startDate, $endDate, $tripsNumber)
     {
@@ -315,7 +315,7 @@ class ReportsService
 
         $pipeline = [
             // STAGE 1
-              ['$match' => [
+            ['$match' => [
                 'log_time' => ['$gt' => $start, '$lte' => $end],
                 'id_trip' => array('$ne' => 0),
                 'begin_trip' => array('$ne' => 'null'),
@@ -325,19 +325,19 @@ class ReportsService
             ]],
 
             // STAGE 2
-              ['$group' => [
+            ['$group' => [
                 'VIN' => ['$last' => '$VIN'],
                 '_id' => '$idTrip',
                 'begin_trip' => ['$first' => '$log_time'],
                 'end_trip' => ['$last' => '$log_time'],
                 'points' => ['$sum' => 1],
-               ]],
+            ]],
 
             // STAGE 3
             ['$sort' => ['_id' => -1]],
 
             // STAGE 4
-               ['$project' => [
+            ['$project' => [
                 '_id' => 1,
                 'VIN' => 1,
                 'begin_trip' => 1,
@@ -418,7 +418,6 @@ class ReportsService
             $south = 35.48333;
 
             foreach ($result as $object) {
-
                 // Check if the object have all the needed properties
                 if (isset($object->log_time) && isset($object->lat) && isset($object->lon)) {
                     $time = $object->log_time->toDateTime()->format("Y-m-d\Th:i:s+0000");

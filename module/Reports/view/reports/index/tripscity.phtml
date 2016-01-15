@@ -5,7 +5,7 @@
             // Getting the actual city id (from the controller), and save it to js $.oe vars
             var thiscity='.$this->city.';
         ');
-        
+
     $this->headLink()
         ->appendStylesheet('/assets-modules/reports/css/vendor.trips.city.css');
 
@@ -23,20 +23,20 @@
                 <!--  <span class='filter-count'></span> selected out of <span class='total-count'></span> records -->
                 </div>
             </p>
-            
+
             <br>
-            
+
             <div class="panel panel-default  affix-top" id="data-range">
                 <div class="panel-heading">
-                    Intervallo (Ultimi 28 giorni)</span>
+                    Intervallo (Ultimi 28 giorni)
                 </div>
                 <div class="panel-body">
                     <div id="days-chart">
                         <span class="reset" style="display: none;"> filtro: <span class="filter"></span></span>
-                            <a class="reset" href="javascript:$.oe.charts.day.filterAll();dc.redrawAll();" style="display: none;"> Azzera </a>
+                        <a class="reset" href="javascript:$.oe.charts.day.filterAll();dc.redrawAll();" style="display: none;"> Azzera </a>
                         <div class="clearfix"></div>
                     </div>
-              </div>
+                </div>
             </div>
 
             <div class="panel panel-default" id="day-of-week">
@@ -46,12 +46,12 @@
                 <div class="panel-body">
                     <div id="day-of-week-chart">
                         <span class="reset" style="display: none;">filtro: <span class="filter"></span></span>
-                            <a class="reset" href="javascript:$.oe.charts.dayOfWeek.filterAll();dc.redrawAll();" style="display: none;"> Azzera </a>
+                        <a class="reset" href="javascript:$.oe.charts.dayOfWeek.filterAll();dc.redrawAll();" style="display: none;"> Azzera </a>
                         <div class="clearfix"></div>
                     </div>
                 </div>
             </div>
-            
+
             <div class="panel panel-default" id="duration">
                 <div class="panel-heading">
                     Corse per durata (minuti)
@@ -64,7 +64,7 @@
                     </div>
                 </div>
             </div>
-    
+
             <div class="panel panel-default" id="beginning-hour">
                 <div class="panel-heading">
                     Corse ora di inizio
@@ -80,7 +80,7 @@
 
             <div class="row" id="bio-data">
                 <div class="col-xs-12 col-sm-6 col-md-6">
-                     <div class="panel panel-default" id="customer-age">
+                    <div class="panel panel-default" id="customer-age">
                         <div class="panel-heading">
                             Suddivisione per Categoria di Et&agrave;
                         </div>

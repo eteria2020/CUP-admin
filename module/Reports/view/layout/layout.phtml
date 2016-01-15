@@ -7,7 +7,7 @@
 
     <meta name="description" content="">
     <meta name="author" content="Omniaevo S.r.l.">
-        
+
     <!-- CSS -->
     <?php
         // Load Bootstrap
@@ -35,32 +35,22 @@
                     <li><a href="/reports/map">Map</a></li>
                     <li><a href="/reports/routes">Routes</a></li>
                     <li><a href="/reports/live">Live</a></li>
-                    <?php 
-
-                    /* Structure like:
-                        <li class="active"><a href="this.php">This page</a></li>
-                        <li><a href="bla1.php">Bla 1</a></li>
-                        <li><a href="blablabla.php">blablabla</a></li>
-                    */
-                    ?>
-
                 </ul>
             </div><!--/.nav-collapse -->
         </div>
     </nav>
-    
-    
+
     <!-- Begin page content -->
     <?php echo $this->content; ?>
-       
+
     <footer class="footer">
         <div class="container">
             <p class="text-muted">&reg;Omniaevo S.r.l. 2015</p>
         </div>
     </footer>
-    
+
     <!-- Scripts -->
-    <?php 
+    <?php
         // Load Bootstrap
         $this->inlineScript()->appendFile($this->basePath()."/bootstrap/dist/js/bootstrap.js");
 

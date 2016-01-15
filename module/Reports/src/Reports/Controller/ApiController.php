@@ -66,6 +66,7 @@ class ApiController extends AbstractActionController
             $this->flashMessenger()->addErrorMessage('Si è verificato un errore applicativo.');
             return false;
         }
+
         return $this->tripsCsvResponse($output);
     }
 
@@ -90,7 +91,7 @@ class ApiController extends AbstractActionController
 
             // Get the trips, in CSV string format
             $output = $this->reportsCsvService->getCityTripsCsv($startDate, $endDate, $city);
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             //error_log('Errore: '.$e->getMessage());
             $this->flashMessenger()->addErrorMessage('Si è verificato un errore applicativo.');
             return false;
@@ -281,40 +282,32 @@ class ApiController extends AbstractActionController
     }
 
     /**
-     * $this method generate two valid DateTime from a given $postData assoc array that 
-     * MUST contain a 'end_date' property.
-     * In case ther's a 'start_date' the returned Interval is calculated between those 
-     * dates, otherwise the 'start_date' is the day before 'end_date'.
+     * $this method generate two valid DateTime from a given $postData assoc array that
+     * MUST contain a 'endDate' property.
+     * In case ther's a 'startDate' the returned Interval is calculated between those
+     * dates, otherwise the 'startDate' is the day before 'endDate'.
      *
      * @param array<string,mixed> $postData     Post data array.
      * @param \DateInterval       $dateInterval The Interval between the two date
-     *                                          (used if there isn't a 'start_date') 
+     *                                          (used if there isn't a 'startDate')
      *
      * @return [\DateTime,\DateTime]
      */
     private function getDateInterval($postData, DateInterval $dateInterval)
     {
-        $dateInterval = isset($dateInterval) ? $dateInterval : new DateInterval('P28D');
-
-        if (!isset($postData['end_date'])) {
-            throw new Exception('Missing end_date parameter.', 0);
-            return false;
+        if (!isset($postData['endDate'])) {
+            throw new Exception('Missing endDate parameter.', 0);
         }
 
-        try {
-            $endDate = new DateTime($postData['end_date']);
-            $endDate = $endDate->format('H:i:s') == '00:00:00' ? $endDate->setTime(23, 59, 59) : $endDate;
-        } catch (Exception $e) {
-            throw new Exception('The parameter end_date is not a correct DateTime.', 1);
-            return false;
-        }
+        $endDate = new DateTime($postData['endDate']);
+        $endDate = $endDate->format('H:i:s') == '00:00:00' ? $endDate->setTime(23, 59, 59) : $endDate;
 
-        // If the start_date is null, will set it with 30 days before the end_date
-        if (!isset($postData['start_date']) || $postData['start_date'] == '') {
-            $date = new DateTime($postData['end_date']);
+        // If the startDate is not set, we set it according to the $dateInterval
+        if (empty($postData['startDate'])) {
+            $date = new DateTime($postData['endDate']);
             $startDate = $date->sub($dateInterval);
         } else {
-            $startDate = new DateTime($postData['start_date']);
+            $startDate = new DateTime($postData['startDate']);
         }
 
         //error_log('start: '.$startDate->format('Y-m-d H:i:s').'  ---  end: '.$endDate->format('Y-m-d H:i:s'),0);
@@ -322,88 +315,80 @@ class ApiController extends AbstractActionController
     }
 
     /**
-     * $this method get a city (fleet_id) from a given $postData assoc array that 
+     * $this method get a city (fleet_id) from a given $postData assoc array that
      * MUST contain a 'city' property.
      *
      * @param array<string,mixed> $postData Post data array.
-     * 
+     *
      * @return int
      */
     private function getCity($postData)
     {
         if (!isset($postData['city'])) {
             throw new Exception('Missing city parameter.');
-            return false;
         }
         if (!is_int((int) $postData['city'])) {
             throw new Exception('The parameter city is not valid.');
-            return false;
         }
 
         return (int) $postData['city'];
     }
 
     /**
-     * $this method get a tripsnumber from a given $postData assoc array that 
+     * $this method get a tripsnumber from a given $postData assoc array that
      * MUST contain a 'trips_number' property.
      *
      * @param array<string,mixed> $postData Post data array.
-     * 
+     *
      * @return int
      */
     private function getTripsNumber($postData)
     {
         if (!isset($postData['trips_number'])) {
             throw new Exception('Missing trips_id parameter.');
-            return false;
         }
         if (!is_int((int) $postData['trips_number'])) {
             throw new Exception('The parameter trips_number is not valid.');
-            return false;
         }
 
         return (int) $postData['trips_number'];
     }
 
     /**
-     * $this method get a trip id from a given $postData assoc array that 
+     * $this method get a trip id from a given $postData assoc array that
      * MUST contain a 'id' property.
      *
      * @param array<string,mixed> $postData Post data array.
-     * 
+     *
      * @return int
      */
     private function getTripId($postData)
     {
         if (!isset($postData['id'])) {
             throw new Exception('Missing trips_id parameter.');
-            return false;
         }
         if (!is_int((int) $postData['id'])) {
             throw new Exception('The parameter trips_number is not valid.');
-            return false;
         }
 
         return (int) $postData['id'];
     }
 
     /**
-     * $this method get the trips ids from a given $postData assoc array that 
+     * $this method get the trips ids from a given $postData assoc array that
      * MUST contain a 'trips_id' property.
      *
      * @param array<string,mixed> $postData Post data array.
-     * 
+     *
      * @return array<string,mixed>
      */
     private function getTripsId($postData)
     {
         if (!isset($postData['trips_id'])) {
             throw new Exception('Missing trips_id parameter.');
-            return false;
         }
         if (!is_array($postData['trips_id'])) {
             throw new Exception('The parameter trips_id is not valid.');
-            return false;
         }
 
         return $postData['trips_id'];
@@ -414,7 +399,7 @@ class ApiController extends AbstractActionController
      * that MUST contain a 'maintainer' property.
      *
      * @param array<string,mixed> $postData Post data array.
-     * 
+     *
      * @return true|false
      */
     private function getMaintainer($postData)
@@ -431,18 +416,17 @@ class ApiController extends AbstractActionController
     }
 
     /**
-     * $this method get a  (fleet_id) from a given $postData assoc array that 
+     * $this method get a  (fleet_id) from a given $postData assoc array that
      * MUST contain a 'begend' property, that could be int, char or string.
      *
      * @param array<string,mixed> $postData Post data array.
-     * 
+     *
      * @return int
      */
     private function getBegEnd($postData)
     {
         if (!isset($postData['begend'])) {
             throw new Exception('Missing begend parameter.');
-            return false;
         }
 
         if (preg_match('/^(0|b+e+g)/i', $postData['begend'])) {
@@ -454,7 +438,6 @@ class ApiController extends AbstractActionController
         }
 
         throw new Exception('The parameter begend is not valid.');
-        return false;
     }
 
     /**
