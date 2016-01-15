@@ -51,8 +51,8 @@ $(function() {
             {data: 'position'},
             {data: 'e.status'},
             {data: 'ci.gps'},
-            {data: 'ci.fw_ver'},
-            {data: 'ci.sw_ver'},
+            {data: 'ci.firmwareVersion'},
+            {data: 'ci.softwareVersion'},
             {data: 'positionLink'},
             {data: 'button'}
         ],
@@ -65,6 +65,21 @@ $(function() {
             {
                 targets: 7,
                 sortable: false
+            },
+            {
+                targets: 9,
+                sortable: true,
+                type: 'string'
+            },
+            {
+                targets: 10,
+                sortable: true,
+                type: 'string'
+            },
+            {
+                targets: 11,
+                sortable: true,
+                type: 'string'
             },
             {
                 targets: 12,
@@ -135,7 +150,7 @@ $(function() {
 
         var value = $(this).val();
 
-        if (value == 'e.plate' || value == 'e.label' || value == 'f.name') {
+        if (value == 'e.plate' || value == 'e.label' || value == 'f.name' || value == 'ci.gps' || value == 'ci.firmwareVersion' || value == 'ci.softwareVersion') {
 
             filterWithoutLike = false;
             search.val('');
