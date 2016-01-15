@@ -12,6 +12,6 @@ class ApiControllerFactory implements FactoryInterface
         $reportsService = $serviceLocator->getServiceLocator()->get('Reports\Service\Reports');
         $reportsCsvService = $serviceLocator->getServiceLocator()->get('Reports\Service\ReportsCsvService');
 
-        return new ApiController($reportsService,$reportsCsvService);
+        return new ApiController($reportsService, $reportsCsvService);
     }
 }

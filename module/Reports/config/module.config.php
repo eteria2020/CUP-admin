@@ -53,9 +53,12 @@ return [
                         ],
                     ],
                     'routes' => [
-                        'type' => 'Literal',
+                        'type' => 'Segment',
                         'options' => [
-                            'route' => '/routes',
+                            'route' => '/routes[/:tripid]',
+                            'constraints' => [
+                                'tripid' => '[0-9]*',
+                            ],
                             'defaults' => [
                                 'action' => 'routes',
                             ],
@@ -131,12 +134,15 @@ return [
                                     ],
                                 ],
                             ],
-                            'get-cars-geo-data' => [
-                                'type' => 'Literal',
+                            'get-trip' => [
+                                'type' => 'Segment',
                                 'options' => [
-                                    'route' => '/get-cars-geo-data',
+                                    'route' => '/get-trip/:id',
+                                    'constraints' => [
+                                        'id' => '[0-9]*',
+                                    ],
                                     'defaults' => [
-                                        'action' => 'get-cars-geo-data',
+                                        'action' => 'get-trip',
                                     ],
                                 ],
                             ],
@@ -185,6 +191,7 @@ return [
     'service_manager' => [
         'factories' => [
             'Reports\Service\Reports' => 'Reports\Service\ReportsServiceFactory',
+            'Reports\Service\ReportsCsvService' => 'Reports\Service\ReportsCsvServiceFactory',
             'Reports\Service\Obfuscator' => 'Reports\Service\ObfuscatorFactory',
         ],
     ],

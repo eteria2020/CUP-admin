@@ -23,7 +23,7 @@ class IndexController extends AbstractActionController
 
         return $viewModel;
     }
-    
+
     public function mapAction()
     {
         $this->layout('layout/reports');
@@ -33,17 +33,19 @@ class IndexController extends AbstractActionController
 
         return $viewModel;
     }
-    
+
     public function routesAction()
     {
         $this->layout('layout/reports');
 
+        $tripid = $this->params()->fromRoute('tripid', NULL);
+
         $viewModel = new ViewModel();
-        $viewModel->setVariables(array());
+        $viewModel->setVariables(['tripid' => $tripid]);
 
         return $viewModel;
     }
-    
+
     public function liveAction()
     {
         $this->layout('layout/reports');
@@ -53,7 +55,7 @@ class IndexController extends AbstractActionController
 
         return $viewModel;
     }
-    
+
     public function tripscityAction()
     {
         $this->layout('layout/reports');
@@ -65,5 +67,4 @@ class IndexController extends AbstractActionController
 
         return $viewModel;
     }
-    
 }

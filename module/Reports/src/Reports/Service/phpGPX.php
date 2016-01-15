@@ -44,7 +44,7 @@ class phpGPX
 
     //var $KML_name = "KML name was not defined. Using default.";
     //var $KML_description = "KML description was not defined. Using default.";
-    
+
     private $errorMessage = '';
     public $file_content = '';
     public $pointWpt = '';
@@ -70,7 +70,7 @@ class phpGPX
         }
         if (!is_writable($this->outputDirectory)) {
             die('Direcotry is not writable! Please set appertaining permissions.');
-      }
+        }
     }
 
     public function GetXmlTag()
@@ -99,16 +99,16 @@ class phpGPX
     }
 
     /**
-    * This internal method returns KML file header based on user defined (or pre-defined) kml or kml parameters.
-    *
-    * @return string
-    */
+     * This internal method returns KML file header based on user defined (or pre-defined) kml or kml parameters.
+     *
+     * @return string
+     */
     public function CreateHeader()
     {
         $this->header .= $this->GetXmlTag();
         $this->header .= $this->GetGpxTag();
         $this->header .= $this->GetMetadataTag();
-    
+
         return $this->header;
     }
 
@@ -147,7 +147,7 @@ class phpGPX
         //$this->pointWpt .= "<sym>".$sym."</sym>\n";
         //$this->pointWpt .= "<type>".$type."</type>\n";
         $this->pointWpt .= "</wpt>\n";
-        
+
         return $this->pointWpt;
     }
 
@@ -156,10 +156,10 @@ class phpGPX
     }
 
     /**
-    * This external method creates the KML file.
-    *
-    * @todo add ValidateFile method.   
-    */
+     * This external method creates the KML file.
+     *
+     * @todo add ValidateFile method.   
+     */
     public function CreateGPXfile()
     {
         $this->ValidateOutputDirecotry();
@@ -214,8 +214,8 @@ class phpGPX
     }
 
     /**
-    * This external method displays created KML file in browser.
-    */
+     * This external method displays created KML file in browser.
+     */
     public function DisplayGPXfile()
     {
         echo highlight_string($this->CreateHeader().$this->pointWpt.$this->lineWpt.$this->CreateFooter(), 1);

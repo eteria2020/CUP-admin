@@ -4,9 +4,6 @@ namespace Reports\Service;
 
 use Doctrine\DBAL\Connection;
 use MongoDB;
-use DateTime;
-use PDO;
-
 use phpGpx;
 
 class ReportsService
@@ -27,13 +24,14 @@ class ReportsService
      * This method return an Assoc Array containign the records of trips between 
      * the given dates $startDate and $endDate.
      *
-     * @param   \DateTime           $startDate      The start date.
-     * @param   \DateTime           $endDate        The end date.
+     * @param \DateTime $startDate The start date.
+     * @param \DateTime $endDate   The end date.
      *
-     * @return  array<string,mixed>
+     * @return array<string,mixed>
      */
-    private function getAllTrips($startDate, $endDate)
+    public function getAllTrips($startDate, $endDate)
     {
+        error_log("Start: ".$startDate->format('Y-m-d H:i:s')." - End: ".$endDate->format('Y-m-d H:i:s'),0);
         $query = "
             SELECT        *,
                         to_char(time_beginning, 'YYYY-MM-DD HH24:MI:SS')             as time_beginning_parsed,
@@ -54,16 +52,16 @@ class ReportsService
 
         return $trips;
     }
-    
+
     /**
      * This method return an Assoc Array containign the records of trips between 
      * the given dates $startDate and $endDate of a particular city.
      *
-     * @param   \DateTime           $startDate      The start date.
-     * @param   \DateTime           $endDate        The end date.
-     * @param   integer             $city           The fleet_id of the city
+     * @param \DateTime $startDate The start date.
+     * @param \DateTime $endDate   The end date.
+     * @param int       $city      The fleet_id of the city
      *
-     * @return  array<string,mixed>
+     * @return array<string,mixed>
      */
     public function getCityTrips($startDate, $endDate, $city)
     {
@@ -227,10 +225,40 @@ class ReportsService
     }
 
     /**
-     * @param $startDate    The start date to filter data
-     * @param $endDate      The end date to filter data    (DateTime)
-     * @param $tripsNumber  The number of trips to         (DateTime)
-     * @param $maintainer   The flag to get the mainteiner trips (true | false)
+     * @param int       $tripsId     The trip ID
+     */
+    public function getTrip($tripsId)
+    {
+        $query = "
+            SELECT row_to_json(fc)
+            FROM (
+                SELECT    
+                    t.id                                 as _id,
+                    t.car_plate                            as VIN,
+                    t.timestamp_beginning::timestamp    as begin_trip,
+                    t.timestamp_end::timestamp            as end_trip
+
+                FROM            trips        t    
+                LEFT JOIN        customers     c        ON    t.customer_id = c.id
+                            
+
+                WHERE           t.id = '$tripsId'
+            ) as fc
+        ";
+
+        // Fetch all rows (but in this case will always fetch just one row)
+        $trips = $this->database->fetchAll($query);
+
+        // Return the undecoded JSON
+        return $trips[0]['row_to_json'];
+    }
+
+
+    /**
+     * @param \DateTime $startDate   The start date to filter data
+     * @param \DateTime $endDate     The end date to filter data 
+     * @param int       $tripsNumber The number of trips to
+     * @param bool      $maintainer  The flag to get the mainteiner trips
      */
     public function getTrips($startDate, $endDate, $tripsNumber, $maintainer)
     {
@@ -412,5 +440,6 @@ class ReportsService
         }
 
         return $gpx->GetContentToString();
+
     }
 }

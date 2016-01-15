@@ -1,35 +1,25 @@
 <?php
-    
-namespace Reports\Controller;
 
-// External Modules
-use Doctrine\DBAL\Connection;
-use DateTime;
+namespace Reports\Service;
 
-class ReportsCsvService extends AbstractActionController
+class ReportsCsvService
 {
-    /**
-     * @var ReportsService
-     */
+    /** @var ReportsService */
     private $reportsService;
-
-    // Doctrine Database
-    private $database;
-
-    public function __construct(ReportsService $reportsService, Connection $database)
+    
+    public function __construct(ReportsService $reportsService)
     {
         $this->reportsService = $reportsService;
-        $this->database = $database;
     }
 
     /**
      * This method return a string containign the CSV data records of trips between 
      * the given dates $startDate and $endDate.
      *
-     * @param   \DateTime           $startDate      The start date.
-     * @param   \DateTime           $endDate        The end date.
+     * @param \DateTime $startDate The start date.
+     * @param \DateTime $endDate   The end date.
      *
-     * @return  string
+     * @return string
      */
     public function getAllTripsCsv($startDate, $endDate)
     {
@@ -43,7 +33,7 @@ class ReportsCsvService extends AbstractActionController
 
             // Write CSV to memory
             fputcsv($file, array_keys(call_user_func_array('array_merge', $trips)));
-            
+
             foreach ($trips as $row) {
                 fputcsv($file, $row);
             }
@@ -52,7 +42,6 @@ class ReportsCsvService extends AbstractActionController
             rewind($file);
             $output = stream_get_contents($file);
             fclose($file);
-
         } catch (\Exception $e) {
             throw new Exception('Error trying to parse CSV data.');
             return false;
@@ -60,16 +49,16 @@ class ReportsCsvService extends AbstractActionController
 
         return $output;
     }
- 
+
     /**
      * This method return a string containign the CSV data records of trips between 
      * the given dates $startDate and $endDate of a particular city.
      *
-     * @param   \DateTime           $startDate      The start date.
-     * @param   \DateTime           $endDate        The end date.
-     * @param   integer             $city           The fleet_id of the city
+     * @param \DateTime $startDate The start date.
+     * @param \DateTime $endDate   The end date.
+     * @param int       $city      The fleet_id of the city
      *
-     * @return  array<string,mixed>
+     * @return array<string,mixed>
      */
     public function getCityTripsCsv($startDate, $endDate, $city)
     {
@@ -92,7 +81,6 @@ class ReportsCsvService extends AbstractActionController
             rewind($file);
             $output = stream_get_contents($file);
             fclose($file);
-
         } catch (\Exception $e) {
             throw new Exception('Error trying to parse CSV data.');
             return false;

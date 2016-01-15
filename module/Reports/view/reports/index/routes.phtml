@@ -2,6 +2,11 @@
     
 $this->inlineScript()
     ->appendFile('/assets-modules/reports/js/vendor.routes.js');
+   
+error_log('tripsid:'.$this->tripid,0);
+if(isset($this->tripid)) {
+    $this->inlineScript()->prependScript('var tripid='.$this->tripid.';');
+}
 
 $this->headLink()
     ->appendStylesheet('/assets-modules/reports/css/vendor.routes.css');

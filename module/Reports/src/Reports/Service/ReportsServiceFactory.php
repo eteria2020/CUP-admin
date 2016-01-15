@@ -5,13 +5,11 @@ namespace Reports\Service;
 use Zend\ServiceManager\FactoryInterface;
 use Zend\ServiceManager\ServiceLocatorInterface;
 use MongoDB;
-
 use phpGpx;
 
 if (!class_exists('phpGpx')) {
     include_once 'phpGPX.php';
 }
-
 
 class ReportsServiceFactory implements FactoryInterface
 {

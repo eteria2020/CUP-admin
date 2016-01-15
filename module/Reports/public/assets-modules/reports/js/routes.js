@@ -97,13 +97,21 @@ $(document).ready(function()
 });
 
 $(window).load(function() {
-    
+
     $.oe.fn.getCityData();
-    $.oe.fn.loadTracks();
-    
+
+    if (typeof tripid !=='undefined') {
+        // If ther's only one trip
+        $.oe.trips.push(tripid);
+        $.oe.fn.loadSingleTrack();
+    } else {
+        // More trips
+        $.oe.fn.loadTracks();
+    }
+
     // Resize the MAP
     $.oe.fn.doneResizing();
-    
+
     $.oe.fn.activateHoverButton();
 });
 
@@ -385,9 +393,74 @@ $.oe.fn.activateListActions = function()
     );
 };
 
+$.oe.fn.zoomOnTrip = function(tripId)
+{
+    var f = $.grep( $.oe.features, function(e){ return parseInt(e.id) == parseInt(tripId); });
+    if(f.length > 0 ){
+        var extent = f[0].getGeometry().getExtent();
+        $.oe.map.getView().fit(extent , $.oe.map.getSize());
+    }
+};
 
 ///////////////// LOAD DATA /////////////////
 
+$.oe.fn.loadSingleTrack = function() 
+{
+    $.oe.items = [];
+
+    // Remove unneeded DOM Elements
+    $(".btn-toolbar").html('<div class="col-md-2"><div class="input-group"><span class="input-group-addon">Targa Veicolo</span><input type="text" class="form-control" id="carplate" aria-describedby="basic-addon3"></div></div><div class="col-md-2"><div class="input-group"><span class="input-group-addon">Durata (min)</span><input type="text" class="form-control" id="duration" aria-describedby="basic-addon3"></div></div><div class="col-md-3"><div class="input-group"><span class="input-group-addon">Data Inizio Corsa</span><input type="text" class="form-control" id="date-beg" aria-describedby="basic-addon3"></div></div><div class="col-md-3"><div class="input-group"><span class="input-group-addon">Data Fine Corsa</span><input type="text" class="form-control" id="date-end" aria-describedby="basic-addon3"></div></div><div class="col-md-2"><div class="input-group"><span class="input-group-addon">Numero Punti</span><input type="text" class="form-control" id="pointsnumber" aria-describedby="basic-addon3"></div></div>');
+
+    $('.col-md-2.rightbar').remove();
+    $('.col-md-10.leftbar').prop('class','col-md-12');
+
+    $('.page-header h1').html('Route '+$.oe.trips[0]);
+
+    $.oe.fn.doneResizing();
+
+    $.ajax({
+        method: 'POST',
+        url: '/reports/api/get-trip/'+$.oe.trips[0],
+        dataType: "json",
+    })
+    .success(function(data) {
+        if(typeof(data) == "undefined" || data === null || data.count === 0)
+        {
+            alert("Non sono state trovate corse con i filtri selezionati");
+        }else{
+            if (data._id>-1) {
+                data.end_trip = (typeof data.end_trip == 'string') ? data.end_trip : data.end_trip.date;
+                data.begin_trip = (typeof data.begin_trip == 'string') ? data.begin_trip : data.begin_trip.date;
+
+                data.end_trip = moment(data.end_trip).format("X");
+                data.begin_trip = moment(data.begin_trip).format("X");
+
+                var duration = Math.round((data.end_trip - data.begin_trip)/60);
+                
+                data.VIN = data.VIN ? data.VIN : data.vin;
+
+                $('#carplate').val(data.VIN);
+                $('#duration').val(duration);
+                $('#date-beg').val( moment(data.begin_trip*1000).format("DD/MM/YYYY HH:mm"));
+                $('#date-end').val( moment(data.end_trip*1000).format("DD/MM/YYYY HH:mm"));
+
+                if (typeof(data.points) != "undefined" && data.points !== null){
+                    $('#pointsnumber').val(data.points);
+                }
+            }
+
+            $("#trips").html($.oe.items.join(""));
+
+            $.oe.fn.getTripsData(function(){
+                $.oe.fn.zoomOnTrip(data._id);
+
+                if ($('#pointsnumber').val() == ''){
+                    $('#pointsnumber').val( $.oe.features[0].getGeometry().v.length / 4 );
+                }
+            });
+        }
+    });
+}
 
 $.oe.fn.loadTracks = function() 
 {
@@ -405,11 +478,11 @@ $.oe.fn.loadTracks = function()
         .prop('disabled', true)
         .removeClass('btn-default')
         .addClass('btn-warning');
-        
+
     $('button#dataupdate span')
         .removeClass('glyphicon-screenshot')
         .addClass('glyphicon-refresh glyphicon-refresh-animate');
-    
+
     $.oe.trips = [];
     $.oe.items = [];
 
@@ -418,19 +491,19 @@ $.oe.fn.loadTracks = function()
         url: 'api/get-trips',
         dataType: "json",
         data: {
-            end_date:         $.oe.urlDate,
-            trips_number:    $.oe.tripsnumber,
-            maintainer:        $.oe.maintainer
+            end_date:           $.oe.urlDate,
+            trips_number:       $.oe.tripsnumber,
+            maintainer:         $.oe.maintainer
         }
     })
     .success(function(data) {
         if(typeof(data) == "undefined" || data === null || data.count === 0)
         {
             alert("Non sono state trovate corse con i filtri selezionati");
-            
+
             // Enable the Data Update Button
             $("button#dataupdate").prop('disabled', false);
-            
+
             // Bind its action
             $("button#dataupdate").one('click','',function(){
                 $.oe.fn.loadTracks();
@@ -439,17 +512,17 @@ $.oe.fn.loadTracks = function()
             $.each(data, function(key, val)
             {
                 if (val._id>-1) {
-                            
+
                     val.end_trip     = (typeof val.end_trip         == 'string')     ? val.end_trip         : val.end_trip.date;
                     val.begin_trip  = (typeof val.begin_trip    == 'string')     ? val.begin_trip     : val.begin_trip.date;
-                                        
+
                     val.end_trip     = moment(val.end_trip).format("X");
                     val.begin_trip     = moment(val.begin_trip).format("X");
-                    
+
                     var duration = Math.round((val.end_trip - val.begin_trip)/60);
-    
+
                     $.oe.trips.push(val._id);
-                    
+
                     val.VIN = val.VIN ? val.VIN : val.vin;
 
                     var date = moment(val.begin_trip*1000).format("DD/MM/YYYY HH:mm");
@@ -458,13 +531,13 @@ $.oe.fn.loadTracks = function()
                         '<h5 class="list-group-item-heading">'+ date +' <b>'+ val.VIN+'</b></h5>'+
                         '<p class="list-group-item-text">'+
                          val._id + ' ' + duration + 'min';
-                         
+
                     if (typeof(val.points) != "undefined" && val.points !== null){
                         li += ' ('+ val.points +')';
                     } 
-                    
+
                     li += '</p></li>';
-                        
+
                     $.oe.items.push(li);
                 }
             });
@@ -477,8 +550,8 @@ $.oe.fn.loadTracks = function()
 
     //newTrack(features, "way_J10_vers_albine", "", "http://core.sharengo.it/ui/log-data.php?id_trip=4410");
 };
-
-$.oe.fn.getTripsData = function() 
+console.log("TUATTA");
+$.oe.fn.getTripsData = function(callback) 
 {
     $.ajax({
         method:            'POST',
@@ -493,27 +566,27 @@ $.oe.fn.getTripsData = function()
     .success(function(data,status,jsonXHR) {
         $.oe.highlightStyleCache = null;
         $.oe.highlight = null;
-        
+
         // Remove all Features
         $.oe.vectorSource.clear();
         $.oe.featureOverlaySource.clear();
-        
+
         var format = new ol.format.GPX();
         var points = 0;
-        
+
         // Reading the xmlDoc
         var xmlDoc = jsonXHR.responseXML;
-        
+
         $.oe.features = [];
         $.oe.features = format.readFeatures(xmlDoc,  {featureProjection: 'EPSG:3857'});
-        
+
         for (var i=0; i<$.oe.features.length; i++) {
             var trackFeature = $.oe.features[i];
-        
+
             trackFeature.id = trackFeature.get('name');
             trackFeature.setGeometry(trackFeature.getGeometry());    
             $.oe.vectorSource.addFeature(trackFeature);
-            
+
             //points += trackFeature.geometry.components.length;
         }
 
@@ -547,6 +620,8 @@ $.oe.fn.getTripsData = function()
         
         // Activate the map
         $.oe.fn.activeMapInteraction();
+        
+        typeof callback === 'function' && callback();
     });
 };
 
@@ -559,9 +634,13 @@ $(window).resize(function() {
 });
 
 
-$.oe.fn.doneResizing = function(){
+$.oe.fn.doneResizing = function() {
     var newHeight             = $(window).height();
     $(".row.mainrow").css("height", newHeight -280); //-110);
     $(".map").css("height", newHeight -280);
     $.oe.map.updateSize();
+};
+
+$.oe.fn.rebluildGUI = function() {
+    
 };

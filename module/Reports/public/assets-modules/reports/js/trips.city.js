@@ -15,6 +15,9 @@ $.oe.trips = {};
 
 $.oe.filters = {};
 
+$.oe.today = new Date();
+$.oe.todayFormatted = $.oe.today.getFullYear()     + '-' + ("0" + ($.oe.today.getMonth()+1)).slice(-2) + '-' + ("0" + $.oe.today.getDate()).slice(-2);
+
 // Charts definition
 $.oe.charts = {
     day                : dc.barChart('#days-chart'),
@@ -69,7 +72,7 @@ $.oe.fn.getCharts = function(){
     // Get the data records
     d3.csv('/reports/api/get-city-trips')
         .header("Content-Type", "application/x-www-form-urlencoded")
-        .post("end_date=2015-12-01&city="+$.oe.thiscity,function (error,trips_record)
+        .post("end_date="+$.oe.todayFormatted+"&city="+$.oe.thiscity,function (error,trips_record)
         {
             // Variables
             var formatDate = d3.time.format('%Y-%m-%d %H:%M:%S'),
