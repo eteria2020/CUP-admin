@@ -282,7 +282,7 @@ class CarsController extends AbstractActionController
 
             $as_filters['withLimit'] = false;
 
-            return count($this->carsService->getDataDataTable($as_filters));
+            return $this->carsService->getDataDataTable($as_filters, true);
         }
     }
 }

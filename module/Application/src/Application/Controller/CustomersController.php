@@ -501,7 +501,7 @@ class CustomersController extends AbstractActionController
         } else {
             $filters['withLimit'] = false;
 
-            return count($this->customersService->getDataDataTable($filters));
+            return $this->customersService->getDataDataTable($filters, true);
         }
     }
 
@@ -512,7 +512,7 @@ class CustomersController extends AbstractActionController
         } else {
             $as_filters['withLimit'] = false;
 
-            return count($this->I_cardsService->getDataDataTable($as_filters));
+            return $this->I_cardsService->getDataDataTable($as_filters, true);
         }
     }
 

@@ -177,7 +177,7 @@ class PoisController extends AbstractActionController
             return $i_totalPois;
         } else {
             $as_filters['withLimit'] = false;
-            return count($this->poisService->getDataDataTable($as_filters));
+            return $this->poisService->getDataDataTable($as_filters, true);
         }
     }
 }

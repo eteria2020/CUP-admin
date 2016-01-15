@@ -45,7 +45,7 @@ class ReservationsController extends AbstractActionController
 
         if (isset($as_filters['columnFromDate']) && isset($as_filters['columnFromEnd'])) {
 
-            return count($this->I_reservationsService->getDataDataTable($as_filters));
+            return $this->I_reservationsService->getDataDataTable($as_filters, true);
 
         } else if (empty($as_filters['searchValue'])) {
 
@@ -53,7 +53,7 @@ class ReservationsController extends AbstractActionController
 
         } else {
 
-            return count($this->I_reservationsService->getDataDataTable($as_filters));
+            return $this->I_reservationsService->getDataDataTable($as_filters, true);
         }
     }
 }
