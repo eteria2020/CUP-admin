@@ -220,7 +220,7 @@ class ApiController extends AbstractActionController
             // So, we don't need to use a JsonModel,but simply use an Http Response
             $this->getResponse()->setContent($tripsdata);
         } catch (\Exception $e) {
-            //error_log('Errore: '.$e->getMessage());
+            error_log('Errore: '.$e->getMessage());
             $this->flashMessenger()->addErrorMessage('Si è verificato un errore applicativo.');
             return false;
         }
@@ -295,22 +295,22 @@ class ApiController extends AbstractActionController
      */
     private function getDateInterval($postData, DateInterval $dateInterval)
     {
-        if (!isset($postData['endDate'])) {
-            throw new Exception('Missing endDate parameter.', 0);
+        if (!isset($postData['end_date'])) {
+            throw new Exception('Missing end_date parameter.', 0);
         }
 
-        $endDate = new DateTime($postData['endDate']);
+        $endDate = new DateTime($postData['end_date']);
         $endDate = $endDate->format('H:i:s') == '00:00:00' ? $endDate->setTime(23, 59, 59) : $endDate;
 
         // If the startDate is not set, we set it according to the $dateInterval
-        if (empty($postData['startDate'])) {
-            $date = new DateTime($postData['endDate']);
+        if (empty($postData['start_date'])) {
+            $date = new DateTime($postData['end_date']);
             $startDate = $date->sub($dateInterval);
         } else {
-            $startDate = new DateTime($postData['startDate']);
+            $startDate = new DateTime($postData['start_date']);
         }
 
-        //error_log('start: '.$startDate->format('Y-m-d H:i:s').'  ---  end: '.$endDate->format('Y-m-d H:i:s'),0);
+        error_log('start: '.$startDate->format('Y-m-d H:i:s').'  ---  end: '.$endDate->format('Y-m-d H:i:s'),0);
         return [$startDate, $endDate];
     }
 

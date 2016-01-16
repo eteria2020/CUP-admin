@@ -33,7 +33,8 @@
         "jquery-migrate": "1.2.1",
         "seiyria-bootstrap-slider": "6.0.4",
         "jquery-scrollto": "jquery.scrollTo#2.1.2",
-        "jquery-ui": "1.11.4"
+        "jquery-ui": "1.11.4",
+        "jquery-timer": "ajgon/jquery-timer"
     },
     "resolutions": {
         "angular": "^1.3.10"

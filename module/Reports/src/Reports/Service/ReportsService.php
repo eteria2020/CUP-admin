@@ -420,7 +420,7 @@ class ReportsService
             foreach ($result as $object) {
                 // Check if the object have all the needed properties
                 if (isset($object->log_time) && isset($object->lat) && isset($object->lon)) {
-                    $time = $object->log_time->toDateTime()->format("Y-m-d\Th:i:s+0000");
+                    $time = $object->log_time->toDateTime()->format("Y-m-d\TH:i:s\Z");
                     $lat = $object->lat;
                     $lon = $object->lon;
 

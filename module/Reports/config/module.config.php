@@ -311,6 +311,7 @@ return [
                     'jquery-legacy/dist/jquery.js',             // Jquery 1.11.3
                     'jquery-migrate/jquery-migrate.js',         // Jquery Migrate 1.2.1
                     'jquery-scrollto/jquery.scrollTo.js',       // ScrollTo
+                    'jquery-timer/jquery.timer.js',      // JqueryTimer
                     'moment/moment.js',                         // Moment.js
                     'eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js',
                     'seiyria-bootstrap-slider/dist/bootstrap-slider.js',

@@ -58,12 +58,28 @@ $.oe.features = [];
 // Flag to trigger the map mousehover listener 
 $.oe.listenHover = true;
 
+// Flag to trigger the map click listener 
+$.oe.listenClick = true;
+
 // The number of trips to load
 $.oe.tripsnumber = 0;
 
 // Flag to get the maintainer trips or the customers one
 // true = maintainers | false = clients
 $.oe.maintainer = false;
+
+// Flag to change view center on carTooltip move
+$.oe.fixedViewPosition = false;
+
+// Object created to use on single track.
+// Useful to calculate the ratio for track / maptrack.
+$.oe.time = {
+    start: Infinity,
+    stop: -Infinity,
+    duration: 0
+};
+
+$.oe.tooltip = {};
 ////////////////////////////////////////////////
 
 $(document).ready(function()
@@ -373,6 +389,10 @@ $.oe.fn.activateListActions = function()
 
     $(".way").click(
         function () {
+            if (!$.oe.listenClick){
+                return;
+            }
+            
             var thisId= $(this).attr("id");
             
             // Remove the "green color class" to the others <li>
@@ -404,16 +424,22 @@ $.oe.fn.zoomOnTrip = function(tripId)
 
 ///////////////// LOAD DATA /////////////////
 
+/**
+ *  This complex func, load a single Track
+ *  It's called when the page has a "/tripid" appendix
+ */
 $.oe.fn.loadSingleTrack = function() 
 {
     $.oe.items = [];
 
-    // Remove unneeded DOM Elements
+    // Create new Input containing the trips info
     $(".btn-toolbar").html('<div class="col-md-2"><div class="input-group"><span class="input-group-addon">Targa Veicolo</span><input type="text" class="form-control" id="carplate" aria-describedby="basic-addon3"></div></div><div class="col-md-2"><div class="input-group"><span class="input-group-addon">Durata (min)</span><input type="text" class="form-control" id="duration" aria-describedby="basic-addon3"></div></div><div class="col-md-3"><div class="input-group"><span class="input-group-addon">Data Inizio Corsa</span><input type="text" class="form-control" id="date-beg" aria-describedby="basic-addon3"></div></div><div class="col-md-3"><div class="input-group"><span class="input-group-addon">Data Fine Corsa</span><input type="text" class="form-control" id="date-end" aria-describedby="basic-addon3"></div></div><div class="col-md-2"><div class="input-group"><span class="input-group-addon">Numero Punti</span><input type="text" class="form-control" id="pointsnumber" aria-describedby="basic-addon3"></div></div>');
 
+    // Remove unneeded DOM Elements
     $('.col-md-2.rightbar').remove();
     $('.col-md-10.leftbar').prop('class','col-md-12');
 
+    // Set new page title
     $('.page-header h1').html('Route '+$.oe.trips[0]);
 
     $.oe.fn.doneResizing();
@@ -421,7 +447,7 @@ $.oe.fn.loadSingleTrack = function()
     $.ajax({
         method: 'POST',
         url: '/reports/api/get-trip/'+$.oe.trips[0],
-        dataType: "json",
+        dataType: "json"
     })
     .success(function(data) {
         if(typeof(data) == "undefined" || data === null || data.count === 0)
@@ -435,7 +461,7 @@ $.oe.fn.loadSingleTrack = function()
                 data.end_trip = moment(data.end_trip).format("X");
                 data.begin_trip = moment(data.begin_trip).format("X");
 
-                var duration = Math.round((data.end_trip - data.begin_trip)/60);
+                var duration = moment(data.end_trip*1000).subtract(moment(data.begin_trip*1000)).format('HH:mm:ss');
                 
                 data.VIN = data.VIN ? data.VIN : data.vin;
 
@@ -452,16 +478,100 @@ $.oe.fn.loadSingleTrack = function()
             $("#trips").html($.oe.items.join(""));
 
             $.oe.fn.getTripsData(function(){
+                // Deactive Uneeded functions
+                $.oe.fn.deactiveListActions();
+
+                // Zoom Map to the unique loaded track
                 $.oe.fn.zoomOnTrip(data._id);
 
+                // If the trips point number is not passed trought JSON data
+                // we obtain it from feature obj.
                 if ($('#pointsnumber').val() == ''){
                     $('#pointsnumber').val( $.oe.features[0].getGeometry().v.length / 4 );
                 }
+                
+                console.log('data.end_trip: '+moment(data.end_trip*1000).format('HH:mm:ss'));
+                console.log('data.end_trip: '+moment($.oe.features[0].getGeometry().getLastCoordinate()[3]*1000).format('HH:mm:ss'));
+                console.log('data.begin_trip: '+moment(data.begin_trip*1000).format('HH:mm:ss'));
+                console.log('data.begin_trip: '+moment($.oe.features[0].getGeometry().getFirstCoordinate()[3]*1000).format('HH:mm:ss'));
+                
+                console.log('diff: '+moment($.oe.features[0].getGeometry().getLastCoordinate()[3]*1000).subtract(moment($.oe.features[0].getGeometry().getFirstCoordinate()[3]*1000)).format('HH:mm:ss'));
+                
+                
+                $.oe.time.start = ($.oe.features[0].getGeometry().getFirstCoordinate()[3])*1000;
+                $.oe.time.stop = ($.oe.features[0].getGeometry().getLastCoordinate()[3])*1000;
+                $.oe.time.duration = $.oe.time.stop - $.oe.time.start;
+
+                $('.btn-toolbar').append('
+                    <div class="col-md-12 secondrow">
+                        <div class="col-md-2 controls">
+                            <div class="btn-group btn-group-sm" role="group" aria-label="Small button group">
+                                <button type="button" class="btn btn-default stop" aria-label="Ferma">
+                                    <span class="glyphicon glyphicon glyphicon-stop" aria-hidden="true"></span>
+                                </button>
+                                <button type="button" class="btn btn-default pause" aria-label="Pausa">
+                                    <span class="glyphicon glyphicon-pause" aria-hidden="true"></span>
+                                </button>
+                                <button type="button" class="btn btn-default play" aria-label="Avvia">
+                                    <span class="glyphicon  glyphicon-play" aria-hidden="true"></span>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="col-md-8 dataslider">
+                            <input id="ex7" type="text" data-slider-min="0" data-slider-max="100000" data-slider-step="1" data-slider-value="0"/>
+                        </div>
+                        <div class="col-md-2">
+                            <span id="ex7CurrentSliderValLabel"><span id="ex7SliderVal"></span></span>
+                        </div>
+                    </div>
+                ');
+
+                // Create The Slider
+                $("#ex7").slider({
+                	formatter: function(value) {
+                    	var mi = ($.oe.time.duration/100000)*value;
+                		var date = moment().startOf('day').add(mi,'milliseconds');
+                		return 'Tempo Corsa: ' + date.format('HH:mm:ss');
+                	}
+                });
+                
+                // Create the tooltop
+                $.oe.fn.createCarTooltip();
+
+                // Stop hover action
+                $.oe.listenHover = false;
+                $.oe.listenClick = false;
+                
+                $.oe.tripslayer.setStyle(
+                    new ol.style.Style({
+                        stroke: new ol.style.Stroke({
+                            color: 'rgba(110, 69, 255, 0.80)',
+                            width: 6
+                        })
+                    })
+                );
+
+                // Listen to Slider Change Value (Ther's also the on("slide" bind, that listen
+                // only the slide action, not also the click on a specific section of the
+                // slidebar.
+                $("#ex7").on("change", function(slideEvt) {
+                    var time = $.oe.fn.getTimeOfTripPercentage(slideEvt.value.newValue/1000);
+                    $.oe.fn.setcarTooltipPosition(time.format('X'));
+                    
+                    $("#ex7SliderVal").text(time.format('DD/MM/YYYY HH:mm:ss'));
+                    
+                    $.oe.tooltip.carTooltipElement.innerHTML = time.format('HH:mm:ss'); 
+                });
+                
+                $.oe.fn.activateTimerButtons();
             });
         }
     });
 }
 
+/**
+ *  This complex func, load more tracks
+ */
 $.oe.fn.loadTracks = function() 
 {
     $.oe.fn.deactiveListActions();
@@ -478,7 +588,6 @@ $.oe.fn.loadTracks = function()
         .prop('disabled', true)
         .removeClass('btn-default')
         .addClass('btn-warning');
-
     $('button#dataupdate span')
         .removeClass('glyphicon-screenshot')
         .addClass('glyphicon-refresh glyphicon-refresh-animate');
@@ -551,6 +660,12 @@ $.oe.fn.loadTracks = function()
     //newTrack(features, "way_J10_vers_albine", "", "http://core.sharengo.it/ui/log-data.php?id_trip=4410");
 };
 
+/**
+ *  This complex func, load the GPX file containing all the tracks
+ *
+ *  @param function  callback  If it's a valid function, callback()
+ *                             will be excetued at the end
+ */
 $.oe.fn.getTripsData = function(callback) 
 {
     $.ajax({
@@ -625,6 +740,162 @@ $.oe.fn.getTripsData = function(callback)
     });
 };
 
+      
+
+/**
+ * Creates a new help tooltip
+ */
+$.oe.fn.createCarTooltip = function() {   
+    /**
+     * The help tooltip element.
+     * @type {Element}
+     */
+    $.oe.tooltip.carTooltipElement;
+
+    /**
+     * Overlay to show the help messages.
+     * @type {ol.Overlay}
+     */
+    $.oe.tooltip.carTooltip;
+     
+    /** 
+     * The car icon of the tooltip
+     * @type {olx.style.IconOptions}
+     */
+    $.oe.tooltip.carIcon =  new ol.style.Icon({
+        anchor: [0.5, 1],
+        anchorXUnits: 'fraction',
+        anchorYUnits: 'fraction',
+        opacity: 0.75,
+        scale: 0.07,
+        src: '/img/car-icon.png'
+    });
+    
+    /** 
+     * The car pint of the tooltip
+     * @type {olx.style.Circle}
+     */
+    $.oe.tooltip.carPoint = new ol.style.Circle({
+        radius: 2,
+        fill: new ol.style.Fill({
+            color: 'rgba(255,0,0,0.9)'
+        }),
+        stroke: null
+    })
+    
+    /**
+    * Overlay to show the help messages.
+    * @type {ol.Vector}
+    */
+    $.oe.tooltip.featureOverlay = new ol.layer.Vector({
+        source: new ol.source.Vector(),
+        map: $.oe.map,
+        style: 
+            [
+                new ol.style.Style({
+                    image: $.oe.tooltip.carIcon
+                }),
+                new ol.style.Style({
+                    image: $.oe.tooltip.carPoint
+                })
+            ]
+    });
+    
+
+    if ($.oe.tooltip.carTooltipElement) {
+        $.oe.tooltip.carTooltipElement.parentNode.removeChild($.oe.tooltip.carTooltipElement);
+    }
+    $.oe.tooltip.carTooltipElement = document.createElement('div');
+    $.oe.tooltip.carTooltipElement.className = 'tooltip point-tooltip';
+    $.oe.tooltip.carTooltip = new ol.Overlay({
+        element: $.oe.tooltip.carTooltipElement,
+        offset: [15, 0],
+        positioning: 'center-left'
+    });
+    $.oe.map.addOverlay($.oe.tooltip.carTooltip);
+};
+
+
+$.oe.fn.activateTimerButtons = function(){
+    $.timer('timer', function() {
+        var newval = parseInt($("#ex7").val())+100;
+        
+        if(newval >= 100000){
+            $.timer('timer').stop();
+            return;
+        }
+        
+        $("#ex7").slider('setValue',newval);
+
+        var time = $.oe.fn.getTimeOfTripPercentage(newval/1000);
+        $.oe.fn.setcarTooltipPosition(time.format('X'));
+
+        $("#ex7SliderVal").text(time.format('DD/MM/YYYY HH:mm:ss'));            
+        $.oe.tooltip.carTooltipElement.innerHTML = time.format('HH:mm:ss');
+    }, 1, {timeout: 100000000});  
+    
+    $('div.controls button.play').on('click',function(){
+        if($.timer('timer').status() == 'paused'){
+            $.timer('timer').resume()
+        } else {
+            $.timer('timer').start();
+        }
+    });
+    
+    $('div.controls button.pause').on('click',function(){
+        $.timer('timer').pause();
+    });
+    
+    $('div.controls button.pause').on('click',function(){
+        $.timer('timer').stop();
+    });
+};
+
+
+/**
+ * This func return the moment() (time) of
+ * the trip at a specific percentage
+ *
+ * @param   int     percent  The percent value ( 0 <= percent <= 100 )
+ * @return {moment}
+ */
+$.oe.fn.getTimeOfTripPercentage = function(percent){
+    var step = ($.oe.time.duration / 100) * percent;
+    return moment($.oe.time.start + step);
+};
+
+/**
+ * This func change the position of the carTooltip on the $.oe.map
+ *
+ * @param   int     seconds  The second value (Unix format) of the
+ *                           trips moment where the tooltip should
+ *                           be placed
+ *                  example  moment(stratime).format('x')
+ */
+$.oe.fn.setcarTooltipPosition = function(seconds) {
+    var feature = $.oe.features[0];
+
+    var geometry = /** @type {ol.geom.LineString} */ (feature.getGeometry());
+    var coordinate = geometry.getCoordinateAtM(seconds, true);
+    var highlight = feature.get('highlight');
+
+    $.oe.tooltip.carTooltip.setPosition(coordinate);  
+
+    if (highlight === undefined) {
+        highlight = new ol.Feature(new ol.geom.Point(coordinate));
+        feature.set('highlight', highlight);
+        $.oe.tooltip.featureOverlay.getSource().addFeature(highlight);
+    } else {
+        highlight.getGeometry().setCoordinates(coordinate);
+    }
+    
+    if($.oe.fixedViewPosition) {
+        $.oe.map.getView().setCenter($.oe.tooltip.carTooltip.getPosition());
+    }
+
+    $.oe.map.render();
+};
+
 
 // Window Resize Action Bind
 var id;
@@ -636,11 +907,7 @@ $(window).resize(function() {
 
 $.oe.fn.doneResizing = function() {
     var newHeight             = $(window).height();
-    $(".row.mainrow").css("height", newHeight -280); //-110);
-    $(".map").css("height", newHeight -280);
+    $(".row.mainrow").css("height", newHeight -285);//-280); //-110);
+    $(".map").css("height", newHeight -285);
     $.oe.map.updateSize();
-};
-
-$.oe.fn.rebluildGUI = function() {
-    
 };
