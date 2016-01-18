@@ -85,8 +85,7 @@ class TripsController extends AbstractActionController
             return $i_tripsTotal;
         } else {
             $as_filters['withLimit'] = false;
-
-            return count($this->tripsService->getDataDataTable($as_filters));
+            return $this->tripsService->getDataDataTable($as_filters, true);
         }
     }
 

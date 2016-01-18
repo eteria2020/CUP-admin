@@ -1,7 +1,7 @@
 <?php
 // Get data
 $trip = $this->trip;
-$tripPayment = $trip->getTripPayments()[0];
+$tripPayment = $trip->getTripPayment();
 $customer = $trip->getCustomer();
 
 // parse card
