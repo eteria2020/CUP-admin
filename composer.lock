@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "7c371becb0fea1618f27602ec908e3a6",
+    "hash": "8ad2ef1e30ebcc54c72e3f9ce9b5d6d3",
     "content-hash": "a7bcc0e728d3aae09316b4a2eca8ff83",
     "packages": [
         {
@@ -1274,7 +1274,7 @@
             "source": {
                 "type": "git",
                 "url": "ssh://git@git.mvlabs.it:4222/clients/sharengo-cartasi.git",
-                "reference": "68766566e1b1e00ffbdfcf6bc1069899c0afd703"
+                "reference": "6fb04a005c82967a6e81329a316aae823222f185"
             },
             "require": {
                 "doctrine/doctrine-orm-module": "0.*",
@@ -1288,7 +1288,7 @@
                 }
             },
             "description": "Cartasi module for Sharengo",
-            "time": "2015-12-11 11:24:40"
+            "time": "2016-01-12 08:12:39"
         },
         {
             "name": "mvlabs/sharengo-coremodule",
