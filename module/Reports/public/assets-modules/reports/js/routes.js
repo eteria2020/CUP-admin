@@ -37,7 +37,7 @@ $.oe.vectorSource = {};
 $.oe.tracks = {};
 
 // The collection of features selected
-$.oe.featureOverlaySource = {}; 
+$.oe.featureOverlaySource = {};
 
 // The Ol3 Vector containing the selected overlay
 $.oe.featureOverlay;
@@ -55,10 +55,10 @@ $.oe.items = [];
 // The loaded tracks (features)
 $.oe.features = [];
 
-// Flag to trigger the map mousehover listener 
+// Flag to trigger the map mousehover listener
 $.oe.listenHover = true;
 
-// Flag to trigger the map click listener 
+// Flag to trigger the map click listener
 $.oe.listenClick = true;
 
 // The number of trips to load
@@ -82,7 +82,7 @@ $.oe.time = {
 // The Car tooltip
 $.oe.tooltip = {};
 
-// Set the costant of used space by the toolbars 
+// Set the costant of used space by the toolbars
 // This value will be subtract to the total page height.
 $.oe.pageHeightReduce = -255;
 ////////////////////////////////////////////////
@@ -96,7 +96,7 @@ $(document).ready(function()
         defaultDate: Date(),
         format: 'YYYY-MM-DD HH:mm:ss'
     });
-    
+
     // Create The Slider
     $("#ex6").slider();
 
@@ -106,12 +106,12 @@ $(document).ready(function()
     $("#ex6").on("change", function(slideEvt) {
         $("#ex6SliderVal").text(slideEvt.value.newValue+" corse prima di");
     });
-   
-    
+
+
     // Init Bootstrap Switch
     $('#maintainer')
         .bootstrapSwitch()
-        .on('switchChange.bootstrapSwitch', 
+        .on('switchChange.bootstrapSwitch',
             function(event, state) {
                 $.oe.maintainer = !state; // true | false
             });
@@ -164,7 +164,7 @@ var style = {
             width: 3
         })
     })],
-    
+
     // Tracks
     'MultiLineString': [new ol.style.Style({
         stroke: new ol.style.Stroke({
@@ -193,7 +193,7 @@ var hoverstyle = {
             width: 6
         })
     })],
-    
+
     // Tracks
     'MultiLineString': [new ol.style.Style({
         stroke: new ol.style.Stroke({
@@ -242,7 +242,7 @@ $.oe.featureOverlay = new ol.layer.Vector({
 });
 // Add the overlay to the MAP ol.obj
 $.oe.featureOverlay.setMap($.oe.map);
-    
+
 // Bind the entire map mouse moving
 $.oe.map.on('pointermove', function(evt) {
     if (evt.dragging) {
@@ -259,29 +259,29 @@ $.oe.map.on('pointermove', function(evt) {
 $.oe.map.on('click', function(evt) {
     $.oe.fn.displayFeatureInfo(evt.pixel);
 });
-    
+
 
 // Map MouseMove Handler
 $.oe.fn.displayFeatureInfo = function(pixel) {
     var selectedfeatures = [];
-    
+
     $.oe.map.forEachFeatureAtPixel(pixel, function(feature) {
         selectedfeatures.push(feature);
     });
-    
+
     if (selectedfeatures.length > 0) {
         var info = [];
         var i;
-        
+
         for (i = 0 ; i <  selectedfeatures.length; ++i) {
             info.push(selectedfeatures[i].get('name'));
-                        
+
             $.oe.fn.changeTrackColor(selectedfeatures[i]);
         }
-        
+
         //get the selected <li> track of the first selected
         var element = $("#" + selectedfeatures[0].id);
-        
+
         // Remove the "green color class" to the others <li>
         $(".way:not(#"+selectedfeatures[0].id+")").removeClass("list-group-item-success");
 
@@ -289,12 +289,12 @@ $.oe.fn.displayFeatureInfo = function(pixel) {
         if (!element.hasClass("list-group-item-success")) {
             element.removeClass("list-group-item-danger");
             element.addClass("list-group-item-success");
-            
+
             element.parent().stop();
             element.parent().scrollTo(element);
         }
-        
-        
+
+
         document.getElementById('info').innerHTML = info.join(', ') || '(unknown)';
         $.oe.map.getTarget().style.cursor = 'pointer';
     } else {
@@ -325,7 +325,7 @@ $.oe.fn.activateHoverButton = function()
 {
     $('button#hoverenable').removeClass("btn-default");
     $('button#hoverenable').addClass("btn-success");
-    
+
     $('button#hoverenable').click(
         function () {
             if($.oe.listenHover){
@@ -347,7 +347,7 @@ $.oe.fn.activateFixView = function()
 {
     $('button#fixview').removeClass("btn-default");
     $('button#fixview').addClass("btn-danger");
-    
+
     $('button#fixview').click(
         function () {
             if($.oe.fixView){
@@ -457,7 +457,7 @@ $.oe.fn.zoomOnTrip = function(tripId)
  *  This complex func, load a single Track
  *  It's called when the page has a "/tripid" appendix
  */
-$.oe.fn.loadSingleTrack = function() 
+$.oe.fn.loadSingleTrack = function()
 {
     $.oe.items = [];
 
@@ -494,7 +494,7 @@ $.oe.fn.loadSingleTrack = function()
                 data.begin_trip = moment(data.begin_trip).format("X");
 
                 var duration = moment(data.end_trip*1000).subtract(moment(data.begin_trip*1000)).format('HH:mm:ss');
-                
+
                 data.VIN = data.VIN ? data.VIN : data.vin;
 
                 $('#carplate').val(data.VIN);
@@ -565,7 +565,7 @@ $.oe.fn.loadSingleTrack = function()
 
                     $("#ex7SliderVal").val(time.format('DD/MM/YYYY HH:mm:ss'));
 
-                    $.oe.tooltip.carTooltipElement.innerHTML = time.format('HH:mm:ss'); 
+                    $.oe.tooltip.carTooltipElement.innerHTML = time.format('HH:mm:ss');
 
                     var ms = $.oe.fn.getSpeed(time);
                     var kmh = Math.round((ms*18)/5);
@@ -584,7 +584,7 @@ $.oe.fn.loadSingleTrack = function()
 /**
  *  This complex func, load more tracks
  */
-$.oe.fn.loadTracks = function() 
+$.oe.fn.loadTracks = function()
 {
     $.oe.fn.deactiveListActions();
     $.oe.fn.deactiveMapInteraction();
@@ -651,7 +651,7 @@ $.oe.fn.loadTracks = function()
 
                     if (typeof(val.points) != "undefined" && val.points !== null){
                         li += ' ('+ val.points +')';
-                    } 
+                    }
 
                     li += '</p></li>';
 
@@ -674,7 +674,7 @@ $.oe.fn.loadTracks = function()
  *  @param function  callback  If it's a valid function, callback()
  *                             will be excetued at the end
  */
-$.oe.fn.getTripsData = function(callback) 
+$.oe.fn.getTripsData = function(callback)
 {
     $.ajax({
         method:            'POST',
@@ -707,7 +707,7 @@ $.oe.fn.getTripsData = function(callback)
             var trackFeature = $.oe.features[i];
 
             trackFeature.id = trackFeature.get('name');
-            trackFeature.setGeometry(trackFeature.getGeometry());    
+            trackFeature.setGeometry(trackFeature.getGeometry());
             $.oe.vectorSource.addFeature(trackFeature);
 
             //points += trackFeature.geometry.components.length;
@@ -720,7 +720,7 @@ $.oe.fn.getTripsData = function(callback)
         //console.log(features.length);
         $.oe.vectorSource.changed();
     })
-    .complete(function(){    
+    .complete(function(){
         // Enable the Data Update Button
         $('button#dataupdate')
             .prop('disabled', false)
@@ -730,7 +730,7 @@ $.oe.fn.getTripsData = function(callback)
         $('button#dataupdate span')
             .removeClass('glyphicon-refresh-animate');
 
-        
+
         // Bind its action
         $("button#dataupdate").one('click','',function(){
             $.oe.fn.loadTracks();
@@ -746,12 +746,12 @@ $.oe.fn.getTripsData = function(callback)
     });
 };
 
-      
+
 
 /**
  * Creates a new help tooltip
  */
-$.oe.fn.createCarTooltip = function() {   
+$.oe.fn.createCarTooltip = function() {
     /**
      * The help tooltip element.
      * @type {Element}
@@ -764,7 +764,7 @@ $.oe.fn.createCarTooltip = function() {
      */
     $.oe.tooltip.carTooltip;
 
-    /** 
+    /**
      * The car icon of the tooltip
      * @type {olx.style.IconOptions}
      */
@@ -777,7 +777,7 @@ $.oe.fn.createCarTooltip = function() {
         src: '/img/car-icon.png'
     });
 
-    /** 
+    /**
      * The car pint of the tooltip
      * @type {olx.style.Circle}
      */
@@ -796,7 +796,7 @@ $.oe.fn.createCarTooltip = function() {
     $.oe.tooltip.featureOverlay = new ol.layer.Vector({
         source: new ol.source.Vector(),
         map: $.oe.map,
-        style: 
+        style:
         [
             new ol.style.Style({
                 image: $.oe.tooltip.carIcon
@@ -805,7 +805,7 @@ $.oe.fn.createCarTooltip = function() {
                 image: $.oe.tooltip.carPoint
             })
         ]
-    });    
+    });
 
     if ($.oe.tooltip.carTooltipElement) {
         $.oe.tooltip.carTooltipElement.parentNode.removeChild($.oe.tooltip.carTooltipElement);
@@ -834,7 +834,7 @@ $.oe.fn.createTimer = function() {
         var time = $.oe.fn.getTimeOfTripPercentage(newval/1000);
         $.oe.fn.setcarTooltipPosition(time.format('X'));
 
-        $("#ex7SliderVal").val(time.format('DD/MM/YYYY HH:mm:ss'));            
+        $("#ex7SliderVal").val(time.format('DD/MM/YYYY HH:mm:ss'));
         $.oe.tooltip.carTooltipElement.innerHTML = time.format('HH:mm:ss');
 
         var ms = $.oe.fn.getSpeed(time);
@@ -871,7 +871,7 @@ $.oe.fn.activateTimerButtons = function(){
         var time = $.oe.fn.getTimeOfTripPercentage(0);
         $.oe.fn.setcarTooltipPosition(time.format('X'));
 
-        $("#ex7SliderVal").val(time.format('DD/MM/YYYY HH:mm:ss'));            
+        $("#ex7SliderVal").val(time.format('DD/MM/YYYY HH:mm:ss'));
         $.oe.tooltip.carTooltipElement.innerHTML = time.format('HH:mm:ss');
 
         $('#current-speed-ms').val(0);
@@ -954,7 +954,7 @@ $.oe.fn.setcarTooltipPosition = function(seconds) {
     var coordinate = geometry.getCoordinateAtM(seconds, true);
     var highlight = feature.get('highlight');
 
-    $.oe.tooltip.carTooltip.setPosition(coordinate);  
+    $.oe.tooltip.carTooltip.setPosition(coordinate);
 
     if (highlight === undefined) {
         highlight = new ol.Feature(new ol.geom.Point(coordinate));
