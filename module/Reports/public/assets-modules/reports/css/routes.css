@@ -140,6 +140,9 @@ background: transparent
 	float:right;
 }
 
+#fixview{
+    float:right;
+}
 
 /*#maintainer*/
 #menubar .bootstrap-switch{
@@ -205,7 +208,20 @@ div#over span{
     to { transform: scale(1) rotate(360deg);}
 }
 
-.slider.slider-horizontal{
+/******** OVERRIDE BOOTSTRAP *********/
+.page-header{
+    padding-bottom: 0px !important;
+    margin: 0px 0 30px !important;
+}
+
+.page-header h1{
+    margin-top: 0px !important;
+}
+
+.tripsprogression{
+    padding-top: 7px;
+}
+.tripsprogression .slider.slider-horizontal{
     width: 100%;
 }
 
@@ -248,6 +264,20 @@ div#over span{
 .secondrow > div{
     line-height:30px;
 }
-.secondrow div.controls{
-    padding-left: 0px;
+
+.controls .btn-group{
+    width: 100%;
+}
+
+.controls button{
+    width: 33%;
+}
+
+.controls .btn.stop{
+    border-radius: 0px;
+}
+
+li.way div.open-button{
+    float: right;
+    left: 20px;
 }

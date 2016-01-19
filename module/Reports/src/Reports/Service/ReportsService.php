@@ -5,6 +5,8 @@ namespace Reports\Service;
 use Doctrine\DBAL\Connection;
 use MongoDB;
 use phpGpx;
+use DateTime;
+use DateTimeZone;
 
 class ReportsService
 {
@@ -420,9 +422,31 @@ class ReportsService
             foreach ($result as $object) {
                 // Check if the object have all the needed properties
                 if (isset($object->log_time) && isset($object->lat) && isset($object->lon)) {
-                    $time = $object->log_time->toDateTime()->format("Y-m-d\TH:i:s\Z");
-                    $lat = $object->lat;
-                    $lon = $object->lon;
+                    // If there are the GPS Box info, we prefer get time from that (that are 
+                    // more accurate).
+                    if (isset($object->gps_box)) {
+                        // set default timezone
+                        date_default_timezone_set('Europe/London');
+
+                        $date = new DateTime();
+                        $date->setTimestamp($object->gps_box->ts);
+                        $date->setTimezone(new DateTimeZone('MST'));
+
+                        $time = $date->format('Y-m-d\TH:i:s').'+00:00';
+                    } else {
+                        $time = $object->log_time->toDateTime()->format("Y-m-d\TH:i:s").'+00:00';
+                    }
+
+                    // If there are the GPS Box info, and the Car should get GPS data from it (extgps == true)
+                    if (isset($object->extgps)) {
+                        if ($object->extgps && isset($object->gps_box)) {
+                            $lat = $object->gps_box->lat;
+                            $lon = $object->gps_box->lon;
+                        }
+                    } else {
+                        $lat = $object->lat;
+                        $lon = $object->lon;
+                    }
 
                     $mapurl = "<a href='http://maps.google.com/maps?q=$lat,$lon&z=16'>$lat , $lon</a>";
 

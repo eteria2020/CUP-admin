@@ -275,6 +275,7 @@ class ApiController extends AbstractActionController
             // Get the trips data, in GPX format
             $tripsdata = $this->reportsService->getTripPointsFromLogs($getTripsId);
         } catch (\Exception $e) {
+            error_log("errore: ".$e,0);
             $this->flashMessenger()->addErrorMessage('Si è verificato un errore applicativo.');
             return false;
         }
