@@ -31,7 +31,7 @@ $this->headScript()
                             <div class="tab-pane active" id="tab_1_1">
 
                                 <!-- BEGIN new files table -->
-                                <?php if (count($this->newFileNames) > 0): ?>
+                                <?php if (count($this->newFiles) > 0): ?>
                                 <h3>Nuovi file</h3>
                                 <table id="new-table" class="table table-striped table-bordered table-hover sng-margin-top">
                                     <thead>
@@ -42,11 +42,11 @@ $this->headScript()
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <?php foreach ($this->newFileNames as $name): ?>
+                                        <?php foreach ($this->newFiles as $file): ?>
                                         <tr>
-                                            <td><?= $name ?></td>
-                                            <td><?= 'xx/xx/xxxx' ?></td>
-                                            <td><a href="<?= $this->url('payments/csv-add-file', [], ['query' => ['filename' => $name]]); ?>">Inserisci</a></td>
+                                            <td><?= $file['name'] ?></td>
+                                            <td><?= $file['date']->format('d-m-Y H:i:s'); ?></td>
+                                            <td><a href="<?= $this->url('payments/csv-add-file', [], ['query' => ['filename' => $file['name']]]); ?>">Inserisci</a></td>
                                         </tr>
                                         <?php endforeach; ?>
                                     </tbody>
@@ -91,7 +91,11 @@ $this->headScript()
                             <div class="tab-pane " id="tab_1_2">
 
                                 <!-- BEGIN unresolved table -->
-                                <?php if (count($this->csvUnresolvedAnomalies) > 0): ?>
+                                <?php
+                                $someAnomalyFound = false;
+                                if (count($this->csvUnresolvedAnomalies) > 0):
+                                    $someAnomalyFound = true;
+                                ?>
                                 <h3>Anomalie non risolte</h3>
                                 <table id="unresolved-table" class="table table-striped table-bordered table-hover sng-margin-top">
                                     <thead>
@@ -130,7 +134,10 @@ $this->headScript()
                                 <!-- END unresolved table -->
 
                                 <!-- BEGIN resolved table -->
-                                <?php if (count($this->csvResolvedAnomalies) > 0): ?>
+                                <?php
+                                if (count($this->csvResolvedAnomalies) > 0):
+                                    $someAnomalyFound = true;
+                                ?>
                                 <h3>Anomalie risolte</h3>
                                 <table id="resolved-table" class="table table-striped table-bordered table-hover sng-margin-top">
                                     <thead>
@@ -167,6 +174,10 @@ $this->headScript()
                                 </table>
                                 <?php endif; ?>
                                 <!-- END resolved table -->
+
+                                <?php if (!$someAnomalyFound): ?>
+                                <h4>Nessun anomalia trovata nei file analizzati.</h4>
+                                <?php endif; ?>
 
                             </div>
                             <!-- END anomalies tab -->
