@@ -28,13 +28,13 @@ class PaymentsCsvController extends AbstractActionController
 
     public function csvAction()
     {
-        $newFileNames = $this->csvService->searchForNewFiles();
+        $newFiles = $this->csvService->searchForNewFiles();
         $csvFiles = $this->csvService->getAllFiles();
         $csvResolvedAnomalies = $this->csvService->getAllResolvedAnomalies();
         $csvUnresolvedAnomalies = $this->csvService->getAllUnresolvedAnomalies();
 
         return new ViewModel([
-            'newFileNames' => $newFileNames,
+            'newFiles' => $newFiles,
             'csvFiles' => $csvFiles,
             'csvResolvedAnomalies' => $csvResolvedAnomalies,
             'csvUnresolvedAnomalies' => $csvUnresolvedAnomalies
