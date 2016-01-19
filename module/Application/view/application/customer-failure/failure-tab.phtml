@@ -42,7 +42,11 @@
                                             }
                                         ?>
                                     </td>
-                                    <td><?= count($tripPayment->getTripPaymentTries()); ?></td>
+                                    <td>
+                                        <?php foreach ($tripPayment->getTripPaymentTries() as $tripPaymentTry): ?>
+                                        <p><?= $tripPaymentTry->getTs()->format('d-m-Y H:i:s'); ?> </p>
+                                        <?php endforeach; ?>
+                                    </td>
                                 </tr>
                                 <?php endforeach; ?>
                             </tbody>
