@@ -52,7 +52,7 @@ $.oe.fn.getCharts = function(){
     $.oe.fn.deactivePageInteraction();
 
     // Get the data records
-    d3.csv("reports/api/get-all-trips")
+    d3.csv("/reports/api/get-all-trips")
         .header("Content-Type", "application/x-www-form-urlencoded")
         .post("end_date=" + $.oe.todayFormatted, function (error, trips_record)
         {

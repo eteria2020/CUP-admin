@@ -605,7 +605,7 @@ $.oe.fn.loadTracks = function()
 
     $.ajax({
         method: 'POST',
-        url: 'reports/api/get-trips',
+        url: '/reports/api/get-trips',
         dataType: "json",
         data: {
             end_date: $.oe.urlDate,
