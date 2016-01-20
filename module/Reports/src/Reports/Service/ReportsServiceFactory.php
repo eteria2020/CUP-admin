@@ -17,7 +17,7 @@ class ReportsServiceFactory implements FactoryInterface
     {
         $database = $serviceLocator->get('doctrine.connection.orm_default');
 
-        $mongodb = new MongoDB\Driver\Manager('mongodb://core.sharengo.it:27017');
+        $mongodb = new MongoDB\Driver\Manager('mongodb://'.$serviceLocator->get('Configuration')['mongo']['server'].':'.$serviceLocator->get('Configuration')['mongo']['port']);
 
         return new ReportsService($database, $mongodb);
     }

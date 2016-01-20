@@ -183,7 +183,7 @@ $.oe.fn.getCharts = function(){
                 .dimension(gender)
                 .group(genders)
                 .label(function (d) {
-                    var lbl = d.key === "male" ? "Uomini " : "Donne ",
+                    var lbl = d.key == "male" ? "Uomini " : "Donne ",
                         percent = 0;
 
                     if ($.oe.charts.gender.hasFilter() && !$.oe.charts.gender.hasFilter(d.key)){
@@ -207,7 +207,7 @@ $.oe.fn.getCharts = function(){
                 .group(citys)
                 .label(function (d) {
                     var lbl = $.grep($.oe.city, function(e){
-                            return e.fleet_id === d.key;
+                            return e.fleet_id == d.key;
                         })[0].fleet_name,
                         percent = 0;
 

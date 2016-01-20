@@ -66,8 +66,11 @@ class ApiController extends AbstractActionController
 
             // Get the trips, in CSV string format
             $output = $this->reportsCsvService->getAllTripsCsv($startDate, $endDate);
+        } catch (CsvParsingException $e) {
+            $this->flashMessenger()->addErrorMessage('Si è verificato un errore applicativo nel parsing dei dati CSV.');
+
+            return false;
         } catch (Exception $e) {
-            error_log('Errore: '.$e->getMessage());
             $this->flashMessenger()->addErrorMessage('Si è verificato un errore applicativo.');
 
             return false;
@@ -98,6 +101,18 @@ class ApiController extends AbstractActionController
 
             // Get the trips, in CSV string format
             $output = $this->reportsCsvService->getCityTripsCsv($startDate, $endDate, $city);
+        } catch (MissingParameter $e) { 
+            $this->flashMessenger()->addErrorMessage('Si è verificato un errore applicativo causato dalla mancanza di uno o pi&ugrave; parametri.');
+
+            return false;
+        } catch (InvalidParameter $e) { 
+            $this->flashMessenger()->addErrorMessage('Si è verificato un errore applicativo causato dall\'invalidit&agrave; di uno o pi&ugrave; parametri.');
+
+            return false;
+        } catch (CsvParsingException $e) {
+            $this->flashMessenger()->addErrorMessage('Si è verificato un errore applicativo nel parsing dei dati CSV.');
+
+            return false;
         } catch (Exception $e) {
             //error_log('Errore: '.$e->getMessage());
             $this->flashMessenger()->addErrorMessage('Si è verificato un errore applicativo.');
@@ -239,6 +254,14 @@ class ApiController extends AbstractActionController
 
             // So, we don't need to use a JsonModel,but simply use an Http Response
             $this->getResponse()->setContent($tripsdata);
+        } catch (MissingParameter $e) { 
+            $this->flashMessenger()->addErrorMessage('Si è verificato un errore applicativo causato dalla mancanza di uno o pi&ugrave; parametri.');
+
+            return false;
+        } catch (InvalidParameter $e) { 
+            $this->flashMessenger()->addErrorMessage('Si è verificato un errore applicativo causato dall\'invalidit&agrave; di uno o pi&ugrave; parametri.');
+
+            return false;
         } catch (Exception $e) {
             //error_log('Errore: '.$e->getMessage());
             $this->flashMessenger()->addErrorMessage('Si è verificato un errore applicativo.');
@@ -272,6 +295,14 @@ class ApiController extends AbstractActionController
 
             // So, we don't need to use a JsonModel,but simply use an Http Response
             $this->getResponse()->setContent($tripsdata);
+        } catch (MissingParameter $e) { 
+            $this->flashMessenger()->addErrorMessage('Si è verificato un errore applicativo causato dalla mancanza di uno o pi&ugrave; parametri.');
+
+            return false;
+        } catch (InvalidParameter $e) { 
+            $this->flashMessenger()->addErrorMessage('Si è verificato un errore applicativo causato dall\'invalidit&agrave; di uno o pi&ugrave; parametri.');
+
+            return false;
         } catch (Exception $e) {
             $this->flashMessenger()->addErrorMessage('Si è verificato un errore applicativo.');
 
@@ -300,6 +331,14 @@ class ApiController extends AbstractActionController
 
             // Get the trips data, in GPX format
             $tripsdata = $this->reportsService->getTripPointsFromLogs($getTripsId);
+        } catch (MissingParameter $e) { 
+            $this->flashMessenger()->addErrorMessage('Si è verificato un errore applicativo causato dalla mancanza di uno o pi&ugrave; parametri.');
+
+            return false;
+        } catch (InvalidParameter $e) { 
+            $this->flashMessenger()->addErrorMessage('Si è verificato un errore applicativo causato dall\'invalidit&agrave; di uno o pi&ugrave; parametri.');
+
+            return false;
         } catch (Exception $e) {
             //error_log('errore: '.$e, 0);
             $this->flashMessenger()->addErrorMessage('Si è verificato un errore applicativo.');
