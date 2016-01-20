@@ -7,6 +7,8 @@ use Reports\Service\ReportsService;
 use Reports\Service\ReportsCsvService;
 use Reports\Exception\InvalidParameter;
 use Reports\Exception\MissingParameter;
+use Reports\Exception\CsvParsingException;
+
 // External Modules
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\JsonModel;
@@ -101,11 +103,11 @@ class ApiController extends AbstractActionController
 
             // Get the trips, in CSV string format
             $output = $this->reportsCsvService->getCityTripsCsv($startDate, $endDate, $city);
-        } catch (MissingParameter $e) { 
+        } catch (MissingParameter $e) {
             $this->flashMessenger()->addErrorMessage('Si è verificato un errore applicativo causato dalla mancanza di uno o pi&ugrave; parametri.');
 
             return false;
-        } catch (InvalidParameter $e) { 
+        } catch (InvalidParameter $e) {
             $this->flashMessenger()->addErrorMessage('Si è verificato un errore applicativo causato dall\'invalidit&agrave; di uno o pi&ugrave; parametri.');
 
             return false;
@@ -254,11 +256,11 @@ class ApiController extends AbstractActionController
 
             // So, we don't need to use a JsonModel,but simply use an Http Response
             $this->getResponse()->setContent($tripsdata);
-        } catch (MissingParameter $e) { 
+        } catch (MissingParameter $e) {
             $this->flashMessenger()->addErrorMessage('Si è verificato un errore applicativo causato dalla mancanza di uno o pi&ugrave; parametri.');
 
             return false;
-        } catch (InvalidParameter $e) { 
+        } catch (InvalidParameter $e) {
             $this->flashMessenger()->addErrorMessage('Si è verificato un errore applicativo causato dall\'invalidit&agrave; di uno o pi&ugrave; parametri.');
 
             return false;
@@ -295,11 +297,11 @@ class ApiController extends AbstractActionController
 
             // So, we don't need to use a JsonModel,but simply use an Http Response
             $this->getResponse()->setContent($tripsdata);
-        } catch (MissingParameter $e) { 
+        } catch (MissingParameter $e) {
             $this->flashMessenger()->addErrorMessage('Si è verificato un errore applicativo causato dalla mancanza di uno o pi&ugrave; parametri.');
 
             return false;
-        } catch (InvalidParameter $e) { 
+        } catch (InvalidParameter $e) {
             $this->flashMessenger()->addErrorMessage('Si è verificato un errore applicativo causato dall\'invalidit&agrave; di uno o pi&ugrave; parametri.');
 
             return false;
@@ -331,11 +333,11 @@ class ApiController extends AbstractActionController
 
             // Get the trips data, in GPX format
             $tripsdata = $this->reportsService->getTripPointsFromLogs($getTripsId);
-        } catch (MissingParameter $e) { 
+        } catch (MissingParameter $e) {
             $this->flashMessenger()->addErrorMessage('Si è verificato un errore applicativo causato dalla mancanza di uno o pi&ugrave; parametri.');
 
             return false;
-        } catch (InvalidParameter $e) { 
+        } catch (InvalidParameter $e) {
             $this->flashMessenger()->addErrorMessage('Si è verificato un errore applicativo causato dall\'invalidit&agrave; di uno o pi&ugrave; parametri.');
 
             return false;
