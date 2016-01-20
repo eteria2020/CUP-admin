@@ -5,6 +5,8 @@ namespace Reports\Controller;
 // Internal Modules
 use Reports\Service\ReportsService;
 use Reports\Service\ReportsCsvService;
+use Reports\Exception\InvalidParameter;
+use Reports\Exception\MissingParameter;
 // External Modules
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\JsonModel;
@@ -41,6 +43,7 @@ class ApiController extends AbstractActionController
 
         // So, we don't need to use a JsonModel,but simply use an Http Response
         $this->getResponse()->setContent($cities);
+
         return $this->getResponse();
     }
 
@@ -51,6 +54,7 @@ class ApiController extends AbstractActionController
     {
         if (!$this->getRequest()->isPost()) {
             $this->getResponse()->setStatusCode(Response::STATUS_CODE_404);
+
             return false;
         }
 
@@ -62,8 +66,10 @@ class ApiController extends AbstractActionController
 
             // Get the trips, in CSV string format
             $output = $this->reportsCsvService->getAllTripsCsv($startDate, $endDate);
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
+            error_log('Errore: '.$e->getMessage());
             $this->flashMessenger()->addErrorMessage('Si è verificato un errore applicativo.');
+
             return false;
         }
 
@@ -77,6 +83,7 @@ class ApiController extends AbstractActionController
     {
         if (!$this->getRequest()->isPost()) {
             $this->getResponse()->setStatusCode(Response::STATUS_CODE_404);
+
             return false;
         }
 
@@ -94,8 +101,10 @@ class ApiController extends AbstractActionController
         } catch (Exception $e) {
             //error_log('Errore: '.$e->getMessage());
             $this->flashMessenger()->addErrorMessage('Si è verificato un errore applicativo.');
+
             return false;
         }
+
         return $this->tripsCsvResponse($output);
     }
 
@@ -108,6 +117,7 @@ class ApiController extends AbstractActionController
 
         if (!isset($city)) {
             $this->getResponse()->setStatusCode(Response::STATUS_CODE_404);
+
             return false;
         }
 
@@ -116,6 +126,7 @@ class ApiController extends AbstractActionController
 
         // So, we don't need to use a JsonModel,but simply use an Http Response
         $this->getResponse()->setContent($urbanareas);
+
         return $this->getResponse();
     }
 
@@ -126,6 +137,7 @@ class ApiController extends AbstractActionController
     {
         if (!$this->getRequest()->isPost()) {
             $this->getResponse()->setStatusCode(Response::STATUS_CODE_404);
+
             return false;
         }
 
@@ -143,11 +155,13 @@ class ApiController extends AbstractActionController
 
             // So, we don't need to use a JsonModel,but simply use an Http Response
             $this->getResponse()->setContent($tripsgeodata);
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             //error_log('Errore: '.$e->getMessage());
             $this->flashMessenger()->addErrorMessage('Si è verificato un errore applicativo.');
+
             return false;
         }
+
         return $this->getResponse();
     }
 
@@ -162,11 +176,13 @@ class ApiController extends AbstractActionController
 
             // So, we don't need to use a JsonModel,but simply use an Http Response
             $this->getResponse()->setContent($carsgeodata);
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             //error_log('Errore: '.$e->getMessage());
             $this->flashMessenger()->addErrorMessage('Si è verificato un errore applicativo.');
+
             return false;
         }
+
         return $this->getResponse();
     }
 
@@ -179,6 +195,7 @@ class ApiController extends AbstractActionController
 
         if (!isset($tripId)) {
             $this->getResponse()->setStatusCode(Response::STATUS_CODE_404);
+
             return false;
         }
 
@@ -188,11 +205,13 @@ class ApiController extends AbstractActionController
 
             // So, we don't need to use a JsonModel,but simply use an Http Response
             $this->getResponse()->setContent($tripdata);
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             //error_log('Errore: '.$e->getMessage());
             $this->flashMessenger()->addErrorMessage('Si è verificato un errore applicativo.');
+
             return false;
         }
+
         return $this->getResponse();
     }
 
@@ -203,6 +222,7 @@ class ApiController extends AbstractActionController
     {
         if (!$this->getRequest()->isPost()) {
             $this->getResponse()->setStatusCode(Response::STATUS_CODE_404);
+
             return false;
         }
 
@@ -219,11 +239,13 @@ class ApiController extends AbstractActionController
 
             // So, we don't need to use a JsonModel,but simply use an Http Response
             $this->getResponse()->setContent($tripsdata);
-        } catch (\Exception $e) {
-            error_log('Errore: '.$e->getMessage());
+        } catch (Exception $e) {
+            //error_log('Errore: '.$e->getMessage());
             $this->flashMessenger()->addErrorMessage('Si è verificato un errore applicativo.');
+
             return false;
         }
+
         return $this->getResponse();
     }
 
@@ -234,6 +256,7 @@ class ApiController extends AbstractActionController
     {
         if (!$this->getRequest()->isPost()) {
             $this->getResponse()->setStatusCode(Response::STATUS_CODE_404);
+
             return false;
         }
 
@@ -249,10 +272,12 @@ class ApiController extends AbstractActionController
 
             // So, we don't need to use a JsonModel,but simply use an Http Response
             $this->getResponse()->setContent($tripsdata);
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             $this->flashMessenger()->addErrorMessage('Si è verificato un errore applicativo.');
+
             return false;
         }
+
         return $this->getResponse();
     }
 
@@ -263,6 +288,7 @@ class ApiController extends AbstractActionController
     {
         if (!$this->getRequest()->isPost()) {
             $this->getResponse()->setStatusCode(Response::STATUS_CODE_404);
+
             return false;
         }
 
@@ -274,11 +300,13 @@ class ApiController extends AbstractActionController
 
             // Get the trips data, in GPX format
             $tripsdata = $this->reportsService->getTripPointsFromLogs($getTripsId);
-        } catch (\Exception $e) {
-            error_log("errore: ".$e,0);
+        } catch (Exception $e) {
+            //error_log('errore: '.$e, 0);
             $this->flashMessenger()->addErrorMessage('Si è verificato un errore applicativo.');
+
             return false;
         }
+
         return $this->tripsGpxResponse($tripsdata);
     }
 
@@ -296,10 +324,6 @@ class ApiController extends AbstractActionController
      */
     private function getDateInterval($postData, DateInterval $dateInterval)
     {
-        if (!isset($postData['end_date'])) {
-            throw new Exception('Missing end_date parameter.', 0);
-        }
-
         $endDate = new DateTime($postData['end_date']);
         $endDate = $endDate->format('H:i:s') == '00:00:00' ? $endDate->setTime(23, 59, 59) : $endDate;
 
@@ -310,8 +334,8 @@ class ApiController extends AbstractActionController
         } else {
             $startDate = new DateTime($postData['start_date']);
         }
+        //error_log('start: '.$startDate->format('Y-m-d H:i:s').'  ---  end: '.$endDate->format('Y-m-d H:i:s'), 0);
 
-        error_log('start: '.$startDate->format('Y-m-d H:i:s').'  ---  end: '.$endDate->format('Y-m-d H:i:s'),0);
         return [$startDate, $endDate];
     }
 
@@ -322,14 +346,17 @@ class ApiController extends AbstractActionController
      * @param array<string,mixed> $postData Post data array.
      *
      * @return int
+     *
+     * @throws Exception\MissingParameter if $postData['city'] is not set
+     * @throws Exception\InvalidParameter if $postData['city'] is not int
      */
     private function getCity($postData)
     {
         if (!isset($postData['city'])) {
-            throw new Exception('Missing city parameter.');
+            throw new MissingParameter('Missing city parameter.');
         }
         if (!is_int((int) $postData['city'])) {
-            throw new Exception('The parameter city is not valid.');
+            throw new InvalidParameter('The parameter city is not valid.');
         }
 
         return (int) $postData['city'];
@@ -342,14 +369,17 @@ class ApiController extends AbstractActionController
      * @param array<string,mixed> $postData Post data array.
      *
      * @return int
+     *
+     * @throws Exception\MissingParameter if $postData['trips_number'] is not set
+     * @throws Exception\InvalidParameter if $postData['trips_number'] is not int
      */
     private function getTripsNumber($postData)
     {
         if (!isset($postData['trips_number'])) {
-            throw new Exception('Missing trips_id parameter.');
+            throw new MissingParameter('Missing trips_id parameter.');
         }
         if (!is_int((int) $postData['trips_number'])) {
-            throw new Exception('The parameter trips_number is not valid.');
+            throw new InvalidParameter('The parameter trips_number is not valid.');
         }
 
         return (int) $postData['trips_number'];
@@ -362,14 +392,17 @@ class ApiController extends AbstractActionController
      * @param array<string,mixed> $postData Post data array.
      *
      * @return int
+     *
+     * @throws Exception\MissingParameter if $postData['id'] is not set
+     * @throws Exception\InvalidParameter if $postData['id'] is not int
      */
     private function getTripId($postData)
     {
         if (!isset($postData['id'])) {
-            throw new Exception('Missing trips_id parameter.');
+            throw new MissingParameter('Missing trips_id parameter.');
         }
         if (!is_int((int) $postData['id'])) {
-            throw new Exception('The parameter trips_number is not valid.');
+            throw new InvalidParameter('The parameter trips_number is not valid.');
         }
 
         return (int) $postData['id'];
@@ -382,14 +415,17 @@ class ApiController extends AbstractActionController
      * @param array<string,mixed> $postData Post data array.
      *
      * @return array<string,mixed>
+     *
+     * @throws Exception\MissingParameter if $postData['trips_id'] is not set
+     * @throws Exception\InvalidParameter if $postData['trips_id'] is not an Array
      */
     private function getTripsId($postData)
     {
         if (!isset($postData['trips_id'])) {
-            throw new Exception('Missing trips_id parameter.');
+            throw new MissingParameter('Missing trips_id parameter.');
         }
         if (!is_array($postData['trips_id'])) {
-            throw new Exception('The parameter trips_id is not valid.');
+            throw new InvalidParameter('The parameter trips_id is not valid.');
         }
 
         return $postData['trips_id'];
@@ -402,17 +438,21 @@ class ApiController extends AbstractActionController
      * @param array<string,mixed> $postData Post data array.
      *
      * @return true|false
+     *
+     * @throws Exception\MissingParameter if $postData['maintainer'] is not set
+     * @throws Exception\InvalidParameter if $postData['maintainer'] is not Boolean, Int( 0 || 1 ) or Char( 't' || 'f' )
      */
     private function getMaintainer($postData)
     {
         if (!isset($postData['maintainer'])) {
-            throw new Exception('Missing trips_id parameter.');
+            throw new MissingParameter('Missing trips_id parameter.');
         }
         if (preg_match('/^(1|t)/i', $postData['maintainer'])) {
             return true;
         } elseif (!preg_match('/^(0|f)/i', $postData['maintainer'])) {
-            throw new Exception('The parameter maintainer is not valid.');
+            throw new InvalidParameter('The parameter maintainer is not valid.');
         }
+
         return false;
     }
 
@@ -423,11 +463,15 @@ class ApiController extends AbstractActionController
      * @param array<string,mixed> $postData Post data array.
      *
      * @return int
+     *
+     * @throws Exception\MissingParameter if $postData['begend'] is not set
+     * @throws Exception\InvalidParameter if $postData['begend'] is not Boolean, Int( 0 || 1 )
+     *                                    or Char( 'b' || 'e' ) or String starting with 'b' || 'e'
      */
     private function getBegEnd($postData)
     {
         if (!isset($postData['begend'])) {
-            throw new Exception('Missing begend parameter.');
+            throw new MissingParameter('Missing begend parameter.');
         }
 
         if (preg_match('/^(0|b+e+g)/i', $postData['begend'])) {
@@ -438,7 +482,7 @@ class ApiController extends AbstractActionController
             return 1;
         }
 
-        throw new Exception('The parameter begend is not valid.');
+        throw new InvalidParameter('The parameter begend is not valid.');
     }
 
     /**
@@ -459,6 +503,7 @@ class ApiController extends AbstractActionController
             ->addHeaderLine('Content-Length', strlen($csvData));
 
         $response->setContent($csvData);
+
         return $response;
     }
 
@@ -481,6 +526,7 @@ class ApiController extends AbstractActionController
             ->addHeaderLine('Content-Transfer-Encoding', 'binary');
 
         $response->setContent($gpxData);
+
         return $response;
     }
 }

@@ -2,6 +2,11 @@
 
 namespace Reports\Service;
 
+// Internal Modules
+use Reports\Exception\CsvParsingException;
+// External Modules
+use Exception;
+
 class ReportsCsvService
 {
     /** @var ReportsService */
@@ -42,8 +47,8 @@ class ReportsCsvService
             rewind($file);
             $output = stream_get_contents($file);
             fclose($file);
-        } catch (\Exception $e) {
-            throw new \Exception('Error trying to parse CSV data.');
+        } catch (Exception $e) {
+            throw new CsvParsingException();
         }
 
         return $output;
@@ -80,8 +85,8 @@ class ReportsCsvService
             rewind($file);
             $output = stream_get_contents($file);
             fclose($file);
-        } catch (\Exception $e) {
-            throw new \Exception('Error trying to parse CSV data.');
+        } catch (Exception $e) {
+            throw new CsvParsingException();
         }
 
         return $output;

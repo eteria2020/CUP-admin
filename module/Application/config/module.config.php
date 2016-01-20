@@ -1262,7 +1262,7 @@ return [
                 'icon'            => 'fa fa-line-chart',
                 'resource'        => 'superadmin',
                 'openOnNewWindow' => true,
-                'uri'             => 'http://core.sharengo.it/ui/reports/trips.php',
+                'uri'             => 'reports',
             ],
             [
                 'label'           => 'Call center',

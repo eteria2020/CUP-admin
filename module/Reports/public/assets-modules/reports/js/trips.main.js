@@ -44,10 +44,9 @@ $(window).resize(function() {
     $.oe.timeout = setTimeout($.oe.fn.resizeCharts, 500);
 });
 
-
-
-
 $.oe.fn.getCharts = function(){
+    $.oe.fn.deactivePageInteraction();
+
     // Get the data records
     d3.csv("api/get-all-trips")
         .header("Content-Type", "application/x-www-form-urlencoded")
@@ -281,6 +280,9 @@ $.oe.fn.getCharts = function(){
             // Graphics are loaded, so I resize the graphs
             $.oe.fn.resizeCharts();
 
+            // Reactivate Page Intercations
+            $.oe.fn.activePageInteraction();
+
             // Recompose the chart structure (to adapt for Bootstrap)
             //$("div.panel-body > div:not(.chart-label) >span, div.panel-body > div:not(.chart-label) > a").appendTo("div.panel-heading");
             //$("div.panel-body > div:not(.chart-label) >span, div.panel-body > div:not(.chart-label) > a").clone().appendTo("div.panel-heading");
@@ -302,6 +304,14 @@ $.oe.fn.getCharts = function(){
             //dc.renderAll();
         }
     );
+};
+
+$.oe.fn.activePageInteraction = function(){
+    $('div#over').remove();
+};
+
+$.oe.fn.deactivePageInteraction = function(){
+    $('div.container > div.row').append('<div id="over"><span class="glyphicon glyphicon-refresh glyphicon-refresh-animate" aria-hidden="true"></span></div>');
 };
 
 

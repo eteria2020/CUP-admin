@@ -8,6 +8,16 @@ if (typeof $.oe === 'undefined') {
     });
 }
 
+$.ajaxSetup({
+    async: true,
+    cache : false,
+    timeout: 180000,        // set to 2minutes
+    queue: false/*,
+    error: function (msg) {
+        alert('error : ' + msg.d);
+    }*/
+});
+
 ///////////// $.oe Vars Definition /////////////
 $.oe.today = new Date();
 $.oe.aMonthAgo = new Date(); $.oe.aMonthAgo.setMonth($.oe.today.getMonth() - 1);
@@ -94,7 +104,10 @@ $.oe.vectorSource = new ol.source.Vector({
                     end_date: $.oe.params.dateTo,
                     begend: $.oe.params.begend
                 },
-                dataType: "json"
+                dataType: "json",
+                beforeSend: function() {
+                    $.oe.fn.deactiveMapInteraction();
+                }
             })
             .success(function(response) {
                 var format = new ol.format.GeoJSON();
@@ -108,6 +121,9 @@ $.oe.vectorSource = new ol.source.Vector({
 
                 // Determino il numero di elementi caricati
                 $("#element-counter input").val($.oe.features.length);
+            })
+            .complete(function() {
+                $.oe.fn.activeMapInteraction();
             });
         },
     format: new ol.format.GeoJSON()
@@ -223,6 +239,13 @@ $.oe.fn.createDataPicker = function(){
         });
 };
 
+$.oe.fn.activeMapInteraction = function(){
+    $('div#over').remove();
+};
+
+$.oe.fn.deactiveMapInteraction = function(){
+    $('.map').after('<div id="over"><span class="glyphicon glyphicon-refresh glyphicon-refresh-animate" aria-hidden="true"></span></div>');
+};
 
 // Window Resize Action Bind
 var id;
