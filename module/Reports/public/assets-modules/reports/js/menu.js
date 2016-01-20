@@ -1,3 +1,5 @@
+/* global $ */
+
 if (typeof $.oe === 'undefined') {
     $.extend({
         oe: {
@@ -5,7 +7,7 @@ if (typeof $.oe === 'undefined') {
             fn: {}
         }
     });
-}else{
+} else {
     $.oe.city = {};
 }
 
@@ -17,7 +19,7 @@ if (typeof $.oe === 'undefined') {
  *    It also makes the Submenu and populate it.
  *
  */
-$.oe.fn.getCityData = function(callback){
+$.oe.fn.getCityData = function(callback) {
     $.ajax({
         method: "GET",
         dataType: "json",
@@ -34,8 +36,10 @@ $.oe.fn.getCityData = function(callback){
                 });
             },
         complete:
-            function(){
-                typeof callback === 'function' && callback();
+            function() {
+                if (typeof callback === 'function') {
+                    callback();
+                }
             }
     });
 };
@@ -47,8 +51,14 @@ $.oe.fn.getCityData = function(callback){
  *  @case   DEBUG
  */
 $.oe.fn.printFilter = function(filter){
-    var f=eval(filter);
-    if (typeof(f.top) != "undefined") {f=f.top(Infinity);}
-    if (typeof(f.dimension) != "undefined") {f=f.dimension(function() { return "";}).top(Infinity);}
+    var f = eval(filter);
+    if (typeof f.top !== "undefined") {
+        f = f.top(Infinity);
+    }
+    if (typeof f.dimension !== "undefined") {
+        f = f.dimension(function() {
+            return "";
+        }).top(Infinity);
+    }
     //console.log(filter+"("+f.length+") = "+JSON.stringify(f).replace("[","[\n\t").replace(/}\,/g,"},\n\t").replace("]","\n]"));
 };

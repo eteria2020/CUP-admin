@@ -1,5 +1,5 @@
 // Define Glbal vars
-/* global thiscity:true, d3:true, dc:true, crossfilter:true, ol:true */
+/* global thiscity:true, d3:true, dc:true, crossfilter:true, ol:true $ document window clearTimeoute setTimeout */
 
 // Check if var $.oe has been declared
 if (typeof $.oe === 'undefined') {
@@ -10,7 +10,7 @@ if (typeof $.oe === 'undefined') {
 
 $.ajaxSetup({
     async: true,
-    cache : false,
+    cache: false,
     timeout: 180000,        // set to 2minutes
     queue: false/*,
     error: function (msg) {
@@ -22,15 +22,19 @@ $.ajaxSetup({
 $.oe.today = new Date();
 $.oe.aMonthAgo = new Date(); $.oe.aMonthAgo.setMonth($.oe.today.getMonth() - 1);
 
-$.oe.todayFormatted = $.oe.today.getFullYear() + '-' + ("0" + ($.oe.today.getMonth()+1)).slice(-2) + '-' + ("0" + $.oe.today.getDate()).slice(-2);
-$.oe.aMonthAgoFormatted = $.oe.aMonthAgo.getFullYear() + '-' + ("0" + ($.oe.aMonthAgo.getMonth()+1)).slice(-2) + '-' + ("0" + $.oe.aMonthAgo.getDate()).slice(-2);
+$.oe.todayFormatted = $.oe.today.getFullYear() + '-' +
+    ("0" + ($.oe.today.getMonth() + 1)).slice(-2) + '-' +
+    ("0" + $.oe.today.getDate()).slice(-2);
+$.oe.aMonthAgoFormatted = $.oe.aMonthAgo.getFullYear() + '-' +
+    ("0" + ($.oe.aMonthAgo.getMonth() + 1)).slice(-2) + '-' +
+    ("0" + $.oe.aMonthAgo.getDate()).slice(-2);
 
 $.oe.params = {
-    dateFrom : $.oe.aMonthAgoFormatted,
-    dateTo : $.oe.todayFormatted,
-    begend : 0,     // 0 ==> Beginning Hour ||  1 ==> Ending Hour
-    weight : 0.192,
-    base_weight : 0.4
+    dateFrom: $.oe.aMonthAgoFormatted,
+    dateTo: $.oe.todayFormatted,
+    begend: 0,     // 0 ==> Beginning Hour ||  1 ==> Ending Hour
+    weight: 0.192,
+    baseWeight: 0.4
 };
 
 // Set the timeout needed for the page resize bind function
@@ -41,9 +45,6 @@ $.oe.vectorSource = {};
 
 // Set the features collection
 $.oe.features = {};
-
-// Flag var containing the last zoom value
-$.oe.lastZoom;
 
 // The base map layer
 $.oe.osmLayer = {};
@@ -68,17 +69,23 @@ $(window).load(function() {
 
 
 $.oe.fn.createButtons = function(){
-    $.each($.oe.city,function(key,val){
+    $.each($.oe.city, function(key, val){
         // Create and populate the city prop
         val.ol = {};
-        val.ol.coordinate = ol.proj.fromLonLat([val.params.center.longitude,val.params.center.latitude]);
+        val.ol.coordinate = ol.proj.fromLonLat([val.params.center.longitude, val.params.center.latitude]);
 
         // Create a button for every city
-        $('#header-buttons').prepend('<button type="button" class="btn btn-default" id="pan-to-'+ val.fleet_code +'">Pan to '+ val.fleet_name +'</button>');
+        $('#header-buttons').prepend(
+            '<button type="button" class="btn btn-default" id="pan-to-' +
+            val.fleet_code +
+            '">Pan to ' +
+            val.fleet_name +
+            '</button>'
+        );
 
 
         // Handle the click action for every city button
-        $("#pan-to-"+ val.fleet_code).click(function()
+        $("#pan-to-" + val.fleet_code).click(function()
         {
             var pan = ol.animation.pan({
                 duration: 2000,
@@ -153,7 +160,7 @@ $.oe.layerHeatmap = new ol.layer.Heatmap({
     blur: 14,
     weight:
         function() {
-            return  $.oe.params.base_weight + $.oe.params.weight;
+            return $.oe.params.baseWeight + $.oe.params.weight;
         }
 });
 
@@ -174,7 +181,7 @@ $.oe.osmLayer = new ol.layer.Tile({
 });
 
 $.oe.map = new ol.Map({
-    layers:[$.oe.osmLayer, $.oe.layerHeatmap],
+    layers: [$.oe.osmLayer, $.oe.layerHeatmap],
     target: 'map',
     view: $.oe.view,
     eventListeners: {"zoomend": $.oe.fn.zoomChanged}
@@ -183,28 +190,30 @@ $.oe.map = new ol.Map({
 $.oe.fn.zoomChanged = function(){
     var zoom = $.oe.map.getView().getZoom();
 
-    if ($.oe.lastZoom!=zoom)    {
-        $.oe.layerHeatmap.setRadius(zoom*1.0);
-        $.oe.params.weight =  (0.4*zoom/25);
+    if ($.oe.lastZoom !== zoom) {
+        $.oe.layerHeatmap.setRadius(zoom * 1.0);
+        $.oe.params.weight = (0.4 * zoom / 25);
         $.oe.lastZoom = zoom;
     }
 };
 
 var cnt = 0;
-$.oe.fn.animate = function(){
-    $.oe.params.weight = 0.1*cnt;
+$.oe.fn.animate = function() {
+    $.oe.params.weight = 0.1 * cnt;
     $.oe.layerHeatmap.getSource().changed();
     //map.renderSync();
     cnt++;
-    if (cnt>10) cnt=0;
+    if (cnt > 10) {
+        cnt = 0;
+    }
 };
 
 
 $('#weight').slider({
     formatter: function(value) {
-        $.oe.params.base_weight = value/10;
+        $.oe.params.baseWeight = value / 10;
         $.oe.layerHeatmap.getSource().changed();
-        return '' + value/10;
+        return '' + value / 10;
     }
 });
 
@@ -213,7 +222,7 @@ $("#change-begend").click(function(){
         return text === "Change to Ending Location" ? "Change to Beginning Location" : "Change to Ending Location";
     });
 
-    $.oe.params.begend == 0 ? changeFilterBegEnd(1) : changeFilterBegEnd(0);
+    changeFilterBegEnd($.oe.params.begend === 0 ? 0 : 1);
 });
 
 
@@ -221,7 +230,7 @@ $.oe.fn.createDataPicker = function(){
     $('.input-daterange').datepicker({
         format: "yyyy-mm-dd",
         language: "it",
-        endDate: $.oe.today,
+        end_date: $.oe.today,
         orientation: "bottom auto",
         autoclose: true
     });
@@ -229,7 +238,7 @@ $.oe.fn.createDataPicker = function(){
     $('.input-daterange')
         .datepicker()
         .on("changeDate", function(e) {
-            if (e.target.id == "start"){
+            if (e.target.id === "start"){
                 // id = start
                 changeFilterDateFrom($(e.target).val());
             }else{
@@ -256,8 +265,8 @@ $(window).resize(function() {
 
 
 $.oe.fn.doneResizing = function(){
-    var newHeight             = $(window).height();
-    $(".row.mainrow").css("height", newHeight -280); //-110);
-    $(".map").css("height", newHeight -280);
+    var newHeight = $(window).height();
+    $(".row.mainrow").css("height", newHeight - 280); //-110);
+    $(".map").css("height", newHeight - 280);
     $.oe.map.updateSize();
 };

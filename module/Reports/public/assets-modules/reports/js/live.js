@@ -1,5 +1,5 @@
 // Define Glbal vars
-/* global thiscity:true, d3:true, dc:true, crossfilter:true, ol:true $ document window setInterval clearTimeout setTimeout */
+/* global thiscity:true, d3:true, dc:true, crossfilter:true, ol:true $ document window setInterval clearInterval clearTimeout setTimeout */
 
 // Check if var $.oe has been declared
 if (typeof $.oe === 'undefined') {
@@ -10,7 +10,7 @@ if (typeof $.oe === 'undefined') {
 
 $.ajaxSetup({
     async: true,
-    cache : false,
+    cache: false,
     timeout: 180000,        // set to 2minutes
     queue: false/*,
     error: function (msg) {
@@ -27,15 +27,17 @@ $.extend($.scrollTo.defaults, {
 
 ///////////// $.oe Vars Definition /////////////
 $.oe.today = new Date();
-$.oe.todayFormatted = $.oe.today.getFullYear()     + '-' + ("0" + ($.oe.today.getMonth()+1)).slice(-2) + '-' + ("0" + $.oe.today.getDate()).slice(-2);
+$.oe.todayFormatted = $.oe.today.getFullYear() + '-' +
+    ("0" + ($.oe.today.getMonth() + 1)).slice(-2) + '-' +
+    ("0" + $.oe.today.getDate()).slice(-2);
 
 // Set the vector source; will contain the map data
 $.oe.vectorSource = {};
 
 // Set the elements style
 $.oe.mapStyle = {
-    fill : {},
-    stroke : {},
+    fill: {},
+    stroke: {},
     iconStyle: {}
 };
 
@@ -47,9 +49,6 @@ $.oe.view = {};
 
 // The map element
 $.oe.map = {};
-
-// Flag var containing the last zoom value
-$.oe.lastZoom;
 
 // The base map layer
 $.oe.osmLayer = {};
@@ -195,7 +194,7 @@ $.oe.trailLayer = new ol.layer.Vector({
 });
 
 $.oe.map = new ol.Map({
-    layers: [$.oe.osmLayer, $.oe.trailLayer, $.oe.lineStringTrailLayer,$.oe.carLayer],
+    layers: [$.oe.osmLayer, $.oe.trailLayer, $.oe.lineStringTrailLayer, $.oe.carLayer],
     target: 'map',
     view: $.oe.view,
     eventListeners: {"zoomend": $.oe.fn.zoomChanged}
@@ -295,15 +294,15 @@ $.oe.fn.getCarsGeoData = function(){
                                 ft.setStyle($.oe.mapStyle.stopPointStyle);
                             }
                         }
-                        line.getGeometry().set('standing',standing+1);
+                        line.getGeometry().set('standing', standing + 1);
                     } else {
                         // First time standing
-                        line.getGeometry().set('standing',1);
+                        line.getGeometry().set('standing', 1);
                     }
                 } else {
                     // The car is moving
                     ft.setStyle($.oe.mapStyle.movingPointStyle);
-                    line.getGeometry().set('standing',0);
+                    line.getGeometry().set('standing', 0);
                 }
                 ft.setGeometry(features[i].getGeometry());
             } else {
@@ -317,7 +316,7 @@ $.oe.fn.getCarsGeoData = function(){
 
                 // Remove more than $.oe.pointsToShow points
                 if (line.getGeometry().getCoordinates().length >= $.oe.pointsToShow) {
-                    line.getGeometry().setCoordinates(line.getGeometry().getCoordinates().slice(1,$.oe.pointsToShow));
+                    line.getGeometry().setCoordinates(line.getGeometry().getCoordinates().slice(1, $.oe.pointsToShow));
                 }
             } else {
                 // New Car
@@ -332,10 +331,10 @@ $.oe.fn.getCarsGeoData = function(){
             }
 
             if (lineString) {
-                lineString.setGeometry(new ol.geom.LineString(line.getGeometry().getCoordinates(),'XY'));
+                lineString.setGeometry(new ol.geom.LineString(line.getGeometry().getCoordinates(), 'XY'));
             } else {
-                var multistring =  new ol.Feature({
-                    geometry: new ol.geom.LineString(line.getGeometry().getCoordinates(),'XY'),
+                var multistring = new ol.Feature({
+                    geometry: new ol.geom.LineString(line.getGeometry().getCoordinates(), 'XY'),
                     name: 'Punto Scia'
                 });
 
@@ -377,7 +376,7 @@ $.oe.fn.createButtons = function(){
 };
 
 $.oe.fn.hideStopped = function(){
-    $.each($.oe.lineVectorSource.getFeatures(),function(key, val){
+    $.each($.oe.lineVectorSource.getFeatures(), function(key, val){
         var standing = val.getGeometry().get('standing');
 
         if(typeof standing !== 'undefined'){
@@ -397,7 +396,7 @@ $.oe.fn.hideStopped = function(){
 };
 
 $.oe.fn.showStopped = function(){
-    $.each($.oe.lineVectorSource.getFeatures(),function(key, val){
+    $.each($.oe.lineVectorSource.getFeatures(), function(key, val){
         var standing = val.getGeometry().get('standing');
 
         if(typeof standing !== 'undefined'){
@@ -454,7 +453,7 @@ $.oe.fn.activateDataRefresh = function(){
     $.oe.refreshInterval = setInterval($.oe.fn.getCarsGeoData, 2500);
 
     // Bind its action
-    $("button#dataupdate").one('click','',function(){
+    $("button#dataupdate").one('click', '', function(){
         $.oe.fn.deactivateDataRefresh();
     });
 };
@@ -469,7 +468,7 @@ $.oe.fn.deactivateDataRefresh = function(){
     clearInterval($.oe.refreshInterval);
 
     // Bind its action
-    $("button#dataupdate").one('click','',function(){
+    $("button#dataupdate").one('click', '', function(){
         $.oe.fn.activateDataRefresh();
     });
 };

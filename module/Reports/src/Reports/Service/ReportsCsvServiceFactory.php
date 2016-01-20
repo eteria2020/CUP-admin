@@ -9,7 +9,7 @@ class ReportsCsvServiceFactory implements FactoryInterface
 {
     public function createService(ServiceLocatorInterface $serviceLocator)
     {
-        $reportsService = $serviceLocator->get('\Reports\Service\Reports');
+        $reportsService = $serviceLocator->get('Reports\Service\Reports');
 
         return new ReportsCsvService($reportsService);
     }

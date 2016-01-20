@@ -24,10 +24,6 @@
     },
     "license": "MIT",
     "readmeFilename": "README.md",
-    "scripts": {
-        "build": "gulp dist",
-        "test": "gulp test"
-    },
     "npmName": "sharengo-admin",
     "npmFileMap": []
 }

@@ -19,7 +19,6 @@ class IndexController extends AbstractActionController
         $this->layout('layout/reports');
 
         $viewModel = new ViewModel();
-        $viewModel->setVariables(array());
 
         return $viewModel;
     }
@@ -29,7 +28,6 @@ class IndexController extends AbstractActionController
         $this->layout('layout/reports');
 
         $viewModel = new ViewModel();
-        $viewModel->setVariables(array());
 
         return $viewModel;
     }
@@ -40,8 +38,9 @@ class IndexController extends AbstractActionController
 
         $tripid = $this->params()->fromRoute('tripid', null);
 
-        $viewModel = new ViewModel();
-        $viewModel->setVariables(['tripid' => $tripid]);
+        $viewModel = new ViewModel([
+            'tripid' => $tripid
+        ]);
 
         return $viewModel;
     }
@@ -51,7 +50,6 @@ class IndexController extends AbstractActionController
         $this->layout('layout/reports');
 
         $viewModel = new ViewModel();
-        $viewModel->setVariables(array());
 
         return $viewModel;
     }
@@ -62,8 +60,7 @@ class IndexController extends AbstractActionController
 
         $city = $this->params()->fromRoute('id', 0);
 
-        $viewModel = new ViewModel();
-        $viewModel->setVariables(['city' => $city]);
+        $viewModel = new ViewModel(['city' => $city]);
 
         return $viewModel;
     }

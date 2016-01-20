@@ -1,5 +1,5 @@
 // Define Glbal vars
-/* global thiscity:true, d3:true, dc:true, crossfilter:true */
+/* global thiscity:true, d3:true, dc:true, crossfilter:true $ document window clearTimeout setTimeout */
 
 // Check if var $.oe has been declared
 if (typeof $.oe === 'undefined') {
@@ -16,18 +16,20 @@ $.oe.trips = {};
 $.oe.filters = {};
 
 $.oe.today = new Date();
-$.oe.todayFormatted = $.oe.today.getFullYear()     + '-' + ("0" + ($.oe.today.getMonth()+1)).slice(-2) + '-' + ("0" + $.oe.today.getDate()).slice(-2);
+$.oe.todayFormatted = $.oe.today.getFullYear() + '-' +
+    ("0" + ($.oe.today.getMonth() + 1)).slice(-2) + '-' +
+    ("0" + $.oe.today.getDate()).slice(-2);
 
 // Charts definition
 $.oe.charts = {
-    day                : dc.barChart('#days-chart'),
-    dayOfWeek        : dc.rowChart('#day-of-week-chart'),
-    duration         : dc.barChart('#duration-chart'),
-    beginningHour    : dc.barChart('#beginning-hour-chart'),
-    age                : dc.pieChart('#age-chart'),
-    gender            : dc.pieChart('#gender-chart'),
-    arealist        : dc.rowChart('#area-list-chart'),
-    areamap            : dc.geoChoroplethChart("#area-map-chart")
+    day: dc.barChart('#days-chart'),
+    dayOfWeek: dc.rowChart('#day-of-week-chart'),
+    duration: dc.barChart('#duration-chart'),
+    beginningHour: dc.barChart('#beginning-hour-chart'),
+    age: dc.pieChart('#age-chart'),
+    gender: dc.pieChart('#gender-chart'),
+    arealist: dc.rowChart('#area-list-chart'),
+    areamap: dc.geoChoroplethChart("#area-map-chart")
 };
 
 // Set the timeout needed for the page resize bind function
@@ -58,12 +60,14 @@ $(window).resize(function() {
 $.oe.fn.setCityNameOnPage = function(){
     if(typeof $.oe.thiscity !== 'undefined' && typeof $.oe.city !== 'undefined' ){
 
-        var thisvars = $.grep($.oe.city, function(element){ return element.fleet_id==$.oe.thiscity;})[0];
+        var thisvars = $.grep($.oe.city, function(element){
+            return element.fleet_id === $.oe.thiscity;
+        })[0];
         $.oe.params = thisvars.params;
 
-        $('div.page-header h1').prepend(thisvars.fleet_name+' ');
-        $('div#area-map > div.panel-heading').append(' '+thisvars.fleet_name);
-        $('div#area-list > div.panel-heading').append(' '+thisvars.fleet_name);
+        $('div.page-header h1').prepend(thisvars.fleet_name + ' ');
+        $('div#area-map > div.panel-heading').append(' ' + thisvars.fleet_name);
+        $('div#area-list > div.panel-heading').append(' ' + thisvars.fleet_name);
     }
 };
 
@@ -73,7 +77,7 @@ $.oe.fn.getCharts = function(){
     // Get the data records
     d3.csv('/reports/api/get-city-trips')
         .header("Content-Type", "application/x-www-form-urlencoded")
-        .post("end_date="+$.oe.todayFormatted+"&city="+$.oe.thiscity,function (error,trips_record)
+        .post("end_date=" + $.oe.todayFormatted + "&city=" + $.oe.thiscity, function (error, trips_record)
         {
             // Variables
             var formatDate = d3.time.format('%Y-%m-%d %H:%M:%S'),
@@ -86,59 +90,82 @@ $.oe.fn.getCharts = function(){
             trips_record.forEach(function(d)
             {
                 d.dd = formatDate.parse(d.time_beginning_parsed);
-                if (ddmin==null || d.dd < ddmin) ddmin = d.dd;
-                if (ddmax==null || d.dd > ddmax) ddmax = d.dd;
+                if (ddmin === null || d.dd < ddmin) {
+                    ddmin = d.dd;
+                }
+                if (ddmax === null || d.dd > ddmax) {
+                    ddmax = d.dd;
+                }
             });
 
             // Create the crossfilter for the relevant dimensions and groups.
-            $.oe.trips          = crossfilter(trips_record);
-            $.oe.filters.all    = $.oe.trips.groupAll();
+            $.oe.trips = crossfilter(trips_record);
+            $.oe.filters.all = $.oe.trips.groupAll();
 
             var
                 // dc.barChart('#days-chart')
-                date_beginning  = $.oe.trips.dimension(function(d){return d.dd;}),
-                days            = date_beginning.group(d3.time.day),
+                date_beginning = $.oe.trips.dimension(function(d){
+                    return d.dd;
+                }),
+                days = date_beginning.group(d3.time.day),
 
                 // dc.rowChart('#day-of-week-chart')
-                dayOfWeek       = $.oe.trips.dimension(function(d){
-                    var name    = ['','0.Lun', '1.Mar', '2.Mer', '3.Gio', '4.Ven', '5.Sab', '6.Dom'];
+                dayOfWeek = $.oe.trips.dimension(function(d){
+                    var name = ['', '0.Lun', '1.Mar', '2.Mer', '3.Gio', '4.Ven', '5.Sab', '6.Dom'];
                     return name[d.time_dow];
                 }),
-                dayOfWeeks      = dayOfWeek.group(),
+                dayOfWeeks = dayOfWeek.group(),
 
                 // dc.barChart('#beginning-hour-chart')
-                beginningHour   = $.oe.trips.dimension(function(d){return d.dd.getHours();}),
-                beginningHours  = beginningHour.group(),
+                beginningHour = $.oe.trips.dimension(function(d){
+                    return d.dd.getHours();
+                }),
+                beginningHours = beginningHour.group(),
 
                 // dc.barChart('#duration-chart')
-                duration        = $.oe.trips.dimension(function(d){return Math.min(d.time_total_minute,61);}),
-                durations       = duration.group(),
+                duration = $.oe.trips.dimension(function(d){
+                    return Math.min(d.time_total_minute,61);
+                }),
+                durations = duration.group(),
 
                 // dc.pieChart('#gender-chart')
-                gender          = $.oe.trips.dimension(function(d){return d.customer_gender;}),
-                genders         = gender.group(),
+                gender = $.oe.trips.dimension(function(d){
+                    return d.customer_gender;
+                }),
+                genders = gender.group(),
 
-                real_area       = $.oe.trips.dimension(function(d){return +d.area_id;}),
-                real_areas      = real_area.group().reduceCount(),
+                real_area = $.oe.trips.dimension(function(d){
+                    return +d.area_id;
+                }),
+                real_areas = real_area.group().reduceCount(),
 
                 // dc.rowChart('#area-chart')
-                area            = $.oe.trips.dimension(function(d){return [d.area_id,""+d.area_name];}),
-                areas           = area.group(),
+                area = $.oe.trips.dimension(function(d){
+                    return [d.area_id, "" + d.area_name];
+                }),
+                areas = area.group(),
 
                 // dc.pieChart('#age-chart')
-                age             = $.oe.trips.dimension(function(d)
+                age = $.oe.trips.dimension(function(d)
                 {
-                    if (18 <= d.customer_age && d.customer_age <= 24 )      return 0;
-                    else if(25 <= d.customer_age && d.customer_age <= 34 )  return 1;
-                    else if(35 <= d.customer_age && d.customer_age <= 44 )  return 2;
-                    else if(45 <= d.customer_age && d.customer_age <= 54 )  return 3;
-                    else if(55 <= d.customer_age && d.customer_age <= 64 )  return 4;
-                    else if( d.customer_age > 64 )                          return 5;
+                    if (d.customer_age >= 18 && d.customer_age <= 24) {
+                        return 0;
+                    } else if (d.customer_age >= 25 && d.customer_age <= 34) {
+                        return 1;
+                    } else if (d.customer_age >= 35 && d.customer_age <= 44) {
+                        return 2;
+                    } else if (d.customer_age >= 45 && d.customer_age <= 54) {
+                        return 3;
+                    } else if (d.customer_age >= 55 && d.customer_age <= 64) {
+                        return 4;
+                    } else if (d.customer_age > 64) {
+                        return 5;
+                    }
                 }),
-                ages            = age.group();
+                ages = age.group();
 
             // Get the urban areas
-            d3.json('/reports/api/get-urban-areas/'+$.oe.thiscity, function (areasjson) {
+            d3.json('/reports/api/get-urban-areas/' + $.oe.thiscity, function (areasjson) {
                 // Calculate the max value of record recursion
                 maxval = real_areas.top(1)[0].value;
 
@@ -191,7 +218,7 @@ $.oe.fn.getCharts = function(){
                     .dimension(gender)
                     .group(genders)
                     .label(function (d) {
-                        var lbl     = d.key == "male" ? 'Uomini ' : 'Donne ',
+                        var lbl = d.key === "male" ? 'Uomini ' : 'Donne ',
                             percent = 0;
 
                         if ($.oe.charts.gender.hasFilter() && !$.oe.charts.gender.hasFilter(d.key)){
@@ -280,7 +307,7 @@ $.oe.fn.getCharts = function(){
                 area.filterAll();
 
                 var width = 500,
-                    height= 500;
+                    height = 500;
 
 
                 real_area.filterAll();
@@ -290,13 +317,15 @@ $.oe.fn.getCharts = function(){
                     .dimension(real_area)
                     .group(real_areas)
 
-                    .colorCalculator(function(d){ return d ? getColor(d) : '#ffffff';})
+                    .colorCalculator(function(d){
+                        return d ? getColor(d) : '#ffffff';
+                    })
 
                     .overlayGeoJson(areasjson.features, "quartiere", function (d) {
                         return d.properties.to_char;
                     })
                     .title(function (d) {
-                        return "Area: " + d.key + "\nConcentrazione: "+d.value;
+                        return "Area: " + d.key + "\nConcentrazione: " + d.value;
                     })
                     .projection(
                         d3.geo.stereographic()
@@ -306,7 +335,7 @@ $.oe.fn.getCharts = function(){
                             ])//[3.9,43.0])
                             .scale($.oe.params.scale)
                             .translate([
-                                width / $.oe.params.translation.width ,
+                                width / $.oe.params.translation.width,
                                 height / $.oe.params.translation.height
                             ])
                     );
@@ -314,16 +343,16 @@ $.oe.fn.getCharts = function(){
                 var maxColor = getColor(maxval),
                     minColor = getColor(0);
 
-                $(".area-chart").append('<div><span style="float:left;color: '+maxColor+
-                    '">&nbsp;0</span><span style="float:right;color:'+minColor+
-                    '">'+maxval+'&nbsp;</span>'+
-                    '<div style="'+
-                    'height: 20px;'+
-                    'background: '+maxColor+';'+ /* For browsers that do not support gradients */
-                    'background: -webkit-linear-gradient(left, '+minColor+' , '+maxColor+');'+ /* For Safari 5.1 to 6.0 */
-                    'background: -o-linear-gradient(right, '+minColor+', '+maxColor+');'+ /* For Opera 11.1 to 12.0 */
-                    'background: -moz-linear-gradient(right, '+minColor+', '+maxColor+');'+ /* For Firefox 3.6 to 15 */
-                    'background: linear-gradient(to right, '+minColor+' , '+maxColor+');'+ /* Standard syntax (must be last) */
+                $(".area-chart").append('<div><span style="float:left;color: ' + maxColor +
+                    '">&nbsp;0</span><span style="float:right;color:' + minColor +
+                    '">' + maxval + '&nbsp;</span>' +
+                    '<div style="' +
+                    'height: 20px;' +
+                    'background: ' + maxColor + ';' + /* For browsers that do not support gradients */
+                    'background: -webkit-linear-gradient(left, ' + minColor + ' , ' + maxColor + ');' + /* For Safari 5.1 to 6.0 */
+                    'background: -o-linear-gradient(right, ' + minColor + ', ' + maxColor + ');' + /* For Opera 11.1 to 12.0 */
+                    'background: -moz-linear-gradient(right, ' + minColor + ', ' + maxColor + ');' + /* For Firefox 3.6 to 15 */
+                    'background: linear-gradient(to right, ' + minColor + ' , ' + maxColor + ');' + /* Standard syntax (must be last) */
                     '"></div></div>');
 
 
@@ -337,7 +366,7 @@ $.oe.fn.getCharts = function(){
                     .elasticX(true)
 
                     .label(function (d) {
-                        return d.key[1] ;
+                        return d.key[1];
                     })
                     .title(function (d) {
                         return d.key + " : " + d.value;
@@ -347,16 +376,16 @@ $.oe.fn.getCharts = function(){
 
                  //
 
-                $("svg").css("background-color","red");
+                $("svg").css("background-color", "red");
 
 
                 dc.dataCount('#data-count')
                     .dimension($.oe.trips)
                     .group($.oe.filters.all)
                     .html({
-                        some:'<strong>%filter-count</strong> selected out of <strong>%total-count</strong> records' +
+                        some: '<strong>%filter-count</strong> selected out of <strong>%total-count</strong> records' +
                             ' | <a href=\'javascript:dc.filterAll(); dc.renderAll();\'\'>Reset All</a>',
-                        all:'All records selected. Please click on the graph to apply filters.'
+                        all: 'All records selected. Please click on the graph to apply filters.'
                     });
 
 
@@ -375,19 +404,19 @@ $.oe.fn.getCharts = function(){
                 //$("div.panel-body > div:not(.chart-label) >span, div.panel-body > div:not(.chart-label) > a").clone().appendTo("div.panel-heading");
                 //$("div.panel-body > div:not(.chart-label) >span, div.panel-body > div:not(.chart-label) > a")
                 $("svg").on( "click", function(){
-                    var parentID = "#"+$(this).parent().parent().parent().prop('id');
+                    var parentID = "#" + $(this).parent().parent().parent().prop('id');
                     $.oe.fn.rearrangeFilterHelper(parentID);
                 });
 
 
                 // Coloring the Age Pie Chart Legend
-                $("div.panel .chart-label > span:nth-of-type(3)").css("color", $("div.panel#customer-age g.pie-slice._5 path").css("fill")) ;
-                $("div.panel .chart-label > span:nth-of-type(2)").css("color", $("div.panel#customer-age g.pie-slice._4 path").css("fill")) ;
-                $("div.panel .chart-label > span:nth-of-type(1)").css("color", $("div.panel#customer-age g.pie-slice._3 path").css("fill")) ;
+                $("div.panel .chart-label > span:nth-of-type(3)").css("color", $("div.panel#customer-age g.pie-slice._5 path").css("fill"));
+                $("div.panel .chart-label > span:nth-of-type(2)").css("color", $("div.panel#customer-age g.pie-slice._4 path").css("fill"));
+                $("div.panel .chart-label > span:nth-of-type(1)").css("color", $("div.panel#customer-age g.pie-slice._3 path").css("fill"));
 
                 // Setting the correct svg width of the Map Chart
                 // Doing this the chart is vertically centered
-                $(".area-list-chart").css("width",width+"px");
+                $(".area-list-chart").css("width", width + "px");
 
                 //dc.renderAll();
             });
@@ -410,8 +439,8 @@ $.oe.fn.deactivePageInteraction = function(){
  *
  */
 $.oe.fn.resizeCharts = function(){
-    var newWidth                 = $(".panel-body").width(),
-        newRadiusChartsWidth    = $(".col-xs-12 .panel-body").width();
+    var newWidth = $(".panel-body").width(),
+        newRadiusChartsWidth = $(".col-xs-12 .panel-body").width();
 
     $.oe.charts.day.width(newWidth)
     .transitionDuration(0);
@@ -431,15 +460,15 @@ $.oe.fn.resizeCharts = function(){
         .transitionDuration(0);
 
     $.oe.charts.age
-        .width(newRadiusChartsWidth-5)
-        .height(newRadiusChartsWidth-5)
-        .radius((newRadiusChartsWidth/2.2)-20)
+        .width(newRadiusChartsWidth - 5)
+        .height(newRadiusChartsWidth - 5)
+        .radius((newRadiusChartsWidth / 2.2) - 20)
         .transitionDuration(0);
 
     $.oe.charts.gender
-        .width(newRadiusChartsWidth-5)
-        .height(newRadiusChartsWidth-5)
-        .radius((newRadiusChartsWidth/2.2)-20)
+        .width(newRadiusChartsWidth - 5)
+        .height(newRadiusChartsWidth - 5)
+        .radius((newRadiusChartsWidth / 2.2) - 20)
         .transitionDuration(0);
 
     // Render the charts
@@ -454,8 +483,8 @@ $.oe.fn.resizeCharts = function(){
  */
 $.oe.fn.rearrangeFilterHelper = function(parentID){
     // Remove the actual helpers from the panel header
-    $(parentID+" div.panel-heading .reset").remove();
+    $(parentID + " div.panel-heading .reset").remove();
 
     // Clone the hidden helpers to the panel header
-    $(parentID+" .reset").clone().appendTo(parentID+" div.panel-heading");
+    $(parentID + " .reset").clone().appendTo(parentID + " div.panel-heading");
 };

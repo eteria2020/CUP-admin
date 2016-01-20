@@ -1,5 +1,5 @@
 // Define Glbal vars
-/* global thiscity:true, d3:true, dc:true, crossfilter:true, ol:true, moment:true, tripid:true */
+/* global thiscity:true, d3:true, dc:true, crossfilter:true, ol:true, moment:true, tripid:true $ document window clearTimeout setTimeout */
 
 // Check if var $.oe has been declared
 if (typeof $.oe === 'undefined') {
@@ -10,7 +10,7 @@ if (typeof $.oe === 'undefined') {
 
 $.ajaxSetup({
     async: true,
-    cache : false,
+    cache: false,
     timeout: 180000,        // set to 2minutes
     queue: false/*,
     error: function (msg) {
@@ -28,7 +28,9 @@ $.extend($.scrollTo.defaults, {
 
 ///////////// $.oe Vars Definition /////////////
 $.oe.today = new Date();
-$.oe.todayFormatted = $.oe.today.getFullYear()     + '-' + ("0" + ($.oe.today.getMonth()+1)).slice(-2) + '-' + ("0" + $.oe.today.getDate()).slice(-2);
+$.oe.todayFormatted = $.oe.today.getFullYear() + '-' +
+    ("0" + ($.oe.today.getMonth() + 1)).slice(-2) + '-' +
+    ("0" + $.oe.today.getDate()).slice(-2);
 
 $.oe.urlDate = "";
 
@@ -41,14 +43,7 @@ $.oe.tracks = {};
 // The collection of features selected
 $.oe.featureOverlaySource = {};
 
-// The Ol3 Vector containing the selected overlay
-$.oe.featureOverlay;
-
-// flag for Overlight features
-$.oe.highlightStyleCache;
-$.oe.highlight;
-
-// The loaded trips (id)
+/// The loaded trips (id)
 $.oe.trips = [];
 
 // The HTML <li> of the trips
@@ -94,7 +89,7 @@ $(document).ready(function()
     // DateTime Picker
     $('#datetimepicker1').datetimepicker({
         sideBySide: true,
-        maxDate:    Date(),
+        maxDate: Date(),
         defaultDate: Date(),
         format: 'YYYY-MM-DD HH:mm:ss'
     });
@@ -106,7 +101,7 @@ $(document).ready(function()
     // only the slide action, not also the click on a specific section of the
     // slidebar.
     $("#ex6").on("change", function(slideEvt) {
-        $("#ex6SliderVal").text(slideEvt.value.newValue+" corse prima di");
+        $("#ex6SliderVal").text(slideEvt.value.newValue + " corse prima di");
     });
 
 
@@ -123,7 +118,7 @@ $(window).load(function() {
 
     $.oe.fn.getCityData();
 
-    if (typeof tripid !=='undefined') {
+    if (typeof tripid !== 'undefined') {
         // If ther's only one trip
         $.oe.trips.push(tripid);
         $.oe.fn.loadSingleTrack();
@@ -212,8 +207,8 @@ $.oe.vectorSource = new ol.source.Vector({
 });
 
 $.oe.tripslayer = new ol.layer.Vector({
-    source:    $.oe.vectorSource,
-    style :
+    source: $.oe.vectorSource,
+    style:
         function(feature) {
             return style[feature.getGeometry().getType()];
         }
@@ -275,7 +270,7 @@ $.oe.fn.displayFeatureInfo = function(pixel) {
         var info = [];
         var i;
 
-        for (i = 0 ; i <  selectedfeatures.length; ++i) {
+        for (i = 0; i < selectedfeatures.length; ++i) {
             info.push(selectedfeatures[i].get('name'));
 
             $.oe.fn.changeTrackColor(selectedfeatures[i]);
@@ -285,7 +280,7 @@ $.oe.fn.displayFeatureInfo = function(pixel) {
         var element = $("#" + selectedfeatures[0].id);
 
         // Remove the "green color class" to the others <li>
-        $(".way:not(#"+selectedfeatures[0].id+")").removeClass("list-group-item-success");
+        $(".way:not(#" + selectedfeatures[0].id + ")").removeClass("list-group-item-success");
 
         // If the feature is not selceted, the we select it
         if (!element.hasClass("list-group-item-success")) {
@@ -379,7 +374,7 @@ $.oe.fn.deactiveMapInteraction = function(){
 $.oe.fn.deactiveListActions = function()
 {
     // Set it as disabled
-    $("#steps").attr('disabled',true);
+    $("#steps").attr('disabled', true);
 
     // Remove other bind events();
     $('.way').off();
@@ -392,7 +387,7 @@ $.oe.fn.activateListActions = function()
     $('.way').off();
 
     // Set it as enabled
-    $("#steps").attr('disabled',false);
+    $("#steps").attr('disabled', false);
 
     // Add hover function to highlight tracks
     $(".way").hover(
@@ -401,14 +396,14 @@ $.oe.fn.activateListActions = function()
                 return;
             }
 
-            var thisId= $(this).attr("id");
+            var thisId = $(this).attr("id");
 
             // Remove the "green color class" to the others <li>
-            $(".way:not(#"+thisId+")").removeClass("list-group-item-success");
+            $(".way:not(#" + thisId + ")").removeClass("list-group-item-success");
 
-            var f = $.grep( $.oe.features, function(e){ return parseInt(e.id) == parseInt(thisId); });
+            var f = $.grep( $.oe.features, function(e){ return parseInt(e.id) === parseInt(thisId); });
 
-            if(f.length != 1 ){
+            if(f.length !== 1 ){
                 $(this).addClass("list-group-item-danger");
             }else{
                 $(this).removeClass("list-group-item-danger");
@@ -424,20 +419,20 @@ $.oe.fn.activateListActions = function()
                 return;
             }
 
-            var thisId= $(this).attr("id");
+            var thisId = $(this).attr("id");
 
             // Remove the "green color class" to the others <li>
-            $(".way:not(#"+thisId+")").removeClass("list-group-item-success");
+            $(".way:not(#" + thisId + ")").removeClass("list-group-item-success");
 
-            var f = $.grep( $.oe.features, function(e){ return parseInt(e.id) == parseInt(thisId); });
+            var f = $.grep( $.oe.features, function(e){ return parseInt(e.id) === parseInt(thisId); });
 
-            if(f.length != 1 ){
+            if(f.length !== 1 ){
                 $(this).addClass("list-group-item-danger");
             }else{
                 $(this).removeClass("list-group-item-danger");
                 $(this).addClass("list-group-item-success");
                 var extent = f[0].getGeometry().getExtent();
-                $.oe.map.getView().fit(extent , $.oe.map.getSize());
+                $.oe.map.getView().fit(extent, $.oe.map.getSize());
                 $.oe.fn.changeTrackColor(f[0]);
             }
         }
@@ -446,10 +441,10 @@ $.oe.fn.activateListActions = function()
 
 $.oe.fn.zoomOnTrip = function(tripId)
 {
-    var f = $.grep( $.oe.features, function(e){ return parseInt(e.id) == parseInt(tripId); });
+    var f = $.grep( $.oe.features, function(e){ return parseInt(e.id) === parseInt(tripId); });
     if(f.length > 0 ){
         var extent = f[0].getGeometry().getExtent();
-        $.oe.map.getView().fit(extent , $.oe.map.getSize());
+        $.oe.map.getView().fit(extent, $.oe.map.getSize());
     }
 };
 
@@ -468,10 +463,10 @@ $.oe.fn.loadSingleTrack = function()
 
     // Remove unneeded DOM Elements
     $('.col-md-2.rightbar').remove();
-    $('.col-md-10.leftbar').prop('class','col-md-12');
+    $('.col-md-10.leftbar').prop('class', 'col-md-12');
 
     // Set new page title
-    $('.page-header h1').html('Route '+$.oe.trips[0]);
+    $('.page-header h1').html('Route ' + $.oe.trips[0]);
 
     // Set the new page height reduce (because we will load more rows on toolbar)
     $.oe.pageHeightReduce = -305;
@@ -480,31 +475,31 @@ $.oe.fn.loadSingleTrack = function()
 
     $.ajax({
         method: 'POST',
-        url: '/reports/api/get-trip/'+$.oe.trips[0],
+        url: '/reports/api/get-trip/' + $.oe.trips[0],
         dataType: "json"
     })
     .success(function(data) {
-        if(typeof(data) == "undefined" || data === null || data.count === 0)
+        if(typeof data === "undefined" || data === null || data.count === 0)
         {
             alert("Non sono state trovate corse con i filtri selezionati");
-        }else{
-            if (data._id>-1) {
-                data.end_trip = (typeof data.end_trip == 'string') ? data.end_trip : data.end_trip.date;
-                data.begin_trip = (typeof data.begin_trip == 'string') ? data.begin_trip : data.begin_trip.date;
+        } else {
+            if (data._id > -1) {
+                data.end_trip = (typeof data.end_trip === 'string') ? data.end_trip : data.end_trip.date;
+                data.begin_trip = (typeof data.begin_trip === 'string') ? data.begin_trip : data.begin_trip.date;
 
                 data.end_trip = moment(data.end_trip).format("X");
                 data.begin_trip = moment(data.begin_trip).format("X");
 
-                var duration = moment(data.end_trip*1000).subtract(moment(data.begin_trip*1000)).format('HH:mm:ss');
+                var duration = moment(data.end_trip * 1000).subtract(moment(data.begin_trip * 1000)).format('HH:mm:ss');
 
                 data.VIN = data.VIN ? data.VIN : data.vin;
 
                 $('#carplate').val(data.VIN);
                 $('#duration').val(duration);
-                $('#date-beg').val( moment(data.begin_trip*1000).format("DD/MM/YYYY HH:mm"));
-                $('#date-end').val( moment(data.end_trip*1000).format("DD/MM/YYYY HH:mm"));
+                $('#date-beg').val( moment(data.begin_trip * 1000).format("DD/MM/YYYY HH:mm"));
+                $('#date-end').val( moment(data.end_trip * 1000).format("DD/MM/YYYY HH:mm"));
 
-                if (typeof(data.points) != "undefined" && data.points !== null){
+                if (typeof data.points !== "undefined" && data.points !== null){
                     $('#pointsnumber').val(data.points);
                 }
             }
@@ -520,12 +515,12 @@ $.oe.fn.loadSingleTrack = function()
 
                 // If the trips point number is not passed trought JSON data
                 // we obtain it from feature obj.
-                if ($('#pointsnumber').val() == ''){
+                if ($('#pointsnumber').val() === ''){
                     $('#pointsnumber').val( $.oe.features[0].getGeometry().v.length / 4 );
                 }
 
-                $.oe.time.start = ($.oe.features[0].getGeometry().getFirstCoordinate()[3])*1000;
-                $.oe.time.stop = ($.oe.features[0].getGeometry().getLastCoordinate()[3])*1000;
+                $.oe.time.start = ($.oe.features[0].getGeometry().getFirstCoordinate()[3]) * 1000;
+                $.oe.time.stop = ($.oe.features[0].getGeometry().getLastCoordinate()[3]) * 1000;
                 $.oe.time.duration = $.oe.time.stop - $.oe.time.start;
 
                 $('.btn-toolbar').append('<div class="col-md-12 secondrow row"><div class="col-md-2 controls"><div class="input-group"><span class="input-group-addon">Controlli</span><div class="btn-group" role="group" aria-label="Small button group"><button type="button" class="btn btn-default stop" aria-label="Ferma"><span class="glyphicon glyphicon glyphicon-stop" aria-hidden="true"></span></button><button type="button" class="btn btn-default pause" aria-label="Pausa"><span class="glyphicon glyphicon-pause" aria-hidden="true"></span></button><button type="button" class="btn btn-default play" aria-label="Avvia"><span class="glyphicon  glyphicon-play" aria-hidden="true"></span></button></div></div></div><div class="col-md-2"><div class="input-group"><span class="input-group-addon">Velocit&agrave; m/s</span><input type="text" class="form-control" id="current-speed-ms" aria-describedby="basic-addon3"></div></div><div class="col-md-2"><div class="input-group"><span class="input-group-addon">Velocit&agrave; Km/h</span><input type="text" class="form-control" id="current-speed-km" aria-describedby="basic-addon3"></div></div><div class="col-md-3"><div class="input-group" id="ex7CurrentSliderValLabel"><span class="input-group-addon">Dara Rilevazione Punto</span><input type="text" class="form-control" id="ex7SliderVal" aria-describedby="basic-addon3"></div></div></div><div class="col-md-12 thirdrow row"><div class="col-md-10 dataslider tripsprogression"><input id="ex7" type="text" data-slider-min="0" data-slider-max="100000" data-slider-step="1" data-slider-value="0"/></div><div class="col-md-2"><button id="fixview" type="button" class="btn btn-default" aria-label="Left Align">Blocca Vista su Auto<span class=" glyphicon glyphicon-magnet" aria-hidden="true"></span></button></div></div>');
@@ -533,8 +528,8 @@ $.oe.fn.loadSingleTrack = function()
                 // Create The Slider
                 $("#ex7").slider({
                     formatter: function(value) {
-                        var mi = ($.oe.time.duration/100000)*value;
-                        var date = moment().startOf('day').add(mi,'milliseconds');
+                        var mi = ($.oe.time.duration / 100000) * value;
+                        var date = moment().startOf('day').add(mi, 'milliseconds');
                         return 'Tempo Corsa: ' + date.format('HH:mm:ss');
                     }
                 });
@@ -562,7 +557,7 @@ $.oe.fn.loadSingleTrack = function()
                 // only the slide action, not also the click on a specific section of the
                 // slidebar.
                 $("#ex7").on("change", function(slideEvt) {
-                    var time = $.oe.fn.getTimeOfTripPercentage(slideEvt.value.newValue/1000);
+                    var time = $.oe.fn.getTimeOfTripPercentage(slideEvt.value.newValue / 1000);
                     $.oe.fn.setcarTooltipPosition(time.format('X'));
 
                     $("#ex7SliderVal").val(time.format('DD/MM/YYYY HH:mm:ss'));
@@ -570,7 +565,7 @@ $.oe.fn.loadSingleTrack = function()
                     $.oe.tooltip.carTooltipElement.innerHTML = time.format('HH:mm:ss');
 
                     var ms = $.oe.fn.getSpeed(time);
-                    var kmh = Math.round((ms*18)/5);
+                    var kmh = Math.round((ms * 18) / 5);
 
                     $('#current-speed-ms').val(ms);
                     $('#current-speed-km').val(kmh);
@@ -592,10 +587,10 @@ $.oe.fn.loadTracks = function()
     $.oe.fn.deactiveMapInteraction();
 
     // Get The date from the DateTime Input
-    $.oe.urlDate    = $("div.date input").val();
+    $.oe.urlDate = $("div.date input").val();
 
     // Get the number of trips to load
-    $.oe.tripsnumber    = $("#ex6").slider().val();
+    $.oe.tripsnumber = $("#ex6").slider().val();
 
     // Disable the Data Update Button to prevent error
     $('button#dataupdate')
@@ -613,13 +608,13 @@ $.oe.fn.loadTracks = function()
         url: 'api/get-trips',
         dataType: "json",
         data: {
-            end_date:           $.oe.urlDate,
-            trips_number:       $.oe.tripsnumber,
-            maintainer:         $.oe.maintainer
+            end_date: $.oe.urlDate,
+            trips_number: $.oe.tripsnumber,
+            maintainer: $.oe.maintainer
         }
     })
     .success(function(data) {
-        if(typeof(data) == "undefined" || data === null || data.count === 0)
+        if(typeof data === "undefined" || data === null || data.count === 0)
         {
             alert("Non sono state trovate corse con i filtri selezionati");
 
@@ -627,32 +622,40 @@ $.oe.fn.loadTracks = function()
             $("button#dataupdate").prop('disabled', false);
 
             // Bind its action
-            $("button#dataupdate").one('click','',function(){
+            $("button#dataupdate").one('click', '', function(){
                 $.oe.fn.loadTracks();
             });
         }else{
             $.each(data, function(key, val)
             {
-                if (val._id>-1) {
+                if (val._id > -1) {
 
-                    val.end_trip     = (typeof val.end_trip         == 'string')     ? val.end_trip         : val.end_trip.date;
-                    val.begin_trip  = (typeof val.begin_trip    == 'string')     ? val.begin_trip     : val.begin_trip.date;
+                    val.end_trip = (typeof val.end_trip === 'string') ? val.end_trip : val.end_trip.date;
+                    val.begin_trip = (typeof val.begin_trip === 'string') ? val.begin_trip : val.begin_trip.date;
 
-                    val.end_trip     = moment(val.end_trip).format("X");
-                    val.begin_trip     = moment(val.begin_trip).format("X");
+                    val.end_trip = moment(val.end_trip).format("X");
+                    val.begin_trip = moment(val.begin_trip).format("X");
 
-                    var duration = Math.round((val.end_trip - val.begin_trip)/60);
+                    var duration = Math.round((val.end_trip - val.begin_trip) / 60);
 
                     $.oe.trips.push(val._id);
 
                     val.VIN = val.VIN ? val.VIN : val.vin;
 
-                    var date = moment(val.begin_trip*1000).format("DD/MM/YYYY HH:mm");
+                    var date = moment(val.begin_trip * 1000).format("DD/MM/YYYY HH:mm");
 
-                    var li = '<li href="#" class="list-group-item way" id="' + val._id + '"><div class="open-button"><a type="button" href="' + window.location.href + '/' + val._id+'" class="btn btn-default" aria-label="Left Align" role="button">Apri<span class="glyphicon glyphicon-screenshot" aria-hidden="true"></span></a></div><h5 class="list-group-item-heading">'+ date +' <b>'+ val.VIN+'</b></h5><p class="list-group-item-text">'+ val._id + ' ' + duration + 'min';
+                    var li = '<li href="#" class="list-group-item way" id="' +
+                        val._id +
+                        '"><div class="open-button"><a type="button" href="' +
+                        window.location.href + '/' + val._id +
+                        '" class="btn btn-default" aria-label="Left Align" role="button">Apri' +
+                        '<span class="glyphicon glyphicon-screenshot" aria-hidden="true"></span></a></div>' +
+                        '<h5 class="list-group-item-heading">' + date +
+                        ' <b>' + val.VIN + '</b></h5><p class="list-group-item-text">' +
+                        val._id + ' ' + duration + 'min';
 
-                    if (typeof(val.points) != "undefined" && val.points !== null){
-                        li += ' ('+ val.points +')';
+                    if (typeof val.points !== "undefined" && val.points !== null) {
+                        li += ' (' + val.points + ')';
                     }
 
                     li += '</p></li>';
@@ -679,16 +682,16 @@ $.oe.fn.loadTracks = function()
 $.oe.fn.getTripsData = function(callback)
 {
     $.ajax({
-        method:            'POST',
-        url:            '/reports/api/get-trip-points-from-logs',
-        processData:    true,
-        dataType:        'xml',
+        method: 'POST',
+        url: '/reports/api/get-trip-points-from-logs',
+        processData: true,
+        dataType: 'xml',
         data: {
-            trips_id:         $.oe.trips
+            trips_id: $.oe.trips
         },
-        timeout: 180000        // Timeout = 3 minutes (2 minutes ~= 300 tracks)
+        timeout: 180000 // Timeout = 3 minutes (2 minutes ~= 300 tracks)
     })
-    .success(function(data,status,jsonXHR) {
+    .success(function(data, status, jsonXHR) {
         $.oe.highlightStyleCache = null;
         $.oe.highlight = null;
 
@@ -703,9 +706,9 @@ $.oe.fn.getTripsData = function(callback)
         var xmlDoc = jsonXHR.responseXML;
 
         $.oe.features = [];
-        $.oe.features = format.readFeatures(xmlDoc,  {featureProjection: 'EPSG:3857'});
+        $.oe.features = format.readFeatures(xmlDoc, {featureProjection: 'EPSG:3857'});
 
-        for (var i=0; i<$.oe.features.length; i++) {
+        for (var i = 0; i < $.oe.features.length; i++) {
             var trackFeature = $.oe.features[i];
 
             trackFeature.id = trackFeature.get('name');
@@ -734,7 +737,7 @@ $.oe.fn.getTripsData = function(callback)
 
 
         // Bind its action
-        $("button#dataupdate").one('click','',function(){
+        $("button#dataupdate").one('click', '', function(){
             $.oe.fn.loadTracks();
         });
 
@@ -744,7 +747,9 @@ $.oe.fn.getTripsData = function(callback)
         // Activate the map
         $.oe.fn.activeMapInteraction();
 
-        typeof callback === 'function' && callback();
+        if (typeof callback === 'function') {
+            callback();
+        }
     });
 };
 
@@ -755,22 +760,10 @@ $.oe.fn.getTripsData = function(callback)
  */
 $.oe.fn.createCarTooltip = function() {
     /**
-     * The help tooltip element.
-     * @type {Element}
-     */
-    $.oe.tooltip.carTooltipElement;
-
-    /**
-     * Overlay to show the help messages.
-     * @type {ol.Overlay}
-     */
-    $.oe.tooltip.carTooltip;
-
-    /**
      * The car icon of the tooltip
      * @type {olx.style.IconOptions}
      */
-    $.oe.tooltip.carIcon =  new ol.style.Icon({
+    $.oe.tooltip.carIcon = new ol.style.Icon({
         anchor: [0.5, 1],
         anchorXUnits: 'fraction',
         anchorYUnits: 'fraction',
@@ -824,23 +817,23 @@ $.oe.fn.createCarTooltip = function() {
 
 $.oe.fn.createTimer = function() {
     $.timer('timer', function() {
-        var newval = parseInt($("#ex7").val())+50;
+        var newval = parseInt($("#ex7").val()) + 50;
 
         if(newval >= 100000){
             $.timer('timer').stop();
             return;
         }
 
-        $("#ex7").slider('setValue',newval);
+        $("#ex7").slider('setValue', newval);
 
-        var time = $.oe.fn.getTimeOfTripPercentage(newval/1000);
+        var time = $.oe.fn.getTimeOfTripPercentage(newval / 1000);
         $.oe.fn.setcarTooltipPosition(time.format('X'));
 
         $("#ex7SliderVal").val(time.format('DD/MM/YYYY HH:mm:ss'));
         $.oe.tooltip.carTooltipElement.innerHTML = time.format('HH:mm:ss');
 
         var ms = $.oe.fn.getSpeed(time);
-        var kmh = Math.round((ms*18)/5);
+        var kmh = Math.round((ms * 18) / 5);
 
         $('#current-speed-ms').val(ms);
         $('#current-speed-km').val(kmh);
@@ -849,8 +842,8 @@ $.oe.fn.createTimer = function() {
 
 $.oe.fn.activateTimerButtons = function(){
     // Play button
-    $('div.controls button.play').on('click',function(){
-        if($.timer('timer').status() == 'paused'){
+    $('div.controls button.play').on('click', function(){
+        if($.timer('timer').status() === 'paused'){
             $.timer('timer').resume();
         } else {
             $.timer('timer').start();
@@ -858,17 +851,19 @@ $.oe.fn.activateTimerButtons = function(){
     });
 
     // Pause Button
-    $('div.controls button.pause').on('click',function(){
+    $('div.controls button.pause').on('click', function(){
         $.timer('timer').pause();
     });
 
     // Stop Button
-    $('div.controls button.stop').on('click',function(){
+    $('div.controls button.stop').on('click', function(){
         // If the timer is in pause, we can't stop it. So we resume it.
-        if($.timer('timer').status() == 'paused'){$.timer('timer').resume();}
+        if ($.timer('timer').status() === 'paused') {
+            $.timer('timer').resume();
+        }
 
         $.timer('timer').stop();
-        $("#ex7").slider('setValue',0);
+        $("#ex7").slider('setValue', 0);
 
         var time = $.oe.fn.getTimeOfTripPercentage(0);
         $.oe.fn.setcarTooltipPosition(time.format('X'));
@@ -909,15 +904,15 @@ $.oe.fn.getSpeed = function(pointTime){
 
     //var pointTime = $.oe.fn.getTimeOfTripPercentage(percent);
     var actualCoordinate = geometry.getCoordinateAtM(parseInt(pointTime.format('X')), true);
-    var beforeCoordinate = geometry.getCoordinateAtM(parseInt(new moment(pointTime).subtract(1,'seconds').format('X')),true);
+    var beforeCoordinate = geometry.getCoordinateAtM(parseInt(new moment(pointTime).subtract(1, 'seconds').format('X')), true);
 
     // Check if this is the first point of trip
-    if (actualCoordinate == geometry.getFirstCoordinate()) {
+    if (actualCoordinate === geometry.getFirstCoordinate()) {
         return 0;
     }
 
     // Create a new segment
-    var lineGeometry =  new ol.geom.LineString([beforeCoordinate, actualCoordinate]);
+    var lineGeometry = new ol.geom.LineString([beforeCoordinate, actualCoordinate]);
     var length = 0;
 
     // get points of geometry (for simplicity assume 2 points)
@@ -931,7 +926,7 @@ $.oe.fn.getSpeed = function(pointTime){
 
     for (var i = 0, ii = lineCoordinates.length - 1; i < ii; ++i) {
         var t1 = ol.proj.transform(lineCoordinates[i], mapProjection, 'EPSG:4326');
-        var t2 = ol.proj.transform(lineCoordinates[i+1], mapProjection, 'EPSG:4326');
+        var t2 = ol.proj.transform(lineCoordinates[i + 1], mapProjection, 'EPSG:4326');
 
         // get distance on sphere
         length += wgs84Sphere.haversineDistance(t1, t2);
@@ -983,7 +978,7 @@ $(window).resize(function() {
 
 
 $.oe.fn.doneResizing = function() {
-    var newHeight             = $(window).height();
+    var newHeight = $(window).height();
     $(".row.mainrow").css("height", newHeight + $.oe.pageHeightReduce);//-280); //-110);
     $(".map").css("height", newHeight + $.oe.pageHeightReduce);
     $.oe.map.updateSize();
