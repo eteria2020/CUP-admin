@@ -12,8 +12,10 @@ $.ajaxSetup({
     async: true,
     cache : false,
     timeout: 180000,        // set to 2minutes
-    queue: false,
-    error: function (msg) { alert('error : ' + msg.d); }
+    queue: false/*,
+    error: function (msg) {
+        console.log('error : ' + msg.d);
+    }*/
 });
 
 $.extend($.scrollTo.defaults, {
@@ -69,6 +71,11 @@ $.oe.refreshInterval = {};
 
 // Flag to set if stopped cars should be hide
 $.oe.hideStopped = false;
+
+// Flag to determinate the number of olf points to show on the map
+$.oe.pointsToShow = 120;
+
+$.oe.updatedBeforeOld = 5;
 ////////////////////////////////////////////////
 
 // The magic!
@@ -101,7 +108,7 @@ $.oe.mapStyle.fill.stand = new ol.style.Fill({
     color: '#EDE431'
 });
 $.oe.mapStyle.fill.old = new ol.style.Fill({
-    color: '#311431'
+    color: 'rgba(5, 5, 255,0.9)'//color: '#311431'
 });
 $.oe.mapStyle.fill.stop= new ol.style.Fill({
     color: '#FF0000'
@@ -144,11 +151,15 @@ $.oe.mapStyle.stopPointStyle = new ol.style.Style({
 $.oe.mapStyle.oldPointStyle = new ol.style.Style({
     image: new ol.style.Circle({
         fill: $.oe.mapStyle.fill.old,
-        stroke: $.oe.mapStyle.stroke,
         radius: 4
     }),
-    fill: $.oe.mapStyle.fill.old,
-    stroke: $.oe.mapStyle.stroke
+    fill: $.oe.mapStyle.fill.old
+});
+$.oe.mapStyle.lineStyle = new ol.style.Style({
+    stroke: new ol.style.Stroke({
+        color: 'rgba(5, 5, 255,0.7)',
+        width: 5
+    })
 });
 $.oe.mapStyle.emptyStyle = new ol.style.Style({});
 
@@ -171,6 +182,12 @@ $.oe.osmLayer = new ol.layer.Tile({
     source: new ol.source.OSM()
 });
 
+$.oe.lineStringVectorSource = new ol.source.Vector();
+$.oe.lineStringTrailLayer = new ol.layer.Vector({
+    source: $.oe.lineStringVectorSource,
+    style: $.oe.mapStyle.lineStyle
+});
+
 $.oe.lineVectorSource = new ol.source.Vector();
 $.oe.trailLayer = new ol.layer.Vector({
     source: $.oe.lineVectorSource,
@@ -178,7 +195,7 @@ $.oe.trailLayer = new ol.layer.Vector({
 });
 
 $.oe.map = new ol.Map({
-    layers: [$.oe.osmLayer, $.oe.trailLayer, $.oe.carLayer],
+    layers: [$.oe.osmLayer, $.oe.trailLayer, $.oe.lineStringTrailLayer,$.oe.carLayer],
     target: 'map',
     view: $.oe.view,
     eventListeners: {"zoomend": $.oe.fn.zoomChanged}
@@ -252,6 +269,7 @@ $.oe.fn.getCarsGeoData = function(){
             features[i].setId(features[i].get('plate'));
             var ft = $.oe.vectorSource.getFeatureById(features[i].getId());
             var line = $.oe.lineVectorSource.getFeatureById(features[i].getId());
+            var lineString = $.oe.lineStringVectorSource.getFeatureById(features[i].getId());
 
             // If we already have the feature --> update coords and do other stuff
             if (ft) {
@@ -267,7 +285,7 @@ $.oe.fn.getCarsGeoData = function(){
                     if (typeof line.getGeometry().get('standing') !== 'undefined' ){
                         var standing = parseInt(line.getGeometry().get('standing'));
 
-                        if (standing >= 5) {
+                        if (standing >= $.oe.updatedBeforeOld) {
                             // The car is stopped
 
                             // Check if we have to show it or hide it.
@@ -277,7 +295,6 @@ $.oe.fn.getCarsGeoData = function(){
                                 ft.setStyle($.oe.mapStyle.stopPointStyle);
                             }
                         }
-
                         line.getGeometry().set('standing',standing+1);
                     } else {
                         // First time standing
@@ -295,21 +312,35 @@ $.oe.fn.getCarsGeoData = function(){
             }
 
             if (line) {
+                // Adding new point to the track
                 line.getGeometry().appendPoint(features[i].getGeometry());
-                $.oe.lineVectorSource.addFeature(line);
-            } else {
-                console.log("Nuova Macchiana");
 
+                // Remove more than $.oe.pointsToShow points
+                if (line.getGeometry().getCoordinates().length >= $.oe.pointsToShow) {
+                    line.getGeometry().setCoordinates(line.getGeometry().getCoordinates().slice(1,$.oe.pointsToShow));
+                }
+            } else {
+                // New Car
                 line = new ol.Feature({
                     geometry: new ol.geom.MultiPoint([], 'XY'),
                     name: 'Punto Scia'
                 });
 
                 line.setId(features[i].get('plate'));
-
                 line.getGeometry().appendPoint(features[i].getGeometry());
-
                 $.oe.lineVectorSource.addFeature(line);
+            }
+
+            if (lineString) {
+                lineString.setGeometry(new ol.geom.LineString(line.getGeometry().getCoordinates(),'XY'));
+            } else {
+                var multistring =  new ol.Feature({
+                    geometry: new ol.geom.LineString(line.getGeometry().getCoordinates(),'XY'),
+                    name: 'Punto Scia'
+                });
+
+                multistring.setId(features[i].get('plate'));
+                $.oe.lineStringVectorSource.addFeature(multistring);
             }
         }
 
@@ -319,6 +350,7 @@ $.oe.fn.getCarsGeoData = function(){
         // Update the graphic vectors
         $.oe.vectorSource.changed();
         $.oe.lineVectorSource.changed();
+        $.oe.lineStringVectorSource.changed();
     });
 };
 
@@ -329,13 +361,7 @@ $.oe.fn.createButtons = function(){
         val.ol.coordinate = ol.proj.fromLonLat([val.params.center.longitude, val.params.center.latitude]);
 
         // Create a button for every city
-        $('#header-buttons').prepend(
-            '<button type="button" class="btn btn-default" id="pan-to-' +
-            val.fleet_code +
-            '">Pan to ' +
-            val.fleet_name +
-            '</button>'
-        );
+        $('#header-buttons').prepend('<button type="button" class="btn btn-default" id="pan-to-' + val.fleet_code + '">Pan to ' + val.fleet_name + '</button>');
 
         // Handle the click action for every city button
         $("#pan-to-" + val.fleet_code).click(function(){
@@ -368,7 +394,7 @@ $.oe.fn.hideStopped = function(){
             }
         }
     });
-}
+};
 
 $.oe.fn.showStopped = function(){
     $.each($.oe.lineVectorSource.getFeatures(),function(key, val){
@@ -389,7 +415,7 @@ $.oe.fn.showStopped = function(){
             }
         }
     });
-}
+};
 
 // Bind buttons actions
 $.oe.fn.activateHideStoppedButton = function()

@@ -12,8 +12,10 @@ $.ajaxSetup({
     async: true,
     cache : false,
     timeout: 180000,        // set to 2minutes
-    queue: false,
-    error: function (msg) { alert('error : ' + msg.d); }
+    queue: false/*,
+    error: function (msg) {
+        alert('error : ' + msg.d);
+    }*/
 });
 
 $.extend($.scrollTo.defaults, {
