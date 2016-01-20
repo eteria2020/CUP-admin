@@ -53,7 +53,7 @@ class InvoicesController extends AbstractActionController
 
             $filters['withLimit'] = false;
 
-            return count($this->invoicesService->getDataDataTable($filters));
+            return $this->invoicesService->getDataDataTable($filters, true);
         }
     }
 }

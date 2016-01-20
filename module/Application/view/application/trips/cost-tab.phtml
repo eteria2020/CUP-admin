@@ -2,7 +2,7 @@
 // Get data
 $trip = $this->trip;
 $customer = $trip->getCustomer();
-$tripPayment = $trip->getTripPayments()[0];
+$tripPayment = $trip->getTripPayment();
 $tripFreeFares = $trip->getTripFreeFares();
 $tripBonuses = $trip->getTripBonuses();
 
