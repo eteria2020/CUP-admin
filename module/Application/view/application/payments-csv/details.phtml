@@ -15,35 +15,78 @@ $this->headScript()
             <div class="row-fluid">
                 <div class="span6">
 
-                    <!-- BEGIN csv data container -->
+                    <?php echo $this->partial('partials/flash-messages.phtml', []); ?>
 
+                    <!-- BEGIN csv data container -->
+                    <div class="portlet box green row">
+                        <div class="portlet-title">
+                            <div class="caption">
+                                <i class="fa fa-file-text-o"></i>Dati csv
+                            </div>
+                        </div>
+
+                        <div class="portlet-body col-lg-12">
+                            <?php
+                            $csvData = $this->csvAnomaly->getCsvData();
+                            ksort($csvData);
+                            foreach ($csvData as $key => $data):
+                            ?>
+                            <div class="col-lg-3">
+                                <div class="form-group">
+                                    <label><?= $key; ?></label>
+                                    <div class="sng-info-box sng-info-box-fixed"><?= $data ?></div>
+                                </div>
+                            </div>
+                            <?php endforeach; ?>
+                        </div>
+                    </div>
                     <!-- END csv data container -->
 
                     <!-- BEGIN transaction container -->
+                    <div class="portlet box green row">
+                        <div class="portlet-title">
+                            <div class="caption">
+                                <i class="fa fa-credit-card"></i>Dati transazione
+                            </div>
+                        </div>
 
+                        <div class="portlet-body col-lg-12">
+
+                        </div>
+                    </div>
                     <!-- END transaction container -->
 
                     <!-- BEGIN solutions container -->
+                    <div class="portlet box green row">
+                        <div class="portlet-title">
+                            <div class="caption">
+                                <i class="fa fa-calculator"></i>Soluzioni
+                            </div>
+                        </div>
 
+                        <div class="portlet-body col-lg-12">
+
+                        </div>
+                    </div>
                     <!-- END solutions container -->
 
                     <!-- BEGIN note container -->
-                    <div class="portlet box green">
+                    <div class="portlet box green row">
                         <div class="portlet-title">
                             <div class="caption">
                                 <i class="fa fa-paperclip"></i>Note
                             </div>
                         </div>
 
-                        <!-- BEGIN notes table container -->
-                        <?php
-                        $updates = $this->csvAnomaly->getUpdates();
-                        if (!empty($updates)):
-                        ?>
-                        <div class="portlet-body">
-                        <h4>Elenco Note</h4>
+                        <div class="portlet-body col-lg-12">
 
-                            <!-- Table -->
+                            <!-- BEGIN notes table -->
+                            <?php
+                            $updates = $this->csvAnomaly->getUpdates();
+                            if (!empty($updates)):
+                            ?>
+                            <h4>Elenco Note</h4>
+
                             <table id="notes-table" class="table table-striped table-bordered table-hover" id="js-invoices-table">
                                 <thead>
                                     <tr>
@@ -62,24 +105,26 @@ $this->headScript()
                                     <?php endforeach; ?>
                                 </tbody>
                             </table>
-                            <!-- table -->
+
+                            <!-- END notes table -->
+                            <?php endif; ?>
+
+                            <!-- BEGIN new note -->
+                            <h4>Nuova Nota</h4>
+                            <form action="<?= $this->url('payments/csv-add-note', ['id' => $this->csvAnomaly->getId()]); ?>"
+                                method="post">
+
+                                <textarea id="new-note" name="new-note" style="width: 100%" rows="5"></textarea><br><br>
+                                <input id="add-button"
+                                    class="btn btn-default btn-xs"
+                                    type="submit"
+                                    value="Aggiungi">
+                                </input>
+
+                            </form>
+                            <!-- END new note -->
 
                         </div>
-                        <!-- END notes table container -->
-                        <?php endif; ?>
-
-                        <form class="portlet-body"
-                            action="<?= $this->url('payments/csv-add-note', ['id' => $this->csvAnomaly->getId()]); ?>"
-                            method="post">
-
-                            <textarea id="new-note" name="new-note" style="width: 100%" rows="5"></textarea><br><br>
-                            <input id="add-button"
-                                class="btn btn-default btn-xs"
-                                type="submit"
-                                value="Aggiungi">
-                            </input>
-
-                        </form>
                     </div>
                     <!-- END note container -->
 
