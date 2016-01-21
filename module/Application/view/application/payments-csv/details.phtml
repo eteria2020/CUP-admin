@@ -1,0 +1,93 @@
+<?php
+$this->headLink()->appendStylesheet('/js/datatables/plugins/bootstrap/dataTables.bootstrap.css');
+$this->headScript()
+    ->appendFile('/js/datatables/media/js/jquery.dataTables.min.js')
+    ->appendFile('/js/datatables/plugins/bootstrap/dataTables.bootstrap.js');
+?>
+<div class="page-content-wrapper">
+    <div class="page-content">
+
+        <!-- Title -->
+        <h3 class="page-title">Dettagli Anomalia</h3>
+
+        <!-- BEGIN content container -->
+        <div class="portlet-body">
+            <div class="row-fluid">
+                <div class="span6">
+
+                    <!-- BEGIN csv data container -->
+
+                    <!-- END csv data container -->
+
+                    <!-- BEGIN transaction container -->
+
+                    <!-- END transaction container -->
+
+                    <!-- BEGIN solutions container -->
+
+                    <!-- END solutions container -->
+
+                    <!-- BEGIN note container -->
+                    <div class="portlet box green">
+                        <div class="portlet-title">
+                            <div class="caption">
+                                <i class="fa fa-paperclip"></i>Note
+                            </div>
+                        </div>
+
+                        <!-- BEGIN notes table container -->
+                        <?php
+                        $updates = $this->csvAnomaly->getUpdates();
+                        if (!empty($updates)):
+                        ?>
+                        <div class="portlet-body">
+                        <h4>Elenco Note</h4>
+
+                            <!-- Table -->
+                            <table id="notes-table" class="table table-striped table-bordered table-hover" id="js-invoices-table">
+                                <thead>
+                                    <tr>
+                                        <th>Data</th>
+                                        <th>Id Webuser</th>
+                                        <th>Nota</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <?php foreach ($updates as $date => $note): ?>
+                                    <tr>
+                                        <td class="sng-date-column"><?= $date; ?></td>
+                                        <td><?= $note['webuser']; ?></td>
+                                        <td><?= $note['content']; ?></td>
+                                    </tr>
+                                    <?php endforeach; ?>
+                                </tbody>
+                            </table>
+                            <!-- table -->
+
+                        </div>
+                        <!-- END notes table container -->
+                        <?php endif; ?>
+
+                        <form class="portlet-body"
+                            action="<?= $this->url('payments/csv-add-note', ['id' => $this->csvAnomaly->getId()]); ?>"
+                            method="post">
+
+                            <textarea id="new-note" name="new-note" style="width: 100%" rows="5"></textarea><br><br>
+                            <input id="add-button"
+                                class="btn btn-default btn-xs"
+                                type="submit"
+                                value="Aggiungi">
+                            </input>
+
+                        </form>
+                    </div>
+                    <!-- END note container -->
+
+                </div>
+            </div>
+        </div>
+        <!-- END content container -->
+
+    </div>
+</div>
+<script type="text/javascript" src="<?= $this->basePath() .'/js/payments-csv-details.js'; ?>"></script>

@@ -44,18 +44,43 @@ class PaymentsCsvController extends AbstractActionController
     public function addFileAction()
     {
         $filename = $this->params()->fromQuery('filename');
-        $this->csvService->addFile($filename);
+        $csvFile = $this->csvService->addFile($filename, $this->identity());
+        $this->csvService->analyzeFile($csvFile);
 
         return $this->reload();
     }
 
-    public function analyzeFileAction()
+    public function detailsAction()
     {
-        $csvFileId = $this->params()->fromQuery('csvFileId');
-        $csvFile = $this->csvService->getFileById($csvFileId);
-        $this->csvService->analyzeFile($csvFile);
+        $id = (int) $this->params()->fromRoute('id', 0);
+        $csvAnomaly = $this->csvService->getAnomalyById($id);
 
-        return $this->reload();
+        return new ViewModel([
+            'csvAnomaly' => $csvAnomaly
+        ]);
+    }
+
+    public function addNoteAction()
+    {
+        $id = $this->params()->fromRoute('id', 0);
+        $csvAnomaly = $this->csvService->getAnomalyById($id);
+
+        if ($this->getRequest()->isPost()) {
+            try {
+                $postData = $this->getRequest()->getPost()->toArray();
+                $content = $postData['new-note'];
+                $this->csvService->addNoteToAnomaly($csvAnomaly, $this->identity(), $content);
+                $this->flashMessenger()->addSuccessMessage('Nota aggiunta con successo');
+            } catch (NoteContentNotValidException $e) {
+                $this->getResponse()->setStatusCode(Response::STATUS_CODE_500);
+                $this->flashMessenger()->addErrorMessage($e->getMessage());
+            } catch (\Exception $e) {
+                $this->getResponse()->setStatusCode(Response::STATUS_CODE_500);
+                $this->flashMessenger()->addErrorMessage('Errore nell\'inserimento della nota');
+            }
+        }
+
+        return $this->redirect()->toRoute('payments/csv-details', ['id' => $csvAnomaly->getId()]);
     }
 
     private function reload()

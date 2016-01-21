@@ -878,6 +878,32 @@ return [
                                 'action' => 'analyze-file'
                             ]
                         ]
+                    ],
+                    'csv-details' => [
+                        'type' => 'Segment',
+                        'options' => [
+                            'route' => '/csv-details/:id',
+                            'constraints' => [
+                                'id'    => '[0-9]*'
+                            ],
+                            'defaults' => [
+                                'controller' => 'PaymentsCsv',
+                                'action' => 'details'
+                            ]
+                        ]
+                    ],
+                    'csv-add-note' => [
+                        'type' => 'Segment',
+                        'options' => [
+                            'route' => '/csv-add-note/:id',
+                            'constraints' => [
+                                'id'    => '[0-9]*'
+                            ],
+                            'defaults' => [
+                                'controller' => 'PaymentsCsv',
+                                'action' => 'add-note'
+                            ]
+                        ]
                     ]
                 ]
             ],
