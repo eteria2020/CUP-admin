@@ -4,8 +4,11 @@ namespace Application\Controller;
 
 use Cartasi\Exception\InvalidCsvException;
 use Cartasi\Exception\InvalidPathException;
+use Cartasi\Service\CartasiContractsService;
+use SharengoCore\Exception\CartasiCsvAnomalyAlreadyResolvedException;
 use SharengoCore\Service\CsvService;
 
+use Zend\Http\Response;
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\JsonModel;
 use Zend\View\Model\ViewModel;
@@ -18,12 +21,20 @@ class PaymentsCsvController extends AbstractActionController
     private $csvService;
 
     /**
+     * @var CartasiContractsService
+     */
+    private $contractsService;
+
+    /**
      * @param CsvService $csvService
+     * @param CartasiContractsService $contractsService
      */
     public function __construct(
-        CsvService $csvService
+        CsvService $csvService,
+        CartasiContractsService $contractsService
     ) {
         $this->csvService = $csvService;
+        $this->contractsService = $contractsService;
     }
 
     public function csvAction()
@@ -47,7 +58,7 @@ class PaymentsCsvController extends AbstractActionController
         $csvFile = $this->csvService->addFile($filename, $this->identity());
         $this->csvService->analyzeFile($csvFile);
 
-        return $this->reload();
+        return $this->redirect()->toRoute('payments/csv');
     }
 
     public function detailsAction()
@@ -55,8 +66,19 @@ class PaymentsCsvController extends AbstractActionController
         $id = (int) $this->params()->fromRoute('id', 0);
         $csvAnomaly = $this->csvService->getAnomalyById($id);
 
+        // Fetch customer
+        $customer = null;
+        try {
+            $contractId = $csvAnomaly->getCsvData()['num_contratto'];
+            $contract = $this->contractsService->getContractById($contractId);
+            $customer = $contract->getCustomer();
+        } catch (ContractNotFoundException $e) {
+
+        }
+
         return new ViewModel([
-            'csvAnomaly' => $csvAnomaly
+            'csvAnomaly' => $csvAnomaly,
+            'customer' => $customer
         ]);
     }
 
@@ -80,11 +102,30 @@ class PaymentsCsvController extends AbstractActionController
             }
         }
 
-        return $this->redirect()->toRoute('payments/csv-details', ['id' => $csvAnomaly->getId()]);
+        return $this->reloadDetails($csvAnomaly->getId());
     }
 
-    private function reload()
+    public function resolveAction()
     {
-        return $this->redirect()->toRoute('payments/csv');
+        $id = $this->params()->fromRoute('id', 0);
+        $csvAnomaly = $this->csvService->getAnomalyById($id);
+
+        try {
+            $this->csvService->resolveAnomaly($csvAnomaly, $this->identity());
+            $this->flashMessenger()->addSuccessMessage('Anomalia risolta con successo');
+        } catch (CartasiCsvAnomalyAlreadyResolvedException $e) {
+            $this->getResponse()->setStatusCode(Response::STATUS_CODE_500);
+            $this->flashMessenger()->addErrorMessage('Anomalia già segnata come risolta');
+        } catch (\Exception $e) {
+            $this->getResponse()->setStatusCode(Response::STATUS_CODE_500);
+            $this->flashMessenger()->addErrorMessage('Errore nella risoluzione');
+        }
+
+        return $this->reloadDetails($csvAnomaly->getId());
+    }
+
+    private function reloadDetails($id)
+    {
+        return $this->redirect()->toRoute('payments/csv-details', ['id' => $id]);
     }
 }

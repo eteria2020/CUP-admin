@@ -11,9 +11,11 @@ class PaymentsCsvControllerFactory implements FactoryInterface
     {
         $sharedServiceManager = $serviceLocator->getServiceLocator();
         $csvService = $sharedServiceManager->get('SharengoCore\Service\CsvService');
+        $contractsService = $sharedServiceManager->get('Cartasi\Service\CartasiContracts');
 
         return new PaymentsCsvController(
-            $csvService
+            $csvService,
+            $contractsService
         );
     }
 }

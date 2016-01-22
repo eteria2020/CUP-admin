@@ -904,6 +904,19 @@ return [
                                 'action' => 'add-note'
                             ]
                         ]
+                    ],
+                    'csv-resolve' => [
+                        'type' => 'Segment',
+                        'options' => [
+                            'route' => '/csv-resolve/:id',
+                            'constraints' => [
+                                'id'    => '[0-9]*'
+                            ],
+                            'defaults' => [
+                                'controller' => 'PaymentsCsv',
+                                'action' => 'resolve'
+                            ]
+                        ]
                     ]
                 ]
             ],
