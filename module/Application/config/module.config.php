@@ -253,6 +253,19 @@ return [
                             ],
                         ],
                     ],
+                    'ajax-tab-failure' => [
+                        'type'    => 'Segment',
+                        'options' => [
+                            'route'    => '/ajax-tab/failure/:id',
+                            'constraints' => [
+                                'id' => '[0-9]*'
+                            ],
+                            'defaults' => [
+                                'controller' => 'CustomerFailure',
+                                'action' => 'failure-tab',
+                            ],
+                        ],
+                    ],
                     'ajax-card-code' => [
                         'type'    => 'Literal',
                         'options' => [
@@ -970,7 +983,8 @@ return [
             'Application\Controller\Pois' => 'Application\Controller\PoisControllerFactory',
             'Application\Controller\Zones' => 'Application\Controller\ZonesControllerFactory',
             'Application\Controller\CustomersEdit' => 'Application\Controller\CustomersEditControllerFactory',
-            'Application\Controller\EditTrip' => 'Application\Controller\EditTripControllerFactory'
+            'Application\Controller\EditTrip' => 'Application\Controller\EditTripControllerFactory',
+            'Application\Controller\CustomerFailure' => 'Application\Controller\CustomerFailureControllerFactory'
         ]
     ],
     'input_filters' => [
@@ -1073,7 +1087,8 @@ return [
                 ['controller' => 'Application\Controller\Pois', 'roles' => ['superadmin']],
                 ['controller' => 'Application\Controller\Zones', 'roles' => ['superadmin']],
                 ['controller' => 'Application\Controller\CustomersEdit', 'roles' => ['admin']],
-                ['controller' => 'Application\Controller\EditTrip', 'roles' => ['admin']]
+                ['controller' => 'Application\Controller\EditTrip', 'roles' => ['admin']],
+                ['controller' => 'Application\Controller\CustomerFailure', 'roles' => ['admin']]
             ],
         ],
     ],

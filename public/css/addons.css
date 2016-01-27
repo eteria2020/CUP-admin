@@ -33,6 +33,9 @@
 .sng-text-right {
     text-align: right;
 }
+.sng-text-center {
+    text-align: center;
+}
 .sng-full-width {
     width: 100%;
 }
