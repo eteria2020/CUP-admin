@@ -1262,7 +1262,7 @@ return [
                 'icon'            => 'fa fa-line-chart',
                 'resource'        => 'superadmin',
                 'openOnNewWindow' => true,
-                'uri'             => 'reports',
+                'route'           => 'reports',
             ],
             [
                 'label'           => 'Call center',
