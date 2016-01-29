@@ -2,6 +2,7 @@
 
 namespace Application\Controller;
 
+use Application\Form\CsvUploadForm;
 use Cartasi\Exception\InvalidCsvException;
 use Cartasi\Exception\InvalidPathException;
 use Cartasi\Service\CartasiContractsService;
@@ -26,15 +27,23 @@ class PaymentsCsvController extends AbstractActionController
     private $contractsService;
 
     /**
+     * @var CsvUploadForm
+     */
+    private $form;
+
+    /**
      * @param CsvService $csvService
      * @param CartasiContractsService $contractsService
+     * @param CsvUploadForm $form
      */
     public function __construct(
         CsvService $csvService,
-        CartasiContractsService $contractsService
+        CartasiContractsService $contractsService,
+        CsvUploadForm $form
     ) {
         $this->csvService = $csvService;
         $this->contractsService = $contractsService;
+        $this->form = $form;
     }
 
     public function csvAction()
@@ -43,8 +52,11 @@ class PaymentsCsvController extends AbstractActionController
         $csvFiles = $this->csvService->getAllFiles();
         $csvResolvedAnomalies = $this->csvService->getAllResolvedAnomalies();
         $csvUnresolvedAnomalies = $this->csvService->getAllUnresolvedAnomalies();
+        $url = $this->url()->fromRoute('payments/csv-upload');
+        $this->form->setAttribute('action', $url);
 
         return new ViewModel([
+            'form' => $this->form,
             'newFiles' => $newFiles,
             'csvFiles' => $csvFiles,
             'csvResolvedAnomalies' => $csvResolvedAnomalies,
@@ -58,7 +70,7 @@ class PaymentsCsvController extends AbstractActionController
         $csvFile = $this->csvService->addFile($filename, $this->identity());
         $this->csvService->analyzeFile($csvFile);
 
-        return $this->redirect()->toRoute('payments/csv');
+        return $this->reloadList();
     }
 
     public function detailsAction()
@@ -122,6 +134,40 @@ class PaymentsCsvController extends AbstractActionController
         }
 
         return $this->reloadDetails($csvAnomaly->getId());
+    }
+
+    public function uploadAction()
+    {
+        $request = $this->getRequest();
+        if ($request->isPost()) {
+            // Make certain to merge the files info!
+            $post = array_merge_recursive(
+                $request->getPost()->toArray(),
+                $request->getFiles()->toArray()
+            );
+
+            $this->form->setData($post);
+            if ($this->form->isValid()) {
+                $data = $this->form->getData();
+                $csvFile = $this->csvService->addFile(
+                    $data['csv-upload']['tmp_name'],
+                    $this->identity(),
+                    true,
+                    $data['csv-upload']['name']
+                );
+                $this->csvService->analyzeFile($csvFile);
+                $this->flashMessenger()->addSuccessMessage('File caricato con successo');
+            } else {
+                $this->flashMessenger()->addErrorMessage('Errore nel caricamento del file');
+            }
+        }
+
+        return $this->reloadList();
+    }
+
+    private function reloadList()
+    {
+        return $this->redirect()->toRoute('payments/csv');
     }
 
     private function reloadDetails($id)

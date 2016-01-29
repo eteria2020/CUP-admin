@@ -4,6 +4,9 @@ $this->headScript()
     ->appendFile('/js/datatables/media/js/jquery.dataTables.min.js')
     ->appendFile('/js/datatables/plugins/bootstrap/dataTables.bootstrap.js')
     ->appendFile($this->basePath() .'/js/payments-csv.js');
+
+$form = $this->form;
+$form->prepare();
 ?>
 <div class="page-content-wrapper">
     <div class="page-content">
@@ -28,8 +31,34 @@ $this->headScript()
 
                         <div class="tab-content">
 
-                            <!-- BEGIN file list tab -->
+                            <!-- BEGIN file tab -->
                             <div class="tab-pane active" id="tab_1_1">
+
+                            <?php echo $this->partial('partials/flash-messages.phtml', []); ?>
+
+                                <!-- BEGIN upload form -->
+                                <?= $this->form()->openTag($form); ?>
+                                <h3>Carica nuovo file</h3>
+                                <div class="row">
+                                    <div class="col-lg-12">
+                                        <div class="row">
+                                            <div class="col-lg-4">
+                                                <div class="form-group">
+                                                    <?= $this->formRow($form->get('csv-upload')); ?>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-lg-4">
+                                                <div class="form-group">
+                                                    <?= $this->formRow($form->get('submit')); ?>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <?= $this->form()->closeTag(); ?>
+                                <!-- END upload form -->
 
                                 <!-- BEGIN new files table -->
                                 <?php if (count($this->newFiles) > 0): ?>
@@ -80,7 +109,7 @@ $this->headScript()
                                 <!-- END loaded files table -->
 
                             </div>
-                            <!-- END file list tab -->
+                            <!-- END file tab -->
 
                             <!-- BEGIN anomalies tab -->
                             <div class="tab-pane " id="tab_1_2">

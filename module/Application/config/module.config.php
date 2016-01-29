@@ -917,6 +917,16 @@ return [
                                 'action' => 'resolve'
                             ]
                         ]
+                    ],
+                    'csv-upload' => [
+                        'type' => 'Segment',
+                        'options' => [
+                            'route' => '/csv-upload',
+                            'defaults' => [
+                                'controller' => 'PaymentsCsv',
+                                'action' => 'upload'
+                            ]
+                        ]
                     ]
                 ]
             ],
