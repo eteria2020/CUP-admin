@@ -6,7 +6,10 @@ $(function() {
     var table = $('#js-payments-table'),
         search = $('#js-value'),
         column = $('#js-column'),
-        typeClean = $('#js-clean-type');
+        typeClean = $('#js-clean-type'),
+        filterWithoutLike = false,
+        columnWithoutLike = false,
+        columnValueWithoutLike = false;
 
     search.val('');
     column.val('select');
@@ -50,8 +53,16 @@ $(function() {
             } );
         },
         "fnServerParams": function ( aoData ) {
-            aoData.push({ "name": "column", "value": $(column).val()});
-            aoData.push({ "name": "searchValue", "value": search.val().trim()});
+            if(filterWithoutLike) {
+                aoData.push({ "name": "column", "value": ''});
+                aoData.push({ "name": "searchValue", "value": ''});
+                aoData.push({ "name": "columnWithoutLike", "value": columnWithoutLike});
+                aoData.push({ "name": "columnValueWithoutLike", "value": columnValueWithoutLike});
+            } else {
+                aoData.push({ "name": "column", "value": $(column).val()});
+                aoData.push({ "name": "searchValue", "value": search.val().trim()});
+            }
+
             aoData.push({ "name": "fixedColumn", "value": "e.status"});
             aoData.push({ "name": "fixedValue", "value": "wrong_payment"});
             aoData.push({ "name": "fixedLike", "value": false});
@@ -78,7 +89,20 @@ $(function() {
             },
             {
                 targets: 6,
-                className: "sng-dt-right"
+                className: "sng-dt-right",
+                "render": function (data) {
+                    return '<a href="/trips/details/' + data +
+                        '" title="Visualizza corsa ID ' + data +
+                        ' ">' + data + '</a>';
+                }
+            },
+            {
+                targets: [1, 2, 3],
+                "render": function (data, type, row) {
+                    return '<a href="/customers/edit/' + row.cu.id +
+                        '" title="Visualizza profilo di ' + row.cu.name +
+                        ' ' + row.cu.surname + ' ">' + data + '</a>';
+                }
             },
             {
                 targets: 7,
@@ -152,6 +176,10 @@ $(function() {
     });
 
     $('#js-search').click(function() {
+        // Always set the columnValueWithoutLike (even for columns that will be filtered with the "LIKE" stmt.).
+        columnValueWithoutLike = search.val();
+
+        // Filter Action
         table.fnFilter();
     });
 
@@ -162,4 +190,34 @@ $(function() {
         search.show();
         column.val('select');
     });
+
+    // Select Changed Action
+    $(column).change(function() {
+        // Selected Column
+        var value = $(this).val();
+
+        // Column that need the standard "LIKE" search operator
+        if (value === 'cu.surname') {
+            filterWithoutLike = false;
+            search.val('');
+            search.prop('disabled', false);
+            typeClean.hide();
+            search.show();
+        } else {
+            filterWithoutLike = true;
+            search.val('');
+            search.prop('disabled', false);
+            typeClean.hide();
+            search.show();
+
+            switch (value) {
+                // Columns that need a "=" instead the standard "LIKE" search operator.
+                case 'e.trip':
+                    columnWithoutLike = value;
+                    //columnValueWithoutLike = true;
+                    break;
+            }
+        }
+    });
+
 });

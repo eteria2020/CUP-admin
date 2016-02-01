@@ -167,6 +167,8 @@ $(function() {
                 return 'Corse';
             case 'PENALTY':
                 return 'Sanzione';
+            case 'BONUS_PACKAGE':
+                return 'Pacchetto minuti';
         }
     }
 

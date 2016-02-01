@@ -1,23 +1,21 @@
 <?php
 namespace Application\Controller;
 
+use Application\Form\InputData\CloseTripDataFactory;
 use Application\Form\TripCostForm;
-use Application\Form\EditTripForm;
-use SharengoCore\Service\TripsService;
-use SharengoCore\Service\TripCostComputerService;
-use SharengoCore\Service\EventsService;
-use SharengoCore\Service\EditTripsService;
-use SharengoCore\Entity\TripPayments;
-use SharengoCore\Entity\Invoices;
+use SharengoCore\Entity\Trips;
 use SharengoCore\Exception\EditTripDeniedException;
-use SharengoCore\Exception\EditTripWrongDateException;
 use SharengoCore\Exception\EditTripNotDateTimeException;
+use SharengoCore\Exception\EditTripWrongDateException;
+use SharengoCore\Exception\InvalidFormInputData;
+use SharengoCore\Exception\TripNotFoundException;
+use SharengoCore\Service\EventsService;
+use SharengoCore\Service\TripCostComputerService;
+use SharengoCore\Service\TripsService;
 
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\JsonModel;
 use Zend\View\Model\ViewModel;
-use Zend\EventManager\EventManager;
-use DoctrineModule\Stdlib\Hydrator\DoctrineObject as DoctrineHydrator;
 
 class TripsController extends AbstractActionController
 {
@@ -42,43 +40,22 @@ class TripsController extends AbstractActionController
     private $eventsService;
 
     /**
-     * @var EditTripsService
+     * @var CloseTripDataFactory
      */
-    private $editTripsService;
-
-    /**
-     * @var EditTripForm
-     */
-    private $editTripForm;
-
-    /**
-     * @var DoctrineHydrator
-     */
-    private $hydrator;
-
-    /**
-     * @var EventManager
-     */
-    private $eventManager;
+    private $closeTripDataFactory;
 
     public function __construct(
         TripsService $tripsService,
         TripCostForm $tripCostForm,
         TripCostComputerService $tripCostComputerService,
         EventsService $eventsService,
-        EditTripsService $editTripsService,
-        EditTripForm $editTripForm,
-        EventManager $eventManager,
-        DoctrineHydrator $hydrator
+        CloseTripDataFactory $closeTripDataFactory
     ) {
         $this->tripsService = $tripsService;
         $this->tripCostForm = $tripCostForm;
         $this->tripCostComputerService = $tripCostComputerService;
         $this->eventsService = $eventsService;
-        $this->editTripsService = $editTripsService;
-        $this->editTripForm = $editTripForm;
-        $this->eventManager = $eventManager;
-        $this->hydrator = $hydrator;
+        $this->closeTripDataFactory = $closeTripDataFactory;
     }
 
     public function indexAction()
@@ -105,14 +82,10 @@ class TripsController extends AbstractActionController
     protected function _getRecordsFiltered($as_filters, $i_tripsTotal)
     {
         if (empty($as_filters['searchValue']) && !isset($as_filters['columnNull'])) {
-
             return $i_tripsTotal;
-
         } else {
-
             $as_filters['withLimit'] = false;
-
-            return count($this->tripsService->getDataDataTable($as_filters));
+            return $this->tripsService->getDataDataTable($as_filters, true);
         }
     }
 
@@ -188,59 +161,43 @@ class TripsController extends AbstractActionController
         return $view;
     }
 
-    public function editTabAction()
+    public function closeTabAction()
     {
-        $id = (int)$this->params()->fromRoute('id', 0);
+        $id = $this->params()->fromRoute('id', 0);
 
         $trip = $this->tripsService->getTripById($id);
 
-        if ($this->getRequest()->isPost()) {
-            $postData = $this->getRequest()->getPost()->toArray();
-
-            try {
-                $this->editTripsService->editTrip(
-                    $trip,
-                    !$postData['trip']['payable'],
-                    date_create_from_format('d-m-Y H:i:s', $postData['trip']['timestampEnd'])
-                );
-
-                $this->eventManager->trigger('trip-edited', $this, [
-                    'topic' => 'trips',
-                    'trip_id' => $trip->getId(),
-                    'action' => 'Edit trip data: payable ' . ($postData['trip']['payable'] ? 'true' : 'false') . ', end date ' . $postData['trip']['timestampEnd']
-                ]);
-
-                $this->flashMessenger()->addSuccessMessage('Modifica effettuta con successo!');
-            } catch (EditTripDeniedException $e) {
-                $this->flashMessenger()->addErrorMessage('La corsa non può essere modificata perché non è conclusa o il processo di pagamento è già iniziato.');
-            } catch (EditTripWrongDateException $e) {
-                $this->flashMessenger()->addErrorMessage('La data specificata non può essere precedente alla data di inizio della corsa');
-            } catch (EditTripNotDateTimeException $e) {
-                $this->flashMessenger()->addErrorMessage('La data specificata non è nel formato corretto. Verifica i dati inseriti.');
-            } catch (\Exception $e) {
-                $this->flashMessenger()->addErrorMessage('Si è verificato un errore applicativo. L\'assistenza tecnica è già al corrente, ci scusiamo per l\'inconveniente');
-            }
-
-            return $this->redirect()->toUrl('/trips/details/' . $trip->getId() . '?tab=edit');
+        if (!$trip instanceof Trips) {
+            throw new TripNotFoundException();
         }
 
         $events = $this->eventsService->getEventsByTrip($trip);
 
-        $tripArray = $trip->toArray($this->hydrator, []);
-
-        if ($trip->isEnded()) {
-            $tripArray['timestampEnd'] = $tripArray['timestampEnd']->format('d-m-Y H:i:s');
-        }
-
-        $this->editTripForm->setData(['trip' => $tripArray]);
-
         $view = new ViewModel([
             'trip' => $trip,
-            'events' => $events,
-            'editTripForm' => $this->editTripForm
+            'events' => $events
         ]);
         $view->setTerminal(true);
 
         return $view;
+    }
+
+    public function doCloseAction()
+    {
+        $data = $this->params()->fromPost();
+
+        try {
+            $inputData = $this->closeTripDataFactory->createFromArray($data);
+
+            $this->tripsService->closeTrip($inputData, $this->identity());
+
+            $this->flashMessenger()->addSuccessMessage('Corsa chiusa con successo');
+
+            return $this->redirect()->toRoute('trips/details', ['id' => $data['id']]);
+        } catch (InvalidFormInputData $e) {
+            $this->flashMessenger()->addErrorMessage($e->getMessage());
+
+            return $this->redirect()->toRoute('trips/details', ['id' => $data['id']], ['query' => ['tab' => 'close']]);
+        }
     }
 }

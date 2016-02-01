@@ -2,7 +2,8 @@
 
 namespace Application\Controller;
 
-use Application\Form\ExtraPaymentsForm;
+use Application\Form\FaresForm;
+use SharengoCore\Service\FaresService;
 use SharengoCore\Service\TripPaymentsService;
 use SharengoCore\Service\PaymentsService;
 use SharengoCore\Service\CustomersService;
@@ -12,6 +13,7 @@ use Cartasi\Service\CartasiCustomerPayments;
 use SharengoCore\Service\PenaltiesService;
 use SharengoCore\Exception\FleetNotFoundException;
 use SharengoCore\Service\FleetService;
+use SharengoCore\Service\RecapService;
 
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\JsonModel;
@@ -33,11 +35,6 @@ class PaymentsController extends AbstractActionController
      * @var CustomersService
      */
     private $customersService;
-
-    /**
-     * @var ExtraPaymentsForm
-     */
-    private $extraPaymentsForm;
 
     /**
      * @var CartasiContractsService
@@ -64,26 +61,45 @@ class PaymentsController extends AbstractActionController
      */
     private $fleetService;
 
+    /**
+     * @var RecapService
+     */
+    private $recapService;
+
+    /**
+     * @var FaresService
+     */
+    private $faresService;
+
+    /**
+     * @var FaresForm;
+     */
+    private $faresForm;
+
     public function __construct(
         TripPaymentsService $tripPaymentsService,
         PaymentsService $paymentsService,
         CustomersService $customersService,
-        ExtraPaymentsForm $extraPaymentsForm,
         CartasiContractsService $cartasiContractsService,
         CartasiCustomerPayments $cartasiCustomerPayments,
         ExtraPaymentsService $extraPaymentsService,
         PenaltiesService $penaltiesService,
-        FleetService $fleetService
+        FleetService $fleetService,
+        RecapService $recapService,
+        FaresService $faresService,
+        FaresForm $faresForm
     ) {
         $this->tripPaymentsService = $tripPaymentsService;
         $this->paymentsService = $paymentsService;
         $this->customersService = $customersService;
-        $this->extraPaymentsForm = $extraPaymentsForm;
         $this->cartasiContractsService = $cartasiContractsService;
         $this->cartasiCustomerPayments = $cartasiCustomerPayments;
         $this->extraPaymentsService = $extraPaymentsService;
         $this->penaltiesService = $penaltiesService;
         $this->fleetService = $fleetService;
+        $this->recapService = $recapService;
+        $this->faresService = $faresService;
+        $this->faresForm = $faresForm;
     }
 
     public function failedPaymentsAction()
@@ -144,11 +160,13 @@ class PaymentsController extends AbstractActionController
     {
         $id = (int)$this->params()->fromRoute('id', 0);
 
+        $webuser = $this->identity();
+
         $tripPayment = $this->tripPaymentsService->getTripPaymentById($id);
 
         if ($tripPayment->isWrongPayment()) {
             // the second parameter is needed to avoid sending an email to the customer
-            $cartasiResponse = $this->paymentsService->tryTripPayment($tripPayment, true, false, false, true);
+            $cartasiResponse = $this->paymentsService->tryTripPayment($tripPayment, $webuser, true, false, false, true);
 
             if ($cartasiResponse->getOutcome() === 'OK') {
                 $this->customersService->setCustomerPaymentAble($tripPayment->getCustomer());
@@ -156,7 +174,8 @@ class PaymentsController extends AbstractActionController
 
             return new JsonModel([
                 'outcome' => $cartasiResponse->getOutcome(),
-                'message' => $cartasiResponse->getMessage()
+                'message' => $cartasiResponse->getMessage(),
+                'tripPaymentTriesId' => $tripPayment->getTripPaymentTries()[0]->getId()
             ]);
         } else {
             return new JsonModel([
@@ -169,20 +188,29 @@ class PaymentsController extends AbstractActionController
     public function extraAction()
     {
         $penalties = $this->penaltiesService->getAllPenalties();
+        $fleets = $this->fleetService->getAllFleets();
+        $types = $this->extraPaymentsService->getAllTypes();
 
         return new ViewModel([
-            'form' => $this->extraPaymentsForm,
+            'fleets' => $fleets,
+            'types' => $types,
             'penalties' => $penalties
         ]);
+
+        foreach($this->penalties as $penalty) {
+            echo '<option data-reason="' . $penalty->getReason() . '" data-amount="' . $penalty->getAmount() . '">' .
+                $penalty->getReason() . number_format($penalty->getAmount()/100, 2) . '&euro' .
+                '</option>';
+        }
     }
 
     public function payExtraAction()
     {
         $customerId = $this->params()->fromPost('customerId');
         $fleetId = $this->params()->fromPost('fleetId');
-        $paymentType = $this->params()->fromPost('paymentType');
-        $reason = $this->params()->fromPost('reason');
-        $amount = $this->params()->fromPost('amount');
+        $type = $this->params()->fromPost('type');
+        $reasons = $this->params()->fromPost('reasons');
+        $amounts = $this->params()->fromPost('amounts');
 
         try {
             $customer = $this->customersService->findById($customerId);
@@ -212,6 +240,11 @@ class PaymentsController extends AbstractActionController
                 ]);
             }
 
+
+            $amount = 0;
+            foreach ($amounts as $value) {
+                $amount += intval($value);
+            }
             $response = $this->cartasiCustomerPayments->sendPaymentRequest($customer, $amount);
 
             if (!$response->getCompletedCorrectly()) {
@@ -224,9 +257,11 @@ class PaymentsController extends AbstractActionController
             $extraPayment = $this->extraPaymentsService->registerExtraPayment(
                 $customer,
                 $fleet,
+                $response->getTransaction(),
                 $amount,
-                $paymentType,
-                $reason
+                $type,
+                $reasons,
+                $amounts
             );
 
             return new JsonModel([
@@ -243,12 +278,12 @@ class PaymentsController extends AbstractActionController
     public function recapAction()
     {
         // Get months
-        $months = $this->tripPaymentsService->getAvailableMonths();
+        $months = $this->recapService->getAvailableMonths();
 
         // Get the selected month or default to last available
         $date = '';
         if (is_null($this->params()->fromQuery('date'))) {
-            $date = $months[0]['tp_date'];
+            $date = $months[0]['date'];
         } else {
             $date = $this->params()->fromQuery('date');
         }
@@ -256,19 +291,49 @@ class PaymentsController extends AbstractActionController
         // Get all fleets
         $fleets = $this->fleetService->getAllFleets();
         // Get income for each day of the selected month
-        $dailyIncome = $this->tripPaymentsService->getDailyIncomeForMonth($date);
+        $dailyIncome = $this->recapService->getDailyIncomeForMonth($date);
         // Get income for last 4 weeks
-        $weeklyIncome = $this->tripPaymentsService->getWeeklyIncome();
+        $weeklyIncome = $this->recapService->getWeeklyIncome();
         // Get income for last 12 months
-        $monthlyIncome = $this->tripPaymentsService->getMonthlyIncome();
+        $monthlyIncome = $this->recapService->getMonthlyIncome();
 
         return new ViewModel([
             'months' => $months,
             'selectedMonth' => $date,
+            'isLastMonth' => $date == $months[0]['date'],
             'fleets' => $fleets,
             'daily' => $dailyIncome,
             'weekly' => $weeklyIncome,
             'monthly' => $monthlyIncome
+        ]);
+    }
+
+    public function faresAction()
+    {
+        $form = $this->faresForm;
+
+        if ($this->getRequest()->isPost()) {
+            $postData = $this->getRequest()->getPost()->toArray();
+            $form->setData($postData);
+
+            if ($form->isValid()) {
+                try {
+                    if ($this->faresService->saveData($form->getData())) {
+                        $this->flashMessenger()->addSuccessMessage('Tariffa creata con successo!');
+                    } else {
+                        $this->flashMessenger()->addInfoMessage('Tariffa invariata');
+                    }
+                } catch (\Exception $e) {
+                    $this->flashMessenger()->addErrorMessage('Si è verificato un errore applicativo. L\'assistenza tecnica è già al corrente, ci scusiamo per l\'inconveniente');
+
+                }
+
+                return $this->redirect()->toRoute('payments/fares');
+            }
+        }
+
+        return new ViewModel([
+            'faresForm' => $form
         ]);
     }
 }

@@ -1,0 +1,53 @@
+<!-- Events table -->
+<div class="row">
+    <div class="col-md-12">
+        <div class="portlet box green">
+            <!-- Header -->
+            <div class="portlet-title">
+                <div class="caption">
+                    <i class="fa fa-cogs"></i>Elenco eventi
+                </div>
+            </div>
+            <!-- header -->
+            <!-- Body -->
+            <div class="portlet-body">
+                <table class="table table-striped table-bordered table-hover events-table">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Data</th>
+                            <th>Batteria</th>
+                            <th>Km</th>
+                            <th>Evento</th>
+                            <th>Label</th>
+                            <th>Valore</th>
+                            <th>Intval</th>
+                            <th>Posizione</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php foreach($this->events as $event): ?>
+                            <tr>
+                                <td><?= $event->getId() ?></td>
+                                <td class="event-time"><?= $event->getEventTime()->format('d-m-Y H:i:s') ?></td>
+                                <td><?= $event->getBattery() . '%' ?></td>
+                                <td><?= $event->getKm() ?></td>
+                                <td><?= $event->getEventId() ?></td>
+                                <td><?= $event->getLabel() ?></td>
+                                <td><?= $event->getTxtval() ?></td>
+                                <td><?= $event->getIntval() ?></td>
+                                <td>
+                                    <a href="http://maps.google.com/?q=<?= $event->getLat() ?>,<?= $event->getLon() ?>" target="_blank">
+                                        <?= 'Lat/Lon: ' . $event->getLat() . ' ' . $event->getLon() ?>
+                                    </a>
+                                </td>
+                            </tr>
+                        <?php endforeach; ?>
+                    </tbody>
+                </table>
+            </div>
+            <!-- body -->
+        </div>
+    </div>
+</div>
+<!-- events table -->

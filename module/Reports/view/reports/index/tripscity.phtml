@@ -1,0 +1,159 @@
+<?
+    $this->inlineScript()
+        ->appendFile('/assets-modules/reports/js/vendor.trips.city.js')
+        ->prependScript('
+            // Getting the actual city id (from the controller), and save it to js $.oe vars
+            var thiscity='.$this->city.';
+        ');
+
+    $this->headLink()
+        ->appendStylesheet('/assets-modules/reports/css/vendor.trips.city.css');
+
+?>
+<!-- Begin page content -->
+<div class="container bs-docs-container">
+    <div class="page-header">
+        <h1>Trips Report</h1>
+    </div>
+
+    <div class="row">
+        <div class="col-md-9" role="main">
+            <p class="lead">
+                <div id='data-count'>
+                <!--  <span class='filter-count'></span> selected out of <span class='total-count'></span> records -->
+                </div>
+            </p>
+
+            <br>
+
+            <div class="panel panel-default  affix-top" id="data-range">
+                <div class="panel-heading">
+                    Intervallo (Ultimi 28 giorni)
+                </div>
+                <div class="panel-body">
+                    <div id="days-chart">
+                        <span class="reset" style="display: none;"> filtro: <span class="filter"></span></span>
+                        <a class="reset" href="javascript:$.oe.charts.day.filterAll();dc.redrawAll();" style="display: none;"> Azzera </a>
+                        <div class="clearfix"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="panel panel-default" id="day-of-week">
+                <div class="panel-heading">
+                    Corse per giorno della settimana
+                </div>
+                <div class="panel-body">
+                    <div id="day-of-week-chart">
+                        <span class="reset" style="display: none;">filtro: <span class="filter"></span></span>
+                        <a class="reset" href="javascript:$.oe.charts.dayOfWeek.filterAll();dc.redrawAll();" style="display: none;"> Azzera </a>
+                        <div class="clearfix"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="panel panel-default" id="duration">
+                <div class="panel-heading">
+                    Corse per durata (minuti)
+                </div>
+                <div class="panel-body">
+                    <div id="duration-chart">
+                        <span class="reset" style="display: none;">filtro: <span class="filter"></span></span>
+                        <a class="reset" href="javascript:$.oe.charts.durationChart.filterAll();dc.redrawAll();" style="display: none;"> Azzera </a>
+                        <div class="clearfix"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="panel panel-default" id="beginning-hour">
+                <div class="panel-heading">
+                    Corse ora di inizio
+                </div>
+                <div class="panel-body">
+                    <div id="beginning-hour-chart">
+                        <span class="reset" style="display: none;">filtro: <span class="filter"></span></span>
+                        <a class="reset" href="javascript:$.oe.charts.beginningHour.filterAll();dc.redrawAll();" style="display: none;"> Azzera </a>
+                        <div class="clearfix"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row" id="bio-data">
+                <div class="col-xs-12 col-sm-6 col-md-6">
+                    <div class="panel panel-default" id="customer-age">
+                        <div class="panel-heading">
+                            Suddivisione per Categoria di Et&agrave;
+                        </div>
+                        <div class="panel-body">
+                            <div id="age-chart">
+                                <span class="reset" style="display: none;">range: <span class="filter"></span></span>
+                                <a class="reset" href="javascript:$.oe.charts.age.filterAll();dc.redrawAll();" style="display: none;"> Azzera </a>
+                                <div class="clearfix"></div>
+                            </div>
+                            <div class="chart-label ">
+                                <span class="glyphicon glyphicon-stop" aria-hidden="true"></span> = 45-54&nbsp;&nbsp;&nbsp;
+                                <span class="glyphicon glyphicon-stop" aria-hidden="true"></span> = 55-64&nbsp;&nbsp;&nbsp;
+                                <span class="glyphicon glyphicon-stop" aria-hidden="true"></span> = Over 65
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class=" col-xs-12 col-sm-6 col-md-6">
+                    <div class="panel panel-default" id="customer-gender">
+                        <div class="panel-heading">
+                            Suddivisione per sesso
+                        </div>
+                        <div class="panel-body">
+                            <div id="gender-chart">
+                                <span class="reset" style="display: none;">filtro: <span class="filter"></span></span>
+                                <a class="reset" href="javascript:$.oe.charts.gender.filterAll();dc.redrawAll();" style="display: none;"> Azzera </a>
+                                <div class="clearfix"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="panel panel-default" id="area-map">
+                <div class="panel-heading">
+                    Quartieri
+                </div>
+                <div class="panel-body">
+                    <div id="area-map-chart" class="area-chart">
+                        <span class="reset" style="display: none;">selezionati: <span class="filter"></span></span>
+                        <a class="reset" href="javascript:$.oe.charts.areaChart.filterAll();dc.redrawAll();" style="display: none;"> Azzera </a>
+                        <div class="clearfix"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="panel panel-default" id="area-list">
+                <div class="panel-heading">
+                    Lista Quartieri
+                </div>
+                <div class="panel-body">
+                    <div id="area-list-chart">
+                        <span class="reset" style="display: none;">selezionati: <span class="filter"></span></span>
+                        <a class="reset" href="javascript:$.oe.charts.areaListChart.filterAll();dc.redrawAll();" style="display: none;"> Azzera </a>
+                        <div class="clearfix"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div style='clear:both;'></div>
+        </div>
+        <div class="col-md-3" role="complementary">
+            <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix">
+                <ul class="nav bs-docs-sidenav"  data-spy="affix" data-offset-top="100" data-offset-bottom="0">
+                    <li><a href="#data-range">Intervallo Dati</a></li>
+                    <li><a href="#day-of-week">Giorno della Settimana</a></li>
+                    <li><a href="#duration">Durata della Corsa</a></li>
+                    <li><a href="#beginning-hour">Ora di inizio Corsa</a></li>
+                    <li><a href="#customer-age">Fascia di Et&agrave;</a></li>
+                    <li><a href="#customer-gender">Sesso</a></li>
+                    <li><a href="#area-map">Quartiere</a></li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+</div>

@@ -142,6 +142,16 @@ $formSetting = $this->settingForm->prepare();
                     </div>
 
                     <div class="col-lg-4">
+                        <div class="form-group">
+                            <label for="id">Id</label>
+                            <?php $idElement = $form->get('customer')->get('id');
+                                $idElement->setAttributes(['type'=>'text','readonly'=>'true','class'=>'form-control']);
+                            ?>
+                            <?= $this->formRow($idElement); ?>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-4">
                     </div>
                 </div>
 
@@ -186,11 +196,20 @@ $formSetting = $this->settingForm->prepare();
 
                     <div class="col-lg-4">
                         <div class="form-group">
+                            <label for="driverLicenseName">Cognome sulla patente</label>
+                            <?= $this->formRow($formDriver->get('driver')->get('driverLicenseSurname')->setAttribute('readonly', 'true')); ?>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-4">
+                        <div class="form-group">
                             <label for="driverLicenseCountry">Rilasciata da (nazione)</label>
                             <?= $this->formRow($formDriver->get('driver')->get('driverLicenseCountry')->setAttribute('disabled', 'true')); ?>
                         </div>
                     </div>
+                </div>
 
+                <div class="row">
                     <div class="col-lg-4">
                         <div class="form-group">
                             <label for="driverLicenseExpire">Data di scadenza</label>
@@ -262,6 +281,32 @@ $formSetting = $this->settingForm->prepare();
                             <label for="gender">Data/Ora</label>
                             <h4>Iscrizione:<br><?= is_object($this->customer->getInsertedTs()) ? $this->customer->getInsertedTs()->format('d-m-Y - H:i:s') : ''; ?></h4>
                             <h4><?= is_object($this->customer->getUpdateTs()) ? 'Ultima Modifica: ' . $this->customer->getUpdateTs()->format('d-m-Y - H:i:s') : ''; ?></h4>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="form-group">
+                            <label for="maintainer">Maintainer</label>
+                            <?php if($this->customer->getMaintainer()): ?>
+                                <div class="alert alert-success">Si</div>
+                            <?php else: ?>
+                                <div class="alert alert-danger">No</div>
+                            <?php endif; ?>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="form-group">
+                            <label for="goldList">Gold List</label>
+                            <?php if($this->customer->getGoldList()): ?>
+                                <div class="alert alert-success">Si</div>
+                            <?php else: ?>
+                                <div class="alert alert-danger">No</div>
+                            <?php endif; ?>
                         </div>
                     </div>
                 </div>

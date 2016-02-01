@@ -50,6 +50,9 @@ $(function() {
             {data: 'clean'},
             {data: 'position'},
             {data: 'e.status'},
+            {data: 'ci.gps'},
+            {data: 'ci.firmwareVersion'},
+            {data: 'ci.softwareVersion'},
             {data: 'positionLink'},
             {data: 'button'}
         ],
@@ -65,10 +68,25 @@ $(function() {
             },
             {
                 targets: 9,
-                sortable: false
+                sortable: true,
+                type: 'string'
             },
             {
                 targets: 10,
+                sortable: true,
+                type: 'string'
+            },
+            {
+                targets: 11,
+                sortable: true,
+                type: 'string'
+            },
+            {
+                targets: 12,
+                sortable: false
+            },
+            {
+                targets: 13,
                 data: 'button',
                 searchable: false,
                 sortable: false,
@@ -123,7 +141,7 @@ $(function() {
         column.val('select');
         filterWithoutLike = false;
     });
-    
+
     $('#js-cars-table').on('click', '.js-delete', function() {
         return confirm("Confermi l'eliminazione dell'auto? L'operazione non è annullabile");
     });
@@ -132,7 +150,7 @@ $(function() {
 
         var value = $(this).val();
 
-        if (value == 'e.plate' || value == 'e.label' || value == 'f.name') {
+        if (value == 'e.plate' || value == 'e.label' || value == 'f.name' || value == 'ci.gps' || value == 'ci.firmwareVersion' || value == 'ci.softwareVersion') {
 
             filterWithoutLike = false;
             search.val('');

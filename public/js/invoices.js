@@ -45,6 +45,12 @@ $(function() {
                 }
             },
             {
+                targets: [2, 3],
+                "render": function ( data, type, row ) {
+                    return '<a href="/customers/edit/'+row.e.customerId+'" title="Visualizza profilo di '+row.e.customerName+' '+row.e.customerSurname+'">'+data+'</a>';
+                }
+            },
+            {
                 targets: 4,
                 "render": function ( data, type, row ) {
                     return renderType(data);
@@ -148,6 +154,8 @@ $(function() {
                 return 'Corse';
             case 'PENALTY':
                 return 'Sanzione';
+            case 'BONUS_PACKAGE':
+                return 'Pacchetto bonus';
         }
     }
 

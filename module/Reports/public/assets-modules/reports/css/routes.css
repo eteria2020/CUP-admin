@@ -1,0 +1,284 @@
+/**
+ *      journey2web.css			-			Style sheet
+ *      
+ *      Copyright © 2011, Florian Birée <florian@biree.name>
+ *      
+ *      This file is a part of Journey2web
+ *
+ *      Based on the design Innovation by Free CSS Templates
+ *      <http://www.freecsstemplates.org>
+ *      Released for free under a Creative Commons Attribution 2.5 License
+ *            
+**/
+
+/* Step list:
+*************/
+
+.col-md-10.leftbar,.col-md-2.rightbar{
+	height:100%;
+}
+
+.row.mainrow{
+	height:800px;
+}
+
+.map{
+	height: 800px;
+	width: 100%;
+background: transparent
+}
+
+.labeldate{
+	text-align: right;
+}
+
+.labeldate span{
+	vertical-align: middle;
+    line-height: 33px;
+}
+
+.dataslider{
+	text-align:left;
+}
+
+.dataslider span{
+	vertical-align: middle;
+    line-height: 33px;
+	margin-left: 20px;
+}
+
+
+#steps{
+  	height: 100%;
+}
+
+#steps .panel-body{
+	padding: 0 !important;
+}
+
+#steps ol{
+    /*border: 1px solid #4E7301;
+    background: #ece29f; */
+    max-height:88%;
+    /*margin: 0;
+    padding: 0;*/
+    height:100%;
+    overflow: auto;
+    display: block;
+}
+#steps ol li {
+	/*
+    padding: 0;
+    margin: 0;
+    border: none;
+    display:block;
+    clear:both;*/
+}
+#steps .way{
+	/*
+    background: #a1b747;
+    border-top: 1px solid #4E7301;
+    border-bottom: 1px solid #4E7301;
+	*/
+}
+#steps .place{
+    background: #ece29f;
+}
+#steps .hover{
+    background: red !important;
+    color: black;
+}
+#steps .date{
+    display: block;
+    float: left;
+    margin-left:0;
+    width:3em;
+    text-align: center;
+    background:#a1b747;
+    border-right: 1px solid #4E7301;
+    border-bottom: 1px solid #4E7301;
+    padding-top: 0.3em;
+    margin-right: 0.5em;
+}
+#steps .date .day{
+    font-weight: bold;
+    font-size: 1.5em;
+    line-height: 0.7;
+}
+#steps .month, #steps .year{
+    font-variant: small-caps;
+    font-weight:bold;
+    font-size: 0.75em;
+    line-height: 0.7;
+}
+#steps .duration, #steps .distance, #steps .hdiff, #steps .gpx{
+    font-style: italic;
+    color:black;
+    font-size: 90%;
+}
+.gpx{
+    font-variant: small-caps;
+}
+
+/* Content:
+***********/
+
+#content {
+    margin-right: 16%;
+    padding-top:20px;
+    height: 90%;
+    z-index: 10;
+}
+
+#content #map{
+    height: 100%;
+    width: 100%;
+    background: white;
+}
+
+#hoverenable{
+	float:right;
+}
+
+#fixview{
+    float:right;
+}
+
+/*#maintainer*/
+#menubar .bootstrap-switch{
+	float:right;
+	margin-right:5px;
+}
+
+#menubar{
+	margin-bottom:5px;
+}
+
+.side.panel[disabled]{
+	cursor: not-allowed !important;
+	filter: alpha(opacity=65);
+	-webkit-box-shadow: none;
+	box-shadow: none;
+	opacity: .65;
+	overflow: hidden!important;
+}
+
+.side.panel[disabled] > ol{
+	overflow: hidden!important;
+}
+
+.map[disabled]{
+	cursor: not-allowed !important;
+	filter: alpha(opacity=65);
+	-webkit-box-shadow: none;
+	box-shadow: none;
+	opacity: .65;
+	overflow: hidden!important;
+}
+
+.glyphicon-refresh-animate {
+    -animation: spin .7s infinite linear;
+    -webkit-animation: spin2 .7s infinite linear;
+}
+
+div#over{
+	left: 0;
+	top: 0;
+	overflow: hidden;
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	background: rgba(255, 255, 255, 0.8);
+}
+
+div#over span{
+	left: 50%;
+	top: 45%;
+	overflow: hidden;
+	font-size: 4em;
+}
+
+@-webkit-keyframes spin2 {
+    from { -webkit-transform: rotate(0deg);}
+    to { -webkit-transform: rotate(360deg);}
+}
+
+@keyframes spin {
+    from { transform: scale(1) rotate(0deg);}
+    to { transform: scale(1) rotate(360deg);}
+}
+
+/******** OVERRIDE BOOTSTRAP *********/
+.page-header{
+    padding-bottom: 0px !important;
+    margin: 0px 0 30px !important;
+}
+
+.page-header h1{
+    margin-top: 0px !important;
+}
+/******** END OVERRIDE BOOTSTRAP *****/
+
+.tripsprogression{
+    padding-top: 7px;
+}
+.tripsprogression .slider.slider-horizontal{
+    width: 100%;
+}
+
+.tooltip.point-tooltip {
+    position: relative;
+    background: rgba(0, 0, 0, 0.8);
+    border-radius: 4px;
+    color: white;
+    padding: 4px 8px;
+    opacity: 0.7;
+    white-space: nowrap;
+}
+.tooltip.point-tooltip .tooltip-measure {
+    opacity: 1;
+    font-weight: bold;
+}
+.tooltip.point-tooltip .tooltip-static {
+    background-color: #ffcc33;
+    color: black;
+    border: 1px solid white;
+}
+.tooltip.point-tooltip .tooltip-measure:before,
+.tooltip.point-tooltip .tooltip-static:before {
+    border-top: 6px solid rgba(0, 0, 0, 0.5);
+    border-right: 6px solid transparent;
+    border-left: 6px solid transparent;
+    content: "";
+    position: absolute;
+    bottom: -6px;
+    margin-left: -7px;
+    left: 50%;
+}
+.tooltip.point-tooltip .tooltip-static:before {
+    border-top-color: #ffcc33;
+}
+
+.secondrow{
+    margin-top:3px;
+}
+.secondrow > div{
+    line-height:30px;
+}
+
+.controls .btn-group{
+    width: 100%;
+}
+
+.controls button{
+    width: 33%;
+}
+
+.controls .btn.stop{
+    border-radius: 0px;
+}
+
+li.way div.open-button{
+    float: right;
+    left: 20px;
+}

@@ -37,7 +37,9 @@ return [
              */
             'BjyAuthorize\Provider\Role\Config' => [
                 'guest' => [],
-                'admin' => [],
+                'admin' => ['children' => [
+                        'superadmin' => [],
+                ]],
                 'callcenter' => [],
                 'user' => [],
             ]

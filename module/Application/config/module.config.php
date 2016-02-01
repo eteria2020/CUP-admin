@@ -9,19 +9,19 @@ namespace Application;
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
 
-return array(
-    'router' => array(
-        'routes' => array(
-            'home' => array(
+return [
+    'router' => [
+        'routes' => [
+            'home' => [
                 'type' => 'Literal',
-                'options' => array(
+                'options' => [
                     'route'    => '/',
-                    'defaults' => array(
+                    'defaults' => [
                         'controller' => 'Application\Controller\Index',
                         'action'     => 'index',
-                    ),
-                ),
-            ),
+                    ],
+                ],
+            ],
             'customers' => [
                 'type' => 'Literal',
                 'options' => [
@@ -47,11 +47,11 @@ return array(
                         'type'    => 'Segment',
                         'options' => [
                             'route'    => '/edit/:id',
-                            'constraints' => array(
+                            'constraints' => [
                                 'id' => '[0-9]*'
-                            ),
+                            ],
                             'defaults' => [
-                                'action'        => 'edit',
+                                'action' => 'edit',
                             ],
                         ],
                     ],
@@ -59,9 +59,9 @@ return array(
                         'type'    => 'Segment',
                         'options' => [
                             'route'    => '/remove-card/:id',
-                            'constraints' => array(
+                            'constraints' => [
                                 'id' => '[0-9]*'
-                            ),
+                            ],
                             'defaults' => [
                                 'action'        => 'remove-card',
                             ],
@@ -71,21 +71,57 @@ return array(
                         'type'    => 'Segment',
                         'options' => [
                             'route'    => '/assign-card/:id',
-                            'constraints' => array(
+                            'constraints' => [
                                 'id' => '[0-9]*'
-                            ),
+                            ],
                             'defaults' => [
                                 'action'        => 'assign-card',
                             ],
                         ],
                     ],
+                    'list-card' => [
+                        'type'    => 'Segment',
+                        'options' => [
+                            'route'    => '/card',
+                            'defaults' => [
+                                '__NAMESPACE__' => 'Application\Controller',
+                                'controller'    => 'Customers',
+                                'action'        => 'list-card',
+                            ],
+                        ],
+                        'may_terminate' => true,
+                        'child_routes' => [
+                            'add' => [
+                                'type'    => 'Literal',
+                                'options' => [
+                                    'route'    => '/add',
+                                    'defaults' => [
+                                        '__NAMESPACE__' => 'Application\Controller',
+                                        'controller'    => 'Customers',
+                                        'action'        => 'add-card',
+                                    ],
+                                ],
+                            ],
+                            'datatable' => [
+                                'type'    => 'Literal',
+                                'options' => [
+                                    'route'    => '/datatable',
+                                    'defaults' => [
+                                        '__NAMESPACE__' => 'Application\Controller',
+                                        'controller'    => 'Customers',
+                                        'action'        => 'list-cards-datatable',
+                                    ],
+                                ],
+                            ],
+                        ]
+                    ],
                     'ajax-tab-info' => [
                         'type'    => 'Segment',
                         'options' => [
                             'route'    => '/ajax-tab/info/:id',
-                            'constraints' => array(
+                            'constraints' => [
                                 'id' => '[0-9]*'
-                            ),
+                            ],
                             'defaults' => [
                                 'action'        => 'info-tab',
                             ],
@@ -95,11 +131,51 @@ return array(
                         'type'    => 'Segment',
                         'options' => [
                             'route'    => '/ajax-tab/edit/:id',
-                            'constraints' => array(
+                            'constraints' => [
                                 'id' => '[0-9]*'
-                            ),
+                            ],
                             'defaults' => [
+                                'controller' => 'CustomersEdit',
                                 'action'        => 'edit-tab',
+                            ],
+                        ],
+                    ],
+                    'deactivate' => [
+                        'type' => 'Segment',
+                        'options' => [
+                            'route' => '/deactivate/:id',
+                            'constraints' => [
+                                'id' => '[0-9]*'
+                            ],
+                            'defaults' => [
+                                'controller' => 'CustomersEdit',
+                                'action' => 'deactivate',
+                            ],
+                        ],
+                    ],
+                    'reactivate' => [
+                        'type' => 'Segment',
+                        'options' => [
+                            'route' => '/reactivate/:id',
+                            'constraints' => [
+                                'id' => '[0-9]*'
+                            ],
+                            'defaults' => [
+                                'controller' => 'CustomersEdit',
+                                'action' => 'reactivate',
+                            ],
+                        ],
+                    ],
+                    'edit-deactivation' => [
+                        'type' => 'Segment',
+                        'options' => [
+                            'route' => '/edit/deactivation/:id',
+                            'constraints' => [
+                                'id' => '[0-9]*'
+                            ],
+                            'defaults' => [
+                                'controller' => 'CustomersEdit',
+                                'action' => 'edit-deactivation',
                             ],
                         ],
                     ],
@@ -107,9 +183,9 @@ return array(
                         'type'    => 'Segment',
                         'options' => [
                             'route'    => '/ajax-tab/bonus/:id',
-                            'constraints' => array(
+                            'constraints' => [
                                 'id' => '[0-9]*'
-                            ),
+                            ],
                             'defaults' => [
                                 'action'        => 'bonus-tab',
                             ],
@@ -119,9 +195,9 @@ return array(
                         'type'    => 'Segment',
                         'options' => [
                             'route'    => '/ajax-tab/card/:id',
-                            'constraints' => array(
+                            'constraints' => [
                                 'id' => '[0-9]*'
-                            ),
+                            ],
                             'defaults' => [
                                 'action'        => 'card-tab',
                             ],
@@ -148,6 +224,45 @@ return array(
                             ],
                             'defaults' => [
                                 'action'        => 'contract-tab',
+                            ],
+                        ],
+                    ],
+                    'ajax-tab-notes' => [
+                        'type'    => 'Segment',
+                        'options' => [
+                            'route'    => '/ajax-tab/notes/:id',
+                            'constraints' => [
+                                'id' => '[0-9]*'
+                            ],
+                            'defaults' => [
+                                'controller' => 'CustomerNote',
+                                'action' => 'notes-tab',
+                            ],
+                        ],
+                    ],
+                    'add-note' => [
+                        'type'    => 'Segment',
+                        'options' => [
+                            'route'    => '/note/:id',
+                            'constraints' => [
+                                'id' => '[0-9]*'
+                            ],
+                            'defaults' => [
+                                'controller' => 'CustomerNote',
+                                'action'        => 'add-note',
+                            ],
+                        ],
+                    ],
+                    'ajax-tab-failure' => [
+                        'type'    => 'Segment',
+                        'options' => [
+                            'route'    => '/ajax-tab/failure/:id',
+                            'constraints' => [
+                                'id' => '[0-9]*'
+                            ],
+                            'defaults' => [
+                                'controller' => 'CustomerFailure',
+                                'action' => 'failure-tab',
                             ],
                         ],
                     ],
@@ -268,9 +383,9 @@ return array(
                         'type'    => 'Segment',
                         'options' => [
                             'route'    => '/edit/:plate',
-                            'constraints' => array(
+                            'constraints' => [
                                 'plate' => '[a-zA-Z0-9]*'
-                            ),
+                            ],
                             'defaults' => [
                                 '__NAMESPACE__' => 'Application\Controller',
                                 'controller'    => 'Cars',
@@ -282,9 +397,9 @@ return array(
                         'type'    => 'Segment',
                         'options' => [
                             'route'    => '/delete/:plate',
-                            'constraints' => array(
+                            'constraints' => [
                                 'plate' => '[A-Z0-9]*'
-                            ),
+                            ],
                             'defaults' => [
                                 '__NAMESPACE__' => 'Application\Controller',
                                 'controller'    => 'Cars',
@@ -296,14 +411,50 @@ return array(
                         'type'    => 'Segment',
                         'options' => [
                             'route'    => '/send-command/:plate/:command',
-                            'constraints' => array(
+                            'constraints' => [
                                 'plate' => '[a-zA-Z0-9]*',
                                 'command' => '[0-9]*'
-                            ),
+                            ],
                             'defaults' => [
                                 '__NAMESPACE__' => 'Application\Controller',
                                 'controller'    => 'Cars',
                                 'action'        => 'send-command',
+                            ],
+                        ],
+                    ],
+                    'ajax-tab-edit' => [
+                        'type'    => 'Segment',
+                        'options' => [
+                            'route'    => '/ajax-tab/edit/:plate',
+                            'constraints' => [
+                                'plate' => '[a-zA-Z0-9]*',
+                            ],
+                            'defaults' => [
+                                'action'        => 'edit-tab',
+                            ],
+                        ],
+                    ],
+                    'ajax-tab-commands' => [
+                        'type'    => 'Segment',
+                        'options' => [
+                            'route'    => '/ajax-tab/commands/:plate',
+                            'constraints' => [
+                                'plate' => '[a-zA-Z0-9]*',
+                            ],
+                            'defaults' => [
+                                'action'        => 'commands-tab',
+                            ],
+                        ],
+                    ],
+                    'ajax-tab-damages' => [
+                        'type'    => 'Segment',
+                        'options' => [
+                            'route'    => '/ajax-tab/damages/:plate',
+                            'constraints' => [
+                                'plate' => '[a-zA-Z0-9]*',
+                            ],
+                            'defaults' => [
+                                'action'        => 'damages-tab',
                             ],
                         ],
                     ],
@@ -416,7 +567,38 @@ return array(
                                 'id'    => '[0-9]*'
                             ],
                             'defaults' => [
+                                'controller' => 'EditTrip',
                                 'action' => 'edit-tab'
+                            ]
+                        ]
+                    ],
+                    'close-tab' => [
+                        'type' => 'Segment',
+                        'options' => [
+                            'route' => '/tab/close/:id',
+                            'constraints' => [
+                                'id' => '[0-9]*'
+                            ],
+                            'defaults' => [
+                                'action' => 'close-tab'
+                            ]
+                        ]
+                    ],
+                    'do-close' => [
+                        'type' => 'Literal',
+                        'options' => [
+                            'route' => '/do-close',
+                            'defaults' => [
+                                'action' => 'do-close'
+                            ]
+                        ],
+                        'may_terminate' => false,
+                        'child_routes' => [
+                            'post' => [
+                                'type' => 'Method',
+                                'options' => [
+                                    'verb' => 'post'
+                                ]
                             ]
                         ]
                     ]
@@ -529,6 +711,55 @@ return array(
                     ],
                 ],
             ],
+            'zones' => [
+                'type' => 'Literal',
+                'options' => [
+                    'route' => '/zones',
+                    'defaults' => [
+                        'controller' => 'Application\Controller\Zones',
+                        'action' => 'index'
+                    ]
+                ],
+                'may_terminate' => true,
+                'child_routes' => [
+                    'ajax-tab-trip' => [
+                        'type'    => 'Literal',
+                        'options' => [
+                            'route' => '/ajax-tab-trip',
+                            'defaults' => [
+                                'action' => 'trip-tab',
+                            ],
+                        ],
+                    ],
+                    'zone-alarms' => [
+                        'type'    => 'Literal',
+                        'options' => [
+                            'route' => '/zone-alarms',
+                            'defaults' => [
+                                'action' => 'zone-alarms',
+                            ],
+                        ],
+                    ],
+                    'ajax-tab-groups' => [
+                        'type'    => 'Literal',
+                        'options' => [
+                            'route' => '/ajax-tab-groups',
+                            'defaults' => [
+                                'action' => 'groups-tab',
+                            ],
+                        ],
+                    ],
+                    'ajax-tab-prices' => [
+                        'type'    => 'Literal',
+                        'options' => [
+                            'route' => '/ajax-tab-prices',
+                            'defaults' => [
+                                'action' => 'prices-tab',
+                            ],
+                        ],
+                    ],
+                ],
+            ],
             'payments' => [
                 'type' => 'Literal',
                 'options' => [
@@ -608,86 +839,196 @@ return array(
                                 'action' => 'recap'
                             ]
                         ]
+                    ],
+                    'fares' => [
+                        'type' => 'Segment',
+                        'options' => [
+                            'route' => '/fares',
+                            'defaults' => [
+                                'action' => 'fares'
+                            ]
+                        ]
+                    ]
+                ]
+            ],
+            'configurations' => [
+                'type' => 'Literal',
+                'options' => [
+                    'route' => '/configurations',
+                    'defaults' => [
+                        '__NAMESPACE__' => 'Application\Controller',
+                        'controller' => 'Configurations'
+                    ]
+                ],
+                'may_terminate' => false,
+                'child_routes' => [
+                    'manage-alarm' => [
+                        'type' => 'Segment',
+                        'options' => [
+                            'route' => '/manage-alarm/',
+                            'defaults' => [
+                                'action' => 'manageAlarm'
+                            ]
+                        ]
+                    ],
+                    'manage-pois' => [
+                        'type' => 'Segment',
+                        'options' => [
+                            'route' => '/manage-pois',
+                            'defaults' => [
+                                'controller' => 'Pois',
+                                'action' => 'index'
+                            ]
+                        ],
+                        'may_terminate' => true,
+                        'child_routes' => [
+                            'datatable' => [
+                                'type'    => 'Literal',
+                                'options' => [
+                                    'route'    => '/datatable',
+                                    'defaults' => [
+                                        '__NAMESPACE__' => 'Application\Controller',
+                                        'controller'    => 'Pois',
+                                        'action'        => 'datatable',
+                                    ],
+                                ],
+                            ],
+                            'add' => [
+                                'type'    => 'Literal',
+                                'options' => [
+                                    'route'    => '/add',
+                                    'defaults' => [
+                                        '__NAMESPACE__' => 'Application\Controller',
+                                        'controller'    => 'Pois',
+                                        'action'        => 'add',
+                                    ],
+                                ],
+                            ],
+                            'edit' => [
+                                'type'    => 'Segment',
+                                'options' => [
+                                    'route'    => '/edit/:id',
+                                    'constraints' => [
+                                        'plate' => '[0-9]*'
+                                    ],
+                                    'defaults' => [
+                                        '__NAMESPACE__' => 'Application\Controller',
+                                        'controller'    => 'Pois',
+                                        'action'        => 'edit',
+                                    ],
+                                ],
+                            ],
+                            'delete' => [
+                                'type'    => 'Segment',
+                                'options' => [
+                                    'route'    => '/delete/:id',
+                                    'constraints' => [
+                                        'plate' => '[0-9]*'
+                                    ],
+                                    'defaults' => [
+                                        '__NAMESPACE__' => 'Application\Controller',
+                                        'controller'    => 'Pois',
+                                        'action'        => 'delete',
+                                    ],
+                                ],
+                            ],
+                        ]
                     ]
                 ]
             ]
-        ),
-    ),
-    'service_manager' => array(
-        'abstract_factories' => array(
+        ],
+    ],
+    'service_manager' => [
+        'abstract_factories' => [
             'Zend\Cache\Service\StorageCacheAbstractServiceFactory',
             'Zend\Log\LoggerAbstractServiceFactory',
-        ),
-        'aliases' => array(
+        ],
+        'aliases' => [
             'translator' => 'MvcTranslator',
-        ),
+            'Zend\Authentication\AuthenticationService' => 'zfcuser_auth_service'
+        ],
         'factories' => [
             'navigation' => 'Zend\Navigation\Service\DefaultNavigationFactory',
             'CustomerForm' => 'Application\Form\CustomerFormFactory',
             'UserForm' => 'Application\Form\UserFormFactory',
             'CarForm' => 'Application\Form\CarFormFactory',
+            'PoiForm' => 'Application\Form\PoiFormFactory',
+            'CardForm' => 'Application\Form\CardFormFactory',
             'DriverForm' => 'Application\Form\DriverFormFactory',
             'SettingForm' => 'Application\Form\SettingFormFactory',
             'PromoCodeForm' => 'Application\Form\PromoCodeFormFactory',
             'CustomerBonusForm' => 'Application\Form\CustomerBonusFormFactory',
             'TripCostForm' => 'Application\Form\TripCostFormFactory',
-            'ExtraPaymentsForm' => 'Application\Form\ExtraPaymentsFormFactory',
-            'EditTripForm' => 'Application\Form\EditTripFormFactory'
+            'FaresForm' => 'Application\Form\FaresFormFactory',
+            'EditTripForm' => 'Application\Form\EditTripFormFactory',
+            'ConfigurationsForm' => 'Application\Form\ConfigurationsFormFactory'
         ]
-    ),
+    ],
     'controllers' => [
         'invokables' => [
             'Application\Controller\Index' => 'Application\Controller\IndexController',
             'Application\Controller\Error' => 'Application\Controller\ErrorController',
         ],
         'factories' => [
-            'Application\Controller\ConsoleUser'  => 'Application\Controller\ConsoleUserControllerFactory',
-            'Application\Controller\Trips'        => 'Application\Controller\TripsControllerFactory',
-            'Application\controller\Users'        => 'Application\Controller\UsersControllerFactory',
-            'Application\Controller\Cars'         => 'Application\Controller\CarsControllerFactory',
-            'Application\Controller\Customers'    => 'Application\Controller\CustomersControllerFactory',
+            'Application\Controller\ConsoleUser' => 'Application\Controller\ConsoleUserControllerFactory',
+            'Application\Controller\Trips' => 'Application\Controller\TripsControllerFactory',
+            'Application\controller\Users' => 'Application\Controller\UsersControllerFactory',
+            'Application\Controller\Cars' => 'Application\Controller\CarsControllerFactory',
+            'Application\Controller\Customers' => 'Application\Controller\CustomersControllerFactory',
             'Application\Controller\Reservations' => 'Application\Controller\ReservationsControllerFactory',
             'Application\Controller\Invoices' => 'Application\Controller\InvoicesControllerFactory',
-            'Application\Controller\Payments' => 'Application\Controller\PaymentsControllerFactory'
+            'Application\Controller\Payments' => 'Application\Controller\PaymentsControllerFactory',
+            'Application\Controller\CustomerNote' => 'Application\Controller\CustomerNoteControllerFactory',
+            'Application\Controller\Configurations' => 'Application\Controller\ConfigurationsControllerFactory',
+            'Application\Controller\Pois' => 'Application\Controller\PoisControllerFactory',
+            'Application\Controller\Zones' => 'Application\Controller\ZonesControllerFactory',
+            'Application\Controller\CustomersEdit' => 'Application\Controller\CustomersEditControllerFactory',
+            'Application\Controller\EditTrip' => 'Application\Controller\EditTripControllerFactory',
+            'Application\Controller\CustomerFailure' => 'Application\Controller\CustomerFailureControllerFactory'
         ]
     ],
-    'translator'         => [
-        'locale'                    => 'it',
+    'input_filters' => [
+        'invokables' => [
+            'close-trip' => 'Application\Form\InputFilter\CloseTripFilter'
+        ]
+    ],
+    'translator' => [
+        'locale' => 'it',
         'translation_file_patterns' => [
             [
-                'type'          => 'phpArray',
-                'base_dir'      => 'vendor/zendframework/zendframework/resources/languages',
-                'pattern'       => '%s/Zend_Validate.php',
-                'text_domain'   => 'zend_validate',
+                'type' => 'phpArray',
+                'base_dir' => 'vendor/zendframework/zendframework/resources/languages',
+                'pattern' => '%s/Zend_Validate.php',
+                'text_domain' => 'zend_validate',
             ]
         ],
     ],
-    'view_manager' => array(
+    'view_manager' => [
         'display_not_found_reason' => true,
         'display_exceptions'       => true,
         'doctype'                  => 'HTML5',
         'not_found_template'       => 'error/404',
         'exception_template'       => 'error/index',
-        'template_map' => array(
+        'template_map' => [
             'layout/layout'           => __DIR__ . '/../view/layout/layout.phtml',
             'application/index/index' => __DIR__ . '/../view/application/index/index.phtml',
             'error/404'               => __DIR__ . '/../view/error/404.phtml',
             'error/index'             => __DIR__ . '/../view/error/index.phtml',
             'error/unauthorized'      => __DIR__ . '/../view/error/unauthorized.phtml',
-        ),
-        'template_path_stack' => array(
+        ],
+        'template_path_stack' => [
             __DIR__ . '/../view',
-        ),
-        'strategies' => array(
+        ],
+        'strategies' => [
             'ViewJsonStrategy',
-        ),
-    ),
+        ],
+    ],
 
-    'view_helpers'    => array(
-        'invokables' => array(
+    'view_helpers'    => [
+        'invokables' => [
             'CarStatus' => 'Application\View\Helper\CarStatus',
-        )
-    ),
+        ]
+    ],
 
     // Placeholder for console routes
     'console' => [
@@ -709,25 +1050,28 @@ return array(
     ],
 
     // ACL
-    'bjyauthorize' => array(
+    'bjyauthorize' => [
         'resource_providers' => [
             'BjyAuthorize\Provider\Resource\Config' => [
                 'admin' => [],
                 'callcenter' => [],
+                'superadmin' => [],
             ],
         ],
         'rule_providers' => [
             'BjyAuthorize\Provider\Rule\Config' => [
                 'allow' => [
-                    [['admin'], 'admin'],
-                    [['admin','callcenter'], 'callcenter'],
+                    [['superadmin','admin'], 'admin'],
+                    [['superadmin','admin','callcenter'], 'callcenter'],
+                    [['superadmin'], 'superadmin'],
                 ],
             ],
         ],
-        'guards' => array(
-            'BjyAuthorize\Guard\Controller' => array(
+        'guards' => [
+            'BjyAuthorize\Guard\Controller' => [
                 // Enable access to ZFC User pages
                 ['controller' => 'zfcuser', 'roles' => []],
+
                 ['controller' => 'Application\Controller\Error', 'roles' => []],
                 ['controller' => 'Application\Controller\Index', 'roles' => ['admin','callcenter']],
                 ['controller' => 'Application\Controller\Customers', 'roles' => ['admin']],
@@ -737,10 +1081,17 @@ return array(
                 ['controller' => 'Application\Controller\Users', 'roles' => ['admin']],
                 ['controller' => 'Application\Controller\Reservations', 'roles' => ['admin']],
                 ['controller' => 'Application\Controller\Invoices', 'roles' => ['admin']],
-                ['controller' => 'Application\Controller\Payments', 'roles' => ['admin']]
-            ),
-        ),
-    ),
+                ['controller' => 'Application\Controller\Payments', 'roles' => ['admin']],
+                ['controller' => 'Application\Controller\CustomerNote', 'roles' => ['admin']],
+                ['controller' => 'Application\Controller\Configurations', 'roles' => ['admin']],
+                ['controller' => 'Application\Controller\Pois', 'roles' => ['superadmin']],
+                ['controller' => 'Application\Controller\Zones', 'roles' => ['superadmin']],
+                ['controller' => 'Application\Controller\CustomersEdit', 'roles' => ['admin']],
+                ['controller' => 'Application\Controller\EditTrip', 'roles' => ['admin']],
+                ['controller' => 'Application\Controller\CustomerFailure', 'roles' => ['admin']]
+            ],
+        ],
+    ],
 
     // navigation
     'navigation' => [
@@ -756,6 +1107,16 @@ return array(
                         'label' => 'Elenco',
                         'route' => 'customers',
                         'isVisible' => true
+                    ],
+                    [
+                        'label' => 'Card',
+                        'route' => 'customers/list-card',
+                        'isVisible' => true
+                    ],
+                    [
+                        'label' => 'Card',
+                        'route' => 'customers/list-card/add',
+                        'isVisible' => false
                     ],
                     [
                         'route' => 'customers/edit',
@@ -869,12 +1230,69 @@ return array(
                 ]
             ],
             [
+                'label' => 'Configurazione',
+                'route' => 'configurations',
+                'icon' => 'fa fa-cog',
+                'resource' => 'superadmin',
+                'isRouteJs' => true,
+                'pages' => [
+                    [
+                        'label' => 'Gestione soglie allarme',
+                        'route' => 'configurations/manage-alarm',
+                        'isVisible' => true
+                    ],
+                    [
+                        'label' => 'Gestione POIS',
+                        'route' => 'configurations/manage-pois',
+                        'isVisible' => true
+                    ],
+                    [
+                        'label' => 'Tariffe',
+                        'route' => 'payments/fares',
+                        'isVisible' => true
+                    ],
+                ]
+            ],
+            [
+                'label'           => 'Aree',
+                'route'           => 'zones',
+                'icon'            => 'fa fa-map-marker',
+                'resource'        => 'superadmin',
+                'isRouteJs'       => true,
+                'pages' => [
+                    [
+                        'label' => 'Gestione aree',
+                        'route' => 'zones',
+                        'isVisible' => true
+                    ],
+                    [
+                        'label' => 'Aree d\'allarme',
+                        'route' => 'zones/zone-alarms',
+                        'isVisible' => true
+                    ]
+                ]
+            ],
+            [
+                'label'           => 'Statistiche',
+                'icon'            => 'fa fa-line-chart',
+                'resource'        => 'superadmin',
+                'openOnNewWindow' => true,
+                'route'           => 'reports',
+            ],
+            [
                 'label'           => 'Call center',
                 'route'           => 'call-center',
                 'icon'            => 'fa fa-map-marker',
                 'resource'        => 'callcenter',
                 'openOnNewWindow' => true,
             ],
+            [
+                'label'           => 'Mappa Allarmi',
+                'route'           => 'alarms',
+                'icon'            => 'fa fa-map-marker',
+                'resource'        => 'callcenter',
+                'openOnNewWindow' => true,
+            ],
         ]
     ]
-);
+];

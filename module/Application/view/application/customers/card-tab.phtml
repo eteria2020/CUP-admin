@@ -1,6 +1,5 @@
 <div class="row">
     <div class="col-lg-12">
-
             <div id="js-with-code" style="<?= is_object($this->customer->getCard()) ? '' : 'display: none;'; ?>">
                 <div class="row">
                     <div class="col-lg-5">
@@ -13,6 +12,10 @@
             </div>
             <div id="js-no-code" style="<?= !is_object($this->customer->getCard()) ? '' : 'display: none;'; ?>">
                 <div class="col-lg-6">
+                    <a href="<?= $this->url('customers/list-card/add', [], ['query' => ['customer' => $this->customer->getId()]]); ?>" class="btn btn-sm btn-success pull-left">
+                        <i class="fa fa-plus"></i> Aggiungi Card
+                    </a>
+                    <br />
                     <div class="alert alert-info" style="margin-top: 20px;">
                         Nessun codice card assegnato per questo utente.
                     </div>

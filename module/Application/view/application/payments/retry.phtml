@@ -38,10 +38,6 @@ $customer = $this->customer;
                     <strong>Pagamento completato con successo</strong>
                 </div>
                 <div class="form-inline">
-                    <div class="form-group col-sm-2 text-center">
-                        <label for="send-mail">Inviare mail di notifica</label>
-                        <input type="checkbox" name="send-mail" id="send-mail" checked="checked">
-                    </div>
                     <div class="btn-group">
                         <button type="button" class="btn green" id="js-abilitate-customer">
                             <i class="fa fa-caret-square-o-right"></i>
@@ -148,6 +144,9 @@ $customer = $this->customer;
                         </div>
                     </div>
                     <div class="portlet-body">
+                        <div class="col-lg-6">
+                            <label><a href="<?= $this->url('customers/edit', ['id' => $customer->getId()]); ?>?tab=failure">Elenco completo corse con pagamento fallito</a></label>
+                        </div>
                         <table class="table table-striped table-bordered table-hover" id="js-payments-table">
                             <thead>
                                 <tr>
@@ -184,6 +183,6 @@ $customer = $this->customer;
 <script>
     var tripPaymentId = "<?= $this->tripPayment->getId() ?>",
         retryUrl = "<?= $this->url('payments/do-retry', ['id' => $this->tripPayment->getId()], ['force_canonical' => true]) ?>",
-        abilitateUrl = "<?= $this->url('customers/activate', ['id' => $this->customer->getId()], ['force_canonical' => true]) ?>",
+        abilitateUrl = "<?= $this->url('customers/reactivate', ['id' => $this->customer->getId()], ['force_canonical' => true]) ?>",
         listUrl = "<?= $this->url('payments/failed-payments', [], ['force_canonical' => true]) ?>";
 </script>

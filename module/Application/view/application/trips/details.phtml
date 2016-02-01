@@ -32,12 +32,16 @@ $this->headScript()
                     <li role="presentation" id="menu-info"><a href="<?= $this->url('trips/info-tab', ['id' => $this->tripId]); ?>" data-target="#tab-info" role="tab" data-toggle="tab">Informazioni</a></li>
                     <li role="presentation" id="menu-cost"><a href="<?= $this->url('trips/cost-tab', ['id' => $this->tripId]); ?>" data-target="#tab-cost" role="tab" data-toggle="tab">Costo</a></li>
                     <li role="presentation" id="menu-edit"><a href="<?= $this->url('trips/edit-tab', ['id' => $this->tripId]); ?>" data-target="#tab-edit" role="tab" data-toggle="tab">Modifica corsa</a></li>
+                    <?php if (!$trip->isEnded()): ?>
+                        <li role="presentation" id="menu-close"><a href="<?= $this->url('trips/close-tab', ['id' => $this->tripId]); ?>" data-target="#tab-close" role="tab" data-toggle="tab">Chiudi corsa</a></li>
+                    <?php endif; ?>
                 </ul>
 
                 <div class="tab-content">
                     <div role="tabpanel" class="tab-pane" id="tab-info"></div>
                     <div role="tabpanel" class="tab-pane" id="tab-cost"></div>
                     <div role="tabpanel" class="tab-pane" id="tab-edit"></div>
+                    <div role="tabpanel" class="tab-pane" id="tab-close"></div>
                 </div>
             </div>
         </div>

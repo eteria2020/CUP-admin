@@ -13,10 +13,12 @@ return array(
         'MvlabsSnappy',
 
         'CallCenter',
+        'Alarms',
         'SharengoCore',
         'Application',
         'Cartasi',
         'EventLogger',
+        'Reports',
     ),
 
     // These are various options for the listeners attached to the ModuleManager

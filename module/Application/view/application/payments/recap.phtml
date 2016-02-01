@@ -33,7 +33,7 @@ $daily = $this->daily;
                             <div class="tab-pane active" id="tab_1_1">
                                 <select id="month-selector">
                                     <?php foreach($this->months as $month): ?>
-                                        <option value="<?= $month['tp_date'] ?>"><?= $month['tp_date'] ?></option>
+                                        <option value="<?= $month['date'] ?>"><?= $month['date'] ?></option>
                                     <?php endforeach; ?>
                                 </select>
 
@@ -42,11 +42,11 @@ $daily = $this->daily;
                                         <tr>
                                             <th class="sng-date-column">Data</th>
                                             <?php foreach($this->fleets as $fleet): ?>
-                                            <th><?= $fleet->getName() ?></th>
+                                            <th class="sng-text-right"><?= $fleet->getName() ?></th>
                                             <?php endforeach; ?>
                                         </tr>
                                     </thead>
-                                    <tbody>
+                                    <tbody id="daily-body">
                                         <?php foreach($daily as $day => $amounts): ?>
                                             <tr>
                                                 <td><?= $day ?></td>
@@ -73,7 +73,7 @@ $daily = $this->daily;
                                         <tr>
                                             <th class="sng-date-column">Data</th>
                                             <?php foreach($this->fleets as $fleet): ?>
-                                            <th><?= $fleet->getName() ?></th>
+                                            <th class="sng-text-right"><?= $fleet->getName() ?></th>
                                             <?php endforeach; ?>
                                         </tr>
                                     </thead>
@@ -85,7 +85,7 @@ $daily = $this->daily;
                                                 $weekStart = date_create(substr($week, 0, 5) . "W" . substr($week, 5, 2));
                                                 $weekEnd = clone($weekStart);
                                                 $weekEnd->add($interval);
-                                                echo "<td>" . strftime("%d %b", $weekStart->getTimestamp()) . " - " . strftime("%d %b", $weekEnd->getTimestamp()) . "</td>";
+                                                echo "<td>" . strftime("%d %b", $weekStart->getTimestamp()) . " - " . strftime("%d %b", $weekEnd->getTimestamp() - 1) . "</td>";
 
                                                 foreach($this->fleets as $fleet) {
                                                     $entry = 'n.d.';
@@ -109,7 +109,7 @@ $daily = $this->daily;
                                         <tr>
                                             <th class="sng-date-column">Data</th>
                                             <?php foreach($this->fleets as $fleet): ?>
-                                            <th><?= $fleet->getName() ?></th>
+                                            <th class="sng-text-right"><?= $fleet->getName() ?></th>
                                             <?php endforeach; ?>
                                         </tr>
                                     </thead>
@@ -157,5 +157,6 @@ setlocale(LC_TIME, 'en_EN.UTF-8');
 <script type="text/javascript">
 var reloadUrl = "<?= $this->url('payments/recap'); ?>";
 var selectedMonth = "<?= $this->selectedMonth ?>";
+var isLastMonth = <?= $this->isLastMonth ? "true" : "false"; ?>;
 </script>
 <script type="text/javascript" src="<?= $this->basePath(); ?>/js/payments-recap.js"></script>

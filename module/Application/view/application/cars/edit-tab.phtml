@@ -1,0 +1,142 @@
+<?php
+$form = $this->carForm->prepare();
+$form->setAttribute('action', $this->url('cars/ajax-tab-edit', ['plate' => $this->car->getPlate()]));
+?>
+<div class="row">
+    <div class="col-md-12">
+
+        <?php echo $this->partial('partials/flash-messages.phtml', []); ?>
+
+        <?= $this->form()->openTag($form); ?>
+
+        <div class="row">
+            <div class="col-lg-3">
+                <div class="form-group">
+                    <label for="gender">Targa</label>
+                    <?= $this->formRow($form->get('car')->get('plate')->setAttribute('disabled', 'disabled')); ?>
+                </div>
+            </div>
+
+            <div class="col-lg-3">
+                <div class="form-group">
+                    <label for="name">Costruttore</label>
+                    <?php
+                    $manufactures = $form->get('car')->get('manufactures');
+                    echo $this->formElement($manufactures);
+                    echo $this->formElementErrors($manufactures, array('class' => 'text-danger list-unstyled'));
+                    ?>
+                </div>
+            </div>
+
+            <div class="col-lg-3">
+                <div class="form-group">
+                    <label for="surname">Modello</label>
+                    <?php
+                    $model = $form->get('car')->get('model');
+                    echo $this->formElement($model);
+                    echo $this->formElementErrors($model, array('class' => 'text-danger list-unstyled'));
+                    ?>
+                </div>
+            </div>
+
+            <div class="col-lg-3">
+                <div class="form-group">
+                    <label for="surname">Identificativo</label>
+                    <?php
+                    $label = $form->get('car')->get('label');
+                    echo $this->formElement($label);
+                    echo $this->formElementErrors($label, array('class' => 'text-danger list-unstyled'));
+                    ?>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-lg-5">
+                <div class="form-group">
+                    <label for="gender">Note</label>
+                    <?= $this->formRow($form->get('car')->get('notes')); ?>
+                </div>
+            </div>
+
+            <div class="col-lg-2">
+                <div class="form-group">
+                    <label for="name">Attiva</label>
+                    <?= $this->formRow($form->get('car')->get('active')); ?>
+                </div>
+            </div>
+
+            <div class="col-lg-1">
+                <div class="form-group">
+                    <label for="surname">Stato</label><br />
+                    <?= $this->CarStatus($form->get('car')->get('status')->getValue()); ?>
+                </div>
+            </div>
+
+            <div class="col-lg-4">
+                <div class="col-lg-6">
+                    <div class="form-group">
+                        <label for="surname">Aggiorna stato auto</label>
+                        <?= $this->formRow($form->get('car')->get('status')); ?>
+                    </div>
+                </div>
+                <div class="col-lg-6" id="js-list-ricovery-car" style="display: none;">
+                    <div class="form-group">
+                        <label for="surname">Sede di ricovero auto</label>
+                        <?php if($this->disableInputStatusMaintenance): ?>
+                            <?= $this->formRow($form->get('location')->setAttribute('disabled', 'true')); ?>
+                        <?php else: ?>
+                            <?= $this->formRow($form->get('location')); ?>
+                        <?php endif; ?>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row" style="display: none;" id="js-note">
+            <div class="col-lg-12">
+                <label for="note">Note</label>
+                <?php if($this->disableInputStatusMaintenance): ?>
+                    <?= $this->formRow($form->get('note')->setAttribute('readonly', 'true')); ?>
+                <?php else: ?>
+                    <?= $this->formRow($form->get('note')); ?>
+                <?php endif; ?>
+                <br /><br />
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-lg-12">
+                <button type="submit" class="btn btn-success">Modifica Auto</button>
+            </div>
+        </div>
+
+        <?= $this->form()->closeTag(); ?>
+
+    </div>
+</div>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        var listRecovery = $('#js-list-ricovery-car');
+        var selectStatus = $('.js-status');
+        var noteInput = $('#js-note');
+
+        showListRecovery(selectStatus.val());
+
+        $(selectStatus).change(function() {
+            var value = $(this).val();
+            showListRecovery(value);
+        });
+
+        function showListRecovery(value) {
+            if(value == '<?= \SharengoCore\Utility\CarStatus::MAINTENANCE; ?>') {
+                listRecovery.show();
+                noteInput.show();
+            } else {
+                listRecovery.hide();
+                noteInput.hide();
+            }
+        }
+    });
+</script>

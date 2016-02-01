@@ -91,6 +91,36 @@ class SettingFieldset extends Fieldset implements InputFilterProviderInterface
                 ]
             ]
         ]);
+
+        $this->add([
+            'name'       => 'maintainer',
+            'type'       => 'Zend\Form\Element\Select',
+            'attributes' => [
+                'id'    => 'maintainer',
+                'class' => 'form-control',
+            ],
+            'options'    => [
+                'value_options' => [
+                    0 => "No",
+                    1 => "Si"
+                ]
+            ]
+        ]);
+
+        $this->add([
+            'name'       => 'goldList',
+            'type'       => 'Zend\Form\Element\Select',
+            'attributes' => [
+                'id'    => 'goldList',
+                'class' => 'form-control',
+            ],
+            'options'    => [
+                'value_options' => [
+                    0 => "No",
+                    1 => "Si"
+                ]
+            ]
+        ]);
     }
 
     public function getInputFilterSpecification()
@@ -114,17 +144,18 @@ class SettingFieldset extends Fieldset implements InputFilterProviderInterface
                 ],
             ],
             'registrationCompleted' => [
-                'required' => true,
-                'filters' => [
-                    [
-                        'name' => 'StringTrim'
-                    ]
-                ]
+                'required' => true
             ],
             'enabled' => [
                 'required' => true
             ],
             'firstPaymentCompleted' => [
+                'required' => true
+            ],
+            'maintainer' => [
+                'required' => true
+            ],
+            'goldList' => [
                 'required' => true
             ]
         ];

@@ -33,9 +33,12 @@ $this->headScript()
                                     <option value="c.timestampEnd">Corse Aperte</option>
                                     <option value="e.id">ID Corsa</option>
                                     <option value="cu.id">ID Cliente</option>
+                                    <option value="cu.surname">Cognome Cliente</option>
+                                    <option value="cu.email">eMail Cliente</option>
                                     <option value="cc.code">RFID</option>
                                     <option value="c.plate">Targa</option>
                                     <option value="c.label">Numero</option>
+                                    <option value="payed">Corse non pagate</option>
                                 </select>
                             </div>
                             <div class="form-group">
@@ -82,6 +85,7 @@ $this->headScript()
                             <thead>
                             <tr>
                                 <th>Id Corsa</th>
+                                <th>eMail</th>
                                 <th>Cognome</th>
                                 <th>Nome</th>
                                 <th>Cellulare</th>
@@ -96,6 +100,7 @@ $this->headScript()
                                 <th>Stato Quadro</th>
                                 <th>In sosta</th>
                                 <th>Pagabile</th>
+                                <th>Pagata</th>
                                 <th>Costo</th>
                                 <th></th>
                             </tr>
