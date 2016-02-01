@@ -21,9 +21,6 @@ class ReportsServiceFactory implements FactoryInterface
         $mongoConnectionString = 'mongodb://' . $mongoConfig['server'] . ':' . $mongoConfig['port'];
         $mongodb = new MongoDB\Driver\Manager($mongoConnectionString);
 
-        // Bypass default php.ini memory limit to allow large query data.
-        ini_set('memory_limit', '750M');
-
         return new ReportsService($database, $mongodb);
     }
 }

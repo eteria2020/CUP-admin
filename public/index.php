@@ -10,6 +10,9 @@ if (php_sapi_name() === 'cli-server' && is_file(__DIR__ . parse_url($_SERVER['RE
     return false;
 }
 
+// Bypass default php.ini memory limit to allow large query data.
+ini_set('memory_limit', '256M');
+
 // Setup autoloading
 require 'init_autoloader.php';
 
