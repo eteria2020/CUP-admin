@@ -84,6 +84,7 @@ $(function() {
             {data: 'c.parking'},
             {data: 'e.payable'},
             {data: 'payed'},
+            {data: 'f.name'},
             {data: 'e.totalCost'},
             {data: 'e.idLink'}
         ],
@@ -115,14 +116,14 @@ $(function() {
                 sortable: false
             },
             {
-                targets: 17,
+                targets: 18,
                 sortable: false,
                 "render": function ( data, type, row ) {
                     return renderCostButton(data);
                 }
             },
             {
-                targets: 18,
+                targets: 19,
                 sortable: false,
                 "render": function ( data, type, row ) {
                     return renderInfoButton(data);
