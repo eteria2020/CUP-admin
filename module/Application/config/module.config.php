@@ -601,6 +601,16 @@ return [
                                 ]
                             ]
                         ]
+                    ],
+                    'not-payed' => [
+                        'type' => 'Literal',
+                        'options' => [
+                            'route' => '/not-payed',
+                            'defaults' => [
+                                'action' => 'list',
+                                'controller' => 'TripsNotPayed'
+                            ]
+                        ]
                     ]
                 ],
              ],
@@ -984,7 +994,8 @@ return [
             'Application\Controller\Zones' => 'Application\Controller\ZonesControllerFactory',
             'Application\Controller\CustomersEdit' => 'Application\Controller\CustomersEditControllerFactory',
             'Application\Controller\EditTrip' => 'Application\Controller\EditTripControllerFactory',
-            'Application\Controller\CustomerFailure' => 'Application\Controller\CustomerFailureControllerFactory'
+            'Application\Controller\CustomerFailure' => 'Application\Controller\CustomerFailureControllerFactory',
+            'Application\Controller\TripsNotPayed' => 'Application\Controller\TripsNotPayedControllerFactory'
         ]
     ],
     'input_filters' => [
@@ -1088,7 +1099,8 @@ return [
                 ['controller' => 'Application\Controller\Zones', 'roles' => ['superadmin']],
                 ['controller' => 'Application\Controller\CustomersEdit', 'roles' => ['admin']],
                 ['controller' => 'Application\Controller\EditTrip', 'roles' => ['admin']],
-                ['controller' => 'Application\Controller\CustomerFailure', 'roles' => ['admin']]
+                ['controller' => 'Application\Controller\CustomerFailure', 'roles' => ['admin']],
+                ['controller' => 'Application\Controller\TripsNotPayed', 'roles' => ['admin']]
             ],
         ],
     ],
@@ -1173,6 +1185,11 @@ return [
                     [
                         'label' => 'Costo corsa',
                         'route' => 'trips/cost',
+                        'isVisible' => true
+                    ],
+                    [
+                        'label' => 'Corse non pagate',
+                        'route' => 'trips/not-payed',
                         'isVisible' => true
                     ]
                 ],

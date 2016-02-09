@@ -6,9 +6,6 @@ $(function() {
     var from = $('#js-date-from');
     var to = $('#js-date-to');
     var filterWithNull = false;
-    var filterWithFixed = false;
-    var fixedColumn = 'e.payable';
-    var fixedValue = true;
     search.val('');
     column.val('select');
 
@@ -48,13 +45,6 @@ $(function() {
                 aoData.push({ "name": "column", "value": ''});
                 aoData.push({ "name": "searchValue", "value": ''});
                 aoData.push({ "name": "columnNull", "value": "e.timestampEnd"});
-            } else if (filterWithFixed) {
-                aoData.push({ "name": "column", "value": ''});
-                aoData.push({ "name": "searchValue", "value": ''});
-                aoData.push({ "name": "fixedColumn", "value": fixedColumn});
-                aoData.push({ "name": "fixedValue", "value": fixedValue});
-                aoData.push({ "name": "fixedLike", "value": false});
-                aoData.push({ "name": "columnNull", "value": "tp.payedSuccessfullyAt"});
             } else {
                 aoData.push({ "name": "column", "value": $(column).val()});
                 aoData.push({ "name": "searchValue", "value": search.val().trim()});
@@ -83,7 +73,6 @@ $(function() {
             {data: 'c.keyStatus'},
             {data: 'c.parking'},
             {data: 'e.payable'},
-            {data: 'payed'},
             {data: 'e.totalCost'},
             {data: 'e.idLink'}
         ],
@@ -112,17 +101,13 @@ $(function() {
             },
             {
                 targets: 16,
-                sortable: false
-            },
-            {
-                targets: 17,
                 sortable: false,
                 "render": function ( data, type, row ) {
                     return renderCostButton(data);
                 }
             },
             {
-                targets: 18,
+                targets: 17,
                 sortable: false,
                 "render": function ( data, type, row ) {
                     return renderInfoButton(data);
@@ -171,7 +156,6 @@ $(function() {
         column.val('select');
         search.prop('disabled', false);
         filterWithNull = false;
-        filterWithFixed = false;
         search.show();
     });
 
@@ -185,17 +169,13 @@ $(function() {
         var value = $(this).val();
 
         search.show();
-        filterWithNull = false;
-        filterWithFixed = false;
         search.val('');
 
         if(value == 'c.timestampEnd') {
             filterWithNull = true;
             search.prop('disabled', true);
-        } else if (value == 'payed') {
-            filterWithFixed = true;
-            search.prop('disabled', true);
         } else {
+            filterWithNull = false;
             search.prop('disabled', false);
         }
     });
@@ -210,11 +190,6 @@ $(function() {
         } else {
             return amount;
         }
-        /*
-        return '<div class="btn-group">' +
-                    '<a href="' + data + '" class="btn btn-default">Dettagli</a> ' +
-                '</div>';
-        */
     }
 
     function renderInfoButton(data)

@@ -1,0 +1,83 @@
+<?php
+$this->headLink()
+    ->appendStylesheet('/js/datatables/plugins/bootstrap/dataTables.bootstrap.css');
+$this->headScript()
+    ->appendFile('/js/datatables/media/js/jquery.dataTables.min.js')
+    ->appendFile('/js/datatables/plugins/bootstrap/dataTables.bootstrap.js')
+    ->appendFile($this->basePath() .'/js/trips-not-payed.js');
+?>
+<div class="page-content-wrapper">
+    <div class="page-content">
+
+        <h3 class="page-title">CORSE NON PAGATE</h3>
+        <div class="page-bar"></div>
+
+        <div class="row">
+
+            <div class="portlet box green">
+                <div class="portlet-title">
+                    <div class="caption">Elenco</div>
+                </div>
+
+                <!-- BEGIN table -->
+                <div class="portlet-body">
+                    <table class="table table-striped table-bordered table-hover" id="trips-table">
+                        <thead>
+                            <tr>
+                                <th>Id Corsa</th>
+                                <th>Cliente</th>
+                                <th>RFID</th>
+                                <th>Targa</th>
+                                <th>Km Inizio</th>
+                                <th>Km Fine</th>
+                                <th style="min-width: 60px !important;">Inizio</th>
+                                <th style="min-width: 60px !important;">Fine</th>
+                                <th style="min-width: 80px !important;">Durata</th>
+                                <th>Sosta</th>
+                                <th>Costo</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php foreach ($this->trips as $trip): ?>
+                            <tr>
+                                <?php
+                                $customer = $trip->getCustomer();
+                                $car = $trip->getCar();
+                                $tripPayment = $trip->getTripPayment();
+                                ?>
+
+                                <td>
+                                    <a href="<?= $this->url('trips/details', ['id' => $trip->getId()]); ?>">
+                                        <?= $trip->getId(); ?>
+                                    </a>
+                                </td>
+                                <td>
+                                    <a href="<?= $this->url('customers/edit', ['id' => $customer->getId()]); ?>">
+                                        <?= $customer->getSurname() . ' ' . $customer->getName(); ?>
+                                    </a>
+                                </td>
+                                <td><?= $customer->getCard()->getRfid(); ?></td>
+                                <td><?= $trip->getCar()->getPlate(); ?></td>
+                                <td><?= $trip->getKmBeginning(); ?></td>
+                                <td><?= $trip->getKmEnd(); ?></td>
+                                <td><?= $trip->getTimestampBeginning()->format('d-m-Y H:i:s'); ?></td>
+                                <td><?= $trip->getTimestampEnd()->format('d-m-Y H:i:s'); ?></td>
+                                <td><?= $trip->getTimestampBeginning()->diff($trip->getTimestampEnd())->format('%dg %H:%I:%S'); ?></td>
+                                <td><?= $trip->getParkSeconds() . ' sec'; ?></td>
+                                <td class="sng-dt-right">
+                                    <a href="<?= $this->url('trips/details', ['id' => $trip->getId()], ['query' => ['tab' => 'cost']]); ?>">
+                                        <?= sprintf('%.2f €', $tripPayment->getTotalCost() / 100); ?>
+                                    </a>
+                                </td>
+                            </tr>
+                            <?php endforeach; ?>
+                        </tbody>
+                    </table>
+                </div>
+                <!-- END table -->
+
+            </div>
+        </div>
+
+    </div>
+</div>
