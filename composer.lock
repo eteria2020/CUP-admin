@@ -1375,7 +1375,7 @@
             "source": {
                 "type": "git",
                 "url": "ssh://git@git.mvlabs.it:4222/clients/sharengo-cartasi.git",
-                "reference": "d92bac099bcb48c1885d9691811e1eb0f794420c"
+                "reference": "abef1c4c48d373ca1cecd13ffc44a4e1bf349495"
             },
             "require": {
                 "doctrine/doctrine-orm-module": "0.*",
@@ -1389,7 +1389,7 @@
                 }
             },
             "description": "Cartasi module for Sharengo",
-            "time": "2016-02-11 09:09:19"
+            "time": "2016-02-12 14:22:42"
         },
         {
             "name": "mvlabs/sharengo-coremodule",
@@ -1397,7 +1397,7 @@
             "source": {
                 "type": "git",
                 "url": "ssh://git@git.mvlabs.it:4222/clients/sharengo-coremodule.git",
-                "reference": "df2543735bbde379cb4b7f4458d9f8195747220b"
+                "reference": "a9f1a86c45841886128a9caea588290e86d48744"
             },
             "require": {
                 "doctrine/doctrine-orm-module": "0.*",
@@ -1418,7 +1418,7 @@
                 }
             },
             "description": "Core ZF2 module for Sharengo apps",
-            "time": "2016-01-27 15:18:06"
+            "time": "2016-02-12 14:28:25"
         },
         {
             "name": "natxet/CssMin",
