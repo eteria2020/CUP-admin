@@ -13,4 +13,3 @@ module/Cartasi
 data/DoctrineORMModule
 public/cache
 node_modules
-data/Csv
