@@ -100,7 +100,7 @@ $form->prepare();
                                         <tr>
                                             <td><?= $csvFile->getFilename() ?></td>
                                             <td><?= $csvFile->getInsertedTs()->format('d-m-Y H:i:s') ?></td>
-                                            <td><?= count($csvFile->getCartasiCsvAnomalies()) ?></td>
+                                            <td><a href="javascript:void()" class="anomalies"><?= count($csvFile->getCartasiCsvAnomalies()) ?></a></td>
                                         </tr>
                                         <?php endforeach; ?>
                                     </tbody>
@@ -191,3 +191,9 @@ $form->prepare();
 
     </div>
 </div>
+
+<script>
+    $('.anomalies').click(function () {
+        $('ul.nav-tabs li a[href="#tab_1_2"]').click();
+    });
+</script>

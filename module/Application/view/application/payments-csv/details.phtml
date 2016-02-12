@@ -5,7 +5,7 @@ $this->headScript()
     ->appendFile('/js/datatables/plugins/bootstrap/dataTables.bootstrap.js');
 
 $csvData = $this->csvAnomaly->getCsvData();
-$csvAmount = number_format(floatval(str_replace(',', '.', $csvData['Importo dell\'ordine'])), 2, ',', '');
+$csvAmount = number_format(floatval(str_replace(',', '.', $csvData['Importo contabilizzato'])), 2, ',', '');
 $transactionAmount = null;
 $updates = $this->csvAnomaly->getUpdates();
 
@@ -91,7 +91,7 @@ $updates = $this->csvAnomaly->getUpdates();
                             <div class="col-lg-4">
                                 <div class="form-group">
                                     <label>Data</label>
-                                    <div class="sng-info-box"><?= $transaction->getDatetime()->format('d/m/Y H:i'); ?></div>
+                                    <div class="sng-info-box"><?= $transaction->getDatetime() ? $transaction->getDatetime()->format('d/m/Y H:i') : ''; ?></div>
                                 </div>
                             </div>
                             <div class="col-lg-4">
@@ -121,7 +121,7 @@ $updates = $this->csvAnomaly->getUpdates();
                         <div class="col-lg-4">
                             <div class="form-group">
                                 <label><?= $this->csvAnomaly->getTypeTranslated(); ?>:</label>
-                                <p>Effettuare <?= $this->csvAnomaly->getAmount() > 0 ? 'NC' : 'fattura'; ?> di <?= number_format($this->csvAnomaly->getAmount() / 100, 2, ',', ''); ?> € all'utente</p>
+                                <p>Effettuare <?= $this->csvAnomaly->getAmount() > 0 ? 'NC' : 'fattura'; ?> di <?= number_format(abs($this->csvAnomaly->getAmount()) / 100, 2, ',', ''); ?> € all'utente</p>
                             </div>
                         </div>
 
@@ -129,7 +129,7 @@ $updates = $this->csvAnomaly->getUpdates();
                             <div class="form-group">
                                 <form action="<?= $this->url('payments/csv-resolve', ['id' => $this->csvAnomaly->getId()]); ?>"
                                     method="post">
-                                    <input class="btn btn-default btn-xs"
+                                    <input class="btn btn-default green"
                                         type="submit"
                                         value="Segna come risolta">
                                     </input>
@@ -180,7 +180,7 @@ $updates = $this->csvAnomaly->getUpdates();
                                 method="post">
 
                                 <textarea id="new-note" name="new-note" style="width: 100%" rows="5"></textarea><br><br>
-                                <input class="btn btn-default btn-xs"
+                                <input class="btn btn-default green"
                                     type="submit"
                                     value="Aggiungi">
                                 </input>

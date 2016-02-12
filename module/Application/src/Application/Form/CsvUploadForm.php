@@ -4,6 +4,10 @@ namespace Application\Form;
 
 use Zend\Form\Element;
 use Zend\Form\Form;
+use Zend\InputFilter\InputFilter;
+use Zend\InputFilter\Factory as InputFactory;
+use Zend\Validator\File\MimeType;
+use Zend\Validator\File\Extension;
 
 class CsvUploadForm extends Form
 {
@@ -16,7 +20,9 @@ class CsvUploadForm extends Form
         parent::__construct($name, $options);
         $this->setAttribute('method', 'post');
         $this->setAttribute('enctype', 'multipart/form-data');
+
         $this->addElements();
+        $this->addInputFilter();
     }
 
     private function addElements()
@@ -24,14 +30,61 @@ class CsvUploadForm extends Form
         $this->add([
             'name' => 'csv-upload',
             'type' => 'file',
+            'validators' => [
+                [
+                    'name' => 'File\MimeType',
+                    'options' => [
+                        'mimeType' => 'text/csv'
+                    ]
+                ]
+            ]
         ]);
 
         $this->add([
             'name' => 'submit',
             'type' => 'submit',
             'attributes' => [
-                'value' => 'Carica adesso'
+                'value' => 'Carica adesso',
+                'class' => 'btn green'
             ],
         ]);
+    }
+
+    private function addInputFilter()
+    {
+        $inputFilter = new InputFilter();
+        $inputFactory = new InputFactory();
+
+        $inputFilter->add(
+            $inputFactory->createInput([
+                'name' => 'csv-upload',
+                'validators' => [
+                    [
+                        'name' => 'File/MimeType',
+                        'options' => [
+                            'mimeType' => 'text/csv,text/plain',
+                            'messages' => [
+                                MimeType::FALSE_TYPE => 'Il file caricato ha un formato non valido; sono accettati solo file in formato csv',
+                                MimeType::NOT_DETECTED => 'Non è stato possibile verificare il formato del file',
+                                MimeType::NOT_READABLE => 'Il file caricato non è leggibile o non esiste'
+                            ]
+                        ],
+                        'break_chain_on_failure' => true
+                    ],
+                    [
+                        'name' => 'File/Extension',
+                        'options' => [
+                            'extension' => 'csv',
+                            'messages' => [
+                                Extension::FALSE_EXTENSION => 'Il file caricato ha un formato non valido; sono accettati solo file in formato csv',
+                                Extension::NOT_FOUND => 'Il file caricato non è leggibile o non esiste'
+                            ]
+                        ]
+                    ]
+                ]
+            ])
+        );
+
+        $this->setInputFilter($inputFilter);
     }
 }

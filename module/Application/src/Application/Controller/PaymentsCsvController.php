@@ -5,9 +5,11 @@ namespace Application\Controller;
 use Application\Form\CsvUploadForm;
 use Cartasi\Exception\InvalidCsvException;
 use Cartasi\Exception\InvalidPathException;
+use Cartasi\Exception\ContractNotFoundException;
 use Cartasi\Service\CartasiContractsService;
 use SharengoCore\Exception\CartasiCsvAnomalyAlreadyResolvedException;
 use SharengoCore\Service\CsvService;
+use SharengoCore\Entity\CartasiCsvAnomaly;
 
 use Zend\Http\Response;
 use Zend\Mvc\Controller\AbstractActionController;
@@ -77,6 +79,11 @@ class PaymentsCsvController extends AbstractActionController
     {
         $id = (int) $this->params()->fromRoute('id', 0);
         $csvAnomaly = $this->csvService->getAnomalyById($id);
+
+        if (!$csvAnomaly instanceof CartasiCsvAnomaly) {
+            $this->response->setStatusCode(Response::STATUS_CODE_404);
+            return;
+        }
 
         // Fetch customer
         $customer = null;
@@ -155,10 +162,17 @@ class PaymentsCsvController extends AbstractActionController
                     true,
                     $data['csv-upload']['name']
                 );
-                $this->csvService->analyzeFile($csvFile);
-                $this->flashMessenger()->addSuccessMessage('File caricato con successo');
+
+                try {
+                    $this->csvService->analyzeFile($csvFile);
+                    $this->flashMessenger()->addSuccessMessage('File caricato con successo');
+                } catch (InvalidCsvException $e) {
+                    $this->flashMessenger()->addErrorMessage('Formattazione del file non valida');
+                }
             } else {
-                $this->flashMessenger()->addErrorMessage('Errore nel caricamento del file');
+                foreach ($this->form->getMessages() as $message) {
+                    $this->flashMessenger()->addErrorMessage($message);
+                }
             }
         }
 
