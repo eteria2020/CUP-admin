@@ -10,7 +10,7 @@ $this->headScript()
 
         <!-- BEGIN PAGE HEADER-->
         <h3 class="page-title">
-            ELENCO POIS <small>ricerca</small>
+            <?php echo $this->translate("ELENCO POIS"); ?> <small><?php echo $this->translate("ricerca"); ?></small>
         </h3>
 
         <div class="page-bar">
@@ -26,24 +26,24 @@ $this->headScript()
                         <div class="form-inline">
                             <div class="form-group">
                                 <select name="column" id="js-column" class="form-control">
-                                    <option value="select" selected>-- Seleziona --</option>
-                                    <option value="e.id">Id</option>
-                                    <option value="e.type">Tipo</option>
-                                    <option value="e.code">Codice</option>
-                                    <option value="e.name">Nome</option>
-                                    <option value="e.address">Indirizzo</option>
-                                    <option value="e.town">Città</option>
-                                    <option value="e.zipCode">CAP</option>
-                                    <option value="e.province">Provincia</option>
+                                    <option value="select" selected>-- <?php echo $this->translate("Seleziona"); ?> --</option>
+                                    <option value="e.id"><?php echo $this->translate("Id"); ?></option>
+                                    <option value="e.type"><?php echo $this->translate("Tipo"); ?></option>
+                                    <option value="e.code"><?php echo $this->translate("Codice"); ?></option>
+                                    <option value="e.name"><?php echo $this->translate("Nome"); ?></option>
+                                    <option value="e.address"><?php echo $this->translate("Indirizzo"); ?></option>
+                                    <option value="e.town"><?php echo $this->translate("Città"); ?></option>
+                                    <option value="e.zipCode"><?php echo $this->translate("CAP"); ?></option>
+                                    <option value="e.province"><?php echo $this->translate("Provincia"); ?></option>
                                 </select>
                             </div>
                             <div class="form-group">
                                 <input type="text" name="value" value="" class="form-control" id="js-value"
-                                       placeholder="Filtra...">
+                                       placeholder="<?php echo $this->translate("Filtra..."); ?>">
                             </div>
                             <div class="btn-group">
                                 <button type="button" class="btn green js-search" id="js-search">
-                                    <i class="fa fa-search"></i> Cerca
+                                    <i class="fa fa-search"></i> <?php echo $this->translate("Cerca"); ?>
                                 </button>
                                 <button type="button" class="btn green dropdown-toggle" data-toggle="dropdown">
                                     <i class="fa fa-angle-down"></i>
@@ -51,7 +51,7 @@ $this->headScript()
                                 <ul class="dropdown-menu" role="menu">
                                     <li>
                                         <a href="javascript:void(0);" id="js-clear">
-                                            <i class="fa fa-remove"></i> Pulisci Ricerca
+                                            <i class="fa fa-remove"></i> <?php echo $this->translate("Pulisci Ricerca"); ?>
                                         </a>
                                     </li>
                                 </ul>
@@ -60,7 +60,7 @@ $this->headScript()
                     </div>
                     <div class="col-md-4">
                         <a href="<?= $this->url('configurations/manage-pois/add'); ?>" class="btn green pull-right">
-                            <i class="fa fa-plus"></i> Aggiungi POIS
+                            <i class="fa fa-plus"></i> <?php echo $this->translate("Aggiungi POIS"); ?>
                         </a>
                     </div>
                 </div>
@@ -71,22 +71,22 @@ $this->headScript()
                 <div class="portlet box green">
                     <div class="portlet-title">
                         <div class="caption">
-                            <i class="fa fa-cogs"></i>Elenco POIS
+                            <i class="fa fa-cogs"></i><?php echo $this->translate("Elenco POIS"); ?>
                         </div>
                     </div>
                     <div class="portlet-body">
                         <table class="table table-striped table-bordered table-hover" id="js-pois-table">
                             <thead>
                             <tr>
-                                <th>Id</th>
-                                <th>Tipo.</th>
-                                <th>Codice</th>
-                                <th>Nome</th>
-                                <th>Indirizzo</th>
-                                <th>Città</th>
-                                <th>CAP</th>
-                                <th>Provincia</th>
-                                <th>Azione</th>
+                                <th><?php echo $this->translate("Id"); ?></th>
+                                <th><?php echo $this->translate("Tipo."); ?></th>
+                                <th><?php echo $this->translate("Codice"); ?></th>
+                                <th><?php echo $this->translate("Nome"); ?></th>
+                                <th><?php echo $this->translate("Indirizzo"); ?></th>
+                                <th><?php echo $this->translate("Città"); ?></th>
+                                <th><?php echo $this->translate("CAP"); ?></th>
+                                <th><?php echo $this->translate("Provincia"); ?></th>
+                                <th><?php echo $this->translate("Azione"); ?></th>
                             </tr>
                             </thead>
                         </table>

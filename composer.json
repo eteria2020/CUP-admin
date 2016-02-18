@@ -15,6 +15,10 @@
         {
             "url": "ssh://git@git.mvlabs.it:4222/clients/sharengo-cartasi.git",
             "type": "git"
+        },
+        {
+            "url": "ssh://git@git.mvlabs.it:4222/internals/zf2-multilanguage.git",
+            "type": "git"
         }
     ],
     "require": {
@@ -30,7 +34,8 @@
         "mockery/mockery": "^0.9.4",
         "mrclay/minify": "2.2.*",
         "natxet/CssMin": "3.0.*",
-        "mongodb/mongodb": "^0.2.0"
+        "mongodb/mongodb": "^0.2.0",
+        "mvlabs/zf2-multilanguage": "dev-master"
     },
     "require-dev": {
         "phpunit/phpunit": "^4.8"
@@ -40,5 +45,6 @@
             "SharengoCore": "module/SharengoCore/src",
             "Cartasi": "module/Cartasi/src"
         }
-    }
+    },
+    "minimum-stability": "dev"
 }

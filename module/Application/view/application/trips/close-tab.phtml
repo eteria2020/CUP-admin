@@ -3,7 +3,7 @@
 
         <?php echo $this->partial('partials/flash-messages.phtml', []); ?>
         <div class="panel panel-default">
-            <div class="panel-heading">Chiudi corsa</div>
+            <div class="panel-heading"><?php echo $this->translate("Chiudi corsa"); ?></div>
             <div class="panel-body">
                 <form method="post" action="<?= $this->url('trips/do-close/post'); ?>">
                     <input type="hidden" name="id" value="<?= $this->trip->getId(); ?>">
@@ -11,18 +11,18 @@
                     <div class="row">
                         <div class="col-lg-6">
                             <div class="form-group">
-                                <label for="gender">Data e ora chiusura</label>
+                                <label for="gender"><?php echo $this->translate("Data e ora chiusura"); ?></label>
                                 <input type="text" name="datetime" id="datetime" class="form-control date-picker">
                             </div>
                         </div>
 
                         <div class="col-lg-6">
                             <div class="form-group">
-                                <label for="name">Pagabile</label>
+                                <label for="name"><?php echo $this->translate("Pagabile"); ?></label>
                                 <select name="payable" id="payable" class="form-control">
                                     <option value="none">-</option>
-                                    <option value="yes">Sì</option>
-                                    <option value="no">No</option>
+                                    <option value="yes"><?php echo $this->translate("Sì"); ?></option>
+                                    <option value="no"><?php echo $this->translate("No"); ?></option>
                                 </select>
                             </div>
                         </div>
@@ -30,7 +30,7 @@
 
                     <div class="row">
                         <div class="col-lg-12">
-                            <button type="submit" class="btn btn-success">Chiudi corsa</button>
+                            <button type="submit" class="btn btn-success"><?php echo $this->translate("Chiudi corsa"); ?></button>
                         </div>
                     </div>
                 </form>

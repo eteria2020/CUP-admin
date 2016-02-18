@@ -19,7 +19,7 @@ $formSetting->setAttribute('action', $this->url('customers/edit', ['id' => $this
 
         <!-- BEGIN Customer details -->
         <div class="panel panel-default">
-            <div class="panel-heading">Anagrafica</div>
+            <div class="panel-heading"><?php echo $this->translate("Anagrafica"); ?></div>
             <div class="panel-body">
 
                 <?= $this->form()->openTag($form); ?>
@@ -28,21 +28,21 @@ $formSetting->setAttribute('action', $this->url('customers/edit', ['id' => $this
                     <div class="row">
                         <div class="col-lg-4">
                             <div class="form-group">
-                                <label for="gender">Titolo</label>
+                                <label for="gender"><?php echo $this->translate("Titolo"); ?></label>
                                 <?= $this->formRow($form->get('customer')->get('gender')); ?>
                             </div>
                         </div>
 
                         <div class="col-lg-4">
                             <div class="form-group">
-                                <label for="name">Nome</label>
+                                <label for="name"><?php echo $this->translate("Nome"); ?></label>
                                 <?= $this->formRow($form->get('customer')->get('name')->setAttribute('readonly', 'true')); ?>
                             </div>
                         </div>
 
                         <div class="col-lg-4">
                             <div class="form-group">
-                                <label for="surname">Cognome</label>
+                                <label for="surname"><?php echo $this->translate("Cognome"); ?></label>
                                 <?= $this->formRow($form->get('customer')->get('surname')->setAttribute('readonly', 'true')); ?>
                             </div>
                         </div>
@@ -51,21 +51,21 @@ $formSetting->setAttribute('action', $this->url('customers/edit', ['id' => $this
                     <div class="row">
                         <div class="col-lg-4">
                             <div class="form-group">
-                                <label for="gender">Email</label>
+                                <label for="gender"><?php echo $this->translate("Email"); ?></label>
                                 <?= $this->formRow($form->get('customer')->get('email')->setAttribute('readonly', 'true')); ?>
                             </div>
                         </div>
 
                         <div class="col-lg-4">
                             <div class="form-group">
-                                <label for="name">Data di nascita</label>
+                                <label for="name"><?php echo $this->translate("Data di nascita"); ?></label>
                                 <?= $this->formRow($form->get('customer')->get('birthDate')->setAttributes(['readonly'=> 'true', 'class' => 'form-control'])); ?>
                             </div>
                         </div>
 
                         <div class="col-lg-4">
                             <div class="form-group">
-                                <label for="surname">Stato di nascita</label>
+                                <label for="surname"><?php echo $this->translate("Stato di nascita"); ?></label>
                                 <?= $this->formRow($form->get('customer')->get('birthCountry')); ?>
                             </div>
                         </div>
@@ -74,21 +74,21 @@ $formSetting->setAttribute('action', $this->url('customers/edit', ['id' => $this
                     <div class="row">
                         <div class="col-lg-4">
                             <div class="form-group">
-                                <label for="gender">Provincia di nascita (EE = estero)</label>
+                                <label for="gender"><?php echo $this->translate("Provincia di nascita (EE = estero)"); ?></label>
                                 <?= $this->formRow($form->get('customer')->get('birthProvince')); ?>
                             </div>
                         </div>
 
                         <div class="col-lg-4">
                             <div class="form-group">
-                                <label for="name">Comune di nascita</label>
+                                <label for="name"><?php echo $this->translate("Comune di nascita"); ?></label>
                                 <?= $this->formRow($form->get('customer')->get('birthTown')); ?>
                             </div>
                         </div>
 
                         <div class="col-lg-4">
                             <div class="form-group">
-                                <label for="surname">Via e numero civico</label>
+                                <label for="surname"><?php echo $this->translate("Via e numero civico"); ?></label>
                                 <?= $this->formRow($form->get('customer')->get('address')); ?>
                             </div>
                         </div>
@@ -97,21 +97,21 @@ $formSetting->setAttribute('action', $this->url('customers/edit', ['id' => $this
                     <div class="row">
                         <div class="col-lg-4">
                             <div class="form-group">
-                                <label for="gender">Informazioni aggiuntive</label>
+                                <label for="gender"><?php echo $this->translate("Informazioni aggiuntive"); ?></label>
                                 <?= $this->formRow($form->get('customer')->get('addressInfo')); ?>
                             </div>
                         </div>
 
                         <div class="col-lg-4">
                             <div class="form-group">
-                                <label for="name">CAP</label>
+                                <label for="name"><?php echo $this->translate("CAP"); ?></label>
                                 <?= $this->formRow($form->get('customer')->get('zipCode')); ?>
                             </div>
                         </div>
 
                         <div class="col-lg-4">
                             <div class="form-group">
-                                <label for="surname">Città</label>
+                                <label for="surname"><?php echo $this->translate("Città"); ?></label>
                                 <?= $this->formRow($form->get('customer')->get('town')); ?>
                             </div>
                         </div>
@@ -120,21 +120,21 @@ $formSetting->setAttribute('action', $this->url('customers/edit', ['id' => $this
                     <div class="row">
                         <div class="col-lg-4">
                             <div class="form-group">
-                                <label for="language">Lingua preferita</label>
+                                <label for="language"><?php echo $this->translate("Lingua preferita"); ?></label>
                                 <?= $this->formRow($form->get('customer')->get('language')); ?>
                             </div>
                         </div>
 
                         <div class="col-lg-4">
                             <div class="form-group">
-                                <label for="taxCode">Codice fiscale</label>
+                                <label for="taxCode"><?php echo $this->translate("Codice fiscale"); ?></label>
                                 <?= $this->formRow($form->get('customer')->get('taxCode')->setAttribute('readonly', 'true')); ?>
                             </div>
                         </div>
 
                         <div class="col-lg-4">
                             <div class="form-group">
-                                <label for="vat">Partita IVA (opzionale)</label>
+                                <label for="vat"><?php echo $this->translate("Partita IVA (opzionale)"); ?></label>
                                 <?= $this->formRow($form->get('customer')->get('vat')); ?>
                             </div>
                         </div>
@@ -143,14 +143,14 @@ $formSetting->setAttribute('action', $this->url('customers/edit', ['id' => $this
                     <div class="row">
                         <div class="col-lg-4">
                             <div class="form-group">
-                                <label for="mobile">Cellulare</label>
+                                <label for="mobile"><?php echo $this->translate("Cellulare"); ?></label>
                                 <?= $this->formRow($form->get('customer')->get('mobile')); ?>
                             </div>
                         </div>
 
                         <div class="col-lg-4">
                             <div class="form-group">
-                                <label for="phone">Telefono</label>
+                                <label for="phone"><?php echo $this->translate("Telefono"); ?></label>
                                 <?= $this->formRow($form->get('customer')->get('phone')); ?>
                             </div>
                         </div>
@@ -161,7 +161,7 @@ $formSetting->setAttribute('action', $this->url('customers/edit', ['id' => $this
 
                     <div class="row">
                         <div class="col-lg-12">
-                            <button type="submit" class="btn btn-success">Salva Dati Anagrafici</button>
+                            <button type="submit" class="btn btn-success"><?php echo $this->translate("Salva Dati Anagrafici"); ?></button>
                         </div>
                     </div>
 
@@ -172,7 +172,7 @@ $formSetting->setAttribute('action', $this->url('customers/edit', ['id' => $this
 
         <!-- BEGIN Driver's license details -->
         <div class="panel panel-default">
-            <div class="panel-heading">Dati Patente</div>
+            <div class="panel-heading"><?php echo $this->translate("Dati Patente"); ?></div>
             <div class="panel-body">
 
                 <?= $this->form()->openTag($formDriver); ?>
@@ -181,21 +181,21 @@ $formSetting->setAttribute('action', $this->url('customers/edit', ['id' => $this
                     <div class="row">
                         <div class="col-lg-4">
                             <div class="form-group">
-                                <label for="driverLicense">Patente</label>
+                                <label for="driverLicense"><?php echo $this->translate("Patente"); ?></label>
                                 <?= $this->formRow($formDriver->get('driver')->get('driverLicense')); ?>
                             </div>
                         </div>
 
                         <div class="col-lg-4">
                             <div class="form-group">
-                                <label for="driverLicenseAuthority">Rilasciato da (autorità)</label>
+                                <label for="driverLicenseAuthority"><?php echo $this->translate("Rilasciato da (autorità)"); ?></label>
                                 <?= $this->formRow($formDriver->get('driver')->get('driverLicenseAuthority')); ?>
                             </div>
                         </div>
 
                         <div class="col-lg-4">
                             <div class="form-group">
-                                <label for="driverLicenseReleaseDate">Rilasciato il</label>
+                                <label for="driverLicenseReleaseDate"><?php echo $this->translate("Rilasciato il"); ?></label>
                                 <?= $this->formRow($formDriver->get('driver')->get('driverLicenseReleaseDate')); ?>
                             </div>
                         </div>
@@ -204,28 +204,28 @@ $formSetting->setAttribute('action', $this->url('customers/edit', ['id' => $this
                     <div class="row">
                         <div class="col-lg-4">
                             <div class="form-group">
-                                <label for="driverLicenseName">Nome sulla patente</label>
+                                <label for="driverLicenseName"><?php echo $this->translate("Nome sulla patente"); ?></label>
                                 <?= $this->formRow($formDriver->get('driver')->get('driverLicenseName')); ?>
                             </div>
                         </div>
 
                         <div class="col-lg-4">
                             <div class="form-group">
-                                <label for="driverLicenseName">Cognome sulla patente</label>
+                                <label for="driverLicenseName"><?php echo $this->translate("Cognome sulla patente"); ?></label>
                                 <?= $this->formRow($formDriver->get('driver')->get('driverLicenseSurname')); ?>
                             </div>
                         </div>
 
                         <div class="col-lg-4">
                             <div class="form-group">
-                                <label for="driverLicenseCountry">Rilasciata da (nazione)</label>
+                                <label for="driverLicenseCountry"><?php echo $this->translate("Rilasciata da (nazione)"); ?></label>
                                 <?= $this->formRow($formDriver->get('driver')->get('driverLicenseCountry')); ?>
                             </div>
                         </div>
 
                         <div class="col-lg-4">
                             <div class="form-group">
-                                <label for="driverLicenseExpire">Data di scadenza</label>
+                                <label for="driverLicenseExpire"><?php echo $this->translate("Data di scadenza"); ?></label>
                                 <?= $this->formRow($formDriver->get('driver')->get('driverLicenseExpire')); ?>
                             </div>
                         </div>
@@ -233,7 +233,7 @@ $formSetting->setAttribute('action', $this->url('customers/edit', ['id' => $this
 
                     <div class="row">
                         <div class="col-lg-12">
-                            <button type="submit" class="btn btn-success">Salva Dati Patente</button>
+                            <button type="submit" class="btn btn-success"><?php echo $this->translate("Salva Dati Patente"); ?></button>
                         </div>
                     </div>
                 <?php echo $this->form()->closeTag(); ?>
@@ -250,13 +250,13 @@ $formSetting->setAttribute('action', $this->url('customers/edit', ['id' => $this
         <!-- BEGIN Other details -->
         <div class="panel panel-default">
 
-            <div class="panel-heading">Altri dati</div>
+            <div class="panel-heading"><?php echo $this->translate("Altri dati"); ?></div>
             <div class="panel-body">
 
                 <div class="row">
                     <div class="col-lg-12">
                         <div class="form-group">
-                            <label for="gender">Stato Iscrizione</label>
+                            <label for="gender"><?php echo $this->translate("Stato Iscrizione"); ?></label>
                             <?= $this->formRow($formSetting->get('setting')->get('registrationCompleted'));?>
                         </div>
                     </div>
@@ -265,7 +265,7 @@ $formSetting->setAttribute('action', $this->url('customers/edit', ['id' => $this
                 <div class="row">
                     <div class="col-lg-12">
                         <div class="form-group">
-                            <label for="gender">Stato Primo Pagamento</label>
+                            <label for="gender"><?php echo $this->translate("Stato Primo Pagamento"); ?></label>
                             <?= $this->formRow($formSetting->get('setting')->get('firstPaymentCompleted'));?>
                         </div>
                     </div>
@@ -274,7 +274,7 @@ $formSetting->setAttribute('action', $this->url('customers/edit', ['id' => $this
                 <div class="row">
                     <div class="col-lg-12">
                         <div class="form-group">
-                            <label for="gender">Percentuale Sconto</label>
+                            <label for="gender"><?php echo $this->translate("Percentuale Sconto"); ?></label>
                             <?= $this->formRow(is_null($formSetting->get('setting')->get('discountRate')) ? '0' : $formSetting->get('setting')->get('discountRate'));?>
                         </div>
                     </div>
@@ -283,7 +283,7 @@ $formSetting->setAttribute('action', $this->url('customers/edit', ['id' => $this
                 <div class="row">
                     <div class="col-lg-12">
                         <div class="form-group">
-                            <label for="goldList">Maintainer</label>
+                            <label for="goldList"><?php echo $this->translate("Maintainer"); ?></label>
                             <?= $this->formRow($formSetting->get('setting')->get('maintainer'));?>
                         </div>
                     </div>
@@ -292,7 +292,7 @@ $formSetting->setAttribute('action', $this->url('customers/edit', ['id' => $this
                 <div class="row">
                     <div class="col-lg-12">
                         <div class="form-group">
-                            <label for="goldList">Gold List</label>
+                            <label for="goldList"><?php echo $this->translate("Gold List"); ?></label>
                             <?= $this->formRow($formSetting->get('setting')->get('goldList'));?>
                         </div>
                     </div>
@@ -300,7 +300,7 @@ $formSetting->setAttribute('action', $this->url('customers/edit', ['id' => $this
 
                 <div class="row">
                     <div class="col-lg-12">
-                        <button type="submit" class="btn btn-success">Salva Dati</button>
+                        <button type="submit" class="btn btn-success"><?php echo $this->translate("Salva Dati"); ?></button>
                     </div>
                 </div>
 
@@ -317,13 +317,13 @@ $formSetting->setAttribute('action', $this->url('customers/edit', ['id' => $this
             $isManuallyDisabled = false;
         ?>
         <div class="panel panel-default">
-            <div class="panel-heading">Abilitazione</div>
+            <div class="panel-heading"><?php echo $this->translate("Abilitazione"); ?></div>
             <div class="panel-body">
 
                 <div class="row">
                     <div class="col-lg-12">
-                        <label class="sng-margin-top">Stato:</label>
-                        <label class="sng-info-box sng-move-right"><?= $isEnabled ? 'Abilitato' : 'Disabilitato';?></label>
+                        <label class="sng-margin-top"><?php echo $this->translate("Stato:"); ?></label>
+                        <label class="sng-info-box sng-move-right"><?= $isEnabled ? $this->translate('Abilitato') : $this->translate('Disabilitato');?></label>
                     </div>
                 </div>
 
@@ -331,7 +331,7 @@ $formSetting->setAttribute('action', $this->url('customers/edit', ['id' => $this
 
                 <div class="row sng-margin-top">
                     <div class="col-lg-12">
-                        <label>Motivi:</label>
+                        <label><?php echo $this->translate("Motivi:"); ?></label>
                     </div>
                 </div>
 
@@ -341,7 +341,7 @@ $formSetting->setAttribute('action', $this->url('customers/edit', ['id' => $this
                     <div class="col-lg-12">
                         <label class="sng-info-box sng-full-width">
                             <?php if ($deactivation->isGeneratedAutomatically()): ?>
-                            <i class="fa fa-info-circle" title="Generata automaticamente, alcuni dati potrebbero non essere corretti"></i>
+                            <i class="fa fa-info-circle" title="<?php echo $this->translate("Generata automaticamente, alcuni dati potrebbero non essere corretti"); ?>"></i>
                             <?php endif; ?>
                             <a class="sng-move-right sng-margin-left"
                                 href="<?= $this->url(
@@ -372,7 +372,7 @@ $formSetting->setAttribute('action', $this->url('customers/edit', ['id' => $this
                                 class="btn btn-success"
                                 type="submit"
                                 onclick="reactivate(event)"
-                                value="Riabilita">
+                                value="<?php echo $this->translate("Riabilita"); ?>">
                             </input>
                         </form>
                     </div>
@@ -391,7 +391,7 @@ $formSetting->setAttribute('action', $this->url('customers/edit', ['id' => $this
                                 class="btn btn-success"
                                 type="submit"
                                 onclick="deactivate(event)"
-                                value="Disabilita manualmente">
+                                value="<?php echo $this->translate("Disabilita manualmente"); ?>">
                             </input>
                         </form>
                     </div>

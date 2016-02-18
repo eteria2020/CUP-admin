@@ -1090,7 +1090,10 @@ return [
             'TripCostForm' => 'Application\Form\TripCostFormFactory',
             'FaresForm' => 'Application\Form\FaresFormFactory',
             'EditTripForm' => 'Application\Form\EditTripFormFactory',
-            'ConfigurationsForm' => 'Application\Form\ConfigurationsFormFactory'
+            'ConfigurationsForm' => 'Application\Form\ConfigurationsFormFactory',
+            'UserLanguageService' => 'Application\Service\UserLanguageServiceFactory',
+            'ChangeLanguageDetector.listener' => 'Application\Listener\ChangeLanguageDetectorFactory',
+
         ]
     ],
     'controllers' => [
@@ -1125,15 +1128,36 @@ return [
         ]
     ],
     'translator' => [
-        'locale' => 'it',
+        'locale' => 'it_IT',
         'translation_file_patterns' => [
             [
-                'type' => 'phpArray',
-                'base_dir' => 'vendor/zendframework/zendframework/resources/languages',
-                'pattern' => '%s/Zend_Validate.php',
-                'text_domain' => 'zend_validate',
+                'type' => 'gettext',
+                'base_dir' => __DIR__ . '/../language',
+                'pattern' => '%s.mo'
+            ]
+        ]
+    ],
+    'translation_config' => [
+        'languages' => [
+            'it' => [
+                "locale" => "it_IT",
+                "lang" => "it",
+                "lang_3chars" => "ita",
+                "label" => "Italiano"
+            ],
+            'en' => [
+                "locale" => "en_US",
+                "lang" => "en",
+                "lang_3chars" => "eng",
+                "label" => "English"
             ]
         ],
+        "language_folder" => __DIR__ . "/../language"
+    ],
+    'language_detector_listeners' => [
+        'invokables' => [
+            'LanguageFromSessionDetectorListener' => 'Application\Listener\LanguageFromSessionDetectorListener'
+        ]
     ],
     'view_manager' => [
         'display_not_found_reason' => true,

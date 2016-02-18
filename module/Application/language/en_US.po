@@ -1,0 +1,60 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=iso-8859-1\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: en_US\n"
+"X-Generator: Poedit 1.6.10\n"
+
+msgid "Targa"
+msgstr "Plate"
+
+msgid "Seleziona"
+msgstr "Select"
+
+msgid "Identificativo"
+msgstr "Id"
+
+msgid "GPS"
+msgstr "GPS"
+
+msgid "GPRS"
+msgstr "GPRS"
+
+msgid "OBC"
+msgstr "PBC"
+
+msgid "Pulizia Interna"
+msgstr "Internal cleaning"
+
+msgid "Pulizia Esterna"
+msgstr "External cleaning"
+
+msgid "In Corsa"
+msgstr "In use"
+
+msgid "Nascosta"
+msgstr "Hidden"
+
+msgid "Attiva"
+msgstr "Active"
+
+msgid "Stato manutenzione"
+msgstr "Maintenance status"
+
+msgid "Stato operativa"
+msgstr "Working"
+
+msgid "Stato non operativa"
+msgstr "Not working"
+
+msgid "Occupata"
+msgstr "Busy"
+
+msgid "Auto aggiunta con successo!"
+msgstr "Car successfully added"

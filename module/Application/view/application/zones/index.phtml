@@ -12,7 +12,7 @@ $this->headScript()
         <div class="row">
             <div class="col-lg-6">
                 <h3 class="page-title">
-                    Gestione Aree
+                    <?php echo $this->translate("Gestione Aree"); ?>
                 </h3>
             </div>
         </div>
@@ -23,9 +23,9 @@ $this->headScript()
         <div class="row">
             <div class="col-md-12">
                 <ul class="nav nav-tabs" id="js-tabs" role="tablist">
-                    <li role="presentation" id="menu-trip"><a href="<?= $this->url('zones/ajax-tab-trip'); ?>" data-target="#tab-trip" role="tab" data-toggle="tab">Aree utilizzo</a></li>
-                    <li role="presentation" id="menu-groups"><a href="<?= $this->url('zones/ajax-tab-groups'); ?>" data-target="#tab-groups" role="tab" data-toggle="tab">Gruppi</a></li>
-                    <li role="presentation" id="menu-prices"><a href="<?= $this->url('zones/ajax-tab-prices'); ?>" data-target="#tab-prices" role="tab" data-toggle="tab">Listini</a></li>
+                    <li role="presentation" id="menu-trip"><a href="<?= $this->url('zones/ajax-tab-trip'); ?>" data-target="#tab-trip" role="tab" data-toggle="tab"><?php echo $this->translate("Aree utilizzo"); ?></a></li>
+                    <li role="presentation" id="menu-groups"><a href="<?= $this->url('zones/ajax-tab-groups'); ?>" data-target="#tab-groups" role="tab" data-toggle="tab"><?php echo $this->translate("Gruppi"); ?></a></li>
+                    <li role="presentation" id="menu-prices"><a href="<?= $this->url('zones/ajax-tab-prices'); ?>" data-target="#tab-prices" role="tab" data-toggle="tab"><?php echo $this->translate("Listini"); ?></a></li>
                 </ul>
 
                 <div class="tab-content">

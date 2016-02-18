@@ -10,7 +10,7 @@ $this->headScript()
 
         <!-- BEGIN PAGE HEADER-->
         <h3 class="page-title">
-            ELENCO CARD <small>ricerca</small>
+            <?php echo $this->translate("ELENCO CARD"); ?> <small><?php echo $this->translate("ricerca"); ?></small>
         </h3>
 
         <div class="page-bar">
@@ -24,7 +24,7 @@ $this->headScript()
 
                     </div>
                     <div class="col-md-4">
-                        <a href="<?= $this->url('customers/list-card/add'); ?>" class="btn green pull-right"><i class="fa fa-plus"></i> Aggiungi Card</a>
+                        <a href="<?= $this->url('customers/list-card/add'); ?>" class="btn green pull-right"><i class="fa fa-plus"></i> <?php echo $this->translate("Aggiungi Card"); ?></a>
                     </div>
                 </div>
 
@@ -38,19 +38,19 @@ $this->headScript()
                 <div class="portlet box green">
                     <div class="portlet-title">
                         <div class="caption">
-                            Elenco card
+                            <?php echo $this->translate("Elenco card"); ?>
                         </div>
                     </div>
                     <div class="portlet-body">
                         <table class="table table-striped table-bordered table-hover" id="js-cards-table">
                             <thead>
                             <tr>
-                                <th>Codice</th>
-                                <th>RFID</th>
-                                <th>Assegnato</th>
-                                <th>Note</th>
-                                <th>Assegnabile</th>
-                                <th>Utente</th>
+                                <th><?php echo $this->translate("Codice"); ?></th>
+                                <th><?php echo $this->translate("RFID"); ?></th>
+                                <th><?php echo $this->translate("Assegnato"); ?></th>
+                                <th><?php echo $this->translate("Note"); ?></th>
+                                <th><?php echo $this->translate("Assegnabile"); ?></th>
+                                <th><?php echo $this->translate("Utente"); ?></th>
                             </tr>
                             </thead>
                         </table>
