@@ -84,8 +84,8 @@ $(function() {
             {data: 'c.parking'},
             {data: 'e.payable'},
             {data: 'payed'},
-            {data: 'f.name'},
             {data: 'e.totalCost'},
+            {data: 'f.name'},
             {data: 'e.idLink'}
         ],
         "columnDefs": [
@@ -116,7 +116,7 @@ $(function() {
                 sortable: false
             },
             {
-                targets: 18,
+                targets: 17,
                 sortable: false,
                 "render": function ( data, type, row ) {
                     return renderCostButton(data);
