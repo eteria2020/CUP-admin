@@ -6,20 +6,20 @@ $this->headScript()
     <div class="page-content">
 
         <!-- TITLE -->
-        <h3 class="page-title">ADDEBITI EXTRA/PENALI</h3>
+        <h3 class="page-title"><?php echo $this->translate("ADDEBITI EXTRA/PENALI"); ?></h3>
 
         <!-- BEGIN TOP INPUT ROW -->
         <div class="row">
 
             <!-- INPUT CUSTOMER ID -->
             <div class="col-lg-2">
-                <label>Id Cliente</label>
-                <input id="customer" class="form-control" type="text"></input>
+                <label><?php echo $this->translate("Id Cliente"); ?></label>
+                <input id="customer" class="form-control" type="text">
             </div>
 
             <!-- SELECT FLEET -->
             <div class="col-lg-2">
-                <label>Flotta</label>
+                <label><?php echo $this->translate("Flotta"); ?></label>
                 <select id="fleet" class="form-control">
                     <option id="fleet-option-null">---</option>
                     <?php foreach ($this->fleets as $fleet): ?>
@@ -30,7 +30,7 @@ $this->headScript()
 
             <!-- SELECT TYPE -->
             <div class="col-lg-2">
-                <label>Tipologia</label>
+                <label><?php echo $this->translate("Tipologia"); ?></label>
                 <select id="type" class="form-control">
                     <option id="type-option-null">---</option>
                     <?php foreach ($this->types as $type): ?>
@@ -47,14 +47,14 @@ $this->headScript()
         <!-- ADD PAYMENT ROW BUTTON -->
         <div class="row sng-margin-top">
             <div class="col-lg-2">
-                <button id="js-add-row" class="sng-green-btn"></i> Aggiungi addebito</button>
+                <button id="js-add-row" class="sng-green-btn"></i> <?php echo $this->translate("Aggiungi addebito"); ?></button>
             </div>
         </div>
 
         <!-- SUBMIT BUTTON -->
         <div class="row sng-margin-top">
             <div class="col-lg-12 sng-margin-top">
-                <button id="js-extra-payment" class="btn btn-success sng-faded">Effettua pagamento</button>
+                <button id="js-extra-payment" class="btn btn-success sng-faded"><?php echo $this->translate("Effettua pagamento"); ?></button>
             </div>
         </div>
 

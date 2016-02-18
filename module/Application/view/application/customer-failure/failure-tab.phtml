@@ -8,7 +8,7 @@
                 <div class="portlet box green">
                     <div class="portlet-title">
                         <div class="caption">
-                            <i class="fa fa-paperclip"></i>Elenco pagamenti falliti
+                            <i class="fa fa-paperclip"></i><?php echo $this->translate("Elenco pagamenti falliti"); ?>
                         </div>
                     </div>
                     <div class="portlet-body">
@@ -17,11 +17,11 @@
                         <table id="failures-table" class="table table-striped table-bordered table-hover">
                             <thead>
                                 <tr>
-                                    <th>Id Corsa</th>
-                                    <th>Importo</th>
-                                    <th>Data risoluzione</th>
-                                    <th>Tempo risoluzione</th>
-                                    <th>Tentativi</th>
+                                    <th><?php echo $this->translate("Id Corsa"); ?></th>
+                                    <th><?php echo $this->translate("Importo"); ?></th>
+                                    <th><?php echo $this->translate("Data risoluzione"); ?></th>
+                                    <th><?php echo $this->translate("Tempo risoluzione"); ?></th>
+                                    <th><?php echo $this->translate("Tentativi"); ?></th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -35,7 +35,7 @@
                                             if ($tripPayment->getPayedSuccessfullyAt() instanceof \DateTime) {
                                                 echo $tripPayment->getPayedSuccessfullyAt()->format('d-m-Y H:i:s') . '</td>';
                                                 //echo '<td class="sng-date-column">' . $tripPayment->getFirstPaymentTryTs()->format('d-m-Y H:i:s') . '</td>';
-                                                echo '<td class="sng-text-center">' . date_diff($tripPayment->getFirstPaymentTryTs(), $tripPayment->getPayedSuccessfullyAt())->format('%a giorni, %h ore, %i minuti');
+                                                echo '<td class="sng-text-center">' . date_diff($tripPayment->getFirstPaymentTryTs(), $tripPayment->getPayedSuccessfullyAt())->format($this->translate("%a giorni, %h ore, %i minuti"));
                                             } else {
                                                 echo '-</td><td class="sng-text-center">-';
                                             }

@@ -48,9 +48,13 @@
             </div>
         </div>
 
+
+
         <a href="javascript:;" class="menu-toggler responsive-toggler" data-toggle="collapse" data-target=".navbar-collapse">
         </a>
-
+        <div class="top-menu">
+            <?php echo $this->partial('partials/menu-language.phtml', array()); ?>
+        </div>
         <div class="top-menu">
             <?php echo $this->partial('partials/menu-user.phtml', array()); ?>
         </div>

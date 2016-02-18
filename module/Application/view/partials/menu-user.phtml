@@ -10,12 +10,12 @@
         <ul class="dropdown-menu dropdown-menu-default">
             <li>
                 <a href="<?= $this->url('users'); ?>">
-                    <i class="fa fa-users"></i> Gestioni Utenti
+                    <i class="fa fa-users"></i> <?php echo $this->translate("Gestioni Utenti"); ?>
                 </a>
             </li>
             <li>
                 <a href="/user/logout">
-                    <i class="fa fa-key"></i> Log Out </a>
+                    <i class="fa fa-key"></i> <?php echo $this->translate("Log Out"); ?> </a>
             </li>
         </ul>
     </li>

@@ -64,6 +64,8 @@ class Module
         } catch (\Doctrine\DBAL\DBALException $exception) {
             // database tables not yet initialized
         }
+
+        $eventManager->attachAggregate($serviceManager->get('ChangeLanguageDetector.listener'));
     }
 
     public function getConfig()
@@ -80,5 +82,17 @@ class Module
                 ),
             ),
         );
+    }
+
+    // View Helper Configuration
+    public function getViewHelperConfig()
+    {
+        return [
+            'invokables' => [],
+            'factories' => [
+                'languageManager' => 'Application\\View\\Helper\\LanguageManagerFactory'
+            ],
+        ];
+
     }
 }

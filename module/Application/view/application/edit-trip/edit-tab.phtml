@@ -6,7 +6,7 @@ if (!$this->trip->isEnded()):
 
 <div class="row">
     <div class="col-lg-12">
-        <p>La corsa non può essere modificata perché non risulta ancora conclusa.</p>
+        <p><?php echo $this->translate("La corsa non può essere modificata perché non risulta ancora conclusa."); ?></p>
     </div>
 </div>
 
@@ -17,7 +17,7 @@ elseif ($this->trip->isPaymentCompleted()):
 
 <div class="row">
     <div class="col-lg-12">
-        <p>La corsa non può essere modificata perché risulta già pagata.</p>
+        <p><?php echo $this->translate("La corsa non può essere modificata perché risulta già pagata."); ?></p>
     </div>
 </div>
 
@@ -39,7 +39,7 @@ else:
             <!-- Header -->
             <div class="portlet-title">
                 <div class="caption">
-                    <i class="fa fa-server"></i>Dati corsa
+                    <i class="fa fa-server"></i><?php echo $this->translate("Dati corsa"); ?>
                 </div>
             </div>
             <!-- header -->
@@ -48,24 +48,24 @@ else:
                 <div class="row">
                     <div class="col-lg-4">
                         <div class="form-group">
-                            <label>Data inizio</label>
+                            <label><?php echo $this->translate("Data inizio"); ?></label>
                             <div class="sng-info-box"><?= $timestampBeginning ?></div>
                         </div>
                     </div>
                     <div class="col-lg-4">
                         <div class="form-group">
-                            <label>Data fine <span class="sng-hint">(non precedente a quella di inizio)</span></label>
+                            <label><?php echo $this->translate("Data fine"); ?> <span class="sng-hint"><?php echo $this->translate("(non precedente a quella di inizio)"); ?></span></label>
                             <?= $this->formRow($form->get('trip')->get('timestampEnd')); ?>
                         </div>
                     </div>
                     <div class="col-lg-4">
                         <div class="form-group">
-                            <label>Pagabile <span class="sng-hint">(impostabile solo a non pagabile)</span></label>
+                            <label><?php echo $this->translate("Pagabile"); ?> <span class="sng-hint"><?php echo $this->translate("(impostabile solo a non pagabile)"); ?></span></label>
                             <?php
                             if ($trip->getPayable()) {
                                 echo $this->formRow($form->get('trip')->get('payable'));
                             } else {
-                                echo '<div class="sng-info-box">NO</div>';
+                                echo '<div class="sng-info-box">' . $this->translate("NO") . '</div>';
                             }
                             ?>
                         </div>
@@ -77,7 +77,7 @@ else:
                             type="submit"
                             onClick="<?= $this->trip->isPaymentTried() ? "removeTries(event)" : ""; ?>"
                             class="btn btn-success">
-                            Salva Dati Corsa
+                            <?php echo $this->translate("Salva Dati Corsa"); ?>
                         </button>
                     </div>
                 </div>

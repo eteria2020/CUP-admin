@@ -3,12 +3,12 @@
 <?php echo $this->partial('partials/flash-messages.phtml', []); ?>
 
 <div class="btn-group">
-    <button type="button" class="btn btn-default">Seleziona...</button>
+    <button type="button" class="btn btn-default"><?php echo $this->translate("Seleziona..."); ?></button>
     <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown"><i class="fa fa-angle-down"></i></button>
     <ul class="dropdown-menu" role="menu">
         <?php foreach($this->commands as $key => $command): ?>
             <li>
-                <a href="<?= $this->url('cars/send-command', ['plate' => $this->car->getPlate(), 'command' => $key]); ?>" onclick="return confirm('Sei sicuro di voler eseguire questo comando?')">
+                <a href="<?= $this->url('cars/send-command', ['plate' => $this->car->getPlate(), 'command' => $key]); ?>" onclick="return confirm('<?php echo $this->translate("Sei sicuro di voler eseguire questo comando?"); ?>')">
                     <?= $command; ?>
                 </a>
             </li>

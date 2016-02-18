@@ -4,7 +4,7 @@
         <div class="row">
             <div class="col-lg-6">
                 <h3 class="page-title">
-                    Gestione Aree
+                    <?php echo $this->translate("Gestione Aree"); ?>
                 </h3>
             </div>
         </div>
@@ -15,7 +15,7 @@
                     <div class="form-inline">
                         <div class="form-group">
                             <select name="zone-sel" id="zone-sel" class="form-control">
-                                <option value="select" selected="">-- Seleziona --</option>
+                                <option value="select" selected="">-- <?php echo $this->translate("Seleziona"); ?> --</option>
                             </select>
                         </div>
                     </div>
