@@ -848,6 +848,85 @@ return [
                                 'action' => 'fares'
                             ]
                         ]
+                    ],
+                    'csv' => [
+                        'type' => 'Segment',
+                        'options' => [
+                            'route' => '/csv',
+                            'defaults' => [
+                                'controller' => 'PaymentsCsv',
+                                'action' => 'csv'
+                            ]
+                        ]
+                    ],
+                    'csv-add-file' => [
+                        'type' => 'Segment',
+                        'options' => [
+                            'route' => '/csv-add-file',
+                            'defaults' => [
+                                'controller' => 'PaymentsCsv',
+                                'action' => 'add-file'
+                            ]
+                        ]
+                    ],
+                    'csv-analyze-file' => [
+                        'type' => 'Segment',
+                        'options' => [
+                            'route' => '/csv-analyze-file',
+                            'defaults' => [
+                                'controller' => 'PaymentsCsv',
+                                'action' => 'analyze-file'
+                            ]
+                        ]
+                    ],
+                    'csv-details' => [
+                        'type' => 'Segment',
+                        'options' => [
+                            'route' => '/csv-details/:id',
+                            'constraints' => [
+                                'id'    => '[0-9]*'
+                            ],
+                            'defaults' => [
+                                'controller' => 'PaymentsCsv',
+                                'action' => 'details'
+                            ]
+                        ]
+                    ],
+                    'csv-add-note' => [
+                        'type' => 'Segment',
+                        'options' => [
+                            'route' => '/csv-add-note/:id',
+                            'constraints' => [
+                                'id'    => '[0-9]*'
+                            ],
+                            'defaults' => [
+                                'controller' => 'PaymentsCsv',
+                                'action' => 'add-note'
+                            ]
+                        ]
+                    ],
+                    'csv-resolve' => [
+                        'type' => 'Segment',
+                        'options' => [
+                            'route' => '/csv-resolve/:id',
+                            'constraints' => [
+                                'id'    => '[0-9]*'
+                            ],
+                            'defaults' => [
+                                'controller' => 'PaymentsCsv',
+                                'action' => 'resolve'
+                            ]
+                        ]
+                    ],
+                    'csv-upload' => [
+                        'type' => 'Segment',
+                        'options' => [
+                            'route' => '/csv-upload',
+                            'defaults' => [
+                                'controller' => 'PaymentsCsv',
+                                'action' => 'upload'
+                            ]
+                        ]
                     ]
                 ]
             ],
@@ -984,7 +1063,8 @@ return [
             'Application\Controller\Zones' => 'Application\Controller\ZonesControllerFactory',
             'Application\Controller\CustomersEdit' => 'Application\Controller\CustomersEditControllerFactory',
             'Application\Controller\EditTrip' => 'Application\Controller\EditTripControllerFactory',
-            'Application\Controller\CustomerFailure' => 'Application\Controller\CustomerFailureControllerFactory'
+            'Application\Controller\CustomerFailure' => 'Application\Controller\CustomerFailureControllerFactory',
+            'Application\Controller\PaymentsCsv' => 'Application\Controller\PaymentsCsvControllerFactory'
         ]
     ],
     'input_filters' => [
@@ -1088,7 +1168,8 @@ return [
                 ['controller' => 'Application\Controller\Zones', 'roles' => ['superadmin']],
                 ['controller' => 'Application\Controller\CustomersEdit', 'roles' => ['admin']],
                 ['controller' => 'Application\Controller\EditTrip', 'roles' => ['admin']],
-                ['controller' => 'Application\Controller\CustomerFailure', 'roles' => ['admin']]
+                ['controller' => 'Application\Controller\CustomerFailure', 'roles' => ['admin']],
+                ['controller' => 'Application\Controller\PaymentsCsv', 'roles' => ['admin']]
             ],
         ],
     ],
@@ -1225,6 +1306,11 @@ return [
                     [
                         'label' => 'Competenze',
                         'route' => 'payments/recap',
+                        'isVisible' => true
+                    ],
+                    [
+                        'label' => 'Verifica CartaSI',
+                        'route' => 'payments/csv',
                         'isVisible' => true
                     ]
                 ]

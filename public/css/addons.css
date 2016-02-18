@@ -4,6 +4,12 @@
     border-color: #E5E5E5;
     background-color: #EEEEEE;
     padding: 5px;
+    min-height: 32px;
+}
+.sng-info-box-fixed {
+    height: 32px;
+    white-space: nowrap;
+    overflow: scroll;
 }
 .panel-default > .panel-heading {
     color: white;
@@ -25,7 +31,7 @@
     margin-top: 10px;
 }
 .sng-date-column {
-    width: 130px;
+    width: 140px;
 }
 .sng-last-row {
     background-color: #FFEE99 !important;

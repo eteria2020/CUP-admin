@@ -18,5 +18,11 @@ return array(
         'X-Mailer' => 'Sharengo agent',
         'sharengoNotices' => 'webmaster@philcartechnology.eu',
         'registrationBcc' => 'webmaster@philcartechnology.eu'
+    ],
+    'csv' => [
+        'newPath' => 'data/Csv',
+        'addedPath' => 'data/Csv/Added',
+        'analyzedPath' => 'data/Csv/Analyzed',
+        'tempPath' => 'data/Csv/Temp'
     ]
 );
