@@ -1,7 +1,6 @@
 <?php
 namespace Application\Controller;
 
-use Application\Entity\Webuser;
 use Application\Form\UserForm;
 use Application\Form\Validator\DuplicateEmail;
 use SharengoCore\Service\UsersService;
@@ -46,6 +45,7 @@ class UsersController extends AbstractActionController
 
     public function addAction()
     {
+        $translator = $this->TranslatorPlugin();
         /** @var UserForm $form */
         $form = $this->I_userForm;
 
@@ -62,10 +62,10 @@ class UsersController extends AbstractActionController
                 try {
 
                     $this->I_usersService->saveData($form->getData());
-                    $this->flashMessenger()->addSuccessMessage('Utente creato con successo!');
+                    $this->flashMessenger()->addSuccessMessage($translator->translate('Utente creato con successo!'));
 
                 } catch (\Exception $e) {
-                    $this->flashMessenger()->addErrorMessage('Si è verificato un errore applicativo. L\'assistenza tecnica è già al corrente, ci scusiamo per l\'inconveniente');
+                    $this->flashMessenger()->addErrorMessage($translator->translate('Si è verificato un errore applicativo. L\'assistenza tecnica è già al corrente, ci scusiamo per l\'inconveniente'));
 
                 }
 
@@ -80,6 +80,7 @@ class UsersController extends AbstractActionController
 
     public function editAction()
     {
+        $translator = $this->TranslatorPlugin();
         $id = (int)$this->params()->fromRoute('id', 0);
 
         /** @var Webuser $I_user */
@@ -117,11 +118,11 @@ class UsersController extends AbstractActionController
                 try {
 
                     $this->I_usersService->saveData($form->getData(), $userData['password']);
-                    $this->flashMessenger()->addSuccessMessage('Utente modificato con successo!');
+                    $this->flashMessenger()->addSuccessMessage($translator->translate('Utente modificato con successo!'));
 
                 } catch (\Exception $e) {
 
-                    $this->flashMessenger()->addErrorMessage('Si è verificato un errore applicativo. L\'assistenza tecnica è già al corrente, ci scusiamo per l\'inconveniente');
+                    $this->flashMessenger()->addErrorMessage($translator->translate('Si è verificato un errore applicativo. L\'assistenza tecnica è già al corrente, ci scusiamo per l\'inconveniente'));
 
                 }
 

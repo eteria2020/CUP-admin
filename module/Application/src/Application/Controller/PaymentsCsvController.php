@@ -103,6 +103,7 @@ class PaymentsCsvController extends AbstractActionController
 
     public function addNoteAction()
     {
+        $translator = $this->TranslatorPlugin();
         $id = $this->params()->fromRoute('id', 0);
         $csvAnomaly = $this->csvService->getAnomalyById($id);
 
@@ -111,13 +112,13 @@ class PaymentsCsvController extends AbstractActionController
                 $postData = $this->getRequest()->getPost()->toArray();
                 $content = $postData['new-note'];
                 $this->csvService->addNoteToAnomaly($csvAnomaly, $this->identity(), $content);
-                $this->flashMessenger()->addSuccessMessage('Nota aggiunta con successo');
+                $this->flashMessenger()->addSuccessMessage($translator->translate('Nota aggiunta con successo'));
             } catch (NoteContentNotValidException $e) {
                 $this->getResponse()->setStatusCode(Response::STATUS_CODE_500);
                 $this->flashMessenger()->addErrorMessage($e->getMessage());
             } catch (\Exception $e) {
                 $this->getResponse()->setStatusCode(Response::STATUS_CODE_500);
-                $this->flashMessenger()->addErrorMessage('Errore nell\'inserimento della nota');
+                $this->flashMessenger()->addErrorMessage($translator->translate('Errore nell\'inserimento della nota'));
             }
         }
 
@@ -126,18 +127,19 @@ class PaymentsCsvController extends AbstractActionController
 
     public function resolveAction()
     {
+        $translator = $this->TranslatorPlugin();
         $id = $this->params()->fromRoute('id', 0);
         $csvAnomaly = $this->csvService->getAnomalyById($id);
 
         try {
             $this->csvService->resolveAnomaly($csvAnomaly, $this->identity());
-            $this->flashMessenger()->addSuccessMessage('Anomalia risolta con successo');
+            $this->flashMessenger()->addSuccessMessage($translator->translate('Anomalia risolta con successo'));
         } catch (CartasiCsvAnomalyAlreadyResolvedException $e) {
             $this->getResponse()->setStatusCode(Response::STATUS_CODE_500);
-            $this->flashMessenger()->addErrorMessage('Anomalia già segnata come risolta');
+            $this->flashMessenger()->addErrorMessage($translator->translate('Anomalia già segnata come risolta'));
         } catch (\Exception $e) {
             $this->getResponse()->setStatusCode(Response::STATUS_CODE_500);
-            $this->flashMessenger()->addErrorMessage('Errore nella risoluzione');
+            $this->flashMessenger()->addErrorMessage($translator->translate('Errore nella risoluzione'));
         }
 
         return $this->reloadDetails($csvAnomaly->getId());
@@ -145,6 +147,7 @@ class PaymentsCsvController extends AbstractActionController
 
     public function uploadAction()
     {
+        $translator = $this->TranslatorPlugin();
         $request = $this->getRequest();
         if ($request->isPost()) {
             // Make certain to merge the files info!
@@ -165,9 +168,9 @@ class PaymentsCsvController extends AbstractActionController
 
                 try {
                     $this->csvService->analyzeFile($csvFile);
-                    $this->flashMessenger()->addSuccessMessage('File caricato con successo');
+                    $this->flashMessenger()->addSuccessMessage($translator->translate('File caricato con successo'));
                 } catch (InvalidCsvException $e) {
-                    $this->flashMessenger()->addErrorMessage('Formattazione del file non valida');
+                    $this->flashMessenger()->addErrorMessage($translator->translate('Formattazione del file non valida'));
                 }
             } else {
                 foreach ($this->form->getMessages() as $message) {

@@ -14,7 +14,8 @@ return [
         // transaltor/translation_file_patterns configuration key
         'allowed_languages' => [
             'en_US',
-            'it_IT'
+            'it_IT',
+            'de_DE'
         ],
         // listeners used to determine the appropriate language range for the
         // application.

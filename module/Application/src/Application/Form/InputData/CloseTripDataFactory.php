@@ -27,6 +27,7 @@ class CloseTripDataFactory
      */
     public function createFromArray(array $data)
     {
+        $translator = $this->TranslatorPlugin();
         $trip = $this->tripsRepository->findOneById($data['id']);
 
         if (!$trip instanceof Trips) {

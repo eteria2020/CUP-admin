@@ -11,21 +11,21 @@ $(document).ready(function () {
 
 function deactivate(e)
 {
-    if (!confirm('Disattivare utente?')) {
+    if (!confirm(translate("deactivateUser"))) {
         e.preventDefault();
     }
 }
 
 function reactivate(e)
 {
-    if (!confirm('Riattivare utente?')) {
+    if (!confirm(translate("reactivateUser"))) {
         e.preventDefault();
     }
 }
 
 function removeDeactivation(e)
 {
-    if (!confirm('Rimuovere disattivazione?')) {
+    if (!confirm(translate("removeDeactivation"))) {
         e.preventDefault();
     }
 }

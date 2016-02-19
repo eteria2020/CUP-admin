@@ -37,7 +37,7 @@
                                 $s_child_menu .= sprintf('<i class="%s"></i>', $icon);
                             }
 
-                            $s_child_menu .= sprintf('%s </a></li>', $child->getLabel());
+                            $s_child_menu .= sprintf('%s </a></li>', $this->translate($child->getLabel()));
                         }
 
                     }
@@ -59,7 +59,7 @@
                     $s_menu .= sprintf('<a href="%s">', isset($isRouteJs) ? 'javascript:;' : $page->getHref());
                 }
                 $s_menu .= sprintf('<i class="%s"></i>', $page->get('icon'));
-                $s_menu .= sprintf('<span class="title">%s</span>', $page->getLabel());
+                $s_menu .= sprintf('<span class="title">%s</span>', $this->translate($page->getLabel()));
 
                 if ($page->hasPages()) {
                     $s_menu .= sprintf('<span class="arrow %s"></span>', $b_childActive ? 'open' : '');

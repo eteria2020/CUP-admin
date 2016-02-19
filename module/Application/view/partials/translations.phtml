@@ -1,0 +1,75 @@
+<script>
+    var translations = {
+
+        'modify': '<?php echo $this->translate('Clienti') ?>',
+        'delete': '<?php echo $this->translate('Elimina') ?>',
+        //tables
+        'sEmptyTable': '<?php echo $this->translate('Nessun elemento presente nella tabella') ?>',
+        'sCarsEmptyTable': '<?php echo $this->translate('Nessuna auto presente nella tabella') ?>',
+        'sCardsEmptyTable': '<?php echo $this->translate('Nessun card presente nella tabella') ?>',
+        'sInvoicesEmptyTable': '<?php echo $this->translate('Nessuna fattura presente nella tabella') ?>',
+        'sCustomersEmptyTable': '<?php echo $this->translate('Nessun cliente presente nella tabella') ?>',
+        'sPoisEmptyTable': '<?php echo $this->translate('Nessun pois presente nella tabella') ?>',
+        'sTripEmptyTable': '<?php echo $this->translate('Nessuna corsa presente nella tabella') ?>',
+        'sInfo': '<?php echo $this->translate('Vista da _START_ a _END_ di _TOTAL_ elementi') ?>',
+        'sInfoEmpty': '<?php echo $this->translate('Vista da 0 a 0 di 0 elementi') ?>',
+        'sInfoFiltered': '<?php echo $this->translate('(filtrati da _MAX_ elementi totali)') ?>',
+        'sLengthMenu': '<?php echo $this->translate('Visualizza _MENU_ elementi') ?>',
+        'sLoadingRecords': '<?php echo $this->translate('Caricamento...') ?>',
+        'sProcessing': '<?php echo $this->translate('Elaborazione in corso...') ?>',
+        'sSearch': '<?php echo $this->translate('Cerca:') ?>',
+        'sZeroRecords': '<?php echo $this->translate('La ricerca non ha portato alcun risultato.') ?>',
+        'oPaginateFirst': '<?php echo $this->translate('Inizio') ?>',
+        'oPaginatePrevious': '<?php echo $this->translate('Precedente') ?>',
+        'oPaginateNext': '<?php echo $this->translate('Successivo') ?>',
+        'oPaginateLast': '<?php echo $this->translate('Fine') ?>',
+        'sSortAscending': '<?php echo $this->translate(': attiva per ordinare la colonna in ordine crescente') ?>',
+        'sSortDescending': '<?php echo $this->translate(': attiva per ordinare la colonna in ordine decrescente') ?>',
+        //cars
+        'confirmCarDelete': '<?php echo $this->translate("Confermi l\'eliminazione dell\'auto? L\'operazione non è annullabile") ?>',
+        //customers-edit
+        'deactivateUser': '<?php echo $this->translate("Disattivare utente?") ?>',
+        'reactivateUser': '<?php echo $this->translate("Riattivare utente?") ?>',
+        'removeDeactivation': '<?php echo $this->translate("Rimuovere disattivazione?") ?>',
+        //customers
+        'removeCardConfirm': '<?php echo $this->translate("Sei sicuro di voler rimuovere questo codice card?") ?>',
+        'removeBonusConfirm': '<?php echo $this->translate("Sei sicuro di voler rimuovere questo bonus?") ?>',
+        'ajaxError': '<?php echo $this->translate("Qualcosa è andato storto, riprova!") ?>',
+        //edit-trip
+        'confirmRemoveTries': '<?php echo $this->translate("La procedura di pagamento è già iniziata. Per procedere sarà necessario annullare tutti i tentativi di pagamento effettuati. Confermi di voler rimuovere tutti i tentativi di pagamento?") ?>',
+        //extra-payments
+        'errorId': '<?php echo $this->translate("Formato id cliente non corretto") ?>',
+        'errorFleet': '<?php echo $this->translate("Selezionare una flotta") ?>',
+        'errorType': '<?php echo $this->translate("Selezionare una tipologia") ?>',
+        'errorAddDebit': '<?php echo $this->translate("Aggiungere almeno un addebito") ?>',
+        'errorCausal': '<?php echo $this->translate("Inserire una causale valida") ?>',
+        'errorAmount': '<?php echo $this->translate("Inserire un importo valido in euro") ?>',
+
+        'confirmPayment': '<?php echo $this->translate("Confermi il pagamento al cliente") ?>',
+        'confirmPaymentContinue': '<?php echo $this->translate("di un importo di") ?>',
+        //failed-payments
+        'tripDetailId': '<?php echo $this->translate("Visualizza corsa ID") ?>',
+        'customersDetailId': '<?php echo $this->translate("Visualizza corsa ID") ?>',
+        'continue': '<?php echo $this->translate("Prosegui") ?>',
+        //invoices
+        'showProfileOf': '<?php echo $this->translate("Prosegui") ?>',
+        'renderFirstPayment': '<?php echo $this->translate("Iscrizione") ?>',
+        'renderTrip': '<?php echo $this->translate("Corse") ?>',
+        'renderPenality': '<?php echo $this->translate("Sanzione") ?>',
+        'renderBonusPackage': '<?php echo $this->translate("Pacchetto bonus") ?>',
+        //pois
+        'confirmPaymentDelete': '<?php echo $this->translate("Confermi l\'eliminazione del poi? L\'operazione non è annullabile") ?>',
+        //reservations
+        'showCarPlate': '<?php echo $this->translate("Visualizza auto targata") ?>',
+        'showProfile': '<?php echo $this->translate("Visualizza profilo di") ?>',
+        //trip-cost
+        'alertEmptyFields': '<?php echo $this->translate('i campi "Inizio corsa" e "Fine corsa" devono essere compilati') ?>',
+        //trip
+        'details': '<?php echo $this->translate('Dettagli') ?>',
+
+    };
+
+    function translate(key) {
+        return translations[key];
+    }
+</script>

@@ -93,23 +93,24 @@ function startPaymentProcess()
 function checkAndFormatFields(customerId, fleetId, type, reasons, amounts)
 {
     if (!customerId || customerId < 0) {
-        alert('Formato id cliente non corretto');
+        alert(translate("errorId"));
         return false;
     }
 
     if (!fleetId || fleetId <= 0) {
-        alert('Selezionare una flotta');
+        alert(translate("errorFleet"));
+
         return false;
     }
 
     if (type === "---") {
-        alert('Selezionare una tipologia');
+        alert(translate("errorType"));
         return false;
     }
 
     // This condition should never be met but it's good to check anyway
     if (reasons.length < 1) {
-        alert('Aggiungere almeno un addebito');
+        alert(translate("errorAddDebit"));
         return false;
     }
 
@@ -118,14 +119,14 @@ function checkAndFormatFields(customerId, fleetId, type, reasons, amounts)
         var reason = reasons[i];
         var amount = amounts[i];
         if (reason.length === 0) {
-            alert('Inserire una causale valida');
+            alert(translate("errorCausal"));
             return false;
         }
         amount = amount.replace(",", ".");
         amount = parseFloat(amount);
         amount = Math.floor(amount * 100);
         if (!amount || amount < 0) {
-            alert('Inserire un importo valido in euro');
+            alert(translate("errorAmount"));
             return false;
         } else {
             // If the amount is valid, sobstitute the formatted value in the
@@ -155,9 +156,9 @@ function proceedWithPayment(customerId, fleetId, type, reasons, amounts)
             for (var i = 0; i < amounts.length; i++) {
                 amount += amounts[i];
             }
-            if (confirm('Confermi il pagamento al cliente ' +
+            if (confirm(translate("confirmPayment") + ' ' +
                 data.name + ' ' + data.surname +
-                ' di un importo di ' + amount / 100 + ' euro')) {
+                ' ' + translate("confirmPaymentContinue") + ' ' + amount / 100 + ' euro')) {
                 sendPaymentRequest(customerId, fleetId, type, reasons, amounts);
             }
         })

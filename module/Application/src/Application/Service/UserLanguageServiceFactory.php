@@ -15,6 +15,9 @@ class UserLanguageServiceFactory implements FactoryInterface
      */
     public function createService(ServiceLocatorInterface $serviceLocator)
     {
-        return new UserLanguageService();
+        $config = $serviceLocator->get('config');
+        $languages = $config['translation_config']['languages'];
+
+        return new UserLanguageService($languages);
     }
 }
