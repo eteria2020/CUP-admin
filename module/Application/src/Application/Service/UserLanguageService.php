@@ -6,28 +6,46 @@ use Zend\Session\Container;
 
 class UserLanguageService
 {
-
     const SESSION_KEY = "user";
     const LANGUAGE = "lang";
 
-    const DEFAULT_LANGUAGE = "it";
+    const DEFAULT_LOCALE = "it_IT";
 
-    public function getCurrentLang()
+    private $languages;
+
+    public function __construct($languages)
+    {
+        $this->languages = $languages;
+    }
+
+    public function getCurrentLocale()
     {
         $container = new Container(UserLanguageService::SESSION_KEY);
 
-        $lang = $container->offsetGet(UserLanguageService::LANGUAGE);
-        if (!is_null($lang) && $lang != "") {
-            return $lang;
-        } else {
-            return self::DEFAULT_LANGUAGE;
+        $locale = $container->offsetGet(UserLanguageService::LANGUAGE);
+
+        foreach($this->languages as $lang) {
+            if ($lang['locale'] == $locale) {
+                return $lang['locale'];
+            }
+        }
+        return self::DEFAULT_LOCALE;
+    }
+    public function getCurrentLang() {
+        $locale = $this->getCurrentLocale();
+
+        foreach($this->languages as $lang) {
+            if ($lang['locale'] == $locale) {
+                return $lang['lang'];
+            }
         }
     }
 
     public function setCurrentLang($lang) {
-        $container = new Container(UserLanguageService::SESSION_KEY);
-        $container->offsetSet(UserLanguageService::LANGUAGE, $lang);
+        if (isset($this->languages[$lang])) {
+            $container = new Container(UserLanguageService::SESSION_KEY);
+            $locale = $this->languages[$lang]['locale'];
+            $container->offsetSet(UserLanguageService::LANGUAGE, $locale);
+        }
     }
-
-
 }

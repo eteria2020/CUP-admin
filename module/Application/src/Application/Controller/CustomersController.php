@@ -131,6 +131,7 @@ class CustomersController extends AbstractActionController
 
     public function editAction()
     {
+        $translator = $this->TranslatorPlugin();
         /** @var Customers $customer */
         $customer = $this->getCustomer();
         $tab = $this->params()->fromQuery('tab', 'info');
@@ -179,15 +180,15 @@ class CustomersController extends AbstractActionController
             if ($form->isValid()) {
                 try {
                     $this->customersService->saveData($form->getData());
-                    $this->flashMessenger()->addSuccessMessage('Modifica effettuta con successo!');
+                    $this->flashMessenger()->addSuccessMessage($translator->translate('Modifica effettuta con successo!'));
 
                 } catch (\Exception $e) {
-                    $this->flashMessenger()->addErrorMessage('Si è verificato un errore applicativo. L\'assistenza tecnica è già al corrente, ci scusiamo per l\'inconveniente');
+                    $this->flashMessenger()->addErrorMessage($translator->translate('Si è verificato un errore applicativo. L\'assistenza tecnica è già al corrente, ci scusiamo per l\'inconveniente'));
                 }
 
                 return $this->redirect()->toRoute('customers/edit', ['id' => $customer->getId()]);
             } else {
-                $this->flashMessenger()->addErrorMessage('Dati inseriti non validi');
+                $this->flashMessenger()->addErrorMessage($translator->translate('Dati inseriti non validi'));
             }
         }
 
@@ -329,6 +330,7 @@ class CustomersController extends AbstractActionController
 
     public function disableContractAction()
     {
+        $translator = $this->TranslatorPlugin();
         $contractId = $this->params()->fromPost('contractId');
 
         $contract = $this->cartasiContractsService->getContractById($contractId);
@@ -336,9 +338,9 @@ class CustomersController extends AbstractActionController
         try {
             $this->disableContractService->disableContract($contract);
 
-            $this->flashMessenger()->addSuccessMessage('Contratto disabilitato correttamente!');
+            $this->flashMessenger()->addSuccessMessage($translator->translate('Contratto disabilitato correttamente!'));
         } catch (\Exception $e) {
-            $this->flashMessenger()->addErrorMessage('Errore durante la disabilitazione del contratto');
+            $this->flashMessenger()->addErrorMessage($translator->translate('Errore durante la disabilitazione del contratto'));
         }
 
         return new JsonModel();
@@ -346,6 +348,7 @@ class CustomersController extends AbstractActionController
 
     public function assignPromoCodeAction()
     {
+        $translator = $this->TranslatorPlugin();
         $customer = $this->getCustomer();
         $form = $this->promoCodeForm;
 
@@ -360,11 +363,11 @@ class CustomersController extends AbstractActionController
 
                     $this->customersService->addBonusFromPromoCode($customer, $promoCode);
 
-                    $this->flashMessenger()->addSuccessMessage('Operazione completata con successo!');
+                    $this->flashMessenger()->addSuccessMessage($translator->translate('Operazione completata con successo!'));
                 } catch (BonusAssignmentException $e) {
                     $this->flashMessenger()->addErrorMessage($e->getMessage());
                 } catch (\Exception $e) {
-                    $this->flashMessenger()->addErrorMessage('Si è verificato un errore applicativo. L\'assistenza tecnica è già al corrente, ci scusiamo per l\'inconveniente');
+                    $this->flashMessenger()->addErrorMessage($translator->translate('Si è verificato un errore applicativo. L\'assistenza tecnica è già al corrente, ci scusiamo per l\'inconveniente'));
 
                     return $this->redirect()->toRoute('customers/assign-promo-code', ['id' => $customer->getId()]);
                 }
@@ -381,6 +384,7 @@ class CustomersController extends AbstractActionController
 
     public function addBonusAction()
     {
+        $translator = $this->TranslatorPlugin();
         /** @var Customers $customer */
         $customer = $this->getCustomer();
         $form = $this->customerBonusForm;
@@ -393,9 +397,9 @@ class CustomersController extends AbstractActionController
                 try {
                     $this->customersService->addBonusFromWebUser($customer, $form->getData());
 
-                    $this->flashMessenger()->addSuccessMessage('Operazione completata con successo!');
+                    $this->flashMessenger()->addSuccessMessage($translator->translate('Operazione completata con successo!'));
                 } catch (\Exception $e) {
-                    $this->flashMessenger()->addErrorMessage('Si è verificato un errore applicativo. L\'assistenza tecnica è già al corrente, ci scusiamo per l\'inconveniente');
+                    $this->flashMessenger()->addErrorMessage($translator->translate('Si è verificato un errore applicativo. L\'assistenza tecnica è già al corrente, ci scusiamo per l\'inconveniente'));
 
                     return $this->redirect()->toRoute('customers/add-bonus', ['id' => $customer->getId()]);
                 }
@@ -455,6 +459,7 @@ class CustomersController extends AbstractActionController
 
     public function addCardAction()
     {
+        $translator = $this->TranslatorPlugin();
         $customer = null;
         $customerId = $this->params()->fromQuery('customer', 0);
 
@@ -475,9 +480,9 @@ class CustomersController extends AbstractActionController
             if ($this->cardForm->isValid()) {
                 try {
                     $this->cardsService->createCard($this->cardForm->getData(), $customer);
-                    $this->flashMessenger()->addSuccessMessage('Operazione completata con successo!');
+                    $this->flashMessenger()->addSuccessMessage($translator->translate('Operazione completata con successo!'));
                 } catch (\Exception $e) {
-                    $this->flashMessenger()->addErrorMessage('Qualcosa è andata storto durante la creazione');
+                    $this->flashMessenger()->addErrorMessage($translator->translate('Qualcosa è andata storto durante la creazione'));
                 }
 
                 if (!is_null($customer)) {
@@ -546,6 +551,7 @@ class CustomersController extends AbstractActionController
 
     public function infoAction()
     {
+        $translator = $this->TranslatorPlugin();
         try {
             $customer = $this->getCustomer();
 
@@ -561,7 +567,7 @@ class CustomersController extends AbstractActionController
         } catch (\Exception $e) {
             $this->getResponse()->setStatusCode(422);
             return new JsonModel([
-                'error' => 'Non esiste un cliente per l\'id specificato'
+                'error' => $translator->translate('Non esiste un cliente per l\'id specificato')
             ]);
         }
     }

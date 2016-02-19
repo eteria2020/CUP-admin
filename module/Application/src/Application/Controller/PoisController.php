@@ -69,6 +69,7 @@ class PoisController extends AbstractActionController
 
     public function addAction()
     {
+        $translator = $this->TranslatorPlugin();
         $form = $this->poiForm;
         $form->setFleets($this->carsService->getFleets());
 
@@ -79,12 +80,12 @@ class PoisController extends AbstractActionController
             if ($form->isValid()) {
                 try {
                     $this->poisService->saveData($form->getData());
-                    $this->flashMessenger()->addSuccessMessage('POI aggiunta con successo!');
+                    $this->flashMessenger()->addSuccessMessage($translator->translate('POI aggiunta con successo!'));
 
                 } catch (\Exception $e) {
                     $this->flashMessenger()
-                        ->addErrorMessage('Si è verificato un errore applicativo.
-                        L\'assistenza tecnica è già al corrente, ci scusiamo per l\'inconveniente');
+                        ->addErrorMessage($translator->translate('Si è verificato un errore applicativo.
+                        L\'assistenza tecnica è già al corrente, ci scusiamo per l\'inconveniente'));
 
                 }
 
@@ -99,6 +100,7 @@ class PoisController extends AbstractActionController
 
     public function editAction()
     {
+        $translator = $this->TranslatorPlugin();
         $id = $this->params()->fromRoute('id', 0);
         $poi = $this->poisService->getPoiById($id);
 
@@ -127,12 +129,12 @@ class PoisController extends AbstractActionController
             if ($form->isValid()) {
                 try {
                     $this->poisService->saveData($form->getData(),true);
-                    $this->flashMessenger()->addSuccessMessage('POI modificato con successo!');
+                    $this->flashMessenger()->addSuccessMessage($translator->translate('POI modificato con successo!'));
 
                 } catch (\Exception $e) {
                     $this->flashMessenger()
-                        ->addErrorMessage('Si è verificato un errore applicativo.
-                        L\'assistenza tecnica è già al corrente, ci scusiamo per l\'inconveniente');
+                        ->addErrorMessage($translator->translate('Si è verificato un errore applicativo.
+                        L\'assistenza tecnica è già al corrente, ci scusiamo per l\'inconveniente'));
                 }
 
                 return $this->redirect()->toRoute('configurations/manage-pois');
@@ -148,6 +150,7 @@ class PoisController extends AbstractActionController
 
     public function deleteAction()
     {
+        $translator = $this->TranslatorPlugin();
         $id = $this->params()->fromRoute('id', 0);
 
         /** @var Pois $poi */
@@ -160,12 +163,12 @@ class PoisController extends AbstractActionController
 
         try {
             $this->poisService->deletePoi($poi);
-            $this->flashMessenger()->addSuccessMessage('POI rimosso con successo!');
+            $this->flashMessenger()->addSuccessMessage($translator->translate('POI rimosso con successo!'));
 
         } catch (\Exception $e) {
             $this->flashMessenger()
-                ->addErrorMessage('Si è verificato un errore applicativo.
-                L\'assistenza tecnica è già al corrente, ci scusiamo per l\'inconveniente');
+                ->addErrorMessage($translator->translate('Si è verificato un errore applicativo.
+                L\'assistenza tecnica è già al corrente, ci scusiamo per l\'inconveniente'));
         }
 
         return $this->redirect()->toRoute('configurations/manage-pois');

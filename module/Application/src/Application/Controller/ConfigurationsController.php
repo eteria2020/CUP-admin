@@ -41,6 +41,7 @@ class ConfigurationsController extends AbstractActionController
      */
     public function manageAlarmAction()
     {
+        $translator = $this->TranslatorPlugin();
         $form = $this->configurationsForm;
         $alarms = [];
         $alarms['configurations'] = $this->configurationsService->getConfigurationsBySlug(Configurations::ALARM, true);
@@ -55,7 +56,7 @@ class ConfigurationsController extends AbstractActionController
                 try {
 
                     $this->configurationsService->saveDataManageAlarm($form->getData());
-                    $this->flashMessenger()->addSuccessMessage('Configurazione salvata con successo!');
+                    $this->flashMessenger()->addSuccessMessage($translator->translate('Configurazione salvata con successo!'));
 
                 } catch (ConfigurationSaveAlarmException $e) {
 

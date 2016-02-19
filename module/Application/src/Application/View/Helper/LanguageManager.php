@@ -35,13 +35,11 @@ class LanguageManager extends AbstractHelper
             ];
         }
 
-        $menu->currentLanguage = $this->userLanguageService->getCurrentLang();
-
         $menu->currentLanguage = [
             'code' => $this->languages[$this->userLanguageService->getcurrentLang()]['locale'],
             'label' => $this->languages[$this->userLanguageService->getcurrentLang()]['label'],
         ];
-        
+
         return $menu;
     }
 }

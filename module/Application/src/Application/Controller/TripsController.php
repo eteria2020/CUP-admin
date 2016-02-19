@@ -184,6 +184,7 @@ class TripsController extends AbstractActionController
 
     public function doCloseAction()
     {
+        $translator = $this->TranslatorPlugin();
         $data = $this->params()->fromPost();
 
         try {
@@ -191,7 +192,7 @@ class TripsController extends AbstractActionController
 
             $this->tripsService->closeTrip($inputData, $this->identity());
 
-            $this->flashMessenger()->addSuccessMessage('Corsa chiusa con successo');
+            $this->flashMessenger()->addSuccessMessage($translator->translate('Corsa chiusa con successo'));
 
             return $this->redirect()->toRoute('trips/details', ['id' => $data['id']]);
         } catch (InvalidFormInputData $e) {

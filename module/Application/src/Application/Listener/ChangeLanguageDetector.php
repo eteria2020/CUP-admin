@@ -5,10 +5,7 @@ namespace Application\Listener;
 use Application\Service\UserLanguageService;
 use Zend\EventManager\EventManagerInterface;
 use Zend\EventManager\ListenerAggregateInterface;
-use Zend\Mvc\I18n\Translator;
 use Zend\Mvc\MvcEvent;
-use Zend\Http\Header\SetCookie;
-use Zend\Http\Header\Cookie;
 
 class ChangeLanguageDetector implements ListenerAggregateInterface
 {
@@ -56,22 +53,15 @@ class ChangeLanguageDetector implements ListenerAggregateInterface
 
     public function initChangeLanguageDetector(MvcEvent $event)
     {
-
-        $viewModel = $event->getViewModel();
-
         //set current language
         $request = $event->getRequest();
         $uri  = $request->getUri();
         $queryStringArray = $uri->getQueryAsArray();
 
         if (array_key_exists(self::GET_PARAMENTER_CHANGE_LANGUAGE, $queryStringArray)) {
+
            $this->userLanguageService->setCurrentLang($queryStringArray[self::GET_PARAMENTER_CHANGE_LANGUAGE]);
         }
-
-        $currentLanguage = $this->userLanguageService->getCurrentLang();
-
-        $viewModel->currentLanguage = $currentLanguage;
     }
-
 
 }

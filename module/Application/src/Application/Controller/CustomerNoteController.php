@@ -52,6 +52,7 @@ class CustomerNoteController extends AbstractActionController
 
     public function addNoteAction()
     {
+        $translator = $this->TranslatorPlugin();
         $id = $this->params()->fromRoute('id', 0);
         $customer = $this->customersService->findById($id);
 
@@ -60,13 +61,13 @@ class CustomerNoteController extends AbstractActionController
                 $postData = $this->getRequest()->getPost()->toArray();
                 $content = $postData['new-note'];
                 $this->customerNoteService->addNote($customer, $this->identity(), $content);
-                $this->flashMessenger()->addSuccessMessage('Nota aggiunta con successo');
+                $this->flashMessenger()->addSuccessMessage($translator->translate('Nota aggiunta con successo'));
             } catch (NoteContentNotValidException $e) {
                 $this->getResponse()->setStatusCode(Response::STATUS_CODE_500);
                 $this->flashMessenger()->addErrorMessage($e->getMessage());
             } catch (\Exception $e) {
                 $this->getResponse()->setStatusCode(Response::STATUS_CODE_500);
-                $this->flashMessenger()->addErrorMessage('Errore nell\'inserimento della nota');
+                $this->flashMessenger()->addErrorMessage($translator->translate('Errore nell\'inserimento della nota'));
             }
         }
 
