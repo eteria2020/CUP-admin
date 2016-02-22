@@ -7,7 +7,7 @@ use Zend\InputFilter\InputFilterProviderInterface;
 
 class TripCostFieldset extends Fieldset
 {
-    public function __construct()
+    public function __construct($translator)
     {
         parent::__construct('tripCost', [
             'use_as_base_fieldset' => true
@@ -62,8 +62,8 @@ class TripCostFieldset extends Fieldset
             ],
             'options' => [
                 'value_options' => [
-                    'male' => 'maschio',
-                    'female' => 'femmina'
+                    'male' => $translator->translate('Maschio'),
+                    'female' => $translator->translate('Femmina')
                 ]
             ]
         ]);

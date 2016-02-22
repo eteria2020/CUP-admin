@@ -13,6 +13,7 @@ use Zend\Mvc\ModuleRouteListener;
 use Zend\Mvc\MvcEvent;
 use BjyAuthorize\View\RedirectionStrategy;
 use Doctrine\ORM\Mapping\Driver\XmlDriver;
+use Zend\Validator\AbstractValidator;
 
 class Module
 {
@@ -54,7 +55,7 @@ class Module
         $eventManager->attach($strategy);
 
         $translator     = $serviceManager->get('translator');
-        \Zend\Validator\AbstractValidator::setDefaultTranslator($translator, 'zend_validate');
+        AbstractValidator::setDefaultTranslator($translator);
 
         // Add ACL information to Navigation view helper
         $authorize = $serviceManager->get('BjyAuthorize\Service\Authorize');
@@ -64,6 +65,8 @@ class Module
         } catch (\Doctrine\DBAL\DBALException $exception) {
             // database tables not yet initialized
         }
+
+
 
         $eventManager->attachAggregate($serviceManager->get('ChangeLanguageDetector.listener'));
     }

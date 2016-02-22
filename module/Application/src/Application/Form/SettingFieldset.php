@@ -21,7 +21,7 @@ class SettingFieldset extends Fieldset implements InputFilterProviderInterface
      * @param string $name
      * @param array  $options
      */
-    public function __construct(HydratorInterface $hydrator) {
+    public function __construct(HydratorInterface $hydrator, $translator) {
 
         parent::__construct('setting', [
             'use_as_base_fieldset' => true
@@ -56,8 +56,8 @@ class SettingFieldset extends Fieldset implements InputFilterProviderInterface
             ],
             'options'    => [
                 'value_options' => [
-                    0 => "No",
-                    1 => "Si"
+                    0 => $translator->translate("No"),
+                    1 => $translator->translate("Si")
                 ]
             ]
         ]);
@@ -71,8 +71,8 @@ class SettingFieldset extends Fieldset implements InputFilterProviderInterface
             ],
             'options'    => [
                 'value_options' => [
-                    0 => "No",
-                    1 => "Si"
+                    0 => $translator->translate("No"),
+                    1 => $translator->translate("Si")
                 ]
             ]
         ]);
@@ -86,8 +86,8 @@ class SettingFieldset extends Fieldset implements InputFilterProviderInterface
             ],
             'options'    => [
                 'value_options' => [
-                    0 => "No",
-                    1 => "Si"
+                    0 => $translator->translate("No"),
+                    1 => $translator->translate("Si")
                 ]
             ]
         ]);
@@ -101,8 +101,8 @@ class SettingFieldset extends Fieldset implements InputFilterProviderInterface
             ],
             'options'    => [
                 'value_options' => [
-                    0 => "No",
-                    1 => "Si"
+                    0 => $translator->translate("No"),
+                    1 => $translator->translate("Si")
                 ]
             ]
         ]);
@@ -116,8 +116,8 @@ class SettingFieldset extends Fieldset implements InputFilterProviderInterface
             ],
             'options'    => [
                 'value_options' => [
-                    0 => "No",
-                    1 => "Si"
+                    0 => $translator->translate("No"),
+                    1 => $translator->translate("Si")
                 ]
             ]
         ]);

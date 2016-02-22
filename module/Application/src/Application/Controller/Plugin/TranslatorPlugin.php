@@ -27,8 +27,4 @@ class TranslatorPlugin extends AbstractPlugin
     {
         return $this->translator;
     }
-
-    public function getX() {
-        return "gesu";
-    }
 }

@@ -121,7 +121,7 @@ $updates = $this->csvAnomaly->getUpdates();
                         <div class="col-lg-4">
                             <div class="form-group">
                                 <label><?= $this->csvAnomaly->getTypeTranslated(); ?>:</label>
-                                <p><?php echo $this->translate("Effettuare"); ?> <?= $this->csvAnomaly->getAmount() > 0 ? $this->tramslate('NC') : $this->translate('fattura'); ?> <?php echo $this->translate("di"); ?> <?= number_format(abs($this->csvAnomaly->getAmount()) / 100, 2, ',', ''); ?> <?php echo $this->translate("€ all'utente"); ?></p>
+                                <p><?php echo $this->translate("Effettuare"); ?> <?= $this->csvAnomaly->getAmount() > 0 ? $this->translate('NC') : $this->translate('fattura'); ?> <?php echo $this->translate("di"); ?> <?= number_format(abs($this->csvAnomaly->getAmount()) / 100, 2, ',', ''); ?> <?php echo $this->translate("€ all'utente"); ?></p>
                             </div>
                         </div>
 

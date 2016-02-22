@@ -3,7 +3,7 @@
             <div id="js-with-code" style="<?= is_object($this->customer->getCard()) ? '' : 'display: none;'; ?>">
                 <div class="row">
                     <div class="col-lg-5">
-                        <h1>Codice Card: <span id="js-code"><?= is_object($this->customer->getCard()) ? $this->customer->getCard()->getCode() : ''; ?></span></h1>
+                        <h1><?php echo $this->translate("Codice Card:"); ?> <span id="js-code"><?= is_object($this->customer->getCard()) ? $this->customer->getCard()->getCode() : ''; ?></span></h1>
                     </div>
                     <div class="col-lg-7" style="margin-top: 20px;">
                         <a href="javascript:void(0);" id="js-remove-card" data-id="<?= $this->customer->getId(); ?>" class="btn btn-danger"><i class="fa fa-remove"></i> <?php echo $this->translate("Rimuovi Card"); ?></i></a>

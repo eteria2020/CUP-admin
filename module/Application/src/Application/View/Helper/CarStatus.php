@@ -16,19 +16,20 @@ class CarStatus extends AbstractHelper
      */
     function __invoke($status)
     {
+        $translator = $this->TranslatorPlugin();
         $label = '';
         switch ($status) {
 
             case CarStatusUtility::OPERATIVE:
-                $label = 'Operativa';
+                $label = $translator->translate('Operativa');
                 break;
 
             case CarStatusUtility::MAINTENANCE:
-                $label = 'In manutenzione';
+                $label = $translator->translate('In manutenzione');
                 break;
 
             case CarStatusUtility::OUT_OF_ORDER:
-                $label = 'Non operativa';
+                $label = $translator->translate('Non operativa');
                 break;
         }
 
