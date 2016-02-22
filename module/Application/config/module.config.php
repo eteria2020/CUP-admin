@@ -343,6 +343,46 @@ return [
                                 'action' => 'disable-contract'
                             ]
                         ]
+                    ],
+                    'foreign-drivers-license' => [
+                        'type' => 'Literal',
+                        'options' => [
+                            'route' => '/foreign-drivers-license',
+                            'defaults' => [
+                                'controller' => 'Application\Controller\ForeignDriversLicense',
+                                'action' => 'uploaded-files'
+                            ]
+                        ],
+                        'may_terminate' => true,
+                        'child_routes' => [
+                            'datatable' => [
+                                'type' => 'Literal',
+                                'options' => [
+                                    'route' => '/datatable',
+                                    'defaults' => [
+                                        'action' => 'datatable'
+                                    ]
+                                ]
+                            ],
+                            'download' => [
+                                'type' => 'Segment',
+                                'options' => [
+                                    'route' => '/download/:id',
+                                    'defaults' => [
+                                        'action' => 'download'
+                                    ]
+                                ]
+                            ],
+                            'validate' => [
+                                'type' => 'Segment',
+                                'options' => [
+                                    'route' => '/validate/:id',
+                                    'defaults' => [
+                                        'action' => 'validate'
+                                    ]
+                                ]
+                            ]
+                        ]
                     ]
                 ],
             ],
@@ -1064,7 +1104,8 @@ return [
             'Application\Controller\CustomersEdit' => 'Application\Controller\CustomersEditControllerFactory',
             'Application\Controller\EditTrip' => 'Application\Controller\EditTripControllerFactory',
             'Application\Controller\CustomerFailure' => 'Application\Controller\CustomerFailureControllerFactory',
-            'Application\Controller\PaymentsCsv' => 'Application\Controller\PaymentsCsvControllerFactory'
+            'Application\Controller\PaymentsCsv' => 'Application\Controller\PaymentsCsvControllerFactory',
+            'Application\Controller\ForeignDriversLicense' => 'Application\Controller\ForeignDriversLicenseControllerFactory',
         ]
     ],
     'input_filters' => [
@@ -1169,7 +1210,8 @@ return [
                 ['controller' => 'Application\Controller\CustomersEdit', 'roles' => ['admin']],
                 ['controller' => 'Application\Controller\EditTrip', 'roles' => ['admin']],
                 ['controller' => 'Application\Controller\CustomerFailure', 'roles' => ['admin']],
-                ['controller' => 'Application\Controller\PaymentsCsv', 'roles' => ['admin']]
+                ['controller' => 'Application\Controller\PaymentsCsv', 'roles' => ['admin']],
+                ['controller' => 'Application\Controller\ForeignDriversLicense', 'roles' => ['admin']],
             ],
         ],
     ],
@@ -1192,6 +1234,11 @@ return [
                     [
                         'label' => 'Card',
                         'route' => 'customers/list-card',
+                        'isVisible' => true
+                    ],
+                    [
+                        'label' => 'Patenti estere',
+                        'route' => 'customers/foreign-drivers-license',
                         'isVisible' => true
                     ],
                     [

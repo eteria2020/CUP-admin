@@ -28,5 +28,9 @@ return [
     ],
     'website' => [
         'uri' => 'http://www.dev.sharengo.eu'
+    ],
+    'driversLicense' => [
+        'path' => '/srv/apps/sharengo/data/drivers-license-uploads',
+        'notifyTo' => 'email@domain'
     ]
 ];
