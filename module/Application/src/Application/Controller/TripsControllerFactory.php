@@ -23,7 +23,11 @@ class TripsControllerFactory implements FactoryInterface
         $eventsService = $sharedServiceLocator->get('SharengoCore\Service\EventsService');
         $entityManager = $sharedServiceLocator->get('doctrine.entitymanager.orm_default');
         $tripsRepository = $entityManager->getRepository('SharengoCore\Entity\Trips');
-        $closeTripDataFactory = new CloseTripDataFactory($tripsRepository);
+
+        $languageService = $sharedServiceLocator->get('LanguageService');
+        $translator = $languageService->getTranslator();
+
+        $closeTripDataFactory = new CloseTripDataFactory($tripsRepository, $translator);
 
         return new TripsController(
             $tripsService,

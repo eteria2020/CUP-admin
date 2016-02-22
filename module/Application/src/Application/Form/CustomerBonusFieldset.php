@@ -11,12 +11,14 @@ use Zend\InputFilter\InputFilterProviderInterface;
 class CustomerBonusFieldset extends Fieldset implements InputFilterProviderInterface
 {
 
-    public function __construct(HydratorInterface $hydrator)
+    private $translator;
+    public function __construct(HydratorInterface $hydrator, $translator)
     {
         parent::__construct('customer-bonus', [
             'use_as_base_fieldset' => true
         ]);
 
+        $this->translator = $translator;
         $this->setHydrator($hydrator);
         $this->setObject(new CustomersBonus());
 
@@ -62,6 +64,7 @@ class CustomerBonusFieldset extends Fieldset implements InputFilterProviderInter
 
     public function getInputFilterSpecification()
     {
+
         return [
             'total' => [
                 'required' => true,
@@ -108,7 +111,7 @@ class CustomerBonusFieldset extends Fieldset implements InputFilterProviderInter
                         'name'    => 'Callback',
                         'options' => [
                             'messages' => [
-                                \Zend\Validator\Callback::INVALID_VALUE => 'La data di fine validità deve essere posteriore alla data di inizio',
+                                \Zend\Validator\Callback::INVALID_VALUE => $this->translator->translate('La data di fine validità deve essere posteriore alla data di inizio'),
                             ],
                             'callback' => function ($value, $context) {
                                 $validFrom = date_create($context['validFrom']);

@@ -482,7 +482,7 @@ class CustomersController extends AbstractActionController
                     $this->cardsService->createCard($this->cardForm->getData(), $customer);
                     $this->flashMessenger()->addSuccessMessage($translator->translate('Operazione completata con successo!'));
                 } catch (\Exception $e) {
-                    $this->flashMessenger()->addErrorMessage($translator->translate('Qualcosa è andata storto durante la creazione'));
+                    $this->flashMessenger()->addErrorMessage($translator->translate('Qualcosa è andato storto durante la creazione'));
                 }
 
                 if (!is_null($customer)) {

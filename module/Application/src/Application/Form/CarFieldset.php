@@ -19,7 +19,7 @@ class CarFieldset extends Fieldset implements InputFilterProviderInterface
      * @param string $name
      * @param array  $options
      */
-    public function __construct(CarsService $carsService, HydratorInterface $hydrator)
+    public function __construct(CarsService $carsService, HydratorInterface $hydrator, $translator)
     {
         $this->carsService = $carsService;
 
@@ -88,8 +88,8 @@ class CarFieldset extends Fieldset implements InputFilterProviderInterface
             ],
             'options'    => [
                 'value_options' => [
-                    1 => "Attivo",
-                    0 => "Non Attivo"
+                    1 => $translator->translate("Attivo"),
+                    0 => $translator->translate("Non Attivo")
                 ]
             ]
         ]);

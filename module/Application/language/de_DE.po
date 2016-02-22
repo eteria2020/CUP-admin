@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"POT-Creation-Date: 2016-02-19 15:21+0100\n"
-"PO-Revision-Date: 2016-02-19 15:23+0100\n"
+"POT-Creation-Date: 2016-02-22 14:57+0100\n"
+"PO-Revision-Date: 2016-02-22 14:59+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: de\n"
@@ -126,8 +126,8 @@ msgstr "xxx"
 #: src/Application/Controller/CustomersController.php:370
 #: src/Application/Controller/CustomersController.php:402
 #: src/Application/Controller/PaymentsController.php:329
-#: src/Application/Controller/UsersController.php:69
-#: src/Application/Controller/UsersController.php:126
+#: src/Application/Controller/UsersController.php:68
+#: src/Application/Controller/UsersController.php:125
 msgid ""
 "Si è verificato un errore applicativo. L'assistenza tecnica è già al "
 "corrente, ci scusiamo per l'inconveniente"
@@ -318,12 +318,93 @@ msgstr "xxx"
 msgid "Corsa chiusa con successo"
 msgstr "xxx"
 
-#: src/Application/Controller/UsersController.php:66
+#: src/Application/Controller/UsersController.php:65
 msgid "Utente creato con successo!"
 msgstr "xxx"
 
-#: src/Application/Controller/UsersController.php:122
+#: src/Application/Controller/UsersController.php:121
 msgid "Utente modificato con successo!"
+msgstr "xxx"
+
+#: src/Application/Form/CarFieldset.php:91
+msgid "Attivo"
+msgstr "xxxdsfs"
+
+#: src/Application/Form/CarFieldset.php:92
+msgid "Non Attivo"
+msgstr "xxxs"
+
+#: src/Application/Form/CsvUploadForm.php:51
+msgid "Carica adesso"
+msgstr "xxxx"
+
+#: src/Application/Form/CsvUploadForm.php:71
+#: src/Application/Form/CsvUploadForm.php:83
+msgid ""
+"Il file caricato ha un formato non valido; sono accettati solo file in "
+"formato csv"
+msgstr "xxxx"
+
+#: src/Application/Form/CsvUploadForm.php:72
+msgid "Non è stato possibile verificare il formato del file"
+msgstr "xxx"
+
+#: src/Application/Form/CsvUploadForm.php:73
+#: src/Application/Form/CsvUploadForm.php:84
+msgid "Il file caricato non è leggibile o non esiste"
+msgstr "xxx"
+
+#: src/Application/Form/CustomerBonusFieldset.php:114
+msgid "La data di fine validità deve essere posteriore alla data di inizio"
+msgstr "xxxdd"
+
+#: src/Application/Form/CustomerFieldset.php:59
+msgid "Sig."
+msgstr "xxx"
+
+#: src/Application/Form/CustomerFieldset.php:60
+msgid "Sig.ra"
+msgstr "xxx"
+
+#: src/Application/Form/SettingFieldset.php:59
+#: src/Application/Form/SettingFieldset.php:74
+#: src/Application/Form/SettingFieldset.php:89
+#: src/Application/Form/SettingFieldset.php:104
+#: src/Application/Form/SettingFieldset.php:119
+#: view/application/customers/info-tab.phtml:295
+#: view/application/customers/info-tab.phtml:308
+#: view/application/trips/close-tab.phtml:25
+msgid "No"
+msgstr "xxx"
+
+#: src/Application/Form/SettingFieldset.php:60
+#: src/Application/Form/SettingFieldset.php:75
+#: src/Application/Form/SettingFieldset.php:90
+#: src/Application/Form/SettingFieldset.php:105
+#: src/Application/Form/SettingFieldset.php:120
+#: view/application/customers/info-tab.phtml:293
+#: view/application/customers/info-tab.phtml:306
+msgid "Si"
+msgstr "xxx"
+
+#: src/Application/Form/TripCostFieldset.php:65
+msgid "Maschio"
+msgstr "xxx"
+
+#: src/Application/Form/TripCostFieldset.php:66
+msgid "Femmina"
+msgstr "xxx"
+
+#: src/Application/View/Helper/CarStatus.php:24
+msgid "Operativa"
+msgstr "xxx"
+
+#: src/Application/View/Helper/CarStatus.php:28
+msgid "In manutenzione"
+msgstr "xxx"
+
+#: src/Application/View/Helper/CarStatus.php:32
+msgid "Non operativa"
 msgstr "xxx"
 
 #: view/application/cars/add.phtml:9
@@ -512,6 +593,17 @@ msgstr "xxx"
 
 #: view/application/cars/index.phtml:51
 msgid "Sporco"
+msgstr "xxx"
+
+#: view/application/cars/index.phtml:53
+#: view/application/customers/invoices-tab.phtml:35
+#: view/application/customers/list.phtml:42
+#: view/application/invoices/index.phtml:49
+#: view/application/payments/failed-payments.phtml:35
+#: view/application/pois/index.phtml:42
+#: view/application/reservations/index.phtml:40
+#: view/application/trips/index.phtml:45
+msgid "Filtra..."
 msgstr "xxx"
 
 #: view/application/cars/index.phtml:56
@@ -927,6 +1019,13 @@ msgstr "xxx"
 msgid "AGGIUNGI CARD"
 msgstr "xxx"
 
+#: view/application/customers/add-card.phtml:34
+#: view/application/customers/list-card.phtml:48
+#: view/application/pois/add.phtml:40 view/application/pois/edit.phtml:40
+#: view/application/pois/index.phtml:32 view/application/pois/index.phtml:83
+msgid "Codice"
+msgstr "xxx"
+
 #: view/application/customers/add-card.phtml:40
 #: view/application/customers/card-tab.phtml:16
 #: view/application/customers/list-card.phtml:27
@@ -991,6 +1090,10 @@ msgstr "xxx"
 
 #: view/application/customers/bonus-tab.phtml:51
 msgid "Il cliente non ha alcun bonus assegnato."
+msgstr "xxx"
+
+#: view/application/customers/card-tab.phtml:6
+msgid "Codice Card:"
 msgstr "xxx"
 
 #: view/application/customers/card-tab.phtml:9
@@ -1108,17 +1211,6 @@ msgstr "xxx"
 msgid "Ultima Modifica: "
 msgstr "xxx"
 
-#: view/application/customers/info-tab.phtml:293
-#: view/application/customers/info-tab.phtml:306
-msgid "Si"
-msgstr "xxx"
-
-#: view/application/customers/info-tab.phtml:295
-#: view/application/customers/info-tab.phtml:308
-#: view/application/trips/close-tab.phtml:25
-msgid "No"
-msgstr "xxx"
-
 #: view/application/customers/invoices-tab.phtml:22
 #: view/application/customers/invoices-tab.phtml:77
 #: view/application/invoices/index.phtml:34
@@ -1145,16 +1237,6 @@ msgstr "xxx"
 msgid "Sanzione"
 msgstr "xxx"
 
-#: view/application/customers/invoices-tab.phtml:35
-#: view/application/customers/list.phtml:42
-#: view/application/invoices/index.phtml:49
-#: view/application/payments/failed-payments.phtml:35
-#: view/application/pois/index.phtml:42
-#: view/application/reservations/index.phtml:40
-#: view/application/trips/index.phtml:45
-msgid "Filtra..."
-msgstr "xxx"
-
 #: view/application/customers/invoices-tab.phtml:68
 #: view/application/invoices/index.phtml:82
 msgid "Elenco Fatture"
@@ -1177,12 +1259,6 @@ msgstr "xxx"
 
 #: view/application/customers/list-card.phtml:41
 msgid "Elenco card"
-msgstr "xxx"
-
-#: view/application/customers/list-card.phtml:48
-#: view/application/pois/add.phtml:40 view/application/pois/edit.phtml:40
-#: view/application/pois/index.phtml:32 view/application/pois/index.phtml:83
-msgid "Codice"
 msgstr "xxx"
 
 #: view/application/customers/list-card.phtml:49
@@ -2051,38 +2127,32 @@ msgid "Log Out"
 msgstr "xxx"
 
 #: view/partials/translations.phtml:7
-#, fuzzy
 msgid "Nessun elemento presente nella tabella"
-msgstr "xxxx"
+msgstr "xxxxx"
 
 #: view/partials/translations.phtml:8
-#, fuzzy
 msgid "Nessuna auto presente nella tabella"
-msgstr "xxxx"
+msgstr "xxxxx"
 
 #: view/partials/translations.phtml:9
-#, fuzzy
 msgid "Nessun card presente nella tabella"
-msgstr "xxxx"
+msgstr "xxxxx"
 
 #: view/partials/translations.phtml:10
-#, fuzzy
 msgid "Nessuna fattura presente nella tabella"
-msgstr "xxxx"
+msgstr "xxxxx"
 
 #: view/partials/translations.phtml:11
 msgid "Nessun cliente presente nella tabella"
 msgstr "xxxx"
 
 #: view/partials/translations.phtml:12
-#, fuzzy
 msgid "Nessun pois presente nella tabella"
-msgstr "xxxx"
+msgstr "xxxxx"
 
 #: view/partials/translations.phtml:13
-#, fuzzy
 msgid "Nessuna corsa presente nella tabella"
-msgstr "xxxx"
+msgstr "xxxxx"
 
 #: view/partials/translations.phtml:14
 msgid "Vista da _START_ a _END_ di _TOTAL_ elementi"
@@ -2109,7 +2179,6 @@ msgid "Elaborazione in corso..."
 msgstr "xxxxxxx.x.x.x"
 
 #: view/partials/translations.phtml:20
-#, fuzzy
 msgid "Cerca:"
 msgstr "xxx"
 
@@ -2134,65 +2203,55 @@ msgid ": attiva per ordinare la colonna in ordine decrescente"
 msgstr " :xczx"
 
 #: view/partials/translations.phtml:29
-#, fuzzy
 msgid "Confermi l\\'eliminazione dell\\'auto? L\\'operazione non è annullabile"
-msgstr "csasas"
+msgstr "xxx"
 
 #: view/partials/translations.phtml:31
-#, fuzzy
 msgid "Disattivare utente?"
 msgstr "xxx"
 
 #: view/partials/translations.phtml:32
-#, fuzzy
 msgid "Riattivare utente?"
 msgstr "xxx"
 
 #: view/partials/translations.phtml:33
-#, fuzzy
 msgid "Rimuovere disattivazione?"
 msgstr "xxx"
 
 #: view/partials/translations.phtml:35
-#, fuzzy
 msgid "Sei sicuro di voler rimuovere questo codice card?"
-msgstr "xxx"
+msgstr "xxxx"
 
 #: view/partials/translations.phtml:36
-#, fuzzy
 msgid "Sei sicuro di voler rimuovere questo bonus?"
-msgstr "xxx"
+msgstr "xxxx"
 
 #: view/partials/translations.phtml:37
-#, fuzzy
 msgid "Qualcosa è andato storto, riprova!"
-msgstr "xxx"
+msgstr "xxxx"
 
 #: view/partials/translations.phtml:39
 msgid ""
 "La procedura di pagamento è già iniziata. Per procedere sarà necessario "
-"annullare tutti i tentativi di pagamento effettuati.\n"
-"Confermi di voler rimuovere tutti i tentativi di pagamento?"
-msgstr "xxx"
+"annullare tutti i tentativi di pagamento effettuati. Confermi di voler "
+"rimuovere tutti i tentativi di pagamento?"
+msgstr "xxxx"
 
 #: view/partials/translations.phtml:41
 msgid "Formato id cliente non corretto"
 msgstr "xxxx"
 
 #: view/partials/translations.phtml:42
-#, fuzzy
 msgid "Selezionare una flotta"
-msgstr "xxx"
+msgstr "xxxx"
 
 #: view/partials/translations.phtml:43
-#, fuzzy
 msgid "Selezionare una tipologia"
-msgstr "xxx"
+msgstr "xxxx"
 
 #: view/partials/translations.phtml:44
-#, fuzzy
 msgid "Aggiungere almeno un addebito"
-msgstr "xxx"
+msgstr "xxxx"
 
 #: view/partials/translations.phtml:45
 msgid "Inserire una causale valida"
@@ -2203,9 +2262,8 @@ msgid "Inserire un importo valido in euro"
 msgstr "xxx\t"
 
 #: view/partials/translations.phtml:48
-#, fuzzy
 msgid "Confermi il pagamento al cliente"
-msgstr "xxx"
+msgstr "xxxx"
 
 #: view/partials/translations.phtml:49
 msgid "di un importo di"
@@ -2224,9 +2282,8 @@ msgid "Pacchetto bonus"
 msgstr "xxx"
 
 #: view/partials/translations.phtml:61
-#, fuzzy
-msgid "Confermi l'eliminazione del poi? L'operazione non è annullabile"
-msgstr "csasas"
+msgid "Confermi l\\'eliminazione del poi? L\\'operazione non è annullabile"
+msgstr "xxxx"
 
 #: view/partials/translations.phtml:63
 msgid "Visualizza auto targata"
@@ -2239,3 +2296,6 @@ msgstr "xxx"
 #: view/partials/translations.phtml:66
 msgid "i campi \"Inizio corsa\" e \"Fine corsa\" devono essere compilati"
 msgstr "xxx"
+
+#~ msgid "Esiste già un utente con lo stesso indirizzo email"
+#~ msgstr "wolololo"

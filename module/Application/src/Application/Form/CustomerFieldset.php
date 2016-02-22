@@ -27,7 +27,8 @@ class CustomerFieldset extends Fieldset implements InputFilterProviderInterface
         CustomersService $customersService,
         CountriesService $countriesService,
         ProvincesService $provincesService,
-        HydratorInterface $hydrator
+        HydratorInterface $hydrator,
+        $translator
     ) {
         $this->customersService = $customersService;
 
@@ -55,8 +56,8 @@ class CustomerFieldset extends Fieldset implements InputFilterProviderInterface
             ],
             'options'    => [
                 'value_options' => [
-                    'male'   => 'Sig.',
-                    'female' => 'Sig.ra'
+                    'male'   => $translator->translate('Sig.'),
+                    'female' => $translator->translate('Sig.ra')
                 ]
             ]
         ]);
