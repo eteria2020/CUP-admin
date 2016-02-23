@@ -108,7 +108,7 @@ $(function() {
                 }
             },
             {
-                targets: 19,
+                targets: 18,
                 sortable: false,
                 "render": function ( data, type, row ) {
                     return renderInfoButton(data);
