@@ -641,6 +641,16 @@ return [
                                 ]
                             ]
                         ]
+                    ],
+                    'not-payed' => [
+                        'type' => 'Literal',
+                        'options' => [
+                            'route' => '/not-payed',
+                            'defaults' => [
+                                'action' => 'list',
+                                'controller' => 'TripsNotPayed'
+                            ]
+                        ]
                     ]
                 ],
              ],
@@ -1106,6 +1116,7 @@ return [
             'Application\Controller\CustomerFailure' => 'Application\Controller\CustomerFailureControllerFactory',
             'Application\Controller\PaymentsCsv' => 'Application\Controller\PaymentsCsvControllerFactory',
             'Application\Controller\ForeignDriversLicense' => 'Application\Controller\ForeignDriversLicenseControllerFactory',
+            'Application\Controller\TripsNotPayed' => 'Application\Controller\TripsNotPayedControllerFactory'
         ]
     ],
     'input_filters' => [
@@ -1212,6 +1223,7 @@ return [
                 ['controller' => 'Application\Controller\CustomerFailure', 'roles' => ['admin']],
                 ['controller' => 'Application\Controller\PaymentsCsv', 'roles' => ['admin']],
                 ['controller' => 'Application\Controller\ForeignDriversLicense', 'roles' => ['admin']],
+                ['controller' => 'Application\Controller\TripsNotPayed', 'roles' => ['admin']]
             ],
         ],
     ],
@@ -1301,6 +1313,11 @@ return [
                     [
                         'label' => 'Costo corsa',
                         'route' => 'trips/cost',
+                        'isVisible' => true
+                    ],
+                    [
+                        'label' => 'Corse non pagate',
+                        'route' => 'trips/not-payed',
                         'isVisible' => true
                     ]
                 ],
