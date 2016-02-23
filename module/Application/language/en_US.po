@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Sharengo\n"
 "POT-Creation-Date: 2016-02-22 16:59+0100\n"
-"PO-Revision-Date: 2016-02-22 18:00+0100\n"
+"PO-Revision-Date: 2016-02-22 18:07+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: en\n"
@@ -2239,7 +2239,7 @@ msgstr ": activate to order in descending order"
 
 #: view/partials/translations.phtml:29
 msgid "Confermi l\\'eliminazione dell\\'auto? L\\'operazione non è annullabile"
-msgstr "Do you really want to delete the auto? This can't be undone."
+msgstr "Do you really want to delete the auto? This can\\'t be undone."
 
 #: view/partials/translations.phtml:31
 msgid "Disattivare utente?"
@@ -2321,7 +2321,7 @@ msgstr "Bonus pack"
 
 #: view/partials/translations.phtml:61
 msgid "Confermi l\\'eliminazione del poi? L\\'operazione non è annullabile"
-msgstr "Do you really want to delete the POI? This can't be undone."
+msgstr "Do you really want to delete the POI? This can\\'t be undone."
 
 #: view/partials/translations.phtml:63
 msgid "Visualizza auto targata"
