@@ -4,6 +4,8 @@ $this->headLink()
 $this->headScript()
     ->appendFile('/js/datatables/media/js/jquery.dataTables.min.js')
     ->appendFile('/js/datatables/plugins/bootstrap/dataTables.bootstrap.js')
+    ->appendFile('/js/moment.min.js')
+    ->appendFile('/js/datatables/plugins/sorting/datetime-moment.js')
     ->appendFile($this->basePath() .'/js/trips-not-payed.js');
 ?>
 <div class="page-content-wrapper">

@@ -27,6 +27,8 @@ $(document).ready(function() {
         }
     };
 
+    $.fn.dataTable.moment('DD-MM-YYYY HH:mm:ss');
+
     // Create the datatable and order it by descending date
     $('#trips-table').DataTable({
         language: languageSpecs,
@@ -34,6 +36,6 @@ $(document).ready(function() {
             [100, 200, 300],
             [100, 200, 300]
         ],
-        pageLength: 100,
+        pageLength: 100
     });
 });
