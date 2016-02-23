@@ -29,7 +29,11 @@ $(document).ready(function() {
 
     // Create the datatable and order it by descending date
     $('#trips-table').DataTable({
-        order: orderSpecs,
-        language: languageSpecs
+        language: languageSpecs,
+        lengthMenu: [
+            [100, 200, 300],
+            [100, 200, 300]
+        ],
+        pageLength: 100,
     });
 });
