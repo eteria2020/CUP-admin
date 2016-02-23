@@ -1,4 +1,4 @@
-/* global $ */
+/* global $ confirm */
 
 $(function() {
     'use strict';
@@ -9,11 +9,13 @@ $(function() {
     search.val('');
     column.val('select');
 
-    function showValid(data) {console.log(data);
+    function showValid(data) {
         if (data.e.valid) {
             return '<span class="label label-success">Validato</span>';
         } else {
-            return '<a href="/customers/foreign-drivers-license/validate/' + data.e.id + '" class="btn btn-default btn-xs">Valida</a>';
+            return '<a href="/customers/foreign-drivers-license/validate/' +
+                data.e.id +
+                '" class="btn btn-default btn-xs" onclick="return confirm(\'Confermare la validazione?\')">Valida</a>';
         }
     }
 
@@ -101,11 +103,11 @@ $(function() {
         }
     });
 
-    $('#js-search').click(function() {
+    $('#js-search').click(function () {
         table.fnFilter();
     });
 
-    $('#js-clear').click(function() {
+    $('#js-clear').click(function () {
         search.val('');
         column.val('select');
     });
