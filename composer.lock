@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "017d4a60412466940f4581df8cff4672",
+    "hash": "ccc08ea123f1698dc3b57492a1e29cd1",
     "content-hash": "c9859a89125d709d7928d26a251c1827",
     "packages": [
         {
@@ -1397,7 +1397,7 @@
             "source": {
                 "type": "git",
                 "url": "ssh://git@git.mvlabs.it:4222/clients/sharengo-coremodule.git",
-                "reference": "21f00e4242cb3c4590435e261acad27752ec740f"
+                "reference": "1f10843e89e5572c49ac1911e372d813138dea4b"
             },
             "require": {
                 "doctrine/doctrine-orm-module": "0.*",
@@ -1418,7 +1418,7 @@
                 }
             },
             "description": "Core ZF2 module for Sharengo apps",
-            "time": "2016-02-23 08:29:18"
+            "time": "2016-02-23 08:45:51"
         },
         {
             "name": "natxet/CssMin",
