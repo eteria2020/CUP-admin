@@ -89,6 +89,7 @@ class ForeignDriversLicenseController extends AbstractActionController
 
     public function validateAction()
     {
+        $translator = $this->TranslatorPlugin();
         $fileUploadId = $this->params()->fromRoute('id');
 
         $foreignDriversLicenseUpload = $this->foreignDriversLicenseService->getUploadedFileById($fileUploadId);
@@ -99,9 +100,9 @@ class ForeignDriversLicenseController extends AbstractActionController
                 $this->identity()
             );
 
-            $this->flashMessenger()->addSuccessMessage('Patente validata con successo.');
+            $this->flashMessenger()->addSuccessMessage($translator->translate('Patente validata con successo.'));
         } catch (\Exception $e) {
-            $this->flashMessenger()->addErrorMessage('Si è verificato un errore nella validazione della patente');
+            $this->flashMessenger()->addErrorMessage($translator->translate('Si è verificato un errore nella validazione della patente'));
         }
 
         $this->redirect()->toRoute('customers/foreign-drivers-license');

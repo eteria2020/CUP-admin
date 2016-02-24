@@ -11,7 +11,7 @@ class PromoCodeFieldset extends Fieldset implements InputFilterProviderInterface
 {
     private $promoCodesService;
 
-    public function __construct(PromoCodesService $promoCodesService) {
+    public function __construct(PromoCodesService $promoCodesService, $translator) {
         $this->promoCodesService = $promoCodesService;
 
         parent::__construct('promocode', [
@@ -24,7 +24,7 @@ class PromoCodeFieldset extends Fieldset implements InputFilterProviderInterface
             'attributes' => [
                 'id' => 'name',
                 'maxlength' => 5,
-                'placeholder' => 'Codice promo',
+                'placeholder' => $translator->translate('Codice promo'),
             ]
         ]);
 

@@ -1,18 +1,18 @@
-<h1><?php echo $this->translate('An error occurred') ?></h1>
+<h1><?php echo $this->translate('Errore') ?></h1>
 <h2><?php echo $this->message ?></h2>
 
 <?php if (isset($this->display_exceptions) && $this->display_exceptions): ?>
 
 <?php if(isset($this->exception) && $this->exception instanceof Exception): ?>
 <hr/>
-<h2><?php echo $this->translate('Additional information') ?>:</h2>
+<h2><?php echo $this->translate('Informazioni aggiuntive') ?>:</h2>
 <h3><?php echo get_class($this->exception); ?></h3>
 <dl>
     <dt><?php echo $this->translate('File') ?>:</dt>
     <dd>
         <pre class="prettyprint linenums"><?php echo $this->exception->getFile() ?>:<?php echo $this->exception->getLine() ?></pre>
     </dd>
-    <dt><?php echo $this->translate('Message') ?>:</dt>
+    <dt><?php echo $this->translate('Messaggio') ?>:</dt>
     <dd>
         <pre class="prettyprint linenums"><?php echo $this->escapeHtml($this->exception->getMessage()) ?></pre>
     </dd>
@@ -26,7 +26,7 @@
     if ($e) :
 ?>
 <hr/>
-<h2><?php echo $this->translate('Previous exceptions') ?>:</h2>
+<h2><?php echo $this->translate('Eccezioni precedenti') ?>:</h2>
 <ul class="unstyled">
     <?php while($e) : ?>
     <li>
@@ -36,7 +36,7 @@
             <dd>
                 <pre class="prettyprint linenums"><?php echo $e->getFile() ?>:<?php echo $e->getLine() ?></pre>
             </dd>
-            <dt><?php echo $this->translate('Message') ?>:</dt>
+            <dt><?php echo $this->translate('Messaggio') ?>:</dt>
             <dd>
                 <pre class="prettyprint linenums"><?php echo $this->escapeHtml($e->getMessage()) ?></pre>
             </dd>
@@ -55,7 +55,7 @@
 
 <?php else: ?>
 
-<h3><?php echo $this->translate('No Exception available') ?></h3>
+<h3><?php echo $this->translate('Nessuna eccezione disponibile') ?></h3>
 
 <?php endif ?>
 

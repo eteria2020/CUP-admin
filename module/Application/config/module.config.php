@@ -1127,11 +1127,6 @@ return [
             'TranslatorPlugin' => 'Application\Controller\Plugin\TranslatorPluginFactory'
         ]
     ],
-    'controller_plugins' => [
-        'factories' => [
-            'TranslatorPlugin' => 'Application\Controller\Plugin\TranslatorPluginFactory'
-        ]
-    ],
     'input_filters' => [
         'invokables' => [
             'close-trip' => 'Application\Form\InputFilter\CloseTripFilter'
@@ -1160,12 +1155,6 @@ return [
                 "lang" => "en",
                 "lang_3chars" => "eng",
                 "label" => "English"
-            ],
-            'de' => [
-                "locale" => "de_DE",
-                "lang" => "de",
-                "lang_3chars" => "deu",
-                "label" => "Deutsch"
             ]
         ],
         "language_folder" => __DIR__ . "/../language"
@@ -1352,7 +1341,7 @@ return [
                         'isVisible' => true
                     ],
                     [
-                        'label' => 'Corse non pagate',
+                        'label' => $translator->translate('Corse non pagate'),
                         'route' => 'trips/not-payed',
                         'isVisible' => true
                     ]

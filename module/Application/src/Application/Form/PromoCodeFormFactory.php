@@ -15,7 +15,11 @@ class PromoCodeFormFactory implements FactoryInterface
     public function createService(ServiceLocatorInterface $serviceLocator)
     {
         $promoCodeService = $serviceLocator->get('SharengoCore\Service\PromoCodesService');
-        $promoCodeFieldset = new PromoCodeFieldset($promoCodeService);
+
+        $languageService = $serviceLocator->get('LanguageService');
+        $translator = $languageService->getTranslator();
+
+        $promoCodeFieldset = new PromoCodeFieldset($promoCodeService, $translator);
 
         return new PromoCodeForm($promoCodeFieldset);
     }
