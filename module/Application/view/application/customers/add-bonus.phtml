@@ -11,12 +11,12 @@ $this->headScript()
             <div class="row">
                 <div class="col-lg-6">
                     <h3 class="page-title">
-                        <?php echo $this->translate("AGGIUNGI BONUS"); ?> <small><?= $this->customer->getName() . ' ' . $this->customer->getSurname(); ?></small>
+                        <?= $this->translate("AGGIUNGI BONUS"); ?> <small><?= $this->customer->getName() . ' ' . $this->customer->getSurname(); ?></small>
                     </h3>
                 </div>
 
                 <div class="col-lg-6">
-                    <a href="<?= $this->url('customers/edit', ['id' => $this->customer->getId()], ['query' => ['tab' => 'bonus']]); ?>" class="btn btn-success pull-right"><i class="fa fa-arrow-left"></i> <?php echo $this->translate("Torna alla scheda cliente"); ?></a>
+                    <a href="<?= $this->url('customers/edit', ['id' => $this->customer->getId()], ['query' => ['tab' => 'bonus']]); ?>" class="btn btn-success pull-right"><i class="fa fa-arrow-left"></i> <?= $this->translate("Torna alla scheda cliente"); ?></a>
                 </div>
             </div>
 
@@ -26,28 +26,28 @@ $this->headScript()
             <div class="row">
                 <div class="col-lg-12">
 
-                    <?php echo $this->partial('partials/flash-messages.phtml', []); ?>
+                    <?= $this->partial('partials/flash-messages.phtml', []); ?>
 
                     <?= $this->form()->openTag($form); ?>
 
                     <div class="row">
                         <div class="col-lg-4">
-                            <label><?php echo $this->translate("Numero minuti"); ?></label>
+                            <label><?= $this->translate("Numero minuti"); ?></label>
                             <?= $this->formRow($form->get('customer-bonus')->get('total')); ?>
                         </div>
                         <div class="col-lg-8">
-                            <label><?php echo $this->translate("Descrizione"); ?></label>
+                            <label><?= $this->translate("Descrizione"); ?></label>
                             <?= $this->formRow($form->get('customer-bonus')->get('description')); ?>
                         </div>
                     </div>
 
                     <div class="row" style="margin-top: 10px;">
                         <div class="col-lg-4">
-                            <label><?php echo $this->translate("Utilizzabile dal"); ?></label>
+                            <label><?= $this->translate("Utilizzabile dal"); ?></label>
                             <?= $this->formRow($form->get('customer-bonus')->get('validFrom')); ?>
                         </div>
                         <div class="col-lg-4">
-                            <label><?php echo $this->translate("Utilizzabile fino al"); ?></label>
+                            <label><?= $this->translate("Utilizzabile fino al"); ?></label>
                             <?= $this->formRow($form->get('customer-bonus')->get('validTo')); ?>
                         </div>
                     </div>
@@ -55,7 +55,7 @@ $this->headScript()
                     <br />
                     <input type=submit name="" class="btn btn-success" value="<?= $this->translate('Aggiungi Bonus'); ?>">
 
-                    <?php echo $this->form()->closeTag(); ?>
+                    <?= $this->form()->closeTag(); ?>
                 </div>
             </div>
 

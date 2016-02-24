@@ -13,13 +13,13 @@ $this->headScript()
         <div class="row">
             <div class="col-lg-6">
                 <h3 class="page-title">
-                    <?php echo $this->translate("DETTAGLI CORSA"); ?>
+                    <?= $this->translate("DETTAGLI CORSA"); ?>
                     <small>ID <?= $this->tripId ?> - <?= $this->customer->getName() . ' ' . $this->customer->getSurname() ?></small>
                 </h3>
             </div>
 
             <div class="col-lg-6">
-                <a href="<?php echo $this->url('trips'); ?>" class="btn btn-success pull-right"><i class="fa fa-arrow-left"></i> <?php echo $this->translate("Torna alla lista"); ?></a>
+                <a href="<?= $this->url('trips'); ?>" class="btn btn-success pull-right"><i class="fa fa-arrow-left"></i> <?= $this->translate("Torna alla lista"); ?></a>
             </div>
         </div>
 
@@ -29,11 +29,11 @@ $this->headScript()
         <div class="row">
             <div class="col-md-12">
                 <ul class="nav nav-tabs" id="js-tabs" role="tablist">
-                    <li role="presentation" id="menu-info"><a href="<?= $this->url('trips/info-tab', ['id' => $this->tripId]); ?>" data-target="#tab-info" role="tab" data-toggle="tab"><?php echo $this->translate("Informazioni"); ?></a></li>
-                    <li role="presentation" id="menu-cost"><a href="<?= $this->url('trips/cost-tab', ['id' => $this->tripId]); ?>" data-target="#tab-cost" role="tab" data-toggle="tab"><?php echo $this->translate("Costo"); ?></a></li>
-                    <li role="presentation" id="menu-edit"><a href="<?= $this->url('trips/edit-tab', ['id' => $this->tripId]); ?>" data-target="#tab-edit" role="tab" data-toggle="tab"><?php echo $this->translate("Modifica corsa"); ?></a></li>
+                    <li role="presentation" id="menu-info"><a href="<?= $this->url('trips/info-tab', ['id' => $this->tripId]); ?>" data-target="#tab-info" role="tab" data-toggle="tab"><?= $this->translate("Informazioni"); ?></a></li>
+                    <li role="presentation" id="menu-cost"><a href="<?= $this->url('trips/cost-tab', ['id' => $this->tripId]); ?>" data-target="#tab-cost" role="tab" data-toggle="tab"><?= $this->translate("Costo"); ?></a></li>
+                    <li role="presentation" id="menu-edit"><a href="<?= $this->url('trips/edit-tab', ['id' => $this->tripId]); ?>" data-target="#tab-edit" role="tab" data-toggle="tab"><?= $this->translate("Modifica corsa"); ?></a></li>
                     <?php if (!$trip->isEnded()): ?>
-                        <li role="presentation" id="menu-close"><a href="<?= $this->url('trips/close-tab', ['id' => $this->tripId]); ?>" data-target="#tab-close" role="tab" data-toggle="tab"><?php echo $this->translate("Chiudi corsa"); ?></a></li>
+                        <li role="presentation" id="menu-close"><a href="<?= $this->url('trips/close-tab', ['id' => $this->tripId]); ?>" data-target="#tab-close" role="tab" data-toggle="tab"><?= $this->translate("Chiudi corsa"); ?></a></li>
                     <?php endif; ?>
                 </ul>
 

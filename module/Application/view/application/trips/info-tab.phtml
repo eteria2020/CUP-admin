@@ -29,27 +29,27 @@ if ($tripPayment !== null) {
 <div class="row">
     <div class="col-lg-9">
 
-        <?php echo $this->partial('partials/flash-messages.phtml', []); ?>
+        <?= $this->partial('partials/flash-messages.phtml', []); ?>
         <div class="panel panel-default">
-            <div class="panel-heading"><?php echo $this->translate("Dettagli Corsa"); ?></div>
+            <div class="panel-heading"><?= $this->translate("Dettagli Corsa"); ?></div>
             <div class="panel-body">
 
                 <div class="row">
                     <div class="col-lg-4">
                         <div class="form-group">
-                            <label><?php echo $this->translate("Id corsa"); ?></label>
+                            <label><?= $this->translate("Id corsa"); ?></label>
                             <div class="sng-info-box"><?= $trip->getId() ?></div>
                         </div>
                     </div>
                     <div class="col-lg-4">
                         <div class="form-group">
-                            <label><?php echo $this->translate("Nome"); ?></label>
+                            <label><?= $this->translate("Nome"); ?></label>
                             <div class="sng-info-box"><?= $customer->getName() ?></div>
                         </div>
                     </div>
                     <div class="col-lg-4">
                         <div class="form-group">
-                            <label><?php echo $this->translate("Cognome"); ?></label>
+                            <label><?= $this->translate("Cognome"); ?></label>
                             <div class="sng-info-box"><?= $customer->getSurname() ?></div>
                         </div>
                     </div>
@@ -58,19 +58,19 @@ if ($tripPayment !== null) {
                 <div class="row">
                     <div class="col-lg-4">
                         <div class="form-group">
-                            <label><?php echo $this->translate("Cellulare"); ?></label>
+                            <label><?= $this->translate("Cellulare"); ?></label>
                             <div class="sng-info-box"><?= $customer->getMobile() ?></div>
                         </div>
                     </div>
                     <div class="col-lg-4">
                         <div class="form-group">
-                            <label><?php echo $this->translate("RFID cliente"); ?></label>
+                            <label><?= $this->translate("RFID cliente"); ?></label>
                             <div class="sng-info-box"><?= $rfid ?></div>
                         </div>
                     </div>
                     <div class="col-lg-4">
                         <div class="form-group">
-                            <label><?php echo $this->translate("Targa"); ?></label>
+                            <label><?= $this->translate("Targa"); ?></label>
                             <div class="sng-info-box"><?= $trip->getCar()->getPlate() ?></div>
                         </div>
                     </div>
@@ -79,19 +79,19 @@ if ($tripPayment !== null) {
                 <div class="row">
                     <div class="col-lg-4">
                         <div class="form-group">
-                            <label><?php echo $this->translate("Numero auto"); ?></label>
+                            <label><?= $this->translate("Numero auto"); ?></label>
                             <div class="sng-info-box"><?= $trip->getCar()->getLabel() ?></div>
                         </div>
                     </div>
                     <div class="col-lg-4">
                         <div class="form-group">
-                            <label><?php echo $this->translate("Km Inizio"); ?></label>
+                            <label><?= $this->translate("Km Inizio"); ?></label>
                             <div class="sng-info-box"><?= $trip->getKmBeginning() ?></div>
                         </div>
                     </div>
                     <div class="col-lg-4">
                         <div class="form-group">
-                            <label><?php echo $this->translate("Km Fine"); ?></label>
+                            <label><?= $this->translate("Km Fine"); ?></label>
                             <div class="sng-info-box"><?= $trip->getKmEnd() ?></div>
                         </div>
                     </div>
@@ -100,20 +100,20 @@ if ($tripPayment !== null) {
                 <div class="row">
                     <div class="col-lg-4">
                         <div class="form-group">
-                            <label><?php echo $this->translate("Inizio"); ?></label>
+                            <label><?= $this->translate("Inizio"); ?></label>
                             <div class="sng-info-box"><?= $trip->getTimestampBeginning()->format('d-m-Y H:i:s') ?></div>
                         </div>
                     </div>
                     <div class="col-lg-4">
                         <div class="form-group">
-                            <label><?php echo $this->translate("Fine"); ?></label>
+                            <label><?= $this->translate("Fine"); ?></label>
                             <div class="sng-info-box"><?= (null != $trip->getTimestampEnd() ? $trip->getTimestampEnd()->format('d-m-Y H:i:s') : $this->translate('n.d.')) ?></div>
                         </div>
                     </div>
                     <div class="col-lg-4">
                         <div class="form-group">
-                            <label><?php echo $this->translate("Durata"); ?></label>
-                            <div class="sng-info-box"><?= $trip->getDurationMinutes() ?> <?php echo $this->translate("minuti"); ?></div>
+                            <label><?= $this->translate("Durata"); ?></label>
+                            <div class="sng-info-box"><?= $trip->getDurationMinutes() ?> <?= $this->translate("minuti"); ?></div>
                         </div>
                     </div>
                 </div>
@@ -121,19 +121,19 @@ if ($tripPayment !== null) {
                 <div class="row">
                     <div class="col-lg-4">
                         <div class="form-group">
-                            <label><?php echo $this->translate("Sosta"); ?></label>
+                            <label><?= $this->translate("Sosta"); ?></label>
                             <div class="sng-info-box"><?= $trip->getParkSeconds() . ' sec.' ?></div>
                         </div>
                     </div>
                     <div class="col-lg-4">
                         <div class="form-group">
-                            <label><?php echo $this->translate("Stato Quadro"); ?></label>
+                            <label><?= $this->translate("Stato Quadro"); ?></label>
                             <div class="sng-info-box"><?= $trip->getCar()->getKeystatus() ?></div>
                         </div>
                     </div>
                     <div class="col-lg-4">
                         <div class="form-group">
-                            <label><?php echo $this->translate("In Sosta"); ?></label>
+                            <label><?= $this->translate("In Sosta"); ?></label>
                             <div class="sng-info-box"><?= $trip->getCar()->getParking() ? $this->translate("SI") : $this->translate("NO") ?></div>
                         </div>
                     </div>
@@ -147,13 +147,13 @@ if ($tripPayment !== null) {
     <div class="col-lg-3">
         <div class="panel panel-default">
 
-            <div class="panel-heading"><?php echo $this->translate("Dati pagamento"); ?></div>
+            <div class="panel-heading"><?= $this->translate("Dati pagamento"); ?></div>
             <div class="panel-body">
 
                 <div class="row">
                     <div class="col-lg-12">
                         <div class="form-group">
-                            <label><?php echo $this->translate("Pagabile"); ?></label>
+                            <label><?= $this->translate("Pagabile"); ?></label>
                             <div class="sng-info-box"><?= $trip->getPayable() ? $this->translate("SI") : $this->translate("NO") ?></div>
                         </div>
                     </div>
@@ -161,7 +161,7 @@ if ($tripPayment !== null) {
                 <div class="row">
                     <div class="col-lg-12">
                         <div class="form-group">
-                            <label><?php echo $this->translate("Pagata"); ?></label>
+                            <label><?= $this->translate("Pagata"); ?></label>
                             <div class="sng-info-box"><?= $payed ?></div>
                         </div>
                     </div>
@@ -169,7 +169,7 @@ if ($tripPayment !== null) {
                 <div class="row">
                     <div class="col-lg-12">
                         <div class="form-group">
-                            <label><?php echo $this->translate("Fatturata"); ?></label>
+                            <label><?= $this->translate("Fatturata"); ?></label>
                             <div class="sng-info-box"><?= $invoiced ?></div>
                         </div>
                     </div>

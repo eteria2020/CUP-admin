@@ -6,10 +6,10 @@ $form = $this->carForm->prepare();
 
         <div class="row">
             <div class="col-lg-6">
-                <h3 class="page-title"><?php echo $this->translate("AGGIUNGI AUTO"); ?></h3>
+                <h3 class="page-title"><?= $this->translate("AGGIUNGI AUTO"); ?></h3>
             </div>
             <div class="col-lg-6">
-                <a href="<?php echo $this->url('cars'); ?>" class="btn btn-success pull-right"><i class="fa fa-arrow-left"></i> <?php echo $this->translate("Torna alla lista"); ?></a>
+                <a href="<?php echo $this->url('cars'); ?>" class="btn btn-success pull-right"><i class="fa fa-arrow-left"></i> <?= $this->translate("Torna alla lista"); ?></a>
             </div>
         </div>
 
@@ -25,7 +25,7 @@ $form = $this->carForm->prepare();
                 <div class="row">
                     <div class="col-lg-3">
                         <div class="form-group">
-                            <label for="gender"><?php echo $this->translate("Targa"); ?></label>
+                            <label for="gender"><?= $this->translate("Targa"); ?></label>
                             <?php
                             $plate = $form->get('car')->get('plate');
                             echo $this->formElement($plate);
@@ -36,7 +36,7 @@ $form = $this->carForm->prepare();
 
                     <div class="col-lg-3">
                         <div class="form-group">
-                            <label for="name"><?php echo $this->translate("Costruttore"); ?></label>
+                            <label for="name"><?= $this->translate("Costruttore"); ?></label>
                             <?php
                             $manufactures = $form->get('car')->get('manufactures');
                             echo $this->formElement($manufactures);
@@ -47,7 +47,7 @@ $form = $this->carForm->prepare();
 
                     <div class="col-lg-3">
                         <div class="form-group">
-                            <label for="surname"><?php echo $this->translate("Modello"); ?></label>
+                            <label for="surname"><?= $this->translate("Modello"); ?></label>
                             <?php
                             $model = $form->get('car')->get('model');
                             echo $this->formElement($model);
@@ -58,7 +58,7 @@ $form = $this->carForm->prepare();
 
                     <div class="col-lg-3">
                         <div class="form-group">
-                            <label for="surname"><?php echo $this->translate("Identificativo"); ?></label>
+                            <label for="surname"><?= $this->translate("Identificativo"); ?></label>
                             <?php
                             $label = $form->get('car')->get('label');
                             echo $this->formElement($label);
@@ -72,21 +72,21 @@ $form = $this->carForm->prepare();
 
                     <div class="col-lg-4">
                         <div class="form-group">
-                            <label for="name"><?php echo $this->translate("Flotta"); ?></label>
+                            <label for="name"><?= $this->translate("Flotta"); ?></label>
                             <?= $this->formRow($form->get('car')->get('fleet')); ?>
                         </div>
                     </div>
 
                     <div class="col-lg-2">
                         <div class="form-group">
-                            <label for="name"><?php echo $this->translate("Attiva"); ?></label>
+                            <label for="name"><?= $this->translate("Attiva"); ?></label>
                             <?= $this->formRow($form->get('car')->get('active')); ?>
                         </div>
                     </div>
 
                     <div class="col-lg-2">
                         <div class="form-group">
-                            <label for="surname"><?php echo $this->translate("Stato"); ?></label>
+                            <label for="surname"><?= $this->translate("Stato"); ?></label>
                             <?= $this->formRow($form->get('car')->get('status')); ?>
                         </div>
                     </div>
@@ -95,7 +95,7 @@ $form = $this->carForm->prepare();
                 <div class="row">
                     <div class="col-lg-12">
                         <div class="form-group">
-                            <label for="gender"><?php echo $this->translate("Note"); ?></label>
+                            <label for="gender"><?= $this->translate("Note"); ?></label>
                             <?= $this->formRow($form->get('car')->get('notes')); ?>
                         </div>
                     </div>
@@ -103,7 +103,7 @@ $form = $this->carForm->prepare();
 
                 <div class="row">
                     <div class="col-lg-12">
-                        <button type="submit" class="btn btn-success"><?php echo $this->translate("Aggiungi Auto"); ?></button>
+                        <button type="submit" class="btn btn-success"><?= $this->translate("Aggiungi Auto"); ?></button>
                     </div>
                 </div>
 

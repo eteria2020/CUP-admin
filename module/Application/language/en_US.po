@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Sharengo\n"
-"POT-Creation-Date: 2016-02-24 16:36+0100\n"
-"PO-Revision-Date: 2016-02-24 16:38+0100\n"
+"POT-Creation-Date: 2016-02-24 17:17+0100\n"
+"PO-Revision-Date: 2016-02-24 17:47+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: en\n"
@@ -2292,6 +2292,14 @@ msgstr "Allow trip closing?"
 #: Application/view/application/zones/groups-tab.phtml:10
 msgid "Zone"
 msgstr "Zone"
+
+#: Application/view/application/zones/groups-tab.phtml:20
+msgid "si"
+msgstr "yes"
+
+#: Application/view/application/zones/groups-tab.phtml:20
+msgid "no"
+msgstr "no"
 
 #: Application/view/application/zones/index.phtml:15
 #: Application/view/application/zones/zone-alarms.phtml:7

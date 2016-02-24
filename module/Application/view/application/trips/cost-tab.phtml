@@ -36,13 +36,13 @@ if ($tripPayment !== null) {
 
 
         <div class="panel panel-default">
-            <div class="panel-heading"><?php echo $this->translate("Dettagli Corsa"); ?></div>
+            <div class="panel-heading"><?= $this->translate("Dettagli Corsa"); ?></div>
             <div class="panel-body">
 
                 <div class="row">
                     <div class="col-lg-4">
                         <div class="form-group">
-                            <label><?php echo $this->translate("Inizio"); ?></label>
+                            <label><?= $this->translate("Inizio"); ?></label>
                             <div class="sng-info-box"><?= $trip->getTimestampBeginning()->format('d-m-Y H:i:s') ?></div>
                         </div>
                     </div>
@@ -54,8 +54,8 @@ if ($tripPayment !== null) {
                     </div>
                     <div class="col-lg-4">
                         <div class="form-group">
-                            <label><?php echo $this->translate("Durata"); ?></label>
-                            <div class="sng-info-box"><?= $trip->getDurationMinutes() ?> <?php echo $this->translate("minuti"); ?></div>
+                            <label><?= $this->translate("Durata"); ?></label>
+                            <div class="sng-info-box"><?= $trip->getDurationMinutes() ?> <?= $this->translate("minuti"); ?></div>
                         </div>
                     </div>
                 </div>
@@ -63,19 +63,19 @@ if ($tripPayment !== null) {
                 <div class="row">
                     <div class="col-lg-4">
                         <div class="form-group">
-                            <label><?php echo $this->translate("Tariffa corsa"); ?></label>
+                            <label><?= $this->translate("Tariffa corsa"); ?></label>
                             <div class="sng-info-box"><?= $tripFare ?></div>
                         </div>
                     </div>
                     <div class="col-lg-4">
                         <div class="form-group">
-                            <label><?php echo $this->translate("Tariffa sosta"); ?></label>
+                            <label><?= $this->translate("Tariffa sosta"); ?></label>
                             <div class="sng-info-box"><?= $parkingFare ?></div>
                         </div>
                     </div>
                     <div class="col-lg-4">
                         <div class="form-group">
-                            <label><?php echo $this->translate("Sconto cliente"); ?></label>
+                            <label><?= $this->translate("Sconto cliente"); ?></label>
                             <div class="sng-info-box"><?= $customer->getDiscountRate() . '%' ?></div>
                         </div>
                     </div>
@@ -86,15 +86,15 @@ if ($tripPayment !== null) {
 
         <?php if(count($trip->getTripBills()) > 0) { ?>
         <div class="panel panel-default">
-            <div class="panel-heading"><?php echo $this->translate("Minuti addebitati"); ?></div>
+            <div class="panel-heading"><?= $this->translate("Minuti addebitati"); ?></div>
             <div class="panel-body">
 
                 <table class="table table-bordered">
                     <thead>
                         <tr>
-                            <th><?php echo $this->translate("Dal"); ?></th>
-                            <th><?php echo $this->translate("Fino al"); ?></th>
-                            <th><?php echo $this->translate("Minuti"); ?></th>
+                            <th><?= $this->translate("Dal"); ?></th>
+                            <th><?= $this->translate("Fino al"); ?></th>
+                            <th><?= $this->translate("Minuti"); ?></th>
                         </tr>
                     </thead>
                     <tbody>
@@ -116,16 +116,16 @@ if ($tripPayment !== null) {
 
         <?php if(count($trip->getTripBonuses()) > 0) { ?>
         <div class="panel panel-default">
-            <div class="panel-heading"><?php echo $this->translate("Minuti bonus usufruiti"); ?></div>
+            <div class="panel-heading"><?= $this->translate("Minuti bonus usufruiti"); ?></div>
             <div class="panel-body">
 
                 <table class="table table-bordered">
                     <thead>
                         <tr>
-                            <th><?php echo $this->translate("Dal"); ?></th>
-                            <th><?php echo $this->translate("Fino al"); ?></th>
-                            <th><?php echo $this->translate("Minuti"); ?></th>
-                            <th><?php echo $this->translate("Descrizione bonus"); ?></th>
+                            <th><?= $this->translate("Dal"); ?></th>
+                            <th><?= $this->translate("Fino al"); ?></th>
+                            <th><?= $this->translate("Minuti"); ?></th>
+                            <th><?= $this->translate("Descrizione bonus"); ?></th>
                         </tr>
                     </thead>
                     <tbody>
@@ -148,16 +148,16 @@ if ($tripPayment !== null) {
 
         <?php if(count($trip->getTripFreeFares()) > 0) { ?>
         <div class="panel panel-default">
-            <div class="panel-heading"><?php echo $this->translate("Sconti / tariffe speciali"); ?></div>
+            <div class="panel-heading"><?= $this->translate("Sconti / tariffe speciali"); ?></div>
             <div class="panel-body">
 
                 <table class="table table-bordered">
                     <thead>
                         <tr>
-                            <th><?php echo $this->translate("Dal"); ?></th>
-                            <th><?php echo $this->translate("Fino al"); ?></th>
-                            <th><?php echo $this->translate("Minuti"); ?></th>
-                            <th><?php echo $this->translate("Descrizione sconto / tariffa speciale"); ?></th>
+                            <th><?= $this->translate("Dal"); ?></th>
+                            <th><?= $this->translate("Fino al"); ?></th>
+                            <th><?= $this->translate("Minuti"); ?></th>
+                            <th><?= $this->translate("Descrizione sconto / tariffa speciale"); ?></th>
                         </tr>
                     </thead>
                     <tbody>
@@ -183,13 +183,13 @@ if ($tripPayment !== null) {
     <div class="col-lg-3">
         <div class="panel panel-default">
 
-            <div class="panel-heading"><?php echo $this->translate("Dati pagamento"); ?></div>
+            <div class="panel-heading"><?= $this->translate("Dati pagamento"); ?></div>
             <div class="panel-body">
 
                 <div class="row">
                     <div class="col-lg-6">
                         <div class="form-group">
-                            <label><?php echo $this->translate("Importo"); ?></label>
+                            <label><?= $this->translate("Importo"); ?></label>
                             <div class="sng-info-box"><?= $amount ?></div>
                         </div>
                     </div>
@@ -197,7 +197,7 @@ if ($tripPayment !== null) {
                 <div class="row">
                     <div class="col-lg-6">
                         <div class="form-group">
-                            <label><?php echo $this->translate("Pagabile"); ?></label>
+                            <label><?= $this->translate("Pagabile"); ?></label>
                             <div class="sng-info-box"><?= $trip->getPayable() ? $this->translate("SI") : $this->translate("NO") ?></div>
                         </div>
                     </div>
@@ -205,7 +205,7 @@ if ($tripPayment !== null) {
                 <div class="row">
                     <div class="col-lg-12">
                         <div class="form-group">
-                            <label><?php echo $this->translate("Pagata"); ?></label>
+                            <label><?= $this->translate("Pagata"); ?></label>
                             <div class="sng-info-box"><?= $payed ?></div>
                         </div>
                     </div>

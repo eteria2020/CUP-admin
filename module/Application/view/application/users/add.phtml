@@ -6,19 +6,19 @@ $form = $this->userForm->prepare();
         <div class="row">
             <div class="col-lg-6">
                 <h3 class="page-title">
-                    <?php echo $this->translate("AGGIUNGI UTENTE"); ?>
+                    <?= $this->translate("AGGIUNGI UTENTE"); ?>
                 </h3>
             </div>
 
             <div class="col-lg-6">
                 <a href="<?= $this->url('users'); ?>" class="btn btn-success pull-right">
-                    <i class="fa fa-arrow-left"></i> <?php echo $this->translate("Torna Indietro"); ?>
+                    <i class="fa fa-arrow-left"></i> <?= $this->translate("Torna Indietro"); ?>
                 </a>
             </div>
         </div>
 
         <div class="panel panel-default">
-            <div class="panel-heading"><?php echo $this->translate("Dati Utente"); ?></div>
+            <div class="panel-heading"><?= $this->translate("Dati Utente"); ?></div>
             <div class="panel-body">
                 <div class="row">
                     <div class="col-md-12">
@@ -27,7 +27,7 @@ $form = $this->userForm->prepare();
                             <div class="row">
                                 <div class="col-lg-8">
                                     <div class="form-group">
-                                        <label for="displayName"><?php echo $this->translate("Nome & Cognome"); ?></label>
+                                        <label for="displayName"><?= $this->translate("Nome & Cognome"); ?></label>
                                         <?php
                                         $displayName = $form->get('user')->get('displayName');
                                         echo $this->formElement($displayName);
@@ -37,7 +37,7 @@ $form = $this->userForm->prepare();
                                 </div>
 
                                 <div class="col-lg-4">
-                                    <label for="displayName"><?php echo $this->translate("Ruolo"); ?></label>
+                                    <label for="displayName"><?= $this->translate("Ruolo"); ?></label>
                                     <?php
                                     $role = $form->get('user')->get('role');
                                     echo $this->formElement($role);
@@ -50,7 +50,7 @@ $form = $this->userForm->prepare();
 
                                 <div class="col-lg-3">
                                     <div class="form-group">
-                                        <label for="email"><?php echo $this->translate("Email"); ?></label>
+                                        <label for="email"><?= $this->translate("Email"); ?></label>
                                         <?php
                                         $email = $form->get('user')->get('email');
                                         echo $this->formElement($email);
@@ -61,7 +61,7 @@ $form = $this->userForm->prepare();
 
                                 <div class="col-lg-3">
                                     <div class="form-group">
-                                        <label for="email"><?php echo $this->translate("Ripeti Email"); ?></label>
+                                        <label for="email"><?= $this->translate("Ripeti Email"); ?></label>
                                         <?php
                                         $email2 = $form->get('user')->get('email2');
                                         echo $this->formElement($email2);
@@ -72,7 +72,7 @@ $form = $this->userForm->prepare();
 
                                 <div class="col-lg-3">
                                     <div class="form-group">
-                                        <label for="password"><?php echo $this->translate("Password"); ?></label>
+                                        <label for="password"><?= $this->translate("Password"); ?></label>
                                         <?php
                                         $password= $form->get('user')->get('password');
                                         echo $this->formElement($password);
@@ -83,7 +83,7 @@ $form = $this->userForm->prepare();
 
                                 <div class="col-lg-3">
                                     <div class="form-group">
-                                        <label for="password"><?php echo $this->translate("Ripeti Password"); ?></label>
+                                        <label for="password"><?= $this->translate("Ripeti Password"); ?></label>
                                         <?php
                                         $password2= $form->get('user')->get('password2');
                                         echo $this->formElement($password2);
@@ -95,10 +95,10 @@ $form = $this->userForm->prepare();
 
                             <div class="row">
                                 <div class="col-lg-12">
-                                    <button type="submit" class="btn btn-success"><?php echo $this->translate("Crea Utente"); ?></button>
+                                    <button type="submit" class="btn btn-success"><?= $this->translate("Crea Utente"); ?></button>
                                 </div>
                             </div>
-                        <?php echo $this->form()->closeTag(); ?>
+                        <?= $this->form()->closeTag(); ?>
                     </div>
                 </div>
             </div>

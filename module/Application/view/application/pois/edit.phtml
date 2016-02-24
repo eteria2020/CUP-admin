@@ -6,11 +6,11 @@ $form = $this->poiForm->prepare();
 
         <div class="row">
             <div class="col-lg-6">
-                <h3 class="page-title"><?php echo $this->translate("MODIFICA POI:"); ?> <?= $this->poi->getName(); ?></h3>
+                <h3 class="page-title"><?= $this->translate("MODIFICA POI:"); ?> <?= $this->poi->getName(); ?></h3>
             </div>
             <div class="col-lg-6">
-                <a href="<?php echo $this->url('configurations/manage-pois'); ?>" class="btn btn-success pull-right">
-                    <i class="fa fa-arrow-left"></i> <?php echo $this->translate("Torna alla lista"); ?>
+                <a href="<?= $this->url('configurations/manage-pois'); ?>" class="btn btn-success pull-right">
+                    <i class="fa fa-arrow-left"></i> <?= $this->translate("Torna alla lista"); ?>
                 </a>
             </div>
         </div>
@@ -27,7 +27,7 @@ $form = $this->poiForm->prepare();
                 <div class="row">
                     <div class="col-lg-3">
                         <div class="form-group">
-                            <label for="gender"><?php echo $this->translate("Tipo"); ?></label>
+                            <label for="gender"><?= $this->translate("Tipo"); ?></label>
                             <?php
                             $type = $form->get('poi')->get('type');
                             echo $this->formElement($type);
@@ -37,7 +37,7 @@ $form = $this->poiForm->prepare();
 
                     <div class="col-lg-3">
                         <div class="form-group">
-                            <label for="name"><?php echo $this->translate("Codice"); ?></label>
+                            <label for="name"><?= $this->translate("Codice"); ?></label>
                             <?php
                             $code = $form->get('poi')->get('code');
                             echo $this->formElement($code);
@@ -48,7 +48,7 @@ $form = $this->poiForm->prepare();
 
                     <div class="col-lg-3">
                         <div class="form-group">
-                            <label for="surname"><?php echo $this->translate("Nome"); ?></label>
+                            <label for="surname"><?= $this->translate("Nome"); ?></label>
                             <?php
                             $name = $form->get('poi')->get('name');
                             echo $this->formElement($name);
@@ -59,7 +59,7 @@ $form = $this->poiForm->prepare();
 
                     <div class="col-lg-3">
                         <div class="form-group">
-                            <label for="surname"><?php echo $this->translate("Indirizzo"); ?></label>
+                            <label for="surname"><?= $this->translate("Indirizzo"); ?></label>
                             <?php
                             $address = $form->get('poi')->get('address');
                             echo $this->formElement($address);
@@ -73,35 +73,35 @@ $form = $this->poiForm->prepare();
 
                     <div class="col-lg-4">
                         <div class="form-group">
-                            <label for="name"><?php echo $this->translate("Città"); ?></label>
+                            <label for="name"><?= $this->translate("Città"); ?></label>
                             <?= $this->formRow($form->get('poi')->get('town')); ?>
                         </div>
                     </div>
 
                     <div class="col-lg-2">
                         <div class="form-group">
-                            <label for="name"><?php echo $this->translate("CAP"); ?></label>
+                            <label for="name"><?= $this->translate("CAP"); ?></label>
                             <?= $this->formRow($form->get('poi')->get('zipCode')); ?>
                         </div>
                     </div>
 
                     <div class="col-lg-2">
                         <div class="form-group">
-                            <label for="surname"><?php echo $this->translate("Provincia"); ?></label>
+                            <label for="surname"><?= $this->translate("Provincia"); ?></label>
                             <?= $this->formRow($form->get('poi')->get('province')); ?>
                         </div>
                     </div>
 
                     <div class="col-lg-2">
                         <div class="form-group">
-                            <label for="surname"><?php echo $this->translate("Lat"); ?></label>
+                            <label for="surname"><?= $this->translate("Lat"); ?></label>
                             <?= $this->formRow($form->get('poi')->get('lat')); ?>
                         </div>
                     </div>
 
                     <div class="col-lg-2">
                         <div class="form-group">
-                            <label for="surname"><?php echo $this->translate("Lon"); ?></label>
+                            <label for="surname"><?= $this->translate("Lon"); ?></label>
                             <?= $this->formRow($form->get('poi')->get('lon')); ?>
                         </div>
                     </div>
@@ -110,7 +110,7 @@ $form = $this->poiForm->prepare();
 
                 <div class="row">
                     <div class="col-lg-12">
-                        <button type="submit" class="btn btn-success"><?php echo $this->translate("Modifica POI"); ?></button>
+                        <button type="submit" class="btn btn-success"><?= $this->translate("Modifica POI"); ?></button>
                     </div>
                 </div>
 

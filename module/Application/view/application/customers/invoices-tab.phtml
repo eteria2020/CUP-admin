@@ -2,13 +2,13 @@
     <div class="col-lg-12">
 
         <div class="alert alert-success" style="display: none;" id="js-message">
-            <p><?php echo $this->translate("Operazione eseguita con successo"); ?></p>
+            <p><?= $this->translate("Operazione eseguita con successo"); ?></p>
         </div>
 
         <div class="row">
             <div class="col-md-12">
 
-                <?php echo $this->partial('partials/flash-messages.phtml', []); ?>
+                <?= $this->partial('partials/flash-messages.phtml', []); ?>
 
                 <!-- Filter container -->
                 <div class="row">
@@ -18,8 +18,8 @@
                             <!-- Filter selector -->
                             <div class="form-group">
                                 <select name="column" id="js-column" class="form-control">
-                                    <option value="select" selected>-- <?php echo $this->translate("Seleziona"); ?> --</option>
-                                    <option value="e.invoiceNumber"><?php echo $this->translate("N° Fattura"); ?></option>
+                                    <option value="select" selected>-- <?= $this->translate("Seleziona"); ?> --</option>
+                                    <option value="e.invoiceNumber"><?= $this->translate("N° Fattura"); ?></option>
                                     <!-- <option value="e.type">Tipo</option> -->
                                 </select>
                             </div>
@@ -28,18 +28,18 @@
                             <!-- Type selector -->
                             <div class="form-group">
                                 <select name="js-clean-type" id="js-clean-type" class="form-control" style="display: none;">
-                                    <option value="FIRST_PAYMENT"><?php echo $this->translate("Iscrizione"); ?></option>
-                                    <option value="TRIP"><?php echo $this->translate("Corsa"); ?></option>
-                                    <option value="PENALTY"><?php echo $this->translate("Sanzione"); ?></option>
+                                    <option value="FIRST_PAYMENT"><?= $this->translate("Iscrizione"); ?></option>
+                                    <option value="TRIP"><?= $this->translate("Corsa"); ?></option>
+                                    <option value="PENALTY"><?= $this->translate("Sanzione"); ?></option>
                                 </select>
-                                <input type="text" name="value" value="" class="form-control" id="js-value" placeholder="<?php echo $this->translate("Filtra..."); ?>">
+                                <input type="text" name="value" value="" class="form-control" id="js-value" placeholder="<?= $this->translate("Filtra..."); ?>">
                             </div>
                             <!-- type selector -->
 
                             <!-- Search buttons -->
                             <div class="btn-group">
                                 <button type="button" class="btn green js-search" id="js-search">
-                                    <i class="fa fa-search"></i> <?php echo $this->translate("Cerca"); ?>
+                                    <i class="fa fa-search"></i> <?= $this->translate("Cerca"); ?>
                                 </button>
                                 <button type="button" class="btn green dropdown-toggle" data-toggle="dropdown">
                                     <i class="fa fa-angle-down"></i>
@@ -47,7 +47,7 @@
                                 <ul class="dropdown-menu" role="menu">
                                     <li>
                                         <a href="javascript:void(0);" id="js-clear">
-                                            <i class="fa fa-remove"></i> <?php echo $this->translate("Pulisci Ricerca"); ?>
+                                            <i class="fa fa-remove"></i> <?= $this->translate("Pulisci Ricerca"); ?>
                                         </a>
                                     </li>
                                 </ul>
@@ -65,7 +65,7 @@
                 <div class="portlet box green">
                     <div class="portlet-title">
                         <div class="caption">
-                            <i class="fa fa-cogs"></i><?php echo $this->translate("Elenco Fatture"); ?>
+                            <i class="fa fa-cogs"></i><?= $this->translate("Elenco Fatture"); ?>
                         </div>
                     </div>
                     <div class="portlet-body">
@@ -74,11 +74,11 @@
                         <table class="table table-striped table-bordered table-hover" id="js-invoices-table">
                             <thead>
                             <tr>
-                                <th><?php echo $this->translate("N° Fattura"); ?></th>
-                                <th><?php echo $this->translate("Data"); ?></th>
-                                <th><?php echo $this->translate("Tipo"); ?></th>
-                                <th><?php echo $this->translate("Totale"); ?></th>
-                                <th><?php echo $this->translate("Download"); ?></th>
+                                <th><?= $this->translate("N° Fattura"); ?></th>
+                                <th><?= $this->translate("Data"); ?></th>
+                                <th><?= $this->translate("Tipo"); ?></th>
+                                <th><?= $this->translate("Totale"); ?></th>
+                                <th><?= $this->translate("Download"); ?></th>
                             </tr>
                             </thead>
                         </table>

@@ -11,14 +11,14 @@ $this->headScript()
 <div class="page-content-wrapper">
     <div class="page-content">
 
-        <h3 class="page-title"><?php echo $this->translate("CORSE NON PAGATE"); ?></h3>
+        <h3 class="page-title"><?= $this->translate("CORSE NON PAGATE"); ?></h3>
         <div class="page-bar"></div>
 
         <div class="row">
 
             <div class="portlet box green">
                 <div class="portlet-title">
-                    <div class="caption"><?php echo $this->translate("Elenco"); ?></div>
+                    <div class="caption"><?= $this->translate("Elenco"); ?></div>
                 </div>
 
                 <!-- BEGIN table -->
@@ -26,17 +26,17 @@ $this->headScript()
                     <table class="table table-striped table-bordered table-hover" id="trips-table">
                         <thead>
                             <tr>
-                                <th><?php echo $this->translate("Id Corsa"); ?></th>
-                                <th><?php echo $this->translate("Cliente"); ?></th>
-                                <th><?php echo $this->translate("RFID"); ?></th>
-                                <th><?php echo $this->translate("Targa"); ?></th>
-                                <th><?php echo $this->translate("Km Inizio"); ?></th>
-                                <th><?php echo $this->translate("Km Fine"); ?></th>
-                                <th style="min-width: 60px !important;"><?php echo $this->translate("Inizio"); ?></th>
-                                <th style="min-width: 60px !important;"><?php echo $this->translate("Fine"); ?></th>
-                                <th style="min-width: 80px !important;"><?php echo $this->translate("Durata"); ?></th>
-                                <th><?php echo $this->translate("Sosta"); ?></th>
-                                <th><?php echo $this->translate("Costo"); ?></th>
+                                <th><?= $this->translate("Id Corsa"); ?></th>
+                                <th><?= $this->translate("Cliente"); ?></th>
+                                <th><?= $this->translate("RFID"); ?></th>
+                                <th><?= $this->translate("Targa"); ?></th>
+                                <th><?= $this->translate("Km Inizio"); ?></th>
+                                <th><?= $this->translate("Km Fine"); ?></th>
+                                <th style="min-width: 60px !important;"><?= $this->translate("Inizio"); ?></th>
+                                <th style="min-width: 60px !important;"><?= $this->translate("Fine"); ?></th>
+                                <th style="min-width: 80px !important;"><?= $this->translate("Durata"); ?></th>
+                                <th><?= $this->translate("Sosta"); ?></th>
+                                <th><?= $this->translate("Costo"); ?></th>
                             </tr>
                         </thead>
                         <tbody>

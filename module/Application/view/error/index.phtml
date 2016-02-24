@@ -1,24 +1,24 @@
-<h1><?php echo $this->translate('Errore') ?></h1>
-<h2><?php echo $this->message ?></h2>
+<h1><?= $this->translate('Errore') ?></h1>
+<h2><?= $this->message ?></h2>
 
 <?php if (isset($this->display_exceptions) && $this->display_exceptions): ?>
 
 <?php if(isset($this->exception) && $this->exception instanceof Exception): ?>
 <hr/>
-<h2><?php echo $this->translate('Informazioni aggiuntive') ?>:</h2>
-<h3><?php echo get_class($this->exception); ?></h3>
+<h2><?= $this->translate('Informazioni aggiuntive') ?>:</h2>
+<h3><?= get_class($this->exception); ?></h3>
 <dl>
-    <dt><?php echo $this->translate('File') ?>:</dt>
+    <dt><?= $this->translate('File') ?>:</dt>
     <dd>
-        <pre class="prettyprint linenums"><?php echo $this->exception->getFile() ?>:<?php echo $this->exception->getLine() ?></pre>
+        <pre class="prettyprint linenums"><?= $this->exception->getFile() ?>:<?= $this->exception->getLine() ?></pre>
     </dd>
-    <dt><?php echo $this->translate('Messaggio') ?>:</dt>
+    <dt><?= $this->translate('Messaggio') ?>:</dt>
     <dd>
-        <pre class="prettyprint linenums"><?php echo $this->escapeHtml($this->exception->getMessage()) ?></pre>
+        <pre class="prettyprint linenums"><?= $this->escapeHtml($this->exception->getMessage()) ?></pre>
     </dd>
-    <dt><?php echo $this->translate('Stack trace') ?>:</dt>
+    <dt><?= $this->translate('Stack trace') ?>:</dt>
     <dd>
-        <pre class="prettyprint linenums"><?php echo $this->escapeHtml($this->exception->getTraceAsString()) ?></pre>
+        <pre class="prettyprint linenums"><?= $this->escapeHtml($this->exception->getTraceAsString()) ?></pre>
     </dd>
 </dl>
 <?php
@@ -26,23 +26,23 @@
     if ($e) :
 ?>
 <hr/>
-<h2><?php echo $this->translate('Eccezioni precedenti') ?>:</h2>
+<h2><?= $this->translate('Eccezioni precedenti') ?>:</h2>
 <ul class="unstyled">
     <?php while($e) : ?>
     <li>
-        <h3><?php echo get_class($e); ?></h3>
+        <h3><?= get_class($e); ?></h3>
         <dl>
-            <dt><?php echo $this->translate('File') ?>:</dt>
+            <dt><?= $this->translate('File') ?>:</dt>
             <dd>
-                <pre class="prettyprint linenums"><?php echo $e->getFile() ?>:<?php echo $e->getLine() ?></pre>
+                <pre class="prettyprint linenums"><?= $e->getFile() ?>:<?= $e->getLine() ?></pre>
             </dd>
-            <dt><?php echo $this->translate('Messaggio') ?>:</dt>
+            <dt><?= $this->translate('Messaggio') ?>:</dt>
             <dd>
-                <pre class="prettyprint linenums"><?php echo $this->escapeHtml($e->getMessage()) ?></pre>
+                <pre class="prettyprint linenums"><?= $this->escapeHtml($e->getMessage()) ?></pre>
             </dd>
-            <dt><?php echo $this->translate('Stack trace') ?>:</dt>
+            <dt><?= $this->translate('Stack trace') ?>:</dt>
             <dd>
-                <pre class="prettyprint linenums"><?php echo $this->escapeHtml($e->getTraceAsString()) ?></pre>
+                <pre class="prettyprint linenums"><?= $this->escapeHtml($e->getTraceAsString()) ?></pre>
             </dd>
         </dl>
     </li>
@@ -55,7 +55,7 @@
 
 <?php else: ?>
 
-<h3><?php echo $this->translate('Nessuna eccezione disponibile') ?></h3>
+<h3><?= $this->translate('Nessuna eccezione disponibile') ?></h3>
 
 <?php endif ?>
 

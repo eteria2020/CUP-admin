@@ -4,14 +4,14 @@
             <div class="portlet box green">
                 <div class="portlet-title">
                     <div class="caption">
-                        <i class="fa fa-credit-card"></i><?php echo $this->translate("Contratto cliente"); ?>
+                        <i class="fa fa-credit-card"></i><?= $this->translate("Contratto cliente"); ?>
                     </div>
                 </div>
                 <div class="portlet-body">
                     <div class="row">
                         <div class="col-lg-4">
                             <div class="form-group">
-                                <label><?php echo $this->translate("Codice contratto"); ?></label>
+                                <label><?= $this->translate("Codice contratto"); ?></label>
                                 <div class="form-control" disabled><?= $this->contract->getId(); ?></div>
                             </div>
                         </div>
@@ -19,7 +19,7 @@
                     <div class="row">
                         <div class="col-lg-4">
                             <div class="form-group">
-                                <label><?php echo $this->translate("Data attivazione contratto"); ?></label>
+                                <label><?= $this->translate("Data attivazione contratto"); ?></label>
                                 <div class="form-control" disabled><?= $this->contract->getInsertedTs()->format('d/m/Y'); ?></div>
                             </div>
                         </div>
@@ -27,7 +27,7 @@
                     <div class="row">
                         <div class="col-lg-4">
                             <div class="form-group">
-                                <label><?php echo $this->translate("Carta di credito inserita"); ?></label>
+                                <label><?= $this->translate("Carta di credito inserita"); ?></label>
                                 <div class="form-control" disabled><?= $this->contract->getPan(); ?></div>
                             </div>
                         </div>
@@ -35,7 +35,7 @@
                     <div class="row">
                         <div class="col-lg-4">
                             <div class="form-group">
-                                <label><?php echo $this->translate("Scadenza carta di credito"); ?></label>
+                                <label><?= $this->translate("Scadenza carta di credito"); ?></label>
                                 <div class="form-control" disabled><?= implode('/', str_split($this->contract->getPanExpiry(), 4)); ?></div>
                             </div>
                         </div>
@@ -43,10 +43,10 @@
                     <div class="row">
                         <div class="col-lg-12">
                             <?php if ($this->contract->getDisabledDate()): ?>
-                                <?php echo $this->translate("Data di disabilitazione:"); ?> <span><?= $this->contract->getDisabledDate()->format('Y-m-d H:i:s'); ?></span>
+                                <?= $this->translate("Data di disabilitazione:"); ?> <span><?= $this->contract->getDisabledDate()->format('Y-m-d H:i:s'); ?></span>
                             <?php else: ?>
                                 <button id="disable-contract" class="btn btn-danger" data-contract-id="<?= $this->contract->getId(); ?>">
-                                    <i class="fa fa-ban"></i> <?php echo $this->translate("Disabilita contratto"); ?>
+                                    <i class="fa fa-ban"></i> <?= $this->translate("Disabilita contratto"); ?>
                                 </button>
                             <?php endif; ?>
                         </div>
@@ -54,7 +54,7 @@
                 </div>
             </div>
         <?php else: ?>
-            <div class="col-lg-12"><?php echo $this->translate("Il cliente selezionato non ha al momento un contratto valido con Cartasi"); ?></div>
+            <div class="col-lg-12"><?= $this->translate("Il cliente selezionato non ha al momento un contratto valido con Cartasi"); ?></div>
         <?php endif; ?>
     </div>
 </div>

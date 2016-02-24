@@ -4,10 +4,10 @@
         <table class="table table-bordered">
             <thead>
             <tr>
-                <th><?php echo $this->translate("ID"); ?></th>
-                <th><?php echo $this->translate("Condizione"); ?></th>
-                <th><?php echo $this->translate("Costo"); ?></th>
-                <th><?php echo $this->translate("Bonus"); ?></th>
+                <th><?= $this->translate("ID"); ?></th>
+                <th><?= $this->translate("Condizione"); ?></th>
+                <th><?= $this->translate("Costo"); ?></th>
+                <th><?= $this->translate("Bonus"); ?></th>
             </tr>
             </thead>
             <tbody>
@@ -16,8 +16,8 @@
             foreach($this->list as $zone): ?>
                 <tr>
                     <td><?= $zone->getId(); ?></td>
-                    <td><?php echo $this->translate("Inizio corsa"); ?> <strong><?= $zone->getGroupOpen()->getDescription()?></strong><br />
-                        <?php echo $this->translate("Fine corsa"); ?> <strong><?= $zone->getGroupClose()->getDescription()?></strong></td>
+                    <td><?= $this->translate("Inizio corsa"); ?> <strong><?= $zone->getGroupOpen()->getDescription()?></strong><br />
+                        <?= $this->translate("Fine corsa"); ?> <strong><?= $zone->getGroupClose()->getDescription()?></strong></td>
                     <td><?= $zone->getCost(); ?></td>
                     <td><?= $zone->getBonus(); ?></td>
                 </tr>
