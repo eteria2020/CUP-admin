@@ -1466,6 +1466,43 @@
             "time": "2015-12-09 09:54:47"
         },
         {
+            "name": "mvlabs/zf2-multilanguage",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "ssh://git@git.mvlabs.it:4222/internals/zf2-multilanguage.git",
+                "reference": "684ff8790cd9b8437d92a9d428be3c225a3f8bbb"
+            },
+            "require": {
+                "php": ">=5.4"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "MvLabsMultilanguage\\": "src/"
+                },
+                "classmap": [
+                    "./Module.php"
+                ]
+            },
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Marco Perone",
+                    "email": "m.perone@mvlabs.it"
+                }
+            ],
+            "description": "MVLabs multilanguage module for ZF2",
+            "keywords": [
+                "internationalization",
+                "multilanguage",
+                "zf2"
+            ],
+            "time": "2015-12-09 09:54:47"
+        },
+        {
             "name": "natxet/CssMin",
             "version": "v3.0.4",
             "source": {

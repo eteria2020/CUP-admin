@@ -1127,6 +1127,11 @@ return [
             'TranslatorPlugin' => 'Application\Controller\Plugin\TranslatorPluginFactory'
         ]
     ],
+    'controller_plugins' => [
+        'factories' => [
+            'TranslatorPlugin' => 'Application\Controller\Plugin\TranslatorPluginFactory'
+        ]
+    ],
     'input_filters' => [
         'invokables' => [
             'close-trip' => 'Application\Form\InputFilter\CloseTripFilter'
@@ -1288,11 +1293,6 @@ return [
                         'label' => $translator->translate('Patenti estere'),
                         'route' => 'customers/foreign-drivers-license',
                         'isVisible' => true
-                    ],
-                    [
-                        'label' => $translator->translate('Card'),
-                        'route' => 'customers/list-card/add',
-                        'isVisible' => false
                     ],
                     [
                         'route' => 'customers/edit',

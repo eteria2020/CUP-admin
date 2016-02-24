@@ -29,18 +29,6 @@ $this->headScript()
                         <div class="form-inline">
                             <div class="form-group">
                                 <select name="column" id="js-column" class="form-control">
-<<<<<<< HEAD
-                                    <option value="select" selected>-- Seleziona --</option>
-                                    <option value="c.timestampEnd">Corse Aperte</option>
-                                    <option value="e.id">ID Corsa</option>
-                                    <option value="cu.id">ID Cliente</option>
-                                    <option value="cu.surname">Cognome Cliente</option>
-                                    <option value="cu.email">eMail Cliente</option>
-                                    <option value="cc.code">RFID</option>
-                                    <option value="c.plate">Targa</option>
-                                    <option value="c.label">Numero</option>
-                                    <option value="f.name">Flotta</option>
-=======
                                     <option value="select" selected>-- <?php echo $this->translate("Seleziona"); ?> --</option>
                                     <option value="c.timestampEnd"><?php echo $this->translate("Corse Aperte"); ?></option>
                                     <option value="e.id"><?php echo $this->translate("ID Corsa"); ?></option>
@@ -50,8 +38,7 @@ $this->headScript()
                                     <option value="cc.code"><?php echo $this->translate("RFID"); ?></option>
                                     <option value="c.plate"><?php echo $this->translate("Targa"); ?></option>
                                     <option value="c.label"><?php echo $this->translate("Numero"); ?></option>
-                                    <option value="payed"><?php echo $this->translate("Corse non pagate"); ?></option>
->>>>>>> Added translate code in all views of Application module, added logic to change language using session
+                                    <option value="f.name"><?php echo $this->translate("Flotta"); ?></option>
                                 </select>
                             </div>
                             <div class="form-group">
