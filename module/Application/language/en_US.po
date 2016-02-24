@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Sharengo\n"
-"POT-Creation-Date: 2016-02-24 13:50+0100\n"
-"PO-Revision-Date: 2016-02-24 13:50+0100\n"
+"POT-Creation-Date: 2016-02-24 16:36+0100\n"
+"PO-Revision-Date: 2016-02-24 16:38+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: en\n"
@@ -16,115 +16,115 @@ msgstr ""
 "X-Poedit-SourceCharset: UTF-8\n"
 "X-Poedit-SearchPath-0: .\n"
 
-#: Application/config/module.config.php:1265
-#: Application/view/partials/translations.phtml:4
+#: Application/config/module.config.php:1270
 msgid "Clienti"
 msgstr "Costumers"
 
-#: Application/config/module.config.php:1272
-#: Application/config/module.config.php:1308
-#: Application/config/module.config.php:1334
-#: Application/config/module.config.php:1358
-#: Application/config/module.config.php:1372
+#: Application/config/module.config.php:1277
+#: Application/config/module.config.php:1313
+#: Application/config/module.config.php:1339
+#: Application/config/module.config.php:1363
+#: Application/config/module.config.php:1377
+#: Application/view/application/trips-not-payed/list.phtml:21
 msgid "Elenco"
 msgstr "List"
 
-#: Application/config/module.config.php:1277
+#: Application/config/module.config.php:1282
 #: Application/view/application/customers/edit.phtml:38
 #: Application/view/application/customers/list.phtml:77
 #: Application/view/application/reservations/index.phtml:72
 msgid "Card"
 msgstr "Card"
 
-#: Application/config/module.config.php:1282
+#: Application/config/module.config.php:1287
 msgid "Patenti estere"
 msgstr "Foreign driving licenses"
 
-#: Application/config/module.config.php:1301
+#: Application/config/module.config.php:1306
 msgid "Auto"
 msgstr "Car"
 
-#: Application/config/module.config.php:1327
-#: Application/view/partials/translations.phtml:58
+#: Application/config/module.config.php:1332
+#: Application/view/partials/translations.phtml:57
 msgid "Corse"
 msgstr "Trips"
 
-#: Application/config/module.config.php:1339
+#: Application/config/module.config.php:1344
 msgid "Costo corsa"
 msgstr "Trip cost"
 
-#: Application/config/module.config.php:1344
+#: Application/config/module.config.php:1349
 msgid "Corse non pagate"
 msgstr "Unpaid trips"
 
-#: Application/config/module.config.php:1351
+#: Application/config/module.config.php:1356
 msgid "Prenotazioni"
 msgstr "Reservations"
 
-#: Application/config/module.config.php:1365
+#: Application/config/module.config.php:1370
 #: Application/view/application/customers/edit.phtml:39
 msgid "Fatture"
 msgstr "Invoices"
 
-#: Application/config/module.config.php:1379
+#: Application/config/module.config.php:1384
 msgid "Pagamenti"
 msgstr "Payments"
 
-#: Application/config/module.config.php:1386
+#: Application/config/module.config.php:1391
 #: Application/view/application/customers/edit.phtml:42
 msgid "Pagamenti falliti"
 msgstr "Failed payments"
 
-#: Application/config/module.config.php:1391
+#: Application/config/module.config.php:1396
 msgid "Addebita penale/extra"
 msgstr "Charge fee/extra"
 
-#: Application/config/module.config.php:1396
+#: Application/config/module.config.php:1401
 msgid "Competenze"
 msgstr "Incomes"
 
-#: Application/config/module.config.php:1401
+#: Application/config/module.config.php:1406
 #: Application/view/application/payments-csv/csv.phtml:15
 msgid "Verifica CartaSI"
 msgstr "Verify CartaSI"
 
-#: Application/config/module.config.php:1408
+#: Application/config/module.config.php:1413
 msgid "Configurazione"
 msgstr "Configuration"
 
-#: Application/config/module.config.php:1415
+#: Application/config/module.config.php:1420
 msgid "Gestione soglie allarme"
 msgstr "Alarm thresholds management"
 
-#: Application/config/module.config.php:1420
+#: Application/config/module.config.php:1425
 msgid "Gestione POIS"
 msgstr "POIS Management"
 
-#: Application/config/module.config.php:1425
+#: Application/config/module.config.php:1430
 msgid "Tariffe"
 msgstr "Rates"
 
-#: Application/config/module.config.php:1432
+#: Application/config/module.config.php:1437
 msgid "Aree"
 msgstr "Areas"
 
-#: Application/config/module.config.php:1439
+#: Application/config/module.config.php:1444
 msgid "Gestione aree"
 msgstr "Manage areas"
 
-#: Application/config/module.config.php:1444
+#: Application/config/module.config.php:1449
 msgid "Aree d'allarme"
 msgstr "Alarm areas"
 
-#: Application/config/module.config.php:1451
+#: Application/config/module.config.php:1456
 msgid "Statistiche"
 msgstr "Stats"
 
-#: Application/config/module.config.php:1458
+#: Application/config/module.config.php:1463
 msgid "Call center"
 msgstr "Call center"
 
-#: Application/config/module.config.php:1465
+#: Application/config/module.config.php:1470
 msgid "Mappa Allarmi"
 msgstr "Alarm map"
 
@@ -286,7 +286,7 @@ msgstr ""
 
 #: Application/src/Application/Controller/PaymentsController.php:274
 msgid "C'è stato un errore durante la procedura di pagamento: "
-msgstr "An error occurred during the payment process: "
+msgstr "An error occurred while processing the payment: "
 
 #: Application/src/Application/Controller/PaymentsController.php:324
 msgid "Tariffa creata con successo!"
@@ -355,45 +355,77 @@ msgstr "User successfully created!"
 msgid "Utente modificato con successo!"
 msgstr "User successfully edited!"
 
-#: Application/src/Application/Form/CarFieldset.php:91
+#: Application/src/Application/Form/CarFieldset.php:92
 msgid "Attivo"
 msgstr "Active"
 
-#: Application/src/Application/Form/CarFieldset.php:92
+#: Application/src/Application/Form/CarFieldset.php:93
 msgid "Non Attivo"
 msgstr "Idle"
 
-#: Application/src/Application/Form/CsvUploadForm.php:51
+#: Application/src/Application/Form/CsvUploadForm.php:52
 msgid "Carica adesso"
 msgstr "Upload now"
 
-#: Application/src/Application/Form/CsvUploadForm.php:71
-#: Application/src/Application/Form/CsvUploadForm.php:83
+#: Application/src/Application/Form/CsvUploadForm.php:72
+#: Application/src/Application/Form/CsvUploadForm.php:84
 msgid ""
 "Il file caricato ha un formato non valido; sono accettati solo file in "
 "formato csv"
 msgstr "Wrong file uploaded; we can only process csv files"
 
-#: Application/src/Application/Form/CsvUploadForm.php:72
+#: Application/src/Application/Form/CsvUploadForm.php:73
 msgid "Non è stato possibile verificare il formato del file"
 msgstr "It was not possible to verify the file format"
 
-#: Application/src/Application/Form/CsvUploadForm.php:73
-#: Application/src/Application/Form/CsvUploadForm.php:84
+#: Application/src/Application/Form/CsvUploadForm.php:74
+#: Application/src/Application/Form/CsvUploadForm.php:85
 msgid "Il file caricato non è leggibile o non esiste"
 msgstr "Error while reading the uploaded file"
 
-#: Application/src/Application/Form/CustomerBonusFieldset.php:114
+#: Application/src/Application/Form/CustomerBonusFieldset.php:115
 msgid "La data di fine validità deve essere posteriore alla data di inizio"
 msgstr "The validity end date must be after the start date"
 
-#: Application/src/Application/Form/CustomerFieldset.php:59
+#: Application/src/Application/Form/CustomerFieldset.php:60
 msgid "Sig."
 msgstr "Mr."
 
-#: Application/src/Application/Form/CustomerFieldset.php:60
+#: Application/src/Application/Form/CustomerFieldset.php:61
 msgid "Sig.ra"
 msgstr "Mrs."
+
+#: Application/src/Application/Form/CustomerFieldset.php:198
+msgid "Italiano"
+msgstr "Italian"
+
+#: Application/src/Application/Form/CustomerFieldset.php:199
+msgid "tedesco"
+msgstr "German"
+
+#: Application/src/Application/Form/CustomerFieldset.php:200
+msgid "francese"
+msgstr "French"
+
+#: Application/src/Application/Form/CustomerFieldset.php:201
+msgid "spagnolo"
+msgstr "Spanish"
+
+#: Application/src/Application/Form/CustomerFieldset.php:202
+msgid "inglese"
+msgstr "English"
+
+#: Application/src/Application/Form/CustomerFieldset.php:203
+msgid "cinese"
+msgstr "Chinese"
+
+#: Application/src/Application/Form/CustomerFieldset.php:204
+msgid "russo"
+msgstr "russian"
+
+#: Application/src/Application/Form/CustomerFieldset.php:205
+msgid "portoghese"
+msgstr "Portuguese"
 
 #: Application/src/Application/Form/InputData/CloseTripDataFactory.php:36
 msgid "Impossibile trovare la corsa corretta"
@@ -419,26 +451,9 @@ msgstr "It it not possible to close a trip before its beginning"
 msgid "Per favore seleziona una opzione pagabile"
 msgstr "Please select a payable option"
 
-#: Application/src/Application/Form/PromoCodeFieldset.php:27
+#: Application/src/Application/Form/PromoCodeFieldset.php:28
 msgid "Codice promo"
 msgstr "Promo code"
-
-#: Application/src/Application/Form/SettingFieldset.php:59
-#: Application/src/Application/Form/SettingFieldset.php:74
-#: Application/src/Application/Form/SettingFieldset.php:89
-#: Application/src/Application/Form/SettingFieldset.php:104
-#: Application/src/Application/Form/SettingFieldset.php:119
-#: SharengoCore/src/SharengoCore/Service/CardsService.php:97
-#: SharengoCore/src/SharengoCore/Service/CardsService.php:99
-#: SharengoCore/src/SharengoCore/Service/ReservationsService.php:115
-#: SharengoCore/src/SharengoCore/Service/TripsService.php:176
-#: SharengoCore/src/SharengoCore/Service/TripsService.php:190
-#: SharengoCore/src/SharengoCore/Service/TripsService.php:201
-#: Application/view/application/customers/info-tab.phtml:295
-#: Application/view/application/customers/info-tab.phtml:308
-#: Application/view/application/trips/close-tab.phtml:25
-msgid "No"
-msgstr "No"
 
 #: Application/src/Application/Form/SettingFieldset.php:60
 #: Application/src/Application/Form/SettingFieldset.php:75
@@ -451,18 +466,47 @@ msgstr "No"
 #: SharengoCore/src/SharengoCore/Service/TripsService.php:176
 #: SharengoCore/src/SharengoCore/Service/TripsService.php:190
 #: SharengoCore/src/SharengoCore/Service/TripsService.php:201
+#: Application/view/application/customers/info-tab.phtml:295
+#: Application/view/application/customers/info-tab.phtml:308
+#: Application/view/application/trips/close-tab.phtml:25
+msgid "No"
+msgstr "No"
+
+#: Application/src/Application/Form/SettingFieldset.php:61
+#: Application/src/Application/Form/SettingFieldset.php:76
+#: Application/src/Application/Form/SettingFieldset.php:91
+#: Application/src/Application/Form/SettingFieldset.php:106
+#: Application/src/Application/Form/SettingFieldset.php:121
+#: SharengoCore/src/SharengoCore/Service/CardsService.php:97
+#: SharengoCore/src/SharengoCore/Service/CardsService.php:99
+#: SharengoCore/src/SharengoCore/Service/ReservationsService.php:115
+#: SharengoCore/src/SharengoCore/Service/TripsService.php:176
+#: SharengoCore/src/SharengoCore/Service/TripsService.php:190
+#: SharengoCore/src/SharengoCore/Service/TripsService.php:201
 #: Application/view/application/customers/info-tab.phtml:293
 #: Application/view/application/customers/info-tab.phtml:306
 msgid "Si"
 msgstr "Yes"
 
-#: Application/src/Application/Form/TripCostFieldset.php:65
+#: Application/src/Application/Form/TripCostFieldset.php:66
 msgid "Maschio"
 msgstr "Male"
 
-#: Application/src/Application/Form/TripCostFieldset.php:66
+#: Application/src/Application/Form/TripCostFieldset.php:67
 msgid "Femmina"
 msgstr "Female"
+
+#: Application/src/Application/View/Helper/CarStatus.php:23
+msgid "Operativa"
+msgstr "Operational"
+
+#: Application/src/Application/View/Helper/CarStatus.php:27
+msgid "In manutenzione"
+msgstr "Maintenence"
+
+#: Application/src/Application/View/Helper/CarStatus.php:31
+msgid "Non operativa"
+msgstr "Not operative"
 
 #: SharengoCore/src/SharengoCore/Service/CardsService.php:70
 #, php-format
@@ -533,6 +577,7 @@ msgstr "Back to the list"
 #: Application/view/application/cars/index.phtml:84
 #: Application/view/application/reservations/index.phtml:35
 #: Application/view/application/reservations/index.phtml:70
+#: Application/view/application/trips-not-payed/list.phtml:32
 #: Application/view/application/trips/index.phtml:39
 #: Application/view/application/trips/index.phtml:93
 #: Application/view/application/trips/info-tab.phtml:73
@@ -625,6 +670,7 @@ msgstr "EDIT CAR: "
 #: Application/view/application/cars/edit.phtml:24
 #: Application/view/application/customers/edit.phtml:36
 #: Application/view/application/users/index.phtml:51
+#: Application/view/partials/translations.phtml:4
 msgid "Modifica"
 msgstr "Edit"
 
@@ -808,6 +854,7 @@ msgid "Elenco pagamenti falliti"
 msgstr "Payment failures list"
 
 #: Application/view/application/customer-failure/failure-tab.phtml:20
+#: Application/view/application/trips-not-payed/list.phtml:29
 #: Application/view/application/trips/index.phtml:87
 msgid "Id Corsa"
 msgstr "Trip id"
@@ -816,6 +863,7 @@ msgstr "Trip id"
 #: Application/view/application/payments-csv/details.phtml:65
 #: Application/view/application/payments-csv/details.phtml:105
 #: Application/view/application/trips/cost-tab.phtml:192
+#: Application/view/partials/translations.phtml:76
 msgid "Importo"
 msgstr "Amount"
 
@@ -1369,7 +1417,7 @@ msgstr "Invoice N°"
 
 #: Application/view/application/customers/invoices-tab.phtml:31
 #: Application/view/application/invoices/index.phtml:45
-#: Application/view/partials/translations.phtml:57
+#: Application/view/partials/translations.phtml:56
 msgid "Iscrizione"
 msgstr "Sign up"
 
@@ -1382,7 +1430,7 @@ msgstr "Trip"
 
 #: Application/view/application/customers/invoices-tab.phtml:33
 #: Application/view/application/invoices/index.phtml:47
-#: Application/view/partials/translations.phtml:59
+#: Application/view/partials/translations.phtml:58
 msgid "Sanzione"
 msgstr "Penalty"
 
@@ -1413,6 +1461,7 @@ msgid "Elenco card"
 msgstr "Card list"
 
 #: Application/view/application/customers/list-card.phtml:49
+#: Application/view/application/trips-not-payed/list.phtml:31
 #: Application/view/application/trips/index.phtml:38
 #: Application/view/application/trips/index.phtml:92
 msgid "RFID"
@@ -1552,7 +1601,7 @@ msgid "File patente"
 msgstr "Driving license file"
 
 #: Application/view/application/foreign-drivers-license/uploaded-files.phtml:78
-#: Application/view/partials/translations.phtml:71
+#: Application/view/partials/translations.phtml:70
 msgid "Valida"
 msgstr "Validate"
 
@@ -1609,7 +1658,7 @@ msgstr "File"
 
 #: Application/view/application/payments-csv/csv.phtml:139
 #: Application/view/application/payments-csv/csv.phtml:168
-#: Application/view/partials/translations.phtml:69
+#: Application/view/partials/translations.phtml:68
 msgid "Dettagli"
 msgstr "Details"
 
@@ -1640,6 +1689,7 @@ msgstr "Number"
 
 #: Application/view/application/payments-csv/details.phtml:47
 #: Application/view/application/reservations/index.phtml:71
+#: Application/view/application/trips-not-payed/list.phtml:30
 msgid "Cliente"
 msgstr "Customer"
 
@@ -1739,6 +1789,7 @@ msgstr "Discount"
 
 #: Application/view/application/payments/failed-payments.phtml:73
 #: Application/view/application/payments/retry.phtml:122
+#: Application/view/application/trips-not-payed/list.phtml:39
 #: Application/view/application/trips/details.phtml:33
 #: Application/view/application/trips/index.phtml:103
 #: Application/view/application/zones/prices-tab.phtml:9
@@ -1780,6 +1831,14 @@ msgstr "Weekly summary"
 #: Application/view/application/payments/recap.phtml:26
 msgid "Riepilogo mensile"
 msgstr "Monthly summary"
+
+#: Application/view/application/payments/recap.phtml:55
+#: Application/view/application/payments/recap.phtml:91
+#: Application/view/application/payments/recap.phtml:126
+#: Application/view/application/trips/cost-tab.phtml:52
+#: Application/view/application/trips/info-tab.phtml:110
+msgid "n.d."
+msgstr "n.a."
 
 #: Application/view/application/payments/retry.phtml:19
 msgid "RITENTA PAGAMENTO"
@@ -1899,6 +1958,50 @@ msgstr "Reservations list"
 msgid "ID"
 msgstr "ID"
 
+#: Application/view/application/trips-not-payed/list.phtml:14
+msgid "CORSE NON PAGATE"
+msgstr "UNPAID TRIPS"
+
+#: Application/view/application/trips-not-payed/list.phtml:33
+#: Application/view/application/trips/index.phtml:94
+#: Application/view/application/trips/info-tab.phtml:88
+msgid "Km Inizio"
+msgstr "Start KM"
+
+#: Application/view/application/trips-not-payed/list.phtml:34
+#: Application/view/application/trips/index.phtml:95
+#: Application/view/application/trips/info-tab.phtml:94
+msgid "Km Fine"
+msgstr "End KM"
+
+#: Application/view/application/trips-not-payed/list.phtml:35
+#: Application/view/application/trips/cost-tab.phtml:45
+#: Application/view/application/trips/index.phtml:96
+#: Application/view/application/trips/info-tab.phtml:103
+#: Application/view/partials/translations.phtml:23
+msgid "Inizio"
+msgstr "Start"
+
+#: Application/view/application/trips-not-payed/list.phtml:36
+#: Application/view/application/trips/index.phtml:97
+#: Application/view/application/trips/info-tab.phtml:109
+#: Application/view/partials/translations.phtml:26
+msgid "Fine"
+msgstr "End"
+
+#: Application/view/application/trips-not-payed/list.phtml:37
+#: Application/view/application/trips/cost-tab.phtml:57
+#: Application/view/application/trips/index.phtml:98
+#: Application/view/application/trips/info-tab.phtml:115
+msgid "Durata"
+msgstr "Duration"
+
+#: Application/view/application/trips-not-payed/list.phtml:38
+#: Application/view/application/trips/index.phtml:99
+#: Application/view/application/trips/info-tab.phtml:124
+msgid "Sosta"
+msgstr "Stop"
+
 #: Application/view/application/trips/close-tab.phtml:6
 #: Application/view/application/trips/close-tab.phtml:33
 #: Application/view/application/trips/details.phtml:36
@@ -1917,19 +2020,6 @@ msgstr "Yes"
 #: Application/view/application/trips/info-tab.phtml:34
 msgid "Dettagli Corsa"
 msgstr "Trip details"
-
-#: Application/view/application/trips/cost-tab.phtml:45
-#: Application/view/application/trips/index.phtml:96
-#: Application/view/application/trips/info-tab.phtml:103
-#: Application/view/partials/translations.phtml:23
-msgid "Inizio"
-msgstr "Start"
-
-#: Application/view/application/trips/cost-tab.phtml:57
-#: Application/view/application/trips/index.phtml:98
-#: Application/view/application/trips/info-tab.phtml:115
-msgid "Durata"
-msgstr "Duration"
 
 #: Application/view/application/trips/cost-tab.phtml:58
 #: Application/view/application/trips/info-tab.phtml:116
@@ -2054,27 +2144,6 @@ msgstr "Trips list"
 #: Application/view/application/trips/index.phtml:88
 msgid "eMail"
 msgstr "eMail"
-
-#: Application/view/application/trips/index.phtml:94
-#: Application/view/application/trips/info-tab.phtml:88
-msgid "Km Inizio"
-msgstr "Start KM"
-
-#: Application/view/application/trips/index.phtml:95
-#: Application/view/application/trips/info-tab.phtml:94
-msgid "Km Fine"
-msgstr "End KM"
-
-#: Application/view/application/trips/index.phtml:97
-#: Application/view/application/trips/info-tab.phtml:109
-#: Application/view/partials/translations.phtml:26
-msgid "Fine"
-msgstr "End"
-
-#: Application/view/application/trips/index.phtml:99
-#: Application/view/application/trips/info-tab.phtml:124
-msgid "Sosta"
-msgstr "Stop"
 
 #: Application/view/application/trips/index.phtml:100
 #: Application/view/application/trips/info-tab.phtml:130
@@ -2484,51 +2553,59 @@ msgstr "Please insert a valid causal"
 msgid "Inserire un importo valido in euro"
 msgstr "Please insert a valid amount in Euros"
 
-#: Application/view/partials/translations.phtml:49
+#: Application/view/partials/translations.phtml:48
 msgid "Confermi il pagamento al cliente"
 msgstr "Confirm the payment to the client"
 
-#: Application/view/partials/translations.phtml:50
+#: Application/view/partials/translations.phtml:49
 msgid "di un importo di"
 msgstr "of an amount of"
 
+#: Application/view/partials/translations.phtml:51
 #: Application/view/partials/translations.phtml:52
-#: Application/view/partials/translations.phtml:53
 msgid "Visualizza corsa ID"
 msgstr "Show trip ID"
 
-#: Application/view/partials/translations.phtml:54
-#: Application/view/partials/translations.phtml:56
+#: Application/view/partials/translations.phtml:53
+#: Application/view/partials/translations.phtml:55
 msgid "Prosegui"
 msgstr "Continue"
 
-#: Application/view/partials/translations.phtml:60
+#: Application/view/partials/translations.phtml:59
 msgid "Pacchetto bonus"
 msgstr "Bonus pack"
 
-#: Application/view/partials/translations.phtml:62
+#: Application/view/partials/translations.phtml:61
 msgid "Confermi l\\'eliminazione del poi? L\\'operazione non è annullabile"
 msgstr "Do you really want to delete the POI? This can\\'t be undone."
 
-#: Application/view/partials/translations.phtml:64
+#: Application/view/partials/translations.phtml:63
 msgid "Visualizza auto targata"
 msgstr "Show car with plate"
 
-#: Application/view/partials/translations.phtml:65
+#: Application/view/partials/translations.phtml:64
 msgid "Visualizza profilo di"
 msgstr "Show profile of"
 
-#: Application/view/partials/translations.phtml:67
+#: Application/view/partials/translations.phtml:66
 msgid "i campi \"Inizio corsa\" e \"Fine corsa\" devono essere compilati"
 msgstr "the fields \"trip start\" and \"trip end\" must be filled."
 
-#: Application/view/partials/translations.phtml:72
+#: Application/view/partials/translations.phtml:71
 msgid "Scarica"
 msgstr "Download"
 
-#: Application/view/partials/translations.phtml:73
+#: Application/view/partials/translations.phtml:72
 msgid "Confermare la validazione?"
 msgstr "Confirm validation?"
+
+#: Application/view/partials/translations.phtml:74
+msgid "Penale"
+msgstr "Penalty"
+
+#: Application/view/partials/translations.phtml:75
+msgid "Causale"
+msgstr "Cause"
 
 #: sharengo-cartasi/view/cartasi/cartasi-payments/rejected-first-payment.phtml:10
 msgid "Pagamento annullato o rifutato"
@@ -2561,9 +2638,3 @@ msgstr "The error message received is: \""
 #: sharengo-cartasi/view/cartasi/cartasi-payments/return-first-payment.phtml:25
 msgid "Contattare l'assistenza per maggiori informazioni"
 msgstr "Please contact support for further informations"
-
-#~ msgid "Operativa"
-#~ msgstr "Operational"
-
-#~ msgid "In manutenzione"
-#~ msgstr "Maintenence"

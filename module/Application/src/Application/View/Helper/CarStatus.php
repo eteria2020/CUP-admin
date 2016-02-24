@@ -20,15 +20,15 @@ class CarStatus extends AbstractHelper
         switch ($status) {
 
             case CarStatusUtility::OPERATIVE:
-                $label = 'Operativa';
+                $label = $this->getView()->translate('Operativa');;
                 break;
 
             case CarStatusUtility::MAINTENANCE:
-                $label = 'In manutenzione';
+                $label = $this->getView()->translate('In manutenzione');
                 break;
 
             case CarStatusUtility::OUT_OF_ORDER:
-                $label ='Non operativa';
+                $label =  $this->getView()->translate('Non operativa');
                 break;
         }
 

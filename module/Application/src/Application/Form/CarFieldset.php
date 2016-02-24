@@ -5,6 +5,7 @@ use SharengoCore\Entity\Cars;
 use SharengoCore\Service\CarsService;
 use Zend\Form\Fieldset;
 use Zend\InputFilter\InputFilterProviderInterface;
+use Zend\Mvc\I18n\Translator;
 use Zend\Stdlib\Hydrator\HydratorInterface;
 
 /**
@@ -19,7 +20,7 @@ class CarFieldset extends Fieldset implements InputFilterProviderInterface
      * @param string $name
      * @param array  $options
      */
-    public function __construct(CarsService $carsService, HydratorInterface $hydrator, $translator)
+    public function __construct(CarsService $carsService, HydratorInterface $hydrator, Translator $translator)
     {
         $this->carsService = $carsService;
 

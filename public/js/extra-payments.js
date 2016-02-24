@@ -224,7 +224,7 @@ function addPaymentRow(isPenalty)
     var penaltyContent = "<!-- PENALTY SELECTOR -->" +
         "<div id=\"penaltyRow\" class=\"row\">" +
             "<div class=\"col-lg-12\">" +
-                "<label>Penale</label>" +
+                "<label>" + translate("penalty") + "</label>" +
                 "<select id=\"penalty" + blockNumber + "\" class=\"form-control\">" +
                     penaltyOptions +
                 "</select>" +
@@ -235,7 +235,7 @@ function addPaymentRow(isPenalty)
     var reasonContent = "<!-- REASON INPUT -->" +
         "<div class=\"row sng-margin-top\">" +
             "<div class=\"col-lg-12\">" +
-                "<label>Causale</label>" +
+                "<label>" + translate("cause") + "</label>" +
                 "<input id=\"reason" + blockNumber + "\" class=\"form-control\" type=\"text\"></input>" +
             "</div>" +
         "</div>";
@@ -244,7 +244,7 @@ function addPaymentRow(isPenalty)
     var amountContent = "<!-- AMOUNT INPUT -->" +
         "<div class=\"row sng-margin-top\">" +
             "<div class=\"col-lg-4\">" +
-                "<label>Importo (&euro;)</label>" +
+                "<label>" + translate("amount") + " (&euro;)</label>" +
                 "<input id=\"amount" + blockNumber + "\" class=\"form-control\" type=\"text\"></input>" +
             "</div>" +
         "</div>";

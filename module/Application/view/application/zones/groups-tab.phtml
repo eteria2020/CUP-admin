@@ -17,7 +17,7 @@
                 <tr>
                     <td><?= $zone->getId(); ?></td>
                     <td><?= $zone->getDescription(); ?></td>
-                    <td><?= ($zone->getCloseTrip() ? 'si' : 'no') ?></td>
+                    <td><?= ($zone->getCloseTrip() ? $this->translate("si") : $this->translate("no")) ?></td>
                     <td><?= $zone->getZonesListText(); ?></td>
                 </tr>
             <?php endforeach; ?>

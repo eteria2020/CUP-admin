@@ -9,6 +9,7 @@ use SharengoCore\Service\AuthorityService;
 
 use Zend\Form\Fieldset;
 use Zend\InputFilter\InputFilterProviderInterface;
+use Zend\Mvc\I18n\Translator;
 use Zend\Stdlib\Hydrator\HydratorInterface;
 
 /**
@@ -21,7 +22,7 @@ class SettingFieldset extends Fieldset implements InputFilterProviderInterface
      * @param string $name
      * @param array  $options
      */
-    public function __construct(HydratorInterface $hydrator, $translator) {
+    public function __construct(HydratorInterface $hydrator, Translator $translator) {
 
         parent::__construct('setting', [
             'use_as_base_fieldset' => true

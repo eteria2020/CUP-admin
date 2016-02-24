@@ -1139,6 +1139,11 @@ return [
                 'type' => 'gettext',
                 'base_dir' => __DIR__ . '/../language',
                 'pattern' => '%s.mo'
+            ],
+            [
+                'type' => 'phparray',
+                'base_dir' => __DIR__. '/../language/validator',
+                'pattern' => '%s.php'
             ]
         ]
     ],

@@ -107,7 +107,7 @@ if ($tripPayment !== null) {
                     <div class="col-lg-4">
                         <div class="form-group">
                             <label><?php echo $this->translate("Fine"); ?></label>
-                            <div class="sng-info-box"><?= (null != $trip->getTimestampEnd() ? $trip->getTimestampEnd()->format('d-m-Y H:i:s') : 'n.d.') ?></div>
+                            <div class="sng-info-box"><?= (null != $trip->getTimestampEnd() ? $trip->getTimestampEnd()->format('d-m-Y H:i:s') : $this->translate('n.d.')) ?></div>
                         </div>
                     </div>
                     <div class="col-lg-4">

@@ -55,6 +55,14 @@ class Module
         $eventManager->attach($strategy);
 
         $translator     = $serviceManager->get('translator');
+        $translator->addTranslationFile(
+            'phpArray',
+            'vendor/zendframework/zendframework/resources/languages/it/Zend_Validate.php',
+            'default',
+            'it_IT'
+        );
+
+
         AbstractValidator::setDefaultTranslator($translator);
 
         // Add ACL information to Navigation view helper

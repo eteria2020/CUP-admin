@@ -59,8 +59,8 @@ $(function() {
                 sortable: false,
                 render: function (data) {
                     return '<div class="btn-group">' +
-                        '<a href="/configurations/manage-pois/edit/' + data + '" class="btn btn-default">Modifica</a> ' +
-                        '<a href="/configurations/manage-pois/delete/' + data + '" class="btn btn-default js-delete">Elimina</a>' +
+                        '<a href="/configurations/manage-pois/edit/' + data + '" class="btn btn-default">'+ translate("modify")+'</a> ' +
+                        '<a href="/configurations/manage-pois/delete/' + data + '" class="btn btn-default js-delete">'+translate("delete")+'</a>' +
                         '</div>';
                 }
             }

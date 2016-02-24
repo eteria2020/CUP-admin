@@ -7,6 +7,7 @@ use Zend\Form\Element;
 use Zend\Form\Form;
 use Zend\InputFilter\InputFilter;
 use Zend\InputFilter\Factory as InputFactory;
+use Zend\Mvc\I18n\Translator;
 use Zend\Validator\File\MimeType;
 use Zend\Validator\File\Extension;
 
@@ -18,7 +19,7 @@ class CsvUploadForm extends Form
      */
 
     private $translator;
-    public function __construct($translator,$name = null, array $options = [])
+    public function __construct(Translator $translator,$name = null, array $options = [])
     {
         parent::__construct($name, $options);
         $this->translator = $translator;

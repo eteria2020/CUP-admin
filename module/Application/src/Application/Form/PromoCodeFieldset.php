@@ -6,12 +6,13 @@ use SharengoCore\Service\PromoCodesService;
 
 use Zend\Form\Fieldset;
 use Zend\InputFilter\InputFilterProviderInterface;
+use Zend\Mvc\I18n\Translator;
 
 class PromoCodeFieldset extends Fieldset implements InputFilterProviderInterface
 {
     private $promoCodesService;
 
-    public function __construct(PromoCodesService $promoCodesService, $translator) {
+    public function __construct(PromoCodesService $promoCodesService, Translator $translator) {
         $this->promoCodesService = $promoCodesService;
 
         parent::__construct('promocode', [

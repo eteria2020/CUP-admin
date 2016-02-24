@@ -3,6 +3,7 @@
 namespace Application\Form;
 
 use SharengoCore\Entity\CustomersBonus;
+use Zend\Mvc\I18n\Translator;
 use Zend\Stdlib\Hydrator\HydratorInterface;
 
 use Zend\Form\Fieldset;
@@ -12,7 +13,7 @@ class CustomerBonusFieldset extends Fieldset implements InputFilterProviderInter
 {
 
     private $translator;
-    public function __construct(HydratorInterface $hydrator, $translator)
+    public function __construct(HydratorInterface $hydrator, Translator $translator)
     {
         parent::__construct('customer-bonus', [
             'use_as_base_fieldset' => true

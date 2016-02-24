@@ -20,7 +20,6 @@ class PoiForm extends Form
                 'value' => 'Submit'
             ]
         ]);
-
     }
 
     /**

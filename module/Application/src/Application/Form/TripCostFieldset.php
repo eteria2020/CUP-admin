@@ -4,10 +4,11 @@ namespace Application\Form;
 
 use Zend\Form\Fieldset;
 use Zend\InputFilter\InputFilterProviderInterface;
+use Zend\Mvc\I18n\Translator;
 
 class TripCostFieldset extends Fieldset
 {
-    public function __construct($translator)
+    public function __construct(Translator $translator)
     {
         parent::__construct('tripCost', [
             'use_as_base_fieldset' => true
