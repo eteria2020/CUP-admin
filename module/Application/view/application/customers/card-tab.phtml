@@ -3,31 +3,31 @@
             <div id="js-with-code" style="<?= is_object($this->customer->getCard()) ? '' : 'display: none;'; ?>">
                 <div class="row">
                     <div class="col-lg-5">
-                        <h1>Codice Card: <span id="js-code"><?= is_object($this->customer->getCard()) ? $this->customer->getCard()->getCode() : ''; ?></span></h1>
+                        <h1><?= $this->translate("Codice Card:"); ?> <span id="js-code"><?= is_object($this->customer->getCard()) ? $this->customer->getCard()->getCode() : ''; ?></span></h1>
                     </div>
                     <div class="col-lg-7" style="margin-top: 20px;">
-                        <a href="javascript:void(0);" id="js-remove-card" data-id="<?= $this->customer->getId(); ?>" class="btn btn-danger"><i class="fa fa-remove"></i> Rimuovi Card</i></a>
+                        <a href="javascript:void(0);" id="js-remove-card" data-id="<?= $this->customer->getId(); ?>" class="btn btn-danger"><i class="fa fa-remove"></i> <?= $this->translate("Rimuovi Card"); ?></i></a>
                     </div>
                 </div>
             </div>
             <div id="js-no-code" style="<?= !is_object($this->customer->getCard()) ? '' : 'display: none;'; ?>">
                 <div class="col-lg-6">
                     <a href="<?= $this->url('customers/list-card/add', [], ['query' => ['customer' => $this->customer->getId()]]); ?>" class="btn btn-sm btn-success pull-left">
-                        <i class="fa fa-plus"></i> Aggiungi Card
+                        <i class="fa fa-plus"></i> <?= $this->translate("Aggiungi Card"); ?>
                     </a>
                     <br />
                     <div class="alert alert-info" style="margin-top: 20px;">
-                        Nessun codice card assegnato per questo utente.
+                        <?= $this->translate("Nessun codice card assegnato per questo utente."); ?>
                     </div>
                 </div>
                 <div class="col-lg-6">
                     <div class="col-lg-8">
-                        <label>Cerca per Codice Card o Rfid</label>
-                        <input id="typeahead-input" type="text" maxlength="10" class="form-control input-lg" placeholder="Aggiungi Card..." autocomplete="off" style="font-size: 16px;" />
-                        <div class="alert alert-info" id="js-no-results" style="display: none;">Nessuna card corrisponde al codice inserito</div>
+                        <label><?= $this->translate("Cerca per Codice Card o Rfid"); ?></label>
+                        <input id="typeahead-input" type="text" maxlength="10" class="form-control input-lg" placeholder="<?= $this->translate("Aggiungi Card..."); ?>" autocomplete="off" style="font-size: 16px;" />
+                        <div class="alert alert-info" id="js-no-results" style="display: none;"><?= $this->translate("Nessuna card corrisponde al codice inserito"); ?></div>
                     </div>
                     <div class="col-lg-4">
-                        <a href="javascript:void(0);" id="js-assign-card" data-code="" data-id="<?= $this->customer->getId(); ?>" class="btn btn-success" style="display: none; margin-top: 28px;"><i class="fa fa-plus"></i> Salva Codice</i></a>
+                        <a href="javascript:void(0);" id="js-assign-card" data-code="" data-id="<?= $this->customer->getId(); ?>" class="btn btn-success" style="display: none; margin-top: 28px;"><i class="fa fa-plus"></i> <?= $this->translate("Salva Codice"); ?></i></a>
                     </div>
                 </div>
             </div>

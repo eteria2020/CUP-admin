@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "ccc08ea123f1698dc3b57492a1e29cd1",
-    "content-hash": "c9859a89125d709d7928d26a251c1827",
+    "hash": "589386d931cc8479b16ce4fb4b0f9cb7",
+    "content-hash": "2fb52635465c715627ae338f0d83ccbd",
     "packages": [
         {
             "name": "bjyoungblood/bjy-authorize",
@@ -1419,6 +1419,43 @@
             },
             "description": "Core ZF2 module for Sharengo apps",
             "time": "2016-02-23 08:45:51"
+        },
+        {
+            "name": "mvlabs/zf2-multilanguage",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "ssh://git@git.mvlabs.it:4222/internals/zf2-multilanguage.git",
+                "reference": "684ff8790cd9b8437d92a9d428be3c225a3f8bbb"
+            },
+            "require": {
+                "php": ">=5.4"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "MvLabsMultilanguage\\": "src/"
+                },
+                "classmap": [
+                    "./Module.php"
+                ]
+            },
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Marco Perone",
+                    "email": "m.perone@mvlabs.it"
+                }
+            ],
+            "description": "MVLabs multilanguage module for ZF2",
+            "keywords": [
+                "internationalization",
+                "multilanguage",
+                "zf2"
+            ],
+            "time": "2015-12-09 09:54:47"
         },
         {
             "name": "natxet/CssMin",
@@ -2886,7 +2923,8 @@
     "minimum-stability": "stable",
     "stability-flags": {
         "mvlabs/sharengo-coremodule": 20,
-        "mvlabs/sharengo-cartasi": 20
+        "mvlabs/sharengo-cartasi": 20,
+        "mvlabs/zf2-multilanguage": 20
     },
     "prefer-stable": false,
     "prefer-lowest": false,

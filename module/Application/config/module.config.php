@@ -8,7 +8,7 @@ namespace Application;
  * @copyright Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
-
+$translator = new \Zend\I18n\Translator\Translator;
 return [
     'router' => [
         'routes' => [
@@ -1090,7 +1090,10 @@ return [
             'TripCostForm' => 'Application\Form\TripCostFormFactory',
             'FaresForm' => 'Application\Form\FaresFormFactory',
             'EditTripForm' => 'Application\Form\EditTripFormFactory',
-            'ConfigurationsForm' => 'Application\Form\ConfigurationsFormFactory'
+            'ConfigurationsForm' => 'Application\Form\ConfigurationsFormFactory',
+            'UserLanguageService' => 'Application\Service\UserLanguageServiceFactory',
+            'ChangeLanguageDetector.listener' => 'Application\Listener\ChangeLanguageDetectorFactory',
+
         ]
     ],
     'controllers' => [
@@ -1119,21 +1122,52 @@ return [
             'Application\Controller\TripsNotPayed' => 'Application\Controller\TripsNotPayedControllerFactory'
         ]
     ],
+    'controller_plugins' => [
+        'factories' => [
+            'TranslatorPlugin' => 'Application\Controller\Plugin\TranslatorPluginFactory'
+        ]
+    ],
     'input_filters' => [
         'invokables' => [
             'close-trip' => 'Application\Form\InputFilter\CloseTripFilter'
         ]
     ],
     'translator' => [
-        'locale' => 'it',
+        'locale' => 'it_IT',
         'translation_file_patterns' => [
             [
-                'type' => 'phpArray',
-                'base_dir' => 'vendor/zendframework/zendframework/resources/languages',
-                'pattern' => '%s/Zend_Validate.php',
-                'text_domain' => 'zend_validate',
+                'type' => 'gettext',
+                'base_dir' => __DIR__ . '/../language',
+                'pattern' => '%s.mo'
+            ],
+            [
+                'type' => 'phparray',
+                'base_dir' => __DIR__. '/../language/validator',
+                'pattern' => '%s.php'
+            ]
+        ]
+    ],
+    'translation_config' => [
+        'languages' => [
+            'it' => [
+                "locale" => "it_IT",
+                "lang" => "it",
+                "lang_3chars" => "ita",
+                "label" => "Italiano"
+            ],
+            'en' => [
+                "locale" => "en_US",
+                "lang" => "en",
+                "lang_3chars" => "eng",
+                "label" => "English"
             ]
         ],
+        "language_folder" => __DIR__ . "/../language"
+    ],
+    'language_detector_listeners' => [
+        'invokables' => [
+            'LanguageFromSessionDetectorListener' => 'Application\Listener\LanguageFromSessionDetectorListener'
+        ]
     ],
     'view_manager' => [
         'display_not_found_reason' => true,
@@ -1229,34 +1263,30 @@ return [
     ],
 
     // navigation
+
     'navigation' => [
         'default' => [
             [
-                'label'     => 'Clienti',
+                'label'     => $translator->translate('Clienti'),
                 'route'     => 'customers',
                 'icon'      => 'fa fa-users',
                 'resource'  => 'admin',
                 'isRouteJs' => true,
                 'pages'     => [
                     [
-                        'label' => 'Elenco',
+                        'label' => $translator->translate('Elenco'),
                         'route' => 'customers',
                         'isVisible' => true
                     ],
                     [
-                        'label' => 'Card',
+                        'label' => $translator->translate('Card'),
                         'route' => 'customers/list-card',
                         'isVisible' => true
                     ],
                     [
-                        'label' => 'Patenti estere',
+                        'label' => $translator->translate('Patenti estere'),
                         'route' => 'customers/foreign-drivers-license',
                         'isVisible' => true
-                    ],
-                    [
-                        'label' => 'Card',
-                        'route' => 'customers/list-card/add',
-                        'isVisible' => false
                     ],
                     [
                         'route' => 'customers/edit',
@@ -1273,14 +1303,14 @@ return [
                 ],
             ],
             [
-                'label'     => 'Auto',
+                'label'     => $translator->translate('Auto'),
                 'route'     => 'cars',
                 'icon'      => 'fa fa-car',
                 'resource'  => 'admin',
                 'isRouteJs' => true,
                 'pages'     => [
                     [
-                        'label' => 'Elenco',
+                        'label' => $translator->translate('Elenco'),
                         'route' => 'cars',
                         'isVisible' => true
                     ],
@@ -1299,145 +1329,145 @@ return [
                 ],
             ],
             [
-                'label'     => 'Corse',
+                'label'     => $translator->translate('Corse'),
                 'route'     => 'trips',
                 'icon'      => 'fa fa-road',
                 'resource'  => 'admin',
                 'isRouteJs' => true,
                 'pages'     => [
                     [
-                        'label' => 'Elenco',
+                        'label' => $translator->translate('Elenco'),
                         'route' => 'trips',
                         'isVisible' => true
                     ],
                     [
-                        'label' => 'Costo corsa',
+                        'label' => $translator->translate('Costo corsa'),
                         'route' => 'trips/cost',
                         'isVisible' => true
                     ],
                     [
-                        'label' => 'Corse non pagate',
+                        'label' => $translator->translate('Corse non pagate'),
                         'route' => 'trips/not-payed',
                         'isVisible' => true
                     ]
                 ],
             ],
             [
-                'label'     => 'Prenotazioni',
+                'label'     => $translator->translate('Prenotazioni'),
                 'route'     => 'reservations',
                 'icon'      => 'fa fa-calendar',
                 'resource'  => 'admin',
                 'isRouteJs' => true,
                 'pages'     => [
                     [
-                        'label' => 'Elenco',
+                        'label' => $translator->translate('Elenco'),
                         'route' => 'reservations',
                         'isVisible' => true
                     ]
                 ],
             ],
             [
-                'label'     => 'Fatture',
+                'label'     => $translator->translate('Fatture'),
                 'route'     => 'invoices',
                 'icon'      => 'fa fa-file-o',
                 'resource'  => 'admin',
                 'isRouteJs' => true,
                 'pages'     => [
                     [
-                        'label' => 'Elenco',
+                        'label' => $translator->translate('Elenco'),
                         'route' => 'invoices',
                         'isVisible' => true
                     ]
                 ],
             ],
             [
-                'label' => 'Pagamenti',
+                'label' => $translator->translate('Pagamenti'),
                 'route' => 'payments',
                 'icon' => 'fa fa-money',
                 'resource' => 'admin',
                 'isRouteJs' => true,
                 'pages' => [
                     [
-                        'label' => 'Pagamenti falliti',
+                        'label' => $translator->translate('Pagamenti falliti'),
                         'route' => 'payments/failed-payments',
                         'isVisible' => true
                     ],
                     [
-                        'label' => 'Addebita penale/extra',
+                        'label' => $translator->translate('Addebita penale/extra'),
                         'route' => 'payments/extra',
                         'isVisible' => true
                     ],
                     [
-                        'label' => 'Competenze',
+                        'label' => $translator->translate('Competenze'),
                         'route' => 'payments/recap',
                         'isVisible' => true
                     ],
                     [
-                        'label' => 'Verifica CartaSI',
+                        'label' => $translator->translate('Verifica CartaSI'),
                         'route' => 'payments/csv',
                         'isVisible' => true
                     ]
                 ]
             ],
             [
-                'label' => 'Configurazione',
+                'label' => $translator->translate('Configurazione'),
                 'route' => 'configurations',
                 'icon' => 'fa fa-cog',
                 'resource' => 'superadmin',
                 'isRouteJs' => true,
                 'pages' => [
                     [
-                        'label' => 'Gestione soglie allarme',
+                        'label' => $translator->translate('Gestione soglie allarme'),
                         'route' => 'configurations/manage-alarm',
                         'isVisible' => true
                     ],
                     [
-                        'label' => 'Gestione POIS',
+                        'label' => $translator->translate('Gestione POIS'),
                         'route' => 'configurations/manage-pois',
                         'isVisible' => true
                     ],
                     [
-                        'label' => 'Tariffe',
+                        'label' => $translator->translate('Tariffe'),
                         'route' => 'payments/fares',
                         'isVisible' => true
                     ],
                 ]
             ],
             [
-                'label'           => 'Aree',
+                'label'           => $translator->translate('Aree'),
                 'route'           => 'zones',
                 'icon'            => 'fa fa-map-marker',
                 'resource'        => 'superadmin',
                 'isRouteJs'       => true,
                 'pages' => [
                     [
-                        'label' => 'Gestione aree',
+                        'label' => $translator->translate('Gestione aree'),
                         'route' => 'zones',
                         'isVisible' => true
                     ],
                     [
-                        'label' => 'Aree d\'allarme',
+                        'label' => $translator->translate('Aree d\'allarme'),
                         'route' => 'zones/zone-alarms',
                         'isVisible' => true
                     ]
                 ]
             ],
             [
-                'label'           => 'Statistiche',
+                'label'           => $translator->translate('Statistiche'),
                 'icon'            => 'fa fa-line-chart',
                 'resource'        => 'superadmin',
                 'openOnNewWindow' => true,
                 'route'           => 'reports',
             ],
             [
-                'label'           => 'Call center',
+                'label'           => $translator->translate('Call center'),
                 'route'           => 'call-center',
                 'icon'            => 'fa fa-map-marker',
                 'resource'        => 'callcenter',
                 'openOnNewWindow' => true,
             ],
             [
-                'label'           => 'Mappa Allarmi',
+                'label'           => $translator->translate('Mappa Allarmi'),
                 'route'           => 'alarms',
                 'icon'            => 'fa fa-map-marker',
                 'resource'        => 'callcenter',

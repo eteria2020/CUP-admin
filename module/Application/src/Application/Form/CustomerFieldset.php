@@ -9,6 +9,7 @@ use SharengoCore\Service\AuthorityService;
 
 use Zend\Form\Fieldset;
 use Zend\InputFilter\InputFilterProviderInterface;
+use Zend\Mvc\I18n\Translator;
 use Zend\Stdlib\Hydrator\HydratorInterface;
 
 /**
@@ -27,7 +28,8 @@ class CustomerFieldset extends Fieldset implements InputFilterProviderInterface
         CustomersService $customersService,
         CountriesService $countriesService,
         ProvincesService $provincesService,
-        HydratorInterface $hydrator
+        HydratorInterface $hydrator,
+        Translator $translator
     ) {
         $this->customersService = $customersService;
 
@@ -55,8 +57,8 @@ class CustomerFieldset extends Fieldset implements InputFilterProviderInterface
             ],
             'options'    => [
                 'value_options' => [
-                    'male'   => 'Sig.',
-                    'female' => 'Sig.ra'
+                    'male'   => $translator->translate('Sig.'),
+                    'female' => $translator->translate('Sig.ra')
                 ]
             ]
         ]);
@@ -193,14 +195,14 @@ class CustomerFieldset extends Fieldset implements InputFilterProviderInterface
             ],
             'options'    => [
                 'value_options' => [
-                    "it" => "Italiano",
-                    "de" => "tedesco",
-                    "fr" => "francese",
-                    "es" => "spagnolo",
-                    "en" => "inglese",
-                    "ch" => "cinese",
-                    "ru" => "russo",
-                    "pt" => "portoghese"
+                    "it" => $translator->translate("Italiano"),
+                    "de" => $translator->translate("tedesco"),
+                    "fr" => $translator->translate("francese"),
+                    "es" => $translator->translate("spagnolo"),
+                    "en" => $translator->translate("inglese"),
+                    "ch" => $translator->translate("cinese"),
+                    "ru" => $translator->translate("russo"),
+                    "pt" => $translator->translate("portoghese")
                 ]
             ]
         ]);

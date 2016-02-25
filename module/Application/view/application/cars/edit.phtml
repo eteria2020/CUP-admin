@@ -8,10 +8,10 @@ $this->headScript()
 
         <div class="row">
             <div class="col-lg-6">
-                <h3 class="page-title">MODIFICA AUTO: <?= $this->car->getPlate(); ?></h3>
+                <h3 class="page-title"><?= $this->translate("MODIFICA AUTO:"); ?> <?= $this->car->getPlate(); ?></h3>
             </div>
             <div class="col-lg-6">
-                <a href="<?php echo $this->url('cars'); ?>" class="btn btn-success pull-right"><i class="fa fa-arrow-left"></i> Torna alla lista</a>
+                <a href="<?php echo $this->url('cars'); ?>" class="btn btn-success pull-right"><i class="fa fa-arrow-left"></i> <?= $this->translate("Torna alla lista"); ?></a>
             </div>
         </div>
 
@@ -21,9 +21,9 @@ $this->headScript()
         <div class="row">
             <div class="col-md-12">
                 <ul class="nav nav-tabs" id="js-tabs" role="tablist">
-                    <li role="presentation" id="menu-edit"><a href="<?= $this->url('cars/ajax-tab-edit', ['plate' => $this->car->getPlate()]); ?>" data-target="#tab-edit" role="tab" data-toggle="tab">Modifica</a></li>
-                    <li role="presentation" id="menu-commands"><a href="<?= $this->url('cars/ajax-tab-commands', ['plate' => $this->car->getPlate()]); ?>" data-target="#tab-commands" role="tab" data-toggle="tab">Commandi</a></li>
-                    <li role="presentation" id="menu-damages"><a href="<?= $this->url('cars/ajax-tab-damages', ['plate' => $this->car->getPlate()]); ?>" data-target="#tab-damages" role="tab" data-toggle="tab">Gestione Danni</a></li>
+                    <li role="presentation" id="menu-edit"><a href="<?= $this->url('cars/ajax-tab-edit', ['plate' => $this->car->getPlate()]); ?>" data-target="#tab-edit" role="tab" data-toggle="tab"><?= $this->translate("Modifica"); ?></a></li>
+                    <li role="presentation" id="menu-commands"><a href="<?= $this->url('cars/ajax-tab-commands', ['plate' => $this->car->getPlate()]); ?>" data-target="#tab-commands" role="tab" data-toggle="tab"><?= $this->translate("Comandi"); ?></a></li>
+                    <li role="presentation" id="menu-damages"><a href="<?= $this->url('cars/ajax-tab-damages', ['plate' => $this->car->getPlate()]); ?>" data-target="#tab-damages" role="tab" data-toggle="tab"><?= $this->translate("Gestione Danni"); ?></a></li>
                 </ul>
 
                 <div class="tab-content" style="position: relative; min-height: 200px">

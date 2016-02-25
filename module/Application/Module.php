@@ -13,6 +13,7 @@ use Zend\Mvc\ModuleRouteListener;
 use Zend\Mvc\MvcEvent;
 use BjyAuthorize\View\RedirectionStrategy;
 use Doctrine\ORM\Mapping\Driver\XmlDriver;
+use Zend\Validator\AbstractValidator;
 
 class Module
 {
@@ -54,7 +55,15 @@ class Module
         $eventManager->attach($strategy);
 
         $translator     = $serviceManager->get('translator');
-        \Zend\Validator\AbstractValidator::setDefaultTranslator($translator, 'zend_validate');
+        $translator->addTranslationFile(
+            'phpArray',
+            'vendor/zendframework/zendframework/resources/languages/it/Zend_Validate.php',
+            'default',
+            'it_IT'
+        );
+
+
+        AbstractValidator::setDefaultTranslator($translator);
 
         // Add ACL information to Navigation view helper
         $authorize = $serviceManager->get('BjyAuthorize\Service\Authorize');
@@ -64,6 +73,10 @@ class Module
         } catch (\Doctrine\DBAL\DBALException $exception) {
             // database tables not yet initialized
         }
+
+
+
+        $eventManager->attachAggregate($serviceManager->get('ChangeLanguageDetector.listener'));
     }
 
     public function getConfig()
@@ -80,5 +93,17 @@ class Module
                 ),
             ),
         );
+    }
+
+    // View Helper Configuration
+    public function getViewHelperConfig()
+    {
+        return [
+            'invokables' => [],
+            'factories' => [
+                'languageManager' => 'Application\\View\\Helper\\LanguageManagerFactory'
+            ],
+        ];
+
     }
 }

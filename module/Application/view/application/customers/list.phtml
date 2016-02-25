@@ -11,7 +11,7 @@ $this->headScript()
 
         <!-- BEGIN PAGE HEADER-->
         <h3 class="page-title">
-            ELENCO CLIENTI <small>ricerca</small>
+            <?= $this->translate("ELENCO CLIENTI"); ?> <small><?= $this->translate("ricerca"); ?></small>
         </h3>
 
         <div class="page-bar">
@@ -20,33 +20,33 @@ $this->headScript()
         <div class="row">
             <div class="col-md-12">
 
-                <?php echo $this->partial('partials/flash-messages.phtml', []); ?>
+                <?= $this->partial('partials/flash-messages.phtml', []); ?>
 
                 <div class="row">
                     <div class="col-md-8">
                         <div class="form-inline">
                             <div class="form-group">
                                 <select name="column" id="js-column" class="form-control">
-                                    <option value="select" selected>-- Seleziona --</option>
-                                    <option value="e.id">Id</option>
-                                    <option value="e.surname">Cognome</option>
-                                    <option value="e.taxCode">Codice Fiscale</option>
-                                    <option value="e.driverLicense">Patente</option>
-                                    <option value="e.phone">Cellulare</option>
-                                    <option value="e.town">Città</option>
-                                    <option value="cc.code">Codice Card</option>
-                                    <option value="e.email">Email</option>
+                                    <option value="select" selected>-- <?= $this->translate("Seleziona"); ?> --</option>
+                                    <option value="e.id"><?= $this->translate("Id"); ?></option>
+                                    <option value="e.surname"><?= $this->translate("Cognome"); ?></option>
+                                    <option value="e.taxCode"><?= $this->translate("Codice Fiscale"); ?></option>
+                                    <option value="e.driverLicense"><?= $this->translate("Patente"); ?></option>
+                                    <option value="e.phone"><?= $this->translate("Cellulare"); ?></option>
+                                    <option value="e.town"><?= $this->translate("Città"); ?></option>
+                                    <option value="cc.code"><?= $this->translate("Codice Card"); ?></option>
+                                    <option value="e.email"><?= $this->translate("Email"); ?></option>
                                 </select>
                             </div>
                             <div class="form-group">
-                                <input type="text" name="value" value="" class="form-control" id="js-value" placeholder="Filtra...">
+                                <input type="text" name="value" value="" class="form-control" id="js-value" placeholder="<?= $this->translate("Filtra..."); ?>">
                             </div>
                             <div class="btn-group">
-                                <button type="button" class="btn green js-search" id="js-search"><i class="fa fa-search"></i> Cerca</button>
+                                <button type="button" class="btn green js-search" id="js-search"><i class="fa fa-search"></i> <?= $this->translate("Cerca"); ?></button>
                                 <button type="button" class="btn green dropdown-toggle" data-toggle="dropdown"><i class="fa fa-angle-down"></i></button>
                                 <ul class="dropdown-menu" role="menu">
                                     <li>
-                                        <a href="javascript:void(0);" id="js-clear"><i class="fa fa-remove"></i> Pulisci Ricerca</a>
+                                        <a href="javascript:void(0);" id="js-clear"><i class="fa fa-remove"></i> <?= $this->translate("Pulisci Ricerca"); ?></a>
                                     </li>
                                 </ul>
                             </div>
@@ -62,7 +62,7 @@ $this->headScript()
                     <div class="portlet-title">
                         <div class="caption">
 
-                            Elenco clienti
+                            <?= $this->translate("Elenco clienti"); ?>
 
                         </div>
                     </div>
@@ -70,17 +70,17 @@ $this->headScript()
                         <table class="table table-striped table-bordered table-hover" id="js-customers-table">
                             <thead>
                             <tr>
-                                <th>Id</th>
-                                <th>Nome</th>
-                                <th>Cognome</th>
-                                <th>Cellulare</th>
-                                <th>Card</th>
-                                <th>Patente</th>
-                                <th>Scadenza Patente</th>
-                                <th>Email</th>
-                                <th>Codice Fiscale</th>
-                                <th>Registrazione</th>
-                                <th>Azioni</th>
+                                <th><?= $this->translate("Id"); ?></th>
+                                <th><?= $this->translate("Nome"); ?></th>
+                                <th><?= $this->translate("Cognome"); ?></th>
+                                <th><?= $this->translate("Cellulare"); ?></th>
+                                <th><?= $this->translate("Card"); ?></th>
+                                <th><?= $this->translate("Patente"); ?></th>
+                                <th><?= $this->translate("Scadenza Patente"); ?></th>
+                                <th><?= $this->translate("Email"); ?></th>
+                                <th><?= $this->translate("Codice Fiscale"); ?></th>
+                                <th><?= $this->translate("Registrazione"); ?></th>
+                                <th><?= $this->translate("Azioni"); ?></th>
                             </tr>
                             </thead>
                         </table>

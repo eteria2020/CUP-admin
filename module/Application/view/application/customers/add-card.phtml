@@ -11,7 +11,7 @@ $this->headScript()
         <div class="row">
             <div class="col-lg-6">
                 <h3 class="page-title">
-                    AGGIUNGI CARD <?= $this->customer ? $this->customer->getName() . ' ' . $this->customer->getSurname() : '';?>
+                    <?= $this->translate("AGGIUNGI CARD"); ?> <?= $this->customer ? $this->customer->getName() . ' ' . $this->customer->getSurname() : '';?>
                 </h3>
             </div>
 
@@ -31,13 +31,13 @@ $this->headScript()
 
                 <div class="row">
                     <div class="col-lg-12">
-                        <label>Codice</label>
+                        <label><?= $this->translate("Codice"); ?></label>
                         <?= $this->formRow($form->get('card')->get('code')); ?>
                     </div>
                 </div>
 
                 <br />
-                <input type=submit name="" class="btn btn-success" value="<?= $this->translate('Aggiungi Card'); ?>">
+                <input type=submit name="" class="btn btn-success" value="<?= $this->translate("Aggiungi Card"); ?>">
 
                 <?php echo $this->form()->closeTag(); ?>
 

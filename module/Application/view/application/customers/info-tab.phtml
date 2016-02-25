@@ -6,29 +6,29 @@ $formSetting = $this->settingForm->prepare();
 <div class="row">
     <div class="col-lg-9">
 
-        <?php echo $this->partial('partials/flash-messages.phtml', []); ?>
+        <?= $this->partial('partials/flash-messages.phtml', []); ?>
         <div class="panel panel-default">
-            <div class="panel-heading">Anagrafica</div>
+            <div class="panel-heading"><?= $this->translate("Anagrafica"); ?></div>
             <div class="panel-body">
 
                 <div class="row">
                     <div class="col-lg-4">
                         <div class="form-group">
-                            <label for="gender">Titolo</label>
+                            <label for="gender"><?= $this->translate("Titolo"); ?></label>
                             <?= $this->formRow($form->get('customer')->get('gender')->setAttribute('disabled', 'true')); ?>
                         </div>
                     </div>
 
                     <div class="col-lg-4">
                         <div class="form-group">
-                            <label for="name">Nome</label>
+                            <label for="name"><?= $this->translate("Nome"); ?></label>
                             <?= $this->formRow($form->get('customer')->get('name')->setAttribute('readonly', 'true')); ?>
                         </div>
                     </div>
 
                     <div class="col-lg-4">
                         <div class="form-group">
-                            <label for="surname">Cognome</label>
+                            <label for="surname"><?= $this->translate("Cognome"); ?></label>
                             <?= $this->formRow($form->get('customer')->get('surname')->setAttribute('readonly', 'true')); ?>
                         </div>
                     </div>
@@ -37,21 +37,21 @@ $formSetting = $this->settingForm->prepare();
                 <div class="row">
                     <div class="col-lg-4">
                         <div class="form-group">
-                            <label for="gender">Email</label>
+                            <label for="gender"><?= $this->translate("Email"); ?></label>
                             <?= $this->formRow($form->get('customer')->get('email')->setAttribute('readonly', 'true')); ?>
                         </div>
                     </div>
 
                     <div class="col-lg-4">
                         <div class="form-group">
-                            <label for="name">Data di nascita</label>
+                            <label for="name"><?= $this->translate("Data di nascita"); ?></label>
                             <?= $this->formRow($form->get('customer')->get('birthDate')->setAttributes(['readonly'=> 'true', 'class' => 'form-control'])); ?>
                         </div>
                     </div>
 
                     <div class="col-lg-4">
                         <div class="form-group">
-                            <label for="surname">Stato di nascita</label>
+                            <label for="surname"><?= $this->translate("Stato di nascita"); ?></label>
                             <?= $this->formRow($form->get('customer')->get('birthCountry')->setAttribute('disabled', 'true')); ?>
                         </div>
                     </div>
@@ -60,21 +60,21 @@ $formSetting = $this->settingForm->prepare();
                 <div class="row">
                     <div class="col-lg-4">
                         <div class="form-group">
-                            <label for="gender">Provincia di nascita (EE = estero)</label>
+                            <label for="gender"><?= $this->translate("Provincia di nascita (EE = estero)"); ?></label>
                             <?= $this->formRow($form->get('customer')->get('birthProvince')->setAttribute('disabled', 'true')); ?>
                         </div>
                     </div>
 
                     <div class="col-lg-4">
                         <div class="form-group">
-                            <label for="name">Comune di nascita</label>
+                            <label for="name"><?= $this->translate("Comune di nascita"); ?></label>
                             <?= $this->formRow($form->get('customer')->get('birthTown')->setAttribute('readonly', 'true')); ?>
                         </div>
                     </div>
 
                     <div class="col-lg-4">
                         <div class="form-group">
-                            <label for="surname">Via e numero civico</label>
+                            <label for="surname"><?= $this->translate("Via e numero civico"); ?></label>
                             <?= $this->formRow($form->get('customer')->get('address')->setAttribute('readonly', 'true')); ?>
                         </div>
                     </div>
@@ -83,21 +83,21 @@ $formSetting = $this->settingForm->prepare();
                 <div class="row">
                     <div class="col-lg-4">
                         <div class="form-group">
-                            <label for="gender">Informazioni aggiuntive</label>
+                            <label for="gender"><?= $this->translate("Informazioni aggiuntive"); ?></label>
                             <?= $this->formRow($form->get('customer')->get('addressInfo')->setAttribute('readonly', 'true')); ?>
                         </div>
                     </div>
 
                     <div class="col-lg-4">
                         <div class="form-group">
-                            <label for="name">CAP</label>
+                            <label for="name"><?= $this->translate("CAP"); ?></label>
                             <?= $this->formRow($form->get('customer')->get('zipCode')->setAttribute('readonly', 'true')); ?>
                         </div>
                     </div>
 
                     <div class="col-lg-4">
                         <div class="form-group">
-                            <label for="surname">Città</label>
+                            <label for="surname"><?= $this->translate("Città"); ?></label>
                             <?= $this->formRow($form->get('customer')->get('town')->setAttribute('readonly', 'true')); ?>
                         </div>
                     </div>
@@ -106,21 +106,21 @@ $formSetting = $this->settingForm->prepare();
                 <div class="row">
                     <div class="col-lg-4">
                         <div class="form-group">
-                            <label for="language">Lingua preferita</label>
+                            <label for="language"><?= $this->translate("Lingua preferita"); ?></label>
                             <?= $this->formRow($form->get('customer')->get('language')->setAttribute('disabled', 'true')); ?>
                         </div>
                     </div>
 
                     <div class="col-lg-4">
                         <div class="form-group">
-                            <label for="taxCode">Codice fiscale</label>
+                            <label for="taxCode"><?= $this->translate("Codice fiscale"); ?></label>
                             <?= $this->formRow($form->get('customer')->get('taxCode')->setAttribute('readonly', 'true')); ?>
                         </div>
                     </div>
 
                     <div class="col-lg-4">
                         <div class="form-group">
-                            <label for="vat">Partita IVA (opzionale)</label>
+                            <label for="vat"><?= $this->translate("Partita IVA (opzionale)"); ?></label>
                             <?= $this->formRow($form->get('customer')->get('vat')->setAttribute('readonly', 'true')); ?>
                         </div>
                     </div>
@@ -129,21 +129,21 @@ $formSetting = $this->settingForm->prepare();
                 <div class="row">
                     <div class="col-lg-4">
                         <div class="form-group">
-                            <label for="mobile">Cellulare</label>
+                            <label for="mobile"><?= $this->translate("Cellulare"); ?></label>
                             <?= $this->formRow($form->get('customer')->get('mobile')->setAttribute('readonly', 'true')); ?>
                         </div>
                     </div>
 
                     <div class="col-lg-4">
                         <div class="form-group">
-                            <label for="phone">Telefono</label>
+                            <label for="phone"><?= $this->translate("Telefono"); ?></label>
                             <?= $this->formRow($form->get('customer')->get('phone')->setAttribute('readonly', 'true')); ?>
                         </div>
                     </div>
 
                     <div class="col-lg-4">
                         <div class="form-group">
-                            <label for="id">Id</label>
+                            <label for="id"><?= $this->translate("Id"); ?></label>
                             <?php $idElement = $form->get('customer')->get('id');
                                 $idElement->setAttributes(['type'=>'text','readonly'=>'true','class'=>'form-control']);
                             ?>
@@ -160,27 +160,27 @@ $formSetting = $this->settingForm->prepare();
 
 
         <div class="panel panel-default">
-            <div class="panel-heading">Dati Patente</div>
+            <div class="panel-heading"><?= $this->translate("Dati Patente"); ?></div>
             <div class="panel-body">
 
                 <div class="row">
                     <div class="col-lg-4">
                         <div class="form-group">
-                            <label for="driverLicense">Patente</label>
+                            <label for="driverLicense"><?= $this->translate("Patente"); ?></label>
                             <?= $this->formRow($formDriver->get('driver')->get('driverLicense')->setAttribute('readonly', 'true')); ?>
                         </div>
                     </div>
 
                     <div class="col-lg-4">
                         <div class="form-group">
-                            <label for="driverLicenseAuthority">Rilasciato da (autorità)</label>
+                            <label for="driverLicenseAuthority"><?= $this->translate("Rilasciato da (autorità)"); ?></label>
                             <?= $this->formRow($formDriver->get('driver')->get('driverLicenseAuthority')->setAttribute('disabled', 'true')); ?>
                         </div>
                     </div>
 
                     <div class="col-lg-4">
                         <div class="form-group">
-                            <label for="driverLicenseReleaseDate">Rilasciato il</label>
+                            <label for="driverLicenseReleaseDate"><?= $this->translate("Rilasciato il"); ?></label>
                             <?= $this->formRow($formDriver->get('driver')->get('driverLicenseReleaseDate')->setAttribute('readonly', 'true')); ?>
                         </div>
                     </div>
@@ -189,21 +189,21 @@ $formSetting = $this->settingForm->prepare();
                 <div class="row">
                     <div class="col-lg-4">
                         <div class="form-group">
-                            <label for="driverLicenseName">Nome sulla patente</label>
+                            <label for="driverLicenseName"><?= $this->translate("Nome sulla patente"); ?></label>
                             <?= $this->formRow($formDriver->get('driver')->get('driverLicenseName')->setAttribute('readonly', 'true')); ?>
                         </div>
                     </div>
 
                     <div class="col-lg-4">
                         <div class="form-group">
-                            <label for="driverLicenseName">Cognome sulla patente</label>
+                            <label for="driverLicenseName"><?= $this->translate("Cognome sulla patente"); ?></label>
                             <?= $this->formRow($formDriver->get('driver')->get('driverLicenseSurname')->setAttribute('readonly', 'true')); ?>
                         </div>
                     </div>
 
                     <div class="col-lg-4">
                         <div class="form-group">
-                            <label for="driverLicenseCountry">Rilasciata da (nazione)</label>
+                            <label for="driverLicenseCountry"><?= $this->translate("Rilasciata da (nazione)"); ?></label>
                             <?= $this->formRow($formDriver->get('driver')->get('driverLicenseCountry')->setAttribute('disabled', 'true')); ?>
                         </div>
                     </div>
@@ -212,7 +212,7 @@ $formSetting = $this->settingForm->prepare();
                 <div class="row">
                     <div class="col-lg-4">
                         <div class="form-group">
-                            <label for="driverLicenseExpire">Data di scadenza</label>
+                            <label for="driverLicenseExpire"><?= $this->translate("Data di scadenza"); ?></label>
                             <?= $this->formRow($formDriver->get('driver')->get('driverLicenseExpire')->setAttribute('readonly', 'true')); ?>
                         </div>
                     </div>
@@ -224,17 +224,17 @@ $formSetting = $this->settingForm->prepare();
     <div class="col-lg-3">
         <div class="panel panel-default">
 
-            <div class="panel-heading">Altri dati</div>
+            <div class="panel-heading"><?= $this->translate("Altri dati"); ?></div>
             <div class="panel-body">
 
                 <div class="row">
                     <div class="col-lg-12">
                         <div class="form-group">
-                            <label for="gender">Abilitato</label>
+                            <label for="gender"><?= $this->translate("Abilitato"); ?></label>
                             <?php if($this->customer->getEnabled()): ?>
-                                <div class="alert alert-success">Abilitato</div>
+                                <div class="alert alert-success"><?= $this->translate("Abilitato"); ?></div>
                             <?php else: ?>
-                                <div class="alert alert-danger">Non Abilitato</div>
+                                <div class="alert alert-danger"><?= $this->translate("Non Abilitato"); ?></div>
                             <?php endif; ?>
                         </div>
                     </div>
@@ -243,11 +243,11 @@ $formSetting = $this->settingForm->prepare();
                 <div class="row">
                     <div class="col-lg-12">
                         <div class="form-group">
-                            <label for="gender">Stato Iscrizione</label>
+                            <label for="gender"><?= $this->translate("Stato Iscrizione"); ?></label>
                             <?php if($this->customer->getRegistrationCompleted()): ?>
-                                <div class="alert alert-success">Registrazione Confermata</div>
+                                <div class="alert alert-success"><?= $this->translate("Registrazione Confermata"); ?></div>
                             <?php else: ?>
-                                <div class="alert alert-danger">Registrazione Non Confermata</div>
+                                <div class="alert alert-danger"><?= $this->translate("Registrazione Non Confermata"); ?></div>
                             <?php endif; ?>
                         </div>
                     </div>
@@ -256,11 +256,11 @@ $formSetting = $this->settingForm->prepare();
                 <div class="row">
                     <div class="col-lg-12">
                         <div class="form-group">
-                            <label for="gender">Stato Primo Pagamento</label>
+                            <label for="gender"><?= $this->translate("Stato Primo Pagamento"); ?></label>
                             <?php if($this->customer->getFirstPaymentCompleted()): ?>
-                                <div class="alert alert-success">Pagamento Effettuato</div>
+                                <div class="alert alert-success"><?= $this->translate("Pagamento Effettuato"); ?></div>
                             <?php else: ?>
-                                <div class="alert alert-danger">Pagamento Non Ancora Effettuato</div>
+                                <div class="alert alert-danger"><?= $this->translate("Pagamento Non Ancora Effettuato"); ?></div>
                             <?php endif; ?>
                         </div>
                     </div>
@@ -269,7 +269,7 @@ $formSetting = $this->settingForm->prepare();
                 <div class="row">
                     <div class="col-lg-12">
                         <div class="form-group">
-                            <label for="gender">Percentuale Sconto</label>
+                            <label for="gender"><?= $this->translate("Percentuale Sconto"); ?></label>
                             <h1 class="text-center"><?= is_null($this->customer->getDiscountRate()) ? '0' : $this->customer->getDiscountRate(); ?>%</h1>
                         </div>
                     </div>
@@ -278,9 +278,9 @@ $formSetting = $this->settingForm->prepare();
                 <div class="row">
                     <div class="col-lg-12">
                         <div class="form-group">
-                            <label for="gender">Data/Ora</label>
-                            <h4>Iscrizione:<br><?= is_object($this->customer->getInsertedTs()) ? $this->customer->getInsertedTs()->format('d-m-Y - H:i:s') : ''; ?></h4>
-                            <h4><?= is_object($this->customer->getUpdateTs()) ? 'Ultima Modifica: ' . $this->customer->getUpdateTs()->format('d-m-Y - H:i:s') : ''; ?></h4>
+                            <label for="gender"><?= $this->translate("Data/Ora"); ?></label>
+                            <h4><?= $this->translate("Iscrizione:"); ?><br><?= is_object($this->customer->getInsertedTs()) ? $this->customer->getInsertedTs()->format('d-m-Y - H:i:s') : ''; ?></h4>
+                            <h4><?= is_object($this->customer->getUpdateTs()) ? $this->translate('Ultima Modifica: ') . $this->customer->getUpdateTs()->format('d-m-Y - H:i:s') : ''; ?></h4>
                         </div>
                     </div>
                 </div>
@@ -288,11 +288,11 @@ $formSetting = $this->settingForm->prepare();
                 <div class="row">
                     <div class="col-lg-12">
                         <div class="form-group">
-                            <label for="maintainer">Maintainer</label>
+                            <label for="maintainer"><?= $this->translate("Maintainer"); ?></label>
                             <?php if($this->customer->getMaintainer()): ?>
-                                <div class="alert alert-success">Si</div>
+                                <div class="alert alert-success"><?= $this->translate("Si"); ?></div>
                             <?php else: ?>
-                                <div class="alert alert-danger">No</div>
+                                <div class="alert alert-danger"><?= $this->translate("No"); ?></div>
                             <?php endif; ?>
                         </div>
                     </div>
@@ -301,11 +301,11 @@ $formSetting = $this->settingForm->prepare();
                 <div class="row">
                     <div class="col-lg-12">
                         <div class="form-group">
-                            <label for="goldList">Gold List</label>
+                            <label for="goldList"><?= $this->translate("Gold List"); ?></label>
                             <?php if($this->customer->getGoldList()): ?>
-                                <div class="alert alert-success">Si</div>
+                                <div class="alert alert-success"><?= $this->translate("Si"); ?></div>
                             <?php else: ?>
-                                <div class="alert alert-danger">No</div>
+                                <div class="alert alert-danger"><?= $this->translate("No"); ?></div>
                             <?php endif; ?>
                         </div>
                     </div>

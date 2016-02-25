@@ -123,14 +123,15 @@ class CustomersEditController extends AbstractActionController
      */
     public function deactivateAction()
     {
+        $translator = $this->TranslatorPlugin();
         $customer = $this->getCustomer();
         $webuser = $this->identity();
 
         try {
             $this->deactivationService->deactivateByWebuser($customer, $webuser);
-            $this->flashMessenger()->addSuccessMessage('Utente disattivato');
+            $this->flashMessenger()->addSuccessMessage($translator->translate('Utente disattivato'));
         } catch (Exception $e) {
-            $this->flashMessenger()->addErrorMessage('Operazione fallita');
+            $this->flashMessenger()->addErrorMessage($translator->translate('Operazione fallita'));
         }
 
         return $this->reloadTab($customer);
@@ -143,6 +144,7 @@ class CustomersEditController extends AbstractActionController
      */
     public function reactivateAction()
     {
+        $translator = $this->TranslatorPlugin();
         $customer = $this->getCustomer();
         $webuser = $this->identity();
 
@@ -162,7 +164,7 @@ class CustomersEditController extends AbstractActionController
                     $webuser
                 );
                 $this->flashMessenger()->addSuccessMessage(
-                    'Riattivazione per pagamento riuscito completata'
+                    $translator->translate('Riattivazione per pagamento riuscito completata')
                 );
                 return new JsonModel();
             /*
@@ -171,10 +173,10 @@ class CustomersEditController extends AbstractActionController
              */
             } else {
                 $this->deactivationService->reactivateCustomer($customer, $webuser);
-                $this->flashMessenger()->addSuccessMessage('Utente riattivato');
+                $this->flashMessenger()->addSuccessMessage($translator->translate('Utente riattivato'));
             }
         } catch (Exception $e) {
-            $this->flashMessenger()->addErrorMessage('Operazione fallita');
+            $this->flashMessenger()->addErrorMessage($translator->translate('Operazione fallita'));
         }
 
         return $this->reloadTab($customer);
@@ -185,6 +187,7 @@ class CustomersEditController extends AbstractActionController
      */
     public function editDeactivationAction()
     {
+        $translator = $this->TranslatorPlugin();
         $customer = $this->getCustomer();
         $webuser = $this->identity();
         $deactivationId = $this->params()->fromQuery('deactivationId', 0);
@@ -192,9 +195,9 @@ class CustomersEditController extends AbstractActionController
         try {
             $deactivation = $this->deactivationService->getById($deactivationId);
             $this->deactivationService->reactivateByWebuser($deactivation, $webuser);
-            $this->flashMessenger()->addSuccessMessage('Disattivazione rimossa');
+            $this->flashMessenger()->addSuccessMessage($translator->translate('Disattivazione rimossa'));
         } catch (Exception $e) {
-            $this->flashMessenger()->addErrorMessage('Operazione fallita');
+            $this->flashMessenger()->addErrorMessage($translator->translate('Operazione fallita'));
         }
 
         return $this->reloadTab($customer);

@@ -65,7 +65,7 @@ $(function() {
                 searchable: false,
                 sortable: false,
                 render: function (data, type, row) {
-                    return'<a href="/customers/edit/' + data + '" class="btn btn-default btn-xs">Modifica</a>';
+                    return'<a href="/customers/edit/' + data + '" class="btn btn-default btn-xs">' + translate("modify") + '</a>';
                 }
             }
         ],
@@ -76,26 +76,26 @@ $(function() {
         "pageLength": 100,
         "pagingType": "bootstrap_full_number",
         "language": {
-            "sEmptyTable":     "Nessun cliente presente nella tabella",
-            "sInfo":           "Vista da _START_ a _END_ di _TOTAL_ elementi",
-            "sInfoEmpty":      "Vista da 0 a 0 di 0 elementi",
-            "sInfoFiltered":   "(filtrati da _MAX_ elementi totali)",
+            "sEmptyTable":     translate("sCustomersEmptyTable"),
+            "sInfo":           translate("sInfo"),
+            "sInfoEmpty":      translate("sInfoEmpty"),
+            "sInfoFiltered":   translate("sInfoFiltered"),
             "sInfoPostFix":    "",
             "sInfoThousands":  ",",
-            "sLengthMenu":     "Visualizza _MENU_ elementi",
-            "sLoadingRecords": "Caricamento...",
-            "sProcessing":     "Elaborazione in corso...",
-            "sSearch":         "Cerca:",
-            "sZeroRecords":    "La ricerca non ha portato alcun risultato.",
+            "sLengthMenu":     translate("sLengthMenu"),
+            "sLoadingRecords": translate("sLoadingRecords"),
+            "sProcessing":     translate("sProcessing"),
+            "sSearch":         translate("sSearch"),
+            "sZeroRecords":    translate("sZeroRecords"),
             "oPaginate": {
-                "sFirst":      "Inizio",
-                "sPrevious":   "Precedente",
-                "sNext":       "Successivo",
-                "sLast":       "Fine"
+                "sFirst":      translate("oPaginateFirst"),
+                "sPrevious":   translate("oPaginatePrevious"),
+                "sNext":       translate("oPaginateNext"),
+                "sLast":       translate("oPaginateLast"),
             },
             "oAria": {
-                "sSortAscending":  ": attiva per ordinare la colonna in ordine crescente",
-                "sSortDescending": ": attiva per ordinare la colonna in ordine decrescente"
+                "sSortAscending":   translate("sSortAscending"),
+                "sSortDescending":  translate("sSortDescending")
             }
         }
     });
@@ -117,9 +117,9 @@ $(function() {
 
     $(document).on('click','#js-remove-card',function(e) {
 
-        var removeCardConfrim = confirm("Sei sicuro di voler rimuovere questo codice card?");
+        var removeCardConfirm = confirm(translate("removeCardConfirm"));
 
-        if(removeCardConfrim) {
+        if(removeCardConfirm) {
             var customer = $(this).data('id');
 
             $.ajax({
@@ -136,7 +136,7 @@ $(function() {
                         $('#js-no-code').show();
                     },
                     500: function (response) {
-                        alert('Qualcosa è andato storto, riprova!');
+                        alert(translate("ajaxError"));
                     }
                 }
             });
@@ -162,14 +162,14 @@ $(function() {
                     $('#typeahead-input').val('');
                 },
                 500: function (response) {
-                    alert('Qualcosa è andato storto, riprova!');
+                    alert(translate("ajaxError"));
                 }
             }
         });
     });
 
     $(document).on('click', '#js-remove-bonus', function(e) {
-        var removeBonus = confirm("Sei sicuro di voler rimuovere questo bonus?");
+        var removeBonus = confirm(translate("removeBonusConfirm"));
 
         if(removeBonus) {
 
@@ -193,7 +193,7 @@ $(function() {
                         }, 3000);
                     },
                     500: function (response) {
-                        alert('Qualcosa è andato storto, riprova!');
+                        alert(translate("ajaxError"));
                     }
                 }
             });

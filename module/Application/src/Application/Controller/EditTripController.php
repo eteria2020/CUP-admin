@@ -75,6 +75,7 @@ class EditTripController extends AbstractActionController
 
     public function editTabAction()
     {
+        $translator = $this->TranslatorPlugin();
         $id = (int)$this->params()->fromRoute('id', 0);
         $webuser = $this->identity();
         $trip = $this->tripsService->getTripById($id);
@@ -96,13 +97,13 @@ class EditTripController extends AbstractActionController
                     'action' => 'Edit trip data: payable ' . ($postData['trip']['payable'] ? 'true' : 'false') . ', end date ' . $postData['trip']['timestampEnd']
                 ]);
 
-                $this->flashMessenger()->addSuccessMessage('Modifica effettuta con successo!');
+                $this->flashMessenger()->addSuccessMessage($translator->translate('Modifica effettuta con successo!'));
             } catch (EditTripDeniedException $e) {
-                $this->flashMessenger()->addErrorMessage('La corsa non può essere modificata perché non è conclusa.');
+                $this->flashMessenger()->addErrorMessage($translator->translate('La corsa non può essere modificata perché non è conclusa.'));
             } catch (EditTripWrongDateException $e) {
-                $this->flashMessenger()->addErrorMessage('La data specificata non può essere precedente alla data di inizio della corsa');
+                $this->flashMessenger()->addErrorMessage($translator->translate('La data specificata non può essere precedente alla data di inizio della corsa'));
             } catch (EditTripNotDateTimeException $e) {
-                $this->flashMessenger()->addErrorMessage('La data specificata non è nel formato corretto. Verifica i dati inseriti.');
+                $this->flashMessenger()->addErrorMessage($translator->translate('La data specificata non è nel formato corretto. Verifica i dati inseriti.'));
             } catch (\Exception $e) {
                 $this->flashMessenger()->addErrorMessage($e->getMessage());
             }

@@ -1,7 +1,11 @@
 <?php
 namespace Application\Controller;
 
+use Application\Controller\Plugin\TranslatorPlugin;
 use Application\Form\CarForm;
+use Application\Listener\LanguageFromSessionDetectorListener;
+use Application\Service\UserLanguageService;
+use MvLabsMultilanguage\Service\LanguageService;
 use SharengoCore\Entity\Cars;
 use SharengoCore\Entity\CarsMaintenance;
 use SharengoCore\Entity\Commands;
@@ -12,6 +16,8 @@ use SharengoCore\Utility\CarStatus;
 use Zend\Form\Form;
 use Zend\Http\Response;
 use Zend\Mvc\Controller\AbstractActionController;
+use Zend\Mvc\I18n\Translator;
+use Zend\Session\Container;
 use Zend\Stdlib\Hydrator\HydratorInterface;
 use Zend\View\Model\JsonModel;
 use Zend\View\Model\ViewModel;
@@ -40,7 +46,8 @@ class CarsController extends AbstractActionController
         CarsService $carsService,
         CommandsService $commandsService,
         Form $carForm,
-        HydratorInterface $hydrator)
+        HydratorInterface $hydrator
+    )
     {
         $this->carsService = $carsService;
         $this->commandsService = $commandsService;
@@ -50,6 +57,7 @@ class CarsController extends AbstractActionController
 
     public function indexAction()
     {
+
         return new ViewModel([]);
     }
 
@@ -71,6 +79,7 @@ class CarsController extends AbstractActionController
 
     public function addAction()
     {
+        $translator = $this->TranslatorPlugin();
         $form = $this->carForm;
         $form->setStatus([CarStatus::OPERATIVE => CarStatus::OPERATIVE]);
         $form->setFleets($this->carsService->getFleets());
@@ -85,11 +94,11 @@ class CarsController extends AbstractActionController
                 try {
 
                     $this->carsService->saveData($form->getData());
-                    $this->flashMessenger()->addSuccessMessage('Auto aggiunta con successo!');
+                    $this->flashMessenger()->addSuccessMessage($translator->translate('Auto aggiunta con successo!'));
 
                 } catch (\Exception $e) {
 
-                    $this->flashMessenger()->addErrorMessage('Si è verificato un errore applicativo. L\'assistenza tecnica è già al corrente, ci scusiamo per l\'inconveniente');
+                    $this->flashMessenger()->addErrorMessage($translator->translate('Si è verificato un errore applicativo. L\'assistenza tecnica è già al corrente, ci scusiamo per l\'inconveniente'));
 
                 }
 
@@ -115,6 +124,7 @@ class CarsController extends AbstractActionController
 
     public function editTabAction()
     {
+        $translator = $this->TranslatorPlugin();
         $plate = $this->params()->fromRoute('plate', 0);
         $car = $this->carsService->getCarByPlate($plate);
         $disableInputStatusMaintenance = false;
@@ -157,11 +167,11 @@ class CarsController extends AbstractActionController
 
                     $this->carsService->updateCar($form->getData(), $lastStatus, $postData);
                     $this->carsService->saveData($form->getData(), false);
-                    $this->flashMessenger()->addSuccessMessage('Auto modificata con successo!');
+                    $this->flashMessenger()->addSuccessMessage($translator->translate('Auto modificata con successo!'));
 
                 } catch (\Exception $e) {
 
-                    $this->flashMessenger()->addErrorMessage('Si è verificato un errore applicativo. L\'assistenza tecnica è già al corrente, ci scusiamo per l\'inconveniente');
+                    $this->flashMessenger()->addErrorMessage($translator->translate('Si è verificato un errore applicativo. L\'assistenza tecnica è già al corrente, ci scusiamo per l\'inconveniente'));
 
                 }
 
@@ -193,15 +203,16 @@ class CarsController extends AbstractActionController
     }
 
     public function damagesTabAction () {
+        $translator = $this->TranslatorPlugin();
         $plate = $this->params()->fromRoute('plate', 0);
         $car = $this->carsService->getCarByPlate($plate);
         if ($this->getRequest()->isPost()) {
             $postData = $this->getRequest()->getPost()->toArray();
             try {
                 $this->carsService->updateDamages($car, $postData['damages']);
-                $this->flashMessenger()->addSuccessMessage('Danni auto modificati con successo!');
+                $this->flashMessenger()->addSuccessMessage($translator->translate('Danni auto modificati con successo!'));
             } catch (\Exception $e) {
-                $this->flashMessenger()->addErrorMessage('Si è verificato un errore applicativo. L\'assistenza tecnica è già al corrente, ci scusiamo per l\'inconveniente');
+                $this->flashMessenger()->addErrorMessage($translator->translate('Si è verificato un errore applicativo. L\'assistenza tecnica è già al corrente, ci scusiamo per l\'inconveniente'));
             }
 
             $url = $this->url()->fromRoute('cars/edit', ['plate' => $car->getPlate()]).'#damages';
@@ -219,6 +230,7 @@ class CarsController extends AbstractActionController
 
     public function deleteAction()
     {
+        $translator = $this->TranslatorPlugin();
         $plate = $this->params()->fromRoute('plate', 0);
 
         /** @var Cars $car */
@@ -233,11 +245,11 @@ class CarsController extends AbstractActionController
         try {
 
             $this->carsService->deleteCar($car);
-            $this->flashMessenger()->addSuccessMessage('Auto rimossa con successo!');
+            $this->flashMessenger()->addSuccessMessage($translator->translate('Auto rimossa con successo!'));
 
         } catch (\Exception $e) {
 
-            $this->flashMessenger()->addErrorMessage('Si è verificato un errore applicativo. L\'assistenza tecnica è già al corrente, ci scusiamo per l\'inconveniente');
+            $this->flashMessenger()->addErrorMessage($translator->translate('Si è verificato un errore applicativo. L\'assistenza tecnica è già al corrente, ci scusiamo per l\'inconveniente'));
 
         }
 
@@ -247,6 +259,7 @@ class CarsController extends AbstractActionController
 
     public function sendCommandAction()
     {
+        $translator = $this->TranslatorPlugin();
         $plate = $this->params()->fromRoute('plate', 0);
         $commandIndex = $this->params()->fromRoute('command', 0);
         $car = $this->carsService->getCarByPlate($plate);
@@ -260,11 +273,11 @@ class CarsController extends AbstractActionController
         try {
 
             $this->commandsService->sendCommand($car, $commandIndex, $this->identity());
-            $this->flashMessenger()->addSuccessMessage('Comando eseguito con successo');
+            $this->flashMessenger()->addSuccessMessage($translator->translate('Comando eseguito con successo'));
 
         } catch (\Exception $e) {
 
-            $this->flashMessenger()->addErrorMessage('Errore nell\'esecuzione del comando');
+            $this->flashMessenger()->addErrorMessage($translator->translate('Errore nell\'esecuzione del comando'));
 
         }
 

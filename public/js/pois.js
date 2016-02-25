@@ -59,8 +59,8 @@ $(function() {
                 sortable: false,
                 render: function (data) {
                     return '<div class="btn-group">' +
-                        '<a href="/configurations/manage-pois/edit/' + data + '" class="btn btn-default">Modifica</a> ' +
-                        '<a href="/configurations/manage-pois/delete/' + data + '" class="btn btn-default js-delete">Elimina</a>' +
+                        '<a href="/configurations/manage-pois/edit/' + data + '" class="btn btn-default">'+ translate("modify")+'</a> ' +
+                        '<a href="/configurations/manage-pois/delete/' + data + '" class="btn btn-default js-delete">'+translate("delete")+'</a>' +
                         '</div>';
                 }
             }
@@ -72,26 +72,26 @@ $(function() {
         "pageLength": 100,
         "pagingType": "bootstrap_full_number",
         "language": {
-            "sEmptyTable":     "Nessun pois presente nella tabella",
-            "sInfo":           "Vista da _START_ a _END_ di _TOTAL_ elementi",
-            "sInfoEmpty":      "Vista da 0 a 0 di 0 elementi",
-            "sInfoFiltered":   "(filtrati da _MAX_ elementi totali)",
+            "sEmptyTable":     translate("sPoisEmptyTable"),
+            "sInfo":           translate("sInfo"),
+            "sInfoEmpty":      translate("sInfoEmpty"),
+            "sInfoFiltered":   translate("sInfoFiltered"),
             "sInfoPostFix":    "",
             "sInfoThousands":  ",",
-            "sLengthMenu":     "Visualizza _MENU_ elementi",
-            "sLoadingRecords": "Caricamento...",
-            "sProcessing":     "Elaborazione in corso...",
-            "sSearch":         "Cerca:",
-            "sZeroRecords":    "La ricerca non ha portato alcun risultato.",
+            "sLengthMenu":     translate("sLengthMenu"),
+            "sLoadingRecords": translate("sLoadingRecords"),
+            "sProcessing":     translate("sProcessing"),
+            "sSearch":         translate("sSearch"),
+            "sZeroRecords":    translate("sZeroRecords"),
             "oPaginate": {
-                "sFirst":      "Inizio",
-                "sPrevious":   "Precedente",
-                "sNext":       "Successivo",
-                "sLast":       "Fine"
+                "sFirst":      translate("oPaginateFirst"),
+                "sPrevious":   translate("oPaginatePrevious"),
+                "sNext":       translate("oPaginateNext"),
+                "sLast":       translate("oPaginateLast"),
             },
             "oAria": {
-                "sSortAscending":  ": attiva per ordinare la colonna in ordine crescente",
-                "sSortDescending": ": attiva per ordinare la colonna in ordine decrescente"
+                "sSortAscending":   translate("sSortAscending"),
+                "sSortDescending":  translate("sSortDescending")
             }
         }
     });
@@ -110,7 +110,7 @@ $(function() {
     });
 
     $('#js-pois-table').on('click', '.js-delete', function() {
-        return confirm("Confermi l'eliminazione del poi? L'operazione non è annullabile");
+        return confirm(translate("confirmPaymentDelete"));
     });
 
 });

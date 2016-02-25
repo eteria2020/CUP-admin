@@ -18,6 +18,7 @@ return array(
         'Cartasi',
         'EventLogger',
         'Reports',
+        'MvLabsMultilanguage',
     ),
 
     // These are various options for the listeners attached to the ModuleManager

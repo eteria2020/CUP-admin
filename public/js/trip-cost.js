@@ -47,7 +47,7 @@ $(function() {
         e.preventDefault();
 
         if (!tripBeginning || !tripEnd) {
-            alert('i campi "Inizio corsa" e "Fine corsa" devono essere compilati');
+            alert(translate("alertEmptyFields"));
         } else {
             $.post(
                 window.location.origin + '/trips/cost-computation',

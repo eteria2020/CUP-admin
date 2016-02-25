@@ -2,10 +2,12 @@
 
 namespace Application\Form;
 
+use Application\Controller\Plugin\TranslatorPlugin;
 use Zend\Form\Element;
 use Zend\Form\Form;
 use Zend\InputFilter\InputFilter;
 use Zend\InputFilter\Factory as InputFactory;
+use Zend\Mvc\I18n\Translator;
 use Zend\Validator\File\MimeType;
 use Zend\Validator\File\Extension;
 
@@ -15,9 +17,12 @@ class CsvUploadForm extends Form
      * @param string|null $name
      * @param array  $options
      */
-    public function __construct($name = null, array $options = [])
+
+    private $translator;
+    public function __construct(Translator $translator,$name = null, array $options = [])
     {
         parent::__construct($name, $options);
+        $this->translator = $translator;
         $this->setAttribute('method', 'post');
         $this->setAttribute('enctype', 'multipart/form-data');
 
@@ -44,7 +49,7 @@ class CsvUploadForm extends Form
             'name' => 'submit',
             'type' => 'submit',
             'attributes' => [
-                'value' => 'Carica adesso',
+                'value' => $this->translator->translate('Carica adesso'),
                 'class' => 'btn green'
             ],
         ]);
@@ -64,9 +69,9 @@ class CsvUploadForm extends Form
                         'options' => [
                             'mimeType' => 'text/csv,text/plain',
                             'messages' => [
-                                MimeType::FALSE_TYPE => 'Il file caricato ha un formato non valido; sono accettati solo file in formato csv',
-                                MimeType::NOT_DETECTED => 'Non è stato possibile verificare il formato del file',
-                                MimeType::NOT_READABLE => 'Il file caricato non è leggibile o non esiste'
+                                MimeType::FALSE_TYPE => $this->translator->translate('Il file caricato ha un formato non valido; sono accettati solo file in formato csv'),
+                                MimeType::NOT_DETECTED => $this->translator->translate('Non è stato possibile verificare il formato del file'),
+                                MimeType::NOT_READABLE => $this->translator->translate('Il file caricato non è leggibile o non esiste')
                             ]
                         ],
                         'break_chain_on_failure' => true
@@ -76,8 +81,8 @@ class CsvUploadForm extends Form
                         'options' => [
                             'extension' => 'csv',
                             'messages' => [
-                                Extension::FALSE_EXTENSION => 'Il file caricato ha un formato non valido; sono accettati solo file in formato csv',
-                                Extension::NOT_FOUND => 'Il file caricato non è leggibile o non esiste'
+                                Extension::FALSE_EXTENSION => $this->translator->translate('Il file caricato ha un formato non valido; sono accettati solo file in formato csv'),
+                                Extension::NOT_FOUND => $this->translator->translate('Il file caricato non è leggibile o non esiste')
                             ]
                         ]
                     ]

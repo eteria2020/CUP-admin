@@ -17,7 +17,11 @@ class CustomerBonusFormFactory implements FactoryInterface
     {
         $entityManager = $serviceLocator->get('doctrine.entitymanager.orm_default');
         $hydrator = new DoctrineHydrator($entityManager);
-        $customerBonusFieldset = new CustomerBonusFieldset($hydrator);
+
+        $languageService = $serviceLocator->get('LanguageService');
+        $translator = $languageService->getTranslator();
+
+        $customerBonusFieldset = new CustomerBonusFieldset($hydrator, $translator);
 
         return new CustomerBonusForm($customerBonusFieldset);
     }

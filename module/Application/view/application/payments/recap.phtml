@@ -9,7 +9,7 @@ $daily = $this->daily;
     <div class="page-content">
 
         <!-- Title -->
-        <h3 class="page-title">COMPETENZE</h3>
+        <h3 class="page-title"><?= $this->translate("COMPETENZE"); ?></h3>
 
         <!-- BEGIN tabs container -->
         <div class="portlet-body">
@@ -21,9 +21,9 @@ $daily = $this->daily;
 
                         <!-- BEGIN tabs headers -->
                         <ul class="nav nav-tabs">
-                            <li class="active"><a href="#tab_1_1" data-toggle="tab">Riepilogo giornaliero</a></li>
-                            <li><a href="#tab_1_2" data-toggle="tab">Riepilogo settimanale</a></li>
-                            <li><a href="#tab_1_3" data-toggle="tab">Riepilogo mensile</a></li>
+                            <li class="active"><a href="#tab_1_1" data-toggle="tab"><?= $this->translate("Riepilogo giornaliero"); ?></a></li>
+                            <li><a href="#tab_1_2" data-toggle="tab"><?= $this->translate("Riepilogo settimanale"); ?></a></li>
+                            <li><a href="#tab_1_3" data-toggle="tab"><?= $this->translate("Riepilogo mensile"); ?></a></li>
                         </ul>
                         <!-- END tabs headers -->
 
@@ -40,7 +40,7 @@ $daily = $this->daily;
                                 <table class="table table-striped table-bordered table-hover sng-margin-top">
                                     <thead>
                                         <tr>
-                                            <th class="sng-date-column">Data</th>
+                                            <th class="sng-date-column"><?= $this->translate("Data"); ?></th>
                                             <?php foreach($this->fleets as $fleet): ?>
                                             <th class="sng-text-right"><?= $fleet->getName() ?></th>
                                             <?php endforeach; ?>
@@ -52,7 +52,7 @@ $daily = $this->daily;
                                                 <td><?= $day ?></td>
                                                 <?php
                                                 foreach($this->fleets as $fleet) {
-                                                    $entry = 'n.d.';
+                                                    $entry = $this->translate('n.d.');
                                                     if (array_key_exists($fleet->getName(), $amounts)) {
                                                         $entry = sprintf('%.2f €', $amounts[$fleet->getName()] / 100);
                                                     }
@@ -71,7 +71,7 @@ $daily = $this->daily;
                                 <table class="table table-striped table-bordered table-hover sng-margin-top">
                                     <thead>
                                         <tr>
-                                            <th class="sng-date-column">Data</th>
+                                            <th class="sng-date-column"><?= $this->translate("Data"); ?></th>
                                             <?php foreach($this->fleets as $fleet): ?>
                                             <th class="sng-text-right"><?= $fleet->getName() ?></th>
                                             <?php endforeach; ?>
@@ -88,7 +88,7 @@ $daily = $this->daily;
                                                 echo "<td>" . strftime("%d %b", $weekStart->getTimestamp()) . " - " . strftime("%d %b", $weekEnd->getTimestamp() - 1) . "</td>";
 
                                                 foreach($this->fleets as $fleet) {
-                                                    $entry = 'n.d.';
+                                                    $entry = $this->translate('n.d.');
                                                     if (array_key_exists($fleet->getName(), $amounts)) {
                                                         $entry = sprintf('%.2f €', $amounts[$fleet->getName()] / 100);
                                                     }
@@ -107,7 +107,7 @@ $daily = $this->daily;
                                 <table class="table table-striped table-bordered table-hover sng-margin-top">
                                     <thead>
                                         <tr>
-                                            <th class="sng-date-column">Data</th>
+                                            <th class="sng-date-column"><?= $this->translate("Data"); ?></th>
                                             <?php foreach($this->fleets as $fleet): ?>
                                             <th class="sng-text-right"><?= $fleet->getName() ?></th>
                                             <?php endforeach; ?>
@@ -123,7 +123,7 @@ $daily = $this->daily;
                                                 <td><?= $month ?></td>
                                                 <?php
                                                 foreach($this->fleets as $fleet) {
-                                                    $entry = 'n.d.';
+                                                    $entry = $this->translate('n.d.');
                                                     if (array_key_exists($fleet->getName(), $amounts)) {
                                                         $entry = sprintf('%.2f €', $amounts[$fleet->getName()] / 100);
                                                     }

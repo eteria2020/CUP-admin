@@ -39,26 +39,26 @@ $(function() {
         "pageLength": 100,
         "pagingType": "bootstrap_full_number",
         "language": {
-            "sEmptyTable": "Nessun card presente nella tabella",
-            "sInfo": "Vista da _START_ a _END_ di _TOTAL_ elementi",
-            "sInfoEmpty": "Vista da 0 a 0 di 0 elementi",
-            "sInfoFiltered": "(filtrati da _MAX_ elementi totali)",
-            "sInfoPostFix": "",
-            "sInfoThousands": ",",
-            "sLengthMenu": "Visualizza _MENU_ elementi",
-            "sLoadingRecords": "Caricamento...",
-            "sProcessing": "Elaborazione in corso...",
-            "sSearch": "Cerca:",
-            "sZeroRecords": "La ricerca non ha portato alcun risultato.",
+            "sEmptyTable":     translate("sCardsEmptyTable"),
+            "sInfo":           translate("sInfo"),
+            "sInfoEmpty":      translate("sInfoEmpty"),
+            "sInfoFiltered":   translate("sInfoFiltered"),
+            "sInfoPostFix":    "",
+            "sInfoThousands":  ",",
+            "sLengthMenu":     translate("sLengthMenu"),
+            "sLoadingRecords": translate("sLoadingRecords"),
+            "sProcessing":     translate("sProcessing"),
+            "sSearch":         translate("sSearch"),
+            "sZeroRecords":    translate("sZeroRecords"),
             "oPaginate": {
-                "sFirst": "Inizio",
-                "sPrevious": "Precedente",
-                "sNext": "Successivo",
-                "sLast": "Fine"
+                "sFirst":      translate("oPaginateFirst"),
+                "sPrevious":   translate("oPaginatePrevious"),
+                "sNext":       translate("oPaginateNext"),
+                "sLast":       translate("oPaginateLast"),
             },
             "oAria": {
-                "sSortAscending": ": attiva per ordinare la colonna in ordine crescente",
-                "sSortDescending": ": attiva per ordinare la colonna in ordine decrescente"
+                "sSortAscending":   translate("sSortAscending"),
+                "sSortDescending":  translate("sSortDescending")
             }
         }
     });

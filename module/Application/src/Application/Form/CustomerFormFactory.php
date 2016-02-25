@@ -22,11 +22,16 @@ class CustomerFormFactory implements FactoryInterface
         $I_clientService = $serviceLocator->get('SharengoCore\Service\CustomersService');
         $countriesService = $serviceLocator->get('SharengoCore\Service\CountriesService');
         $provincesService = $serviceLocator->get('SharengoCore\Service\ProvincesService');
+
+        $languageService = $serviceLocator->get('LanguageService');
+        $translator = $languageService->getTranslator();
+
         $customerFieldset = new CustomerFieldset(
             $I_clientService,
             $countriesService,
             $provincesService,
-            $hydrator
+            $hydrator,
+            $translator
         );
 
         return new CustomerForm($customerFieldset, $entityManager);

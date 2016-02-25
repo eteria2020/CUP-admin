@@ -4,10 +4,10 @@
         <table class="table table-bordered">
             <thead>
             <tr>
-                <th>ID</th>
-                <th>Name</th>
-                <th>Consente chiusura corsa?</th>
-                <th>Zone</th>
+                <th><?= $this->translate("ID"); ?></th>
+                <th><?= $this->translate("Name"); ?></th>
+                <th><?= $this->translate("Consente chiusura corsa?"); ?></th>
+                <th><?= $this->translate("Zone"); ?></th>
             </tr>
             </thead>
             <tbody>
@@ -17,7 +17,7 @@
                 <tr>
                     <td><?= $zone->getId(); ?></td>
                     <td><?= $zone->getDescription(); ?></td>
-                    <td><?= ($zone->getCloseTrip() ? 'si' : 'no') ?></td>
+                    <td><?= ($zone->getCloseTrip() ? $this->translate("si") : $this->translate("no")) ?></td>
                     <td><?= $zone->getZonesListText(); ?></td>
                 </tr>
             <?php endforeach; ?>

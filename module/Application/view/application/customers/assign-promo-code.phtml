@@ -7,12 +7,12 @@ $form = $this->promoCodeForm->prepare();
             <div class="row">
                 <div class="col-lg-6">
                     <h3 class="page-title">
-                        ASSOCIA CODICE PROMO <small><?= $this->customer->getName() . ' ' . $this->customer->getSurname(); ?></small>
+                        <?= $this->translate("ASSOCIA CODICE PROMO"); ?> <small><?= $this->customer->getName() . ' ' . $this->customer->getSurname(); ?></small>
                     </h3>
                 </div>
 
                 <div class="col-lg-6">
-                    <a href="<?= $this->url('customers/edit', ['id' => $this->customer->getId()], ['query' => ['tab' => 'bonus']]); ?>" class="btn btn-success pull-right"><i class="fa fa-arrow-left"></i> Torna alla scheda cliente</a>
+                    <a href="<?= $this->url('customers/edit', ['id' => $this->customer->getId()], ['query' => ['tab' => 'bonus']]); ?>" class="btn btn-success pull-right"><i class="fa fa-arrow-left"></i> <?= $this->translate("Torna alla scheda cliente"); ?></a>
                 </div>
             </div>
 
@@ -22,7 +22,7 @@ $form = $this->promoCodeForm->prepare();
             <div class="row">
                 <div class="col-lg-12">
 
-                    <?php echo $this->partial('partials/flash-messages.phtml', []); ?>
+                    <?= $this->partial('partials/flash-messages.phtml', []); ?>
 
                     <?= $this->form()->openTag($form); ?>
                     <div class="form-group">
@@ -34,8 +34,8 @@ $form = $this->promoCodeForm->prepare();
                             ?>
                     </div>
 
-                    <button type=submit class="btn btn-success"><?= $this->translate('Conferma'); ?></button>
-                    <?php echo $this->form()->closeTag(); ?>
+                    <button type=submit class="btn btn-success"><?= $this->translate("Conferma"); ?></button>
+                    <?= $this->form()->closeTag(); ?>
                 </div>
             </div>
 

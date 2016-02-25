@@ -19,7 +19,11 @@ class SettingFormFactory implements FactoryInterface
     {
         $entityManager = $serviceLocator->get('doctrine.entitymanager.orm_default');
         $hydrator = new DoctrineHydrator($entityManager);
-        $settingFieldset = new SettingFieldset($hydrator);
+
+        $languageService = $serviceLocator->get('LanguageService');
+        $translator = $languageService->getTranslator();
+
+        $settingFieldset = new SettingFieldset($hydrator, $translator);
 
         return new SettingForm($settingFieldset);
     }

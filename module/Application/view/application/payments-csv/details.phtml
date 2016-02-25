@@ -14,37 +14,37 @@ $updates = $this->csvAnomaly->getUpdates();
     <div class="page-content">
 
         <!-- Title -->
-        <h3 class="page-title">Dettagli Anomalia<?= $this->csvAnomaly->isResolved() ? ' (risolta)' : ''; ?></h3>
+        <h3 class="page-title"><?= $this->translate("Dettagli Anomalia"); ?><?= $this->csvAnomaly->isResolved() ? ' (' . $this->translate("risolta") .')' : ''; ?></h3>
 
         <!-- BEGIN content container -->
         <div class="portlet-body">
             <div class="row-fluid">
                 <div class="span6">
 
-                    <?php echo $this->partial('partials/flash-messages.phtml', []); ?>
+                    <?= $this->partial('partials/flash-messages.phtml', []); ?>
 
                     <!-- BEGIN csv data container -->
                     <div class="row">
                         <div class="col-lg-12">
-                            <h3>Dati csv</h3>
+                            <h3><?= $this->translate("Dati csv"); ?></h3>
                         </div>
 
                         <div class="col-lg-12">
                             <div class="col-lg-4">
                                 <div class="form-group">
-                                    <label>Numero</label>
+                                    <label><?= $this->translate("Numero"); ?></label>
                                     <div class="sng-info-box"><?= $csvData['Numero']; ?></div>
                                 </div>
                             </div>
                             <div class="col-lg-4">
                                 <div class="form-group">
-                                    <label>Data</label>
+                                    <label><?= $this->translate("Data"); ?></label>
                                     <div class="sng-info-box"><?= $csvData['Data']; ?></div>
                                 </div>
                             </div>
                             <div class="col-lg-4">
                                 <div class="form-group">
-                                    <label>Cliente</label>
+                                    <label><?= $this->translate("Cliente"); ?></label>
                                     <div class="sng-info-box">
                                         <?=
                                         $this->customer instanceof \SharengoCore\Entity\Customers ?
@@ -56,19 +56,19 @@ $updates = $this->csvAnomaly->getUpdates();
                             </div>
                             <div class="col-lg-4">
                                 <div class="form-group">
-                                    <label>Stato</label>
+                                    <label><?= $this->translate("Stato"); ?></label>
                                     <div class="sng-info-box"><?= $csvData['Stato']; ?></div>
                                 </div>
                             </div>
                             <div class="col-lg-4">
                                 <div class="form-group">
-                                    <label>Importo</label>
+                                    <label><?= $this->translate("Importo"); ?></label>
                                     <div class="sng-info-box"><?= $csvAmount; ?></div>
                                 </div>
                             </div>
                             <div class="col-lg-4">
                                 <div class="form-group">
-                                    <label>Dettagli errore</label>
+                                    <label><?= $this->translate("Dettagli errore"); ?></label>
                                     <div class="sng-info-box sng-info-box-fixed"><?= $csvData['Dettaglio Errore']; ?></div>
                                 </div>
                             </div>
@@ -84,25 +84,25 @@ $updates = $this->csvAnomaly->getUpdates();
                     ?>
                     <div class="row">
                         <div class="col-lg-12">
-                            <h3>Dati transazione</h3>
+                            <h3><?= $this->translate("Dati transazione"); ?></h3>
                         </div>
 
                         <div class="col-lg-12">
                             <div class="col-lg-4">
                                 <div class="form-group">
-                                    <label>Data</label>
+                                    <label><?= $this->translate("Data"); ?></label>
                                     <div class="sng-info-box"><?= $transaction->getDatetime() ? $transaction->getDatetime()->format('d/m/Y H:i') : ''; ?></div>
                                 </div>
                             </div>
                             <div class="col-lg-4">
                                 <div class="form-group">
-                                    <label>Esito</label>
+                                    <label><?= $this->translate("Esito"); ?></label>
                                     <div class="sng-info-box"><?= $transaction->getOutcome(); ?></div>
                                 </div>
                             </div>
                             <div class="col-lg-4">
                                 <div class="form-group">
-                                    <label>Importo</label>
+                                    <label><?= $this->translate("Importo"); ?></label>
                                     <div class="sng-info-box"><?= $transactionAmount; ?></div>
                                 </div>
                             </div>
@@ -115,13 +115,13 @@ $updates = $this->csvAnomaly->getUpdates();
                     <?php if (!$this->csvAnomaly->isResolved()): ?>
                     <div class="row">
                         <div class="col-lg-12">
-                            <h3>Soluzione</h3>
+                            <h3><?= $this->translate("Soluzione"); ?></h3>
                         </div>
 
                         <div class="col-lg-4">
                             <div class="form-group">
                                 <label><?= $this->csvAnomaly->getTypeTranslated(); ?>:</label>
-                                <p>Effettuare <?= $this->csvAnomaly->getAmount() > 0 ? 'NC' : 'fattura'; ?> di <?= number_format(abs($this->csvAnomaly->getAmount()) / 100, 2, ',', ''); ?> € all'utente</p>
+                                <p><?= $this->translate("Effettuare"); ?> <?= $this->csvAnomaly->getAmount() > 0 ? $this->translate('NC') : $this->translate('fattura'); ?> <?= $this->translate("di"); ?> <?= number_format(abs($this->csvAnomaly->getAmount()) / 100, 2, ',', ''); ?> <?= $this->translate("€ all'utente"); ?></p>
                             </div>
                         </div>
 
@@ -131,7 +131,7 @@ $updates = $this->csvAnomaly->getUpdates();
                                     method="post">
                                     <input class="btn btn-default green"
                                         type="submit"
-                                        value="Segna come risolta">
+                                        value="<?= $this->translate("Segna come risolta"); ?>">
                                     </input>
                                 </form>
                             </div>
@@ -143,21 +143,21 @@ $updates = $this->csvAnomaly->getUpdates();
                     <!-- BEGIN note container -->
                     <div class="row">
                         <div class="col-lg-12">
-                            <h3>Note</h3>
+                            <h3><?= $this->translate("Note"); ?></h3>
                         </div>
 
                         <div class="col-lg-12">
 
                             <!-- BEGIN notes table -->
                             <?php if (!empty($updates)): ?>
-                            <h4>Elenco Note</h4>
+                            <h4><?= $this->translate("Elenco Note"); ?></h4>
 
                             <table id="notes-table" class="table table-striped table-bordered table-hover" id="js-invoices-table">
                                 <thead>
                                     <tr>
-                                        <th>Data</th>
-                                        <th>Id Webuser</th>
-                                        <th>Nota</th>
+                                        <th><?= $this->translate("Data"); ?></th>
+                                        <th><?= $this->translate("Id Webuser"); ?></th>
+                                        <th><?= $this->translate("Nota"); ?></th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -175,14 +175,14 @@ $updates = $this->csvAnomaly->getUpdates();
                             <?php endif; ?>
 
                             <!-- BEGIN new note -->
-                            <h4>Nuova Nota</h4>
+                            <h4><?= $this->translate("Nuova Nota"); ?></h4>
                             <form action="<?= $this->url('payments/csv-add-note', ['id' => $this->csvAnomaly->getId()]); ?>"
                                 method="post">
 
                                 <textarea id="new-note" name="new-note" style="width: 100%" rows="5"></textarea><br><br>
                                 <input class="btn btn-default green"
                                     type="submit"
-                                    value="Aggiungi">
+                                    value="<?= $this->translate("Aggiungi"); ?>">
                                 </input>
 
                             </form>

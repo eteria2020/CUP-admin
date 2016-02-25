@@ -10,7 +10,7 @@ $this->headScript()
 
         <!-- BEGIN PAGE HEADER-->
         <h3 class="page-title">
-            ELENCO AUTO <small>ricerca</small>
+            <?= $this->translate("ELENCO AUTO"); ?> <small><?= $this->translate("ricerca"); ?></small>
         </h3>
 
         <div class="page-bar">
@@ -26,45 +26,45 @@ $this->headScript()
                         <div class="form-inline">
                             <div class="form-group">
                                 <select name="column" id="js-column" class="form-control">
-                                    <option value="select" selected>-- Seleziona --</option>
-                                    <option value="e.plate">Targa</option>
-                                    <option value="e.label">Identificativo</option>
-                                    <option value="f.name">Flotta</option>
-                                    <option value="ci.gps">GPS</option>
-                                    <option value="ci.firmwareVersion">GPRS</option>
-                                    <option value="ci.softwareVersion">OBC</option>
-                                    <option value="e.intCleanliness">Pulizia Interna</option>
-                                    <option value="e.extCleanliness">Pulizia Esterna</option>
-                                    <option value="e.running">In Corsa</option>
-                                    <option value="e.hidden">Nascosta</option>
-                                    <option value="e.active">Attiva</option>
-                                    <option value="e.statusMaintenance">Stato manutenzione</option>
-                                    <option value="e.statusOperative">Stato operativa</option>
-                                    <option value="e.statusNotOperative">Stato non operativa</option>
-                                    <option value="e.busy">Occupata</option>
+                                    <option value="select" selected>-- <?= $this->translate("Seleziona"); ?> --</option>
+                                    <option value="e.plate"><?= $this->translate("Targa"); ?></option>
+                                    <option value="e.label"><?= $this->translate("Identificativo"); ?></option>
+                                    <option value="f.name"><?= $this->translate("Flotta"); ?></option>
+                                    <option value="ci.gps"><?= $this->translate("GPS"); ?></option>
+                                    <option value="ci.firmwareVersion"><?= $this->translate("GPRS"); ?></option>
+                                    <option value="ci.softwareVersion"><?= $this->translate("OBC"); ?></option>
+                                    <option value="e.intCleanliness"><?= $this->translate("Pulizia Interna"); ?></option>
+                                    <option value="e.extCleanliness"><?= $this->translate("Pulizia Esterna"); ?></option>
+                                    <option value="e.running"><?= $this->translate("In Corsa"); ?></option>
+                                    <option value="e.hidden"><?= $this->translate("Nascosta"); ?></option>
+                                    <option value="e.active"><?= $this->translate("Attiva"); ?></option>
+                                    <option value="e.statusMaintenance"><?= $this->translate("Stato manutenzione"); ?></option>
+                                    <option value="e.statusOperative"><?= $this->translate("Stato operativa"); ?></option>
+                                    <option value="e.statusNotOperative"><?= $this->translate("Stato non operativa"); ?></option>
+                                    <option value="e.busy"><?= $this->translate("Occupata"); ?></option>
                                 </select>
                             </div>
                             <div class="form-group">
                                 <select name="js-clean-type" id="js-clean-type" class="form-control" style="display: none;">
-                                    <option value="clean">Pulito</option>
-                                    <option value="average">Media</option>
-                                    <option value="dirty">Sporco</option>
+                                    <option value="clean"><?= $this->translate("Pulito"); ?></option>
+                                    <option value="average"><?= $this->translate("Media"); ?></option>
+                                    <option value="dirty"><?= $this->translate("Sporco"); ?></option>
                                 </select>
-                                <input type="text" name="value" value="" class="form-control" id="js-value" placeholder="Filtra...">
+                                <input type="text" name="value" value="" class="form-control" id="js-value" placeholder="<?= $this->translate("Filtra..."); ?>">
                             </div>
                             <div class="btn-group">
-                                <button type="button" class="btn green js-search" id="js-search"><i class="fa fa-search"></i> Cerca</button>
+                                <button type="button" class="btn green js-search" id="js-search"><i class="fa fa-search"></i> <?= $this->translate("Cerca"); ?></button>
                                 <button type="button" class="btn green dropdown-toggle" data-toggle="dropdown"><i class="fa fa-angle-down"></i></button>
                                 <ul class="dropdown-menu" role="menu">
                                     <li>
-                                        <a href="javascript:void(0);" id="js-clear"><i class="fa fa-remove"></i> Pulisci Ricerca</a>
+                                        <a href="javascript:void(0);" id="js-clear"><i class="fa fa-remove"></i> <?= $this->translate("Pulisci Ricerca"); ?></a>
                                     </li>
                                 </ul>
                             </div>
                         </div>
                     </div>
                     <div class="col-md-4">
-                        <a href="<?= $this->url('cars/add'); ?>" class="btn green pull-right"><i class="fa fa-plus"></i> Aggiungi Auto</a>
+                        <a href="<?= $this->url('cars/add'); ?>" class="btn green pull-right"><i class="fa fa-plus"></i> <?= $this->translate("Aggiungi Auto"); ?></a>
                     </div>
                 </div>
 
@@ -74,27 +74,27 @@ $this->headScript()
                 <div class="portlet box green">
                     <div class="portlet-title">
                         <div class="caption">
-                            <i class="fa fa-cogs"></i>Elenco Auto
+                            <i class="fa fa-cogs"></i><?= $this->translate("Elenco Auto"); ?>
                         </div>
                     </div>
                     <div class="portlet-body">
                         <table class="table table-striped table-bordered table-hover" id="js-cars-table">
                             <thead>
                             <tr>
-                                <th>Targa</th>
-                                <th>Identif.</th>
-                                <th>Flotta</th>
-                                <th>Batteria</th>
-                                <th>Ultimo Contatto</th>
-                                <th>Km</th>
-                                <th>Pulizia</th>
-                                <th>Posizione</th>
-                                <th>Stato</th>
-                                <th>GPS</th>
-                                <th>GPRS</th>
-                                <th>OBC</th>
-                                <th>Posizione</th>
-                                <th>Azione</th>
+                                <th><?= $this->translate("Targa"); ?></th>
+                                <th><?= $this->translate("Identif."); ?></th>
+                                <th><?= $this->translate("Flotta"); ?></th>
+                                <th><?= $this->translate("Batteria"); ?></th>
+                                <th><?= $this->translate("Ultimo Contatto"); ?></th>
+                                <th><?= $this->translate("Km"); ?></th>
+                                <th><?= $this->translate("Pulizia"); ?></th>
+                                <th><?= $this->translate("Posizione"); ?></th>
+                                <th><?= $this->translate("Stato"); ?></th>
+                                <th><?= $this->translate("GPS"); ?></th>
+                                <th><?= $this->translate("GPRS"); ?></th>
+                                <th><?= $this->translate("OBC"); ?></th>
+                                <th><?= $this->translate("Posizione"); ?></th>
+                                <th><?= $this->translate("Azione"); ?></th>
                             </tr>
                             </thead>
                         </table>

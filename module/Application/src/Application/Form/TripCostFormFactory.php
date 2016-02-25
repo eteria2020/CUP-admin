@@ -17,7 +17,10 @@ class TripCostFormFactory implements FactoryInterface
      */
     public function createService(ServiceLocatorInterface $serviceLocator)
     {
-        $tripCostFieldset = new TripCostFieldset();
+        $languageService = $serviceLocator->get('LanguageService');
+        $translator = $languageService->getTranslator();
+
+        $tripCostFieldset = new TripCostFieldset($translator);
 
         return new TripCostForm($tripCostFieldset);
     }

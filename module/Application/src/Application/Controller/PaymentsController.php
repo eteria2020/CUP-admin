@@ -206,6 +206,7 @@ class PaymentsController extends AbstractActionController
 
     public function payExtraAction()
     {
+        $translator = $this->TranslatorPlugin();
         $customerId = $this->params()->fromPost('customerId');
         $fleetId = $this->params()->fromPost('fleetId');
         $type = $this->params()->fromPost('type');
@@ -218,7 +219,7 @@ class PaymentsController extends AbstractActionController
             if (is_null($customer)) {
                 $this->getResponse()->setStatusCode(422);
                 return new JsonModel([
-                    'error' => 'Non esiste un cliente per l\'id specificato'
+                    'error' => $translator->translate('Non esiste un cliente per l\'id specificato')
                 ]);
             }
 
@@ -227,7 +228,7 @@ class PaymentsController extends AbstractActionController
             if (is_null($contract)) {
                 $this->getResponse()->setStatusCode(422);
                 return new JsonModel([
-                    'error' => 'Il cliente non ha un contratto valido con Cartasi'
+                    'error' => $translator->translate('Il cliente non ha un contratto valido con Cartasi')
                 ]);
             }
 
@@ -236,7 +237,7 @@ class PaymentsController extends AbstractActionController
             } catch (FleetNotFoundException $e) {
                 $this->getResponse()->setStatusCode(422);
                 return new JsonModel([
-                    'error' => 'La flotta selezionata non è valida'
+                    'error' => $translator->translate('La flotta selezionata non è valida')
                 ]);
             }
 
@@ -250,7 +251,7 @@ class PaymentsController extends AbstractActionController
             if (!$response->getCompletedCorrectly()) {
                 $this->response->setStatusCode(402);
                 return new JsonModel([
-                    'error' => 'Il tentativo di pagamento non è andato a buon fine. Il cliente è stato notificato da Cartasi'
+                    'error' => $translator->translate('Il tentativo di pagamento non è andato a buon fine. Il cliente è stato notificato da Cartasi')
                 ]);
             }
 
@@ -265,12 +266,12 @@ class PaymentsController extends AbstractActionController
             );
 
             return new JsonModel([
-                'message' => 'Il tentativo di pagamento è andato a buon fine. Il cliente è stato notificato da Cartasi'
+                'message' => $translator->translate('Il tentativo di pagamento è andato a buon fine. Il cliente è stato notificato da Cartasi')
             ]);
         } catch (\Exception $e) {
             $this->response->setStatusCode(500);
             return new JsonModel([
-                'error' => 'C\'è stato un errore durante la procedura di pagamento: ' . $e->getMessage()
+                'error' => $translator->translate('C\'è stato un errore durante la procedura di pagamento: ') . $e->getMessage()
             ]);
         }
     }
@@ -310,6 +311,7 @@ class PaymentsController extends AbstractActionController
 
     public function faresAction()
     {
+        $translator = $this->TranslatorPlugin();
         $form = $this->faresForm;
 
         if ($this->getRequest()->isPost()) {
@@ -319,12 +321,12 @@ class PaymentsController extends AbstractActionController
             if ($form->isValid()) {
                 try {
                     if ($this->faresService->saveData($form->getData())) {
-                        $this->flashMessenger()->addSuccessMessage('Tariffa creata con successo!');
+                        $this->flashMessenger()->addSuccessMessage($translator->translate('Tariffa creata con successo!'));
                     } else {
-                        $this->flashMessenger()->addInfoMessage('Tariffa invariata');
+                        $this->flashMessenger()->addInfoMessage($translator->translate('Tariffa invariata'));
                     }
                 } catch (\Exception $e) {
-                    $this->flashMessenger()->addErrorMessage('Si è verificato un errore applicativo. L\'assistenza tecnica è già al corrente, ci scusiamo per l\'inconveniente');
+                    $this->flashMessenger()->addErrorMessage($translator->translate('Si è verificato un errore applicativo. L\'assistenza tecnica è già al corrente, ci scusiamo per l\'inconveniente'));
 
                 }
 

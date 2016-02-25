@@ -86,7 +86,7 @@ $(function() {
             {
                 targets: [2, 3],
                 "render": function (data, type, row) {
-                    return '<a href="/customers/edit/'+row.cu.id+'" title="Visualizza profilo di '+row.cu.name+' '+row.cu.surname+' ">'+data+'</a>';
+                    return '<a href="/customers/edit/'+row.cu.id+'" title="' + translate("showProfile") + ' '+row.cu.name+' '+row.cu.surname+' ">'+data+'</a>';
                 }
             },
             {
@@ -123,26 +123,26 @@ $(function() {
         "pageLength": 100,
         "pagingType": "bootstrap_full_number",
         "language": {
-            "sEmptyTable":     "Nessuna corsa presente nella tabella",
-            "sInfo":           "Vista da _START_ a _END_ di _TOTAL_ elementi",
-            "sInfoEmpty":      "Vista da 0 a 0 di 0 elementi",
-            "sInfoFiltered":   "(filtrati da _MAX_ elementi totali)",
+            "sEmptyTable":     translate("sTripEmptyTable"),
+            "sInfo":           translate("sInfo"),
+            "sInfoEmpty":      translate("sInfoEmpty"),
+            "sInfoFiltered":   translate("sInfoFiltered"),
             "sInfoPostFix":    "",
             "sInfoThousands":  ",",
-            "sLengthMenu":     "Visualizza _MENU_ elementi",
-            "sLoadingRecords": "Caricamento...",
-            "sProcessing":     "Elaborazione in corso...",
-            "sSearch":         "Cerca:",
-            "sZeroRecords":    "La ricerca non ha portato alcun risultato.",
+            "sLengthMenu":     translate("sLengthMenu"),
+            "sLoadingRecords": translate("sLoadingRecords"),
+            "sProcessing":     translate("sProcessing"),
+            "sSearch":         translate("sSearch"),
+            "sZeroRecords":    translate("sZeroRecords"),
             "oPaginate": {
-                "sFirst":      "Inizio",
-                "sPrevious":   "Precedente",
-                "sNext":       "Successivo",
-                "sLast":       "Fine"
+                "sFirst":      translate("oPaginateFirst"),
+                "sPrevious":   translate("oPaginatePrevious"),
+                "sNext":       translate("oPaginateNext"),
+                "sLast":       translate("oPaginateLast"),
             },
             "oAria": {
-                "sSortAscending":  ": attiva per ordinare la colonna in ordine crescente",
-                "sSortDescending": ": attiva per ordinare la colonna in ordine decrescente"
+                "sSortAscending":   translate("sSortAscending"),
+                "sSortDescending":  translate("sSortDescending")
             }
         }
     });
@@ -197,7 +197,7 @@ $(function() {
     function renderInfoButton(data)
     {
         return '<div class="btn-group">' +
-                    '<a href="/trips/details/' + data + '" class="btn btn-default">Dettagli</a> ' +
+                    '<a href="/trips/details/' + data + '" class="btn btn-default">' + translate("details") + '</a> ' +
                 '</div>';
     }
 
