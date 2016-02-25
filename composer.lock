@@ -1426,7 +1426,7 @@
             "source": {
                 "type": "git",
                 "url": "ssh://git@git.mvlabs.it:4222/internals/zf2-multilanguage.git",
-                "reference": "684ff8790cd9b8437d92a9d428be3c225a3f8bbb"
+                "reference": "8835c4611a7351b9bb9c0021a39d55457f8dae64"
             },
             "require": {
                 "php": ">=5.4"
@@ -1455,7 +1455,7 @@
                 "multilanguage",
                 "zf2"
             ],
-            "time": "2015-12-09 09:54:47"
+            "time": "2016-02-25 07:58:04"
         },
         {
             "name": "natxet/CssMin",
