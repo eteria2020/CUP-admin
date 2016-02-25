@@ -45,6 +45,5 @@
             "SharengoCore": "module/SharengoCore/src",
             "Cartasi": "module/Cartasi/src"
         }
-    },
-    "minimum-stability": "dev"
+    }
 }
