@@ -1,16 +1,16 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Sharengo\n"
-"POT-Creation-Date: 2016-02-24 17:17+0100\n"
-"PO-Revision-Date: 2016-02-24 17:47+0100\n"
+"POT-Creation-Date: 2016-02-25 06:46+0100\n"
+"PO-Revision-Date: 2016-02-25 06:56+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: en\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 1.6.10\n"
-"X-Poedit-Basepath: /home/andrea/mvapps/sharengo/sharengo-admin/module/\n"
+"X-Generator: Poedit 1.8.6\n"
+"X-Poedit-Basepath: E:/omniaevo-twist/sharengo-admin/module\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Poedit-KeywordsList: translate\n"
 "X-Poedit-SourceCharset: UTF-8\n"
@@ -155,7 +155,7 @@ msgstr "Car modified successfully!"
 
 #: Application/src/Application/Controller/CarsController.php:213
 msgid "Danni auto modificati con successo!"
-msgstr "Car modified edited successfully!"
+msgstr "Car damages edited successfully!"
 
 #: Application/src/Application/Controller/CarsController.php:248
 msgid "Auto rimossa con successo!"
@@ -163,7 +163,7 @@ msgstr "Car removed successfully!"
 
 #: Application/src/Application/Controller/CarsController.php:276
 msgid "Comando eseguito con successo"
-msgstr "Command executed succesffully"
+msgstr "Command executed successfully"
 
 #: Application/src/Application/Controller/CarsController.php:280
 msgid "Errore nell'esecuzione del comando"
@@ -190,7 +190,7 @@ msgstr "Changes saved successfully!"
 
 #: Application/src/Application/Controller/CustomersController.php:191
 msgid "Dati inseriti non validi"
-msgstr "Invalid inserted data"
+msgstr "Invalid data"
 
 #: Application/src/Application/Controller/CustomersController.php:341
 msgid "Contratto disabilitato correttamente!"
@@ -239,12 +239,12 @@ msgstr "Deactivation removed"
 
 #: Application/src/Application/Controller/EditTripController.php:102
 msgid "La corsa non può essere modificata perché non è conclusa."
-msgstr "The trip can't be edited because it is not included"
+msgstr "The trip can't be edited because it is not finished"
 
 #: Application/src/Application/Controller/EditTripController.php:104
 msgid ""
 "La data specificata non può essere precedente alla data di inizio della corsa"
-msgstr "The specified date can't be preceding the start date of the trip"
+msgstr "The specified date can't be before the trip start date"
 
 #: Application/src/Application/Controller/EditTripController.php:106
 msgid ""
@@ -266,7 +266,7 @@ msgstr "The customer doesn't have a valid contract with CartaSi"
 
 #: Application/src/Application/Controller/PaymentsController.php:240
 msgid "La flotta selezionata non è valida"
-msgstr "The selected fleet is not valid"
+msgstr "The selected fleet is invalid"
 
 #: Application/src/Application/Controller/PaymentsController.php:254
 msgid ""
@@ -401,23 +401,23 @@ msgstr "Italian"
 
 #: Application/src/Application/Form/CustomerFieldset.php:199
 msgid "tedesco"
-msgstr "German"
+msgstr "german"
 
 #: Application/src/Application/Form/CustomerFieldset.php:200
 msgid "francese"
-msgstr "French"
+msgstr "french"
 
 #: Application/src/Application/Form/CustomerFieldset.php:201
 msgid "spagnolo"
-msgstr "Spanish"
+msgstr "spanish"
 
 #: Application/src/Application/Form/CustomerFieldset.php:202
 msgid "inglese"
-msgstr "English"
+msgstr "english"
 
 #: Application/src/Application/Form/CustomerFieldset.php:203
 msgid "cinese"
-msgstr "Chinese"
+msgstr "chinese"
 
 #: Application/src/Application/Form/CustomerFieldset.php:204
 msgid "russo"
@@ -425,7 +425,7 @@ msgstr "russian"
 
 #: Application/src/Application/Form/CustomerFieldset.php:205
 msgid "portoghese"
-msgstr "Portuguese"
+msgstr "portuguese"
 
 #: Application/src/Application/Form/InputData/CloseTripDataFactory.php:36
 msgid "Impossibile trovare la corsa corretta"
@@ -433,11 +433,11 @@ msgstr "Impossible to retrieve the correct trip"
 
 #: Application/src/Application/Form/InputData/CloseTripDataFactory.php:40
 msgid "Per favore seleziona una data"
-msgstr "Please select a date time"
+msgstr "Please select a date"
 
 #: Application/src/Application/Form/InputData/CloseTripDataFactory.php:46
 msgid "La data inserita non è corretta"
-msgstr "Impossible to parse the provided datetime"
+msgstr "Impossible to parse the provided date"
 
 #: Application/src/Application/Form/InputData/CloseTripDataFactory.php:50
 msgid "Non è possibile utilizzare una data futura"
@@ -552,7 +552,7 @@ msgstr "SHARENGO - USER DISABLED NOTIFICATION"
 
 #: SharengoCore/src/SharengoCore/Service/CustomersService.php:519
 msgid "SHARENGO - RIABILITAZIONE UTENTE"
-msgstr "SHARENGO - RE ENABLE USER"
+msgstr "SHARENGO - ENABLE USER"
 
 #: SharengoCore/src/SharengoCore/Service/ReservationsService.php:114
 msgid "PRENOTAZIONE DI SISTEMA"
@@ -569,7 +569,7 @@ msgstr "ADD AUTO"
 #: Application/view/application/pois/edit.phtml:13
 #: Application/view/application/trips/details.phtml:22
 msgid "Torna alla lista"
-msgstr "Back to the list"
+msgstr "Back to list"
 
 #: Application/view/application/cars/add.phtml:28
 #: Application/view/application/cars/edit-tab.phtml:15
@@ -587,7 +587,7 @@ msgstr "Plate"
 #: Application/view/application/cars/add.phtml:39
 #: Application/view/application/cars/edit-tab.phtml:22
 msgid "Costruttore"
-msgstr "manufacturer"
+msgstr "Manufacturer"
 
 #: Application/view/application/cars/add.phtml:50
 #: Application/view/application/cars/edit-tab.phtml:33
@@ -605,7 +605,7 @@ msgstr "Id"
 #: Application/view/application/cars/index.phtml:86
 #: Application/view/application/payments/extra.phtml:22
 #: Application/view/application/trips/index.phtml:41
-#: Application/view/application/trips/index.phtml:104
+#: Application/view/application/trips/index.phtml:105
 msgid "Flotta"
 msgstr "Fleet"
 
@@ -1736,7 +1736,7 @@ msgstr "Mark as resolved"
 
 #: Application/view/application/payments-csv/details.phtml:159
 msgid "Id Webuser"
-msgstr "Id Webuser"
+msgstr "Webuser Id"
 
 #: Application/view/application/payments-csv/details.phtml:178
 msgid "Nuova Nota"
@@ -1752,7 +1752,7 @@ msgstr "Customer id"
 
 #: Application/view/application/payments/extra.phtml:50
 msgid "Aggiungi addebito"
-msgstr "Add charges"
+msgstr "Add charge"
 
 #: Application/view/application/payments/extra.phtml:57
 msgid "Effettua pagamento"
@@ -1791,7 +1791,7 @@ msgstr "Discount"
 #: Application/view/application/payments/retry.phtml:122
 #: Application/view/application/trips-not-payed/list.phtml:39
 #: Application/view/application/trips/details.phtml:33
-#: Application/view/application/trips/index.phtml:103
+#: Application/view/application/trips/index.phtml:104
 #: Application/view/application/zones/prices-tab.phtml:9
 msgid "Costo"
 msgstr "Cost"
@@ -2089,6 +2089,7 @@ msgid "SI"
 msgstr "YES"
 
 #: Application/view/application/trips/cost-tab.phtml:208
+#: Application/view/application/trips/index.phtml:103
 #: Application/view/application/trips/info-tab.phtml:164
 msgid "Pagata"
 msgstr "Payed"
@@ -2615,34 +2616,34 @@ msgstr "Penalty"
 msgid "Causale"
 msgstr "Cause"
 
-#: sharengo-cartasi/view/cartasi/cartasi-payments/rejected-first-payment.phtml:10
+#: Cartasi/view/cartasi/cartasi-payments/rejected-first-payment.phtml:10
 msgid "Pagamento annullato o rifutato"
 msgstr "Payment canceled or rejected"
 
-#: sharengo-cartasi/view/cartasi/cartasi-payments/rejected-first-payment.phtml:11
+#: Cartasi/view/cartasi/cartasi-payments/rejected-first-payment.phtml:11
 msgid "La procedura di pagamento con Cartasi ha dato esito "
 msgstr "The payment with Cartasi has been successfull"
 
-#: sharengo-cartasi/view/cartasi/cartasi-payments/return-first-payment.phtml:11
+#: Cartasi/view/cartasi/cartasi-payments/return-first-payment.phtml:11
 msgid "Attivazione completata"
 msgstr "Activation completed"
 
-#: sharengo-cartasi/view/cartasi/cartasi-payments/return-first-payment.phtml:12
+#: Cartasi/view/cartasi/cartasi-payments/return-first-payment.phtml:12
 msgid "Ti confermiamo la ricezione del pagamento"
 msgstr "We confirm we have received the payment"
 
-#: sharengo-cartasi/view/cartasi/cartasi-payments/return-first-payment.phtml:22
+#: Cartasi/view/cartasi/cartasi-payments/return-first-payment.phtml:22
 msgid "Si è verificato un problema"
 msgstr "An error occurred"
 
-#: sharengo-cartasi/view/cartasi/cartasi-payments/return-first-payment.phtml:23
+#: Cartasi/view/cartasi/cartasi-payments/return-first-payment.phtml:23
 msgid "Il pagamento non è andato a buon fine."
 msgstr "The payment has not been successful"
 
-#: sharengo-cartasi/view/cartasi/cartasi-payments/return-first-payment.phtml:24
+#: Cartasi/view/cartasi/cartasi-payments/return-first-payment.phtml:24
 msgid "Il messaggio di errore che abbiamo ricevuto è: \""
 msgstr "The error message received is: \""
 
-#: sharengo-cartasi/view/cartasi/cartasi-payments/return-first-payment.phtml:25
+#: Cartasi/view/cartasi/cartasi-payments/return-first-payment.phtml:25
 msgid "Contattare l'assistenza per maggiori informazioni"
 msgstr "Please contact support for further informations"
