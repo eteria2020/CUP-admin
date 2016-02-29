@@ -1,8 +1,6 @@
 $(function() {
 
-    var orderSpecs = {
-        1: "desc"
-    };
+    var orderSpecs = [[1, 'desc']];
 
     var languageSpecs = {
         "sEmptyTable":     translate("sEmptyTable"),
@@ -20,7 +18,7 @@ $(function() {
             "sFirst":      translate("oPaginateFirst"),
             "sPrevious":   translate("oPaginatePrevious"),
             "sNext":       translate("oPaginateNext"),
-            "sLast":       translate("oPaginateLast"),
+            "sLast":       translate("oPaginateLast")
         },
         "oAria": {
             "sSortAscending":   translate("sSortAscending"),

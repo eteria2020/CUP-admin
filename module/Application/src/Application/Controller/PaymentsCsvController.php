@@ -79,6 +79,7 @@ class PaymentsCsvController extends AbstractActionController
     {
         $id = (int) $this->params()->fromRoute('id', 0);
         $csvAnomaly = $this->csvService->getAnomalyById($id);
+        $notes = $this->csvService->getAnomalyNotes($csvAnomaly);
 
         if (!$csvAnomaly instanceof CartasiCsvAnomaly) {
             $this->response->setStatusCode(Response::STATUS_CODE_404);
@@ -97,7 +98,8 @@ class PaymentsCsvController extends AbstractActionController
 
         return new ViewModel([
             'csvAnomaly' => $csvAnomaly,
-            'customer' => $customer
+            'customer' => $customer,
+            'notes' => $notes
         ]);
     }
 
@@ -111,7 +113,7 @@ class PaymentsCsvController extends AbstractActionController
             try {
                 $postData = $this->getRequest()->getPost()->toArray();
                 $content = $postData['new-note'];
-                $this->csvService->addNoteToAnomaly($csvAnomaly, $this->identity(), $content);
+                $this->csvService->createAnomalyNote($csvAnomaly, $this->identity(), $content);
                 $this->flashMessenger()->addSuccessMessage($translator->translate('Nota aggiunta con successo'));
             } catch (NoteContentNotValidException $e) {
                 $this->getResponse()->setStatusCode(Response::STATUS_CODE_500);
