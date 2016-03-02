@@ -8,6 +8,7 @@ $(document).ready(function () {
             })
             .done(function (data) {
                 alert(data.message);
+                $("#assignPromoBtn").hide();
             })
             .fail(function (data) {
                 alert(data.message);
@@ -18,8 +19,8 @@ $(document).ready(function () {
         var url = $("#confirmTripPaymentUrl").val();
         $.post(url)
             .done(function (data) {
-                $("#setTripAsPayedBtn").addClass('disabled');
                 alert(data.message);
+                $("#setTripAsPayedBtn").hide();
             })
             .fail(function (data) {
                 alert(data.message);
