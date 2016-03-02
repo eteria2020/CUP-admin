@@ -39,7 +39,8 @@
         "mvlabs/zf2-multilanguage": "dev-master"
     },
     "require-dev": {
-        "phpunit/phpunit": "^4.8"
+        "phpunit/phpunit": "^4.8",
+        "phpmd/phpmd" : "@stable"
     },
     "autoload-dev": {
         "psr-0": {

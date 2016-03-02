@@ -346,6 +346,30 @@ class CustomersController extends AbstractActionController
         return new JsonModel();
     }
 
+    public function assignPromoCodeAjaxAction()
+    {
+        $translator = $this->TranslatorPlugin();
+        $customer = $this->getCustomer();
+        $postData = $this->getRequest()->getPost()->toArray();
+        try {
+            /** @var PromoCodes $promoCode */
+            $promoCode = $this->promoCodeService->getPromoCode($postData['promocode']);
+
+            $this->customersService->addBonusFromPromoCode($customer, $promoCode);
+
+            $this->flashMessenger()->addSuccessMessage($translator->translate('Operazione completata con successo!'));
+        } catch (BonusAssignmentException $e) {
+            $this->flashMessenger()->addErrorMessage($e->getMessage());
+            return true;
+        } catch (\Exception $e) {
+            $this->flashMessenger()->addErrorMessage($translator->translate('Si è verificato un errore applicativo. L\'assistenza tecnica è già al corrente, ci scusiamo per l\'inconveniente'));
+
+            return true;
+        }
+
+        return true;
+    }
+
     public function assignPromoCodeAction()
     {
         $translator = $this->TranslatorPlugin();

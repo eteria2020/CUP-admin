@@ -2,7 +2,6 @@
     "extends": "eslint:recommended",
     "rules": {
         "quotes": 0,
-        "no-alert": 0,
-        "no-unused-vars": [2, {"vars": "local", "args": "after-used"}]
+        "no-alert": 0
     }
 }

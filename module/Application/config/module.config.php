@@ -287,6 +287,18 @@ return [
                             ],
                         ],
                     ],
+                    'assign-promo-code-ajax' => [
+                        'type'    => 'Segment',
+                        'options' => [
+                            'route'    => '/assign-promo-code-ajax/:id',
+                            'constraints' => [
+                                'id' => '[0-9]*'
+                            ],
+                            'defaults' => [
+                                'action'        => 'assign-promo-code-ajax',
+                            ],
+                        ],
+                    ],
                     'add-bonus' => [
                         'type'    => 'Segment',
                         'options' => [
@@ -888,6 +900,18 @@ return [
                             'route' => '/pay-extra',
                             'defaults' => [
                                 'action' => 'pay-extra'
+                            ]
+                        ]
+                    ],
+                    'set-trip-as-payed' => [
+                        'type' => 'Segment',
+                        'options' => [
+                            'route' => '/set-trip-payed/:id',
+                            'constraints' => [
+                                'id'    => '[0-9]*'
+                            ],
+                            'defaults' => [
+                                'action' => 'set-trip-as-payed-ajax'
                             ]
                         ]
                     ],

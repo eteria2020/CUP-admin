@@ -126,11 +126,8 @@ class PaymentsController extends AbstractActionController
     protected function getRecordsFiltered($filters, $totalTripPayments)
     {
         if (empty($filters['searchValue']) && !isset($filters['columnValueWithoutLike'])) {
-
             return $totalTripPayments;
-
         } else {
-
             $filters['withLimit'] = false;
 
             return count($this->tripPaymentsService->getFailedPaymentsData($filters));
@@ -196,6 +193,28 @@ class PaymentsController extends AbstractActionController
             'types' => $types,
             'penalties' => $penalties
         ]);
+    }
+
+
+    public function setTripAsPayedAjaxAction()
+    {
+        $translator = $this->TranslatorPlugin();
+        $id = (int)$this->params()->fromRoute('id', 0);
+        $tripPayment = $this->tripPaymentsService->getTripPaymentById($id);
+
+        try {
+            $this->tripPaymentsService->setTripPaymentPayed($tripPayment);
+
+            $this->getResponse()->setStatusCode(200);
+            return new JsonModel([
+                'message' => $translator->translate('La corsa è stata segnata come pagata')
+            ]);
+        } catch (\Exception $e) {
+            $this->getResponse()->setStatusCode(500);
+            return new JsonModel([
+                'error' => $translator->translate('si è verificato un errore')
+            ]);
+        }
     }
 
     public function payExtraAction()
