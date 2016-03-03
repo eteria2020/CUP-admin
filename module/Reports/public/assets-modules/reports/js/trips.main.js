@@ -1,4 +1,4 @@
-/* global $ dc document window d3 clearTimeout setTimeout crossfilter */
+/* global translate:true, $ dc document window d3 clearTimeout setTimeout crossfilter */
 
 // Check if var $.oe has been declared
 if (typeof $.oe === "undefined") {
@@ -14,9 +14,9 @@ $.oe.trips = {};
 $.oe.filters = {};
 
 $.oe.today = new Date();
-$.oe.todayFormatted = $.oe.today.getFullYear() + '-' +
-    ("0" + ($.oe.today.getMonth() + 1)).slice(-2) + '-' +
-    ("0" + $.oe.today.getDate()).slice(-2);
+$.oe.todayFormatted = $.oe.today.getFullYear() + "-" +
+("0" + ($.oe.today.getMonth() + 1)).slice(-2) + "-" +
+("0" + $.oe.today.getDate()).slice(-2);
 
 // Charts definition
 $.oe.charts = {
@@ -34,7 +34,7 @@ $.oe.timeout = 0;
 ////////////////////////////////////////////////
 
 // The magic!
-$(document).ready(function(){
+$(document).ready(function () {
     $.oe.fn.getCityData($.oe.fn.getCharts);
 
     // Print the DC.js version
@@ -43,27 +43,25 @@ $(document).ready(function(){
 });
 
 // Window Resize Action Bind
-$(window).resize(function() {
+$(window).resize(function () {
     clearTimeout($.oe.timeout);
     $.oe.timeout = setTimeout($.oe.fn.resizeCharts, 500);
 });
 
-$.oe.fn.getCharts = function(){
+$.oe.fn.getCharts = function () {
     $.oe.fn.deactivePageInteraction();
 
     // Get the data records
     d3.csv("/reports/api/get-all-trips")
         .header("Content-Type", "application/x-www-form-urlencoded")
-        .post("end_date=" + $.oe.todayFormatted, function (error, trips_record)
-        {
+        .post("end_date=" + $.oe.todayFormatted, function (error, trips_record) {
             // Variables
             var formatDate = d3.time.format("%Y-%m-%d %H:%M:%S"),
                 ddmin = null,
                 ddmax = null;
 
             //     A little coercion, since the CSV is untyped.
-            trips_record.forEach(function(d)
-            {
+            trips_record.forEach(function (d) {
                 d.dd = formatDate.parse(d.time_beginning_parsed);
                 if (ddmin === null || d.dd < ddmin) {
                     ddmin = d.dd;
@@ -79,44 +77,53 @@ $.oe.fn.getCharts = function(){
 
             var
                 // dc.barChart("#days-chart")
-                date_beginning = $.oe.trips.dimension(function(d) {
+                date_beginning = $.oe.trips.dimension(function (d) {
                     return d.dd;
                 }),
                 days = date_beginning.group(d3.time.day),
 
                 // dc.rowChart("#day-of-week-chart")
-                dayOfWeek = $.oe.trips.dimension(function(d) {
-                    var name = ["", "0.Lun", "1.Mar", "2.Mer", "3.Gio", "4.Ven", "5.Sab", "6.Dom"];
+                dayOfWeek = $.oe.trips.dimension(function (d) {
+                    var name = [
+                        "",
+                        "0." + translate("Lunedi\u0300"),
+                        "1." + translate("Martedi\u0300"),
+                        "2." + translate("Mercoledi\u0300"),
+                        "3." + translate("Giovedi\u0300"),
+                        "4." + translate("Venerdi\u0300"),
+                        "5." + translate("Sabato"),
+                        "6." + translate("Domenica")
+                    ];
                     return name[d.time_dow];
                 }),
                 dayOfWeeks = dayOfWeek.group(),
 
                 // dc.barChart("#beginning-hour-chart")
-                beginningHour = $.oe.trips.dimension(function(d) {
+                beginningHour = $.oe.trips.dimension(function (d) {
                     return d.dd.getHours();
                 }),
                 beginningHours = beginningHour.group(),
 
                 // dc.barChart("#duration-chart")
-                duration = $.oe.trips.dimension(function(d) {
+                duration = $.oe.trips.dimension(function (d) {
                     return Math.min(d.time_total_minute, 61);
                 }),
                 durations = duration.group(),
 
                 // dc.pieChart("#gender-chart")
-                gender = $.oe.trips.dimension(function(d) {
+                gender = $.oe.trips.dimension(function (d) {
                     return d.customer_gender;
                 }),
                 genders = gender.group(),
 
                 // dc.pieChart("#city-chart")
-                city = $.oe.trips.dimension(function(d) {
+                city = $.oe.trips.dimension(function (d) {
                     return d.fleet_id;
                 }),
                 citys = city.group(),
 
                 // dc.pieChart("#age-chart")
-                age = $.oe.trips.dimension(function(d){
+                age = $.oe.trips.dimension(function (d) {
                     if (d.customer_age >= 18 && d.customer_age <= 24) {
                         return 0;
                     } else if (d.customer_age >= 25 && d.customer_age <= 34) {
@@ -133,12 +140,11 @@ $.oe.fn.getCharts = function(){
                 }),
                 ages = age.group();
 
-
             date_beginning.filterAll();
             $.oe.charts.day.width(900)
-                .margins({top: 30, left: 40, right: 10, bottom: 20})
+                .margins({ top: 30, left: 40, right: 10, bottom: 20 })
                 .renderLabel(false)
-                .x(d3.time.scale().domain(d3.extent(trips_record, function(d) { return d.dd; })))
+                .x(d3.time.scale().domain(d3.extent(trips_record, function (d) { return d.dd; })))
                 .xUnits(d3.time.days)
                 .height(250)
                 .gap(2)
@@ -165,13 +171,13 @@ $.oe.fn.getCharts = function(){
                 .dimension(age)
                 .group(ages)
                 .label(function (d) {
-                    switch(d.key){
+                    switch (d.key) {
                     case 0: return "18-24";
                     case 1: return "25-34";
                     case 2: return "35-44";
                     case 3: return "45-54";
                     case 4: return "55-65";
-                    case 5: return "Over 64";
+                    case 5: return translate("oltre") + " 64";
                     }
                 });
 
@@ -183,17 +189,14 @@ $.oe.fn.getCharts = function(){
                 .dimension(gender)
                 .group(genders)
                 .label(function (d) {
-                    var lbl = d.key === "male" ? "Uomini " : "Donne ",
+                    var lbl = d.key === "male" ? translate("Uomini") + " " : translate("Donne") + " ",
                         percent = 0;
-
-                    if ($.oe.charts.gender.hasFilter() && !$.oe.charts.gender.hasFilter(d.key)){
+                    if ($.oe.charts.gender.hasFilter() && !$.oe.charts.gender.hasFilter(d.key)) {
                         percent = 0;
-                    }else{
+                    } else {
                         percent = (d.value / $.oe.trips.groupAll().reduceCount().value() * 100);
                     }
-
                     lbl += percent.toFixed(2) + "%";
-
                     return lbl;
                     //return d.key == "male" ? "Uomini " + Math.round((d.value*100)/(gender.top(Number.POSITIVE_INFINITY).length)) + "%": "Donne " + Math.round((d.value*100)/(gender.top(Number.POSITIVE_INFINITY).length)) + "%";
                 });
@@ -206,15 +209,15 @@ $.oe.fn.getCharts = function(){
                 .dimension(city)
                 .group(citys)
                 .label(function (d) {
-                    var lbl = $.grep($.oe.city, function(e){
+                    var lbl = $.grep($.oe.city, function (e) {
                             return e.fleet_id == d.key;
                         })[0].fleet_name,
                         percent = 0;
 
 
-                    if ($.oe.charts.city.hasFilter() && !$.oe.charts.city.hasFilter(d.key)){
+                    if ($.oe.charts.city.hasFilter() && !$.oe.charts.city.hasFilter(d.key)) {
                         percent = 0;
-                    }else{
+                    } else {
                         percent = (d.value / $.oe.trips.groupAll().reduceCount().value() * 100);
                     }
 
@@ -227,14 +230,24 @@ $.oe.fn.getCharts = function(){
             dayOfWeek.filterAll();
             $.oe.charts.dayOfWeek.width(400)
                 .height(250)
-                .margins({top: 20, left: 10, right: 10, bottom: 20})
+                .margins({ top: 20, left: 10, right: 10, bottom: 20 })
                 .group(dayOfWeeks)
                 .dimension(dayOfWeek)
                 .elasticX(true)
                 .label(function (d) {
                     return d.key.split(".")[1];//return d.key;
                 })
-                .ordering(function() {return ["Lun", "Mar", "Mer", "Gio", "Ven", "Sab", "Dom"]; })
+                .ordering(function () {
+                    return [
+                        translate("Lunedi\u0300"),
+                        translate("Martedi\u0300"),
+                        translate("Mercoledi\u0300"),
+                        translate("Giovedi\u0300"),
+                        translate("Venerdi\u0300"),
+                        translate("Sabato"),
+                        translate("Domenica")
+                    ];
+                })
                 .title(function (d) {
                     return d.value;
                 });
@@ -243,7 +256,7 @@ $.oe.fn.getCharts = function(){
             beginningHour.filterAll();
             $.oe.charts.beginningHour.width(450)
                 .height(250)
-                .margins({top: 50, right: 10, bottom: 30, left: 50})
+                .margins({ top: 50, right: 10, bottom: 30, left: 50 })
                 .dimension(beginningHour)
                 .group(beginningHours)
                 .elasticY(true)
@@ -252,22 +265,22 @@ $.oe.fn.getCharts = function(){
                 .round(d3.time.hour.round)
                 .x(
                     d3.scale.linear()
-                    .domain([0, 24])
-                )
+                        .domain([0, 24])
+                    )
                 .renderHorizontalGridLines(true)
                 .on("filtered", function () {
                     $.oe.fn.rearrangeFilterHelper("#beginning-hour");
                 });
             $.oe.charts.beginningHour.xAxis().tickFormat(
-            function (v) {
-                return v + 'h';
-            });
+                function (v) {
+                    return v + "h";
+                });
             $.oe.charts.beginningHour.yAxis().ticks(5);
 
             duration.filterAll();
             $.oe.charts.duration.width(450)
                 .height(250)
-                .margins({top: 50, right: 10, bottom: 30, left: 50})
+                .margins({ top: 50, right: 10, bottom: 30, left: 50 })
                 .dimension(duration)
                 .group(durations)
                 .elasticY(true)
@@ -276,16 +289,16 @@ $.oe.fn.getCharts = function(){
                 .round(d3.time.minute.round)//dc.round.floor)
                 .x(
                     d3.scale.linear()
-                    .domain([0, 60])
-                    .rangeRound([0, 10 * 60])
-                )
+                        .domain([0, 60])
+                        .rangeRound([0, 10 * 60])
+                    )
                 .renderHorizontalGridLines(true)
                 .on("filtered", function () {
                     $.oe.fn.rearrangeFilterHelper("#duration");
                 });
             $.oe.charts.duration.xAxis().tickFormat(
                 function (v) {
-                    return v + 'm';
+                    return v + "m";
                 });
             $.oe.charts.duration.yAxis().ticks(5);
 
@@ -293,9 +306,9 @@ $.oe.fn.getCharts = function(){
                 .dimension($.oe.trips)
                 .group($.oe.filters.all)
                 .html({
-                    some: "<strong>%filter-count</strong> selected out of <strong>%total-count</strong> records" +
-                        " | <a href=\"javascript:dc.filterAll(); dc.renderAll();\">Reset All</a>",
-                    all: "All records selected. Please click on the graph to apply filters."
+                    some: "<strong>%filter-count</strong> " + translate("selezionate di") + "<strong>%total-count</strong> " + translate("corse") +
+                    " | <a href=\"javascript:dc.filterAll(); dc.renderAll();\"\">" + translate("Azzera tutti i filtri") + "</a>",
+                    all: translate("Tutte le") + "<strong>%total-count</strong> " + translate("corse sono selezionate. Clicca su uno dei grafici per applicarne dei filtri.")
                 });
 
 
@@ -314,15 +327,15 @@ $.oe.fn.getCharts = function(){
             //$("div.panel-body > div:not(.chart-label) >span, div.panel-body > div:not(.chart-label) > a").appendTo("div.panel-heading");
             //$("div.panel-body > div:not(.chart-label) >span, div.panel-body > div:not(.chart-label) > a").clone().appendTo("div.panel-heading");
             //$("div.panel-body > div:not(.chart-label) >span, div.panel-body > div:not(.chart-label) > a")
-            $("svg").on( "click", function(){
+            $("svg").on("click", function () {
                 var parentID = "#" + $(this).parent().parent().parent().prop("id");
                 $.oe.fn.rearrangeFilterHelper(parentID);
             });
 
             // Coloring the Age Pie Chart Legend
-            $("div.panel .chart-label > span:nth-of-type(3)").css("color", $("div.panel#customer-age g.pie-slice._5 path").css("fill")) ;
-            $("div.panel .chart-label > span:nth-of-type(2)").css("color", $("div.panel#customer-age g.pie-slice._4 path").css("fill")) ;
-            $("div.panel .chart-label > span:nth-of-type(1)").css("color", $("div.panel#customer-age g.pie-slice._3 path").css("fill")) ;
+            $("div.panel .chart-label > span:nth-of-type(3)").css("color", $("div.panel#customer-age g.pie-slice._5 path").css("fill"));
+            $("div.panel .chart-label > span:nth-of-type(2)").css("color", $("div.panel#customer-age g.pie-slice._4 path").css("fill"));
+            $("div.panel .chart-label > span:nth-of-type(1)").css("color", $("div.panel#customer-age g.pie-slice._3 path").css("fill"));
 
             // Setting the correct svg width of the Map Chart
             // Doing this the chart is vertically centered
@@ -330,15 +343,15 @@ $.oe.fn.getCharts = function(){
 
             //dc.renderAll();
         }
-    );
+            );
 };
 
-$.oe.fn.activePageInteraction = function(){
-    $('div#over').remove();
+$.oe.fn.activePageInteraction = function () {
+    $("div#over").remove();
 };
 
-$.oe.fn.deactivePageInteraction = function(){
-    $('div.container > div.row').append('<div id="over"><span class="glyphicon glyphicon-refresh glyphicon-refresh-animate" aria-hidden="true"></span></div>');
+$.oe.fn.deactivePageInteraction = function () {
+    $("div.container > div.row").append("<div id=\"over\"><span class=\"glyphicon glyphicon- refresh glyphicon- refresh - animate\" aria-hidden=\"true\"></span></div>");
 };
 
 
@@ -347,7 +360,7 @@ $.oe.fn.deactivePageInteraction = function(){
  * This function resize the Charts, adapting it to the body width.
  *
  */
-$.oe.fn.resizeCharts = function(){
+$.oe.fn.resizeCharts = function () {
     var newWidth = $(".panel-body").width(),
         newRadiusChartsWidth = $(".col-xs-12 .panel-body").width();
 
@@ -392,7 +405,7 @@ $.oe.fn.resizeCharts = function(){
  * position to the bootstrap panel header
  *
  */
-$.oe.fn.rearrangeFilterHelper = function(parentID){
+$.oe.fn.rearrangeFilterHelper = function (parentID) {
     // Remove the actual helpers from the panel header
     $(parentID + " div.panel-heading .reset").remove();
 

@@ -26,6 +26,10 @@ position: relative;
 	text-align:center;
 }
 
+#element-counter input.input-sm.form-control{
+    min-width: 50px;
+}
+
 #info {
   position: absolute;
   height: 1px;

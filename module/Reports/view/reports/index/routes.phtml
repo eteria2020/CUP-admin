@@ -1,7 +1,11 @@
 <?php
 
 $this->inlineScript()
-    ->appendFile('/assets-modules/reports/js/vendor.routes.js');
+    ->appendFile('/assets-modules/reports/js/vendor.routes.js')
+    ->prependScript('
+        // Getting the actual city id (from the controller), and save it to js $.oe vars
+        var thisLanguage="'.$this->userLanguage.'";
+    ');
 
 if(isset($this->tripid)) {
     $this->inlineScript()->prependScript('var tripid='.$this->tripid.';');
@@ -13,18 +17,18 @@ $this->headLink()
 <!-- Begin page content -->
 <div class="container col-md-12">
     <div class="page-header">
-        <h1>Routes</h1>
+        <h1><?=$this->translate("Itinerari");?></h1>
     </div>
     <div class="row mainrow">
         <div class="col-md-12" id="menubar">
             <div class="btn-toolbar" role="toolbar">
                 <div class="col-md-2 labeldate">
-                    <span>Will be loaded</span>
+                    <span><?=$this->translate("Verranno caricate");?></span>
                 </div>
                     <div class="col-md-4 dataslider">
                         <input id="ex6" type="text" data-slider-min="15" data-slider-max="300" data-slider-step="25" data-slider-value="15"/>
                         <span id="ex6CurrentSliderValLabel">
-                            <span id="ex6SliderVal">15 routes before</span>
+                            <span id="ex6SliderVal"><?=$this->translate("le");?> 15 <?=$this->translate("corse precedenti a");?></span>
                         </span>
                     </div>
                     <div class="col-md-3">
@@ -36,20 +40,20 @@ $this->headLink()
                         </div>
                     </div>
                     <div class="col-md-3">
-                        <button id="dataupdate" type="button" class="btn btn-default" aria-label="Left Align">
-                            Update Data
+                        <button id="dataupdate" type="button" class="btn btn-default">
+                            <?=$this->translate("Aggiorna i dati");?>
                             <span class=" glyphicon glyphicon-refresh" aria-hidden="true"></span>
                         </button>
 
-                        <button id="hoverenable" type="button" class="btn btn-default" aria-label="Left Align">
-                            Hover
+                        <button id="hoverenable" type="button" class="btn btn-default">
+                            <?=$this->translate("Inseguimento");?>
                             <span class=" glyphicon glyphicon-screenshot" aria-hidden="true"></span>
                         </button>
                         <!--<button id="maintainer" type="button" class="btn btn-default" aria-label="Left Align">
                             Manutentori
                           <span class=" glyphicon glyphicon-wrench" aria-hidden="true"></span>
                         </button>-->
-                        <input id="maintainer" type="checkbox" name="maintainer" data-on-text="Clienti" data-off-text="Manutentori" data-on-color="info" data-label-width="20" checked>
+                        <input id="maintainer" type="checkbox" name="maintainer" data-on-text="<?=$this->translate("Clienti");?>" data-off-text="<?=$this->translate("Manutentori");?>" data-on-color="info" data-label-width="20" checked>
                     </div>
                 </div>
             <div class="clearfix visible-xs-block"></div>
@@ -62,7 +66,7 @@ $this->headLink()
         <div class="col-md-2 rightbar">
             <div id="steps" class="side panel panel-default">
                 <div class="panel-heading">
-                    <h3 class="panel-title">Trips </h3>
+                    <h3 class="panel-title"><?=$this->translate("Corse");?> </h3>
                 </div>
                 <ol class="list-group panel-body" id="trips"></ol>
             </div>

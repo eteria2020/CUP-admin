@@ -8,7 +8,6 @@ use Reports\Service\ReportsCsvService;
 use Reports\Exception\InvalidParameter;
 use Reports\Exception\MissingParameter;
 use Reports\Exception\CsvParsingException;
-
 // External Modules
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\JsonModel;

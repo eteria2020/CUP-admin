@@ -1,8 +1,9 @@
+/* global translate */
 // Define Glbal vars
-/* global thiscity:true, d3:true, dc:true, crossfilter:true, ol:true $ document window clearTimeoute setTimeout */
+/* global  d3:true, dc:true, crossfilter:true, ol:true $ document window setTimeout */
 
 // Check if var $.oe has been declared
-if (typeof $.oe === 'undefined') {
+if (typeof $.oe === "undefined") {
     $.extend({
         oe: {}
     });
@@ -14,7 +15,7 @@ $.ajaxSetup({
     timeout: 180000,        // set to 2minutes
     queue: false/*,
     error: function (msg) {
-        alert('error : ' + msg.d);
+        alert("error : " + msg.d);
     }*/
 });
 
@@ -22,11 +23,11 @@ $.ajaxSetup({
 $.oe.today = new Date();
 $.oe.aMonthAgo = new Date(); $.oe.aMonthAgo.setMonth($.oe.today.getMonth() - 1);
 
-$.oe.todayFormatted = $.oe.today.getFullYear() + '-' +
-    ("0" + ($.oe.today.getMonth() + 1)).slice(-2) + '-' +
+$.oe.todayFormatted = $.oe.today.getFullYear() + "-" +
+    ("0" + ($.oe.today.getMonth() + 1)).slice(-2) + "-" +
     ("0" + $.oe.today.getDate()).slice(-2);
-$.oe.aMonthAgoFormatted = $.oe.aMonthAgo.getFullYear() + '-' +
-    ("0" + ($.oe.aMonthAgo.getMonth() + 1)).slice(-2) + '-' +
+$.oe.aMonthAgoFormatted = $.oe.aMonthAgo.getFullYear() + "-" +
+    ("0" + ($.oe.aMonthAgo.getMonth() + 1)).slice(-2) + "-" +
     ("0" + $.oe.aMonthAgo.getDate()).slice(-2);
 
 $.oe.params = {
@@ -75,12 +76,12 @@ $.oe.fn.createButtons = function(){
         val.ol.coordinate = ol.proj.fromLonLat([val.params.center.longitude, val.params.center.latitude]);
 
         // Create a button for every city
-        $('#header-buttons').prepend(
-            '<button type="button" class="btn btn-default" id="pan-to-' +
+        $("#header-buttons").prepend(
+            "<button type=\"button\" class=\"btn btn-default\" id=\"pan-to-\"" +
             val.fleet_code +
-            '">Pan to ' +
+            "\">" + translate("Spostati su") + " " +
             val.fleet_name +
-            '</button>'
+            "</button>"
         );
 
 
@@ -100,12 +101,12 @@ $.oe.fn.createButtons = function(){
 
 $.oe.vectorSource = new ol.source.Vector({
     extractStyles: false,
-    projection: 'EPSG:3857',
+    projection: "EPSG:3857",
     loader:
         function(extent, resolution, projection) {
             $.ajax({
-                method: 'POST',
-                url: '/reports/api/get-trips-geo-data',
+                method: "POST",
+                url: "/reports/api/get-trips-geo-data",
                 data: {
                     start_date: $.oe.params.dateFrom,
                     end_date: $.oe.params.dateTo,
@@ -165,15 +166,9 @@ $.oe.layerHeatmap = new ol.layer.Heatmap({
 });
 
 $.oe.view = new ol.View({
-    // the view's initial state
-    center: ol.proj.transform([9.185, 45.465], 'EPSG:4326', 'EPSG:3857'),
+    // the view"s initial state
+    center: ol.proj.transform([9.185, 45.465], "EPSG:4326", "EPSG:3857"),
     zoom: 12
-});
-
-var raster = new ol.layer.Tile({
-    source: new ol.source.Stamen({
-        layer: 'toner'
-    })
 });
 
 $.oe.osmLayer = new ol.layer.Tile({
@@ -182,7 +177,7 @@ $.oe.osmLayer = new ol.layer.Tile({
 
 $.oe.map = new ol.Map({
     layers: [$.oe.osmLayer, $.oe.layerHeatmap],
-    target: 'map',
+    target: "map",
     view: $.oe.view,
     eventListeners: {"zoomend": $.oe.fn.zoomChanged}
 });
@@ -209,17 +204,17 @@ $.oe.fn.animate = function() {
 };
 
 
-$('#weight').slider({
+$("#weight").slider({
     formatter: function(value) {
         $.oe.params.baseWeight = value / 10;
         $.oe.layerHeatmap.getSource().changed();
-        return '' + value / 10;
+        return "" + value / 10;
     }
 });
 
 $("#change-begend").click(function(){
     $(this).text(function(i, text){
-        return text === "Change to Ending Location" ? "Change to Beginning Location" : "Change to Ending Location";
+        return text === translate("Passa a Posizione di Arrivo") ? translate("Passa a Posizione di Partenza") : translate("Passa a Posizione di Arrivo");
     });
 
     changeFilterBegEnd($.oe.params.begend === 0 ? 0 : 1);
@@ -227,7 +222,7 @@ $("#change-begend").click(function(){
 
 
 $.oe.fn.createDataPicker = function(){
-    $('.input-daterange').datepicker({
+    $(".input-daterange").datepicker({
         format: "yyyy-mm-dd",
         language: "it",
         end_date: $.oe.today,
@@ -235,7 +230,7 @@ $.oe.fn.createDataPicker = function(){
         autoclose: true
     });
 
-    $('.input-daterange')
+    $(".input-daterange")
         .datepicker()
         .on("changeDate", function(e) {
             if (e.target.id === "start"){
@@ -249,11 +244,11 @@ $.oe.fn.createDataPicker = function(){
 };
 
 $.oe.fn.activeMapInteraction = function(){
-    $('div#over').remove();
+    $("div#over").remove();
 };
 
 $.oe.fn.deactiveMapInteraction = function(){
-    $('.map').after('<div id="over"><span class="glyphicon glyphicon-refresh glyphicon-refresh-animate" aria-hidden="true"></span></div>');
+    $(".map").after("<div id=\"over\"><span class=\"glyphicon glyphicon-refresh glyphicon-refresh-animate\" aria-hidden=\"true\"></span></div>");
 };
 
 // Window Resize Action Bind

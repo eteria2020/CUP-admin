@@ -18,7 +18,7 @@ class ReportsServiceFactory implements FactoryInterface
         $database = $serviceLocator->get('doctrine.connection.orm_default');
 
         $mongoConfig = $serviceLocator->get('Configuration')['mongo'];
-        $mongoConnectionString = 'mongodb://' . $mongoConfig['server'] . ':' . $mongoConfig['port'];
+        $mongoConnectionString = 'mongodb://'.$mongoConfig['server'].':'.$mongoConfig['port'];
         $mongodb = new MongoDB\Driver\Manager($mongoConnectionString);
 
         return new ReportsService($database, $mongodb);

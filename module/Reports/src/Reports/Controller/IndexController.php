@@ -11,14 +11,28 @@ namespace Reports\Controller;
 
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
+use Application\Service\UserLanguageService;
 
 class IndexController extends AbstractActionController
 {
+    /**
+     * @var Application\Service\UserLanguageService
+     */
+    private $userLanguageService;
+
+    public function __construct(
+        UserLanguageService $userLanguageService
+    ) {
+        $this->userLanguageService = $userLanguageService;
+    }
+
     public function tripsAction()
     {
         $this->layout('layout/reports');
 
-        $viewModel = new ViewModel();
+        $viewModel = new ViewModel([
+            'userLanguage' => $this->userLanguageService->getCurrentLang(),
+        ]);
 
         return $viewModel;
     }
@@ -27,7 +41,9 @@ class IndexController extends AbstractActionController
     {
         $this->layout('layout/reports');
 
-        $viewModel = new ViewModel();
+        $viewModel = new ViewModel([
+            'userLanguage' => $this->userLanguageService->getCurrentLang(),
+        ]);
 
         return $viewModel;
     }
@@ -39,7 +55,8 @@ class IndexController extends AbstractActionController
         $tripid = $this->params()->fromRoute('tripid', null);
 
         $viewModel = new ViewModel([
-            'tripid' => $tripid
+            'tripid' => $tripid,
+            'userLanguage' => $this->userLanguageService->getCurrentLang(),
         ]);
 
         return $viewModel;
@@ -49,7 +66,9 @@ class IndexController extends AbstractActionController
     {
         $this->layout('layout/reports');
 
-        $viewModel = new ViewModel();
+        $viewModel = new ViewModel([
+            'userLanguage' => $this->userLanguageService->getCurrentLang(),
+        ]);
 
         return $viewModel;
     }
@@ -60,7 +79,10 @@ class IndexController extends AbstractActionController
 
         $city = $this->params()->fromRoute('id', 0);
 
-        $viewModel = new ViewModel(['city' => $city]);
+        $viewModel = new ViewModel([
+            'city' => $city,
+            'userLanguage' => $this->userLanguageService->getCurrentLang(),
+        ]);
 
         return $viewModel;
     }

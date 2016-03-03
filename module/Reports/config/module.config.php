@@ -189,10 +189,8 @@ return [
         ],
     ],
     'controllers' => [
-        'invokables' => [
-            'Reports\Controller\Index' => 'Reports\Controller\IndexController',
-        ],
         'factories' => [
+            'Reports\Controller\Index' => 'Reports\Controller\IndexControllerFactory',
             'Reports\Controller\Api' => 'Reports\Controller\ApiControllerFactory',
         ],
     ],

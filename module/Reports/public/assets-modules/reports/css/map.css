@@ -1,13 +1,4 @@
 
-span.date-label{
-	font-size: 15px;
-    float: left;
-    margin-right: 20px;
-    line-height: 30px;
-	text-align: right;
-    width: 100%;
-}
-
 #element-counter{
     float: right;
 }
@@ -64,6 +55,21 @@ div#over span{
 	top: 45%;
 	overflow: hidden;
 	font-size: 4em;
+}
+
+
+span.total-label,
+span.date-label{
+	font-size: 15px;
+    float: left;
+    margin-right: 20px;
+    line-height: 30px;
+	text-align: right;
+    width: 100%;
+}
+
+span.date-label{
+    line-height: normal;
 }
 
 @-webkit-keyframes spin2 {

@@ -1,6 +1,6 @@
-/* global $ */
+/* global $:true, translate:true */
 
-if (typeof $.oe === 'undefined') {
+if (typeof $.oe === "undefined") {
     $.extend({
         oe: {
             city: {},
@@ -10,7 +10,6 @@ if (typeof $.oe === 'undefined') {
 } else {
     $.oe.city = {};
 }
-
 
 /**
  *    This page make an AJAX request to the controller getting the "city" number,
@@ -23,21 +22,21 @@ $.oe.fn.getCityData = function(callback) {
     $.ajax({
         method: "GET",
         dataType: "json",
-        url: '/reports/api/get-cities',
+        url: "/reports/api/get-cities",
         data: {},
         success:
             function(d){
-                $('#navbar li:eq(0)').after('<li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="true">City Trips <span class="caret"></span></a><ul class="dropdown-menu"></ul></li>');
+                $("#navbar li:eq(0)").after("<li class=\"dropdown\"><a href=\"#\" class=\"dropdown-toggle\" data-toggle=\"dropdown\" role=\"button\" aria-haspopup=\"true\" aria-expanded=\"true\">" + translate("Corse per Citt&agrave;") + " <span class=\"caret\"></span></a><ul class=\"dropdown-menu\"></ul></li>");
 
                 $.oe.city = d.city;
 
                 $.each( $.oe.city, function( key, value ) {
-                    $("#navbar ul.dropdown-menu").append('<li><a href="/reports/tripscity/' + value.fleet_id + '">' + value.fleet_name + '</a></li>');
+                    $("#navbar ul.dropdown-menu").append("<li><a href=\"/reports/tripscity/" + value.fleet_id + "\">" + translate(value.fleet_name) + "</a></li>");
                 });
             },
         complete:
             function() {
-                if (typeof callback === 'function') {
+                if (typeof callback === "function") {
                     callback();
                 }
             }
