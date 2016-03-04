@@ -9,8 +9,8 @@ class ReservationsControllerFactory implements FactoryInterface
 {
     public function createService(ServiceLocatorInterface $serviceLocator)
     {
-        $I_reservationsService = $serviceLocator->getServiceLocator()->get('SharengoCore\Service\ReservationsService');
+        $reservationsService = $serviceLocator->getServiceLocator()->get('SharengoCore\Service\ReservationsService');
 
-        return new ReservationsController($I_reservationsService);
+        return new ReservationsController($reservationsService);
     }
 }

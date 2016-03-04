@@ -11,11 +11,11 @@ class ReservationsController extends AbstractActionController
     /**
      * @var ReservationsService
      */
-    public $I_reservationsService;
+    public $reservationsService;
 
-    public function __construct(ReservationsService $I_reservationsService)
+    public function __construct(ReservationsService $reservationsService)
     {
-        $this->I_reservationsService = $I_reservationsService;
+        $this->reservationsService = $reservationsService;
     }
 
     public function indexAction()
@@ -25,35 +25,35 @@ class ReservationsController extends AbstractActionController
 
     public function datatableAction()
     {
-        $as_filters = $this->params()->fromPost();
-        $as_filters['withLimit'] = true;
-        $as_dataDataTable = $this->I_reservationsService->getDataDataTable($as_filters);
-        $i_totalReservations = $this->I_reservationsService->getTotalReservations();
-        $i_recordsFiltered = $this->_getRecordsFiltered($as_filters, $i_totalReservations);
+        $filters = $this->params()->fromPost();
+        $filters['withLimit'] = true;
+        $dataDataTable = $this->reservationsService->getDataDataTable($filters);
+        $totalReservations = $this->reservationsService->getTotalReservations();
+        $recordsFiltered = $this->getRecordsFiltered($filters, $totalReservations);
 
         return new JsonModel([
             'draw'            => $this->params()->fromQuery('sEcho', 0),
-            'recordsTotal'    => $i_totalReservations,
-            'recordsFiltered' => $i_recordsFiltered,
-            'data'            => $as_dataDataTable
+            'recordsTotal'    => $totalReservations,
+            'recordsFiltered' => $recordsFiltered,
+            'data'            => $dataDataTable
         ]);
     }
 
-    protected function _getRecordsFiltered($as_filters, $i_totalReservations)
+    private function getRecordsFiltered($filters, $totalReservations)
     {
-        $as_filters['withLimit'] = false;
+        $filters['withLimit'] = false;
 
-        if (isset($as_filters['columnFromDate']) && isset($as_filters['columnFromEnd'])) {
+        if (isset($filters['columnFromDate']) && isset($filters['columnFromEnd'])) {
 
-            return $this->I_reservationsService->getDataDataTable($as_filters, true);
+            return $this->reservationsService->getDataDataTable($filters, true);
 
-        } else if (empty($as_filters['searchValue'])) {
+        } else if (empty($filters['searchValue'])) {
 
-            return $i_totalReservations;
+            return $totalReservations;
 
         } else {
 
-            return $this->I_reservationsService->getDataDataTable($as_filters, true);
+            return $this->reservationsService->getDataDataTable($filters, true);
         }
     }
 }

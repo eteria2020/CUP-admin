@@ -65,27 +65,27 @@ class TripsController extends AbstractActionController
 
     public function datatableAction()
     {
-        $as_filters = $this->params()->fromPost();
-        $as_filters['withLimit'] = true;
-        $as_dataDataTable = $this->tripsService->getDataDataTable($as_filters);
-        $i_tripsTotal = $this->tripsService->getTotalTrips();
-        $i_recordsFiltered = $this->_getRecordsFiltered($as_filters, $i_tripsTotal);
+        $filters = $this->params()->fromPost();
+        $filters['withLimit'] = true;
+        $dataDataTable = $this->tripsService->getDataDataTable($filters);
+        $tripsTotal = $this->tripsService->getTotalTrips();
+        $recordsFiltered = $this->getRecordsFiltered($filters, $tripsTotal);
 
         return new JsonModel(array(
             'draw'            => $this->params()->fromQuery('sEcho', 0),
-            'recordsTotal'    => $i_tripsTotal,
-            'recordsFiltered' => $i_recordsFiltered,
-            'data'            => $as_dataDataTable
+            'recordsTotal'    => $tripsTotal,
+            'recordsFiltered' => $recordsFiltered,
+            'data'            => $dataDataTable
         ));
     }
 
-    protected function _getRecordsFiltered($as_filters, $i_tripsTotal)
+    private function getRecordsFiltered($filters, $tripsTotal)
     {
-        if (empty($as_filters['searchValue']) && !isset($as_filters['columnNull'])) {
-            return $i_tripsTotal;
+        if (empty($filters['searchValue']) && !isset($filters['columnNull'])) {
+            return $tripsTotal;
         } else {
-            $as_filters['withLimit'] = false;
-            return $this->tripsService->getDataDataTable($as_filters, true);
+            $filters['withLimit'] = false;
+            return $this->tripsService->getDataDataTable($filters, true);
         }
     }
 

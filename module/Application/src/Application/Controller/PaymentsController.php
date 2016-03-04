@@ -196,12 +196,6 @@ class PaymentsController extends AbstractActionController
             'types' => $types,
             'penalties' => $penalties
         ]);
-
-        foreach($this->penalties as $penalty) {
-            echo '<option data-reason="' . $penalty->getReason() . '" data-amount="' . $penalty->getAmount() . '">' .
-                $penalty->getReason() . number_format($penalty->getAmount()/100, 2) . '&euro' .
-                '</option>';
-        }
     }
 
     public function payExtraAction()
