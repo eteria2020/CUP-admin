@@ -6,7 +6,7 @@ $this->headScript()
     ->appendFile('/js/datatables/plugins/bootstrap/dataTables.bootstrap.js')
     ->appendFile('/js/moment.min.js')
     ->appendFile('/js/datatables/plugins/sorting/datetime-moment.js')
-    ->appendFile($this->basePath() .'/js/trips-not-payed.js');
+    ->appendFile($this->basePath() . '/js/trips-not-payed.js');
 ?>
 <div class="page-content-wrapper">
     <div class="page-content">
@@ -15,21 +15,61 @@ $this->headScript()
         <div class="page-bar"></div>
 
         <div class="row">
+            <div class="col-md-12">
 
-            <div class="portlet box green">
-                <div class="portlet-title">
-                    <div class="caption"><?= $this->translate("Elenco"); ?></div>
+                <?= $this->partial('partials/flash-messages.phtml', []); ?>
+
+                <div class="row">
+                    <div class="col-md-8">
+                        <div class="form-inline">
+                            <div class="form-group">
+                                <select name="column" id="js-column" class="form-control">
+                                    <option value="select" selected>-- <?= $this->translate("Seleziona"); ?> --</option>
+                                    <option value="cu.surname"><?= $this->translate("Cognome"); ?></option>
+                                    <option value="cu.id"><?= $this->translate("ID Cliente"); ?></option>
+                                    <option value="cc.rfid"><?= $this->translate("RFID"); ?></option>
+                                    <option value="f.name"><?= $this->translate("Flotta"); ?></option>
+                                    <option value="e.id"><?= $this->translate("ID Corsa"); ?></option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <input type="text" name="value" value="" class="form-control" id="js-value"
+                                       placeholder="<?= $this->translate("Filtra..."); ?>">
+                            </div>
+                            <div class="btn-group">
+                                <button type="button" class="btn green" id="js-search"><i
+                                        class="fa fa-search"></i> <?= $this->translate("Cerca"); ?></button>
+                                <button type="button" class="btn green dropdown-toggle" data-toggle="dropdown"><i
+                                        class="fa fa-angle-down"></i></button>
+                                <ul class="dropdown-menu" role="menu">
+                                    <li>
+                                        <a href="javascript:void(0);" id="js-clear"><i
+                                                class="fa fa-remove"></i> <?= $this->translate("Pulisci Ricerca"); ?>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4"></div>
                 </div>
+                <hr>
+                <div class="portlet box green">
+                    <div class="portlet-title">
+                        <div class="caption"><?= $this->translate("Elenco"); ?></div>
+                    </div>
 
-                <!-- BEGIN table -->
-                <div class="portlet-body">
-                    <table class="table table-striped table-bordered table-hover" id="trips-table">
-                        <thead>
+                    <!-- BEGIN table -->
+                    <div class="portlet-body">
+                        <table class="table table-striped table-bordered table-hover" id="unpayed-trips-table">
+                            <thead>
                             <tr>
                                 <th><?= $this->translate("Id Corsa"); ?></th>
-                                <th><?= $this->translate("Cliente"); ?></th>
+                                <th><?= $this->translate("Cognome"); ?></th>
+                                <th><?= $this->translate("Nome"); ?></th>
                                 <th><?= $this->translate("RFID"); ?></th>
                                 <th><?= $this->translate("Targa"); ?></th>
+                                <th><?= $this->translate("Flotta"); ?></th>
                                 <th><?= $this->translate("Km Inizio"); ?></th>
                                 <th><?= $this->translate("Km Fine"); ?></th>
                                 <th style="min-width: 60px !important;"><?= $this->translate("Inizio"); ?></th>
@@ -38,46 +78,13 @@ $this->headScript()
                                 <th><?= $this->translate("Sosta"); ?></th>
                                 <th><?= $this->translate("Costo"); ?></th>
                             </tr>
-                        </thead>
-                        <tbody>
-                            <?php foreach ($this->trips as $trip): ?>
-                            <tr>
-                                <?php
-                                $customer = $trip->getCustomer();
-                                $car = $trip->getCar();
-                                $tripPayment = $trip->getTripPayment();
-                                ?>
+                            </thead>
 
-                                <td>
-                                    <a href="<?= $this->url('trips/details', ['id' => $trip->getId()]); ?>">
-                                        <?= $trip->getId(); ?>
-                                    </a>
-                                </td>
-                                <td>
-                                    <a href="<?= $this->url('customers/edit', ['id' => $customer->getId()]); ?>">
-                                        <?= $customer->getSurname() . ' ' . $customer->getName(); ?>
-                                    </a>
-                                </td>
-                                <td><?= $customer->getCard()->getRfid(); ?></td>
-                                <td><?= $trip->getCar()->getPlate(); ?></td>
-                                <td><?= $trip->getKmBeginning(); ?></td>
-                                <td><?= $trip->getKmEnd(); ?></td>
-                                <td><?= $trip->getTimestampBeginning()->format('d-m-Y H:i:s'); ?></td>
-                                <td><?= $trip->getTimestampEnd()->format('d-m-Y H:i:s'); ?></td>
-                                <td><?= $trip->getTimestampBeginning()->diff($trip->getTimestampEnd())->format('%dg %H:%I:%S'); ?></td>
-                                <td><?= $trip->getParkSeconds() . ' sec'; ?></td>
-                                <td class="sng-dt-right">
-                                    <a href="<?= $this->url('trips/details', ['id' => $trip->getId()], ['query' => ['tab' => 'cost']]); ?>">
-                                        <?= sprintf('%.2f €', $tripPayment->getTotalCost() / 100); ?>
-                                    </a>
-                                </td>
-                            </tr>
-                            <?php endforeach; ?>
-                        </tbody>
-                    </table>
+                        </table>
+                    </div>
+                    <!-- END table -->
+
                 </div>
-                <!-- END table -->
-
             </div>
         </div>
 

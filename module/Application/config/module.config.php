@@ -545,6 +545,16 @@ return [
                             ],
                         ],
                     ],
+                    'not-payed-datatable' => [
+                        'type' => 'Literal',
+                        'options' => [
+                            'route' => '/not-payed-datatable',
+                            'defaults' => [
+                                'action' => 'datatable',
+                                'controller' => 'TripsNotPayed'
+                            ]
+                        ]
+                    ],
                     'cost' => [
                         'type' => 'Literal',
                         'options' => [
