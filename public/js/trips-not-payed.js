@@ -1,8 +1,11 @@
-$(function() {
+/* global $ translate */
 
-    var table    = $('#unpayed-trips-table');
-    var search   = $('#js-value');
-    var column   = $('#js-column');
+$(function() {
+    "use strict";
+
+    var table = $('#unpayed-trips-table');
+    var search = $('#js-value');
+    var column = $('#js-column');
     var filterWithNull = false;
     search.val('');
     column.val('select');
@@ -21,7 +24,7 @@ $(function() {
                 "url": sSource,
                 "data": aoData,
                 "success": fnCallback,
-                "error": function(jqXHR, textStatus, errorThrown) {
+                "error": function() {
                 }
             } );
         },
@@ -58,13 +61,13 @@ $(function() {
             {
                 targets: [1, 2],
                 "render": function (data, type, row) {
-                    return '<a href="/customers/edit/'+row.cu.id+'" title="' + translate("showProfile") + ' '+row.cu.name+' '+row.cu.surname+' ">'+data+'</a>';
+                    return '<a href="/customers/edit/' + row.cu.id + '" title="' + translate("showProfile") + ' ' + row.cu.name + ' ' + row.cu.surname + ' ">' + data + '</a>';
                 }
             },
             {
                 targets: 12,
                 sortable: false,
-                "render": function ( data, type, row ) {
+                "render": function (data) {
                     return renderCostButton(data);
                 }
             }
@@ -76,26 +79,26 @@ $(function() {
         "pageLength": 100,
         "pagingType": "bootstrap_full_number",
         "language": {
-            "sEmptyTable":     translate("sTripEmptyTable"),
-            "sInfo":           translate("sInfo"),
-            "sInfoEmpty":      translate("sInfoEmpty"),
-            "sInfoFiltered":   translate("sInfoFiltered"),
-            "sInfoPostFix":    "",
-            "sInfoThousands":  ",",
-            "sLengthMenu":     translate("sLengthMenu"),
+            "sEmptyTable": translate("sTripEmptyTable"),
+            "sInfo": translate("sInfo"),
+            "sInfoEmpty": translate("sInfoEmpty"),
+            "sInfoFiltered": translate("sInfoFiltered"),
+            "sInfoPostFix": "",
+            "sInfoThousands": ",",
+            "sLengthMenu": translate("sLengthMenu"),
             "sLoadingRecords": translate("sLoadingRecords"),
-            "sProcessing":     translate("sProcessing"),
-            "sSearch":         translate("sSearch"),
-            "sZeroRecords":    translate("sZeroRecords"),
+            "sProcessing": translate("sProcessing"),
+            "sSearch": translate("sSearch"),
+            "sZeroRecords": translate("sZeroRecords"),
             "oPaginate": {
-                "sFirst":      translate("oPaginateFirst"),
-                "sPrevious":   translate("oPaginatePrevious"),
-                "sNext":       translate("oPaginateNext"),
-                "sLast":       translate("oPaginateLast")
+                "sFirst": translate("oPaginateFirst"),
+                "sPrevious": translate("oPaginatePrevious"),
+                "sNext": translate("oPaginateNext"),
+                "sLast": translate("oPaginateLast")
             },
             "oAria": {
-                "sSortAscending":   translate("sSortAscending"),
-                "sSortDescending":  translate("sSortDescending")
+                "sSortAscending": translate("sSortAscending"),
+                "sSortDescending": translate("sSortDescending")
             }
         }
     });
@@ -106,8 +109,6 @@ $(function() {
 
     $('#js-clear').click(function() {
         search.val('');
-        from.val('');
-        to.val('');
         column.val('select');
         search.prop('disabled', false);
         filterWithNull = false;
@@ -120,7 +121,7 @@ $(function() {
         search.show();
         search.val('');
 
-        if(value == 'c.timestampEnd') {
+        if(value === 'c.timestampEnd') {
             filterWithNull = true;
             search.prop('disabled', true);
         } else {
@@ -129,16 +130,9 @@ $(function() {
         }
     });
 
-    function renderCostButton(data)
+    function toStringKeepZero(value)
     {
-        var amount = data['amount'];
-        if (amount !== 'FREE') {
-            return amount !== '' ?
-            '<a href="/trips/details/' + data['id'] + '?tab=cost">' + renderAmount(parseInt(amount)) + '</a>' :
-                '';
-        } else {
-            return amount;
-        }
+        return ((value < 10) ? '0' : '') + value;
     }
 
     function renderAmount(amount)
@@ -149,8 +143,14 @@ $(function() {
             ' \u20ac';
     }
 
-    function toStringKeepZero(value)
+    function renderCostButton(data)
     {
-        return ((value < 10) ? '0' : '') + value;
+        var amount = data.amount;
+        if (amount !== 'FREE') {
+            return amount !== '' ?
+            '<a href="/trips/details/' + data.id + '?tab=cost">' + renderAmount(parseInt(amount)) + '</a>' : '';
+        } else {
+            return amount;
+        }
     }
 });
