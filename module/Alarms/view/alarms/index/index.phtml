@@ -6,19 +6,21 @@
             ->appendStylesheet($this->basePath() . '/assets-modules/alarms/css/vendors.css')
             ->appendStylesheet($this->basePath() . '/assets-modules/alarms/css/style.css');
     ?>
-    <?php 
+    <?php
         echo $this->headScript()
             ->appendFile($this->basePath() . '/assets-modules/alarms/js/vendors.js')
+            ->appendFile($this->basePath() . '/assets-modules/alarms/js/translations.js')
             ->appendFile($this->basePath() . '/assets-modules/alarms/js/scripts.js');
+
     ?>
 </head>
 <body ng-controller="SharengoCsController">
 
 <div id="map-loader" ng-show="mapLoader">
     <p><i class="fa fa-refresh"></i></p>
-    Caricamento mappa in corso...
+    <translate>Caricamento mappa in corso...</translate>
 </div>
-  
+
 <div id="top-area">
     <tabset>
         <tab heading="Auto">
@@ -27,7 +29,7 @@
                 <div class="col-md-6">
                     <div class="form-input">
                          <div class="input-group">
-                            <input type="text" class="form-control" ng-model="search.plate" placeholder="Targa">
+                            <input type="text" class="form-control" ng-model="search.plate" placeholder="{{'Targa'|translate}}">
                             <span class="input-group-btn">
                                 <button class="btn btn-green" ng-click="plateChange(search.plate, false)" type="button">
                                     <i class="fa fa-search"></i>
@@ -39,7 +41,7 @@
                 <div class="col-md-6">
                     <div class="form-input">
                         <div class="input-group">
-                            <input type="text" class="form-control" ng-model="search.label" placeholder="N°.Unità">
+                            <input type="text" class="form-control" ng-model="search.label" placeholder="{{'N°.Unità'|translate}}">
                             <span class="input-group-btn">
                                 <button class="btn btn-green" ng-click="plateChange(search.label, true)" type="button">
                                     <i class="fa fa-search"></i>
@@ -53,23 +55,23 @@
             <div class="row">
                 <div class="col-md-12">
                     <div class="alert alert-warning" style="margin-top: 10px;" ng-show="accordionStatus.showNoResult"  role="alert">
-                        <i class="fa fa-exclamation-circle"></i> Nessun risultato trovato, riprova con {{noResult}}.
+                        <i class="fa fa-exclamation-circle"></i> <translate>Nessun risultato trovato, riprova con {{noResult}}</translate>.
                     </div>
                 </div>
             </div>
 
         </tab>
-        <tab heading="Indirizzo">
+        <tab heading="{{'Indirizzo'|translate}}">
 
             <div class="row">
                 <div class="col-md-9">
                     <div class="form-input">
-                        <input type="text" ng-model="searchAddress.address" class="form-control" placeholder="Indirizzo">
+                        <input type="text" ng-model="searchAddress.address" class="form-control" placeholder="{{'Address'|translate}}">
                     </div>
                 </div>
                 <div class="col-md-3">
                     <div class="form-input">
-                        <input type="text" ng-model="searchAddress.number" class="form-control" placeholder="Civico">
+                        <input type="text" ng-model="searchAddress.number" class="form-control" placeholder="{{'Civico'|translate}}">
                     </div>
                 </div>
             </div>
@@ -77,7 +79,7 @@
             <div class="row">
                 <div class="col-md-12">
                     <div class="form-input">
-                        <input type="text" ng-model="searchAddress.city" class="form-control" placeholder="Città">
+                        <input type="text" ng-model="searchAddress.city" class="form-control" placeholder="{{'Città'|translate}}">
                     </div>
                 </div>
             </div>
@@ -86,7 +88,7 @@
                 <div class="col-md-12">
                     <div class="form-input">
                         <button class="btn btn-green btn-block" ng-click="searchAddress.search()">
-                        <i class="fa fa-search"></i> Cerca</button>
+                        <i class="fa fa-search"></i> <translate>Cerca</translate></button>
                     </div>
                 </div>
             </div>
@@ -97,7 +99,7 @@
 <div id="top-actions">
     <div class="heading clearfix">
         <div class="fleets">
-            <select 
+            <select
                 class="form-control"
                 ng-change="changeFleet()"
                 ng-model="defaultFleet"
@@ -107,10 +109,10 @@
         </div>
         <div class="pull-right actions">
             <a href="javascript:;" ng-click="loadCars()" class="btn btn-success btn-xs">
-                <i class="fa fa-refresh"></i> Agggiorna
+                <i class="fa fa-refresh"></i> <translate>Aggiorna</translate>
             </a>
             <a href="/user/logout" class="btn btn-danger btn-xs">
-                <i class="fa fa-sign-out"></i> Esci
+                <i class="fa fa-sign-out"></i> <translate>Esci</translate>
             </a>
         </div>
     </div>
@@ -122,16 +124,16 @@
             <table>
                 <thead>
                 <tr>
-                    <th>Seleziona</th>
-                    <th>Nome</th>
-                    <th>Cognome</th>
-                    <th>Telefono</th>
-                    <th>C.F.</th>
+                    <th translate>Seleziona</th>
+                    <th translate>Nome</th>
+                    <th translate>Cognome</th>
+                    <th translate>Telefono</th>
+                    <th translate>C.F.</th>
                 </tr>
                 </thead>
                 <tbody>
                 <tr ng-repeat="customer in customers">
-                    <td><button type="button" class="btn btn-default btn-xs" ng-click="selectCustomer(customer)"><i class="fa fa-info"></i> Seleziona</button></td>
+                    <td><button type="button" class="btn btn-default btn-xs" ng-click="selectCustomer(customer)"><i class="fa fa-info"></i> <translate>Seleziona</translate></button></td>
                     <td>{{customer.name | lowercase}}</td>
                     <td>{{customer.surname | lowercase}}</td>
                     <td>{{customer.phone}}</td>
@@ -140,25 +142,25 @@
                 </tbody>
             </table>
         </accordion-group>
-        <accordion-group class="resultsCars" heading="Veicoli trovati" ng-hide="accordionStatus.hideCarsSelect" is-open="accordionStatus.carsSelectOpen">
+        <accordion-group class="resultsCars" heading="{{'Veicoli trovati'|translate}}" ng-hide="accordionStatus.hideCarsSelect" is-open="accordionStatus.carsSelectOpen">
             <table>
                 <thead>
                 <tr>
-                    <th>Seleziona</th>
-                    <th>Targa</th>
+                    <th translate>Seleziona</th>
+                    <th translate>Targa</th>
                 </tr>
                 </thead>
                 <tbody>
                 <tr ng-repeat="car in carsFound">
-                    <td><button type="button" class="btn btn-default btn-xs" ng-click="plateChange(car.plate,false)"><i class="fa fa-info"></i> Seleziona</button></td>
+                    <td><button type="button" class="btn btn-default btn-xs" ng-click="plateChange(car.plate,false)"><i class="fa fa-info"></i> <translate>Seleziona</translate></button></td>
                     <td>{{car.plate | uppercase}}</td>
                 </tbody>
             </table>
-        </accordion-group>        
-        <accordion-group heading="Dati cliente" id="customerData" ng-hide="accordionStatus.hideCustomerData" is-open="accordionStatus.customerDataOpen" class="acc-user-data">
+        </accordion-group>
+        <accordion-group heading="{{'Dati cliente'|translate}}" id="customerData" ng-hide="accordionStatus.hideCustomerData" is-open="accordionStatus.customerDataOpen" class="acc-user-data">
             <div class="row">
                 <div class="col-md-3">
-                    <label>Nome</label>
+                    <label translate>Nome</label>
                 </div>
 
                 <div class="col-md-9">
@@ -167,7 +169,7 @@
             </div>
             <div class="row">
                 <div class="col-md-3">
-                    <label>Cognome</label>
+                    <label translate>Cognome</label>
                 </div>
 
                 <div class="col-md-9">
@@ -176,7 +178,7 @@
             </div>
             <div class="row">
                 <div class="col-md-3">
-                    <label>Cellulare</label>
+                    <label translate>Cellulare</label>
                 </div>
 
                 <div class="col-md-9">
@@ -185,7 +187,7 @@
             </div>
             <div class="row">
                 <div class="col-md-3">
-                    <label>Abilitato</label>
+                    <label translate>Abilitato</label>
                 </div>
 
                 <div class="col-md-9">
@@ -196,13 +198,13 @@
 
             <div class="row">
                 <div class="col-sm-3 noPaddingRight">
-                    <label>Ultime corse</label>
+                    <label translate>Ultime corse</label>
                 </div>
 
                 <div class="col-md-9" style="font-size: 12px;">
                     <span ng-repeat="trip in customer.lastTrips">
-                        <strong>Targa:</strong> {{trip.car.plate}} <strong>Inizio:</strong> {{trip.beginningTx.date | dateSharengoFormat:'DD-MM-YYYY'}} 
-                        <button tooltip-placement="left" tooltip-html-unsafe="<b>Inizio:</b> {{trip.timestampBeginning.date | dateSharengoFormat}} <br /><b>Fine:</b> {{trip.timestampEnd.date | dateSharengoFormat}}" class="btn btn-default btn-xs">
+                        <strong translate>Targa:</strong> {{trip.car.plate}} <strong translate>Inizio:</strong> {{trip.beginningTx.date | dateSharengoFormat:'DD-MM-YYYY'}}
+                        <button tooltip-placement="left" tooltip-html-unsafe="<b>{{'Inizio'|translate}}:</b> {{trip.timestampBeginning.date | dateSharengoFormat}} <br /><b>{{'Fine'|translate}}:</b> {{trip.timestampEnd.date | dateSharengoFormat}}" class="btn btn-default btn-xs">
                             <i class="fa fa-info-circle"></i>
                         </button>
                         <br>
@@ -210,10 +212,10 @@
                 </div>
             </div>
         </accordion-group>
-        <accordion-group heading="Dati auto" ng-hide="accordionStatus.hideCarData" is-open="accordionStatus.carDataOpen" class="acc-car-data">
+        <accordion-group heading="{{'Dati auto'|translate}}" ng-hide="accordionStatus.hideCarData" is-open="accordionStatus.carDataOpen" class="acc-car-data">
             <div class="row">
                 <div class="col-md-3">
-                    <label>Targa</label>
+                    <label translate>Targa</label>
                 </div>
 
                 <div class="col-md-9">
@@ -223,8 +225,8 @@
 
             <div class="row">
                <div class="col-md-3">
-                    <label>N° Unità</label>
-                </div> 
+                    <label translate>N° Unità</label>
+                </div>
 
                 <div class="col-md-9">
                     <span>{{car.label}}</span>
@@ -233,19 +235,19 @@
 
             <div class="row">
                 <div class="col-md-3">
-                    <label>Posizione</label>
+                    <label translate>Posizione</label>
                 </div>
 
                 <div class="col-md-9" style="font-size: 12px;">
-                    <span>Lat: {{car.latitude}}</span><br />
-                    <span>Lon: {{car.longitude}}</span><br />
+                    <span translate>Lat: {{car.latitude}}</span><br />
+                    <span translate>Lon: {{car.longitude}}</span><br />
                     <span><reverse-geocode lat="car.latitude" lng="car.longitude"></reverse-geocode></span>
                 </div>
             </div>
 
             <div class="row">
                 <div class="col-md-3">
-                    <label>Batteria</label>
+                    <label translate>Batteria</label>
                 </div>
 
                 <div class="col-md-9">
@@ -255,11 +257,11 @@
 
         </accordion-group>
 
-        <accordion-group heading="Dati ultima corsa chiusa" ng-hide="accordionStatus.hideLastTripData" is-open="accordionStatus.lastTripDataOpen" class="acc-run-data">
+        <accordion-group heading="{{'Dati ultima corsa chiusa'|translate}}" ng-hide="accordionStatus.hideLastTripData" is-open="accordionStatus.lastTripDataOpen" class="acc-run-data">
 
             <div class="row">
                 <div class="col-md-3">
-                    <label>Inizio corsa</label>
+                    <label translate>Inizio corsa</label>
                 </div>
 
                 <div class="col-md-9">
@@ -269,7 +271,7 @@
 
             <div class="row">
                 <div class="col-md-3">
-                    <label>Fine corsa</label>
+                    <label translate>Fine corsa</label>
                 </div>
 
                 <div class="col-md-9" ng-if="lastTrip.timestampEnd.date">
@@ -279,7 +281,7 @@
 
             <div class="row">
                 <div class="col-md-3">
-                    <label>Cliente</label>
+                    <label translate>Cliente</label>
                 </div>
 
                 <div class="col-md-9">
@@ -289,7 +291,7 @@
 
             <div class="row">
                 <div class="col-md-3">
-                    <label>Telefono</label>
+                    <label translate>Telefono</label>
                 </div>
 
                 <div class="col-md-9">
@@ -299,7 +301,7 @@
 
             <div class="row">
                 <div class="col-md-3">
-                    <label>Cellulare</label>
+                    <label translate>Cellulare</label>
                 </div>
 
                 <div class="col-md-9">
@@ -309,7 +311,7 @@
 
             <div class="row">
                 <div class="col-md-3">
-                    <label>Eventi</label>
+                    <label translate>Eventi</label>
                 </div>
 
                 <div class="col-md-9">
@@ -321,7 +323,7 @@
 <div id="markers-control">
     <div class="pull-right actions">
         <a href="javascript:;" ng-click="poisVisible = !poisVisible;" class="btn btn-xs" ng-class="{'deactive': !poisVisible }">
-            <i class="fa fa-plug"></i> &nbsp; POIS
+            <i class="fa fa-plug"></i> &nbsp; <translate>POIS</translate>
         </a>
     </div>
 </div>
@@ -329,16 +331,16 @@
 <div id="left-area">
     <div class="pull-left">
         <ul class="list-inline">
-            <li ng-click="markerFilters['libere'] = !markerFilters['libere'];" ng-class="{'active': markerFilters['libere']}" ><span class="block" style="background-color:{{markerColors['green']}}"></span> LIBERE</li>
-            <li  ng-click="markerFilters['prenotate'] = !markerFilters['prenotate'];" ng-class="{'active': markerFilters['prenotate']}"><span class="block" style="background-color:{{markerColors['black']}}"></span> PRENOTATE</li>
-            <li  ng-click="markerFilters['inuso'] = !markerFilters['inuso'];" ng-class="{'active': markerFilters['inuso']}"><span class="block" style="background-color:{{markerColors['yellow']}}"></span> IN USO</li>
-            <li  ng-click="markerFilters['manut'] = !markerFilters['manut'];" ng-class="{'active': markerFilters['manut']}"><span class="block" style="background-color:{{markerColors['red']}}"></span> IN MANUTENZIONE</li> 
-            <li  ng-click="markerFilters['h24'] = !markerFilters['h24'];" ng-class="{'active': markerFilters['h24']}"><span class="block" style="background-color:{{markerColors['azzure']}}"></span> +24hh</li>
-            <li  ng-click="markerFilters['no3g'] = !markerFilters['no3g'];" ng-class="{'active': markerFilters['no3g']}"><span class="block" style="background-color:{{markerColors['brown']}}"><small class="text-label">3G</small></span> N.O. 3G</li>
-            <li  ng-click="markerFilters['nobatt'] = !markerFilters['nobatt'];" ng-class="{'active': markerFilters['nobatt']}"><span class="block" style="background-color:{{markerColors['brown']}}"><i class="fa fa-battery-half"></i></span> N.O. Batt</li>
-            <li  ng-click="markerFilters['nogps'] = !markerFilters['nogps'];" ng-class="{'active': markerFilters['nogps']}"><span class="block" style="background-color:{{markerColors['brown']}}"><small class="text-label">GPS</small></span> N.O. GPS</li>
-            <li  ng-click="markerFilters['ricarica'] = !markerFilters['ricarica'];" ng-class="{'active': markerFilters['ricarica']}"><span class="block" style="background-color:{{markerColors['brown']}};border:1px solid {{markerColors['azzure']}}"><i class="fa fa-plug"></i></span> In Carica</li>
-            <li  ng-click="markerFilters['sporche'] = !markerFilters['sporche'];" ng-class="{'active': markerFilters['sporche']}"><span class="block" style="background-color:{{markerColors['purple']}}"></span> Sporca</li>
+            <li ng-click="markerFilters['libere'] = !markerFilters['libere'];" ng-class="{'active': markerFilters['libere']}" ><span class="block" style="background-color:{{markerColors['green']}}"></span> <translate>LIBERE</translate></li>
+            <li  ng-click="markerFilters['prenotate'] = !markerFilters['prenotate'];" ng-class="{'active': markerFilters['prenotate']}"><span class="block" style="background-color:{{markerColors['black']}}"></span> <translate>PRENOTATE</translate></li>
+            <li  ng-click="markerFilters['inuso'] = !markerFilters['inuso'];" ng-class="{'active': markerFilters['inuso']}"><span class="block" style="background-color:{{markerColors['yellow']}}"></span> <translate>IN USO</translate></li>
+            <li  ng-click="markerFilters['manut'] = !markerFilters['manut'];" ng-class="{'active': markerFilters['manut']}"><span class="block" style="background-color:{{markerColors['red']}}"></span> <translate>IN MANUTENZIONE</translate></li>
+            <li  ng-click="markerFilters['h24'] = !markerFilters['h24'];" ng-class="{'active': markerFilters['h24']}"><span class="block" style="background-color:{{markerColors['azzure']}}"></span> <translate>+24hh</translate></li>
+            <li  ng-click="markerFilters['no3g'] = !markerFilters['no3g'];" ng-class="{'active': markerFilters['no3g']}"><span class="block" style="background-color:{{markerColors['brown']}}"><small class="text-label" translate>3G</small></span> <translate>N.O. 3G</translate></li>
+            <li  ng-click="markerFilters['nobatt'] = !markerFilters['nobatt'];" ng-class="{'active': markerFilters['nobatt']}"><span class="block" style="background-color:{{markerColors['brown']}}"><i class="fa fa-battery-half"></i></span> <translate>N.O. Batt</translate></li>
+            <li  ng-click="markerFilters['nogps'] = !markerFilters['nogps'];" ng-class="{'active': markerFilters['nogps']}"><span class="block" style="background-color:{{markerColors['brown']}}"><small class="text-label" translate>GPS</small></span> <translate>N.O. GPS</translate></li>
+            <li  ng-click="markerFilters['ricarica'] = !markerFilters['ricarica'];" ng-class="{'active': markerFilters['ricarica']}"><span class="block" style="background-color:{{markerColors['brown']}};border:1px solid {{markerColors['azzure']}}"><i class="fa fa-plug"></i></span> <translate>In Carica</translate></li>
+            <li  ng-click="markerFilters['sporche'] = !markerFilters['sporche'];" ng-class="{'active': markerFilters['sporche']}"><span class="block" style="background-color:{{markerColors['purple']}}"></span> <translate>Sporca</translate></li>
         </ul>
     </div>
 </div>

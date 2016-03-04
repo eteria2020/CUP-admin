@@ -64,6 +64,7 @@ return array(
                     'angular-google-maps/dist/angular-google-maps.min.js',
                     'angular-bootstrap/ui-bootstrap-tpls.min.js',
                     'moment/min/moment.min.js',
+                    'angular-gettext/dist/angular-gettext.min.js'
                 ),
                 'assets-modules/alarms/js/scripts.js' => array(
                     'assets-modules/alarms/js/app.js',
@@ -82,7 +83,8 @@ return array(
             'map' => array(
                 'assets-modules/alarms/fonts/glyphicons-halflings-regular.woff2' =>  $baseDir. '/bower_components/bootstrap/dist/fonts/glyphicons-halflings-regular.woff2',
                 'assets-modules/alarms/fonts/fontawesome-webfont.woff' =>  $baseDir. '/bower_components/font-awesome/fonts/fontawesome-webfont.woff',
-                'assets-modules/alarms/fonts/fontawesome-webfont.woff2' =>  $baseDir. '/bower_components/font-awesome/fonts/fontawesome-webfont.woff2'
+                'assets-modules/alarms/fonts/fontawesome-webfont.woff2' =>  $baseDir. '/bower_components/font-awesome/fonts/fontawesome-webfont.woff2',
+                'assets-modules/alarms/js/translations.js'  => $baseDir. '/module/Application/language/js/translations.js'
             ),
             'paths' => array(
                 'alarms' => __DIR__ . '/../public',

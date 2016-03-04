@@ -63,6 +63,7 @@ return array(
                     'angular-google-maps/dist/angular-google-maps.min.js',
                     'angular-bootstrap/ui-bootstrap-tpls.min.js',
                     'moment/min/moment.min.js',
+                    'angular-gettext/dist/angular-gettext.min.js'
                 ),
                 'assets-modules/call-center/js/scripts.js' => array(
                     'assets-modules/call-center/js/app.js',
@@ -79,7 +80,8 @@ return array(
                 )
             ),
             'map' => array(
-                'assets-modules/call-center/fonts/glyphicons-halflings-regular.woff2' =>  $baseDir. '/bower_components/bootstrap/dist/fonts/glyphicons-halflings-regular.woff2'
+                'assets-modules/call-center/fonts/glyphicons-halflings-regular.woff2' =>  $baseDir. '/bower_components/bootstrap/dist/fonts/glyphicons-halflings-regular.woff2',
+                'assets-modules/call-center/js/translations.js'  => $baseDir. '/module/Application/language/js/translations.js'
             ),
             'paths' => array(
                 'call-center' => __DIR__ . '/../public',

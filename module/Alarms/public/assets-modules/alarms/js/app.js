@@ -1,3 +1,3 @@
 'use strict';
 
-angular.module('SharengoCsApp', ['uiGmapgoogle-maps', 'ui.bootstrap', 'config']);
+angular.module('SharengoCsApp', ['uiGmapgoogle-maps', 'gettext', 'ui.bootstrap', 'config']);

@@ -12,7 +12,8 @@ angular.module('SharengoCsApp').controller('SharengoCsController', function (
     ticketsFactory,
     uiGmapGoogleMapApi,
     uiGmapIsReady,
-    $timeout
+    $timeout,
+    gettextCatalog
 ) {
     var infoBox;
     //necessary to avoid errors with network delay
@@ -38,7 +39,7 @@ angular.module('SharengoCsApp').controller('SharengoCsController', function (
         azzure: "#0338FF",
         black: "#000000"
     };
-    
+
     $scope.markerFilters = {
         libere: true,
         prenotate: true,
@@ -51,7 +52,7 @@ angular.module('SharengoCsApp').controller('SharengoCsController', function (
         sporche: true,
         ricarica: true
     }
-    
+
     $scope.markerCounters = {
         libere: 0,
         prenotate: 0,
@@ -64,7 +65,7 @@ angular.module('SharengoCsApp').controller('SharengoCsController', function (
         sporche: 0,
         ricarica: 0
     };
-    
+
     $scope.accordionStatus = {
         researchOpen: true,
         hideCustomerData: true,
@@ -89,7 +90,7 @@ angular.module('SharengoCsApp').controller('SharengoCsController', function (
     $scope.initial = {
         mapCenter: {
             latitude: 44.5563793,
-            longitude: 11.3180998       
+            longitude: 11.3180998
         },
         mapZoom: 7
     }
@@ -99,6 +100,13 @@ angular.module('SharengoCsApp').controller('SharengoCsController', function (
         doCluster: true,
         control: {}
     };
+    function getCookie(name) {
+      var value = "; " + document.cookie;
+      var parts = value.split("; " + name + "=");
+      if (parts.length == 2) return parts.pop().split(";").shift();
+    }
+    gettextCatalog.setCurrentLanguage(getCookie('lang'));
+    //gettextCatalog.debug = true;
 
     //$scope.polygons = mapFactory.getPolygon();
 
@@ -137,14 +145,14 @@ angular.module('SharengoCsApp').controller('SharengoCsController', function (
                     $scope.mapOptions.zoom = 14;
                     addMarker($scope.mapOptions.center.latitude, $scope.mapOptions.center.longitude);
                 } else {
-                    alert('Geocode was not successful for the following reason: ' + status);
+                    alert(gettextCatalog.getString('Geocode was not successful for the following reason: ') + status);
                 }
                 $scope.mapLoader = false;
                 $scope.$digest();
             });
         }
     };
-    
+
     function resetMarkerCounters(){
         for(var counter in $scope.markerCounters){
             if($scope.markerCounters.hasOwnProperty(counter)){
@@ -160,14 +168,14 @@ angular.module('SharengoCsApp').controller('SharengoCsController', function (
             }
         };
     }
-    
+
     resetMarkerCounters();
     resetMarkerFilters();
 
     $scope.loadCars = function () {
         $scope.mapLoader = true;
 
-        
+
         return carsFactory.getCars().success(function (cars) {
             cars = cars.data;
             var markerIcon = {
@@ -196,7 +204,7 @@ angular.module('SharengoCsApp').controller('SharengoCsController', function (
 
                 car.options.labelContent=car.battery+'%';
                 car.options.charging = false;
-     
+
                 car.carIcon = JSON.parse(JSON.stringify(markerIcon)); // fast clone
                 car.iconSelected = car.carIcon;
 
@@ -206,7 +214,7 @@ angular.module('SharengoCsApp').controller('SharengoCsController', function (
                 if(car.status=='maintenance'){
                     car.carIcon['fillColor'] = $scope.markerColors['red'];
                     car.options.group = 'manut';
-                    car.iconSelected = car.carIcon;  
+                    car.iconSelected = car.carIcon;
                 }else if(car.reservation){
                     car.carIcon['fillColor'] = $scope.markerColors['black'];
                     car.options.group = 'prenotate';
@@ -217,12 +225,12 @@ angular.module('SharengoCsApp').controller('SharengoCsController', function (
                     car.iconSelected = car.carIcon;
                 }else if(car.status!='operative'){
                     if(date === null || now>(date+3600)){
-                        car.options.labelContent=car.battery+'% <span class="txt-label">3G</span>';
+                        car.options.labelContent=car.battery+'% <span class="txt-label">' + gettextCatalog.getString('3G') + '</span>';
                         car.carIcon['fillColor'] = $scope.markerColors['brown'];
                         car.options.group = 'no3g';
                         car.iconSelected = car.carIcon;
                     }else if(car.gps_ok == false){
-                        car.options.labelContent=car.battery+'% <span class="txt-label">GPS</span>';
+                        car.options.labelContent=car.battery+'% <span class="txt-label">' + gettextCatalog.getString('GPS') + '</span>';
                         car.carIcon['fillColor'] = $scope.markerColors['brown'];
                         car.options.group = 'nogps';
                         car.iconSelected = car.carIcon;
@@ -239,7 +247,7 @@ angular.module('SharengoCsApp').controller('SharengoCsController', function (
                             car.carIcon['strokeColor'] = $scope.markerColors['azzure'];
                         } else{
                             console.log('nooper',car.plate,car);
-                        }                        
+                        }
                     }
                 }else {
                     if(car.sinceLastTrip && car.sinceLastTrip>1440){
@@ -256,18 +264,18 @@ angular.module('SharengoCsApp').controller('SharengoCsController', function (
                         car.iconSelected = car.carIcon;
                     }
                 }
-                
+
                 if(car.charging){
                     car.options.labelContent += '<i class="fa fa-plug"></i>';
                     car.options.charging = true;
-                }                
-                
+                }
+
                 $scope.markerCounters[car.options.group] +=1;
             });
             $scope.cars = cars;
             $scope.mapLoader = false;
-            
-            
+
+
             $scope.$watch("markerFilters", function(filt){
                 cars.forEach(function (carl) {
                     var toSet = false;
@@ -278,11 +286,11 @@ angular.module('SharengoCsApp').controller('SharengoCsController', function (
                         toSet = true;
                     }*/
                     carl.options.visible = toSet;
-                    
+
                 });
                 $scope.mapOptions.control.refresh();
-            },true);              
-            
+            },true);
+
         });
     };
 
@@ -302,7 +310,7 @@ angular.module('SharengoCsApp').controller('SharengoCsController', function (
             $scope.pois = pois;
             $scope.mapLoader = false;
         });
-    };    
+    };
     $scope.loadFleets = function(){
         fleetsFactory.getFleets().success(function (fleets) {
             var firstOption = {
@@ -312,7 +320,7 @@ angular.module('SharengoCsApp').controller('SharengoCsController', function (
                 zoomLevel: $scope.initial.mapZoom,
                 latitude: $scope.initial.mapCenter.latitude,
                 longitude: $scope.initial.mapCenter.longitude,
-                isDefalt: false                
+                isDefalt: false
             };
             $scope.fleets.push(firstOption);
             $scope.fleets = $scope.fleets.concat(fleets.data);
@@ -371,7 +379,7 @@ angular.module('SharengoCsApp').controller('SharengoCsController', function (
                 {
                     latitude: $scope.defaultFleet.latitude,
                     longitude: $scope.defaultFleet.longitude
-                }, 
+                },
                 $scope.defaultFleet.mapZoom
             );
         }else{
@@ -379,7 +387,7 @@ angular.module('SharengoCsApp').controller('SharengoCsController', function (
                 {
                     latitude: $scope.defaultFleet.latitude,
                     longitude: $scope.defaultFleet.longitude
-                }, 
+                },
                 $scope.defaultFleet.zoomLevel
             );
             $scope.searchAddress.city = $scope.defaultFleet.name;
@@ -400,9 +408,9 @@ angular.module('SharengoCsApp').controller('SharengoCsController', function (
     function searchCar(value, unit, zoom) {
         var cars,
             car;
-        
+
         resetMarkerFilters();
-        
+
         if (value !== undefined) {
             $scope.accordionStatus.hideCustomerSelect = true;
 
@@ -467,9 +475,9 @@ angular.module('SharengoCsApp').controller('SharengoCsController', function (
                     $scope.accordionStatus.showNoResult = true;
 
                     if (unit) {
-                        $scope.noResult = 'un altro n° unità';
+                        $scope.noResult = gettextCatalog.getString('un altro n° unità');
                     } else {
-                        $scope.noResult = 'un\'altra targa';
+                        $scope.noResult = gettextCatalog.getString('un\'altra targa');
                     }
 
                     $scope.zoomOut();
@@ -624,7 +632,7 @@ angular.module('SharengoCsApp').controller('SharengoCsController', function (
                     $scope.markerCounters[car.options.group] += 1;
                  //   if(car.options.charging) $scope.markerCounters['ricarica'] += 1;
                 }
-            });   
+            });
         }
     };
 
@@ -673,22 +681,22 @@ angular.module('SharengoCsApp').controller('SharengoCsController', function (
                 var content = [
 "<div class=\"module-pop-up\" style=\"margin:0 auto;\">",
 "<a id=\"btn-close\" class=\"btn-close\"></a>",
-"<div class=\"module-pop-up-content\"><div class=\"block-car-data bg-ct4 clearfix\"><div class=\"block-heading text-align-center\"><span class=\"block-info\">Auto scelta</span><h1 id=\"licence-plate\" class=\"block-title\">{{plate}}</h1></div>",
+"<div class=\"module-pop-up-content\"><div class=\"block-car-data bg-ct4 clearfix\"><div class=\"block-heading text-align-center\"><span class=\"block-info\">" + gettextCatalog.getString('Auto scelta') + "</span><h1 id=\"licence-plate\" class=\"block-title\">{{plate}}</h1></div>",
 "<div class=\"block-content clearfix\">",
 "<div id=\"left-column\" class=\"block-column bw-f w-2-4\">",
 "<div class=\"block-image\"><img src=\"assets-modules/call-center/images/car.png\" alt=\"\"></div>",
-"<div id=\"left-info\"><div class=\"block-label-status\"><span class=\"block-info\">Stato interni</span><div class=\"block-bar\"><div id=\"int_cleanliness\" class=\"block-bar-value\">",
+"<div id=\"left-info\"><div class=\"block-label-status\"><span class=\"block-info\">" + gettextCatalog.getString('Stato interni') + "</span><div class=\"block-bar\"><div id=\"int_cleanliness\" class=\"block-bar-value\">",
 "<div class=\"block-bar\"><div id=\"int_cleanliness\" class=\"block-bar-value {{int0}}\"></div></div></div></div></div>",
-"<div class=\"block-label-status\"><span class=\"block-info\">Stato esterni</span><div class=\"block-bar\"><div id=\"ext_cleanliness\" class=\"block-bar-value\">",
+"<div class=\"block-label-status\"><span class=\"block-info\">" + gettextCatalog.getString('Stato esterni') + "</span><div class=\"block-bar\"><div id=\"ext_cleanliness\" class=\"block-bar-value\">",
 "<div id=\"ext_cleanliness\" class=\"block-bar-value {{est0}}\"></div></div></div></div></div></div>",
 "<div id=\"right-column\" class=\"block-column last bw-f w-2-4\">",
 "<div class=\"block-wrapper-car-data-info bg-ct4\">",
-"<div id=\"block-right-top\" class=\"block-car-data-info\"><span class=\"block-data-name\"><i class=\"fa fa-map-marker\"></i> Dove si trova</span><span id=\"location\" class=\"block-data-value\">{{latitude}}, {{longitude}} <reverse-geocode lat=\"latitude\" lng=\"longitude\"></reverse-geocode></span></div>",
-"<div class=\"block-car-data-info\"><span id=\"block-right-bottom-title\" class=\"block-data-name\"><i id=\"circle-icon\" class=\"fa fa-sun-o\"></i> Autonomia</span><span id=\"block-right-bottom-text\" class=\"block-data-value\">{{battery}} % batteria</span></div>",
-"<div class=\"block-car-data-info\"><span id=\"block-right-bottom-title\" class=\"block-data-name\"><i id=\"circle-icon\" class=\"fa fa-clock-o\"></i> Ultimo contatto</span><span id=\"block-right-bottom-text\" class=\"block-data-value\">{{lastContact.date | dateSharengoFormat}}</span></div>",
+"<div id=\"block-right-top\" class=\"block-car-data-info\"><span class=\"block-data-name\"><i class=\"fa fa-map-marker\"></i> " + gettextCatalog.getString('Dove si trova') + "</span><span id=\"location\" class=\"block-data-value\">{{latitude}}, {{longitude}} <reverse-geocode lat=\"latitude\" lng=\"longitude\"></reverse-geocode></span></div>",
+"<div class=\"block-car-data-info\"><span id=\"block-right-bottom-title\" class=\"block-data-name\"><i id=\"circle-icon\" class=\"fa fa-sun-o\"></i> " + gettextCatalog.getString('Autonomia') + "</span><span id=\"block-right-bottom-text\" class=\"block-data-value\">{{battery}} % " + gettextCatalog.getString('batteria') + "</span></div>",
+"<div class=\"block-car-data-info\"><span id=\"block-right-bottom-title\" class=\"block-data-name\"><i id=\"circle-icon\" class=\"fa fa-clock-o\"></i> " + gettextCatalog.getString('Ultimo contatto') + "</span><span id=\"block-right-bottom-text\" class=\"block-data-value\">{{lastContact.date | dateSharengoFormat}}</span></div>",
 "<div id=\"btn-reserve\" class=\"block-wrapper-btn\" style=\"display:none\"><a id=\"reserve-text\" href=\"/login\" class=\"btn-link ct3\"><i class=\"fa fa-circle-o-notch fa-spin\"></i></a></div>",
-"<div id=\"step2-buttons\" class=\"block-wrapper-btn\" style=\"display:none\"><button id=\"btn-back\" class=\"reset pull-left\"><i class=\"fa fa-angle-left\"></i> Annulla</button><button id=\"btn-confirm\" class=\"pull-right ct2\">Conferma <i class=\"fa fa-angle-right\"></i></button></div><div>",
-"<button id=\"btn-done\" class=\"ct2\" style=\"display:none; margin:0 auto;\">Chiudi <i class=\"fa fa-check\"></i></button>",
+"<div id=\"step2-buttons\" class=\"block-wrapper-btn\" style=\"display:none\"><button id=\"btn-back\" class=\"reset pull-left\"><i class=\"fa fa-angle-left\"></i> " + gettextCatalog.getString('Annulla') + "</button><button id=\"btn-confirm\" class=\"pull-right ct2\">" + gettextCatalog.getString('Conferma') + " <i class=\"fa fa-angle-right\"></i></button></div><div>",
+"<button id=\"btn-done\" class=\"ct2\" style=\"display:none; margin:0 auto;\">" + gettextCatalog.getString('Chiudi') + " <i class=\"fa fa-check\"></i></button>",
 "</div></div></div></div></div></div></div>"
                 ].join("");
 
