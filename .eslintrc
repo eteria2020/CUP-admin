@@ -1,4 +1,5 @@
 {
+    "extends": "eslint:recommended",
     "rules": {
         "quotes": 0,
         "no-alert": 0,

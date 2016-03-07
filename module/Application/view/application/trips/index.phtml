@@ -6,14 +6,15 @@ $this->headScript()
     ->appendFile('/js/datatables/media/js/jquery.dataTables.min.js')
     ->appendFile('/js/datatables/plugins/bootstrap/dataTables.bootstrap.js')
     ->appendFile('/plugins/bootstrap-datepicker/js/bootstrap-datepicker.js')
-    ->appendFile($this->basePath() .'/js/trips.js');
+    ->appendFile($this->basePath() . '/js/trips.js');
 ?>
 <div class="page-content-wrapper">
     <div class="page-content">
 
         <!-- BEGIN PAGE HEADER-->
         <h3 class="page-title">
-            <?= $this->translate("ELENCO CORSE"); ?> <small><?= $this->translate("ricerca"); ?></small>
+            <?= $this->translate("ELENCO CORSE"); ?>
+            <small><?= $this->translate("ricerca"); ?></small>
         </h3>
 
         <div class="page-bar">
@@ -42,7 +43,8 @@ $this->headScript()
                                 </select>
                             </div>
                             <div class="form-group">
-                                <input type="text" name="value" value="" class="form-control" id="js-value" placeholder="<?= $this->translate("Filtra..."); ?>">
+                                <input type="text" name="value" value="" class="form-control" id="js-value"
+                                       placeholder="<?= $this->translate("Filtra..."); ?>">
                             </div>
                         </div>
                     </div>
@@ -50,23 +52,30 @@ $this->headScript()
                         <div class="form-inline">
                             <div class="form-group">
                                 <label> <?= $this->translate("da"); ?>: </label>
-                                <input class="form-control form-control-inline input-medium date-picker" size="16" type="text" id="js-date-from" placeholder="<?= $this->translate("Seleziona data inizio"); ?>">
+                                <input class="form-control form-control-inline input-small date-picker" size="16"
+                                       type="text" id="js-date-from"
+                                       placeholder="<?= $this->translate("Data inizio"); ?>">
                             </div>
                             <div class="form-group">
                                 <label> <?= $this->translate("a"); ?>: </label>
-                                <input class="form-control form-control-inline input-medium date-picker" size="16" type="text" id="js-date-to" placeholder="<?= $this->translate("Seleziona data fine"); ?>">
+                                <input class="form-control form-control-inline input-small date-picker" size="16"
+                                       type="text" id="js-date-to"
+                                       placeholder="<?= $this->translate("Data fine"); ?>">
                             </div>
                             <div class="btn-group">
-                                <button type="button" class="btn green js-search" id="js-search"><i class="fa fa-search"></i> <?= $this->translate("Cerca"); ?></button>
-                                <button type="button" class="btn green dropdown-toggle" data-toggle="dropdown"><i class="fa fa-angle-down"></i></button>
+                                <button type="button" class="btn green js-search" id="js-search"><i
+                                        class="fa fa-search"></i> <?= $this->translate("Cerca"); ?></button>
+                                <button type="button" class="btn green dropdown-toggle" data-toggle="dropdown"><i
+                                        class="fa fa-angle-down"></i></button>
                                 <ul class="dropdown-menu" role="menu">
                                     <li>
-                                        <a href="javascript:void(0);" id="js-clear"><i class="fa fa-remove"></i> <?= $this->translate("Pulisci Ricerca"); ?></a>
+                                        <a href="javascript:void(0);" id="js-clear"><i
+                                                class="fa fa-remove"></i> <?= $this->translate("Pulisci Ricerca"); ?>
+                                        </a>
                                     </li>
                                 </ul>
                             </div>
                         </div>
-                    </div>
                     </div>
                 </div>
 

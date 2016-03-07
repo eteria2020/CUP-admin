@@ -11,10 +11,10 @@ class UsersControllerFactory implements FactoryInterface
     public function createService(ServiceLocatorInterface $serviceLocator)
     {
         $entityManager = $serviceLocator->getServiceLocator()->get('doctrine.entitymanager.orm_default');
-        $I_usersService = $serviceLocator->getServiceLocator()->get('SharengoCore\Service\UsersService');
-        $I_userForm = $serviceLocator->getServiceLocator()->get('UserForm');
+        $usersService = $serviceLocator->getServiceLocator()->get('SharengoCore\Service\UsersService');
+        $userForm = $serviceLocator->getServiceLocator()->get('UserForm');
         $hydrator = new DoctrineHydrator($entityManager);
 
-        return new UsersController($I_usersService, $I_userForm, $hydrator);
+        return new UsersController($usersService, $userForm, $hydrator);
     }
 }

@@ -16,30 +16,30 @@ class UsersController extends AbstractActionController
     /**
      * @var UsersService
      */
-    private $I_usersService;
+    private $usersService;
 
     /**
      * @var
      */
-    private $I_userForm;
+    private $userForm;
 
     /** @var DoctrineHydrator */
     private $hydrator;
 
     /**
-     * @param UsersService $I_usersService
+     * @param UsersService $usersService
      */
-    public function __construct(UsersService $I_usersService, Form $I_userForm, DoctrineHydrator $hydrator)
+    public function __construct(UsersService $usersService, Form $userForm, DoctrineHydrator $hydrator)
     {
-        $this->I_usersService = $I_usersService;
-        $this->I_userForm = $I_userForm;
+        $this->usersService = $usersService;
+        $this->userForm = $userForm;
         $this->hydrator = $hydrator;
     }
 
     public function indexAction()
     {
         return new ViewModel([
-            'users' => $this->I_usersService->getListUsers()
+            'users' => $this->usersService->getListUsers()
         ]);
     }
 
@@ -47,13 +47,13 @@ class UsersController extends AbstractActionController
     {
         $translator = $this->TranslatorPlugin();
         /** @var UserForm $form */
-        $form = $this->I_userForm;
+        $form = $this->userForm;
 
         if ($this->getRequest()->isPost()) {
             $postData = $this->getRequest()->getPost()->toArray();
             $form->setData($postData);
 
-            $validator = new DuplicateEmail(['service' => $this->I_usersService]);
+            $validator = new DuplicateEmail(['service' => $this->usersService]);
             $email = $form->getInputFilter()->get('user')->get('email');
             $email->getValidatorChain()->attach($validator);
 
@@ -61,7 +61,7 @@ class UsersController extends AbstractActionController
 
                 try {
 
-                    $this->I_usersService->saveData($form->getData());
+                    $this->usersService->saveData($form->getData());
                     $this->flashMessenger()->addSuccessMessage($translator->translate('Utente creato con successo!'));
 
                 } catch (\Exception $e) {
@@ -84,7 +84,7 @@ class UsersController extends AbstractActionController
         $id = (int)$this->params()->fromRoute('id', 0);
 
         /** @var Webuser $I_user */
-        $I_user = $this->I_usersService->findUserById($id);
+        $I_user = $this->usersService->findUserById($id);
 
         if (is_null($I_user)) {
             $this->getResponse()->setStatusCode(Response::STATUS_CODE_404);
@@ -93,7 +93,7 @@ class UsersController extends AbstractActionController
         }
 
         /** @var UserForm $form */
-        $form = $this->I_userForm;
+        $form = $this->userForm;
         $userData = $this->hydrator->extract($I_user);
         $userData['email2'] = $I_user->getEmail();
         $form->setData(['user' => $userData]);
@@ -107,7 +107,7 @@ class UsersController extends AbstractActionController
             $form->getInputFilter()->get('user')->get('password')->setRequired(false);
             $form->getInputFilter()->get('user')->get('password2')->setRequired(false);
             $validator = new DuplicateEmail([
-                'service' => $this->I_usersService,
+                'service' => $this->usersService,
                 'avoid'   => [$I_user->getEmail()]
             ]);
             $email = $form->getInputFilter()->get('user')->get('email');
@@ -117,7 +117,7 @@ class UsersController extends AbstractActionController
 
                 try {
 
-                    $this->I_usersService->saveData($form->getData(), $userData['password']);
+                    $this->usersService->saveData($form->getData(), $userData['password']);
                     $this->flashMessenger()->addSuccessMessage($translator->translate('Utente modificato con successo!'));
 
                 } catch (\Exception $e) {
