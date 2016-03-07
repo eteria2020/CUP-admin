@@ -4,8 +4,10 @@ namespace Application\Controller;
 use Application\Form\CustomerForm;
 use Application\Form\DriverForm;
 use SharengoCore\Entity\Customers;
+use SharengoCore\Entity\CustomersBonus;
 use SharengoCore\Entity\PromoCodes;
 use SharengoCore\Service\CardsService;
+use SharengoCore\Service\CustomersBonusPackagesService;
 use SharengoCore\Service\CustomersService;
 use SharengoCore\Service\PromoCodesService;
 use SharengoCore\Service\DisableContractService;
@@ -85,11 +87,13 @@ class CustomersController extends AbstractActionController
      * @param CustomersService $customersService
      * @param CardsService $cardsService
      * @param PromoCodesService $promoCodeService
+     * @param CustomersBonusPackagesService $customersBonusPackagesService
      * @param Form $customerForm
      * @param Form $driverForm
      * @param Form $settingForm
      * @param Form $promoCodeForm
-     * @param Form customerBonusForm
+     * @param Form $customerBonusForm
+     * @param Form $cardForm
      * @param HydratorInterface $hydrator
      * @param CartasiContractsService $cartasiContractsService
      * @param DisableContractService $disableContractService
@@ -346,28 +350,26 @@ class CustomersController extends AbstractActionController
         return new JsonModel();
     }
 
-    public function assignPromoCodeAjaxAction()
+    public function assignBonusAjaxAction()
     {
         $translator = $this->TranslatorPlugin();
         $customer = $this->getCustomer();
         $postData = $this->getRequest()->getPost()->toArray();
-        try {
-            /** @var PromoCodes $promoCode */
-            $promoCode = $this->promoCodeService->getPromoCode($postData['promocode']);
 
-            $this->customersService->addBonusFromPromoCode($customer, $promoCode);
+        try {
+            $bonusId = $postData['bonusId'];
+
+            $customerBonus = $this->customersService->getBonusFromId($bonusId);
+            $this->customersService->addBonusFromWebUser($customer, $customerBonus);
 
             $this->flashMessenger()->addSuccessMessage($translator->translate('Operazione completata con successo!'));
-        } catch (BonusAssignmentException $e) {
-            $this->flashMessenger()->addErrorMessage($e->getMessage());
-            return true;
+
         } catch (\Exception $e) {
             $this->flashMessenger()->addErrorMessage($translator->translate('Si è verificato un errore applicativo. L\'assistenza tecnica è già al corrente, ci scusiamo per l\'inconveniente'));
-
-            return true;
         }
 
-        return true;
+        return new JsonModel();
+
     }
 
     public function assignPromoCodeAction()

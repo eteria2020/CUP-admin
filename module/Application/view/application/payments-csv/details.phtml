@@ -25,115 +25,6 @@ $transactionAmount = null;
                     <?= $this->partial('partials/flash-messages.phtml', []); ?>
 
                     <?php
-                    if (!is_null($this->transactionType)): ?>
-                        <div class="row">
-                            <div class="col-lg-12">
-                                <h3><?= $this->translate("Tipologia anomalia"); ?></h3>
-                                <?php
-                                /* @var SharengoCore\Entity\SubscriptionPayment this->transactionType */
-                                if ($this->transactionType instanceof SharengoCore\Entity\SubscriptionPayment) : ?>
-                                    <div class="col-lg-4">
-                                        <div class="form-group">
-                                            <label><?= $this->translate("Tipologia"); ?></label>
-                                            <div class="sng-info-box">Pagamento iscrizione utente</div>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-8">
-                                        <div class="form-group">
-                                            <label><?= $this->translate("Nome cliente"); ?></label>
-                                            <div class="sng-info-box">
-                                                <a href="<?= $this->url('customers/edit', ['id' => $this->transactionType->getCustomer()->getId()]); ?>">
-                                                    <?= $this->transactionType->getCustomer()->getName() .
-                                                    " " .
-                                                    $this->transactionType->getCustomer()->getSurname(); ?></a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <?php
-                                endif; ?>
-                                <?php
-                                /* @var SharengoCore\Entity\TripPayments this->transactionType */
-                                if ($this->transactionType instanceof SharengoCore\Entity\TripPayments) : ?>
-                                    <div class="col-lg-4">
-                                        <div class="form-group">
-                                            <label><?= $this->translate("Tipologia"); ?></label>
-                                            <div class="sng-info-box">Pagamento corsa</div>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-4">
-                                        <div class="form-group">
-                                            <label><?= $this->translate("Id corsa"); ?></label>
-                                            <div class="sng-info-box">
-                                                <?= $this->transactionType->getTripId() ?>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-4">
-                                        <div class="form-group">
-                                            <label><?= $this->translate("Id Pagamento"); ?></label>
-                                            <div class="sng-info-box">
-                                                <?= $this->transactionType->getId() ?>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <?php
-                                    if ($this->transactionType->isWrongPayment()) :
-                                        ?>
-                                        <div class="col-lg-12">
-                                            <input id="confirmTripPaymentUrl" type="hidden" value="<?= $this->url('payments/set-trip-as-payed', ['id' => $this->transactionType->getId()]); ?>">
-                                            <div id="setTripAsPayedBtn"
-                                                 class="btn btn-default green"><?= $this->translate("Segna come pagata"); ?></div>
-
-                                        </div>
-                                        <?php
-                                    endif; ?>
-                                    <?php
-                                endif; ?>
-
-                                <?php /* @var SharengoCore\Entity\BonusPackagePayment this->transactionType */
-                                if ($this->transactionType instanceof SharengoCore\Entity\BonusPackagePayment) : ?>
-                                    <div class="col-lg-4">
-                                        <div class="form-group">
-                                            <label><?= $this->translate("Tipologia"); ?></label>
-                                            <div class="sng-info-box">Pagamento minuti bonus</div>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-4">
-                                        <div class="form-group">
-                                            <label><?= $this->translate("Codice bonus"); ?></label>
-                                            <div class="sng-info-box">
-                                                <?= $this->transactionType->getPackage()->getCode() ?>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-4">
-                                        <div class="form-group">
-                                            <label><?= $this->translate("Nome cliente"); ?></label>
-                                            <div class="sng-info-box">
-                                                <?= $this->transactionType->getCustomer()->getName() .
-                                                " " .
-                                                $this->transactionType->getCustomer()->getSurname(); ?>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-12">
-                                        <input id="assignPromoUrl" type="hidden" value="<?= $this->url('customers/assign-promo-code-ajax', ['id' => $this->transactionType->getCustomer()->getId()]); ?>">
-                                        <input id="assignPromoCode" type="hidden" name="promocode"
-                                               value="<?= $this->transactionType->getPackage()->getCode() ?>">
-                                        <div id="assignPromoBtn"
-                                             class="btn btn-default green"><?= $this->translate("Assegna promo code"); ?></div>
-
-                                    </div>
-
-                                    <?php
-                                endif; ?>
-
-                            </div>
-                        </div>
-                    <?php
-                    endif; ?>
-
-                    <?php
                     if ($this->csvAnomaly->isResolved()) { ?>
                         <!-- BEGIN resolved data container -->
                         <div class="row">
@@ -277,7 +168,7 @@ $transactionAmount = null;
                                 <h3><?= $this->translate("Soluzione"); ?></h3>
                             </div>
 
-                            <div class="col-lg-4">
+                            <div class="col-lg-3">
                                 <div class="form-group">
                                     <label><?= $this->csvAnomaly->getTypeTranslated(); ?>:</label>
                                     <p><?= $this->translate("Effettuare"); ?> <?= $this->csvAnomaly->getAmount() > 0 ? $this->translate('NC') : $this->translate('fattura'); ?><?= $this->translate("di"); ?> <?= number_format(abs($this->csvAnomaly->getAmount()) / 100,
@@ -285,7 +176,7 @@ $transactionAmount = null;
                                 </div>
                             </div>
 
-                            <div class="col-lg-4">
+                            <div class="col-lg-3">
                                 <div class="form-group">
                                     <form action="<?= $this->url('payments/csv-resolve',
                                         ['id' => $this->csvAnomaly->getId()]); ?>"
@@ -299,6 +190,119 @@ $transactionAmount = null;
                             </div>
                         </div>
                     <?php
+                    endif; ?>
+
+                    <?php
+                    if (!is_null($this->transactionType)): ?>
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <h3><?= $this->translate("Altre azioni"); ?></h3>
+                                <?php
+                                /* @var SharengoCore\Entity\SubscriptionPayment this->transactionType */
+                                if ($this->transactionType instanceof SharengoCore\Entity\SubscriptionPayment) : ?>
+                                    <div class="col-lg-4">
+                                        <div class="form-group">
+                                            <label><?= $this->translate("Tipologia"); ?></label>
+                                            <div class="sng-info-box"><?= $this->translate("Pagamento iscrizione utente"); ?></div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-8">
+                                        <div class="form-group">
+                                            <label><?= $this->translate("Nome cliente"); ?></label>
+                                            <div class="sng-info-box">
+                                                <a href="<?= $this->url('customers/edit', ['id' => $this->transactionType->getCustomer()->getId()]); ?>">
+                                                    <?= $this->transactionType->getCustomer()->getName() .
+                                                    " " .
+                                                    $this->transactionType->getCustomer()->getSurname(); ?></a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <?php
+                                endif; ?>
+                                <?php
+                                /* @var SharengoCore\Entity\TripPayments this->transactionType */
+                                if ($this->transactionType instanceof SharengoCore\Entity\TripPayments) : ?>
+                                    <div class="col-lg-4">
+                                        <div class="form-group">
+                                            <label><?= $this->translate("Tipologia"); ?></label>
+                                            <div class="sng-info-box"><?= $this->translate("Pagamento corsa"); ?></div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-4">
+                                        <div class="form-group">
+                                            <label><?= $this->translate("Id corsa"); ?></label>
+                                            <div class="sng-info-box">
+                                                <?= $this->transactionType->getTripId() ?>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-4">
+                                        <div class="form-group">
+                                            <label><?= $this->translate("Id Pagamento"); ?></label>
+                                            <div class="sng-info-box">
+                                                <?= $this->transactionType->getId() ?>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <?php
+                                    if ($this->transactionType->isWrongPayment()) :
+                                        ?>
+                                        <div class="col-lg-12">
+                                            <input id="confirmTripPaymentUrl" type="hidden" value="<?= $this->url('payments/set-trip-as-payed', ['id' => $this->transactionType->getId()]); ?>">
+                                            <div id="setTripAsPayedBtn"
+                                                 class="btn btn-default green"><?= $this->translate("Segna come pagata"); ?></div>
+
+                                        </div>
+                                        <?php
+                                    endif; ?>
+                                    <?php
+                                endif; ?>
+
+                                <?php /* @var SharengoCore\Entity\BonusPackagePayment this->transactionType */
+                                if ($this->transactionType instanceof SharengoCore\Entity\BonusPackagePayment) : ?>
+                                    <div class="col-lg-4">
+                                        <div class="form-group">
+                                            <label><?= $this->translate("Tipologia"); ?></label>
+                                            <div class="sng-info-box"><?= $this->translate("Pagamento minuti bonus"); ?></div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-4">
+                                        <div class="form-group">
+                                            <label><?= $this->translate("Codice bonus"); ?></label>
+                                            <div class="sng-info-box">
+                                                <?= $this->transactionType->getPackage()->getCode() ?>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-4">
+                                        <div class="form-group">
+                                            <label><?= $this->translate("Nome cliente"); ?></label>
+                                            <div class="sng-info-box">
+                                                <?= $this->transactionType->getCustomer()->getName() .
+                                                " " .
+                                                $this->transactionType->getCustomer()->getSurname(); ?>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-lg-12">
+                                        <input id="assignPromoUrl" type="hidden" value="
+                                        <?= $this->url('customers/assign-bonus-ajax', ['id' => $this->transactionType->getCustomer()->getId()]); ?>">
+                                        <input id="assignBonusId" type="hidden" name="bonusid"
+                                               value="<?= $this->transactionType->getBonus()->getId() ?>">
+                                        <input id="assignPackageTransaction" type="hidden" name="transactionId"
+                                               value="<?= $this->csvAnomaly->getTransaction()->getId()?>">
+                                        <div id="assignBonusBtn"
+                                             class="btn btn-default green"><?= $this->translate("Assegna bonus"); ?></div>
+
+                                    </div>
+
+                                    <?php
+                                endif; ?>
+
+                            </div>
+                        </div>
+                        <?php
                     endif; ?>
                     <!-- END solutions container -->
 

@@ -287,15 +287,15 @@ return [
                             ],
                         ],
                     ],
-                    'assign-promo-code-ajax' => [
+                    'assign-bonus-ajax' => [
                         'type'    => 'Segment',
                         'options' => [
-                            'route'    => '/assign-promo-code-ajax/:id',
+                            'route'    => '/assign-bonus-ajax/:id',
                             'constraints' => [
                                 'id' => '[0-9]*'
                             ],
                             'defaults' => [
-                                'action'        => 'assign-promo-code-ajax',
+                                'action'        => 'assign-bonus-ajax',
                             ],
                         ],
                     ],
