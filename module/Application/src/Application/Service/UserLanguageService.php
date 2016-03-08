@@ -46,6 +46,7 @@ class UserLanguageService
             $container = new Container(UserLanguageService::SESSION_KEY);
             $locale = $this->languages[$lang]['locale'];
             $container->offsetSet(UserLanguageService::LANGUAGE, $locale);
+            setcookie('lang', $this->languages[$lang]['lang_3chars'], NULL, '/');
         }
     }
 }
