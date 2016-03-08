@@ -62,6 +62,13 @@ class Module
             'it_IT'
         );
 
+        $translator->addTranslationFile(
+            'phpArray',
+            'vendor/zendframework/zendframework/resources/languages/fr/Zend_Validate.php',
+            'default',
+            'fr_FR'
+        );
+
 
         AbstractValidator::setDefaultTranslator($translator);
 

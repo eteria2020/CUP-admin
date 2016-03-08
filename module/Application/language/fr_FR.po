@@ -1,0 +1,2665 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Sharengo\n"
+"POT-Creation-Date: 2016-02-25 06:46+0100\n"
+"PO-Revision-Date: 2016-03-07 17:41+0100\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.6.10\n"
+"X-Poedit-Basepath: E:/omniaevo-twist/sharengo-admin/module\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"X-Poedit-KeywordsList: translate\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"Last-Translator: \n"
+"Language: fr\n"
+"X-Poedit-SearchPath-0: .\n"
+
+#: Application/config/module.config.php:1270
+msgid "Clienti"
+msgstr "Client"
+
+#: Application/config/module.config.php:1277
+#: Application/config/module.config.php:1313
+#: Application/config/module.config.php:1339
+#: Application/config/module.config.php:1363
+#: Application/config/module.config.php:1377
+#: Application/view/application/trips-not-payed/list.phtml:21
+msgid "Elenco"
+msgstr "Liste"
+
+#: Application/config/module.config.php:1282
+#: Application/view/application/customers/edit.phtml:38
+#: Application/view/application/customers/list.phtml:77
+#: Application/view/application/reservations/index.phtml:72
+msgid "Card"
+msgstr "Carte"
+
+#: Application/config/module.config.php:1287
+msgid "Patenti estere"
+msgstr "Licences étrangères"
+
+#: Application/config/module.config.php:1306
+msgid "Auto"
+msgstr "Voiture"
+
+#: Application/config/module.config.php:1332
+#: Application/view/partials/translations.phtml:57
+msgid "Corse"
+msgstr "Courses"
+
+#: Application/config/module.config.php:1344
+msgid "Costo corsa"
+msgstr "Course de coût"
+
+#: Application/config/module.config.php:1349
+msgid "Corse non pagate"
+msgstr "Courses impayées"
+
+#: Application/config/module.config.php:1356
+msgid "Prenotazioni"
+msgstr "Réservations"
+
+#: Application/config/module.config.php:1370
+#: Application/view/application/customers/edit.phtml:39
+msgid "Fatture"
+msgstr "Factures"
+
+#: Application/config/module.config.php:1384
+msgid "Pagamenti"
+msgstr "Paiements"
+
+#: Application/config/module.config.php:1391
+#: Application/view/application/customers/edit.phtml:42
+msgid "Pagamenti falliti"
+msgstr "Paiements ont échoué"
+
+#: Application/config/module.config.php:1396
+msgid "Addebita penale/extra"
+msgstr "Accusation pénale/extra"
+
+#: Application/config/module.config.php:1401
+msgid "Competenze"
+msgstr "Compétences"
+
+#: Application/config/module.config.php:1406
+#: Application/view/application/payments-csv/csv.phtml:15
+msgid "Verifica CartaSI"
+msgstr "Vérification CartaSì"
+
+#: Application/config/module.config.php:1413
+msgid "Configurazione"
+msgstr "Configuration"
+
+#: Application/config/module.config.php:1420
+msgid "Gestione soglie allarme"
+msgstr "Seuils de gestion d'alarme"
+
+#: Application/config/module.config.php:1425
+msgid "Gestione POIS"
+msgstr "Gestion de POIS"
+
+#: Application/config/module.config.php:1430
+msgid "Tariffe"
+msgstr "Taux"
+
+#: Application/config/module.config.php:1437
+msgid "Aree"
+msgstr "Domaines"
+
+#: Application/config/module.config.php:1444
+msgid "Gestione aree"
+msgstr "Zones de gestion"
+
+#: Application/config/module.config.php:1449
+msgid "Aree d'allarme"
+msgstr "Zones d'alarme"
+
+#: Application/config/module.config.php:1456
+msgid "Statistiche"
+msgstr "Statistiques"
+
+#: Application/config/module.config.php:1463
+msgid "Call center"
+msgstr "Centre d'appels"
+
+#: Application/config/module.config.php:1470
+msgid "Mappa Allarmi"
+msgstr "Carte des Alertes"
+
+#: Application/src/Application/Controller/CarsController.php:97
+msgid "Auto aggiunta con successo!"
+msgstr "Ajoutée  réussi de voiture!"
+
+#: Application/src/Application/Controller/CarsController.php:101
+#: Application/src/Application/Controller/CarsController.php:174
+#: Application/src/Application/Controller/CarsController.php:215
+#: Application/src/Application/Controller/CarsController.php:252
+#: Application/src/Application/Controller/CustomersController.php:186
+#: Application/src/Application/Controller/CustomersController.php:370
+#: Application/src/Application/Controller/CustomersController.php:402
+#: Application/src/Application/Controller/PaymentsController.php:329
+#: Application/src/Application/Controller/UsersController.php:68
+#: Application/src/Application/Controller/UsersController.php:125
+msgid ""
+"Si è verificato un errore applicativo. L'assistenza tecnica è già al "
+"corrente, ci scusiamo per l'inconveniente"
+msgstr ""
+"Une erreur s'est produite. Le service est déjà au courant, nous nous "
+"excusons pour la gêne occasionnée"
+
+#: Application/src/Application/Controller/CarsController.php:170
+msgid "Auto modificata con successo!"
+msgstr "Voiture modifié avec succès !"
+
+#: Application/src/Application/Controller/CarsController.php:213
+msgid "Danni auto modificati con successo!"
+msgstr "Dégâts voiture modifiée avec succès!"
+
+#: Application/src/Application/Controller/CarsController.php:248
+msgid "Auto rimossa con successo!"
+msgstr "Voiture correctement supprimée!"
+
+#: Application/src/Application/Controller/CarsController.php:276
+msgid "Comando eseguito con successo"
+msgstr "Commande avec succès exécuté"
+
+#: Application/src/Application/Controller/CarsController.php:280
+msgid "Errore nell'esecuzione del comando"
+msgstr "Erreur l'exécution de la commande"
+
+#: Application/src/Application/Controller/ConfigurationsController.php:59
+msgid "Configurazione salvata con successo!"
+msgstr "Configuration sauvegardée avec succès!"
+
+#: Application/src/Application/Controller/CustomerNoteController.php:64
+#: Application/src/Application/Controller/PaymentsCsvController.php:115
+msgid "Nota aggiunta con successo"
+msgstr "Note ajoutée avec succès"
+
+#: Application/src/Application/Controller/CustomerNoteController.php:70
+#: Application/src/Application/Controller/PaymentsCsvController.php:121
+msgid "Errore nell'inserimento della nota"
+msgstr "Erreur insertion de note"
+
+#: Application/src/Application/Controller/CustomersController.php:183
+#: Application/src/Application/Controller/EditTripController.php:100
+msgid "Modifica effettuta con successo!"
+msgstr "Examen réussi!"
+
+#: Application/src/Application/Controller/CustomersController.php:191
+msgid "Dati inseriti non validi"
+msgstr "Données non valides entrées"
+
+#: Application/src/Application/Controller/CustomersController.php:341
+msgid "Contratto disabilitato correttamente!"
+msgstr "Contrat désactivé correctement!"
+
+#: Application/src/Application/Controller/CustomersController.php:343
+msgid "Errore durante la disabilitazione del contratto"
+msgstr "Erreur s'est produite lors de la désactivation du contrat"
+
+#: Application/src/Application/Controller/CustomersController.php:366
+#: Application/src/Application/Controller/CustomersController.php:400
+#: Application/src/Application/Controller/CustomersController.php:483
+msgid "Operazione completata con successo!"
+msgstr "Opération terminée avec succès!"
+
+#: Application/src/Application/Controller/CustomersController.php:485
+msgid "Qualcosa è andato storto durante la creazione"
+msgstr "Quelque chose s'est mal passé lors de la création"
+
+#: Application/src/Application/Controller/CustomersController.php:570
+#: Application/src/Application/Controller/PaymentsController.php:222
+msgid "Non esiste un cliente per l'id specificato"
+msgstr "N'existe pas un client pour l'id spécifié."
+
+#: Application/src/Application/Controller/CustomersEditController.php:132
+msgid "Utente disattivato"
+msgstr "Utilisateurs désactivés"
+
+#: Application/src/Application/Controller/CustomersEditController.php:134
+#: Application/src/Application/Controller/CustomersEditController.php:179
+#: Application/src/Application/Controller/CustomersEditController.php:200
+msgid "Operazione fallita"
+msgstr "Utilisateurs désactivés"
+
+#: Application/src/Application/Controller/CustomersEditController.php:167
+msgid "Riattivazione per pagamento riuscito completata"
+msgstr "Réactivation de paiement réussi terminé"
+
+#: Application/src/Application/Controller/CustomersEditController.php:176
+msgid "Utente riattivato"
+msgstr "Utilisateur réactivé"
+
+#: Application/src/Application/Controller/CustomersEditController.php:198
+msgid "Disattivazione rimossa"
+msgstr "Désactivation de supprimé"
+
+#: Application/src/Application/Controller/EditTripController.php:102
+msgid "La corsa non può essere modificata perché non è conclusa."
+msgstr "La course n'est pas modifiable car il n'est pas fini."
+
+#: Application/src/Application/Controller/EditTripController.php:104
+msgid ""
+"La data specificata non può essere precedente alla data di inizio della corsa"
+msgstr ""
+"La date spécifiée ne peut être antérieure à la date de début de la course"
+
+#: Application/src/Application/Controller/EditTripController.php:106
+msgid ""
+"La data specificata non è nel formato corretto. Verifica i dati inseriti."
+msgstr ""
+"La date spécifiée n'est pas au format correct. Vérifier les données saisies."
+
+#: Application/src/Application/Controller/ForeignDriversLicenseController.php:103
+msgid "Patente validata con successo."
+msgstr "Licence validée avec succès."
+
+#: Application/src/Application/Controller/ForeignDriversLicenseController.php:105
+msgid "Si è verificato un errore nella validazione della patente"
+msgstr "S'est produite une erreur dans la validation de la licence"
+
+#: Application/src/Application/Controller/PaymentsController.php:231
+msgid "Il cliente non ha un contratto valido con Cartasi"
+msgstr "Le client ne dispose pas d'un contrat valide avec Cartasi"
+
+#: Application/src/Application/Controller/PaymentsController.php:240
+msgid "La flotta selezionata non è valida"
+msgstr "La flotte sélectionnée n'est pas valide"
+
+#: Application/src/Application/Controller/PaymentsController.php:254
+msgid ""
+"Il tentativo di pagamento non è andato a buon fine. Il cliente è stato "
+"notificato da Cartasi"
+msgstr ""
+"La tentative de paiement était fin sans succès. Le client a été notifié par "
+"Cartasi"
+
+#: Application/src/Application/Controller/PaymentsController.php:269
+msgid ""
+"Il tentativo di pagamento è andato a buon fine. Il cliente è stato "
+"notificato da Cartasi"
+msgstr ""
+"Votre tentative de paiement a été couronnée de succès. Le client a été "
+"notifié par Cartasi"
+
+#: Application/src/Application/Controller/PaymentsController.php:274
+msgid "C'è stato un errore durante la procedura di pagamento: "
+msgstr "Il y a une erreur pendant le processus de commande :"
+
+#: Application/src/Application/Controller/PaymentsController.php:324
+msgid "Tariffa creata con successo!"
+msgstr "Taux créé avec succès!"
+
+#: Application/src/Application/Controller/PaymentsController.php:326
+msgid "Tariffa invariata"
+msgstr "Taux inchangé"
+
+#: Application/src/Application/Controller/PaymentsCsvController.php:136
+msgid "Anomalia risolta con successo"
+msgstr "Anomalie résolu avec succès"
+
+#: Application/src/Application/Controller/PaymentsCsvController.php:139
+msgid "Anomalia già segnata come risolta"
+msgstr "Anomalie déjà marqué comme résolu"
+
+#: Application/src/Application/Controller/PaymentsCsvController.php:142
+msgid "Errore nella risoluzione"
+msgstr "Résolution de l'erreur"
+
+#: Application/src/Application/Controller/PaymentsCsvController.php:171
+msgid "File caricato con successo"
+msgstr "Fichier téléchargé avec succès"
+
+#: Application/src/Application/Controller/PaymentsCsvController.php:173
+msgid "Formattazione del file non valida"
+msgstr "Format de fichier non valide"
+
+#: Application/src/Application/Controller/PoisController.php:83
+msgid "POI aggiunta con successo!"
+msgstr "POI ajouté avec succès!"
+
+#: Application/src/Application/Controller/PoisController.php:87
+#: Application/src/Application/Controller/PoisController.php:136
+msgid ""
+"Si è verificato un errore applicativo.\n"
+"                        L'assistenza tecnica è già al corrente, ci scusiamo "
+"per l'inconveniente"
+msgstr ""
+"Il y avait une erreur d'application.\n"
+"                       Le service est déjà au courant, nous nous excusons "
+"pour la gêne occasionnée"
+
+#: Application/src/Application/Controller/PoisController.php:132
+msgid "POI modificato con successo!"
+msgstr "POI changé avec succès!"
+
+#: Application/src/Application/Controller/PoisController.php:166
+msgid "POI rimosso con successo!"
+msgstr "POI supprimé avec succès!"
+
+#: Application/src/Application/Controller/PoisController.php:170
+msgid ""
+"Si è verificato un errore applicativo.\n"
+"                L'assistenza tecnica è già al corrente, ci scusiamo per "
+"l'inconveniente"
+msgstr ""
+"Il y avait une erreur d'application.\n"
+"               Le service est déjà au courant, nous nous excusons pour la "
+"gêne occasionnée"
+
+#: Application/src/Application/Controller/TripsController.php:195
+msgid "Corsa chiusa con successo"
+msgstr "Course avec succès fermé"
+
+#: Application/src/Application/Controller/UsersController.php:65
+msgid "Utente creato con successo!"
+msgstr "Utilisateur créé avec succès!"
+
+#: Application/src/Application/Controller/UsersController.php:121
+msgid "Utente modificato con successo!"
+msgstr "Utilisateur édité avec succès!"
+
+#: Application/src/Application/Form/CarFieldset.php:92
+msgid "Attivo"
+msgstr "Actif"
+
+#: Application/src/Application/Form/CarFieldset.php:93
+msgid "Non Attivo"
+msgstr "Pas actif"
+
+#: Application/src/Application/Form/CsvUploadForm.php:52
+msgid "Carica adesso"
+msgstr "Télécharger maintenant"
+
+#: Application/src/Application/Form/CsvUploadForm.php:72
+#: Application/src/Application/Form/CsvUploadForm.php:84
+msgid ""
+"Il file caricato ha un formato non valido; sono accettati solo file in "
+"formato csv"
+msgstr ""
+"Le fichier téléchargé a un format non valide. sont acceptés uniquement dans "
+"le fichier csv"
+
+#: Application/src/Application/Form/CsvUploadForm.php:73
+msgid "Non è stato possibile verificare il formato del file"
+msgstr "Il n'était pas possible de vérifier le format de fichier"
+
+#: Application/src/Application/Form/CsvUploadForm.php:74
+#: Application/src/Application/Form/CsvUploadForm.php:85
+msgid "Il file caricato non è leggibile o non esiste"
+msgstr "Le fichier téléchargé n'est pas lisible ou n'existe pas"
+
+#: Application/src/Application/Form/CustomerBonusFieldset.php:115
+msgid "La data di fine validità deve essere posteriore alla data di inizio"
+msgstr "La date de fin doit être postérieure à la date de début"
+
+#: Application/src/Application/Form/CustomerFieldset.php:60
+msgid "Sig."
+msgstr "Mr."
+
+#: Application/src/Application/Form/CustomerFieldset.php:61
+msgid "Sig.ra"
+msgstr "Mme."
+
+#: Application/src/Application/Form/CustomerFieldset.php:198
+msgid "Italiano"
+msgstr "Italien"
+
+#: Application/src/Application/Form/CustomerFieldset.php:199
+msgid "tedesco"
+msgstr "Allemand"
+
+#: Application/src/Application/Form/CustomerFieldset.php:200
+msgid "francese"
+msgstr "Français"
+
+#: Application/src/Application/Form/CustomerFieldset.php:201
+msgid "spagnolo"
+msgstr "Espagnol"
+
+#: Application/src/Application/Form/CustomerFieldset.php:202
+msgid "inglese"
+msgstr "Anglais"
+
+#: Application/src/Application/Form/CustomerFieldset.php:203
+msgid "cinese"
+msgstr "Chinois"
+
+#: Application/src/Application/Form/CustomerFieldset.php:204
+msgid "russo"
+msgstr "Russe"
+
+#: Application/src/Application/Form/CustomerFieldset.php:205
+msgid "portoghese"
+msgstr "Portugais"
+
+#: Application/src/Application/Form/InputData/CloseTripDataFactory.php:36
+msgid "Impossibile trovare la corsa corretta"
+msgstr "Impossible de trouver la bonne race"
+
+#: Application/src/Application/Form/InputData/CloseTripDataFactory.php:40
+msgid "Per favore seleziona una data"
+msgstr "Veuillez sélectionner une date"
+
+#: Application/src/Application/Form/InputData/CloseTripDataFactory.php:46
+msgid "La data inserita non è corretta"
+msgstr "La date saisie est incorrecte"
+
+#: Application/src/Application/Form/InputData/CloseTripDataFactory.php:50
+msgid "Non è possibile utilizzare una data futura"
+msgstr "Vous ne pouvez pas utiliser une date ultérieure"
+
+#: Application/src/Application/Form/InputData/CloseTripDataFactory.php:52
+msgid "Non è possibile chiudere una corsa prima del suo inizio"
+msgstr "Vous ne pouvez pas fermer une course avant qu'elle commence"
+
+#: Application/src/Application/Form/InputData/CloseTripDataFactory.php:56
+msgid "Per favore seleziona una opzione pagabile"
+msgstr "Veuillez sélectionner une option qui doit être payée"
+
+#: Application/src/Application/Form/PromoCodeFieldset.php:28
+msgid "Codice promo"
+msgstr "Code promo"
+
+#: Application/src/Application/Form/SettingFieldset.php:60
+#: Application/src/Application/Form/SettingFieldset.php:75
+#: Application/src/Application/Form/SettingFieldset.php:90
+#: Application/src/Application/Form/SettingFieldset.php:105
+#: Application/src/Application/Form/SettingFieldset.php:120
+#: SharengoCore/src/SharengoCore/Service/CardsService.php:97
+#: SharengoCore/src/SharengoCore/Service/CardsService.php:99
+#: SharengoCore/src/SharengoCore/Service/ReservationsService.php:115
+#: SharengoCore/src/SharengoCore/Service/TripsService.php:176
+#: SharengoCore/src/SharengoCore/Service/TripsService.php:190
+#: SharengoCore/src/SharengoCore/Service/TripsService.php:201
+#: Application/view/application/customers/info-tab.phtml:295
+#: Application/view/application/customers/info-tab.phtml:308
+#: Application/view/application/trips/close-tab.phtml:25
+msgid "No"
+msgstr "Non"
+
+#: Application/src/Application/Form/SettingFieldset.php:61
+#: Application/src/Application/Form/SettingFieldset.php:76
+#: Application/src/Application/Form/SettingFieldset.php:91
+#: Application/src/Application/Form/SettingFieldset.php:106
+#: Application/src/Application/Form/SettingFieldset.php:121
+#: SharengoCore/src/SharengoCore/Service/CardsService.php:97
+#: SharengoCore/src/SharengoCore/Service/CardsService.php:99
+#: SharengoCore/src/SharengoCore/Service/ReservationsService.php:115
+#: SharengoCore/src/SharengoCore/Service/TripsService.php:176
+#: SharengoCore/src/SharengoCore/Service/TripsService.php:190
+#: SharengoCore/src/SharengoCore/Service/TripsService.php:201
+#: Application/view/application/customers/info-tab.phtml:293
+#: Application/view/application/customers/info-tab.phtml:306
+msgid "Si"
+msgstr "Oui"
+
+#: Application/src/Application/Form/TripCostFieldset.php:66
+msgid "Maschio"
+msgstr "Mâle"
+
+#: Application/src/Application/Form/TripCostFieldset.php:67
+msgid "Femmina"
+msgstr "Femelle"
+
+#: Application/src/Application/View/Helper/CarStatus.php:23
+msgid "Operativa"
+msgstr "Opérationnelles"
+
+#: Application/src/Application/View/Helper/CarStatus.php:27
+msgid "In manutenzione"
+msgstr "Dans l'entretien"
+
+#: Application/src/Application/View/Helper/CarStatus.php:31
+msgid "Non operativa"
+msgstr "A l'arrêt"
+
+#: SharengoCore/src/SharengoCore/Service/CardsService.php:70
+#, php-format
+msgid "Rfid: %s - Codice: %s"
+msgstr "Rfid:% s - Code:% s"
+
+#: SharengoCore/src/SharengoCore/Service/CarsService.php:131
+msgid "Interna"
+msgstr "Interne"
+
+#: SharengoCore/src/SharengoCore/Service/CarsService.php:131
+msgid "Esterna"
+msgstr "Externe"
+
+#: SharengoCore/src/SharengoCore/Service/CarsService.php:134
+msgid "Mappa"
+msgstr "Carte"
+
+#: SharengoCore/src/SharengoCore/Service/ConfigurationsService.php:85
+msgid "Si è verificato un errore durante il salvataggio della configurazione"
+msgstr "Une erreur s'est produite lors de l'enregistrement de la configuration"
+
+#: SharengoCore/src/SharengoCore/Service/CustomersService.php:241
+msgid "Completata"
+msgstr "Terminé"
+
+#: SharengoCore/src/SharengoCore/Service/CustomersService.php:241
+msgid "Non Completata"
+msgstr "Non Terminé"
+
+#: SharengoCore/src/SharengoCore/Service/CustomersService.php:375
+#: SharengoCore/src/SharengoCore/Service/CustomersService.php:383
+msgid "Codice promo non valido."
+msgstr "Code promo non valide."
+
+#: SharengoCore/src/SharengoCore/Service/CustomersService.php:379
+msgid "Codice promo già associato a questo account."
+msgstr "Code promo déjà associé à ce compte."
+
+#: SharengoCore/src/SharengoCore/Service/CustomersService.php:460
+msgid "SHARENGO - NOTIFICA DI DISABILITAZIONE"
+msgstr "SHARENGO - NOTIFICATION DÉSACTIVATION"
+
+#: SharengoCore/src/SharengoCore/Service/CustomersService.php:519
+msgid "SHARENGO - RIABILITAZIONE UTENTE"
+msgstr "SHARENGO - REHABILITATION UTILISATEUR"
+
+#: SharengoCore/src/SharengoCore/Service/ReservationsService.php:114
+msgid "PRENOTAZIONE DI SISTEMA"
+msgstr "SYSTÈME DE RÉSERVATION"
+
+#: Application/view/application/cars/add.phtml:9
+msgid "AGGIUNGI AUTO"
+msgstr "AJOUTER VOITURE"
+
+#: Application/view/application/cars/add.phtml:12
+#: Application/view/application/cars/edit.phtml:14
+#: Application/view/application/customers/edit.phtml:25
+#: Application/view/application/pois/add.phtml:13
+#: Application/view/application/pois/edit.phtml:13
+#: Application/view/application/trips/details.phtml:22
+msgid "Torna alla lista"
+msgstr "Retour à la liste"
+
+#: Application/view/application/cars/add.phtml:28
+#: Application/view/application/cars/edit-tab.phtml:15
+#: Application/view/application/cars/index.phtml:30
+#: Application/view/application/cars/index.phtml:84
+#: Application/view/application/reservations/index.phtml:35
+#: Application/view/application/reservations/index.phtml:70
+#: Application/view/application/trips-not-payed/list.phtml:32
+#: Application/view/application/trips/index.phtml:39
+#: Application/view/application/trips/index.phtml:93
+#: Application/view/application/trips/info-tab.phtml:73
+msgid "Targa"
+msgstr "Plaque d'immatriculation"
+
+#: Application/view/application/cars/add.phtml:39
+#: Application/view/application/cars/edit-tab.phtml:22
+msgid "Costruttore"
+msgstr "Constructeur"
+
+#: Application/view/application/cars/add.phtml:50
+#: Application/view/application/cars/edit-tab.phtml:33
+msgid "Modello"
+msgstr "Modèle"
+
+#: Application/view/application/cars/add.phtml:61
+#: Application/view/application/cars/edit-tab.phtml:44
+#: Application/view/application/cars/index.phtml:31
+msgid "Identificativo"
+msgstr "Indicatif d'appel"
+
+#: Application/view/application/cars/add.phtml:75
+#: Application/view/application/cars/index.phtml:32
+#: Application/view/application/cars/index.phtml:86
+#: Application/view/application/payments/extra.phtml:22
+#: Application/view/application/trips/index.phtml:41
+#: Application/view/application/trips/index.phtml:105
+msgid "Flotta"
+msgstr "Flotte"
+
+#: Application/view/application/cars/add.phtml:82
+#: Application/view/application/cars/edit-tab.phtml:64
+#: Application/view/application/cars/index.phtml:40
+#: Application/view/application/reservations/index.phtml:73
+msgid "Attiva"
+msgstr "Actif"
+
+#: Application/view/application/cars/add.phtml:89
+#: Application/view/application/cars/edit-tab.phtml:71
+#: Application/view/application/cars/index.phtml:92
+#: Application/view/application/foreign-drivers-license/uploaded-files.phtml:72
+#: Application/view/application/payments-csv/details.phtml:59
+msgid "Stato"
+msgstr "État"
+
+#: Application/view/application/cars/add.phtml:98
+#: Application/view/application/cars/edit-tab.phtml:57
+#: Application/view/application/cars/edit-tab.phtml:98
+#: Application/view/application/customers/edit.phtml:41
+#: Application/view/application/customers/list-card.phtml:51
+#: Application/view/application/payments-csv/details.phtml:146
+msgid "Note"
+msgstr "Remarques"
+
+#: Application/view/application/cars/add.phtml:106
+#: Application/view/application/cars/index.phtml:67
+msgid "Aggiungi Auto"
+msgstr "Ajouter voiture"
+
+#: Application/view/application/cars/commands-tab.phtml:6
+msgid "Seleziona..."
+msgstr "Sélectionnez ..."
+
+#: Application/view/application/cars/commands-tab.phtml:11
+msgid "Sei sicuro di voler eseguire questo comando?"
+msgstr "Voulez-vous vraiment exécuter cette commande?"
+
+#: Application/view/application/cars/damages-tab.phtml:13
+#: Application/view/application/configurations/manage-alarm.phtml:32
+msgid "Salva"
+msgstr "Sauvegarder"
+
+#: Application/view/application/cars/edit-tab.phtml:79
+msgid "Aggiorna stato auto"
+msgstr "Mise à jour d'état de voiture"
+
+#: Application/view/application/cars/edit-tab.phtml:85
+msgid "Sede di ricovero auto"
+msgstr "Seat abri voiture"
+
+#: Application/view/application/cars/edit-tab.phtml:110
+msgid "Modifica Auto"
+msgstr "Modification de la voiture"
+
+#: Application/view/application/cars/edit.phtml:11
+msgid "MODIFICA AUTO:"
+msgstr "MODIFICATION DE LA VOITURE:"
+
+#: Application/view/application/cars/edit.phtml:24
+#: Application/view/application/customers/edit.phtml:36
+#: Application/view/application/users/index.phtml:51
+#: Application/view/partials/translations.phtml:4
+msgid "Modifica"
+msgstr "modification"
+
+#: Application/view/application/cars/edit.phtml:25
+msgid "Comandi"
+msgstr "Commandes"
+
+#: Application/view/application/cars/edit.phtml:26
+msgid "Gestione Danni"
+msgstr "Gestion des Dommages"
+
+#: Application/view/application/cars/index.phtml:13
+msgid "ELENCO AUTO"
+msgstr "LISTE DE VOITURE"
+
+#: Application/view/application/cars/index.phtml:13
+#: Application/view/application/customers/list-card.phtml:13
+#: Application/view/application/customers/list.phtml:14
+#: Application/view/application/foreign-drivers-license/uploaded-files.phtml:13
+#: Application/view/application/invoices/index.phtml:13
+#: Application/view/application/payments/failed-payments.phtml:13
+#: Application/view/application/pois/index.phtml:13
+#: Application/view/application/reservations/index.phtml:17
+#: Application/view/application/trips/index.phtml:16
+msgid "ricerca"
+msgstr "recherche"
+
+#: Application/view/application/cars/index.phtml:29
+#: Application/view/application/customers/invoices-tab.phtml:21
+#: Application/view/application/customers/list.phtml:30
+#: Application/view/application/foreign-drivers-license/uploaded-files.phtml:29
+#: Application/view/application/invoices/index.phtml:33
+#: Application/view/application/payments/failed-payments.phtml:29
+#: Application/view/application/pois/index.phtml:29
+#: Application/view/application/reservations/index.phtml:33
+#: Application/view/application/trips/index.phtml:32
+#: Application/view/application/zones/zone-alarms.phtml:18
+msgid "Seleziona"
+msgstr "Sélectionnez"
+
+#: Application/view/application/cars/index.phtml:33
+#: Application/view/application/cars/index.phtml:93
+msgid "GPS"
+msgstr "GPS"
+
+#: Application/view/application/cars/index.phtml:34
+#: Application/view/application/cars/index.phtml:94
+msgid "GPRS"
+msgstr "GPRS"
+
+#: Application/view/application/cars/index.phtml:35
+#: Application/view/application/cars/index.phtml:95
+msgid "OBC"
+msgstr "OBC"
+
+#: Application/view/application/cars/index.phtml:36
+msgid "Pulizia Interna"
+msgstr "Nettoyage Intérieur"
+
+#: Application/view/application/cars/index.phtml:37
+msgid "Pulizia Esterna"
+msgstr "Nettoyage Extérieur"
+
+#: Application/view/application/cars/index.phtml:38
+msgid "In Corsa"
+msgstr "Fonctionnement"
+
+#: Application/view/application/cars/index.phtml:39
+msgid "Nascosta"
+msgstr "Caché"
+
+#: Application/view/application/cars/index.phtml:41
+msgid "Stato manutenzione"
+msgstr "Condition entretien"
+
+#: Application/view/application/cars/index.phtml:42
+msgid "Stato operativa"
+msgstr "Condition opérationnel"
+
+#: Application/view/application/cars/index.phtml:43
+msgid "Stato non operativa"
+msgstr "Condition non opérationnel"
+
+#: Application/view/application/cars/index.phtml:44
+msgid "Occupata"
+msgstr "Occupé"
+
+#: Application/view/application/cars/index.phtml:49
+msgid "Pulito"
+msgstr "Propre"
+
+#: Application/view/application/cars/index.phtml:50
+msgid "Media"
+msgstr "Moyenne"
+
+#: Application/view/application/cars/index.phtml:51
+msgid "Sporco"
+msgstr "Sale"
+
+#: Application/view/application/cars/index.phtml:53
+#: Application/view/application/customers/invoices-tab.phtml:35
+#: Application/view/application/customers/list.phtml:42
+#: Application/view/application/foreign-drivers-license/uploaded-files.phtml:33
+#: Application/view/application/invoices/index.phtml:49
+#: Application/view/application/payments/failed-payments.phtml:35
+#: Application/view/application/pois/index.phtml:42
+#: Application/view/application/reservations/index.phtml:40
+#: Application/view/application/trips/index.phtml:45
+msgid "Filtra..."
+msgstr "Filtre ..."
+
+#: Application/view/application/cars/index.phtml:56
+#: Application/view/application/customers/invoices-tab.phtml:42
+#: Application/view/application/customers/list.phtml:45
+#: Application/view/application/foreign-drivers-license/uploaded-files.phtml:36
+#: Application/view/application/invoices/index.phtml:56
+#: Application/view/application/payments/failed-payments.phtml:38
+#: Application/view/application/pois/index.phtml:46
+#: Application/view/application/reservations/index.phtml:43
+#: Application/view/application/trips/index.phtml:60
+msgid "Cerca"
+msgstr "Recherche"
+
+#: Application/view/application/cars/index.phtml:60
+#: Application/view/application/customers/invoices-tab.phtml:50
+#: Application/view/application/customers/list.phtml:49
+#: Application/view/application/foreign-drivers-license/uploaded-files.phtml:40
+#: Application/view/application/invoices/index.phtml:64
+#: Application/view/application/payments/failed-payments.phtml:42
+#: Application/view/application/pois/index.phtml:54
+#: Application/view/application/reservations/index.phtml:47
+#: Application/view/application/trips/index.phtml:64
+msgid "Pulisci Ricerca"
+msgstr "Effacer la recherche"
+
+#: Application/view/application/cars/index.phtml:77
+msgid "Elenco Auto"
+msgstr "Liste de voitures"
+
+#: Application/view/application/cars/index.phtml:85
+msgid "Identif."
+msgstr "Identif."
+
+#: Application/view/application/cars/index.phtml:87
+#: Application/view/partials/events-table.phtml:19
+msgid "Batteria"
+msgstr "Batterie"
+
+#: Application/view/application/cars/index.phtml:88
+msgid "Ultimo Contatto"
+msgstr "Dernier contact"
+
+#: Application/view/application/cars/index.phtml:89
+#: Application/view/partials/events-table.phtml:20
+msgid "Km"
+msgstr "Km"
+
+#: Application/view/application/cars/index.phtml:90
+msgid "Pulizia"
+msgstr "Nettoyage"
+
+#: Application/view/application/cars/index.phtml:91
+#: Application/view/application/cars/index.phtml:96
+#: Application/view/partials/events-table.phtml:25
+msgid "Posizione"
+msgstr "Emplacement"
+
+#: Application/view/application/cars/index.phtml:97
+#: Application/view/application/pois/index.phtml:89
+#: Application/view/application/users/index.phtml:39
+msgid "Azione"
+msgstr "Action"
+
+#: Application/view/application/configurations/manage-alarm.phtml:9
+msgid "GESTIONE SOGLIE ALLARME"
+msgstr "GESTION SEUIL D'ALARME"
+
+#: Application/view/application/customer-failure/failure-tab.phtml:11
+#: Application/view/application/payments/failed-payments.phtml:56
+msgid "Elenco pagamenti falliti"
+msgstr "Liste de paiements ayant échoué"
+
+#: Application/view/application/customer-failure/failure-tab.phtml:20
+#: Application/view/application/trips-not-payed/list.phtml:29
+#: Application/view/application/trips/index.phtml:87
+msgid "Id Corsa"
+msgstr "Id Voyages"
+
+#: Application/view/application/customer-failure/failure-tab.phtml:21
+#: Application/view/application/payments-csv/details.phtml:65
+#: Application/view/application/payments-csv/details.phtml:105
+#: Application/view/application/trips/cost-tab.phtml:192
+#: Application/view/partials/translations.phtml:76
+msgid "Importo"
+msgstr "Montant"
+
+#: Application/view/application/customer-failure/failure-tab.phtml:22
+msgid "Data risoluzione"
+msgstr "Résolution Donnée"
+
+#: Application/view/application/customer-failure/failure-tab.phtml:23
+msgid "Tempo risoluzione"
+msgstr "Temps de résolution"
+
+#: Application/view/application/customer-failure/failure-tab.phtml:24
+msgid "Tentativi"
+msgstr "Tentatives"
+
+#: Application/view/application/customer-failure/failure-tab.phtml:38
+msgid "%a giorni, %h ore, %i minuti"
+msgstr "% Par jour, ou à l'heure%,% minutes"
+
+#: Application/view/application/customer-note/notes-tab.phtml:5
+#: Application/view/application/customers/bonus-tab.phtml:5
+#: Application/view/application/customers/invoices-tab.phtml:5
+msgid "Operazione eseguita con successo"
+msgstr "Opération effectuée avec succès"
+
+#: Application/view/application/customer-note/notes-tab.phtml:17
+msgid "Nuova nota"
+msgstr "Nouvelle note"
+
+#: Application/view/application/customer-note/notes-tab.phtml:28
+#: Application/view/application/payments-csv/details.phtml:185
+msgid "Aggiungi"
+msgstr "Ajouter"
+
+#: Application/view/application/customer-note/notes-tab.phtml:39
+#: Application/view/application/payments-csv/details.phtml:153
+msgid "Elenco Note"
+msgstr "Liste Remarques"
+
+#: Application/view/application/customer-note/notes-tab.phtml:48
+#: Application/view/application/customers/invoices-tab.phtml:78
+#: Application/view/application/invoices/index.phtml:92
+#: Application/view/application/payments-csv/csv.phtml:128
+#: Application/view/application/payments-csv/csv.phtml:157
+#: Application/view/application/payments-csv/details.phtml:41
+#: Application/view/application/payments-csv/details.phtml:93
+#: Application/view/application/payments-csv/details.phtml:158
+#: Application/view/application/payments/recap.phtml:43
+#: Application/view/application/payments/recap.phtml:74
+#: Application/view/application/payments/recap.phtml:110
+#: Application/view/application/payments/retry.phtml:83
+#: Application/view/application/reservations/index.phtml:34
+#: Application/view/partials/events-table.phtml:18
+msgid "Data"
+msgstr "Date"
+
+#: Application/view/application/customer-note/notes-tab.phtml:49
+msgid "Id Utente"
+msgstr "Id Utilisateur"
+
+#: Application/view/application/customer-note/notes-tab.phtml:50
+#: Application/view/application/payments-csv/details.phtml:160
+msgid "Nota"
+msgstr "Annotation"
+
+#: Application/view/application/customers-edit/edit-tab.phtml:22
+#: Application/view/application/customers/info-tab.phtml:11
+msgid "Anagrafica"
+msgstr "Enregistrement"
+
+#: Application/view/application/customers-edit/edit-tab.phtml:31
+#: Application/view/application/customers/info-tab.phtml:17
+msgid "Titolo"
+msgstr "Titre"
+
+#: Application/view/application/customers-edit/edit-tab.phtml:38
+#: Application/view/application/customers/info-tab.phtml:24
+#: Application/view/application/customers/list.phtml:74
+#: Application/view/application/foreign-drivers-license/uploaded-files.phtml:65
+#: Application/view/application/invoices/index.phtml:35
+#: Application/view/application/invoices/index.phtml:93
+#: Application/view/application/payments-csv/csv.phtml:69
+#: Application/view/application/payments-csv/csv.phtml:93
+#: Application/view/application/payments/failed-payments.phtml:65
+#: Application/view/application/payments/retry.phtml:89
+#: Application/view/application/pois/add.phtml:51
+#: Application/view/application/pois/edit.phtml:51
+#: Application/view/application/pois/index.phtml:33
+#: Application/view/application/pois/index.phtml:84
+#: Application/view/application/trips/index.phtml:90
+#: Application/view/application/trips/info-tab.phtml:46
+msgid "Nome"
+msgstr "Nom"
+
+#: Application/view/application/customers-edit/edit-tab.phtml:45
+#: Application/view/application/customers/info-tab.phtml:31
+#: Application/view/application/customers/list.phtml:32
+#: Application/view/application/customers/list.phtml:75
+#: Application/view/application/foreign-drivers-license/uploaded-files.phtml:66
+#: Application/view/application/invoices/index.phtml:36
+#: Application/view/application/invoices/index.phtml:94
+#: Application/view/application/payments/failed-payments.phtml:30
+#: Application/view/application/payments/failed-payments.phtml:66
+#: Application/view/application/payments/retry.phtml:95
+#: Application/view/application/trips/index.phtml:89
+#: Application/view/application/trips/info-tab.phtml:52
+msgid "Cognome"
+msgstr "Nom de famille"
+
+#: Application/view/application/customers-edit/edit-tab.phtml:54
+#: Application/view/application/customers/info-tab.phtml:40
+#: Application/view/application/customers/list.phtml:38
+#: Application/view/application/customers/list.phtml:80
+#: Application/view/application/payments/failed-payments.phtml:68
+#: Application/view/application/users/add.phtml:53
+#: Application/view/application/users/edit.phtml:53
+#: Application/view/application/users/index.phtml:37
+msgid "Email"
+msgstr "email"
+
+#: Application/view/application/customers-edit/edit-tab.phtml:61
+#: Application/view/application/customers/info-tab.phtml:47
+#: Application/view/application/foreign-drivers-license/uploaded-files.phtml:68
+msgid "Data di nascita"
+msgstr "Date de naissance"
+
+#: Application/view/application/customers-edit/edit-tab.phtml:68
+#: Application/view/application/customers/info-tab.phtml:54
+msgid "Stato di nascita"
+msgstr "État de naissance"
+
+#: Application/view/application/customers-edit/edit-tab.phtml:77
+#: Application/view/application/customers/info-tab.phtml:63
+msgid "Provincia di nascita (EE = estero)"
+msgstr "Province de naissance (EE = étranger)"
+
+#: Application/view/application/customers-edit/edit-tab.phtml:84
+#: Application/view/application/customers/info-tab.phtml:70
+msgid "Comune di nascita"
+msgstr "Ville de naissance"
+
+#: Application/view/application/customers-edit/edit-tab.phtml:91
+#: Application/view/application/customers/info-tab.phtml:77
+msgid "Via e numero civico"
+msgstr "Adresse"
+
+#: Application/view/application/customers-edit/edit-tab.phtml:100
+#: Application/view/application/customers/info-tab.phtml:86
+#: Application/view/error/404.phtml:64 Application/view/error/index.phtml:8
+msgid "Informazioni aggiuntive"
+msgstr "Informations complémentaires"
+
+#: Application/view/application/customers-edit/edit-tab.phtml:107
+#: Application/view/application/customers/info-tab.phtml:93
+#: Application/view/application/pois/add.phtml:83
+#: Application/view/application/pois/edit.phtml:83
+#: Application/view/application/pois/index.phtml:36
+#: Application/view/application/pois/index.phtml:87
+msgid "CAP"
+msgstr "Code postal"
+
+#: Application/view/application/customers-edit/edit-tab.phtml:114
+#: Application/view/application/customers/info-tab.phtml:100
+#: Application/view/application/customers/list.phtml:36
+#: Application/view/application/pois/add.phtml:76
+#: Application/view/application/pois/edit.phtml:76
+#: Application/view/application/pois/index.phtml:35
+#: Application/view/application/pois/index.phtml:86
+msgid "Città"
+msgstr "Ville"
+
+#: Application/view/application/customers-edit/edit-tab.phtml:123
+#: Application/view/application/customers/info-tab.phtml:109
+msgid "Lingua preferita"
+msgstr "Langue préférée"
+
+#: Application/view/application/customers-edit/edit-tab.phtml:130
+#: Application/view/application/customers/info-tab.phtml:116
+msgid "Codice fiscale"
+msgstr "Code fiscal"
+
+#: Application/view/application/customers-edit/edit-tab.phtml:137
+#: Application/view/application/customers/info-tab.phtml:123
+msgid "Partita IVA (opzionale)"
+msgstr "Numéro de TVA (facultatif)"
+
+#: Application/view/application/customers-edit/edit-tab.phtml:146
+#: Application/view/application/customers/info-tab.phtml:132
+#: Application/view/application/customers/list.phtml:35
+#: Application/view/application/customers/list.phtml:76
+#: Application/view/application/payments/failed-payments.phtml:67
+#: Application/view/application/trips/index.phtml:91
+#: Application/view/application/trips/info-tab.phtml:61
+msgid "Cellulare"
+msgstr "Cellulaire"
+
+#: Application/view/application/customers-edit/edit-tab.phtml:153
+#: Application/view/application/customers/info-tab.phtml:139
+msgid "Telefono"
+msgstr "Téléphone"
+
+#: Application/view/application/customers-edit/edit-tab.phtml:164
+msgid "Salva Dati Anagrafici"
+msgstr "Enregistrer les détails personnels"
+
+#: Application/view/application/customers-edit/edit-tab.phtml:175
+#: Application/view/application/customers/info-tab.phtml:163
+msgid "Dati Patente"
+msgstr "Données permis de conduire"
+
+#: Application/view/application/customers-edit/edit-tab.phtml:184
+#: Application/view/application/customers/info-tab.phtml:169
+#: Application/view/application/customers/list.phtml:34
+#: Application/view/application/customers/list.phtml:78
+msgid "Patente"
+msgstr "Permis de conduire"
+
+#: Application/view/application/customers-edit/edit-tab.phtml:191
+#: Application/view/application/customers/info-tab.phtml:176
+msgid "Rilasciato da (autorità)"
+msgstr "Publié par (autorités)"
+
+#: Application/view/application/customers-edit/edit-tab.phtml:198
+#: Application/view/application/customers/info-tab.phtml:183
+msgid "Rilasciato il"
+msgstr "Publié le"
+
+#: Application/view/application/customers-edit/edit-tab.phtml:207
+#: Application/view/application/customers/info-tab.phtml:192
+#: Application/view/application/foreign-drivers-license/uploaded-files.phtml:74
+msgid "Nome sulla patente"
+msgstr "Nom sur permis de conduire"
+
+#: Application/view/application/customers-edit/edit-tab.phtml:214
+#: Application/view/application/customers/info-tab.phtml:199
+msgid "Cognome sulla patente"
+msgstr "Nom de famille sur permis de conduire"
+
+#: Application/view/application/customers-edit/edit-tab.phtml:221
+#: Application/view/application/customers/info-tab.phtml:206
+msgid "Rilasciata da (nazione)"
+msgstr "Publié par (pays)"
+
+#: Application/view/application/customers-edit/edit-tab.phtml:228
+#: Application/view/application/customers/info-tab.phtml:215
+msgid "Data di scadenza"
+msgstr "Date d'expiration"
+
+#: Application/view/application/customers-edit/edit-tab.phtml:236
+msgid "Salva Dati Patente"
+msgstr "Enregistrer données permis de conduire"
+
+#: Application/view/application/customers-edit/edit-tab.phtml:253
+#: Application/view/application/customers/info-tab.phtml:227
+msgid "Altri dati"
+msgstr "D'autres données"
+
+#: Application/view/application/customers-edit/edit-tab.phtml:259
+#: Application/view/application/customers/info-tab.phtml:246
+msgid "Stato Iscrizione"
+msgstr "Enregistrement d'un condition"
+
+#: Application/view/application/customers-edit/edit-tab.phtml:268
+#: Application/view/application/customers/info-tab.phtml:259
+msgid "Stato Primo Pagamento"
+msgstr "Première condition de paiement"
+
+#: Application/view/application/customers-edit/edit-tab.phtml:277
+#: Application/view/application/customers/info-tab.phtml:272
+msgid "Percentuale Sconto"
+msgstr "Remise en pourcentage"
+
+#: Application/view/application/customers-edit/edit-tab.phtml:286
+#: Application/view/application/customers/info-tab.phtml:291
+msgid "Maintainer"
+msgstr "Maintainer"
+
+#: Application/view/application/customers-edit/edit-tab.phtml:295
+#: Application/view/application/customers/info-tab.phtml:304
+msgid "Gold List"
+msgstr "Gold List"
+
+#: Application/view/application/customers-edit/edit-tab.phtml:303
+msgid "Salva Dati"
+msgstr "Sauvegarder les données"
+
+#: Application/view/application/customers-edit/edit-tab.phtml:320
+msgid "Abilitazione"
+msgstr "Permettre"
+
+#: Application/view/application/customers-edit/edit-tab.phtml:325
+msgid "Stato:"
+msgstr "Condition:"
+
+#: Application/view/application/customers-edit/edit-tab.phtml:326
+#: Application/view/application/customers/info-tab.phtml:233
+#: Application/view/application/customers/info-tab.phtml:235
+msgid "Abilitato"
+msgstr "Qualifié"
+
+#: Application/view/application/customers-edit/edit-tab.phtml:326
+msgid "Disabilitato"
+msgstr "Désactiver"
+
+#: Application/view/application/customers-edit/edit-tab.phtml:334
+msgid "Motivi:"
+msgstr "Raisons:"
+
+#: Application/view/application/customers-edit/edit-tab.phtml:344
+msgid "Generata automaticamente, alcuni dati potrebbero non essere corretti"
+msgstr "Généré automatiquement, certaines données peuvent ne pas être correcte"
+
+#: Application/view/application/customers-edit/edit-tab.phtml:375
+msgid "Riabilita"
+msgstr "Réhabilite"
+
+#: Application/view/application/customers-edit/edit-tab.phtml:394
+msgid "Disabilita manualmente"
+msgstr "Désactiver manuellement"
+
+#: Application/view/application/customers/add-bonus.phtml:14
+msgid "AGGIUNGI BONUS"
+msgstr "AJOUTER BONUS"
+
+#: Application/view/application/customers/add-bonus.phtml:19
+#: Application/view/application/customers/assign-promo-code.phtml:15
+msgid "Torna alla scheda cliente"
+msgstr "Retour à la carte client"
+
+#: Application/view/application/customers/add-bonus.phtml:35
+msgid "Numero minuti"
+msgstr "Nombre de minutes"
+
+#: Application/view/application/customers/add-bonus.phtml:39
+#: Application/view/application/customers/bonus-tab.phtml:25
+msgid "Descrizione"
+msgstr "Description"
+
+#: Application/view/application/customers/add-bonus.phtml:46
+msgid "Utilizzabile dal"
+msgstr "Utilisable par"
+
+#: Application/view/application/customers/add-bonus.phtml:50
+msgid "Utilizzabile fino al"
+msgstr "Utilisable jusqu'à"
+
+#: Application/view/application/customers/add-bonus.phtml:56
+msgid "Aggiungi Bonus"
+msgstr "Ajouter Bonus"
+
+#: Application/view/application/customers/add-card.phtml:14
+msgid "AGGIUNGI CARD"
+msgstr "AJOUTER CARTE"
+
+#: Application/view/application/customers/add-card.phtml:34
+#: Application/view/application/customers/list-card.phtml:48
+#: Application/view/application/pois/add.phtml:40
+#: Application/view/application/pois/edit.phtml:40
+#: Application/view/application/pois/index.phtml:32
+#: Application/view/application/pois/index.phtml:83
+msgid "Codice"
+msgstr "Code"
+
+#: Application/view/application/customers/add-card.phtml:40
+#: Application/view/application/customers/card-tab.phtml:16
+#: Application/view/application/customers/list-card.phtml:27
+msgid "Aggiungi Card"
+msgstr "Ajouter une carte"
+
+#: Application/view/application/customers/assign-promo-code.phtml:10
+msgid "ASSOCIA CODICE PROMO"
+msgstr "CODE PROMO ASSOCIÉ"
+
+#: Application/view/application/customers/assign-promo-code.phtml:37
+msgid "Conferma"
+msgstr "Confirmation"
+
+#: Application/view/application/customers/bonus-tab.phtml:9
+msgid "Associa promo code"
+msgstr "Associés code promo"
+
+#: Application/view/application/customers/bonus-tab.phtml:10
+msgid "Aggiungi bonus"
+msgstr "Ajouter Bonus"
+
+#: Application/view/application/customers/bonus-tab.phtml:20
+#: Application/view/application/customers/invoices-tab.phtml:80
+#: Application/view/application/invoices/index.phtml:96
+msgid "Totale"
+msgstr "Somme"
+
+#: Application/view/application/customers/bonus-tab.phtml:21
+msgid "Residuo"
+msgstr "Résiduel"
+
+#: Application/view/application/customers/bonus-tab.phtml:22
+msgid "Valido Dal"
+msgstr "De Valide"
+
+#: Application/view/application/customers/bonus-tab.phtml:23
+msgid "Valido Fino al"
+msgstr "Valide jusqu'au"
+
+#: Application/view/application/customers/bonus-tab.phtml:24
+#: Application/view/application/payments-csv/csv.phtml:129
+#: Application/view/application/payments-csv/csv.phtml:158
+#: Application/view/application/payments/extra.phtml:33
+msgid "Tipologia"
+msgstr "Typologie"
+
+#: Application/view/application/customers/bonus-tab.phtml:26
+#: Application/view/application/customers/list.phtml:83
+msgid "Azioni"
+msgstr "Actes"
+
+#: Application/view/application/customers/bonus-tab.phtml:42
+#: Application/view/partials/translations.phtml:5
+msgid "Elimina"
+msgstr "Effacer"
+
+#: Application/view/application/customers/bonus-tab.phtml:51
+msgid "Il cliente non ha alcun bonus assegnato."
+msgstr "Le client n'a pas de bonus attribué."
+
+#: Application/view/application/customers/card-tab.phtml:6
+msgid "Codice Card:"
+msgstr "Code de la carte:"
+
+#: Application/view/application/customers/card-tab.phtml:9
+msgid "Rimuovi Card"
+msgstr "Retirez la carte"
+
+#: Application/view/application/customers/card-tab.phtml:20
+msgid "Nessun codice card assegnato per questo utente."
+msgstr "Aucun code de carte attribuée pour cet utilisateur."
+
+#: Application/view/application/customers/card-tab.phtml:25
+msgid "Cerca per Codice Card o Rfid"
+msgstr "Recherche par Code ou Carte RFID"
+
+#: Application/view/application/customers/card-tab.phtml:26
+msgid "Aggiungi Card..."
+msgstr "Ajouter Carte ..."
+
+#: Application/view/application/customers/card-tab.phtml:27
+msgid "Nessuna card corrisponde al codice inserito"
+msgstr "Aucune carte correspond au code d'entrée"
+
+#: Application/view/application/customers/card-tab.phtml:30
+msgid "Salva Codice"
+msgstr "Enregistrer le Code"
+
+#: Application/view/application/customers/contract-tab.phtml:7
+msgid "Contratto cliente"
+msgstr "Contrat client"
+
+#: Application/view/application/customers/contract-tab.phtml:14
+msgid "Codice contratto"
+msgstr "Code contrat"
+
+#: Application/view/application/customers/contract-tab.phtml:22
+msgid "Data attivazione contratto"
+msgstr "Activation Date de contrat"
+
+#: Application/view/application/customers/contract-tab.phtml:30
+msgid "Carta di credito inserita"
+msgstr "L'utilisation de la carte de crédit"
+
+#: Application/view/application/customers/contract-tab.phtml:38
+msgid "Scadenza carta di credito"
+msgstr "Carte de crédit expiration"
+
+#: Application/view/application/customers/contract-tab.phtml:46
+msgid "Data di disabilitazione:"
+msgstr "La date de désactivation:"
+
+#: Application/view/application/customers/contract-tab.phtml:49
+msgid "Disabilita contratto"
+msgstr "Désactiver contrat"
+
+#: Application/view/application/customers/contract-tab.phtml:57
+msgid ""
+"Il cliente selezionato non ha al momento un contratto valido con Cartasi"
+msgstr ""
+"Le client sélectionné ne dispose pas actuellement d'un contrat valide avec "
+"Cartasi"
+
+#: Application/view/application/customers/edit.phtml:20
+msgid "MODIFICA CLIENTE"
+msgstr "REVUE DE CLIENT"
+
+#: Application/view/application/customers/edit.phtml:35
+#: Application/view/application/trips/details.phtml:32
+msgid "Informazioni"
+msgstr "Information"
+
+#: Application/view/application/customers/edit.phtml:37
+#: Application/view/application/zones/prices-tab.phtml:10
+msgid "Bonus"
+msgstr "Bonus"
+
+#: Application/view/application/customers/edit.phtml:40
+msgid "Contratto"
+msgstr "Contrat"
+
+#: Application/view/application/customers/info-tab.phtml:146
+#: Application/view/application/customers/list.phtml:31
+#: Application/view/application/customers/list.phtml:73
+#: Application/view/application/pois/index.phtml:30
+#: Application/view/application/pois/index.phtml:81
+#: Application/view/application/users/index.phtml:35
+msgid "Id"
+msgstr "Id"
+
+#: Application/view/application/customers/info-tab.phtml:237
+msgid "Non Abilitato"
+msgstr "Pas activé"
+
+#: Application/view/application/customers/info-tab.phtml:248
+msgid "Registrazione Confermata"
+msgstr "Inscription Confirmée"
+
+#: Application/view/application/customers/info-tab.phtml:250
+msgid "Registrazione Non Confermata"
+msgstr "Enregistrement Non Confirmé"
+
+#: Application/view/application/customers/info-tab.phtml:261
+msgid "Pagamento Effettuato"
+msgstr "Adopté paiement"
+
+#: Application/view/application/customers/info-tab.phtml:263
+msgid "Pagamento Non Ancora Effettuato"
+msgstr "Pas encore effectué de paiement"
+
+#: Application/view/application/customers/info-tab.phtml:281
+msgid "Data/Ora"
+msgstr "Date/Heure"
+
+#: Application/view/application/customers/info-tab.phtml:282
+msgid "Iscrizione:"
+msgstr "Inscription:"
+
+#: Application/view/application/customers/info-tab.phtml:283
+msgid "Ultima Modifica: "
+msgstr "Dernière édition:"
+
+#: Application/view/application/customers/invoices-tab.phtml:22
+#: Application/view/application/customers/invoices-tab.phtml:77
+#: Application/view/application/invoices/index.phtml:34
+#: Application/view/application/invoices/index.phtml:91
+msgid "N° Fattura"
+msgstr "N ° de facture"
+
+#: Application/view/application/customers/invoices-tab.phtml:31
+#: Application/view/application/invoices/index.phtml:45
+#: Application/view/partials/translations.phtml:56
+msgid "Iscrizione"
+msgstr "Registration"
+
+#: Application/view/application/customers/invoices-tab.phtml:32
+#: Application/view/application/invoices/index.phtml:46
+#: Application/view/application/payments/failed-payments.phtml:70
+#: Application/view/application/payments/retry.phtml:104
+msgid "Corsa"
+msgstr "Course"
+
+#: Application/view/application/customers/invoices-tab.phtml:33
+#: Application/view/application/invoices/index.phtml:47
+#: Application/view/partials/translations.phtml:58
+msgid "Sanzione"
+msgstr "Sanction"
+
+#: Application/view/application/customers/invoices-tab.phtml:68
+#: Application/view/application/invoices/index.phtml:82
+msgid "Elenco Fatture"
+msgstr "Liste des factures"
+
+#: Application/view/application/customers/invoices-tab.phtml:79
+#: Application/view/application/invoices/index.phtml:95
+#: Application/view/application/pois/add.phtml:30
+#: Application/view/application/pois/edit.phtml:30
+#: Application/view/application/pois/index.phtml:31
+msgid "Tipo"
+msgstr "Type de"
+
+#: Application/view/application/customers/invoices-tab.phtml:81
+#: Application/view/application/invoices/index.phtml:97
+msgid "Download"
+msgstr "Download"
+
+#: Application/view/application/customers/list-card.phtml:13
+msgid "ELENCO CARD"
+msgstr "LISTE DE CARTE"
+
+#: Application/view/application/customers/list-card.phtml:41
+msgid "Elenco card"
+msgstr "Liste de carte"
+
+#: Application/view/application/customers/list-card.phtml:49
+#: Application/view/application/trips-not-payed/list.phtml:31
+#: Application/view/application/trips/index.phtml:38
+#: Application/view/application/trips/index.phtml:92
+msgid "RFID"
+msgstr "RFID"
+
+#: Application/view/application/customers/list-card.phtml:50
+msgid "Assegnato"
+msgstr "Assignés"
+
+#: Application/view/application/customers/list-card.phtml:52
+msgid "Assegnabile"
+msgstr "Assignable"
+
+#: Application/view/application/customers/list-card.phtml:53
+msgid "Utente"
+msgstr "Utilisateur"
+
+#: Application/view/application/customers/list.phtml:14
+msgid "ELENCO CLIENTI"
+msgstr "LISTE DES CLIENTS"
+
+#: Application/view/application/customers/list.phtml:33
+#: Application/view/application/customers/list.phtml:81
+#: Application/view/application/reservations/index.phtml:36
+msgid "Codice Fiscale"
+msgstr "Code Fiscal"
+
+#: Application/view/application/customers/list.phtml:37
+msgid "Codice Card"
+msgstr "Code Card"
+
+#: Application/view/application/customers/list.phtml:65
+msgid "Elenco clienti"
+msgstr "Liste des clients"
+
+#: Application/view/application/customers/list.phtml:79
+msgid "Scadenza Patente"
+msgstr "Expiration permis de conduire"
+
+#: Application/view/application/customers/list.phtml:82
+msgid "Registrazione"
+msgstr "Enregistrement"
+
+#: Application/view/application/edit-trip/edit-tab.phtml:9
+msgid "La corsa non può essere modificata perché non risulta ancora conclusa."
+msgstr "La course ne peut pas être modifié car il est pas encore terminée."
+
+#: Application/view/application/edit-trip/edit-tab.phtml:20
+msgid "La corsa non può essere modificata perché risulta già pagata."
+msgstr "La course ne peut pas être modifié car il est déjà payé."
+
+#: Application/view/application/edit-trip/edit-tab.phtml:42
+msgid "Dati corsa"
+msgstr "Les données gérées"
+
+#: Application/view/application/edit-trip/edit-tab.phtml:51
+msgid "Data inizio"
+msgstr "Date de début"
+
+#: Application/view/application/edit-trip/edit-tab.phtml:57
+msgid "Data fine"
+msgstr "Date de fin"
+
+#: Application/view/application/edit-trip/edit-tab.phtml:57
+msgid "(non precedente a quella di inizio)"
+msgstr "(pas plus tôt que le début)"
+
+#: Application/view/application/edit-trip/edit-tab.phtml:63
+#: Application/view/application/trips/close-tab.phtml:21
+#: Application/view/application/trips/cost-tab.phtml:200
+#: Application/view/application/trips/index.phtml:102
+#: Application/view/application/trips/info-tab.phtml:156
+msgid "Pagabile"
+msgstr "Payable"
+
+#: Application/view/application/edit-trip/edit-tab.phtml:63
+msgid "(impostabile solo a non pagabile)"
+msgstr "(peut être définie uniquement non exigible)"
+
+#: Application/view/application/edit-trip/edit-tab.phtml:68
+#: Application/view/application/trips/cost-tab.phtml:201
+#: Application/view/application/trips/info-tab.phtml:137
+#: Application/view/application/trips/info-tab.phtml:157
+msgid "NO"
+msgstr "NON"
+
+#: Application/view/application/edit-trip/edit-tab.phtml:80
+msgid "Salva Dati Corsa"
+msgstr "Enregistrer les données en cours d'exécution"
+
+#: Application/view/application/foreign-drivers-license/uploaded-files.phtml:13
+msgid "UPLOAD PATENTI ESTERE"
+msgstr "TÉLÉCHARGER LE PERMIS DE CONDUIRE ÉTRANGER"
+
+#: Application/view/application/foreign-drivers-license/uploaded-files.phtml:56
+msgid "Lista file caricati"
+msgstr "Liste des fichiers téléchargés"
+
+#: Application/view/application/foreign-drivers-license/uploaded-files.phtml:64
+msgid "Id cliente"
+msgstr "ID de client"
+
+#: Application/view/application/foreign-drivers-license/uploaded-files.phtml:67
+#: Application/view/application/pois/add.phtml:62
+#: Application/view/application/pois/edit.phtml:62
+#: Application/view/application/pois/index.phtml:34
+#: Application/view/application/pois/index.phtml:85
+msgid "Indirizzo"
+msgstr "Adresse"
+
+#: Application/view/application/foreign-drivers-license/uploaded-files.phtml:69
+msgid "Luogo di nascita"
+msgstr "Lieu de naissance"
+
+#: Application/view/application/foreign-drivers-license/uploaded-files.phtml:70
+msgid "Numero patente"
+msgstr "Nombre Fichier "
+
+#: Application/view/application/foreign-drivers-license/uploaded-files.phtml:71
+msgid "Autorità"
+msgstr "Autorité"
+
+#: Application/view/application/foreign-drivers-license/uploaded-files.phtml:73
+msgid "Rilasciata il"
+msgstr "Publié sur"
+
+#: Application/view/application/foreign-drivers-license/uploaded-files.phtml:75
+msgid "Categoria"
+msgstr "Catégorie"
+
+#: Application/view/application/foreign-drivers-license/uploaded-files.phtml:76
+msgid "Scade il"
+msgstr "Expire le"
+
+#: Application/view/application/foreign-drivers-license/uploaded-files.phtml:77
+msgid "File patente"
+msgstr "Fichier de permis de conduire"
+
+#: Application/view/application/foreign-drivers-license/uploaded-files.phtml:78
+#: Application/view/partials/translations.phtml:70
+msgid "Valida"
+msgstr "Valide"
+
+#: Application/view/application/index/index.phtml:5
+msgid "Dashboard"
+msgstr "Dashboard"
+
+#: Application/view/application/invoices/index.phtml:13
+msgid "ELENCO FATTURE"
+msgstr "LISTE DES FACTURES"
+
+#: Application/view/application/payments-csv/csv.phtml:27
+msgid "Gestione file"
+msgstr "Gestionnaire de fichiers"
+
+#: Application/view/application/payments-csv/csv.phtml:28
+msgid "Lista anomalie"
+msgstr "Liste des anomalies"
+
+#: Application/view/application/payments-csv/csv.phtml:41
+msgid "Carica nuovo file"
+msgstr "Télécharger le nouveau fichier"
+
+#: Application/view/application/payments-csv/csv.phtml:65
+msgid "Nuovi file"
+msgstr "Nouveaux fichiers"
+
+#: Application/view/application/payments-csv/csv.phtml:70
+msgid "Data inserimento"
+msgstr "Date d'ajout"
+
+#: Application/view/application/payments-csv/csv.phtml:89
+msgid "File analizzati"
+msgstr "Fichiers analysés"
+
+#: Application/view/application/payments-csv/csv.phtml:94
+msgid "Data analisi"
+msgstr "Analyse des données"
+
+#: Application/view/application/payments-csv/csv.phtml:95
+msgid "Anomalie riscontrate"
+msgstr "Défauts trouvés"
+
+#: Application/view/application/payments-csv/csv.phtml:123
+msgid "Anomalie non risolte"
+msgstr "Anomalies non résolues"
+
+#: Application/view/application/payments-csv/csv.phtml:127
+#: Application/view/application/payments-csv/csv.phtml:156
+#: Application/view/error/404.phtml:67 Application/view/error/404.phtml:91
+#: Application/view/error/index.phtml:11 Application/view/error/index.phtml:35
+msgid "File"
+msgstr "Fichier"
+
+#: Application/view/application/payments-csv/csv.phtml:139
+#: Application/view/application/payments-csv/csv.phtml:168
+#: Application/view/partials/translations.phtml:68
+msgid "Dettagli"
+msgstr "Détails"
+
+#: Application/view/application/payments-csv/csv.phtml:152
+msgid "Anomalie risolte"
+msgstr "Anomalies résolus"
+
+#: Application/view/application/payments-csv/csv.phtml:177
+msgid "Nessun anomalia trovata nei file analizzati."
+msgstr "Aucune anomalie dans les fichiers en cours d'analyse."
+
+#: Application/view/application/payments-csv/details.phtml:17
+msgid "Dettagli Anomalia"
+msgstr "Faute de détails"
+
+#: Application/view/application/payments-csv/details.phtml:17
+msgid "risolta"
+msgstr "résolu"
+
+#: Application/view/application/payments-csv/details.phtml:29
+msgid "Dati csv"
+msgstr "Données csv"
+
+#: Application/view/application/payments-csv/details.phtml:35
+#: Application/view/application/trips/index.phtml:40
+msgid "Numero"
+msgstr "Nombre"
+
+#: Application/view/application/payments-csv/details.phtml:47
+#: Application/view/application/reservations/index.phtml:71
+#: Application/view/application/trips-not-payed/list.phtml:30
+msgid "Cliente"
+msgstr "Client"
+
+#: Application/view/application/payments-csv/details.phtml:71
+msgid "Dettagli errore"
+msgstr "Détails de l'erreur"
+
+#: Application/view/application/payments-csv/details.phtml:87
+msgid "Dati transazione"
+msgstr "Données de transaction"
+
+#: Application/view/application/payments-csv/details.phtml:99
+#: Application/view/application/payments/retry.phtml:156
+msgid "Esito"
+msgstr "Résultats"
+
+#: Application/view/application/payments-csv/details.phtml:118
+msgid "Soluzione"
+msgstr "Solution"
+
+#: Application/view/application/payments-csv/details.phtml:124
+msgid "Effettuare"
+msgstr "Effectuer"
+
+#: Application/view/application/payments-csv/details.phtml:124
+msgid "NC"
+msgstr "NC"
+
+#: Application/view/application/payments-csv/details.phtml:124
+msgid "fattura"
+msgstr "facture"
+
+#: Application/view/application/payments-csv/details.phtml:124
+msgid "di"
+msgstr "par"
+
+#: Application/view/application/payments-csv/details.phtml:124
+msgid "€ all'utente"
+msgstr "€ tous les utilisateurs"
+
+#: Application/view/application/payments-csv/details.phtml:134
+msgid "Segna come risolta"
+msgstr "Marquer comme résolu"
+
+#: Application/view/application/payments-csv/details.phtml:159
+msgid "Id Webuser"
+msgstr "Id Webuser"
+
+#: Application/view/application/payments-csv/details.phtml:178
+msgid "Nuova Nota"
+msgstr "Nouvelle Note"
+
+#: Application/view/application/payments/extra.phtml:9
+msgid "ADDEBITI EXTRA/PENALI"
+msgstr "EXTRA FRAIS ET PÉNALITÉS"
+
+#: Application/view/application/payments/extra.phtml:16
+msgid "Id Cliente"
+msgstr "Id de client"
+
+#: Application/view/application/payments/extra.phtml:50
+msgid "Aggiungi addebito"
+msgstr "Ajouter la charge"
+
+#: Application/view/application/payments/extra.phtml:57
+msgid "Effettua pagamento"
+msgstr "Effectuer un paiement"
+
+#: Application/view/application/payments/failed-payments.phtml:13
+msgid "PAGAMENTI FALLITI"
+msgstr "PAIEMENT A ÉCHOUÉ"
+
+#: Application/view/application/payments/failed-payments.phtml:31
+#: Application/view/application/payments/failed-payments.phtml:69
+#: Application/view/application/payments/retry.phtml:77
+#: Application/view/application/trips/index.phtml:34
+msgid "ID Corsa"
+msgstr "ID de course"
+
+#: Application/view/application/payments/failed-payments.phtml:63
+msgid "Data pagamento"
+msgstr "Date de paiement"
+
+#: Application/view/application/payments/failed-payments.phtml:64
+msgid "ID cliente"
+msgstr "ID de client"
+
+#: Application/view/application/payments/failed-payments.phtml:71
+#: Application/view/application/payments/retry.phtml:110
+msgid "Parcheggio"
+msgstr "Parking"
+
+#: Application/view/application/payments/failed-payments.phtml:72
+#: Application/view/application/payments/retry.phtml:116
+msgid "Sconto"
+msgstr "Remise"
+
+#: Application/view/application/payments/failed-payments.phtml:73
+#: Application/view/application/payments/retry.phtml:122
+#: Application/view/application/trips-not-payed/list.phtml:39
+#: Application/view/application/trips/details.phtml:33
+#: Application/view/application/trips/index.phtml:104
+#: Application/view/application/zones/prices-tab.phtml:9
+msgid "Costo"
+msgstr "Coût"
+
+#: Application/view/application/payments/fares.phtml:8
+msgid "TARIFFE"
+msgstr "TARIFS"
+
+#: Application/view/application/payments/fares.phtml:17
+msgid "Soglia Tariffaria 60 min"
+msgstr "Le seuil de modification tarifaire 60 min"
+
+#: Application/view/application/payments/fares.phtml:26
+msgid "Soglia Tariffaria 240 min"
+msgstr "Le seuil de modification tarifaire 240 min"
+
+#: Application/view/application/payments/fares.phtml:35
+msgid "Soglia Tariffaria 1440 min"
+msgstr "Le seuil de modification tarifaire 1440 min"
+
+#: Application/view/application/payments/fares.phtml:43
+msgid "Salva tariffe"
+msgstr "Enregistrer les tarifs"
+
+#: Application/view/application/payments/recap.phtml:12
+msgid "COMPETENZE"
+msgstr "COMPÉTENCES"
+
+#: Application/view/application/payments/recap.phtml:24
+msgid "Riepilogo giornaliero"
+msgstr "Résumé quotidien"
+
+#: Application/view/application/payments/recap.phtml:25
+msgid "Riepilogo settimanale"
+msgstr "Résumé hebdomadaire"
+
+#: Application/view/application/payments/recap.phtml:26
+msgid "Riepilogo mensile"
+msgstr "Synthèse mensuelle"
+
+#: Application/view/application/payments/recap.phtml:55
+#: Application/view/application/payments/recap.phtml:91
+#: Application/view/application/payments/recap.phtml:126
+#: Application/view/application/trips/cost-tab.phtml:52
+#: Application/view/application/trips/info-tab.phtml:110
+msgid "n.d."
+msgstr "n.d."
+
+#: Application/view/application/payments/retry.phtml:19
+msgid "RITENTA PAGAMENTO"
+msgstr "REESSAYEZ PAIEMENT"
+
+#: Application/view/application/payments/retry.phtml:28
+msgid "Effettua nuovo tentativo di pagamento"
+msgstr "Fait nouveau tentative de paiement"
+
+#: Application/view/application/payments/retry.phtml:38
+msgid "Pagamento completato con successo"
+msgstr "Paiement effectué avec succès"
+
+#: Application/view/application/payments/retry.phtml:44
+msgid "Riabilita utente"
+msgstr "Objet utilisateur"
+
+#: Application/view/application/payments/retry.phtml:54
+msgid "Il pagamento non è andato a buon fine"
+msgstr "Le paiement n'a pas été couronnée de succès"
+
+#: Application/view/application/payments/retry.phtml:69
+msgid "Riepilogo"
+msgstr "Résumé"
+
+#: Application/view/application/payments/retry.phtml:143
+msgid "Elenco tentativi effettuati"
+msgstr "Liste des tentatives"
+
+#: Application/view/application/payments/retry.phtml:148
+msgid "Elenco completo corse con pagamento fallito"
+msgstr "Liste complète a couru avec le paiement a échoué"
+
+#: Application/view/application/payments/retry.phtml:153
+msgid "Data del tentativo"
+msgstr "Date de la tentative"
+
+#: Application/view/application/payments/retry.phtml:154
+msgid "Utente Admin"
+msgstr "Utilisateur admin"
+
+#: Application/view/application/payments/retry.phtml:155
+msgid "Prodotto"
+msgstr "Produit"
+
+#: Application/view/application/payments/retry.phtml:157
+msgid "Risultato"
+msgstr "Résultat"
+
+#: Application/view/application/payments/retry.phtml:158
+#: Application/view/error/404.phtml:71 Application/view/error/404.phtml:95
+#: Application/view/error/index.phtml:15 Application/view/error/index.phtml:39
+msgid "Messaggio"
+msgstr "Message"
+
+#: Application/view/application/pois/add.phtml:9
+msgid "AGGIUNGI POI"
+msgstr "PUIS AJOUTER"
+
+#: Application/view/application/pois/add.phtml:90
+#: Application/view/application/pois/edit.phtml:90
+#: Application/view/application/pois/index.phtml:37
+#: Application/view/application/pois/index.phtml:88
+msgid "Provincia"
+msgstr "Province"
+
+#: Application/view/application/pois/add.phtml:97
+#: Application/view/application/pois/edit.phtml:97
+msgid "Lat"
+msgstr "lat"
+
+#: Application/view/application/pois/add.phtml:104
+#: Application/view/application/pois/edit.phtml:104
+msgid "Lon"
+msgstr "Lon"
+
+#: Application/view/application/pois/add.phtml:113
+msgid "Aggiungi POI"
+msgstr "Puis Ajouter"
+
+#: Application/view/application/pois/edit.phtml:9
+msgid "MODIFICA POI:"
+msgstr "ALORS CHANGER:"
+
+#: Application/view/application/pois/edit.phtml:113
+msgid "Modifica POI"
+msgstr "Alors Changer"
+
+#: Application/view/application/pois/index.phtml:13
+msgid "ELENCO POIS"
+msgstr "LISTE POIS"
+
+#: Application/view/application/pois/index.phtml:63
+msgid "Aggiungi POIS"
+msgstr "Ajouter POIS"
+
+#: Application/view/application/pois/index.phtml:74
+msgid "Elenco POIS"
+msgstr "Liste POIS"
+
+#: Application/view/application/pois/index.phtml:82
+msgid "Tipo."
+msgstr "Type."
+
+#: Application/view/application/reservations/index.phtml:17
+msgid "ELENCO PRENOTAZIONI"
+msgstr "LISTE DE RÉSERVATION"
+
+#: Application/view/application/reservations/index.phtml:62
+msgid "Elenco Prenotazioni"
+msgstr "Liste de Rèservation"
+
+#: Application/view/application/reservations/index.phtml:69
+#: Application/view/application/zones/groups-tab.phtml:7
+#: Application/view/application/zones/prices-tab.phtml:7
+#: Application/view/partials/events-table.phtml:17
+msgid "ID"
+msgstr "ID"
+
+#: Application/view/application/trips-not-payed/list.phtml:14
+msgid "CORSE NON PAGATE"
+msgstr "COURSE NON RÉMUNÉRÉ"
+
+#: Application/view/application/trips-not-payed/list.phtml:33
+#: Application/view/application/trips/index.phtml:94
+#: Application/view/application/trips/info-tab.phtml:88
+msgid "Km Inizio"
+msgstr "Km Départ"
+
+#: Application/view/application/trips-not-payed/list.phtml:34
+#: Application/view/application/trips/index.phtml:95
+#: Application/view/application/trips/info-tab.phtml:94
+msgid "Km Fine"
+msgstr "Km Fin"
+
+#: Application/view/application/trips-not-payed/list.phtml:35
+#: Application/view/application/trips/cost-tab.phtml:45
+#: Application/view/application/trips/index.phtml:96
+#: Application/view/application/trips/info-tab.phtml:103
+#: Application/view/partials/translations.phtml:23
+msgid "Inizio"
+msgstr "Début"
+
+#: Application/view/application/trips-not-payed/list.phtml:36
+#: Application/view/application/trips/index.phtml:97
+#: Application/view/application/trips/info-tab.phtml:109
+#: Application/view/partials/translations.phtml:26
+msgid "Fine"
+msgstr "Fin"
+
+#: Application/view/application/trips-not-payed/list.phtml:37
+#: Application/view/application/trips/cost-tab.phtml:57
+#: Application/view/application/trips/index.phtml:98
+#: Application/view/application/trips/info-tab.phtml:115
+msgid "Durata"
+msgstr "Durée"
+
+#: Application/view/application/trips-not-payed/list.phtml:38
+#: Application/view/application/trips/index.phtml:99
+#: Application/view/application/trips/info-tab.phtml:124
+msgid "Sosta"
+msgstr "Parc"
+
+#: Application/view/application/trips/close-tab.phtml:6
+#: Application/view/application/trips/close-tab.phtml:33
+#: Application/view/application/trips/details.phtml:36
+msgid "Chiudi corsa"
+msgstr "Fermer la course"
+
+#: Application/view/application/trips/close-tab.phtml:14
+msgid "Data e ora chiusura"
+msgstr "Date et heure de fermeture"
+
+#: Application/view/application/trips/close-tab.phtml:24
+msgid "Sì"
+msgstr "Oui"
+
+#: Application/view/application/trips/cost-tab.phtml:39
+#: Application/view/application/trips/info-tab.phtml:34
+msgid "Dettagli Corsa"
+msgstr "Détails de course"
+
+#: Application/view/application/trips/cost-tab.phtml:58
+#: Application/view/application/trips/info-tab.phtml:116
+msgid "minuti"
+msgstr "minutes"
+
+#: Application/view/application/trips/cost-tab.phtml:66
+msgid "Tariffa corsa"
+msgstr "Taux de course"
+
+#: Application/view/application/trips/cost-tab.phtml:72
+msgid "Tariffa sosta"
+msgstr "Taux de stationnement"
+
+#: Application/view/application/trips/cost-tab.phtml:78
+#: Application/view/application/trips/trip-cost.phtml:69
+msgid "Sconto cliente"
+msgstr "Remise client"
+
+#: Application/view/application/trips/cost-tab.phtml:89
+msgid "Minuti addebitati"
+msgstr "Minutes facturées"
+
+#: Application/view/application/trips/cost-tab.phtml:95
+#: Application/view/application/trips/cost-tab.phtml:125
+#: Application/view/application/trips/cost-tab.phtml:157
+msgid "Dal"
+msgstr "à partir de"
+
+#: Application/view/application/trips/cost-tab.phtml:96
+#: Application/view/application/trips/cost-tab.phtml:126
+#: Application/view/application/trips/cost-tab.phtml:158
+msgid "Fino al"
+msgstr "Jusqu'au"
+
+#: Application/view/application/trips/cost-tab.phtml:97
+#: Application/view/application/trips/cost-tab.phtml:127
+#: Application/view/application/trips/cost-tab.phtml:159
+msgid "Minuti"
+msgstr "Minutes"
+
+#: Application/view/application/trips/cost-tab.phtml:119
+msgid "Minuti bonus usufruiti"
+msgstr "Minutes de bonus utilisés"
+
+#: Application/view/application/trips/cost-tab.phtml:128
+msgid "Descrizione bonus"
+msgstr "Description du bonus"
+
+#: Application/view/application/trips/cost-tab.phtml:151
+msgid "Sconti / tariffe speciali"
+msgstr "Réductions / tarifs spéciaux"
+
+#: Application/view/application/trips/cost-tab.phtml:160
+msgid "Descrizione sconto / tariffa speciale"
+msgstr "Description de rabais / tarif spécial"
+
+#: Application/view/application/trips/cost-tab.phtml:186
+#: Application/view/application/trips/info-tab.phtml:150
+msgid "Dati pagamento"
+msgstr "Données de paiement"
+
+#: Application/view/application/trips/cost-tab.phtml:201
+#: Application/view/application/trips/info-tab.phtml:137
+#: Application/view/application/trips/info-tab.phtml:157
+msgid "SI"
+msgstr "OUI"
+
+#: Application/view/application/trips/cost-tab.phtml:208
+#: Application/view/application/trips/index.phtml:103
+#: Application/view/application/trips/info-tab.phtml:164
+msgid "Pagata"
+msgstr "Payé"
+
+#: Application/view/application/trips/details.phtml:16
+msgid "DETTAGLI CORSA"
+msgstr "DÉTAILS DE LA COURSE"
+
+#: Application/view/application/trips/details.phtml:34
+msgid "Modifica corsa"
+msgstr "Modifier la course"
+
+#: Application/view/application/trips/index.phtml:16
+msgid "ELENCO CORSE"
+msgstr "LISTE DE COURSE"
+
+#: Application/view/application/trips/index.phtml:33
+msgid "Corse Aperte"
+msgstr "Courses Open"
+
+#: Application/view/application/trips/index.phtml:35
+msgid "ID Cliente"
+msgstr "Id de client"
+
+#: Application/view/application/trips/index.phtml:36
+msgid "Cognome Cliente"
+msgstr "Prénom du client"
+
+#: Application/view/application/trips/index.phtml:37
+msgid "eMail Cliente"
+msgstr "eMail Client"
+
+#: Application/view/application/trips/index.phtml:52
+msgid "da"
+msgstr "à partir de"
+
+#: Application/view/application/trips/index.phtml:53
+msgid "Seleziona data inizio"
+msgstr "Sélectionnez la date de début"
+
+#: Application/view/application/trips/index.phtml:56
+msgid "a"
+msgstr "à"
+
+#: Application/view/application/trips/index.phtml:57
+msgid "Seleziona data fine"
+msgstr "Sélectionnez la date de fin"
+
+#: Application/view/application/trips/index.phtml:79
+msgid "Elenco Corse"
+msgstr "Liste de courses"
+
+#: Application/view/application/trips/index.phtml:88
+msgid "eMail"
+msgstr "eMail"
+
+#: Application/view/application/trips/index.phtml:100
+#: Application/view/application/trips/info-tab.phtml:130
+msgid "Stato Quadro"
+msgstr "Condition Console"
+
+#: Application/view/application/trips/index.phtml:101
+msgid "In sosta"
+msgstr "dans le parc"
+
+#: Application/view/application/trips/info-tab.phtml:40
+msgid "Id corsa"
+msgstr "ID voyages"
+
+#: Application/view/application/trips/info-tab.phtml:67
+msgid "RFID cliente"
+msgstr "RFID client"
+
+#: Application/view/application/trips/info-tab.phtml:82
+msgid "Numero auto"
+msgstr "numéro de la voiture"
+
+#: Application/view/application/trips/info-tab.phtml:136
+msgid "In Sosta"
+msgstr "Dans le parc"
+
+#: Application/view/application/trips/info-tab.phtml:172
+msgid "Fatturata"
+msgstr "Facturé"
+
+#: Application/view/application/trips/trip-cost.phtml:18
+msgid "COSTO CORSA"
+msgstr "FRAIS DE VOYAGE"
+
+#: Application/view/application/trips/trip-cost.phtml:27
+#: Application/view/application/zones/prices-tab.phtml:19
+msgid "Inizio corsa"
+msgstr "Départ de course"
+
+#: Application/view/application/trips/trip-cost.phtml:34
+#: Application/view/application/zones/prices-tab.phtml:20
+msgid "Fine corsa"
+msgstr "Fin de course"
+
+#: Application/view/application/trips/trip-cost.phtml:41
+msgid "Durata corsa"
+msgstr "Temps de course"
+
+#: Application/view/application/trips/trip-cost.phtml:48
+msgid "Secondi di sosta"
+msgstr "Secondes pour arrêter"
+
+#: Application/view/application/trips/trip-cost.phtml:55
+msgid "Sesso del cliente"
+msgstr "Commentaires sexe"
+
+#: Application/view/application/trips/trip-cost.phtml:62
+msgid "Minuti bonus"
+msgstr "Bonus de minutes"
+
+#: Application/view/application/trips/trip-cost.phtml:81
+msgid "Calcola costo"
+msgstr "Coût estimé"
+
+#: Application/view/application/trips/trip-cost.phtml:88
+msgid "Il costo della corsa è di"
+msgstr "Le tarif est de"
+
+#: Application/view/application/trips/trip-cost.phtml:89
+msgid "Il costo della corsa scontato è di"
+msgstr "Le tarif réduit est"
+
+#: Application/view/application/users/add.phtml:9
+msgid "AGGIUNGI UTENTE"
+msgstr "AJOUTER UN UTILISATEUR"
+
+#: Application/view/application/users/add.phtml:15
+#: Application/view/application/users/edit.phtml:15
+msgid "Torna Indietro"
+msgstr "Retour"
+
+#: Application/view/application/users/add.phtml:21
+#: Application/view/application/users/edit.phtml:21
+msgid "Dati Utente"
+msgstr "Données de l\\'utilisateur"
+
+#: Application/view/application/users/add.phtml:30
+#: Application/view/application/users/edit.phtml:30
+#: Application/view/application/users/index.phtml:36
+msgid "Nome & Cognome"
+msgstr "Nom et prénom"
+
+#: Application/view/application/users/add.phtml:40
+#: Application/view/application/users/edit.phtml:40
+#: Application/view/application/users/index.phtml:38
+msgid "Ruolo"
+msgstr "Rôle"
+
+#: Application/view/application/users/add.phtml:64
+#: Application/view/application/users/edit.phtml:64
+msgid "Ripeti Email"
+msgstr "Répétez E-mail"
+
+#: Application/view/application/users/add.phtml:75
+#: Application/view/application/users/edit.phtml:75
+msgid "Password"
+msgstr "Password"
+
+#: Application/view/application/users/add.phtml:86
+#: Application/view/application/users/edit.phtml:86
+msgid "Ripeti Password"
+msgstr "Répétez Password"
+
+#: Application/view/application/users/add.phtml:98
+msgid "Crea Utente"
+msgstr "Création d'utilisateur"
+
+#: Application/view/application/users/edit.phtml:9
+msgid "MODIFICA UTENTE"
+msgstr "MODIFIER UTILISATEUR"
+
+#: Application/view/application/users/edit.phtml:98
+msgid "Modifica Utente"
+msgstr "Modifier utilisateur"
+
+#: Application/view/application/users/index.phtml:7
+msgid "ELENCO UTENTI"
+msgstr "LISTE DES UTILISATEURS"
+
+#: Application/view/application/users/index.phtml:13
+msgid "Nuovo Utente"
+msgstr "Nouvel utilisateur"
+
+#: Application/view/application/users/index.phtml:28
+msgid "Totale utenti"
+msgstr "Nombre total d'utilisateurs"
+
+#: Application/view/application/zones/groups-tab.phtml:8
+msgid "Name"
+msgstr "Nom"
+
+#: Application/view/application/zones/groups-tab.phtml:9
+msgid "Consente chiusura corsa?"
+msgstr "Permet de fermer la marche?"
+
+#: Application/view/application/zones/groups-tab.phtml:10
+msgid "Zone"
+msgstr "Zone de"
+
+#: Application/view/application/zones/groups-tab.phtml:20
+msgid "si"
+msgstr "oui"
+
+#: Application/view/application/zones/groups-tab.phtml:20
+msgid "no"
+msgstr "non"
+
+#: Application/view/application/zones/index.phtml:15
+#: Application/view/application/zones/zone-alarms.phtml:7
+msgid "Gestione Aree"
+msgstr "Zones de gestion"
+
+#: Application/view/application/zones/index.phtml:26
+msgid "Aree utilizzo"
+msgstr "Domaines d'utilisation"
+
+#: Application/view/application/zones/index.phtml:27
+msgid "Gruppi"
+msgstr "Groupes"
+
+#: Application/view/application/zones/index.phtml:28
+msgid "Listini"
+msgstr "Listes de prix"
+
+#: Application/view/application/zones/prices-tab.phtml:8
+msgid "Condizione"
+msgstr "Condition"
+
+#: Application/view/error/404.phtml:6
+msgid "Errore 404"
+msgstr "Erreur 404"
+
+#: Application/view/error/404.phtml:21
+msgid "Il controller richiesto non è stato in grado di inviare la richiesta."
+msgstr ""
+"Le contrôleur a demandé n'était pas en mesure de présenter votre demande."
+
+#: Application/view/error/404.phtml:24
+msgid ""
+"Il controller richiesto non può essere mappato ad una classe controller "
+"esistente."
+msgstr ""
+"Le contrôleur a demandé ne peut pas être mappé à un contrôleur de classe "
+"existe."
+
+#: Application/view/error/404.phtml:27
+msgid "Il controller richiesto non può essere inviato"
+msgstr "Le contrôleur a demandé ne peut pas être envoyé"
+
+#: Application/view/error/404.phtml:30
+msgid "Non è stato possibile trovare un matching all'URL richiesto"
+msgstr "Nous avons été incapables de trouver un correspondant à l'URL demandée"
+
+#: Application/view/error/404.phtml:33
+msgid "Non siamo riusciti a determinare il motivo di questo errore"
+msgstr "Nous n'avons pu déterminer la raison de cette erreur"
+
+#: Application/view/error/404.phtml:45
+msgid "Controller"
+msgstr "Contrôleur de"
+
+#: Application/view/error/404.phtml:52
+#, php-format
+msgid "resolves to %s"
+msgstr "se résout à %s"
+
+#: Application/view/error/404.phtml:75 Application/view/error/404.phtml:99
+#: Application/view/error/index.phtml:19 Application/view/error/index.phtml:43
+msgid "Stack trace"
+msgstr "Trace de la pile"
+
+#: Application/view/error/404.phtml:85 Application/view/error/index.phtml:29
+msgid "Eccezioni precedenti"
+msgstr "Exceptions antérieures"
+
+#: Application/view/error/404.phtml:114 Application/view/error/index.phtml:58
+msgid "Nessuna eccezione disponibile"
+msgstr "Aucune exception disponible"
+
+#: Application/view/error/index.phtml:1
+msgid "Errore"
+msgstr "Erreur"
+
+#: Application/view/error/unauthorized.phtml:5
+msgid "Accesso negato"
+msgstr "L'accès est refusé"
+
+#: Application/view/error/unauthorized.phtml:8
+msgid "Non sei autorizzato ad accedere a questa risorsa."
+msgstr "Vous n'avez pas l'autorisation d'accéder à cette ressource."
+
+#: Application/view/error/unauthorized.phtml:12
+msgid ""
+"Se ritieni che questa pagina sia comparsa per errore, ti preghiamo di "
+"segnalarlo all'assistenza tecnica. Grazie."
+msgstr ""
+"Si vous pensez que cette page est apparue par erreur, veuillez le signaler à "
+"votre support technique. Merci."
+
+#: Application/view/partials/events-table.phtml:8
+msgid "Elenco eventi"
+msgstr "Liste d'événements"
+
+#: Application/view/partials/events-table.phtml:21
+msgid "Evento"
+msgstr "Événement"
+
+#: Application/view/partials/events-table.phtml:22
+msgid "Label"
+msgstr "Étiquette"
+
+#: Application/view/partials/events-table.phtml:23
+msgid "Valore"
+msgstr "Valeur"
+
+#: Application/view/partials/events-table.phtml:24
+msgid "Intval"
+msgstr "Inrval"
+
+#: Application/view/partials/menu-user.phtml:13
+msgid "Gestioni Utenti"
+msgstr "Gestionnaires des utilisateurs"
+
+#: Application/view/partials/menu-user.phtml:18
+msgid "Log Out"
+msgstr "Log Out"
+
+#: Application/view/partials/translations.phtml:7
+msgid "Nessun elemento presente nella tabella"
+msgstr "Aucun élément figurant dans la table"
+
+#: Application/view/partials/translations.phtml:8
+msgid "Nessuna auto presente nella tabella"
+msgstr "Pas trouvées dans la table de voitures"
+
+#: Application/view/partials/translations.phtml:9
+msgid "Nessun card presente nella tabella"
+msgstr "Aucune carte n\\'existe dans la table"
+
+#: Application/view/partials/translations.phtml:10
+msgid "Nessuna fattura presente nella tabella"
+msgstr "Aucune facture n\\'existe dans la table"
+
+#: Application/view/partials/translations.phtml:11
+msgid "Nessun cliente presente nella tabella"
+msgstr "Aucun client n\\'existe dans la table"
+
+#: Application/view/partials/translations.phtml:12
+msgid "Nessun pois presente nella tabella"
+msgstr "Aucun pois dans le tableau"
+
+#: Application/view/partials/translations.phtml:13
+msgid "Nessuna corsa presente nella tabella"
+msgstr "Aucune course sur la table"
+
+#: Application/view/partials/translations.phtml:14
+msgid "Nessun file caricato"
+msgstr "Aucun fichiers téléchargés"
+
+#: Application/view/partials/translations.phtml:15
+msgid "Vista da _START_ a _END_ di _TOTAL_ elementi"
+msgstr "Vue depuis du _START_ à _END_ de _TOTAL_ éléments"
+
+#: Application/view/partials/translations.phtml:16
+msgid "Vista da 0 a 0 di 0 elementi"
+msgstr "Voir 0-0 de 0 éléments"
+
+#: Application/view/partials/translations.phtml:17
+msgid "(filtrati da _MAX_ elementi totali)"
+msgstr "(Filtré par éléments totaux _Max_)"
+
+#: Application/view/partials/translations.phtml:18
+msgid "Visualizza _MENU_ elementi"
+msgstr "Voir articles _MENU_"
+
+#: Application/view/partials/translations.phtml:19
+msgid "Caricamento..."
+msgstr "Chargement..."
+
+#: Application/view/partials/translations.phtml:20
+msgid "Elaborazione in corso..."
+msgstr "Préparation en cours..."
+
+#: Application/view/partials/translations.phtml:21
+msgid "Cerca:"
+msgstr "Rechercher:"
+
+#: Application/view/partials/translations.phtml:22
+msgid "La ricerca non ha portato alcun risultato."
+msgstr "La recherche n\\'a pas apporté de résultats."
+
+#: Application/view/partials/translations.phtml:24
+msgid "Precedente"
+msgstr "Précédent"
+
+#: Application/view/partials/translations.phtml:25
+msgid "Successivo"
+msgstr "Suivant"
+
+#: Application/view/partials/translations.phtml:27
+msgid ": attiva per ordinare la colonna in ordine crescente"
+msgstr ": permet de trier la colonne en ordre croissant"
+
+#: Application/view/partials/translations.phtml:28
+msgid ": attiva per ordinare la colonna in ordine decrescente"
+msgstr ": permet de trier la colonne dans l\\'ordre décroissant"
+
+#: Application/view/partials/translations.phtml:30
+msgid "Confermi l\\'eliminazione dell\\'auto? L\\'operazione non è annullabile"
+msgstr ""
+"Confirmer la voiture de dell\\ l\\ élimination ? L\\ opération ne peut pas "
+"être annulée"
+
+#: Application/view/partials/translations.phtml:32
+msgid "Disattivare utente?"
+msgstr "Désactiver l\\'utilisateur?"
+
+#: Application/view/partials/translations.phtml:33
+msgid "Riattivare utente?"
+msgstr "Réactiver l\\'utilisateur?"
+
+#: Application/view/partials/translations.phtml:34
+msgid "Rimuovere disattivazione?"
+msgstr "Supprimer le déclassement?"
+
+#: Application/view/partials/translations.phtml:36
+msgid "Sei sicuro di voler rimuovere questo codice card?"
+msgstr "Êtes-vous sûr de que vouloir supprimer cette fiche de code?"
+
+#: Application/view/partials/translations.phtml:37
+msgid "Sei sicuro di voler rimuovere questo bonus?"
+msgstr "Êtes-vous sûr de que vouloir supprimer cette prime?"
+
+#: Application/view/partials/translations.phtml:38
+msgid "Qualcosa è andato storto, riprova!"
+msgstr "Quelque chose n\\'allait pas, s\\'il vous plaît essayer de nouveau!"
+
+#: Application/view/partials/translations.phtml:40
+msgid ""
+"La procedura di pagamento è già iniziata. Per procedere sarà necessario "
+"annullare tutti i tentativi di pagamento effettuati. Confermi di voler "
+"rimuovere tutti i tentativi di pagamento?"
+msgstr ""
+"Le processus de paiement a déjà commencé. Pour continuer, vous devez annuler "
+"toutes les tentatives de paiement effectué. Vous confirmez que vous "
+"souhaitez supprimer toutes les tentatives de paiement?"
+
+#: Application/view/partials/translations.phtml:42
+msgid "Formato id cliente non corretto"
+msgstr "Format d\\'id de client incorrect"
+
+#: Application/view/partials/translations.phtml:43
+msgid "Selezionare una flotta"
+msgstr "Sélectionnez une flotte"
+
+#: Application/view/partials/translations.phtml:44
+msgid "Selezionare una tipologia"
+msgstr "Sélectionnez un type de"
+
+#: Application/view/partials/translations.phtml:45
+msgid "Aggiungere almeno un addebito"
+msgstr "Ajouter au moins une charge"
+
+#: Application/view/partials/translations.phtml:46
+msgid "Inserire una causale valida"
+msgstr "Entrez une causalité valide"
+
+#: Application/view/partials/translations.phtml:47
+msgid "Inserire un importo valido in euro"
+msgstr "Inscrivez un montant valide en euros"
+
+#: Application/view/partials/translations.phtml:48
+msgid "Confermi il pagamento al cliente"
+msgstr "Confirmer le paiement au client"
+
+#: Application/view/partials/translations.phtml:49
+msgid "di un importo di"
+msgstr "un montant de"
+
+#: Application/view/partials/translations.phtml:51
+#: Application/view/partials/translations.phtml:52
+msgid "Visualizza corsa ID"
+msgstr "ID de série vue"
+
+#: Application/view/partials/translations.phtml:53
+#: Application/view/partials/translations.phtml:55
+msgid "Prosegui"
+msgstr "Continuer"
+
+#: Application/view/partials/translations.phtml:59
+msgid "Pacchetto bonus"
+msgstr "Pack bonus"
+
+#: Application/view/partials/translations.phtml:61
+msgid "Confermi l\\'eliminazione del poi? L\\'operazione non è annullabile"
+msgstr ""
+"Confirmer l\\'élimination d\\'alors ? L\\'opération ne peut pas être annulée"
+
+#: Application/view/partials/translations.phtml:63
+msgid "Visualizza auto targata"
+msgstr "Voir la plaque d\\'immatriculation de voiture"
+
+#: Application/view/partials/translations.phtml:64
+msgid "Visualizza profilo di"
+msgstr "Voir le profil de"
+
+#: Application/view/partials/translations.phtml:66
+msgid "i campi \"Inizio corsa\" e \"Fine corsa\" devono essere compilati"
+msgstr "les champs\" Début et\" fin course\" doit être renseigné"
+
+#: Application/view/partials/translations.phtml:71
+msgid "Scarica"
+msgstr "Télécharger"
+
+#: Application/view/partials/translations.phtml:72
+msgid "Confermare la validazione?"
+msgstr "Confirmer la validation?"
+
+#: Application/view/partials/translations.phtml:74
+msgid "Penale"
+msgstr "Peine de"
+
+#: Application/view/partials/translations.phtml:75
+msgid "Causale"
+msgstr "Causalité"
+
+#: Cartasi/view/cartasi/cartasi-payments/rejected-first-payment.phtml:10
+msgid "Pagamento annullato o rifutato"
+msgstr "Paiement annulé ou refusé l'entrée"
+
+#: Cartasi/view/cartasi/cartasi-payments/rejected-first-payment.phtml:11
+msgid "La procedura di pagamento con Cartasi ha dato esito "
+msgstr "Le processus de paiement avec Cartasi a donné des résultats"
+
+#: Cartasi/view/cartasi/cartasi-payments/return-first-payment.phtml:11
+msgid "Attivazione completata"
+msgstr "Activation complète"
+
+#: Cartasi/view/cartasi/cartasi-payments/return-first-payment.phtml:12
+msgid "Ti confermiamo la ricezione del pagamento"
+msgstr "Confirmez-vous la réception du paiement"
+
+#: Cartasi/view/cartasi/cartasi-payments/return-first-payment.phtml:22
+msgid "Si è verificato un problema"
+msgstr "Il y a un problème"
+
+#: Cartasi/view/cartasi/cartasi-payments/return-first-payment.phtml:23
+msgid "Il pagamento non è andato a buon fine."
+msgstr "Le paiement ne passe pas."
+
+#: Cartasi/view/cartasi/cartasi-payments/return-first-payment.phtml:24
+msgid "Il messaggio di errore che abbiamo ricevuto è: \""
+msgstr "Nous avons reçu le message d'erreur est: \""
+
+#: Cartasi/view/cartasi/cartasi-payments/return-first-payment.phtml:25
+msgid "Contattare l'assistenza per maggiori informazioni"
+msgstr "Contacter le support technique pour plus d'informations"

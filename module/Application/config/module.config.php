@@ -1170,6 +1170,12 @@ return [
                 "lang" => "en",
                 "lang_3chars" => "eng",
                 "label" => "English"
+            ],
+            'fr' => [
+                "locale" => "fr_FR",
+                "lang" => "fr",
+                "lang_3chars" => "fra",
+                "label" => "Français"
             ]
         ],
         "language_folder" => __DIR__ . "/../language"

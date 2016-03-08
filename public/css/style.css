@@ -43,3 +43,7 @@ div.container a.brand {
 #penaltyField {
     display: none;
 }
+
+.page-header.navbar .top-menu .navbar-nav > li.dropdown-user > .dropdown-menu.dropdown-menu-large {
+    width: 250px;
+}
