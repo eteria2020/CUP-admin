@@ -44,6 +44,6 @@ div.container a.brand {
     display: none;
 }
 
-.dropdown-menu-size-fix {
-    width: 250px !important;
+.page-header.navbar .top-menu .navbar-nav > li.dropdown-user > .dropdown-menu.dropdown-menu-large {
+    width: 250px;
 }
