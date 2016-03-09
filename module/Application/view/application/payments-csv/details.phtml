@@ -57,7 +57,7 @@ $transactionAmount = null;
                                 </div>
                             </div>
                         </div>
-                    <?php
+                        <?php
                     } ?>
                     <!-- BEGIN csv data container -->
                     <div class="row">
@@ -171,7 +171,7 @@ $transactionAmount = null;
                             <div class="col-lg-3">
                                 <div class="form-group">
                                     <label><?= $this->csvAnomaly->getTypeTranslated(); ?>:</label>
-                                    <p><?= $this->translate("Effettuare"); ?> <?= $this->csvAnomaly->getAmount() > 0 ? $this->translate('NC') : $this->translate('fattura'); ?><?= $this->translate("di"); ?> <?= number_format(abs($this->csvAnomaly->getAmount()) / 100,
+                                    <p><?= $this->translate("Effettuare"); ?> <?= $this->csvAnomaly->getAmount() > 0 ? $this->translate('NC') : $this->translate('fattura'); ?> <?= $this->translate("di"); ?> <?= number_format(abs($this->csvAnomaly->getAmount()) / 100,
                                             2, ',', ''); ?> <?= $this->translate("€ all'utente"); ?></p>
                                 </div>
                             </div>
@@ -189,7 +189,7 @@ $transactionAmount = null;
                                 </div>
                             </div>
                         </div>
-                    <?php
+                        <?php
                     endif; ?>
 
                     <?php
@@ -203,14 +203,16 @@ $transactionAmount = null;
                                     <div class="col-lg-4">
                                         <div class="form-group">
                                             <label><?= $this->translate("Tipologia"); ?></label>
-                                            <div class="sng-info-box"><?= $this->translate("Pagamento iscrizione utente"); ?></div>
+                                            <div
+                                                class="sng-info-box"><?= $this->translate("Pagamento iscrizione utente"); ?></div>
                                         </div>
                                     </div>
                                     <div class="col-lg-8">
                                         <div class="form-group">
                                             <label><?= $this->translate("Nome cliente"); ?></label>
                                             <div class="sng-info-box">
-                                                <a href="<?= $this->url('customers/edit', ['id' => $this->transactionType->getCustomer()->getId()]); ?>">
+                                                <a href="<?= $this->url('customers/edit',
+                                                    ['id' => $this->transactionType->getCustomer()->getId()]); ?>">
                                                     <?= $this->transactionType->getCustomer()->getName() .
                                                     " " .
                                                     $this->transactionType->getCustomer()->getSurname(); ?></a>
@@ -245,16 +247,21 @@ $transactionAmount = null;
                                         </div>
                                     </div>
                                     <?php
-                                    if ($this->transactionType->isWrongPayment()) :
-                                        ?>
+                                    if (!$this->transactionType->getPayedSuccessfullyAt() instanceof DateTime) { ?>
                                         <div class="col-lg-12">
-                                            <input id="confirmTripPaymentUrl" type="hidden" value="<?= $this->url('payments/set-trip-as-payed', ['id' => $this->transactionType->getId()]); ?>">
+                                            <input id="confirmTripPaymentUrl" type="hidden"
+                                                   value="<?= $this->url('payments/set-trip-as-payed',
+                                                       ['id' => $this->transactionType->getId()]); ?>">
                                             <div id="setTripAsPayedBtn"
-                                                 class="btn btn-default green"><?= $this->translate("Segna come pagata"); ?></div>
-
+                                                 class="btn btn-default green"><?= $this->translate("Segna come pagata"); ?>
+                                            </div>
                                         </div>
                                         <?php
-                                    endif; ?>
+                                    } else { ?>
+                                        <div class="col-lg-12">
+                                            <?= $this->translate("la corsa risulta essere pagata"); ?>
+                                        </div>
+                                    <?php } ?>
                                     <?php
                                 endif; ?>
 
@@ -263,7 +270,8 @@ $transactionAmount = null;
                                     <div class="col-lg-4">
                                         <div class="form-group">
                                             <label><?= $this->translate("Tipologia"); ?></label>
-                                            <div class="sng-info-box"><?= $this->translate("Pagamento minuti bonus"); ?></div>
+                                            <div
+                                                class="sng-info-box"><?= $this->translate("Pagamento minuti bonus"); ?></div>
                                         </div>
                                     </div>
                                     <div class="col-lg-4">
@@ -284,18 +292,28 @@ $transactionAmount = null;
                                             </div>
                                         </div>
                                     </div>
+                                    <?php
+                                    if (!$this->transactionType->getCustomer()->hasAlreadyBonus($this->transactionType->getBonus())) { ?>
+                                        <div class="col-lg-12">
+                                            <input id="assignPromoUrl" type="hidden" value="
+                                            <?= $this->url('customers/assign-bonus-ajax',
+                                                ['id' => $this->transactionType->getCustomer()->getId()]); ?>">
+                                            <input id="assignBonusId" type="hidden" name="bonusid"
+                                                   value="<?= $this->transactionType->getBonus()->getId() ?>">
+                                            <input id="assignPackageTransaction" type="hidden" name="transactionId"
+                                                   value="<?= $this->csvAnomaly->getTransaction()->getId() ?>">
+                                            <div id="assignBonusBtn"
+                                                 class="btn btn-default green"><?= $this->translate("Assegna bonus"); ?></div>
 
-                                    <div class="col-lg-12">
-                                        <input id="assignPromoUrl" type="hidden" value="
-                                        <?= $this->url('customers/assign-bonus-ajax', ['id' => $this->transactionType->getCustomer()->getId()]); ?>">
-                                        <input id="assignBonusId" type="hidden" name="bonusid"
-                                               value="<?= $this->transactionType->getBonus()->getId() ?>">
-                                        <input id="assignPackageTransaction" type="hidden" name="transactionId"
-                                               value="<?= $this->csvAnomaly->getTransaction()->getId()?>">
-                                        <div id="assignBonusBtn"
-                                             class="btn btn-default green"><?= $this->translate("Assegna bonus"); ?></div>
+                                        </div>
+                                        <?php
+                                    } else {
+                                        ?>
+                                        <div class="col-lg-12">
+                                            <?= $this->translate("Il bonus risulta essere assegnato a questo utente"); ?>
+                                        </div>
 
-                                    </div>
+                                    <?php }; ?>
 
                                     <?php
                                 endif; ?>
@@ -330,26 +348,26 @@ $transactionAmount = null;
                                     </thead>
                                     <tbody>
                                     <?php
+                                    /** @var \SharengoCore\Entity\CartasiCsvAnomalyNote $note */
                                     foreach ($notes as $note): ?>
                                         <tr>
                                             <td class="sng-date-column"><?= $note->getInsertedAt()->format('d/m/Y H:i'); ?></td>
                                             <td><?= $note->getWebuser()->getId() . " - " . $note->getWebuser()->getDisplayName(); ?></td>
                                             <td><?= $note->getNote(); ?></td>
                                         </tr>
-                                    <?php
+                                        <?php
                                     endforeach; ?>
                                     </tbody>
                                 </table>
 
                                 <!-- END notes table -->
-                            <?php
+                                <?php
                             endif; ?>
 
                             <!-- BEGIN new note -->
                             <h4><?= $this->translate("Nuova Nota"); ?></h4>
-                            <form action="<?= $this->url(
-                                'payments/csv-add-note',
-                                ['id' => $this->csvAnomaly->getId()]); ?>"
+                            <form action="
+                            <?= $this->url('payments/csv-add-note', ['id' => $this->csvAnomaly->getId()]); ?>"
                                   method="post">
 
                                 <textarea id="new-note" name="new-note" style="width: 100%" rows="5"></textarea><br><br>

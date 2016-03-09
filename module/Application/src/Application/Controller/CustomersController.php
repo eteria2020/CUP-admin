@@ -1,11 +1,10 @@
 <?php
 namespace Application\Controller;
 
-use Application\Form\CustomerForm;
-use Application\Form\DriverForm;
 use SharengoCore\Entity\Customers;
 use SharengoCore\Entity\CustomersBonus;
 use SharengoCore\Entity\PromoCodes;
+use SharengoCore\Service\BonusService;
 use SharengoCore\Service\CardsService;
 use SharengoCore\Service\CustomersBonusPackagesService;
 use SharengoCore\Service\CustomersService;
@@ -76,7 +75,7 @@ class CustomersController extends AbstractActionController
     /**
      * @var CartasiContractsService
      */
-    private $cartsiContractsService;
+    private $cartasiContractsService;
 
     /**
      * @var DisableContractService
@@ -84,10 +83,15 @@ class CustomersController extends AbstractActionController
     private $disableContractService;
 
     /**
+     * @var BonusService
+     */
+    private $bonusService;
+
+    /**
      * @param CustomersService $customersService
      * @param CardsService $cardsService
      * @param PromoCodesService $promoCodeService
-     * @param CustomersBonusPackagesService $customersBonusPackagesService
+     * @param BonusService $bonusService
      * @param Form $customerForm
      * @param Form $driverForm
      * @param Form $settingForm
@@ -102,6 +106,7 @@ class CustomersController extends AbstractActionController
         CustomersService $customersService,
         CardsService $cardsService,
         PromoCodesService $promoCodeService,
+        BonusService $bonusService,
         Form $customerForm,
         Form $driverForm,
         Form $settingForm,
@@ -114,7 +119,7 @@ class CustomersController extends AbstractActionController
     ) {
         $this->customersService = $customersService;
         $this->cardsService = $cardsService;
-        $this->promoCodeService =  $promoCodeService;
+        $this->promoCodeService = $promoCodeService;
         $this->customerForm = $customerForm;
         $this->driverForm = $driverForm;
         $this->settingForm = $settingForm;
@@ -124,6 +129,7 @@ class CustomersController extends AbstractActionController
         $this->hydrator = $hydrator;
         $this->cartasiContractsService = $cartasiContractsService;
         $this->disableContractService = $disableContractService;
+        $this->bonusService = $bonusService;
     }
 
     public function listAction()
@@ -198,23 +204,23 @@ class CustomersController extends AbstractActionController
 
         return new ViewModel([
             'customer' => $customer,
-            'tab'      => $tab
+            'tab' => $tab
         ]);
     }
 
     public function datatableAction()
     {
-        $as_filters = $this->params()->fromPost();
-        $as_filters['withLimit'] = true;
-        $as_dataDataTable = $this->customersService->getDataDataTable($as_filters);
+        $filters = $this->params()->fromPost();
+        $filters['withLimit'] = true;
+        $dataDataTable = $this->customersService->getDataDataTable($filters);
         $userTotal = $this->customersService->getTotalCustomers();
-        $recordsFiltered = $this->_getRecordsFiltered($as_filters, $userTotal);
+        $recordsFiltered = $this->_getRecordsFiltered($filters, $userTotal);
 
         return new JsonModel([
-            'draw'            => $this->params()->fromQuery('sEcho', 0),
-            'recordsTotal'    => $userTotal,
+            'draw' => $this->params()->fromQuery('sEcho', 0),
+            'recordsTotal' => $userTotal,
             'recordsFiltered' => $recordsFiltered,
-            'data'            => $as_dataDataTable
+            'data' => $dataDataTable
         ]);
     }
 
@@ -232,10 +238,10 @@ class CustomersController extends AbstractActionController
         $formSetting->setData(['setting' => $customerData]);
 
         $view = new ViewModel([
-            'customer'     => $customer,
+            'customer' => $customer,
             'customerForm' => $form,
-            'driverForm'   => $formDriver,
-            'settingForm'  => $formSetting
+            'driverForm' => $formDriver,
+            'settingForm' => $formSetting
         ]);
         $view->setTerminal(true);
 
@@ -248,8 +254,8 @@ class CustomersController extends AbstractActionController
         $customer = $this->getCustomer();
 
         $view = new ViewModel([
-            'customer'      => $customer,
-            'listBonus'     => $this->customersService->getAllBonus($customer),
+            'customer' => $customer,
+            'listBonus' => $this->customersService->getAllBonus($customer),
         ]);
         $view->setTerminal(true);
 
@@ -262,7 +268,7 @@ class CustomersController extends AbstractActionController
         $customer = $this->getCustomer();
 
         $view = new ViewModel([
-            'customer'  => $customer,
+            'customer' => $customer,
         ]);
         $view->setTerminal(true);
 
@@ -359,7 +365,8 @@ class CustomersController extends AbstractActionController
         try {
             $bonusId = $postData['bonusId'];
 
-            $customerBonus = $this->customersService->getBonusFromId($bonusId);
+            $customerBonus = $this->bonusService->getBonusFromId($bonusId);
+
             $this->customersService->addBonusFromWebUser($customer, $customerBonus);
 
             $this->flashMessenger()->addSuccessMessage($translator->translate('Operazione completata con successo!'));
@@ -369,7 +376,6 @@ class CustomersController extends AbstractActionController
         }
 
         return new JsonModel();
-
     }
 
     public function assignPromoCodeAction()
@@ -398,7 +404,8 @@ class CustomersController extends AbstractActionController
                     return $this->redirect()->toRoute('customers/assign-promo-code', ['id' => $customer->getId()]);
                 }
 
-                return $this->redirect()->toRoute('customers/edit', ['id' => $customer->getId()], ['query' => ['tab' => 'bonus']]);
+                return $this->redirect()->toRoute('customers/edit', ['id' => $customer->getId()],
+                    ['query' => ['tab' => 'bonus']]);
             }
         }
 
@@ -430,7 +437,8 @@ class CustomersController extends AbstractActionController
                     return $this->redirect()->toRoute('customers/add-bonus', ['id' => $customer->getId()]);
                 }
 
-                return $this->redirect()->toRoute('customers/edit', ['id' => $customer->getId()], ['query' => ['tab' => 'bonus']]);
+                return $this->redirect()->toRoute('customers/edit', ['id' => $customer->getId()],
+                    ['query' => ['tab' => 'bonus']]);
             }
         }
 
@@ -512,7 +520,8 @@ class CustomersController extends AbstractActionController
                 }
 
                 if (!is_null($customer)) {
-                    return $this->redirect()->toRoute('customers/edit', ['id' => $customer->getId()], ['query' => ['tab' => 'card']]);
+                    return $this->redirect()->toRoute('customers/edit', ['id' => $customer->getId()],
+                        ['query' => ['tab' => 'card']]);
                 }
 
                 return $this->redirect()->toRoute('customers/list-card');
@@ -536,14 +545,14 @@ class CustomersController extends AbstractActionController
         }
     }
 
-    protected function _getRecordsFilteredCards($as_filters, $i_totalCards)
+    protected function _getRecordsFilteredCards($filters, $totalCards)
     {
-        if (empty($as_filters['searchValue'])) {
-            return $i_totalCards;
+        if (empty($filters['searchValue'])) {
+            return $totalCards;
         } else {
-            $as_filters['withLimit'] = false;
+            $filters['withLimit'] = false;
 
-            return $this->I_cardsService->getDataDataTable($as_filters, true);
+            return $this->cardsService->getDataDataTable($filters, true);
         }
     }
 
@@ -567,7 +576,7 @@ class CustomersController extends AbstractActionController
         $customer = $this->getCustomer();
 
         $view = new ViewModel([
-            'customer'  => $customer,
+            'customer' => $customer,
         ]);
 
         $view->setTerminal(true);

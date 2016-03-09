@@ -12,6 +12,8 @@ class CustomersControllerFactory implements FactoryInterface
      * Default method to be used in a Factory Class
      *
      * @see \Zend\ServiceManager\FactoryInterface::createService()
+     * @param ServiceLocatorInterface $serviceLocator
+     * @return CustomersController|mixed
      */
     public function createService(ServiceLocatorInterface $serviceLocator)
     {
@@ -22,6 +24,7 @@ class CustomersControllerFactory implements FactoryInterface
         $clientService = $sharedLocator->get('SharengoCore\Service\CustomersService');
         $cardsService = $sharedLocator->get('SharengoCore\Service\CardsService');
         $promoCodeService = $sharedLocator->get('SharengoCore\Service\PromoCodesService');
+        $bonusService = $sharedLocator->get('SharengoCore\Service\BonusService');
         $customerForm = $sharedLocator->get('CustomerForm');
         $driverForm = $sharedLocator->get('DriverForm');
         $settingForm = $sharedLocator->get('SettingForm');
@@ -39,6 +42,7 @@ class CustomersControllerFactory implements FactoryInterface
             $clientService,
             $cardsService,
             $promoCodeService,
+            $bonusService,
             $customerForm,
             $driverForm,
             $settingForm,
