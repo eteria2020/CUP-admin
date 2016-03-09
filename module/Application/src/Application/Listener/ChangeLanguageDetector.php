@@ -2,22 +2,23 @@
 
 namespace Application\Listener;
 
-use Application\Service\UserLanguageService;
+use MvLabsMultilanguage\Service\LanguageService;
 use Zend\EventManager\EventManagerInterface;
 use Zend\EventManager\ListenerAggregateInterface;
 use Zend\Mvc\MvcEvent;
+use Zend\Session\Container;
 
 class ChangeLanguageDetector implements ListenerAggregateInterface
 {
-    const GET_PARAMENTER_CHANGE_LANGUAGE = 'change-language';
+    const URL_PARAM = 'change-language';
     
-    private $userLanguageService;
+    private $languageService;
 
     protected $listeners = array();
 
-    public function __construct(UserLanguageService $userLanguageService)
+    public function __construct(LanguageService $languageService)
     {
-        $this->userLanguageService = $userLanguageService;
+        $this->languageService = $languageService;
     }
 
     /**
@@ -53,15 +54,15 @@ class ChangeLanguageDetector implements ListenerAggregateInterface
 
     public function initChangeLanguageDetector(MvcEvent $event)
     {
-        //set current language
+        //set changed language in session
         $request = $event->getRequest();
         $uri  = $request->getUri();
         $queryStringArray = $uri->getQueryAsArray();
 
-        if (array_key_exists(self::GET_PARAMENTER_CHANGE_LANGUAGE, $queryStringArray)) {
-
-           $this->userLanguageService->setCurrentLang($queryStringArray[self::GET_PARAMENTER_CHANGE_LANGUAGE]);
+        if (array_key_exists(self::URL_PARAM, $queryStringArray)) {
+            $container = new Container(LanguageFromSessionDetectorListener::SESSION_KEY);
+            $locale = $queryStringArray[self::URL_PARAM];
+            $container->offsetSet(LanguageFromSessionDetectorListener::LANGUAGE, $locale);
         }
     }
-
 }

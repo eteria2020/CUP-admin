@@ -15,24 +15,12 @@ use Application\Service\UserLanguageService;
 
 class IndexController extends AbstractActionController
 {
-    /**
-     * @var Application\Service\UserLanguageService
-     */
-    private $userLanguageService;
-
-    public function __construct(
-        UserLanguageService $userLanguageService
-    ) {
-        $this->userLanguageService = $userLanguageService;
-    }
 
     public function tripsAction()
     {
         $this->layout('layout/reports');
 
-        $viewModel = new ViewModel([
-            'userLanguage' => $this->userLanguageService->getCurrentLang(),
-        ]);
+        $viewModel = new ViewModel();
 
         return $viewModel;
     }
@@ -41,9 +29,7 @@ class IndexController extends AbstractActionController
     {
         $this->layout('layout/reports');
 
-        $viewModel = new ViewModel([
-            'userLanguage' => $this->userLanguageService->getCurrentLang(),
-        ]);
+        $viewModel = new ViewModel();
 
         return $viewModel;
     }
@@ -55,8 +41,7 @@ class IndexController extends AbstractActionController
         $tripid = $this->params()->fromRoute('tripid', null);
 
         $viewModel = new ViewModel([
-            'tripid' => $tripid,
-            'userLanguage' => $this->userLanguageService->getCurrentLang(),
+            'tripid' => $tripid
         ]);
 
         return $viewModel;
@@ -66,9 +51,7 @@ class IndexController extends AbstractActionController
     {
         $this->layout('layout/reports');
 
-        $viewModel = new ViewModel([
-            'userLanguage' => $this->userLanguageService->getCurrentLang(),
-        ]);
+        $viewModel = new ViewModel();
 
         return $viewModel;
     }
@@ -80,8 +63,7 @@ class IndexController extends AbstractActionController
         $city = $this->params()->fromRoute('id', 0);
 
         $viewModel = new ViewModel([
-            'city' => $city,
-            'userLanguage' => $this->userLanguageService->getCurrentLang(),
+            'city' => $city
         ]);
 
         return $viewModel;

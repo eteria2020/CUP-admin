@@ -1,10 +1,6 @@
 <?
     $this->inlineScript()
-        ->appendFile('/assets-modules/reports/js/vendor.trips.main.js')
-        ->prependScript('
-            // Getting the actual city id (from the controller), and save it to js $.oe vars
-            var thisLanguage="'.$this->userLanguage.'";
-        ');
+        ->appendFile('/assets-modules/reports/js/vendor.trips.main.js');
 
     $this->headLink()
         ->appendStylesheet('/assets-modules/reports/css/vendor.trips.main.css');

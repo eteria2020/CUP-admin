@@ -1,19 +1,21 @@
 <?php
 namespace Application\View\Helper;
 
-use Application\Service\UserLanguageService;
+
+use Application\Listener\ChangeLanguageDetector;
+use MvLabsMultilanguage\Service\LanguageService;
 use Zend\View\Helper\AbstractHelper;
 
 class LanguageManager extends AbstractHelper
 {
     
     private $languages;
-    private $userLanguageService;
+    private $languageService;
 
-    public function __construct(array $languages, UserLanguageService $userLanguageService)
+    public function __construct(array $languages, LanguageService $languageService)
     {
         $this->languages = $languages;
-        $this->userLanguageService = $userLanguageService;
+        $this->languageService = $languageService;
     }
     
     public function __invoke()
@@ -22,24 +24,25 @@ class LanguageManager extends AbstractHelper
         $menu->languages = [];
         
         $languages = $this->languages;
+        $currentLocale = $this->languageService->getTranslator()->getLocale();
+        $menu->currentLanguageLabel = "Lingua";
 
         foreach ($languages as $language) {
+
             $locale = $language['locale'];
-            $lang = $language['lang'];
-            $url = "?change-language=" . $lang;
-            
-            $menu->languages[] = [
-                'code' => $locale,
-                'label' => $language['label'],
-                'url' => $url
-            ];
+            $label = $language['label'];
+            $url = "?" . ChangeLanguageDetector::URL_PARAM . "=" . $locale;
+
+            if ($locale == $currentLocale) {
+                $menu->currentLanguageLabel = $label;
+            } else {
+                $menu->languages[] = [
+                    'code' => $locale,
+                    'label' => $label,
+                    'url' => $url
+                ];
+            }
         }
-
-        $menu->currentLanguage = [
-            'code' => $this->languages[$this->userLanguageService->getcurrentLang()]['locale'],
-            'label' => $this->languages[$this->userLanguageService->getcurrentLang()]['label'],
-        ];
-
         return $menu;
     }
 }

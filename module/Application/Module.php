@@ -69,7 +69,6 @@ class Module
             'fr_FR'
         );
 
-
         AbstractValidator::setDefaultTranslator($translator);
 
         // Add ACL information to Navigation view helper
@@ -80,8 +79,6 @@ class Module
         } catch (\Doctrine\DBAL\DBALException $exception) {
             // database tables not yet initialized
         }
-
-
 
         $eventManager->attachAggregate($serviceManager->get('ChangeLanguageDetector.listener'));
     }

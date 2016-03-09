@@ -1,10 +1,6 @@
 <?php
     $this->inlineScript()
-        ->appendFile('/assets-modules/reports/js/vendor.map.js')
-        ->prependScript('
-            // Getting the actual city id (from the controller), and save it to js $.oe vars
-            var thisLanguage="'.$this->userLanguage.'";
-        ');
+        ->appendFile('/assets-modules/reports/js/vendor.map.js');
 
     $this->headLink()
         ->appendStylesheet('/assets-modules/reports/css/vendor.map.css');

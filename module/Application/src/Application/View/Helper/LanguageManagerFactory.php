@@ -20,7 +20,7 @@ class LanguageManagerFactory implements FactoryInterface
         $config = $sm->get('config');
         $languages = $config['translation_config']['languages'];
 
-        $userLanguageService = $sm->get('UserLanguageService');
+        $userLanguageService = $sm->get('LanguageService');
 
         return new LanguageManager($languages, $userLanguageService);
     }
