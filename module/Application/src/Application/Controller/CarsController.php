@@ -247,9 +247,9 @@ class CarsController extends AbstractActionController
             $this->carsService->deleteCar($car);
             $this->flashMessenger()->addSuccessMessage($translator->translate('Auto rimossa con successo!'));
 
-        } catch (\Exception $e) {
+        } catch (\Doctrine\DBAL\Exception\ForeignKeyConstraintViolationException $e) {
 
-            $this->flashMessenger()->addErrorMessage($translator->translate('Si è verificato un errore applicativo. L\'assistenza tecnica è già al corrente, ci scusiamo per l\'inconveniente'));
+            $this->flashMessenger()->addErrorMessage($translator->translate('L\'auto non può essere rimossa perchè ha effettuato una o più corse.'));
 
         }
 
