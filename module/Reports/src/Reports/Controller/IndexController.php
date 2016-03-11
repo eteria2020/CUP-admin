@@ -20,18 +20,14 @@ class IndexController extends AbstractActionController
     {
         $this->layout('layout/reports');
 
-        $viewModel = new ViewModel();
-
-        return $viewModel;
+        return new ViewModel();
     }
 
     public function mapAction()
     {
         $this->layout('layout/reports');
 
-        $viewModel = new ViewModel();
-
-        return $viewModel;
+        return new ViewModel();
     }
 
     public function routesAction()
@@ -51,9 +47,7 @@ class IndexController extends AbstractActionController
     {
         $this->layout('layout/reports');
 
-        $viewModel = new ViewModel();
-
-        return $viewModel;
+        return new ViewModel();
     }
 
     public function tripscityAction()
