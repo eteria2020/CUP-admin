@@ -24,5 +24,9 @@ return array(
         'addedPath' => 'data/Csv/Added',
         'analyzedPath' => 'data/Csv/Analyzed',
         'tempPath' => 'data/Csv/Temp'
+    ],
+    'languageSession' => [
+        'session' => 'user',
+        'offset' => 'lang'
     ]
 );

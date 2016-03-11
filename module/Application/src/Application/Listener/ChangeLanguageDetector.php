@@ -9,9 +9,19 @@ use Zend\Session\Container;
 
 class ChangeLanguageDetector implements ListenerAggregateInterface
 {
-    const URL_PARAM = 'change-language';
+    const URL_PARAM = 'lang';
+
+    private $languageService;
 
     protected $listeners = array();
+
+    private $params;
+
+    public function __construct(LanguageService $languageService, array $params)
+    {
+        $this->languageService = $languageService;
+        $this->params = $params;
+    }
 
     /**
      * Attach one or more listeners
@@ -52,9 +62,9 @@ class ChangeLanguageDetector implements ListenerAggregateInterface
         $queryStringArray = $uri->getQueryAsArray();
 
         if (array_key_exists(self::URL_PARAM, $queryStringArray)) {
-            $container = new Container(LanguageFromSessionDetectorListener::SESSION_KEY);
+            $container = new Container($this->params['session']);
             $locale = $queryStringArray[self::URL_PARAM];
-            $container->offsetSet(LanguageFromSessionDetectorListener::LANGUAGE, $locale);
+            $container->offsetSet($this->params['offset'], $locale);
         }
     }
 }

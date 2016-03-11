@@ -10,25 +10,27 @@ use Zend\Session\Container;
 
 class LanguageFromSessionDetectorListener implements LanguageDetectorListenerInterface
 {
-    const SESSION_KEY = "user";
-    const LANGUAGE = "lang";
-    const DEFAULT_LOCALE = "it_IT";
-    /**
-     * @inheritdoc
-     */
+
+    private $params;
+
+    public function __construct($params)
+    {
+        $this->params = $params;
+    }
+
     public function detectLanguage(DetectLanguageEventInterface $event)
     {
-        $container = new Container(self::SESSION_KEY);
+        $container = new Container($this->params['languageSession']['session']);
 
-        $locale = $container->offsetGet(self::LANGUAGE);
+        $locale = $container->offsetGet($this->params['languageSession']['offset']);
 
         if (is_null($locale)) {
-            $locale = self::DEFAULT_LOCALE;
+            $locale = $this->params['translator']['locale'];
         }
 
         $languageRange = LanguageRange::fromString($locale);
         $event->removeLanguageRange($languageRange);
-        $event->addLanguageRange($languageRange, 100);
+        $event->addLanguageRange($languageRange);
 
         return $event->getLanguageRanges();
     }

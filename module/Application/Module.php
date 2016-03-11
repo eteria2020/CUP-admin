@@ -103,9 +103,8 @@ class Module
     public function getViewHelperConfig()
     {
         return [
-            'invokables' => [],
             'factories' => [
-                'languageManager' => 'Application\\View\\Helper\\LanguageManagerFactory'
+                'languageMenuHelper' => 'Application\\View\\Helper\\LanguageMenuHelperFactory'
             ],
         ];
 

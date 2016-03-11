@@ -4,6 +4,7 @@
         ->prependScript('
             // Getting the actual city id (from the controller), and save it to js $.oe vars
             var thiscity='.$this->city.';
+            var thisLanguage="'.$this->plugin('translate')->getTranslator()->getLocale().'";
         ');
 
     $this->headLink()

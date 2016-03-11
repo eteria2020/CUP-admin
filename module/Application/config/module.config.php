@@ -1186,8 +1186,8 @@ return [
         "language_folder" => __DIR__ . "/../language"
     ],
     'language_detector_listeners' => [
-        'invokables' => [
-            'LanguageFromSessionDetectorListener' => 'Application\Listener\LanguageFromSessionDetectorListener'
+        'factories' => [
+            'LanguageFromSessionDetectorListener' => 'Application\Listener\LanguageFromSessionDetectorListenerFactory'
         ]
     ],
     'view_manager' => [
