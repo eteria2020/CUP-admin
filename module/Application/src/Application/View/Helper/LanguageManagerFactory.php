@@ -16,7 +16,7 @@ class LanguageManagerFactory implements FactoryInterface
     {
 
         $sm = $serviceLocator->getServiceLocator();
-        
+
         $config = $sm->get('config');
         $languages = $config['translation_config']['languages'];
 

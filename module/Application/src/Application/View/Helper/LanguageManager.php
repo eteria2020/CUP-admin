@@ -1,14 +1,12 @@
 <?php
 namespace Application\View\Helper;
 
-
 use Application\Listener\ChangeLanguageDetector;
 use MvLabsMultilanguage\Service\LanguageService;
 use Zend\View\Helper\AbstractHelper;
 
 class LanguageManager extends AbstractHelper
 {
-
     private $languages;
     private $languageService;
 
@@ -27,7 +25,6 @@ class LanguageManager extends AbstractHelper
         $menu->currentLanguageLabel = "Lingua";
 
         foreach ($languages as $language) {
-
             $locale = $language['locale'];
             $label = $language['label'];
             $url = "?" . ChangeLanguageDetector::URL_PARAM . "=" . $locale;

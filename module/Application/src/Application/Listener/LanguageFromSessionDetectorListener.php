@@ -5,6 +5,7 @@ namespace Application\Listener;
 use MvLabsMultilanguage\LanguageRange\LanguageRange;
 use MvLabsMultilanguage\Event\DetectLanguageEventInterface;
 use MvLabsMultilanguage\Detector\Listener\LanguageDetectorListenerInterface;
+
 use Zend\Session\Container;
 
 class LanguageFromSessionDetectorListener implements LanguageDetectorListenerInterface
