@@ -2,7 +2,6 @@
 
 namespace Application\Listener;
 
-use MvLabsMultilanguage\Service\LanguageService;
 use Zend\EventManager\EventManagerInterface;
 use Zend\EventManager\ListenerAggregateInterface;
 use Zend\Mvc\MvcEvent;
@@ -11,15 +10,8 @@ use Zend\Session\Container;
 class ChangeLanguageDetector implements ListenerAggregateInterface
 {
     const URL_PARAM = 'change-language';
-    
-    private $languageService;
 
     protected $listeners = array();
-
-    public function __construct(LanguageService $languageService)
-    {
-        $this->languageService = $languageService;
-    }
 
     /**
      * Attach one or more listeners
@@ -33,7 +25,7 @@ class ChangeLanguageDetector implements ListenerAggregateInterface
      */
     public function attach(EventManagerInterface $events)
     {
-        $this->listeners[] = $events->attach(MvcEvent::EVENT_ROUTE, array($this, 'initChangeLanguageDetector'), 100);
+        $this->listeners[] = $events->attach(MvcEvent::EVENT_ROUTE, array($this, 'initChangeLanguageDetector'), 200);
     }
 
     /**

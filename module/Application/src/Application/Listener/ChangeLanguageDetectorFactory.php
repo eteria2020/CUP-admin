@@ -15,8 +15,6 @@ class ChangeLanguageDetectorFactory implements FactoryInterface
      */
     public function createService(ServiceLocatorInterface $serviceLocator)
     {
-        $languageService = $serviceLocator->get('LanguageService');
-
-        return new ChangeLanguageDetector($languageService);
+        return new ChangeLanguageDetector();
     }
 }
