@@ -19,18 +19,15 @@ class LanguageFromSessionDetectorListener implements LanguageDetectorListenerInt
     {
         $container = new Container(self::SESSION_KEY);
 
-        //get session locale
         $locale = $container->offsetGet(self::LANGUAGE);
 
         if (is_null($locale)) {
-            $languageRange = LanguageRange::fromString(self::DEFAULT_LOCALE);
-            $event->removeLanguageRange($languageRange);
-            $event->addLanguageRange($languageRange, 0);
-        } else {
-            $languageRange = LanguageRange::fromString($locale);
-            $event->removeLanguageRange($languageRange);
-            $event->addLanguageRange($languageRange, 1000);
+            $locale = self::DEFAULT_LOCALE;
         }
+
+        $languageRange = LanguageRange::fromString($locale);
+        $event->removeLanguageRange($languageRange);
+        $event->addLanguageRange($languageRange, 100);
 
         return $event->getLanguageRanges();
     }

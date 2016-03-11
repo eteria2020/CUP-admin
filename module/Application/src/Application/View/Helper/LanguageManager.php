@@ -8,7 +8,7 @@ use Zend\View\Helper\AbstractHelper;
 
 class LanguageManager extends AbstractHelper
 {
-    
+
     private $languages;
     private $languageService;
 
@@ -17,12 +17,11 @@ class LanguageManager extends AbstractHelper
         $this->languages = $languages;
         $this->languageService = $languageService;
     }
-    
+
     public function __invoke()
     {
-        $menu = new \stdClass();
-        $menu->languages = [];
-        
+        $menu = new LanguageMenu();
+
         $languages = $this->languages;
         $currentLocale = $this->languageService->getTranslator()->getLocale();
         $menu->currentLanguageLabel = "Lingua";
