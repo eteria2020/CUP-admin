@@ -10,7 +10,7 @@ class IndexControllerFactory implements FactoryInterface
     /**
      * @see \Zend\ServiceManager\FactoryInterface::createService()
      * @param ServiceLocatorInterface $serviceLocator
-     * @return mixed|IndexController
+     * @return IndexController
      */
     public function createService(ServiceLocatorInterface $serviceLocator)
     {
