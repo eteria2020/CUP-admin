@@ -17,7 +17,7 @@ class ChangeLanguageDetector implements ListenerAggregateInterface
 
     private $params;
 
-    public function __construct(LanguageService $languageService, array $params)
+    public function __construct(array $params)
     {
         $this->languageService = $languageService;
         $this->params = $params;
