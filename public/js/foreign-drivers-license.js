@@ -13,9 +13,10 @@ $(function() {
         if (data.e.valid) {
             return '<span class="label label-success">Validato</span>';
         } else {
-            return '<a href="/customers/foreign-drivers-license/validate/' +
+            var confirmText = 'id: ' + data.e.customer + ' ' + data.e.customer_name + ' ' + data.e.customer_surname + ' ' + translate("confirmValidate")
+            return '<a href="//' +
                 data.e.id +
-                '" onclick="return confirm(\'' + translate("confirmValidate") + '\')" class="btn btn-default btn-xs">'+translate("validate")+'</a>';
+                '" onclick="return confirm(\'' + confirmText + '\')" class="btn btn-default btn-xs">'+translate("validate")+'</a>';
         }
     }
 
