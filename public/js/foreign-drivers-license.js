@@ -1,4 +1,4 @@
-/* global $ confirm */
+/* global $ confirm document translate */
 
 $(function() {
     'use strict';
@@ -15,7 +15,7 @@ $(function() {
         } else {
             return '<a href="/customers/foreign-drivers-license/validate/' +
                 data.e.id +
-                '" class="btn btn-default btn-xs" onclick="return confirm(' + translate("confirmValidate") +')">'+translate("validate")+'</a>';
+                '" onclick="return confirm(\'' + translate("confirmValidate") + '\')" class="btn btn-default btn-xs">'+translate("validate")+'</a>';
         }
     }
 
@@ -94,7 +94,7 @@ $(function() {
                 "sFirst":      translate("oPaginateFirst"),
                 "sPrevious":   translate("oPaginatePrevious"),
                 "sNext":       translate("oPaginateNext"),
-                "sLast":       translate("oPaginateLast"),
+                "sLast":       translate("oPaginateLast")
             },
             "oAria": {
                 "sSortAscending":   translate("sSortAscending"),
