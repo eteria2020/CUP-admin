@@ -393,6 +393,15 @@ return [
                                         'action' => 'validate'
                                     ]
                                 ]
+                            ],
+                            'revoke' => [
+                                'type' => 'Segment',
+                                'options' => [
+                                    'route' => '/revoke/:id',
+                                    'defaults' => [
+                                        'action' => 'revoke'
+                                    ]
+                                ]
                             ]
                         ]
                     ]

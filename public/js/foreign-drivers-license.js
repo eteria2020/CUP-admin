@@ -11,12 +11,23 @@ $(function() {
 
     function showValid(data) {
         if (data.e.valid) {
-            return '<span class="label label-success">Validato</span>';
+            return '<span class="btn btn-success btn-xs disabled">Validato</span>';
         } else {
             var confirmText = 'id: ' + data.e.customer + ' ' + data.e.customer_name + ' ' + data.e.customer_surname + ' ' + translate("confirmValidate")
-            return '<a href="//' +
+            return '<a href="/customers/foreign-drivers-license/validate/' +
                 data.e.id +
                 '" onclick="return confirm(\'' + confirmText + '\')" class="btn btn-default btn-xs">'+translate("validate")+'</a>';
+        }
+    }
+
+    function showRevoke(data) {
+        if (!data.e.valid) {
+            return '<span class="btn btn-danger btn-xs disabled">Revocato</span>';
+        } else {
+            var confirmText = 'id: ' + data.e.customer + ' ' + data.e.customer_name + ' ' + data.e.customer_surname + ' ' + translate("confirmRevoke")
+            return '<a href="/customers/foreign-drivers-license/revoke/' +
+                data.e.id +
+                '" onclick="return confirm(\'' + confirmText + '\')" class="btn btn-default btn-xs">'+translate("revoke")+'</a>';
         }
     }
 
@@ -55,7 +66,8 @@ $(function() {
             {data: 'e.drivers_license_categories'},
             {data: 'e.drivers_license_expire'},
             {data: 'e.id'},
-            {data: showValid}
+            {data: showValid},
+            {data: showRevoke}
         ],
         "columnDefs": [
             {

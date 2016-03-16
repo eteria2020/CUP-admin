@@ -107,4 +107,25 @@ class ForeignDriversLicenseController extends AbstractActionController
 
         $this->redirect()->toRoute('customers/foreign-drivers-license');
     }
+
+    public function revokeAction()
+    {
+        $translator = $this->TranslatorPlugin();
+        $fileUploadId = $this->params()->fromRoute('id');
+
+        $foreignDriversLicenseUpload = $this->foreignDriversLicenseService->getUploadedFileById($fileUploadId);
+
+        try {
+            $this->validateForeignDriversLicenseService->revokeForeignDriversLicense(
+                $foreignDriversLicenseUpload,
+                $this->identity()
+            );
+
+            $this->flashMessenger()->addSuccessMessage($translator->translate('Patente revocata con successo.'));
+        } catch (\Exception $e) {
+            $this->flashMessenger()->addErrorMessage($translator->translate('Si è verificato un errore durante la revoca della patente'));
+        }
+
+        $this->redirect()->toRoute('customers/foreign-drivers-license');
+    }
 }
