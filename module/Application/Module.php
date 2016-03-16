@@ -39,17 +39,14 @@ class Module
         // Change default layout if user is not logged
         $auth = $serviceManager->get('zfcuser_auth_service');
         if (!$auth->hasIdentity()) {
-
             $eventManager->attach("dispatch", function ($e) {
                 $I_controller = $e->getTarget();
                 $I_controller->layout('layout/layout_login');
             });
 
         } else {
-
             // if user is not logged, set unauthorized route name
             $strategy->setRedirectRoute('unauthorized');
-
         }
 
         $eventManager->attach($strategy);
@@ -136,7 +133,11 @@ class Module
             // database tables not yet initialized
         }
 
-        $eventManager->attachAggregate($serviceManager->get('ChangeLanguageDetector.listener'));
+        $changeLanguageDetector = $serviceManager->get('ChangeLanguageDetector.listener');
+        $eventManager->attachAggregate($changeLanguageDetector);
+
+        $foreignDriverLicenseValidListener = $serviceManager->get('SharengoCore\Listener\ForeignDriverLicenseValidListener');
+        $eventManager->getSharedManager()->attachAggregate($foreignDriverLicenseValidListener);
     }
 
     public function getConfig()
@@ -163,6 +164,5 @@ class Module
                 'languageMenuHelper' => 'Application\\View\\Helper\\LanguageMenuHelperFactory'
             ],
         ];
-
     }
 }
