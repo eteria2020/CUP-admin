@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "d48f69685e5c8add5f12700562afcb31",
+    "hash": "589386d931cc8479b16ce4fb4b0f9cb7",
     "content-hash": "2fb52635465c715627ae338f0d83ccbd",
     "packages": [
         {
@@ -1375,7 +1375,7 @@
             "source": {
                 "type": "git",
                 "url": "ssh://git@git.mvlabs.it:4222/clients/sharengo-cartasi.git",
-                "reference": "abef1c4c48d373ca1cecd13ffc44a4e1bf349495"
+                "reference": "82a643de0ee26921a1341f6147e9ef8924ad66a0"
             },
             "require": {
                 "doctrine/doctrine-orm-module": "0.*",
@@ -1389,7 +1389,7 @@
                 }
             },
             "description": "Cartasi module for Sharengo",
-            "time": "2016-02-12 14:22:42"
+            "time": "2016-03-04 08:50:56"
         },
         {
             "name": "mvlabs/sharengo-coremodule",
@@ -1397,7 +1397,7 @@
             "source": {
                 "type": "git",
                 "url": "ssh://git@git.mvlabs.it:4222/clients/sharengo-coremodule.git",
-                "reference": "216fbb53e412f802c663311d72fdec5c6fcebf5e"
+                "reference": "9016bd591b374b1fef849ce516d22b2bbd6fd19a"
             },
             "require": {
                 "doctrine/doctrine-orm-module": "0.*",
@@ -1418,7 +1418,7 @@
                 }
             },
             "description": "Core ZF2 module for Sharengo apps",
-            "time": "2016-03-07 09:55:22"
+            "time": "2016-03-17 13:21:30"
         },
         {
             "name": "mvlabs/zf2-multilanguage",
@@ -1426,7 +1426,7 @@
             "source": {
                 "type": "git",
                 "url": "ssh://git@git.mvlabs.it:4222/internals/zf2-multilanguage.git",
-                "reference": "8835c4611a7351b9bb9c0021a39d55457f8dae64"
+                "reference": "54efb90fbfad687696766f0a12a676e0a72b6657"
             },
             "require": {
                 "php": ">=5.4"
@@ -1455,7 +1455,7 @@
                 "multilanguage",
                 "zf2"
             ],
-            "time": "2016-02-25 07:58:04"
+            "time": "2016-03-08 15:35:31"
         },
         {
             "name": "natxet/CssMin",
