@@ -13,6 +13,13 @@ return array(
                     'password' => 'pass',
                     'dbname'   => 'db',
                 )
+            ),
+            // default Mongo connection name
+            'odm_default' => array(
+                'server'           => 'localhost',
+                'port'             => '27017',
+                'user'             => null,
+                'password'         => null
             )
         ),
         'configuration' => array(
@@ -25,6 +32,9 @@ return array(
                     'linestring' => 'CrEOF\Spatial\DBAL\Types\Geometry\LineStringType',
                 ),
             ),
+            'odm_default' => array(
+                'default_db' => 'sharengo'
+            )
         ),
     ),
 );

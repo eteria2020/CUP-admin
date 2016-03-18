@@ -11,5 +11,6 @@ vendor
 module/SharengoCore
 module/Cartasi
 data/DoctrineORMModule
+data/DoctrineMongoODMModule
 public/cache
 node_modules

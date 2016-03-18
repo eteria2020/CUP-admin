@@ -9,6 +9,7 @@ use SharengoCore\Exception\EditTripWrongDateException;
 use SharengoCore\Exception\TripNotFoundException;
 use SharengoCore\Service\EditTripsService;
 use SharengoCore\Service\EventsService;
+use SharengoCore\Service\EventsTypesService;
 use SharengoCore\Service\TripsService;
 
 use DoctrineModule\Stdlib\Hydrator\DoctrineObject as DoctrineHydrator;
@@ -28,6 +29,11 @@ class EditTripController extends AbstractActionController
      * @var EventsService
      */
     private $eventsService;
+
+    /**
+     * @var EventsTypesService
+     */
+    private $eventsTypesService;
 
     /**
      * @var EditTripsService
@@ -54,6 +60,7 @@ class EditTripController extends AbstractActionController
      * @param EditTripsService $editTripsService
      * @param EventManager $eventManager
      * @param EventsService $eventsService
+     * @param EventsTypesService $eventsTypesService
      * @param DoctrineHydrator $hydrator
      * @param EditTripForm $editTripForm
      */
@@ -62,11 +69,13 @@ class EditTripController extends AbstractActionController
         EditTripsService $editTripsService,
         EventManager $eventManager,
         EventsService $eventsService,
+        EventsTypesService $eventsTypesService,
         DoctrineHydrator $hydrator,
         EditTripForm $editTripForm
     ) {
         $this->tripsService = $tripsService;
         $this->eventsService = $eventsService;
+        $this->eventsTypesService = $eventsTypesService;
         $this->editTripsService = $editTripsService;
         $this->editTripForm = $editTripForm;
         $this->eventManager = $eventManager;
@@ -112,6 +121,12 @@ class EditTripController extends AbstractActionController
         }
 
         $events = $this->eventsService->getEventsByTrip($trip);
+
+        foreach ($events as $event) {
+            $eventType = $this->eventsTypesService->mapEvent($event);
+            $event->setEventType($eventType);
+        }
+
 
         $tripArray = $trip->toArray($this->hydrator, []);
 

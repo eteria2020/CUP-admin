@@ -16,6 +16,7 @@
                         <tr>
                             <th><?php echo $this->translate("ID"); ?></th>
                             <th><?php echo $this->translate("Data"); ?></th>
+                            <th><?php echo $this->translate("Descrizione"); ?></th>
                             <th><?php echo $this->translate("Batteria"); ?></th>
                             <th><?php echo $this->translate("Km"); ?></th>
                             <th><?php echo $this->translate("Evento"); ?></th>
@@ -30,6 +31,7 @@
                             <tr>
                                 <td><?= $event->getId() ?></td>
                                 <td class="event-time"><?= $event->getEventTime()->format('d-m-Y H:i:s') ?></td>
+                                <td><?= ($event->getEventType()) ? $event->getEventType()->getFormattedDescription($event) : ''; ?></td>
                                 <td><?= $event->getBattery() . '%' ?></td>
                                 <td><?= $event->getKm() ?></td>
                                 <td><?= $event->getEventId() ?></td>
