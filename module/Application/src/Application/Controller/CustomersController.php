@@ -361,7 +361,7 @@ class CustomersController extends AbstractActionController
                     /** @var PromoCodes $promoCode */
                     $promoCode = $this->promoCodeService->getPromoCode($postData['promocode']['promocode']);
 
-                    $this->customersService->addBonusFromPromoCode($customer, $promoCode);
+                    $this->customersService->addBonusFromPromoCodeFromWebuser($customer, $promoCode);
 
                     $this->flashMessenger()->addSuccessMessage($translator->translate('Operazione completata con successo!'));
                 } catch (BonusAssignmentException $e) {
