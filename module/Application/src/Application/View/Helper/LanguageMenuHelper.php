@@ -21,27 +21,25 @@ class LanguageMenuHelper extends AbstractHelper
      */
     public function __invoke()
     {
-        $menu = new LanguageMenu();
-
-        $languages = $this->languages;
         $currentLocale = $this->languageService->getTranslator()->getLocale();
-
-        foreach ($languages as $language) {
+        $currentLabel = '';
+        $menuLanguages = [];
+        foreach ($this->languages as $language) {
             $locale = $language['locale'];
             $label = $language['label'];
             $url = "?" . ChangeLanguageDetector::URL_PARAM . "=" . $locale;
 
             if ($locale == $currentLocale) {
-                $menu->setCurrentLanguageLabel($label);
+                $currentLabel = $label;
             } else {
-                $menu->addLanguage([
+                $menuLanguages[] = [
                     'code' => $locale,
                     'label' => $label,
                     'url' => $url
-                ]);
+                ];
             }
         }
 
-        return $menu;
+        return new LanguageMenu($currentLabel, $menuLanguages);
     }
 }

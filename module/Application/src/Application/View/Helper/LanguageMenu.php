@@ -9,11 +9,14 @@ class LanguageMenu
     private $currentLanguageLabel;
 
     /**
-     * @param array $lang
+     * LanguageMenu constructor.
+     * @param $currentLanguageLabel
+     * @param array $menuLanguages
      */
-    public function addLanguage($lang)
+    public function __construct($currentLanguageLabel, array $menuLanguages)
     {
-        $this->languages[] = $lang;
+        $this->currentLanguageLabel = $currentLanguageLabel;
+        $this->languages = $menuLanguages;
     }
 
     /**
@@ -22,14 +25,6 @@ class LanguageMenu
     public function getCurrentLanguageLabel()
     {
         return $this->currentLanguageLabel;
-    }
-
-    /**
-     * @param string $currentLanguageLabel
-     */
-    public function setCurrentLanguageLabel($currentLanguageLabel)
-    {
-        $this->currentLanguageLabel = $currentLanguageLabel;
     }
 
     /**
