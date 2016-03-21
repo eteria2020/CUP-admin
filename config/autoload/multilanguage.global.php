@@ -15,7 +15,8 @@ return [
         'allowed_languages' => [
             'it_IT',
             'en_US',
-            'fr_FR'
+            'fr_FR',
+            'zh_CN',
         ],
         // listeners used to determine the appropriate language range for the
         // application.

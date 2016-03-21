@@ -1176,6 +1176,12 @@ return [
                 "lang" => "fr",
                 "lang_3chars" => "fra",
                 "label" => "Français"
+            ],
+            'zh' => [
+                "locale" => "zh_CN",
+                "lang" => "zh",
+                "lang_3chars" => "zho",
+                "label" => "中国"
             ]
         ],
         "language_folder" => __DIR__ . "/../language"
