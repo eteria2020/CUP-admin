@@ -1,6 +1,8 @@
 /* global $, confirm, location, translate*/
 
 $(function () {
+    'use strict';
+
     $("#assignBonusBtn").click(function () {
         if (confirm(translate("confirmAssignBonus"))) {
             var url = $("#assignPromoUrl").val();

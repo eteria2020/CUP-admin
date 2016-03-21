@@ -288,14 +288,14 @@ return [
                         ],
                     ],
                     'assign-bonus-ajax' => [
-                        'type'    => 'Segment',
+                        'type' => 'Segment',
                         'options' => [
-                            'route'    => '/assign-bonus-ajax/:id',
+                            'route' => '/assign-bonus-ajax/:id',
                             'constraints' => [
                                 'id' => '[0-9]*'
                             ],
                             'defaults' => [
-                                'action'        => 'assign-bonus-ajax',
+                                'action' => 'assign-bonus-ajax',
                             ],
                         ],
                     ],
@@ -908,7 +908,7 @@ return [
                         'options' => [
                             'route' => '/set-trip-payed/:id',
                             'constraints' => [
-                                'id'    => '[0-9]*'
+                                'id' => '[0-9]*'
                             ],
                             'defaults' => [
                                 'action' => 'set-trip-as-payed-ajax'

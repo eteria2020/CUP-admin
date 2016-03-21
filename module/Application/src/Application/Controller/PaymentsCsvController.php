@@ -19,9 +19,9 @@ use Zend\View\Model\ViewModel;
 class PaymentsCsvController extends AbstractActionController
 {
     /**
-     * @var CsvService
+     * @var CartasiCsvAnalyzeService
      */
-    private $csvService;
+    private $cartasiCsvAnalyzeService;
 
     /**
      * @var CartasiContractsService
@@ -34,26 +34,26 @@ class PaymentsCsvController extends AbstractActionController
     private $form;
 
     /**
-     * @param CartasiCsvAnalyzeService $csvService
+     * @param CartasiCsvAnalyzeService $cartasiCsvAnalyzeService
      * @param CartasiContractsService $contractsService
      * @param CsvUploadForm $form
      */
     public function __construct(
-        CartasiCsvAnalyzeService $csvService,
+        CartasiCsvAnalyzeService $cartasiCsvAnalyzeService,
         CartasiContractsService $contractsService,
         CsvUploadForm $form
     ) {
-        $this->csvService = $csvService;
+        $this->cartasiCsvAnalyzeService = $cartasiCsvAnalyzeService;
         $this->contractsService = $contractsService;
         $this->form = $form;
     }
 
     public function csvAction()
     {
-        $newFiles = $this->csvService->searchForNewFiles();
-        $csvFiles = $this->csvService->getAllFiles();
-        $csvResolvedAnomalies = $this->csvService->getAllResolvedAnomalies();
-        $csvUnresolvedAnomalies = $this->csvService->getAllUnresolvedAnomalies();
+        $newFiles = $this->cartasiCsvAnalyzeService->searchForNewFiles();
+        $csvFiles = $this->cartasiCsvAnalyzeService->getAllFiles();
+        $csvResolvedAnomalies = $this->cartasiCsvAnalyzeService->getAllResolvedAnomalies();
+        $csvUnresolvedAnomalies = $this->cartasiCsvAnalyzeService->getAllUnresolvedAnomalies();
         $url = $this->url()->fromRoute('payments/csv-upload');
         $this->form->setAttribute('action', $url);
 
@@ -69,8 +69,8 @@ class PaymentsCsvController extends AbstractActionController
     public function addFileAction()
     {
         $filename = $this->params()->fromQuery('filename');
-        $csvFile = $this->csvService->addFile($filename, $this->identity());
-        $this->csvService->analyzeFile($csvFile);
+        $csvFile = $this->cartasiCsvAnalyzeService->addFile($filename, $this->identity());
+        $this->cartasiCsvAnalyzeService->analyzeFile($csvFile);
 
         return $this->reloadList();
     }
@@ -78,9 +78,9 @@ class PaymentsCsvController extends AbstractActionController
     public function detailsAction()
     {
         $id = (int) $this->params()->fromRoute('id', 0);
-        $csvAnomaly = $this->csvService->getAnomalyById($id);
+        $csvAnomaly = $this->cartasiCsvAnalyzeService->getAnomalyById($id);
         $transaction = $csvAnomaly->getTransaction();
-        $transactionType = $this->csvService->getTransactionTypeEntity($transaction);
+        $transactionType = $this->cartasiCsvAnalyzeService->getTransactionTypeEntity($transaction);
 
         if (!$csvAnomaly instanceof CartasiCsvAnomaly) {
             $this->response->setStatusCode(Response::STATUS_CODE_404);
@@ -94,7 +94,6 @@ class PaymentsCsvController extends AbstractActionController
             $contract = $this->contractsService->getContractById($contractId);
             $customer = $contract->getCustomer();
         } catch (ContractNotFoundException $e) {
-
         }
 
         return new ViewModel([
@@ -108,13 +107,13 @@ class PaymentsCsvController extends AbstractActionController
     {
         $translator = $this->TranslatorPlugin();
         $id = $this->params()->fromRoute('id', 0);
-        $csvAnomaly = $this->csvService->getAnomalyById($id);
+        $csvAnomaly = $this->cartasiCsvAnalyzeService->getAnomalyById($id);
 
         if ($this->getRequest()->isPost()) {
             try {
                 $postData = $this->getRequest()->getPost()->toArray();
                 $content = $postData['new-note'];
-                $this->csvService->createAnomalyNote($csvAnomaly, $this->identity(), $content);
+                $this->cartasiCsvAnalyzeService->createAnomalyNote($csvAnomaly, $this->identity(), $content);
                 $this->flashMessenger()->addSuccessMessage($translator->translate('Nota aggiunta con successo'));
             } catch (NoteContentNotValidException $e) {
                 $this->getResponse()->setStatusCode(Response::STATUS_CODE_500);
@@ -132,10 +131,10 @@ class PaymentsCsvController extends AbstractActionController
     {
         $translator = $this->TranslatorPlugin();
         $id = $this->params()->fromRoute('id', 0);
-        $csvAnomaly = $this->csvService->getAnomalyById($id);
+        $csvAnomaly = $this->cartasiCsvAnalyzeService->getAnomalyById($id);
 
         try {
-            $this->csvService->resolveAnomaly($csvAnomaly, $this->identity());
+            $this->cartasiCsvAnalyzeService->resolveAnomaly($csvAnomaly, $this->identity());
             $this->flashMessenger()->addSuccessMessage($translator->translate('Anomalia risolta con successo'));
         } catch (CartasiCsvAnomalyAlreadyResolvedException $e) {
             $this->getResponse()->setStatusCode(Response::STATUS_CODE_500);
@@ -162,7 +161,7 @@ class PaymentsCsvController extends AbstractActionController
             $this->form->setData($post);
             if ($this->form->isValid()) {
                 $data = $this->form->getData();
-                $csvFile = $this->csvService->addFile(
+                $csvFile = $this->cartasiCsvAnalyzeService->addFile(
                     $data['csv-upload']['tmp_name'],
                     $this->identity(),
                     true,
@@ -170,7 +169,7 @@ class PaymentsCsvController extends AbstractActionController
                 );
 
                 try {
-                    $this->csvService->analyzeFile($csvFile);
+                    $this->cartasiCsvAnalyzeService->analyzeFile($csvFile);
                     $this->flashMessenger()->addSuccessMessage($translator->translate('File caricato con successo'));
                 } catch (InvalidCsvException $e) {
                     $this->flashMessenger()->addErrorMessage($translator->translate('Formattazione del file non valida'));

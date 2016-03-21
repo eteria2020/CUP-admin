@@ -13,7 +13,7 @@ class CustomersControllerFactory implements FactoryInterface
      *
      * @see \Zend\ServiceManager\FactoryInterface::createService()
      * @param ServiceLocatorInterface $serviceLocator
-     * @return CustomersController|mixed
+     * @return CustomersController
      */
     public function createService(ServiceLocatorInterface $serviceLocator)
     {

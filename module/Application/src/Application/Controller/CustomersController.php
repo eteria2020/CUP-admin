@@ -372,7 +372,7 @@ class CustomersController extends AbstractActionController
             $this->flashMessenger()->addSuccessMessage($translator->translate('Operazione completata con successo!'));
 
         } catch (\Exception $e) {
-            $this->flashMessenger()->addErrorMessage($translator->translate('Si è verificato un errore applicativo. L\'assistenza tecnica è già al corrente, ci scusiamo per l\'inconveniente'));
+            $this->flashMessenger()->addErrorMessage($translator->translate('Si è verificato un errore applicativo. Operazione non completata'));
         }
 
         return new JsonModel();
@@ -404,8 +404,11 @@ class CustomersController extends AbstractActionController
                     return $this->redirect()->toRoute('customers/assign-promo-code', ['id' => $customer->getId()]);
                 }
 
-                return $this->redirect()->toRoute('customers/edit', ['id' => $customer->getId()],
-                    ['query' => ['tab' => 'bonus']]);
+                return $this->redirect()->toRoute(
+                    'customers/edit',
+                    ['id' => $customer->getId()],
+                    ['query' => ['tab' => 'bonus']]
+                );
             }
         }
 
@@ -437,8 +440,11 @@ class CustomersController extends AbstractActionController
                     return $this->redirect()->toRoute('customers/add-bonus', ['id' => $customer->getId()]);
                 }
 
-                return $this->redirect()->toRoute('customers/edit', ['id' => $customer->getId()],
-                    ['query' => ['tab' => 'bonus']]);
+                return $this->redirect()->toRoute(
+                    'customers/edit',
+                    ['id' => $customer->getId()],
+                    ['query' => ['tab' => 'bonus']]
+                );
             }
         }
 
@@ -520,8 +526,11 @@ class CustomersController extends AbstractActionController
                 }
 
                 if (!is_null($customer)) {
-                    return $this->redirect()->toRoute('customers/edit', ['id' => $customer->getId()],
-                        ['query' => ['tab' => 'card']]);
+                    return $this->redirect()->toRoute(
+                        'customers/edit',
+                        ['id' => $customer->getId()],
+                        ['query' => ['tab' => 'card']]
+                    );
                 }
 
                 return $this->redirect()->toRoute('customers/list-card');
