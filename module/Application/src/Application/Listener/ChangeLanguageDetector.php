@@ -2,6 +2,8 @@
 
 namespace Application\Listener;
 
+use MvLabsMultilanguage\Service\LanguageService;
+
 use Zend\EventManager\EventManagerInterface;
 use Zend\EventManager\ListenerAggregateInterface;
 use Zend\Mvc\MvcEvent;
@@ -17,7 +19,7 @@ class ChangeLanguageDetector implements ListenerAggregateInterface
 
     private $params;
 
-    public function __construct(array $params)
+    public function __construct(LanguageService $languageService, array $params)
     {
         $this->languageService = $languageService;
         $this->params = $params;
