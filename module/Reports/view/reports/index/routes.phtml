@@ -3,9 +3,9 @@
 $this->inlineScript()
     ->appendFile('/assets-modules/reports/js/vendor.routes.js')
     ->prependScript('
-        // Getting the actual city id (from the controller), and save it to js $.oe vars
-        var thisLanguage="'.$this->userLanguage.'";
-    ');
+            // Getting the actual city id (from the controller), and save it to js $.oe vars
+            var thisLanguage="'.$this->plugin('translate')->getTranslator()->getLocale().'";
+        ');
 
 if(isset($this->tripid)) {
     $this->inlineScript()->prependScript('var tripid='.$this->tripid.';');

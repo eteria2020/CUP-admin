@@ -1,23 +1,26 @@
 <?php
-
-namespace Application\Service;
+namespace Application\View\Helper;
 
 use Zend\ServiceManager\FactoryInterface;
 use Zend\ServiceManager\ServiceLocatorInterface;
 
-class UserLanguageServiceFactory implements FactoryInterface
+class LanguageMenuHelperFactory implements FactoryInterface
 {
     /**
      * Create service
      *
      * @param ServiceLocatorInterface $serviceLocator
-     * @return mixed
+     * @return LanguageMenuHelper
      */
     public function createService(ServiceLocatorInterface $serviceLocator)
     {
-        $config = $serviceLocator->get('config');
+        $sm = $serviceLocator->getServiceLocator();
+
+        $config = $sm->get('config');
         $languages = $config['translation_config']['languages'];
 
-        return new UserLanguageService($languages);
+        $languageService = $sm->get('LanguageService');
+
+        return new LanguageMenuHelper($languages, $languageService);
     }
 }

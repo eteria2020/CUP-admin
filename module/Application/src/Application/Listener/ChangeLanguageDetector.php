@@ -2,22 +2,33 @@
 
 namespace Application\Listener;
 
-use Application\Service\UserLanguageService;
+use MvLabsMultilanguage\Service\LanguageService;
+
 use Zend\EventManager\EventManagerInterface;
 use Zend\EventManager\ListenerAggregateInterface;
 use Zend\Mvc\MvcEvent;
+use Zend\Session\Container;
 
 class ChangeLanguageDetector implements ListenerAggregateInterface
 {
-    const GET_PARAMENTER_CHANGE_LANGUAGE = 'change-language';
-    
-    private $userLanguageService;
+    const URL_PARAM = 'lang';
 
-    protected $listeners = array();
+    private $languageService;
 
-    public function __construct(UserLanguageService $userLanguageService)
-    {
-        $this->userLanguageService = $userLanguageService;
+    private $listeners = array();
+
+    private $params;
+
+    private $languages;
+
+    public function __construct(
+        LanguageService $languageService,
+        array $params,
+        array $languages
+    ) {
+        $this->languageService = $languageService;
+        $this->params = $params;
+        $this->languages = $languages;
     }
 
     /**
@@ -32,7 +43,7 @@ class ChangeLanguageDetector implements ListenerAggregateInterface
      */
     public function attach(EventManagerInterface $events)
     {
-        $this->listeners[] = $events->attach(MvcEvent::EVENT_ROUTE, array($this, 'initChangeLanguageDetector'), 100);
+        $this->listeners[] = $events->attach(MvcEvent::EVENT_ROUTE, array($this, 'initChangeLanguageDetector'), 200);
     }
 
     /**
@@ -53,15 +64,20 @@ class ChangeLanguageDetector implements ListenerAggregateInterface
 
     public function initChangeLanguageDetector(MvcEvent $event)
     {
-        //set current language
+        //set changed language in session
         $request = $event->getRequest();
         $uri  = $request->getUri();
         $queryStringArray = $uri->getQueryAsArray();
 
-        if (array_key_exists(self::GET_PARAMENTER_CHANGE_LANGUAGE, $queryStringArray)) {
+        if (array_key_exists(self::URL_PARAM, $queryStringArray)) {
+            $container = new Container($this->params['session']);
+            $locale = $queryStringArray[self::URL_PARAM];
+            $container->offsetSet($this->params['offset'], $locale);
 
-           $this->userLanguageService->setCurrentLang($queryStringArray[self::GET_PARAMENTER_CHANGE_LANGUAGE]);
+            // set the language cookie to propagate the language information to the
+            // pages built with javascript
+            $lang = substr($locale, 0, 2);
+            setcookie('lang', $this->languages[$lang]['lang_3chars'], null, '/');
         }
     }
-
 }

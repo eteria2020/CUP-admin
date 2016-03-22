@@ -1101,7 +1101,6 @@ return [
             'FaresForm' => 'Application\Form\FaresFormFactory',
             'EditTripForm' => 'Application\Form\EditTripFormFactory',
             'ConfigurationsForm' => 'Application\Form\ConfigurationsFormFactory',
-            'UserLanguageService' => 'Application\Service\UserLanguageServiceFactory',
             'ChangeLanguageDetector.listener' => 'Application\Listener\ChangeLanguageDetectorFactory',
 
         ]
@@ -1187,8 +1186,8 @@ return [
         "language_folder" => __DIR__ . "/../language"
     ],
     'language_detector_listeners' => [
-        'invokables' => [
-            'LanguageFromSessionDetectorListener' => 'Application\Listener\LanguageFromSessionDetectorListener'
+        'factories' => [
+            'LanguageFromSessionDetectorListener' => 'Application\Listener\LanguageFromSessionDetectorListenerFactory'
         ]
     ],
     'view_manager' => [
