@@ -15,14 +15,20 @@ class ChangeLanguageDetector implements ListenerAggregateInterface
 
     private $languageService;
 
-    protected $listeners = array();
+    private $listeners = array();
 
     private $params;
 
-    public function __construct(LanguageService $languageService, array $params)
-    {
+    private $languages;
+
+    public function __construct(
+        LanguageService $languageService,
+        array $params,
+        array $languages
+    ) {
         $this->languageService = $languageService;
         $this->params = $params;
+        $this->languages = $languages;
     }
 
     /**
@@ -67,6 +73,11 @@ class ChangeLanguageDetector implements ListenerAggregateInterface
             $container = new Container($this->params['session']);
             $locale = $queryStringArray[self::URL_PARAM];
             $container->offsetSet($this->params['offset'], $locale);
+
+            // set the language cookie to propagate the language information to the
+            // pages built with javascript
+            $lang = substr($locale, 0, 2);
+            setcookie('lang', $this->languages[$lang]['lang_3chars'], null, '/');
         }
     }
 }
