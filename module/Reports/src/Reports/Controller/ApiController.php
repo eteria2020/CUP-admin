@@ -53,6 +53,7 @@ class ApiController extends AbstractActionController
      */
     public function getAllTripsAction()
     {
+        $translator = $this->TranslatorPlugin();
         if (!$this->getRequest()->isPost()) {
             $this->getResponse()->setStatusCode(Response::STATUS_CODE_404);
 
@@ -68,11 +69,11 @@ class ApiController extends AbstractActionController
             // Get the trips, in CSV string format
             $output = $this->reportsCsvService->getAllTripsCsv($startDate, $endDate);
         } catch (CsvParsingException $e) {
-            $this->flashMessenger()->addErrorMessage('Si è verificato un errore applicativo nel parsing dei dati CSV.');
+            $this->flashMessenger()->addErrorMessage($translator->translate('Si è verificato un errore applicativo nel parsing dei dati CSV.'));
 
             return false;
         } catch (Exception $e) {
-            $this->flashMessenger()->addErrorMessage('Si è verificato un errore applicativo.');
+            $this->flashMessenger()->addErrorMessage($translator->translate('Si è verificato un errore applicativo.'));
 
             return false;
         }
@@ -85,6 +86,7 @@ class ApiController extends AbstractActionController
      */
     public function getCityTripsAction()
     {
+        $translator = $this->TranslatorPlugin();
         if (!$this->getRequest()->isPost()) {
             $this->getResponse()->setStatusCode(Response::STATUS_CODE_404);
 
@@ -103,20 +105,20 @@ class ApiController extends AbstractActionController
             // Get the trips, in CSV string format
             $output = $this->reportsCsvService->getCityTripsCsv($startDate, $endDate, $city);
         } catch (MissingParameter $e) {
-            $this->flashMessenger()->addErrorMessage('Si è verificato un errore applicativo causato dalla mancanza di uno o pi&ugrave; parametri.');
+            $this->flashMessenger()->addErrorMessage($translator->translate('Si è verificato un errore applicativo causato dalla mancanza di uno o pi&ugrave; parametri.'));
 
             return false;
         } catch (InvalidParameter $e) {
-            $this->flashMessenger()->addErrorMessage('Si è verificato un errore applicativo causato dall\'invalidit&agrave; di uno o pi&ugrave; parametri.');
+            $this->flashMessenger()->addErrorMessage($translator->translate('Si è verificato un errore applicativo causato dall\'invalidit&agrave; di uno o pi&ugrave; parametri.'));
 
             return false;
         } catch (CsvParsingException $e) {
-            $this->flashMessenger()->addErrorMessage('Si è verificato un errore applicativo nel parsing dei dati CSV.');
+            $this->flashMessenger()->addErrorMessage($translator->translate('Si è verificato un errore applicativo nel parsing dei dati CSV.'));
 
             return false;
         } catch (Exception $e) {
             //error_log('Errore: '.$e->getMessage());
-            $this->flashMessenger()->addErrorMessage('Si è verificato un errore applicativo.');
+            $this->flashMessenger()->addErrorMessage($translator->translate('Si è verificato un errore applicativo.'));
 
             return false;
         }
@@ -151,6 +153,7 @@ class ApiController extends AbstractActionController
      */
     public function getTripsGeoDataAction()
     {
+        $translator = $this->TranslatorPlugin();
         if (!$this->getRequest()->isPost()) {
             $this->getResponse()->setStatusCode(Response::STATUS_CODE_404);
 
@@ -173,7 +176,7 @@ class ApiController extends AbstractActionController
             $this->getResponse()->setContent($tripsgeodata);
         } catch (Exception $e) {
             //error_log('Errore: '.$e->getMessage());
-            $this->flashMessenger()->addErrorMessage('Si è verificato un errore applicativo.');
+            $this->flashMessenger()->addErrorMessage($translator->translate('Si è verificato un errore applicativo.'));
 
             return false;
         }
@@ -186,6 +189,7 @@ class ApiController extends AbstractActionController
      */
     public function getCarsGeoDataAction()
     {
+        $translator = $this->TranslatorPlugin();
         try {
             // Get the trips geo data, in JSON format
             $carsgeodata = $this->reportsService->getCarsGeoData();
@@ -194,7 +198,7 @@ class ApiController extends AbstractActionController
             $this->getResponse()->setContent($carsgeodata);
         } catch (Exception $e) {
             //error_log('Errore: '.$e->getMessage());
-            $this->flashMessenger()->addErrorMessage('Si è verificato un errore applicativo.');
+            $this->flashMessenger()->addErrorMessage($translator->translate('Si è verificato un errore applicativo.'));
 
             return false;
         }
@@ -207,6 +211,7 @@ class ApiController extends AbstractActionController
      */
     public function getTripAction()
     {
+        $translator = $this->TranslatorPlugin();
         $tripId = $this->params()->fromRoute('id', 0);
 
         if (!isset($tripId)) {
@@ -223,7 +228,7 @@ class ApiController extends AbstractActionController
             $this->getResponse()->setContent($tripdata);
         } catch (Exception $e) {
             //error_log('Errore: '.$e->getMessage());
-            $this->flashMessenger()->addErrorMessage('Si è verificato un errore applicativo.');
+            $this->flashMessenger()->addErrorMessage($translator->translate('Si è verificato un errore applicativo.'));
 
             return false;
         }
@@ -236,6 +241,7 @@ class ApiController extends AbstractActionController
      */
     public function getTripsAction()
     {
+        $translator = $this->TranslatorPlugin();
         if (!$this->getRequest()->isPost()) {
             $this->getResponse()->setStatusCode(Response::STATUS_CODE_404);
 
@@ -256,16 +262,16 @@ class ApiController extends AbstractActionController
             // So, we don't need to use a JsonModel,but simply use an Http Response
             $this->getResponse()->setContent($tripsdata);
         } catch (MissingParameter $e) {
-            $this->flashMessenger()->addErrorMessage('Si è verificato un errore applicativo causato dalla mancanza di uno o pi&ugrave; parametri.');
+            $this->flashMessenger()->addErrorMessage($translator->translate('Si è verificato un errore applicativo causato dalla mancanza di uno o pi&ugrave; parametri.'));
 
             return false;
         } catch (InvalidParameter $e) {
-            $this->flashMessenger()->addErrorMessage('Si è verificato un errore applicativo causato dall\'invalidit&agrave; di uno o pi&ugrave; parametri.');
+            $this->flashMessenger()->addErrorMessage($translator->translate('Si è verificato un errore applicativo causato dall\'invalidit&agrave; di uno o pi&ugrave; parametri.'));
 
             return false;
         } catch (Exception $e) {
             //error_log('Errore: '.$e->getMessage());
-            $this->flashMessenger()->addErrorMessage('Si è verificato un errore applicativo.');
+            $this->flashMessenger()->addErrorMessage($translator->translate('Si è verificato un errore applicativo.'));
 
             return false;
         }
@@ -278,6 +284,7 @@ class ApiController extends AbstractActionController
      */
     public function getTripsFromLogsAction()
     {
+        $translator = $this->TranslatorPlugin();
         if (!$this->getRequest()->isPost()) {
             $this->getResponse()->setStatusCode(Response::STATUS_CODE_404);
 
@@ -297,15 +304,15 @@ class ApiController extends AbstractActionController
             // So, we don't need to use a JsonModel,but simply use an Http Response
             $this->getResponse()->setContent($tripsdata);
         } catch (MissingParameter $e) {
-            $this->flashMessenger()->addErrorMessage('Si è verificato un errore applicativo causato dalla mancanza di uno o pi&ugrave; parametri.');
+            $this->flashMessenger()->addErrorMessage($translator->translate('Si è verificato un errore applicativo causato dalla mancanza di uno o pi&ugrave; parametri.'));
 
             return false;
         } catch (InvalidParameter $e) {
-            $this->flashMessenger()->addErrorMessage('Si è verificato un errore applicativo causato dall\'invalidit&agrave; di uno o pi&ugrave; parametri.');
+            $this->flashMessenger()->addErrorMessage($translator->translate('Si è verificato un errore applicativo causato dall\'invalidit&agrave; di uno o pi&ugrave; parametri.'));
 
             return false;
         } catch (Exception $e) {
-            $this->flashMessenger()->addErrorMessage('Si è verificato un errore applicativo.');
+            $this->flashMessenger()->addErrorMessage($translator->translate('Si è verificato un errore applicativo.'));
 
             return false;
         }
@@ -318,6 +325,7 @@ class ApiController extends AbstractActionController
      */
     public function getTripPointsFromLogsAction()
     {
+        $translator = $this->TranslatorPlugin();
         if (!$this->getRequest()->isPost()) {
             $this->getResponse()->setStatusCode(Response::STATUS_CODE_404);
 
@@ -333,16 +341,16 @@ class ApiController extends AbstractActionController
             // Get the trips data, in GPX format
             $tripsdata = $this->reportsService->getTripPointsFromLogs($getTripsId);
         } catch (MissingParameter $e) {
-            $this->flashMessenger()->addErrorMessage('Si è verificato un errore applicativo causato dalla mancanza di uno o pi&ugrave; parametri.');
+            $this->flashMessenger()->addErrorMessage($translator->translate('Si è verificato un errore applicativo causato dalla mancanza di uno o pi&ugrave; parametri.'));
 
             return false;
         } catch (InvalidParameter $e) {
-            $this->flashMessenger()->addErrorMessage('Si è verificato un errore applicativo causato dall\'invalidit&agrave; di uno o pi&ugrave; parametri.');
+            $this->flashMessenger()->addErrorMessage($translator->translate('Si è verificato un errore applicativo causato dall\'invalidit&agrave; di uno o pi&ugrave; parametri.'));
 
             return false;
         } catch (Exception $e) {
             //error_log('errore: '.$e, 0);
-            $this->flashMessenger()->addErrorMessage('Si è verificato un errore applicativo.');
+            $this->flashMessenger()->addErrorMessage($translator->translate('Si è verificato un errore applicativo.'));
 
             return false;
         }

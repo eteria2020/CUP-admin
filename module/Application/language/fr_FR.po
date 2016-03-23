@@ -1,130 +1,133 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Sharengo\n"
-"POT-Creation-Date: 2016-02-25 06:46+0100\n"
-"PO-Revision-Date: 2016-03-07 17:41+0100\n"
+"POT-Creation-Date: 2016-03-23 11:04+0100\n"
+"PO-Revision-Date: 2016-03-23 11:04+0100\n"
+"Last-Translator: \n"
 "Language-Team: \n"
+"Language: fr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Poedit 1.6.10\n"
-"X-Poedit-Basepath: E:/omniaevo-twist/sharengo-admin/module\n"
+"X-Poedit-Basepath: ../../\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 "X-Poedit-KeywordsList: translate\n"
 "X-Poedit-SourceCharset: UTF-8\n"
-"Last-Translator: \n"
-"Language: fr\n"
 "X-Poedit-SearchPath-0: .\n"
 
-#: Application/config/module.config.php:1270
+#: Application/config/module.config.php:1333
+#: Reports/view/reports/index/routes.phtml:56
 msgid "Clienti"
 msgstr "Client"
 
-#: Application/config/module.config.php:1277
-#: Application/config/module.config.php:1313
-#: Application/config/module.config.php:1339
-#: Application/config/module.config.php:1363
-#: Application/config/module.config.php:1377
-#: Application/view/application/trips-not-payed/list.phtml:21
+#: Application/config/module.config.php:1340
+#: Application/config/module.config.php:1376
+#: Application/config/module.config.php:1402
+#: Application/config/module.config.php:1426
+#: Application/config/module.config.php:1440
+#: Application/view/application/trips-not-payed/list.phtml:59
 msgid "Elenco"
 msgstr "Liste"
 
-#: Application/config/module.config.php:1282
+#: Application/config/module.config.php:1345
 #: Application/view/application/customers/edit.phtml:38
 #: Application/view/application/customers/list.phtml:77
 #: Application/view/application/reservations/index.phtml:72
 msgid "Card"
 msgstr "Carte"
 
-#: Application/config/module.config.php:1287
+#: Application/config/module.config.php:1350
 msgid "Patenti estere"
 msgstr "Licences étrangères"
 
-#: Application/config/module.config.php:1306
+#: Application/config/module.config.php:1369
 msgid "Auto"
 msgstr "Voiture"
 
-#: Application/config/module.config.php:1332
+#: Application/config/module.config.php:1395
 #: Application/view/partials/translations.phtml:57
+#: Reports/view/layout/layout.phtml:37
+#: Reports/view/reports/index/routes.phtml:69
 msgid "Corse"
 msgstr "Courses"
 
-#: Application/config/module.config.php:1344
+#: Application/config/module.config.php:1407
 msgid "Costo corsa"
 msgstr "Course de coût"
 
-#: Application/config/module.config.php:1349
+#: Application/config/module.config.php:1412
 msgid "Corse non pagate"
 msgstr "Courses impayées"
 
-#: Application/config/module.config.php:1356
+#: Application/config/module.config.php:1419
 msgid "Prenotazioni"
 msgstr "Réservations"
 
-#: Application/config/module.config.php:1370
+#: Application/config/module.config.php:1433
 #: Application/view/application/customers/edit.phtml:39
 msgid "Fatture"
 msgstr "Factures"
 
-#: Application/config/module.config.php:1384
+#: Application/config/module.config.php:1447
 msgid "Pagamenti"
 msgstr "Paiements"
 
-#: Application/config/module.config.php:1391
+#: Application/config/module.config.php:1454
 #: Application/view/application/customers/edit.phtml:42
 msgid "Pagamenti falliti"
 msgstr "Paiements ont échoué"
 
-#: Application/config/module.config.php:1396
+#: Application/config/module.config.php:1459
 msgid "Addebita penale/extra"
 msgstr "Accusation pénale/extra"
 
-#: Application/config/module.config.php:1401
+#: Application/config/module.config.php:1464
 msgid "Competenze"
 msgstr "Compétences"
 
-#: Application/config/module.config.php:1406
+#: Application/config/module.config.php:1469
 #: Application/view/application/payments-csv/csv.phtml:15
 msgid "Verifica CartaSI"
 msgstr "Vérification CartaSì"
 
-#: Application/config/module.config.php:1413
+#: Application/config/module.config.php:1476
 msgid "Configurazione"
 msgstr "Configuration"
 
-#: Application/config/module.config.php:1420
+#: Application/config/module.config.php:1483
 msgid "Gestione soglie allarme"
 msgstr "Seuils de gestion d'alarme"
 
-#: Application/config/module.config.php:1425
+#: Application/config/module.config.php:1488
 msgid "Gestione POIS"
 msgstr "Gestion de POIS"
 
-#: Application/config/module.config.php:1430
+#: Application/config/module.config.php:1493
 msgid "Tariffe"
 msgstr "Taux"
 
-#: Application/config/module.config.php:1437
+#: Application/config/module.config.php:1500
 msgid "Aree"
 msgstr "Domaines"
 
-#: Application/config/module.config.php:1444
+#: Application/config/module.config.php:1507
 msgid "Gestione aree"
 msgstr "Zones de gestion"
 
-#: Application/config/module.config.php:1449
+#: Application/config/module.config.php:1512
 msgid "Aree d'allarme"
 msgstr "Zones d'alarme"
 
-#: Application/config/module.config.php:1456
+#: Application/config/module.config.php:1519
 msgid "Statistiche"
 msgstr "Statistiques"
 
-#: Application/config/module.config.php:1463
+#: Application/config/module.config.php:1526
 msgid "Call center"
 msgstr "Centre d'appels"
 
-#: Application/config/module.config.php:1470
+#: Application/config/module.config.php:1533
 msgid "Mappa Allarmi"
 msgstr "Carte des Alertes"
 
@@ -135,11 +138,10 @@ msgstr "Ajoutée  réussi de voiture!"
 #: Application/src/Application/Controller/CarsController.php:101
 #: Application/src/Application/Controller/CarsController.php:174
 #: Application/src/Application/Controller/CarsController.php:215
-#: Application/src/Application/Controller/CarsController.php:252
 #: Application/src/Application/Controller/CustomersController.php:186
 #: Application/src/Application/Controller/CustomersController.php:370
 #: Application/src/Application/Controller/CustomersController.php:402
-#: Application/src/Application/Controller/PaymentsController.php:329
+#: Application/src/Application/Controller/PaymentsController.php:323
 #: Application/src/Application/Controller/UsersController.php:68
 #: Application/src/Application/Controller/UsersController.php:125
 msgid ""
@@ -160,6 +162,11 @@ msgstr "Dégâts voiture modifiée avec succès!"
 #: Application/src/Application/Controller/CarsController.php:248
 msgid "Auto rimossa con successo!"
 msgstr "Voiture correctement supprimée!"
+
+#: Application/src/Application/Controller/CarsController.php:252
+#, fuzzy
+msgid "L'auto non può essere rimossa perchè ha effettuato una o più corse."
+msgstr "La course n'est pas modifiable car il n'est pas fini."
 
 #: Application/src/Application/Controller/CarsController.php:276
 msgid "Comando eseguito con successo"
@@ -184,7 +191,7 @@ msgid "Errore nell'inserimento della nota"
 msgstr "Erreur insertion de note"
 
 #: Application/src/Application/Controller/CustomersController.php:183
-#: Application/src/Application/Controller/EditTripController.php:100
+#: Application/src/Application/Controller/EditTripController.php:109
 msgid "Modifica effettuta con successo!"
 msgstr "Examen réussi!"
 
@@ -211,7 +218,7 @@ msgid "Qualcosa è andato storto durante la creazione"
 msgstr "Quelque chose s'est mal passé lors de la création"
 
 #: Application/src/Application/Controller/CustomersController.php:570
-#: Application/src/Application/Controller/PaymentsController.php:222
+#: Application/src/Application/Controller/PaymentsController.php:216
 msgid "Non esiste un cliente per l'id specificato"
 msgstr "N'existe pas un client pour l'id spécifié."
 
@@ -237,17 +244,17 @@ msgstr "Utilisateur réactivé"
 msgid "Disattivazione rimossa"
 msgstr "Désactivation de supprimé"
 
-#: Application/src/Application/Controller/EditTripController.php:102
+#: Application/src/Application/Controller/EditTripController.php:111
 msgid "La corsa non può essere modificata perché non è conclusa."
 msgstr "La course n'est pas modifiable car il n'est pas fini."
 
-#: Application/src/Application/Controller/EditTripController.php:104
+#: Application/src/Application/Controller/EditTripController.php:113
 msgid ""
 "La data specificata non può essere precedente alla data di inizio della corsa"
 msgstr ""
 "La date spécifiée ne peut être antérieure à la date de début de la course"
 
-#: Application/src/Application/Controller/EditTripController.php:106
+#: Application/src/Application/Controller/EditTripController.php:115
 msgid ""
 "La data specificata non è nel formato corretto. Verifica i dati inseriti."
 msgstr ""
@@ -261,15 +268,15 @@ msgstr "Licence validée avec succès."
 msgid "Si è verificato un errore nella validazione della patente"
 msgstr "S'est produite une erreur dans la validation de la licence"
 
-#: Application/src/Application/Controller/PaymentsController.php:231
+#: Application/src/Application/Controller/PaymentsController.php:225
 msgid "Il cliente non ha un contratto valido con Cartasi"
 msgstr "Le client ne dispose pas d'un contrat valide avec Cartasi"
 
-#: Application/src/Application/Controller/PaymentsController.php:240
+#: Application/src/Application/Controller/PaymentsController.php:234
 msgid "La flotta selezionata non è valida"
 msgstr "La flotte sélectionnée n'est pas valide"
 
-#: Application/src/Application/Controller/PaymentsController.php:254
+#: Application/src/Application/Controller/PaymentsController.php:248
 msgid ""
 "Il tentativo di pagamento non è andato a buon fine. Il cliente è stato "
 "notificato da Cartasi"
@@ -277,7 +284,7 @@ msgstr ""
 "La tentative de paiement était fin sans succès. Le client a été notifié par "
 "Cartasi"
 
-#: Application/src/Application/Controller/PaymentsController.php:269
+#: Application/src/Application/Controller/PaymentsController.php:263
 msgid ""
 "Il tentativo di pagamento è andato a buon fine. Il cliente è stato "
 "notificato da Cartasi"
@@ -285,15 +292,15 @@ msgstr ""
 "Votre tentative de paiement a été couronnée de succès. Le client a été "
 "notifié par Cartasi"
 
-#: Application/src/Application/Controller/PaymentsController.php:274
+#: Application/src/Application/Controller/PaymentsController.php:268
 msgid "C'è stato un errore durante la procedura di pagamento: "
 msgstr "Il y a une erreur pendant le processus de commande :"
 
-#: Application/src/Application/Controller/PaymentsController.php:324
+#: Application/src/Application/Controller/PaymentsController.php:318
 msgid "Tariffa creata con successo!"
 msgstr "Taux créé avec succès!"
 
-#: Application/src/Application/Controller/PaymentsController.php:326
+#: Application/src/Application/Controller/PaymentsController.php:320
 msgid "Tariffa invariata"
 msgstr "Taux inchangé"
 
@@ -472,9 +479,9 @@ msgstr "Code promo"
 #: SharengoCore/src/SharengoCore/Service/CardsService.php:97
 #: SharengoCore/src/SharengoCore/Service/CardsService.php:99
 #: SharengoCore/src/SharengoCore/Service/ReservationsService.php:115
-#: SharengoCore/src/SharengoCore/Service/TripsService.php:176
-#: SharengoCore/src/SharengoCore/Service/TripsService.php:190
-#: SharengoCore/src/SharengoCore/Service/TripsService.php:201
+#: SharengoCore/src/SharengoCore/Service/TripsService.php:155
+#: SharengoCore/src/SharengoCore/Service/TripsService.php:169
+#: SharengoCore/src/SharengoCore/Service/TripsService.php:180
 #: Application/view/application/customers/info-tab.phtml:295
 #: Application/view/application/customers/info-tab.phtml:308
 #: Application/view/application/trips/close-tab.phtml:25
@@ -489,9 +496,9 @@ msgstr "Non"
 #: SharengoCore/src/SharengoCore/Service/CardsService.php:97
 #: SharengoCore/src/SharengoCore/Service/CardsService.php:99
 #: SharengoCore/src/SharengoCore/Service/ReservationsService.php:115
-#: SharengoCore/src/SharengoCore/Service/TripsService.php:176
-#: SharengoCore/src/SharengoCore/Service/TripsService.php:190
-#: SharengoCore/src/SharengoCore/Service/TripsService.php:201
+#: SharengoCore/src/SharengoCore/Service/TripsService.php:155
+#: SharengoCore/src/SharengoCore/Service/TripsService.php:169
+#: SharengoCore/src/SharengoCore/Service/TripsService.php:180
 #: Application/view/application/customers/info-tab.phtml:293
 #: Application/view/application/customers/info-tab.phtml:306
 msgid "Si"
@@ -516,6 +523,42 @@ msgstr "Dans l'entretien"
 #: Application/src/Application/View/Helper/CarStatus.php:31
 msgid "Non operativa"
 msgstr "A l'arrêt"
+
+#: Reports/src/Reports/Controller/ApiController.php:72
+#: Reports/src/Reports/Controller/ApiController.php:116
+#, fuzzy
+msgid "Si è verificato un errore applicativo nel parsing dei dati CSV."
+msgstr "S'est produite une erreur dans la validation de la licence"
+
+#: Reports/src/Reports/Controller/ApiController.php:76
+#: Reports/src/Reports/Controller/ApiController.php:121
+#: Reports/src/Reports/Controller/ApiController.php:179
+#: Reports/src/Reports/Controller/ApiController.php:201
+#: Reports/src/Reports/Controller/ApiController.php:231
+#: Reports/src/Reports/Controller/ApiController.php:274
+#: Reports/src/Reports/Controller/ApiController.php:315
+#: Reports/src/Reports/Controller/ApiController.php:353
+#, fuzzy
+msgid "Si è verificato un errore applicativo."
+msgstr "Il y a un problème"
+
+#: Reports/src/Reports/Controller/ApiController.php:108
+#: Reports/src/Reports/Controller/ApiController.php:265
+#: Reports/src/Reports/Controller/ApiController.php:307
+#: Reports/src/Reports/Controller/ApiController.php:344
+msgid ""
+"Si è verificato un errore applicativo causato dalla mancanza di uno o "
+"pi&ugrave; parametri."
+msgstr ""
+
+#: Reports/src/Reports/Controller/ApiController.php:112
+#: Reports/src/Reports/Controller/ApiController.php:269
+#: Reports/src/Reports/Controller/ApiController.php:311
+#: Reports/src/Reports/Controller/ApiController.php:348
+msgid ""
+"Si è verificato un errore applicativo causato dall'invalidit&agrave; di uno "
+"o pi&ugrave; parametri."
+msgstr ""
 
 #: SharengoCore/src/SharengoCore/Service/CardsService.php:70
 #, php-format
@@ -586,9 +629,9 @@ msgstr "Retour à la liste"
 #: Application/view/application/cars/index.phtml:84
 #: Application/view/application/reservations/index.phtml:35
 #: Application/view/application/reservations/index.phtml:70
-#: Application/view/application/trips-not-payed/list.phtml:32
-#: Application/view/application/trips/index.phtml:39
-#: Application/view/application/trips/index.phtml:93
+#: Application/view/application/trips-not-payed/list.phtml:71
+#: Application/view/application/trips/index.phtml:40
+#: Application/view/application/trips/index.phtml:102
 #: Application/view/application/trips/info-tab.phtml:73
 msgid "Targa"
 msgstr "Plaque d'immatriculation"
@@ -613,8 +656,10 @@ msgstr "Indicatif d'appel"
 #: Application/view/application/cars/index.phtml:32
 #: Application/view/application/cars/index.phtml:86
 #: Application/view/application/payments/extra.phtml:22
-#: Application/view/application/trips/index.phtml:41
-#: Application/view/application/trips/index.phtml:105
+#: Application/view/application/trips-not-payed/list.phtml:31
+#: Application/view/application/trips-not-payed/list.phtml:72
+#: Application/view/application/trips/index.phtml:42
+#: Application/view/application/trips/index.phtml:114
 msgid "Flotta"
 msgstr "Flotte"
 
@@ -703,7 +748,7 @@ msgstr "LISTE DE VOITURE"
 #: Application/view/application/payments/failed-payments.phtml:13
 #: Application/view/application/pois/index.phtml:13
 #: Application/view/application/reservations/index.phtml:17
-#: Application/view/application/trips/index.phtml:16
+#: Application/view/application/trips/index.phtml:17
 msgid "ricerca"
 msgstr "recherche"
 
@@ -715,7 +760,8 @@ msgstr "recherche"
 #: Application/view/application/payments/failed-payments.phtml:29
 #: Application/view/application/pois/index.phtml:29
 #: Application/view/application/reservations/index.phtml:33
-#: Application/view/application/trips/index.phtml:32
+#: Application/view/application/trips-not-payed/list.phtml:27
+#: Application/view/application/trips/index.phtml:33
 #: Application/view/application/zones/zone-alarms.phtml:18
 msgid "Seleziona"
 msgstr "Sélectionnez"
@@ -787,7 +833,8 @@ msgstr "Sale"
 #: Application/view/application/payments/failed-payments.phtml:35
 #: Application/view/application/pois/index.phtml:42
 #: Application/view/application/reservations/index.phtml:40
-#: Application/view/application/trips/index.phtml:45
+#: Application/view/application/trips-not-payed/list.phtml:37
+#: Application/view/application/trips/index.phtml:47
 msgid "Filtra..."
 msgstr "Filtre ..."
 
@@ -799,7 +846,8 @@ msgstr "Filtre ..."
 #: Application/view/application/payments/failed-payments.phtml:38
 #: Application/view/application/pois/index.phtml:46
 #: Application/view/application/reservations/index.phtml:43
-#: Application/view/application/trips/index.phtml:60
+#: Application/view/application/trips-not-payed/list.phtml:41
+#: Application/view/application/trips/index.phtml:67
 msgid "Cerca"
 msgstr "Recherche"
 
@@ -811,7 +859,8 @@ msgstr "Recherche"
 #: Application/view/application/payments/failed-payments.phtml:42
 #: Application/view/application/pois/index.phtml:54
 #: Application/view/application/reservations/index.phtml:47
-#: Application/view/application/trips/index.phtml:64
+#: Application/view/application/trips-not-payed/list.phtml:47
+#: Application/view/application/trips/index.phtml:73
 msgid "Pulisci Ricerca"
 msgstr "Effacer la recherche"
 
@@ -824,7 +873,7 @@ msgid "Identif."
 msgstr "Identif."
 
 #: Application/view/application/cars/index.phtml:87
-#: Application/view/partials/events-table.phtml:19
+#: Application/view/partials/events-table.phtml:20
 msgid "Batteria"
 msgstr "Batterie"
 
@@ -833,7 +882,7 @@ msgid "Ultimo Contatto"
 msgstr "Dernier contact"
 
 #: Application/view/application/cars/index.phtml:89
-#: Application/view/partials/events-table.phtml:20
+#: Application/view/partials/events-table.phtml:21
 msgid "Km"
 msgstr "Km"
 
@@ -843,7 +892,7 @@ msgstr "Nettoyage"
 
 #: Application/view/application/cars/index.phtml:91
 #: Application/view/application/cars/index.phtml:96
-#: Application/view/partials/events-table.phtml:25
+#: Application/view/partials/events-table.phtml:26
 msgid "Posizione"
 msgstr "Emplacement"
 
@@ -863,8 +912,8 @@ msgid "Elenco pagamenti falliti"
 msgstr "Liste de paiements ayant échoué"
 
 #: Application/view/application/customer-failure/failure-tab.phtml:20
-#: Application/view/application/trips-not-payed/list.phtml:29
-#: Application/view/application/trips/index.phtml:87
+#: Application/view/application/trips-not-payed/list.phtml:67
+#: Application/view/application/trips/index.phtml:96
 msgid "Id Corsa"
 msgstr "Id Voyages"
 
@@ -962,7 +1011,8 @@ msgstr "Titre"
 #: Application/view/application/pois/edit.phtml:51
 #: Application/view/application/pois/index.phtml:33
 #: Application/view/application/pois/index.phtml:84
-#: Application/view/application/trips/index.phtml:90
+#: Application/view/application/trips-not-payed/list.phtml:69
+#: Application/view/application/trips/index.phtml:99
 #: Application/view/application/trips/info-tab.phtml:46
 msgid "Nome"
 msgstr "Nom"
@@ -977,7 +1027,9 @@ msgstr "Nom"
 #: Application/view/application/payments/failed-payments.phtml:30
 #: Application/view/application/payments/failed-payments.phtml:66
 #: Application/view/application/payments/retry.phtml:95
-#: Application/view/application/trips/index.phtml:89
+#: Application/view/application/trips-not-payed/list.phtml:28
+#: Application/view/application/trips-not-payed/list.phtml:68
+#: Application/view/application/trips/index.phtml:98
 #: Application/view/application/trips/info-tab.phtml:52
 msgid "Cognome"
 msgstr "Nom de famille"
@@ -1064,7 +1116,7 @@ msgstr "Numéro de TVA (facultatif)"
 #: Application/view/application/customers/list.phtml:35
 #: Application/view/application/customers/list.phtml:76
 #: Application/view/application/payments/failed-payments.phtml:67
-#: Application/view/application/trips/index.phtml:91
+#: Application/view/application/trips/index.phtml:100
 #: Application/view/application/trips/info-tab.phtml:61
 msgid "Cellulare"
 msgstr "Cellulaire"
@@ -1208,6 +1260,7 @@ msgstr "Nombre de minutes"
 
 #: Application/view/application/customers/add-bonus.phtml:39
 #: Application/view/application/customers/bonus-tab.phtml:25
+#: Application/view/partials/events-table.phtml:19
 msgid "Descrizione"
 msgstr "Description"
 
@@ -1472,9 +1525,10 @@ msgid "Elenco card"
 msgstr "Liste de carte"
 
 #: Application/view/application/customers/list-card.phtml:49
-#: Application/view/application/trips-not-payed/list.phtml:31
-#: Application/view/application/trips/index.phtml:38
-#: Application/view/application/trips/index.phtml:92
+#: Application/view/application/trips-not-payed/list.phtml:30
+#: Application/view/application/trips-not-payed/list.phtml:70
+#: Application/view/application/trips/index.phtml:39
+#: Application/view/application/trips/index.phtml:101
 msgid "RFID"
 msgstr "RFID"
 
@@ -1529,10 +1583,12 @@ msgid "Dati corsa"
 msgstr "Les données gérées"
 
 #: Application/view/application/edit-trip/edit-tab.phtml:51
+#: Application/view/application/trips/index.phtml:57
 msgid "Data inizio"
 msgstr "Date de début"
 
 #: Application/view/application/edit-trip/edit-tab.phtml:57
+#: Application/view/application/trips/index.phtml:63
 msgid "Data fine"
 msgstr "Date de fin"
 
@@ -1543,7 +1599,7 @@ msgstr "(pas plus tôt que le début)"
 #: Application/view/application/edit-trip/edit-tab.phtml:63
 #: Application/view/application/trips/close-tab.phtml:21
 #: Application/view/application/trips/cost-tab.phtml:200
-#: Application/view/application/trips/index.phtml:102
+#: Application/view/application/trips/index.phtml:111
 #: Application/view/application/trips/info-tab.phtml:156
 msgid "Pagabile"
 msgstr "Payable"
@@ -1694,13 +1750,12 @@ msgid "Dati csv"
 msgstr "Données csv"
 
 #: Application/view/application/payments-csv/details.phtml:35
-#: Application/view/application/trips/index.phtml:40
+#: Application/view/application/trips/index.phtml:41
 msgid "Numero"
 msgstr "Nombre"
 
 #: Application/view/application/payments-csv/details.phtml:47
 #: Application/view/application/reservations/index.phtml:71
-#: Application/view/application/trips-not-payed/list.phtml:30
 msgid "Cliente"
 msgstr "Client"
 
@@ -1776,7 +1831,8 @@ msgstr "PAIEMENT A ÉCHOUÉ"
 #: Application/view/application/payments/failed-payments.phtml:31
 #: Application/view/application/payments/failed-payments.phtml:69
 #: Application/view/application/payments/retry.phtml:77
-#: Application/view/application/trips/index.phtml:34
+#: Application/view/application/trips-not-payed/list.phtml:32
+#: Application/view/application/trips/index.phtml:35
 msgid "ID Corsa"
 msgstr "ID de course"
 
@@ -1800,9 +1856,9 @@ msgstr "Remise"
 
 #: Application/view/application/payments/failed-payments.phtml:73
 #: Application/view/application/payments/retry.phtml:122
-#: Application/view/application/trips-not-payed/list.phtml:39
+#: Application/view/application/trips-not-payed/list.phtml:79
 #: Application/view/application/trips/details.phtml:33
-#: Application/view/application/trips/index.phtml:104
+#: Application/view/application/trips/index.phtml:113
 #: Application/view/application/zones/prices-tab.phtml:9
 msgid "Costo"
 msgstr "Coût"
@@ -1973,42 +2029,48 @@ msgstr "ID"
 msgid "CORSE NON PAGATE"
 msgstr "COURSE NON RÉMUNÉRÉ"
 
-#: Application/view/application/trips-not-payed/list.phtml:33
-#: Application/view/application/trips/index.phtml:94
+#: Application/view/application/trips-not-payed/list.phtml:29
+#: Application/view/application/trips/index.phtml:36
+msgid "ID Cliente"
+msgstr "Id de client"
+
+#: Application/view/application/trips-not-payed/list.phtml:73
+#: Application/view/application/trips/index.phtml:103
 #: Application/view/application/trips/info-tab.phtml:88
 msgid "Km Inizio"
 msgstr "Km Départ"
 
-#: Application/view/application/trips-not-payed/list.phtml:34
-#: Application/view/application/trips/index.phtml:95
+#: Application/view/application/trips-not-payed/list.phtml:74
+#: Application/view/application/trips/index.phtml:104
 #: Application/view/application/trips/info-tab.phtml:94
 msgid "Km Fine"
 msgstr "Km Fin"
 
-#: Application/view/application/trips-not-payed/list.phtml:35
+#: Application/view/application/trips-not-payed/list.phtml:75
 #: Application/view/application/trips/cost-tab.phtml:45
-#: Application/view/application/trips/index.phtml:96
+#: Application/view/application/trips/index.phtml:105
 #: Application/view/application/trips/info-tab.phtml:103
 #: Application/view/partials/translations.phtml:23
 msgid "Inizio"
 msgstr "Début"
 
-#: Application/view/application/trips-not-payed/list.phtml:36
-#: Application/view/application/trips/index.phtml:97
+#: Application/view/application/trips-not-payed/list.phtml:76
+#: Application/view/application/trips/index.phtml:106
 #: Application/view/application/trips/info-tab.phtml:109
 #: Application/view/partials/translations.phtml:26
 msgid "Fine"
 msgstr "Fin"
 
-#: Application/view/application/trips-not-payed/list.phtml:37
+#: Application/view/application/trips-not-payed/list.phtml:77
 #: Application/view/application/trips/cost-tab.phtml:57
-#: Application/view/application/trips/index.phtml:98
+#: Application/view/application/trips/index.phtml:107
 #: Application/view/application/trips/info-tab.phtml:115
+#: Reports/view/partials/reports_translations.phtml:18
 msgid "Durata"
 msgstr "Durée"
 
-#: Application/view/application/trips-not-payed/list.phtml:38
-#: Application/view/application/trips/index.phtml:99
+#: Application/view/application/trips-not-payed/list.phtml:78
+#: Application/view/application/trips/index.phtml:108
 #: Application/view/application/trips/info-tab.phtml:124
 msgid "Sosta"
 msgstr "Parc"
@@ -2100,7 +2162,7 @@ msgid "SI"
 msgstr "OUI"
 
 #: Application/view/application/trips/cost-tab.phtml:208
-#: Application/view/application/trips/index.phtml:103
+#: Application/view/application/trips/index.phtml:112
 #: Application/view/application/trips/info-tab.phtml:164
 msgid "Pagata"
 msgstr "Payé"
@@ -2117,52 +2179,41 @@ msgstr "Modifier la course"
 msgid "ELENCO CORSE"
 msgstr "LISTE DE COURSE"
 
-#: Application/view/application/trips/index.phtml:33
+#: Application/view/application/trips/index.phtml:34
 msgid "Corse Aperte"
 msgstr "Courses Open"
 
-#: Application/view/application/trips/index.phtml:35
-msgid "ID Cliente"
-msgstr "Id de client"
-
-#: Application/view/application/trips/index.phtml:36
+#: Application/view/application/trips/index.phtml:37
 msgid "Cognome Cliente"
 msgstr "Prénom du client"
 
-#: Application/view/application/trips/index.phtml:37
+#: Application/view/application/trips/index.phtml:38
 msgid "eMail Cliente"
 msgstr "eMail Client"
 
-#: Application/view/application/trips/index.phtml:52
+#: Application/view/application/trips/index.phtml:54
 msgid "da"
 msgstr "à partir de"
 
-#: Application/view/application/trips/index.phtml:53
-msgid "Seleziona data inizio"
-msgstr "Sélectionnez la date de début"
-
-#: Application/view/application/trips/index.phtml:56
+#: Application/view/application/trips/index.phtml:60
+#: Reports/view/reports/index/map.phtml:29
 msgid "a"
 msgstr "à"
 
-#: Application/view/application/trips/index.phtml:57
-msgid "Seleziona data fine"
-msgstr "Sélectionnez la date de fin"
-
-#: Application/view/application/trips/index.phtml:79
+#: Application/view/application/trips/index.phtml:88
 msgid "Elenco Corse"
 msgstr "Liste de courses"
 
-#: Application/view/application/trips/index.phtml:88
+#: Application/view/application/trips/index.phtml:97
 msgid "eMail"
 msgstr "eMail"
 
-#: Application/view/application/trips/index.phtml:100
+#: Application/view/application/trips/index.phtml:109
 #: Application/view/application/trips/info-tab.phtml:130
 msgid "Stato Quadro"
 msgstr "Condition Console"
 
-#: Application/view/application/trips/index.phtml:101
+#: Application/view/application/trips/index.phtml:110
 msgid "In sosta"
 msgstr "dans le parc"
 
@@ -2409,19 +2460,19 @@ msgstr ""
 msgid "Elenco eventi"
 msgstr "Liste d'événements"
 
-#: Application/view/partials/events-table.phtml:21
+#: Application/view/partials/events-table.phtml:22
 msgid "Evento"
 msgstr "Événement"
 
-#: Application/view/partials/events-table.phtml:22
+#: Application/view/partials/events-table.phtml:23
 msgid "Label"
 msgstr "Étiquette"
 
-#: Application/view/partials/events-table.phtml:23
+#: Application/view/partials/events-table.phtml:24
 msgid "Valore"
 msgstr "Valeur"
 
-#: Application/view/partials/events-table.phtml:24
+#: Application/view/partials/events-table.phtml:25
 msgid "Intval"
 msgstr "Inrval"
 
@@ -2663,3 +2714,356 @@ msgstr "Nous avons reçu le message d'erreur est: \""
 #: Cartasi/view/cartasi/cartasi-payments/return-first-payment.phtml:25
 msgid "Contattare l'assistenza per maggiori informazioni"
 msgstr "Contacter le support technique pour plus d'informations"
+
+#: Reports/view/layout/layout.phtml:33
+#, fuzzy
+msgid "Dati Statistici"
+msgstr "Statistiques"
+
+#: Reports/view/layout/layout.phtml:38 Reports/view/reports/index/map.phtml:15
+msgid "Mappa a calore"
+msgstr ""
+
+#: Reports/view/layout/layout.phtml:39
+#: Reports/view/reports/index/routes.phtml:20
+msgid "Itinerari"
+msgstr ""
+
+#: Reports/view/layout/layout.phtml:40
+#: Reports/view/reports/index/live.phtml:15
+msgid "In tempo reale"
+msgstr ""
+
+#: Reports/view/partials/reports_translations.phtml:3
+#, fuzzy
+msgid "Spostati su"
+msgstr "Parc"
+
+#: Reports/view/partials/reports_translations.phtml:6
+#: Reports/view/reports/index/map.phtml:19
+msgid "Passa a Posizione di Arrivo"
+msgstr ""
+
+#: Reports/view/partials/reports_translations.phtml:7
+msgid "Passa a Posizione di Partenza"
+msgstr ""
+
+#: Reports/view/partials/reports_translations.phtml:10
+#, fuzzy
+msgid "Corse per Citt&agrave;"
+msgstr "Courses Open"
+
+#: Reports/view/partials/reports_translations.phtml:11
+msgid "Roma"
+msgstr ""
+
+#: Reports/view/partials/reports_translations.phtml:12
+msgid "Milano"
+msgstr ""
+
+#: Reports/view/partials/reports_translations.phtml:13
+msgid "Firenze"
+msgstr ""
+
+#: Reports/view/partials/reports_translations.phtml:16
+#: Reports/view/reports/index/routes.phtml:31
+#, fuzzy
+msgid "corse precedenti a"
+msgstr "Exceptions antérieures"
+
+#: Reports/view/partials/reports_translations.phtml:17
+msgid "Targa Veicolo"
+msgstr ""
+
+#: Reports/view/partials/reports_translations.phtml:19
+#, fuzzy
+msgid "Numero Punti"
+msgstr "Nombre de minutes"
+
+#: Reports/view/partials/reports_translations.phtml:20
+#, fuzzy
+msgid "Data Inizio Corsa"
+msgstr "Départ de course"
+
+#: Reports/view/partials/reports_translations.phtml:21
+#, fuzzy
+msgid "Data Fine Corsa"
+msgstr "Fin de course"
+
+#: Reports/view/partials/reports_translations.phtml:22
+msgid "Itinerario"
+msgstr ""
+
+#: Reports/view/partials/reports_translations.phtml:23
+msgid "Non sono state trovate corse con i filtri selezionati"
+msgstr ""
+
+#: Reports/view/partials/reports_translations.phtml:24
+#, fuzzy
+msgid "Controlli"
+msgstr "Contrôleur de"
+
+#: Reports/view/partials/reports_translations.phtml:25
+#, fuzzy
+msgid "Ferma"
+msgstr "Confirmation"
+
+#: Reports/view/partials/reports_translations.phtml:26
+#, fuzzy
+msgid "Pausa"
+msgstr "Causalité"
+
+#: Reports/view/partials/reports_translations.phtml:27
+msgid "Avvia"
+msgstr ""
+
+#: Reports/view/partials/reports_translations.phtml:28
+msgid "Velocit&agrave;"
+msgstr ""
+
+#: Reports/view/partials/reports_translations.phtml:29
+#, fuzzy
+msgid "Data Rilevazione Punto"
+msgstr "Activation Date de contrat"
+
+#: Reports/view/partials/reports_translations.phtml:30
+msgid "Blocca Vista su Auto"
+msgstr ""
+
+#: Reports/view/partials/reports_translations.phtml:31
+#, fuzzy
+msgid "Durata Corsa"
+msgstr "Temps de course"
+
+#: Reports/view/partials/reports_translations.phtml:32
+msgid "Apri"
+msgstr ""
+
+#: Reports/view/partials/reports_translations.phtml:35
+msgid "Lunedi"
+msgstr ""
+
+#: Reports/view/partials/reports_translations.phtml:36
+msgid "Martedi"
+msgstr ""
+
+#: Reports/view/partials/reports_translations.phtml:37
+msgid "Mercoledi"
+msgstr ""
+
+#: Reports/view/partials/reports_translations.phtml:38
+msgid "Giovedi"
+msgstr ""
+
+#: Reports/view/partials/reports_translations.phtml:39
+msgid "Venerdi"
+msgstr ""
+
+#: Reports/view/partials/reports_translations.phtml:40
+msgid "Sabato"
+msgstr ""
+
+#: Reports/view/partials/reports_translations.phtml:41
+msgid "Domenica"
+msgstr ""
+
+#: Reports/view/partials/reports_translations.phtml:42
+#: Reports/view/reports/index/trips.phtml:115
+#: Reports/view/reports/index/tripscity.phtml:92
+msgid "oltre"
+msgstr ""
+
+#: Reports/view/partials/reports_translations.phtml:43
+msgid "Uomini"
+msgstr ""
+
+#: Reports/view/partials/reports_translations.phtml:44
+msgid "Donne"
+msgstr ""
+
+#: Reports/view/partials/reports_translations.phtml:45
+msgid "Area"
+msgstr ""
+
+#: Reports/view/partials/reports_translations.phtml:46
+#, fuzzy
+msgid "Concentrazione"
+msgstr "Configuration"
+
+#: Reports/view/partials/reports_translations.phtml:47
+#, fuzzy
+msgid "selezionate di"
+msgstr "Sélectionnez"
+
+#: Reports/view/partials/reports_translations.phtml:48
+#, fuzzy
+msgid "corse"
+msgstr "Courses"
+
+#: Reports/view/partials/reports_translations.phtml:49
+msgid "Azzera tutti i filtri"
+msgstr ""
+
+#: Reports/view/partials/reports_translations.phtml:50
+msgid "Tutte le"
+msgstr ""
+
+#: Reports/view/partials/reports_translations.phtml:51
+msgid ""
+"corse sono selezionate. Clicca su uno dei grafici per applicarne dei filtri."
+msgstr ""
+
+#: Reports/view/reports/index/live.phtml:20
+#: Reports/view/reports/index/routes.phtml:44
+#, fuzzy
+msgid "Aggiorna i dati"
+msgstr "Mise à jour d'état de voiture"
+
+#: Reports/view/reports/index/live.phtml:24
+msgid "Nascondi auto ferme"
+msgstr ""
+
+#: Reports/view/reports/index/live.phtml:30
+#: Reports/view/reports/index/map.phtml:36
+#, fuzzy
+msgid "Totali"
+msgstr "Somme"
+
+#: Reports/view/reports/index/map.phtml:24
+msgid "Intervallo di tempo"
+msgstr ""
+
+#: Reports/view/reports/index/routes.phtml:26
+msgid "Verranno caricate"
+msgstr ""
+
+#: Reports/view/reports/index/routes.phtml:31
+#, fuzzy
+msgid "le"
+msgstr "Fichier"
+
+#: Reports/view/reports/index/routes.phtml:49
+#, fuzzy
+msgid "Inseguimento"
+msgstr "Date d'ajout"
+
+#: Reports/view/reports/index/routes.phtml:56
+msgid "Manutentori"
+msgstr ""
+
+#: Reports/view/reports/index/trips.phtml:15
+#: Reports/view/reports/index/tripscity.phtml:17
+#, fuzzy
+msgid "Riepilogo Corse"
+msgstr "Synthèse mensuelle"
+
+#: Reports/view/reports/index/trips.phtml:31
+#: Reports/view/reports/index/trips.phtml:141
+#: Reports/view/reports/index/tripscity.phtml:28
+#: Reports/view/reports/index/tripscity.phtml:144
+msgid "Range dati (Ultimi 28 giorni)"
+msgstr ""
+
+#: Reports/view/reports/index/trips.phtml:35
+#: Reports/view/reports/index/trips.phtml:50
+#: Reports/view/reports/index/trips.phtml:65
+#: Reports/view/reports/index/trips.phtml:80
+#: Reports/view/reports/index/trips.phtml:93
+#: Reports/view/reports/index/trips.phtml:108
+#: Reports/view/reports/index/trips.phtml:127
+#: Reports/view/reports/index/tripscity.phtml:31
+#: Reports/view/reports/index/tripscity.phtml:44
+#: Reports/view/reports/index/tripscity.phtml:57
+#: Reports/view/reports/index/tripscity.phtml:70
+#: Reports/view/reports/index/tripscity.phtml:104
+msgid "filtro"
+msgstr ""
+
+#: Reports/view/reports/index/trips.phtml:36
+#: Reports/view/reports/index/trips.phtml:51
+#: Reports/view/reports/index/trips.phtml:66
+#: Reports/view/reports/index/trips.phtml:81
+#: Reports/view/reports/index/trips.phtml:94
+#: Reports/view/reports/index/trips.phtml:109
+#: Reports/view/reports/index/trips.phtml:128
+#: Reports/view/reports/index/tripscity.phtml:32
+#: Reports/view/reports/index/tripscity.phtml:45
+#: Reports/view/reports/index/tripscity.phtml:58
+#: Reports/view/reports/index/tripscity.phtml:71
+#: Reports/view/reports/index/tripscity.phtml:86
+#: Reports/view/reports/index/tripscity.phtml:105
+#: Reports/view/reports/index/tripscity.phtml:120
+#: Reports/view/reports/index/tripscity.phtml:133
+msgid "Azzera"
+msgstr ""
+
+#: Reports/view/reports/index/trips.phtml:46
+#: Reports/view/reports/index/trips.phtml:142
+#: Reports/view/reports/index/tripscity.phtml:40
+#: Reports/view/reports/index/tripscity.phtml:145
+#, fuzzy
+msgid "Giorno della settimana"
+msgstr "Résumé hebdomadaire"
+
+#: Reports/view/reports/index/trips.phtml:61
+#: Reports/view/reports/index/trips.phtml:143
+msgid "Citt&agrave;"
+msgstr ""
+
+#: Reports/view/reports/index/trips.phtml:76
+#: Reports/view/reports/index/trips.phtml:144
+#: Reports/view/reports/index/tripscity.phtml:53
+#: Reports/view/reports/index/tripscity.phtml:146
+#, fuzzy
+msgid "Durata (minuti)"
+msgstr "Nombre de minutes"
+
+#: Reports/view/reports/index/trips.phtml:89
+#: Reports/view/reports/index/trips.phtml:145
+#: Reports/view/reports/index/tripscity.phtml:66
+#: Reports/view/reports/index/tripscity.phtml:147
+#, fuzzy
+msgid "Orario inizio corsa"
+msgstr "Départ de course"
+
+#: Reports/view/reports/index/trips.phtml:104
+#: Reports/view/reports/index/trips.phtml:146
+#: Reports/view/reports/index/tripscity.phtml:81
+#: Reports/view/reports/index/tripscity.phtml:148
+msgid "Classe di et&agrave;"
+msgstr ""
+
+#: Reports/view/reports/index/trips.phtml:123
+#: Reports/view/reports/index/trips.phtml:147
+#: Reports/view/reports/index/tripscity.phtml:100
+#: Reports/view/reports/index/tripscity.phtml:149
+msgid "Sesso"
+msgstr ""
+
+#: Reports/view/reports/index/tripscity.phtml:85
+msgid "classe"
+msgstr ""
+
+#: Reports/view/reports/index/tripscity.phtml:115
+msgid "Mappa Distretti"
+msgstr ""
+
+#: Reports/view/reports/index/tripscity.phtml:119
+#: Reports/view/reports/index/tripscity.phtml:132
+#, fuzzy
+msgid "selezionati"
+msgstr "Sélectionnez"
+
+#: Reports/view/reports/index/tripscity.phtml:128
+msgid "Lista Distretti"
+msgstr ""
+
+#: Reports/view/reports/index/tripscity.phtml:150
+msgid "Distretti"
+msgstr ""
+
+#~ msgid "Seleziona data inizio"
+#~ msgstr "Sélectionnez la date de début"
+
+#~ msgid "Seleziona data fine"
+#~ msgstr "Sélectionnez la date de fin"

@@ -242,11 +242,11 @@ $.oe.fn.getCharts = function () {
                     })
                     .ordering(function () {
                         return [
-                            translate("Lunedi\u0300"),
-                            translate("Martedi\u0300"),
-                            translate("Mercoledi\u0300"),
-                            translate("Giovedi\u0300"),
-                            translate("Venerdi\u0300"),
+                            translate("Lunedi") + "\u0300",
+                            translate("Martedi") + "\u0300",
+                            translate("Mercoledi") + "\u0300",
+                            translate("Giovedi") + "\u0300",
+                            translate("Venerdi") + "\u0300",
                             translate("Sabato"),
                             translate("Domenica")
                         ];

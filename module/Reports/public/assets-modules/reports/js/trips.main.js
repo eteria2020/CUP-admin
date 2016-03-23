@@ -86,11 +86,11 @@ $.oe.fn.getCharts = function () {
                 dayOfWeek = $.oe.trips.dimension(function (d) {
                     var name = [
                         "",
-                        "0." + translate("Lunedi\u0300"),
-                        "1." + translate("Martedi\u0300"),
-                        "2." + translate("Mercoledi\u0300"),
-                        "3." + translate("Giovedi\u0300"),
-                        "4." + translate("Venerdi\u0300"),
+                        "0." + translate("Lunedi") + "\u0300",
+                        "1." + translate("Martedi") + "\u0300",
+                        "2." + translate("Mercoledi") + "\u0300",
+                        "3." + translate("Giovedi") + "\u0300",
+                        "4." + translate("Venerdi") + "\u0300",
                         "5." + translate("Sabato"),
                         "6." + translate("Domenica")
                     ];
@@ -239,11 +239,11 @@ $.oe.fn.getCharts = function () {
                 })
                 .ordering(function () {
                     return [
-                        translate("Lunedi\u0300"),
-                        translate("Martedi\u0300"),
-                        translate("Mercoledi\u0300"),
-                        translate("Giovedi\u0300"),
-                        translate("Venerdi\u0300"),
+                        translate("Lunedi") + "\u0300",
+                        translate("Martedi") + "\u0300",
+                        translate("Mercoledi") + "\u0300",
+                        translate("Giovedi") + "\u0300",
+                        translate("Venerdi") + "\u0300",
                         translate("Sabato"),
                         translate("Domenica")
                     ];
