@@ -193,12 +193,15 @@ $transactionAmount = null;
                     endif; ?>
 
                     <?php
+                    /*
+                    this is commented because at the moment it can not work due to the way the order of the operation
+                    is handled. Once those things are modified, we can uncomment this
+
                     if (!is_null($this->transactionType)): ?>
                         <div class="row">
                             <div class="col-lg-12">
                                 <h3><?= $this->translate("Altre azioni"); ?></h3>
                                 <?php
-                                /* @var SharengoCore\Entity\SubscriptionPayment this->transactionType */
                                 if ($this->transactionType instanceof SharengoCore\Entity\SubscriptionPayment) : ?>
                                     <div class="col-lg-4">
                                         <div class="form-group">
@@ -222,7 +225,6 @@ $transactionAmount = null;
                                     <?php
                                 endif; ?>
                                 <?php
-                                /* @var SharengoCore\Entity\TripPayments this->transactionType */
                                 if ($this->transactionType instanceof SharengoCore\Entity\TripPayments) : ?>
                                     <div class="col-lg-4">
                                         <div class="form-group">
@@ -265,7 +267,7 @@ $transactionAmount = null;
                                     <?php
                                 endif; ?>
 
-                                <?php /* @var SharengoCore\Entity\BonusPackagePayment this->transactionType */
+                                <?php
                                 if ($this->transactionType instanceof SharengoCore\Entity\BonusPackagePayment) : ?>
                                     <div class="col-lg-4">
                                         <div class="form-group">
@@ -321,7 +323,7 @@ $transactionAmount = null;
                             </div>
                         </div>
                         <?php
-                    endif; ?>
+                    endif;*/ ?>
                     <!-- END solutions container -->
 
                     <!-- BEGIN note container -->
