@@ -10,6 +10,7 @@ use Cartasi\Service\CartasiContractsService;
 use SharengoCore\Exception\CartasiCsvAnomalyAlreadyResolvedException;
 use SharengoCore\Service\CartasiCsvAnalyzeService;
 use SharengoCore\Entity\CartasiCsvAnomaly;
+use Cartasi\Service\CartasiTransactionsService;
 
 use Zend\Http\Response;
 use Zend\Mvc\Controller\AbstractActionController;
@@ -29,6 +30,11 @@ class PaymentsCsvController extends AbstractActionController
     private $contractsService;
 
     /**
+     * @var CartasiTransactionsService
+     */
+    private $transactionsService;
+
+    /**
      * @var CsvUploadForm
      */
     private $form;
@@ -41,10 +47,12 @@ class PaymentsCsvController extends AbstractActionController
     public function __construct(
         CartasiCsvAnalyzeService $cartasiCsvAnalyzeService,
         CartasiContractsService $contractsService,
+        CartasiTransactionsService $transactionsService,
         CsvUploadForm $form
     ) {
         $this->cartasiCsvAnalyzeService = $cartasiCsvAnalyzeService;
         $this->contractsService = $contractsService;
+        $this->transactionsService = $transactionsService;
         $this->form = $form;
     }
 
@@ -80,7 +88,7 @@ class PaymentsCsvController extends AbstractActionController
         $id = (int) $this->params()->fromRoute('id', 0);
         $csvAnomaly = $this->cartasiCsvAnalyzeService->getAnomalyById($id);
         $transaction = $csvAnomaly->getTransaction();
-        $transactionType = $this->cartasiCsvAnalyzeService->getTransactionTypeEntity($transaction);
+        $transactionType = $this->transactionsService->getPaymentTypeFromTransaction($transaction);
 
         if (!$csvAnomaly instanceof CartasiCsvAnomaly) {
             $this->response->setStatusCode(Response::STATUS_CODE_404);
