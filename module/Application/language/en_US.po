@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Sharengo\n"
-"POT-Creation-Date: 2016-03-22 11:10+0100\n"
-"PO-Revision-Date: 2016-03-22 11:10+0100\n"
+"POT-Creation-Date: 2016-03-23 11:05+0100\n"
+"PO-Revision-Date: 2016-03-23 11:05+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: en\n"
@@ -16,118 +16,118 @@ msgstr ""
 "X-Poedit-SourceCharset: UTF-8\n"
 "X-Poedit-SearchPath-0: .\n"
 
-#: Application/config/module.config.php:1291
+#: Application/config/module.config.php:1333
 #: Reports/view/reports/index/routes.phtml:56
 msgid "Clienti"
 msgstr "Customers"
 
-#: Application/config/module.config.php:1298
-#: Application/config/module.config.php:1334
-#: Application/config/module.config.php:1360
-#: Application/config/module.config.php:1384
-#: Application/config/module.config.php:1398
+#: Application/config/module.config.php:1340
+#: Application/config/module.config.php:1376
+#: Application/config/module.config.php:1402
+#: Application/config/module.config.php:1426
+#: Application/config/module.config.php:1440
 #: Application/view/application/trips-not-payed/list.phtml:59
 msgid "Elenco"
 msgstr "List"
 
-#: Application/config/module.config.php:1303
+#: Application/config/module.config.php:1345
 #: Application/view/application/customers/edit.phtml:38
 #: Application/view/application/customers/list.phtml:77
 #: Application/view/application/reservations/index.phtml:72
 msgid "Card"
 msgstr "Card"
 
-#: Application/config/module.config.php:1308
+#: Application/config/module.config.php:1350
 msgid "Patenti estere"
 msgstr "Foreign driving licenses"
 
-#: Application/config/module.config.php:1327
+#: Application/config/module.config.php:1369
 msgid "Auto"
 msgstr "Car"
 
-#: Application/config/module.config.php:1353
+#: Application/config/module.config.php:1395
 #: Application/view/partials/translations.phtml:57
 #: Reports/view/layout/layout.phtml:37
 #: Reports/view/reports/index/routes.phtml:69
 msgid "Corse"
 msgstr "Trips"
 
-#: Application/config/module.config.php:1365
+#: Application/config/module.config.php:1407
 msgid "Costo corsa"
 msgstr "Trip cost"
 
-#: Application/config/module.config.php:1370
+#: Application/config/module.config.php:1412
 msgid "Corse non pagate"
 msgstr "Unpaid trips"
 
-#: Application/config/module.config.php:1377
+#: Application/config/module.config.php:1419
 msgid "Prenotazioni"
 msgstr "Reservations"
 
-#: Application/config/module.config.php:1391
+#: Application/config/module.config.php:1433
 #: Application/view/application/customers/edit.phtml:39
 msgid "Fatture"
 msgstr "Invoices"
 
-#: Application/config/module.config.php:1405
+#: Application/config/module.config.php:1447
 msgid "Pagamenti"
 msgstr "Payments"
 
-#: Application/config/module.config.php:1412
+#: Application/config/module.config.php:1454
 #: Application/view/application/customers/edit.phtml:42
 msgid "Pagamenti falliti"
 msgstr "Failed payments"
 
-#: Application/config/module.config.php:1417
+#: Application/config/module.config.php:1459
 msgid "Addebita penale/extra"
 msgstr "Charge fee/extra"
 
-#: Application/config/module.config.php:1422
+#: Application/config/module.config.php:1464
 msgid "Competenze"
 msgstr "Incomes"
 
-#: Application/config/module.config.php:1427
+#: Application/config/module.config.php:1469
 #: Application/view/application/payments-csv/csv.phtml:15
 msgid "Verifica CartaSI"
 msgstr "Verify CartaSI"
 
-#: Application/config/module.config.php:1434
+#: Application/config/module.config.php:1476
 msgid "Configurazione"
 msgstr "Configuration"
 
-#: Application/config/module.config.php:1441
+#: Application/config/module.config.php:1483
 msgid "Gestione soglie allarme"
 msgstr "Alarm thresholds management"
 
-#: Application/config/module.config.php:1446
+#: Application/config/module.config.php:1488
 msgid "Gestione POIS"
 msgstr "POIS Management"
 
-#: Application/config/module.config.php:1451
+#: Application/config/module.config.php:1493
 msgid "Tariffe"
 msgstr "Rates"
 
-#: Application/config/module.config.php:1458
+#: Application/config/module.config.php:1500
 msgid "Aree"
 msgstr "Areas"
 
-#: Application/config/module.config.php:1465
+#: Application/config/module.config.php:1507
 msgid "Gestione aree"
 msgstr "Manage areas"
 
-#: Application/config/module.config.php:1470
+#: Application/config/module.config.php:1512
 msgid "Aree d'allarme"
 msgstr "Alarm areas"
 
-#: Application/config/module.config.php:1477
+#: Application/config/module.config.php:1519
 msgid "Statistiche"
 msgstr "Stats"
 
-#: Application/config/module.config.php:1484
+#: Application/config/module.config.php:1526
 msgid "Call center"
 msgstr "Call center"
 
-#: Application/config/module.config.php:1491
+#: Application/config/module.config.php:1533
 msgid "Mappa Allarmi"
 msgstr "Alarm map"
 
@@ -515,6 +515,42 @@ msgstr "Maintenence"
 msgid "Non operativa"
 msgstr "Not operative"
 
+#: Reports/src/Reports/Controller/ApiController.php:72
+#: Reports/src/Reports/Controller/ApiController.php:116
+#, fuzzy
+msgid "Si è verificato un errore applicativo nel parsing dei dati CSV."
+msgstr "An error occurred while validating the driving license"
+
+#: Reports/src/Reports/Controller/ApiController.php:76
+#: Reports/src/Reports/Controller/ApiController.php:121
+#: Reports/src/Reports/Controller/ApiController.php:179
+#: Reports/src/Reports/Controller/ApiController.php:201
+#: Reports/src/Reports/Controller/ApiController.php:231
+#: Reports/src/Reports/Controller/ApiController.php:274
+#: Reports/src/Reports/Controller/ApiController.php:315
+#: Reports/src/Reports/Controller/ApiController.php:353
+#, fuzzy
+msgid "Si è verificato un errore applicativo."
+msgstr "An error occurred"
+
+#: Reports/src/Reports/Controller/ApiController.php:108
+#: Reports/src/Reports/Controller/ApiController.php:265
+#: Reports/src/Reports/Controller/ApiController.php:307
+#: Reports/src/Reports/Controller/ApiController.php:344
+msgid ""
+"Si è verificato un errore applicativo causato dalla mancanza di uno o "
+"pi&ugrave; parametri."
+msgstr ""
+
+#: Reports/src/Reports/Controller/ApiController.php:112
+#: Reports/src/Reports/Controller/ApiController.php:269
+#: Reports/src/Reports/Controller/ApiController.php:311
+#: Reports/src/Reports/Controller/ApiController.php:348
+msgid ""
+"Si è verificato un errore applicativo causato dall'invalidit&agrave; di uno "
+"o pi&ugrave; parametri."
+msgstr ""
+
 #: SharengoCore/src/SharengoCore/Service/CardsService.php:70
 #, php-format
 msgid "Rfid: %s - Codice: %s"
@@ -544,20 +580,20 @@ msgstr "Completed"
 msgid "Non Completata"
 msgstr "Not completed"
 
-#: SharengoCore/src/SharengoCore/Service/CustomersService.php:374
-#: SharengoCore/src/SharengoCore/Service/CustomersService.php:396
+#: SharengoCore/src/SharengoCore/Service/CustomersService.php:375
+#: SharengoCore/src/SharengoCore/Service/CustomersService.php:383
 msgid "Codice promo non valido."
 msgstr "Invalid promo code"
 
-#: SharengoCore/src/SharengoCore/Service/CustomersService.php:378
+#: SharengoCore/src/SharengoCore/Service/CustomersService.php:379
 msgid "Codice promo già associato a questo account."
 msgstr "Promo code already associated to this account"
 
-#: SharengoCore/src/SharengoCore/Service/CustomersService.php:473
+#: SharengoCore/src/SharengoCore/Service/CustomersService.php:460
 msgid "SHARENGO - NOTIFICA DI DISABILITAZIONE"
 msgstr "SHARENGO - USER DISABLED NOTIFICATION"
 
-#: SharengoCore/src/SharengoCore/Service/CustomersService.php:532
+#: SharengoCore/src/SharengoCore/Service/CustomersService.php:519
 msgid "SHARENGO - RIABILITAZIONE UTENTE"
 msgstr "SHARENGO - ENABLE USER"
 
@@ -2788,23 +2824,23 @@ msgid "Apri"
 msgstr ""
 
 #: Reports/view/partials/reports_translations.phtml:35
-msgid "Lunedi\\u0300"
+msgid "Lunedi"
 msgstr ""
 
 #: Reports/view/partials/reports_translations.phtml:36
-msgid "Martedi\\u0300"
+msgid "Martedi"
 msgstr ""
 
 #: Reports/view/partials/reports_translations.phtml:37
-msgid "Mercoledi\\u0300"
+msgid "Mercoledi"
 msgstr ""
 
 #: Reports/view/partials/reports_translations.phtml:38
-msgid "Giovedi\\u0300"
+msgid "Giovedi"
 msgstr ""
 
 #: Reports/view/partials/reports_translations.phtml:39
-msgid "Venerdi\\u0300"
+msgid "Venerdi"
 msgstr ""
 
 #: Reports/view/partials/reports_translations.phtml:40

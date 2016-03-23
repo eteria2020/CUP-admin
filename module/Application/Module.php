@@ -69,6 +69,62 @@ class Module
             'fr_FR'
         );
 
+        $translator->addTranslationFile(
+            'phpArray',
+            'vendor/zendframework/zendframework/resources/languages/de/Zend_Validate.php',
+            'default',
+            'de_DE'
+        );
+
+        $translator->addTranslationFile(
+            'phpArray',
+            'vendor/zendframework/zendframework/resources/languages/es/Zend_Validate.php',
+            'default',
+            'es_ES'
+        );
+
+        $translator->addTranslationFile(
+            'phpArray',
+            'vendor/zendframework/zendframework/resources/languages/hu/Zend_Validate.php',
+            'default',
+            'hu_HU'
+        );
+
+        $translator->addTranslationFile(
+            'phpArray',
+            'vendor/zendframework/zendframework/resources/languages/pl/Zend_Validate.php',
+            'default',
+            'pl_PL'
+        );
+
+        $translator->addTranslationFile(
+            'phpArray',
+            'vendor/zendframework/zendframework/resources/languages/pt_BR/Zend_Validate.php',
+            'default',
+            'pt_PT'
+        );
+
+        $translator->addTranslationFile(
+            'phpArray',
+            'vendor/zendframework/zendframework/resources/languages/ru/Zend_Validate.php',
+            'default',
+            'ru_RU'
+        );
+
+        $translator->addTranslationFile(
+            'phpArray',
+            'vendor/zendframework/zendframework/resources/languages/tr/Zend_Validate.php',
+            'default',
+            'tr_TR'
+        );
+
+        $translator->addTranslationFile(
+            'phpArray',
+            'vendor/zendframework/zendframework/resources/languages/zh/Zend_Validate.php',
+            'default',
+            'zh_CN'
+        );
+
         AbstractValidator::setDefaultTranslator($translator);
 
         // Add ACL information to Navigation view helper

@@ -1,0 +1,359 @@
+msgid ""
+msgstr ""
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Project-Id-Version: \n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"X-Generator: Poedit 1.6.10\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Language: es_ES\n"
+
+#: module/Alarms/view/alarms/index/index.phtml:338
+#: module/CallCenter/view/call-center/index/index.phtml:500
+msgid "+24hh"
+msgstr ""
+
+#: module/Alarms/public/assets-modules/alarms/js/controllers/main.js:228
+#: module/Alarms/view/alarms/index/index.phtml:339
+msgid "3G"
+msgstr ""
+
+#: module/Alarms/view/alarms/index/index.phtml:190
+#: module/CallCenter/view/call-center/index/index.phtml:246
+msgid "Abilitato"
+msgstr ""
+
+#: module/Alarms/view/alarms/index/index.phtml:69
+msgid "Address"
+msgstr ""
+
+#: module/Alarms/view/alarms/index/index.phtml:112
+#: module/CallCenter/view/call-center/index/index.phtml:37
+msgid "Aggiorna"
+msgstr ""
+
+#: module/Alarms/public/assets-modules/alarms/js/controllers/main.js:698
+#: module/CallCenter/public/assets-modules/call-center/js/controllers/main.js:548
+msgid "Annulla"
+msgstr ""
+
+#: module/CallCenter/view/call-center/index/index.phtml:56
+msgid "Auto"
+msgstr ""
+
+#: module/Alarms/public/assets-modules/alarms/js/controllers/main.js:684
+#: module/CallCenter/public/assets-modules/call-center/js/controllers/main.js:534
+msgid "Auto scelta"
+msgstr ""
+
+#: module/Alarms/public/assets-modules/alarms/js/controllers/main.js:695
+#: module/CallCenter/public/assets-modules/call-center/js/controllers/main.js:545
+msgid "Autonomia"
+msgstr ""
+
+#: module/Alarms/public/assets-modules/alarms/js/controllers/main.js:695
+#: module/CallCenter/public/assets-modules/call-center/js/controllers/main.js:545
+msgid "batteria"
+msgstr ""
+
+#: module/Alarms/view/alarms/index/index.phtml:250
+#: module/CallCenter/view/call-center/index/index.phtml:323
+msgid "Batteria"
+msgstr ""
+
+#: module/Alarms/view/alarms/index/index.phtml:131
+#: module/CallCenter/view/call-center/index/index.phtml:187
+msgid "C.F."
+msgstr ""
+
+#: module/Alarms/view/alarms/index/index.phtml:21
+#: module/CallCenter/view/call-center/index/index.phtml:21
+msgid "Caricamento mappa in corso..."
+msgstr ""
+
+#: module/Alarms/view/alarms/index/index.phtml:181
+#: module/Alarms/view/alarms/index/index.phtml:304
+#: module/CallCenter/view/call-center/index/index.phtml:117
+#: module/CallCenter/view/call-center/index/index.phtml:237
+#: module/CallCenter/view/call-center/index/index.phtml:413
+msgid "Cellulare"
+msgstr ""
+
+#: module/Alarms/view/alarms/index/index.phtml:91
+#: module/CallCenter/view/call-center/index/index.phtml:126
+#: module/CallCenter/view/call-center/index/index.phtml:168
+msgid "Cerca"
+msgstr ""
+
+#: module/Alarms/public/assets-modules/alarms/js/controllers/main.js:699
+#: module/CallCenter/public/assets-modules/call-center/js/controllers/main.js:549
+msgid "Chiudi"
+msgstr ""
+
+#: module/Alarms/view/alarms/index/index.phtml:82
+#: module/CallCenter/view/call-center/index/index.phtml:159
+msgid "Città"
+msgstr ""
+
+#: module/Alarms/view/alarms/index/index.phtml:74
+#: module/CallCenter/view/call-center/index/index.phtml:151
+msgid "Civico"
+msgstr ""
+
+#: module/Alarms/view/alarms/index/index.phtml:284
+#: module/CallCenter/view/call-center/index/index.phtml:393
+#: module/CallCenter/view/call-center/index/index.phtml:94
+msgid "Cliente"
+msgstr ""
+
+#: module/Alarms/view/alarms/index/index.phtml:129
+#: module/Alarms/view/alarms/index/index.phtml:172
+#: module/CallCenter/view/call-center/index/index.phtml:112
+#: module/CallCenter/view/call-center/index/index.phtml:185
+#: module/CallCenter/view/call-center/index/index.phtml:228
+msgid "Cognome"
+msgstr ""
+
+#: module/Alarms/public/assets-modules/alarms/js/controllers/main.js:698
+#: module/CallCenter/public/assets-modules/call-center/js/controllers/main.js:548
+msgid "Conferma"
+msgstr ""
+
+#: module/Alarms/view/alarms/index/index.phtml:215
+#: module/CallCenter/view/call-center/index/index.phtml:288
+msgid "Dati auto"
+msgstr ""
+
+#: module/Alarms/view/alarms/index/index.phtml:160
+#: module/CallCenter/view/call-center/index/index.phtml:216
+msgid "Dati cliente"
+msgstr ""
+
+#: module/Alarms/view/alarms/index/index.phtml:260
+#: module/CallCenter/view/call-center/index/index.phtml:369
+msgid "Dati ultima corsa chiusa"
+msgstr ""
+
+#: module/Alarms/public/assets-modules/alarms/js/controllers/main.js:694
+#: module/CallCenter/public/assets-modules/call-center/js/controllers/main.js:544
+msgid "Dove si trova"
+msgstr ""
+
+#: module/Alarms/view/alarms/index/index.phtml:115
+#: module/CallCenter/view/call-center/index/index.phtml:40
+msgid "Esci"
+msgstr ""
+
+#: module/Alarms/view/alarms/index/index.phtml:314
+#: module/CallCenter/view/call-center/index/index.phtml:423
+msgid "Eventi"
+msgstr ""
+
+#: module/Alarms/view/alarms/index/index.phtml:207
+#: module/CallCenter/view/call-center/index/index.phtml:280
+msgid "Fine"
+msgstr ""
+
+#: module/Alarms/view/alarms/index/index.phtml:274
+#: module/CallCenter/view/call-center/index/index.phtml:383
+msgid "Fine corsa"
+msgstr ""
+
+#: module/Alarms/public/assets-modules/alarms/js/controllers/main.js:148
+#: module/CallCenter/public/assets-modules/call-center/js/controllers/main.js:105
+msgid "Geocode was not successful for the following reason:"
+msgstr ""
+
+#: module/Alarms/public/assets-modules/alarms/js/controllers/main.js:233
+#: module/Alarms/view/alarms/index/index.phtml:341
+msgid "GPS"
+msgstr ""
+
+#: module/Alarms/view/alarms/index/index.phtml:342
+msgid "In Carica"
+msgstr ""
+
+#: module/Alarms/view/alarms/index/index.phtml:337
+#: module/CallCenter/view/call-center/index/index.phtml:498
+msgid "IN MANUTENZIONE"
+msgstr ""
+
+#: module/Alarms/view/alarms/index/index.phtml:336
+#: module/CallCenter/view/call-center/index/index.phtml:496
+msgid "IN USO"
+msgstr ""
+
+#: module/Alarms/view/alarms/index/index.phtml:64
+#: module/CallCenter/view/call-center/index/index.phtml:141
+#: module/CallCenter/view/call-center/index/index.phtml:146
+msgid "Indirizzo"
+msgstr ""
+
+#: module/Alarms/view/alarms/index/index.phtml:207
+#: module/CallCenter/view/call-center/index/index.phtml:280
+msgid "Inizio"
+msgstr ""
+
+#: module/Alarms/view/alarms/index/index.phtml:264
+#: module/CallCenter/view/call-center/index/index.phtml:373
+msgid "Inizio corsa"
+msgstr ""
+
+#: module/Alarms/view/alarms/index/index.phtml:206
+#: module/CallCenter/view/call-center/index/index.phtml:279
+msgid "Inizio:"
+msgstr ""
+
+#: module/Alarms/view/alarms/index/index.phtml:242
+#: module/CallCenter/view/call-center/index/index.phtml:315
+msgid "Lat: {{car.latitude}}"
+msgstr ""
+
+#: module/Alarms/view/alarms/index/index.phtml:334
+#: module/CallCenter/view/call-center/index/index.phtml:495
+msgid "LIBERE"
+msgstr ""
+
+#: module/Alarms/view/alarms/index/index.phtml:243
+#: module/CallCenter/view/call-center/index/index.phtml:316
+msgid "Lon: {{car.longitude}}"
+msgstr ""
+
+#: module/Alarms/view/alarms/index/index.phtml:339
+msgid "N.O. 3G"
+msgstr ""
+
+#: module/Alarms/view/alarms/index/index.phtml:340
+msgid "N.O. Batt"
+msgstr ""
+
+#: module/Alarms/view/alarms/index/index.phtml:341
+msgid "N.O. GPS"
+msgstr ""
+
+#: module/CallCenter/view/call-center/index/index.phtml:104
+msgid "N° Card"
+msgstr ""
+
+#: module/Alarms/view/alarms/index/index.phtml:228
+#: module/CallCenter/view/call-center/index/index.phtml:301
+msgid "N° Unità"
+msgstr ""
+
+#: module/Alarms/view/alarms/index/index.phtml:44
+#: module/CallCenter/view/call-center/index/index.phtml:74
+msgid "N°.Unità"
+msgstr ""
+
+#: module/CallCenter/view/call-center/index/index.phtml:134
+msgid "Nessun risultato trovato, riprova"
+msgstr ""
+
+#: module/Alarms/view/alarms/index/index.phtml:58
+#: module/CallCenter/view/call-center/index/index.phtml:88
+msgid "Nessun risultato trovato, riprova con {{noResult}}"
+msgstr ""
+
+#: module/Alarms/view/alarms/index/index.phtml:128
+#: module/Alarms/view/alarms/index/index.phtml:163
+#: module/CallCenter/view/call-center/index/index.phtml:184
+#: module/CallCenter/view/call-center/index/index.phtml:219
+#: module/CallCenter/view/call-center/index/index.phtml:99
+msgid "Nome"
+msgstr ""
+
+#: module/CallCenter/view/call-center/index/index.phtml:499
+msgid "NON OPERATIVE"
+msgstr ""
+
+#: module/Alarms/view/alarms/index/index.phtml:326
+#: module/CallCenter/view/call-center/index/index.phtml:49
+msgid "POIS"
+msgstr ""
+
+#: module/Alarms/view/alarms/index/index.phtml:238
+#: module/CallCenter/view/call-center/index/index.phtml:311
+msgid "Posizione"
+msgstr ""
+
+#: module/Alarms/view/alarms/index/index.phtml:335
+#: module/CallCenter/view/call-center/index/index.phtml:497
+msgid "PRENOTATE"
+msgstr ""
+
+#: module/Alarms/view/alarms/index/index.phtml:127
+#: module/Alarms/view/alarms/index/index.phtml:136
+#: module/Alarms/view/alarms/index/index.phtml:149
+#: module/Alarms/view/alarms/index/index.phtml:155
+#: module/CallCenter/view/call-center/index/index.phtml:183
+#: module/CallCenter/view/call-center/index/index.phtml:192
+#: module/CallCenter/view/call-center/index/index.phtml:205
+#: module/CallCenter/view/call-center/index/index.phtml:211
+msgid "Seleziona"
+msgstr ""
+
+#: module/CallCenter/view/call-center/index/index.phtml:179
+msgid "Seleziona cliente"
+msgstr ""
+
+#: module/Alarms/view/alarms/index/index.phtml:343
+msgid "Sporca"
+msgstr ""
+
+#: module/Alarms/public/assets-modules/alarms/js/controllers/main.js:690
+#: module/CallCenter/public/assets-modules/call-center/js/controllers/main.js:540
+msgid "Stato esterni"
+msgstr ""
+
+#: module/Alarms/public/assets-modules/alarms/js/controllers/main.js:688
+#: module/CallCenter/public/assets-modules/call-center/js/controllers/main.js:538
+msgid "Stato interni"
+msgstr ""
+
+#: module/Alarms/view/alarms/index/index.phtml:150
+#: module/Alarms/view/alarms/index/index.phtml:218
+#: module/Alarms/view/alarms/index/index.phtml:32
+#: module/CallCenter/view/call-center/index/index.phtml:206
+#: module/CallCenter/view/call-center/index/index.phtml:291
+#: module/CallCenter/view/call-center/index/index.phtml:62
+msgid "Targa"
+msgstr ""
+
+#: module/Alarms/view/alarms/index/index.phtml:206
+#: module/CallCenter/view/call-center/index/index.phtml:279
+msgid "Targa:"
+msgstr ""
+
+#: module/Alarms/view/alarms/index/index.phtml:130
+#: module/Alarms/view/alarms/index/index.phtml:294
+#: module/CallCenter/view/call-center/index/index.phtml:186
+#: module/CallCenter/view/call-center/index/index.phtml:403
+msgid "Telefono"
+msgstr ""
+
+#: module/Alarms/view/alarms/index/index.phtml:201
+#: module/CallCenter/view/call-center/index/index.phtml:274
+msgid "Ultime corse"
+msgstr ""
+
+#: module/Alarms/public/assets-modules/alarms/js/controllers/main.js:696
+#: module/CallCenter/public/assets-modules/call-center/js/controllers/main.js:546
+msgid "Ultimo contatto"
+msgstr ""
+
+#: module/Alarms/public/assets-modules/alarms/js/controllers/main.js:478
+msgid "un altro n° unità"
+msgstr ""
+
+#: module/Alarms/public/assets-modules/alarms/js/controllers/main.js:480
+msgid "un'altra targa"
+msgstr ""
+
+#: module/Alarms/view/alarms/index/index.phtml:145
+#: module/CallCenter/view/call-center/index/index.phtml:201
+msgid "Veicoli trovati"
+msgstr ""

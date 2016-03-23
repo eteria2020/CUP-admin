@@ -1181,6 +1181,48 @@ return [
                 "lang" => "zh",
                 "lang_3chars" => "zho",
                 "label" => "中国"
+            ],
+            'de' => [
+                "locale" => "de_DE",
+                "lang" => "de",
+                "lang_3chars" => "deu",
+                "label" => "Deutsch"
+            ],
+            'es' => [
+                "locale" => "es_ES",
+                "lang" => "es",
+                "lang_3chars" => "spa",
+                "label" => "Español"
+            ],
+            'hu' => [
+                "locale" => "hu_HU",
+                "lang" => "hu",
+                "lang_3chars" => "hun",
+                "label" => "Magyar"
+            ],
+            'pl' => [
+                "locale" => "pl_PL",
+                "lang" => "pl",
+                "lang_3chars" => "pol",
+                "label" => "Polskie"
+            ],
+            'pt' => [
+                "locale" => "pt_PT",
+                "lang" => "pt",
+                "lang_3chars" => "por",
+                "label" => "Português"
+            ],
+            'ru' => [
+                "locale" => "ru_RU",
+                "lang" => "ru",
+                "lang_3chars" => "rus",
+                "label" => "Pусский"
+            ],
+            'tr' => [
+                "locale" => "tr_TR",
+                "lang" => "tr",
+                "lang_3chars" => "tur",
+                "label" => "Türk"
             ]
         ],
         "language_folder" => __DIR__ . "/../language"
