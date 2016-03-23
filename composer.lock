@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "42953d6f7c22742b8ebdb38b7d6d5137",
-    "content-hash": "05206fb879517c7293efa75ad45aff85",
+    "hash": "88a9104dd1a8a198e8c1c232eb2c6aef",
+    "content-hash": "94893e5657a8da5ad592016b3d83c611",
     "packages": [
         {
             "name": "bjyoungblood/bjy-authorize",
@@ -1600,7 +1600,7 @@
             "source": {
                 "type": "git",
                 "url": "ssh://git@git.mvlabs.it:4222/clients/sharengo-cartasi.git",
-                "reference": "82a643de0ee26921a1341f6147e9ef8924ad66a0"
+                "reference": "d12c5e9130fde2c6ee796140efd6095545d71744"
             },
             "require": {
                 "doctrine/doctrine-orm-module": "0.*",
@@ -1614,7 +1614,7 @@
                 }
             },
             "description": "Cartasi module for Sharengo",
-            "time": "2016-03-04 08:50:56"
+            "time": "2016-03-23 14:31:27"
         },
         {
             "name": "mvlabs/sharengo-coremodule",
@@ -1622,7 +1622,7 @@
             "source": {
                 "type": "git",
                 "url": "ssh://git@git.mvlabs.it:4222/clients/sharengo-coremodule.git",
-                "reference": "cba7ee693e47a1b76fefc4d5b8be0b401e8cbf7d"
+                "reference": "be84b723abf35869298b7947ea713e4e9783939b"
             },
             "require": {
                 "doctrine/doctrine-orm-module": "0.*",
@@ -1643,7 +1643,7 @@
                 }
             },
             "description": "Core ZF2 module for Sharengo apps",
-            "time": "2016-03-21 09:35:46"
+            "time": "2016-03-23 14:29:59"
         },
         {
             "name": "mvlabs/zf2-multilanguage",
