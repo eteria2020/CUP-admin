@@ -9,25 +9,22 @@ $(function() {
     search.val('');
     column.val('select');
 
-    function showValid(data) {
+    function showStatus(data) {
+        var confirmText;
         if (data.e.valid) {
-            return '<span class="btn btn-success btn-xs disabled">Validato</span>';
-        } else {
-            var confirmText = 'id: ' + data.e.customer + ' ' + data.e.customer_name + ' ' + data.e.customer_surname + ' ' + translate("confirmValidate")
-            return '<a href="/customers/foreign-drivers-license/validate/' +
-                data.e.id +
-                '" onclick="return confirm(\'' + confirmText + '\')" class="btn btn-default btn-xs">'+translate("validate")+'</a>';
-        }
-    }
-
-    function showRevoke(data) {
-        if (!data.e.valid) {
-            return '<span class="btn btn-danger btn-xs disabled">Revocato</span>';
-        } else {
-            var confirmText = 'id: ' + data.e.customer + ' ' + data.e.customer_name + ' ' + data.e.customer_surname + ' ' + translate("confirmRevoke")
-            return '<a href="/customers/foreign-drivers-license/revoke/' +
+            confirmText = 'id: ' + data.e.customer + ' ' + data.e.customer_name + ' ' + data.e.customer_surname + ' ' + translate("confirmRevoke");
+            return '<span class="btn btn-success btn-xs disabled">' + translate("valid") + '</span>' +
+                '<br><a href="/customers/foreign-drivers-license/revoke/' +
                 data.e.id +
                 '" onclick="return confirm(\'' + confirmText + '\')" class="btn btn-default btn-xs">'+translate("revoke")+'</a>';
+
+        } else {
+            var status = data.e.first_time ? '<span class="btn btn-warning btn-xs disabled">' + translate("pending") + '</span>' : '<span class="btn btn-danger btn-xs disabled">' + translate("revoked") + '</span>';
+            confirmText = 'id: ' + data.e.customer + ' ' + data.e.customer_name + ' ' + data.e.customer_surname + ' ' + translate("confirmValidate");
+            return status +
+                '<br><a href="/customers/foreign-drivers-license/validate/' +
+                data.e.id +
+                '" onclick="return confirm(\'' + confirmText + '\')" class="btn btn-default btn-xs">'+translate("validate")+'</a>';
         }
     }
 
@@ -66,8 +63,7 @@ $(function() {
             {data: 'e.drivers_license_categories'},
             {data: 'e.drivers_license_expire'},
             {data: 'e.id'},
-            {data: showValid},
-            {data: showRevoke}
+            {data: showStatus}
         ],
         "columnDefs": [
             {
