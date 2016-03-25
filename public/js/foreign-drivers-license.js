@@ -13,18 +13,18 @@ $(function() {
         var confirmText;
         if (data.e.valid) {
             confirmText = 'id: ' + data.e.customer + ' ' + data.e.customer_name + ' ' + data.e.customer_surname + ' ' + translate("confirmRevoke");
-            return '<span class="btn btn-success btn-xs disabled">' + translate("valid") + '</span>' +
-                '<br><a href="/customers/foreign-drivers-license/revoke/' +
+            return '<span class="validation-btn-info btn btn-success btn-xs disabled">' + translate("valid") + '</span>' +
+                '<a href="/customers/foreign-drivers-license/revoke/' +
                 data.e.id +
-                '" onclick="return confirm(\'' + confirmText + '\')" class="btn btn-default btn-xs">'+translate("revoke")+'</a>';
+                '" onclick="return confirm(\'' + confirmText + '\')" class="validation-btn btn btn-default btn-xs">'+translate("revoke")+'</a>';
 
         } else {
-            var status = data.e.first_time ? '<span class="btn btn-warning btn-xs disabled">' + translate("pending") + '</span>' : '<span class="btn btn-danger btn-xs disabled">' + translate("revoked") + '</span>';
+            var status = data.e.first_time ? '<span class="validation-btn-info btn btn-warning btn-xs disabled">' + translate("pending") + '</span>' : '<span class="validation-btn-info btn btn-danger btn-xs disabled">' + translate("revoked") + '</span>';
             confirmText = 'id: ' + data.e.customer + ' ' + data.e.customer_name + ' ' + data.e.customer_surname + ' ' + translate("confirmValidate");
             return status +
-                '<br><a href="/customers/foreign-drivers-license/validate/' +
+                '<a href="/customers/foreign-drivers-license/validate/' +
                 data.e.id +
-                '" onclick="return confirm(\'' + confirmText + '\')" class="btn btn-default btn-xs">'+translate("validate")+'</a>';
+                '" onclick="return confirm(\'' + confirmText + '\')" class="validation-btn btn btn-default btn-xs">'+translate("validate")+'</a>';
         }
     }
 
@@ -72,7 +72,7 @@ $(function() {
                 sortable: false,
                 data: 'e.customer',
                 render: function (data) {
-                    return '<a href="/customers/foreign-drivers-license/download/' + data + '" class="btn btn-default btn-xs">'+translate("download")+'</a>';
+                    return '<a href="/customers/foreign-drivers-license/download/' + data + '" class="validation-btn btn btn-default btn-xs">'+translate("download")+'</a>';
                 }
             },
             {

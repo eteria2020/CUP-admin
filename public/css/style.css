@@ -47,3 +47,12 @@ div.container a.brand {
 .page-header.navbar .top-menu .navbar-nav > li.dropdown-user > .dropdown-menu.dropdown-menu-large {
     width: 250px;
 }
+
+.validation-btn, .validation-btn-info {
+    text-align: center;
+    width: 100%;
+}
+
+.validation-btn-info {
+    margin-bottom: 2px;
+}
