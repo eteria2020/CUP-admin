@@ -3,7 +3,7 @@
 use Zend\Stdlib\ArrayUtils;
 
 $env = getenv('APPLICATION_ENV') == 'development' ? 'dev' : 'prod';
-return [
+$config = [
     // This should be an array of module namespaces used in the application.
     'modules' => [
         'DoctrineModule',
@@ -82,3 +82,10 @@ return [
    // Should be compatible with Zend\ServiceManager\Config.
    // 'service_manager' => array(),
 ];
+
+$environmentConfigFile = 'config/application.config.' . $env . '.php';
+if (is_readable($environmentConfigFile)) {
+    $config = ArrayUtils::merge($config, require($environmentConfigFile));
+}
+
+return $config;

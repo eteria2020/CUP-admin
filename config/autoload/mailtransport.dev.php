@@ -3,6 +3,6 @@
 return [
     'emailTransport' => [
         'type' => 'Zend\Mail\Transport\File',
-        'filePath' => 'data/mails/'
+        'filePath' => realpath(__DIR__ . "/../../data/mails")
     ],
 ];
