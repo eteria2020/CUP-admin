@@ -22,7 +22,7 @@
         }
     ],
     "require": {
-        "php": ">=5.3.3",
+        "php": ">=5.4",
         "zendframework/zendframework": "~2.4",
         "bjyoungblood/bjy-authorize": "1.4.0",
         "zf-commons/zfc-user-doctrine-orm": "^1.0",
@@ -36,7 +36,8 @@
         "mrclay/minify": "2.2.*",
         "natxet/CssMin": "3.0.*",
         "mongodb/mongodb": "^0.2.0",
-        "mvlabs/zf2-multilanguage": "dev-master"
+        "mvlabs/zf2-multilanguage": "dev-master",
+        "doctrine/migrations": "1.2.2"
     },
     "require-dev": {
         "phpunit/phpunit": "^4.8",
@@ -45,7 +46,8 @@
     "autoload-dev": {
         "psr-0": {
             "SharengoCore": "module/SharengoCore/src",
-            "Cartasi": "module/Cartasi/src"
+            "Cartasi": "module/Cartasi/src",
+            "CUPAdminBusiness": "module/CUPAdminBusiness/src"
         }
     }
 }
