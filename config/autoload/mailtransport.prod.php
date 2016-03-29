@@ -2,6 +2,6 @@
 
 return [
     'emailTransport' => [
-        'type' => 'Zend\Mail\Transport\Sendmail'
+        'type' => 'sendmail'
     ],
 ];
