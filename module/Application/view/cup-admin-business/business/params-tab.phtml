@@ -1,0 +1,71 @@
+<?php
+$form = $this->form->prepare();
+$business = $this->business;
+?>
+<div class="row">
+    <div class="col-lg-12">
+        <?= $this->form()->openTag($form); ?>
+        <div class="row">
+            <div class="col-lg-3">
+                <div class="form-group">
+                    <label for="code"><?= $this->translate("Codice"); ?></label>
+                    <input type="text" name="code" id="code" class="form-control" disabled value="<?= $this->business->getCode(); ?>">
+                </div>
+            </div>
+            <div class="col-lg-3">
+                <div class="form-group">
+                    <label for="name"><?= $this->translate("Ragione Sociale"); ?></label>
+                    <input type="text" name="name" id="name" class="form-control" disabled value="<?= $this->business->getName(); ?>">
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-lg-6">
+                <div class="form-group">
+                    <label for="payment-frequence"><?= $this->translate("Frequenza pagamento"); ?></label>
+                    <?php
+                    $field = $form->get('paymentFrequence');
+                    $field->setValue($this->business->getPaymentFrequence());
+                    echo $this->formElement($field);
+                    echo $this->formElementErrors($field, array('class' => 'text-danger list-unstyled'));
+                    ?>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-lg-6">
+                <div class="form-group">
+                    <label for="payment-type"><?= $this->translate("Tipo di pagamento"); ?></label>
+                    <?php
+                    $field = $form->get('paymentType');
+                    $field->setValue($this->business->getPaymentType());
+                    echo $this->formElement($field);
+                    echo $this->formElementErrors($field, array('class' => 'text-danger list-unstyled'));
+                    ?>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-6">
+                <div class="form-group">
+                    <label for="business-mail-control"><?= $this->translate("Controllo email aziendale"); ?></label>
+                    <?php
+                    $field = $form->get('businessMailControl');
+                    $field->setValue($this->business->isBusinessMailControl());
+                    echo $this->formElement($field);
+                    echo $this->formElementErrors($field, array('class' => 'text-danger list-unstyled'));
+                    ?>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-12">
+                <input type="hidden" name="tabType" value="params">
+                <button type="submit" class="btn btn-success"><?= $this->translate("Modifica parametri aziendali"); ?></button>
+            </div>
+        </div>
+        <?= $this->form()->closeTag(); ?>
+    </div>
+</div>

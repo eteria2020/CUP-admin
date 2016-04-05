@@ -1362,20 +1362,20 @@ return [
 
     'navigation' => [
         'default' => [
-//            [
-//                'label'     => $translator->translate('Aziende'),
-//                'route'     => 'businesses',
-//                'icon'      => 'fa fa-briefcase',
-//                'resource'  => 'admin',
-//                'isRouteJs' => true,
-//                'pages'     => [
-//                    [
-//                        'label' => $translator->translate('Elenco'),
-//                        'route' => 'business',
-//                        'isVisible' => true
-//                    ]
-//                ],
-//            ],
+            [
+                'label'     => $translator->translate('Aziende'),
+                'route'     => 'business',
+                'icon'      => 'fa fa-briefcase',
+                'resource'  => 'admin',
+                'isRouteJs' => true,
+                'pages'     => [
+                    [
+                        'label' => $translator->translate('Elenco'),
+                        'route' => 'business',
+                        'isVisible' => true
+                    ]
+                ],
+            ],
             [
                 'label'     => $translator->translate('Clienti'),
                 'route'     => 'customers',
