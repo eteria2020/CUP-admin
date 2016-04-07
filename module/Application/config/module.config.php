@@ -1556,6 +1556,7 @@ return [
                 ['controller' => 'Application\Controller\Payments', 'roles' => ['admin']],
                 ['controller' => 'Application\Controller\CustomerNote', 'roles' => ['admin']],
                 ['controller' => 'Application\Controller\Configurations', 'roles' => ['admin']],
+                ['controller' => 'Application\Controller\CarsConfigurations', 'roles' => ['superadmin']],
                 ['controller' => 'Application\Controller\Pois', 'roles' => ['superadmin']],
                 ['controller' => 'Application\Controller\Zones', 'roles' => ['superadmin']],
                 ['controller' => 'Application\Controller\CustomersEdit', 'roles' => ['admin']],
