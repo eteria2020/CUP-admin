@@ -11,6 +11,7 @@ vendor
 module/SharengoCore
 module/Cartasi
 module/CUPAdminBusiness
+module/BusinessCore
 data/DoctrineORMModule
 data/DoctrineMongoODMModule
 public/cache
