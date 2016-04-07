@@ -47,6 +47,7 @@
         "psr-0": {
             "SharengoCore": "module/SharengoCore/src",
             "Cartasi": "module/Cartasi/src",
+            "BusinessCore": "module/BusinessCore/src",
             "CUPAdminBusiness": "module/CUPAdminBusiness/src"
         }
     }

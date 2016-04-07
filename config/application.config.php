@@ -23,6 +23,7 @@ $config = [
         'EventLogger',
         'Reports',
         'MvLabsMultilanguage',
+        'BusinessCore',
         'CUPAdminBusiness',
     ],
 
