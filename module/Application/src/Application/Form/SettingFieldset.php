@@ -78,7 +78,7 @@ class SettingFieldset extends Fieldset implements InputFilterProviderInterface
             ]
         ]);
 
-        $this->add([
+        /*$this->add([
             'name'       => 'firstPaymentCompleted',
             'type'       => 'Zend\Form\Element\Select',
             'attributes' => [
@@ -91,7 +91,7 @@ class SettingFieldset extends Fieldset implements InputFilterProviderInterface
                     1 => $translator->translate("Si")
                 ]
             ]
-        ]);
+        ]);*/
 
         $this->add([
             'name'       => 'maintainer',
