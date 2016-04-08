@@ -6,7 +6,6 @@ use SharengoCore\Service\CountriesService;
 use SharengoCore\Service\CustomersService;
 use SharengoCore\Service\ProvincesService;
 use SharengoCore\Service\AuthorityService;
-
 use Zend\Form\Fieldset;
 use Zend\InputFilter\InputFilterProviderInterface;
 use Zend\Mvc\I18n\Translator;
@@ -22,8 +21,8 @@ class SettingFieldset extends Fieldset implements InputFilterProviderInterface
      * @param string $name
      * @param array  $options
      */
-    public function __construct(HydratorInterface $hydrator, Translator $translator) {
-
+    public function __construct(HydratorInterface $hydrator, Translator $translator)
+    {
         parent::__construct('setting', [
             'use_as_base_fieldset' => true
         ]);
@@ -77,21 +76,6 @@ class SettingFieldset extends Fieldset implements InputFilterProviderInterface
                 ]
             ]
         ]);
-
-        /*$this->add([
-            'name'       => 'firstPaymentCompleted',
-            'type'       => 'Zend\Form\Element\Select',
-            'attributes' => [
-                'id'    => 'firstPaymentCompleted',
-                'class' => 'form-control',
-            ],
-            'options'    => [
-                'value_options' => [
-                    0 => $translator->translate("No"),
-                    1 => $translator->translate("Si")
-                ]
-            ]
-        ]);*/
 
         $this->add([
             'name'       => 'maintainer',
@@ -150,9 +134,6 @@ class SettingFieldset extends Fieldset implements InputFilterProviderInterface
             'enabled' => [
                 'required' => true
             ],
-            'firstPaymentCompleted' => [
-                'required' => true
-            ],
             'maintainer' => [
                 'required' => true
             ],
@@ -161,5 +142,4 @@ class SettingFieldset extends Fieldset implements InputFilterProviderInterface
             ]
         ];
     }
-
 }
