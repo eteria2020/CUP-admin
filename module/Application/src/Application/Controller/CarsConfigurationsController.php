@@ -65,6 +65,11 @@ class CarsConfigurationsController extends AbstractActionController
         ]);
     }
 
+    public function listAllAction()
+    {
+        return new ViewModel([]);
+    }
+
     public function listGlobalAction()
     {
         return new ViewModel([]);

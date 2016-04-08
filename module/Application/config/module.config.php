@@ -1152,7 +1152,7 @@ return [
                     'defaults' => [
                         '__NAMESPACE__' => 'Application\Controller',
                         'controller' => 'CarsConfigurations',
-                        'action'        => 'list-global'
+                        'action'        => 'list-all'
                     ],
                 ],
                 'may_terminate' => true,
@@ -1170,11 +1170,8 @@ return [
                         'type'    => 'Literal',
                         'options' => [
                             'route'    => '/list',
-                            'defaults' => [
-                                'action'        => 'list-global',
-                            ],
                         ],
-                        'may_terminate' => true,
+                        'may_terminate' => false,
                         'child_routes' => [
                             'all' => [
                                 'type' => 'Literal',
@@ -1747,6 +1744,11 @@ return [
                 'resource' => 'admin',
                 'isRouteJs' => true,
                 'pages' => [
+                    [
+                        'label' => $translator->translate('Elenco Completo'),
+                        'route' => 'cars-configurations/list/all',
+                        'isVisible' => true
+                    ],
                     [
                         'label' => $translator->translate('Elenco Globale'),
                         'route' => 'cars-configurations/list/global',
