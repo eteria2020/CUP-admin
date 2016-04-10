@@ -6,7 +6,7 @@ $customer = $trip->getCustomer();
 
 // parse card
 // must write something even if empty otherwise the box shrinks in height
-$rfid = $customer->getCard() !== null ? $customer->getCard()->getRfid() : 'n.a.';
+$rfid = $customer->getCard() !== null ? $customer->getCard()->getCode() : 'n.a.';
 
 // Parse payment
 $payed = 'NO';
