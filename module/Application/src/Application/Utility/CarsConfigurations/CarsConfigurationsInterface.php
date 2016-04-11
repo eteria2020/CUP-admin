@@ -10,8 +10,6 @@ interface CarsConfigurationsInterface
 
     public function getForm();
 
-    public function getDetails();
-
     public function getValue();
     
     public function hasMultipleValues();

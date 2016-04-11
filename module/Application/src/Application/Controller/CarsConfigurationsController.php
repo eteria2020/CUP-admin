@@ -94,14 +94,26 @@ class CarsConfigurationsController extends AbstractActionController
     {
         $id = $this->params()->fromRoute('id', 0);
 
-        /** @var Pois $poi */
         $carConfiguration = $this->carsConfigurationsService->getCarConfigurationById($id);
         $key = $carConfiguration->getKey();
         $value = $carConfiguration->getValue();
 
         $configurationClass = CarsConfigurationsFactory::create($key, $value);
 
-        return new ViewModel([$configurationClass->getDetails()]);
+        $hasMultipleValues = $configurationClass->hasMultipleValues();
+
+        return new ViewModel([
+            'configuration' => $carConfiguration,
+            'hasMultipleValues' => $hasMultipleValues,
+            'indexedValues' => $configurationClass->getIndexedValues(),
+            'formattedValue' => $configurationClass->getOverview(),
+            'thisId' => $id,
+        ]);
+    }
+
+    public function addAction()
+    {
+        $view = new ViewModel([]);
     }
 
     public function editAction () {

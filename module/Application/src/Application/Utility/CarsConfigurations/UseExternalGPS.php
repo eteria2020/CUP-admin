@@ -31,11 +31,6 @@ class UseExternalGPS implements CarsConfigurationsInterface
         return false;
     }
 
-    public function getDetails()
-    {
-        return $this->value ? 'Esterno' : 'Interno';
-    }
-
     public function getValue()
     {
         return $this->value;

@@ -37,11 +37,6 @@ class RadioSetup implements CarsConfigurationsInterface
         return true;
     }
 
-    public function getDetails()
-    {
-        
-    }
-
     public function getValue()
     {
         return $this->value;

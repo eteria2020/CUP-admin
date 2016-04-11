@@ -31,11 +31,6 @@ class DefaultCity implements CarsConfigurationsInterface
         return false;
     }
 
-    public function getDetails()
-    {
-        
-    }
-
     public function getValue()
     {
         return $this->value;
