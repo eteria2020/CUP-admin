@@ -1166,6 +1166,16 @@ return [
                             ],
                         ],
                     ],
+                    'add' => [
+                        'type' => 'Segment',
+                        'options' => [
+                            'route' => '/add',
+                            'defaults' => [
+                                'action' => 'add'
+                            ],
+                        ],
+                        'may_terminate' => true,
+                    ],
                     'list' => [
                         'type'    => 'Literal',
                         'options' => [
