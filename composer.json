@@ -9,7 +9,7 @@
     "homepage": "http://framework.zend.com/",
     "repositories": [
         {
-            "url": "ssh://git@git.mvlabs.it:4222/clients/sharengo-coremodule.git",
+            "url": "ssh://git@gitlab.bulweria.com:1022/cup-web/core.git",
             "type": "git"
         },
         {
