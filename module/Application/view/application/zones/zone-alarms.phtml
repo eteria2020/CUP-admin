@@ -31,25 +31,26 @@
                     .row-filters {margin-bottom:30px;}
                 </style>
                 <script>
-                    var geoPoly,data = {<?php
+                    var geoPoly,
+                        data = {<?php
                         /** @var \SharengoCore\Entity\ZoneAlarms $zone */
                         foreach($this->list as $zone){
-                            echo $zone->getId().':[';
+                            echo $zone->getId().':{description:"'.$zone->getDescription().'",data:[';
                             $data = explode('),(',substr($zone->getGeo(),2,-2));
                             foreach($data as $coord){
                                 $coord = explode(',',$coord);
                                 echo '{lat:'.$coord[1].',lng:'.$coord[0].'},';
                             }
-                            echo '],';
+                            echo ']},';
                         } ?>};
 
                     $(document).ready(function(){
-                        $('#map').height($('.page-content').outerHeight()-$('#map').offset().top);
-
                         $.each(data, function (i, item) {
+                            console.log("I: "+ i);
+                            console.log(item);
                             $('#zone-sel').append($('<option>', {
                                 value: i,
-                                text : i
+                                text : i + " - " + item.description
                             }));
                         });
 
@@ -59,7 +60,7 @@
                             }
 
                             geoPoly = new google.maps.Polygon({
-                                paths: data[$(this).val()],
+                                paths: data[$(this).val()].data,
                                 strokeColor: '#FF0000',
                                 strokeOpacity: 0.8,
                                 strokeWeight: 3,
@@ -70,12 +71,28 @@
 
                         });
                     });
+
+                    $( window ).load(function() {   
+                        $('#map').height($('.page-content').outerHeight()-$('#map').offset().top);
+                    });
+
                     function initMap(){
                         map = new google.maps.Map(document.getElementById('map'), {
                             zoom: 7,
                             center: {lat: 44.5563793, lng: 11.3180998}
                         });
                     }
+                    // Window Resize Action Bind
+                    var id;
+                    $(window).resize(function() {
+                        clearTimeout(id);
+                        id = setTimeout(doneResizing, 500);
+                    });
+                    var doneResizing = function(){
+                        //var newHeight = $(window).height();
+                        //$(".map").css("height", newHeight - 280);
+                        $('#map').height($('.page-content').outerHeight()-$('#map').offset().top);    
+                    };
                 </script>
                 <script async defer
                 src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCHVZSbufdhNoMVU8uJHi1aTmvPoYN4ErY&signed_in=true&callback=initMap"></script>
