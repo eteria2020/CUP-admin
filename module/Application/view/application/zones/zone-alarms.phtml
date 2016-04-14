@@ -34,11 +34,11 @@
                     var geoPoly,
                         data = {<?php
                         /** @var \SharengoCore\Entity\ZoneAlarms $zone */
-                        foreach($this->list as $zone){
+                        foreach ($this->list as $zone) {
                             echo $zone->getId().':{description:"'.$zone->getDescription().'",data:[';
-                            $data = explode('),(',substr($zone->getGeo(),2,-2));
-                            foreach($data as $coord){
-                                $coord = explode(',',$coord);
+                            $data = explode('),(', substr($zone->getGeo(), 2, -2));
+                            foreach ($data as $coord) {
+                                $coord = explode(',', $coord);
                                 echo '{lat:'.$coord[1].',lng:'.$coord[0].'},';
                             }
                             echo ']},';
@@ -72,7 +72,7 @@
                         });
                     });
 
-                    $( window ).load(function() {   
+                    $( window ).load(function() {
                         $('#map').height($('.page-content').outerHeight()-$('#map').offset().top);
                     });
 
@@ -89,14 +89,10 @@
                         id = setTimeout(doneResizing, 500);
                     });
                     var doneResizing = function(){
-                        //var newHeight = $(window).height();
-                        //$(".map").css("height", newHeight - 280);
-                        $('#map').height($('.page-content').outerHeight()-$('#map').offset().top);    
+                        $('#map').height($('.page-content').outerHeight()-$('#map').offset().top);
                     };
                 </script>
-                <script async defer
-                src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCHVZSbufdhNoMVU8uJHi1aTmvPoYN4ErY&signed_in=true&callback=initMap"></script>
-
+                <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCHVZSbufdhNoMVU8uJHi1aTmvPoYN4ErY&signed_in=true&callback=initMap"></script>
             </div>
         </div>
     </div>
