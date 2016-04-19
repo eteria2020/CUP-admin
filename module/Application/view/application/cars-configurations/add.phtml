@@ -1,5 +1,5 @@
 <?php
-$form = $this->carsConfigutarionForm->prepare();
+$form = $this->carsConfigurationsForm->prepare();
 ?>
 <div class="page-content-wrapper">
     <div class="page-content">
@@ -12,105 +12,56 @@ $form = $this->carsConfigutarionForm->prepare();
                 <a href="<?php echo $this->url('cars'); ?>" class="btn btn-success pull-right"><i class="fa fa-arrow-left"></i> Torna alla lista</a>
             </div>
         </div>
-
-
         <div class="page-bar">
         </div>
-
         <div class="row">
             <div class="col-md-12">
-
                 <?= $this->form()->openTag($form); ?>
-
                 <div class="row">
                     <div class="col-lg-3">
                         <div class="form-group">
-                            <label for="gender">Targa</label>
+                            <label for="fleet"><?= $this->translate('Flotta') ?></label>
                             <?php
-                            $plate = $form->get('car')->get('plate');
-                            echo $this->formElement($plate);
-                            echo $this->formElementErrors($plate, array('class' => 'text-danger list-unstyled'));
+                            $fleet = $form->get('carsConfigurations')->get('fleet');
+                            echo $this->formElement($fleet);
                             ?>
                         </div>
                     </div>
-
                     <div class="col-lg-3">
                         <div class="form-group">
-                            <label for="name">Costruttore</label>
+                            <label for="model"><?= $this->translate('Modello Auto') ?></label>
                             <?php
-                            $manufactures = $form->get('car')->get('manufactures');
-                            echo $this->formElement($manufactures);
-                            echo $this->formElementErrors($manufactures, array('class' => 'text-danger list-unstyled'));
-                            ?>
-                        </div>
-                    </div>
-
-                    <div class="col-lg-3">
-                        <div class="form-group">
-                            <label for="surname">Modello</label>
-                            <?php
-                            $model = $form->get('car')->get('model');
+                            $model = $form->get('carsConfigurations')->get('model');
                             echo $this->formElement($model);
-                            echo $this->formElementErrors($model, array('class' => 'text-danger list-unstyled'));
                             ?>
                         </div>
                     </div>
-
                     <div class="col-lg-3">
                         <div class="form-group">
-                            <label for="surname">Identificativo</label>
+                            <label for="plate"><?= $this->translate('Targa Auto') ?></label>
                             <?php
-                            $label = $form->get('car')->get('label');
-                            echo $this->formElement($label);
-                            echo $this->formElementErrors($label, array('class' => 'text-danger list-unstyled'));
+                            $plate = $form->get('carsConfigurations')->get('plate');
+                            echo $this->formElement($plate);
+                            ?>
+                        </div>
+                    </div>
+                    <div class="col-lg-3">
+                        <div class="form-group">
+                            <label for="key"><?= $this->translate('Tipo di Configurazione') ?></label>
+                            <?php
+                            $key = $form->get('carsConfigurations')->get('key');
+                            echo $this->formElement($key);
                             ?>
                         </div>
                     </div>
                 </div>
-
-                <div class="row">
-
-                    <div class="col-lg-4">
-                        <div class="form-group">
-                            <label for="name">Flotta</label>
-                            <?= $this->formRow($form->get('car')->get('fleet')); ?>
-                        </div>
-                    </div>
-
-                    <div class="col-lg-2">
-                        <div class="form-group">
-                            <label for="name">Attiva</label>
-                            <?= $this->formRow($form->get('car')->get('active')); ?>
-                        </div>
-                    </div>
-
-                    <div class="col-lg-2">
-                        <div class="form-group">
-                            <label for="surname">Stato</label>
-                            <?= $this->formRow($form->get('car')->get('status')); ?>
-                        </div>
-                    </div>
-                </div>
-
                 <div class="row">
                     <div class="col-lg-12">
-                        <div class="form-group">
-                            <label for="gender">Note</label>
-                            <?= $this->formRow($form->get('car')->get('notes')); ?>
-                        </div>
+                        <button type="submit" class="btn btn-success"><?= $this->translate("Aggiungi Configurazione Auto e Inserisci i/il Valore"); ?></button>
                     </div>
                 </div>
-
-                <div class="row">
-                    <div class="col-lg-12">
-                        <button type="submit" class="btn btn-success">Aggiungi Auto</button>
-                    </div>
-                </div>
-
                 <?= $this->form()->closeTag(); ?>
-
             </div>
         </div>
-
     </div>
 </div>

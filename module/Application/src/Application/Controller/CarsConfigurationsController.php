@@ -6,6 +6,7 @@ use  Application\Utility\CarsConfigurations\CarsConfigurationsFactory;
 use Application\Form\CarsConfigurationsForm;
 use SharengoCore\Entity\CarsConfigurations;
 use SharengoCore\Service\CarsConfigurationsService;
+use SharengoCore\Service\FleetService;
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
 use Zend\View\Model\JsonModel;
@@ -22,6 +23,16 @@ class CarsConfigurationsController extends AbstractActionController
      */
     private $carsConfigurationsService;
 
+     /**
+     * @var FleetService
+     */
+    private $fleetService;
+
+     /**
+     * @var CarsConfigurationsForm
+     */
+    private $carsConfigurationsForm;
+
     /**
      * @var \Zend\Stdlib\Hydrator\HydratorInterface
      */
@@ -34,9 +45,13 @@ class CarsConfigurationsController extends AbstractActionController
      */
     public function __construct(
         CarsConfigurationsService $carsConfigurationsService,
+        FleetService $fleetService,
+        CarsConfigurationsForm $carsConfigurationsForm,
         HydratorInterface $hydrator
     ) {
         $this->carsConfigurationsService = $carsConfigurationsService;
+        $this->fleetService = $fleetService;
+        $this->carsConfigurationsForm = $carsConfigurationsForm;
         $this->hydrator = $hydrator;
     }
 
@@ -113,7 +128,35 @@ class CarsConfigurationsController extends AbstractActionController
 
     public function addAction()
     {
-        $view = new ViewModel([]);
+        $translator = $this->TranslatorPlugin();
+        $form = $this->carsConfigurationsForm;
+        $form->setFleets($this->fleetService->getAllFleets());
+
+        if ($this->getRequest()->isPost()) {
+            $postData = $this->getRequest()->getPost()->toArray();
+            $form->setData($postData);
+error_log("----> Valido?",0);
+            if ($form->isValid()) {
+error_log("----> SI",0);
+                try {
+                    $this->carsConfigurationsService->save($form->getData(),"");
+                    $this->flashMessenger()->addSuccessMessage($translator->translate('POI aggiunta con successo!'));
+error_log("----> ".print_r($form->getData(),true),0);
+                } catch (\Exception $e) {
+                    $this->flashMessenger()
+                        ->addErrorMessage($translator->translate('Si è verificato un errore applicativo.
+                        L\'assistenza tecnica è già al corrente, ci scusiamo per l\'inconveniente'));
+                }
+                return $this->redirect()->toRoute('configurations/manage-pois');
+            } else {
+error_log("----> NO",0);
+                $this->flashMessenger()->addErrorMessage($translator->translate('Dati inseriti non validi'));
+            }
+        }
+
+        return new ViewModel([
+            'carsConfigurationsForm' => $form
+        ]);
     }
 
     public function editAction () {

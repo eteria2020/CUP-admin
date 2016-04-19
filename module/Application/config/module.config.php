@@ -1317,6 +1317,7 @@ return [
             'FaresForm' => 'Application\Form\FaresFormFactory',
             'EditTripForm' => 'Application\Form\EditTripFormFactory',
             'ConfigurationsForm' => 'Application\Form\ConfigurationsFormFactory',
+            'CarsConfigurationsForm' => 'Application\Form\CarsConfigurationsFormFactory',
             'ChangeLanguageDetector.listener' => 'Application\Listener\ChangeLanguageDetectorFactory',
             'ZoneForm' => 'Application\Form\ZoneFormFactory',
         ]
