@@ -28,5 +28,9 @@ return array(
     'languageSession' => [
         'session' => 'user',
         'offset' => 'lang'
-    ]
+    ],
+    'zf2resque' => [
+        'redisBackend' => '127.0.0.1:6379',
+        'redisDatabase' => 5
+    ],
 );
