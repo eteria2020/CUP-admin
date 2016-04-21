@@ -17,6 +17,10 @@
             "type": "git"
         },
         {
+            "url": "ssh://git@gitlab.bulweria.com:cup-web/admin-business-module.git",
+            "type": "git"
+        },
+        {
             "url": "ssh://git@git.mvlabs.it:4222/internals/zf2-multilanguage.git",
             "type": "git"
         }
@@ -31,13 +35,13 @@
         "mvlabs/sharengo-coremodule": "dev-master",
         "leafo/lessphp": "0.5.*",
         "mvlabs/sharengo-cartasi": "dev-master",
+        "mvlabs/sharengo-admin-business-module": "dev-master",
         "mockery/mockery": "^0.9.4",
         "doctrine/doctrine-mongo-odm-module": "^0.9.1",
         "mrclay/minify": "2.2.*",
         "natxet/CssMin": "3.0.*",
         "mongodb/mongodb": "^0.2.0",
         "mvlabs/zf2-multilanguage": "dev-master",
-        "doctrine/migrations": "1.2.2",
         "oro/doctrine-extensions": "1.0.*"
     },
     "require-dev": {
