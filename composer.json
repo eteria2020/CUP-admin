@@ -9,7 +9,7 @@
     "homepage": "http://framework.zend.com/",
     "repositories": [
         {
-            "url": "ssh://git@gitlab.bulweria.com:1022/cup-web/core.git",
+            "url": "ssh://git@gitlab.bulweria.com/cup-web/core.git",
             "type": "git"
         },
         {
