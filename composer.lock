@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "c03ea1dce26665eb7365c6ed84f54966",
-    "content-hash": "75f73bf6bc505c1551920cabb86b9e36",
+    "hash": "385e463228168d294c6f0f29ccf2d7c9",
+    "content-hash": "6133022825f1f53ba019ae853331baaa",
     "packages": [
         {
             "name": "bjyoungblood/bjy-authorize",
@@ -131,6 +131,51 @@
                 "spatial"
             ],
             "time": "2014-03-17 13:45:28"
+        },
+        {
+            "name": "cup-web/admin-business-module",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "ssh://git@gitlab.bulweria.com/cup-web/admin-business-module.git",
+                "reference": "276e22d5ef2835ca020619c06ed82fc39ada12ab"
+            },
+            "require": {
+                "php": ">=5.4",
+                "rwoverdijk/assetmanager": "1.4.*",
+                "zendframework/zendframework": "2.4.*"
+            },
+            "type": "library",
+            "autoload": {
+                "classmap": [
+                    "./Module.php"
+                ]
+            },
+            "description": "Business area in Admin",
+            "time": "2016-04-22 14:23:37"
+        },
+        {
+            "name": "cup-web/core-business",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "ssh://git@gitlab.bulweria.com/cup-web/core-business.git",
+                "reference": "2cafcb542c0ad113ec4840b83e747979cc8506e9"
+            },
+            "require": {
+                "doctrine/doctrine-orm-module": "0.9.*",
+                "doctrine/migrations": "^1.2",
+                "php": ">=5.4",
+                "zendframework/zendframework": "2.4.*"
+            },
+            "type": "library",
+            "autoload": {
+                "classmap": [
+                    "./Module.php"
+                ]
+            },
+            "description": "Business Core module",
+            "time": "2016-04-22 14:23:37"
         },
         {
             "name": "doctrine/annotations",
@@ -1689,8 +1734,8 @@
             "version": "dev-master",
             "source": {
                 "type": "git",
-                "url": "ssh://git@gitlab.bulweria.com:1022/cup-web/core.git",
-                "reference": "87615aedf5503a9d71aa921559e8f5bd3b83caf9"
+                "url": "ssh://git@gitlab.bulweria.com/cup-web/core.git",
+                "reference": "954105010b437fc1f4b13a31383c2c7667ccc55b"
             },
             "require": {
                 "doctrine/doctrine-orm-module": "0.*",
@@ -1711,7 +1756,7 @@
                 }
             },
             "description": "Core ZF2 module for Sharengo apps",
-            "time": "2016-04-18 10:00:31"
+            "time": "2016-04-21 10:56:33"
         },
         {
             "name": "mvlabs/zf2-multilanguage",
@@ -3602,6 +3647,8 @@
     "stability-flags": {
         "mvlabs/sharengo-coremodule": 20,
         "mvlabs/sharengo-cartasi": 20,
+        "cup-web/core-business": 20,
+        "cup-web/admin-business-module": 20,
         "mvlabs/zf2-multilanguage": 20,
         "phpmd/phpmd": 0
     },

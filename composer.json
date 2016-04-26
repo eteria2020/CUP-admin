@@ -17,7 +17,11 @@
             "type": "git"
         },
         {
-            "url": "ssh://git@gitlab.bulweria.com:cup-web/admin-business-module.git",
+            "url": "ssh://git@gitlab.bulweria.com/cup-web/admin-business-module.git",
+            "type": "git"
+        },
+        {
+            "url": "ssh://git@gitlab.bulweria.com/cup-web/core-business.git",
             "type": "git"
         },
         {
@@ -35,7 +39,8 @@
         "mvlabs/sharengo-coremodule": "dev-master",
         "leafo/lessphp": "0.5.*",
         "mvlabs/sharengo-cartasi": "dev-master",
-        "mvlabs/sharengo-admin-business-module": "dev-master",
+        "cup-web/core-business": "dev-master",
+        "cup-web/admin-business-module": "dev-master",
         "mockery/mockery": "^0.9.4",
         "doctrine/doctrine-mongo-odm-module": "^0.9.1",
         "mrclay/minify": "2.2.*",
@@ -53,7 +58,7 @@
             "SharengoCore": "module/SharengoCore/src",
             "Cartasi": "module/Cartasi/src",
             "BusinessCore": "module/BusinessCore/src",
-            "CUPAdminBusiness": "module/CUPAdminBusiness/src"
+            "BusinessAdminSection": "module/BusinessAdminSection/src"
         }
     }
 }
