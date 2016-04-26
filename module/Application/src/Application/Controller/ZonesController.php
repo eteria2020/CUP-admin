@@ -9,6 +9,7 @@ use Zend\Form\Form;
 use Zend\Http\Response;
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
+use Zend\View\Model\JsonModel;
 use DoctrineModule\Stdlib\Hydrator\DoctrineObject as DoctrineHydrator;
 
 
@@ -68,6 +69,32 @@ class ZonesController extends AbstractActionController
         $view->setTerminal(true);
 
         return $view;
+    }
+
+    public function datatableAction()
+    {
+        $as_filters = $this->params()->fromPost();
+        $as_filters['withLimit'] = true;
+        $as_dataDataTable = $this->zoneService->getDataDataTable($as_filters);
+        $i_totalZones = $this->zoneService->getTotalZones();
+        $i_recordsFiltered = $this->getRecordsFiltered($as_filters, $i_totalZones);
+
+        return new JsonModel([
+            'draw'            => $this->params()->fromQuery('sEcho', 0),
+            'recordsTotal'    => $i_totalZones,
+            'recordsFiltered' => $i_recordsFiltered,
+            'data'            => $as_dataDataTable
+        ]);
+    }
+
+    protected function getRecordsFiltered($as_filters, $i_totalZones)
+    {
+        if (empty($as_filters['searchValue']) && !isset($as_filters['columnValueWithoutLike'])) {
+            return $i_totalZones;
+        } else {
+            $as_filters['withLimit'] = false;
+            return $this->zoneService->getDataDataTable($as_filters, true);
+        }
     }
 
 }

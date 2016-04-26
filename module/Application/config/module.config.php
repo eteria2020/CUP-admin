@@ -808,7 +808,7 @@ return [
                         'options' => [
                             'route' => '/ajax-tab-trip',
                             'defaults' => [
-                                'action' => 'trip-tab',
+                                'action' => 'list-tab',
                             ],
                         ],
                     ],
@@ -839,6 +839,27 @@ return [
                             ],
                         ],
                     ],
+                    'datatable' => [
+                        'type'    => 'Literal',
+                        'options' => [
+                            'route'    => '/datatable',
+                            'defaults' => [
+                                'action'        => 'datatable',
+                            ],
+                        ],
+                    ],
+                    'edit' => [
+                        'type'    => 'Segment',
+                        'options' => [
+                            'route'    => '/edit/:id',
+                            'constraints' => [
+                                'id'    => '[0-9]*'
+                            ],
+                            'defaults' => [
+                                'action'        => 'edit',
+                            ],
+                        ],
+                    ]
                 ],
             ],
             'payments' => [

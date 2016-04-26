@@ -911,3 +911,14 @@ body {
 .block-spinner-bar > div {
   background: #da4a59;
 }
+
+/****
+Utils
+****/
+table .glyphicon.glyphicon-ok{
+  color: #15A96E;
+}
+
+table .glyphicon.glyphicon-remove{
+  color: #cc1d1d;
+}
