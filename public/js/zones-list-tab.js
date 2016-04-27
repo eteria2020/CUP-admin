@@ -1,5 +1,5 @@
 /* global $, confirm, dataTable */
-$(function () {
+//$(function () {
     var table = $("#js-zones-table");
     var search = $("#js-value");
     var column = $("#js-column");
@@ -63,15 +63,15 @@ $(function () {
                 searchable: false,
                 sortable: false,
                 render: function (data) {
-                    return "<div class=\"btn-group\"><div class=\"btn btn-default\" data-id=\"" + data + "\">Visualizza</div><a href=\"/zones/edit/" + data + "\" class=\"btn btn-default\">Modifica</a></div>";
+                    return "<div class=\"btn-group\"><input class=\"visualizza\" type=\"checkbox\" name=\"visualizza\" data-id=\"" + data + "\" data-on-text=\"" + translate("zonesListTabDataOnText") + "\" data-off-text=\"" + translate("zonesListTabDataOffText") + "\" data-on-color=\"info\" data-label-width=\"20\"><a href=\"#map\" data-id=\"" + data + "\" class=\"btn btn-default focus\"><span class=\"glyphicon glyphicon-screenshot\"></span> " + translate("zonesListFocusText") + "</a><a href=\"/zones/edit/" + data + "\" class=\"btn btn-default\">" + translate("modify") + "</a></div>";
                 }
             }
         ],
         "lengthMenu": [
-            [5, 10, 30],
-            [5, 10, 30]
+            [100, 200, 300],
+            [100, 200, 300]
         ],
-        "pageLength": 5,
+        "pageLength": 100,
         "pagingType": "bootstrap_full_number",
         "language": {
             "sEmptyTable":     translate("sCustomersEmptyTable"),
@@ -95,6 +95,31 @@ $(function () {
                 "sSortAscending":   translate("sSortAscending"),
                 "sSortDescending":  translate("sSortDescending")
             }
+        },
+        "initComplete": function() {
+            // Init Bootstrap Switch
+            $("input.visualizza")
+                .bootstrapSwitch()
+                .on("switchChange.bootstrapSwitch",
+                    function(event, state) {
+                        var zoneId = $(this).data("id");
+                        if(state){
+                            drawZone(zoneId);
+                        } else {
+                            removeZone(zoneId);
+                        }
+                    }
+                );
+
+            // Listen to Focus Button
+            $("a.focus").click(function(){
+                var zoneId = $(this).data("id");
+                var extent = zonesFC[zoneId].getGeometry().getExtent();
+                map.getView().fit(extent, map.getSize());
+            });
+
+           // Readjust columns width (because bootstrapSwitch resizing).
+           this.DataTable().columns.adjust().draw();
         }
     });
 
@@ -107,27 +132,6 @@ $(function () {
         column.val('select');
     });
 
-    $(column).change(function() {
-        var value = $(this).val();
-
-        if(value == 'beginningTs') {
-            filterDate = true;
-            search.val('');
-            $(search).datepicker({
-                autoclose: true,
-                format: 'yyyy-mm-dd',
-                weekStart: 1
-            });
-
-        } else {
-            filterDate = false;
-            search.val('');
-            $(search).datepicker("remove");
-        }
-
-    });
-
-
     ///// OpenStreetMap Section /////
     // Set the vector source; will contain the map data
     var vectorSource = {};
@@ -135,11 +139,16 @@ $(function () {
     // Set the features collection
     var zonesFC = {};
 
+    // Adding features to Feature Collection
+    $.each(zones,function(key,val){
+        zonesFC[key] = new ol.Feature({
+            geometry: format.readGeometry(val, {featureProjection: 'EPSG:3857'})
+        });
+        zonesFC[key].setId(key);
+    });
+
     // The collection of features selected
     var featureOverlaySource = {};
-
-    // The loaded tracks (features)
-    var zones = [];
 
     // The MAP
     var OSM = new ol.layer.Tile({
@@ -165,7 +174,15 @@ $(function () {
                 width: 3
             })
         })],
-
+        "Polygon": [new ol.style.Style({
+            fill: new ol.style.Fill({
+                color: 'rgba(67, 163, 76, 0.5)'
+            }),
+            stroke: new ol.style.Stroke({
+                color: 'red',
+                width: 2
+            })
+        })],
         // Tracks
         "MultiLineString": [new ol.style.Style({
             stroke: new ol.style.Stroke({
@@ -177,7 +194,7 @@ $(function () {
 
     var vectorSource = new ol.source.Vector({
         projection: "EPSG:3857",
-        format: new ol.format.GPX()
+        format: new ol.format.GeoJSON()
     });
 
     var zonesLayer = new ol.layer.Vector({
@@ -197,30 +214,39 @@ $(function () {
     var map = new ol.Map({
         layers: [OSM, zonesLayer],
         target: document.getElementById("map"),
+        interactions: ol.interaction.defaults({mouseWheelZoom:false}),
+        controls: ol.control.defaults({
+          attributionOptions: /** @type {olx.control.AttributionOptions} */ ({
+            collapsible: false
+          })
+        }),
         view: view
     });
 
-    // Set the overlay for the selected zones
-    var featureOverlaySource = new ol.source.Vector({});
-    var featureOverlay = new ol.layer.Vector({
-        source: featureOverlaySource,
-        style:
-            function(feature){
-                return hoverstyle[feature.getGeometry().getType()];
-            }
-    });
-    // Add the overlay to the MAP ol.obj
-    featureOverlay.setMap(map);
+    vectorSource.addFeature(new ol.Feature(new ol.geom.Circle([5e6, 7e6], 1e6)));
 
-    // Bind the entire map mouse moving
-    map.on("pointermove", function(evt) {
-        if (evt.dragging) {
-            return;
-        }
-        if (!$.oe.listenHover){
-            return;
-        }
-        var pixel = map.getEventPixel(evt.originalEvent);
-    });
+    var format = new ol.format.GeoJSON(); 
 
-});
+    var drawZone = function(zoneId) {
+        vectorSource.addFeature(zonesFC[zoneId]);
+    };
+
+    var removeZone = function(zoneId) {
+        vectorSource.removeFeature(zonesFC[zoneId]);
+    };
+
+    // Window Resize Action Bind
+    var resizeId;
+    $(window).resize(function() {
+        clearTimeout(resizeId);
+        resizeId = setTimeout(doneResizing, 500);
+    });
+    doneResizing = function(){
+        var newHeight = $(window).height();
+        $(".map").css("height", newHeight - 280);
+        map.updateSize();
+    };
+
+    // Set to the map the current page height
+    doneResizing();
+//});

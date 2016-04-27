@@ -1,0 +1,99 @@
+<?php
+    $form = $this->zoneForm->prepare();
+?>
+<div class="page-content-wrapper">
+    <div class="page-content">
+
+        <!-- BEGIN PAGE HEADER-->
+        <div class="row">
+            <div class="col-lg-6">
+                <h3 class="page-title"><?= $this->translate("MODIFICA ZONA:"); ?> <?= $this->zone->getName(); ?></h3>
+            </div>
+            <div class="col-lg-6">
+                <a href="<?= $this->url('zones'); ?>" class="btn btn-success pull-right">
+                    <i class="fa fa-arrow-left"></i> <?= $this->translate("Torna alla lista"); ?>
+                </a>
+            </div>
+        </div>
+        <div class="page-bar">
+        </div>
+        <hr>
+        <div class="row">
+            <div class="col-md-12">
+
+                <?= $this->partial('partials/flash-messages.phtml', []); ?>
+
+                <?= $this->form()->openTag($form); ?>
+                <div class="row">
+                    <div class="col-lg-3">
+                        <div class="form-group">
+                            <label for="name"><?= $this->translate("Nome"); ?></label>
+                            <?php
+                            $name = $form->get('zone')->get('name');
+                            echo $this->formElement($name);
+                            ?>
+                        </div>
+                    </div>
+                    <div class="col-lg-3">
+                        <div class="form-group">
+                            <label for="active"><?= $this->translate("Attivo"); ?></label>
+                            <?php
+                            $active = $form->get('zone')->get('active');
+                            echo $this->formElement($active);
+                            echo $this->formElementErrors($active, array('class' => 'text-danger list-unstyled'));
+                            ?>
+                        </div>
+                    </div>
+                    <div class="col-lg-3">
+                        <div class="form-group">
+                            <label for="hidden"><?= $this->translate("Nascosto"); ?></label>
+                            <?php
+                            $hidden = $form->get('zone')->get('hidden');
+                            echo $this->formElement($hidden);
+                            echo $this->formElementErrors($hidden, array('class' => 'text-danger list-unstyled'));
+                            ?>
+                        </div>
+                    </div>
+                    <div class="col-lg-3">
+                        <div class="form-group">
+                            <label for="invoiceDescription"><?= $this->translate("Descrizione"); ?></label>
+                            <?php
+                            $invoiceDescription = $form->get('zone')->get('invoiceDescription');
+                            echo $this->formElement($invoiceDescription);
+                            echo $this->formElementErrors($invoiceDescription, array('class' => 'text-danger list-unstyled'));
+                            ?>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-3">
+                        <div class="form-group">
+                            <label for="revGeo"><?= $this->translate("RevGeo"); ?></label>
+                            <?php
+                            $revGeo = $form->get('zone')->get('revGeo');
+                            echo $this->formElement($revGeo);
+                            echo $this->formElementErrors($revGeo, array('class' => 'text-danger list-unstyled'));
+                            ?>
+                        </div>
+                    </div>
+                    <div class="col-lg-9">
+                        <div class="form-group">
+                            <label for="areaUse"><?= $this->translate("areaUse"); ?></label>
+                            <?php
+                            $areaUse = $form->get('zone')->get('areaUse');
+                            echo $this->formElement($areaUse);
+                            echo $this->formElementErrors($areaUse, array('class' => 'text-danger list-unstyled'));
+                            ?>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-12">
+                        <button type="submit" class="btn btn-success"><?= $this->translate("Modifica Zona"); ?></button>
+                    </div>
+                </div>
+                <?= $this->form()->closeTag(); ?>
+            </div>
+        </div>
+    </div>
+</div>

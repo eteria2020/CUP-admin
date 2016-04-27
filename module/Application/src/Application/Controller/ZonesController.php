@@ -1,30 +1,45 @@
 <?php
 namespace Application\Controller;
 
-use Application\Entity\Webuser;
-use Application\Form\UserForm;
-use Application\Form\Validator\DuplicateEmail;
+// Internals
+use Application\Entity\Zone;
+use Application\Form\ZoneForm;
 use SharengoCore\Service\ZonesService;
+// Externals
 use Zend\Form\Form;
 use Zend\Http\Response;
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
 use Zend\View\Model\JsonModel;
-use DoctrineModule\Stdlib\Hydrator\DoctrineObject as DoctrineHydrator;
-
+use Zend\Stdlib\Hydrator\HydratorInterface;
 
 class ZonesController extends AbstractActionController
 {
     /**
-     * @var ZoneService
+     * @var zonesService
      */
-    private $zoneService;
+    private $zonesService;
+    
+    /**
+     * @var \Zend\Stdlib\Hydrator\HydratorInterface
+     */
+    private $hydrator;
+
+    /**
+     * @var ZoneForm
+     */
+    private $zoneForm;
 
     /**
      */
-    public function __construct(ZonesService $zoneService)
-    {
-        $this->zoneService = $zoneService;
+    public function __construct(
+        ZonesService $zonesService,
+        ZoneForm $zoneForm,
+        HydratorInterface $hydrator
+    ) {
+        $this->zoneForm = $zoneForm;
+        $this->hydrator = $hydrator;
+        $this->zonesService = $zonesService;
     }
 
     public function indexAction()
@@ -32,10 +47,10 @@ class ZonesController extends AbstractActionController
         return new ViewModel();
     }
 
-    public function tripTabAction()
+    public function listTabAction()
     {
         $view = new ViewModel([
-            'list' => $this->zoneService->getListZones()
+            'list' => $this->zonesService->getListZones()
         ]);
         $view->setTerminal(true);
 
@@ -45,7 +60,7 @@ class ZonesController extends AbstractActionController
     public function zoneAlarmsAction()
     {
         $view = new ViewModel([
-            'list' => $this->zoneService->getListZonesAlarms()
+            'list' => $this->zonesService->getListZonesAlarms()
         ]);
 
         return $view;
@@ -54,7 +69,7 @@ class ZonesController extends AbstractActionController
     public function groupsTabAction()
     {
         $view = new ViewModel([
-            'list' => $this->zoneService->getListZonesGroups()
+            'list' => $this->zonesService->getListZonesGroups()
         ]);
         $view->setTerminal(true);
 
@@ -64,7 +79,7 @@ class ZonesController extends AbstractActionController
     public function pricesTabAction()
     {
         $view = new ViewModel([
-            'list' => $this->zoneService->getListZonesPrices()
+            'list' => $this->zonesService->getListZonesPrices()
         ]);
         $view->setTerminal(true);
 
@@ -75,8 +90,8 @@ class ZonesController extends AbstractActionController
     {
         $as_filters = $this->params()->fromPost();
         $as_filters['withLimit'] = true;
-        $as_dataDataTable = $this->zoneService->getDataDataTable($as_filters);
-        $i_totalZones = $this->zoneService->getTotalZones();
+        $as_dataDataTable = $this->zonesService->getDataDataTable($as_filters);
+        $i_totalZones = $this->zonesService->getTotalZones();
         $i_recordsFiltered = $this->getRecordsFiltered($as_filters, $i_totalZones);
 
         return new JsonModel([
@@ -93,8 +108,54 @@ class ZonesController extends AbstractActionController
             return $i_totalZones;
         } else {
             $as_filters['withLimit'] = false;
-            return $this->zoneService->getDataDataTable($as_filters, true);
+            return $this->zonesService->getDataDataTable($as_filters, true);
         }
+    }
+
+    public function editAction()
+    {
+        $translator = $this->TranslatorPlugin();
+        $id = $this->params()->fromRoute('id', 0);
+        $zone = $this->zonesService->getZoneById($id);
+
+        if (is_null($zone)) {
+            $this->getResponse()->setStatusCode(Response::STATUS_CODE_404);
+            return false;
+        }
+        /** @var ZoneForm $form */
+        $form = $this->zoneForm;
+
+        $zoneData = $this->hydrator->extract($zone);
+        $data = [];
+        $data['zone'] = $zoneData;
+
+        $form->setData($data);
+
+        if ($this->getRequest()->isPost()) {
+            $postData = $this->getRequest()->getPost()->toArray();
+            $postData['zone']['id'] = $zone->getId();
+
+            $form->setData($postData);
+
+            if ($form->isValid()) {
+                try {
+                    $this->zonesService->saveData($form->getData(),true);
+                    $this->flashMessenger()->addSuccessMessage($translator->translate('Zona modificata con successo!'));
+
+                } catch (\Exception $e) {
+                    $this->flashMessenger()
+                        ->addErrorMessage($translator->translate('Si è verificato un errore applicativo.'));
+                }
+
+                return $this->redirect()->toRoute('zones');
+            }
+        }
+
+        $view = new ViewModel([
+            'zone'                           => $zone,
+            'zoneForm'                       => $form,
+        ]);
+        return $view;
     }
 
 }

@@ -9,6 +9,10 @@ namespace Application;
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
 $translator = new \Zend\I18n\Translator\Translator;
+
+// Getting the siteroot path ( = sharengo-admin folder)
+$baseDir = realpath(__DIR__.'/../../../');
+
 return [
     'router' => [
         'routes' => [
@@ -803,10 +807,10 @@ return [
                 ],
                 'may_terminate' => true,
                 'child_routes' => [
-                    'ajax-tab-trip' => [
+                    'ajax-tab-list' => [
                         'type'    => 'Literal',
                         'options' => [
-                            'route' => '/ajax-tab-trip',
+                            'route' => '/ajax-tab-list',
                             'defaults' => [
                                 'action' => 'list-tab',
                             ],
@@ -1156,8 +1160,50 @@ return [
             'EditTripForm' => 'Application\Form\EditTripFormFactory',
             'ConfigurationsForm' => 'Application\Form\ConfigurationsFormFactory',
             'ChangeLanguageDetector.listener' => 'Application\Listener\ChangeLanguageDetectorFactory',
-
+            'ZoneForm' => 'Application\Form\ZoneFormFactory',
         ]
+    ],
+    'asset_manager' => [
+        'caching' => [
+            'default' => [
+                'cache' => 'Assetic\\Cache\\FilesystemCache',
+                'options' => [
+                    'dir' => 'data/cache', // path/to/cache
+                ],
+            ],
+        ],
+        'resolver_configs' => [
+            'collections' => [
+                // Specific Asset for Trips (main] Page.
+                'assets-modules/js/vendor.zones.js' => [
+                    // Libs
+                    'ol3/ol-debug.js',
+                    'bootstrap-switch/dist/js/bootstrap-switch.js',
+                ],
+                'assets-modules/css/vendor.zones.css' => [
+                    // Libs
+                    'ol3/ol.css',
+                    'bootstrap-switch/dist/css/bootstrap3/bootstrap-switch.css',
+                ],
+           ],
+           'paths' => [
+                $baseDir.'/bower_components',
+            ],
+        ],
+        'filters' => [
+            // Minify All JS
+            'js' => [
+                [
+                    'filter' => 'JSMin',
+                ],
+            ],
+            // Minify All CSS
+            'css' => [
+                [
+                    'filter' => 'CssMin',
+                ],
+            ],
+        ],
     ],
     'controllers' => [
         'invokables' => [
