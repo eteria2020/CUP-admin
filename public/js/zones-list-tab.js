@@ -7,6 +7,22 @@
     var columnWithoutLike = false;
     var columnValueWithoutLike = false;
 
+    // Set the vector source; will contain the map data
+    var vectorSource = {};
+
+    // Set the features collection
+    var zonesFC = {};
+
+    var format = new ol.format.GeoJSON();
+
+    // Adding features to Feature Collection
+    $.each(zones,function(key,val){
+        zonesFC[key] = new ol.Feature({
+            geometry: format.readGeometry(val, {featureProjection: 'EPSG:3857'})
+        });
+        zonesFC[key].setId(key);
+    });
+
     search.val("");
     column.val("select");
 
@@ -133,20 +149,6 @@
     });
 
     ///// OpenStreetMap Section /////
-    // Set the vector source; will contain the map data
-    var vectorSource = {};
-
-    // Set the features collection
-    var zonesFC = {};
-
-    // Adding features to Feature Collection
-    $.each(zones,function(key,val){
-        zonesFC[key] = new ol.Feature({
-            geometry: format.readGeometry(val, {featureProjection: 'EPSG:3857'})
-        });
-        zonesFC[key].setId(key);
-    });
-
     // The collection of features selected
     var featureOverlaySource = {};
 
@@ -224,8 +226,6 @@
     });
 
     vectorSource.addFeature(new ol.Feature(new ol.geom.Circle([5e6, 7e6], 1e6)));
-
-    var format = new ol.format.GeoJSON(); 
 
     var drawZone = function(zoneId) {
         vectorSource.addFeature(zonesFC[zoneId]);
