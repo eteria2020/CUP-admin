@@ -5,6 +5,7 @@ namespace Application\Form;
 use Zend\Form\Fieldset;
 use Zend\InputFilter\InputFilterProviderInterface;
 use Zend\Mvc\I18n\Translator;
+use Zend\Stdlib\Hydrator\HydratorInterface;
 
 use SharengoCore\Entity\CarsConfigurations;
 
