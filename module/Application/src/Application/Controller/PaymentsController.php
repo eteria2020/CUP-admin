@@ -104,7 +104,11 @@ class PaymentsController extends AbstractActionController
 
     public function failedPaymentsAction()
     {
-        return new ViewModel();
+        $sessionDatatableFilters = $this->tripPaymentsService->getDataTableSessionFilters();
+
+        return new ViewModel([
+            'filters' => $sessionDatatableFilters,
+        ]);
     }
 
     public function failedPaymentsDatatableAction()

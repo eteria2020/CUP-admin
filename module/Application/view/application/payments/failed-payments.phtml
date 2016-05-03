@@ -7,20 +7,15 @@ $this->headScript()
 ?>
 <div class="page-content-wrapper">
     <div class="page-content">
-
         <!-- BEGIN PAGE HEADER-->
         <h3 class="page-title">
             <?= $this->translate("PAGAMENTI FALLITI"); ?> <small><?= $this->translate("ricerca"); ?></small>
         </h3>
-
         <div class="page-bar">
         </div>
-
         <div class="row">
             <div class="col-md-12">
-
                 <?= $this->partial('partials/flash-messages.phtml', []); ?>
-
                 <div class="row">
                     <div class="col-md-8">
                         <div class="form-inline">
@@ -46,9 +41,7 @@ $this->headScript()
                         </div>
                     </div>
                 </div>
-
                 <hr>
-
                 <!-- BEGIN EXAMPLE TABLE PORTLET-->
                 <div class="portlet box green">
                     <div class="portlet-title">
@@ -80,7 +73,13 @@ $this->headScript()
                 <!-- END EXAMPLE TABLE PORTLET-->
             </div>
         </div>
-
         <!-- END PAGE CONTENT-->
     </div>
 </div>
+<script>
+    var filters = {<?php
+        foreach ($this->filters as $key => $value) {
+            echo '"'.$key.'": "'.$value.'", ';
+        }
+    ?>};
+</script>

@@ -1,30 +1,54 @@
-/* global $ */
-
+/* global filters:true, $ confirm document translate */
 $(function() {
     "use strict";
 
-    var table = $('#js-payments-table'),
-        search = $('#js-value'),
-        column = $('#js-column'),
-        typeClean = $('#js-clean-type'),
+     // DataTables
+    var table = $("#js-payments-table");
+
+    // Define DataTables Filters
+    var searchValue = $("#js-value");
+    var column = $("#js-column");
+    var iSortCol_0 = 0;
+    var sSortDir_0 = "desc";
+    var iDisplayLength = 10;
+
+    var typeClean = $("#js-clean-type"),
         filterWithoutLike = false,
         columnWithoutLike = false,
         columnValueWithoutLike = false;
 
-    search.val('');
-    column.val('select');
+    searchValue.val("");
+    column.val("select");
+
+    if (typeof filters !== "undefined"){
+        if (typeof filters.searchValue !== "undefined"){
+            searchValue.val(filters.searchValue);
+        }
+        if (typeof filters.column !== "undefined"){
+            column.val(filters.column);
+        }
+        if (typeof filters.iSortCol_0 !== "undefined"){
+            iSortCol_0 = filters.iSortCol_0;
+        }
+        if (typeof filters.sSortDir_0 !== "undefined"){
+            sSortDir_0 = filters.sSortDir_0;
+        }
+        if (typeof filters.iDisplayLength !== "undefined"){
+            iDisplayLength = filters.iDisplayLength;
+        }
+    }
 
     function toStringKeepZero(value)
     {
-        return ((value < 10) ? '0' : '') + value;
+        return ((value < 10) ? "0" : "") + value;
     }
 
     function renderAmount(amount)
     {
         return (Math.floor(amount / 100)) +
-            ',' +
+            "," +
             toStringKeepZero(amount % 100) +
-            ' \u20ac';
+            " \u20ac";
     }
 
     function renderDiscount(discount)
@@ -45,7 +69,7 @@ $(function() {
         "sAjaxSource": "/payments/failed-payments-datatable",
         "fnServerData": function ( sSource, aoData, fnCallback, oSettings ) {
             oSettings.jqXHR = $.ajax( {
-                "dataType": 'json',
+                "dataType": "json",
                 "type": "POST",
                 "url": sSource,
                 "data": aoData,
@@ -54,33 +78,33 @@ $(function() {
         },
         "fnServerParams": function ( aoData ) {
             if(filterWithoutLike) {
-                aoData.push({ "name": "column", "value": ''});
-                aoData.push({ "name": "searchValue", "value": ''});
+                aoData.push({ "name": "column", "value": ""});
+                aoData.push({ "name": "searchValue", "value": ""});
                 aoData.push({ "name": "columnWithoutLike", "value": columnWithoutLike});
                 aoData.push({ "name": "columnValueWithoutLike", "value": columnValueWithoutLike});
             } else {
                 aoData.push({ "name": "column", "value": $(column).val()});
-                aoData.push({ "name": "searchValue", "value": search.val().trim()});
+                aoData.push({ "name": "searchValue", "value": searchValue.val().trim()});
             }
 
             aoData.push({ "name": "fixedColumn", "value": "e.status"});
             aoData.push({ "name": "fixedValue", "value": "wrong_payment"});
             aoData.push({ "name": "fixedLike", "value": false});
         },
-        "order": [[0, 'desc']],
+        "order": [[iSortCol_0, sSortDir_0]],
         "columns": [
-            {data: 'e.firstPaymentTryTs'},
-            {data: 'cu.id'},
-            {data: 'cu.name'},
-            {data: 'cu.surname'},
-            {data: 'cu.mobile'},
-            {data: 'cu.email'},
-            {data: 'e.trip'},
-            {data: 'e.tripMinutes'},
-            {data: 'e.parkingMinutes'},
-            {data: 'e.discountPercentage'},
-            {data: 'e.totalCost'},
-            {data: 'button'}
+            {data: "e.firstPaymentTryTs"},
+            {data: "cu.id"},
+            {data: "cu.name"},
+            {data: "cu.surname"},
+            {data: "cu.mobile"},
+            {data: "cu.email"},
+            {data: "e.trip"},
+            {data: "e.tripMinutes"},
+            {data: "e.parkingMinutes"},
+            {data: "e.discountPercentage"},
+            {data: "e.totalCost"},
+            {data: "button"}
         ],
         "columnDefs": [
             {
@@ -134,7 +158,7 @@ $(function() {
             },
             {
                 targets: 11,
-                data: 'button',
+                data: "button",
                 searchable: false,
                 sortable: false,
                 render: function (data) {
@@ -148,47 +172,47 @@ $(function() {
             [10, 20, 30],
             [10, 20, 30]
         ],
-        "pageLength": 10,
+        "pageLength": iDisplayLength,
         "pagingType": "bootstrap_full_number",
         "language": {
-            "sEmptyTable":     translate("sCustomersEmptyTable"),
-            "sInfo":           translate("sInfo"),
-            "sInfoEmpty":      translate("sInfoEmpty"),
-            "sInfoFiltered":   translate("sInfoFiltered"),
-            "sInfoPostFix":    "",
-            "sInfoThousands":  ",",
-            "sLengthMenu":     translate("sLengthMenu"),
+            "sEmptyTable": translate("sCustomersEmptyTable"),
+            "sInfo": translate("sInfo"),
+            "sInfoEmpty": translate("sInfoEmpty"),
+            "sInfoFiltered": translate("sInfoFiltered"),
+            "sInfoPostFix": "",
+            "sInfoThousands": ",",
+            "sLengthMenu": translate("sLengthMenu"),
             "sLoadingRecords": translate("sLoadingRecords"),
-            "sProcessing":     translate("sProcessing"),
-            "sSearch":         translate("sSearch"),
-            "sZeroRecords":    translate("sZeroRecords"),
+            "sProcessing": translate("sProcessing"),
+            "sSearch": translate("sSearch"),
+            "sZeroRecords": translate("sZeroRecords"),
             "oPaginate": {
-                "sFirst":      translate("oPaginateFirst"),
-                "sPrevious":   translate("oPaginatePrevious"),
-                "sNext":       translate("oPaginateNext"),
-                "sLast":       translate("oPaginateLast"),
+                "sFirst": translate("oPaginateFirst"),
+                "sPrevious": translate("oPaginatePrevious"),
+                "sNext": translate("oPaginateNext"),
+                "sLast": translate("oPaginateLast")
             },
             "oAria": {
-                "sSortAscending":   translate("sSortAscending"),
-                "sSortDescending":  translate("sSortDescending")
+                "sSortAscending": translate("sSortAscending"),
+                "sSortDescending": translate("sSortDescending")
             }
         }
     });
 
-    $('#js-search').click(function() {
+    $("#js-search").click(function() {
         // Always set the columnValueWithoutLike (even for columns that will be filtered with the "LIKE" stmt.).
-        columnValueWithoutLike = search.val();
+        columnValueWithoutLike = searchValue.val();
 
         // Filter Action
         table.fnFilter();
     });
 
-    $('#js-clear').click(function() {
-        search.val('');
-        search.prop('disabled', false);
+    $("#js-clear").click(function() {
+        searchValue.val("");
+        searchValue.prop("disabled", false);
         typeClean.hide();
-        search.show();
-        column.val('select');
+        searchValue.show();
+        column.val("select");
     });
 
     // Select Changed Action
@@ -197,22 +221,22 @@ $(function() {
         var value = $(this).val();
 
         // Column that need the standard "LIKE" search operator
-        if (value === 'cu.surname') {
+        if (value === "cu.surname") {
             filterWithoutLike = false;
-            search.val('');
-            search.prop('disabled', false);
+            searchValue.val("");
+            searchValue.prop("disabled", false);
             typeClean.hide();
-            search.show();
+            searchValue.show();
         } else {
             filterWithoutLike = true;
-            search.val('');
-            search.prop('disabled', false);
+            searchValue.val("");
+            searchValue.prop("disabled", false);
             typeClean.hide();
-            search.show();
+            searchValue.show();
 
             switch (value) {
                 // Columns that need a "=" instead the standard "LIKE" search operator.
-                case 'e.trip':
+                case "e.trip":
                     columnWithoutLike = value;
                     //columnValueWithoutLike = true;
                     break;
