@@ -1,7 +1,9 @@
 <?php
 namespace Application\Controller;
 
+// Internals
 use SharengoCore\Service\ReservationsService;
+// Externals
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\JsonModel;
 use Zend\View\Model\ViewModel;
@@ -20,7 +22,11 @@ class ReservationsController extends AbstractActionController
 
     public function indexAction()
     {
-        return new ViewModel([]);
+        $sessionDatatableFilters = $this->reservationsService->getDataTableSessionFilters();
+
+        return new ViewModel([
+            'filters' => $sessionDatatableFilters,
+        ]);
     }
 
     public function datatableAction()

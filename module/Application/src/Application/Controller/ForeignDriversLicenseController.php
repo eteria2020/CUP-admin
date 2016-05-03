@@ -33,7 +33,11 @@ class ForeignDriversLicenseController extends AbstractActionController
 
     public function uploadedFilesAction()
     {
-        return new ViewModel();
+        $sessionDatatableFilters = $this->foreignDriversLicenseService->getDataTableSessionFilters();
+
+        return new ViewModel([
+            'filters' => $sessionDatatableFilters,
+        ]);
     }
 
     public function datatableAction()

@@ -1,12 +1,37 @@
+/* global  filters:true */
 $(function() {
+    // DataTables
+    var table = $("#js-invoices-table");
 
-    var table    = $('#js-invoices-table');
-    var search   = $('#js-value');
-    var column   = $('#js-column');
+    // Define DataTables Filters
+    var searchValue = $("#js-value");
+    var column = $("#js-column");
+    var iSortCol_0 = 0;
+    var sSortDir_0 = "desc";
+    var iDisplayLength = 100;
+
     var typePayment = $('#js-payment-type');
 
-    search.val('');
-    column.val('select');
+    searchValue.val("");
+    column.val("select");
+
+    if(typeof filters !== "undefined"){
+        if(typeof filters.searchValue !== "undefined"){
+            searchValue.val(filters.searchValue);
+        }
+        if(typeof filters.column !== "undefined"){
+            column.val(filters.column);
+        }
+        if(typeof filters.iSortCol_0 !== "undefined"){
+            iSortCol_0=filters.iSortCol_0;
+        }
+        if(typeof filters.sSortDir_0 !== "undefined"){
+            sSortDir_0=filters.sSortDir_0;
+        }
+        if(typeof filters.iDisplayLength !== "undefined"){
+            iDisplayLength=filters.iDisplayLength;
+        }
+    }
 
     table.dataTable({
         "processing": true,
@@ -25,14 +50,14 @@ $(function() {
         },
         "fnServerParams": function ( aoData ) {
             aoData.push({ "name": "column", "value": $(column).val()});
-            aoData.push({ "name": "searchValue", "value": formatData().trim()});
+            aoData.push({ "name": "searchValue", "value": $(searchValue).val().trim()});
         },
-        "order": [[0, 'asc']],
+        "order": [[iSortCol_0, sSortDir_0]],
         "columns": [
             {data: 'e.invoiceNumber'},
             {data: 'e.invoiceDate'},
-            {data: 'e.customerName'},
-            {data: 'e.customerSurname'},
+            {data: 'cu.name'},
+            {data: 'cu.surname'},
             {data: 'e.type'},
             {data: 'e.amount'},
             {data: 'link'}
@@ -47,7 +72,7 @@ $(function() {
             {
                 targets: [2, 3],
                 "render": function ( data, type, row ) {
-                    return '<a href="/customers/edit/'+row.e.customerId+'" title="' + translate("showProfileOf") + ' '+row.e.customerName+' '+row.e.customerSurname+'">'+data+'</a>';
+                    return '<a href="/customers/edit/'+row.cu.id+'" title="' + translate("showProfileOf") + ' '+row.cu.name+' '+row.cu.surname+'">'+data+'</a>';
                 }
             },
             {
@@ -76,7 +101,7 @@ $(function() {
             [100, 200, 300],
             [100, 200, 300]
         ],
-        "pageLength": 100,
+        "pageLength": iDisplayLength,
         "pagingType": "bootstrap_full_number",
         "language": {
             "sEmptyTable":     translate("sInvoicesEmptyTable"),
@@ -108,27 +133,20 @@ $(function() {
     });
 
     $('#js-clear').click(function() {
-        search.val('');
-        search.prop('disabled', false);
+        searchValue.val('');
+        searchValue.prop('disabled', false);
         typeClean.hide();
-        search.show();
+        searchValue.show();
         column.val('select');
         filterWithoutLike = false;
     });
 
     $(column).change(function() {
         var value = $(this).val();
-        search.val('');
+        searchValue.val('');
         typePayment.hide();
-        search.show();
+        searchValue.show();
     });
-
-    function formatData()
-    {
-        var value = $(column).val();
-        var searchValue = $(search).val();
-        return searchValue;
-    }
 
     function renderDate(date)
     {

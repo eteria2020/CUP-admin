@@ -1,15 +1,39 @@
-/* global $ translate */
-
+/* global  filters:true, translate:true, $ */
 $(function() {
     "use strict";
 
-    var table = $('#unpayed-trips-table');
-    var search = $('#js-value');
-    var column = $('#js-column');
-    var filterWithNull = false;
-    search.val('');
-    column.val('select');
+    // DataTables
+    var table = $("#unpayed-trips-table");
 
+    // Define DataTables Filters
+    var searchValue = $("#js-value");
+    var column = $("#js-column");
+    var iSortCol_0 = 0;
+    var sSortDir_0 = "desc";
+    var iDisplayLength = 100;
+
+    var filterWithNull = false;
+
+    searchValue.val("");
+    column.val("select");
+
+    if(typeof filters !== "undefined"){
+        if(typeof filters.searchValue !== "undefined"){
+            searchValue.val(filters.searchValue);
+        }
+        if(typeof filters.column !== "undefined"){
+            column.val(filters.column);
+        }
+        if(typeof filters.iSortCol_0 !== "undefined"){
+            iSortCol_0=filters.iSortCol_0;
+        }
+        if(typeof filters.sSortDir_0 !== "undefined"){
+            sSortDir_0=filters.sSortDir_0;
+        }
+        if(typeof filters.iDisplayLength !== "undefined"){
+            iDisplayLength=filters.iDisplayLength;
+        }
+    }
 
     table.dataTable({
         "processing": true,
@@ -24,23 +48,20 @@ $(function() {
                 "url": sSource,
                 "data": aoData,
                 "success": fnCallback,
-                "error": function() {
-                }
-            } );
+                "error": function() {}
+            });
         },
         "fnServerParams": function ( aoData ) {
-
             if(filterWithNull) {
                 aoData.push({ "name": "column", "value": ''});
                 aoData.push({ "name": "searchValue", "value": ''});
                 aoData.push({ "name": "columnNull", "value": "e.timestampEnd"});
             } else {
                 aoData.push({ "name": "column", "value": $(column).val()});
-                aoData.push({ "name": "searchValue", "value": search.val().trim()});
+                aoData.push({ "name": "searchValue", "value": searchValue.val().trim()});
             }
-
         },
-        "order": [[0, 'desc']],
+        "order": [[iSortCol_0, sSortDir_0]],
         "columns": [
             {data: 'e.id'},
             {data: 'cu.surname'},
@@ -57,7 +78,6 @@ $(function() {
             {data: 'e.totalCost'}
         ],
         "columnDefs": [
-
             {
                 targets: [1, 2],
                 "render": function (data, type, row) {
@@ -76,7 +96,7 @@ $(function() {
             [100, 200, 300],
             [100, 200, 300]
         ],
-        "pageLength": 100,
+        "pageLength": iDisplayLength,
         "pagingType": "bootstrap_full_number",
         "language": {
             "sEmptyTable": translate("sTripEmptyTable"),
@@ -108,25 +128,25 @@ $(function() {
     });
 
     $('#js-clear').click(function() {
-        search.val('');
+        searchValue.val('');
         column.val('select');
-        search.prop('disabled', false);
+        searchValue.prop('disabled', false);
         filterWithNull = false;
-        search.show();
+        searchValue.show();
     });
 
     $(column).change(function() {
         var value = $(this).val();
 
-        search.show();
-        search.val('');
+        searchValue.show();
+        searchValue.val('');
 
         if(value === 'c.timestampEnd') {
             filterWithNull = true;
-            search.prop('disabled', true);
+            searchValue.prop('disabled', true);
         } else {
             filterWithNull = false;
-            search.prop('disabled', false);
+            searchValue.prop('disabled', false);
         }
     });
 

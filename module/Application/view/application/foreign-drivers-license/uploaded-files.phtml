@@ -88,3 +88,10 @@ $this->headScript()
         <!-- END PAGE CONTENT-->
     </div>
 </div>
+<script>
+    var filters = {<?php
+        foreach ($this->filters as $key => $value) {
+            echo '"'.$key.'": "'.$value.'", ';
+        }
+    ?>};
+</script>

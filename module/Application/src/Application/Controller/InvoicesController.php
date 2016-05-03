@@ -23,7 +23,11 @@ class InvoicesController extends AbstractActionController
 
     public function indexAction()
     {
-        return new ViewModel([]);
+        $sessionDatatableFilters = $this->invoicesService->getDataTableSessionFilters();
+
+        return new ViewModel([
+            'filters' => $sessionDatatableFilters,
+        ]);
     }
 
     public function datatableAction()

@@ -134,8 +134,11 @@ class CustomersController extends AbstractActionController
 
     public function listAction()
     {
+        $sessionDatatableFilters = $this->customersService->getDataTableSessionFilters();
+
         return new ViewModel([
-            'totalCustomers' => $this->customersService->getTotalCustomers()
+            'totalCustomers' => $this->customersService->getTotalCustomers(),
+            'filters' => $sessionDatatableFilters,
         ]);
     }
 

@@ -1,13 +1,37 @@
-/* global $ confirm document translate */
-
+/* global filters:true, $ confirm document translate */
 $(function() {
-    'use strict';
+    "use strict";
 
-    var table = $('#js-files-table');
-    var search = $('#js-value');
-    var column = $('#js-column');
-    search.val('');
-    column.val('select');
+    // DataTables
+    var table = $("#js-files-table");
+
+    // Define DataTables Filters
+    var searchValue = $("#js-value");
+    var column = $("#js-column");
+    var iSortCol_0 = 0;
+    var sSortDir_0 = "desc";
+    var iDisplayLength = 10;
+
+    searchValue.val("");
+    column.val("select");
+
+    if(typeof filters !== "undefined"){
+        if(typeof filters.searchValue !== "undefined"){
+            searchValue.val(filters.searchValue);
+        }
+        if(typeof filters.column !== "undefined"){
+            column.val(filters.column);
+        }
+        if(typeof filters.iSortCol_0 !== "undefined"){
+            iSortCol_0=filters.iSortCol_0;
+        }
+        if(typeof filters.sSortDir_0 !== "undefined"){
+            sSortDir_0=filters.sSortDir_0;
+        }
+        if(typeof filters.iDisplayLength !== "undefined"){
+            iDisplayLength=filters.iDisplayLength;
+        }
+    }
 
     function showStatus(data) {
         var confirmText;
@@ -45,16 +69,16 @@ $(function() {
         },
         "fnServerParams": function (aoData) {
             aoData.push({"name": "column", "value": $(column).val()});
-            aoData.push({"name": "searchValue", "value": search.val().trim()});
+            aoData.push({"name": "searchValue", "value": searchValue.val().trim()});
         },
-        "order": [[0, 'desc']],
+        "order": [[iSortCol_0, sSortDir_0]],
         "columns": [
-            {data: 'e.customer'},
+            {data: 'e.customer_id'},
             {data: 'e.customer_name'},
             {data: 'e.customer_surname'},
             {data: 'e.customer_address'},
-            {data: 'e.customer_birthdate'},
-            {data: 'e.customer_birthplace'},
+            {data: 'e.customer_birth_date'},
+            {data: 'e.customer_birth_place'},
             {data: 'e.drivers_license_number'},
             {data: 'e.drivers_license_authority'},
             {data: 'e.drivers_license_country'},
@@ -85,7 +109,7 @@ $(function() {
             [10, 50, 100],
             [10, 50, 100]
         ],
-        "pageLength": 100,
+        "pageLength": iDisplayLength,
         "pagingType": "bootstrap_full_number",
         "language": {
             "sEmptyTable":     translate("sDrivingLicenseEmptyTable"),
@@ -117,7 +141,7 @@ $(function() {
     });
 
     $('#js-clear').click(function () {
-        search.val('');
+        searchValue.val('');
         column.val('select');
     });
 });

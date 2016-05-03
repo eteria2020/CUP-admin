@@ -1,10 +1,32 @@
+/* global  filters:true */
 $(function() {
+    // DataTables
+    var table = $('#js-customers-table');
 
-    var table    = $('#js-customers-table');
-    var search   = $('#js-value');
-    var column   = $('#js-column');
-    search.val('');
-    column.val('select');
+    // Define DataTables Filters
+    var searchValue = $('#js-value');
+    var column = $('#js-column');
+    var iSortCol_0 = 0;
+    var sSortDir_0 = "desc";
+    var iDisplayLength = 100;
+
+    if(typeof filters !== "undefined"){
+        if(typeof filters.searchValue !== "undefined"){
+            searchValue.val(filters.searchValue);
+        }
+        if(typeof filters.column !== "undefined"){
+            column.val(filters.column);
+        }
+        if(typeof filters.iSortCol_0 !== "undefined"){
+            iSortCol_0=filters.iSortCol_0;
+        }
+        if(typeof filters.sSortDir_0 !== "undefined"){
+            sSortDir_0=filters.sSortDir_0;
+        }
+        if(typeof filters.iDisplayLength !== "undefined"){
+            iDisplayLength=filters.iDisplayLength;
+        }
+    }
 
     table.dataTable({
         "processing": true,
@@ -37,9 +59,9 @@ $(function() {
         },
         "fnServerParams": function ( aoData ) {
             aoData.push({ "name": "column", "value": $(column).val()});
-            aoData.push({ "name": "searchValue", "value": search.val().trim()});
+            aoData.push({ "name": "searchValue", "value": searchValue.val().trim()});
         },
-        "order": [[0, 'desc']],
+        "order": [[iSortCol_0, sSortDir_0]],
         "columns": [
             {data: 'e.id'},
             {data: 'e.name'},
@@ -73,7 +95,7 @@ $(function() {
             [100, 200, 300],
             [100, 200, 300]
         ],
-        "pageLength": 100,
+        "pageLength": iDisplayLength,
         "pagingType": "bootstrap_full_number",
         "language": {
             "sEmptyTable":     translate("sCustomersEmptyTable"),
@@ -105,7 +127,7 @@ $(function() {
     });
 
     $('#js-clear').click(function() {
-        search.val('');
+        searchValue.val('');
         column.val('select');
     });
 

@@ -60,7 +60,11 @@ class TripsController extends AbstractActionController
 
     public function indexAction()
     {
-        return new ViewModel();
+        $sessionDatatableFilters = $this->tripsService->getDataTableSessionFilters();
+
+        return new ViewModel([
+            'filters' => $sessionDatatableFilters,
+        ]);
     }
 
     public function datatableAction()

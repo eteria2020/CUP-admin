@@ -1,14 +1,53 @@
+/* global  filters:true */
 $(function() {
+    // DataTables
+    var table = $("#js-trips-table");
 
-    var table    = $('#js-trips-table');
-    var search   = $('#js-value');
-    var column   = $('#js-column');
-    var from = $('#js-date-from');
-    var to = $('#js-date-to');
+    // Define DataTables Filters
+    var searchValue = $("#js-value");
+    var column = $("#js-column");
+    var iSortCol_0 = 0;
+    var sSortDir_0 = "desc";
+    var iDisplayLength = 100;
+    var from = $("#js-date-from");
+    var columnFromDate = "e.timestampBeginning";
+    var to = $("#js-date-to");
+    var columnFromEnd = "e.timestampEnd";
+
     var filterWithNull = false;
-    search.val('');
-    column.val('select');
 
+    searchValue.val("");
+    column.val("select");
+
+    if(typeof filters !== "undefined"){
+        if(typeof filters.searchValue !== "undefined"){
+            searchValue.val(filters.searchValue);
+        }
+        if(typeof filters.column !== "undefined"){
+            column.val(filters.column);
+        }
+        if(typeof filters.iSortCol_0 !== "undefined"){
+            iSortCol_0=filters.iSortCol_0;
+        }
+        if(typeof filters.sSortDir_0 !== "undefined"){
+            sSortDir_0=filters.sSortDir_0;
+        }
+        if(typeof filters.iDisplayLength !== "undefined"){
+            iDisplayLength=filters.iDisplayLength;
+        }
+        if(typeof filters.from !== "undefined"){
+            from.val(filters.from);
+        }
+        if(typeof filters.columnFromDate !== "undefined"){
+            columnFromDate=filters.columnFromDate;
+        }
+        if(typeof filters.to !== "undefined"){
+            to.val(filters.to);
+        }
+        if(typeof filters.columnFromEnd !== "undefined"){
+            columnFromEnd=filters.columnFromEnd;
+        }
+    }
 
     table.dataTable({
         "processing": true,
@@ -23,39 +62,24 @@ $(function() {
                 "url": sSource,
                 "data": aoData,
                 "success": fnCallback,
-                "error": function(jqXHR, textStatus, errorThrown) {
-
-                    /*
-                    if (jqXHR.status == '200' &&
-                        textStatus == 'parsererror') {
-
-                        bootbox.alert('La tua sessione è scaduta, clicca sul pulsante OK per tornare alla pagina di login.', function(r) {
-                            document.location.href = '/user/login';
-                        });
-
-                        //@tofix user come here also if the response is wrong
-
-                    }*/
-                }
-            } );
+                "error": function() {}
+            });
         },
         "fnServerParams": function ( aoData ) {
-
-            if(filterWithNull) {
+            if (filterWithNull) {
                 aoData.push({ "name": "column", "value": ''});
                 aoData.push({ "name": "searchValue", "value": ''});
                 aoData.push({ "name": "columnNull", "value": "e.timestampEnd"});
             } else {
                 aoData.push({ "name": "column", "value": $(column).val()});
-                aoData.push({ "name": "searchValue", "value": search.val().trim()});
+                aoData.push({ "name": "searchValue", "value": searchValue.val().trim()});
             }
-
             aoData.push({ "name": "from", "value": $(from).val().trim()});
             aoData.push({ "name": "to", "value": $(to).val().trim()});
-            aoData.push({ "name": "columnFromDate", "value": "e.timestampBeginning"});
-            aoData.push({ "name": "columnFromEnd", "value": "e.timestampEnd"});
+            aoData.push({ "name": "columnFromDate", "value": columnFromDate});
+            aoData.push({ "name": "columnFromEnd", "value": columnFromEnd});
         },
-        "order": [[0, 'desc']],
+        "order": [[iSortCol_0, sSortDir_0]],
         "columns": [
             {data: 'e.id'},
             {data: 'cu.email'},
@@ -120,7 +144,7 @@ $(function() {
             [100, 200, 300],
             [100, 200, 300]
         ],
-        "pageLength": 100,
+        "pageLength": iDisplayLength,
         "pagingType": "bootstrap_full_number",
         "language": {
             "sEmptyTable":     translate("sTripEmptyTable"),
@@ -152,13 +176,13 @@ $(function() {
     });
 
     $('#js-clear').click(function() {
-        search.val('');
+        searchValue.val('');
         from.val('');
         to.val('');
         column.val('select');
-        search.prop('disabled', false);
+        searchValue.prop('disabled', false);
         filterWithNull = false;
-        search.show();
+        searchValue.show();
     });
 
     $('.date-picker').datepicker({
@@ -170,15 +194,15 @@ $(function() {
     $(column).change(function() {
         var value = $(this).val();
 
-        search.show();
-        search.val('');
+        searchValue.show();
+        searchValue.val('');
 
         if(value == 'c.timestampEnd') {
             filterWithNull = true;
-            search.prop('disabled', true);
+            searchValue.prop('disabled', true);
         } else {
             filterWithNull = false;
-            search.prop('disabled', false);
+            searchValue.prop('disabled', false);
         }
     });
 

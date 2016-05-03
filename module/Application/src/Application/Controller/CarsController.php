@@ -57,8 +57,11 @@ class CarsController extends AbstractActionController
 
     public function indexAction()
     {
+        $sessionDatatableFilters = $this->carsService->getDataTableSessionFilters();
 
-        return new ViewModel([]);
+        return new ViewModel([
+            'filters' => $sessionDatatableFilters,
+        ]);
     }
 
     public function datatableAction()

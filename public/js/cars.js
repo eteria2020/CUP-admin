@@ -1,15 +1,40 @@
+/* global  filters:true */
 $(function() {
+    // DataTables
+    var table = $("#js-cars-table");
 
-    var table    = $('#js-cars-table');
-    var search   = $('#js-value');
-    var column   = $('#js-column');
-    var typeClean = $('#js-clean-type');
-    var filterWithoutLike = false;
+    // Define DataTables Filters
+    var searchValue = $("#js-value");
+    var column = $("#js-column");
+    var typeClean = $("#js-clean-type");
     var columnWithoutLike = false;
-    var columnValueWithoutLike  = false;
+    var columnValueWithoutLike = false;
+    var iSortCol_0 = 0;
+    var sSortDir_0 = "desc";
+    var iDisplayLength = 100;
 
-    search.val('');
-    column.val('select');
+    var filterWithoutLike = false;
+
+    searchValue.val("");
+    column.val("select");
+
+    if(typeof filters !== "undefined"){
+        if(typeof filters.searchValue !== "undefined"){
+            searchValue.val(filters.searchValue);
+        }
+        if(typeof filters.column !== "undefined"){
+            column.val(filters.column);
+        }
+        if(typeof filters.iSortCol_0 !== "undefined"){
+            iSortCol_0=filters.iSortCol_0;
+        }
+        if(typeof filters.sSortDir_0 !== "undefined"){
+            sSortDir_0=filters.sSortDir_0;
+        }
+        if(typeof filters.iDisplayLength !== "undefined"){
+            iDisplayLength=filters.iDisplayLength;
+        }
+    }
 
     table.dataTable({
         "processing": true,
@@ -27,7 +52,6 @@ $(function() {
             } );
         },
         "fnServerParams": function ( aoData ) {
-
             if(filterWithoutLike) {
                 aoData.push({ "name": "column", "value": ''});
                 aoData.push({ "name": "searchValue", "value": ''});
@@ -35,11 +59,10 @@ $(function() {
                 aoData.push({ "name": "columnValueWithoutLike", "value": columnValueWithoutLike});
             } else {
                 aoData.push({ "name": "column", "value": $(column).val()});
-                aoData.push({ "name": "searchValue", "value": search.val().trim()});
+                aoData.push({ "name": "searchValue", "value": searchValue.val().trim()});
             }
-
         },
-        "order": [[0, 'desc']],
+        "order": [[iSortCol_0, sSortDir_0]],
         "columns": [
             {data: 'e.plate'},
             {data: 'e.label'},
@@ -56,7 +79,6 @@ $(function() {
             {data: 'positionLink'},
             {data: 'button'}
         ],
-
         "columnDefs": [
             {
                 targets: 6,
@@ -102,7 +124,7 @@ $(function() {
             [100, 200, 300],
             [100, 200, 300]
         ],
-        "pageLength": 100,
+        "pageLength": iDisplayLength,
         "pagingType": "bootstrap_full_number",
         "language": {
             "sEmptyTable":     translate("sCarsEmptyTable"),
@@ -134,10 +156,10 @@ $(function() {
     });
 
     $('#js-clear').click(function() {
-        search.val('');
-        search.prop('disabled', false);
+        searchValue.val('');
+        searchValue.prop('disabled', false);
         typeClean.hide();
-        search.show();
+        searchValue.show();
         column.val('select');
         filterWithoutLike = false;
     });
@@ -147,24 +169,23 @@ $(function() {
     });
 
     $(column).change(function() {
-
         var value = $(this).val();
 
         if (value == 'e.plate' || value == 'e.label' || value == 'f.name' || value == 'ci.gps' || value == 'ci.firmwareVersion' || value == 'ci.softwareVersion') {
 
             filterWithoutLike = false;
-            search.val('');
-            search.prop('disabled', false);
+            searchValue.val('');
+            searchValue.prop('disabled', false);
             typeClean.hide();
-            search.show();
+            searchValue.show();
 
         } else {
 
             filterWithoutLike = true;
-            search.val('');
-            search.prop('disabled', true);
+            searchValue.val('');
+            searchValue.prop('disabled', true);
             typeClean.hide();
-            search.show();
+            searchValue.show();
 
             switch (value) {
 
@@ -177,7 +198,7 @@ $(function() {
                     break;
                 case 'e.intCleanliness':
                     typeClean.show();
-                    search.hide();
+                    searchValue.hide();
                     columnWithoutLike = value;
                     columnValueWithoutLike = typeClean.val();
                     $(typeClean).change(function() {
@@ -186,7 +207,7 @@ $(function() {
                     break;
                 case 'e.extCleanliness':
                     typeClean.show();
-                    search.hide();
+                    searchValue.hide();
                     columnWithoutLike = value;
                     columnValueWithoutLike = typeClean.val();
                     $(typeClean).change(function() {
