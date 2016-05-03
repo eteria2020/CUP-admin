@@ -1,4 +1,4 @@
-/* global  filters:true */
+/* global  filters:true, translate:true, $ */
 $(function() {
     // DataTables
     var table = $("#js-reservations-table");
@@ -15,21 +15,21 @@ $(function() {
     searchValue.val("");
     column.val("select");
 
-    if(typeof filters !== "undefined"){
-        if(typeof filters.searchValue !== "undefined"){
+    if (typeof filters !== "undefined"){
+        if (typeof filters.searchValue !== "undefined"){
             searchValue.val(filters.searchValue);
         }
-        if(typeof filters.column !== "undefined"){
+        if (typeof filters.column !== "undefined"){
             column.val(filters.column);
         }
-        if(typeof filters.iSortCol_0 !== "undefined"){
-            iSortCol_0=filters.iSortCol_0;
+        if (typeof filters.iSortCol_0 !== "undefined"){
+            iSortCol_0 = filters.iSortCol_0;
         }
-        if(typeof filters.sSortDir_0 !== "undefined"){
-            sSortDir_0=filters.sSortDir_0;
+        if (typeof filters.sSortDir_0 !== "undefined"){
+            sSortDir_0 = filters.sSortDir_0;
         }
-        if(typeof filters.iDisplayLength !== "undefined"){
-            iDisplayLength=filters.iDisplayLength;
+        if (typeof filters.iDisplayLength !== "undefined"){
+            iDisplayLength = filters.iDisplayLength;
         }
     }
 
@@ -41,7 +41,7 @@ $(function() {
         "sAjaxSource": "/reservations/datatable",
         "fnServerData": function ( sSource, aoData, fnCallback, oSettings ) {
             oSettings.jqXHR = $.ajax( {
-                "dataType": 'json',
+                "dataType": "json",
                 "type": "POST",
                 "url": sSource,
                 "data": aoData,
@@ -49,9 +49,9 @@ $(function() {
             } );
         },
         "fnServerParams": function ( aoData ) {
-            if(filterDate) {
-                aoData.push({ "name": "column", "value": ''});
-                aoData.push({ "name": "searchValue", "value": ''});
+            if (filterDate) {
+                aoData.push({ "name": "column", "value": ""});
+                aoData.push({ "name": "searchValue", "value": ""});
                 aoData.push({ "name": "from", "value": searchValue.val().trim()});
                 aoData.push({ "name": "to", "value": searchValue.val().trim()});
                 aoData.push({ "name": "columnFromDate", "value": "e.beginningTs"});
@@ -63,11 +63,11 @@ $(function() {
         },
         "order": [[iSortCol_0, sSortDir_0]],
         "columns": [
-            {data: 'e.id'},
-            {data: 'e.carPlate'},
-            {data: 'e.customer'},
-            {data: 'e.cards'},
-            {data: 'e.active'}
+            {data: "e.id"},
+            {data: "e.carPlate"},
+            {data: "e.customer"},
+            {data: "e.cards"},
+            {data: "e.active"}
         ],
         "columnDefs": [
             {
@@ -78,17 +78,17 @@ $(function() {
                 targets: 1,
                 sortable: false,
                 "render": function (data, type, row) {
-                    return '<a href="/cars/edit/'+row.e.carPlate+'" title="' + translate("showCarPlate") + ' '+data+'">'+data+'</a>';
+                    return '<a href="/cars/edit/' + row.e.carPlate + '" title="' + translate("showCarPlate") + ' ' + data + '">' + data + '</a>';
                 }
             },
             {
                 targets: 2,
                 sortable: false,
                 "render": function (data, type, row) {
-                    if (data !== '') {
-                        return '<a href="/customers/edit/'+row.e.customerId+'" title="' + translate("showProfile") + ' '+data+'">'+data+'</a>';
+                    if (data !== "") {
+                        return '<a href="/customers/edit/' + row.e.customerId + '" title="' + translate("showProfile") + ' ' + data + '">' + data + '</a>';
                     } else {
-                        return '';
+                        return "";
                     }
                 }
             }
@@ -100,60 +100,58 @@ $(function() {
         "pageLength": iDisplayLength,
         "pagingType": "bootstrap_full_number",
         "language": {
-            "sEmptyTable":     translate("sCustomersEmptyTable"),
-            "sInfo":           translate("sInfo"),
-            "sInfoEmpty":      translate("sInfoEmpty"),
-            "sInfoFiltered":   translate("sInfoFiltered"),
-            "sInfoPostFix":    "",
-            "sInfoThousands":  ",",
-            "sLengthMenu":     translate("sLengthMenu"),
+            "sEmptyTable": translate("sCustomersEmptyTable"),
+            "sInfo": translate("sInfo"),
+            "sInfoEmpty": translate("sInfoEmpty"),
+            "sInfoFiltered": translate("sInfoFiltered"),
+            "sInfoPostFix": "",
+            "sInfoThousands": ",",
+            "sLengthMenu": translate("sLengthMenu"),
             "sLoadingRecords": translate("sLoadingRecords"),
-            "sProcessing":     translate("sProcessing"),
-            "sSearch":         translate("sSearch"),
-            "sZeroRecords":    translate("sZeroRecords"),
+            "sProcessing": translate("sProcessing"),
+            "sSearch": translate("sSearch"),
+            "sZeroRecords": translate("sZeroRecords"),
             "oPaginate": {
-                "sFirst":      translate("oPaginateFirst"),
-                "sPrevious":   translate("oPaginatePrevious"),
-                "sNext":       translate("oPaginateNext"),
-                "sLast":       translate("oPaginateLast"),
+                "sFirst": translate("oPaginateFirst"),
+                "sPrevious": translate("oPaginatePrevious"),
+                "sNext": translate("oPaginateNext"),
+                "sLast": translate("oPaginateLast")
             },
             "oAria": {
-                "sSortAscending":   translate("sSortAscending"),
-                "sSortDescending":  translate("sSortDescending")
+                "sSortAscending": translate("sSortAscending"),
+                "sSortDescending": translate("sSortDescending")
             }
         }
     });
 
-    $('#js-search').click(function() {
+    $("#js-search").click(function() {
         table.fnFilter();
     });
 
-    $('#js-clear').click(function() {
-        searchValue.val('');
-        column.val('select');
+    $("#js-clear").click(function() {
+        searchValue.val("");
+        column.val("select");
     });
 
-    $('.date-picker').datepicker({
+    $(".date-picker").datepicker({
         autoclose: true,
-        format: 'yyyy-mm-dd',
+        format: "yyyy-mm-dd",
         weekStart: 1
     });
 
     $(column).change(function() {
         var value = $(this).val();
-
-        if(value == 'beginningTs') {
+        if (value === "beginningTs") {
             filterDate = true;
-            searchValue.val('');
+            searchValue.val("");
             $(searchValue).datepicker({
                 autoclose: true,
-                format: 'yyyy-mm-dd',
+                format: "yyyy-mm-dd",
                 weekStart: 1
             });
-
         } else {
             filterDate = false;
-            searchValue.val('');
+            searchValue.val("");
             $(searchValue).datepicker("remove");
         }
     });

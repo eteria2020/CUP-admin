@@ -15,21 +15,21 @@ $(function() {
     searchValue.val("");
     column.val("select");
 
-    if(typeof filters !== "undefined"){
-        if(typeof filters.searchValue !== "undefined"){
+    if (typeof filters !== "undefined"){
+        if (typeof filters.searchValue !== "undefined"){
             searchValue.val(filters.searchValue);
         }
-        if(typeof filters.column !== "undefined"){
+        if (typeof filters.column !== "undefined"){
             column.val(filters.column);
         }
-        if(typeof filters.iSortCol_0 !== "undefined"){
-            iSortCol_0=filters.iSortCol_0;
+        if (typeof filters.iSortCol_0 !== "undefined"){
+            iSortCol_0 = filters.iSortCol_0;
         }
-        if(typeof filters.sSortDir_0 !== "undefined"){
-            sSortDir_0=filters.sSortDir_0;
+        if (typeof filters.sSortDir_0 !== "undefined"){
+            sSortDir_0 = filters.sSortDir_0;
         }
-        if(typeof filters.iDisplayLength !== "undefined"){
-            iDisplayLength=filters.iDisplayLength;
+        if (typeof filters.iDisplayLength !== "undefined"){
+            iDisplayLength = filters.iDisplayLength;
         }
     }
 
@@ -60,7 +60,7 @@ $(function() {
         "sAjaxSource": "/customers/foreign-drivers-license/datatable",
         "fnServerData": function (sSource, aoData, fnCallback, oSettings) {
             oSettings.jqXHR = $.ajax({
-                "dataType": 'json',
+                "dataType": "json",
                 "type": "POST",
                 "url": sSource,
                 "data": aoData,
@@ -73,20 +73,20 @@ $(function() {
         },
         "order": [[iSortCol_0, sSortDir_0]],
         "columns": [
-            {data: 'e.customer_id'},
-            {data: 'e.customer_name'},
-            {data: 'e.customer_surname'},
-            {data: 'e.customer_address'},
-            {data: 'e.customer_birth_date'},
-            {data: 'e.customer_birth_place'},
-            {data: 'e.drivers_license_number'},
-            {data: 'e.drivers_license_authority'},
-            {data: 'e.drivers_license_country'},
-            {data: 'e.drivers_license_release_date'},
-            {data: 'e.drivers_license_name'},
-            {data: 'e.drivers_license_categories'},
-            {data: 'e.drivers_license_expire'},
-            {data: 'e.id'},
+            {data: "e.customer_id"},
+            {data: "e.customer_name"},
+            {data: "e.customer_surname"},
+            {data: "e.customer_address"},
+            {data: "e.customer_birth_date"},
+            {data: "e.customer_birth_place"},
+            {data: "e.drivers_license_number"},
+            {data: "e.drivers_license_authority"},
+            {data: "e.drivers_license_country"},
+            {data: "e.drivers_license_release_date"},
+            {data: "e.drivers_license_name"},
+            {data: "e.drivers_license_categories"},
+            {data: "e.drivers_license_expire"},
+            {data: "e.id"},
             {data: showStatus}
         ],
         "columnDefs": [
@@ -94,7 +94,7 @@ $(function() {
                 targets: 13,
                 searchable: false,
                 sortable: false,
-                data: 'e.customer',
+                data: "e.customer",
                 render: function (data) {
                     return '<a href="/customers/foreign-drivers-license/download/' + data + '" class="validation-btn btn btn-default btn-xs">'+translate("download")+'</a>';
                 }
@@ -112,36 +112,36 @@ $(function() {
         "pageLength": iDisplayLength,
         "pagingType": "bootstrap_full_number",
         "language": {
-            "sEmptyTable":     translate("sDrivingLicenseEmptyTable"),
-            "sInfo":           translate("sInfo"),
-            "sInfoEmpty":      translate("sInfoEmpty"),
-            "sInfoFiltered":   translate("sInfoFiltered"),
-            "sInfoPostFix":    "",
-            "sInfoThousands":  ",",
-            "sLengthMenu":     translate("sLengthMenu"),
+            "sEmptyTable": translate("sDrivingLicenseEmptyTable"),
+            "sInfo": translate("sInfo"),
+            "sInfoEmpty": translate("sInfoEmpty"),
+            "sInfoFiltered": translate("sInfoFiltered"),
+            "sInfoPostFix": "",
+            "sInfoThousands": ",",
+            "sLengthMenu": translate("sLengthMenu"),
             "sLoadingRecords": translate("sLoadingRecords"),
-            "sProcessing":     translate("sProcessing"),
-            "sSearch":         translate("sSearch"),
-            "sZeroRecords":    translate("sZeroRecords"),
+            "sProcessing": translate("sProcessing"),
+            "sSearch": translate("sSearch"),
+            "sZeroRecords": translate("sZeroRecords"),
             "oPaginate": {
-                "sFirst":      translate("oPaginateFirst"),
-                "sPrevious":   translate("oPaginatePrevious"),
-                "sNext":       translate("oPaginateNext"),
-                "sLast":       translate("oPaginateLast")
+                "sFirst": translate("oPaginateFirst"),
+                "sPrevious": translate("oPaginatePrevious"),
+                "sNext": translate("oPaginateNext"),
+                "sLast": translate("oPaginateLast")
             },
             "oAria": {
-                "sSortAscending":   translate("sSortAscending"),
-                "sSortDescending":  translate("sSortDescending")
+                "sSortAscending": translate("sSortAscending"),
+                "sSortDescending": translate("sSortDescending")
             }
         }
     });
 
-    $('#js-search').click(function () {
+    $("#js-search").click(function () {
         table.fnFilter();
     });
 
-    $('#js-clear').click(function () {
-        searchValue.val('');
-        column.val('select');
+    $("#js-clear").click(function () {
+        searchValue.val("");
+        column.val("select");
     });
 });

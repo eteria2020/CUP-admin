@@ -17,21 +17,21 @@ $(function() {
     searchValue.val("");
     column.val("select");
 
-    if(typeof filters !== "undefined"){
-        if(typeof filters.searchValue !== "undefined"){
+    if (typeof filters !== "undefined"){
+        if (typeof filters.searchValue !== "undefined"){
             searchValue.val(filters.searchValue);
         }
-        if(typeof filters.column !== "undefined"){
+        if (typeof filters.column !== "undefined"){
             column.val(filters.column);
         }
-        if(typeof filters.iSortCol_0 !== "undefined"){
-            iSortCol_0=filters.iSortCol_0;
+        if (typeof filters.iSortCol_0 !== "undefined"){
+            iSortCol_0 = filters.iSortCol_0;
         }
-        if(typeof filters.sSortDir_0 !== "undefined"){
-            sSortDir_0=filters.sSortDir_0;
+        if (typeof filters.sSortDir_0 !== "undefined"){
+            sSortDir_0 = filters.sSortDir_0;
         }
-        if(typeof filters.iDisplayLength !== "undefined"){
-            iDisplayLength=filters.iDisplayLength;
+        if (typeof filters.iDisplayLength !== "undefined"){
+            iDisplayLength = filters.iDisplayLength;
         }
     }
 
@@ -43,7 +43,7 @@ $(function() {
         "sAjaxSource": "/trips/not-payed-datatable",
         "fnServerData": function ( sSource, aoData, fnCallback, oSettings ) {
             oSettings.jqXHR = $.ajax( {
-                "dataType": 'json',
+                "dataType": "json",
                 "type": "POST",
                 "url": sSource,
                 "data": aoData,
@@ -52,9 +52,9 @@ $(function() {
             });
         },
         "fnServerParams": function ( aoData ) {
-            if(filterWithNull) {
-                aoData.push({ "name": "column", "value": ''});
-                aoData.push({ "name": "searchValue", "value": ''});
+            if (filterWithNull) {
+                aoData.push({ "name": "column", "value": ""});
+                aoData.push({ "name": "searchValue", "value": ""});
                 aoData.push({ "name": "columnNull", "value": "e.timestampEnd"});
             } else {
                 aoData.push({ "name": "column", "value": $(column).val()});
@@ -63,19 +63,19 @@ $(function() {
         },
         "order": [[iSortCol_0, sSortDir_0]],
         "columns": [
-            {data: 'e.id'},
-            {data: 'cu.surname'},
-            {data: 'cu.name'},
-            {data: 'cc.rfid'},
-            {data: 'c.plate'},
-            {data: 'f.name'},
-            {data: 'e.kmBeginning'},
-            {data: 'e.kmEnd'},
-            {data: 'e.timestampBeginning'},
-            {data: 'e.timestampEnd'},
-            {data: 'e.duration'},
-            {data: 'e.parkSeconds'},
-            {data: 'e.totalCost'}
+            {data: "e.id"},
+            {data: "cu.surname"},
+            {data: "cu.name"},
+            {data: "cc.rfid"},
+            {data: "c.plate"},
+            {data: "f.name"},
+            {data: "e.kmBeginning"},
+            {data: "e.kmEnd"},
+            {data: "e.timestampBeginning"},
+            {data: "e.timestampEnd"},
+            {data: "e.duration"},
+            {data: "e.parkSeconds"},
+            {data: "e.totalCost"}
         ],
         "columnDefs": [
             {
@@ -123,14 +123,14 @@ $(function() {
         }
     });
 
-    $('#js-search').click(function() {
+    $("#js-search").click(function() {
         table.fnFilter();
     });
 
-    $('#js-clear').click(function() {
-        searchValue.val('');
-        column.val('select');
-        searchValue.prop('disabled', false);
+    $("#js-clear").click(function() {
+        searchValue.val("");
+        column.val("select");
+        searchValue.prop("disabled", false);
         filterWithNull = false;
         searchValue.show();
     });
@@ -139,35 +139,35 @@ $(function() {
         var value = $(this).val();
 
         searchValue.show();
-        searchValue.val('');
+        searchValue.val("");
 
-        if(value === 'c.timestampEnd') {
+        if (value === "c.timestampEnd") {
             filterWithNull = true;
-            searchValue.prop('disabled', true);
+            searchValue.prop("disabled", true);
         } else {
             filterWithNull = false;
-            searchValue.prop('disabled', false);
+            searchValue.prop("disabled", false);
         }
     });
 
     function toStringKeepZero(value)
     {
-        return ((value < 10) ? '0' : '') + value;
+        return ((value < 10) ? "0" : "") + value;
     }
 
     function renderAmount(amount)
     {
         return (Math.floor(amount / 100)) +
-            ',' +
+            "," +
             toStringKeepZero(amount % 100) +
-            ' \u20ac';
+            " \u20ac";
     }
 
     function renderCostButton(data)
     {
         var amount = data.amount;
-        if (amount !== 'FREE') {
-            return amount !== '' ?
+        if (amount !== "FREE") {
+            return amount !== "" ?
             '<a href="/trips/details/' + data.id + '?tab=cost">' + renderAmount(parseInt(amount)) + '</a>' : '';
         } else {
             return amount;
