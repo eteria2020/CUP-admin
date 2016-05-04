@@ -1,12 +1,14 @@
 <?php
 namespace Application\Controller;
 
+// Internals
+use SharengoCore\Service\InvoicesService;
+// Externals
 use Zend\Http\Response;
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\JsonModel;
 use Zend\View\Model\ViewModel;
-
-use SharengoCore\Service\InvoicesService;
+use Zend\Session\Container;
 
 class InvoicesController extends AbstractActionController
 {
@@ -15,15 +17,33 @@ class InvoicesController extends AbstractActionController
      */
     private $invoicesService;
 
+    /**
+     * @var Container
+     */
+    private $datatableFiltersSessionContainer;
+
     public function __construct(
-        InvoicesService $invoicesService
+        InvoicesService $invoicesService,
+        Container $datatableFiltersSessionContainer
     ) {
         $this->invoicesService = $invoicesService;
+        $this->datatableFiltersSessionContainer = $datatableFiltersSessionContainer;
+    }
+
+    /**
+     * This method return an array containing the DataTable filters,
+     * from a Session Container.
+     *
+     * @return array
+     */
+    private function getDataTableSessionFilters()
+    {
+        return $this->datatableFiltersSessionContainer->offsetGet('Invoices');
     }
 
     public function indexAction()
     {
-        $sessionDatatableFilters = $this->invoicesService->getDataTableSessionFilters();
+        $sessionDatatableFilters = $this->getDataTableSessionFilters();
 
         return new ViewModel([
             'filters' => json_encode($sessionDatatableFilters),

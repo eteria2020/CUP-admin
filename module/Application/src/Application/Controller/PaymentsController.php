@@ -2,6 +2,7 @@
 
 namespace Application\Controller;
 
+// Internals
 use Application\Form\FaresForm;
 use SharengoCore\Service\FaresService;
 use SharengoCore\Service\TripPaymentsService;
@@ -14,10 +15,11 @@ use SharengoCore\Service\PenaltiesService;
 use SharengoCore\Exception\FleetNotFoundException;
 use SharengoCore\Service\FleetService;
 use SharengoCore\Service\RecapService;
-
+// Externals
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\JsonModel;
 use Zend\View\Model\ViewModel;
+use Zend\Session\Container;
 
 class PaymentsController extends AbstractActionController
 {
@@ -76,6 +78,11 @@ class PaymentsController extends AbstractActionController
      */
     private $faresForm;
 
+    /**
+     * @var Container
+     */
+    private $datatableFiltersSessionContainer;
+
     public function __construct(
         TripPaymentsService $tripPaymentsService,
         PaymentsService $paymentsService,
@@ -100,11 +107,23 @@ class PaymentsController extends AbstractActionController
         $this->recapService = $recapService;
         $this->faresService = $faresService;
         $this->faresForm = $faresForm;
+        $this->datatableFiltersSessionContainer = $datatableFiltersSessionContainer;
+    }
+
+    /**
+     * This method return an array containing the DataTable filters,
+     * from a Session Container.
+     *
+     * @return array
+     */
+    private function getDataTableSessionFilters()
+    {
+        return $this->datatableFiltersSessionContainer->offsetGet('TripPayments');
     }
 
     public function failedPaymentsAction()
     {
-        $sessionDatatableFilters = $this->tripPaymentsService->getDataTableSessionFilters();
+        $sessionDatatableFilters = $this->getDataTableSessionFilters();
 
         return new ViewModel([
             'filters' => json_encode($sessionDatatableFilters),

@@ -2,9 +2,11 @@
 
 namespace Application\Controller;
 
+// Externals
 use Zend\ServiceManager\FactoryInterface;
 use Zend\ServiceManager\ServiceLocatorInterface;
 use DoctrineModule\Stdlib\Hydrator\DoctrineObject as DoctrineHydrator;
+use Zend\Session\Container;
 
 class InvoicesControllerFactory implements FactoryInterface
 {
@@ -15,8 +17,17 @@ class InvoicesControllerFactory implements FactoryInterface
      */
     public function createService(ServiceLocatorInterface $serviceLocator)
     {
-        $invoicesService = $serviceLocator->getServiceLocator()->get('SharengoCore\Service\Invoices');
+        $sharedServiceLocator = $serviceLocator->getServiceLocator();
 
-        return new InvoicesController($invoicesService);
+        $invoicesService = $sharedServiceLocator->get('SharengoCore\Service\Invoices');
+        $datatablesSessionNamespace = $sharedServiceLocator->get('Configuration')['session']['datatablesNamespace'];
+
+        // Creating DataTable Filters Session Container
+        $datatableFiltersSessionContainer = new Container($datatablesSessionNamespace);
+
+        return new InvoicesController(
+            $invoicesService,
+            $datatableFiltersSessionContainer
+        );
     }
 }

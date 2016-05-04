@@ -1,6 +1,7 @@
 <?php
 namespace Application\Controller;
 
+// Internals
 use Application\Controller\Plugin\TranslatorPlugin;
 use Application\Form\CarForm;
 use Application\Listener\LanguageFromSessionDetectorListener;
@@ -13,14 +14,15 @@ use SharengoCore\Service\CarsService;
 use SharengoCore\Service\CarsDamagesService;
 use SharengoCore\Service\CommandsService;
 use SharengoCore\Utility\CarStatus;
+// Externals
 use Zend\Form\Form;
 use Zend\Http\Response;
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\Mvc\I18n\Translator;
-use Zend\Session\Container;
 use Zend\Stdlib\Hydrator\HydratorInterface;
 use Zend\View\Model\JsonModel;
 use Zend\View\Model\ViewModel;
+use Zend\Session\Container;
 
 class CarsController extends AbstractActionController
 {
@@ -42,22 +44,39 @@ class CarsController extends AbstractActionController
      */
     private $hydrator;
 
+    /**
+     * @var Container
+     */
+    private $datatableFiltersSessionContainer;
+
     public function __construct(
         CarsService $carsService,
         CommandsService $commandsService,
         Form $carForm,
-        HydratorInterface $hydrator
-    )
-    {
+        HydratorInterface $hydrator,
+        Container $datatableFiltersSessionContainer
+    ) {
         $this->carsService = $carsService;
         $this->commandsService = $commandsService;
         $this->carForm = $carForm;
         $this->hydrator = $hydrator;
+        $this->datatableFiltersSessionContainer = $datatableFiltersSessionContainer;
+    }
+
+    /**
+     * This method return an array containing the DataTable filters,
+     * from a Session Container.
+     *
+     * @return array
+     */
+    private function getDataTableSessionFilters()
+    {
+        return $this->datatableFiltersSessionContainer->offsetGet('Cars');
     }
 
     public function indexAction()
     {
-        $sessionDatatableFilters = $this->carsService->getDataTableSessionFilters();
+        $sessionDatatableFilters = $this->getDataTableSessionFilters();
 
         return new ViewModel([
             'filters' => json_encode($sessionDatatableFilters),

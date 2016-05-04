@@ -7,6 +7,7 @@ use SharengoCore\Service\ReservationsService;
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\JsonModel;
 use Zend\View\Model\ViewModel;
+use Zend\Session\Container;
 
 class ReservationsController extends AbstractActionController
 {
@@ -15,14 +16,33 @@ class ReservationsController extends AbstractActionController
      */
     public $reservationsService;
 
-    public function __construct(ReservationsService $reservationsService)
-    {
+    /**
+     * @var Container
+     */
+    private $datatableFiltersSessionContainer;
+
+    public function __construct(
+        ReservationsService $reservationsService,
+        Container $datatableFiltersSessionContainer
+    ) {
         $this->reservationsService = $reservationsService;
+        $this->datatableFiltersSessionContainer = $datatableFiltersSessionContainer;
+    }
+
+    /**
+     * This method return an array containing the DataTable filters,
+     * from a Session Container.
+     *
+     * @return array
+     */
+    private function getDataTableSessionFilters()
+    {
+        return $this->datatableFiltersSessionContainer->offsetGet('Reservations');
     }
 
     public function indexAction()
     {
-        $sessionDatatableFilters = $this->reservationsService->getDataTableSessionFilters();
+        $sessionDatatableFilters = $this->getDataTableSessionFilters();
 
         return new ViewModel([
             'filters' => json_encode($sessionDatatableFilters),

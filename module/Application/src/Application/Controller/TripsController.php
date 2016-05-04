@@ -1,6 +1,7 @@
 <?php
 namespace Application\Controller;
 
+// Internals
 use Application\Form\InputData\CloseTripDataFactory;
 use Application\Form\TripCostForm;
 use SharengoCore\Entity\Trips;
@@ -12,10 +13,11 @@ use SharengoCore\Exception\TripNotFoundException;
 use SharengoCore\Service\EventsService;
 use SharengoCore\Service\TripCostComputerService;
 use SharengoCore\Service\TripsService;
-
+// Externals
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\JsonModel;
 use Zend\View\Model\ViewModel;
+use Zend\Session\Container;
 
 class TripsController extends AbstractActionController
 {
@@ -44,23 +46,41 @@ class TripsController extends AbstractActionController
      */
     private $closeTripDataFactory;
 
+    /**
+     * @var Container
+     */
+    private $datatableFiltersSessionContainer;
+
     public function __construct(
         TripsService $tripsService,
         TripCostForm $tripCostForm,
         TripCostComputerService $tripCostComputerService,
         EventsService $eventsService,
-        CloseTripDataFactory $closeTripDataFactory
+        CloseTripDataFactory $closeTripDataFactory,
+        Container $datatableFiltersSessionContainer
     ) {
         $this->tripsService = $tripsService;
         $this->tripCostForm = $tripCostForm;
         $this->tripCostComputerService = $tripCostComputerService;
         $this->eventsService = $eventsService;
         $this->closeTripDataFactory = $closeTripDataFactory;
+        $this->datatableFiltersSessionContainer = $datatableFiltersSessionContainer;
+    }
+
+    /**
+     * This method return an array containing the DataTable filters,
+     * from a Session Container.
+     *
+     * @return array
+     */
+    private function getDataTableSessionFilters()
+    {
+        return $this->datatableFiltersSessionContainer->offsetGet('Trips');
     }
 
     public function indexAction()
     {
-        $sessionDatatableFilters = $this->tripsService->getDataTableSessionFilters();
+        $sessionDatatableFilters = $this->getDataTableSessionFilters();
 
         return new ViewModel([
             'filters' => json_encode($sessionDatatableFilters),

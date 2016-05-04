@@ -2,14 +2,16 @@
 
 namespace Application\Controller;
 
+// Internals
 use SharengoCore\Service\ForeignDriversLicenseService;
 use SharengoCore\Service\ValidateForeignDriversLicenseService;
-
+// Externals
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
 use Zend\View\Model\JsonModel;
 use Zend\Http\Response\Stream;
 use Zend\Http\Headers;
+use Zend\Session\Container;
 
 class ForeignDriversLicenseController extends AbstractActionController
 {
@@ -23,17 +25,35 @@ class ForeignDriversLicenseController extends AbstractActionController
      */
     private $validateForeignDriversLicenseService;
 
+    /**
+     * @var Container
+     */
+    private $datatableFiltersSessionContainer;
+
     public function __construct(
         ForeignDriversLicenseService $foreignDriversLicenseService,
-        ValidateForeignDriversLicenseService $validateForeignDriversLicenseService
+        ValidateForeignDriversLicenseService $validateForeignDriversLicenseService,
+        Container $datatableFiltersSessionContainer
     ) {
         $this->foreignDriversLicenseService = $foreignDriversLicenseService;
         $this->validateForeignDriversLicenseService = $validateForeignDriversLicenseService;
+        $this->datatableFiltersSessionContainer = $datatableFiltersSessionContainer;
+    }
+
+    /**
+     * This method return an array containing the DataTable filters,
+     * from a Session Container.
+     *
+     * @return array
+     */
+    private function getDataTableSessionFilters()
+    {
+        return $this->datatableFiltersSessionContainer->offsetGet('ForeignDriversLicenseUpload');
     }
 
     public function uploadedFilesAction()
     {
-        $sessionDatatableFilters = $this->foreignDriversLicenseService->getDataTableSessionFilters();
+        $sessionDatatableFilters = $this->getDataTableSessionFilters();
 
         return new ViewModel([
             'filters' => json_encode($sessionDatatableFilters),

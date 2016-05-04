@@ -2,9 +2,11 @@
 
 namespace Application\Controller;
 
+// Externals
 use Zend\ServiceManager\FactoryInterface;
 use Zend\ServiceManager\ServiceLocatorInterface;
 use DoctrineModule\Stdlib\Hydrator\DoctrineObject as DoctrineHydrator;
+use Zend\Session\Container;
 
 class CustomersControllerFactory implements FactoryInterface
 {
@@ -31,11 +33,15 @@ class CustomersControllerFactory implements FactoryInterface
         $promoCodeForm = $sharedLocator->get('PromoCodeForm');
         $customerBonusForm = $sharedLocator->get('CustomerBonusForm');
         $cardForm = $sharedLocator->get('CardForm');
+        $datatablesSessionNamespace = $sharedLocator->get('Configuration')['session']['datatablesNamespace'];
 
         $hydrator = new DoctrineHydrator($entityManager);
 
         $cartasiContractsService = $sharedLocator->get('Cartasi\Service\CartasiContracts');
         $disableContractService = $sharedLocator->get('SharengoCore\Service\DisableContractService');
+
+        // Creating DataTable Filters Session Container
+        $datatableFiltersSessionContainer = new Container($datatablesSessionNamespace);
 
         // Controller is constructed, dependencies are injected (IoC in action)
         return new CustomersController(
@@ -51,7 +57,8 @@ class CustomersControllerFactory implements FactoryInterface
             $cardForm,
             $hydrator,
             $cartasiContractsService,
-            $disableContractService
+            $disableContractService,
+            $datatableFiltersSessionContainer
         );
     }
 }
