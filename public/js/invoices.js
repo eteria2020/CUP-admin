@@ -63,7 +63,7 @@ $(function() {
             {
                 targets: [2, 3],
                 "render": function ( data, type, row ) {
-                    return '<a href="/customers/edit/'+row.cu.id+'" title="' + translate("showProfileOf") + ' '+row.cu.name+' '+row.cu.surname+'">'+data+'</a>';
+                    return '<a href="/customers/edit/' + row.cu.id + '" title="' + translate("showProfileOf") + ' ' + row.cu.name + ' ' + row.cu.surname + '">' + data + '</a>';
                 }
             },
             {
@@ -138,9 +138,7 @@ $(function() {
 
     function renderDate(date)
     {
-        return toStringKeepZero(date % 100) + "/" +
-        toStringKeepZero(Math.floor((date / 100) % 100)) + "/" +
-        (Math.floor(date / 10000));
+        return toStringKeepZero(date % 100) + "/" + toStringKeepZero(Math.floor((date / 100) % 100)) + "/" + (Math.floor(date / 10000));
     }
 
     function renderAmount(amount)

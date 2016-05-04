@@ -1,4 +1,4 @@
-/* global  filters:true */
+/* global $, filters:true, translate:true */
 $(function() {
     // DataTables
     var table = $("#js-cars-table");
@@ -102,10 +102,7 @@ $(function() {
                 searchable: false,
                 sortable: false,
                 render: function (data) {
-                    return '<div class="btn-group">' +
-                        '<a href="/cars/edit/' + data + '" class="btn btn-default">' + translate("modify")  + '</a> ' +
-                        '<a href="/cars/delete/' + data + '" class="btn btn-default js-delete">' + translate("delete")  + '</a>' +
-                        '</div>';
+                    return '<div class="btn-group"><a href="/cars/edit/' + data + '" class="btn btn-default">' + translate("modify")  + '</a><a href="/cars/delete/' + data + '" class="btn btn-default js-delete">' + translate("delete")  + '</a></div>';
                 }
             }
         ],
@@ -116,26 +113,26 @@ $(function() {
         "pageLength": dataTableVars.iDisplayLength,
         "pagingType": "bootstrap_full_number",
         "language": {
-            "sEmptyTable":     translate("sCarsEmptyTable"),
-            "sInfo":           translate("sInfo"),
-            "sInfoEmpty":      translate("sInfoEmpty"),
-            "sInfoFiltered":   translate("sInfoFiltered"),
-            "sInfoPostFix":    "",
-            "sInfoThousands":  ",",
-            "sLengthMenu":     translate("sLengthMenu"),
+            "sEmptyTable": translate("sCarsEmptyTable"),
+            "sInfo": translate("sInfo"),
+            "sInfoEmpty": translate("sInfoEmpty"),
+            "sInfoFiltered": translate("sInfoFiltered"),
+            "sInfoPostFix": "",
+            "sInfoThousands": ",",
+            "sLengthMenu": translate("sLengthMenu"),
             "sLoadingRecords": translate("sLoadingRecords"),
-            "sProcessing":     translate("sProcessing"),
-            "sSearch":         translate("sSearch"),
-            "sZeroRecords":    translate("sZeroRecords"),
+            "sProcessing": translate("sProcessing"),
+            "sSearch": translate("sSearch"),
+            "sZeroRecords": translate("sZeroRecords"),
             "oPaginate": {
-                "sFirst":      translate("oPaginateFirst"),
-                "sPrevious":   translate("oPaginatePrevious"),
-                "sNext":       translate("oPaginateNext"),
-                "sLast":       translate("oPaginateLast"),
+                "sFirst": translate("oPaginateFirst"),
+                "sPrevious": translate("oPaginatePrevious"),
+                "sNext": translate("oPaginateNext"),
+                "sLast": translate("oPaginateLast")
             },
             "oAria": {
-                "sSortAscending":   translate("sSortAscending"),
-                "sSortDescending":  translate("sSortDescending")
+                "sSortAscending": translate("sSortAscending"),
+                "sSortDescending": translate("sSortDescending")
             }
         }
     });

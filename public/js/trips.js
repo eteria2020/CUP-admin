@@ -1,4 +1,4 @@
-/* global $, filters:true */
+/* global $, filters:true, translate:true */
 $(function() {
     // DataTable
     var table = $("#js-trips-table");
@@ -36,7 +36,7 @@ $(function() {
         "sAjaxSource": "/trips/datatable",
         "fnServerData": function ( sSource, aoData, fnCallback, oSettings ) {
             oSettings.jqXHR = $.ajax( {
-                "dataType": 'json',
+                "dataType": "json",
                 "type": "POST",
                 "url": sSource,
                 "data": aoData,
@@ -46,8 +46,8 @@ $(function() {
         },
         "fnServerParams": function ( aoData ) {
             if (filterWithNull) {
-                aoData.push({ "name": "column", "value": ''});
-                aoData.push({ "name": "searchValue", "value": ''});
+                aoData.push({ "name": "column", "value": ""});
+                aoData.push({ "name": "searchValue", "value": ""});
                 aoData.push({ "name": "columnNull", "value": "e.timestampEnd"});
             } else {
                 aoData.push({ "name": "column", "value": $(dataTableVars.column).val()});
@@ -60,36 +60,36 @@ $(function() {
         },
         "order": [[dataTableVars.iSortCol_0, dataTableVars.sSortDir_0]],
         "columns": [
-            {data: 'e.id'},
-            {data: 'cu.email'},
-            {data: 'cu.surname'},
-            {data: 'cu.name'},
-            {data: 'cu.mobile'},
-            {data: 'cc.code'},
-            {data: 'c.plate'},
-            {data: 'e.kmBeginning'},
-            {data: 'e.kmEnd'},
-            {data: 'e.timestampBeginning'},
-            {data: 'e.timestampEnd'},
-            {data: 'duration'},
-            {data: 'e.parkSeconds'},
-            {data: 'c.keyStatus'},
-            {data: 'c.parking'},
-            {data: 'e.payable'},
-            {data: 'payed'},
-            {data: 'e.totalCost'},
-            {data: 'f.name'},
-            {data: 'e.idLink'}
+            {data: "e.id"},
+            {data: "cu.email"},
+            {data: "cu.surname"},
+            {data: "cu.name"},
+            {data: "cu.mobile"},
+            {data: "cc.code"},
+            {data: "c.plate"},
+            {data: "e.kmBeginning"},
+            {data: "e.kmEnd"},
+            {data: "e.timestampBeginning"},
+            {data: "e.timestampEnd"},
+            {data: "duration"},
+            {data: "e.parkSeconds"},
+            {data: "c.keyStatus"},
+            {data: "c.parking"},
+            {data: "e.payable"},
+            {data: "payed"},
+            {data: "e.totalCost"},
+            {data: "f.name"},
+            {data: "e.idLink"}
         ],
         "columnDefs": [
-	        {
+            {
                 targets: 1,
                 visible: false
             },
             {
                 targets: [2, 3],
                 "render": function (data, type, row) {
-                    return '<a href="/customers/edit/'+row.cu.id+'" title="' + translate("showProfile") + ' '+row.cu.name+' '+row.cu.surname+' ">'+data+'</a>';
+                    return '<a href="/customers/edit/' + row.cu.id + '" title="' + translate("showProfile") + " " + row.cu.name + " " + row.cu.surname + ' ">' + data + '</a>';
                 }
             },
             {
@@ -107,14 +107,14 @@ $(function() {
             {
                 targets: 17,
                 sortable: false,
-                "render": function ( data, type, row ) {
+                "render": function ( data ) {
                     return renderCostButton(data);
                 }
             },
             {
                 targets: 19,
                 sortable: false,
-                "render": function ( data, type, row ) {
+                "render": function ( data ) {
                     return renderInfoButton(data);
                 }
             }
@@ -126,47 +126,47 @@ $(function() {
         "pageLength": dataTableVars.iDisplayLength,
         "pagingType": "bootstrap_full_number",
         "language": {
-            "sEmptyTable":     translate("sTripEmptyTable"),
-            "sInfo":           translate("sInfo"),
-            "sInfoEmpty":      translate("sInfoEmpty"),
-            "sInfoFiltered":   translate("sInfoFiltered"),
-            "sInfoPostFix":    "",
-            "sInfoThousands":  ",",
-            "sLengthMenu":     translate("sLengthMenu"),
+            "sEmptyTable": translate("sTripEmptyTable"),
+            "sInfo": translate("sInfo"),
+            "sInfoEmpty": translate("sInfoEmpty"),
+            "sInfoFiltered": translate("sInfoFiltered"),
+            "sInfoPostFix": "",
+            "sInfoThousands": ",",
+            "sLengthMenu": translate("sLengthMenu"),
             "sLoadingRecords": translate("sLoadingRecords"),
-            "sProcessing":     translate("sProcessing"),
-            "sSearch":         translate("sSearch"),
-            "sZeroRecords":    translate("sZeroRecords"),
+            "sProcessing": translate("sProcessing"),
+            "sSearch": translate("sSearch"),
+            "sZeroRecords": translate("sZeroRecords"),
             "oPaginate": {
-                "sFirst":      translate("oPaginateFirst"),
-                "sPrevious":   translate("oPaginatePrevious"),
-                "sNext":       translate("oPaginateNext"),
-                "sLast":       translate("oPaginateLast"),
+                "sFirst": translate("oPaginateFirst"),
+                "sPrevious": translate("oPaginatePrevious"),
+                "sNext": translate("oPaginateNext"),
+                "sLast": translate("oPaginateLast")
             },
             "oAria": {
-                "sSortAscending":   translate("sSortAscending"),
-                "sSortDescending":  translate("sSortDescending")
+                "sSortAscending": translate("sSortAscending"),
+                "sSortDescending": translate("sSortDescending")
             }
         }
     });
 
-    $('#js-search').click(function() {
+    $("#js-search").click(function() {
         table.fnFilter();
     });
 
-    $('#js-clear').click(function() {
-        dataTableVars.searchValue.val('');
-        dataTableVars.from.val('');
-        dataTableVars.to.val('');
-        dataTableVars.column.val('select');
-        dataTableVars.searchValue.prop('disabled', false);
+    $("#js-clear").click(function() {
+        dataTableVars.searchValue.val("");
+        dataTableVars.from.val("");
+        dataTableVars.to.val("");
+        dataTableVars.column.val("select");
+        dataTableVars.searchValue.prop("disabled", false);
         filterWithNull = false;
         dataTableVars.searchValue.show();
     });
 
-    $('.date-picker').datepicker({
+    $(".date-picker").datepicker({
         autoclose: true,
-        format: 'yyyy-mm-dd',
+        format: "yyyy-mm-dd",
         weekStart: 1
     });
 
@@ -174,46 +174,40 @@ $(function() {
         var value = $(this).val();
 
         dataTableVars.searchValue.show();
-        dataTableVars.searchValue.val('');
+        dataTableVars.searchValue.val("");
 
-        if(value == 'c.timestampEnd') {
+        if (value === "c.timestampEnd") {
             filterWithNull = true;
-            dataTableVars.searchValue.prop('disabled', true);
+            dataTableVars.searchValue.prop("disabled", true);
         } else {
             filterWithNull = false;
-            dataTableVars.searchValue.prop('disabled', false);
+            dataTableVars.searchValue.prop("disabled", false);
         }
     });
 
     function renderCostButton(data)
     {
-        var amount = data['amount'];
-        if (amount !== 'FREE') {
-            return amount !== '' ?
-                '<a href="/trips/details/' + data['id'] + '?tab=cost">' + renderAmount(parseInt(amount)) + '</a>' :
-                '';
-        } else {
-            return amount;
+        var amount = data.amount;
+        if (amount !== "FREE") {
+            return amount !== "" ?
+                '<a href="/trips/details/' + data.id + '?tab=cost">' + renderAmount(parseInt(amount)) + '</a>' :
+                "";
         }
+        return amount;
     }
 
     function renderInfoButton(data)
     {
-        return '<div class="btn-group">' +
-                    '<a href="/trips/details/' + data + '" class="btn btn-default">' + translate("details") + '</a> ' +
-                '</div>';
+        return '<div class="btn-group">' + '<a href="/trips/details/' + data + '" class="btn btn-default">' + translate("details") + '</a> ' + '</div>';
     }
 
     function renderAmount(amount)
     {
-        return (Math.floor(amount / 100)) +
-            ',' +
-            toStringKeepZero(amount % 100) +
-            ' \u20ac';
+        return (Math.floor(amount / 100)) + "," + toStringKeepZero(amount % 100) + " \u20ac";
     }
 
     function toStringKeepZero(value)
     {
-        return ((value < 10) ? '0' : '') + value;
+        return ((value < 10) ? "0" : "") + value;
     }
 });

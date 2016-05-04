@@ -158,8 +158,7 @@ $(function() {
     {
         var amount = data.amount;
         if (amount !== "FREE") {
-            return amount !== "" ?
-            '<a href="/trips/details/' + data.id + '?tab=cost">' + renderAmount(parseInt(amount)) + '</a>' : '';
+            return amount !== "" ? '<a href="/trips/details/' + data.id + '?tab=cost">' + renderAmount(parseInt(amount)) + '</a>' : "";
         } else {
             return amount;
         }

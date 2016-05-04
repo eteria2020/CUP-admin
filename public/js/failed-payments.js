@@ -36,10 +36,7 @@ $(function() {
 
     function renderAmount(amount)
     {
-        return (Math.floor(amount / 100)) +
-            "," +
-            toStringKeepZero(amount % 100) +
-            " \u20ac";
+        return (Math.floor(amount / 100)) + "," + toStringKeepZero(amount % 100) + " \u20ac";
     }
 
     function renderDiscount(discount)
@@ -68,7 +65,7 @@ $(function() {
             } );
         },
         "fnServerParams": function ( aoData ) {
-            if(filterWithoutLike) {
+            if (filterWithoutLike) {
                 aoData.push({ "name": "column", "value": ""});
                 aoData.push({ "name": "searchValue", "value": ""});
                 aoData.push({ "name": "columnWithoutLike", "value": columnWithoutLike});
@@ -106,17 +103,13 @@ $(function() {
                 targets: 6,
                 className: "sng-dt-right",
                 "render": function (data) {
-                    return '<a href="/trips/details/' + data +
-                        '" title="' + translate("tripDetailId") + ' ' + data +
-                        ' ">' + data + '</a>';
+                    return '<a href="/trips/details/' + data + '" title="' + translate("tripDetailId") + ' ' + data + ' ">' + data + '</a>';
                 }
             },
             {
                 targets: [1, 2, 3],
                 "render": function (data, type, row) {
-                    return '<a href="/customers/edit/' + row.cu.id +
-                        '" title="' + translate("customersDetailId") + ' ' + row.cu.name +
-                        ' ' + row.cu.surname + ' ">' + data + '</a>';
+                    return '<a href="/customers/edit/' + row.cu.id + '" title="' + translate("customersDetailId") + ' ' + row.cu.name + ' ' + row.cu.surname + ' ">' + data + '</a>';
                 }
             },
             {
@@ -153,9 +146,7 @@ $(function() {
                 searchable: false,
                 sortable: false,
                 render: function (data) {
-                    return '<div class="btn-group">' +
-                        '<a href="/payments/retry/' + data + '" class="btn btn-default">' + translate("continue") + '</a> ' +
-                        '</div>';
+                    return '<div class="btn-group"><a href="/payments/retry/' + data + '" class="btn btn-default">' + translate("continue") + '</a></div>';
                 }
             }
         ],

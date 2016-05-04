@@ -1,4 +1,4 @@
-/* global  filters:true, $, document */
+/* global  filters:true, $, document, translate:true */
 $(function() {
     // DataTables
     var table = $("#js-customers-table");
@@ -67,7 +67,7 @@ $(function() {
                 data: "button",
                 searchable: false,
                 sortable: false,
-                render: function (data, type, row) {
+                render: function (data) {
                     return '<a href="/customers/edit/' + data + '" class="btn btn-default btn-xs">' + translate("modify") + '</a>';
                 }
             }
@@ -118,12 +118,11 @@ $(function() {
         weekStart: 1
     });
 
-    $(document).on("click","#js-remove-card",function(e) {
+    $(document).on("click", "#js-remove-card", function() {
         var removeCardConfirm = confirm(translate("removeCardConfirm"));
+        var customer = $(this).data("id");
 
-        if(removeCardConfirm) {
-            var customer = $(this).data("id");
-
+        if (removeCardConfirm) {
             $.ajax({
                 url: "/customers/remove-card/" + customer,
                 type: "POST",
@@ -133,11 +132,11 @@ $(function() {
                 dataType: "json",
                 cache: false,
                 statusCode: {
-                    200: function (response) {
+                    200: function () {
                         $("#js-with-code").hide();
                         $("#js-no-code").show();
                     },
-                    500: function (response) {
+                    500: function () {
                         alert(translate("ajaxError"));
                     }
                 }
@@ -145,7 +144,7 @@ $(function() {
         }
     });
 
-    $(document).on("click", "#js-assign-card", function(e) {
+    $(document).on("click", "#js-assign-card", function() {
         var customer = $(this).data("id");
         var code = $(this).data("code");
         $.ajax({
@@ -170,13 +169,12 @@ $(function() {
         });
     });
 
-    $(document).on("click", "#js-remove-bonus", function(e) {
+    $(document).on("click", "#js-remove-bonus", function() {
         var removeBonus = confirm(translate("removeBonusConfirm"));
+        var customer = $(this).data("id");
+        var bonus = $(this).data("bonus");
 
         if (removeBonus) {
-            var customer = $(this).data("id");
-            var bonus = $(this).data("bonus");
-
             $.ajax({
                 url: "/customers/remove-bonus/" + customer,
                 type: "POST",

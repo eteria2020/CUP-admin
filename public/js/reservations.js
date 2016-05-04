@@ -78,9 +78,8 @@ $(function() {
                 "render": function (data, type, row) {
                     if (data !== "") {
                         return '<a href="/customers/edit/' + row.e.customerId + '" title="' + translate("showProfile") + ' ' + data + '">' + data + '</a>';
-                    } else {
-                        return "";
                     }
+                    return "";
                 }
             }
         ],
