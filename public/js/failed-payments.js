@@ -1,4 +1,4 @@
-/* global filters:true, $ confirm document translate */
+/* global filters:true, $ confirm document translate, getSessionVars:true */
 $(function() {
     "use strict";
 
@@ -22,10 +22,7 @@ $(function() {
     dataTableVars.searchValue.val("");
     dataTableVars.column.val("select");
 
-    if ( typeof getSessionVars === "undefined"){
-        console.log("datatalbe-session-data.js Not loaded.");
-        return;
-    } else {
+    if ( typeof getSessionVars !== "undefined"){
         getSessionVars(filters, dataTableVars);
     }
 
@@ -103,13 +100,17 @@ $(function() {
                 targets: 6,
                 className: "sng-dt-right",
                 "render": function (data) {
-                    return '<a href="/trips/details/' + data + '" title="' + translate("tripDetailId") + ' ' + data + ' ">' + data + '</a>';
+                    return '<a href="/trips/details/' + data +
+                        '" title="' + translate("tripDetailId") + " " + data +
+                        ' ">' + data + '</a>';
                 }
             },
             {
                 targets: [1, 2, 3],
                 "render": function (data, type, row) {
-                    return '<a href="/customers/edit/' + row.cu.id + '" title="' + translate("customersDetailId") + ' ' + row.cu.name + ' ' + row.cu.surname + ' ">' + data + '</a>';
+                    return '<a href="/customers/edit/' + row.cu.id +
+                        '" title="' + translate("customersDetailId") + ' ' + row.cu.name +
+                        ' ' + row.cu.surname + ' ">' + data + '</a>';
                 }
             },
             {
@@ -146,7 +147,9 @@ $(function() {
                 searchable: false,
                 sortable: false,
                 render: function (data) {
-                    return '<div class="btn-group"><a href="/payments/retry/' + data + '" class="btn btn-default">' + translate("continue") + '</a></div>';
+                    return '<div class="btn-group">' +
+                        '<a href="/payments/retry/' + data + '" class="btn btn-default">' + translate("continue") + '</a> ' +
+                        '</div>';
                 }
             }
         ],

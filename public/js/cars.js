@@ -1,4 +1,4 @@
-/* global $, filters:true, translate:true */
+/* global $, filters:true, translate:true, getSessionVars:true */
 $(function() {
     // DataTables
     var table = $("#js-cars-table");
@@ -19,9 +19,7 @@ $(function() {
     dataTableVars.searchValue.val("");
     dataTableVars.column.val("select");
 
-    if ( typeof getSessionVars === "undefined"){
-        console.log("datatalbe-session-data.js Not loaded.");
-    } else {
+    if ( typeof getSessionVars !== "undefined"){
         getSessionVars(filters, dataTableVars);
     }
 
@@ -102,7 +100,10 @@ $(function() {
                 searchable: false,
                 sortable: false,
                 render: function (data) {
-                    return '<div class="btn-group"><a href="/cars/edit/' + data + '" class="btn btn-default">' + translate("modify")  + '</a><a href="/cars/delete/' + data + '" class="btn btn-default js-delete">' + translate("delete")  + '</a></div>';
+                    return '<div class="btn-group">' +
+                        '<a href="/cars/edit/' + data + '" class="btn btn-default">' + translate("modify")  + '</a> ' +
+                        '<a href="/cars/delete/' + data + '" class="btn btn-default js-delete">' + translate("delete")  + '</a>' +
+                        '</div>';
                 }
             }
         ],

@@ -1,4 +1,4 @@
-/* global  filters:true, translate:true, $ */
+/* global  filters:true, translate:true, $, getSessionVars:true */
 $(function() {
     "use strict";
 
@@ -19,10 +19,7 @@ $(function() {
     dataTableVars.searchValue.val("");
     dataTableVars.column.val("select");
 
-    if (typeof getSessionVars === "undefined"){
-        console.log("datatalbe-session-data.js Not loaded.");
-        return;
-    } else {
+    if ( typeof getSessionVars !== "undefined"){
         getSessionVars(filters, dataTableVars);
     }
 
@@ -158,7 +155,8 @@ $(function() {
     {
         var amount = data.amount;
         if (amount !== "FREE") {
-            return amount !== "" ? '<a href="/trips/details/' + data.id + '?tab=cost">' + renderAmount(parseInt(amount)) + '</a>' : "";
+            return amount !== "" ? '<a href="/trips/details/' + data.id +
+                '?tab=cost">' + renderAmount(parseInt(amount)) + '</a>' : "";
         } else {
             return amount;
         }

@@ -1,4 +1,4 @@
-/* global $, filters:true, translate:true */
+/* global $, filters:true, translate:true, getSessionVars:true */
 $(function() {
     // DataTable
     var table = $("#js-trips-table");
@@ -21,10 +21,7 @@ $(function() {
     dataTableVars.searchValue.val("");
     dataTableVars.column.val("select");
 
-    if (typeof getSessionVars === "undefined"){
-        console.log("datatalbe-session-data.js Not loaded.");
-        return;
-    } else {
+    if ( typeof getSessionVars !== "undefined"){
         getSessionVars(filters, dataTableVars);
     }
 
@@ -89,7 +86,9 @@ $(function() {
             {
                 targets: [2, 3],
                 "render": function (data, type, row) {
-                    return '<a href="/customers/edit/' + row.cu.id + '" title="' + translate("showProfile") + " " + row.cu.name + " " + row.cu.surname + ' ">' + data + '</a>';
+                    return '<a href="/customers/edit/' + row.cu.id + '" title="' +
+                        translate("showProfile") + " " + row.cu.name + " " +
+                        row.cu.surname + ' ">' + data + '</a>';
                 }
             },
             {
@@ -190,15 +189,16 @@ $(function() {
         var amount = data.amount;
         if (amount !== "FREE") {
             return amount !== "" ?
-                '<a href="/trips/details/' + data.id + '?tab=cost">' + renderAmount(parseInt(amount)) + '</a>' :
-                "";
+                '<a href="/trips/details/' + data.id + '?tab=cost">' +
+                renderAmount(parseInt(amount)) + '</a>' : "";
         }
         return amount;
     }
 
     function renderInfoButton(data)
     {
-        return '<div class="btn-group">' + '<a href="/trips/details/' + data + '" class="btn btn-default">' + translate("details") + '</a> ' + '</div>';
+        return '<div class="btn-group">' + '<a href="/trips/details/' + data +
+            '" class="btn btn-default">' + translate("details") + '</a> ' + '</div>';
     }
 
     function renderAmount(amount)

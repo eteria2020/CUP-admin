@@ -1,4 +1,4 @@
-/* global filters:true, $ confirm document translate */
+/* global filters:true, $ confirm document translate, getSessionVars:true */
 $(function() {
     "use strict";
 
@@ -17,10 +17,7 @@ $(function() {
     dataTableVars.searchValue.val("");
     dataTableVars.column.val("select");
 
-    if ( typeof getSessionVars === "undefined"){
-        console.log("datatalbe-session-data.js Not loaded.");
-        return;
-    } else {
+    if ( typeof getSessionVars !== "undefined"){
         getSessionVars(filters, dataTableVars);
     }
 
@@ -29,11 +26,19 @@ $(function() {
         var status;
         if (data.e.valid) {
             confirmText = 'id: ' + data.e.customer + ' ' + data.e.customer_name + ' ' + data.e.customer_surname + ' ' + translate("confirmRevoke");
-            return '<span class="validation-btn-info btn btn-success btn-xs disabled">' + translate("valid") + '</span><a href="/customers/foreign-drivers-license/revoke/' + data.e.id + '" onclick="return confirm(\'' + confirmText + '\')" class="validation-btn btn btn-default btn-xs">'+translate("revoke") + '</a>';
+            return '<span class="validation-btn-info btn btn-success btn-xs disabled">' + translate("valid") + '</span>' +
+                '<a href="/customers/foreign-drivers-license/revoke/' +
+                data.e.id +
+                '" onclick="return confirm(\'' + confirmText + '\')" class="validation-btn btn btn-default btn-xs">'+translate("revoke")+'</a>';
         }
-        status = data.e.first_time ? '<span class="validation-btn-info btn btn-warning btn-xs disabled">' + translate("pending") + '</span>' : '<span class="validation-btn-info btn btn-danger btn-xs disabled">' + translate("revoked") + '</span>';
+        status = data.e.first_time ?
+            '<span class="validation-btn-info btn btn-warning btn-xs disabled">' + translate("pending") + '</span>' :
+            '<span class="validation-btn-info btn btn-danger btn-xs disabled">' + translate("revoked") + '</span>';
         confirmText = 'id: ' + data.e.customer + ' ' + data.e.customer_name + ' ' + data.e.customer_surname + ' ' + translate("confirmValidate");
-        return status + '<a href="/customers/foreign-drivers-license/validate/' + data.e.id + '" onclick="return confirm(\'' + confirmText + '\')" class="validation-btn btn btn-default btn-xs">' + translate("validate") + '</a>';
+        return status +
+            '<a href="/customers/foreign-drivers-license/validate/' +
+            data.e.id +
+            '" onclick="return confirm(\'' + confirmText + '\')" class="validation-btn btn btn-default btn-xs">'+translate("validate")+'</a>';
     }
 
     table.dataTable({
@@ -80,7 +85,8 @@ $(function() {
                 sortable: false,
                 data: "e.customer",
                 render: function (data) {
-                    return '<a href="/customers/foreign-drivers-license/download/' + data + '" class="validation-btn btn btn-default btn-xs">' + translate("download") + '</a>';
+                    return '<a href="/customers/foreign-drivers-license/download/' + data +
+                        '" class="validation-btn btn btn-default btn-xs">' + translate("download") + '</a>';
                 }
             },
             {
