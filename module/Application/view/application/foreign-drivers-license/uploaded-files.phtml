@@ -3,6 +3,7 @@ $this->headLink()->appendStylesheet('/js/datatables/plugins/bootstrap/dataTables
 $this->headScript()
     ->appendFile('/js/datatables/media/js/jquery.dataTables.min.js')
     ->appendFile('/js/datatables/plugins/bootstrap/dataTables.bootstrap.js')
+    ->appendFile($this->basePath() . '/js/datatable-session-data.js')
     ->appendFile($this->basePath() .'/js/foreign-drivers-license.js');
 ?>
 <div class="page-content-wrapper">
@@ -79,9 +80,5 @@ $this->headScript()
     </div>
 </div>
 <script>
-    var filters = {<?php
-        foreach ($this->filters as $key => $value) {
-            echo '"'.$key.'": "'.$value.'", ';
-        }
-    ?>};
+    var filters = <?= $this->filters ?>;
 </script>

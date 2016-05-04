@@ -1,52 +1,31 @@
-/* global  filters:true */
+/* global $, filters:true */
 $(function() {
-    // DataTables
+    // DataTable
     var table = $("#js-trips-table");
 
     // Define DataTables Filters
-    var searchValue = $("#js-value");
-    var column = $("#js-column");
-    var iSortCol_0 = 0;
-    var sSortDir_0 = "desc";
-    var iDisplayLength = 100;
-    var from = $("#js-date-from");
-    var columnFromDate = "e.timestampBeginning";
-    var to = $("#js-date-to");
-    var columnFromEnd = "e.timestampEnd";
+    var dataTableVars = {
+        searchValue: $("#js-value"),
+        column: $("#js-column"),
+        iSortCol_0: 0,
+        sSortDir_0: "desc",
+        iDisplayLength: 100,
+        from: $("#js-date-from"),
+        columnFromDate: "e.timestampBeginning",
+        to: $("#js-date-to"),
+        columnFromEnd: "e.timestampEnd"
+    };
 
     var filterWithNull = false;
 
-    searchValue.val("");
-    column.val("select");
+    dataTableVars.searchValue.val("");
+    dataTableVars.column.val("select");
 
-    if(typeof filters !== "undefined"){
-        if(typeof filters.searchValue !== "undefined"){
-            searchValue.val(filters.searchValue);
-        }
-        if(typeof filters.column !== "undefined"){
-            column.val(filters.column);
-        }
-        if(typeof filters.iSortCol_0 !== "undefined"){
-            iSortCol_0=filters.iSortCol_0;
-        }
-        if(typeof filters.sSortDir_0 !== "undefined"){
-            sSortDir_0=filters.sSortDir_0;
-        }
-        if(typeof filters.iDisplayLength !== "undefined"){
-            iDisplayLength=filters.iDisplayLength;
-        }
-        if(typeof filters.from !== "undefined"){
-            from.val(filters.from);
-        }
-        if(typeof filters.columnFromDate !== "undefined"){
-            columnFromDate=filters.columnFromDate;
-        }
-        if(typeof filters.to !== "undefined"){
-            to.val(filters.to);
-        }
-        if(typeof filters.columnFromEnd !== "undefined"){
-            columnFromEnd=filters.columnFromEnd;
-        }
+    if (typeof getSessionVars === "undefined"){
+        console.log("datatalbe-session-data.js Not loaded.");
+        return;
+    } else {
+        getSessionVars(filters, dataTableVars);
     }
 
     table.dataTable({
@@ -71,15 +50,15 @@ $(function() {
                 aoData.push({ "name": "searchValue", "value": ''});
                 aoData.push({ "name": "columnNull", "value": "e.timestampEnd"});
             } else {
-                aoData.push({ "name": "column", "value": $(column).val()});
-                aoData.push({ "name": "searchValue", "value": searchValue.val().trim()});
+                aoData.push({ "name": "column", "value": $(dataTableVars.column).val()});
+                aoData.push({ "name": "searchValue", "value": dataTableVars.searchValue.val().trim()});
             }
-            aoData.push({ "name": "from", "value": $(from).val().trim()});
-            aoData.push({ "name": "to", "value": $(to).val().trim()});
-            aoData.push({ "name": "columnFromDate", "value": columnFromDate});
-            aoData.push({ "name": "columnFromEnd", "value": columnFromEnd});
+            aoData.push({ "name": "from", "value": $(dataTableVars.from).val().trim()});
+            aoData.push({ "name": "to", "value": $(dataTableVars.to).val().trim()});
+            aoData.push({ "name": "columnFromDate", "value": dataTableVars.columnFromDate});
+            aoData.push({ "name": "columnFromEnd", "value": dataTableVars.columnFromEnd});
         },
-        "order": [[iSortCol_0, sSortDir_0]],
+        "order": [[dataTableVars.iSortCol_0, dataTableVars.sSortDir_0]],
         "columns": [
             {data: 'e.id'},
             {data: 'cu.email'},
@@ -144,7 +123,7 @@ $(function() {
             [100, 200, 300],
             [100, 200, 300]
         ],
-        "pageLength": iDisplayLength,
+        "pageLength": dataTableVars.iDisplayLength,
         "pagingType": "bootstrap_full_number",
         "language": {
             "sEmptyTable":     translate("sTripEmptyTable"),
@@ -176,13 +155,13 @@ $(function() {
     });
 
     $('#js-clear').click(function() {
-        searchValue.val('');
-        from.val('');
-        to.val('');
-        column.val('select');
-        searchValue.prop('disabled', false);
+        dataTableVars.searchValue.val('');
+        dataTableVars.from.val('');
+        dataTableVars.to.val('');
+        dataTableVars.column.val('select');
+        dataTableVars.searchValue.prop('disabled', false);
         filterWithNull = false;
-        searchValue.show();
+        dataTableVars.searchValue.show();
     });
 
     $('.date-picker').datepicker({
@@ -191,18 +170,18 @@ $(function() {
         weekStart: 1
     });
 
-    $(column).change(function() {
+    $(dataTableVars.column).change(function() {
         var value = $(this).val();
 
-        searchValue.show();
-        searchValue.val('');
+        dataTableVars.searchValue.show();
+        dataTableVars.searchValue.val('');
 
         if(value == 'c.timestampEnd') {
             filterWithNull = true;
-            searchValue.prop('disabled', true);
+            dataTableVars.searchValue.prop('disabled', true);
         } else {
             filterWithNull = false;
-            searchValue.prop('disabled', false);
+            dataTableVars.searchValue.prop('disabled', false);
         }
     });
 

@@ -63,7 +63,7 @@ class TripsController extends AbstractActionController
         $sessionDatatableFilters = $this->tripsService->getDataTableSessionFilters();
 
         return new ViewModel([
-            'filters' => $sessionDatatableFilters,
+            'filters' => json_encode($sessionDatatableFilters),
         ]);
     }
 

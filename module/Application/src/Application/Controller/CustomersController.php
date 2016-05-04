@@ -138,7 +138,7 @@ class CustomersController extends AbstractActionController
 
         return new ViewModel([
             'totalCustomers' => $this->customersService->getTotalCustomers(),
-            'filters' => $sessionDatatableFilters,
+            'filters' => json_encode($sessionDatatableFilters),
         ]);
     }
 

@@ -36,7 +36,7 @@ class ForeignDriversLicenseController extends AbstractActionController
         $sessionDatatableFilters = $this->foreignDriversLicenseService->getDataTableSessionFilters();
 
         return new ViewModel([
-            'filters' => $sessionDatatableFilters,
+            'filters' => json_encode($sessionDatatableFilters),
         ]);
     }
 

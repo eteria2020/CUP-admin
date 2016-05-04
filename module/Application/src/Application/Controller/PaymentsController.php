@@ -107,7 +107,7 @@ class PaymentsController extends AbstractActionController
         $sessionDatatableFilters = $this->tripPaymentsService->getDataTableSessionFilters();
 
         return new ViewModel([
-            'filters' => $sessionDatatableFilters,
+            'filters' => json_encode($sessionDatatableFilters),
         ]);
     }
 

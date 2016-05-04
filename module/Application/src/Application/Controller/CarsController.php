@@ -60,7 +60,7 @@ class CarsController extends AbstractActionController
         $sessionDatatableFilters = $this->carsService->getDataTableSessionFilters();
 
         return new ViewModel([
-            'filters' => $sessionDatatableFilters,
+            'filters' => json_encode($sessionDatatableFilters),
         ]);
     }
 

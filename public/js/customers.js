@@ -4,28 +4,22 @@ $(function() {
     var table = $("#js-customers-table");
 
     // Define DataTables Filters
-    var searchValue = $("#js-value");
-    var column = $("#js-column");
-    var iSortCol_0 = 0;
-    var sSortDir_0 = "desc";
-    var iDisplayLength = 100;
+    var dataTableVars = {
+        searchValue: $("#js-value"),
+        column: $("#js-column"),
+        iSortCol_0: 0,
+        sSortDir_0: "desc",
+        iDisplayLength: 100
+    };
 
-    if (typeof filters !== "undefined"){
-        if (typeof filters.searchValue !== "undefined"){
-            searchValue.val(filters.searchValue);
-        }
-        if (typeof filters.column !== "undefined"){
-            column.val(filters.column);
-        }
-        if (typeof filters.iSortCol_0 !== "undefined"){
-            iSortCol_0 = filters.iSortCol_0;
-        }
-        if (typeof filters.sSortDir_0 !== "undefined"){
-            sSortDir_0 = filters.sSortDir_0;
-        }
-        if (typeof filters.iDisplayLength !== "undefined"){
-            iDisplayLength = filters.iDisplayLength;
-        }
+    dataTableVars.searchValue.val("");
+    dataTableVars.column.val("select");
+
+    if ( typeof getSessionVars === "undefined"){
+        console.log("datatalbe-session-data.js Not loaded.");
+        return;
+    } else {
+        getSessionVars(filters, dataTableVars);
     }
 
     table.dataTable({
@@ -45,10 +39,10 @@ $(function() {
             } );
         },
         "fnServerParams": function ( aoData ) {
-            aoData.push({ "name": "column", "value": $(column).val()});
-            aoData.push({ "name": "searchValue", "value": searchValue.val().trim()});
+            aoData.push({ "name": "column", "value": $(dataTableVars.column).val()});
+            aoData.push({ "name": "searchValue", "value": dataTableVars.searchValue.val().trim()});
         },
-        "order": [[iSortCol_0, sSortDir_0]],
+        "order": [[dataTableVars.iSortCol_0, dataTableVars.sSortDir_0]],
         "columns": [
             {data: "e.id"},
             {data: "e.name"},
@@ -82,7 +76,7 @@ $(function() {
             [100, 200, 300],
             [100, 200, 300]
         ],
-        "pageLength": iDisplayLength,
+        "pageLength": dataTableVars.iDisplayLength,
         "pagingType": "bootstrap_full_number",
         "language": {
             "sEmptyTable": translate("sCustomersEmptyTable"),
@@ -114,8 +108,8 @@ $(function() {
     });
 
     $("#js-clear").click(function() {
-        searchValue.val("");
-        column.val("select");
+        dataTableVars.searchValue.val("");
+        dataTableVars.column.val("select");
     });
 
     $(".date-picker").datepicker({

@@ -26,7 +26,7 @@ class InvoicesController extends AbstractActionController
         $sessionDatatableFilters = $this->invoicesService->getDataTableSessionFilters();
 
         return new ViewModel([
-            'filters' => $sessionDatatableFilters,
+            'filters' => json_encode($sessionDatatableFilters),
         ]);
     }
 

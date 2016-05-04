@@ -25,7 +25,7 @@ class ReservationsController extends AbstractActionController
         $sessionDatatableFilters = $this->reservationsService->getDataTableSessionFilters();
 
         return new ViewModel([
-            'filters' => $sessionDatatableFilters,
+            'filters' => json_encode($sessionDatatableFilters),
         ]);
     }
 

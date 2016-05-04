@@ -53,10 +53,10 @@ class TripsNotPayedController extends AbstractActionController
 
     public function listAction()
     {
-        $sessionDatatableFilters = $this->tripsService->getDataTableSessionFilters();
+        $sessionDatatableFilters = $this->tripsService->getNotPayedDataTableSessionFilters();
 
         return new ViewModel([
-            'filters' => $sessionDatatableFilters,
+            'filters' => json_encode($sessionDatatableFilters),
         ]);
     }
 }
