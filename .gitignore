@@ -14,3 +14,4 @@ data/DoctrineORMModule
 data/DoctrineMongoODMModule
 public/cache
 node_modules
+bower_components
