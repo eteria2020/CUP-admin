@@ -2,15 +2,18 @@
 
 namespace Application\Controller;
 
+// Internals
 use Application\Form\PoiForm;
 use SharengoCore\Entity\Pois;
 use SharengoCore\Service\CarsService;
+use SharengoCore\Service\PoisService;
+// Externals
 use Zend\Http\Response;
 use Zend\Mvc\Controller\AbstractActionController;
-use SharengoCore\Service\PoisService;
 use Zend\Stdlib\Hydrator\HydratorInterface;
 use Zend\View\Model\JsonModel;
 use Zend\View\Model\ViewModel;
+use Zend\Session\Container;
 
 class PoisController extends AbstractActionController
 {
@@ -34,21 +37,43 @@ class PoisController extends AbstractActionController
      */
     private $poiForm;
 
+    /**
+     * @var Container
+     */
+    private $datatableFiltersSessionContainer;
+
     public function __construct(
         PoisService $poisService,
         CarsService $carsService,
         PoiForm $poiForm,
-        HydratorInterface $hydrator
+        HydratorInterface $hydrator,
+        Container $datatableFiltersSessionContainer
     ) {
         $this->poisService = $poisService;
         $this->carsService = $carsService;
         $this->poiForm = $poiForm;
         $this->hydrator = $hydrator;
+        $this->datatableFiltersSessionContainer = $datatableFiltersSessionContainer;
+    }
+
+    /**
+     * This method return an array containing the DataTable filters,
+     * from a Session Container.
+     *
+     * @return array
+     */
+    private function getDataTableSessionFilters()
+    {
+        return $this->datatableFiltersSessionContainer->offsetGet('Pois');
     }
 
     public function indexAction()
     {
-        return new ViewModel([]);
+        $sessionDatatableFilters = $this->getDataTableSessionFilters();
+
+        return new ViewModel([
+            'filters' => json_encode($sessionDatatableFilters),
+        ]);
     }
 
     public function datatableAction()
