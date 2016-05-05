@@ -1622,7 +1622,7 @@
             "source": {
                 "type": "git",
                 "url": "ssh://git@gitlab.bulweria.com:1022/cup-web/core.git",
-                "reference": "87615aedf5503a9d71aa921559e8f5bd3b83caf9"
+                "reference": "f334d22fd556889802a3df8583b9db5867d45c99"
             },
             "require": {
                 "doctrine/doctrine-orm-module": "0.*",
@@ -1643,7 +1643,7 @@
                 }
             },
             "description": "Core ZF2 module for Sharengo apps",
-            "time": "2016-04-18 10:00:31"
+            "time": "2016-05-05 10:19:27"
         },
         {
             "name": "mvlabs/zf2-multilanguage",
@@ -2017,12 +2017,12 @@
             "version": "2.4.9",
             "source": {
                 "type": "git",
-                "url": "https://github.com/zendframework/zf2.git",
+                "url": "https://github.com/zendframework/zendframework.git",
                 "reference": "4d096d15d01d46b03a69fff00576b31789246364"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/zendframework/zf2/zipball/4d096d15d01d46b03a69fff00576b31789246364",
+                "url": "https://api.github.com/repos/zendframework/zendframework/zipball/4d096d15d01d46b03a69fff00576b31789246364",
                 "reference": "4d096d15d01d46b03a69fff00576b31789246364",
                 "shasum": ""
             },
