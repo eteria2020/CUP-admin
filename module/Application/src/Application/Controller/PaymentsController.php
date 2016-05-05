@@ -94,7 +94,8 @@ class PaymentsController extends AbstractActionController
         FleetService $fleetService,
         RecapService $recapService,
         FaresService $faresService,
-        FaresForm $faresForm
+        FaresForm $faresForm,
+        Container $datatableFiltersSessionContainer
     ) {
         $this->tripPaymentsService = $tripPaymentsService;
         $this->paymentsService = $paymentsService;

@@ -17,7 +17,7 @@ class CarsControllerFactory implements FactoryInterface
      */
     public function createService(ServiceLocatorInterface $serviceLocator)
     {
-        $sharedServiceLocator = $sharedServiceLocator;
+        $sharedServiceLocator = $serviceLocator->getServiceLocator();
 
         $entityManager = $sharedServiceLocator->get('doctrine.entitymanager.orm_default');
         $carsService = $sharedServiceLocator->get('SharengoCore\Service\CarsService');
