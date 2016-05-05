@@ -1,6 +1,7 @@
 <?php
 namespace Application\Controller;
 
+// Internals
 use SharengoCore\Entity\Customers;
 use SharengoCore\Entity\CustomersBonus;
 use SharengoCore\Entity\PromoCodes;
@@ -13,13 +14,14 @@ use SharengoCore\Service\DisableContractService;
 use SharengoCore\Exception\CustomerNotFoundException;
 use SharengoCore\Exception\BonusAssignmentException;
 use Cartasi\Service\CartasiContractsService;
-
+// Externals
 use Zend\Form\Form;
 use Zend\Http\Response;
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\Stdlib\Hydrator\HydratorInterface;
 use Zend\View\Model\JsonModel;
 use Zend\View\Model\ViewModel;
+use Zend\Session\Container;
 
 class CustomersController extends AbstractActionController
 {
@@ -88,6 +90,11 @@ class CustomersController extends AbstractActionController
     private $bonusService;
 
     /**
+     * @var Container
+     */
+    private $datatableFiltersSessionContainer;
+
+    /**
      * @param CustomersService $customersService
      * @param CardsService $cardsService
      * @param PromoCodesService $promoCodeService
@@ -101,6 +108,7 @@ class CustomersController extends AbstractActionController
      * @param HydratorInterface $hydrator
      * @param CartasiContractsService $cartasiContractsService
      * @param DisableContractService $disableContractService
+     * @param Container $datatableFiltersSessionContainer
      */
     public function __construct(
         CustomersService $customersService,
@@ -115,7 +123,8 @@ class CustomersController extends AbstractActionController
         Form $cardForm,
         HydratorInterface $hydrator,
         CartasiContractsService $cartasiContractsService,
-        DisableContractService $disableContractService
+        DisableContractService $disableContractService,
+        Container $datatableFiltersSessionContainer
     ) {
         $this->customersService = $customersService;
         $this->cardsService = $cardsService;
@@ -130,12 +139,27 @@ class CustomersController extends AbstractActionController
         $this->cartasiContractsService = $cartasiContractsService;
         $this->disableContractService = $disableContractService;
         $this->bonusService = $bonusService;
+        $this->datatableFiltersSessionContainer = $datatableFiltersSessionContainer;
+    }
+
+    /**
+     * This method return an array containing the DataTable filters,
+     * from a Session Container.
+     *
+     * @return array
+     */
+    private function getDataTableSessionFilters()
+    {
+        return $this->datatableFiltersSessionContainer->offsetGet('Customers');
     }
 
     public function listAction()
     {
+        $sessionDatatableFilters = $this->getDataTableSessionFilters();
+
         return new ViewModel([
-            'totalCustomers' => $this->customersService->getTotalCustomers()
+            'totalCustomers' => $this->customersService->getTotalCustomers(),
+            'filters' => json_encode($sessionDatatableFilters),
         ]);
     }
 

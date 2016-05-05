@@ -2,15 +2,26 @@
 
 namespace Application\Controller;
 
+// Externals
 use Zend\ServiceManager\FactoryInterface;
 use Zend\ServiceManager\ServiceLocatorInterface;
+use Zend\Session\Container;
 
 class ReservationsControllerFactory implements FactoryInterface
 {
     public function createService(ServiceLocatorInterface $serviceLocator)
     {
-        $reservationsService = $serviceLocator->getServiceLocator()->get('SharengoCore\Service\ReservationsService');
+        $sharedServiceLocator = $serviceLocator->getServiceLocator();
 
-        return new ReservationsController($reservationsService);
+        $reservationsService = $sharedServiceLocator->get('SharengoCore\Service\ReservationsService');
+        $datatablesSessionNamespace = $sharedServiceLocator->get('Configuration')['session']['datatablesNamespace'];
+
+        // Creating DataTable Filters Session Container
+        $datatableFiltersSessionContainer = new Container($datatablesSessionNamespace);
+
+        return new ReservationsController(
+            $reservationsService,
+            $datatableFiltersSessionContainer
+        );
     }
 }

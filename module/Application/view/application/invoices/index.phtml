@@ -3,30 +3,25 @@ $this->headLink()->appendStylesheet('/js/datatables/plugins/bootstrap/dataTables
 $this->headScript()
     ->appendFile('/js/datatables/media/js/jquery.dataTables.min.js')
     ->appendFile('/js/datatables/plugins/bootstrap/dataTables.bootstrap.js')
+    ->appendFile($this->basePath() . '/js/datatable-session-data.js')
     ->appendFile($this->basePath() .'/js/invoices.js');
 ?>
 <div class="page-content-wrapper">
     <div class="page-content">
-
         <!-- Header -->
         <h3 class="page-title">
             <?= $this->translate("ELENCO FATTURE"); ?> <small><?= $this->translate("ricerca"); ?></small>
         </h3>
-
         <div class="page-bar">
         </div>
-
         <!-- Content -->
         <div class="row">
             <div class="col-md-12">
-
                 <?= $this->partial('partials/flash-messages.phtml', []); ?>
-
                 <!-- Filter container -->
                 <div class="row">
                     <div class="col-md-8">
                         <div class="form-inline">
-
                             <!-- Filter selector -->
                             <div class="form-group">
                                 <select name="column" id="js-column" class="form-control">
@@ -38,7 +33,6 @@ $this->headScript()
                                 </select>
                             </div>
                             <!-- filter selector -->
-
                             <!-- Type selector -->
                             <div class="form-group">
                                 <select name="js-payment-type" id="js-payment-type" class="form-control" style="display: none;">
@@ -49,7 +43,6 @@ $this->headScript()
                                 <input type="text" name="value" value="" class="form-control" id="js-value" placeholder="<?= $this->translate("Filtra..."); ?>">
                             </div>
                             <!-- type selector -->
-
                             <!-- Search buttons -->
                             <div class="btn-group">
                                 <button type="button" class="btn green js-search" id="js-search">
@@ -67,14 +60,11 @@ $this->headScript()
                                 </ul>
                             </div>
                             <!-- search buttons -->
-
                         </div>
                     </div>
                 </div>
                 <!-- filter container -->
-
                 <hr>
-
                 <!-- Datatable container -->
                 <div class="portlet box green">
                     <div class="portlet-title">
@@ -83,7 +73,6 @@ $this->headScript()
                         </div>
                     </div>
                     <div class="portlet-body">
-
                         <!-- Table -->
                         <table class="table table-striped table-bordered table-hover" id="js-invoices-table">
                             <thead>
@@ -99,18 +88,17 @@ $this->headScript()
                             </thead>
                         </table>
                         <!-- table -->
-
                     </div>
                 </div>
                 <!-- datatable container -->
-
             </div>
         </div>
         <!-- content -->
-
     </div>
 </div>
-
 <script>
 var pdfPath = "<?= $this->url('pdf/invoices'); ?>/";
+</script>
+<script>
+    var filters = <?= $this->filters ?>;
 </script>
