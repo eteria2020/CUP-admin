@@ -37,7 +37,7 @@ class ReportsCsvService
             $file = fopen('php://temp/maxmemory:'.(12 * 1024 * 1024), 'r+'); // 128mb
 
             // Write CSV to memory
-            fputcsv($file, array_keys(call_user_func_array('array_merge', $trips)));
+            fputcsv($file, array_keys($trips[0]));
 
             foreach ($trips as $row) {
                 fputcsv($file, $row);
