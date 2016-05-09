@@ -47,11 +47,6 @@ msgstr ""
 msgid "Autonomia"
 msgstr ""
 
-#: module/Alarms/public/assets-modules/alarms/js/controllers/main.js:695
-#: module/CallCenter/public/assets-modules/call-center/js/controllers/main.js:545
-msgid "batteria"
-msgstr ""
-
 #: module/Alarms/view/alarms/index/index.phtml:250
 #: module/CallCenter/view/call-center/index/index.phtml:323
 msgid "Batteria"
@@ -155,18 +150,14 @@ msgstr ""
 msgid "Fine corsa"
 msgstr ""
 
-#: module/Alarms/public/assets-modules/alarms/js/controllers/main.js:148
-#: module/CallCenter/public/assets-modules/call-center/js/controllers/main.js:105
-msgid "Geocode was not successful for the following reason:"
-msgstr ""
-
 #: module/Alarms/public/assets-modules/alarms/js/controllers/main.js:233
 #: module/Alarms/view/alarms/index/index.phtml:341
 msgid "GPS"
 msgstr ""
 
-#: module/Alarms/view/alarms/index/index.phtml:342
-msgid "In Carica"
+#: module/Alarms/public/assets-modules/alarms/js/controllers/main.js:148
+#: module/CallCenter/public/assets-modules/call-center/js/controllers/main.js:105
+msgid "Geocode was not successful for the following reason:"
 msgstr ""
 
 #: module/Alarms/view/alarms/index/index.phtml:337
@@ -177,6 +168,10 @@ msgstr ""
 #: module/Alarms/view/alarms/index/index.phtml:336
 #: module/CallCenter/view/call-center/index/index.phtml:496
 msgid "IN USO"
+msgstr ""
+
+#: module/Alarms/view/alarms/index/index.phtml:342
+msgid "In Carica"
 msgstr ""
 
 #: module/Alarms/view/alarms/index/index.phtml:64
@@ -200,14 +195,14 @@ msgstr ""
 msgid "Inizio:"
 msgstr ""
 
-#: module/Alarms/view/alarms/index/index.phtml:242
-#: module/CallCenter/view/call-center/index/index.phtml:315
-msgid "Lat: {{car.latitude}}"
-msgstr ""
-
 #: module/Alarms/view/alarms/index/index.phtml:334
 #: module/CallCenter/view/call-center/index/index.phtml:495
 msgid "LIBERE"
+msgstr ""
+
+#: module/Alarms/view/alarms/index/index.phtml:242
+#: module/CallCenter/view/call-center/index/index.phtml:315
+msgid "Lat: {{car.latitude}}"
 msgstr ""
 
 #: module/Alarms/view/alarms/index/index.phtml:243
@@ -227,18 +222,8 @@ msgstr ""
 msgid "N.O. GPS"
 msgstr ""
 
-#: module/CallCenter/view/call-center/index/index.phtml:104
-msgid "N° Card"
-msgstr ""
-
-#: module/Alarms/view/alarms/index/index.phtml:228
-#: module/CallCenter/view/call-center/index/index.phtml:301
-msgid "N° Unità"
-msgstr ""
-
-#: module/Alarms/view/alarms/index/index.phtml:44
-#: module/CallCenter/view/call-center/index/index.phtml:74
-msgid "N°.Unità"
+#: module/CallCenter/view/call-center/index/index.phtml:499
+msgid "NON OPERATIVE"
 msgstr ""
 
 #: module/CallCenter/view/call-center/index/index.phtml:134
@@ -258,8 +243,18 @@ msgstr ""
 msgid "Nome"
 msgstr ""
 
-#: module/CallCenter/view/call-center/index/index.phtml:499
-msgid "NON OPERATIVE"
+#: module/CallCenter/view/call-center/index/index.phtml:104
+msgid "N° Card"
+msgstr ""
+
+#: module/Alarms/view/alarms/index/index.phtml:228
+#: module/CallCenter/view/call-center/index/index.phtml:301
+msgid "N° Unità"
+msgstr ""
+
+#: module/Alarms/view/alarms/index/index.phtml:44
+#: module/CallCenter/view/call-center/index/index.phtml:74
+msgid "N°.Unità"
 msgstr ""
 
 #: module/Alarms/view/alarms/index/index.phtml:326
@@ -267,14 +262,14 @@ msgstr ""
 msgid "POIS"
 msgstr ""
 
-#: module/Alarms/view/alarms/index/index.phtml:238
-#: module/CallCenter/view/call-center/index/index.phtml:311
-msgid "Posizione"
-msgstr ""
-
 #: module/Alarms/view/alarms/index/index.phtml:335
 #: module/CallCenter/view/call-center/index/index.phtml:497
 msgid "PRENOTATE"
+msgstr ""
+
+#: module/Alarms/view/alarms/index/index.phtml:238
+#: module/CallCenter/view/call-center/index/index.phtml:311
+msgid "Posizione"
 msgstr ""
 
 #: module/Alarms/view/alarms/index/index.phtml:127
@@ -337,15 +332,20 @@ msgstr ""
 msgid "Ultimo contatto"
 msgstr ""
 
+#: module/Alarms/view/alarms/index/index.phtml:145
+#: module/CallCenter/view/call-center/index/index.phtml:201
+msgid "Veicoli trovati"
+msgstr ""
+
+#: module/Alarms/public/assets-modules/alarms/js/controllers/main.js:695
+#: module/CallCenter/public/assets-modules/call-center/js/controllers/main.js:545
+msgid "batteria"
+msgstr ""
+
 #: module/Alarms/public/assets-modules/alarms/js/controllers/main.js:478
 msgid "un altro n° unità"
 msgstr ""
 
 #: module/Alarms/public/assets-modules/alarms/js/controllers/main.js:480
 msgid "un'altra targa"
-msgstr ""
-
-#: module/Alarms/view/alarms/index/index.phtml:145
-#: module/CallCenter/view/call-center/index/index.phtml:201
-msgid "Veicoli trovati"
 msgstr ""
