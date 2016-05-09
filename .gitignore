@@ -10,7 +10,7 @@ Thumbs.db
 vendor
 module/SharengoCore
 module/Cartasi
-module/BusinessAdminSection
+module/CUPAdminBusinessModule
 module/BusinessCore
 data/DoctrineORMModule
 data/DoctrineMongoODMModule

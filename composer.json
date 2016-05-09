@@ -58,7 +58,7 @@
             "SharengoCore": "module/SharengoCore/src",
             "Cartasi": "module/Cartasi/src",
             "BusinessCore": "module/BusinessCore/src",
-            "BusinessAdminSection": "module/BusinessAdminSection/src"
+            "CUPAdminBusinessModule": "module/CUPAdminBusinessModule/src"
         }
     }
 }

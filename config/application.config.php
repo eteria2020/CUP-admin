@@ -24,7 +24,7 @@ $config = [
         'Reports',
         'MvLabsMultilanguage',
         'BusinessCore',
-        'BusinessAdminSection',
+        'CUPAdminBusinessModule',
     ],
 
     // These are various options for the listeners attached to the ModuleManager
