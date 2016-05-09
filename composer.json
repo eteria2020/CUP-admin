@@ -9,11 +9,19 @@
     "homepage": "http://framework.zend.com/",
     "repositories": [
         {
-            "url": "ssh://git@gitlab.bulweria.com:1022/cup-web/core.git",
+            "url": "ssh://git@gitlab.bulweria.com/cup-web/core.git",
             "type": "git"
         },
         {
             "url": "ssh://git@git.mvlabs.it:4222/clients/sharengo-cartasi.git",
+            "type": "git"
+        },
+        {
+            "url": "ssh://git@gitlab.bulweria.com/cup-web/admin-business-module.git",
+            "type": "git"
+        },
+        {
+            "url": "ssh://git@gitlab.bulweria.com/cup-web/core-business.git",
             "type": "git"
         },
         {
@@ -22,7 +30,7 @@
         }
     ],
     "require": {
-        "php": ">=5.3.3",
+        "php": ">=5.4",
         "zendframework/zendframework": "~2.4",
         "bjyoungblood/bjy-authorize": "1.4.0",
         "zf-commons/zfc-user-doctrine-orm": "^1.0",
@@ -31,6 +39,8 @@
         "mvlabs/sharengo-coremodule": "dev-master",
         "leafo/lessphp": "0.5.*",
         "mvlabs/sharengo-cartasi": "dev-master",
+        "cup-web/core-business": "dev-master",
+        "cup-web/admin-business-module": "dev-master",
         "mockery/mockery": "^0.9.4",
         "doctrine/doctrine-mongo-odm-module": "^0.9.1",
         "mrclay/minify": "2.2.*",
@@ -46,7 +56,9 @@
     "autoload-dev": {
         "psr-0": {
             "SharengoCore": "module/SharengoCore/src",
-            "Cartasi": "module/Cartasi/src"
+            "Cartasi": "module/Cartasi/src",
+            "BusinessCore": "module/BusinessCore/src",
+            "CUPAdminBusinessModule": "module/CUPAdminBusinessModule/src"
         }
     }
 }
