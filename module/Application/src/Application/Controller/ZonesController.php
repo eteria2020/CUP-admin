@@ -13,6 +13,7 @@ use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
 use Zend\View\Model\JsonModel;
 use Zend\Stdlib\Hydrator\HydratorInterface;
+use Zend\Session\Container;
 
 class ZonesController extends AbstractActionController
 {
@@ -37,17 +38,33 @@ class ZonesController extends AbstractActionController
     private $zoneForm;
 
     /**
+     * @var Container
      */
+    private $datatableFiltersSessionContainer;
+
     public function __construct(
         ZonesService $zonesService,
         PostGisService $postGisService,
         ZoneForm $zoneForm,
-        HydratorInterface $hydrator
+        HydratorInterface $hydrator,
+        Container $datatableFiltersSessionContainer
     ) {
         $this->zonesService = $zonesService;
         $this->postGisService = $postGisService;
         $this->zoneForm = $zoneForm;
         $this->hydrator = $hydrator;
+        $this->datatableFiltersSessionContainer = $datatableFiltersSessionContainer;
+    }
+
+    /**
+     * This method return an array containing the DataTable filters,
+     * from a Session Container.
+     *
+     * @return array
+     */
+    private function getDataTableSessionFilters()
+    {
+        return $this->datatableFiltersSessionContainer->offsetGet('Zone');
     }
 
     public function indexAction()
@@ -57,7 +74,11 @@ class ZonesController extends AbstractActionController
 
     public function listTabAction()
     {
-        $view = new ViewModel([]);
+        $sessionDatatableFilters = $this->getDataTableSessionFilters();
+
+        $view = new ViewModel([
+            'filters' => json_encode($sessionDatatableFilters),
+        ]);
 
         $view->setTerminal(true);
 

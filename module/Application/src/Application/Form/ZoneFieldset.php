@@ -129,7 +129,7 @@ class ZoneFieldset extends Fieldset implements InputFilterProviderInterface
             ],
             'options' => [
                 'value_options' => [
-                    0 => $translator->translate("Usa String GeoJSON"),
+                    0 => $translator->translate("Usa Stringa GeoJSON"),
                     1 => $translator->translate("Usa File KML")
                 ],
             ],

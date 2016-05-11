@@ -1,8 +1,17 @@
 /* global $, confirm, dataTable, zones, ol, translate */
 $(function () {
+    // DataTable
     var table = $("#js-zones-table");
-    var search = $("#js-value");
-    var column = $("#js-column");
+
+    // Define DataTables Filters
+    var dataTableVars = {
+        searchValue: $("#js-value"),
+        column: $("#js-column"),
+        iSortCol_0: 0,
+        sSortDir_0: "desc",
+        iDisplayLength: 5
+    };
+
     var filterWithoutLike = false;
     var columnWithoutLike = false;
     var columnValueWithoutLike = false;
@@ -18,8 +27,12 @@ $(function () {
 
     var format = new ol.format.GeoJSON();
 
-    search.val("");
-    column.val("select");
+    dataTableVars.searchValue.val("");
+    dataTableVars.column.val("select");
+
+    if ( typeof getSessionVars !== "undefined"){
+        getSessionVars(filters, dataTableVars);
+    }
 
     table.dataTable({
         "processing": true,
@@ -46,11 +59,11 @@ $(function () {
                 aoData.push({ "name": "columnWithoutLike", "value": columnWithoutLike });
                 aoData.push({ "name": "columnValueWithoutLike", "value": columnValueWithoutLike });
             } else {
-                aoData.push({ "name": "column", "value": $(column).val() });
-                aoData.push({ "name": "searchValue", "value": search.val().trim() });
+                aoData.push({ "name": "column", "value": $(dataTableVars.column).val() });
+                aoData.push({ "name": "searchValue", "value": dataTableVars.searchValue.val().trim() });
             }
         },
-        "order": [[0, "desc"]],
+        "order": [[dataTableVars.iSortCol_0, dataTableVars.sSortDir_0]],
         "columns": [
             { data: "e.name" },
             { data: "e.active" },
@@ -85,7 +98,7 @@ $(function () {
             [5, 10, 100],
             [5, 10, 100]
         ],
-        "pageLength": 5,
+        "pageLength": dataTableVars.iDisplayLength,
         "pagingType": "bootstrap_full_number",
         "language": {
             "sEmptyTable": translate("sCustomersEmptyTable"),
@@ -170,8 +183,8 @@ $(function () {
     });
 
     $('#js-clear').click(function () {
-        search.val('');
-        column.val('select');
+        dataTableVars.searchValue.val('');
+        dataTableVars.column.val('select');
     });
 
     ///// OpenStreetMap Section /////

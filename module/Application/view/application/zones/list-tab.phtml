@@ -14,8 +14,8 @@
                     <div class="form-group">
                         <select name="column" id="js-column" class="form-control">
                             <option value="select" selected><?= $this->translate('-- Seleziona --') ?></option>
-                            <option value="f.name"><?= $this->translate('Nome') ?></option>
-                            <option value="f.description"><?= $this->translate('Descrizione') ?></option>
+                            <option value="e.name"><?= $this->translate('Nome') ?></option>
+                            <option value="e.description"><?= $this->translate('Descrizione') ?></option>
                         </select>
                     </div>
                     <div class="form-group">
@@ -72,4 +72,7 @@
         <!-- END EXAMPLE TABLE PORTLET-->
     </div>
 </div>
+<script>
+    var filters = <?= $this->filters ?>;
+</script>
 <script type="text/javascript" src="/js/zones-list-tab.js"></script>
