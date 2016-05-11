@@ -2,9 +2,10 @@
 namespace Application\Controller;
 
 // Internals
-use Application\Entity\Zone;
+use SharengoCore\Entity\Zone;
 use Application\Form\ZoneForm;
 use SharengoCore\Service\ZonesService;
+use SharengoCore\Service\PostGisService;
 // Externals
 use Zend\Form\Form;
 use Zend\Http\Response;
@@ -19,6 +20,11 @@ class ZonesController extends AbstractActionController
      * @var zonesService
      */
     private $zonesService;
+
+    /**
+     * @var PostGisService
+     */
+    private $postGisService;
     
     /**
      * @var \Zend\Stdlib\Hydrator\HydratorInterface
@@ -34,12 +40,14 @@ class ZonesController extends AbstractActionController
      */
     public function __construct(
         ZonesService $zonesService,
+        PostGisService $postGisService,
         ZoneForm $zoneForm,
         HydratorInterface $hydrator
     ) {
+        $this->zonesService = $zonesService;
+        $this->postGisService = $postGisService;
         $this->zoneForm = $zoneForm;
         $this->hydrator = $hydrator;
-        $this->zonesService = $zonesService;
     }
 
     public function indexAction()
@@ -49,9 +57,8 @@ class ZonesController extends AbstractActionController
 
     public function listTabAction()
     {
-        $view = new ViewModel([
-            'list' => $this->zonesService->getListZones()
-        ]);
+        $view = new ViewModel([]);
+
         $view->setTerminal(true);
 
         return $view;
@@ -95,10 +102,10 @@ class ZonesController extends AbstractActionController
         $i_recordsFiltered = $this->getRecordsFiltered($as_filters, $i_totalZones);
 
         return new JsonModel([
-            'draw'            => $this->params()->fromQuery('sEcho', 0),
-            'recordsTotal'    => $i_totalZones,
+            'draw' => $this->params()->fromQuery('sEcho', 0),
+            'recordsTotal' => $i_totalZones,
             'recordsFiltered' => $i_recordsFiltered,
-            'data'            => $as_dataDataTable
+            'data' => $as_dataDataTable
         ]);
     }
 
@@ -130,23 +137,39 @@ class ZonesController extends AbstractActionController
         $data['zone'] = $zoneData;
 
         $form->setData($data);
+        $request = $this->getRequest();
 
-        if ($this->getRequest()->isPost()) {
-            $postData = $this->getRequest()->getPost()->toArray();
+        if ($request->isPost()) {
+
+            // Merge post data with post file.
+            $postData = array_merge_recursive(
+                $request->getPost()->toArray(),
+                $request->getFiles()->toArray()
+            );
+
+            // Set correct object (record) Id
             $postData['zone']['id'] = $zone->getId();
 
+            // Check if the Area is KML file or GeoJSON string:
+            if ($postData['zone']['useKmlFile']) {
+                $areaUseGeometry = $this->postGisService->getGeometryFromGeomKMLFile($postData['zone']['kmlUpload']['tmp_name']);
+                $postData['zone']['areaUse'] = $areaUseGeometry;
+            } else {
+                $areaUseGeometry = $this->postGisService->getGeometryFromGeoJson($postData['zone']['areaUse']);
+                $postData['zone']['areaUse'] = $areaUseGeometry;
+            }
+
+            // Set the data
             $form->setData($postData);
 
             if ($form->isValid()) {
                 try {
-                    $this->zonesService->saveData($form->getData(),true);
+                    $this->zonesService->updateZone($form->getData());
                     $this->flashMessenger()->addSuccessMessage($translator->translate('Zona modificata con successo!'));
-
                 } catch (\Exception $e) {
                     $this->flashMessenger()
                         ->addErrorMessage($translator->translate('Si è verificato un errore applicativo.'));
                 }
-
                 return $this->redirect()->toRoute('zones');
             }
         }
@@ -157,5 +180,4 @@ class ZonesController extends AbstractActionController
         ]);
         return $view;
     }
-
 }

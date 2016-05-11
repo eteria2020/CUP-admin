@@ -2,16 +2,12 @@
     $this->headLink()
         ->appendStylesheet('/assets-modules/reports/css/vendor.trips.city.css');
 ?>
-
 <!-- BEGIN PAGE HEADER-->
 <div class="page-bar">
 </div>
-
 <div class="row">
     <div class="col-md-12">
-
         <?php echo $this->partial('partials/flash-messages.phtml', []); ?>
-
         <div class="row">
             <div class="col-md-12">
                 <div class="form-inline">
@@ -37,9 +33,7 @@
                 </div>
             </div>
         </div>
-
         <hr>
-
         <!-- BEGIN EXAMPLE TABLE PORTLET-->
         <div class="portlet box green">
             <div class="portlet-title">
@@ -63,7 +57,6 @@
             </div>
         </div>
         <!-- END EXAMPLE TABLE PORTLET-->
-
         <!-- BEGIN EXAMPLE TABLE PORTLET-->
         <div class="portlet box green">
             <div class="portlet-title">
@@ -79,13 +72,4 @@
         <!-- END EXAMPLE TABLE PORTLET-->
     </div>
 </div>
-<script>
-    <?php
-        $zones;
-        foreach ($this->list as $zone) {
-            $zones[$zone->getId()] = json_decode($zone->getAreaUse());
-        }
-    ?>
-    var zones = <?= json_encode($zones); ?>;
-</script>
 <script type="text/javascript" src="/js/zones-list-tab.js"></script>

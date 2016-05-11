@@ -4,6 +4,7 @@ namespace Application\Form;
 // Internals
 use SharengoCore\Entity\Zone;
 use SharengoCore\Service\ZonesService;
+use SharengoCore\Service\PostGisService;
 // Externals
 use Zend\Form\Fieldset;
 use Zend\InputFilter\InputFilterProviderInterface;
@@ -16,18 +17,29 @@ use Zend\Mvc\I18n\Translator;
  */
 class ZoneFieldset extends Fieldset implements InputFilterProviderInterface
 {
+    /**
+     * @var ZoneService
+     */
     private $zonesService;
 
     /**
+     * @var PostGisService
+     */
+    private $postGisService;
+
+    /**
      * @param ZonesService $zonesService
+     * @param PostGisService $postGisService
      * @param HydratorInterface $hydrator
      */
     public function __construct(
         ZonesService $zonesService,
+        PostGisService $postGisService,
         HydratorInterface $hydrator,
         Translator $translator
     ) {
         $this->zonesService = $zonesService;
+        $this->postGisService = $postGisService;
 
         $this->setHydrator($hydrator);
         $this->setObject(new Zone());
@@ -37,83 +49,112 @@ class ZoneFieldset extends Fieldset implements InputFilterProviderInterface
         ]);
 
         $this->add([
-            'name'       => 'id',
-            'type'       => 'Zend\Form\Element\Hidden',
+            'name' => 'id',
+            'type' => 'Zend\Form\Element\Hidden',
             'attributes' => [
                 'id' => 'id'
-            ]
+            ],
         ]);
 
         $this->add([
-            'name'       => 'name',
-            'type'       => 'Zend\Form\Element\Text',
+            'name' => 'name',
+            'type' => 'Zend\Form\Element\Text',
             'attributes' => [
-                'id'       => 'name',
-                'class'    => 'form-control'
-            ]
+                'id' => 'name',
+                'class' => 'form-control'
+            ],
         ]);
 
         $this->add([
-            'name'       => 'active',
-            'type'       => 'Zend\Form\Element\Select',
+            'name' => 'active',
+            'type' => 'Zend\Form\Element\Select',
             'attributes' => [
-                'id'    => 'active',
+                'id' => 'active',
                 'class' => 'form-control',
             ],
             'options'    => [
                 'value_options' => [
                     1 => $translator->translate("Attivo"),
                     0 => $translator->translate("Non Attivo")
-                ]
-            ]
+                ],
+            ],
         ]);
 
         $this->add([
-            'name'       => 'hidden',
-            'type'       => 'Zend\Form\Element\Select',
+            'name' => 'hidden',
+            'type' => 'Zend\Form\Element\Select',
             'attributes' => [
-                'id'    => 'hidden',
+                'id' => 'hidden',
                 'class' => 'form-control',
             ],
             'options'    => [
                 'value_options' => [
                     1 => $translator->translate("Nascosta"),
                     0 => $translator->translate("Visibile")
-                ]
-            ]
+                ],
+            ],
         ]);
 
         $this->add([
-            'name'       => 'invoiceDescription',
-            'type'       => 'Zend\Form\Element\Text',
+            'name' => 'invoiceDescription',
+            'type' => 'Zend\Form\Element\Text',
             'attributes' => [
-                'id'       => 'invoice-description',
-                'class'    => 'form-control'
-            ]
+                'id' => 'invoice-description',
+                'class' => 'form-control'
+            ],
         ]);
 
         $this->add([
-            'name'       => 'revGeo',
-            'type'       => 'Zend\Form\Element\Select',
+            'name' => 'revGeo',
+            'type' => 'Zend\Form\Element\Select',
             'attributes' => [
-                'id'    => 'revGeo',
+                'id' => 'revGeo',
                 'class' => 'form-control',
             ],
-            'options'    => [
+            'options' => [
                 'value_options' => [
                     1 => $translator->translate("Usa RevGeo"),
                     0 => $translator->translate("Non Usa RevGeo")
-                ]
-            ]
+                ],
+            ],
         ]);
 
         $this->add([
-            'name'       => 'areaUse',
-            'type'       => 'Zend\Form\Element\Text',
+            'name' => 'useKmlFile',
+            'type' => 'Zend\Form\Element\Select',
             'attributes' => [
-                'id'       => 'areaUse',
-                'class'    => 'form-control'
-            ]
+                'id' => 'useKmlFile',
+                'class' => 'form-control',
+                'required' => 'required'
+            ],
+            'options' => [
+                'value_options' => [
+                    0 => $translator->translate("Usa String GeoJSON"),
+                    1 => $translator->translate("Usa File KML")
+                ],
+            ],
+        ])->setValue(0);
+
+        $this->add([
+            'name' => 'kmlUpload',
+            'type' => 'file',
+            'validators' => [
+                [
+                    'name' => 'File\MimeType',
+                    'options' => [
+                        'mimeType' => 'text/xml'
+                    ],
+                ],
+            ],
+        ]);
+
+        $this->add([
+            'name' => 'areaUse',
+            'type' => 'Application\Form\Element\GeometryTextarea',
+            'attributes' => [
+                'id' => 'areaUse',
+                'class' => 'form-control'
+            ],
         ]);
     }
 
@@ -123,17 +164,17 @@ class ZoneFieldset extends Fieldset implements InputFilterProviderInterface
             'active' => [
                 'required' => true,
             ],
-            'name'        => [
+            'name' => [
                 'required' => true,
-                'filters'  => [
+                'filters' => [
                     [
                         'name' => 'StringTrim'
-                    ]
+                    ],
                 ],
                 'validators' => [
                     [
                         'name' =>'NotEmpty'
-                    ]
+                    ],
                 ],
             ],
             'hidden' => [
@@ -141,32 +182,25 @@ class ZoneFieldset extends Fieldset implements InputFilterProviderInterface
             ],
             'invoiceDescription' => [
                 'required' => true,
-                'filters'  => [
+                'filters' => [
                     [
                         'name' => 'StringTrim'
-                    ]
+                    ],
                 ],
                 'validators' => [
                     [
                         'name' =>'NotEmpty',
-                    ]
+                    ],
                 ],
             ],
             'revGeo' => [
                 'required' => true,
             ],
-            'areaUse'        => [
-                'required' => true,
-                'filters'  => [
-                    [
-                        'name' => 'StringTrim'
-                    ]
-                ],
-                'validators' => [
-                    [
-                        'name' =>'NotEmpty'
-                    ]
-                ],
+            'kmlUpload' => [
+                'required' => false,
+            ],
+            'areaUse' => [
+                'required' => false,
             ],
         ];
     }

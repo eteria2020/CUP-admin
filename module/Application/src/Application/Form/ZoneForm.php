@@ -3,11 +3,14 @@
 namespace Application\Form;
 
 use Zend\Form\Form;
+use Doctrine\ORM\EntityManager;
 
 class ZoneForm extends Form
 {
-    public function __construct($zoneFieldset)
+    public function __construct($zoneFieldset, EntityManager $entityManager)
     {
+        $this->entityManager = $entityManager;
+
         parent::__construct('poi');
         $this->setAttribute('method', 'post');
 

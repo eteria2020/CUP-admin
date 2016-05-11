@@ -12,10 +12,16 @@ class ZonesControllerFactory implements FactoryInterface
     {
         $entityManager = $serviceLocator->getServiceLocator()->get('doctrine.entitymanager.orm_default');
         $zonesService = $serviceLocator->getServiceLocator()->get('SharengoCore\Service\ZonesService');
+        $postGisService = $serviceLocator->getServiceLocator()->get('SharengoCore\Service\PostGisService');
 
         $zoneForm = $serviceLocator->getServiceLocator()->get('ZoneForm');
         $hydrator = new DoctrineHydrator($entityManager);
 
-        return new ZonesController($zonesService, $zoneForm, $hydrator);
+        return new ZonesController(
+            $zonesService,
+            $postGisService,
+            $zoneForm,
+            $hydrator
+        );
     }
 }

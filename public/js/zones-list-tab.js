@@ -1,5 +1,5 @@
-/* global $, confirm, dataTable */
-//$(function () {
+/* global $, confirm, dataTable, zones, ol, translate */
+$(function () {
     var table = $("#js-zones-table");
     var search = $("#js-value");
     var column = $("#js-column");
@@ -13,15 +13,10 @@
     // Set the features collection
     var zonesFC = {};
 
-    var format = new ol.format.GeoJSON();
+    // Set the bootstrapSwitchCollection
+    var switchCollection = [];
 
-    // Adding features to Feature Collection
-    $.each(zones,function(key,val){
-        zonesFC[key] = new ol.Feature({
-            geometry: format.readGeometry(val, {featureProjection: 'EPSG:3857'})
-        });
-        zonesFC[key].setId(key);
-    });
+    var format = new ol.format.GeoJSON();
 
     search.val("");
     column.val("select");
@@ -38,7 +33,10 @@
                 "type": "POST",
                 "url": sSource,
                 "data": aoData,
-                "success": fnCallback
+                "success": function (msg) {
+                    fnCallback(msg);
+                    renderTable(msg.data);
+                }
             });
         },
         "fnServerParams": function (aoData) {
@@ -65,7 +63,7 @@
             {
                 targets: [1, 2, 4],
                 render: function (data, type, row) {
-                        return (data === true) ? '<span class="glyphicon glyphicon-ok"></span>' : '<span class="glyphicon glyphicon-remove"></span>';
+                    return (data === true) ? '<span class="glyphicon glyphicon-ok"></span>' : '<span class="glyphicon glyphicon-remove"></span>';
                 }
             },
             {
@@ -84,66 +82,94 @@
             }
         ],
         "lengthMenu": [
-            [100, 200, 300],
-            [100, 200, 300]
+            [5, 10, 100],
+            [5, 10, 100]
         ],
-        "pageLength": 100,
+        "pageLength": 5,
         "pagingType": "bootstrap_full_number",
         "language": {
-            "sEmptyTable":     translate("sCustomersEmptyTable"),
-            "sInfo":           translate("sInfo"),
-            "sInfoEmpty":      translate("sInfoEmpty"),
-            "sInfoFiltered":   translate("sInfoFiltered"),
-            "sInfoPostFix":    "",
-            "sInfoThousands":  ",",
-            "sLengthMenu":     translate("sLengthMenu"),
+            "sEmptyTable": translate("sCustomersEmptyTable"),
+            "sInfo": translate("sInfo"),
+            "sInfoEmpty": translate("sInfoEmpty"),
+            "sInfoFiltered": translate("sInfoFiltered"),
+            "sInfoPostFix": "",
+            "sInfoThousands": ",",
+            "sLengthMenu": translate("sLengthMenu"),
             "sLoadingRecords": translate("sLoadingRecords"),
-            "sProcessing":     translate("sProcessing"),
-            "sSearch":         translate("sSearch"),
-            "sZeroRecords":    translate("sZeroRecords"),
+            "sProcessing": translate("sProcessing"),
+            "sSearch": translate("sSearch"),
+            "sZeroRecords": translate("sZeroRecords"),
             "oPaginate": {
-                "sFirst":      translate("oPaginateFirst"),
-                "sPrevious":   translate("oPaginatePrevious"),
-                "sNext":       translate("oPaginateNext"),
-                "sLast":       translate("oPaginateLast"),
+                "sFirst": translate("oPaginateFirst"),
+                "sPrevious": translate("oPaginatePrevious"),
+                "sNext": translate("oPaginateNext"),
+                "sLast": translate("oPaginateLast")
             },
             "oAria": {
-                "sSortAscending":   translate("sSortAscending"),
-                "sSortDescending":  translate("sSortDescending")
+                "sSortAscending": translate("sSortAscending"),
+                "sSortDescending": translate("sSortDescending")
             }
         },
-        "initComplete": function() {
-            // Init Bootstrap Switch
-            $("input.visualizza")
-                .bootstrapSwitch()
-                .on("switchChange.bootstrapSwitch",
-                    function(event, state) {
-                        var zoneId = $(this).data("id");
-                        if(state){
-                            drawZone(zoneId);
-                        } else {
-                            removeZone(zoneId);
-                        }
-                    }
-                );
-
-            // Listen to Focus Button
-            $("a.focus").click(function(){
-                var zoneId = $(this).data("id");
-                var extent = zonesFC[zoneId].getGeometry().getExtent();
-                map.getView().fit(extent, map.getSize());
-            });
-
-           // Readjust columns width (because bootstrapSwitch resizing).
-           this.DataTable().columns.adjust().draw();
+        "initComplete": function () {
+            // Readjust columns width (because bootstrapSwitch resizing).
+            this.DataTable().columns.adjust().draw();
         }
     });
 
-   $('#js-search').click(function() {
+    var renderTable = function (jXHRData) {
+        // Adding features to Feature Collection
+        $.each(jXHRData, function (key, val) {
+
+            var areaUse = val.e.areaUse;
+            var id = val.e.id;
+
+            if (typeof zonesFC[id] === "undefined") {
+                zonesFC[id] = new ol.Feature({
+                    geometry: format.readGeometry(areaUse, { featureProjection: 'EPSG:3857' })
+                });
+                zonesFC[id].setId(id);
+            }
+        });
+
+        // Adding the Bootstrap Switch on each record "view" button
+        $.each($("input.visualizza"), function (key, val) {
+            var id = $(val).data("id");
+
+            if (typeof switchCollection[id] === "undefined") {
+                switchCollection[id] = false;
+            }
+
+            $(val)
+                .bootstrapSwitch({
+                    state: switchCollection[id]
+                })
+                .on("switchChange.bootstrapSwitch",
+                function (event, state) {
+                    var zoneId = $(this).data("id");
+                    if (state) {
+                        switchCollection[id] = true;
+                        drawZone(zoneId);
+                    } else {
+                        switchCollection[id] = false;
+                        removeZone(zoneId);
+                    }
+                }
+                );
+        });
+
+        // Listen to Focus Button
+        $("a.focus").click(function () {
+            var zoneId = $(this).data("id");
+            var extent = zonesFC[zoneId].getGeometry().getExtent();
+            map.getView().fit(extent, map.getSize());
+        });
+    };
+
+    $('#js-search').click(function () {
         table.fnFilter();
     });
 
-    $('#js-clear').click(function() {
+    $('#js-clear').click(function () {
         search.val('');
         column.val('select');
     });
@@ -202,9 +228,9 @@
     var zonesLayer = new ol.layer.Vector({
         source: vectorSource,
         style:
-            function(feature) {
-                return style[feature.getGeometry().getType()];
-            }
+        function (feature) {
+            return style[feature.getGeometry().getType()];
+        }
     });
 
     var view = new ol.View({
@@ -216,32 +242,32 @@
     var map = new ol.Map({
         layers: [OSM, zonesLayer],
         target: document.getElementById("map"),
-        interactions: ol.interaction.defaults({mouseWheelZoom:false}),
+        interactions: ol.interaction.defaults({ mouseWheelZoom: false }),
         controls: ol.control.defaults({
-          attributionOptions: /** @type {olx.control.AttributionOptions} */ ({
-            collapsible: false
-          })
+            attributionOptions: /** @type {olx.control.AttributionOptions} */ ({
+                collapsible: false
+            })
         }),
         view: view
     });
 
     vectorSource.addFeature(new ol.Feature(new ol.geom.Circle([5e6, 7e6], 1e6)));
 
-    var drawZone = function(zoneId) {
+    var drawZone = function (zoneId) {
         vectorSource.addFeature(zonesFC[zoneId]);
     };
 
-    var removeZone = function(zoneId) {
+    var removeZone = function (zoneId) {
         vectorSource.removeFeature(zonesFC[zoneId]);
     };
 
     // Window Resize Action Bind
     var resizeId;
-    $(window).resize(function() {
+    $(window).resize(function () {
         clearTimeout(resizeId);
         resizeId = setTimeout(doneResizing, 500);
     });
-    doneResizing = function(){
+    doneResizing = function () {
         var newHeight = $(window).height();
         $(".map").css("height", newHeight - 280);
         map.updateSize();
@@ -249,4 +275,4 @@
 
     // Set to the map the current page height
     doneResizing();
-//});
+});
