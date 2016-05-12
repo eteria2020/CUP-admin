@@ -40,6 +40,11 @@ class BatteryAlarmSMSNumbers implements CarsConfigurationsInterface
         return $this->value;
     }
 
+    public function getDefaultValue()
+    {
+        return ['3333333333'];
+    }
+
     public function getValueFromForm(array $data)
     {
         // Extract the radio configuration id.
@@ -49,14 +54,21 @@ class BatteryAlarmSMSNumbers implements CarsConfigurationsInterface
         // Get the complete record object
         $configuration = $this->getIndexedValues();
         $configurationUpdated = [];
+
+        $newConfiguration = true;
         
         // Update the sepecific radio
         foreach($configuration as &$number){
             if($number['id'] === $id){
-                $number = $data;
+                $number = $data;               
             }
             array_push($configurationUpdated,$number['number']);
         }
+
+error_log("\n\n\nPRE:".print_r($configurationUpdated,true),0);
+        // If this is a new configuration, we save it.
+        array_push($configurationUpdated,$data['number']);
+error_log("\n\n\nPOST:".print_r($configurationUpdated,true)."\n\n\n",0);
 
         // Recompose the json string.
         return json_encode($configurationUpdated);

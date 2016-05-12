@@ -42,6 +42,11 @@ class RadioSetup implements CarsConfigurationsInterface
         return $this->value;
     }
 
+    public function getDefaultValue()
+    {
+        return '[{"volume":"0","name":"Radio1","frequency":"0.0","band":"FM"},{"volume":0,"name":"Radio2","frequency":0.0,"band":"FM"},{"volume":0,"name":"Radio3","frequency":0.0,"band":"FM"},{"volume":0,"name":"Radio4","frequency":0.0,"band":"FM"}]';
+    }
+
     public function getValueFromForm(array $data)
     {
         // Extract the radio configuration id.
@@ -72,6 +77,7 @@ class RadioSetup implements CarsConfigurationsInterface
         foreach ($configurations as &$configuration) {
             $configuration['id'] = strtolower(str_replace(' ', '' ,$configuration['name']));
         }
+
         return $configurations;
     }
 }

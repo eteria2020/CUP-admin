@@ -36,6 +36,11 @@ class DefaultCity implements CarsConfigurationsInterface
         return $this->value;
     }
 
+    public function getDefaultValue()
+    {
+        return 'Milano';
+    }
+
     public function getValueFromForm(array $data)
     {
         return $data['DefaultCity'];

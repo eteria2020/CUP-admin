@@ -11,9 +11,11 @@ interface CarsConfigurationsInterface
     public function getForm();
 
     public function getValue();
-    
+
+    public function getDefaultValue();
+
     public function hasMultipleValues();
-    
+
      /**
      * This function return a string containing the value
      * field, updated with the data present into $data param.

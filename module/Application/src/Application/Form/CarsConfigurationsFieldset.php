@@ -21,20 +21,27 @@ class CarsConfigurationsFieldset extends Fieldset implements InputFilterProvider
             'use_as_base_fieldset' => true
         ]);
 
-
         $this->setHydrator($hydrator);
         $this->setObject(new CarsConfigurations());
 
         $this->add([
-            'name'       => 'fleet',
-            'type'       => 'Zend\Form\Element\Select',
+            'name' => 'id',
+            'type' => 'Zend\Form\Element\Hidden',
             'attributes' => [
-                'id'    => 'fleet',
+                'id' => 'id'
+            ]
+        ]);
+
+        $this->add([
+            'name' => 'fleet',
+            'type' => 'Zend\Form\Element\Select',
+            'attributes' => [
+                'id' => 'fleet',
                 'class' => 'form-control',
             ],
-            'options'    => [
+            'options' => [
                 'value_options' => [
-                    '' => ''
+                    '' => $translator->translate('- Non Specificata -'),
                 ]
             ]
         ]);
@@ -44,8 +51,7 @@ class CarsConfigurationsFieldset extends Fieldset implements InputFilterProvider
             'type' => 'Zend\Form\Element\Text',
             'attributes' => [
                 'id' => 'model',
-                'class'    => 'form-control',
-                'maxlength' => 5,
+                'class' => 'form-control',
                 'placeholder' => $translator->translate('Modello Auto'),
             ]
         ]);
@@ -55,8 +61,7 @@ class CarsConfigurationsFieldset extends Fieldset implements InputFilterProvider
             'type' => 'Zend\Form\Element\Text',
             'attributes' => [
                 'id' => 'plate',
-                'class'    => 'form-control',
-                'maxlength' => 5,
+                'class' => 'form-control',
                 'placeholder' => $translator->translate('Targa Auto'),
             ]
         ]);
@@ -66,11 +71,18 @@ class CarsConfigurationsFieldset extends Fieldset implements InputFilterProvider
             'type' => 'Zend\Form\Element\Text',
             'attributes' => [
                 'id' => 'key',
-                'class'    => 'form-control',
-                'maxlength' => 5,
+                'class' => 'form-control',
                 'placeholder' => $translator->translate('Tipo di Configurazione'),
                 'required' => 'required'
             ]
+        ]);
+
+        $this->add([
+            'name' => 'value',
+            'type' => 'Zend\Form\Element\Hidden',
+            'attributes' => [
+                'id' => 'id'
+            ],
         ]);
     }
     
@@ -79,31 +91,31 @@ class CarsConfigurationsFieldset extends Fieldset implements InputFilterProvider
         return [
             'fleet' => [
                 'required' => false,
-                'filters'  => [
+                'filters' => [
                     [
-                        'name' => 'StringTrim'
+                        'name' => 'ToNull'
                     ],
                 ],
             ],
             'model' => [
                 'required' => false,
-                'filters'  => [
+                'filters' => [
                     [
-                        'name' => 'StringTrim'
+                        'name' => 'ToNull'
                     ],
                 ],
             ],
             'plate' => [
                 'required' => false,
-                'filters'  => [
+                'filters' => [
                     [
-                        'name' => 'StringTrim'
+                        'name' => 'ToNull'
                     ],
                 ],
             ],
             'key' => [
                 'required' => true,
-                'filters'  => [
+                'filters' => [
                     [
                         'name' => 'StringTrim'
                     ]

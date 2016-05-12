@@ -4,13 +4,11 @@ $this->headScript()
     ->appendFile('/js/datatables/media/js/jquery.dataTables.min.js')
     ->appendFile('/js/datatables/plugins/bootstrap/dataTables.bootstrap.js')
     ->appendFile($this->basePath() .'/js/cars-configurations-edit.js');
-
 $form = $this->form->prepare();
 //$form->setAttribute('action', $this->url('cars-configurations/edit', ['id' => $this->carConfiguration->getKey()]));    
 ?>
 <div class="page-content-wrapper">
     <div class="page-content">
-
         <div class="row">
             <div class="col-lg-6">
                 <h3 class="page-title"><?=$this->translate('MODIFICA CONFIGURAZIONE AUTO')?>: <?= $this->carConfiguration->getKey(); ?></h3>
@@ -19,7 +17,6 @@ $form = $this->form->prepare();
                 <a href="<?php echo $this->url('cars-configurations'); ?>" class="btn btn-success pull-right"><i class="fa fa-arrow-left"></i> Torna alla lista</a>
             </div>
         </div>
-
         <div class="page-bar">
         </div>
         <?php if ($this->hasMultipleValues){ ?>
@@ -70,14 +67,14 @@ $form = $this->form->prepare();
                             $elements = $this->form->getElements();
                             foreach($elements as $element) {
                         ?>
-                            <div>
-                                <div class="form-group">
-                                    <?= $this->formRow($element) ?>
-                                </div>
+                        <div>
+                            <div class="form-group">
+                                <?= $this->formRow($element) ?>
                             </div>
+                        </div>
                         <?php } ?>
                             <div>
-                                    <button type="submit" class="btn btn-success">Modifica Configurazione Auto</button>
+                                <button type="submit" class="btn btn-success"><?= $this->hasMultipleValues ? $this->translate('Modifica Opzione Configurazione Auto') : $this->translate('Modifica Configurazione Auto') ?></button>
                             </div>
                         <?= $this->form()->closeTag(); ?>
                     </div>

@@ -135,21 +135,36 @@ class CarsConfigurationsController extends AbstractActionController
         if ($this->getRequest()->isPost()) {
             $postData = $this->getRequest()->getPost()->toArray();
             $form->setData($postData);
-error_log("----> Valido?",0);
+
             if ($form->isValid()) {
-error_log("----> SI",0);
+                // The Car Configuration form is valid, now we need to initialize the 
+                // value of the new configuration.
+                // This can be done by the configuration Class.
+
+                /** @var SharengoCore\Entity\CarsConfigurations */
+                $carConfigurationFromForm = $form->getData();
+
+                // Get the CarsConfiguration key.
+                $newCarConfigurationKey = $carConfigurationFromForm->getKey();
+
+                // Get the right class.
+                $configurationClass = CarsConfigurationsFactory::create($newCarConfigurationKey, '');
+
+                // Set the default value for the specific CarConfiguration Class type.
+                $defaultCarConfigurationValue = $configurationClass->getDefaultValue();
+
                 try {
-                    $this->carsConfigurationsService->save($form->getData(),"");
-                    $this->flashMessenger()->addSuccessMessage($translator->translate('POI aggiunta con successo!'));
-error_log("----> ".print_r($form->getData(),true),0);
+                    // Finally save the new CarConfiguration to the DB.
+                    $newCarConfiguration = $this->carsConfigurationsService->save($carConfigurationFromForm, $defaultCarConfigurationValue);
+
+                    $this->flashMessenger()->addSuccessMessage($translator->translate('Configurazione Auto aggiunta con successo!'));
+
+                    return $this->redirect()->toRoute('cars-configurations/edit', ['id' => $newCarConfiguration->getId()]);
                 } catch (\Exception $e) {
                     $this->flashMessenger()
-                        ->addErrorMessage($translator->translate('Si è verificato un errore applicativo.
-                        L\'assistenza tecnica è già al corrente, ci scusiamo per l\'inconveniente'));
+                        ->addErrorMessage($translator->translate('Si è verificato un errore applicativo.'));
                 }
-                return $this->redirect()->toRoute('configurations/manage-pois');
             } else {
-error_log("----> NO",0);
                 $this->flashMessenger()->addErrorMessage($translator->translate('Dati inseriti non validi'));
             }
         }
@@ -189,6 +204,8 @@ error_log("----> NO",0);
                          ->addErrorMessage('Si è verificato un errore applicativo.
                         L\'assistenza tecnica è già al corrente, ci scusiamo per l\'inconveniente');
                 }
+
+                return $this->redirect()->toRoute('cars-configurations/edit', ['id' => $id]);
             }
         }
 

@@ -36,6 +36,11 @@ class UseExternalGPS implements CarsConfigurationsInterface
         return $this->value;
     }
 
+    public function getDefaultValue()
+    {
+        return true;
+    }
+
     public function getValueFromForm(array $data)
     {
         return $data['UseExternalGPS'];
