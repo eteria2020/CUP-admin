@@ -57,9 +57,9 @@ function start() {
      docker rm sharengo-frontend
   fi
 
-  admin_container_name=sharengoadmin_sharengo-admin-nginx_1
-  public_container_name=sharengopublicsite_sharengo-public-nginx_1
-  if [ $(container_running sharengopublicsite_sharengo-public-nginx_1) -eq 0 ]
+  admin_container_name=admin_sharengo-admin-nginx_1
+  public_container_name=public_sharengo-public-nginx_1
+  if [ $(container_running $public_container_name) -eq 0 ]
   then
     # no public container found, fallback to admin container
     public_container_name=$admin_container_name
