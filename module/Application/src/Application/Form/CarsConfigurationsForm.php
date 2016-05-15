@@ -2,11 +2,14 @@
 
 namespace Application\Form;
 
+// Internlas
+use Application\Form\CarsConfigurationsFieldset;
+// Externals
 use Zend\Form\Form;
 
 class CarsConfigurationsForm extends Form
 {
-    public function __construct($userFieldset)
+    public function __construct(CarsConfigurationsFieldset $userFieldset)
     {
         parent::__construct('carsConfigurations');
         $this->setAttribute('id', 'carsConfigurationsForm');
@@ -14,14 +17,14 @@ class CarsConfigurationsForm extends Form
         $this->add($userFieldset);
 
         $this->add([
-            'name'       => 'submit',
+            'name' => 'submit',
             'attributes' => [
-                'type'  => 'submit',
+                'type' => 'submit',
                 'value' => 'Submit'
             ]
         ]);
     }
-    
+
     /*
      * @param array $fleets list of Fleet instances
      */

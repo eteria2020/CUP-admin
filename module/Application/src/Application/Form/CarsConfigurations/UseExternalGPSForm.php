@@ -2,15 +2,17 @@
 
 namespace Application\Form\CarsConfigurations;
 
+// Externals
 use Zend\Form\Form;
+use Zend\Mvc\I18n\Translator;
 
 /**
  * Class UseExternalGpsForm
  * @package Application\Form
  */
-class UseExternalGpsForm extends Form
+class UseExternalGPSForm extends Form
 {
-    public function __construct()
+    public function __construct(Translator $translator)
     {
         parent::__construct('carConfiguration');
         $this->setAttribute('method', 'post');
@@ -28,7 +30,7 @@ class UseExternalGpsForm extends Form
                     'false' => 'No',
                     'true' => 'Si',
                 ],
-                'label' => 'Gps Esterno',
+                'label' => $translator->translate('Gps Esterno'),
             ]
         ]);
     }

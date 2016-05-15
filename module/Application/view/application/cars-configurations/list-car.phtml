@@ -1,72 +1,65 @@
 <?php
-$this->headLink()->appendStylesheet('/js/datatables/plugins/bootstrap/dataTables.bootstrap.css');
-$this->headScript()
-    ->appendFile('/js/datatables/media/js/jquery.dataTables.min.js')
-    ->appendFile('/js/datatables/plugins/bootstrap/dataTables.bootstrap.js')
-    ->appendFile($this->basePath() .'/js/cars-configurations-list-car.js');
+    $this->headLink()->appendStylesheet('/js/datatables/plugins/bootstrap/dataTables.bootstrap.css');
+    $this->headScript()
+        ->appendFile('/js/datatables/media/js/jquery.dataTables.min.js')
+        ->appendFile('/js/datatables/plugins/bootstrap/dataTables.bootstrap.js')
+        ->appendFile($this->basePath() .'/js/cars-configurations-list-car.js');
 ?>
 <div class="page-content-wrapper">
     <div class="page-content">
-
         <!-- BEGIN PAGE HEADER-->
         <h3 class="page-title">
-            ELENCO CONFIGURAZIONI PER AUTO <small>ricerca</small>
+            <?= $this->translate('ELENCO CONFIGURAZIONI PER AUTO') ?> <small><?= $this->translate('ricerca') ?></small>
         </h3>
-
         <div class="page-bar">
         </div>
-
         <div class="row">
             <div class="col-md-12">
-
                 <?php echo $this->partial('partials/flash-messages.phtml', []); ?>
-
                 <div class="row">
                     <div class="col-md-8">
                         <div class="form-inline">
                             <div class="form-group">
                                 <select name="column" id="js-column" class="form-control">
-                                    <option value="select" selected>-- Seleziona --</option>
-                                    <option value="c.plate">Targa</option>
-                                    <option value="e.key">Chiave</option>
+                                    <option value="select" selected><?= $this->translate('-- Seleziona --') ?></option>
+                                    <option value="c.plate"><?= $this->translate('Targa') ?></option>
+                                    <option value="e.key"><?= $this->translate('Chiave') ?></option>
                                 </select>
                             </div>
                             <div class="form-group">
-                                <input type="text" name="value" value="" class="form-control" id="js-value" placeholder="Filtra...">
+                                <input type="text" name="value" value="" class="form-control" id="js-value" placeholder="<?= $this->translate('Filtra...') ?>">
                             </div>
                             <div class="btn-group">
-                                <button type="button" class="btn green js-search" id="js-search"><i class="fa fa-search"></i> Cerca</button>
+                                <button type="button" class="btn green js-search" id="js-search"><i class="fa fa-search"></i> <?= $this->translate('Cerca') ?></button>
                                 <button type="button" class="btn green dropdown-toggle" data-toggle="dropdown"><i class="fa fa-angle-down"></i></button>
                                 <ul class="dropdown-menu" role="menu">
                                     <li>
-                                        <a href="javascript:void(0);" id="js-clear"><i class="fa fa-remove"></i> Pulisci Ricerca</a>
+                                        <a href="javascript:void(0);" id="js-clear"><i class="fa fa-remove"></i> <?= $this->translate('Pulisci Ricerca') ?></a>
                                     </li>
                                 </ul>
                             </div>
                         </div>
                     </div>
                     <div class="col-md-4">
-                        <a href="<? /*$this->url('cars-configurations/add/car');*/ ?>" class="btn green pull-right"><i class="fa fa-plus"></i> Aggiungi Configurazione</a>
+                        <a href="<? $this->url('cars-configurations/add'); ?>" class="btn green pull-right"><i class="fa fa-plus"></i> <?= $this->translate('Aggiungi Configurazione') ?></a>
                     </div>
                 </div>
-
                 <hr>
-
                 <!-- BEGIN EXAMPLE TABLE PORTLET-->
                 <div class="portlet box green">
                     <div class="portlet-title">
                         <div class="caption">
-                            <i class="fa fa-cogs"></i>Elenco Configurazioni
+                            <i class="fa fa-cogs"></i><?= $this->translate('Elenco Configurazioni') ?>
                         </div>
                     </div>
                     <div class="portlet-body">
                         <table class="table table-striped table-bordered table-hover" id="js-cars-configurations-table">
                             <thead>
                             <tr>
-                                <th>Targa</th>
-                                <th>Chiave</th>
-                                <th>Valore</th>
-                                <th>Azioni</th>
+                                <th><?= $this->translate('Targa') ?></th>
+                                <th><?= $this->translate('Chiave') ?></th>
+                                <th><?= $this->translate('Valore') ?></th>
+                                <th><?= $this->translate('Azioni') ?></th>
                             </tr>
                             </thead>
                         </table>
@@ -75,7 +68,6 @@ $this->headScript()
                 <!-- END EXAMPLE TABLE PORTLET-->
             </div>
         </div>
-
         <!-- END PAGE CONTENT-->
     </div>
 </div>

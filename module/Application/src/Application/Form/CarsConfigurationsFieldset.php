@@ -2,12 +2,13 @@
 
 namespace Application\Form;
 
+// Internals
+use SharengoCore\Entity\CarsConfigurations;
+// Externals
 use Zend\Form\Fieldset;
 use Zend\InputFilter\InputFilterProviderInterface;
 use Zend\Mvc\I18n\Translator;
 use Zend\Stdlib\Hydrator\HydratorInterface;
-
-use SharengoCore\Entity\CarsConfigurations;
 
 /**
  * Class CarsConfigurationsFieldset
@@ -15,8 +16,10 @@ use SharengoCore\Entity\CarsConfigurations;
  */
 class CarsConfigurationsFieldset extends Fieldset implements InputFilterProviderInterface
 {
-    public function __construct(Translator $translator, HydratorInterface $hydrator)
-    {
+    public function __construct(
+        Translator $translator,
+        HydratorInterface $hydrator
+    ) {
         parent::__construct('carsConfigurations', [
             'use_as_base_fieldset' => true
         ]);

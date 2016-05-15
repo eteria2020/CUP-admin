@@ -1,16 +1,18 @@
 <?php
 namespace Application\Controller;
 
-use  Application\Utility\CarsConfigurations\CarsConfigurationsFactory;
-
+// Internals
+use Application\Utility\CarsConfigurations\CarsConfigurationsFactory;
 use Application\Form\CarsConfigurationsForm;
 use SharengoCore\Entity\CarsConfigurations;
 use SharengoCore\Service\CarsConfigurationsService;
 use SharengoCore\Service\FleetService;
+// Externals
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
 use Zend\View\Model\JsonModel;
 use Zend\Stdlib\Hydrator\HydratorInterface;
+use Zend\Mvc\I18n\Translator;
 
 /**
  * Class ConfigurationsController
@@ -23,40 +25,53 @@ class CarsConfigurationsController extends AbstractActionController
      */
     private $carsConfigurationsService;
 
-     /**
+    /**
      * @var FleetService
      */
     private $fleetService;
 
-     /**
+    /**
      * @var CarsConfigurationsForm
      */
     private $carsConfigurationsForm;
 
     /**
-     * @var \Zend\Stdlib\Hydrator\HydratorInterface
+     * @var HydratorInterface
      */
     private $hydrator;
+
+    /**
+     * @var Translator
+     */
+    private $translator;
 
     /**
      * CarsConfigurationsController constructor.
      *
      * @param CarsConfigurationsService $carsConfigurationsService
+     * @param FleetService $fleetService
+     * @param CarsConfigurationsForm $carsConfigurationsForm
+     * @param HydratorInterface $hydrator
+     * @param Translator $translator
      */
     public function __construct(
         CarsConfigurationsService $carsConfigurationsService,
         FleetService $fleetService,
         CarsConfigurationsForm $carsConfigurationsForm,
-        HydratorInterface $hydrator
+        HydratorInterface $hydrator,
+        Translator $translator
     ) {
         $this->carsConfigurationsService = $carsConfigurationsService;
         $this->fleetService = $fleetService;
         $this->carsConfigurationsForm = $carsConfigurationsForm;
         $this->hydrator = $hydrator;
+        $this->translator = $translator;
     }
 
     /**
-     * @return Zend\View\Model\JsonModel
+     * This action return a JSON with the jQuery DataTables formatted CarsConfigurations data.
+     *
+     * @return JsonModel
      */
     public function datatableAction()
     {
@@ -66,11 +81,10 @@ class CarsConfigurationsController extends AbstractActionController
         $i_totalCarsConfigurations = $this->carsConfigurationsService->getTotalCarsConfigurations();
         $i_recordsFiltered = $this->_getRecordsFiltered($as_filters, $i_totalCarsConfigurations);
 
-        foreach($as_dataDataTable as &$row)
-        {
-            $configurationClass = CarsConfigurationsFactory::create($row['e']['key'], $row['e']['value']);
+        foreach ($as_dataDataTable as &$row) {
+            $configurationClass = CarsConfigurationsFactory::create($row['e']['key'], $row['e']['value'], $this->translator);
             $row['e']['value'] = $configurationClass->getOverview();
-        } 
+        }
 
         return new JsonModel([
             'draw' => $this->params()->fromQuery('sEcho', 0),
@@ -105,6 +119,11 @@ class CarsConfigurationsController extends AbstractActionController
         return new ViewModel([]);
     }
 
+    /**
+     * This method print the a detail action for a given CarConfiguration Id number.
+     *
+     * @param (from route) 'id' int
+     */
     public function detailsAction()
     {
         $id = $this->params()->fromRoute('id', 0);
@@ -113,7 +132,7 @@ class CarsConfigurationsController extends AbstractActionController
         $key = $carConfiguration->getKey();
         $value = $carConfiguration->getValue();
 
-        $configurationClass = CarsConfigurationsFactory::create($key, $value);
+        $configurationClass = CarsConfigurationsFactory::create($key, $value, $this->translator);
 
         $hasMultipleValues = $configurationClass->hasMultipleValues();
 
@@ -128,7 +147,6 @@ class CarsConfigurationsController extends AbstractActionController
 
     public function addAction()
     {
-        $translator = $this->TranslatorPlugin();
         $form = $this->carsConfigurationsForm;
         $form->setFleets($this->fleetService->getAllFleets());
 
@@ -148,7 +166,7 @@ class CarsConfigurationsController extends AbstractActionController
                 $newCarConfigurationKey = $carConfigurationFromForm->getKey();
 
                 // Get the right class.
-                $configurationClass = CarsConfigurationsFactory::create($newCarConfigurationKey, '');
+                $configurationClass = CarsConfigurationsFactory::create($newCarConfigurationKey, '', $this->translator);
 
                 // Set the default value for the specific CarConfiguration Class type.
                 $defaultCarConfigurationValue = $configurationClass->getDefaultValue();
@@ -157,15 +175,15 @@ class CarsConfigurationsController extends AbstractActionController
                     // Finally save the new CarConfiguration to the DB.
                     $newCarConfiguration = $this->carsConfigurationsService->save($carConfigurationFromForm, $defaultCarConfigurationValue);
 
-                    $this->flashMessenger()->addSuccessMessage($translator->translate('Configurazione Auto aggiunta con successo!'));
+                    $this->flashMessenger()->addSuccessMessage($this->translator->translate('Configurazione Auto aggiunta con successo!'));
 
                     return $this->redirect()->toRoute('cars-configurations/edit', ['id' => $newCarConfiguration->getId()]);
                 } catch (\Exception $e) {
                     $this->flashMessenger()
-                        ->addErrorMessage($translator->translate('Si è verificato un errore applicativo.'));
+                        ->addErrorMessage($this->translator->translate('Si è verificato un errore applicativo.'));
                 }
             } else {
-                $this->flashMessenger()->addErrorMessage($translator->translate('Dati inseriti non validi'));
+                $this->flashMessenger()->addErrorMessage($this->translator->translate('Dati inseriti non validi'));
             }
         }
 
@@ -174,17 +192,18 @@ class CarsConfigurationsController extends AbstractActionController
         ]);
     }
 
-    public function editAction () {
+    public function editAction()
+    {
         $id = $this->params()->fromRoute('id', 0);
         $carConfiguration = $this->carsConfigurationsService->getCarConfigurationById($id);
 
-        $configurationClass = CarsConfigurationsFactory::create($carConfiguration->getKey(), $carConfiguration->getValue());
+        $configurationClass = CarsConfigurationsFactory::create($carConfiguration->getKey(), $carConfiguration->getValue(), $this->translator);
 
         /** @var  CarsConfigurations $form */
         $form = $configurationClass->getForm();
 
         $hasMultipleValues = $configurationClass->hasMultipleValues();
-        if ($hasMultipleValues){
+        if ($hasMultipleValues) {
             $indexedValues = $configurationClass->getIndexedValues();
         } else {
             $form->setData([$carConfiguration->getKey() => $carConfiguration->getValue()]);
@@ -198,11 +217,10 @@ class CarsConfigurationsController extends AbstractActionController
             if ($form->isValid()) {
                 try {
                     $this->carsConfigurationsService->save($carConfiguration, $configurationClass->getValueFromForm($postData));
-                    $this->flashMessenger()->addSuccessMessage('Configurazione modificata con successo!');
+                    $this->flashMessenger()->addSuccessMessage($this->translator->translate('Configurazione modificata con successo!'));
                 } catch (\Exception $e) {
                     $this->flashMessenger()
-                         ->addErrorMessage('Si è verificato un errore applicativo.
-                        L\'assistenza tecnica è già al corrente, ci scusiamo per l\'inconveniente');
+                         ->addErrorMessage($this->translator->translate('Si è verificato un errore applicativo.'));
                 }
 
                 return $this->redirect()->toRoute('cars-configurations/edit', ['id' => $id]);
@@ -224,25 +242,69 @@ class CarsConfigurationsController extends AbstractActionController
     {
         $id = $this->params()->fromRoute('id', 0);
 
-        /** @var Pois $poi */
-        $poi = $this->poisService->getPoiById($id);
+        /** @var CarsConfigurations $carConfiguration */
+        $carConfiguration = $this->carsConfigurationsService->getCarConfigurationById($id);
 
-        if (is_null($poi)) {
+        if (is_null($carConfiguration)) {
             $this->getResponse()->setStatusCode(Response::STATUS_CODE_404);
             return false;
         }
 
         try {
-            $this->poisService->deletePoi($poi);
-            $this->flashMessenger()->addSuccessMessage('POI rimosso con successo!');
-
+            $this->carsConfigurationsService->deleteCarConfiguration($carConfiguration);
+            $this->flashMessenger()->addSuccessMessage($this->translator->translate('Configurazione Auto rimossa con successo!'));
         } catch (\Exception $e) {
             $this->flashMessenger()
-                ->addErrorMessage('Si è verificato un errore applicativo.
-                L\'assistenza tecnica è già al corrente, ci scusiamo per l\'inconveniente');
+                ->addErrorMessage($this->translator->translate('Si è verificato un errore applicativo.'));
         }
 
-        return $this->redirect()->toRoute('configurations/manage-pois');
+        return $this->redirect()->toRoute('cars-configurations/edit', ['id' => $id]);
+    }
+
+    public function deleteOptionAction()
+    {
+        // Get the id of the configuration
+        $id = $this->params()->fromRoute('id', 0);
+
+        // Get the id of the option of the configuration
+        $optionId = $this->params()->fromRoute('optionid', 0);
+
+        // Get the configuration.
+        $carConfiguration = $this->carsConfigurationsService->getCarConfigurationById($id);
+
+        // Get the configuration helper class.
+        $configurationClass = CarsConfigurationsFactory::create($carConfiguration->getKey(), $carConfiguration->getValue(), $this->translator);
+
+        // Get the indexed options of the configuration
+        $options = $configurationClass->getIndexedValues();
+
+        if (empty($options)) {
+            $this->getResponse()->setStatusCode(Response::STATUS_CODE_404);
+            return false;
+        }
+
+        // Remove the sepecific option
+        foreach ($options as $key => &$option) {
+            if ($option['id'] === $optionId) {
+                unset($options[$key]);
+            }
+            // Remove the index from the radio configuration
+            unset($option['id']);
+        }
+
+        // Update the carConfiguration value
+        $configurationClass->setValue($options);
+
+        try {
+            // Finally save the updated CarConfiguration to the DB.
+            $this->carsConfigurationsService->save($carConfiguration, $configurationClass->getRawValue());
+            $this->flashMessenger()->addSuccessMessage($this->translator->translate('Configurazione Auto aggioranta con successo!'));
+        } catch (\Exception $e) {
+            $this->flashMessenger()
+                ->addErrorMessage($this->translator->translate('Si è verificato un errore applicativo.'));
+        }
+
+        return $this->redirect()->toRoute('cars-configurations/edit', ['id' => $id]);
     }
 
     /**
@@ -260,16 +322,15 @@ class CarsConfigurationsController extends AbstractActionController
         $carConfiguration = $this->carsConfigurationsService->getCarConfigurationById($id);
 
         // Get the configuration helper class.
-        $configurationClass = CarsConfigurationsFactory::create($carConfiguration->getKey(), $carConfiguration->getValue());
+        $configurationClass = CarsConfigurationsFactory::create($carConfiguration->getKey(), $carConfiguration->getValue(), $this->translator);
 
         // Get the indexed options of the configuration
         $options = $configurationClass->getIndexedValues();
 
         // Get the position of the option in the options array
         $foundOption = [];
-        foreach( $options as $option )
-        {
-            if ($option[ 'id' ] == $optionId){
+        foreach ($options as $option) {
+            if ($option[ 'id' ] == $optionId) {
                 $foundOption = $option;
             }
         }
@@ -289,5 +350,4 @@ class CarsConfigurationsController extends AbstractActionController
             return $this->carsCinfigurationsService->getDataDataTable($as_filters, true);
         }
     }
-
 }

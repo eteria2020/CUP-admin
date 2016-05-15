@@ -1,11 +1,10 @@
 <?php
-$this->headLink()->appendStylesheet('/js/datatables/plugins/bootstrap/dataTables.bootstrap.css');
-$this->headScript()
-    ->appendFile('/js/datatables/media/js/jquery.dataTables.min.js')
-    ->appendFile('/js/datatables/plugins/bootstrap/dataTables.bootstrap.js')
-    ->appendFile($this->basePath() .'/js/cars-configurations-edit.js');
-$form = $this->form->prepare();
-//$form->setAttribute('action', $this->url('cars-configurations/edit', ['id' => $this->carConfiguration->getKey()]));    
+    $this->headLink()->appendStylesheet('/js/datatables/plugins/bootstrap/dataTables.bootstrap.css');
+    $this->headScript()
+        ->appendFile('/js/datatables/media/js/jquery.dataTables.min.js')
+        ->appendFile('/js/datatables/plugins/bootstrap/dataTables.bootstrap.js')
+        ->appendFile($this->basePath() .'/js/cars-configurations-edit.js');
+    $form = $this->form->prepare();
 ?>
 <div class="page-content-wrapper">
     <div class="page-content">

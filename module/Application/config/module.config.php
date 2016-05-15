@@ -1250,7 +1250,6 @@ return [
                                 'options' => [
                                     'route'    => '/ajax-edit/:optionid',
                                     'constraints' => [
-                                        'id' => '[a-zA-Z0-9]*',
                                         'optionid' => '[a-zA-Z0-9]*',
                                     ],
                                     'defaults' => [
@@ -1274,13 +1273,12 @@ return [
                             ],
                         ],
                     ],
-                    /*
                     'delete' => [
                         'type'    => 'Segment',
                         'options' => [
                             'route'    => '/delete/:id',
                             'constraints' => [
-                                'plate' => '[0-9]*'
+                                'id' => '[0-9]*'
                             ],
                             'defaults' => [
                                 '__NAMESPACE__' => 'Application\Controller',
@@ -1288,7 +1286,24 @@ return [
                                 'action'        => 'delete',
                             ],
                         ],
-                    ],*/
+                        'may_terminate' => true,
+                        'child_routes' => [
+                            'delete-option' => [
+                                'type'    => 'Segment',
+                                'options' => [
+                                    'route'    => '/:optionid',
+                                    'constraints' => [
+                                        'optionid' => '[a-zA-Z0-9]*',
+                                    ],
+                                    'defaults' => [
+                                        '__NAMESPACE__' => 'Application\Controller',
+                                        'controller'    => 'CarsConfigurations',
+                                        'action'        => 'delete-option',
+                                    ],
+                                ],
+                            ],
+                        ],
+                    ],
                 ],
             ],
         ],

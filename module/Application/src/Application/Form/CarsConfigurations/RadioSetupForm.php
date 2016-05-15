@@ -2,7 +2,9 @@
 
 namespace Application\Form\CarsConfigurations;
 
+// Externals
 use Zend\Form\Form;
+use Zend\Mvc\I18n\Translator;
 
 /**
  * Class RadioSetupForm
@@ -10,16 +12,16 @@ use Zend\Form\Form;
  */
 class RadioSetupForm extends Form
 {
-    public function __construct()
+    public function __construct(Translator $translator)
     {
         parent::__construct('carConfiguration');
         $this->setAttribute('method', 'post');
 
         $this->add([
-            'name'       => 'id',
-            'type'       => 'Zend\Form\Element\Hidden',
+            'name' => 'id',
+            'type' => 'Zend\Form\Element\Hidden',
             'attributes' => [
-                'id'       => 'id',
+                'id' => 'id',
             ],
         ]);
 
@@ -32,46 +34,46 @@ class RadioSetupForm extends Form
                 'required' => 'required',
             ],
             'options' => [
-                'label' => 'Volume',
+                'label' => $translator->translate('Volume'),
             ],
         ]);
 
         $this->add([
-            'name'       => 'name',
-            'type'       => 'Zend\Form\Element\Text',
+            'name' => 'name',
+            'type' => 'Zend\Form\Element\Text',
             'attributes' => [
-                'id'       => 'name',
-                'class'    => 'form-control',
+                'id' => 'name',
+                'class' => 'form-control',
                 'required' => 'required'
             ],
             'options' => [
-                'label' => 'Nome',
+                'label' => $translator->translate('Nome'),
             ],
         ]);
 
         $this->add([
-            'name'       => 'frequency',
-            'type'       => 'Zend\Form\Element\Text',
+            'name' => 'frequency',
+            'type' => 'Zend\Form\Element\Text',
             'attributes' => [
-                'id'       => 'frequency',
-                'class'    => 'form-control',
+                'id' => 'frequency',
+                'class' => 'form-control',
                 'required' => 'required'
             ],
             'options' => [
-                'label' => 'Frequenza',
+                'label' => $translator->translate('Frequenza'),
             ],
         ]);
 
         $this->add([
-            'name'       => 'band',
-            'type'       => 'Zend\Form\Element\Text',
+            'name' => 'band',
+            'type' => 'Zend\Form\Element\Text',
             'attributes' => [
-                'id'       => 'band',
-                'class'    => 'form-control',
+                'id' => 'band',
+                'class' => 'form-control',
                 'required' => 'required',
             ],
             'options' => [
-                'label' => 'Banda',
+                'label' => $translator->translate('Banda'),
             ],
         ]);
     }

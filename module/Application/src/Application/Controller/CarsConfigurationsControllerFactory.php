@@ -19,17 +19,28 @@ class CarsConfigurationsControllerFactory implements FactoryInterface
      */
     public function createService(ServiceLocatorInterface $serviceLocator)
     {
-        $entityManager = $serviceLocator->getServiceLocator()->get('doctrine.entitymanager.orm_default');
-        $carsConfigurationsService = $serviceLocator->getServiceLocator()->get('SharengoCore\Service\CarsConfigurationsService');
+        $sharedServiceLocator = $serviceLocator->getServiceLocator();
+
+        $entityManager = $sharedServiceLocator->get('doctrine.entitymanager.orm_default');
+        $carsConfigurationsService = $sharedServiceLocator->get('SharengoCore\Service\CarsConfigurationsService');
+        $languageService = $sharedServiceLocator->get('LanguageService');
+
+        $translator = $languageService->getTranslator();
 
         // Useful to fleets list
-        $fleetService = $serviceLocator->getServiceLocator()->get('SharengoCore\Service\FleetService');
+        $fleetService = $sharedServiceLocator->get('SharengoCore\Service\FleetService');
 
         // Static fields CarsConfigurations Form
-        $carsConfigurationsForm = $serviceLocator->getServiceLocator()->get('CarsConfigurationsForm');
+        $carsConfigurationsForm = $sharedServiceLocator->get('CarsConfigurationsForm');
 
         $hydrator = new DoctrineHydrator($entityManager);
 
-        return new CarsConfigurationsController($carsConfigurationsService, $fleetService, $carsConfigurationsForm, $hydrator);
+        return new CarsConfigurationsController(
+            $carsConfigurationsService,
+            $fleetService,
+            $carsConfigurationsForm,
+            $hydrator,
+            $translator
+        );
     }
 }

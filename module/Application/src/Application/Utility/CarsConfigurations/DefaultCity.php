@@ -2,18 +2,35 @@
 
 namespace Application\Utility\CarsConfigurations;
 
+// Internlas
 use Application\Form\CarsConfigurations\DefaultCityForm;
+// Externals
+use Zend\Mvc\I18n\Translator;
 
 class DefaultCity implements CarsConfigurationsInterface
 {
+    /**
+     * @var string
+     */
     private $value;
 
     /**
-     * UseExternalGPSInterface constructor.
+     * @var Translator
      */
-    public function __construct($rawValue)
-    {
-        $this->value = $rawValue;
+    private $translator;
+
+    /**
+     * DefaultCity constructor.
+     *
+     * @param string $rawValue
+     * @param Translator $translator
+     */
+    public function __construct(
+        $rawValue,
+        Translator $translator
+    ) {
+        $this->setValue($rawValue);
+        $this->translator = $translator;
     }
 
     public function getOverview()
@@ -23,10 +40,10 @@ class DefaultCity implements CarsConfigurationsInterface
 
     public function getForm()
     {
-        return new DefaultCityForm();
+        return new DefaultCityForm($this->translator);
     }
 
-    public function hasMultipleValues() 
+    public function hasMultipleValues()
     {
         return false;
     }
@@ -34,6 +51,16 @@ class DefaultCity implements CarsConfigurationsInterface
     public function getValue()
     {
         return $this->value;
+    }
+
+    public function setValue($value)
+    {
+        $this->value = $value;
+    }
+
+    public function getRawValue()
+    {
+        return (string) $this->value;
     }
 
     public function getDefaultValue()
@@ -48,6 +75,6 @@ class DefaultCity implements CarsConfigurationsInterface
 
     public function getIndexedValues()
     {
-        
+        return $this->value;
     }
 }

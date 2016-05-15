@@ -2,26 +2,41 @@
 
 namespace Application\Utility\CarsConfigurations;
 
+// Internlas
 use Application\Form\CarsConfigurations\RadioSetupForm;
+// Externals
+use Zend\Mvc\I18n\Translator;
 
 class RadioSetup implements CarsConfigurationsInterface
 {
+    /**
+     * @var string
+     */
     private $value;
 
     /**
-     * CarsConfigurationsInterface constructor.
-     *
-     * @param CarsConfigurationsService $carsConfigurationsService
+     * @var Translator
      */
-    public function __construct($rawValue)
-    {
-        $this->value = json_decode($rawValue, true);
+    private $translator;
+
+    /**
+     * RadioSetup constructor.
+     *
+     * @param string $rawValue
+     * @param Translator $translator
+     */
+    public function __construct(
+        $rawValue,
+        Translator $translator
+    ) {
+        $this->setValue(json_decode($rawValue, true));
+        $this->translator = $translator;
     }
 
     public function getOverview()
     {
         $names = '';
-        foreach($this->value as $value){
+        foreach ($this->value as $value) {
             $names .= '[ '.$value['name'].' ] ';
         }
         return $names;
@@ -29,10 +44,10 @@ class RadioSetup implements CarsConfigurationsInterface
 
     public function getForm()
     {
-        return new RadioSetupForm();
+        return new RadioSetupForm($this->translator);
     }
-    
-    public function hasMultipleValues() 
+
+    public function hasMultipleValues()
     {
         return true;
     }
@@ -40,6 +55,16 @@ class RadioSetup implements CarsConfigurationsInterface
     public function getValue()
     {
         return $this->value;
+    }
+
+    public function setValue($value)
+    {
+        $this->value = $value;
+    }
+
+    public function getRawValue()
+    {
+        return json_encode($this->value);
     }
 
     public function getDefaultValue()
@@ -56,17 +81,25 @@ class RadioSetup implements CarsConfigurationsInterface
         // Get the complete record object
         $configuration = $this->getIndexedValues();
 
+        $newConfiguration = true;
+
         // Update the sepecific radio
-        foreach($configuration as &$radio){
-            if($radio['id'] === $id){
+        foreach ($configuration as &$radio) {
+            if ($radio['id'] === $id) {
                 $radio = $data;
+                $newConfiguration = false;
             }
             // Remove the index from the radio configuration
             unset($radio['id']);
         }
 
+        if ($newConfiguration) {
+            // If this is a new configuration, we save it.
+            array_push($configuration, $data);
+        }
+
         // Recompose the json string.
-        return json_encode($configuration);
+        return $this->getRawValue($configuration);
     }
 
     public function getIndexedValues()
@@ -75,7 +108,7 @@ class RadioSetup implements CarsConfigurationsInterface
         $configurations = $this->getValue();
 
         foreach ($configurations as &$configuration) {
-            $configuration['id'] = strtolower(str_replace(' ', '' ,$configuration['name']));
+            $configuration['id'] = strtolower(str_replace(' ', '', $configuration['name']));
         }
 
         return $configurations;

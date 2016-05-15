@@ -1,14 +1,12 @@
 <?php 
-$this->headLink()->appendStylesheet('/js/datatables/plugins/bootstrap/dataTables.bootstrap.css');
+    $this->headLink()->appendStylesheet('/js/datatables/plugins/bootstrap/dataTables.bootstrap.css');
 
-// Get data
-$configuration = $this->configuration;
-$dtValues = $this->indexedValues;
-
+    // Get data
+    $configuration = $this->configuration;
+    $dtValues = $this->indexedValues;
 ?>
 <div class="page-content-wrapper">
     <div class="page-content">
-
         <div class="row">
             <div class="col-lg-6">
                 <h3 class="page-title">
@@ -16,15 +14,12 @@ $dtValues = $this->indexedValues;
                     <small>ID - <?= $this->thisId ?></small>
                 </h3>
             </div>
-
             <div class="col-lg-6">
                 <a href="<?= $this->url('cars-configurations/list/all'); ?>" class="btn btn-success pull-right"><i class="fa fa-arrow-left"></i> <?= $this->translate("Torna alla lista"); ?></a>
             </div>
         </div>
-
         <div class="page-bar">
         </div>
-
         <div class="row">
             <div class="col-md-12">
                 <div class="tab-content">
@@ -32,7 +27,6 @@ $dtValues = $this->indexedValues;
                         <div class="row">
                             <div class="col-lg-12">
                                 <?= $this->partial('partials/flash-messages.phtml', []); ?>
-
                                 <!-- CONFIGURATION POSITION -->
                                 <div class="portlet box green">
                                     <div class="portlet-title">
@@ -87,7 +81,6 @@ $dtValues = $this->indexedValues;
                                         </div>
                                     </div>
                                 </div>
-
                                 <!-- CONFIGURATION RAW VALUE -->
                                 <div class="portlet box green">
                                     <div class="portlet-title">
@@ -120,7 +113,6 @@ $dtValues = $this->indexedValues;
                                         </div>
                                     </div>
                                 </div>
-
                                 <!-- CONFIGURATION VALUE -->
                                 <div class="portlet box green">
                                     <div class="portlet-title">
@@ -173,11 +165,9 @@ $dtValues = $this->indexedValues;
                 </div>
             </div>
         </div>
-
         <!-- END PAGE CONTENT-->
     </div>
 </div>
-
 <script>
     var tab = '<?= $this->tab ?>';
 </script>

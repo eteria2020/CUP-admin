@@ -2,24 +2,41 @@
 
 namespace Application\Utility\CarsConfigurations;
 
+// Internlas
 use Application\Form\CarsConfigurations\BatteryAlarmSMSNumbersForm;
+// Externals
+use Zend\Mvc\I18n\Translator;
 
 class BatteryAlarmSMSNumbers implements CarsConfigurationsInterface
 {
+    /**
+     * @var string
+     */
     private $value;
 
     /**
-     * UseExternalGPSInterface constructor.
+     * @var Translator
      */
-    public function __construct($rawValue)
-    {
-        $this->value = json_decode($rawValue, true);
+    private $translator;
+
+    /**
+     * BatteryAlarmSMSNumbers constructor.
+     *
+     * @param string $rawValue
+     * @param Translator $translator
+     */
+    public function __construct(
+        $rawValue,
+        Translator $translator
+    ) {
+        $this->setValue(json_decode($rawValue, true));
+        $this->translator = $translator;
     }
 
     public function getOverview()
     {
         $names = '';
-        foreach($this->value as $value){
+        foreach ($this->value as $value) {
             $names .= '[ '.$value.' ] ';
         }
         return $names;
@@ -27,10 +44,10 @@ class BatteryAlarmSMSNumbers implements CarsConfigurationsInterface
 
     public function getForm()
     {
-        return new BatteryAlarmSMSNumbersForm();
+        return new BatteryAlarmSMSNumbersForm($this->translator);
     }
 
-    public function hasMultipleValues() 
+    public function hasMultipleValues()
     {
         return true;
     }
@@ -38,6 +55,16 @@ class BatteryAlarmSMSNumbers implements CarsConfigurationsInterface
     public function getValue()
     {
         return $this->value;
+    }
+
+    public function setValue($value)
+    {
+        $this->value = $value;
+    }
+
+    public function getRawValue()
+    {
+        return json_encode($this->value);
     }
 
     public function getDefaultValue()
@@ -58,20 +85,21 @@ class BatteryAlarmSMSNumbers implements CarsConfigurationsInterface
         $newConfiguration = true;
         
         // Update the sepecific radio
-        foreach($configuration as &$number){
-            if($number['id'] === $id){
-                $number = $data;               
+        foreach ($configuration as &$number) {
+            if ($number['id'] === $id) {
+                $number = $data;
+                $newConfiguration = false;
             }
-            array_push($configurationUpdated,$number['number']);
+            array_push($configurationUpdated, $number['number']);
         }
 
-error_log("\n\n\nPRE:".print_r($configurationUpdated,true),0);
-        // If this is a new configuration, we save it.
-        array_push($configurationUpdated,$data['number']);
-error_log("\n\n\nPOST:".print_r($configurationUpdated,true)."\n\n\n",0);
+        if ($newConfiguration) {
+            // If this is a new configuration, we save it.
+            array_push($configurationUpdated, $data['number']);
+        }
 
         // Recompose the json string.
-        return json_encode($configurationUpdated);
+        return $this->getRawValue($configurationUpdated);
     }
 
     public function getIndexedValues()
@@ -80,9 +108,9 @@ error_log("\n\n\nPOST:".print_r($configurationUpdated,true)."\n\n\n",0);
         $configurations = $this->getValue();
 
         foreach ($configurations as &$configuration) {
-            $configuration = [ 
+            $configuration = [
                 'number' => $configuration,
-                'id' => strtolower(str_replace(' ', '' ,$configuration))
+                'id' => strtolower(str_replace(' ', '', $configuration))
             ];
         }
         return $configurations;

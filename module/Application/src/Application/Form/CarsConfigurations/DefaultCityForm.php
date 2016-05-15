@@ -2,7 +2,9 @@
 
 namespace Application\Form\CarsConfigurations;
 
+// Externals
 use Zend\Form\Form;
+use Zend\Mvc\I18n\Translator;
 
 /**
  * Class DefaultCityForm
@@ -10,7 +12,7 @@ use Zend\Form\Form;
  */
 class DefaultCityForm extends Form
 {
-    public function __construct()
+    public function __construct(Translator $translator)
     {
         parent::__construct('carConfiguration');
         $this->setAttribute('method', 'post');
@@ -24,7 +26,7 @@ class DefaultCityForm extends Form
                 'required' => 'required'
             ],
             'options' => [
-                'label' => 'Citta\'',
+                'label' => $translator->translate('Citta\''),
             ],
         ]);
     }
