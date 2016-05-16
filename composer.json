@@ -17,7 +17,7 @@
             "type": "git"
         },
         {
-            "url": "ssh://git@git.mvlabs.it:4222/internals/zf2-multilanguage.git",
+            "url": "https://git.mvlabs.it/internals/zf2-multilanguage.git",
             "type": "git"
         }
     ],

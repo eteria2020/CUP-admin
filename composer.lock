@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "f3738713ae18f5d6d71c80e13ad1b3bc",
-    "content-hash": "5d716391147bbb4be2f0f9a59c2d300f",
+    "hash": "4cb73824159b940a57123c0fb59d0427",
+    "content-hash": "39368425a02d3ddc3b0446983d0380c5",
     "packages": [
         {
             "name": "bjyoungblood/bjy-authorize",
@@ -1650,7 +1650,7 @@
             "version": "dev-master",
             "source": {
                 "type": "git",
-                "url": "ssh://git@git.mvlabs.it:4222/internals/zf2-multilanguage.git",
+                "url": "https://git.mvlabs.it/internals/zf2-multilanguage.git",
                 "reference": "54efb90fbfad687696766f0a12a676e0a72b6657"
             },
             "require": {
