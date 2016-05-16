@@ -1,13 +1,16 @@
 <?php
 namespace Application\Controller;
 
+// Internals
 use Application\Form\UserForm;
 use Application\Form\Validator\DuplicateEmail;
 use SharengoCore\Service\UsersService;
+// Externals
 use Zend\Form\Form;
 use Zend\Http\Response;
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
+use Zend\View\Model\JsonModel;
 use DoctrineModule\Stdlib\Hydrator\DoctrineObject as DoctrineHydrator;
 
 
@@ -19,18 +22,23 @@ class UsersController extends AbstractActionController
     private $usersService;
 
     /**
-     * @var
+     * @var Form
      */
     private $userForm;
 
-    /** @var DoctrineHydrator */
+    /**
+     * @var DoctrineHydrator
+     */
     private $hydrator;
 
     /**
      * @param UsersService $usersService
      */
-    public function __construct(UsersService $usersService, Form $userForm, DoctrineHydrator $hydrator)
-    {
+    public function __construct(
+        UsersService $usersService,
+        Form $userForm,
+        DoctrineHydrator $hydrator
+    ) {
         $this->usersService = $usersService;
         $this->userForm = $userForm;
         $this->hydrator = $hydrator;
@@ -38,9 +46,7 @@ class UsersController extends AbstractActionController
 
     public function indexAction()
     {
-        return new ViewModel([
-            'users' => $this->usersService->getListUsers()
-        ]);
+        return new ViewModel([]);
     }
 
     public function addAction()
@@ -134,5 +140,31 @@ class UsersController extends AbstractActionController
             'userForm' => $form,
             'user'     => $I_user
         ]);
+    }
+
+    public function datatableAction()
+    {
+        $filters = $this->params()->fromPost();
+        $filters['withLimit'] = true;
+        $dataDataTable = $this->usersService->getDataDataTable($filters);
+        $usersTotal = $this->usersService->getTotalUsers();
+        $recordsFiltered = $this->getRecordsFiltered($filters, $usersTotal);
+
+        return new JsonModel(array(
+            'draw'            => $this->params()->fromQuery('sEcho', 0),
+            'recordsTotal'    => $usersTotal,
+            'recordsFiltered' => $recordsFiltered,
+            'data'            => $dataDataTable
+        ));
+    }
+
+    private function getRecordsFiltered($filters, $usersTotal)
+    {
+        if (empty($filters['searchValue']) && !isset($filters['columnNull'])) {
+            return $usersTotal;
+        } else {
+            $filters['withLimit'] = false;
+            return $this->usersService->getDataDataTable($filters, true);
+        }
     }
 }

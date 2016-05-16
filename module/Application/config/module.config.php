@@ -729,17 +729,24 @@ return [
                     'defaults' => [
                         'controller' => 'Application\Controller\Users',
                         'action' => 'index'
-                    ]
+                    ],
                 ],
                 'may_terminate' => true,
                 'child_routes' => [
+                    'datatable' => [
+                        'type'    => 'Literal',
+                        'options' => [
+                            'route'    => '/datatable',
+                            'defaults' => [
+                                'action'        => 'datatable',
+                            ],
+                        ],
+                    ],
                     'add' => [
                         'type'    => 'Literal',
                         'options' => [
                             'route'    => '/add',
                             'defaults' => [
-                                '__NAMESPACE__' => 'Application\Controller',
-                                'controller'    => 'Users',
                                 'action'        => 'add',
                             ],
                         ],
@@ -752,12 +759,10 @@ return [
                                 'id'    => '[0-9]*'
                             ],
                             'defaults' => [
-                                '__NAMESPACE__' => 'Application\Controller',
-                                'controller'    => 'Users',
                                 'action'        => 'edit',
                             ],
                         ],
-                    ]
+                    ],
                 ],
             ],
             'reservations' => [
