@@ -11,7 +11,7 @@ class ZoneForm extends Form
     {
         $this->entityManager = $entityManager;
 
-        parent::__construct('poi');
+        parent::__construct('zone');
         $this->setAttribute('method', 'post');
 
         $this->add($zoneFieldset);
