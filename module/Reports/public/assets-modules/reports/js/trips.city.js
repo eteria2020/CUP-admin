@@ -109,7 +109,7 @@ $.oe.fn.getCharts = function () {
 
                 // dc.rowChart("#day-of-week-chart")
                 dayOfWeek = $.oe.trips.dimension(function (d) {
-                    var name = ["", "0." + translate("Lunedi'"), "1." + translate("Martedi'"), "2." + translate("Mercoledi'"), "3." + translate("Giovedi'"), "4." + translate("Venerdi'"), "5." + translate("Sabato"), "6." + translate("Domenica")];
+                    var name = ["", "0." + translate("Lunedi"), "1." + translate("Martedi"), "2." + translate("Mercoledi"), "3." + translate("Giovedi"), "4." + translate("Venerdi"), "5." + translate("Sabato"), "6." + translate("Domenica")];
                     return name[d.time_dow];
                 }),
                 dayOfWeeks = dayOfWeek.group(),
@@ -242,11 +242,11 @@ $.oe.fn.getCharts = function () {
                     })
                     .ordering(function () {
                         return [
-                            translate("Lunedi") + "'",
-                            translate("Martedi") + "'",
-                            translate("Mercoledi") + "'",
-                            translate("Giovedi") + "'",
-                            translate("Venerdi") + "'",
+                            translate("Lunedi"),
+                            translate("Martedi"),
+                            translate("Mercoledi"),
+                            translate("Giovedi"),
+                            translate("Venerdi"),
                             translate("Sabato"),
                             translate("Domenica")
                         ];
