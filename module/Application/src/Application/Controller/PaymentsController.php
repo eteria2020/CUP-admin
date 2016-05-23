@@ -190,7 +190,7 @@ class PaymentsController extends AbstractActionController
             $cartasiResponse = $this->paymentsService->tryTripPayment($tripPayment, $webuser, true, false, false, true);
 
             if ($cartasiResponse->getOutcome() === 'OK') {
-                $this->customersService->setCustomerPaymentAble($tripPayment->getCustomer());
+                $this->customersService->enableCustomerPayment($tripPayment->getCustomer());
             }
 
             return new JsonModel([
