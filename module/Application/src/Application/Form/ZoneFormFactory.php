@@ -18,16 +18,12 @@ class ZoneFormFactory implements FactoryInterface
     public function createService(ServiceLocatorInterface $serviceLocator)
     {
         $entityManager = $serviceLocator->get('doctrine.entitymanager.orm_default');
-        $zonesService = $serviceLocator->get('SharengoCore\Service\ZonesService');
-        $postGisService = $serviceLocator->get('SharengoCore\Service\PostGisService');
 
         $languageService = $serviceLocator->get('LanguageService');
         $translator = $languageService->getTranslator();
 
         $hydrator = new DoctrineHydrator($entityManager);
         $zoneFieldset = new ZoneFieldset(
-            $zonesService,
-            $postGisService,
             $hydrator,
             $translator
         );

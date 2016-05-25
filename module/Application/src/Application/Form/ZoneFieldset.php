@@ -18,29 +18,13 @@ use Zend\Mvc\I18n\Translator;
 class ZoneFieldset extends Fieldset implements InputFilterProviderInterface
 {
     /**
-     * @var ZoneService
-     */
-    private $zonesService;
-
-    /**
-     * @var PostGisService
-     */
-    private $postGisService;
-
-    /**
-     * @param ZonesService $zonesService
-     * @param PostGisService $postGisService
      * @param HydratorInterface $hydrator
+     * @param Translator $translator
      */
     public function __construct(
-        ZonesService $zonesService,
-        PostGisService $postGisService,
         HydratorInterface $hydrator,
         Translator $translator
     ) {
-        $this->zonesService = $zonesService;
-        $this->postGisService = $postGisService;
-
         $this->setHydrator($hydrator);
         $this->setObject(new Zone());
 

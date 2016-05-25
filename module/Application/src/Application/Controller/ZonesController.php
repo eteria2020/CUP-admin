@@ -174,11 +174,10 @@ class ZonesController extends AbstractActionController
             // Check if the Area is KML file or GeoJSON string:
             if ($postData['zone']['useKmlFile']) {
                 $areaUseGeometry = $this->postGisService->getGeometryFromGeomKMLFile($postData['zone']['kmlUpload']['tmp_name']);
-                $postData['zone']['areaUse'] = $areaUseGeometry;
             } else {
                 $areaUseGeometry = $this->postGisService->getGeometryFromGeoJson($postData['zone']['areaUse']);
-                $postData['zone']['areaUse'] = $areaUseGeometry;
             }
+            $postData['zone']['areaUse'] = $areaUseGeometry;
 
             // Set the data
             $form->setData($postData);
