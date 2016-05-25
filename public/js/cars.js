@@ -9,6 +9,7 @@ $(function() {
         column: $("#js-column"),
         iSortCol_0: 0,
         sSortDir_0: "desc",
+        typeClean: $("#js-clean-type"),
         iDisplayLength: 100
     };
 
@@ -60,6 +61,7 @@ $(function() {
             {data: "clean"},
             {data: "position"},
             {data: "e.status"},
+            {data: "e.hidden"},
             {data: "ci.gps"},
             {data: "ci.firmwareVersion"},
             {data: "ci.softwareVersion"},
@@ -78,7 +80,9 @@ $(function() {
             {
                 targets: 9,
                 sortable: true,
-                type: "string"
+                render: function (data, type, row) {
+                     return (data === true) ? '<span class="glyphicon glyphicon-ok"></span>' : '<span class="glyphicon glyphicon-remove"></span>';
+                 }
             },
             {
                 targets: 10,
@@ -92,10 +96,15 @@ $(function() {
             },
             {
                 targets: 12,
-                sortable: false
+                sortable: true,
+                type: "string"
             },
             {
                 targets: 13,
+                sortable: false
+            },
+            {
+                targets: 14,
                 data: "button",
                 searchable: false,
                 sortable: false,
