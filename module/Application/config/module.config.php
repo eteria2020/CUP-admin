@@ -1168,7 +1168,7 @@ return [
             'collections' => [
                 'assets-modules/js/vendor.zones.js' => [
                     // Libs
-                    'ol3/ol-debug.js',
+                    'ol3/ol.js',
                     'bootstrap-switch/dist/js/bootstrap-switch.js',
                 ],
                 'assets-modules/css/vendor.zones.css' => [
