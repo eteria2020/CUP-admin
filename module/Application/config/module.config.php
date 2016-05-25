@@ -1164,17 +1164,8 @@ return [
         ]
     ],
     'asset_manager' => [
-        'caching' => [
-            'default' => [
-                'cache' => 'Assetic\\Cache\\FilesystemCache',
-                'options' => [
-                    'dir' => 'data/cache', // path/to/cache
-                ],
-            ],
-        ],
         'resolver_configs' => [
             'collections' => [
-                // Specific Asset for Trips (main] Page.
                 'assets-modules/js/vendor.zones.js' => [
                     // Libs
                     'ol3/ol-debug.js',
@@ -1185,8 +1176,8 @@ return [
                     'ol3/ol.css',
                     'bootstrap-switch/dist/css/bootstrap3/bootstrap-switch.css',
                 ],
-           ],
-           'paths' => [
+            ],
+            'paths' => [
                 $baseDir.'/bower_components',
             ],
         ],
