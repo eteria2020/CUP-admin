@@ -334,7 +334,7 @@ angular.module('SharengoCsApp').controller('SharengoCsController', function (
             if(typeof cookieFleet !== 'undefined'){
                 $scope.defaultFleet = $scope.fleets.find(function(fleet){
                    return fleet.id == cookieFleet;
-                })[0];
+                });
             }
             $scope.zoomOut();
         });
@@ -385,10 +385,10 @@ angular.module('SharengoCsApp').controller('SharengoCsController', function (
         if(!$scope.defaultFleet){
             $scope.zoom(
                 {
-                    latitude: $scope.defaultFleet.latitude,
-                    longitude: $scope.defaultFleet.longitude
+                    latitude: $scope.initial.mapCenter.latitude,
+                    longitude: $scope.initial.mapCenter.longitude
                 },
-                $scope.defaultFleet.mapZoom
+                $scope.initial.mapZoom
             );
         }else{
             $scope.zoom(

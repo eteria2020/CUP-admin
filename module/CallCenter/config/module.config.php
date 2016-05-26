@@ -56,14 +56,16 @@ return array(
                     'assets-modules/call-center/css/style.less'
                 ),
                 'assets-modules/call-center/js/vendors.js' => array(
-                    'jquery/dist/jquery.js',
                     'angular/angular.js',
+                    'jquery/dist/jquery.js',
                     'bootstrap/dist/js/bootstrap.js',
                     'lodash/dist/lodash.min.js',
+                    'angular-simple-logger/dist/angular-simple-logger.min.js',
                     'angular-google-maps/dist/angular-google-maps.min.js',
                     'angular-bootstrap/ui-bootstrap-tpls.min.js',
                     'moment/min/moment.min.js',
-                    'angular-gettext/dist/angular-gettext.min.js'
+                    'angular-gettext/dist/angular-gettext.min.js',
+                    'angular-cookies/angular-cookies.min.js'
                 ),
                 'assets-modules/call-center/js/scripts.js' => array(
                     'assets-modules/call-center/js/app.js',
