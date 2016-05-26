@@ -13,7 +13,8 @@ angular.module('SharengoCsApp').controller('SharengoCsController', function (
     uiGmapGoogleMapApi,
     uiGmapIsReady,
     $timeout,
-    gettextCatalog
+    gettextCatalog,
+    $cookieStore
 ) {
     var infoBox;
     //necessary to avoid errors with network delay
@@ -329,11 +330,18 @@ angular.module('SharengoCsApp').controller('SharengoCsController', function (
                 return fleet.isDefault;
             });
             $scope.defaultFleet = defaultFleet.length > 0 ? defaultFleet.shift() : false;
+            var cookieFleet = $cookieStore.get('defaultFleet');
+            if(typeof cookieFleet !== 'undefined'){
+                $scope.defaultFleet = $scope.fleets.find(function(fleet){
+                   return fleet.id == cookieFleet;
+                });
+            }
             $scope.zoomOut();
         });
     };
 
     $scope.changeFleet = function(){
+        $cookieStore.put('defaultFleet',$scope.defaultFleet.id);
         $scope.zoomOut();
     };
 
@@ -377,10 +385,10 @@ angular.module('SharengoCsApp').controller('SharengoCsController', function (
         if(!$scope.defaultFleet){
             $scope.zoom(
                 {
-                    latitude: $scope.defaultFleet.latitude,
-                    longitude: $scope.defaultFleet.longitude
+                    latitude: $scope.initial.mapCenter.latitude,
+                    longitude: $scope.initial.mapCenter.longitude
                 },
-                $scope.defaultFleet.mapZoom
+                $scope.initial.mapZoom
             );
         }else{
             $scope.zoom(
