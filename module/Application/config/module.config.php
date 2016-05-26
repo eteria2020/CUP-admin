@@ -1110,6 +1110,13 @@ return [
             ]
         ],
     ],
+    'asset_manager' => [
+        'resolver_configs' => [
+            'map' => [
+                'js/trips.js' => __DIR__.'/../public/js/trips.js',
+            ],
+        ],
+    ],
     'service_manager' => [
         'abstract_factories' => [
             'Zend\Cache\Service\StorageCacheAbstractServiceFactory',
@@ -1289,7 +1296,10 @@ return [
     'view_helpers'    => [
         'invokables' => [
             'CarStatus' => 'Application\View\Helper\CarStatus',
-        ]
+        ],
+        'factories' => [
+            'datatableFilters' => 'Application\View\Helper\DatatableFiltersHelperFactory',
+        ],
     ],
 
     // Placeholder for console routes
@@ -1570,5 +1580,18 @@ return [
                 'openOnNewWindow' => true,
             ],
         ]
-    ]
+    ],
+    'datatable-filters' => [
+        'trips-index' => [
+            'e.timestampEnd' => $translator->translate("Corse Aperte"),
+            'e.id' => $translator->translate("ID Corsa"),
+            'cu.id' => $translator->translate("ID Cliente"),
+            'cu.surname' => $translator->translate("Cognome Cliente"),
+            'cu.email' => $translator->translate("eMail Cliente"),
+            'cc.code' => $translator->translate("RFID"),
+            'c.plate' => $translator->translate("Targa"),
+            'c.label' => $translator->translate("Numero"),
+            'f.name' => $translator->translate("Flotta")
+        ]
+    ],
 ];
