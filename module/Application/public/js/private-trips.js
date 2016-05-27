@@ -1,5 +1,5 @@
 $(function() {
-
+alert("original");
     var table    = $('#js-trips-table');
     var search   = $('#js-value');
     var column   = $('#js-column');
@@ -173,7 +173,7 @@ $(function() {
         search.show();
         search.val('');
 
-        if(value == 'c.timestampEnd') {
+        if(value == 'e.timestampEnd') {
             filterWithNull = true;
             search.prop('disabled', true);
         } else {

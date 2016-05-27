@@ -1112,8 +1112,13 @@ return [
     ],
     'asset_manager' => [
         'resolver_configs' => [
-            'map' => [
-                'js/trips.js' => __DIR__.'/../public/js/trips.js',
+            'collections' => [
+                'js/trips.js' => [
+                    'js/private-trips.js',
+                ],
+            ],
+            'paths' => [
+                __DIR__ . '/../public/'
             ],
         ],
     ],
