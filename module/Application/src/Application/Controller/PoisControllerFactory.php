@@ -2,21 +2,35 @@
 
 namespace Application\Controller;
 
+// Externals
 use Zend\ServiceManager\FactoryInterface;
 use Zend\ServiceManager\ServiceLocatorInterface;
 use DoctrineModule\Stdlib\Hydrator\DoctrineObject as DoctrineHydrator;
+use Zend\Session\Container;
 
 class PoisControllerFactory implements FactoryInterface
 {
     public function createService(ServiceLocatorInterface $serviceLocator)
     {
-        $entityManager = $serviceLocator->getServiceLocator()->get('doctrine.entitymanager.orm_default');
-        $poisService = $serviceLocator->getServiceLocator()->get('SharengoCore\Service\PoisService');
-        $carsService = $serviceLocator->getServiceLocator()->get('SharengoCore\Service\CarsService');
+        $sharedServiceLocator = $serviceLocator->getServiceLocator();
 
-        $poiForm = $serviceLocator->getServiceLocator()->get('PoiForm');
+        $entityManager = $sharedServiceLocator->get('doctrine.entitymanager.orm_default');
+        $poisService = $sharedServiceLocator->get('SharengoCore\Service\PoisService');
+        $carsService = $sharedServiceLocator->get('SharengoCore\Service\CarsService');
+        $datatablesSessionNamespace = $sharedServiceLocator->get('Configuration')['session']['datatablesNamespace'];
+
+        $poiForm = $sharedServiceLocator->get('PoiForm');
         $hydrator = new DoctrineHydrator($entityManager);
 
-        return new PoisController($poisService, $carsService, $poiForm, $hydrator);
+        // Creating DataTable Filters Session Container
+        $datatableFiltersSessionContainer = new Container($datatablesSessionNamespace);
+
+        return new PoisController(
+            $poisService,
+            $carsService,
+            $poiForm,
+            $hydrator,
+            $datatableFiltersSessionContainer
+        );
     }
 }

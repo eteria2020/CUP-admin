@@ -13,7 +13,11 @@
             "type": "git"
         },
         {
-            "url": "ssh://git@git.mvlabs.it:4222/clients/sharengo-cartasi.git",
+            "url": "ssh://git@gitlab.bulweria.com/cup-web/cartasi.git",
+            "type": "git"
+        },
+        {
+            "url": "https://git.mvlabs.it/internals/zf2-multilanguage.git",
             "type": "git"
         },
         {
@@ -22,10 +26,6 @@
         },
         {
             "url": "ssh://git@gitlab.bulweria.com/cup-web/core-business.git",
-            "type": "git"
-        },
-        {
-            "url": "ssh://git@git.mvlabs.it:4222/internals/zf2-multilanguage.git",
             "type": "git"
         }
     ],
@@ -38,7 +38,7 @@
         "rwoverdijk/assetmanager": "1.4.*",
         "mvlabs/sharengo-coremodule": "dev-master",
         "leafo/lessphp": "0.5.*",
-        "mvlabs/sharengo-cartasi": "dev-master",
+        "cup-web/cartasi": "dev-master",
         "cup-web/core-business": "dev-master",
         "cup-web/admin-business-module": "dev-master",
         "mockery/mockery": "^0.9.4",
