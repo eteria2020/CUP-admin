@@ -1,7 +1,8 @@
 <?php
 $this->headLink()
     ->appendStylesheet('/js/datatables/plugins/bootstrap/dataTables.bootstrap.css')
-    ->appendStylesheet('/js/plugins/bootstrap-datepicker/css/datepicker3.css');
+    ->appendStylesheet('/js/plugins/bootstrap-datepicker/css/datepicker3.css')
+    ->appendStylesheet('/css/trips.css');
 $this->headScript()
     ->appendFile('/js/datatables/media/js/jquery.dataTables.min.js')
     ->appendFile('/js/datatables/plugins/bootstrap/dataTables.bootstrap.js')
@@ -21,59 +22,9 @@ $this->headScript()
         <div class="row">
             <div class="col-md-12">
                 <?= $this->partial('partials/flash-messages.phtml', []); ?>
-                <div class="row">
-                    <div class="col-md-5">
-                        <div class="form-inline">
-                            <div class="form-group">
-                                <select name="column" id="js-column" class="form-control">
-                                    <option value="select" selected>-- <?= $this->translate("Seleziona"); ?> --</option>
-                                    <option value="c.timestampEnd"><?= $this->translate("Corse Aperte"); ?></option>
-                                    <option value="e.id"><?= $this->translate("ID Corsa"); ?></option>
-                                    <option value="cu.id"><?= $this->translate("ID Cliente"); ?></option>
-                                    <option value="cu.surname"><?= $this->translate("Cognome Cliente"); ?></option>
-                                    <option value="cu.email"><?= $this->translate("eMail Cliente"); ?></option>
-                                    <option value="cc.code"><?= $this->translate("RFID"); ?></option>
-                                    <option value="c.plate"><?= $this->translate("Targa"); ?></option>
-                                    <option value="c.label"><?= $this->translate("Numero"); ?></option>
-                                    <option value="f.name"><?= $this->translate("Flotta"); ?></option>
-                                </select>
-                            </div>
-                            <div class="form-group">
-                                <input type="text" name="value" value="" class="form-control" id="js-value"
-                                       placeholder="<?= $this->translate("Filtra..."); ?>">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-7">
-                        <div class="form-inline">
-                            <div class="form-group">
-                                <label> <?= $this->translate("da"); ?>: </label>
-                                <input class="form-control form-control-inline input-small date-picker" size="16"
-                                       type="text" id="js-date-from"
-                                       placeholder="<?= $this->translate("Data inizio"); ?>">
-                            </div>
-                            <div class="form-group">
-                                <label> <?= $this->translate("a"); ?>: </label>
-                                <input class="form-control form-control-inline input-small date-picker" size="16"
-                                       type="text" id="js-date-to"
-                                       placeholder="<?= $this->translate("Data fine"); ?>">
-                            </div>
-                            <div class="btn-group">
-                                <button type="button" class="btn green js-search" id="js-search"><i
-                                        class="fa fa-search"></i> <?= $this->translate("Cerca"); ?></button>
-                                <button type="button" class="btn green dropdown-toggle" data-toggle="dropdown"><i
-                                        class="fa fa-angle-down"></i></button>
-                                <ul class="dropdown-menu" role="menu">
-                                    <li>
-                                        <a href="javascript:void(0);" id="js-clear"><i
-                                                class="fa fa-remove"></i> <?= $this->translate("Pulisci Ricerca"); ?>
-                                        </a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+
+                <?= $this->datatableFilters('trips-index') ?>
+
                 <hr>
                 <!-- BEGIN EXAMPLE TABLE PORTLET-->
                 <div class="portlet box green">

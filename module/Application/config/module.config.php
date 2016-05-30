@@ -1116,6 +1116,7 @@ return [
                 'js/trips.js' => [
                     'js/private-trips.js',
                 ],
+                'css/trips.css' => [],
             ],
             'paths' => [
                 __DIR__ . '/../public/'

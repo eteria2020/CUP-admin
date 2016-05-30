@@ -10,7 +10,7 @@ class DatatableFiltersHelperFactory implements FactoryInterface
      * Create service
      *
      * @param ServiceLocatorInterface $serviceLocator
-     * @return LanguageMenuHelper
+     * @return DatatableFiltersHelper
      */
     public function createService(ServiceLocatorInterface $serviceLocator)
     {
