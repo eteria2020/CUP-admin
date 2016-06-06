@@ -27,14 +27,8 @@ class GeometryTextarea extends Element
      */
     private function getJsonValue()
     {
-        if ($this->value instanceof \CrEOF\Spatial\PHP\Types\Geometry\GeometryInterface ||
-            $this->value instanceof \CrEOF\Spatial\PHP\Types\Geometry\Polygon ||
-            $this->value instanceof \CrEOF\Spatial\PHP\Types\Geometry\MultiPolygon ||
-            $this->value instanceof \CrEOF\Spatial\PHP\Types\Geometry\LineString ||
-            $this->value instanceof \CrEOF\Spatial\PHP\Types\Geometry\MultiLineString ||
-            $this->value instanceof \CrEOF\Spatial\PHP\Types\Geometry\Point ||
-            $this->value instanceof \CrEOF\Spatial\PHP\Types\Geometry\MultiPoint) {
-            return $this->value->toJson();         
+        if ($this->value instanceof \CrEOF\Spatial\PHP\Types\Geometry\GeometryInterface) {
+            return $this->value->toJson();
         }
         return $this->value;
     }

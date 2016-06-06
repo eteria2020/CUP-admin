@@ -1,5 +1,7 @@
-/* global $, confirm, dataTable, zones, ol, translate */
+/* global $, confirm, dataTable, zones, ol, translate, getSessionVars, filters, renderTable, document, window, clearTimeout, setTimeout */
 $(function () {
+    "use strict";
+
     // DataTable
     var table = $("#js-zones-table");
 
@@ -75,7 +77,7 @@ $(function () {
         "columnDefs": [
             {
                 targets: [1, 2, 4],
-                render: function (data, type, row) {
+                render: function (data) {
                     return (data === true) ? '<span class="glyphicon glyphicon-ok"></span>' : '<span class="glyphicon glyphicon-remove"></span>';
                 }
             },
@@ -90,13 +92,18 @@ $(function () {
                 searchable: false,
                 sortable: false,
                 render: function (data) {
-                    return "<div class=\"btn-group\"><input class=\"visualizza\" type=\"checkbox\" name=\"visualizza\" data-id=\"" + data + "\" data-on-text=\"" + translate("zonesListTabDataOnText") + "\" data-off-text=\"" + translate("zonesListTabDataOffText") + "\" data-on-color=\"info\" data-label-width=\"20\"><a href=\"#map\" data-id=\"" + data + "\" class=\"btn btn-default focus\"><span class=\"glyphicon glyphicon-screenshot\"></span> " + translate("zonesListFocusText") + "</a><a href=\"/zones/edit/" + data + "\" class=\"btn btn-default\">" + translate("modify") + "</a></div>";
+                    return "<div class=\"btn-group\"><input class=\"visualizza\" type=\"checkbox\" name=\"visualizza\" data-id=\"" + data +
+                    "\" data-on-text=\"" + translate("zonesListTabDataOnText") + "\" data-off-text=\"" + translate("zonesListTabDataOffText") +
+                    "\" data-on-color=\"info\" data-label-width=\"20\"><a href=\"#map\" data-id=\"" + data +
+                    "\" class=\"btn btn-default focus\"><span class=\"glyphicon glyphicon-screenshot\"></span> " +
+                    translate("zonesListFocusText") + "</a><a href=\"/zones/edit/" + data + "\" class=\"btn btn-default\">" +
+                    translate("modify") + "</a></div>";
                 }
             }
         ],
         "lengthMenu": [
-            [5, 10, 100],
-            [5, 10, 100]
+            [dataTableVars.iDisplayLength, 10, 100],
+            [dataTableVars.iDisplayLength, 10, 100]
         ],
         "pageLength": dataTableVars.iDisplayLength,
         "pagingType": "bootstrap_full_number",
@@ -188,8 +195,6 @@ $(function () {
     });
 
     ///// OpenStreetMap Section /////
-    // The collection of features selected
-    var featureOverlaySource = {};
 
     // The MAP
     var OSM = new ol.layer.Tile({
@@ -233,7 +238,7 @@ $(function () {
         })]
     };
 
-    var vectorSource = new ol.source.Vector({
+    vectorSource = new ol.source.Vector({
         projection: "EPSG:3857",
         format: new ol.format.GeoJSON()
     });
@@ -280,7 +285,7 @@ $(function () {
         clearTimeout(resizeId);
         resizeId = setTimeout(doneResizing, 500);
     });
-    doneResizing = function () {
+    var doneResizing = function () {
         var newHeight = $(window).height();
         $(".map").css("height", newHeight - 280);
         map.updateSize();

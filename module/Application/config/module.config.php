@@ -803,12 +803,12 @@ return [
                     'defaults' => [
                         'controller' => 'Application\Controller\Zones',
                         'action' => 'index'
-                    ]
+                    ],
                 ],
                 'may_terminate' => true,
                 'child_routes' => [
                     'ajax-tab-list' => [
-                        'type'    => 'Literal',
+                        'type' => 'Literal',
                         'options' => [
                             'route' => '/ajax-tab-list',
                             'defaults' => [
@@ -817,7 +817,7 @@ return [
                         ],
                     ],
                     'zone-alarms' => [
-                        'type'    => 'Literal',
+                        'type' => 'Literal',
                         'options' => [
                             'route' => '/zone-alarms',
                             'defaults' => [
@@ -826,7 +826,7 @@ return [
                         ],
                     ],
                     'ajax-tab-groups' => [
-                        'type'    => 'Literal',
+                        'type' => 'Literal',
                         'options' => [
                             'route' => '/ajax-tab-groups',
                             'defaults' => [
@@ -835,7 +835,7 @@ return [
                         ],
                     ],
                     'ajax-tab-prices' => [
-                        'type'    => 'Literal',
+                        'type' => 'Literal',
                         'options' => [
                             'route' => '/ajax-tab-prices',
                             'defaults' => [
@@ -844,26 +844,26 @@ return [
                         ],
                     ],
                     'datatable' => [
-                        'type'    => 'Literal',
+                        'type' => 'Literal',
                         'options' => [
-                            'route'    => '/datatable',
+                            'route' => '/datatable',
                             'defaults' => [
-                                'action'        => 'datatable',
+                                'action' => 'datatable',
                             ],
                         ],
                     ],
                     'edit' => [
-                        'type'    => 'Segment',
+                        'type' => 'Segment',
                         'options' => [
-                            'route'    => '/edit/:id',
+                            'route' => '/edit/:id',
                             'constraints' => [
-                                'id'    => '[0-9]*'
+                                'id' => '[0-9]*'
                             ],
                             'defaults' => [
-                                'action'        => 'edit',
+                                'action' => 'edit',
                             ],
                         ],
-                    ]
+                    ],
                 ],
             ],
             'payments' => [

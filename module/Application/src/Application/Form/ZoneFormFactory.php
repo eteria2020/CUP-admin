@@ -20,7 +20,7 @@ class ZoneFormFactory implements FactoryInterface
         $entityManager = $serviceLocator->get('doctrine.entitymanager.orm_default');
 
         $languageService = $serviceLocator->get('LanguageService');
-        $translator = $languageService->getTranslator();
+        $translator = $serviceLocator->get('MvcTranslator');
 
         $hydrator = new DoctrineHydrator($entityManager);
         $zoneFieldset = new ZoneFieldset(

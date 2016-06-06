@@ -2,12 +2,10 @@
 namespace Application\Controller;
 
 // Internals
-use SharengoCore\Entity\Zone;
 use Application\Form\ZoneForm;
 use SharengoCore\Service\ZonesService;
 use SharengoCore\Service\PostGisService;
 // Externals
-use Zend\Form\Form;
 use Zend\Http\Response;
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
@@ -18,7 +16,7 @@ use Zend\Session\Container;
 class ZonesController extends AbstractActionController
 {
     /**
-     * @var zonesService
+     * @var ZonesService
      */
     private $zonesService;
 
@@ -28,7 +26,7 @@ class ZonesController extends AbstractActionController
     private $postGisService;
     
     /**
-     * @var \Zend\Stdlib\Hydrator\HydratorInterface
+     * @var HydratorInterface
      */
     private $hydrator;
 
@@ -116,27 +114,27 @@ class ZonesController extends AbstractActionController
 
     public function datatableAction()
     {
-        $as_filters = $this->params()->fromPost();
-        $as_filters['withLimit'] = true;
-        $as_dataDataTable = $this->zonesService->getDataDataTable($as_filters);
-        $i_totalZones = $this->zonesService->getTotalZones();
-        $i_recordsFiltered = $this->getRecordsFiltered($as_filters, $i_totalZones);
+        $filters = $this->params()->fromPost();
+        $filters['withLimit'] = true;
+        $dataDataTable = $this->zonesService->getDataDataTable($filters);
+        $totalZones = $this->zonesService->getTotalZones();
+        $recordsFiltered = $this->getRecordsFiltered($filters, $totalZones);
 
         return new JsonModel([
             'draw' => $this->params()->fromQuery('sEcho', 0),
-            'recordsTotal' => $i_totalZones,
-            'recordsFiltered' => $i_recordsFiltered,
-            'data' => $as_dataDataTable
+            'recordsTotal' => $totalZones,
+            'recordsFiltered' => $recordsFiltered,
+            'data' => $dataDataTable
         ]);
     }
 
-    protected function getRecordsFiltered($as_filters, $i_totalZones)
+    protected function getRecordsFiltered($filters, $totalZones)
     {
-        if (empty($as_filters['searchValue']) && !isset($as_filters['columnValueWithoutLike'])) {
-            return $i_totalZones;
+        if (empty($filters['searchValue']) && !isset($filters['columnValueWithoutLike'])) {
+            return $totalZones;
         } else {
-            $as_filters['withLimit'] = false;
-            return $this->zonesService->getDataDataTable($as_filters, true);
+            $filters['withLimit'] = false;
+            return $this->zonesService->getDataDataTable($filters, true);
         }
     }
 
@@ -195,8 +193,8 @@ class ZonesController extends AbstractActionController
         }
 
         $view = new ViewModel([
-            'zone'                           => $zone,
-            'zoneForm'                       => $form,
+            'zone' => $zone,
+            'zoneForm' => $form,
         ]);
         return $view;
     }
