@@ -1,5 +1,7 @@
 /* global $, confirm, dataTable, translate */
 $(function () {
+    "use strict";
+
     // DataTables
     var table = $("#js-cars-configurations-table");
 
@@ -75,8 +77,8 @@ $(function () {
             }
         ],
         "lengthMenu": [
-            [100, 200, 300],
-            [100, 200, 300]
+            [dataTableVars.iDisplayLength, 200, 300],
+            [dataTableVars.iDisplayLength, 200, 300]
         ],
         "pageLength": dataTableVars.iDisplayLength,
         "pagingType": "bootstrap_full_number",

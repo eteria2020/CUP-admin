@@ -75,22 +75,22 @@ class CarsConfigurationsController extends AbstractActionController
      */
     public function datatableAction()
     {
-        $as_filters = $this->params()->fromPost();
-        $as_filters['withLimit'] = true;
-        $as_dataDataTable = $this->carsConfigurationsService->getDataDataTable($as_filters);
-        $i_totalCarsConfigurations = $this->carsConfigurationsService->getTotalCarsConfigurations();
-        $i_recordsFiltered = $this->_getRecordsFiltered($as_filters, $i_totalCarsConfigurations);
+        $filters = $this->params()->fromPost();
+        $filters['withLimit'] = true;
+        $dataDataTable = $this->carsConfigurationsService->getDataDataTable($filters);
+        $totalCarsConfigurations = $this->carsConfigurationsService->getTotalCarsConfigurations();
+        $recordsFiltered = $this->_getRecordsFiltered($filters, $totalCarsConfigurations);
 
-        foreach ($as_dataDataTable as &$row) {
+        foreach ($dataDataTable as &$row) {
             $configurationClass = CarsConfigurationsFactory::create($row['e']['key'], $row['e']['value'], $this->translator);
             $row['e']['value'] = $configurationClass->getOverview();
         }
 
         return new JsonModel([
             'draw' => $this->params()->fromQuery('sEcho', 0),
-            'recordsTotal' => $i_totalCarsConfigurations,
-            'recordsFiltered' => $i_recordsFiltered,
-            'data' => $as_dataDataTable
+            'recordsTotal' => $totalCarsConfigurations,
+            'recordsFiltered' => $recordsFiltered,
+            'data' => $dataDataTable
         ]);
     }
 
@@ -341,13 +341,13 @@ class CarsConfigurationsController extends AbstractActionController
         return $this->getResponse();
     }
 
-    protected function _getRecordsFiltered($as_filters, $i_totalCarsConfigurations)
+    protected function _getRecordsFiltered($filters, $totalCarsConfigurations)
     {
-        if (empty($as_filters['searchValue']) && !isset($as_filters['columnValueWithoutLike'])) {
-            return $i_totalCarsConfigurations;
+        if (empty($filters['searchValue']) && !isset($filters['columnValueWithoutLike'])) {
+            return $totalCarsConfigurations;
         } else {
-            $as_filters['withLimit'] = false;
-            return $this->carsCinfigurationsService->getDataDataTable($as_filters, true);
+            $filters['withLimit'] = false;
+            return $this->carsCinfigurationsService->getDataDataTable($filters, true);
         }
     }
 }

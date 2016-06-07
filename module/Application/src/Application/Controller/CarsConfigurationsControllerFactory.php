@@ -23,9 +23,7 @@ class CarsConfigurationsControllerFactory implements FactoryInterface
 
         $entityManager = $sharedServiceLocator->get('doctrine.entitymanager.orm_default');
         $carsConfigurationsService = $sharedServiceLocator->get('SharengoCore\Service\CarsConfigurationsService');
-        $languageService = $sharedServiceLocator->get('LanguageService');
-
-        $translator = $languageService->getTranslator();
+        $translator = $serviceLocator->get('MvcTranslator');
 
         // Useful to fleets list
         $fleetService = $sharedServiceLocator->get('SharengoCore\Service\FleetService');

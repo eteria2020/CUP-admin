@@ -27,11 +27,14 @@ class RadioSetupForm extends Form
 
         $this->add([
             'name' => 'volume',
-            'type' => 'Zend\Form\Element\Number',    //@todo specifica range
+            'type' => 'Zend\Form\Element\Number',
             'attributes' => [
                 'id' => 'volume',
                 'class' => 'form-control',
                 'required' => 'required',
+                'min' => '0',
+                'max' => '10',
+                'step' => '1',
             ],
             'options' => [
                 'label' => $translator->translate('Volume'),

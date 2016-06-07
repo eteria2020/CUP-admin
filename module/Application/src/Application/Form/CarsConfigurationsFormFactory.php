@@ -18,9 +18,7 @@ class CarsConfigurationsFormFactory implements FactoryInterface
     public function createService(ServiceLocatorInterface $serviceLocator)
     {
         $entityManager = $serviceLocator->get('doctrine.entitymanager.orm_default');
-
-        $languageService = $serviceLocator->get('LanguageService');
-        $translator = $languageService->getTranslator();
+        $translator = $serviceLocator->get('MvcTranslator');
 
         $hydrator = new DoctrineHydrator($entityManager);
         $carsConfigurationsFieldset = new CarsConfigurationsFieldset($translator, $hydrator);

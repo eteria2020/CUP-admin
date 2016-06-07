@@ -1,5 +1,8 @@
-/* global dataTable:true, $:true, thisId, translate, confirm */
+/* global dataTable:true, $:true, thisId, translate, confirm, document */
+
 var renderDatatable = function(data){
+    "use strict";
+
     // DataTables
     var table = $("#js-cars-configurations-element-table");
 
@@ -23,26 +26,26 @@ var renderDatatable = function(data){
                 targets:(getColumns(data).length - 1),
                 data: "button",
                 sortable: false,
-                render: function (data, type, full) {
+                render: function (dataDT, type, full) {
                     return '<div class="btn-group">' +
-                        '<a class="btn btn-default edit" data-id="' + full['id'] + '">' + translate("Modifica") + '</a> ' +
-                        '<a href="/cars-configurations/delete/' + thisId + '/' + full['id'] + '" class="btn btn-default js-delete">' + translate("Elimina") + '</a>' +
+                        '<a class="btn btn-default edit" data-id="' + full.id + '">' + translate("Modifica") + '</a> ' +
+                        '<a href="/cars-configurations/delete/' + thisId + "/" + full.id + '" class="btn btn-default js-delete">' + translate("Elimina") + '</a>' +
                         '</div>';
                 },
                 "min-width": "180px"
             },
             {
-                targets:(getColumns(data).length - 2),
+                targets: (getColumns(data).length - 2),
                 visible: false
             },
             {
-                targets:(0),
+                targets: (0),
                 visible: false
             }
         ],
         "lengthMenu": [
-            [5, 10, 50],
-            [5, 10, 50]
+            [dataTableVars.iDisplayLength, 10, 50],
+            [dataTableVars.iDisplayLength, 10, 50]
         ],
         "pageLength": dataTableVars.iDisplayLength,
         "pagingType": "bootstrap_full_number",
@@ -77,6 +80,8 @@ var renderDatatable = function(data){
 };
 
 var getColumns = function(data){
+    "use strict";
+
     var array = [];
     array.push({data: "id"});
     $.each(data[0], function(key){
@@ -87,6 +92,8 @@ var getColumns = function(data){
 };
 
 $(document).on("click", ".btn.edit", function() {
+    "use strict";
+
     var optionId = $(this).data("id");
 
     $.ajax({
@@ -101,7 +108,7 @@ $(document).on("click", ".btn.edit", function() {
     }).success(function(data){
         if (typeof data !== "undefined"){
             $("#data-processing").hide();
-            $.each(data,function(key,val){
+            $.each(data, function(key, val){
                 $('input[name="' + key + '"]').val(val); 
             });
             $('input[name="id"]').val(optionId);
