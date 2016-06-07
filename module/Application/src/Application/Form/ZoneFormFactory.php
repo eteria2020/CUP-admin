@@ -18,8 +18,6 @@ class ZoneFormFactory implements FactoryInterface
     public function createService(ServiceLocatorInterface $serviceLocator)
     {
         $entityManager = $serviceLocator->get('doctrine.entitymanager.orm_default');
-
-        $languageService = $serviceLocator->get('LanguageService');
         $translator = $serviceLocator->get('MvcTranslator');
 
         $hydrator = new DoctrineHydrator($entityManager);

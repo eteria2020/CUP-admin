@@ -4,6 +4,7 @@ namespace Application\Form\Element;
 
 // Externals
 use Zend\Form\Element;
+use CrEOF\Spatial\PHP\Types\Geometry\GeometryInterface;
 
 class GeometryTextarea extends Element
 {
@@ -27,7 +28,7 @@ class GeometryTextarea extends Element
      */
     private function getJsonValue()
     {
-        if ($this->value instanceof \CrEOF\Spatial\PHP\Types\Geometry\GeometryInterface) {
+        if ($this->value instanceof GeometryInterface) {
             return $this->value->toJson();
         }
         return $this->value;

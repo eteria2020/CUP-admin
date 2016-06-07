@@ -29,6 +29,139 @@ $(function () {
 
     var format = new ol.format.GeoJSON();
 
+    var drawZone = function (zoneId) {
+        vectorSource.addFeature(zonesFC[zoneId]);
+    };
+
+    var removeZone = function (zoneId) {
+        vectorSource.removeFeature(zonesFC[zoneId]);
+    };
+
+    // The MAP
+    var OSM = new ol.layer.Tile({
+        source: new ol.source.OSM()
+    });
+
+    var style = {
+        "Point": [new ol.style.Style({
+            image: new ol.style.Circle({
+                fill: new ol.style.Fill({
+                    color: "rgba(255,255,0,0.4)"
+                }),
+                radius: 5,
+                stroke: new ol.style.Stroke({
+                    color: "#ff0",
+                    width: 1
+                })
+            })
+        })],
+        "LineString": [new ol.style.Style({
+            stroke: new ol.style.Stroke({
+                color: "#f00",
+                width: 3
+            })
+        })],
+        "Polygon": [new ol.style.Style({
+            fill: new ol.style.Fill({
+                color: 'rgba(67, 163, 76, 0.5)'
+            }),
+            stroke: new ol.style.Stroke({
+                color: 'red',
+                width: 2
+            })
+        })],
+        // Tracks
+        "MultiLineString": [new ol.style.Style({
+            stroke: new ol.style.Stroke({
+                color: "rgba(30,140,0,0.7)",
+                width: 5
+            })
+        })]
+    };
+
+    var resizeId;
+
+    var zonesLayer = new ol.layer.Vector({
+        source: vectorSource,
+        style:
+        function (feature) {
+            return style[feature.getGeometry().getType()];
+        }
+    });
+
+    var view = new ol.View({
+        // the view"s initial state
+        center: ol.proj.transform([9.185, 45.465], "EPSG:4326", "EPSG:3857"),
+        zoom: 12
+    });
+
+    var map = new ol.Map({
+        layers: [OSM, zonesLayer],
+        target: document.getElementById("map"),
+        interactions: ol.interaction.defaults({ mouseWheelZoom: false }),
+        controls: ol.control.defaults({
+            attributionOptions: /** @type {olx.control.AttributionOptions} */ ({
+                collapsible: false
+            })
+        }),
+        view: view
+    });
+
+    var doneResizing = function () {
+        var newHeight = $(window).height();
+        $(".map").css("height", newHeight - 280);
+        map.updateSize();
+    };
+
+    var renderTable = function (jXHRData) {
+        // Adding features to Feature Collection
+        $.each(jXHRData, function (key, val) {
+
+            var areaUse = val.e.areaUse;
+            var id = val.e.id;
+
+            if (typeof zonesFC[id] === "undefined") {
+                zonesFC[id] = new ol.Feature({
+                    geometry: format.readGeometry(areaUse, { featureProjection: 'EPSG:3857' })
+                });
+                zonesFC[id].setId(id);
+            }
+        });
+
+        // Adding the Bootstrap Switch on each record "view" button
+        $.each($("input.visualizza"), function (key, val) {
+            var id = $(val).data("id");
+
+            if (typeof switchCollection[id] === "undefined") {
+                switchCollection[id] = false;
+            }
+
+            $(val)
+                .bootstrapSwitch({
+                    state: switchCollection[id]
+                })
+                .on("switchChange.bootstrapSwitch",
+                function (event, state) {
+                    var zoneId = $(this).data("id");
+                    if (state) {
+                        switchCollection[id] = true;
+                        drawZone(zoneId);
+                    } else {
+                        switchCollection[id] = false;
+                        removeZone(zoneId);
+                    }
+                }
+                );
+        });
+
+        // Listen to Focus Button
+        $("a.focus").click(function () {
+            var zoneId = $(this).data("id");
+            var extent = zonesFC[zoneId].getGeometry().getExtent();
+            map.getView().fit(extent, map.getSize());
+        });
+    };
+
     dataTableVars.searchValue.val("");
     dataTableVars.column.val("select");
 
@@ -136,55 +269,6 @@ $(function () {
         }
     });
 
-    var renderTable = function (jXHRData) {
-        // Adding features to Feature Collection
-        $.each(jXHRData, function (key, val) {
-
-            var areaUse = val.e.areaUse;
-            var id = val.e.id;
-
-            if (typeof zonesFC[id] === "undefined") {
-                zonesFC[id] = new ol.Feature({
-                    geometry: format.readGeometry(areaUse, { featureProjection: 'EPSG:3857' })
-                });
-                zonesFC[id].setId(id);
-            }
-        });
-
-        // Adding the Bootstrap Switch on each record "view" button
-        $.each($("input.visualizza"), function (key, val) {
-            var id = $(val).data("id");
-
-            if (typeof switchCollection[id] === "undefined") {
-                switchCollection[id] = false;
-            }
-
-            $(val)
-                .bootstrapSwitch({
-                    state: switchCollection[id]
-                })
-                .on("switchChange.bootstrapSwitch",
-                function (event, state) {
-                    var zoneId = $(this).data("id");
-                    if (state) {
-                        switchCollection[id] = true;
-                        drawZone(zoneId);
-                    } else {
-                        switchCollection[id] = false;
-                        removeZone(zoneId);
-                    }
-                }
-                );
-        });
-
-        // Listen to Focus Button
-        $("a.focus").click(function () {
-            var zoneId = $(this).data("id");
-            var extent = zonesFC[zoneId].getGeometry().getExtent();
-            map.getView().fit(extent, map.getSize());
-        });
-    };
-
     $('#js-search').click(function () {
         table.fnFilter();
     });
@@ -194,103 +278,18 @@ $(function () {
         dataTableVars.column.val('select');
     });
 
-    ///// OpenStreetMap Section /////
-
-    // The MAP
-    var OSM = new ol.layer.Tile({
-        source: new ol.source.OSM()
-    });
-
-    var style = {
-        "Point": [new ol.style.Style({
-            image: new ol.style.Circle({
-                fill: new ol.style.Fill({
-                    color: "rgba(255,255,0,0.4)"
-                }),
-                radius: 5,
-                stroke: new ol.style.Stroke({
-                    color: "#ff0",
-                    width: 1
-                })
-            })
-        })],
-        "LineString": [new ol.style.Style({
-            stroke: new ol.style.Stroke({
-                color: "#f00",
-                width: 3
-            })
-        })],
-        "Polygon": [new ol.style.Style({
-            fill: new ol.style.Fill({
-                color: 'rgba(67, 163, 76, 0.5)'
-            }),
-            stroke: new ol.style.Stroke({
-                color: 'red',
-                width: 2
-            })
-        })],
-        // Tracks
-        "MultiLineString": [new ol.style.Style({
-            stroke: new ol.style.Stroke({
-                color: "rgba(30,140,0,0.7)",
-                width: 5
-            })
-        })]
-    };
-
     vectorSource = new ol.source.Vector({
         projection: "EPSG:3857",
         format: new ol.format.GeoJSON()
     });
 
-    var zonesLayer = new ol.layer.Vector({
-        source: vectorSource,
-        style:
-        function (feature) {
-            return style[feature.getGeometry().getType()];
-        }
-    });
-
-    var view = new ol.View({
-        // the view"s initial state
-        center: ol.proj.transform([9.185, 45.465], "EPSG:4326", "EPSG:3857"),
-        zoom: 12
-    });
-
-    var map = new ol.Map({
-        layers: [OSM, zonesLayer],
-        target: document.getElementById("map"),
-        interactions: ol.interaction.defaults({ mouseWheelZoom: false }),
-        controls: ol.control.defaults({
-            attributionOptions: /** @type {olx.control.AttributionOptions} */ ({
-                collapsible: false
-            })
-        }),
-        view: view
-    });
-
     vectorSource.addFeature(new ol.Feature(new ol.geom.Circle([5e6, 7e6], 1e6)));
 
-    var drawZone = function (zoneId) {
-        vectorSource.addFeature(zonesFC[zoneId]);
-    };
-
-    var removeZone = function (zoneId) {
-        vectorSource.removeFeature(zonesFC[zoneId]);
-    };
-
     // Window Resize Action Bind
-    var resizeId;
     $(window).resize(function () {
         clearTimeout(resizeId);
         resizeId = setTimeout(doneResizing, 500);
     });
-    var doneResizing = function () {
-        var newHeight = $(window).height();
-        $(".map").css("height", newHeight - 280);
-        map.updateSize();
-    };
-
     // Set to the map the current page height
     doneResizing();
 });
