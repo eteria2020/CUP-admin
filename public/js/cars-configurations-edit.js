@@ -1,4 +1,15 @@
 /* global dataTable:true, $:true, thisId, translate, confirm, document */
+var getColumns = function(data){
+    "use strict";
+
+    var array = [];
+    array.push({data: "id"});
+    $.each(data[0], function(key){
+        array.push({data: key});
+    });
+    array.push({data: "button"});
+    return array;
+};
 
 var renderDatatable = function(data){
     "use strict";
@@ -77,18 +88,6 @@ var renderDatatable = function(data){
     table.on("click", ".js-delete", function () {
         return confirm(translate("confirmCarConfigurationDelete"));
     });
-};
-
-var getColumns = function(data){
-    "use strict";
-
-    var array = [];
-    array.push({data: "id"});
-    $.each(data[0], function(key){
-        array.push({data: key});
-    });
-    array.push({data: "button"});
-    return array;
 };
 
 $(document).on("click", ".btn.edit", function() {
