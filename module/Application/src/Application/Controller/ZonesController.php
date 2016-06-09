@@ -5,6 +5,7 @@ namespace Application\Controller;
 use Application\Form\ZoneForm;
 use SharengoCore\Service\ZonesService;
 use SharengoCore\Service\PostGisService;
+use SharengoCore\Exception\KMLFileNotValidException;
 // Externals
 use Zend\Http\Response;
 use Zend\Mvc\Controller\AbstractActionController;
@@ -171,7 +172,19 @@ class ZonesController extends AbstractActionController
 
             // Check if the Area is KML file or GeoJSON string:
             if ($postData['zone']['useKmlFile']) {
-                $areaUseGeometry = $this->postGisService->getGeometryFromGeomKMLFile($postData['zone']['kmlUpload']['tmp_name']);
+                try{
+                    $areaUseGeometry = $this->postGisService->getGeometryFromGeomKMLFile($postData['zone']['kmlUpload']['tmp_name']);
+                } catch (RuntimeException $e) {
+                    $this->flashMessenger()->addErrorMessage($translator->translate('Non e\' stato possibile elaborare il file'));
+                    return $this->redirect()->toRoute('zones/edit', ['id' => $id]);
+                } catch (KMLFileNotValidException $e) {
+                    $this->flashMessenger()->addErrorMessage($translator->translate('Il file fornito non e\' un valido KML'));
+                    return $this->redirect()->toRoute('zones/edit', ['id' => $id]);
+                } catch (\Exception $e) {
+                    $this->flashMessenger()
+                        ->addErrorMessage($translator->translate('Si è verificato un errore applicativo.'));
+	                return $this->redirect()->toRoute('zones/edit', ['id' => $id]);
+                }
             } else {
                 $areaUseGeometry = $this->postGisService->getGeometryFromGeoJson($postData['zone']['areaUse']);
             }
