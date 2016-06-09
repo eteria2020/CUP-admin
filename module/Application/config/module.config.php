@@ -9,6 +9,10 @@ namespace Application;
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
 $translator = new \Zend\I18n\Translator\Translator;
+
+// Getting the siteroot path ( = sharengo-admin folder)
+$baseDir = realpath(__DIR__.'/../../../');
+
 return [
     'router' => [
         'routes' => [
@@ -799,21 +803,21 @@ return [
                     'defaults' => [
                         'controller' => 'Application\Controller\Zones',
                         'action' => 'index'
-                    ]
+                    ],
                 ],
                 'may_terminate' => true,
                 'child_routes' => [
-                    'ajax-tab-trip' => [
-                        'type'    => 'Literal',
+                    'ajax-tab-list' => [
+                        'type' => 'Literal',
                         'options' => [
-                            'route' => '/ajax-tab-trip',
+                            'route' => '/ajax-tab-list',
                             'defaults' => [
-                                'action' => 'trip-tab',
+                                'action' => 'list-tab',
                             ],
                         ],
                     ],
                     'zone-alarms' => [
-                        'type'    => 'Literal',
+                        'type' => 'Literal',
                         'options' => [
                             'route' => '/zone-alarms',
                             'defaults' => [
@@ -822,7 +826,7 @@ return [
                         ],
                     ],
                     'ajax-tab-groups' => [
-                        'type'    => 'Literal',
+                        'type' => 'Literal',
                         'options' => [
                             'route' => '/ajax-tab-groups',
                             'defaults' => [
@@ -831,11 +835,32 @@ return [
                         ],
                     ],
                     'ajax-tab-prices' => [
-                        'type'    => 'Literal',
+                        'type' => 'Literal',
                         'options' => [
                             'route' => '/ajax-tab-prices',
                             'defaults' => [
                                 'action' => 'prices-tab',
+                            ],
+                        ],
+                    ],
+                    'datatable' => [
+                        'type' => 'Literal',
+                        'options' => [
+                            'route' => '/datatable',
+                            'defaults' => [
+                                'action' => 'datatable',
+                            ],
+                        ],
+                    ],
+                    'edit' => [
+                        'type' => 'Segment',
+                        'options' => [
+                            'route' => '/edit/:id',
+                            'constraints' => [
+                                'id' => '[0-9]*'
+                            ],
+                            'defaults' => [
+                                'action' => 'edit',
                             ],
                         ],
                     ],
@@ -1135,8 +1160,41 @@ return [
             'EditTripForm' => 'Application\Form\EditTripFormFactory',
             'ConfigurationsForm' => 'Application\Form\ConfigurationsFormFactory',
             'ChangeLanguageDetector.listener' => 'Application\Listener\ChangeLanguageDetectorFactory',
-
+            'ZoneForm' => 'Application\Form\ZoneFormFactory',
         ]
+    ],
+    'asset_manager' => [
+        'resolver_configs' => [
+            'collections' => [
+                'assets-modules/js/vendor.zones.js' => [
+                    // Libs
+                    'ol3/ol.js',
+                    'bootstrap-switch/dist/js/bootstrap-switch.js',
+                ],
+                'assets-modules/css/vendor.zones.css' => [
+                    // Libs
+                    'ol3/ol.css',
+                    'bootstrap-switch/dist/css/bootstrap3/bootstrap-switch.css',
+                ],
+            ],
+            'paths' => [
+                $baseDir.'/bower_components',
+            ],
+        ],
+        'filters' => [
+            // Minify All JS
+            'js' => [
+                [
+                    'filter' => 'JSMin',
+                ],
+            ],
+            // Minify All CSS
+            'css' => [
+                [
+                    'filter' => 'CssMin',
+                ],
+            ],
+        ],
     ],
     'controllers' => [
         'invokables' => [

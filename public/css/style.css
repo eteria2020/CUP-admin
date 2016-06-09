@@ -56,3 +56,22 @@ div.container a.brand {
 .validation-btn-info {
     margin-bottom: 2px;
 }
+
+/****
+Utils
+****/
+table .glyphicon.glyphicon-ok{
+  color: #15A96E;
+}
+
+table .glyphicon.glyphicon-remove{
+  color: #cc1d1d;
+}
+
+/****
+Bootstrap Switch Plugin
+****/
+div.bootstrap-switch{
+    float: left;
+    margin-right: 5px;
+}
