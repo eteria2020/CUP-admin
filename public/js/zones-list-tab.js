@@ -81,6 +81,11 @@ $(function () {
 
     var resizeId;
 
+    vectorSource = new ol.source.Vector({
+        projection: "EPSG:3857",
+        format: new ol.format.GeoJSON()
+    });
+
     var zonesLayer = new ol.layer.Vector({
         source: vectorSource,
         style:
@@ -106,12 +111,6 @@ $(function () {
         }),
         view: view
     });
-
-    var doneResizing = function () {
-        var newHeight = $(window).height();
-        $(".map").css("height", newHeight - 280);
-        map.updateSize();
-    };
 
     var renderTable = function (jXHRData) {
         // Adding features to Feature Collection
@@ -278,12 +277,13 @@ $(function () {
         dataTableVars.column.val('select');
     });
 
-    vectorSource = new ol.source.Vector({
-        projection: "EPSG:3857",
-        format: new ol.format.GeoJSON()
-    });
-
     vectorSource.addFeature(new ol.Feature(new ol.geom.Circle([5e6, 7e6], 1e6)));
+
+    var doneResizing = function () {
+        var newHeight = $(window).height();
+        $(".map").css("height", newHeight - 280);
+        map.updateSize();
+    };
 
     // Window Resize Action Bind
     $(window).resize(function () {
