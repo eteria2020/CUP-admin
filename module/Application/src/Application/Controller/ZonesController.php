@@ -13,6 +13,7 @@ use Zend\View\Model\ViewModel;
 use Zend\View\Model\JsonModel;
 use Zend\Stdlib\Hydrator\HydratorInterface;
 use Zend\Session\Container;
+use Zend\Config\Exception\RuntimeException;
 
 class ZonesController extends AbstractActionController
 {
@@ -25,7 +26,7 @@ class ZonesController extends AbstractActionController
      * @var PostGisService
      */
     private $postGisService;
-    
+
     /**
      * @var HydratorInterface
      */
@@ -160,7 +161,6 @@ class ZonesController extends AbstractActionController
         $request = $this->getRequest();
 
         if ($request->isPost()) {
-
             // Merge post data with post file.
             $postData = array_merge_recursive(
                 $request->getPost()->toArray(),
@@ -172,7 +172,7 @@ class ZonesController extends AbstractActionController
 
             // Check if the Area is KML file or GeoJSON string:
             if ($postData['zone']['useKmlFile']) {
-                try{
+                try {
                     $areaUseGeometry = $this->postGisService->getGeometryFromGeomKMLFile($postData['zone']['kmlUpload']['tmp_name']);
                 } catch (RuntimeException $e) {
                     $this->flashMessenger()->addErrorMessage($translator->translate('Non e\' stato possibile elaborare il file'));
@@ -183,7 +183,7 @@ class ZonesController extends AbstractActionController
                 } catch (\Exception $e) {
                     $this->flashMessenger()
                         ->addErrorMessage($translator->translate('Si è verificato un errore applicativo.'));
-	                return $this->redirect()->toRoute('zones/edit', ['id' => $id]);
+                    return $this->redirect()->toRoute('zones/edit', ['id' => $id]);
                 }
             } else {
                 $areaUseGeometry = $this->postGisService->getGeometryFromGeoJson($postData['zone']['areaUse']);
