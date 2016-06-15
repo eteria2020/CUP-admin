@@ -84,7 +84,7 @@ $(function () {
         "pageLength": dataTableVars.iDisplayLength,
         "pagingType": "bootstrap_full_number",
         "language": {
-            "sEmptyTable": translate("sCarsEmptyTable"),
+            "sEmptyTable": translate("sCarsConfigurationsEmptyTable"),
             "sInfo": translate("sInfo"),
             "sInfoEmpty": translate("sInfoEmpty"),
             "sInfoFiltered": translate("sInfoFiltered"),
@@ -124,7 +124,7 @@ $(function () {
         return confirm(translate("confirmCarConfigurationDelete"));
     });
 
-    $(dataTableVars.column).change(function () {
+    $(dataTableVars.column).change(function() {
         var value = $(this).val();
         if (value === "c.plate" || value === "f.name" || value === "e.model" || value === "e.key" || value === "e.value") {
             filterWithoutLike = false;

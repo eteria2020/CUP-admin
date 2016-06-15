@@ -70,11 +70,11 @@ $(function () {
                 sortable: false,
                 render: function (data) {
                     return "<div class=\"btn-group\"><a href=\"/cars-configurations/details/" +
-                        data + "\" class=\"btn btn-default\">" + translate("Dettagli") +
+                        data + "\" class=\"btn btn-default\">" + translate("details") +
                         "</a><a href=\"/cars-configurations/edit/" +
-                        data + "\" class=\"btn btn-default\">" + translate("Modifica") +
+                        data + "\" class=\"btn btn-default\">" + translate("modify") +
                         "</a><a href=\"/cars-configurations/delete/" +
-                        data + "\" class=\"btn btn-default js-delete\">" + translate("Elimina") + "</a></div>";
+                        data + "\" class=\"btn btn-default js-delete\">" + translate("delete") + "</a></div>";
                 }
             }
         ],
@@ -85,7 +85,7 @@ $(function () {
         "pageLength": dataTableVars.iDisplayLength,
         "pagingType": "bootstrap_full_number",
         "language": {
-            "sEmptyTable": translate("sCarsEmptyTable"),
+            "sEmptyTable": translate("sCarsConfigurationsEmptyTable"),
             "sInfo": translate("sInfo"),
             "sInfoEmpty": translate("sInfoEmpty"),
             "sInfoFiltered": translate("sInfoFiltered"),
@@ -125,7 +125,7 @@ $(function () {
         return confirm(translate("confirmCarConfigurationDelete"));
     });
 
-    $(dataTableVars.column).change(function () {
+    $(dataTableVars.column).change(function() {
         var value = $(this).val();
         if (value === "c.plate" || value === "e.key") {
             filterWithoutLike = false;
