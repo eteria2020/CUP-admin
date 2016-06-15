@@ -18,7 +18,7 @@ $(function () {
     var columnWithoutLike = false;
     var columnValueWithoutLike = false;
 
-    dataTableVars.searchValue.val("");
+    dataTableVars.searchValue.val("").prop("disabled", true);
     dataTableVars.column.val("select");
 
     table.dataTable({

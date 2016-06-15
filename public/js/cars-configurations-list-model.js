@@ -18,7 +18,7 @@ $(function () {
     var columnWithoutLike = false;
     var columnValueWithoutLike = false;
 
-    dataTableVars.searchValue.val("");
+    dataTableVars.searchValue.val("").prop("disabled", true);
     dataTableVars.column.val("select");
 
     table.dataTable({
@@ -46,6 +46,8 @@ $(function () {
                 aoData.push({ "name": "column", "value": $(dataTableVars.column).val() });
                 aoData.push({ "name": "searchValue", "value": dataTableVars.searchValue.val().trim() });
             }
+            // Set the column that shouldn't be null.
+            aoData.push({ "name": "columnNotNull", "value": "e.model" });
         },
         "order": [[dataTableVars.iSortCol_0, dataTableVars.sSortDir_0]],
         "columns": [

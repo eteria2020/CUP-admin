@@ -18,7 +18,7 @@ $(function () {
     var columnWithoutLike = false;
     var columnValueWithoutLike = false;
 
-    dataTableVars.searchValue.val("");
+    dataTableVars.searchValue.val("").prop("disabled", true);
     dataTableVars.column.val("select");
 
     table.dataTable({
@@ -126,7 +126,7 @@ $(function () {
 
     $(dataTableVars.column).change(function () {
         var value = $(this).val();
-        if (value === "e.plate" || value === "f.name" || value === "cc.model" || value === "cc.key") {
+        if (value === "c.plate" || value === "f.name" || value === "e.model" || value === "e.key" || value === "e.value") {
             filterWithoutLike = false;
             dataTableVars.searchValue.val("");
             dataTableVars.searchValue.prop("disabled", false);
