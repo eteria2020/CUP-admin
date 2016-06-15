@@ -8,7 +8,6 @@ use Zend\Mvc\I18n\Translator;
 
 /**
  * Class RadioSetupForm
- * @package Application\Form
  */
 class RadioSetupForm extends Form
 {

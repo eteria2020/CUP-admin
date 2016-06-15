@@ -8,7 +8,6 @@ use Zend\Mvc\I18n\Translator;
 
 /**
  * Class UseExternalGpsForm
- * @package Application\Form
  */
 class UseExternalGPSForm extends Form
 {

@@ -121,18 +121,14 @@ class CarsConfigurationsController extends AbstractActionController
 
     /**
      * This method print the a detail action for a given CarConfiguration Id number.
-     *
-     * @param (from route) 'id' int
+     * @return ViewModel
      */
     public function detailsAction()
     {
         $id = $this->params()->fromRoute('id', 0);
 
         $carConfiguration = $this->carsConfigurationsService->getCarConfigurationById($id);
-        $key = $carConfiguration->getKey();
-        $value = $carConfiguration->getValue();
-
-        $configurationClass = CarsConfigurationsFactory::create($key, $value, $this->translator);
+        $configurationClass = CarsConfigurationsFactory::createFromCarConfiguration($carConfiguration, $this->translator);
 
         $hasMultipleValues = $configurationClass->hasMultipleValues();
 
@@ -148,14 +144,13 @@ class CarsConfigurationsController extends AbstractActionController
     public function addAction()
     {
         $form = $this->carsConfigurationsForm;
-        $form->setFleets($this->fleetService->getAllFleets());
 
         if ($this->getRequest()->isPost()) {
             $postData = $this->getRequest()->getPost()->toArray();
             $form->setData($postData);
 
             if ($form->isValid()) {
-                // The Car Configuration form is valid, now we need to initialize the 
+                // The Car Configuration form is valid, now we need to initialize the
                 // value of the new configuration.
                 // This can be done by the configuration Class.
 
@@ -197,7 +192,7 @@ class CarsConfigurationsController extends AbstractActionController
         $id = $this->params()->fromRoute('id', 0);
         $carConfiguration = $this->carsConfigurationsService->getCarConfigurationById($id);
 
-        $configurationClass = CarsConfigurationsFactory::create($carConfiguration->getKey(), $carConfiguration->getValue(), $this->translator);
+        $configurationClass = CarsConfigurationsFactory::createFromCarConfiguration($carConfiguration, $this->translator);
 
         /** @var  CarsConfigurations $form */
         $form = $configurationClass->getForm();
@@ -206,6 +201,7 @@ class CarsConfigurationsController extends AbstractActionController
         if ($hasMultipleValues) {
             $indexedValues = $configurationClass->getIndexedValues();
         } else {
+            $indexedValues = [];
             $form->setData([$carConfiguration->getKey() => $carConfiguration->getValue()]);
         }
 
@@ -233,7 +229,7 @@ class CarsConfigurationsController extends AbstractActionController
             'form' => $form,
             'thisId' => $id,
             'hasMultipleValues' => $hasMultipleValues,
-            'indexedValues' => ($hasMultipleValues ? $indexedValues : []),
+            'indexedValues' => $indexedValues,
         ]);
         return $view;
     }
@@ -245,7 +241,7 @@ class CarsConfigurationsController extends AbstractActionController
         /** @var CarsConfigurations $carConfiguration */
         $carConfiguration = $this->carsConfigurationsService->getCarConfigurationById($id);
 
-        if (is_null($carConfiguration)) {
+        if (!$carConfiguration instanceof CarsConfigurations) {
             $this->getResponse()->setStatusCode(Response::STATUS_CODE_404);
             return false;
         }
@@ -273,7 +269,7 @@ class CarsConfigurationsController extends AbstractActionController
         $carConfiguration = $this->carsConfigurationsService->getCarConfigurationById($id);
 
         // Get the configuration helper class.
-        $configurationClass = CarsConfigurationsFactory::create($carConfiguration->getKey(), $carConfiguration->getValue(), $this->translator);
+        $configurationClass = CarsConfigurationsFactory::createFromCarConfiguration($carConfiguration, $this->translator);
 
         // Get the indexed options of the configuration
         $options = $configurationClass->getIndexedValues();
@@ -308,7 +304,10 @@ class CarsConfigurationsController extends AbstractActionController
     }
 
     /**
-     * @return Json
+     * This method return a JSON containing the configuration value
+     * of a specific option, from a given option "id" key.
+     *
+     * @return JsonModel
      */
     public function ajaxGetOptionAction()
     {
@@ -322,7 +321,7 @@ class CarsConfigurationsController extends AbstractActionController
         $carConfiguration = $this->carsConfigurationsService->getCarConfigurationById($id);
 
         // Get the configuration helper class.
-        $configurationClass = CarsConfigurationsFactory::create($carConfiguration->getKey(), $carConfiguration->getValue(), $this->translator);
+        $configurationClass = CarsConfigurationsFactory::createFromCarConfiguration($carConfiguration, $this->translator);
 
         // Get the indexed options of the configuration
         $options = $configurationClass->getIndexedValues();
@@ -335,10 +334,7 @@ class CarsConfigurationsController extends AbstractActionController
             }
         }
 
-        // So, we don't need to use a JsonModel,but simply use an Http Response
-        $this->getResponse()->setContent(json_encode($foundOption));
-
-        return $this->getResponse();
+        return new JsonModel($foundOption);
     }
 
     protected function _getRecordsFiltered($filters, $totalCarsConfigurations)
@@ -347,7 +343,7 @@ class CarsConfigurationsController extends AbstractActionController
             return $totalCarsConfigurations;
         } else {
             $filters['withLimit'] = false;
-            return $this->carsCinfigurationsService->getDataDataTable($filters, true);
+            return $this->carsConfigurationsService->getDataDataTable($filters, true);
         }
     }
 }

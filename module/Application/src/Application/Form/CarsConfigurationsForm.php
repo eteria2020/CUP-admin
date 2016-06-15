@@ -9,12 +9,12 @@ use Zend\Form\Form;
 
 class CarsConfigurationsForm extends Form
 {
-    public function __construct(CarsConfigurationsFieldset $userFieldset)
+    public function __construct(CarsConfigurationsFieldset $carConfigurationFieldset)
     {
         parent::__construct('carsConfigurations');
         $this->setAttribute('id', 'carsConfigurationsForm');
 
-        $this->add($userFieldset);
+        $this->add($carConfigurationFieldset);
 
         $this->add([
             'name' => 'submit',
@@ -23,18 +23,5 @@ class CarsConfigurationsForm extends Form
                 'value' => 'Submit'
             ]
         ]);
-    }
-
-    /*
-     * @param array $fleets list of Fleet instances
-     */
-    public function setFleets(array $fleets)
-    {
-        $fleetsPlainArray = $this->get('carsConfigurations')->get('fleet')->getValueOptions();
-        foreach ($fleets as $fleet) {
-            $fleetsPlainArray[$fleet->getId()] = $fleet->getName();
-        }
-
-        $this->get('carsConfigurations')->get('fleet')->setValueOptions($fleetsPlainArray);
     }
 }

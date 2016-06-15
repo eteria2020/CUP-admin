@@ -20,4 +20,13 @@ class CarsConfigurationsFactory
 
         //@todo return new GenericConfigClass
     }
+
+    public static function createFromCarConfiguration($carConfiguration, Translator $translator)
+    {
+        return self::create(
+            $carConfiguration->getKey(),
+            $carConfiguration->getValue(),
+            $translator
+        );
+    }
 }

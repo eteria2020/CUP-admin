@@ -8,7 +8,6 @@ use Zend\Mvc\I18n\Translator;
 
 /**
  * Class BatteryAlarmSMSNumbersForm
- * @package Application\Form
  */
 class BatteryAlarmSMSNumbersForm extends Form
 {

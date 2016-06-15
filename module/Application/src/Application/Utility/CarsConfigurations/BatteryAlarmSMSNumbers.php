@@ -10,7 +10,7 @@ use Zend\Mvc\I18n\Translator;
 class BatteryAlarmSMSNumbers implements CarsConfigurationsInterface
 {
     /**
-     * @var string
+     * @var array
      */
     private $value;
 
@@ -79,27 +79,29 @@ class BatteryAlarmSMSNumbers implements CarsConfigurationsInterface
         unset($data['id']);
 
         // Get the complete record object
-        $configuration = $this->getIndexedValues();
-        $configurationUpdated = [];
+        $configurationOptions = $this->getIndexedValues();
+        $configurationOptionsUpdated = [];
 
         $newConfiguration = true;
-        
+
         // Update the sepecific radio
-        foreach ($configuration as &$number) {
+        foreach ($configurationOptions as &$number) {
             if ($number['id'] === $id) {
                 $number = $data;
                 $newConfiguration = false;
             }
-            array_push($configurationUpdated, $number['number']);
+            array_push($configurationOptionsUpdated, $number['number']);
         }
 
         if ($newConfiguration) {
             // If this is a new configuration, we save it.
-            array_push($configurationUpdated, $data['number']);
+            array_push($configurationOptionsUpdated, $data['number']);
         }
 
+        $this->value = $configurationOptionsUpdated;
+
         // Recompose the json string.
-        return $this->getRawValue($configurationUpdated);
+        return $this->getRawValue();
     }
 
     public function getIndexedValues()

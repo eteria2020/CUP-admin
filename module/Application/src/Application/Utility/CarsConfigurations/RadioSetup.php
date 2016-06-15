@@ -79,12 +79,12 @@ class RadioSetup implements CarsConfigurationsInterface
         unset($data['id']);
 
         // Get the complete record object
-        $configuration = $this->getIndexedValues();
+        $configurationOptions = $this->getIndexedValues();
 
         $newConfiguration = true;
 
         // Update the sepecific radio
-        foreach ($configuration as &$radio) {
+        foreach ($configurationOptions as &$radio) {
             if ($radio['id'] === $id) {
                 $radio = $data;
                 $newConfiguration = false;
@@ -95,11 +95,13 @@ class RadioSetup implements CarsConfigurationsInterface
 
         if ($newConfiguration) {
             // If this is a new configuration, we save it.
-            array_push($configuration, $data);
+            array_push($configurationOptions, $data);
         }
 
+        $this->value = $configurationOptions;
+
         // Recompose the json string.
-        return $this->getRawValue($configuration);
+        return $this->getRawValue();
     }
 
     public function getIndexedValues()

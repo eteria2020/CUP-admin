@@ -4,6 +4,7 @@ namespace Application\Form;
 
 // Internals
 use SharengoCore\Entity\CarsConfigurations;
+use SharengoCore\Service\FleetService;
 // Externals
 use Zend\Form\Fieldset;
 use Zend\InputFilter\InputFilterProviderInterface;
@@ -18,6 +19,7 @@ class CarsConfigurationsFieldset extends Fieldset implements InputFilterProvider
 {
     public function __construct(
         Translator $translator,
+        FleetService $fleetService,
         HydratorInterface $hydrator
     ) {
         parent::__construct('carsConfigurations', [
@@ -43,9 +45,10 @@ class CarsConfigurationsFieldset extends Fieldset implements InputFilterProvider
                 'class' => 'form-control',
             ],
             'options' => [
-                'value_options' => [
-                    '' => $translator->translate('- Non Specificata -'),
-                ]
+                'value_options' => array_merge(
+                    [ '' => $translator->translate('- Non Specificata -') ],
+                    $fleetService->getFleetsSelectorArray()
+                )
             ]
         ]);
 
@@ -88,7 +91,7 @@ class CarsConfigurationsFieldset extends Fieldset implements InputFilterProvider
             ],
         ]);
     }
-    
+
     public function getInputFilterSpecification()
     {
         return [

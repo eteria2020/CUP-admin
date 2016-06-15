@@ -8,7 +8,6 @@ use Zend\Mvc\I18n\Translator;
 
 /**
  * Class DefaultCityForm
- * @package Application\Form
  */
 class DefaultCityForm extends Form
 {
