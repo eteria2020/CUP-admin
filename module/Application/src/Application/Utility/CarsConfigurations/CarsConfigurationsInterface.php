@@ -46,6 +46,14 @@ interface CarsConfigurationsInterface
     public function setValue($value);
 
     /**
+     * This method set the configuration instance value From
+     * a give Raw Value.
+     *
+     * @param mixed $rawValue
+     */
+    public function setFromRawValue($rawValue);
+
+    /**
      * This method return a the RAW (string) value of the configuration,
      * as saved in the CarsConfigurations instance.
      *
@@ -69,14 +77,12 @@ interface CarsConfigurationsInterface
     public function hasMultipleValues();
 
     /**
-     * This method return a string containing the value
-     * field, updated with the data present into $data param.
+     * This method update the value with the data present into $data param.
      * 
      * @param array $data   The array containing the updated data from the edit form.
      *                      Example: [ "name" => "radioDeejay" , "volume" => 3 , ... ] for a radio setup
-     * @return string
      */
-    public function getValueFromForm(array $data);
+    public function updateValue(array $data);
 
     /**
      * This method return an indexed values array.
@@ -86,5 +92,13 @@ interface CarsConfigurationsInterface
      *
      * return mixed
      */
-    public function getIndexedValues();
+    public function getIndexedValueOptions();
+
+    /**
+     * This method delete an option from the value property.
+     * This method is valid only on class with "$this->hasMultipleValues() = true"
+     * 
+     * @param mixed $optionId  The option id to be deleted.
+     */
+    public function deleteValueOption($optionId);
 }

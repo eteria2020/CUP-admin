@@ -29,7 +29,7 @@ class RadioSetup implements CarsConfigurationsInterface
         $rawValue,
         Translator $translator
     ) {
-        $this->setValue(json_decode($rawValue, true));
+        $this->setFromRawValue($rawValue);
         $this->translator = $translator;
     }
 
@@ -62,6 +62,11 @@ class RadioSetup implements CarsConfigurationsInterface
         $this->value = $value;
     }
 
+    public function setFromRawValue($rawValue)
+    {
+        $this->value = json_decode($rawValue, true);
+    }
+
     public function getRawValue()
     {
         return json_encode($this->value);
@@ -72,14 +77,14 @@ class RadioSetup implements CarsConfigurationsInterface
         return '[{"volume":"0","name":"Radio1","frequency":"0.0","band":"FM"},{"volume":0,"name":"Radio2","frequency":0.0,"band":"FM"},{"volume":0,"name":"Radio3","frequency":0.0,"band":"FM"},{"volume":0,"name":"Radio4","frequency":0.0,"band":"FM"}]';
     }
 
-    public function getValueFromForm(array $data)
+    public function updateValue(array $data)
     {
         // Extract the radio configuration id.
         $id = $data['id'];
         unset($data['id']);
 
         // Get the complete record object
-        $configurationOptions = $this->getIndexedValues();
+        $configurationOptions = $this->getIndexedValueOptions();
 
         $newConfiguration = true;
 
@@ -98,13 +103,10 @@ class RadioSetup implements CarsConfigurationsInterface
             array_push($configurationOptions, $data);
         }
 
-        $this->value = $configurationOptions;
-
-        // Recompose the json string.
-        return $this->getRawValue();
+        $this->setValue($configurationOptions);
     }
 
-    public function getIndexedValues()
+    public function getIndexedValueOptions()
     {
         // Get the complete record object
         $configurations = $this->getValue();
@@ -114,5 +116,21 @@ class RadioSetup implements CarsConfigurationsInterface
         }
 
         return $configurations;
+    }
+
+    public function deleteValueOption($optionId)
+    {
+        // Get the complete record object
+        $configurationOptions = $this->getIndexedValueOptions();
+        $configurationOptionsUpdated = [];
+
+        // Remove the sepecific option
+        foreach ($configurationOptions as $key => &$option) {
+            if ($option['id'] !== $optionId) {
+                array_push($configurationOptionsUpdated, $option);
+            }
+        }
+
+        $this->setValue($configurationOptionsUpdated);
     }
 }

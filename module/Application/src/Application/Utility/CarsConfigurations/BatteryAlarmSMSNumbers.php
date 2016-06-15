@@ -29,7 +29,7 @@ class BatteryAlarmSMSNumbers implements CarsConfigurationsInterface
         $rawValue,
         Translator $translator
     ) {
-        $this->setValue(json_decode($rawValue, true));
+        $this->setFromRawValue($rawValue);
         $this->translator = $translator;
     }
 
@@ -62,6 +62,11 @@ class BatteryAlarmSMSNumbers implements CarsConfigurationsInterface
         $this->value = $value;
     }
 
+    public function setFromRawValue($rawValue)
+    {
+        $this->value = json_decode($rawValue, true);
+    }
+
     public function getRawValue()
     {
         return json_encode($this->value);
@@ -72,14 +77,14 @@ class BatteryAlarmSMSNumbers implements CarsConfigurationsInterface
         return ['3333333333'];
     }
 
-    public function getValueFromForm(array $data)
+    public function updateValue(array $data)
     {
         // Extract the radio configuration id.
         $id = $data['id'];
         unset($data['id']);
 
         // Get the complete record object
-        $configurationOptions = $this->getIndexedValues();
+        $configurationOptions = $this->getIndexedValueOptions();
         $configurationOptionsUpdated = [];
 
         $newConfiguration = true;
@@ -98,13 +103,10 @@ class BatteryAlarmSMSNumbers implements CarsConfigurationsInterface
             array_push($configurationOptionsUpdated, $data['number']);
         }
 
-        $this->value = $configurationOptionsUpdated;
-
-        // Recompose the json string.
-        return $this->getRawValue();
+        $this->setValue($configurationOptionsUpdated);
     }
 
-    public function getIndexedValues()
+    public function getIndexedValueOptions()
     {
         // Get the complete record object
         $configurations = $this->getValue();
@@ -116,5 +118,21 @@ class BatteryAlarmSMSNumbers implements CarsConfigurationsInterface
             ];
         }
         return $configurations;
+    }
+
+    public function deleteValueOption($optionId)
+    {
+        // Get the complete record object
+        $configurationOptions = $this->getIndexedValueOptions();
+        $configurationOptionsUpdated = [];
+
+        // Remove the sepecific option
+        foreach ($configurationOptions as $key => &$option) {
+            if ($option['id'] !== $optionId) {
+                array_push($configurationOptionsUpdated, $option['number']);
+            }
+        }
+
+        $this->setValue($configurationOptionsUpdated);
     }
 }

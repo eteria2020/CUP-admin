@@ -29,7 +29,7 @@ class UseExternalGPS implements CarsConfigurationsInterface
         $rawValue,
         Translator $translator
     ) {
-        $this->setValue(json_decode($rawValue, true));
+        $this->setFromRawValue($rawValue);
         $this->translator = $translator;
     }
 
@@ -58,6 +58,11 @@ class UseExternalGPS implements CarsConfigurationsInterface
         $this->value = $value;
     }
 
+    public function setFromRawValue($rawValue)
+    {
+        $this->value = json_decode($rawValue, true);
+    }
+
     public function getRawValue()
     {
         return (string) $this->value;
@@ -68,13 +73,15 @@ class UseExternalGPS implements CarsConfigurationsInterface
         return true;
     }
 
-    public function getValueFromForm(array $data)
+    public function updateValue(array $data)
     {
-        return $data['UseExternalGPS'];
+        $this->setFromRawValue($data['UseExternalGPS']);
     }
 
-    public function getIndexedValues()
+    public function getIndexedValueOptions()
     {
         return $this->value;
     }
+
+    public function deleteValueOption($optionId) {}
 }

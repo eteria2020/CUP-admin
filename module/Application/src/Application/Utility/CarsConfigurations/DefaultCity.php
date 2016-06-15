@@ -29,7 +29,7 @@ class DefaultCity implements CarsConfigurationsInterface
         $rawValue,
         Translator $translator
     ) {
-        $this->setValue($rawValue);
+        $this->setFromRawValue($rawValue);
         $this->translator = $translator;
     }
 
@@ -58,6 +58,11 @@ class DefaultCity implements CarsConfigurationsInterface
         $this->value = $value;
     }
 
+    public function setFromRawValue($rawValue)
+    {
+        $this->setValue($rawValue);
+    }
+
     public function getRawValue()
     {
         return (string) $this->value;
@@ -68,13 +73,15 @@ class DefaultCity implements CarsConfigurationsInterface
         return 'Milano';
     }
 
-    public function getValueFromForm(array $data)
+    public function updateValue(array $data)
     {
-        return $data['DefaultCity'];
+        $this->setValue($data['DefaultCity']);
     }
 
-    public function getIndexedValues()
+    public function getIndexedValueOptions()
     {
         return $this->value;
     }
+
+    public function deleteValueOption($optionId) {}
 }

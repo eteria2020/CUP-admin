@@ -135,7 +135,7 @@ class CarsConfigurationsController extends AbstractActionController
         return new ViewModel([
             'configuration' => $carConfiguration,
             'hasMultipleValues' => $hasMultipleValues,
-            'indexedValues' => $configurationClass->getIndexedValues(),
+            'indexedValues' => $configurationClass->getIndexedValueOptions(),
             'formattedValue' => $configurationClass->getOverview(),
             'thisId' => $id,
         ]);
@@ -199,7 +199,7 @@ class CarsConfigurationsController extends AbstractActionController
 
         $hasMultipleValues = $configurationClass->hasMultipleValues();
         if ($hasMultipleValues) {
-            $indexedValues = $configurationClass->getIndexedValues();
+            $indexedValues = $configurationClass->getIndexedValueOptions();
         } else {
             $indexedValues = [];
             $form->setData([$carConfiguration->getKey() => $carConfiguration->getValue()]);
@@ -212,7 +212,8 @@ class CarsConfigurationsController extends AbstractActionController
 
             if ($form->isValid()) {
                 try {
-                    $this->carsConfigurationsService->save($carConfiguration, $configurationClass->getValueFromForm($postData));
+                    $configurationClass->updateValue($postData);
+                    $this->carsConfigurationsService->save($carConfiguration, $configurationClass->getRawValue());
                     $this->flashMessenger()->addSuccessMessage($this->translator->translate('Configurazione modificata con successo!'));
                 } catch (\Exception $e) {
                     $this->flashMessenger()
@@ -271,25 +272,8 @@ class CarsConfigurationsController extends AbstractActionController
         // Get the configuration helper class.
         $configurationClass = CarsConfigurationsFactory::createFromCarConfiguration($carConfiguration, $this->translator);
 
-        // Get the indexed options of the configuration
-        $options = $configurationClass->getIndexedValues();
-
-        if (empty($options)) {
-            $this->getResponse()->setStatusCode(Response::STATUS_CODE_404);
-            return false;
-        }
-
-        // Remove the sepecific option
-        foreach ($options as $key => &$option) {
-            if ($option['id'] === $optionId) {
-                unset($options[$key]);
-            }
-            // Remove the index from the radio configuration
-            unset($option['id']);
-        }
-
         // Update the carConfiguration value
-        $configurationClass->setValue($options);
+        $configurationClass->deleteValueOption($optionId);
 
         try {
             // Finally save the updated CarConfiguration to the DB.
@@ -324,7 +308,7 @@ class CarsConfigurationsController extends AbstractActionController
         $configurationClass = CarsConfigurationsFactory::createFromCarConfiguration($carConfiguration, $this->translator);
 
         // Get the indexed options of the configuration
-        $options = $configurationClass->getIndexedValues();
+        $options = $configurationClass->getIndexedValueOptions();
 
         // Get the position of the option in the options array
         $foundOption = [];
