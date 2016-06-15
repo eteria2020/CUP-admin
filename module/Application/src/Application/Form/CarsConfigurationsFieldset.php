@@ -45,9 +45,8 @@ class CarsConfigurationsFieldset extends Fieldset implements InputFilterProvider
                 'class' => 'form-control',
             ],
             'options' => [
-                'value_options' => array_merge(
-                    [ '' => $translator->translate('- Non Specificata -') ],
-                    $fleetService->getFleetsSelectorArray()
+                'value_options' => $fleetService->getFleetsSelectorArray(
+                    [ '' => $translator->translate('- Non Specificata -') ]
                 )
             ]
         ]);

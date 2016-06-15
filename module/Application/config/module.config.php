@@ -1522,6 +1522,7 @@ return [
     'view_helpers'    => [
         'invokables' => [
             'CarStatus' => 'Application\View\Helper\CarStatus',
+            'CarConfigurationPriorityType' => 'Application\View\Helper\CarConfigurationPriorityType',
         ]
     ],
 
