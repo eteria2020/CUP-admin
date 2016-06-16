@@ -1,5 +1,8 @@
 #!/bin/bash
 
+#REPO_PREFIX="docker.mvlabs.it/"
+REPO_PREFIX=""
+
 function start() {
   # create networks
   for network in sharengo-front-tier sharengo-back-tier
@@ -21,7 +24,7 @@ function start() {
       --net="sharengo-back-tier" \
       -p 5432:5432 \
       -d \
-      docker.mvlabs.it/sharengo-postgres
+      ${REPO_PREFIX}sharengo-postgres
   
   else
     if [ $(container_running sharengo-postgres) -eq 0 ]
@@ -57,8 +60,8 @@ function start() {
      docker rm sharengo-frontend
   fi
 
-  admin_container_name=admin_sharengo-admin-nginx_1
-  public_container_name=public_sharengo-public-nginx_1
+  admin_container_name=admin-nginx
+  public_container_name=public-nginx
   if [ $(container_running $public_container_name) -eq 0 ]
   then
     # no public container found, fallback to admin container
@@ -70,7 +73,7 @@ function start() {
     --link $admin_container_name:admin \
     --link $public_container_name:public \
     --net sharengo-front-tier \
-    docker.mvlabs.it/sharengo-frontend
+    ${REPO_PREFIX}sharengo-frontend
   
   echo ""
   echo "To display application output please execute: "
