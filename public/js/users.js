@@ -1,5 +1,7 @@
 /* global $, filters:true, translate:true, getSessionVars:true */
 $(function() {
+    "use strict";
+
     // DataTable
     var table = $("#js-users-table");
 
@@ -60,18 +62,19 @@ $(function() {
                 searchable: false,
                 sortable: false,
                 render: function (data) {
-                    return '<a href="/users/edit/' + data + '" class="btn btn-sm btn-success">' + translate("modify") + '</a>';
+                    return "<a href=\"/users/edit/" + data + "\" class=\"btn btn-sm btn-success\">" +
+                    translate("modify") + "</a>";
                 }
             }
         ],
         "lengthMenu": [
-            [10, 20, 100],
-            [10, 20, 100]
+            [dataTableVars.iDisplayLength, 20, 100],
+            [dataTableVars.iDisplayLength, 20, 100]
         ],
         "pageLength": dataTableVars.iDisplayLength,
         "pagingType": "bootstrap_full_number",
         "language": {
-            "sEmptyTable": translate("sTripEmptyTable"),
+            "sEmptyTable": translate("sUserEmptyTable"),
             "sInfo": translate("sInfo"),
             "sInfoEmpty": translate("sInfoEmpty"),
             "sInfoFiltered": translate("sInfoFiltered"),
@@ -108,7 +111,6 @@ $(function() {
     });
 
     $(dataTableVars.column).change(function() {
-        var value = $(this).val();
         dataTableVars.searchValue.show();
         dataTableVars.searchValue.val("");
         filterWithNull = false;
