@@ -145,4 +145,29 @@ class EditTripController extends AbstractActionController
 
         return $view;
     }
+    
+    public function eventsTabAction()
+    {
+        $id = $this->params()->fromRoute('id', 0);
+
+        $trip = $this->tripsService->getTripById($id);
+
+        if (!$trip instanceof Trips) {
+            throw new TripNotFoundException();
+        }
+
+        $events = $this->eventsService->getEventsByTrip($trip);
+        
+        foreach ($events as $event) {
+            $eventType = $this->eventsTypesService->mapEvent($event);
+            $event->setEventType($eventType);
+        }
+
+        $view = new ViewModel([
+            'events' => $events
+        ]);
+        $view->setTerminal(true);
+
+        return $view;
+    }
 }

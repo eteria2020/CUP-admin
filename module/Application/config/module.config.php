@@ -659,6 +659,19 @@ return [
                             ]
                         ]
                     ],
+                    'events-tab' => [
+                        'type' => 'Segment',
+                        'options' => [
+                            'route' => '/tab/events/:id',
+                            'constraints' => [
+                                'id'    => '[0-9]*'
+                            ],
+                            'defaults' => [
+                                'controller' => 'EditTrip',
+                                'action' => 'events-tab'
+                            ]
+                        ]
+                    ],
                     'do-close' => [
                         'type' => 'Literal',
                         'options' => [
