@@ -17,7 +17,6 @@ class EditTripControllerFactory implements FactoryInterface
 
         $tripsService = $sharedServiceLocator->get('SharengoCore\Service\TripsService');
         $eventsService = $sharedServiceLocator->get('SharengoCore\Service\EventsService');
-        $eventsTypesService = $sharedServiceLocator->get('SharengoCore\Service\EventsTypesService');
         $editTripsService = $sharedServiceLocator->get('SharengoCore\Service\EditTripsService');
         $editTripForm = $sharedServiceLocator->get('EditTripForm');
         $eventManager = $sharedServiceLocator->get('EventLogger\EventManager\EventManager');
@@ -29,7 +28,6 @@ class EditTripControllerFactory implements FactoryInterface
             $editTripsService,
             $eventManager,
             $eventsService,
-            $eventsTypesService,
             $hydrator,
             $editTripForm
         );

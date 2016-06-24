@@ -11,7 +11,6 @@ use SharengoCore\Exception\EditTripWrongDateException;
 use SharengoCore\Exception\InvalidFormInputData;
 use SharengoCore\Exception\TripNotFoundException;
 use SharengoCore\Service\EventsService;
-use SharengoCore\Service\EventsTypesService;
 use SharengoCore\Service\TripCostComputerService;
 use SharengoCore\Service\TripsService;
 // Externals
@@ -43,11 +42,6 @@ class TripsController extends AbstractActionController
     private $eventsService;
 
     /**
-     * @var EventsTypesService
-     */
-    private $eventsTypesService;
-
-    /**
      * @var CloseTripDataFactory
      */
     private $closeTripDataFactory;
@@ -62,7 +56,6 @@ class TripsController extends AbstractActionController
         TripCostForm $tripCostForm,
         TripCostComputerService $tripCostComputerService,
         EventsService $eventsService,
-        EventsTypesService $eventsTypesService,
         CloseTripDataFactory $closeTripDataFactory,
         Container $datatableFiltersSessionContainer
     ) {
@@ -70,7 +63,6 @@ class TripsController extends AbstractActionController
         $this->tripCostForm = $tripCostForm;
         $this->tripCostComputerService = $tripCostComputerService;
         $this->eventsService = $eventsService;
-        $this->eventsTypesService = $eventsTypesService;
         $this->closeTripDataFactory = $closeTripDataFactory;
         $this->datatableFiltersSessionContainer = $datatableFiltersSessionContainer;
     }
@@ -205,11 +197,6 @@ class TripsController extends AbstractActionController
 
         $events = $this->eventsService->getEventsByTrip($trip);
 
-        foreach ($events as $event) {
-            $eventType = $this->eventsTypesService->mapEvent($event);
-            $event->setEventType($eventType);
-        }
-
         $view = new ViewModel([
             'trip' => $trip,
             'events' => $events
@@ -230,11 +217,6 @@ class TripsController extends AbstractActionController
         }
 
         $events = $this->eventsService->getEventsByTrip($trip);
-
-        foreach ($events as $event) {
-            $eventType = $this->eventsTypesService->mapEvent($event);
-            $event->setEventType($eventType);
-        }
 
         $view = new ViewModel();
         $view->setTemplate('partials/events-table.phtml');
