@@ -667,7 +667,6 @@ return [
                                 'id'    => '[0-9]*'
                             ],
                             'defaults' => [
-                                'controller' => 'EditTrip',
                                 'action' => 'events-tab'
                             ]
                         ]
