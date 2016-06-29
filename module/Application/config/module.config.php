@@ -1144,7 +1144,54 @@ return [
                         ]
                     ]
                 ]
-            ]
+            ],
+            'notifications' => [
+                'type' => 'Literal',
+                'options' => [
+                    'route' => '/notifications',
+                    'defaults' => [
+                        '__NAMESPACE__' => 'Application\Controller',
+                        'controller' => 'Notifications',
+                        'action' => 'index',
+                    ],
+                ],
+                'may_terminate' => true,
+                'child_routes' => [
+                    'details' => [
+                        'type' => 'Segment',
+                        'options' => [
+                            'route' => '/details/:id',
+                            'constraints' => [
+                                'id' => '[0-9]*'
+                            ],
+                            'defaults' => [
+                                'action' => 'details'
+                            ]
+                        ]
+                    ],
+                    'datatable' => [
+                        'type' => 'Literal',
+                        'options' => [
+                            'route' => '/datatable',
+                            'defaults' => [
+                                'action' => 'datatable',
+                            ],
+                        ],
+                    ],
+                    'ajax-acknowledgment' => [
+                        'type'    => 'Segment',
+                        'options' => [
+                            'route'    => '/acknowledgment/:id',
+                            'constraints' => [
+                                'id' => '[0-9]*'
+                            ],
+                            'defaults' => [
+                                'action' => 'ajax-acknowledgment',
+                            ],
+                        ],
+                    ],
+                ],
+            ],
         ],
     ],
     'service_manager' => [
@@ -1178,11 +1225,20 @@ return [
     'asset_manager' => [
         'resolver_configs' => [
             'collections' => [
+                // JavaScript
                 'assets-modules/js/vendor.zones.js' => [
                     // Libs
                     'ol3/ol.js',
                     'bootstrap-switch/dist/js/bootstrap-switch.js',
                 ],
+                'assets-modules/js/vendor.notifications.js' => [
+                    // Libs
+                    'moment/min/moment.min.js',
+                    'moment-timezone/builds/moment-timezone-with-data-2010-2020.min.js',
+                    // Code
+                    'assets-modules/application/js/notifications.js',
+                ],
+                // CSS
                 'assets-modules/css/vendor.zones.css' => [
                     // Libs
                     'ol3/ol.css',
@@ -1190,6 +1246,7 @@ return [
                 ],
             ],
             'paths' => [
+                'application' => __DIR__.'/../public',
                 $baseDir.'/bower_components',
             ],
         ],
@@ -1231,7 +1288,8 @@ return [
             'Application\Controller\CustomerFailure' => 'Application\Controller\CustomerFailureControllerFactory',
             'Application\Controller\PaymentsCsv' => 'Application\Controller\PaymentsCsvControllerFactory',
             'Application\Controller\ForeignDriversLicense' => 'Application\Controller\ForeignDriversLicenseControllerFactory',
-            'Application\Controller\TripsNotPayed' => 'Application\Controller\TripsNotPayedControllerFactory'
+            'Application\Controller\TripsNotPayed' => 'Application\Controller\TripsNotPayedControllerFactory',
+            'Application\Controller\Notifications' => 'Application\Controller\NotificationsControllerFactory',
         ]
     ],
     'controller_plugins' => [
@@ -1423,7 +1481,8 @@ return [
                 ['controller' => 'Application\Controller\CustomerFailure', 'roles' => ['admin']],
                 ['controller' => 'Application\Controller\PaymentsCsv', 'roles' => ['admin']],
                 ['controller' => 'Application\Controller\ForeignDriversLicense', 'roles' => ['admin']],
-                ['controller' => 'Application\Controller\TripsNotPayed', 'roles' => ['admin']]
+                ['controller' => 'Application\Controller\TripsNotPayed', 'roles' => ['admin']],
+                ['controller' => 'Application\Controller\Notifications', 'roles' => ['admin','callcenter']],
             ],
         ],
     ],
@@ -1614,6 +1673,20 @@ return [
                     [
                         'label' => $translator->translate('Aree d\'allarme'),
                         'route' => 'zones/zone-alarms',
+                        'isVisible' => true
+                    ]
+                ]
+            ],
+            [
+                'label' => $translator->translate('Notifiche'),
+                'route' => 'notifications',
+                'icon' => 'fa fa-bell-o',
+                'resource' => 'admin',
+                'isRouteJs' => true,
+                'pages' => [
+                    [
+                        'label' => $translator->translate('Elenco'),
+                        'route' => 'notifications',
                         'isVisible' => true
                     ]
                 ]
