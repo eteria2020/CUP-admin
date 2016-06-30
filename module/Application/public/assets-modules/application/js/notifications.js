@@ -1,4 +1,4 @@
-/* global  filters:true, translate:true, $, getSessionVars:true, jstz:true, moment:true */
+/* global  filters:true, translate:true, $, getSessionVars:true, jstz:true, moment:true, document: true */
 $(function() {
     "use strict";
 
@@ -11,6 +11,8 @@ $(function() {
     // Define DataTables Filters
     var dataTableVars = {
         searchValue: $("#js-value"),
+        notificationsCategory: $("#js-notification-category"),
+        notificationsProtocol: $("#js-notification-protocol"),
         column: $("#js-column"),
         iSortCol_0: 2,
         sSortDir_0: "desc",
@@ -20,11 +22,67 @@ $(function() {
     var filterDate = false,
         filterDateField = "";
 
+    var renderSearchField = function(selectDOMObject){
+        var selectVal = selectDOMObject.val();
+
+        filterDate = false;
+        filterDateField = "";
+        dataTableVars.searchValue.show();
+        dataTableVars.searchValue.prop("disabled", false);
+        $(dataTableVars.searchValue).datepicker("remove");
+        dataTableVars.notificationsProtocol.hide();
+        dataTableVars.notificationsCategory.hide();
+
+        switch (selectVal) {
+            case "e.submitDate":
+            case "e.sentDate":
+            case "e.acknowledgeDate":
+                filterDate = true;
+                filterDateField = selectVal;
+                dataTableVars.searchValue.val("");
+                $(dataTableVars.searchValue).datepicker({
+                    autoclose: true,
+                    format: "yyyy-mm-dd",
+                    weekStart: 1
+                });
+                break;
+            case "nc.name":
+                dataTableVars.searchValue.hide();
+                dataTableVars.searchValue.val(dataTableVars.notificationsCategory.val());
+                dataTableVars.notificationsCategory.show();
+
+                // Bind notificationsCategory select change action
+                $(dataTableVars.notificationsCategory).change(function() {
+                    dataTableVars.searchValue.val(dataTableVars.notificationsCategory.val());
+                });
+                break;
+            case "np.name":
+                dataTableVars.searchValue.hide();
+                dataTableVars.searchValue.val(dataTableVars.notificationsProtocol.val());
+                dataTableVars.notificationsProtocol.show();
+
+                // Bind notificationsProtocol select change action
+                $(dataTableVars.notificationsProtocol).change(function() {
+                    dataTableVars.searchValue.val(dataTableVars.notificationsProtocol.val());
+                });
+                break;
+            case "e.id":
+            case "e.subject":
+                dataTableVars.searchValue.val("");
+                break;
+            default:
+                dataTableVars.searchValue.val("");
+                dataTableVars.searchValue.prop("disabled", true);
+                break;
+        }
+    };
+
     dataTableVars.searchValue.val("");
     dataTableVars.column.val("select");
 
     if ( typeof getSessionVars !== "undefined"){
         getSessionVars(filters, dataTableVars);
+        renderSearchField($(dataTableVars.column));
     }
 
     table.dataTable({
@@ -74,8 +132,12 @@ $(function() {
             {
                 targets: [2, 3, 4],
                 render: function (data) {
+                    var momentDate;
                     if (typeof data === "number"){
-                        return moment(data, "X").tz(userTimeZone).format("DD-MM-YYYY - HH:mm:ss");
+                        momentDate = moment(data, "X");
+                        if (momentDate.isValid()){
+                            return momentDate.tz(userTimeZone).format("DD-MM-YYYY - HH:mm:ss");
+                        }
                     }
                     return "";
                 }
@@ -89,12 +151,12 @@ $(function() {
                     var buttons = "<div class=\"btn-group\">";
 
                     // Check if the notification have no ack date.
-                    if (typeof row.e.acknowledgeDate !== "number"){
+                    if (typeof row.e.acknowledgeDate !== "number" && row.np.name === "Web"){
                         buttons += "<div class=\"btn btn-default\" id=\"ack-button\" data-id=\"" + data + "\">" +
                         translate("acknowledgment") + "</div> ";
                     }
 
-                    buttons += "<a href=\"/cars/details/" + data + "\" class=\"btn btn-default\">" +
+                    buttons += "<a href=\"/notifications/details/" + data + "\" class=\"btn btn-default\">" +
                     translate("details") + "</a></div>";
                     return buttons;
                 }
@@ -138,6 +200,8 @@ $(function() {
     $("#js-clear").click(function() {
         dataTableVars.searchValue.val("");
         dataTableVars.column.val("select");
+        dataTableVars.notificationsProtocol.hide();
+        dataTableVars.notificationsCategory.hide();
     });
 
     $(".date-picker").datepicker({
@@ -147,22 +211,7 @@ $(function() {
     });
 
     $(dataTableVars.column).change(function() {
-        var value = $(this).val();
-        if (value === "submitDate" || value === "sentDate" || value === "acknowledgeDate" ) {
-            filterDate = true;
-            filterDateField = value;
-            dataTableVars.searchValue.val("");
-            $(dataTableVars.searchValue).datepicker({
-                autoclose: true,
-                format: "yyyy-mm-dd",
-                weekStart: 1
-            });
-        } else {
-            filterDate = false;
-            filterDateField = "";
-            dataTableVars.searchValue.val("");
-            $(dataTableVars.searchValue).datepicker("remove");
-        }
+        renderSearchField($(this));
     });
 
     $(document).on("click", "#ack-button", function() {

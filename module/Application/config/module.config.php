@@ -1238,11 +1238,23 @@ return [
                     // Code
                     'assets-modules/application/js/notifications.js',
                 ],
+                'assets-modules/js/vendor.notifications.details.js' => [
+                    // Libs
+                    'ol3/ol.js',
+                    'moment/min/moment.min.js',
+                    'moment-timezone/builds/moment-timezone-with-data-2010-2020.min.js',
+                    // Code
+                    'assets-modules/application/js/notifications.details.js',
+                ],
                 // CSS
                 'assets-modules/css/vendor.zones.css' => [
                     // Libs
                     'ol3/ol.css',
                     'bootstrap-switch/dist/css/bootstrap3/bootstrap-switch.css',
+                ],
+                'assets-modules/css/vendor.notifications.details.css' => [
+                    // Libs
+                    'ol3/ol.css',
                 ],
             ],
             'paths' => [
@@ -1415,9 +1427,12 @@ return [
     ],
 
     'view_helpers'    => [
+        'factories' => [
+            'SOSCategory' => 'Application\View\Helper\Notifications\SOSCategoryFactory',
+        ],
         'invokables' => [
             'CarStatus' => 'Application\View\Helper\CarStatus',
-        ]
+        ],
     ],
 
     // Placeholder for console routes

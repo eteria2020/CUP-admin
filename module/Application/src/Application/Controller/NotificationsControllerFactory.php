@@ -15,6 +15,8 @@ class NotificationsControllerFactory implements FactoryInterface
 
         $entityManager = $sharedServiceLocator->get('doctrine.entitymanager.orm_default');
         $notificationsService = $sharedServiceLocator->get('SharengoCore\Service\NotificationsService');
+        $notificationsProtocolsService = $sharedServiceLocator->get('SharengoCore\Service\NotificationsProtocolsService');
+        $notificationsCategoriesService = $sharedServiceLocator->get('SharengoCore\Service\NotificationsCategoriesService');
         $datatablesSessionNamespace = $sharedServiceLocator->get('Configuration')['session']['datatablesNamespace'];
 
         // Creating DataTable Filters Session Container
@@ -22,6 +24,8 @@ class NotificationsControllerFactory implements FactoryInterface
 
         return new NotificationsController(
             $notificationsService,
+            $notificationsProtocolsService,
+            $notificationsCategoriesService,
             $datatableFiltersSessionContainer
         );
     }

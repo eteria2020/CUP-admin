@@ -1,56 +1,95 @@
 <div class="page-content-wrapper">
     <div class="page-content">
-
         <!-- BEGIN PAGE HEADER-->
-        <h3 class="page-title">
-            <?= $this->translate("ELENCO PRENOTAZIONI"); ?> <small><?= $this->translate("ricerca"); ?></small>
-        </h3>
-
+        <div class="row">
+            <div class="col-lg-6">
+                <h3 class="page-title"><?= $this->translate('DETTAGLI NOTIFICA') ?> - <?= $this->notification->getId() ?></h3>
+            </div>
+            <div class="col-lg-6">
+                <a href="<?= $this->url('notifications'); ?>" class="btn btn-success pull-right">
+                    <i class="fa fa-arrow-left"></i> <?= $this->translate("Torna alla lista"); ?>
+                </a>
+            </div>
+        </div>
         <div class="page-bar">
         </div>
-
         <div class="row">
             <div class="col-md-12">
-
-                <?= $this->partial('partials/flash-messages.phtml', []); ?>
-
-                <div class="row">
-                    <div class="col-md-8">
-                        <div class="form-inline">
-                            <div class="form-group">
-                                <select name="column" id="js-column" class="form-control">
-                                    <option value="select" selected>-- <?= $this->translate("Seleziona"); ?> --</option>
-                                    <option value="beginningTs"><?= $this->translate("Data"); ?></option>
-                                    <option value="c.plate"><?= $this->translate("Targa"); ?></option>
-                                    <option value="cu.taxCode"><?= $this->translate("Codice Fiscale"); ?></option>
-                                    <option value="cu.surname"><?= $this->translate("Cognome"); ?></option>
-                                    <option value="cu.id"><?= $this->translate("ID Cliente"); ?></option>
-                                    <option value="e.cards"><?= $this->translate("RFID"); ?></option>
-                                </select>
+                <?php echo $this->partial('partials/flash-messages.phtml', []); ?>
+                <!-- BEGIN Notification Data -->
+                <div class="portlet box green">
+                    <div class="portlet-title">
+                        <div class="caption">
+                            <i class="fa fa-bell-o"></i><?= $this->translate('Dati Notifica') ?>
+                        </div>
+                    </div>
+                    <div class="portlet-body">
+                        <div class="row">
+                            <div class="col-lg-4">
+                                <div class="form-group">
+                                    <label for="gender"><?= $this->translate('ID') . ' ' . $this->translate('Notifica') ?></label>
+                                    <div class="sng-info-box"><?= $this->notification->getId() ?></div>
+                                </div>
                             </div>
-                            <div class="form-group">
-                                <input type="text" name="value" value="" class="form-control" id="js-value" placeholder="<?= $this->translate("Filtra..."); ?>">
+                            <div class="col-lg-4">
+                                <div class="form-group">
+                                    <label for="name"><?= $this->translate('Categoria Notifica') ?></label>
+                                    <div class="sng-info-box"><?= $this->notification->getCategoryName() ?></div>
+                                </div>
                             </div>
-                            <div class="btn-group">
-                                <button type="button" class="btn green" id="js-search"><i class="fa fa-search"></i> <?= $this->translate("Cerca"); ?></button>
-                                <button type="button" class="btn green dropdown-toggle" data-toggle="dropdown"><i class="fa fa-angle-down"></i></button>
-                                <ul class="dropdown-menu" role="menu">
-                                    <li>
-                                        <a href="javascript:void(0);" id="js-clear"><i class="fa fa-remove"></i> <?= $this->translate("Pulisci Ricerca"); ?></a>
-                                    </li>
-                                </ul>
+                            <div class="col-lg-4">
+                                <div class="form-group">
+                                    <label for="name"><?= $this->translate('Destinatario') ?></label>
+                                    <div class="sng-info-box"><?= $this->notification->getDestination() ?></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-4">
+                                <div class="form-group">
+                                    <label for="name"><?= $this->translate('Protocollo Trasmissione predefinito della Categoria') ?></label>
+                                    <div class="sng-info-box"><?= $this->notification->getCategoryDefaultProtocolName() ?></div>
+                                </div>
+                            </div>
+                            <div class="col-lg-4">
+                                <div class="form-group">
+                                    <label for="name"><?= $this->translate('Protocollo Trasmissione Specifico della Notifica') ?></label>
+                                    <div class="sng-info-box"><?= $this->notification->getProtocolName() ?></div>
+                                </div>
+                            </div>
+                            <div class="col-lg-4">
+                                <div class="form-group">
+                                    <label for="name"><?= $this->translate('Protocollo Trasmissione utilizzato') ?></label>
+                                    <div class="sng-info-box"><?= is_null($this->notification->getProtocolName()) ? $this->notification->getCategoryDefaultProtocolName() : $this->notification->getProtocolName() ?></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-4">
+                                <div class="form-group">
+                                    <label for="gender"><?= $this->translate('Data Inserimento') ?></label>
+                                    <div class="sng-info-box date-time"><?= $this->notification->getSubmitDate() instanceof DateTime ? $this->notification->getSubmitDate()->getTimestamp() : '' ?></div>
+                                </div>
+                            </div>
+                            <div class="col-lg-4">
+                                <div class="form-group">
+                                    <label for="name"><?= $this->translate('Data Invio') ?></label>
+                                    <div class="sng-info-box date-time"><?= $this->notification->getSentDate() instanceof DateTime ?  $this->notification->getSentDate()->getTimestamp() : '' ?></div>
+                                </div>
+                            </div>
+                            <div class="col-lg-4">
+                                <div class="form-group">
+                                    <label for="name"><?= $this->translate('Data Presa Visione') ?></label>
+                                    <div class="sng-info-box date-time"><?= $this->notification->getAcknowledgeDate() instanceof DateTime ? $this->notification->getAcknowledgeDate()->getTimestamp() : '' ?></div>
+                                </div>
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-4"></div>
                 </div>
-
-                <hr>
+                <!-- END Notification Data -->
             </div>
+            <?= $this->partial('partials/notifications/' . $this->notification->getCategoryNameSlug() . '-category.phtml') ?>
         </div>
-
         <!-- END PAGE CONTENT-->
     </div>
 </div>
-<script>
-</script>
