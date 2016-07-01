@@ -2,7 +2,7 @@
 namespace Application\Controller;
 
 // Internals
-use Application\Utility\CarsConfigurations\CarsConfigurationsFactory;
+use Application\Utility\CarsConfigurations\CarsConfigurationsTypesFactory;
 use Application\Form\CarsConfigurationsForm;
 use SharengoCore\Entity\CarsConfigurations;
 use SharengoCore\Service\CarsConfigurationsService;
@@ -82,8 +82,8 @@ class CarsConfigurationsController extends AbstractActionController
         $recordsFiltered = $this->_getRecordsFiltered($filters, $totalCarsConfigurations);
 
         foreach ($dataDataTable as &$row) {
-            $configurationClass = CarsConfigurationsFactory::create($row['e']['key'], $row['e']['value'], $this->translator);
-            $row['e']['value'] = $configurationClass->getOverview();
+            $configurationTypeClass = CarsConfigurationsTypesFactory::create($row['e']['key'], $row['e']['value'], $this->translator);
+            $row['e']['value'] = $configurationTypeClass->getOverview();
         }
 
         return new JsonModel([
@@ -133,15 +133,15 @@ class CarsConfigurationsController extends AbstractActionController
                 ->addErrorMessage($this->translator->translate('La Configurazione Auto non è stata trovata!'));
         }
 
-        $configurationClass = CarsConfigurationsFactory::createFromCarConfiguration($carConfiguration, $this->translator);
+        $configurationTypeClass = CarsConfigurationsTypesFactory::createFromCarConfiguration($carConfiguration, $this->translator);
 
-        $hasMultipleValues = $configurationClass->hasMultipleValues();
+        $hasMultipleValues = $configurationTypeClass::hasMultipleValues;
 
         return new ViewModel([
             'configuration' => $carConfiguration,
             'hasMultipleValues' => $hasMultipleValues,
-            'indexedValues' => $configurationClass->getIndexedValueOptions(),
-            'formattedValue' => $configurationClass->getOverview(),
+            'indexedValues' => $hasMultipleValues ? $configurationTypeClass->getIndexedValueOptions() : $configurationTypeClass->getValue(),
+            'formattedValue' => $configurationTypeClass->getOverview(),
             'thisId' => $carConfiguration->getId(),
         ]);
     }
@@ -166,10 +166,10 @@ class CarsConfigurationsController extends AbstractActionController
                 $newCarConfigurationKey = $carConfigurationFromForm->getKey();
 
                 // Get the right class.
-                $configurationClass = CarsConfigurationsFactory::create($newCarConfigurationKey, '', $this->translator);
+                $configurationTypeClass = CarsConfigurationsTypesFactory::create($newCarConfigurationKey, '', $this->translator);
 
                 // Set the default value for the specific CarConfiguration Class type.
-                $defaultCarConfigurationValue = $configurationClass->getDefaultValue();
+                $defaultCarConfigurationValue = $configurationTypeClass->getDefaultValue();
 
                 try {
                     // Finally save the new CarConfiguration to the DB.
@@ -204,14 +204,15 @@ class CarsConfigurationsController extends AbstractActionController
         }
         $id = $carConfiguration->getId();
 
-        $configurationClass = CarsConfigurationsFactory::createFromCarConfiguration($carConfiguration, $this->translator);
+        $configurationTypeClass = CarsConfigurationsTypesFactory::createFromCarConfiguration($carConfiguration, $this->translator);
 
         /** @var  CarsConfigurations $form */
-        $form = $configurationClass->getForm();
+        $form = $configurationTypeClass->getForm();
 
-        $hasMultipleValues = $configurationClass->hasMultipleValues();
+        $hasMultipleValues = $configurationTypeClass::hasMultipleValues;
+
         if ($hasMultipleValues) {
-            $indexedValues = $configurationClass->getIndexedValueOptions();
+            $indexedValues = $configurationTypeClass->getIndexedValueOptions();
         } else {
             $indexedValues = [];
             $form->setData([
@@ -226,8 +227,8 @@ class CarsConfigurationsController extends AbstractActionController
 
             if ($form->isValid()) {
                 try {
-                    $configurationClass->updateValue($postData);
-                    $this->carsConfigurationsService->save($carConfiguration, $configurationClass->getRawValue());
+                    $configurationTypeClass->updateValue($postData);
+                    $this->carsConfigurationsService->save($carConfiguration, $configurationTypeClass->getRawValue());
                     $this->flashMessenger()->addSuccessMessage($this->translator->translate('Configurazione modificata con successo!'));
                 } catch (\Exception $e) {
                     $this->flashMessenger()
@@ -240,7 +241,7 @@ class CarsConfigurationsController extends AbstractActionController
 
         $view = new ViewModel([
             'carConfiguration' => $carConfiguration,
-            'configurationClass' => $configurationClass,
+            'configurationTypeClass' => $configurationTypeClass,
             'form' => $form,
             'thisId' => $id,
             'hasMultipleValues' => $hasMultipleValues,
@@ -289,14 +290,14 @@ class CarsConfigurationsController extends AbstractActionController
         $optionId = $this->params()->fromRoute('optionid', 0);
 
         // Get the configuration helper class.
-        $configurationClass = CarsConfigurationsFactory::createFromCarConfiguration($carConfiguration, $this->translator);
+        $configurationTypeClass = CarsConfigurationsTypesFactory::createFromCarConfiguration($carConfiguration, $this->translator);
 
         // Update the carConfiguration value
-        $configurationClass->deleteValueOption($optionId);
+        $configurationTypeClass->deleteValueOption($optionId);
 
         try {
             // Finally save the updated CarConfiguration to the DB.
-            $this->carsConfigurationsService->save($carConfiguration, $configurationClass->getRawValue());
+            $this->carsConfigurationsService->save($carConfiguration, $configurationTypeClass->getRawValue());
             $this->flashMessenger()->addSuccessMessage($this->translator->translate('Configurazione Auto aggioranta con successo!'));
         } catch (\Exception $e) {
             $this->flashMessenger()
@@ -326,10 +327,10 @@ class CarsConfigurationsController extends AbstractActionController
         $optionId = $this->params()->fromRoute('optionid', 0);
 
         // Get the configuration helper class.
-        $configurationClass = CarsConfigurationsFactory::createFromCarConfiguration($carConfiguration, $this->translator);
+        $configurationTypeClass = CarsConfigurationsTypesFactory::createFromCarConfiguration($carConfiguration, $this->translator);
 
         // Get the indexed options of the configuration
-        $options = $configurationClass->getIndexedValueOptions();
+        $options = $configurationTypeClass->getIndexedValueOptions();
 
         // Get the position of the option in the options array
         $foundOption = [];

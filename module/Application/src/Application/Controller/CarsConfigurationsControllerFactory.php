@@ -8,7 +8,6 @@ use DoctrineModule\Stdlib\Hydrator\DoctrineObject as DoctrineHydrator;
 
 /**
  * Class ConfigurationsControllerFactory
- * @package Application\Controller
  */
 class CarsConfigurationsControllerFactory implements FactoryInterface
 {

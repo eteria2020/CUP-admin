@@ -1,13 +1,14 @@
 <?php
 
-namespace Application\Utility\CarsConfigurations;
+namespace Application\Utility\CarsConfigurations\Types;
 
 // Internlas
-use Application\Form\CarsConfigurations\DefaultCityForm;
+use Application\Form\CarsConfigurations\UseExternalGPSForm;
+use Application\Utility\CarsConfigurations\CarsConfigurationsSingleValueTypesInterface;
 // Externals
 use Zend\Mvc\I18n\Translator;
 
-class DefaultCity implements CarsConfigurationsInterface
+class UseExternalGPS implements CarsConfigurationsSingleValueTypesInterface
 {
     /**
      * @var string
@@ -20,7 +21,7 @@ class DefaultCity implements CarsConfigurationsInterface
     private $translator;
 
     /**
-     * DefaultCity constructor.
+     * UseExternalGPS constructor.
      *
      * @param string $rawValue
      * @param Translator $translator
@@ -35,17 +36,12 @@ class DefaultCity implements CarsConfigurationsInterface
 
     public function getOverview()
     {
-        return $this->value;
+        return $this->value ? 'Esterno' : 'Interno';
     }
 
     public function getForm()
     {
-        return new DefaultCityForm($this->translator);
-    }
-
-    public function hasMultipleValues()
-    {
-        return false;
+        return new UseExternalGPSForm($this->translator);
     }
 
     public function getValue()
@@ -60,28 +56,21 @@ class DefaultCity implements CarsConfigurationsInterface
 
     public function setFromRawValue($rawValue)
     {
-        $this->setValue($rawValue);
+        $this->value = $rawValue === 'true' ? 1 : 0;
     }
 
     public function getRawValue()
     {
-        return (string) $this->value;
+        return $this->value ? 'true' : 'false';
     }
 
     public function getDefaultValue()
     {
-        return 'Milano';
+        return true;
     }
 
     public function updateValue(array $data)
     {
-        $this->setValue($data['DefaultCity']);
+        $this->setFromRawValue($data['value']);
     }
-
-    public function getIndexedValueOptions()
-    {
-        return $this->value;
-    }
-
-    public function deleteValueOption($optionId) {}
 }

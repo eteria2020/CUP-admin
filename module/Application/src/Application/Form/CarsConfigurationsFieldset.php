@@ -122,7 +122,8 @@ class CarsConfigurationsFieldset extends Fieldset implements InputFilterProvider
                 'required' => true,
                 'filters' => [
                     [
-                        'name' => 'StringTrim'
+                        'name' => 'StringTrim',
+                        'name' => 'Zend\Filter\Word\SeparatorToCamelCase',
                     ]
                 ],
                 'validators' => [

@@ -1,13 +1,14 @@
 <?php
 
-namespace Application\Utility\CarsConfigurations;
+namespace Application\Utility\CarsConfigurations\Types;
 
 // Internlas
 use Application\Form\CarsConfigurations\RadioSetupForm;
+use Application\Utility\CarsConfigurations\CarsConfigurationsMultiValuesTypesInterface;
 // Externals
 use Zend\Mvc\I18n\Translator;
 
-class RadioSetup implements CarsConfigurationsInterface
+class RadioSetup implements CarsConfigurationsMultiValuesTypesInterface
 {
     /**
      * @var string
@@ -45,11 +46,6 @@ class RadioSetup implements CarsConfigurationsInterface
     public function getForm()
     {
         return new RadioSetupForm($this->translator);
-    }
-
-    public function hasMultipleValues()
-    {
-        return true;
     }
 
     public function getValue()

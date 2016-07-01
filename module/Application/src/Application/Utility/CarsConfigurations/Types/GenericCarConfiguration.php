@@ -1,13 +1,14 @@
 <?php
 
-namespace Application\Utility\CarsConfigurations;
+namespace Application\Utility\CarsConfigurations\Types;
 
 // Internlas
 use Application\Form\CarsConfigurations\GenericCarConfigurationForm;
+use Application\Utility\CarsConfigurations\CarsConfigurationsSingleValueTypesInterface;
 // Externals
 use Zend\Mvc\I18n\Translator;
 
-class GenericCarConfiguration implements CarsConfigurationsInterface
+class GenericCarConfiguration implements CarsConfigurationsSingleValueTypesInterface
 {
     /**
      * @var string
@@ -20,7 +21,7 @@ class GenericCarConfiguration implements CarsConfigurationsInterface
     private $translator;
 
     /**
-     * GenericCarConfiguration constructor.
+     * GenericCarConfigurationType constructor.
      *
      * @param string $rawValue
      * @param Translator $translator
@@ -41,11 +42,6 @@ class GenericCarConfiguration implements CarsConfigurationsInterface
     public function getForm()
     {
         return new GenericCarConfigurationForm($this->translator);
-    }
-
-    public function hasMultipleValues()
-    {
-        return false;
     }
 
     public function getValue()
@@ -77,11 +73,4 @@ class GenericCarConfiguration implements CarsConfigurationsInterface
     {
         $this->setValue($data['GenericCarConfiguration']);
     }
-
-    public function getIndexedValueOptions()
-    {
-        return $this->value;
-    }
-
-    public function deleteValueOption($optionId) {}
 }

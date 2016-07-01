@@ -14,25 +14,15 @@ class CarConfigurationPriorityType extends AbstractHelper
      */
     function __invoke($priorityType)
     {
-        $label = '';
         switch ($priorityType) {
             case CarsConfigurations::GLOBAL_TYPE:
-                $label = $this->getView()->translate('Configurazione Globale');
-                break;
-
+                return $this->getView()->translate('Configurazione Globale');
             case CarsConfigurations::FLEET_TYPE:
-                $label = $this->getView()->translate('Configurazione di una Città');
-                break;
-
+                return $this->getView()->translate('Configurazione di una Città');
             case CarsConfigurations::CAR_MODEL_TYPE:
-                $label = $this->getView()->translate('Configurazione di un Modello di Auto');
-                break;
-
-          case CarsConfigurations::CAR_TYPE:
-                $label = $this->getView()->translate('Configurazione Specifica di un Auto');
-                break;
+                return $this->getView()->translate('Configurazione di un Modello di Auto');
+            case CarsConfigurations::CAR_TYPE:
+                return $this->getView()->translate('Configurazione Specifica di un Auto');
         }
-
-        return $label;
     }
 }

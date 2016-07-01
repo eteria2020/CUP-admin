@@ -6,7 +6,7 @@ namespace Application\Utility\CarsConfigurations;
 use Zend\Mvc\I18n\Translator;
 use Zend\Form\Form;
 
-interface CarsConfigurationsInterface
+interface CarsConfigurationsTypesInterface
 {
     /**
     * @param string $rawValue
@@ -69,36 +69,10 @@ interface CarsConfigurationsInterface
     public function getDefaultValue();
 
     /**
-     * This method return "true" if the configuration has multiple values or
-     * "false" if it's a single value config.
-     *
-     * @return boolean
-     */
-    public function hasMultipleValues();
-
-    /**
      * This method update the value with the data present into $data param.
      * 
      * @param array $data   The array containing the updated data from the edit form.
      *                      Example: [ "name" => "radioDeejay" , "volume" => 3 , ... ] for a radio setup
      */
     public function updateValue(array $data);
-
-    /**
-     * This method return an indexed values array.
-     * The index is relative to configuration type.
-     * This method is valid only for configuration
-     * that have multiple options.
-     *
-     * return mixed
-     */
-    public function getIndexedValueOptions();
-
-    /**
-     * This method delete an option from the value property.
-     * This method is valid only on class with "$this->hasMultipleValues() = true"
-     * 
-     * @param mixed $optionId  The option id to be deleted.
-     */
-    public function deleteValueOption($optionId);
 }

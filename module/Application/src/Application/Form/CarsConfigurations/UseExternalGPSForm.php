@@ -18,9 +18,9 @@ class UseExternalGPSForm extends Form
 
         $this->add([
             'name' => 'value',
-            'type' => 'Zend\Form\Element\Radio',
+            'type' => 'Zend\Form\Element\Select',
             'attributes' => [
-                'id' => 'externalgps',
+                'id' => 'value',
                 'class' => 'form-control',
                 'required' => 'required'
             ],

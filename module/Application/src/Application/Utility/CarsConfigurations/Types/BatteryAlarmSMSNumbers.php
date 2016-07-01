@@ -1,13 +1,14 @@
 <?php
 
-namespace Application\Utility\CarsConfigurations;
+namespace Application\Utility\CarsConfigurations\Types;
 
 // Internlas
 use Application\Form\CarsConfigurations\BatteryAlarmSMSNumbersForm;
+use Application\Utility\CarsConfigurations\CarsConfigurationsMultiValuesTypesInterface;
 // Externals
 use Zend\Mvc\I18n\Translator;
 
-class BatteryAlarmSMSNumbers implements CarsConfigurationsInterface
+class BatteryAlarmSMSNumbers implements CarsConfigurationsMultiValuesTypesInterface
 {
     /**
      * @var array
@@ -45,11 +46,6 @@ class BatteryAlarmSMSNumbers implements CarsConfigurationsInterface
     public function getForm()
     {
         return new BatteryAlarmSMSNumbersForm($this->translator);
-    }
-
-    public function hasMultipleValues()
-    {
-        return true;
     }
 
     public function getValue()
