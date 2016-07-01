@@ -2,6 +2,9 @@
 
 namespace Application\Utility\CarsConfigurations;
 
+// Internals
+use SharengoCore\Entity\CarsConfigurations;
+use Application\Utility\CarsConfigurations\GenericCarConfiguration;
 // Externals
 use Zend\Mvc\I18n\Translator;
 
@@ -18,11 +21,16 @@ class CarsConfigurationsFactory
             );
         }
 
-        //@todo return new GenericConfigClass
+        return new GenericCarConfiguration(
+            $configValue,
+            $translator
+        );
     }
 
-    public static function createFromCarConfiguration($carConfiguration, Translator $translator)
-    {
+    public static function createFromCarConfiguration(
+        CarsConfigurations $carConfiguration,
+        Translator $translator
+    ) {
         return self::create(
             $carConfiguration->getKey(),
             $carConfiguration->getValue(),

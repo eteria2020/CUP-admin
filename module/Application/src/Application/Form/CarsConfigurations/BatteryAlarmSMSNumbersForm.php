@@ -26,7 +26,7 @@ class BatteryAlarmSMSNumbersForm extends Form
 
         $this->add([
             'name' => 'number',
-            'type' => 'Zend\Form\Element\Text',
+            'type' => 'Zend\Form\Element\Number',
             'attributes' => [
                 'id' => 'number',
                 'class' => 'form-control',
@@ -36,5 +36,25 @@ class BatteryAlarmSMSNumbersForm extends Form
                 'label' => $translator->translate('Numero'),
             ],
         ]);
+    }
+
+    public function getInputFilterSpecification()
+    {
+        return [
+            'number' => [
+                'required' => true,
+                'validators' => [
+                    [
+                        'name' => 'NotEmpty',
+                    ],
+                    [
+                        'name' => 'StringLength',
+                        'options' => [
+                            'max' => 20
+                        ],
+                    ],
+                ],
+            ],
+        ];
     }
 }

@@ -17,7 +17,7 @@ class UseExternalGPSForm extends Form
         $this->setAttribute('method', 'post');
 
         $this->add([
-            'name' => 'UseExternalGPS',
+            'name' => 'value',
             'type' => 'Zend\Form\Element\Radio',
             'attributes' => [
                 'id' => 'externalgps',
@@ -32,5 +32,19 @@ class UseExternalGPSForm extends Form
                 'label' => $translator->translate('Gps Esterno'),
             ]
         ]);
+    }
+
+    public function getInputFilterSpecification()
+    {
+        return [
+            'value' => [
+                'required' => true,
+                'validators' => [
+                    [
+                        'name' => 'NotEmpty',
+                    ]
+                ],
+            ],
+        ];
     }
 }

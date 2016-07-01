@@ -125,9 +125,14 @@ class CarsConfigurationsController extends AbstractActionController
      */
     public function detailsAction()
     {
-        $id = $this->params()->fromRoute('id', 0);
+        try {
+            // Get the configuration.
+            $carConfiguration = $this::getCarConfigurationFromRouteId();
+        } catch (CarConfigurationNotFoundException $e) {
+            $this->flashMessenger()
+                ->addErrorMessage($this->translator->translate('La Configurazione Auto non è stata trovata!'));
+        }
 
-        $carConfiguration = $this->carsConfigurationsService->getCarConfigurationById($id);
         $configurationClass = CarsConfigurationsFactory::createFromCarConfiguration($carConfiguration, $this->translator);
 
         $hasMultipleValues = $configurationClass->hasMultipleValues();
@@ -137,7 +142,7 @@ class CarsConfigurationsController extends AbstractActionController
             'hasMultipleValues' => $hasMultipleValues,
             'indexedValues' => $configurationClass->getIndexedValueOptions(),
             'formattedValue' => $configurationClass->getOverview(),
-            'thisId' => $id,
+            'thisId' => $carConfiguration->getId(),
         ]);
     }
 
@@ -189,8 +194,15 @@ class CarsConfigurationsController extends AbstractActionController
 
     public function editAction()
     {
-        $id = $this->params()->fromRoute('id', 0);
-        $carConfiguration = $this->carsConfigurationsService->getCarConfigurationById($id);
+        try {
+            // Get the configuration.
+            $carConfiguration = $this::getCarConfigurationFromRouteId();
+        } catch (CarConfigurationNotFoundException $e) {
+            $this->flashMessenger()
+                ->addErrorMessage($this->translator->translate('La Configurazione Auto non è stata trovata!'));
+            return new ViewModel([]);
+        }
+        $id = $carConfiguration->getId();
 
         $configurationClass = CarsConfigurationsFactory::createFromCarConfiguration($carConfiguration, $this->translator);
 
@@ -202,7 +214,9 @@ class CarsConfigurationsController extends AbstractActionController
             $indexedValues = $configurationClass->getIndexedValueOptions();
         } else {
             $indexedValues = [];
-            $form->setData([$carConfiguration->getKey() => $carConfiguration->getValue()]);
+            $form->setData([
+                'value' => $carConfiguration->getValue()
+            ]);
         }
 
         if ($this->getRequest()->isPost()) {
@@ -237,10 +251,13 @@ class CarsConfigurationsController extends AbstractActionController
 
     public function deleteAction()
     {
-        $id = $this->params()->fromRoute('id', 0);
-
-        /** @var CarsConfigurations $carConfiguration */
-        $carConfiguration = $this->carsConfigurationsService->getCarConfigurationById($id);
+        try {
+            // Get the configuration.
+            $carConfiguration = $this::getCarConfigurationFromRouteId();
+        } catch (CarConfigurationNotFoundException $e) {
+            $this->flashMessenger()
+                ->addErrorMessage($this->translator->translate('La Configurazione Auto non è stata trovata!'));
+        }
 
         if (!$carConfiguration instanceof CarsConfigurations) {
             $this->getResponse()->setStatusCode(Response::STATUS_CODE_404);
@@ -255,19 +272,21 @@ class CarsConfigurationsController extends AbstractActionController
                 ->addErrorMessage($this->translator->translate('Si è verificato un errore applicativo.'));
         }
 
-        return $this->redirect()->toRoute('cars-configurations/edit', ['id' => $id]);
+        return $this->redirect()->toRoute('cars-configurations/edit', ['id' => $carConfiguration->getId()]);
     }
 
     public function deleteOptionAction()
     {
-        // Get the id of the configuration
-        $id = $this->params()->fromRoute('id', 0);
+        try {
+            // Get the configuration.
+            $carConfiguration = $this::getCarConfigurationFromRouteId();
+        } catch (CarConfigurationNotFoundException $e) {
+            $this->flashMessenger()
+                ->addErrorMessage($this->translator->translate('La Configurazione Auto non è stata trovata!'));
+        }
 
         // Get the id of the option of the configuration
         $optionId = $this->params()->fromRoute('optionid', 0);
-
-        // Get the configuration.
-        $carConfiguration = $this->carsConfigurationsService->getCarConfigurationById($id);
 
         // Get the configuration helper class.
         $configurationClass = CarsConfigurationsFactory::createFromCarConfiguration($carConfiguration, $this->translator);
@@ -284,7 +303,7 @@ class CarsConfigurationsController extends AbstractActionController
                 ->addErrorMessage($this->translator->translate('Si è verificato un errore applicativo.'));
         }
 
-        return $this->redirect()->toRoute('cars-configurations/edit', ['id' => $id]);
+        return $this->redirect()->toRoute('cars-configurations/edit', ['id' => $carConfiguration->getId()]);
     }
 
     /**
@@ -295,14 +314,16 @@ class CarsConfigurationsController extends AbstractActionController
      */
     public function ajaxGetOptionAction()
     {
-        // Get the id of the configuration
-        $id = $this->params()->fromRoute('id', 0);
+        try {
+            // Get the configuration.
+            $carConfiguration = $this::getCarConfigurationFromRouteId();
+        } catch (CarConfigurationNotFoundException $e) {
+            $this->flashMessenger()
+                ->addErrorMessage($this->translator->translate('La Configurazione Auto non è stata trovata!'));
+        }
 
         // Get the id of the option of the configuration
         $optionId = $this->params()->fromRoute('optionid', 0);
-
-        // Get the configuration.
-        $carConfiguration = $this->carsConfigurationsService->getCarConfigurationById($id);
 
         // Get the configuration helper class.
         $configurationClass = CarsConfigurationsFactory::createFromCarConfiguration($carConfiguration, $this->translator);
@@ -329,5 +350,26 @@ class CarsConfigurationsController extends AbstractActionController
             $filters['withLimit'] = false;
             return $this->carsConfigurationsService->getDataDataTable($filters, true);
         }
+    }
+
+    /**
+     * Get the CarConfiguration from the route param "id".
+     *
+     * @throws CarConfigurationNotFoundException
+     * @return CarsConfigurations
+     */
+    protected function getCarConfigurationFromRouteId()
+    {
+        // Get the id from route
+        $id = $this->params()->fromRoute('id', 0);
+
+        /** @var CarsConfigurations $carConfiguration */
+        $carConfiguration = $this->carsConfigurationsService->getCarConfigurationById($id);
+    
+        if (!$carConfiguration instanceof CarsConfigurations) {
+            throw new CarConfigurationNotFoundException();
+        }
+
+        return $carConfiguration;
     }
 }

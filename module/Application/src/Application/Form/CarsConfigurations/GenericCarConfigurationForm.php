@@ -7,9 +7,9 @@ use Zend\Form\Form;
 use Zend\Mvc\I18n\Translator;
 
 /**
- * Class DefaultCityForm
+ * Class GenericCarConfigurationForm
  */
-class DefaultCityForm extends Form
+class GenericCarConfigurationForm extends Form
 {
     public function __construct(Translator $translator)
     {
@@ -18,14 +18,14 @@ class DefaultCityForm extends Form
 
         $this->add([
             'name' => 'value',
-            'type' => 'Zend\Form\Element\Text',
+            'type' => 'Zend\Form\Element\Textarea',
             'attributes' => [
-                'id' => 'city',
+                'id' => 'value',
                 'class' => 'form-control',
                 'required' => 'required'
             ],
             'options' => [
-                'label' => $translator->translate('Citta\''),
+                'label' => $translator->translate('Valore\''),
             ],
         ]);
     }
@@ -35,6 +35,11 @@ class DefaultCityForm extends Form
         return [
             'value' => [
                 'required' => true,
+                'filters'  => [
+                    [
+                        'name' => 'StringTrim'
+                    ],
+                ],
                 'validators' => [
                     [
                         'name' => 'NotEmpty',

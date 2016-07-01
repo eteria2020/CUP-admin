@@ -68,7 +68,7 @@ class RadioSetupForm extends Form
 
         $this->add([
             'name' => 'band',
-            'type' => 'Zend\Form\Element\Text',
+            'type' => 'Zend\Form\Element\Select',
             'attributes' => [
                 'id' => 'band',
                 'class' => 'form-control',
@@ -76,7 +76,56 @@ class RadioSetupForm extends Form
             ],
             'options' => [
                 'label' => $translator->translate('Banda'),
+                'value_options' => [
+                    'FM' => $translator->translate("FM"),
+                    'AM' => $translator->translate("AM")
+                ],
             ],
         ]);
+    }
+
+    public function getInputFilterSpecification()
+    {
+        return [
+            'volume' => [
+                'required' => true,
+                'validators' => [
+                    [
+                        'name' => 'NotEmpty',
+                    ],
+                    [
+                        'name' => 'Between',
+                        'options' => [
+                            'min' => 0,
+                            'max' => 10,
+                        ],
+                    ],
+                ],
+            ],
+            'name' => [
+                'required' => true,
+                'validators' => [
+                    [
+                        'name' => 'NotEmpty',
+                    ],
+                ],
+            ],
+            'frequency' => [
+                'required' => true,
+                'validators' => [
+                    [
+                        'name' => 'NotEmpty',
+                    ],
+                ],
+            ],
+            'band' => [
+                'required' => true,
+                'validators' => [
+                    [
+                        'name' => 'NotEmpty',
+                    ],
+                ],
+            ],
+        ];
     }
 }
