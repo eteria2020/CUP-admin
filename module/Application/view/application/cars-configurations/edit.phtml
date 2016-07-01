@@ -13,7 +13,7 @@
                 <h3 class="page-title"><?=$this->translate('MODIFICA CONFIGURAZIONE AUTO')?>: <?= $this->carConfiguration->getKey(); ?></h3>
             </div>
             <div class="col-lg-6">
-                <a href="<?php echo $this->url('cars-configurations'); ?>" class="btn btn-success pull-right"><i class="fa fa-arrow-left"></i> Torna alla lista</a>
+                <a href="<?php echo $this->url('cars-configurations'); ?>" class="btn btn-success pull-right"><i class="fa fa-arrow-left"></i> <?= $this->translate('Torna alla lista') ?></a>
             </div>
         </div>
         <div class="page-bar">
@@ -58,9 +58,8 @@
                         </div>
                     </div>
                     <div class="portlet-body">
-                        <?php echo $this->partial('partials/flash-messages.phtml', []); ?>
-
                         <?php
+                            echo $this->partial('partials/flash-messages.phtml', []);
                             echo $this->form()->openTag($form); 
 
                             $elements = $this->form->getElements();
