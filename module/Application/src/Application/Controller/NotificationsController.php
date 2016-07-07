@@ -96,7 +96,7 @@ class NotificationsController extends AbstractActionController
         }
 
         if (!$notification instanceof Notifications) {
-            $this->flashMessenger()->addErrorMessage($translator->translate('La notifica non è stata trovata.'));
+            return $this->getResponse()->setStatusCode(Response::STATUS_CODE_404);
         }
 
         return new ViewModel([
@@ -139,8 +139,11 @@ class NotificationsController extends AbstractActionController
             // Get the notification Object
             $notification = $this->notificationsService->getNotificationById($id);
 
+            // Create the $acknolageDate
+            $acknolageDate = date_create();
+
             // Make the acknowledgment
-            $date = $this->notificationsService->acknowledge($notification);
+            $this->notificationsService->acknowledge($notification, $acknolageDate);
 
             $this->flashMessenger()->addSuccessMessage($translator->translate('Presa visione della notifica con ID: ') . ' ' . $id . '.');
         } catch (\Exception $e) {
@@ -148,8 +151,8 @@ class NotificationsController extends AbstractActionController
         }
 
         return new JsonModel([
-            'dateTimeZ' => $date,
-            'dateTimeStamp' => $date->getTimestamp()
+            'dateTimeZ' => $acknolageDate,
+            'dateTimeStamp' => $acknolageDate->getTimestamp()
         ]);
     }
 

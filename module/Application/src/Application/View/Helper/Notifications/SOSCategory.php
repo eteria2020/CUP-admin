@@ -12,8 +12,6 @@ use SharengoCore\Exception\CustomerNotFoundException;
 use SharengoCore\Exception\TripNotFoundException;
 use SharengoCore\Exception\MetadataNotValidException;
 // Externals
-use Application\Listener\ChangeLanguageDetector;
-use MvLabsMultilanguage\Service\LanguageService;
 use Zend\View\Helper\AbstractHelper;
 
 class SOSCategory extends AbstractHelper
