@@ -104,7 +104,7 @@ $(function() {
     $(".date-time").each(function(){
         var dateTimeStamp = parseInt($(this).html(), 10);
         var momentDate;
-        if ( dateTimeStamp !== "NaN"){
+        if (dateTimeStamp !== "NaN"){
             momentDate = moment(dateTimeStamp, "X");
             if (momentDate.isValid()){
                 $(this).html(momentDate.tz(userTimeZone).format("DD-MM-YYYY - HH:mm:ss"));

@@ -7,9 +7,7 @@ use SharengoCore\Service\NotificationsService;
 use SharengoCore\Service\NotificationsProtocolsService;
 use SharengoCore\Service\NotificationsCategoriesService;
 // Externals
-use Zend\Http\Response;
 use Zend\Mvc\Controller\AbstractActionController;
-use Zend\Mvc\I18n\Translator;
 use Zend\View\Model\JsonModel;
 use Zend\View\Model\ViewModel;
 use Zend\Session\Container;
@@ -97,7 +95,7 @@ class NotificationsController extends AbstractActionController
             $this->flashMessenger()->addErrorMessage($translator->translate('Il valore identificativo della notifica non è un valore accettato.'));
         }
 
-        if (!$notification instanceof Notifications){
+        if (!$notification instanceof Notifications) {
             $this->flashMessenger()->addErrorMessage($translator->translate('La notifica non è stata trovata.'));
         }
 
@@ -144,7 +142,7 @@ class NotificationsController extends AbstractActionController
             // Make the acknowledgment
             $date = $this->notificationsService->acknowledge($notification);
 
-            $this->flashMessenger()->addSuccessMessage($translator->translate('Presa visione della notifica con ID: ') . ' ' . $id . '.' );
+            $this->flashMessenger()->addSuccessMessage($translator->translate('Presa visione della notifica con ID: ') . ' ' . $id . '.');
         } catch (\Exception $e) {
             $this->flashMessenger()->addErrorMessage($translator->translate('Errore durante la presa visione della notifica.'));
         }
