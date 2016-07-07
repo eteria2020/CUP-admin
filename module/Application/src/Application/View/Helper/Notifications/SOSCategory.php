@@ -51,13 +51,13 @@ class SOSCategory extends AbstractHelper
         $customerId = intval($notificationMetadata['customer_id']);
 
         // Check for cast error
-        if (!$customerId){
+        if (!$customerId) {
             throw new MetadataNotValidException();
         }
 
         $customer = $this->customersService->findById($customerId);
 
-        if (!$customer instanceof Customers){
+        if (!$customer instanceof Customers) {
             throw new CustomerNotFoundException();
         }
 
@@ -77,13 +77,13 @@ class SOSCategory extends AbstractHelper
         $tripId = intval($notificationMetadata['trip_id']);
 
         // Check for cast error
-        if (!$tripId){
+        if (!$tripId) {
             throw new MetadataNotValidException();
         }
 
         $trip = $this->tripsService->getById($tripId);
 
-        if (!$trip instanceof Trips){
+        if (!$trip instanceof Trips) {
             throw new TripNotFoundException();
         }
 
