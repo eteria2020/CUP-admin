@@ -163,8 +163,8 @@ $(function() {
             }
         ],
         "lengthMenu": [
-            [dataTableVars.iDisplayLength, 200, 300],
-            [dataTableVars.iDisplayLength, 200, 300]
+            [dataTableVars.iDisplayLength, dataTableVars.iDisplayLength * 5, dataTableVars.iDisplayLength * 10],
+            [dataTableVars.iDisplayLength, dataTableVars.iDisplayLength * 5, dataTableVars.iDisplayLength * 10]
         ],
         "pageLength": dataTableVars.iDisplayLength,
         "pagingType": "bootstrap_full_number",

@@ -1427,9 +1427,6 @@ return [
     ],
 
     'view_helpers'    => [
-        'factories' => [
-            'SOSCategory' => 'Application\View\Helper\Notifications\SOSCategoryFactory',
-        ],
         'invokables' => [
             'CarStatus' => 'Application\View\Helper\CarStatus',
         ],

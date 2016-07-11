@@ -19,7 +19,9 @@ class NotificationsControllerFactory implements FactoryInterface
         $notificationsCategoriesService = $sharedServiceLocator->get('SharengoCore\Service\NotificationsCategoriesService');
         $datatablesSessionNamespace = $sharedServiceLocator->get('Configuration')['session']['datatablesNamespace'];
 
-        $notificationsCategoriesAbstractFactory = $sharedServiceLocator->get('SharengoCore\Service\NotificationsCategories\NotificationsCategoriesAbstractFactory');
+        $notificationsCategoriesAbstractFactory = $sharedServiceLocator->get(
+            'SharengoCore\Service\NotificationsCategories\NotificationsCategoriesAbstractFactory'
+        );
 
         // Creating DataTable Filters Session Container
         $datatableFiltersSessionContainer = new Container($datatablesSessionNamespace);
