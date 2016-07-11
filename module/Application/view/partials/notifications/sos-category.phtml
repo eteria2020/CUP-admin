@@ -1,14 +1,11 @@
 <?php
     $this->headLink()->appendStylesheet('/assets-modules/css/vendor.notifications.details.css');
 
-    /** @var SOSCategory $viewHelper */
-    $viewHelper = $this->SOSCategory();
-
     /** @var Customers $customer */
-    $customer = $viewHelper->getCustomer($this->notification);
+    $customer = $this->data["customer"];
 
     /** @var Trips $trip */
-    $trip = $viewHelper->getTrip($this->notification);
+    $trip = $this->data["trip"];
 
     $meta = $this->notification->getMeta();
 ?>

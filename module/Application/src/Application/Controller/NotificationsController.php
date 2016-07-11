@@ -6,12 +6,14 @@ use SharengoCore\Entity\Notifications;
 use SharengoCore\Service\NotificationsService;
 use SharengoCore\Service\NotificationsProtocolsService;
 use SharengoCore\Service\NotificationsCategoriesService;
+use SharengoCore\Service\NotificationsCategories\NotificationsCategoriesAbstractFactory;
 // Externals
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\JsonModel;
 use Zend\View\Model\ViewModel;
 use Zend\Session\Container;
 use Doctrine\DBAL\Exception\DriverException;
+use Zend\Http\Response;
 
 class NotificationsController extends AbstractActionController
 {
@@ -31,6 +33,11 @@ class NotificationsController extends AbstractActionController
     private $notificationsProtocols;
 
     /**
+     * @var NotificationsCategoriesAbstractFactory
+     */
+    private $notificationsCategoriesAbstractFactory;
+
+    /**
      * @var Container
      */
     private $datatableFiltersSessionContainer;
@@ -39,17 +46,20 @@ class NotificationsController extends AbstractActionController
      * @param NotificationsService $notificationsService
      * @param NotificationsProtocolsService $notificationsProtocols
      * @param NotificationsCategoriesService $notificationsCategories
+     * @param NotificationsCategoriesAbstractFactory $notificationsCategoriesAbstractFactory
      * @param Container $datatableFiltersSessionContainer
      */
     public function __construct(
         NotificationsService $notificationsService,
         NotificationsProtocolsService $notificationsProtocols,
         NotificationsCategoriesService $notificationsCategories,
+        NotificationsCategoriesAbstractFactory $notificationsCategoriesAbstractFactory,
         Container $datatableFiltersSessionContainer
     ) {
         $this->notificationsService = $notificationsService;
         $this->notificationsProtocols = $notificationsProtocols;
         $this->notificationsCategories = $notificationsCategories;
+        $this->notificationsCategoriesAbstractFactory = $notificationsCategoriesAbstractFactory;
         $this->datatableFiltersSessionContainer = $datatableFiltersSessionContainer;
     }
 
@@ -99,8 +109,18 @@ class NotificationsController extends AbstractActionController
             return $this->getResponse()->setStatusCode(Response::STATUS_CODE_404);
         }
 
+        try {
+            // Get the notification Class Service
+            $categoryService = $this->notificationsCategoriesAbstractFactory->createServiceWithName(
+                'SharengoCore\\Service\\NotificationsCategories\\' . strtoupper($notification->getCategoryNameSlug()) . 'CategoryService'
+            );
+        } catch (NotificationsServiceNotFoundException $e) {
+            $this->flashMessenger()->addErrorMessage($translator->translate('Il valore identificativo della notifica non è un valore accettato.'));
+        }
+
         return new ViewModel([
             'notification' => $notification,
+            'data' => $categoryService->getData($notification)
         ]);
     }
 
