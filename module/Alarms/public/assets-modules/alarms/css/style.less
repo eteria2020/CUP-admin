@@ -90,6 +90,32 @@ body {
         background: #0338FF;
       }
     }
+    
+    @media (max-width:700px) {
+        width:33px;
+        overflow:hidden;
+        margin-left:-12px;
+        transition: width 0.3s;
+        z-index:200;
+        bottom:80px;
+        
+        &:hover,&:focus,&:active {
+          width:200px;
+        }
+        .pull-left {
+          width:150px;
+        }
+        li {
+          clear:both;
+          float:left;
+        }
+    }
+    @media (max-width:800px){
+      max-width:160px;
+    }
+    @media (max-width:1000px){
+      max-width:30%;
+    }
 }
 #top-area {
     position:fixed;
@@ -105,8 +131,15 @@ body {
     opacity:0.85;
     -webkit-transition:opacity 0.5s;
     transition:opacity 0.5s;
+    max-width:40%;
 
-    &:hover {opacity:1}
+    &:hover,&:focus,&:active {
+      opacity:1;
+    
+      .opener {
+        opacity:0;
+      }  
+    }
 
     .btn-block {margin-top:10px;}
 
@@ -115,13 +148,47 @@ body {
         background-color: #55C754;
         border-color: #35B535;
     }
+    
+    .opener {
+      display:none;
+    }
+    
+    @media (max-width: 700px) {
+      border-radius: 4px;
+      top:110px;
+      left:0;
+      width: 300px;
+      margin-left: -290px;
+      transition: margin-left 0.3s;
+      max-width:none;
+      display:block;
+      
+      &:hover,&:active,&:focus {
+        margin-left:0;
+      }
+      .opener {
+        display:block;
+        position:absolute;
+        top:0;right:-13px;
+        width:15px;height:100%;
+        background-color:#fff;
+        box-shadow: 4px 2px 7px #aaa;
+        z-index:-1;
+        border-radius:0 4px 4px 0;
+        transition:all 0.3s;
+        
+        i {
+          position:absolute;top:50%;margin-top:-0.5em;right:5px;
+        }
+      }
+    }
 }
 
 
 #controls {
     position: fixed;
     width: 500px;
-    right: 0;
+    right: 50px;
     bottom:0;
     top: auto;
     bottom: 10px;
@@ -134,8 +201,8 @@ body {
     transition:opacity 0.5s;
     box-shadow:0 2px 8px #aaa;
     min-height:30px;
-    border-radius:4px 0 0 4px;
-
+    border-radius:4px;
+    max-width: 80%;
 
     &:hover {opacity:1;}
 
@@ -824,7 +891,28 @@ body {
         color:#296FFF;
     }
 
-
+    @media (max-width:700px) {
+        width:36px;
+        overflow:hidden;
+        margin-left:-14px;
+        transition: width 0.3s;
+        z-index:200;
+        bottom:80px;
+        
+        &:hover,&:focus,&:active {
+          width:200px;
+          margin-left:0px;
+          
+          .pull-left {
+            margin-left:-10px;
+          }
+        }
+        .pull-left {
+          width:190px;
+          margin-left:-10px;
+          transition: all 0.3s;
+        }
+    }
 
     li {
         margin-bottom:10px;
@@ -842,6 +930,16 @@ body {
         }
 
         &.active .block {opacity:1}
+        
+        @media (max-width: 700px) {
+          clear:both;
+          float:left;
+          padding:2px 0;
+          
+          .block {
+            height:18px;
+          }
+        }
     }
     .qta {
         width:30px;
