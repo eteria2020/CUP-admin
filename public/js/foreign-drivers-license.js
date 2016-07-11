@@ -14,6 +14,12 @@ $(function() {
         iDisplayLength: 10
     };
 
+   var rowPerPage = Object.freeze({
+        option1: dataTableVars.iDisplayLength,
+        option2: dataTableVars.iDisplayLength * 2,
+        option3: dataTableVars.iDisplayLength * 3
+    });
+
     dataTableVars.searchValue.val("");
     dataTableVars.column.val("select");
 
@@ -25,20 +31,22 @@ $(function() {
         var confirmText;
         var status;
         if (data.e.valid) {
-            confirmText = 'id: ' + data.cu.id + ' ' + data.e.customerName + ' ' + data.e.customerSurname + ' ' + translate("confirmRevoke");
-            return '<span class="validation-btn-info btn btn-success btn-xs disabled">' + translate("valid") + '</span>' +
-                '<a href="/customers/foreign-drivers-license/revoke/' +
-                data.e.id +
-                '" onclick="return confirm(\'' + confirmText + '\')" class="validation-btn btn btn-default btn-xs">'+translate("revoke")+'</a>';
+            confirmText = "id: " + data.cu.id + " " + data.e.customerName + " " + data.e.customerSurname +
+                " " + translate("confirmRevoke");
+            return "<span class=\"validation-btn-info btn btn-success btn-xs disabled\">" + translate("valid") + "</span>" +
+                "<a href=\"/customers/foreign-drivers-license/revoke/" + data.e.id +
+                "\" onclick=\"return confirm('" + confirmText + "')\" class=\"validation-btn btn btn-default btn-xs\">" +
+                translate("revoke") + "</a>";
         }
         status = data.e.first_time ?
-            '<span class="validation-btn-info btn btn-warning btn-xs disabled">' + translate("pending") + '</span>' :
-            '<span class="validation-btn-info btn btn-danger btn-xs disabled">' + translate("revoked") + '</span>';
-        confirmText = 'id: ' + data.cu.id + ' ' + data.e.customerName + ' ' + data.e.customerSurname + ' ' + translate("confirmValidate");
+            "<span class=\"validation-btn-info btn btn-warning btn-xs disabled\">" + translate("pending") + "</span>" :
+            "<span class=\"validation-btn-info btn btn-danger btn-xs disabled\">" + translate("revoked") + "</span>";
+        confirmText = "id: " + data.cu.id + " " + data.e.customerName + " " + data.e.customerSurname +
+            " " + translate("confirmValidate");
         return status +
-            '<a href="/customers/foreign-drivers-license/validate/' +
-            data.e.id +
-            '" onclick="return confirm(\'' + confirmText + '\')" class="validation-btn btn btn-default btn-xs">'+translate("validate")+'</a>';
+            "<a href=\"/customers/foreign-drivers-license/validate/" + data.e.id +
+            "\" onclick=\"return confirm('" + confirmText + "')\" class=\"validation-btn btn btn-default btn-xs\">" +
+            translate("validate") + "</a>";
   }
 
     table.dataTable({
@@ -85,8 +93,8 @@ $(function() {
                 sortable: false,
                 data: "cu.id",
                 render: function (data) {
-                    return '<a href="/customers/foreign-drivers-license/download/' + data +
-                        '" class="validation-btn btn btn-default btn-xs">' + translate("download") + '</a>';
+                    return "<a href=\"/customers/foreign-drivers-license/download/" + data +
+                        "\" class=\"validation-btn btn btn-default btn-xs\">" + translate("download") + "</a>";
                 }
             },
             {
@@ -96,8 +104,7 @@ $(function() {
             }
         ],
         "lengthMenu": [
-            [dataTableVars.iDisplayLength, 50, 100],
-            [dataTableVars.iDisplayLength, 50, 100]
+            rowPerPage.option1, rowPerPage.option2, rowPerPage.option3
         ],
         "pageLength": dataTableVars.iDisplayLength,
         "pagingType": "bootstrap_full_number",
