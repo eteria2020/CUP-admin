@@ -100,7 +100,6 @@ class NotificationsController extends AbstractActionController
         try {
             // Get the notification Object
             $notification = $this->notificationsService->getNotificationById($id);
-
         } catch (DriverException $e) {
             $this->flashMessenger()->addErrorMessage($translator->translate('Il valore identificativo della notifica non è un valore accettato.'));
         }
