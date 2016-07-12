@@ -734,32 +734,32 @@ return [
                 'may_terminate' => true,
                 'child_routes' => [
                     'datatable' => [
-                        'type'    => 'Literal',
+                        'type' => 'Literal',
                         'options' => [
-                            'route'    => '/datatable',
+                            'route' => '/datatable',
                             'defaults' => [
-                                'action'        => 'datatable',
+                                'action' => 'datatable',
                             ],
                         ],
                     ],
                     'add' => [
-                        'type'    => 'Literal',
+                        'type' => 'Literal',
                         'options' => [
-                            'route'    => '/add',
+                            'route' => '/add',
                             'defaults' => [
-                                'action'        => 'add',
+                                'action' => 'add',
                             ],
                         ],
                     ],
                     'edit' => [
-                        'type'    => 'Segment',
+                        'type' => 'Segment',
                         'options' => [
-                            'route'    => '/edit/:id',
+                            'route' => '/edit/:id',
                             'constraints' => [
-                                'id'    => '[0-9]*'
+                                'id' => '[0-9]*',
                             ],
                             'defaults' => [
-                                'action'        => 'edit',
+                                'action' => 'edit',
                             ],
                         ],
                     ],
