@@ -11,8 +11,8 @@ use Zend\Http\Response;
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
 use Zend\View\Model\JsonModel;
+use Zend\Session\Container;
 use DoctrineModule\Stdlib\Hydrator\DoctrineObject as DoctrineHydrator;
-
 
 class UsersController extends AbstractActionController
 {
@@ -32,21 +32,46 @@ class UsersController extends AbstractActionController
     private $hydrator;
 
     /**
+     * @var Container
+     */
+    private $datatableFiltersSessionContainer;
+
+    /**
      * @param UsersService $usersService
+     * @param Form $userForm
+     * @param DoctrineHydrator $hydrator
+     * @param Container $datatableFiltersSessionContainer
      */
     public function __construct(
         UsersService $usersService,
         Form $userForm,
-        DoctrineHydrator $hydrator
+        DoctrineHydrator $hydrator,
+        Container $datatableFiltersSessionContainer
     ) {
         $this->usersService = $usersService;
         $this->userForm = $userForm;
         $this->hydrator = $hydrator;
+        $this->datatableFiltersSessionContainer = $datatableFiltersSessionContainer;
+    }
+
+    /**
+     * This method return an array containing the DataTable filters,
+     * from a Session Container.
+     *
+     * @return array
+     */
+    private function getDataTableSessionFilters()
+    {
+        return $this->datatableFiltersSessionContainer->offsetGet('Webuser');
     }
 
     public function indexAction()
     {
-        return new ViewModel([]);
+        $sessionDatatableFilters = $this->getDataTableSessionFilters();
+
+        return new ViewModel([
+            'filters' => json_encode($sessionDatatableFilters),
+        ]);
     }
 
     public function addAction()
@@ -64,15 +89,11 @@ class UsersController extends AbstractActionController
             $email->getValidatorChain()->attach($validator);
 
             if ($form->isValid()) {
-
                 try {
-
                     $this->usersService->saveData($form->getData());
                     $this->flashMessenger()->addSuccessMessage($translator->translate('Utente creato con successo!'));
-
                 } catch (\Exception $e) {
                     $this->flashMessenger()->addErrorMessage($translator->translate('Si è verificato un errore applicativo. L\'assistenza tecnica è già al corrente, ci scusiamo per l\'inconveniente'));
-
                 }
 
                 return $this->redirect()->toRoute('users');
@@ -105,7 +126,6 @@ class UsersController extends AbstractActionController
         $form->setData(['user' => $userData]);
 
         if ($this->getRequest()->isPost()) {
-
             $postData = $this->getRequest()->getPost()->toArray();
             $postData['user']['id'] = $I_user->getId();
             $form->setData($postData);
@@ -120,16 +140,11 @@ class UsersController extends AbstractActionController
             $email->getValidatorChain()->attach($validator);
 
             if ($form->isValid()) {
-
                 try {
-
                     $this->usersService->saveData($form->getData(), $userData['password']);
                     $this->flashMessenger()->addSuccessMessage($translator->translate('Utente modificato con successo!'));
-
                 } catch (\Exception $e) {
-
                     $this->flashMessenger()->addErrorMessage($translator->translate('Si è verificato un errore applicativo. L\'assistenza tecnica è già al corrente, ci scusiamo per l\'inconveniente'));
-
                 }
 
                 return $this->redirect()->toRoute('users');
@@ -150,12 +165,12 @@ class UsersController extends AbstractActionController
         $usersTotal = $this->usersService->getTotalUsers();
         $recordsFiltered = $this->getRecordsFiltered($filters, $usersTotal);
 
-        return new JsonModel(array(
-            'draw'            => $this->params()->fromQuery('sEcho', 0),
-            'recordsTotal'    => $usersTotal,
+        return new JsonModel([
+            'draw' => $this->params()->fromQuery('sEcho', 0),
+            'recordsTotal' => $usersTotal,
             'recordsFiltered' => $recordsFiltered,
-            'data'            => $dataDataTable
-        ));
+            'data' => $dataDataTable,
+        ]);
     }
 
     private function getRecordsFiltered($filters, $usersTotal)

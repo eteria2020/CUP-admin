@@ -15,9 +15,18 @@ $(function() {
     };
 
     var filterWithNull = false;
+    var rowPerPage = Object.freeze({
+        option1: dataTableVars.iDisplayLength,
+        option2: dataTableVars.iDisplayLength * 2,
+        option3: dataTableVars.iDisplayLength * 3
+    });
 
     dataTableVars.searchValue.val("");
     dataTableVars.column.val("select");
+
+    if ( typeof getSessionVars !== "undefined"){
+        getSessionVars(filters, dataTableVars);
+    }
 
     table.dataTable({
         "processing": true,
@@ -34,8 +43,7 @@ $(function() {
                 "success": function (msg) {
                     fnCallback(msg);
                     $("#total-users").html(msg.recordsTotal);
-                },
-                "error": function() {}
+                }
             });
         },
         "fnServerParams": function ( aoData ) {
@@ -68,8 +76,7 @@ $(function() {
             }
         ],
         "lengthMenu": [
-            [dataTableVars.iDisplayLength, 20, 100],
-            [dataTableVars.iDisplayLength, 20, 100]
+            rowPerPage.option1, rowPerPage.option2, rowPerPage.option3
         ],
         "pageLength": dataTableVars.iDisplayLength,
         "pagingType": "bootstrap_full_number",
