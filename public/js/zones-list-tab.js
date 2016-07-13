@@ -183,6 +183,11 @@ $(function () {
                 "success": function (msg) {
                     fnCallback(msg);
                     renderTable(msg.data);
+                },
+                "statusCode": {
+                    200: function(data, textStatus, jqXHR) {
+                        loginRedirect(data, textStatus, jqXHR);
+                    }
                 }
             });
         },

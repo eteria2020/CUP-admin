@@ -61,7 +61,12 @@ $(function() {
                 "type": "POST",
                 "url": sSource,
                 "data": aoData,
-                "success": fnCallback
+                "success": fnCallback,
+                "statusCode": {
+                    200: function(data, textStatus, jqXHR) {
+                        loginRedirect(data, textStatus, jqXHR);
+                    }
+                }
             });
         },
         "fnServerParams": function (aoData) {
