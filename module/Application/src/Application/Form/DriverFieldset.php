@@ -168,7 +168,7 @@ class DriverFieldset extends Fieldset implements InputFilterProviderInterface
                         'name' => 'Date'
                     ],
                     [
-                        'name' => 'Application\Form\Validator\OneYearDate'
+                        'name' => 'Application\Form\Validator\NotFutureDate'
                     ]
                 ]
             ],

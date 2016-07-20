@@ -4,12 +4,12 @@ namespace Application\Form\Validator;
 
 use Zend\Validator\AbstractValidator;
 
-class OneYearDate extends AbstractValidator
+class NotFutureDate extends AbstractValidator
 {
-    const ONEYEAR = 'oneYearDate';
+    const NOT_FUTURE = 'oneYearDate';
 
     protected $messageTemplates = [
-        self::ONEYEAR => "E' necessario avere la patente da almeno un anno"
+        self::NOT_FUTURE => "La data della patente non può essere nel futuro"
     ];
 
     public function isValid($value)
@@ -17,10 +17,9 @@ class OneYearDate extends AbstractValidator
         $this->setValue($value);
 
         $date = date_create($value);
-        $oneYear = date_create("-1 years");
 
-        if ($date > $oneYear) {
-            $this->error(self::ONEYEAR);
+        if ($date > date_create()) {
+            $this->error(self::NOT_FUTURE);
             return false;
         }
 
