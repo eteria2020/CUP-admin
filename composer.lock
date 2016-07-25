@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "7120cf8baaf7cdc6c9b36f60d28fbd5f",
+    "hash": "8677a4de4a3e11a3e929b6aecd4c75e4",
     "content-hash": "003977696f98bb8cb11e6fb9396f22ef",
     "packages": [
         {
@@ -1782,7 +1782,7 @@
             "source": {
                 "type": "git",
                 "url": "ssh://git@gitlab.bulweria.com:1022/cup-web/core.git",
-                "reference": "4d0543bcfb13178d74c1dd6afe647e2e7f3c4c86"
+                "reference": "c2cc317b49a7c2c113f795fccfb36e63a8e595be"
             },
             "require": {
                 "doctrine/doctrine-orm-module": "0.*",
@@ -1803,7 +1803,7 @@
                 }
             },
             "description": "Core ZF2 module for Sharengo apps",
-            "time": "2016-07-11 14:53:14"
+            "time": "2016-07-25 12:41:00"
         },
         {
             "name": "mvlabs/zf2-multilanguage",
@@ -2651,7 +2651,7 @@
                     "name": "Manuel Pichler",
                     "email": "github@manuel-pichler.de",
                     "homepage": "https://github.com/manuelpichler",
-                    "role": "Project founder"
+                    "role": "Project Founder"
                 },
                 {
                     "name": "Other contributors",
