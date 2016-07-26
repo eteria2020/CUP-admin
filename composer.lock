@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "4cb73824159b940a57123c0fb59d0427",
-    "content-hash": "39368425a02d3ddc3b0446983d0380c5",
+    "hash": "11c70f6a3ec266cbeb228e1f02477ff8",
+    "content-hash": "ba4743f217fd4967f2133d97ab4563e9",
     "packages": [
         {
             "name": "bjyoungblood/bjy-authorize",
@@ -112,7 +112,7 @@
             ],
             "authors": [
                 {
-                    "name": "Derek J. Lambert",
+                    "name": "Derek Lambert",
                     "email": "dlambert@dereklambert.com"
                 }
             ],
@@ -131,6 +131,28 @@
                 "spatial"
             ],
             "time": "2014-03-17 13:45:28"
+        },
+        {
+            "name": "cup-web/admin-business-module",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "ssh://git@gitlab.bulweria.com/cup-web/admin-business-module.git",
+                "reference": "8471c5a7a02969ee5ad4341de1319ad9ec39e128"
+            },
+            "require": {
+                "php": ">=5.4",
+                "rwoverdijk/assetmanager": "1.4.*",
+                "zendframework/zendframework": "2.4.*"
+            },
+            "type": "library",
+            "autoload": {
+                "classmap": [
+                    "./Module.php"
+                ]
+            },
+            "description": "Business area in Admin",
+            "time": "2016-05-09 10:45:01"
         },
         {
             "name": "cup-web/cartasi",
@@ -153,6 +175,29 @@
             },
             "description": "Cartasi module for Sharengo",
             "time": "2016-05-06 13:16:50"
+        },
+        {
+            "name": "cup-web/core-business",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "ssh://git@gitlab.bulweria.com/cup-web/core-business.git",
+                "reference": "2cafcb542c0ad113ec4840b83e747979cc8506e9"
+            },
+            "require": {
+                "doctrine/doctrine-orm-module": "0.9.*",
+                "doctrine/migrations": "^1.2",
+                "php": ">=5.4",
+                "zendframework/zendframework": "2.4.*"
+            },
+            "type": "library",
+            "autoload": {
+                "classmap": [
+                    "./Module.php"
+                ]
+            },
+            "description": "Business Core module",
+            "time": "2016-04-22 14:23:37"
         },
         {
             "name": "doctrine/annotations",
@@ -907,6 +952,74 @@
             "time": "2014-09-09 13:34:57"
         },
         {
+            "name": "doctrine/migrations",
+            "version": "v1.2.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/doctrine/migrations.git",
+                "reference": "6b70c2c4484c02878743929bb3cd3fdbf41193a6"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/doctrine/migrations/zipball/6b70c2c4484c02878743929bb3cd3fdbf41193a6",
+                "reference": "6b70c2c4484c02878743929bb3cd3fdbf41193a6",
+                "shasum": ""
+            },
+            "require": {
+                "doctrine/dbal": "~2.2",
+                "php": ">=5.4.0",
+                "symfony/console": "~2.3|~3.0",
+                "symfony/yaml": "~2.3|~3.0"
+            },
+            "require-dev": {
+                "doctrine/coding-standard": "dev-master",
+                "doctrine/orm": "2.*",
+                "johnkary/phpunit-speedtrap": "~1.0@dev",
+                "mockery/mockery": "^0.9.4",
+                "phpunit/phpunit": "~4.7",
+                "satooshi/php-coveralls": "0.6.*"
+            },
+            "bin": [
+                "bin/doctrine-migrations"
+            ],
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "v1.1.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Doctrine\\DBAL\\Migrations\\": "lib/Doctrine/DBAL/Migrations"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "LGPL-2.1"
+            ],
+            "authors": [
+                {
+                    "name": "Benjamin Eberlei",
+                    "email": "kontakt@beberlei.de"
+                },
+                {
+                    "name": "Jonathan Wage",
+                    "email": "jonwage@gmail.com"
+                },
+                {
+                    "name": "Michael Simonson",
+                    "email": "contact@mikesimonson.com"
+                }
+            ],
+            "description": "Database Schema migrations using Doctrine DBAL",
+            "homepage": "http://www.doctrine-project.org",
+            "keywords": [
+                "database",
+                "migrations"
+            ],
+            "time": "2016-01-07 21:28:50"
+        },
+        {
             "name": "doctrine/mongodb",
             "version": "1.2.1",
             "source": {
@@ -1136,6 +1249,102 @@
             "time": "2016-01-05 21:34:58"
         },
         {
+            "name": "guzzle/guzzle",
+            "version": "v3.9.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/guzzle/guzzle3.git",
+                "reference": "0645b70d953bc1c067bbc8d5bc53194706b628d9"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/guzzle/guzzle3/zipball/0645b70d953bc1c067bbc8d5bc53194706b628d9",
+                "reference": "0645b70d953bc1c067bbc8d5bc53194706b628d9",
+                "shasum": ""
+            },
+            "require": {
+                "ext-curl": "*",
+                "php": ">=5.3.3",
+                "symfony/event-dispatcher": "~2.1"
+            },
+            "replace": {
+                "guzzle/batch": "self.version",
+                "guzzle/cache": "self.version",
+                "guzzle/common": "self.version",
+                "guzzle/http": "self.version",
+                "guzzle/inflection": "self.version",
+                "guzzle/iterator": "self.version",
+                "guzzle/log": "self.version",
+                "guzzle/parser": "self.version",
+                "guzzle/plugin": "self.version",
+                "guzzle/plugin-async": "self.version",
+                "guzzle/plugin-backoff": "self.version",
+                "guzzle/plugin-cache": "self.version",
+                "guzzle/plugin-cookie": "self.version",
+                "guzzle/plugin-curlauth": "self.version",
+                "guzzle/plugin-error-response": "self.version",
+                "guzzle/plugin-history": "self.version",
+                "guzzle/plugin-log": "self.version",
+                "guzzle/plugin-md5": "self.version",
+                "guzzle/plugin-mock": "self.version",
+                "guzzle/plugin-oauth": "self.version",
+                "guzzle/service": "self.version",
+                "guzzle/stream": "self.version"
+            },
+            "require-dev": {
+                "doctrine/cache": "~1.3",
+                "monolog/monolog": "~1.0",
+                "phpunit/phpunit": "3.7.*",
+                "psr/log": "~1.0",
+                "symfony/class-loader": "~2.1",
+                "zendframework/zend-cache": "2.*,<2.3",
+                "zendframework/zend-log": "2.*,<2.3"
+            },
+            "suggest": {
+                "guzzlehttp/guzzle": "Guzzle 5 has moved to a new package name. The package you have installed, Guzzle 3, is deprecated."
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "3.9-dev"
+                }
+            },
+            "autoload": {
+                "psr-0": {
+                    "Guzzle": "src/",
+                    "Guzzle\\Tests": "tests/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Michael Dowling",
+                    "email": "mtdowling@gmail.com",
+                    "homepage": "https://github.com/mtdowling"
+                },
+                {
+                    "name": "Guzzle Community",
+                    "homepage": "https://github.com/guzzle/guzzle/contributors"
+                }
+            ],
+            "description": "PHP HTTP client. This library is deprecated in favor of https://packagist.org/packages/guzzlehttp/guzzle",
+            "homepage": "http://guzzlephp.org/",
+            "keywords": [
+                "client",
+                "curl",
+                "framework",
+                "http",
+                "http client",
+                "rest",
+                "web service"
+            ],
+            "abandoned": "guzzlehttp/guzzle",
+            "time": "2015-03-18 18:23:50"
+        },
+        {
             "name": "h4cc/wkhtmltopdf-amd64",
             "version": "0.12.0",
             "source": {
@@ -1219,6 +1428,48 @@
                 "test"
             ],
             "time": "2015-05-11 14:41:42"
+        },
+        {
+            "name": "ircmaxell/password-compat",
+            "version": "v1.0.4",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/ircmaxell/password_compat.git",
+                "reference": "5c5cde8822a69545767f7c7f3058cb15ff84614c"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/ircmaxell/password_compat/zipball/5c5cde8822a69545767f7c7f3058cb15ff84614c",
+                "reference": "5c5cde8822a69545767f7c7f3058cb15ff84614c",
+                "shasum": ""
+            },
+            "require-dev": {
+                "phpunit/phpunit": "4.*"
+            },
+            "type": "library",
+            "autoload": {
+                "files": [
+                    "lib/password.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Anthony Ferrara",
+                    "email": "ircmaxell@php.net",
+                    "homepage": "http://blog.ircmaxell.com"
+                }
+            ],
+            "description": "A compatibility library for the proposed simplified password hashing algorithm: https://wiki.php.net/rfc/password_hash",
+            "homepage": "https://github.com/ircmaxell/password_compat",
+            "keywords": [
+                "hashing",
+                "password"
+            ],
+            "time": "2014-11-20 16:49:30"
         },
         {
             "name": "knplabs/knp-snappy",
@@ -1563,6 +1814,40 @@
             "time": "2014-10-30 22:58:02"
         },
         {
+            "name": "mvlabs/mvlabs-payments",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "ssh://git@git.mvlabs.it:4222/internals/payments.git",
+                "reference": "218aaec6464614cef1de3323b72ded248509b0b7"
+            },
+            "require": {
+                "ramsey/uuid": "^3.4",
+                "zendframework/zend-eventmanager": "^2.4"
+            },
+            "require-dev": {
+                "mockery/mockery": "^0.9.5",
+                "phpunit/phpunit": "^5.4"
+            },
+            "suggest": {
+                "omnipay/omnipay": "Payment processing library"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "MvlabsPayments\\": "src/"
+                }
+            },
+            "license": [
+                "MIT"
+            ],
+            "description": "Package that handles payments",
+            "keywords": [
+                "payment"
+            ],
+            "time": "2016-07-14 16:05:16"
+        },
+        {
             "name": "mvlabs/mvlabs-snappy",
             "version": "0.2.0",
             "source": {
@@ -1617,12 +1902,66 @@
             "time": "2015-03-30 15:54:03"
         },
         {
+            "name": "mvlabs/omnipay-cartasi",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "ssh://git@git.mvlabs.it:4222/internals/omnipay-cartasi.git",
+                "reference": "10873be4c3ed27ce55caa7c9fd8acf65cefa17ac"
+            },
+            "require": {
+                "omnipay/common": "~2.0"
+            },
+            "require-dev": {
+                "omnipay/tests": "~2.0",
+                "satooshi/php-coveralls": "^0.7.1"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Omnipay\\Cartasi\\": "src"
+                }
+            },
+            "autoload-dev": {
+                "psr-4": {
+                    "Omnipay\\Cartasi\\": "tests"
+                }
+            },
+            "scripts": {
+                "test": [
+                    "phpunit"
+                ]
+            },
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Marco Perone",
+                    "email": "pasafama@gmail.com",
+                    "homepage": "http://marcosh.github.io"
+                }
+            ],
+            "description": "Cartasi driver for the Omnipay payment processing library",
+            "homepage": "https://github.com/mvlabs/omnipay-2checkout",
+            "keywords": [
+                "cartasi",
+                "omnipay"
+            ],
+            "time": "2016-07-22 09:03:51"
+        },
+        {
             "name": "mvlabs/sharengo-coremodule",
             "version": "dev-master",
             "source": {
                 "type": "git",
-                "url": "ssh://git@gitlab.bulweria.com:1022/cup-web/core.git",
-                "reference": "e4f1d69dffbe7eeb082b1d4183b4a42f18298764"
+                "url": "ssh://git@gitlab.bulweria.com/cup-web/core.git",
+                "reference": "1e6d0fbf39b5fd3b7d98aa7f1f449ff23a89b0c4"
             },
             "require": {
                 "doctrine/doctrine-orm-module": "0.*",
@@ -1730,6 +2069,104 @@
             "time": "2015-09-25 11:13:11"
         },
         {
+            "name": "omnipay/common",
+            "version": "v2.5.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/thephpleague/omnipay-common.git",
+                "reference": "731386e54688405a475d6dd43cd6397728cd709e"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/thephpleague/omnipay-common/zipball/731386e54688405a475d6dd43cd6397728cd709e",
+                "reference": "731386e54688405a475d6dd43cd6397728cd709e",
+                "shasum": ""
+            },
+            "require": {
+                "guzzle/guzzle": "~3.9",
+                "php": ">=5.3.2",
+                "symfony/http-foundation": "~2.1|~3.0"
+            },
+            "require-dev": {
+                "omnipay/tests": "~2.0",
+                "squizlabs/php_codesniffer": "~1.5"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "2.5.x-dev"
+                },
+                "gateways": [
+                    "AuthorizeNet_AIM",
+                    "AuthorizeNet_SIM",
+                    "Buckaroo_CreditCard",
+                    "Buckaroo_Ideal",
+                    "Buckaroo_PayPal",
+                    "CardSave",
+                    "Coinbase",
+                    "Dummy",
+                    "Eway_Rapid",
+                    "FirstData_Connect",
+                    "GoCardless",
+                    "Manual",
+                    "Migs_ThreeParty",
+                    "Migs_TwoParty",
+                    "Mollie",
+                    "MultiSafepay",
+                    "Netaxept",
+                    "NetBanx",
+                    "PayFast",
+                    "Payflow_Pro",
+                    "PaymentExpress_PxPay",
+                    "PaymentExpress_PxPost",
+                    "PayPal_Express",
+                    "PayPal_Pro",
+                    "Pin",
+                    "SagePay_Direct",
+                    "SagePay_Server",
+                    "SecurePay_DirectPost",
+                    "Stripe",
+                    "TargetPay_Directebanking",
+                    "TargetPay_Ideal",
+                    "TargetPay_Mrcash",
+                    "WorldPay"
+                ]
+            },
+            "autoload": {
+                "psr-0": {
+                    "Omnipay\\Common\\": "src/"
+                },
+                "classmap": [
+                    "src/Omnipay/Omnipay.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Adrian Macneil",
+                    "email": "adrian@adrianmacneil.com"
+                },
+                {
+                    "name": "Omnipay Contributors",
+                    "homepage": "https://github.com/thephpleague/omnipay-common/contributors"
+                }
+            ],
+            "description": "Common components for Omnipay payment processing library",
+            "homepage": "https://github.com/thephpleague/omnipay-common",
+            "keywords": [
+                "gateway",
+                "merchant",
+                "omnipay",
+                "pay",
+                "payment",
+                "purchase"
+            ],
+            "time": "2016-07-07 09:52:09"
+        },
+        {
             "name": "oro/doctrine-extensions",
             "version": "1.0.12",
             "source": {
@@ -1782,6 +2219,134 @@
                 "type"
             ],
             "time": "2016-03-29 10:30:36"
+        },
+        {
+            "name": "paragonie/random_compat",
+            "version": "v2.0.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/paragonie/random_compat.git",
+                "reference": "088c04e2f261c33bed6ca5245491cfca69195ccf"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/paragonie/random_compat/zipball/088c04e2f261c33bed6ca5245491cfca69195ccf",
+                "reference": "088c04e2f261c33bed6ca5245491cfca69195ccf",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.2.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "4.*|5.*"
+            },
+            "suggest": {
+                "ext-libsodium": "Provides a modern crypto API that can be used to generate random bytes."
+            },
+            "type": "library",
+            "autoload": {
+                "files": [
+                    "lib/random.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Paragon Initiative Enterprises",
+                    "email": "security@paragonie.com",
+                    "homepage": "https://paragonie.com"
+                }
+            ],
+            "description": "PHP 5.x polyfill for random_bytes() and random_int() from PHP 7",
+            "keywords": [
+                "csprng",
+                "pseudorandom",
+                "random"
+            ],
+            "time": "2016-04-03 06:00:07"
+        },
+        {
+            "name": "ramsey/uuid",
+            "version": "3.4.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/ramsey/uuid.git",
+                "reference": "b4fe3b7387cb323fd15ad5837cae992422c9fa5c"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/ramsey/uuid/zipball/b4fe3b7387cb323fd15ad5837cae992422c9fa5c",
+                "reference": "b4fe3b7387cb323fd15ad5837cae992422c9fa5c",
+                "shasum": ""
+            },
+            "require": {
+                "paragonie/random_compat": "^1.0|^2.0",
+                "php": ">=5.4"
+            },
+            "replace": {
+                "rhumsaa/uuid": "self.version"
+            },
+            "require-dev": {
+                "apigen/apigen": "^4.1",
+                "codeception/aspect-mock": "1.0.0",
+                "goaop/framework": "1.0.0-alpha.2",
+                "ircmaxell/random-lib": "^1.1",
+                "jakub-onderka/php-parallel-lint": "^0.9.0",
+                "mockery/mockery": "^0.9.4",
+                "moontoast/math": "^1.1",
+                "phpunit/phpunit": "^4.7|^5.0",
+                "satooshi/php-coveralls": "^0.6.1",
+                "squizlabs/php_codesniffer": "^2.3"
+            },
+            "suggest": {
+                "ext-libsodium": "Provides the PECL libsodium extension for use with the SodiumRandomGenerator",
+                "ext-uuid": "Provides the PECL UUID extension for use with the PeclUuidTimeGenerator and PeclUuidRandomGenerator",
+                "ircmaxell/random-lib": "Provides RandomLib for use with the RandomLibAdapter",
+                "moontoast/math": "Provides support for converting UUID to 128-bit integer (in string form).",
+                "ramsey/uuid-console": "A console application for generating UUIDs with ramsey/uuid",
+                "ramsey/uuid-doctrine": "Allows the use of Ramsey\\Uuid\\Uuid as Doctrine field type."
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "3.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Ramsey\\Uuid\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Marijn Huizendveld",
+                    "email": "marijn.huizendveld@gmail.com"
+                },
+                {
+                    "name": "Thibaud Fabre",
+                    "email": "thibaud@aztech.io"
+                },
+                {
+                    "name": "Ben Ramsey",
+                    "email": "ben@benramsey.com",
+                    "homepage": "https://benramsey.com"
+                }
+            ],
+            "description": "Formerly rhumsaa/uuid. A PHP 5.4+ library for generating RFC 4122 version 1, 3, 4, and 5 universally unique identifiers (UUID).",
+            "homepage": "https://github.com/ramsey/uuid",
+            "keywords": [
+                "guid",
+                "identifier",
+                "uuid"
+            ],
+            "time": "2016-04-24 00:30:41"
         },
         {
             "name": "rwoverdijk/assetmanager",
@@ -1905,6 +2470,121 @@
             "time": "2016-01-14 08:33:16"
         },
         {
+            "name": "symfony/event-dispatcher",
+            "version": "v2.8.8",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/symfony/event-dispatcher.git",
+                "reference": "b180b70439dca70049b6b9b7e21d75e6e5d7aca9"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/symfony/event-dispatcher/zipball/b180b70439dca70049b6b9b7e21d75e6e5d7aca9",
+                "reference": "b180b70439dca70049b6b9b7e21d75e6e5d7aca9",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.9"
+            },
+            "require-dev": {
+                "psr/log": "~1.0",
+                "symfony/config": "~2.0,>=2.0.5|~3.0.0",
+                "symfony/dependency-injection": "~2.6|~3.0.0",
+                "symfony/expression-language": "~2.6|~3.0.0",
+                "symfony/stopwatch": "~2.3|~3.0.0"
+            },
+            "suggest": {
+                "symfony/dependency-injection": "",
+                "symfony/http-kernel": ""
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "2.8-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Symfony\\Component\\EventDispatcher\\": ""
+                },
+                "exclude-from-classmap": [
+                    "/Tests/"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Fabien Potencier",
+                    "email": "fabien@symfony.com"
+                },
+                {
+                    "name": "Symfony Community",
+                    "homepage": "https://symfony.com/contributors"
+                }
+            ],
+            "description": "Symfony EventDispatcher Component",
+            "homepage": "https://symfony.com",
+            "time": "2016-06-29 05:29:29"
+        },
+        {
+            "name": "symfony/http-foundation",
+            "version": "v2.8.8",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/symfony/http-foundation.git",
+                "reference": "7a55440a2bebd37b8bd06f99f5def1ddf0aa9249"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/symfony/http-foundation/zipball/7a55440a2bebd37b8bd06f99f5def1ddf0aa9249",
+                "reference": "7a55440a2bebd37b8bd06f99f5def1ddf0aa9249",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.9",
+                "symfony/polyfill-mbstring": "~1.1",
+                "symfony/polyfill-php54": "~1.0",
+                "symfony/polyfill-php55": "~1.0"
+            },
+            "require-dev": {
+                "symfony/expression-language": "~2.4|~3.0.0"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "2.8-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Symfony\\Component\\HttpFoundation\\": ""
+                },
+                "exclude-from-classmap": [
+                    "/Tests/"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Fabien Potencier",
+                    "email": "fabien@symfony.com"
+                },
+                {
+                    "name": "Symfony Community",
+                    "homepage": "https://symfony.com/contributors"
+                }
+            ],
+            "description": "Symfony HttpFoundation Component",
+            "homepage": "https://symfony.com",
+            "time": "2016-06-29 07:02:14"
+        },
+        {
             "name": "symfony/polyfill-mbstring",
             "version": "v1.1.1",
             "source": {
@@ -1964,6 +2644,120 @@
             "time": "2016-01-20 09:13:37"
         },
         {
+            "name": "symfony/polyfill-php54",
+            "version": "v1.2.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/symfony/polyfill-php54.git",
+                "reference": "34d761992f6f2cc6092cc0e5e93f38b53ba5e4f1"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/symfony/polyfill-php54/zipball/34d761992f6f2cc6092cc0e5e93f38b53ba5e4f1",
+                "reference": "34d761992f6f2cc6092cc0e5e93f38b53ba5e4f1",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.3"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.2-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Symfony\\Polyfill\\Php54\\": ""
+                },
+                "files": [
+                    "bootstrap.php"
+                ],
+                "classmap": [
+                    "Resources/stubs"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Nicolas Grekas",
+                    "email": "p@tchwork.com"
+                },
+                {
+                    "name": "Symfony Community",
+                    "homepage": "https://symfony.com/contributors"
+                }
+            ],
+            "description": "Symfony polyfill backporting some PHP 5.4+ features to lower PHP versions",
+            "homepage": "https://symfony.com",
+            "keywords": [
+                "compatibility",
+                "polyfill",
+                "portable",
+                "shim"
+            ],
+            "time": "2016-05-18 14:26:46"
+        },
+        {
+            "name": "symfony/polyfill-php55",
+            "version": "v1.2.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/symfony/polyfill-php55.git",
+                "reference": "bf2ff9ad6be1a4772cb873e4eea94d70daa95c6d"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/symfony/polyfill-php55/zipball/bf2ff9ad6be1a4772cb873e4eea94d70daa95c6d",
+                "reference": "bf2ff9ad6be1a4772cb873e4eea94d70daa95c6d",
+                "shasum": ""
+            },
+            "require": {
+                "ircmaxell/password-compat": "~1.0",
+                "php": ">=5.3.3"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.2-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Symfony\\Polyfill\\Php55\\": ""
+                },
+                "files": [
+                    "bootstrap.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Nicolas Grekas",
+                    "email": "p@tchwork.com"
+                },
+                {
+                    "name": "Symfony Community",
+                    "homepage": "https://symfony.com/contributors"
+                }
+            ],
+            "description": "Symfony polyfill backporting some PHP 5.5+ features to lower PHP versions",
+            "homepage": "https://symfony.com",
+            "keywords": [
+                "compatibility",
+                "polyfill",
+                "portable",
+                "shim"
+            ],
+            "time": "2016-05-18 14:26:46"
+        },
+        {
             "name": "symfony/process",
             "version": "v2.8.2",
             "source": {
@@ -2011,6 +2805,55 @@
             "description": "Symfony Process Component",
             "homepage": "https://symfony.com",
             "time": "2016-01-14 08:33:14"
+        },
+        {
+            "name": "symfony/yaml",
+            "version": "v2.8.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/symfony/yaml.git",
+                "reference": "34c8a4b51e751e7ea869b8262f883d008a2b81b8"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/symfony/yaml/zipball/34c8a4b51e751e7ea869b8262f883d008a2b81b8",
+                "reference": "34c8a4b51e751e7ea869b8262f883d008a2b81b8",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.9"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "2.8-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Symfony\\Component\\Yaml\\": ""
+                },
+                "exclude-from-classmap": [
+                    "/Tests/"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Fabien Potencier",
+                    "email": "fabien@symfony.com"
+                },
+                {
+                    "name": "Symfony Community",
+                    "homepage": "https://symfony.com/contributors"
+                }
+            ],
+            "description": "Symfony Yaml Component",
+            "homepage": "https://symfony.com",
+            "time": "2016-01-13 10:28:07"
         },
         {
             "name": "zendframework/zendframework",
@@ -2491,7 +3334,7 @@
                     "name": "Manuel Pichler",
                     "email": "github@manuel-pichler.de",
                     "homepage": "https://github.com/manuelpichler",
-                    "role": "Project Founder"
+                    "role": "Project founder"
                 },
                 {
                     "name": "Other contributors",
@@ -3478,55 +4321,6 @@
             "description": "Symfony Filesystem Component",
             "homepage": "https://symfony.com",
             "time": "2016-02-22 15:02:30"
-        },
-        {
-            "name": "symfony/yaml",
-            "version": "v2.8.2",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/symfony/yaml.git",
-                "reference": "34c8a4b51e751e7ea869b8262f883d008a2b81b8"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/symfony/yaml/zipball/34c8a4b51e751e7ea869b8262f883d008a2b81b8",
-                "reference": "34c8a4b51e751e7ea869b8262f883d008a2b81b8",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=5.3.9"
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "2.8-dev"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Symfony\\Component\\Yaml\\": ""
-                },
-                "exclude-from-classmap": [
-                    "/Tests/"
-                ]
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Fabien Potencier",
-                    "email": "fabien@symfony.com"
-                },
-                {
-                    "name": "Symfony Community",
-                    "homepage": "https://symfony.com/contributors"
-                }
-            ],
-            "description": "Symfony Yaml Component",
-            "homepage": "https://symfony.com",
-            "time": "2016-01-13 10:28:07"
         }
     ],
     "aliases": [],
@@ -3534,13 +4328,17 @@
     "stability-flags": {
         "mvlabs/sharengo-coremodule": 20,
         "cup-web/cartasi": 20,
+        "cup-web/core-business": 20,
+        "cup-web/admin-business-module": 20,
         "mvlabs/zf2-multilanguage": 20,
+        "mvlabs/mvlabs-payments": 20,
+        "mvlabs/omnipay-cartasi": 20,
         "phpmd/phpmd": 0
     },
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {
-        "php": ">=5.3.3"
+        "php": ">=5.4"
     },
     "platform-dev": []
 }
