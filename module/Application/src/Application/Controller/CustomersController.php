@@ -181,9 +181,15 @@ class CustomersController extends AbstractActionController
                     $postData['customer']['id'] = $customer->getId();
                     $postData['customer']['name'] = $customer->getName();
                     $postData['customer']['surname'] = $customer->getSurname();
-                    $postData['customer']['email'] = $customer->getEmail();
                     $postData['customer']['taxCode'] = $customer->getTaxCode();
                     $postData['customer']['birthDate'] = $customer->getBirthDate()->format('Y-m-d');
+
+                    // Check if Webuser can edit email
+                    $webuserRole = $this->identity()->getRole();
+                    $canEditEmail = $webuserRole == 'admin' || $webuserRole == 'superadmin';
+                    if (!$canEditEmail) {
+                        $postData['customer']['email'] = $customer->getEmail();
+                    }
 
                     // ensure vat is not NULL but a string
                     if (is_null($postData['customer']['vat'])) {
