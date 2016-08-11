@@ -52,10 +52,10 @@ $formSetting->setAttribute('action', $this->url('customers/edit', ['id' => $this
                         <div class="col-lg-4">
                             <div class="form-group">
                                 <label for="gender"><?= $this->translate("Email"); ?></label>
-                                <?php if ($this->canEditEmail) {
+                                <?php if ($this->isAllowed('customer', 'changeEmail')) {
                                     echo $this->formRow($form->get('customer')->get('email'));
                                 } else {
-                                    echo $this->formRow($form->get('customer')->get('email')->setAttribute('readonly', 'false'));
+                                    echo $this->formRow($form->get('customer')->get('email')->setAttribute('readonly', 'readonly'));
                                 }
                                 ?>
                             </div>

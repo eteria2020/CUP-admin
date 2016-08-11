@@ -1455,17 +1455,26 @@ return [
     'bjyauthorize' => [
         'resource_providers' => [
             'BjyAuthorize\Provider\Resource\Config' => [
+
+                // current roles mapped as resourcers (used for navigation ACL's)
                 'admin' => [],
                 'callcenter' => [],
                 'superadmin' => [],
+
+                // other resources
+                'customer' => [],
             ],
         ],
         'rule_providers' => [
             'BjyAuthorize\Provider\Rule\Config' => [
                 'allow' => [
+                    // for navigation
                     [['superadmin','admin'], 'admin'],
                     [['superadmin','admin','callcenter'], 'callcenter'],
                     [['superadmin'], 'superadmin'],
+
+                    // for limiting certains operations
+                    [['superadmin'], 'customer', 'changeEmail'],
                 ],
             ],
         ],

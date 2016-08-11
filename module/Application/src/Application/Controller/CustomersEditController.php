@@ -89,7 +89,6 @@ class CustomersEditController extends AbstractActionController
         $formSetting->setData(['setting' => $customerData]);
         $deactivations = $this->deactivationService->getAllActive($customer);
         $webuserRole = $this->identity()->getRole();
-        $canEditEmail = $webuserRole == 'admin' || $webuserRole == 'superadmin';
 
         $view = new ViewModel([
             'customer' => $customer,
@@ -97,7 +96,6 @@ class CustomersEditController extends AbstractActionController
             'driverForm' => $formDriver,
             'settingForm' => $formSetting,
             'deactivations' => $deactivations,
-            'canEditEmail' => $canEditEmail
         ]);
 
         $view->setTerminal(true);

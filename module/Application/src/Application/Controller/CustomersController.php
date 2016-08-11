@@ -185,9 +185,7 @@ class CustomersController extends AbstractActionController
                     $postData['customer']['birthDate'] = $customer->getBirthDate()->format('Y-m-d');
 
                     // Check if Webuser can edit email
-                    $webuserRole = $this->identity()->getRole();
-                    $canEditEmail = $webuserRole == 'admin' || $webuserRole == 'superadmin';
-                    if (!$canEditEmail) {
+                    if (!$this->isAllowed('customer', 'changeEmail')) {
                         $postData['customer']['email'] = $customer->getEmail();
                     }
 
