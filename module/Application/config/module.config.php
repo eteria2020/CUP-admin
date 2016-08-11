@@ -1474,7 +1474,7 @@ return [
                     [['superadmin'], 'superadmin'],
 
                     // for limiting certains operations
-                    [['superadmin'], 'customer', 'changeEmail'],
+                    [['superadmin','admin'], 'customer', 'changeEmail'],
                 ],
             ],
         ],
