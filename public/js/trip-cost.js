@@ -27,7 +27,7 @@ $(function() {
             beginningMoment,
             seconds;
 
-        if (tripBeginning) {
+        if (tripBeginning && $('#trip-length').val() !== '') {
             beginningMoment = moment(tripBeginning, 'YYYY-MM-DD HH:mm:ss');
             seconds = e.date.subtract(moment().startOf('day'));
 

@@ -88,13 +88,14 @@ class CustomersEditController extends AbstractActionController
         $formDriver->setData(['driver' => $customerData]);
         $formSetting->setData(['setting' => $customerData]);
         $deactivations = $this->deactivationService->getAllActive($customer);
+        $webuserRole = $this->identity()->getRole();
 
         $view = new ViewModel([
             'customer' => $customer,
             'customerForm' => $form,
             'driverForm' => $formDriver,
             'settingForm' => $formSetting,
-            'deactivations' => $deactivations
+            'deactivations' => $deactivations,
         ]);
 
         $view->setTerminal(true);

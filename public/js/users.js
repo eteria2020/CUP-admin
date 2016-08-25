@@ -1,20 +1,25 @@
-/* global  filters:true, translate:true, $, getSessionVars:true */
+/* global $, filters:true, translate:true, getSessionVars:true */
 $(function() {
     "use strict";
 
-    // DataTables
-    var table = $("#unpayed-trips-table");
+    // DataTable
+    var table = $("#js-users-table");
 
     // Define DataTables Filters
     var dataTableVars = {
         searchValue: $("#js-value"),
         column: $("#js-column"),
         iSortCol_0: 0,
-        sSortDir_0: "desc",
-        iDisplayLength: 100
+        sSortDir_0: "asc",
+        iDisplayLength: 10
     };
 
     var filterWithNull = false;
+    var rowPerPage = Object.freeze({
+        option1: dataTableVars.iDisplayLength,
+        option2: dataTableVars.iDisplayLength * 2,
+        option3: dataTableVars.iDisplayLength * 3
+    });
 
     dataTableVars.searchValue.val("");
     dataTableVars.column.val("select");
@@ -28,18 +33,16 @@ $(function() {
         "serverSide": true,
         "bStateSave": false,
         "bFilter": false,
-        "sAjaxSource": "/trips/not-payed-datatable",
+        "sAjaxSource": "/users/datatable",
         "fnServerData": function ( sSource, aoData, fnCallback, oSettings ) {
             oSettings.jqXHR = $.ajax( {
                 "dataType": "json",
                 "type": "POST",
                 "url": sSource,
                 "data": aoData,
-                "success": fnCallback,
-                "statusCode": {
-                    200: function(data, textStatus, jqXHR) {
-                        loginRedirect(data, textStatus, jqXHR);
-                    }
+                "success": function (msg) {
+                    fnCallback(msg);
+                    $("#total-users").html(msg.recordsTotal);
                 }
             });
         },
@@ -47,7 +50,6 @@ $(function() {
             if (filterWithNull) {
                 aoData.push({ "name": "column", "value": ""});
                 aoData.push({ "name": "searchValue", "value": ""});
-                aoData.push({ "name": "columnNull", "value": "e.timestampEnd"});
             } else {
                 aoData.push({ "name": "column", "value": $(dataTableVars.column).val()});
                 aoData.push({ "name": "searchValue", "value": dataTableVars.searchValue.val().trim()});
@@ -56,42 +58,30 @@ $(function() {
         "order": [[dataTableVars.iSortCol_0, dataTableVars.sSortDir_0]],
         "columns": [
             {data: "e.id"},
-            {data: "cu.surname"},
-            {data: "cu.name"},
-            {data: "cc.rfid"},
-            {data: "c.plate"},
-            {data: "f.name"},
-            {data: "e.kmBeginning"},
-            {data: "e.kmEnd"},
-            {data: "e.timestampBeginning"},
-            {data: "e.timestampEnd"},
-            {data: "e.duration"},
-            {data: "e.parkSeconds"},
-            {data: "e.totalCost"}
+            {data: "e.displayName"},
+            {data: "e.email"},
+            {data: "e.role"},
+            {data: "button"}
         ],
         "columnDefs": [
             {
-                targets: [1, 2],
-                "render": function (data, type, row) {
-                    return '<a href="/customers/edit/' + row.cu.id + '" title="' + translate("showProfile") + ' ' + row.cu.name + ' ' + row.cu.surname + ' ">' + data + '</a>';
-                }
-            },
-            {
-                targets: 12,
+                targets: 4,
+                data: "button",
+                searchable: false,
                 sortable: false,
-                "render": function (data) {
-                    return renderCostButton(data);
+                render: function (data) {
+                    return "<a href=\"/users/edit/" + data + "\" class=\"btn btn-sm btn-success\">" +
+                    translate("modify") + "</a>";
                 }
             }
         ],
         "lengthMenu": [
-            [100, 200, 300],
-            [100, 200, 300]
+            rowPerPage.option1, rowPerPage.option2, rowPerPage.option3
         ],
         "pageLength": dataTableVars.iDisplayLength,
         "pagingType": "bootstrap_full_number",
         "language": {
-            "sEmptyTable": translate("sTripEmptyTable"),
+            "sEmptyTable": translate("sUserEmptyTable"),
             "sInfo": translate("sInfo"),
             "sInfoEmpty": translate("sInfoEmpty"),
             "sInfoFiltered": translate("sInfoFiltered"),
@@ -128,41 +118,9 @@ $(function() {
     });
 
     $(dataTableVars.column).change(function() {
-        var value = $(this).val();
-
         dataTableVars.searchValue.show();
         dataTableVars.searchValue.val("");
-
-        if (value === "c.timestampEnd") {
-            filterWithNull = true;
-            dataTableVars.searchValue.prop("disabled", true);
-        } else {
-            filterWithNull = false;
-            dataTableVars.searchValue.prop("disabled", false);
-        }
+        filterWithNull = false;
+        dataTableVars.searchValue.prop("disabled", false);
     });
-
-    function toStringKeepZero(value)
-    {
-        return ((value < 10) ? "0" : "") + value;
-    }
-
-    function renderAmount(amount)
-    {
-        return (Math.floor(amount / 100)) +
-            "," +
-            toStringKeepZero(amount % 100) +
-            " \u20ac";
-    }
-
-    function renderCostButton(data)
-    {
-        var amount = data.amount;
-        if (amount !== "FREE") {
-            return amount !== "" ? '<a href="/trips/details/' + data.id +
-                '?tab=cost">' + renderAmount(parseInt(amount)) + '</a>' : "";
-        } else {
-            return amount;
-        }
-    }
 });

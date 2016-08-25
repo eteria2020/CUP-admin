@@ -32,8 +32,12 @@ $(function() {
                 "url": sSource,
                 "data": aoData,
                 "success": fnCallback,
-                "error": function() {}
-            } );
+                "statusCode": {
+                    200: function(data, textStatus, jqXHR) {
+                        loginRedirect(data, textStatus, jqXHR);
+                    }
+                }
+            });
         },
         "fnServerParams": function ( aoData ) {
             aoData.push({ "name": "column", "value": $(dataTableVars.column).val()});

@@ -31,16 +31,18 @@ class CarsController extends AbstractActionController
      */
     private $carsService;
 
-    /** @var  CommandsService */
+    /**
+     * @var CommandsService
+     */
     private $commandsService;
 
     /**
-     * @var
+     * @var Form
      */
     private $carForm;
 
     /**
-     * @var \Zend\Stdlib\Hydrator\HydratorInterface
+     * @var HydratorInterface
      */
     private $hydrator;
 
@@ -49,6 +51,13 @@ class CarsController extends AbstractActionController
      */
     private $datatableFiltersSessionContainer;
 
+    /**
+     * @param CarsService $carsService
+     * @param CommandsService $commandsService
+     * @param Form $carForm
+     * @param HydratorInterface $hydrator
+     * @param Container $datatableFiltersSessionContainer
+     */
     public function __construct(
         CarsService $carsService,
         CommandsService $commandsService,
@@ -187,7 +196,7 @@ class CarsController extends AbstractActionController
 
                 try {
 
-                    $this->carsService->updateCar($form->getData(), $lastStatus, $postData);
+                    $this->carsService->updateCar($form->getData(), $lastStatus, $postData, $this->identity());
                     $this->carsService->saveData($form->getData(), false);
                     $this->flashMessenger()->addSuccessMessage($translator->translate('Auto modificata con successo!'));
 
@@ -276,7 +285,6 @@ class CarsController extends AbstractActionController
         }
 
         return $this->redirect()->toRoute('cars');
-
     }
 
     public function sendCommandAction()
