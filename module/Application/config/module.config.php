@@ -700,7 +700,7 @@ return [
                         ]
                     ]
                 ],
-             ],
+            ],
             'zfcuser' => [
                 'child_routes' => [
                     'register' => [
@@ -1150,6 +1150,167 @@ return [
                     ]
                 ]
             ],
+            'cars-configurations' => [
+                'type' => 'Literal',
+                'options' => [
+                    'route' => '/cars-configurations',
+                    'defaults' => [
+                        '__NAMESPACE__' => 'Application\Controller',
+                        'controller' => 'CarsConfigurations',
+                        'action'        => 'list-all'
+                    ],
+                ],
+                'may_terminate' => true,
+                'child_routes' => [
+                    'datatable' => [
+                        'type'    => 'Literal',
+                        'options' => [
+                            'route'    => '/datatable',
+                            'defaults' => [
+                                'action'        => 'datatable',
+                            ],
+                        ],
+                    ],
+                    'add' => [
+                        'type' => 'Segment',
+                        'options' => [
+                            'route' => '/add',
+                            'defaults' => [
+                                'action' => 'add'
+                            ],
+                        ],
+                        'may_terminate' => true,
+                    ],
+                    'list' => [
+                        'type'    => 'Literal',
+                        'options' => [
+                            'route'    => '/list',
+                        ],
+                        'may_terminate' => false,
+                        'child_routes' => [
+                            'all' => [
+                                'type' => 'Literal',
+                                'options' => [
+                                    'route' => '/all',
+                                    'defaults' => [
+                                        'action' => 'list-all'
+                                    ],
+                                ],
+                            ],
+                            'global' => [
+                                'type' => 'Literal',
+                                'options' => [
+                                    'route' => '/global',
+                                    'defaults' => [
+                                        'action' => 'list-global'
+                                    ],
+                                ],
+                            ],
+                            'fleet' => [
+                                'type' => 'Literal',
+                                'options' => [
+                                    'route' => '/fleet',
+                                    'defaults' => [
+                                        'action' => 'list-fleet'
+                                    ],
+                                ],
+                            ],
+                            'model' => [
+                                'type' => 'Literal',
+                                'options' => [
+                                    'route' => '/model',
+                                    'defaults' => [
+                                        'action' => 'list-model'
+                                    ],
+                                ],
+                            ],
+                            'car' => [
+                                'type' => 'Literal',
+                                'options' => [
+                                    'route' => '/car',
+                                    'defaults' => [
+                                        'action' => 'list-car'
+                                    ],
+                                ],
+                            ],
+                        ],
+                    ],
+                    'edit' => [
+                        'type'    => 'Segment',
+                        'options' => [
+                            'route'    => '/edit/:id',
+                            'constraints' => [
+                                'id' => '[0-9]*'
+                            ],
+                            'defaults' => [
+                                '__NAMESPACE__' => 'Application\Controller',
+                                'controller'    => 'CarsConfigurations',
+                                'action'        => 'edit',
+                            ],
+                        ],
+                        'may_terminate' => true,
+                        'child_routes' => [
+                            'ajax-edit' => [
+                                'type'    => 'Segment',
+                                'options' => [
+                                    'route'    => '/ajax-edit/:optionid',
+                                    'constraints' => [
+                                        'optionid' => '[a-zA-Z0-9]*',
+                                    ],
+                                    'defaults' => [
+                                        '__NAMESPACE__' => 'Application\Controller',
+                                        'controller'    => 'CarsConfigurations',
+                                        'action'        => 'ajax-get-option',
+                                    ],
+                                ],
+                            ],
+                        ],
+                    ],
+                    'details' => [
+                        'type' => 'Segment',
+                        'options' => [
+                            'route' => '/details/:id',
+                            'constraints' => [
+                                'id' => '[0-9]*'
+                            ],
+                            'defaults' => [
+                                'action' => 'details'
+                            ],
+                        ],
+                    ],
+                    'delete' => [
+                        'type'    => 'Segment',
+                        'options' => [
+                            'route'    => '/delete/:id',
+                            'constraints' => [
+                                'id' => '[0-9]*'
+                            ],
+                            'defaults' => [
+                                '__NAMESPACE__' => 'Application\Controller',
+                                'controller'    => 'CarsConfigurations',
+                                'action'        => 'delete',
+                            ],
+                        ],
+                        'may_terminate' => true,
+                        'child_routes' => [
+                            'delete-option' => [
+                                'type'    => 'Segment',
+                                'options' => [
+                                    'route'    => '/:optionid',
+                                    'constraints' => [
+                                        'optionid' => '[a-zA-Z0-9]*',
+                                    ],
+                                    'defaults' => [
+                                        '__NAMESPACE__' => 'Application\Controller',
+                                        'controller'    => 'CarsConfigurations',
+                                        'action'        => 'delete-option',
+                                    ],
+                                ],
+                            ],
+                        ],
+                    ],
+                ],
+            ],
             'notifications' => [
                 'type' => 'Literal',
                 'options' => [
@@ -1223,6 +1384,7 @@ return [
             'FaresForm' => 'Application\Form\FaresFormFactory',
             'EditTripForm' => 'Application\Form\EditTripFormFactory',
             'ConfigurationsForm' => 'Application\Form\ConfigurationsFormFactory',
+            'CarsConfigurationsForm' => 'Application\Form\CarsConfigurationsFormFactory',
             'ChangeLanguageDetector.listener' => 'Application\Listener\ChangeLanguageDetectorFactory',
             'ZoneForm' => 'Application\Form\ZoneFormFactory',
         ]
@@ -1298,6 +1460,7 @@ return [
             'Application\Controller\Payments' => 'Application\Controller\PaymentsControllerFactory',
             'Application\Controller\CustomerNote' => 'Application\Controller\CustomerNoteControllerFactory',
             'Application\Controller\Configurations' => 'Application\Controller\ConfigurationsControllerFactory',
+            'Application\Controller\CarsConfigurations' => 'Application\Controller\CarsConfigurationsControllerFactory',
             'Application\Controller\Pois' => 'Application\Controller\PoisControllerFactory',
             'Application\Controller\Zones' => 'Application\Controller\ZonesControllerFactory',
             'Application\Controller\CustomersEdit' => 'Application\Controller\CustomersEditControllerFactory',
@@ -1434,6 +1597,7 @@ return [
     'view_helpers'    => [
         'invokables' => [
             'CarStatus' => 'Application\View\Helper\CarStatus',
+            'CarConfigurationPriorityType' => 'Application\View\Helper\CarConfigurationPriorityType',
         ],
     ],
 
@@ -1500,6 +1664,7 @@ return [
                 ['controller' => 'Application\Controller\Payments', 'roles' => ['admin']],
                 ['controller' => 'Application\Controller\CustomerNote', 'roles' => ['admin']],
                 ['controller' => 'Application\Controller\Configurations', 'roles' => ['admin']],
+                ['controller' => 'Application\Controller\CarsConfigurations', 'roles' => ['superadmin']],
                 ['controller' => 'Application\Controller\Pois', 'roles' => ['superadmin']],
                 ['controller' => 'Application\Controller\Zones', 'roles' => ['superadmin']],
                 ['controller' => 'Application\Controller\CustomersEdit', 'roles' => ['admin']],
@@ -1683,6 +1848,40 @@ return [
                         'isVisible' => true
                     ],
                 ]
+            ],
+            [
+                'label' => $translator->translate('Configurazione Auto'),
+                'route' => 'cars-configurations',
+                'icon' => 'fa fa-cogs',
+                'resource' => 'admin',
+                'isRouteJs' => true,
+                'pages' => [
+                    [
+                        'label' => $translator->translate('Elenco Completo'),
+                        'route' => 'cars-configurations/list/all',
+                        'isVisible' => true
+                    ],
+                    [
+                        'label' => $translator->translate('Elenco Globale'),
+                        'route' => 'cars-configurations/list/global',
+                        'isVisible' => true
+                    ],
+                    [
+                        'label' => $translator->translate('Elenco per Citta\''),
+                        'route' => 'cars-configurations/list/fleet',
+                        'isVisible' => true
+                    ],
+                    [
+                        'label' => $translator->translate('Elenco per Modello / Citta\''),
+                        'route' => 'cars-configurations/list/model',
+                        'isVisible' => true
+                    ],
+                    [
+                        'label' => $translator->translate('Elenco per Auto'),
+                        'route' => 'cars-configurations/list/car',
+                        'isVisible' => true
+                    ],
+                ],
             ],
             [
                 'label'           => $translator->translate('Aree'),
