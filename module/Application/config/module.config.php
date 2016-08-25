@@ -729,35 +729,40 @@ return [
                     'defaults' => [
                         'controller' => 'Application\Controller\Users',
                         'action' => 'index'
-                    ]
+                    ],
                 ],
                 'may_terminate' => true,
                 'child_routes' => [
-                    'add' => [
-                        'type'    => 'Literal',
+                    'datatable' => [
+                        'type' => 'Literal',
                         'options' => [
-                            'route'    => '/add',
+                            'route' => '/datatable',
                             'defaults' => [
-                                '__NAMESPACE__' => 'Application\Controller',
-                                'controller'    => 'Users',
-                                'action'        => 'add',
+                                'action' => 'datatable',
+                            ],
+                        ],
+                    ],
+                    'add' => [
+                        'type' => 'Literal',
+                        'options' => [
+                            'route' => '/add',
+                            'defaults' => [
+                                'action' => 'add',
                             ],
                         ],
                     ],
                     'edit' => [
-                        'type'    => 'Segment',
+                        'type' => 'Segment',
                         'options' => [
-                            'route'    => '/edit/:id',
+                            'route' => '/edit/:id',
                             'constraints' => [
-                                'id'    => '[0-9]*'
+                                'id' => '[0-9]*',
                             ],
                             'defaults' => [
-                                '__NAMESPACE__' => 'Application\Controller',
-                                'controller'    => 'Users',
-                                'action'        => 'edit',
+                                'action' => 'edit',
                             ],
                         ],
-                    ]
+                    ],
                 ],
             ],
             'reservations' => [
