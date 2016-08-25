@@ -12,7 +12,7 @@ class CarConfigurationPriorityType extends AbstractHelper
     /**
      * @param string $priorityType
      */
-    function __invoke($priorityType)
+    public function __invoke($priorityType)
     {
         switch ($priorityType) {
             case CarsConfigurations::GLOBAL_TYPE:

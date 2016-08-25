@@ -36,7 +36,7 @@ class GenericCarConfiguration implements CarsConfigurationsSingleValueTypesInter
 
     public function getOverview()
     {
-        return substr($this->value,0,20) . '...';
+        return substr($this->value, 0, 20) . '...';
     }
 
     public function getForm()

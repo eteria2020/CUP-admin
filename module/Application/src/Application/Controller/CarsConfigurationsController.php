@@ -129,8 +129,11 @@ class CarsConfigurationsController extends AbstractActionController
             // Get the configuration.
             $carConfiguration = $this->getCarConfigurationFromRouteId();
         } catch (CarConfigurationNotFoundException $e) {
-            $this->flashMessenger()
-                ->addErrorMessage($this->translator->translate('La Configurazione Auto non è stata trovata!'));
+            $this->flashMessenger()->addErrorMessage(
+                $this->translator->translate('La Configurazione Auto non è stata trovata!')
+            );
+
+            return new ViewModel([]);
         }
 
         $configurationTypeClass = CarsConfigurationsTypesFactory::createFromCarConfiguration($carConfiguration, $this->translator);
@@ -171,17 +174,12 @@ class CarsConfigurationsController extends AbstractActionController
                 // Set the default value for the specific CarConfiguration Class type.
                 $defaultCarConfigurationValue = $configurationTypeClass->getDefaultValue();
 
-                try {
-                    // Finally save the new CarConfiguration to the DB.
-                    $newCarConfiguration = $this->carsConfigurationsService->save($carConfigurationFromForm, $defaultCarConfigurationValue);
+                // Finally save the new CarConfiguration to the DB.
+                $newCarConfiguration = $this->carsConfigurationsService->save($carConfigurationFromForm, $defaultCarConfigurationValue);
 
-                    $this->flashMessenger()->addSuccessMessage($this->translator->translate('Configurazione Auto aggiunta con successo!'));
+                $this->flashMessenger()->addSuccessMessage($this->translator->translate('Configurazione Auto aggiunta con successo!'));
 
-                    return $this->redirect()->toRoute('cars-configurations/edit', ['id' => $newCarConfiguration->getId()]);
-                } catch (\Exception $e) {
-                    $this->flashMessenger()
-                        ->addErrorMessage($this->translator->translate('Si è verificato un errore applicativo.'));
-                }
+                return $this->redirect()->toRoute('cars-configurations/edit', ['id' => $newCarConfiguration->getId()]);
             } else {
                 $this->flashMessenger()->addErrorMessage($this->translator->translate('Dati inseriti non validi'));
             }
@@ -198,10 +196,13 @@ class CarsConfigurationsController extends AbstractActionController
             // Get the configuration.
             $carConfiguration = $this->getCarConfigurationFromRouteId();
         } catch (CarConfigurationNotFoundException $e) {
-            $this->flashMessenger()
-                ->addErrorMessage($this->translator->translate('La Configurazione Auto non è stata trovata!'));
+            $this->flashMessenger()->addErrorMessage(
+                $this->translator->translate('La Configurazione Auto non è stata trovata!')
+            );
+
             return new ViewModel([]);
         }
+
         $id = $carConfiguration->getId();
 
         $configurationTypeClass = CarsConfigurationsTypesFactory::createFromCarConfiguration($carConfiguration, $this->translator);
@@ -226,14 +227,9 @@ class CarsConfigurationsController extends AbstractActionController
             $form->setData($postData);
 
             if ($form->isValid()) {
-                try {
-                    $configurationTypeClass->updateValue($postData);
-                    $this->carsConfigurationsService->save($carConfiguration, $configurationTypeClass->getRawValue());
-                    $this->flashMessenger()->addSuccessMessage($this->translator->translate('Configurazione modificata con successo!'));
-                } catch (\Exception $e) {
-                    $this->flashMessenger()
-                         ->addErrorMessage($this->translator->translate('Si è verificato un errore applicativo.'));
-                }
+                $configurationTypeClass->updateValue($postData);
+                $this->carsConfigurationsService->save($carConfiguration, $configurationTypeClass->getRawValue());
+                $this->flashMessenger()->addSuccessMessage($this->translator->translate('Configurazione modificata con successo!'));
 
                 return $this->redirect()->toRoute('cars-configurations/edit', ['id' => $id]);
             }
@@ -256,22 +252,15 @@ class CarsConfigurationsController extends AbstractActionController
             // Get the configuration.
             $carConfiguration = $this->getCarConfigurationFromRouteId();
         } catch (CarConfigurationNotFoundException $e) {
-            $this->flashMessenger()
-                ->addErrorMessage($this->translator->translate('La Configurazione Auto non è stata trovata!'));
+            $this->flashMessenger()->addErrorMessage(
+                $this->translator->translate('La Configurazione Auto non è stata trovata!')
+            );
+
+            return new ViewModel([]);
         }
 
-        if (!$carConfiguration instanceof CarsConfigurations) {
-            $this->getResponse()->setStatusCode(Response::STATUS_CODE_404);
-            return false;
-        }
-
-        try {
-            $this->carsConfigurationsService->deleteCarConfiguration($carConfiguration);
-            $this->flashMessenger()->addSuccessMessage($this->translator->translate('Configurazione Auto rimossa con successo!'));
-        } catch (\Exception $e) {
-            $this->flashMessenger()
-                ->addErrorMessage($this->translator->translate('Si è verificato un errore applicativo.'));
-        }
+        $this->carsConfigurationsService->deleteCarConfiguration($carConfiguration);
+        $this->flashMessenger()->addSuccessMessage($this->translator->translate('Configurazione Auto rimossa con successo!'));
 
         return $this->redirect()->toRoute('cars-configurations/edit', ['id' => $carConfiguration->getId()]);
     }
@@ -282,8 +271,11 @@ class CarsConfigurationsController extends AbstractActionController
             // Get the configuration.
             $carConfiguration = $this->getCarConfigurationFromRouteId();
         } catch (CarConfigurationNotFoundException $e) {
-            $this->flashMessenger()
-                ->addErrorMessage($this->translator->translate('La Configurazione Auto non è stata trovata!'));
+            $this->flashMessenger()->addErrorMessage(
+                $this->translator->translate('La Configurazione Auto non è stata trovata!')
+            );
+
+            return new ViewModel([]);
         }
 
         // Get the id of the option of the configuration
@@ -295,14 +287,9 @@ class CarsConfigurationsController extends AbstractActionController
         // Update the carConfiguration value
         $configurationTypeClass->deleteValueOption($optionId);
 
-        try {
-            // Finally save the updated CarConfiguration to the DB.
-            $this->carsConfigurationsService->save($carConfiguration, $configurationTypeClass->getRawValue());
-            $this->flashMessenger()->addSuccessMessage($this->translator->translate('Configurazione Auto aggioranta con successo!'));
-        } catch (\Exception $e) {
-            $this->flashMessenger()
-                ->addErrorMessage($this->translator->translate('Si è verificato un errore applicativo.'));
-        }
+        // Finally save the updated CarConfiguration to the DB.
+        $this->carsConfigurationsService->save($carConfiguration, $configurationTypeClass->getRawValue());
+        $this->flashMessenger()->addSuccessMessage($this->translator->translate('Configurazione Auto aggioranta con successo!'));
 
         return $this->redirect()->toRoute('cars-configurations/edit', ['id' => $carConfiguration->getId()]);
     }
@@ -319,8 +306,11 @@ class CarsConfigurationsController extends AbstractActionController
             // Get the configuration.
             $carConfiguration = $this->getCarConfigurationFromRouteId();
         } catch (CarConfigurationNotFoundException $e) {
-            $this->flashMessenger()
-                ->addErrorMessage($this->translator->translate('La Configurazione Auto non è stata trovata!'));
+            $this->flashMessenger()->addErrorMessage(
+                $this->translator->translate('La Configurazione Auto non è stata trovata!')
+            );
+
+            return new JsonModel([]);
         }
 
         // Get the id of the option of the configuration

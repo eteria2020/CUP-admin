@@ -70,7 +70,7 @@ interface CarsConfigurationsTypesInterface
 
     /**
      * This method update the value with the data present into $data param.
-     * 
+     *
      * @param array $data   The array containing the updated data from the edit form.
      *                      Example: [ "name" => "radioDeejay" , "volume" => 3 , ... ] for a radio setup
      */
