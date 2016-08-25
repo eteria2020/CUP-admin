@@ -10,7 +10,7 @@ interface CarsConfigurationsMultiValuesTypesInterface extends CarsConfigurations
     /**
      * It's a multi value config.
      */
-    const hasMultipleValues = true;
+    const HAS_MULTIPLE_VALUES = true;
 
     /**
      * This method return an indexed values array.

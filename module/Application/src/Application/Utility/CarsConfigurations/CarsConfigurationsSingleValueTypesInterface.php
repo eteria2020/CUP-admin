@@ -10,5 +10,5 @@ interface CarsConfigurationsSingleValueTypesInterface extends CarsConfigurations
     /**
      * It's a single value config.
      */
-    const hasMultipleValues = false;
+    const HAS_MULTIPLE_VALUES = false;
 }

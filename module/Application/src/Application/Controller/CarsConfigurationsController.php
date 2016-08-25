@@ -127,7 +127,7 @@ class CarsConfigurationsController extends AbstractActionController
     {
         try {
             // Get the configuration.
-            $carConfiguration = $this::getCarConfigurationFromRouteId();
+            $carConfiguration = $this->getCarConfigurationFromRouteId();
         } catch (CarConfigurationNotFoundException $e) {
             $this->flashMessenger()
                 ->addErrorMessage($this->translator->translate('La Configurazione Auto non è stata trovata!'));
@@ -135,7 +135,7 @@ class CarsConfigurationsController extends AbstractActionController
 
         $configurationTypeClass = CarsConfigurationsTypesFactory::createFromCarConfiguration($carConfiguration, $this->translator);
 
-        $hasMultipleValues = $configurationTypeClass::hasMultipleValues;
+        $hasMultipleValues = $configurationTypeClass::HAS_MULTIPLE_VALUES;
 
         return new ViewModel([
             'configuration' => $carConfiguration,
@@ -196,7 +196,7 @@ class CarsConfigurationsController extends AbstractActionController
     {
         try {
             // Get the configuration.
-            $carConfiguration = $this::getCarConfigurationFromRouteId();
+            $carConfiguration = $this->getCarConfigurationFromRouteId();
         } catch (CarConfigurationNotFoundException $e) {
             $this->flashMessenger()
                 ->addErrorMessage($this->translator->translate('La Configurazione Auto non è stata trovata!'));
@@ -209,7 +209,7 @@ class CarsConfigurationsController extends AbstractActionController
         /** @var  CarsConfigurations $form */
         $form = $configurationTypeClass->getForm();
 
-        $hasMultipleValues = $configurationTypeClass::hasMultipleValues;
+        $hasMultipleValues = $configurationTypeClass::HAS_MULTIPLE_VALUES;
 
         if ($hasMultipleValues) {
             $indexedValues = $configurationTypeClass->getIndexedValueOptions();
@@ -254,7 +254,7 @@ class CarsConfigurationsController extends AbstractActionController
     {
         try {
             // Get the configuration.
-            $carConfiguration = $this::getCarConfigurationFromRouteId();
+            $carConfiguration = $this->getCarConfigurationFromRouteId();
         } catch (CarConfigurationNotFoundException $e) {
             $this->flashMessenger()
                 ->addErrorMessage($this->translator->translate('La Configurazione Auto non è stata trovata!'));
@@ -280,7 +280,7 @@ class CarsConfigurationsController extends AbstractActionController
     {
         try {
             // Get the configuration.
-            $carConfiguration = $this::getCarConfigurationFromRouteId();
+            $carConfiguration = $this->getCarConfigurationFromRouteId();
         } catch (CarConfigurationNotFoundException $e) {
             $this->flashMessenger()
                 ->addErrorMessage($this->translator->translate('La Configurazione Auto non è stata trovata!'));
@@ -317,7 +317,7 @@ class CarsConfigurationsController extends AbstractActionController
     {
         try {
             // Get the configuration.
-            $carConfiguration = $this::getCarConfigurationFromRouteId();
+            $carConfiguration = $this->getCarConfigurationFromRouteId();
         } catch (CarConfigurationNotFoundException $e) {
             $this->flashMessenger()
                 ->addErrorMessage($this->translator->translate('La Configurazione Auto non è stata trovata!'));
@@ -366,7 +366,7 @@ class CarsConfigurationsController extends AbstractActionController
 
         /** @var CarsConfigurations $carConfiguration */
         $carConfiguration = $this->carsConfigurationsService->getCarConfigurationById($id);
-    
+
         if (!$carConfiguration instanceof CarsConfigurations) {
             throw new CarConfigurationNotFoundException();
         }
