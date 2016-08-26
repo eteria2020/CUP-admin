@@ -270,6 +270,19 @@ return [
                             ],
                         ],
                     ],
+                    'ajax-tab-license' => [
+                        'type'    => 'Segment',
+                        'options' => [
+                            'route'    => '/ajax-tab/license/:id',
+                            'constraints' => [
+                                'id' => '[0-9]*'
+                            ],
+                            'defaults' => [
+                                'controller' => 'CustomerLicense',
+                                'action' => 'license-tab',
+                            ],
+                        ],
+                    ],
                     'ajax-card-code' => [
                         'type'    => 'Literal',
                         'options' => [
@@ -1466,6 +1479,7 @@ return [
             'Application\Controller\CustomersEdit' => 'Application\Controller\CustomersEditControllerFactory',
             'Application\Controller\EditTrip' => 'Application\Controller\EditTripControllerFactory',
             'Application\Controller\CustomerFailure' => 'Application\Controller\CustomerFailureControllerFactory',
+            'Application\Controller\CustomerLicense' => 'Application\Controller\CustomerLicenseControllerFactory',
             'Application\Controller\PaymentsCsv' => 'Application\Controller\PaymentsCsvControllerFactory',
             'Application\Controller\ForeignDriversLicense' => 'Application\Controller\ForeignDriversLicenseControllerFactory',
             'Application\Controller\TripsNotPayed' => 'Application\Controller\TripsNotPayedControllerFactory',
@@ -1670,6 +1684,7 @@ return [
                 ['controller' => 'Application\Controller\CustomersEdit', 'roles' => ['admin']],
                 ['controller' => 'Application\Controller\EditTrip', 'roles' => ['admin']],
                 ['controller' => 'Application\Controller\CustomerFailure', 'roles' => ['admin']],
+                ['controller' => 'Application\Controller\CustomerLicense', 'roles' => ['admin']],
                 ['controller' => 'Application\Controller\PaymentsCsv', 'roles' => ['admin']],
                 ['controller' => 'Application\Controller\ForeignDriversLicense', 'roles' => ['admin']],
                 ['controller' => 'Application\Controller\TripsNotPayed', 'roles' => ['admin']],

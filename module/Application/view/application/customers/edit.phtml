@@ -40,6 +40,7 @@ $this->headScript()
                     <li role="presentation" id="menu-contract"><a href="<?= $this->url('customers/ajax-tab-contract', ['id' => $this->customer->getId()]); ?>" data-target="#tab-contract" role="tab" data-toggle="tab"><?= $this->translate("Contratto"); ?></a></li>
                     <li role="presentation" id="menu-notes"><a href="<?= $this->url('customers/ajax-tab-notes', ['id' => $this->customer->getId()]); ?>" data-target="#tab-notes" role="tab" data-toggle="tab"><?= $this->translate("Note"); ?></a></li>
                     <li role="presentation" id="menu-failure"><a href="<?= $this->url('customers/ajax-tab-failure', ['id' => $this->customer->getId()]); ?>" data-target="#tab-failure" role="tab" data-toggle="tab"><?= $this->translate("Pagamenti falliti"); ?></a></li>
+                    <li role="presentation" id="menu-license"><a href="<?= $this->url('customers/ajax-tab-license', ['id' => $this->customer->getId()]); ?>" data-target="#tab-license" role="tab" data-toggle="tab"><?= $this->translate("Patente"); ?></a></li>
                 </ul>
 
                 <div class="tab-content">
@@ -52,6 +53,7 @@ $this->headScript()
                     <div role="tabpanel" class="tab-pane" id="tab-contract"></div>
                     <div role="tabpanel" class="tab-pane" id="tab-notes"></div>
                     <div role="tabpanel" class="tab-pane" id="tab-failure"></div>
+                    <div role="tabpanel" class="tab-pane" id="tab-license"></div>
                 </div>
             </div>
         </div>

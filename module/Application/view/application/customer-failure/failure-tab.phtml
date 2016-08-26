@@ -31,7 +31,7 @@
                                     <td class="sng-text-right"><?= sprintf('%01.2f €', $tripPayment->getTotalCost() / 100); ?></td>
                                     <td class="sng-date-column sng-text-center">
                                         <?php
-                                            if ($tripPayment instanceof SharengoCore\Entity\TripPayments) {
+                                        if ($tripPayment instanceof SharengoCore\Entity\TripPayments) {
                                             if ($tripPayment->getPayedSuccessfullyAt() instanceof \DateTime) {
                                                 echo $tripPayment->getPayedSuccessfullyAt()->format('d-m-Y H:i:s') . '</td>';
                                                 //echo '<td class="sng-date-column">' . $tripPayment->getFirstPaymentTryTs()->format('d-m-Y H:i:s') . '</td>';
@@ -39,7 +39,7 @@
                                             } else {
                                                 echo '-</td><td class="sng-text-center">-';
                                             }
-                                            }
+                                        }
                                         ?>
                                     </td>
                                     <td>
