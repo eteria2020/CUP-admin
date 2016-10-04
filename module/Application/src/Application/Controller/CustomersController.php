@@ -207,6 +207,13 @@ class CustomersController extends AbstractActionController
                     $form = $this->settingForm;
                     $postData['setting']['id'] = $customer->getId();
                     $postData['setting']['enabled'] = $customer->getEnabled() ? 'true' : 'false';
+
+                    if (!isset($postData['setting']['goldList'])) {
+                        $postData['setting']['goldList'] = (int)$customer->getGoldList();
+                    }
+                    if (!isset($postData['setting']['maintainer'])) {
+                        $postData['setting']['maintainer'] = (int)$customer->getMaintainer();
+                    }
                     $postData['setting']['goldList'] =
                         $postData['setting']['goldList'] |
                         $postData['setting']['maintainer'];
