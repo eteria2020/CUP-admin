@@ -91,6 +91,7 @@ class CustomersEditController extends AbstractActionController
         $webuserRole = $this->identity()->getRole();
 
         $view = new ViewModel([
+            'webuserRole' => $webuserRole,
             'customer' => $customer,
             'customerForm' => $form,
             'driverForm' => $formDriver,
