@@ -8,11 +8,13 @@
             <i class="fa fa-angle-down"></i>
         </a>
         <ul class="dropdown-menu dropdown-menu-default dropdown-menu-large">
+            <?php if ($this->isAllowed('customer', 'userArea')) {?>
             <li>
                 <a href="<?= $this->url('users'); ?>">
                     <i class="fa fa-users"></i> <?php echo $this->translate("Gestioni Utenti"); ?>
                 </a>
             </li>
+            <?php }?>
             <li>
                 <a href="/user/logout">
                     <i class="fa fa-key"></i> <?php echo $this->translate("Log Out"); ?>
