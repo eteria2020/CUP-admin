@@ -1676,7 +1676,7 @@ return [
                 ['controller' => 'Application\Controller\Trips', 'roles' => ['admin']],
                 ['controller' => 'Application\Controller\Cars', 'roles' => ['admin']],
                 ['controller' => 'Application\Controller\ConsoleUser', 'roles' => []],
-                ['controller' => 'Application\Controller\Users', 'roles' => ['admin']],
+                ['controller' => 'Application\Controller\Users', 'roles' => ['superadmin']],
                 ['controller' => 'Application\Controller\Reservations', 'roles' => ['admin']],
                 ['controller' => 'Application\Controller\Invoices', 'roles' => ['admin']],
                 ['controller' => 'Application\Controller\Payments', 'roles' => ['admin']],
