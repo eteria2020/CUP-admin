@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "8677a4de4a3e11a3e929b6aecd4c75e4",
-    "content-hash": "003977696f98bb8cb11e6fb9396f22ef",
+    "hash": "fbd8d2cb550f0df980673ec670581227",
+    "content-hash": "1b47b2d446b69fc9f3e5903b4d810dd8",
     "packages": [
         {
             "name": "bjyoungblood/bjy-authorize",
@@ -291,28 +291,6 @@
                 "wkt"
             ],
             "time": "2016-05-03 16:15:16"
-        },
-        {
-            "name": "cup-web/cartasi",
-            "version": "dev-master",
-            "source": {
-                "type": "git",
-                "url": "ssh://git@gitlab.bulweria.com/cup-web/cartasi.git",
-                "reference": "b6e596812edd375ac645592c918af1bf010e1b44"
-            },
-            "require": {
-                "doctrine/doctrine-orm-module": "0.*",
-                "php": ">=5.4.0",
-                "zendframework/zendframework": "2.4.*"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-0": {
-                    "Cartasi": "src/"
-                }
-            },
-            "description": "Cartasi module for Sharengo",
-            "time": "2016-05-06 13:16:50"
         },
         {
             "name": "doctrine/annotations",
@@ -1781,8 +1759,8 @@
             "version": "dev-master",
             "source": {
                 "type": "git",
-                "url": "ssh://git@gitlab.bulweria.com:1022/cup-web/core.git",
-                "reference": "645b3269bcafedd859022ce72f4e8593f51eabc5"
+                "url": "ssh://git@gitlab.bulweria.com/sharengo-web/core.git",
+                "reference": "b931b6854ff1c2336a6ac06ded6e0dae61e0d787"
             },
             "require": {
                 "doctrine/doctrine-orm-module": "0.*",
@@ -1803,7 +1781,7 @@
                 }
             },
             "description": "Core ZF2 module for Sharengo apps",
-            "time": "2016-08-26 11:32:22"
+            "time": "2016-10-06 13:00:48"
         },
         {
             "name": "mvlabs/zf2-multilanguage",
@@ -2003,6 +1981,28 @@
                 "zf2"
             ],
             "time": "2015-03-12 07:10:33"
+        },
+        {
+            "name": "sharengo-web/cartasi",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "ssh://git@gitlab.bulweria.com/sharengo-web/cartasi.git",
+                "reference": "b6e596812edd375ac645592c918af1bf010e1b44"
+            },
+            "require": {
+                "doctrine/doctrine-orm-module": "0.*",
+                "php": ">=5.4.0",
+                "zendframework/zendframework": "2.4.*"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "Cartasi": "src/"
+                }
+            },
+            "description": "Cartasi module for Sharengo",
+            "time": "2016-05-06 13:16:50"
         },
         {
             "name": "symfony/console",
@@ -3693,7 +3693,7 @@
     "minimum-stability": "stable",
     "stability-flags": {
         "mvlabs/sharengo-coremodule": 20,
-        "cup-web/cartasi": 20,
+        "sharengo-web/cartasi": 20,
         "mvlabs/zf2-multilanguage": 20,
         "phpmd/phpmd": 0
     },
