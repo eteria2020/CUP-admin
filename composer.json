@@ -9,11 +9,11 @@
     "homepage": "http://framework.zend.com/",
     "repositories": [
         {
-            "url": "ssh://git@gitlab.bulweria.com:1022/cup-web/core.git",
+            "url": "ssh://git@gitlab.bulweria.com/sharengo-web/core.git",
             "type": "git"
         },
         {
-            "url": "ssh://git@gitlab.bulweria.com/cup-web/cartasi.git",
+            "url": "ssh://git@gitlab.bulweria.com/sharengo-web/cartasi.git",
             "type": "git"
         },
         {
@@ -30,7 +30,7 @@
         "rwoverdijk/assetmanager": "1.4.*",
         "mvlabs/sharengo-coremodule": "dev-master",
         "leafo/lessphp": "0.5.*",
-        "cup-web/cartasi": "dev-master",
+        "sharengo-web/cartasi": "dev-master",
         "mockery/mockery": "^0.9.4",
         "doctrine/doctrine-mongo-odm-module": "^0.9.1",
         "mrclay/minify": "2.2.*",
