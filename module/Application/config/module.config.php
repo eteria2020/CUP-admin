@@ -855,6 +855,15 @@ return [
                             ],
                         ],
                     ],
+                    'zone-bonus' => [
+                        'type' => 'Literal',
+                        'options' => [
+                            'route' => '/zone-bonus',
+                            'defaults' => [
+                                'action' => 'zone-bonus',
+                            ],
+                        ],
+                    ],
                     'ajax-tab-groups' => [
                         'type' => 'Literal',
                         'options' => [
@@ -1917,6 +1926,11 @@ return [
                     [
                         'label' => $translator->translate('Aree d\'allarme'),
                         'route' => 'zones/zone-alarms',
+                        'isVisible' => true
+                    ],
+                    [
+                        'label' => $translator->translate('Aree bonus'),
+                        'route' => 'zones/zone-bonus',
                         'isVisible' => true
                     ]
                 ]

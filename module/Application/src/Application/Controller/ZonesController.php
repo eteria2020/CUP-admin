@@ -93,6 +93,15 @@ class ZonesController extends AbstractActionController
 
         return $view;
     }
+    
+    public function zoneBonusAction()
+    {
+        $view = new ViewModel([
+            'list' => $this->zonesService->getListZonesBonus()
+        ]);
+
+        return $view;
+    }
 
     public function groupsTabAction()
     {
