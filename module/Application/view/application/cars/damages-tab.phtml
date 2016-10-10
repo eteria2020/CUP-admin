@@ -10,5 +10,26 @@
             </label>
         </div>
     <?php endforeach; ?>
+
+    <?php if(is_array($this->carDamages)):
+        foreach($this->carDamages AS $damageCar):
+            $flagOldDamage = true;
+            foreach($this->damages AS $damage){
+                if($damageCar===$damage->getName()){
+                    $flagOldDamage = false;
+                    break;
+                }
+            }
+
+            if($flagOldDamage): ?>
+                <div class="checkbox" style="padding-left: 20px">
+                    <label>
+                        <input type="checkbox" name="damages[]" checked value="<?php echo $damageCar ?>" /> <?php echo $damageCar ?>
+                    </label>
+                </div>
+            <?php endif; ?>
+        <?php endforeach; ?>
+    <?php endif; ?>
+
     <button type="submit" class="btn btn-success"><?= $this->translate("Salva"); ?></button>
 </form>
