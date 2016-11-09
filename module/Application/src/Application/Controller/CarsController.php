@@ -240,7 +240,11 @@ class CarsController extends AbstractActionController
         if ($this->getRequest()->isPost()) {
             $postData = $this->getRequest()->getPost()->toArray();
             try {
-                $this->carsService->updateDamages($car, $postData['damages']);
+                if(isset($postData['damages'])){
+                    $this->carsService->updateDamages($car, $postData['damages']);
+                } else {
+                    $this->carsService->updateDamages($car, null);
+                }
                 $this->flashMessenger()->addSuccessMessage($translator->translate('Danni auto modificati con successo!'));
             } catch (\Exception $e) {
                 $this->flashMessenger()->addErrorMessage($translator->translate('Si è verificato un errore applicativo. L\'assistenza tecnica è già al corrente, ci scusiamo per l\'inconveniente'));
