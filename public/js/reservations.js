@@ -60,7 +60,10 @@ $(function() {
             {data: "e.carPlate"},
             {data: "e.customer"},
             {data: "e.cards"},
-            {data: "e.active"}
+            {data: "e.active"},
+            {data: "e.send"},
+            {data: "e.consumed"},
+            {data: "e.deleted"}
         ],
         "columnDefs": [
             {
