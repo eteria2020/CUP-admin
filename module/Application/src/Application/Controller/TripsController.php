@@ -18,6 +18,7 @@ use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\JsonModel;
 use Zend\View\Model\ViewModel;
 use Zend\Session\Container;
+use Zend\EventManager\EventManager;
 
 class TripsController extends AbstractActionController
 {
@@ -42,6 +43,11 @@ class TripsController extends AbstractActionController
     private $eventsService;
 
     /**
+     * @var EventManager
+     */
+    private $eventManager;
+
+    /**
      * @var CloseTripDataFactory
      */
     private $closeTripDataFactory;
@@ -56,6 +62,7 @@ class TripsController extends AbstractActionController
         TripCostForm $tripCostForm,
         TripCostComputerService $tripCostComputerService,
         EventsService $eventsService,
+        EventManager $eventManager,
         CloseTripDataFactory $closeTripDataFactory,
         Container $datatableFiltersSessionContainer
     ) {
@@ -63,6 +70,7 @@ class TripsController extends AbstractActionController
         $this->tripCostForm = $tripCostForm;
         $this->tripCostComputerService = $tripCostComputerService;
         $this->eventsService = $eventsService;
+        $this->eventManager = $eventManager;
         $this->closeTripDataFactory = $closeTripDataFactory;
         $this->datatableFiltersSessionContainer = $datatableFiltersSessionContainer;
     }
@@ -239,6 +247,12 @@ class TripsController extends AbstractActionController
             $inputData = $this->closeTripDataFactory->createFromArray($data);
 
             $this->tripsService->closeTrip($inputData, $this->identity());
+
+            $this->eventManager->trigger('trip-closed', $this, [
+                'topic' => 'trips',
+                'trip_id' => $data['id'],
+                'action' => 'Close trip data: payable ' . ($data['payable'] ? 'true' : 'false') . ', end date ' . $data['datetime']
+            ]);
 
             $this->flashMessenger()->addSuccessMessage($translator->translate('Corsa chiusa con successo'));
 
