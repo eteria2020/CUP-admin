@@ -69,6 +69,9 @@ class ReportsCsvService
      */
     public function getCityTripsCsv($startDate, $endDate, $city)
     {
+        // Bypass standard PHP Memory Limit to allow big data elaborations
+        ini_set('memory_limit', '-1');
+
         // Get the trips, in array format
         $trips = $this->reportsService->getCityTrips($startDate, $endDate, $city);
 
