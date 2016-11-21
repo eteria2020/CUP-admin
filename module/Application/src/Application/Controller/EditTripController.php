@@ -7,9 +7,11 @@ use SharengoCore\Exception\EditTripDeniedException;
 use SharengoCore\Exception\EditTripNotDateTimeException;
 use SharengoCore\Exception\EditTripWrongDateException;
 use SharengoCore\Exception\TripNotFoundException;
+use SharengoCore\Exception\EditTripDeniedForScriptException;
 use SharengoCore\Service\EditTripsService;
 use SharengoCore\Service\EventsService;
 use SharengoCore\Service\TripsService;
+use SharengoCore\Service\PaymentScriptRunsService;
 
 use DoctrineModule\Stdlib\Hydrator\DoctrineObject as DoctrineHydrator;
 use Zend\EventManager\EventManager;
@@ -50,12 +52,18 @@ class EditTripController extends AbstractActionController
     private $eventManager;
 
     /**
+     * @var PaymentScriptRunsService
+     */
+    private $paymentScriptRunsService;
+
+    /**
      * @param TripsService $tripsService
      * @param EditTripsService $editTripsService
      * @param EventManager $eventManager
      * @param EventsService $eventsService
      * @param DoctrineHydrator $hydrator
      * @param EditTripForm $editTripForm
+     * @param PaymentScriptRunsService $paymentScriptRunsService
      */
     public function __construct(
         TripsService $tripsService,
@@ -63,7 +71,8 @@ class EditTripController extends AbstractActionController
         EventManager $eventManager,
         EventsService $eventsService,
         DoctrineHydrator $hydrator,
-        EditTripForm $editTripForm
+        EditTripForm $editTripForm,
+        PaymentScriptRunsService $paymentScriptRunsService
     ) {
         $this->tripsService = $tripsService;
         $this->eventsService = $eventsService;
@@ -71,6 +80,7 @@ class EditTripController extends AbstractActionController
         $this->editTripForm = $editTripForm;
         $this->eventManager = $eventManager;
         $this->hydrator = $hydrator;
+        $this->paymentScriptRunsService = $paymentScriptRunsService;
     }
 
     public function editTabAction()
@@ -104,6 +114,8 @@ class EditTripController extends AbstractActionController
                 $this->flashMessenger()->addErrorMessage($translator->translate('La data specificata non può essere precedente alla data di inizio della corsa'));
             } catch (EditTripNotDateTimeException $e) {
                 $this->flashMessenger()->addErrorMessage($translator->translate('La data specificata non è nel formato corretto. Verifica i dati inseriti.'));
+            } catch (EditTripDeniedForScriptException $e) {
+                $this->flashMessenger()->addErrorMessage($translator->translate('La corsa non può essere modificata perché è in corso la procedura di pagamento.'));
             } catch (\Exception $e) {
                 $this->flashMessenger()->addErrorMessage($e->getMessage());
             }
@@ -124,7 +136,8 @@ class EditTripController extends AbstractActionController
         $view = new ViewModel([
             'trip' => $trip,
             'events' => $events,
-            'editTripForm' => $this->editTripForm
+            'editTripForm' => $this->editTripForm,
+            'scriptRunning' => $this->paymentScriptRunsService->isScriptRunning()
         ]);
         $view->setTerminal(true);
 
