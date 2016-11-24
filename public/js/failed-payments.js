@@ -230,6 +230,9 @@ $(function() {
                     columnWithoutLike = value;
                     //columnValueWithoutLike = true;
                     break;
+                case "cu.id":
+                    columnWithoutLike = value;
+                    break;
             }
         }
     });
