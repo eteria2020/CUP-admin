@@ -10,12 +10,12 @@ $daily = $this->daily;
 
         <!-- Title -->
         <h3 class="page-title"><?= $this->translate("COMPETENZE"); ?></h3>
-
         <!-- BEGIN tabs container -->
         <div class="portlet-body">
             <div class="row-fluid">
                 <div class="span6">
 
+                    <?php if($this->roles[0]==="superadmin") { ?>
                     <!-- BEGIN tabs -->
                     <div class="tabbable tabbable-custom">
 
@@ -140,6 +140,11 @@ $daily = $this->daily;
                         </div>
                     </div>
                     <!-- END tabs -->
+                    <?php }
+                    else {
+                        echo ($this->translate("Attenzione! Area riservata agli utenti super-admin."));
+                    }
+                    ?>
                 </div>
 
             </div>

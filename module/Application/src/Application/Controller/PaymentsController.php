@@ -315,6 +315,13 @@ class PaymentsController extends AbstractActionController
 
     public function recapAction()
     {
+        $authorize = $this->getServiceLocator()->get('BjyAuthorize\Provider\Identity\ProviderInterface');
+        $roles = $authorize->getIdentityRoles();
+
+//        if($roles[0]!=='superadmin'){
+//             return $this->redirect()->toRoute('/');
+//        }
+
         // Get months
         $months = $this->recapService->getAvailableMonths();
 
@@ -342,7 +349,8 @@ class PaymentsController extends AbstractActionController
             'fleets' => $fleets,
             'daily' => $dailyIncome,
             'weekly' => $weeklyIncome,
-            'monthly' => $monthlyIncome
+            'monthly' => $monthlyIncome,
+            'roles' => $roles
         ]);
     }
 
