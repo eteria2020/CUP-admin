@@ -315,32 +315,37 @@ class PaymentsController extends AbstractActionController
 
     public function recapAction()
     {
+        $months = null;
+        $date = date("Y-m-d H:i:s");
+        $fleets = null;
+        $dailyIncome = null;
+        $weeklyIncome = null;
+        $monthlyIncome = null;
+
         $authorize = $this->getServiceLocator()->get('BjyAuthorize\Provider\Identity\ProviderInterface');
         $roles = $authorize->getIdentityRoles();
 
-//        if($roles[0]!=='superadmin'){
-//             return $this->redirect()->toRoute('/');
-//        }
+        if($roles[0]==='superadmin'){
+            // Get months
+            $months = $this->recapService->getAvailableMonths();
 
-        // Get months
-        $months = $this->recapService->getAvailableMonths();
+            // Get the selected month or default to last available
+            $date = '';
+            if (is_null($this->params()->fromQuery('date'))) {
+                $date = $months[0]['date'];
+            } else {
+                $date = $this->params()->fromQuery('date');
+            }
 
-        // Get the selected month or default to last available
-        $date = '';
-        if (is_null($this->params()->fromQuery('date'))) {
-            $date = $months[0]['date'];
-        } else {
-            $date = $this->params()->fromQuery('date');
+            // Get all fleets
+            $fleets = $this->fleetService->getAllFleets();
+            // Get income for each day of the selected month
+            $dailyIncome = $this->recapService->getDailyIncomeForMonth($date);
+            // Get income for last 4 weeks
+            $weeklyIncome = $this->recapService->getWeeklyIncome();
+            // Get income for last 12 months
+            $monthlyIncome = $this->recapService->getMonthlyIncome();
         }
-
-        // Get all fleets
-        $fleets = $this->fleetService->getAllFleets();
-        // Get income for each day of the selected month
-        $dailyIncome = $this->recapService->getDailyIncomeForMonth($date);
-        // Get income for last 4 weeks
-        $weeklyIncome = $this->recapService->getWeeklyIncome();
-        // Get income for last 12 months
-        $monthlyIncome = $this->recapService->getMonthlyIncome();
 
         return new ViewModel([
             'months' => $months,
