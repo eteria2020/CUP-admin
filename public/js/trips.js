@@ -100,6 +100,13 @@ $(function() {
                 sortable: false
             },
             {
+                targets: 12,
+                sortable: false,
+                "render": function ( data ) {
+                    return renderParkingMinutes(data);
+                }
+            },
+            {
                 targets: 13,
                 sortable: false
             },
@@ -213,5 +220,16 @@ $(function() {
     function toStringKeepZero(value)
     {
         return ((value < 10) ? "0" : "") + value;
+    }
+
+    function renderParkingMinutes(data){
+        data = data.replace(" sec", "").trim();
+        if (data === "") {
+            data = "0";
+        }
+
+        data = Math.round(parseInt(data) / 60);
+        data = data.toString() + " min";
+        return data;
     }
 });
