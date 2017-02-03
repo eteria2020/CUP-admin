@@ -122,7 +122,7 @@ if ($tripPayment !== null) {
                     <div class="col-lg-4">
                         <div class="form-group">
                             <label><?= $this->translate("Sosta"); ?></label>
-                            <div class="sng-info-box"><?= $trip->getParkSeconds() . ' sec.' ?></div>
+                            <div class="sng-info-box"><?= round($trip->getParkSeconds()/60)?> <?= $this->translate("minuti"); ?></div>
                         </div>
                     </div>
                     <div class="col-lg-4">
