@@ -1787,7 +1787,7 @@ return [
                     [
                         'label' => $translator->translate('Costo corsa'),
                         'route' => 'trips/cost',
-                        'isVisible' => true
+                        'isVisible' => false
                     ],
                     [
                         'label' => $translator->translate('Corse non pagate'),
