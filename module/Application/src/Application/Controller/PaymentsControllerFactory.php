@@ -2,8 +2,10 @@
 
 namespace Application\Controller;
 
+// Externals
 use Zend\ServiceManager\FactoryInterface;
 use Zend\ServiceManager\ServiceLocatorInterface;
+use Zend\Session\Container;
 
 class PaymentsControllerFactory implements FactoryInterface
 {
@@ -22,6 +24,10 @@ class PaymentsControllerFactory implements FactoryInterface
         $recapService = $sharedServiceManager->get('SharengoCore\Service\RecapService');
         $faresService = $sharedServiceManager->get('SharengoCore\Service\FaresService');
         $faresForm = $sharedServiceManager->get('FaresForm');
+        $datatablesSessionNamespace = $sharedServiceManager->get('Configuration')['session']['datatablesNamespace'];
+
+        // Creating DataTable Filters Session Container
+        $datatableFiltersSessionContainer = new Container($datatablesSessionNamespace);
 
         return new PaymentsController(
             $tripPaymentsService,
@@ -34,7 +40,8 @@ class PaymentsControllerFactory implements FactoryInterface
             $fleetService,
             $recapService,
             $faresService,
-            $faresForm
+            $faresForm,
+            $datatableFiltersSessionContainer
         );
     }
 }

@@ -35,6 +35,7 @@ $this->headScript()
                     <?php if (!$trip->isEnded()): ?>
                         <li role="presentation" id="menu-close"><a href="<?= $this->url('trips/close-tab', ['id' => $this->tripId]); ?>" data-target="#tab-close" role="tab" data-toggle="tab"><?= $this->translate("Chiudi corsa"); ?></a></li>
                     <?php endif; ?>
+                    <li role="presentation" id="menu-events"><a href="<?= $this->url('trips/events-tab', ['id' => $this->tripId]); ?>" data-target="#tab-events" role="tab" data-toggle="tab"><?= $this->translate("Eventi corsa"); ?></a></li>
                 </ul>
 
                 <div class="tab-content">
@@ -42,6 +43,7 @@ $this->headScript()
                     <div role="tabpanel" class="tab-pane" id="tab-cost"></div>
                     <div role="tabpanel" class="tab-pane" id="tab-edit"></div>
                     <div role="tabpanel" class="tab-pane" id="tab-close"></div>
+                    <div role="tabpanel" class="tab-pane" id="tab-events"></div>
                 </div>
             </div>
         </div>

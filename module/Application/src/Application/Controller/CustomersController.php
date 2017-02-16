@@ -1,6 +1,7 @@
 <?php
 namespace Application\Controller;
 
+// Internals
 use SharengoCore\Entity\Customers;
 use SharengoCore\Entity\CustomersBonus;
 use SharengoCore\Entity\PromoCodes;
@@ -13,13 +14,14 @@ use SharengoCore\Service\DisableContractService;
 use SharengoCore\Exception\CustomerNotFoundException;
 use SharengoCore\Exception\BonusAssignmentException;
 use Cartasi\Service\CartasiContractsService;
-
+// Externals
 use Zend\Form\Form;
 use Zend\Http\Response;
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\Stdlib\Hydrator\HydratorInterface;
 use Zend\View\Model\JsonModel;
 use Zend\View\Model\ViewModel;
+use Zend\Session\Container;
 
 class CustomersController extends AbstractActionController
 {
@@ -88,6 +90,11 @@ class CustomersController extends AbstractActionController
     private $bonusService;
 
     /**
+     * @var Container
+     */
+    private $datatableFiltersSessionContainer;
+
+    /**
      * @param CustomersService $customersService
      * @param CardsService $cardsService
      * @param PromoCodesService $promoCodeService
@@ -101,6 +108,7 @@ class CustomersController extends AbstractActionController
      * @param HydratorInterface $hydrator
      * @param CartasiContractsService $cartasiContractsService
      * @param DisableContractService $disableContractService
+     * @param Container $datatableFiltersSessionContainer
      */
     public function __construct(
         CustomersService $customersService,
@@ -115,7 +123,8 @@ class CustomersController extends AbstractActionController
         Form $cardForm,
         HydratorInterface $hydrator,
         CartasiContractsService $cartasiContractsService,
-        DisableContractService $disableContractService
+        DisableContractService $disableContractService,
+        Container $datatableFiltersSessionContainer
     ) {
         $this->customersService = $customersService;
         $this->cardsService = $cardsService;
@@ -130,12 +139,27 @@ class CustomersController extends AbstractActionController
         $this->cartasiContractsService = $cartasiContractsService;
         $this->disableContractService = $disableContractService;
         $this->bonusService = $bonusService;
+        $this->datatableFiltersSessionContainer = $datatableFiltersSessionContainer;
+    }
+
+    /**
+     * This method return an array containing the DataTable filters,
+     * from a Session Container.
+     *
+     * @return array
+     */
+    private function getDataTableSessionFilters()
+    {
+        return $this->datatableFiltersSessionContainer->offsetGet('Customers');
     }
 
     public function listAction()
     {
+        $sessionDatatableFilters = $this->getDataTableSessionFilters();
+
         return new ViewModel([
-            'totalCustomers' => $this->customersService->getTotalCustomers()
+            'totalCustomers' => $this->customersService->getTotalCustomers(),
+            'filters' => json_encode($sessionDatatableFilters),
         ]);
     }
 
@@ -157,9 +181,13 @@ class CustomersController extends AbstractActionController
                     $postData['customer']['id'] = $customer->getId();
                     $postData['customer']['name'] = $customer->getName();
                     $postData['customer']['surname'] = $customer->getSurname();
-                    $postData['customer']['email'] = $customer->getEmail();
                     $postData['customer']['taxCode'] = $customer->getTaxCode();
                     $postData['customer']['birthDate'] = $customer->getBirthDate()->format('Y-m-d');
+
+                    // Check if Webuser can edit email
+                    if (!$this->isAllowed('customer', 'changeEmail')) {
+                        $postData['customer']['email'] = $customer->getEmail();
+                    }
 
                     // ensure vat is not NULL but a string
                     if (is_null($postData['customer']['vat'])) {
@@ -179,6 +207,13 @@ class CustomersController extends AbstractActionController
                     $form = $this->settingForm;
                     $postData['setting']['id'] = $customer->getId();
                     $postData['setting']['enabled'] = $customer->getEnabled() ? 'true' : 'false';
+
+                    if (!isset($postData['setting']['goldList'])) {
+                        $postData['setting']['goldList'] = (int)$customer->getGoldList();
+                    }
+                    if (!isset($postData['setting']['maintainer'])) {
+                        $postData['setting']['maintainer'] = (int)$customer->getMaintainer();
+                    }
                     $postData['setting']['goldList'] =
                         $postData['setting']['goldList'] |
                         $postData['setting']['maintainer'];

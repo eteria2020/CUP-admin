@@ -16,8 +16,8 @@ return array(
         'from' => 'servizioclienti@sharengo.eu',
         'replyTo' => 'servizioclienti@sharengo.ue',
         'X-Mailer' => 'Sharengo agent',
-        'sharengoNotices' => 'webmaster@philcartechnology.eu',
-        'registrationBcc' => 'webmaster@philcartechnology.eu'
+        'sharengoNotices' => 'cup@sharengo.eu',
+        'registrationBcc' => 'cup@sharengo.eu'
     ],
     'csv' => [
         'newPath' => 'data/Csv',

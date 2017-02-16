@@ -1,0 +1,78 @@
+<?php
+    $this->headLink()
+        ->appendStylesheet('/assets-modules/reports/css/vendor.trips.city.css');
+?>
+<!-- BEGIN PAGE HEADER-->
+<div class="page-bar">
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <?php echo $this->partial('partials/flash-messages.phtml', []); ?>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="form-inline">
+                    <div class="form-group">
+                        <select name="column" id="js-column" class="form-control">
+                            <option value="select" selected><?= $this->translate('-- Seleziona --') ?></option>
+                            <option value="e.name"><?= $this->translate('Nome') ?></option>
+                            <option value="e.description"><?= $this->translate('Descrizione') ?></option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" name="value" value="" class="form-control" id="js-value" placeholder="Filtra...">
+                    </div>
+                    <div class="btn-group">
+                        <button type="button" class="btn green js-search" id="js-search"><i class="fa fa-search"></i> <?= $this->translate('Cerca') ?></button>
+                        <button type="button" class="btn green dropdown-toggle" data-toggle="dropdown"><i class="fa fa-angle-down"></i></button>
+                        <ul class="dropdown-menu" role="menu">
+                            <li>
+                                <a href="javascript:void(0);" id="js-clear"><i class="fa fa-remove"></i> <?= $this->translate('Pulisci Ricerca') ?></a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <hr>
+        <!-- BEGIN EXAMPLE TABLE PORTLET-->
+        <div class="portlet box green">
+            <div class="portlet-title">
+                <div class="caption">
+                    <i class="fa fa-cogs"></i><?= $this->translate('Elenco Zone') ?>
+                </div>
+            </div>
+            <div class="portlet-body">
+                <table class="table table-striped table-bordered table-hover" id="js-zones-table">
+                    <thead>
+                    <tr>
+                        <th><?= $this->translate('Nome') ?></th>
+                        <th><?= $this->translate('Attivo') ?></th>
+                        <th><?= $this->translate('Nascosto') ?></th>
+                        <th><?= $this->translate('Descrizione') ?></th>
+                        <th><?= $this->translate('Usa RevGeo') ?></th>
+                        <th><?= $this->translate('Azioni') ?></th>
+                    </tr>
+                    </thead>
+                </table>
+            </div>
+        </div>
+        <!-- END EXAMPLE TABLE PORTLET-->
+        <!-- BEGIN EXAMPLE TABLE PORTLET-->
+        <div class="portlet box green">
+            <div class="portlet-title">
+                <div class="caption">
+                    <i class="fa fa-map-o"></i><?= $this->translate('Mappa') ?>
+                </div>
+            </div>
+            <div class="portlet-body">
+                <div id="map" class="map"></div>
+                <div id="info"></div>
+            </div>
+        </div>
+        <!-- END EXAMPLE TABLE PORTLET-->
+    </div>
+</div>
+<script>
+    var filters = <?= $this->filters ?>;
+</script>
+<script type="text/javascript" src="/js/zones-list-tab.js"></script>

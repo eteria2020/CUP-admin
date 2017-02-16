@@ -9,6 +9,10 @@ namespace Application;
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
 $translator = new \Zend\I18n\Translator\Translator;
+
+// Getting the siteroot path ( = sharengo-admin folder)
+$baseDir = realpath(__DIR__.'/../../../');
+
 return [
     'router' => [
         'routes' => [
@@ -263,6 +267,19 @@ return [
                             'defaults' => [
                                 'controller' => 'CustomerFailure',
                                 'action' => 'failure-tab',
+                            ],
+                        ],
+                    ],
+                    'ajax-tab-license' => [
+                        'type'    => 'Segment',
+                        'options' => [
+                            'route'    => '/ajax-tab/license/:id',
+                            'constraints' => [
+                                'id' => '[0-9]*'
+                            ],
+                            'defaults' => [
+                                'controller' => 'CustomerLicense',
+                                'action' => 'license-tab',
                             ],
                         ],
                     ],
@@ -655,6 +672,18 @@ return [
                             ]
                         ]
                     ],
+                    'events-tab' => [
+                        'type' => 'Segment',
+                        'options' => [
+                            'route' => '/tab/events/:id',
+                            'constraints' => [
+                                'id'    => '[0-9]*'
+                            ],
+                            'defaults' => [
+                                'action' => 'events-tab'
+                            ]
+                        ]
+                    ],
                     'do-close' => [
                         'type' => 'Literal',
                         'options' => [
@@ -684,7 +713,7 @@ return [
                         ]
                     ]
                 ],
-             ],
+            ],
             'zfcuser' => [
                 'child_routes' => [
                     'register' => [
@@ -713,35 +742,40 @@ return [
                     'defaults' => [
                         'controller' => 'Application\Controller\Users',
                         'action' => 'index'
-                    ]
+                    ],
                 ],
                 'may_terminate' => true,
                 'child_routes' => [
-                    'add' => [
-                        'type'    => 'Literal',
+                    'datatable' => [
+                        'type' => 'Literal',
                         'options' => [
-                            'route'    => '/add',
+                            'route' => '/datatable',
                             'defaults' => [
-                                '__NAMESPACE__' => 'Application\Controller',
-                                'controller'    => 'Users',
-                                'action'        => 'add',
+                                'action' => 'datatable',
+                            ],
+                        ],
+                    ],
+                    'add' => [
+                        'type' => 'Literal',
+                        'options' => [
+                            'route' => '/add',
+                            'defaults' => [
+                                'action' => 'add',
                             ],
                         ],
                     ],
                     'edit' => [
-                        'type'    => 'Segment',
+                        'type' => 'Segment',
                         'options' => [
-                            'route'    => '/edit/:id',
+                            'route' => '/edit/:id',
                             'constraints' => [
-                                'id'    => '[0-9]*'
+                                'id' => '[0-9]*',
                             ],
                             'defaults' => [
-                                '__NAMESPACE__' => 'Application\Controller',
-                                'controller'    => 'Users',
-                                'action'        => 'edit',
+                                'action' => 'edit',
                             ],
                         ],
-                    ]
+                    ],
                 ],
             ],
             'reservations' => [
@@ -799,21 +833,21 @@ return [
                     'defaults' => [
                         'controller' => 'Application\Controller\Zones',
                         'action' => 'index'
-                    ]
+                    ],
                 ],
                 'may_terminate' => true,
                 'child_routes' => [
-                    'ajax-tab-trip' => [
-                        'type'    => 'Literal',
+                    'ajax-tab-list' => [
+                        'type' => 'Literal',
                         'options' => [
-                            'route' => '/ajax-tab-trip',
+                            'route' => '/ajax-tab-list',
                             'defaults' => [
-                                'action' => 'trip-tab',
+                                'action' => 'list-tab',
                             ],
                         ],
                     ],
                     'zone-alarms' => [
-                        'type'    => 'Literal',
+                        'type' => 'Literal',
                         'options' => [
                             'route' => '/zone-alarms',
                             'defaults' => [
@@ -821,8 +855,17 @@ return [
                             ],
                         ],
                     ],
+                    'zone-bonus' => [
+                        'type' => 'Literal',
+                        'options' => [
+                            'route' => '/zone-bonus',
+                            'defaults' => [
+                                'action' => 'zone-bonus',
+                            ],
+                        ],
+                    ],
                     'ajax-tab-groups' => [
-                        'type'    => 'Literal',
+                        'type' => 'Literal',
                         'options' => [
                             'route' => '/ajax-tab-groups',
                             'defaults' => [
@@ -831,11 +874,32 @@ return [
                         ],
                     ],
                     'ajax-tab-prices' => [
-                        'type'    => 'Literal',
+                        'type' => 'Literal',
                         'options' => [
                             'route' => '/ajax-tab-prices',
                             'defaults' => [
                                 'action' => 'prices-tab',
+                            ],
+                        ],
+                    ],
+                    'datatable' => [
+                        'type' => 'Literal',
+                        'options' => [
+                            'route' => '/datatable',
+                            'defaults' => [
+                                'action' => 'datatable',
+                            ],
+                        ],
+                    ],
+                    'edit' => [
+                        'type' => 'Segment',
+                        'options' => [
+                            'route' => '/edit/:id',
+                            'constraints' => [
+                                'id' => '[0-9]*'
+                            ],
+                            'defaults' => [
+                                'action' => 'edit',
                             ],
                         ],
                     ],
@@ -1107,7 +1171,215 @@ return [
                         ]
                     ]
                 ]
-            ]
+            ],
+            'cars-configurations' => [
+                'type' => 'Literal',
+                'options' => [
+                    'route' => '/cars-configurations',
+                    'defaults' => [
+                        '__NAMESPACE__' => 'Application\Controller',
+                        'controller' => 'CarsConfigurations',
+                        'action'        => 'list-all'
+                    ],
+                ],
+                'may_terminate' => true,
+                'child_routes' => [
+                    'datatable' => [
+                        'type'    => 'Literal',
+                        'options' => [
+                            'route'    => '/datatable',
+                            'defaults' => [
+                                'action'        => 'datatable',
+                            ],
+                        ],
+                    ],
+                    'add' => [
+                        'type' => 'Segment',
+                        'options' => [
+                            'route' => '/add',
+                            'defaults' => [
+                                'action' => 'add'
+                            ],
+                        ],
+                        'may_terminate' => true,
+                    ],
+                    'list' => [
+                        'type'    => 'Literal',
+                        'options' => [
+                            'route'    => '/list',
+                        ],
+                        'may_terminate' => false,
+                        'child_routes' => [
+                            'all' => [
+                                'type' => 'Literal',
+                                'options' => [
+                                    'route' => '/all',
+                                    'defaults' => [
+                                        'action' => 'list-all'
+                                    ],
+                                ],
+                            ],
+                            'global' => [
+                                'type' => 'Literal',
+                                'options' => [
+                                    'route' => '/global',
+                                    'defaults' => [
+                                        'action' => 'list-global'
+                                    ],
+                                ],
+                            ],
+                            'fleet' => [
+                                'type' => 'Literal',
+                                'options' => [
+                                    'route' => '/fleet',
+                                    'defaults' => [
+                                        'action' => 'list-fleet'
+                                    ],
+                                ],
+                            ],
+                            'model' => [
+                                'type' => 'Literal',
+                                'options' => [
+                                    'route' => '/model',
+                                    'defaults' => [
+                                        'action' => 'list-model'
+                                    ],
+                                ],
+                            ],
+                            'car' => [
+                                'type' => 'Literal',
+                                'options' => [
+                                    'route' => '/car',
+                                    'defaults' => [
+                                        'action' => 'list-car'
+                                    ],
+                                ],
+                            ],
+                        ],
+                    ],
+                    'edit' => [
+                        'type'    => 'Segment',
+                        'options' => [
+                            'route'    => '/edit/:id',
+                            'constraints' => [
+                                'id' => '[0-9]*'
+                            ],
+                            'defaults' => [
+                                '__NAMESPACE__' => 'Application\Controller',
+                                'controller'    => 'CarsConfigurations',
+                                'action'        => 'edit',
+                            ],
+                        ],
+                        'may_terminate' => true,
+                        'child_routes' => [
+                            'ajax-edit' => [
+                                'type'    => 'Segment',
+                                'options' => [
+                                    'route'    => '/ajax-edit/:optionid',
+                                    'constraints' => [
+                                        'optionid' => '[a-zA-Z0-9]*',
+                                    ],
+                                    'defaults' => [
+                                        '__NAMESPACE__' => 'Application\Controller',
+                                        'controller'    => 'CarsConfigurations',
+                                        'action'        => 'ajax-get-option',
+                                    ],
+                                ],
+                            ],
+                        ],
+                    ],
+                    'details' => [
+                        'type' => 'Segment',
+                        'options' => [
+                            'route' => '/details/:id',
+                            'constraints' => [
+                                'id' => '[0-9]*'
+                            ],
+                            'defaults' => [
+                                'action' => 'details'
+                            ],
+                        ],
+                    ],
+                    'delete' => [
+                        'type'    => 'Segment',
+                        'options' => [
+                            'route'    => '/delete/:id',
+                            'constraints' => [
+                                'id' => '[0-9]*'
+                            ],
+                            'defaults' => [
+                                '__NAMESPACE__' => 'Application\Controller',
+                                'controller'    => 'CarsConfigurations',
+                                'action'        => 'delete',
+                            ],
+                        ],
+                        'may_terminate' => true,
+                        'child_routes' => [
+                            'delete-option' => [
+                                'type'    => 'Segment',
+                                'options' => [
+                                    'route'    => '/:optionid',
+                                    'constraints' => [
+                                        'optionid' => '[a-zA-Z0-9]*',
+                                    ],
+                                    'defaults' => [
+                                        '__NAMESPACE__' => 'Application\Controller',
+                                        'controller'    => 'CarsConfigurations',
+                                        'action'        => 'delete-option',
+                                    ],
+                                ],
+                            ],
+                        ],
+                    ],
+                ],
+            ],
+            'notifications' => [
+                'type' => 'Literal',
+                'options' => [
+                    'route' => '/notifications',
+                    'defaults' => [
+                        '__NAMESPACE__' => 'Application\Controller',
+                        'controller' => 'Notifications',
+                        'action' => 'index',
+                    ],
+                ],
+                'may_terminate' => true,
+                'child_routes' => [
+                    'details' => [
+                        'type' => 'Segment',
+                        'options' => [
+                            'route' => '/details/:id',
+                            'constraints' => [
+                                'id' => '[0-9]*'
+                            ],
+                            'defaults' => [
+                                'action' => 'details'
+                            ]
+                        ]
+                    ],
+                    'datatable' => [
+                        'type' => 'Literal',
+                        'options' => [
+                            'route' => '/datatable',
+                            'defaults' => [
+                                'action' => 'datatable',
+                            ],
+                        ],
+                    ],
+                    'ajax-acknowledgment' => [
+                        'type'    => 'Segment',
+                        'options' => [
+                            'route'    => '/acknowledgment/:id',
+                            'constraints' => [
+                                'id' => '[0-9]*'
+                            ],
+                            'defaults' => [
+                                'action' => 'ajax-acknowledgment',
+                            ],
+                        ],
+                    ],
+                ],
+            ],
         ],
     ],
     'service_manager' => [
@@ -1134,9 +1406,65 @@ return [
             'FaresForm' => 'Application\Form\FaresFormFactory',
             'EditTripForm' => 'Application\Form\EditTripFormFactory',
             'ConfigurationsForm' => 'Application\Form\ConfigurationsFormFactory',
+            'CarsConfigurationsForm' => 'Application\Form\CarsConfigurationsFormFactory',
             'ChangeLanguageDetector.listener' => 'Application\Listener\ChangeLanguageDetectorFactory',
-
+            'ZoneForm' => 'Application\Form\ZoneFormFactory',
         ]
+    ],
+    'asset_manager' => [
+        'resolver_configs' => [
+            'collections' => [
+                // JavaScript
+                'assets-modules/js/vendor.zones.js' => [
+                    // Libs
+                    'ol3/ol.js',
+                    'bootstrap-switch/dist/js/bootstrap-switch.js',
+                ],
+                'assets-modules/js/vendor.notifications.js' => [
+                    // Libs
+                    'moment/min/moment.min.js',
+                    'moment-timezone/builds/moment-timezone-with-data-2010-2020.min.js',
+                    // Code
+                    'assets-modules/application/js/notifications.js',
+                ],
+                'assets-modules/js/vendor.notifications.details.js' => [
+                    // Libs
+                    'ol3/ol.js',
+                    'moment/min/moment.min.js',
+                    'moment-timezone/builds/moment-timezone-with-data-2010-2020.min.js',
+                    // Code
+                    'assets-modules/application/js/notifications.details.js',
+                ],
+                // CSS
+                'assets-modules/css/vendor.zones.css' => [
+                    // Libs
+                    'ol3/ol.css',
+                    'bootstrap-switch/dist/css/bootstrap3/bootstrap-switch.css',
+                ],
+                'assets-modules/css/vendor.notifications.details.css' => [
+                    // Libs
+                    'ol3/ol.css',
+                ],
+            ],
+            'paths' => [
+                'application' => __DIR__.'/../public',
+                $baseDir.'/bower_components',
+            ],
+        ],
+        'filters' => [
+            // Minify All JS
+            'js' => [
+                [
+                    'filter' => 'JSMin',
+                ],
+            ],
+            // Minify All CSS
+            'css' => [
+                [
+                    'filter' => 'CssMin',
+                ],
+            ],
+        ],
     ],
     'controllers' => [
         'invokables' => [
@@ -1154,14 +1482,17 @@ return [
             'Application\Controller\Payments' => 'Application\Controller\PaymentsControllerFactory',
             'Application\Controller\CustomerNote' => 'Application\Controller\CustomerNoteControllerFactory',
             'Application\Controller\Configurations' => 'Application\Controller\ConfigurationsControllerFactory',
+            'Application\Controller\CarsConfigurations' => 'Application\Controller\CarsConfigurationsControllerFactory',
             'Application\Controller\Pois' => 'Application\Controller\PoisControllerFactory',
             'Application\Controller\Zones' => 'Application\Controller\ZonesControllerFactory',
             'Application\Controller\CustomersEdit' => 'Application\Controller\CustomersEditControllerFactory',
             'Application\Controller\EditTrip' => 'Application\Controller\EditTripControllerFactory',
             'Application\Controller\CustomerFailure' => 'Application\Controller\CustomerFailureControllerFactory',
+            'Application\Controller\CustomerLicense' => 'Application\Controller\CustomerLicenseControllerFactory',
             'Application\Controller\PaymentsCsv' => 'Application\Controller\PaymentsCsvControllerFactory',
             'Application\Controller\ForeignDriversLicense' => 'Application\Controller\ForeignDriversLicenseControllerFactory',
-            'Application\Controller\TripsNotPayed' => 'Application\Controller\TripsNotPayedControllerFactory'
+            'Application\Controller\TripsNotPayed' => 'Application\Controller\TripsNotPayedControllerFactory',
+            'Application\Controller\Notifications' => 'Application\Controller\NotificationsControllerFactory',
         ]
     ],
     'controller_plugins' => [
@@ -1289,7 +1620,8 @@ return [
     'view_helpers'    => [
         'invokables' => [
             'CarStatus' => 'Application\View\Helper\CarStatus',
-        ]
+            'CarConfigurationPriorityType' => 'Application\View\Helper\CarConfigurationPriorityType',
+        ],
     ],
 
     // Placeholder for console routes
@@ -1315,17 +1647,30 @@ return [
     'bjyauthorize' => [
         'resource_providers' => [
             'BjyAuthorize\Provider\Resource\Config' => [
+
+                // current roles mapped as resourcers (used for navigation ACL's)
                 'admin' => [],
                 'callcenter' => [],
                 'superadmin' => [],
+
+                // other resources
+                'customer' => [],
             ],
         ],
         'rule_providers' => [
             'BjyAuthorize\Provider\Rule\Config' => [
                 'allow' => [
+                    // for navigation
                     [['superadmin','admin'], 'admin'],
                     [['superadmin','admin','callcenter'], 'callcenter'],
                     [['superadmin'], 'superadmin'],
+
+                    // for limiting certains operations
+                    [['superadmin','admin'], 'customer', 'changeEmail'],
+                    [['superadmin'], 'customer', 'userArea'],
+                    [['superadmin'], 'customer', 'discountRate'],
+                    [['superadmin'], 'customer', 'maintainer'],
+                    [['superadmin'], 'customer', 'goldList'],
                 ],
             ],
         ],
@@ -1340,20 +1685,23 @@ return [
                 ['controller' => 'Application\Controller\Trips', 'roles' => ['admin']],
                 ['controller' => 'Application\Controller\Cars', 'roles' => ['admin']],
                 ['controller' => 'Application\Controller\ConsoleUser', 'roles' => []],
-                ['controller' => 'Application\Controller\Users', 'roles' => ['admin']],
+                ['controller' => 'Application\Controller\Users', 'roles' => ['superadmin']],
                 ['controller' => 'Application\Controller\Reservations', 'roles' => ['admin']],
                 ['controller' => 'Application\Controller\Invoices', 'roles' => ['admin']],
                 ['controller' => 'Application\Controller\Payments', 'roles' => ['admin']],
                 ['controller' => 'Application\Controller\CustomerNote', 'roles' => ['admin']],
                 ['controller' => 'Application\Controller\Configurations', 'roles' => ['admin']],
+                ['controller' => 'Application\Controller\CarsConfigurations', 'roles' => ['superadmin']],
                 ['controller' => 'Application\Controller\Pois', 'roles' => ['superadmin']],
                 ['controller' => 'Application\Controller\Zones', 'roles' => ['superadmin']],
                 ['controller' => 'Application\Controller\CustomersEdit', 'roles' => ['admin']],
                 ['controller' => 'Application\Controller\EditTrip', 'roles' => ['admin']],
                 ['controller' => 'Application\Controller\CustomerFailure', 'roles' => ['admin']],
+                ['controller' => 'Application\Controller\CustomerLicense', 'roles' => ['admin']],
                 ['controller' => 'Application\Controller\PaymentsCsv', 'roles' => ['admin']],
                 ['controller' => 'Application\Controller\ForeignDriversLicense', 'roles' => ['admin']],
-                ['controller' => 'Application\Controller\TripsNotPayed', 'roles' => ['admin']]
+                ['controller' => 'Application\Controller\TripsNotPayed', 'roles' => ['admin']],
+                ['controller' => 'Application\Controller\Notifications', 'roles' => ['admin','callcenter']],
             ],
         ],
     ],
@@ -1439,7 +1787,7 @@ return [
                     [
                         'label' => $translator->translate('Costo corsa'),
                         'route' => 'trips/cost',
-                        'isVisible' => true
+                        'isVisible' => false
                     ],
                     [
                         'label' => $translator->translate('Corse non pagate'),
@@ -1530,6 +1878,40 @@ return [
                 ]
             ],
             [
+                'label' => $translator->translate('Configurazione Auto'),
+                'route' => 'cars-configurations',
+                'icon' => 'fa fa-cogs',
+                'resource' => 'admin',
+                'isRouteJs' => true,
+                'pages' => [
+                    [
+                        'label' => $translator->translate('Elenco Completo'),
+                        'route' => 'cars-configurations/list/all',
+                        'isVisible' => true
+                    ],
+                    [
+                        'label' => $translator->translate('Elenco Globale'),
+                        'route' => 'cars-configurations/list/global',
+                        'isVisible' => true
+                    ],
+                    [
+                        'label' => $translator->translate('Elenco per Citta\''),
+                        'route' => 'cars-configurations/list/fleet',
+                        'isVisible' => true
+                    ],
+                    [
+                        'label' => $translator->translate('Elenco per Modello / Citta\''),
+                        'route' => 'cars-configurations/list/model',
+                        'isVisible' => true
+                    ],
+                    [
+                        'label' => $translator->translate('Elenco per Auto'),
+                        'route' => 'cars-configurations/list/car',
+                        'isVisible' => true
+                    ],
+                ],
+            ],
+            [
                 'label'           => $translator->translate('Aree'),
                 'route'           => 'zones',
                 'icon'            => 'fa fa-map-marker',
@@ -1544,6 +1926,25 @@ return [
                     [
                         'label' => $translator->translate('Aree d\'allarme'),
                         'route' => 'zones/zone-alarms',
+                        'isVisible' => true
+                    ],
+                    [
+                        'label' => $translator->translate('Aree bonus'),
+                        'route' => 'zones/zone-bonus',
+                        'isVisible' => true
+                    ]
+                ]
+            ],
+            [
+                'label' => $translator->translate('Notifiche'),
+                'route' => 'notifications',
+                'icon' => 'fa fa-bell-o',
+                'resource' => 'admin',
+                'isRouteJs' => true,
+                'pages' => [
+                    [
+                        'label' => $translator->translate('Elenco'),
+                        'route' => 'notifications',
                         'isVisible' => true
                     ]
                 ]

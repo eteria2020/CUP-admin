@@ -1,0 +1,351 @@
+<?php
+    $this->headLink()->appendStylesheet('/assets-modules/css/vendor.notifications.details.css');
+
+    /** @var Customers $customer */
+    $customer = $this->data["customer"];
+
+    /** @var Trips $trip */
+    $trip = $this->data["trip"];
+
+    $meta = $this->notification->getMeta();
+?>
+<div class="col-md-12">
+    <?php echo $this->partial('partials/flash-messages.phtml', []); ?>
+    <!-- BEGIN Notification details -->
+    <div class="portlet box green">
+        <div class="portlet-title">
+            <div class="caption">
+                <i class="fa fa-medkit"></i><?= $this->translate('Dati Notifica') . $this->translate('SOS') ?>
+            </div>
+        </div>
+        <div class="portlet-body">
+            <div class="row">
+                <div class="col-lg-4">
+                    <div class="form-group">
+                        <label><?= $this->translate('Km Auto'); ?></label>
+                        <div class="sng-info-box"><?= $meta['km']; ?></div>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="form-group">
+                        <label><?= 'IMEI ' . $this->translate('modulo GSM') . ' ' . $this->translate('Auto') ?></label>
+                        <div class="sng-info-box"><?= $meta['imei']; ?></div>
+                        
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="form-group">
+                        <label><?= $this->translate('Etichetta Notifica'); ?></label>
+                        <div class="sng-info-box"><?= $meta['label']; ?></div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="form-group">
+                        <label><?= $this->translate('Valore Testuale'); ?></label>
+                        <div class="sng-info-box"><?= $meta['txtval']; ?></div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-4">
+                    <div class="form-group">
+                        <label><?= $this->translate('Targa Auto'); ?></label>
+                        <div class="sng-info-box"><?= $meta['car_plate']; ?></div>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="form-group">
+                        <label><?= $this->translate('Percentuale Carica Batteria'); ?></label>
+                        <div class="sng-info-box"><?= $meta['battery']; ?></div>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="form-group">
+                        <label><?= $this->translate('ID Cliente'); ?></label>
+                        <div class="sng-info-box"><?= $meta['customer_id']; ?></div>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- END Notification details -->
+    <!-- BEGIN Customer details -->
+    <div class="portlet box green">
+        <div class="portlet-title">
+            <div class="caption">
+                <i class="fa fa-user"></i><?= $this->translate('Anagrafica') . ' ' . $this->translate('Cliente'); ?>
+            </div>
+        </div>
+        <div class="portlet-body">
+            <div class="row">
+                <div class="col-lg-4">
+                    <div class="form-group">
+                        <label><?= $this->translate('ID'); ?></label>
+                        <div class="sng-info-box"><?= $customer->getId(); ?></div>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="form-group">
+                        <label><?= $this->translate('Nome'); ?></label>
+                        <div class="sng-info-box"><?= $customer->getName(); ?></div>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="form-group">
+                        <label><?= $this->translate('Cognome'); ?></label>
+                        <div class="sng-info-box"><?= $customer->getSurname(); ?></div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-4">
+                    <div class="form-group">
+                        <label><?= $this->translate('Cellulare'); ?></label>
+                        <div class="sng-info-box"><?= $customer->getPhone() . ' ' . $customer->getMobile() ?></div>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="form-group">
+                        <label><?= $this->translate('Email'); ?></label>
+                        <div class="sng-info-box"><?= $customer->getEmail(); ?></div>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="form-group">
+                        <label><?= $this->translate('Data di nascita'); ?></label>
+                        <div class="sng-info-box"><?= $customer->getBirthDate()->format('d-m-Y') ?></div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-4">
+                    <div class="form-group">
+                        <label><?= $this->translate('Lingua'); ?></label>
+                        <div class="sng-info-box"><?= $customer->getLanguage(); ?></div>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="form-group">
+                        <label><?= $this->translate('Patente'); ?></label>
+                        <div class="sng-info-box"><?= $customer->getDriverLicense(); ?></div>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="form-group">
+                        <label><?= $this->translate('Abilitato'); ?></label>
+                        <div class="sng-info-box"><?= $customer->getEnabled() ? $this->translate("SI") : $this->translate("NO") ?></div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="form-group">
+                        <label><?= $this->translate('Note'); ?></label>
+                        <div class="sng-info-box"><?= $customer->getNotes(); ?></div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-12">
+                    <a href="<?= $this->url('customers/edit', ['id' => $customer->getId()]) ?>" class="btn btn-success pull-right">
+                        <?= $this->translate("Apri informazioni Cliente"); ?> <i class="fa fa-arrow-right"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- END Customer details -->
+    <!-- BEGIN Trip details -->
+    <div class="portlet box green">
+        <div class="portlet-title">
+            <div class="caption">
+                <i class="fa fa-road"></i><?= $this->translate('Corsa'); ?>
+            </div>
+        </div>
+        <div class="portlet-body">
+            <div class="row">
+                <div class="col-lg-4">
+                    <div class="form-group">
+                        <label><?= $this->translate('ID'); ?></label>
+                        <div class="sng-info-box"><?= $trip->getId(); ?></div>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="form-group">
+                        <label><?= $this->translate('RFID cliente'); ?></label>
+                        <div class="sng-info-box"><?= $trip->getCustomerCardRfid(); ?></div>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="form-group">
+                        <label><?= $this->translate('Numero auto'); ?></label>
+                        <div class="sng-info-box"><?= $trip->getCarLabel(); ?></div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="form-group">
+                        <label><?= $this->translate('Km Inizio'); ?></label>
+                        <div class="sng-info-box"><?= $trip->getKmBeginning() ?></div>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="form-group">
+                        <label><?= $this->translate('Km Fine'); ?></label>
+                        <div class="sng-info-box"><?= $trip->getKmEnd() ?></div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-4">
+                    <div class="form-group">
+                        <label><?= $this->translate('Inizio'); ?></label>
+                        <div class="sng-info-box date-time"><?= $trip->getTimestampBeginning() instanceof DateTime ? $trip->getTimestampBeginning()->getTimestamp() : '' ?></div>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="form-group">
+                        <label><?= $this->translate('Fine'); ?></label>
+                        <div class="sng-info-box date-time"><?= $trip->getTimestampEnd() instanceof DateTime ? $trip->getTimestampEnd()->getTimestamp() : '' ?></div>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="form-group">
+                        <label><?= $this->translate('Durata'); ?></label>
+                        <div class="sng-info-box"><?= $trip->getDurationMinutes() ?> <?= $this->translate("minuti"); ?></div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-4">
+                    <div class="form-group">
+                        <label><?= $this->translate("Sosta"); ?></label>
+                        <div class="sng-info-box"><?= $trip->getParkSeconds() . ' sec.' ?></div>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="form-group">
+                        <label><?= $this->translate("Stato Quadro"); ?></label>
+                        <div class="sng-info-box"><?= $trip->getCar()->getKeystatus() ?></div>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="form-group">
+                        <label><?= $this->translate("In Sosta"); ?></label>
+                        <div class="sng-info-box"><?= $trip->getCar()->getParking() ? $this->translate("SI") : $this->translate("NO") ?></div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-12">
+                    <a href="<?= $this->url('trips/details', ['id' => $trip->getId()]) ?>" class="btn btn-success pull-right">
+                        <?= $this->translate("Apri informazioni Corsa"); ?> <i class="fa fa-arrow-right"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- END Trips details -->
+    <!-- BEGIN Position details -->
+    <div class="portlet box green">
+        <div class="portlet-title">
+            <div class="caption">
+                <i class="fa fa-map-marker"></i><?= $this->translate('Dati Posizione') ?>
+            </div>
+        </div>
+        <div class="portlet-body">
+            <div class="row">
+                <div class="col-lg-2">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="form-group">
+                                <label><?= $this->translate('Stato'); ?></label>
+                                <div class="sng-info-box address country"></div>
+                            </div>
+                        </div>
+                        <div class="col-lg-12">
+                            <div class="form-group">
+                                <label><?= $this->translate('Codice Stato'); ?></label>
+                                <div class="sng-info-box address country_code"></div>
+                            </div>
+                        </div>
+                        <div class="col-lg-12">
+                            <div class="form-group">
+                                <label><?= $this->translate('Regione'); ?></label>
+                                <div class="sng-info-box address state"></div>
+                            </div>
+                        </div>
+                        <div class="col-lg-12">
+                            <div class="form-group">
+                                <label><?= $this->translate('Provincia'); ?></label>
+                                <div class="sng-info-box address county"></div>
+                            </div>
+                        </div>
+                        <div class="col-lg-12">
+                            <div class="form-group">
+                                <label><?= $this->translate('Città'); ?></label>
+                                <div class="sng-info-box address city"></div>
+                            </div>
+                        </div>
+                        <div class="col-lg-12">
+                            <div class="form-group">
+                                <label><?= $this->translate('CAP'); ?></label>
+                                <div class="sng-info-box address postcode"></div>
+                            </div>
+                        </div>
+                        <div class="col-lg-12">
+                            <div class="form-group">
+                                <label><?= $this->translate('Via'); ?></label>
+                                <div class="sng-info-box address road"></div>
+                            </div>
+                        </div>
+                        <div class="col-lg-12">
+                            <div class="form-group">
+                                <label><?= $this->translate('Via') . ' - ' . $this->translate('Maggiori Informazioni') ?></label>
+                                <div class="sng-info-box address suburb"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-10">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="form-group">
+                                <label><?= $this->translate('Mappa'); ?></label>
+                                <div class="sng-info-box"><div id="map"></div></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <div class="form-group">
+                                <label><?= $this->translate('Longitudine'); ?></label>
+                                <div class="sng-info-box" id="point-lon"><?= $meta['lon']; ?></div>
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="form-group">
+                                <label><?= $this->translate('Latitudine'); ?></label>
+                                <div class="sng-info-box" id="point-lat"><?= $meta['lat']; ?></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="form-group">
+                                <label><?= $this->translate('Dato GEO'); ?></label>
+                                <div class="sng-info-box"><?= json_encode($meta['geo']); ?></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- END Notification details -->
+</div>
+<script type="text/javascript" src="/assets-modules/js/vendor.notifications.details.js"></script>

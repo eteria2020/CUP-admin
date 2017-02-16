@@ -1,11 +1,13 @@
 <?php
 namespace Application\Controller;
 
+// Internals
 use SharengoCore\Service\TripsService;
-
+// Externals
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\JsonModel;
 use Zend\View\Model\ViewModel;
+use Zend\Session\Container;
 
 class TripsNotPayedController extends AbstractActionController
 {
@@ -15,11 +17,20 @@ class TripsNotPayedController extends AbstractActionController
     private $tripsService;
 
     /**
-     * @param TripsService $tripsService
+     * @var Container
      */
-    public function __construct(TripsService $tripsService)
-    {
+    private $datatableFiltersSessionContainer;
+
+    /**
+     * @param TripsService $tripsService
+     * @param Container $datatableFiltersSessionContainer
+     */
+    public function __construct(
+        TripsService $tripsService,
+        Container $datatableFiltersSessionContainer
+    ) {
         $this->tripsService = $tripsService;
+        $this->datatableFiltersSessionContainer = $datatableFiltersSessionContainer;
     }
 
     /**
@@ -51,8 +62,23 @@ class TripsNotPayedController extends AbstractActionController
         }
     }
 
+    /**
+     * This method return an array containing the DataTable filters,
+     * from a Session Container.
+     *
+     * @return array
+     */
+    private function getDataTableSessionFilters()
+    {
+        return $this->datatableFiltersSessionContainer->offsetGet('TripsNotPayed');
+    }
+
     public function listAction()
     {
-        return new ViewModel();
+        $sessionDatatableFilters = $this->getDataTableSessionFilters();
+
+        return new ViewModel([
+            'filters' => json_encode($sessionDatatableFilters),
+        ]);
     }
 }

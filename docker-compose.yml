@@ -1,0 +1,30 @@
+version: '2'
+services:
+  admin-fpm:
+    image: cup-admin-fpm
+    container_name: admin-fpm
+    volumes:
+      - .:/srv/apps/sharengo
+    external_links:
+      - sharengo-redis
+      - sharengo-postgres
+    networks:
+      - back-tier
+      - front-tier
+  admin-nginx:
+    image: cup-admin-nginx
+    container_name: admin-nginx
+    volumes_from:
+      - admin-fpm
+    links:
+      - admin-fpm:fpm
+    networks:
+      - front-tier
+      - back-tier
+networks:
+  front-tier:
+    external:
+      name: sharengo-front-tier
+  back-tier:
+    external:
+      name: sharengo-back-tier

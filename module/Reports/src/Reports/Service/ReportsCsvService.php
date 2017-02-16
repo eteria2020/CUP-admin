@@ -28,6 +28,9 @@ class ReportsCsvService
      */
     public function getAllTripsCsv($startDate, $endDate)
     {
+        // Bypass standard PHP Memory Limit to allow big data elaborations
+        ini_set('memory_limit', '-1');
+
         // Get the trips, in array format
         $trips = $this->reportsService->getAllTrips($startDate, $endDate);
 
@@ -37,7 +40,7 @@ class ReportsCsvService
             $file = fopen('php://temp/maxmemory:'.(12 * 1024 * 1024), 'r+'); // 128mb
 
             // Write CSV to memory
-            fputcsv($file, array_keys(call_user_func_array('array_merge', $trips)));
+            fputcsv($file, array_keys($trips[0]));
 
             foreach ($trips as $row) {
                 fputcsv($file, $row);
@@ -66,6 +69,9 @@ class ReportsCsvService
      */
     public function getCityTripsCsv($startDate, $endDate, $city)
     {
+        // Bypass standard PHP Memory Limit to allow big data elaborations
+        ini_set('memory_limit', '-1');
+
         // Get the trips, in array format
         $trips = $this->reportsService->getCityTrips($startDate, $endDate, $city);
 

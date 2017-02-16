@@ -9,11 +9,15 @@
     "homepage": "http://framework.zend.com/",
     "repositories": [
         {
-            "url": "ssh://git@gitlab.bulweria.com/cup-web/core.git",
+            "url": "ssh://git@gitlab.bulweria.com/sharengo-web/core.git",
             "type": "git"
         },
         {
-            "url": "ssh://git@git.mvlabs.it:4222/clients/sharengo-cartasi.git",
+            "url": "ssh://git@gitlab.bulweria.com/sharengo-web/cartasi.git",
+            "type": "git"
+        },
+        {
+            "url": "https://git.mvlabs.it/internals/zf2-multilanguage.git",
             "type": "git"
         },
         {
@@ -24,21 +28,17 @@
             "url": "ssh://git@gitlab.bulweria.com/cup-web/core-business.git",
             "type": "git"
         },
-        {
-            "url": "ssh://git@git.mvlabs.it:4222/internals/zf2-multilanguage.git",
-            "type": "git"
-        }
     ],
     "require": {
         "php": ">=5.4",
         "zendframework/zendframework": "~2.4",
         "bjyoungblood/bjy-authorize": "1.4.0",
         "zf-commons/zfc-user-doctrine-orm": "^1.0",
-        "creof/doctrine2-spatial": "^0.0.1",
+        "creof/doctrine2-spatial": "1.*",
         "rwoverdijk/assetmanager": "1.4.*",
         "mvlabs/sharengo-coremodule": "dev-master",
         "leafo/lessphp": "0.5.*",
-        "mvlabs/sharengo-cartasi": "dev-master",
+        "sharengo-web/cartasi": "dev-master",
         "cup-web/core-business": "dev-master",
         "cup-web/admin-business-module": "dev-master",
         "mockery/mockery": "^0.9.4",

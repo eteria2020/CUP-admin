@@ -1,6 +1,7 @@
 <?php
 namespace Application\Controller;
 
+// Internals
 use Application\Form\InputData\CloseTripDataFactory;
 use Application\Form\TripCostForm;
 use SharengoCore\Entity\Trips;
@@ -12,10 +13,12 @@ use SharengoCore\Exception\TripNotFoundException;
 use SharengoCore\Service\EventsService;
 use SharengoCore\Service\TripCostComputerService;
 use SharengoCore\Service\TripsService;
-
+// Externals
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\JsonModel;
 use Zend\View\Model\ViewModel;
+use Zend\Session\Container;
+use Zend\EventManager\EventManager;
 
 class TripsController extends AbstractActionController
 {
@@ -40,27 +43,56 @@ class TripsController extends AbstractActionController
     private $eventsService;
 
     /**
+     * @var EventManager
+     */
+    private $eventManager;
+
+    /**
      * @var CloseTripDataFactory
      */
     private $closeTripDataFactory;
+
+    /**
+     * @var Container
+     */
+    private $datatableFiltersSessionContainer;
 
     public function __construct(
         TripsService $tripsService,
         TripCostForm $tripCostForm,
         TripCostComputerService $tripCostComputerService,
         EventsService $eventsService,
-        CloseTripDataFactory $closeTripDataFactory
+        EventManager $eventManager,
+        CloseTripDataFactory $closeTripDataFactory,
+        Container $datatableFiltersSessionContainer
     ) {
         $this->tripsService = $tripsService;
         $this->tripCostForm = $tripCostForm;
         $this->tripCostComputerService = $tripCostComputerService;
         $this->eventsService = $eventsService;
+        $this->eventManager = $eventManager;
         $this->closeTripDataFactory = $closeTripDataFactory;
+        $this->datatableFiltersSessionContainer = $datatableFiltersSessionContainer;
+    }
+
+    /**
+     * This method return an array containing the DataTable filters,
+     * from a Session Container.
+     *
+     * @return array
+     */
+    private function getDataTableSessionFilters()
+    {
+        return $this->datatableFiltersSessionContainer->offsetGet('Trips');
     }
 
     public function indexAction()
     {
-        return new ViewModel();
+        $sessionDatatableFilters = $this->getDataTableSessionFilters();
+
+        return new ViewModel([
+            'filters' => json_encode($sessionDatatableFilters),
+        ]);
     }
 
     public function datatableAction()
@@ -81,7 +113,11 @@ class TripsController extends AbstractActionController
 
     private function getRecordsFiltered($filters, $tripsTotal)
     {
-        if (empty($filters['searchValue']) && !isset($filters['columnNull'])) {
+        if (empty($filters['searchValue']) &&
+            !isset($filters['columnNull']) &&
+            empty($filters['from']) &&
+            empty($filters['to'])) {
+
             return $tripsTotal;
         } else {
             $filters['withLimit'] = false;
@@ -182,6 +218,26 @@ class TripsController extends AbstractActionController
         return $view;
     }
 
+    public function eventsTabAction()
+    {
+        $id = $this->params()->fromRoute('id', 0);
+
+        $trip = $this->tripsService->getTripById($id);
+
+        if (!$trip instanceof Trips) {
+            throw new TripNotFoundException();
+        }
+
+        $events = $this->eventsService->getEventsByTrip($trip);
+
+        $view = new ViewModel();
+        $view->setTemplate('partials/events-table.phtml');
+        $view->setVariables(['events' => $events]);
+        $view->setTerminal(true);
+
+        return $view;
+    }
+
     public function doCloseAction()
     {
         $translator = $this->TranslatorPlugin();
@@ -191,6 +247,12 @@ class TripsController extends AbstractActionController
             $inputData = $this->closeTripDataFactory->createFromArray($data);
 
             $this->tripsService->closeTrip($inputData, $this->identity());
+
+            $this->eventManager->trigger('trip-closed', $this, [
+                'topic' => 'trips',
+                'trip_id' => $data['id'],
+                'action' => 'Close trip data: payable ' . ($data['payable'] ? 'true' : 'false') . ', end date ' . $data['datetime']
+            ]);
 
             $this->flashMessenger()->addSuccessMessage($translator->translate('Corsa chiusa con successo'));
 

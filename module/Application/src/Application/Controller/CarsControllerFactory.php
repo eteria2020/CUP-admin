@@ -2,9 +2,11 @@
 
 namespace Application\Controller;
 
+// Externals
 use Zend\ServiceManager\FactoryInterface;
 use Zend\ServiceManager\ServiceLocatorInterface;
 use DoctrineModule\Stdlib\Hydrator\DoctrineObject as DoctrineHydrator;
+use Zend\Session\Container;
 
 class CarsControllerFactory implements FactoryInterface
 {
@@ -15,13 +17,25 @@ class CarsControllerFactory implements FactoryInterface
      */
     public function createService(ServiceLocatorInterface $serviceLocator)
     {
-        $entityManager = $serviceLocator->getServiceLocator()->get('doctrine.entitymanager.orm_default');
-        $I_carsService = $serviceLocator->getServiceLocator()->get('SharengoCore\Service\CarsService');
-        $I_commandsService = $serviceLocator->getServiceLocator()->get('SharengoCore\Service\CommandsService');
+        $sharedServiceLocator = $serviceLocator->getServiceLocator();
 
-        $I_carForm = $serviceLocator->getServiceLocator()->get('CarForm');
+        $entityManager = $sharedServiceLocator->get('doctrine.entitymanager.orm_default');
+        $carsService = $sharedServiceLocator->get('SharengoCore\Service\CarsService');
+        $commandsService = $sharedServiceLocator->get('SharengoCore\Service\CommandsService');
+        $datatablesSessionNamespace = $sharedServiceLocator->get('Configuration')['session']['datatablesNamespace'];
+
+        $carForm = $sharedServiceLocator->get('CarForm');
         $hydrator = new DoctrineHydrator($entityManager);
 
-        return new CarsController($I_carsService, $I_commandsService, $I_carForm, $hydrator);
+        // Creating DataTable Filters Session Container
+        $datatableFiltersSessionContainer = new Container($datatablesSessionNamespace);
+
+        return new CarsController(
+            $carsService,
+            $commandsService,
+            $carForm,
+            $hydrator,
+            $datatableFiltersSessionContainer
+        );
     }
 }

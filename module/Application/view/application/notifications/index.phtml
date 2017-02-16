@@ -1,0 +1,100 @@
+<?php
+$this->headLink()
+    ->appendStylesheet('/js/datatables/plugins/bootstrap/dataTables.bootstrap.css')
+    ->appendStylesheet('/plugins/bootstrap-datepicker/css/datepicker3.css');
+$this->headScript()
+    ->appendFile('/js/datatables/media/js/jquery.dataTables.js')
+    ->appendFile('/js/datatables/plugins/bootstrap/dataTables.bootstrap.js')
+    ->appendFile('/plugins/bootstrap-datepicker/js/bootstrap-datepicker.js')
+    ->appendFile($this->basePath() . '/js/datatable-session-data.js')
+    ->appendFile($this->basePath() .'/assets-modules/js/vendor.notifications.js');
+?>
+<div class="page-content-wrapper">
+    <div class="page-content">
+        <!-- BEGIN PAGE HEADER-->
+        <h3 class="page-title">
+            <?= $this->translate("ELENCO NOTIFICHE"); ?> <small><?= $this->translate("ricerca"); ?></small>
+        </h3>
+        <div class="page-bar">
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <?php echo $this->partial('partials/flash-messages.phtml', []); ?>
+                <div class="row">
+                    <div class="col-md-8">
+                        <div class="form-inline">
+                            <div class="form-group">
+                                <select name="column" id="js-column" class="form-control">
+                                    <option value="select" selected>-- <?= $this->translate("Seleziona"); ?> --</option>
+                                    <option value="e.id"><?= $this->translate("Id"); ?></option>
+                                    <option value="e.subject"><?= $this->translate("Oggetto"); ?></option>
+                                    <option value="e.submitDate"><?= $this->translate("Data Registrazione"); ?></option>
+                                    <option value="e.sentDate"><?= $this->translate("Data Invio"); ?></option>
+                                    <option value="nc.name"><?= $this->translate("Categoria Notifica"); ?></option>
+                                    <option value="np.name"><?= $this->translate("Protocollo Notifica"); ?></option>
+                                    <option value="e.acknowledgeDate"><?= $this->translate("Data Presa Visione"); ?></option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <select name="js-notification-category" id="js-notification-category" class="form-control" style="display: none;">
+                                    <?php
+                                        foreach ($this->notificationsCategories as $category) {
+                                            echo '<option value="' . $category->getName() . '">' . $category->getName() . '</option>';
+                                        }
+                                    ?>
+                                </select>
+                                <select name="js-notification-protocol" id="js-notification-protocol" class="form-control" style="display: none;">
+                                    <?php
+                                        foreach ($this->notificationsProtocols as $protocol) {
+                                            echo '<option value="' . $protocol->getName() . '">' . $protocol->getName() . '</option>';
+                                        }
+                                    ?>
+                                </select>
+                                <input type="text" name="value" value="" class="form-control" id="js-value" placeholder="<?= $this->translate("Filtra..."); ?>">
+                            </div>
+                            <div class="btn-group">
+                                <button type="button" class="btn green js-search" id="js-search"><i class="fa fa-search"></i> <?= $this->translate("Cerca"); ?></button>
+                                <button type="button" class="btn green dropdown-toggle" data-toggle="dropdown"><i class="fa fa-angle-down"></i></button>
+                                <ul class="dropdown-menu" role="menu">
+                                    <li>
+                                        <a href="javascript:void(0);" id="js-clear"><i class="fa fa-remove"></i> <?= $this->translate("Pulisci Ricerca"); ?></a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <hr>
+                <!-- BEGIN TABLE PORTLET-->
+                <div class="portlet box green">
+                    <div class="portlet-title">
+                        <div class="caption">
+                            <i class="fa fa-cogs"></i><?= $this->translate("Elenco Notifiche"); ?>
+                        </div>
+                    </div>
+                    <div class="portlet-body">
+                        <table class="table table-striped table-bordered table-hover" id="js-notifications-table">
+                            <thead>
+                            <tr>
+                                <th><?= $this->translate("Id"); ?></th>
+                                <th><?= $this->translate("Oggetto"); ?></th>
+                                <th><?= $this->translate("Data Registrazione"); ?></th>
+                                <th><?= $this->translate("Data Invio"); ?></th>
+                                <th><?= $this->translate("Data Presa Visione"); ?></th>
+                                <th><?= $this->translate("Categoria Notifica"); ?></th>
+                                <th><?= $this->translate("Protocollo Notifica"); ?></th>
+                                <th><?= $this->translate("Azione"); ?></th>
+                            </tr>
+                            </thead>
+                        </table>
+                    </div>
+                </div>
+                <!-- END EXAMPLE TABLE PORTLET-->
+            </div>
+        </div>
+        <!-- END PAGE CONTENT-->
+    </div>
+</div>
+<script>
+    var filters = <?= $this->filters ?>;
+</script>

@@ -3,30 +3,30 @@ $this->headLink()->appendStylesheet('/js/datatables/plugins/bootstrap/dataTables
 $this->headScript()
     ->appendFile('/js/datatables/media/js/jquery.dataTables.min.js')
     ->appendFile('/js/datatables/plugins/bootstrap/dataTables.bootstrap.js')
+    ->appendFile($this->basePath() . '/js/datatable-session-data.js')
     ->appendFile($this->basePath() .'/js/foreign-drivers-license.js');
 ?>
 <div class="page-content-wrapper">
     <div class="page-content">
-
         <!-- BEGIN PAGE HEADER-->
         <h3 class="page-title">
             <?= $this->translate("UPLOAD PATENTI ESTERE"); ?> <small><?= $this->translate("ricerca"); ?></small>
         </h3>
-
         <div class="page-bar">
         </div>
-
         <div class="row">
             <div class="col-md-12">
-
                 <?= $this->partial('partials/flash-messages.phtml', []); ?>
-
                 <div class="row">
                     <div class="col-md-8">
                         <div class="form-inline">
                             <div class="form-group">
                                 <select name="column" id="js-column" class="form-control">
                                     <option value="select" selected>-- <?= $this->translate("Seleziona"); ?> --</option>
+                                    <option value="cu.id"><?= $this->translate("Id"); ?></option>
+                                    <option value="e.customerSurname"><?= $this->translate("Cognome"); ?></option>
+                                    <option value="cu.email"><?= $this->translate("Email"); ?></option>
+                                    <option value="cu.mobile"><?= $this->translate("Cellulare"); ?></option>
                                 </select>
                             </div>
                             <div class="form-group">
@@ -45,16 +45,12 @@ $this->headScript()
                     </div>
                     <div class="col-md-4"></div>
                 </div>
-
                 <hr>
-
                 <!-- BEGIN EXAMPLE TABLE PORTLET-->
                 <div class="portlet box green">
                     <div class="portlet-title">
                         <div class="caption">
-
                             <?= $this->translate("Lista file caricati"); ?>
-
                         </div>
                     </div>
                     <div class="portlet-body">
@@ -84,7 +80,9 @@ $this->headScript()
                 <!-- END EXAMPLE TABLE PORTLET-->
             </div>
         </div>
-
         <!-- END PAGE CONTENT-->
     </div>
 </div>
+<script>
+    var filters = <?= $this->filters ?>;
+</script>

@@ -52,7 +52,12 @@ $formSetting->setAttribute('action', $this->url('customers/edit', ['id' => $this
                         <div class="col-lg-4">
                             <div class="form-group">
                                 <label for="gender"><?= $this->translate("Email"); ?></label>
-                                <?= $this->formRow($form->get('customer')->get('email')->setAttribute('readonly', 'true')); ?>
+                                <?php if ($this->isAllowed('customer', 'changeEmail')) {
+                                    echo $this->formRow($form->get('customer')->get('email'));
+                                } else {
+                                    echo $this->formRow($form->get('customer')->get('email')->setAttribute('readonly', 'readonly'));
+                                }
+                                ?>
                             </div>
                         </div>
 
@@ -262,32 +267,51 @@ $formSetting->setAttribute('action', $this->url('customers/edit', ['id' => $this
                     </div>
                 </div>
 
-                <div class="row">
-                    <div class="col-lg-12">
-                        <div class="form-group">
-                            <label for="gender"><?= $this->translate("Percentuale Sconto"); ?></label>
-                            <?= $this->formRow(is_null($formSetting->get('setting')->get('discountRate')) ? '0' : $formSetting->get('setting')->get('discountRate'));?>
-                        </div>
-                    </div>
-                </div>
 
-                <div class="row">
-                    <div class="col-lg-12">
-                        <div class="form-group">
-                            <label for="goldList"><?= $this->translate("Maintainer"); ?></label>
-                            <?= $this->formRow($formSetting->get('setting')->get('maintainer'));?>
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="form-group">
+                                <label for="gender"><?= $this->translate("Percentuale Sconto"); ?></label>
+                                <?php
+                                    if($this->isAllowed('customer', 'discountRate')) {
+                                        echo $this->formRow(is_null($formSetting->get('setting')->get('discountRate')) ? '0' : $formSetting->get('setting')->get('discountRate'));
+                                    } else {
+                                        echo $this->formRow(is_null($formSetting->get('setting')->get('discountRate')) ? '0' : $formSetting->get('setting')->get('discountRate')->setAttribute('readonly', 'readonly'));
+                                    }
+                                ?>
+                            </div>
                         </div>
                     </div>
-                </div>
 
-                <div class="row">
-                    <div class="col-lg-12">
-                        <div class="form-group">
-                            <label for="goldList"><?= $this->translate("Gold List"); ?></label>
-                            <?= $this->formRow($formSetting->get('setting')->get('goldList'));?>
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="form-group">
+                                <label for="goldList"><?= $this->translate("Maintainer"); ?></label>
+                                <?php
+                                    if($this->isAllowed('customer', 'maintainer')) {
+                                        echo $this->formRow($formSetting->get('setting')->get('maintainer'));
+                                    } else {
+                                        echo $this->formRow($formSetting->get('setting')->get('maintainer')->setAttribute('disabled', 'true'));
+                                    }
+                                ?>
+                            </div>
                         </div>
                     </div>
-                </div>
+
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="form-group">
+                                <label for="goldList"><?= $this->translate("Gold List"); ?></label>
+                                <?php
+                                    if($this->isAllowed('customer', 'goldList')) {
+                                        echo $this->formRow($formSetting->get('setting')->get('goldList'));
+                                    } else {
+                                        echo $this->formRow($formSetting->get('setting')->get('goldList')->setAttribute('disabled', 'true'));
+                                    }
+                                ?>
+                            </div>
+                        </div>
+                    </div>
 
                 <div class="row">
                     <div class="col-lg-12">

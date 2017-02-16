@@ -1,6 +1,7 @@
 <?php
 namespace Application\Controller;
 
+// Internals
 use Application\Controller\Plugin\TranslatorPlugin;
 use Application\Form\CarForm;
 use Application\Listener\LanguageFromSessionDetectorListener;
@@ -13,14 +14,15 @@ use SharengoCore\Service\CarsService;
 use SharengoCore\Service\CarsDamagesService;
 use SharengoCore\Service\CommandsService;
 use SharengoCore\Utility\CarStatus;
+// Externals
 use Zend\Form\Form;
 use Zend\Http\Response;
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\Mvc\I18n\Translator;
-use Zend\Session\Container;
 use Zend\Stdlib\Hydrator\HydratorInterface;
 use Zend\View\Model\JsonModel;
 use Zend\View\Model\ViewModel;
+use Zend\Session\Container;
 
 class CarsController extends AbstractActionController
 {
@@ -29,36 +31,65 @@ class CarsController extends AbstractActionController
      */
     private $carsService;
 
-    /** @var  CommandsService */
+    /**
+     * @var CommandsService
+     */
     private $commandsService;
 
     /**
-     * @var
+     * @var Form
      */
     private $carForm;
 
     /**
-     * @var \Zend\Stdlib\Hydrator\HydratorInterface
+     * @var HydratorInterface
      */
     private $hydrator;
 
+    /**
+     * @var Container
+     */
+    private $datatableFiltersSessionContainer;
+
+    /**
+     * @param CarsService $carsService
+     * @param CommandsService $commandsService
+     * @param Form $carForm
+     * @param HydratorInterface $hydrator
+     * @param Container $datatableFiltersSessionContainer
+     */
     public function __construct(
         CarsService $carsService,
         CommandsService $commandsService,
         Form $carForm,
-        HydratorInterface $hydrator
-    )
-    {
+        HydratorInterface $hydrator,
+        Container $datatableFiltersSessionContainer
+    ) {
         $this->carsService = $carsService;
         $this->commandsService = $commandsService;
         $this->carForm = $carForm;
         $this->hydrator = $hydrator;
+        $this->datatableFiltersSessionContainer = $datatableFiltersSessionContainer;
+    }
+
+    /**
+     * This method return an array containing the DataTable filters,
+     * from a Session Container.
+     *
+     * @return array
+     */
+    private function getDataTableSessionFilters()
+    {
+        return $this->datatableFiltersSessionContainer->offsetGet('Cars');
     }
 
     public function indexAction()
     {
+        $sessionDatatableFilters = $this->getDataTableSessionFilters();
 
-        return new ViewModel([]);
+        return new ViewModel([
+            'filters' => json_encode($sessionDatatableFilters),
+        ]);
     }
 
     public function datatableAction()
@@ -165,7 +196,7 @@ class CarsController extends AbstractActionController
 
                 try {
 
-                    $this->carsService->updateCar($form->getData(), $lastStatus, $postData);
+                    $this->carsService->updateCar($form->getData(), $lastStatus, $postData, $this->identity());
                     $this->carsService->saveData($form->getData(), false);
                     $this->flashMessenger()->addSuccessMessage($translator->translate('Auto modificata con successo!'));
 
@@ -209,7 +240,11 @@ class CarsController extends AbstractActionController
         if ($this->getRequest()->isPost()) {
             $postData = $this->getRequest()->getPost()->toArray();
             try {
-                $this->carsService->updateDamages($car, $postData['damages']);
+                if(isset($postData['damages'])){
+                    $this->carsService->updateDamages($car, $postData['damages']);
+                } else {
+                    $this->carsService->updateDamages($car, null);
+                }
                 $this->flashMessenger()->addSuccessMessage($translator->translate('Danni auto modificati con successo!'));
             } catch (\Exception $e) {
                 $this->flashMessenger()->addErrorMessage($translator->translate('Si è verificato un errore applicativo. L\'assistenza tecnica è già al corrente, ci scusiamo per l\'inconveniente'));
@@ -254,7 +289,6 @@ class CarsController extends AbstractActionController
         }
 
         return $this->redirect()->toRoute('cars');
-
     }
 
     public function sendCommandAction()

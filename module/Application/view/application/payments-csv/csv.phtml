@@ -75,7 +75,7 @@ $form->prepare();
                                         <?php foreach ($this->newFiles as $file): ?>
                                         <tr>
                                             <td><?= $file['name'] ?></td>
-                                            <td><?= $file['date']->format('d-m-Y H:i:s'); ?></td>
+                                            <td><?= $file['date']->format('Y-m-d H:i:s'); ?></td>
                                             <td><a href="<?= $this->url('payments/csv-add-file', [], ['query' => ['filename' => $file['name']]]); ?>">Analizza</a></td>
                                         </tr>
                                         <?php endforeach; ?>
@@ -99,7 +99,7 @@ $form->prepare();
                                         <?php foreach ($this->csvFiles as $csvFile): ?>
                                         <tr>
                                             <td><?= $csvFile->getFilename() ?></td>
-                                            <td><?= $csvFile->getInsertedTs()->format('d-m-Y H:i:s') ?></td>
+                                            <td><?= $csvFile->getInsertedTs()->format('Y-m-d H:i:s') ?></td>
                                             <td><a href="javascript:void()" class="anomalies"><?= count($csvFile->getCartasiCsvAnomalies()) ?></a></td>
                                         </tr>
                                         <?php endforeach; ?>
@@ -134,7 +134,7 @@ $form->prepare();
                                         <?php foreach ($this->csvUnresolvedAnomalies as $csvAnomaly): ?>
                                         <tr>
                                             <td><?= $csvAnomaly->getCartasiCsvFile()->getFilename(); ?></td>
-                                            <td><?= $csvAnomaly->getInsertedTs()->format('d-m-Y H:i:s'); ?></td>
+                                            <td><?= $csvAnomaly->getInsertedTs()->format('Y-m-d H:i:s'); ?></td>
                                             <td><?= $csvAnomaly->getTypeTranslated(); ?></td>
                                             <td><a href="<?= $this->url('payments/csv-details', ['id' => $csvAnomaly->getId()]); ?>"><?= $this->translate("Dettagli"); ?></a></td>
                                         </tr>
@@ -163,7 +163,7 @@ $form->prepare();
                                         <?php foreach ($this->csvResolvedAnomalies as $csvAnomaly): ?>
                                         <tr>
                                             <td><?= $csvAnomaly->getCartasiCsvFile()->getFilename(); ?></td>
-                                            <td><?= $csvAnomaly->getInsertedTs()->format('d-m-Y H:i:s'); ?></td>
+                                            <td><?= $csvAnomaly->getInsertedTs()->format('Y-m-d H:i:s'); ?></td>
                                             <td><?= $csvAnomaly->getTypeTranslated(); ?></td>
                                             <td><a href="<?= $this->url('payments/csv-details', ['id' => $csvAnomaly->getId()]); ?>"><?= $this->translate("Dettagli"); ?></a></td>
                                         </tr>

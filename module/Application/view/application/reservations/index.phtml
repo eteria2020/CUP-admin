@@ -7,6 +7,7 @@ $this->headScript()
     ->appendFile('/js/datatables/media/js/jquery.dataTables.min.js')
     ->appendFile('/js/datatables/plugins/bootstrap/dataTables.bootstrap.js')
     ->appendFile('/plugins/bootstrap-datepicker/js/bootstrap-datepicker.js')
+    ->appendFile($this->basePath() . '/js/datatable-session-data.js')
     ->appendFile($this->basePath() .'/js/reservations.js');
 ?>
 <div class="page-content-wrapper">
@@ -74,6 +75,9 @@ $this->headScript()
                                 <th><?= $this->translate("Cliente"); ?></th>
                                 <th><?= $this->translate("Card"); ?></th>
                                 <th><?= $this->translate("Attiva"); ?></th>
+                                <th><?= $this->translate("Inviata"); ?></th>
+                                <th><?= $this->translate("Consumata"); ?></th>
+                                <th><?= $this->translate("Cancellata"); ?></th>
                             </tr>
                             </thead>
                         </table>
@@ -86,3 +90,6 @@ $this->headScript()
         <!-- END PAGE CONTENT-->
     </div>
 </div>
+<script>
+    var filters = <?= $this->filters ?>;
+</script>

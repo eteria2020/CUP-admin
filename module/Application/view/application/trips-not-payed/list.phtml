@@ -6,19 +6,16 @@ $this->headScript()
     ->appendFile('/js/datatables/plugins/bootstrap/dataTables.bootstrap.js')
     ->appendFile('/js/moment.min.js')
     ->appendFile('/js/datatables/plugins/sorting/datetime-moment.js')
+    ->appendFile($this->basePath() . '/js/datatable-session-data.js')
     ->appendFile($this->basePath() . '/js/trips-not-payed.js');
 ?>
 <div class="page-content-wrapper">
     <div class="page-content">
-
         <h3 class="page-title"><?= $this->translate("CORSE NON PAGATE"); ?></h3>
         <div class="page-bar"></div>
-
         <div class="row">
             <div class="col-md-12">
-
                 <?= $this->partial('partials/flash-messages.phtml', []); ?>
-
                 <div class="row">
                     <div class="col-md-8">
                         <div class="form-inline">
@@ -58,7 +55,6 @@ $this->headScript()
                     <div class="portlet-title">
                         <div class="caption"><?= $this->translate("Elenco"); ?></div>
                     </div>
-
                     <!-- BEGIN table -->
                     <div class="portlet-body">
                         <table class="table table-striped table-bordered table-hover" id="unpayed-trips-table">
@@ -79,14 +75,14 @@ $this->headScript()
                                 <th><?= $this->translate("Costo"); ?></th>
                             </tr>
                             </thead>
-
                         </table>
                     </div>
                     <!-- END table -->
-
                 </div>
             </div>
         </div>
-
     </div>
 </div>
+<script>
+    var filters = <?= $this->filters ?>;
+</script>

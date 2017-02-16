@@ -3,6 +3,7 @@ $this->headLink()->appendStylesheet('/js/datatables/plugins/bootstrap/dataTables
 $this->headScript()
     ->appendFile('/js/datatables/media/js/jquery.dataTables.min.js')
     ->appendFile('/js/datatables/plugins/bootstrap/dataTables.bootstrap.js')
+    ->appendFile($this->basePath() . '/js/datatable-session-data.js')
     ->appendFile($this->basePath() .'/js/cars.js');
 ?>
 <div class="page-content-wrapper">
@@ -90,6 +91,7 @@ $this->headScript()
                                 <th><?= $this->translate("Pulizia"); ?></th>
                                 <th><?= $this->translate("Posizione"); ?></th>
                                 <th><?= $this->translate("Stato"); ?></th>
+                                <th><?= $this->translate("Nascosta"); ?></th>
                                 <th><?= $this->translate("GPS"); ?></th>
                                 <th><?= $this->translate("GPRS"); ?></th>
                                 <th><?= $this->translate("OBC"); ?></th>
@@ -107,3 +109,6 @@ $this->headScript()
         <!-- END PAGE CONTENT-->
     </div>
 </div>
+<script>
+    var filters = <?= $this->filters ?>;
+</script>

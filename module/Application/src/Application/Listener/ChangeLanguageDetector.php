@@ -77,7 +77,8 @@ class ChangeLanguageDetector implements ListenerAggregateInterface
             // set the language cookie to propagate the language information to the
             // pages built with javascript
             $lang = substr($locale, 0, 2);
-            setcookie('lang', $this->languages[$lang]['lang_3chars'], null, '/');
+
+            setcookie('lang', $this->languages[$lang]['lang'], null, '/');
         }
     }
 }

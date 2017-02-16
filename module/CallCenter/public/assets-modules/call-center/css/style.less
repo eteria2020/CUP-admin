@@ -32,7 +32,7 @@ body {
     &:hover {
         opacity:1;
     }
-    
+
     .fleets {
         select {
             margin-top:5px;
@@ -66,7 +66,7 @@ body {
       width: 15px;
       height: 15px;
       vertical-align: middle;
-      
+
 
       &.blue {
         background: #296FFF;
@@ -90,11 +90,39 @@ body {
         background: #0338FF;
       }
     }
+    
+    @media (max-width:700px) {
+        width:33px;
+        overflow:hidden;
+        margin-left:-12px;
+        transition: width 0.3s;
+        z-index:200;
+        bottom:80px;
+        
+        &:hover,&:focus,&:active {
+          width:200px;
+        }
+        .pull-left {
+          width:150px;
+        }
+        li {
+          clear:both;
+          float:left;
+        }
+    }
+    @media (max-width:800px){
+      max-width:160px;
+    }
+    @media (max-width:1000px){
+      max-width:30%;
+    }
 }
+
+
 #top-area {
     position:fixed;
     top:0px;
-    left:100px;
+    left:120px;
     width:400px;
     min-height:120px;
     background-color:#fff;
@@ -105,8 +133,15 @@ body {
     opacity:0.85;
     -webkit-transition:opacity 0.5s;
     transition:opacity 0.5s;
+    max-width:40%;
 
-    &:hover {opacity:1}
+    &:hover,&:focus,&:active {
+      opacity:1;
+    
+      .opener {
+        opacity:0;
+      }  
+    }
 
     .btn-block {margin-top:10px;}
 
@@ -115,13 +150,47 @@ body {
         background-color: #55C754;
         border-color: #35B535;
     }
+    
+    .opener {
+      display:none;
+    }
+    
+    @media (max-width: 700px) {
+      border-radius: 4px;
+      top:110px;
+      left:0;
+      width: 300px;
+      margin-left: -290px;
+      transition: margin-left 0.3s;
+      max-width:none;
+      display:block;
+      
+      &:hover,&:active,&:focus {
+        margin-left:0;
+      }
+      .opener {
+        display:block;
+        position:absolute;
+        top:0;right:-13px;
+        width:15px;height:100%;
+        background-color:#fff;
+        box-shadow: 4px 2px 7px #aaa;
+        z-index:-1;
+        border-radius:0 4px 4px 0;
+        transition:all 0.3s;
+        
+        i {
+          position:absolute;top:50%;margin-top:-0.5em;right:5px;
+        }
+      }
+    }
 }
 
 
 #controls {
     position: fixed;
     width: 500px;
-    right: 0;
+    right: 50px;
     bottom:0;
     top: auto;
     bottom: 10px;
@@ -134,9 +203,9 @@ body {
     transition:opacity 0.5s;
     box-shadow:0 2px 8px #aaa;
     min-height:30px;
-    border-radius:4px 0 0 4px;
-
-
+    border-radius:4px;
+    max-width: 80%;
+    
     &:hover {opacity:1;}
 
     .block {
@@ -615,7 +684,7 @@ body {
     border: 1px solid white;
     height:auto;
     max-width:100%;
-    position:relative !Important;
+    position:relative !important;
     right:auto;
     bottom:auto;
     top:auto;
@@ -672,25 +741,25 @@ body {
 .tab-pane .row {margin-bottom:10px}
 
 .acc-user-data .panel-title:before {
-    font-family: 'FontAwesome'; 
-    content: "\f007";        
+    font-family: 'FontAwesome';
+    content: "\f007";
     color: #303030;
     font-size: 16px;
-    margin-right: 10px;      
+    margin-right: 10px;
 }
 .acc-car-data .panel-title:before {
-    font-family: 'FontAwesome'; 
-    content: "\f1b9";        
+    font-family: 'FontAwesome';
+    content: "\f1b9";
     color: #303030;
     font-size: 16px;
-    margin-right: 10px;      
+    margin-right: 10px;
 }
 .acc-run-data .panel-title:before {
-    font-family: 'FontAwesome'; 
-    content: "\f018";        
+    font-family: 'FontAwesome';
+    content: "\f018";
     color: #303030;
     font-size: 16px;
-    margin-right: 10px;      
+    margin-right: 10px;
 }
 
 .marker_labels{
@@ -717,7 +786,7 @@ body {
     margin-left:-11px !important;
     margin-top:-32px !important;
     overflow:visible !important;
-    
+
     .fa {
         position:absolute;
         top:10px;
@@ -726,7 +795,7 @@ body {
         text-shadow:0 0 1px #fff;
         font-size:15px;
         z-index:20;
-        
+
         &:after {
             content:'';
             background-color:#296FFF;
@@ -742,11 +811,11 @@ body {
             box-shadow:-2px -2px 4px #56a;
         }
     }
-    
+
 }
 
 .panel-body .fa-plug,.block-car-data-info .fa-plug {
-    font-size:13px; 
+    font-size:13px;
     margin-left:5px;
 }
 
@@ -763,25 +832,25 @@ body {
     border-right:none;
     transition: right 0.5s;
     text-align:left;
-    
+
     &:hover {
         right:0;
     }
-    
+
     a {
         background-color:#55C754;
         background-color:rgba(41,111,255,.8);
         width:70px;
         color:#fff;
         transition: background-color 0.5s;
-        
+
         &:hover {
             background-color:#fff;
             background-color:rgba(41,111,255,1);
         }
-        
+
         span {color:#fff !important;}
-        
+
         &.deactive {
             background-color:#c9302c;
             background-color:rgba(201,48,44,1);

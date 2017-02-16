@@ -2,6 +2,7 @@
 
 namespace Application\Controller;
 
+// Internals
 use Application\Form\FaresForm;
 use SharengoCore\Service\FaresService;
 use SharengoCore\Service\TripPaymentsService;
@@ -14,10 +15,11 @@ use SharengoCore\Service\PenaltiesService;
 use SharengoCore\Exception\FleetNotFoundException;
 use SharengoCore\Service\FleetService;
 use SharengoCore\Service\RecapService;
-
+// Externals
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\JsonModel;
 use Zend\View\Model\ViewModel;
+use Zend\Session\Container;
 
 class PaymentsController extends AbstractActionController
 {
@@ -76,6 +78,11 @@ class PaymentsController extends AbstractActionController
      */
     private $faresForm;
 
+    /**
+     * @var Container
+     */
+    private $datatableFiltersSessionContainer;
+
     public function __construct(
         TripPaymentsService $tripPaymentsService,
         PaymentsService $paymentsService,
@@ -87,7 +94,8 @@ class PaymentsController extends AbstractActionController
         FleetService $fleetService,
         RecapService $recapService,
         FaresService $faresService,
-        FaresForm $faresForm
+        FaresForm $faresForm,
+        Container $datatableFiltersSessionContainer
     ) {
         $this->tripPaymentsService = $tripPaymentsService;
         $this->paymentsService = $paymentsService;
@@ -100,11 +108,27 @@ class PaymentsController extends AbstractActionController
         $this->recapService = $recapService;
         $this->faresService = $faresService;
         $this->faresForm = $faresForm;
+        $this->datatableFiltersSessionContainer = $datatableFiltersSessionContainer;
+    }
+
+    /**
+     * This method return an array containing the DataTable filters,
+     * from a Session Container.
+     *
+     * @return array
+     */
+    private function getDataTableSessionFilters()
+    {
+        return $this->datatableFiltersSessionContainer->offsetGet('TripPayments');
     }
 
     public function failedPaymentsAction()
     {
-        return new ViewModel();
+        $sessionDatatableFilters = $this->getDataTableSessionFilters();
+
+        return new ViewModel([
+            'filters' => json_encode($sessionDatatableFilters),
+        ]);
     }
 
     public function failedPaymentsDatatableAction()
@@ -166,7 +190,7 @@ class PaymentsController extends AbstractActionController
             $cartasiResponse = $this->paymentsService->tryTripPayment($tripPayment, $webuser, true, false, false, true);
 
             if ($cartasiResponse->getOutcome() === 'OK') {
-                $this->customersService->setCustomerPaymentAble($tripPayment->getCustomer());
+                $this->customersService->enableCustomerPayment($tripPayment->getCustomer());
             }
 
             return new JsonModel([
@@ -291,25 +315,37 @@ class PaymentsController extends AbstractActionController
 
     public function recapAction()
     {
-        // Get months
-        $months = $this->recapService->getAvailableMonths();
+        $months = null;
+        $date = date("Y-m-d H:i:s");
+        $fleets = null;
+        $dailyIncome = null;
+        $weeklyIncome = null;
+        $monthlyIncome = null;
 
-        // Get the selected month or default to last available
-        $date = '';
-        if (is_null($this->params()->fromQuery('date'))) {
-            $date = $months[0]['date'];
-        } else {
-            $date = $this->params()->fromQuery('date');
+        $authorize = $this->getServiceLocator()->get('BjyAuthorize\Provider\Identity\ProviderInterface');
+        $roles = $authorize->getIdentityRoles();
+
+        if($roles[0]==='superadmin'){
+            // Get months
+            $months = $this->recapService->getAvailableMonths();
+
+            // Get the selected month or default to last available
+            $date = '';
+            if (is_null($this->params()->fromQuery('date'))) {
+                $date = $months[0]['date'];
+            } else {
+                $date = $this->params()->fromQuery('date');
+            }
+
+            // Get all fleets
+            $fleets = $this->fleetService->getAllFleets();
+            // Get income for each day of the selected month
+            $dailyIncome = $this->recapService->getDailyIncomeForMonth($date);
+            // Get income for last 4 weeks
+            $weeklyIncome = $this->recapService->getWeeklyIncome();
+            // Get income for last 12 months
+            $monthlyIncome = $this->recapService->getMonthlyIncome();
         }
-
-        // Get all fleets
-        $fleets = $this->fleetService->getAllFleets();
-        // Get income for each day of the selected month
-        $dailyIncome = $this->recapService->getDailyIncomeForMonth($date);
-        // Get income for last 4 weeks
-        $weeklyIncome = $this->recapService->getWeeklyIncome();
-        // Get income for last 12 months
-        $monthlyIncome = $this->recapService->getMonthlyIncome();
 
         return new ViewModel([
             'months' => $months,
@@ -318,7 +354,8 @@ class PaymentsController extends AbstractActionController
             'fleets' => $fleets,
             'daily' => $dailyIncome,
             'weekly' => $weeklyIncome,
-            'monthly' => $monthlyIncome
+            'monthly' => $monthlyIncome,
+            'roles' => $roles
         ]);
     }
 

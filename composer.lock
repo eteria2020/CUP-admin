@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "385e463228168d294c6f0f29ccf2d7c9",
-    "content-hash": "6133022825f1f53ba019ae853331baaa",
+    "hash": "fbd8d2cb550f0df980673ec670581227",
+    "content-hash": "1b47b2d446b69fc9f3e5903b4d810dd8",
     "packages": [
         {
             "name": "bjyoungblood/bjy-authorize",
@@ -79,26 +79,28 @@
         },
         {
             "name": "creof/doctrine2-spatial",
-            "version": "0.0.1",
+            "version": "1.1.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/creof/doctrine2-spatial.git",
-                "reference": "be4ee9aeadb7c886caab2c07ab5b1f13c8b9999e"
+                "reference": "7f87fc36954ad52e3bee9ddb62e7b3c637a39710"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/creof/doctrine2-spatial/zipball/be4ee9aeadb7c886caab2c07ab5b1f13c8b9999e",
-                "reference": "be4ee9aeadb7c886caab2c07ab5b1f13c8b9999e",
+                "url": "https://api.github.com/repos/creof/doctrine2-spatial/zipball/7f87fc36954ad52e3bee9ddb62e7b3c637a39710",
+                "reference": "7f87fc36954ad52e3bee9ddb62e7b3c637a39710",
                 "shasum": ""
             },
             "require": {
-                "doctrine/orm": ">=2.1"
+                "creof/geo-parser": "~2.0",
+                "creof/wkb-parser": "~2.0",
+                "creof/wkt-parser": "~2.0",
+                "doctrine/orm": ">=2.3"
             },
             "require-dev": {
-                "doctrine/common": ">=2.1",
-                "doctrine/dbal": ">=2.1",
-                "phpunit/phpunit": ">=3.7",
-                "rhumsaa/array_column": "~1.1"
+                "phpunit/phpcov": "*",
+                "phpunit/phpunit": "<5.0",
+                "satooshi/php-coveralls": "~1.0"
             },
             "type": "library",
             "autoload": {
@@ -130,7 +132,165 @@
                 "postgresql",
                 "spatial"
             ],
-            "time": "2014-03-17 13:45:28"
+            "time": "2016-02-18 14:21:13"
+        },
+        {
+            "name": "creof/geo-parser",
+            "version": "2.1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/creof/geo-parser.git",
+                "reference": "14fbd732207bc264cfeff836230ef6022bb751b6"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/creof/geo-parser/zipball/14fbd732207bc264cfeff836230ef6022bb751b6",
+                "reference": "14fbd732207bc264cfeff836230ef6022bb751b6",
+                "shasum": ""
+            },
+            "require": {
+                "doctrine/lexer": ">=1.0",
+                "ext-spl": "*",
+                "php": ">=5.3.3"
+            },
+            "require-dev": {
+                "codeclimate/php-test-reporter": "dev-master",
+                "phpunit/phpunit": ">=4.8"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "CrEOF\\Geo\\String": "lib/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Derek J. Lambert",
+                    "email": "dlambert@dereklambert.com"
+                }
+            ],
+            "description": "Parser for geography coordinate strings",
+            "keywords": [
+                "coordinate",
+                "geo",
+                "geography",
+                "geometry",
+                "lexer",
+                "parser",
+                "spatial",
+                "string",
+                "text"
+            ],
+            "time": "2016-05-03 18:19:41"
+        },
+        {
+            "name": "creof/wkb-parser",
+            "version": "v2.3.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/creof/wkb-parser.git",
+                "reference": "1ddb69da8cc90607dd528fd9992ef1fc10cc8839"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/creof/wkb-parser/zipball/1ddb69da8cc90607dd528fd9992ef1fc10cc8839",
+                "reference": "1ddb69da8cc90607dd528fd9992ef1fc10cc8839",
+                "shasum": ""
+            },
+            "require": {
+                "ext-spl": "*",
+                "php": ">=5.3.3"
+            },
+            "require-dev": {
+                "codeclimate/php-test-reporter": "dev-master",
+                "phpunit/phpunit": ">=4.8",
+                "satooshi/php-coveralls": "~1.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "CrEOF\\Geo\\WKB": "lib/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Derek J. Lambert",
+                    "email": "dlambert@dereklambert.com"
+                }
+            ],
+            "description": "Parser for well-known binary (WKB/EWKB) object data",
+            "keywords": [
+                "ewkb",
+                "geography",
+                "geometry",
+                "parser",
+                "spatial",
+                "string",
+                "text",
+                "wkb"
+            ],
+            "time": "2016-05-22 22:47:16"
+        },
+        {
+            "name": "creof/wkt-parser",
+            "version": "2.2.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/creof/wkt-parser.git",
+                "reference": "bc4c051b7a4e99b4943e2ec358218ed200aa991e"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/creof/wkt-parser/zipball/bc4c051b7a4e99b4943e2ec358218ed200aa991e",
+                "reference": "bc4c051b7a4e99b4943e2ec358218ed200aa991e",
+                "shasum": ""
+            },
+            "require": {
+                "doctrine/lexer": "~1.0",
+                "ext-spl": "*",
+                "php": ">=5.3.3"
+            },
+            "require-dev": {
+                "codeclimate/php-test-reporter": "dev-master",
+                "phpunit/phpunit": ">=4.8"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "CrEOF\\Geo\\WKT": "lib/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Derek J. Lambert",
+                    "email": "dlambert@dereklambert.com"
+                }
+            ],
+            "description": "Parser for well-known text (WKT) object strings",
+            "keywords": [
+                "ewkt",
+                "geography",
+                "geometry",
+                "lexer",
+                "parser",
+                "spatial",
+                "string",
+                "text",
+                "wkt"
+            ],
+            "time": "2016-05-03 16:15:16"
         },
         {
             "name": "cup-web/admin-business-module",
@@ -1708,34 +1868,12 @@
             "time": "2015-03-30 15:54:03"
         },
         {
-            "name": "mvlabs/sharengo-cartasi",
-            "version": "dev-master",
-            "source": {
-                "type": "git",
-                "url": "ssh://git@git.mvlabs.it:4222/clients/sharengo-cartasi.git",
-                "reference": "d12c5e9130fde2c6ee796140efd6095545d71744"
-            },
-            "require": {
-                "doctrine/doctrine-orm-module": "0.*",
-                "php": ">=5.4.0",
-                "zendframework/zendframework": "2.4.*"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-0": {
-                    "Cartasi": "src/"
-                }
-            },
-            "description": "Cartasi module for Sharengo",
-            "time": "2016-03-23 14:31:27"
-        },
-        {
             "name": "mvlabs/sharengo-coremodule",
             "version": "dev-master",
             "source": {
                 "type": "git",
-                "url": "ssh://git@gitlab.bulweria.com/cup-web/core.git",
-                "reference": "954105010b437fc1f4b13a31383c2c7667ccc55b"
+                "url": "ssh://git@gitlab.bulweria.com/sharengo-web/core.git",
+                "reference": "1be529249ff4497b7b31148745604fd7f8ee1500"
             },
             "require": {
                 "doctrine/doctrine-orm-module": "0.*",
@@ -1756,14 +1894,14 @@
                 }
             },
             "description": "Core ZF2 module for Sharengo apps",
-            "time": "2016-04-21 10:56:33"
+            "time": "2017-02-08 08:47:50"
         },
         {
             "name": "mvlabs/zf2-multilanguage",
             "version": "dev-master",
             "source": {
                 "type": "git",
-                "url": "ssh://git@git.mvlabs.it:4222/internals/zf2-multilanguage.git",
+                "url": "https://git.mvlabs.it/internals/zf2-multilanguage.git",
                 "reference": "54efb90fbfad687696766f0a12a676e0a72b6657"
             },
             "require": {
@@ -1956,6 +2094,28 @@
                 "zf2"
             ],
             "time": "2015-03-12 07:10:33"
+        },
+        {
+            "name": "sharengo-web/cartasi",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "ssh://git@gitlab.bulweria.com/sharengo-web/cartasi.git",
+                "reference": "b6e596812edd375ac645592c918af1bf010e1b44"
+            },
+            "require": {
+                "doctrine/doctrine-orm-module": "0.*",
+                "php": ">=5.4.0",
+                "zendframework/zendframework": "2.4.*"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "Cartasi": "src/"
+                }
+            },
+            "description": "Cartasi module for Sharengo",
+            "time": "2016-05-06 13:16:50"
         },
         {
             "name": "symfony/console",
@@ -2179,12 +2339,12 @@
             "version": "2.4.9",
             "source": {
                 "type": "git",
-                "url": "https://github.com/zendframework/zf2.git",
+                "url": "https://github.com/zendframework/zendframework.git",
                 "reference": "4d096d15d01d46b03a69fff00576b31789246364"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/zendframework/zf2/zipball/4d096d15d01d46b03a69fff00576b31789246364",
+                "url": "https://api.github.com/repos/zendframework/zendframework/zipball/4d096d15d01d46b03a69fff00576b31789246364",
                 "reference": "4d096d15d01d46b03a69fff00576b31789246364",
                 "shasum": ""
             },
@@ -2653,7 +2813,7 @@
                     "name": "Manuel Pichler",
                     "email": "github@manuel-pichler.de",
                     "homepage": "https://github.com/manuelpichler",
-                    "role": "Project founder"
+                    "role": "Project Founder"
                 },
                 {
                     "name": "Other contributors",
@@ -3646,9 +3806,9 @@
     "minimum-stability": "stable",
     "stability-flags": {
         "mvlabs/sharengo-coremodule": 20,
-        "mvlabs/sharengo-cartasi": 20,
         "cup-web/core-business": 20,
         "cup-web/admin-business-module": 20,
+        "sharengo-web/cartasi": 20,
         "mvlabs/zf2-multilanguage": 20,
         "phpmd/phpmd": 0
     },
