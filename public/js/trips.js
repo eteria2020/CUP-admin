@@ -7,7 +7,7 @@ $(function() {
     var dataTableVars = {
         searchValue: $("#js-value"),
         column: $("#js-column"),
-        iSortCol_0: 0,
+        iSortCol_0: 9,
         sSortDir_0: "desc",
         iDisplayLength: 100,
         from: $("#js-date-from"),
@@ -112,6 +112,10 @@ $(function() {
             },
             {
                 targets: 14,
+                sortable: false
+            },
+            {
+                targets: 16,
                 sortable: false
             },
             {
