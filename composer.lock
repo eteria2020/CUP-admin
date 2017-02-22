@@ -298,7 +298,7 @@
             "source": {
                 "type": "git",
                 "url": "ssh://git@gitlab.bulweria.com/cup-web/admin-business-module.git",
-                "reference": "cd097f85d9483a38eaa12806490e40eea03f12ed"
+                "reference": "6359372f330bb37afe667f67ba0788fefb8b39a3"
             },
             "require": {
                 "php": ">=5.4",
@@ -315,7 +315,7 @@
                 }
             },
             "description": "Business area in Admin",
-            "time": "2017-02-20 17:40:10"
+            "time": "2017-02-22 09:12:09"
         },
         {
             "name": "cup-web/cartasi",
