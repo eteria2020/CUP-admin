@@ -298,7 +298,7 @@
             "source": {
                 "type": "git",
                 "url": "ssh://git@gitlab.bulweria.com/cup-web/admin-business-module.git",
-                "reference": "665f4224d82f3f3baa137dc182d6bca4a7f092f2"
+                "reference": "cd097f85d9483a38eaa12806490e40eea03f12ed"
             },
             "require": {
                 "php": ">=5.4",
@@ -315,7 +315,7 @@
                 }
             },
             "description": "Business area in Admin",
-            "time": "2017-02-17 14:09:53"
+            "time": "2017-02-20 17:40:10"
         },
         {
             "name": "cup-web/cartasi",
@@ -345,7 +345,7 @@
             "source": {
                 "type": "git",
                 "url": "ssh://git@gitlab.bulweria.com/cup-web/core-business.git",
-                "reference": "1b8ba36ad7b1ded7f6d53bcdbc921f08d17e7d18"
+                "reference": "7258019616d80ce57e426be8aa1985198a1ad5e8"
             },
             "require": {
                 "doctrine/doctrine-orm-module": "0.9.*",
@@ -366,7 +366,7 @@
                 }
             },
             "description": "Business Core module",
-            "time": "2017-02-16 18:19:46"
+            "time": "2017-02-20 17:40:06"
         },
         {
             "name": "doctrine/annotations",
