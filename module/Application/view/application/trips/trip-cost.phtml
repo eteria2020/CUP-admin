@@ -38,22 +38,15 @@
 
             <div class="col-lg-4">
                 <div class="form-group">
-                    <label for="gender"><?= $this->translate("Durata corsa"); ?></label>
+                    <label for="gender"><?= $this->translate("Durata corsa (HH:MM:SS)"); ?></label>
                     <?= $this->formRow($form->get('tripCost')->get('tripLength')); ?>
                 </div>
             </div>
 
             <div class="col-lg-4">
                 <div class="form-group">
-                    <label for="gender"><?= $this->translate("Secondi di sosta"); ?></label>
-                    <?= $this->formRow($form->get('tripCost')->get('tripParkSeconds')); ?>
-                </div>
-            </div>
-
-            <div class="col-lg-4">
-                <div class="form-group">
-                    <label for="gender"><?= $this->translate("Sesso del cliente"); ?></label>
-                    <?= $this->formRow($form->get('tripCost')->get('customerGender')); ?>
+                    <label for="gender"><?= $this->translate("Minuti di sosta"); ?></label>
+                    <?= $this->formRow($form->get('tripCost')->get('tripParkMinutes')); ?>
                 </div>
             </div>
 
