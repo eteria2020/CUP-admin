@@ -345,7 +345,7 @@
             "source": {
                 "type": "git",
                 "url": "ssh://git@gitlab.bulweria.com/cup-web/core-business.git",
-                "reference": "7258019616d80ce57e426be8aa1985198a1ad5e8"
+                "reference": "1f3268f59a89efafc020f19b41452748bb06e7e9"
             },
             "require": {
                 "doctrine/doctrine-orm-module": "0.9.*",
@@ -366,7 +366,7 @@
                 }
             },
             "description": "Business Core module",
-            "time": "2017-02-20 17:40:06"
+            "time": "2017-03-30 12:48:30"
         },
         {
             "name": "doctrine/annotations",
