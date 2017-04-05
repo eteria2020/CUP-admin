@@ -1445,6 +1445,10 @@ return [
                     // Libs
                     'ol3/ol.css',
                 ],
+                'js/trips.js' => [
+                    'js/private-trips.js',
+                ],
+                'css/trips.css' => [],
             ],
             'paths' => [
                 'application' => __DIR__.'/../public',
@@ -1621,6 +1625,9 @@ return [
         'invokables' => [
             'CarStatus' => 'Application\View\Helper\CarStatus',
             'CarConfigurationPriorityType' => 'Application\View\Helper\CarConfigurationPriorityType',
+        ],
+        'factories' => [
+            'datatableFilters' => 'Application\View\Helper\DatatableFiltersHelperFactory',
         ],
     ],
 
@@ -1971,5 +1978,18 @@ return [
                 'openOnNewWindow' => true,
             ],
         ]
-    ]
+    ],
+    'datatable-filters' => [
+        'trips-index' => [
+            'e.timestampEnd' => $translator->translate("Corse Aperte"),
+            'e.id' => $translator->translate("ID Corsa"),
+            'cu.id' => $translator->translate("ID Cliente"),
+            'cu.surname' => $translator->translate("Cognome Cliente"),
+            'cu.email' => $translator->translate("eMail Cliente"),
+            'cc.code' => $translator->translate("RFID"),
+            'c.plate' => $translator->translate("Targa"),
+            'c.label' => $translator->translate("Numero"),
+            'f.name' => $translator->translate("Flotta")
+        ]
+    ],
 ];

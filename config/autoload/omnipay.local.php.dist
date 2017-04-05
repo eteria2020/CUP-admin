@@ -1,0 +1,19 @@
+<?php
+return [
+    'omnipay' => [
+        'environment' => 'test',//'production' for production
+        'first-payment' => [
+            'alias' => 'xxx',
+            'serviceType' => 'paga_rico',
+            'returnUrl' => 'http://business.dev.sharengo.it/payment-concluded',
+            'cancelUrl' => 'http://business.dev.sharengo.it/payment-cancelled',
+            'macKey' => 'xxx'
+        ],
+        'token-payment' => [
+            'alias' => 'xxx',
+            'serviceType' => 'paga_rico',
+            'requestType' => 'PR',
+            'macKey' => 'xxx'
+        ]
+    ]
+];
