@@ -57,7 +57,7 @@
         "mvlabs/omnipay-cartasi": "@dev",
         "cup-web/admin-business-module": "dev-master",
         "cup-web/core-business": "dev-master",
-        "mvlabs/sharengo-coremodule": "dev-develop-business"
+        "mvlabs/sharengo-coremodule": "dev-master"
     },
     "require-dev": {
         "phpunit/phpunit": "^4.8",
