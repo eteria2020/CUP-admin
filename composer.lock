@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "07aa94a57679649b4df376437149209e",
-    "content-hash": "d8be466c8534a0bfa5e63a8bacecf387",
+    "hash": "dd0669ea37bccf6a69a359fcc943a19b",
+    "content-hash": "593e0c7c1bddfb8162af6391791d1f16",
     "packages": [
         {
             "name": "bjyoungblood/bjy-authorize",
@@ -316,28 +316,6 @@
             },
             "description": "Business area in Admin",
             "time": "2017-02-22 09:12:09"
-        },
-        {
-            "name": "cup-web/cartasi",
-            "version": "dev-master",
-            "source": {
-                "type": "git",
-                "url": "ssh://git@gitlab.bulweria.com/sharengo-web/cartasi.git",
-                "reference": "b6e596812edd375ac645592c918af1bf010e1b44"
-            },
-            "require": {
-                "doctrine/doctrine-orm-module": "0.*",
-                "php": ">=5.4.0",
-                "zendframework/zendframework": "2.4.*"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-0": {
-                    "Cartasi": "src/"
-                }
-            },
-            "description": "Cartasi module for Sharengo",
-            "time": "2016-05-06 13:16:50"
         },
         {
             "name": "cup-web/core-business",
@@ -1599,6 +1577,48 @@
             "time": "2015-05-11 14:41:42"
         },
         {
+            "name": "ircmaxell/password-compat",
+            "version": "v1.0.4",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/ircmaxell/password_compat.git",
+                "reference": "5c5cde8822a69545767f7c7f3058cb15ff84614c"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/ircmaxell/password_compat/zipball/5c5cde8822a69545767f7c7f3058cb15ff84614c",
+                "reference": "5c5cde8822a69545767f7c7f3058cb15ff84614c",
+                "shasum": ""
+            },
+            "require-dev": {
+                "phpunit/phpunit": "4.*"
+            },
+            "type": "library",
+            "autoload": {
+                "files": [
+                    "lib/password.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Anthony Ferrara",
+                    "email": "ircmaxell@php.net",
+                    "homepage": "http://blog.ircmaxell.com"
+                }
+            ],
+            "description": "A compatibility library for the proposed simplified password hashing algorithm: https://wiki.php.net/rfc/password_hash",
+            "homepage": "https://github.com/ircmaxell/password_compat",
+            "keywords": [
+                "hashing",
+                "password"
+            ],
+            "time": "2014-11-20 16:49:30"
+        },
+        {
             "name": "knplabs/knp-snappy",
             "version": "0.3.4",
             "source": {
@@ -2087,7 +2107,7 @@
             "source": {
                 "type": "git",
                 "url": "ssh://git@gitlab.bulweria.com/sharengo-web/core.git",
-                "reference": "22103e7c8c3d3e7188c575b33f558769a877279c"
+                "reference": "1ed7d64e68a51a92e31037ad93ebac9f2fb838a5"
             },
             "require": {
                 "doctrine/doctrine-orm-module": "0.*",
@@ -2104,11 +2124,11 @@
             "type": "library",
             "autoload": {
                 "psr-0": {
-                    "SharengoCore\\": "src/"
+                    "SharengoCore": "src/"
                 }
             },
             "description": "Core ZF2 module for Sharengo apps",
-            "time": "2017-04-05 10:51:08"
+            "time": "2017-02-23 15:13:30"
         },
         {
             "name": "mvlabs/zf2-multilanguage",
@@ -2408,6 +2428,28 @@
             "time": "2015-03-12 07:10:33"
         },
         {
+            "name": "sharengo-web/cartasi",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "ssh://git@gitlab.bulweria.com/sharengo-web/cartasi.git",
+                "reference": "b6e596812edd375ac645592c918af1bf010e1b44"
+            },
+            "require": {
+                "doctrine/doctrine-orm-module": "0.*",
+                "php": ">=5.4.0",
+                "zendframework/zendframework": "2.4.*"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "Cartasi": "src/"
+                }
+            },
+            "description": "Cartasi module for Sharengo",
+            "time": "2016-05-06 13:16:50"
+        },
+        {
             "name": "symfony/console",
             "version": "v2.8.2",
             "source": {
@@ -2469,16 +2511,16 @@
         },
         {
             "name": "symfony/event-dispatcher",
-            "version": "v2.8.17",
+            "version": "v2.8.19",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/event-dispatcher.git",
-                "reference": "74877977f90fb9c3e46378d5764217c55f32df34"
+                "reference": "88b65f0ac25355090e524aba4ceb066025df8bd2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/event-dispatcher/zipball/74877977f90fb9c3e46378d5764217c55f32df34",
-                "reference": "74877977f90fb9c3e46378d5764217c55f32df34",
+                "url": "https://api.github.com/repos/symfony/event-dispatcher/zipball/88b65f0ac25355090e524aba4ceb066025df8bd2",
+                "reference": "88b65f0ac25355090e524aba4ceb066025df8bd2",
                 "shasum": ""
             },
             "require": {
@@ -2486,7 +2528,7 @@
             },
             "require-dev": {
                 "psr/log": "~1.0",
-                "symfony/config": "~2.0,>=2.0.5|~3.0.0",
+                "symfony/config": "^2.0.5|~3.0.0",
                 "symfony/dependency-injection": "~2.6|~3.0.0",
                 "symfony/expression-language": "~2.6|~3.0.0",
                 "symfony/stopwatch": "~2.3|~3.0.0"
@@ -2525,33 +2567,35 @@
             ],
             "description": "Symfony EventDispatcher Component",
             "homepage": "https://symfony.com",
-            "time": "2017-01-02 20:30:24"
+            "time": "2017-04-03 20:37:06"
         },
         {
             "name": "symfony/http-foundation",
-            "version": "v3.2.3",
+            "version": "v2.8.19",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/http-foundation.git",
-                "reference": "e192b04de44aa1ed0e39d6793f7e06f5e0b672a0"
+                "reference": "0717efd2f2264dbd3d8e1bc69a0418c2fd6295d2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/http-foundation/zipball/e192b04de44aa1ed0e39d6793f7e06f5e0b672a0",
-                "reference": "e192b04de44aa1ed0e39d6793f7e06f5e0b672a0",
+                "url": "https://api.github.com/repos/symfony/http-foundation/zipball/0717efd2f2264dbd3d8e1bc69a0418c2fd6295d2",
+                "reference": "0717efd2f2264dbd3d8e1bc69a0418c2fd6295d2",
                 "shasum": ""
             },
             "require": {
-                "php": ">=5.5.9",
-                "symfony/polyfill-mbstring": "~1.1"
+                "php": ">=5.3.9",
+                "symfony/polyfill-mbstring": "~1.1",
+                "symfony/polyfill-php54": "~1.0",
+                "symfony/polyfill-php55": "~1.0"
             },
             "require-dev": {
-                "symfony/expression-language": "~2.8|~3.0"
+                "symfony/expression-language": "~2.4|~3.0.0"
             },
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "3.2-dev"
+                    "dev-master": "2.8-dev"
                 }
             },
             "autoload": {
@@ -2578,7 +2622,7 @@
             ],
             "description": "Symfony HttpFoundation Component",
             "homepage": "https://symfony.com",
-            "time": "2017-02-02 13:47:35"
+            "time": "2017-04-04 15:24:26"
         },
         {
             "name": "symfony/polyfill-mbstring",
@@ -2638,6 +2682,120 @@
                 "shim"
             ],
             "time": "2016-01-20 09:13:37"
+        },
+        {
+            "name": "symfony/polyfill-php54",
+            "version": "v1.3.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/symfony/polyfill-php54.git",
+                "reference": "90e085822963fdcc9d1c5b73deb3d2e5783b16a0"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/symfony/polyfill-php54/zipball/90e085822963fdcc9d1c5b73deb3d2e5783b16a0",
+                "reference": "90e085822963fdcc9d1c5b73deb3d2e5783b16a0",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.3"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.3-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Symfony\\Polyfill\\Php54\\": ""
+                },
+                "files": [
+                    "bootstrap.php"
+                ],
+                "classmap": [
+                    "Resources/stubs"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Nicolas Grekas",
+                    "email": "p@tchwork.com"
+                },
+                {
+                    "name": "Symfony Community",
+                    "homepage": "https://symfony.com/contributors"
+                }
+            ],
+            "description": "Symfony polyfill backporting some PHP 5.4+ features to lower PHP versions",
+            "homepage": "https://symfony.com",
+            "keywords": [
+                "compatibility",
+                "polyfill",
+                "portable",
+                "shim"
+            ],
+            "time": "2016-11-14 01:06:16"
+        },
+        {
+            "name": "symfony/polyfill-php55",
+            "version": "v1.3.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/symfony/polyfill-php55.git",
+                "reference": "03e3f0350bca2220e3623a0e340eef194405fc67"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/symfony/polyfill-php55/zipball/03e3f0350bca2220e3623a0e340eef194405fc67",
+                "reference": "03e3f0350bca2220e3623a0e340eef194405fc67",
+                "shasum": ""
+            },
+            "require": {
+                "ircmaxell/password-compat": "~1.0",
+                "php": ">=5.3.3"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.3-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Symfony\\Polyfill\\Php55\\": ""
+                },
+                "files": [
+                    "bootstrap.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Nicolas Grekas",
+                    "email": "p@tchwork.com"
+                },
+                {
+                    "name": "Symfony Community",
+                    "homepage": "https://symfony.com/contributors"
+                }
+            ],
+            "description": "Symfony polyfill backporting some PHP 5.5+ features to lower PHP versions",
+            "homepage": "https://symfony.com",
+            "keywords": [
+                "compatibility",
+                "polyfill",
+                "portable",
+                "shim"
+            ],
+            "time": "2016-11-14 01:06:16"
         },
         {
             "name": "symfony/process",
@@ -4208,19 +4366,19 @@
     "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
-        "cup-web/cartasi": 20,
+        "mvlabs/sharengo-coremodule": 20,
+        "sharengo-web/cartasi": 20,
         "mvlabs/zf2-multilanguage": 20,
-        "mvlabs/mvlabs-payments": 20,
-        "mvlabs/omnipay-cartasi": 20,
         "cup-web/admin-business-module": 20,
         "cup-web/core-business": 20,
-        "mvlabs/sharengo-coremodule": 20,
+        "mvlabs/mvlabs-payments": 20,
+        "mvlabs/omnipay-cartasi": 20,
         "phpmd/phpmd": 0
     },
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {
-        "php": ">=5.4"
+        "php": ">=5.3.3"
     },
     "platform-dev": []
 }
