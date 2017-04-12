@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "dd0669ea37bccf6a69a359fcc943a19b",
-    "content-hash": "593e0c7c1bddfb8162af6391791d1f16",
+    "hash": "42b757cc48b99f0cd69dfd1c749ee88c",
+    "content-hash": "5e2ed67f3cc1d2060993c1c5957634e9",
     "packages": [
         {
             "name": "bjyoungblood/bjy-authorize",
@@ -1965,7 +1965,7 @@
             "version": "dev-master",
             "source": {
                 "type": "git",
-                "url": "ssh://git@git.mvlabs.it:4222/internals/payments.git",
+                "url": "https://git.mvlabs.it/internals/payments.git",
                 "reference": "7ff26873007c9331c3f3e4423f88fe280f775abb"
             },
             "require": {
@@ -2052,7 +2052,7 @@
             "version": "dev-master",
             "source": {
                 "type": "git",
-                "url": "ssh://git@git.mvlabs.it:4222/internals/omnipay-cartasi.git",
+                "url": "https://git.mvlabs.it/internals/omnipay-cartasi.git",
                 "reference": "10873be4c3ed27ce55caa7c9fd8acf65cefa17ac"
             },
             "require": {
