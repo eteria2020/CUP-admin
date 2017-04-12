@@ -21,11 +21,11 @@
             "type": "git"
         },
         {
-            "url": "ssh://git@gitlab.bulweria.com/cup-web/admin-business-module.git",
+            "url": "ssh://git@gitlab.bulweria.com/sharengo-web/admin-business-module.git",
             "type": "git"
         },
         {
-            "url": "ssh://git@gitlab.bulweria.com/cup-web/core-business.git",
+            "url": "ssh://git@gitlab.bulweria.com/sharengo-web/core-business.git",
             "type": "git"
         },
         {

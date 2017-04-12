@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "42b757cc48b99f0cd69dfd1c749ee88c",
-    "content-hash": "5e2ed67f3cc1d2060993c1c5957634e9",
+    "hash": "a7807b3e80242b099777ea26dd6ccd30",
+    "content-hash": "aa33b3ddc8079f38c8baaf209e143f45",
     "packages": [
         {
             "name": "bjyoungblood/bjy-authorize",
@@ -297,7 +297,7 @@
             "version": "dev-master",
             "source": {
                 "type": "git",
-                "url": "ssh://git@gitlab.bulweria.com/cup-web/admin-business-module.git",
+                "url": "ssh://git@gitlab.bulweria.com/sharengo-web/admin-business-module.git",
                 "reference": "6359372f330bb37afe667f67ba0788fefb8b39a3"
             },
             "require": {
@@ -322,7 +322,7 @@
             "version": "dev-master",
             "source": {
                 "type": "git",
-                "url": "ssh://git@gitlab.bulweria.com/cup-web/core-business.git",
+                "url": "ssh://git@gitlab.bulweria.com/sharengo-web/core-business.git",
                 "reference": "1f3268f59a89efafc020f19b41452748bb06e7e9"
             },
             "require": {
