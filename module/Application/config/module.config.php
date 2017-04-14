@@ -579,6 +579,8 @@ return [
                         'options' => [
                             'route'    => '/datatable',
                             'defaults' => [
+                                '__NAMESPACE__' => 'Application\Controller',
+                                'controller' => 'Trips',
                                 'action'        => 'datatable',
                             ],
                         ],
@@ -588,6 +590,7 @@ return [
                         'options' => [
                             'route' => '/not-payed-datatable',
                             'defaults' => [
+                                '__NAMESPACE__' => 'Application\Controller',
                                 'action' => 'datatable',
                                 'controller' => 'TripsNotPayed'
                             ]
@@ -598,6 +601,8 @@ return [
                         'options' => [
                             'route' => '/cost',
                             'defaults' => [
+                                '__NAMESPACE__' => 'Application\Controller',
+                                'controller' => 'Trips',
                                 'action' => 'trip-cost',
                             ],
                         ]
@@ -607,6 +612,8 @@ return [
                         'options' => [
                             'route' => '/cost-computation',
                             'defaults' => [
+                                '__NAMESPACE__' => 'Application\Controller',
+                                'controller' => 'Trips',
                                 'action' => 'trip-cost-computation'
                             ]
                         ]
@@ -619,6 +626,8 @@ return [
                                 'id' => '[0-9]*'
                             ],
                             'defaults' => [
+                                '__NAMESPACE__' => 'Application\Controller',
+                                'controller' => 'Trips',
                                 'action' => 'details'
                             ]
                         ]
@@ -631,6 +640,8 @@ return [
                                 'id' => '[0-9]*'
                             ],
                             'defaults' => [
+                                '__NAMESPACE__' => 'Application\Controller',
+                                'controller' => 'Trips',
                                 'action' => 'info-tab'
                             ]
                         ]
@@ -643,6 +654,8 @@ return [
                                 'id'    => '[0-9]*'
                             ],
                             'defaults' => [
+                                '__NAMESPACE__' => 'Application\Controller',
+                                'controller' => 'Trips',
                                 'action' => 'cost-tab'
                             ]
                         ]
@@ -655,6 +668,7 @@ return [
                                 'id'    => '[0-9]*'
                             ],
                             'defaults' => [
+                                '__NAMESPACE__' => 'Application\Controller',
                                 'controller' => 'EditTrip',
                                 'action' => 'edit-tab'
                             ]
@@ -668,6 +682,8 @@ return [
                                 'id' => '[0-9]*'
                             ],
                             'defaults' => [
+                                '__NAMESPACE__' => 'Application\Controller',
+                                'controller' => 'Trips',
                                 'action' => 'close-tab'
                             ]
                         ]
@@ -680,6 +696,8 @@ return [
                                 'id'    => '[0-9]*'
                             ],
                             'defaults' => [
+                                '__NAMESPACE__' => 'Application\Controller',
+                                'controller' => 'Trips',
                                 'action' => 'events-tab'
                             ]
                         ]
@@ -689,6 +707,8 @@ return [
                         'options' => [
                             'route' => '/do-close',
                             'defaults' => [
+                                '__NAMESPACE__' => 'Application\Controller',
+                                'controller' => 'Trips',
                                 'action' => 'do-close'
                             ]
                         ],
@@ -707,6 +727,7 @@ return [
                         'options' => [
                             'route' => '/not-payed',
                             'defaults' => [
+                                '__NAMESPACE__' => 'Application\Controller',
                                 'action' => 'list',
                                 'controller' => 'TripsNotPayed'
                             ]
@@ -1977,19 +1998,6 @@ return [
                 'resource'        => 'callcenter',
                 'openOnNewWindow' => true,
             ],
-        ]
-    ],
-    'datatable-filters' => [
-        'trips-index' => [
-            'e.timestampEnd' => $translator->translate("Corse Aperte"),
-            'e.id' => $translator->translate("ID Corsa"),
-            'cu.id' => $translator->translate("ID Cliente"),
-            'cu.surname' => $translator->translate("Cognome Cliente"),
-            'cu.email' => $translator->translate("eMail Cliente"),
-            'cc.code' => $translator->translate("RFID"),
-            'c.plate' => $translator->translate("Targa"),
-            'c.label' => $translator->translate("Numero"),
-            'f.name' => $translator->translate("Flotta")
         ]
     ],
 ];
