@@ -23,15 +23,6 @@ $form = $this->faresForm->prepare();
         <div class="row">
             <div class="col-lg-12">
                 <div class="form-group">
-                    <label for="reason"><?= $this->translate("Soglia Tariffaria 240 min"); ?></label>
-                    <?= $this->formRow($form->get('fares')->get('costStep240')); ?>
-                </div>
-            </div>
-        </div>
-
-        <div class="row">
-            <div class="col-lg-12">
-                <div class="form-group">
                     <label for="reason"><?= $this->translate("Soglia Tariffaria 1440 min"); ?></label>
                     <?= $this->formRow($form->get('fares')->get('costStep1440')); ?>
                 </div>
