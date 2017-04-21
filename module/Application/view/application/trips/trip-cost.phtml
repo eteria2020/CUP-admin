@@ -38,7 +38,7 @@
 
             <div class="col-lg-4">
                 <div class="form-group">
-                    <label for="gender"><?= $this->translate("Durata corsa (HH:MM:SS)"); ?></label>
+                    <label for="gender"><?= $this->translate("Durata corsa"); ?></label>
                     <?= $this->formRow($form->get('tripCost')->get('tripLength')); ?>
                 </div>
             </div>
@@ -49,6 +49,13 @@
                     <?= $this->formRow($form->get('tripCost')->get('tripParkMinutes')); ?>
                 </div>
             </div>
+
+            <!--<div class="col-lg-4">
+                <div class="form-group">
+                    <label for="gender"><?= $this->translate("Sesso del cliente"); ?></label>
+                    <?= $this->formRow($form->get('tripCost')->get('customerGender')); ?>
+                </div>
+            </div>-->
 
             <div class="col-lg-4">
                 <div class="form-group">

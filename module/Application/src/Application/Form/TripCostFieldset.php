@@ -50,8 +50,22 @@ class TripCostFieldset extends Fieldset
             'attributes' => [
                 'id' => 'trip-park-minutes',
                 'class' => 'form-control',
-                'min' => 0,
-                'value' => 0
+                'min' => 0
+            ]
+        ]);
+
+        $this->add([
+            'name' => 'customerGender',
+            'type' => 'Zend\Form\Element\Select',
+            'attributes' => [
+                'id' => 'customer-gender',
+                'class' => 'form-control'
+            ],
+            'options' => [
+                'value_options' => [
+                    'male' => $translator->translate('Maschio'),
+                    'female' => $translator->translate('Femmina')
+                ]
             ]
         ]);
 
@@ -61,8 +75,7 @@ class TripCostFieldset extends Fieldset
             'attributes' => [
                 'id' => 'customer-bonus',
                 'class' => 'form-control',
-                'min' => 0,
-                'value' => 0
+                'min' => 0
             ]
         ]);
     }
