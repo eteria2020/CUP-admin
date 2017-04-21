@@ -32,16 +32,6 @@ class FaresFieldset extends Fieldset implements InputFilterProviderInterface
         ]);
 
         $this->add([
-            'name' => 'costStep240',
-            'type' => 'Zend\Form\Element\Number',
-            'attributes' => [
-                'id'    => 'costStep60',
-                'class' => 'form-control',
-                'value' => $costSteps['240']
-            ]
-        ]);
-
-        $this->add([
             'name' => 'costStep1440',
             'type' => 'Zend\Form\Element\Number',
             'attributes' => [
