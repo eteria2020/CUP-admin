@@ -39,8 +39,8 @@
                                 <td><?= $event->getTxtval() ?></td>
                                 <td><?= $event->getIntval() ?></td>
                                 <td>
-                                    <a href="http://maps.google.com/?q=<?= $event->getLat() ?>,<?= $event->getLon() ?>" target="_blank">
-                                        <?= 'Lat/Lon: ' . $event->getLat() . ' ' . $event->getLon() ?>
+                                    <a href="http://www.openstreetmap.org/?mlat=<?= $event->getLat() ?>&mlon=<?= $event->getLon() ?>&zoom=18" target="_blank">
+                                        <?= 'Lat:' . $event->getLat() . ' Lon:' . $event->getLon() ?>
                                     </a>
                                 </td>
                             </tr>
