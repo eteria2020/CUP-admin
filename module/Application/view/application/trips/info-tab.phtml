@@ -44,6 +44,11 @@ if(!is_null($trip->getLatitudeEnd()) && !is_null($trip->getLongitudeEnd())){
     }
 }
 
+$km_lenght = "";
+if(!is_null($trip->getKmBeginning()) && !is_null($trip->getKmEnd())){
+    $km_lenght = intval($trip->getKmEnd()) -intval($trip->getKmBeginning());
+}
+
 ?>
 <div class="row">
     <div class="col-lg-9">
@@ -176,6 +181,12 @@ if(!is_null($trip->getLatitudeEnd()) && !is_null($trip->getLongitudeEnd())){
                         <div class="form-group">
                             <label><?= $this->translate("Km fine"); ?></label>
                             <div class="sng-info-box"><?= $trip->getKmEnd() ?></div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="form-group">
+                            <label><?= $this->translate("Km percorsi"); ?></label>
+                            <div class="sng-info-box"><?= $km_lenght ?></div>
                         </div>
                     </div>
                 </div>
