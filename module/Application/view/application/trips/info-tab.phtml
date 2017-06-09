@@ -39,7 +39,6 @@ if(!is_null($trip->getLatitudeBeginning()) && !is_null($trip->getLongitudeBeginn
     if($trip->getLatitudeBeginning()==='0.0' && $trip->getLongitudeBeginning()==='0.0') {
     }else{
     //$beginning_trip ='<a href="http://maps.google.com/?q='.$trip->getLatitudeBeginning().','.$trip->getLongitudeBeginning().'" target="_blank"> <i class="fa fa-map-marker"></i></a>';
-    //$beginning_trip ='<a href="http://www.openstreetmap.org/?mlat='.$trip->getLatitudeBeginning().'&mlon='.$trip->getLongitudeBeginning().'&zoom=18" target="_blank"> <i style="font-size: 20px" class="fa fa-map-marker"></i></a>';
     $beginning_trip = sprintf('<a href="http://www.openstreetmap.org/?mlat=%s&mlon=%s&zoom=18" target="_blank"> <i style="font-size: 20px" class="fa fa-map-marker"></i></a>',
         $trip->getLatitudeBeginning(),
         $trip->getLongitudeBeginning());
@@ -51,7 +50,6 @@ if(!is_null($trip->getLatitudeEnd()) && !is_null($trip->getLongitudeEnd())){
     if($trip->getLatitudeEnd()==='0.0' && $trip->getLongitudeEnd()==='0.0') {
     }else{
         //$end_trip ='<a href="http://maps.google.com/?q='.$trip->getLatitudeEnd().','.$trip->getLongitudeEnd().'" target="_blank"> <i class="fa fa-map-marker"></i></a>';
-        //$end_trip ='<a href="http://www.openstreetmap.org/?mlat='.$trip->getLatitudeEnd().'&mlon='.$trip->getLongitudeEnd().'&zoom=18" target="_blank"> <i style="font-size: 20px" class="fa fa-map-marker"></i></a>';
         $end_trip = sprintf('<a href="http://www.openstreetmap.org/?mlat=%s&mlon=%s&zoom=18" target="_blank"> <i style="font-size: 20px" class="fa fa-map-marker"></i></a>',
             $trip->getLatitudeEnd(),
             $trip->getLongitudeEnd());
