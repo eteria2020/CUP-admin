@@ -7,7 +7,7 @@ return [
         //'alias' => 'payment_62321191',
         //'mac_key' => '88QZ74z3wKUBmoWX2V462nO0737933Jj127h5o80',
         'first_payment_amount' => 1,
-        'first_payment_url' => 'https://coll-ecommerce.keyclient.it/ecomm/ecomm/DispatcherServlet',
-        'recurring_payment_url' => 'https://coll-ecommerce.keyclient.it/ecomm/ecomm/ServletS2S'
+        'first_payment_url' => 'https://ecommerce.cartasi.it/ecomm/ecomm/DispatcherServlet',
+        'recurring_payment_url' => 'https://ecommerce.cartasi.it/ecomm/ecomm/ServletS2S'
     ]
 ];
