@@ -1862,12 +1862,12 @@ return [
                     [
                         'label' => $translator->translate('Pagamenti falliti'),
                         'route' => 'payments/failed-payments',
-                        'isVisible' => true
+                        'isVisible' => false //true
                     ],
                     [
                         'label' => $translator->translate('Addebita penale/extra'),
                         'route' => 'payments/extra',
-                        'isVisible' => true
+                        'isVisible' => false //true
                     ],
                     [
                         'label' => $translator->translate('Competenze'),
