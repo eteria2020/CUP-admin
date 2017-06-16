@@ -5,6 +5,7 @@ namespace Application\Form;
 use SharengoCore\Entity\CustomersBonus;
 use Zend\Mvc\I18n\Translator;
 use Zend\Stdlib\Hydrator\HydratorInterface;
+use SharengoCore\Service\AddBonusService;
 
 use Zend\Form\Fieldset;
 use Zend\InputFilter\InputFilterProviderInterface;
@@ -13,12 +14,12 @@ class CustomerBonusFieldset extends Fieldset implements InputFilterProviderInter
 {
 
     private $translator;
-    public function __construct(HydratorInterface $hydrator, Translator $translator)
+    public function __construct(HydratorInterface $hydrator, Translator $translator, AddBonusService $addBonusService)
     {
         parent::__construct('customer-bonus', [
             'use_as_base_fieldset' => true
         ]);
-
+        $this->addBonusService = $addBonusService;
         $this->translator = $translator;
         $this->setHydrator($hydrator);
         $this->setObject(new CustomersBonus());
@@ -35,11 +36,14 @@ class CustomerBonusFieldset extends Fieldset implements InputFilterProviderInter
 
         $this->add([
             'name'       => 'description',
-            'type'       => 'Zend\Form\Element\Text',
+            'type'       => 'Zend\Form\Element\Select',
             'attributes' => [
                 'id'       => 'type',
                 'class'    => 'form-control',
                 'required' => 'required'
+            ],
+            'options' => [
+                'value_options' => $addBonusService->getAllAddBonus()
             ]
         ]);
 
@@ -77,7 +81,19 @@ class CustomerBonusFieldset extends Fieldset implements InputFilterProviderInter
                 'validators' => [
                     [
                         'name' => 'Int'
-                    ]
+                    ],
+                    [
+                        'name'    => 'Callback',
+                        'options' => [
+                            'messages' => [
+                                \Zend\Validator\Callback::INVALID_VALUE => $this->translator->translate('Il valore massimo inseribile è 15 min.'),
+                            ],
+                            'callback' => function ($value) {
+                                
+                                return $value <= 15 ? true : false;
+                            },
+                        ],
+                    ],
                 ]
             ],
             'description' => [
