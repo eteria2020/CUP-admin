@@ -17,11 +17,11 @@ class CustomerBonusFormFactory implements FactoryInterface
     {
         $entityManager = $serviceLocator->get('doctrine.entitymanager.orm_default');
         $hydrator = new DoctrineHydrator($entityManager);
-
+        $addBonusService = $serviceLocator->get('SharengoCore\Service\AddBonusService');
         $languageService = $serviceLocator->get('LanguageService');
         $translator = $languageService->getTranslator();
 
-        $customerBonusFieldset = new CustomerBonusFieldset($hydrator, $translator);
+        $customerBonusFieldset = new CustomerBonusFieldset($hydrator, $translator, $addBonusService);
 
         return new CustomerBonusForm($customerBonusFieldset);
     }
