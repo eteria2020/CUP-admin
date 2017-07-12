@@ -191,7 +191,8 @@ function sendPaymentRequest(customerId, fleetId, type, reasons, amounts) {
     }).fail(function (data) {
         var message = JSON.parse(data.responseText).error;
         alert(message);
-        clearFields();
+        $('#disableuserspan').show();
+        //clearFields();
     });
 }
 
