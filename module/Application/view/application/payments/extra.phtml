@@ -1,6 +1,5 @@
 <?php
 $this->headScript()->appendFile($this->basePath() .'/js/extra-payments.js');
-$this->headScript()->appendFile($this->basePath() .'/js/customers-edit.js');
 ?>
 <div class="page-content-wrapper">
     <div class="page-content">
@@ -82,4 +81,13 @@ foreach($this->penalties as $penalty) {
 }
 echo '"';
 ?>
+    
+    
+function deactivate(e)
+{
+    if (!confirm(translate("deactivateUser"))) {
+        e.preventDefault();
+    }
+}
+
 </script>
