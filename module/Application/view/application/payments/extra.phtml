@@ -76,7 +76,7 @@ $formSetting->setAttribute('action', $this->url('customers/edit', ['id' => $this
         <div id="disableuserspan" style="margin-top:10px; display: none">
             
            <form class="portlet-body" action="" method="post" id="form_deactive_user"  target="_blank">
-               <input id="js-reactivate" class="btn btn-success" type="submit" onclick="$('#form_deactive_user').attr('action','/customers/deactivate/'+$('#customer').val());deactivate(event)" value="Disabilita manualmente">
+               <input id="js-reactivate" class="btn btn-success" type="submit" onclick="$('#form_deactive_user').attr('action','/customers/deactivate/'+$('#customer').val());deactivate(event);clearFields();" value="Disabilita manualmente">
            </form>
             
         </div>
