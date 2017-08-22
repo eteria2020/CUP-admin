@@ -296,6 +296,20 @@ class CustomersController extends AbstractActionController
 
         return $view;
     }
+    
+    public function pointsTabAction()
+    {
+        /** @var Customers $customer */
+        $customer = $this->getCustomer();
+
+        $view = new ViewModel([
+            'customer' => $customer,
+            'listPoints' => $this->customersService->getAllPoints($customer),
+        ]);
+        $view->setTerminal(true);
+
+        return $view;
+    }
 
     public function cardTabAction()
     {
@@ -479,6 +493,42 @@ class CustomersController extends AbstractActionController
                     'customers/edit',
                     ['id' => $customer->getId()],
                     ['query' => ['tab' => 'bonus']]
+                );
+            }
+        }
+
+        return new ViewModel([
+            'customer' => $customer,
+            'promoCodeForm' => $form
+        ]);
+    }
+    
+    public function addPointsAction()
+    {
+        $translator = $this->TranslatorPlugin();
+        /** @var Customers $customer */
+        $customer = $this->getCustomer();
+        $form = $this->customerBonusForm;
+
+        if ($this->getRequest()->isPost()) {
+            $postData = $this->getRequest()->getPost()->toArray();
+            $form->setData($postData);
+
+            if ($form->isValid()) {
+                try {
+                    $this->customersService->addPointFromWebUser($customer, $form->getData());
+
+                    $this->flashMessenger()->addSuccessMessage($translator->translate('Operazione completata con successo!'));
+                } catch (\Exception $e) {
+                    $this->flashMessenger()->addErrorMessage($translator->translate('Si è verificato un errore applicativo. L\'assistenza tecnica è già al corrente, ci scusiamo per l\'inconveniente'));
+
+                    return $this->redirect()->toRoute('customers/add-points', ['id' => $customer->getId()]);
+                }
+
+                return $this->redirect()->toRoute(
+                    'customers/edit',
+                    ['id' => $customer->getId()],
+                    ['query' => ['tab' => 'points']]
                 );
             }
         }

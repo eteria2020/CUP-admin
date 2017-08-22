@@ -195,6 +195,18 @@ return [
                             ],
                         ],
                     ],
+                    'ajax-tab-points' => [
+                        'type'    => 'Segment',
+                        'options' => [
+                            'route'    => '/ajax-tab/points/:id',
+                            'constraints' => [
+                                'id' => '[0-9]*'
+                            ],
+                            'defaults' => [
+                                'action'        => 'points-tab',
+                            ],
+                        ],
+                    ],
                     'ajax-tab-card' => [
                         'type'    => 'Segment',
                         'options' => [
@@ -325,6 +337,18 @@ return [
                             ],
                             'defaults' => [
                                 'action'        => 'add-bonus',
+                            ],
+                        ],
+                    ],
+                    'add-points' => [
+                        'type'    => 'Segment',
+                        'options' => [
+                            'route'    => '/add-points/:id',
+                            'constraints' => [
+                                'id' => '[0-9]*'
+                            ],
+                            'defaults' => [
+                                'action'        => 'add-points',
                             ],
                         ],
                     ],

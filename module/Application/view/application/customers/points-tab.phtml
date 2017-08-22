@@ -1,0 +1,53 @@
+<div class="row">
+    <div class="col-lg-12">
+
+        <div class="alert alert-success" style="display: none;" id="js-message">
+            <p><?= $this->translate("Operazione eseguita con successo"); ?></p>
+        </div>
+
+        <div class="btn-group btn-group-sm btn-group-solid margin-bottom-10 btn-group-spaced">
+            <a href="<?= $this->url('customers/add-points', ['id' => $this->customer->getId()]); ?>" class="btn green"><i class="fa fa-plus"></i> <?= $this->translate("Aggiungi punti"); ?></a>
+        </div>
+
+        <?= $this->partial('partials/flash-messages.phtml', []); ?>
+
+        <?php if(count($this->listPoints) > 0): ?>
+
+        <table class="table table-bordered">
+            <thead>
+            <tr>
+                <th><?= $this->translate("Totale"); ?></th>
+                <th><?= $this->translate("Residuo"); ?></th>
+                <th><?= $this->translate("Valido Dal"); ?></th>
+                <th><?= $this->translate("Valido Fino al"); ?></th>
+                <th><?= $this->translate("Tipologia"); ?></th>
+                <th><?= $this->translate("Descrizione"); ?></th>
+                <th><?= $this->translate("Azioni"); ?></th>
+            </tr>
+            </thead>
+            <tbody>
+            <?php
+            /** @var \SharengoCore\Entity\CustomersPoints $point */
+            foreach($this->listPoints as $point): ?>
+                <tr id="js-row-bonus-<?= $point->getId(); ?>">
+                    <td style="font-weight: normal;"><?= $point->getTotal(); ?></td>
+                    <td><?= $point->getResidual(); ?></td>
+                    <td><?= is_object($point->getValidFrom()) ? $point->getValidFrom()->format('d-m-Y H:i:s') : ''; ?></td>
+                    <td><?= is_object($point->getValidTo()) ? $point->getValidTo()->format('d-m-Y H:i:s') : ''; ?></td>
+                    <td style="font-weight: normal;"><?= $point->getType(); ?></td>
+                    <td style="font-weight: normal;"><?= $point->getDescription(); ?></td>
+                    <td>
+                        <?php if ($point->canBeDeleted()): ?>
+                            <a href="javascript:void(0);" data-id="<?= $this->customer->getId(); ?>" data-bonus="<?= $point->getId(); ?>" class="btn btn-default" id="js-remove-bonus"><?= $this->translate("Elimina"); ?></a>
+                        <?php endif; ?>
+                    </td>
+                </tr>
+            <?php endforeach; ?>
+            </tbody>
+        </table>
+
+        <?php else: ?>
+            <div class="alert alert-info"><?= $this->translate("Il cliente non ha alcun punto assegnato."); ?></div>
+        <?php endif; ?>
+    </div>
+</div>
