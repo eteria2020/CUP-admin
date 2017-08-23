@@ -11,7 +11,7 @@ class CustomerPointFormFactory implements FactoryInterface
     /**
      * @param ServiceLocatorInterface $serviceLocator
      *
-     * @return CustomerBonusForm
+     * @return CustomerPointForm
      */
     public function createService(ServiceLocatorInterface $serviceLocator)
     {

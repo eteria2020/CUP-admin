@@ -32,6 +32,7 @@ class CustomersControllerFactory implements FactoryInterface
         $settingForm = $sharedLocator->get('SettingForm');
         $promoCodeForm = $sharedLocator->get('PromoCodeForm');
         $customerBonusForm = $sharedLocator->get('CustomerBonusForm');
+        //$customerPointForm = $sharedLocator->get('CustomerPointForm');
         $cardForm = $sharedLocator->get('CardForm');
         $datatablesSessionNamespace = $sharedLocator->get('Configuration')['session']['datatablesNamespace'];
 
@@ -54,6 +55,7 @@ class CustomersControllerFactory implements FactoryInterface
             $settingForm,
             $promoCodeForm,
             $customerBonusForm,
+            //$customerPointForm,
             $cardForm,
             $hydrator,
             $cartasiContractsService,

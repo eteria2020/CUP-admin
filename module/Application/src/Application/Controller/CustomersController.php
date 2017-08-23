@@ -4,6 +4,7 @@ namespace Application\Controller;
 // Internals
 use SharengoCore\Entity\Customers;
 use SharengoCore\Entity\CustomersBonus;
+use SharengoCore\Entity\CustomersPoints;
 use SharengoCore\Entity\PromoCodes;
 use SharengoCore\Service\BonusService;
 use SharengoCore\Service\CardsService;
@@ -60,6 +61,11 @@ class CustomersController extends AbstractActionController
      * @var
      */
     private $customerBonusForm;
+    
+    /**
+     * @var
+     */
+    private $customerPointForm;
 
     /**
      * @var
@@ -104,6 +110,7 @@ class CustomersController extends AbstractActionController
      * @param Form $settingForm
      * @param Form $promoCodeForm
      * @param Form $customerBonusForm
+     * @param Form $customerPointForm
      * @param Form $cardForm
      * @param HydratorInterface $hydrator
      * @param CartasiContractsService $cartasiContractsService
@@ -120,6 +127,7 @@ class CustomersController extends AbstractActionController
         Form $settingForm,
         Form $promoCodeForm,
         Form $customerBonusForm,
+        //Form $customerPointForm,
         Form $cardForm,
         HydratorInterface $hydrator,
         CartasiContractsService $cartasiContractsService,
@@ -134,6 +142,7 @@ class CustomersController extends AbstractActionController
         $this->settingForm = $settingForm;
         $this->promoCodeForm = $promoCodeForm;
         $this->customerBonusForm = $customerBonusForm;
+        //$this->customerPointForm = $customerPointForm;
         $this->cardForm = $cardForm;
         $this->hydrator = $hydrator;
         $this->cartasiContractsService = $cartasiContractsService;
@@ -508,7 +517,7 @@ class CustomersController extends AbstractActionController
         $translator = $this->TranslatorPlugin();
         /** @var Customers $customer */
         $customer = $this->getCustomer();
-        $form = $this->customerBonusForm;
+        $form = $this->customerPointForm;
 
         if ($this->getRequest()->isPost()) {
             $postData = $this->getRequest()->getPost()->toArray();

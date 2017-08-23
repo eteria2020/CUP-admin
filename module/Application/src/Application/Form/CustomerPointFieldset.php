@@ -2,10 +2,10 @@
 
 namespace Application\Form;
 
-use SharengoCore\Entity\CustomersBonus;
+use SharengoCore\Entity\CustomersPoints;
 use Zend\Mvc\I18n\Translator;
 use Zend\Stdlib\Hydrator\HydratorInterface;
-use SharengoCore\Service\AddBonusService;
+use SharengoCore\Service\AddPointService;
 
 use Zend\Form\Fieldset;
 use Zend\InputFilter\InputFilterProviderInterface;
@@ -16,10 +16,10 @@ class CustomerPointFieldset extends Fieldset implements InputFilterProviderInter
     private $translator;
     public function __construct(HydratorInterface $hydrator, Translator $translator, AddPointService $addPointService)
     {
-        parent::__construct('customer-bonus', [
+        parent::__construct('customer-point', [
             'use_as_base_fieldset' => true
         ]);
-        $this->addBonusService = $addPointService;
+        $this->addPointService = $addPointService;
         $this->translator = $translator;
         $this->setHydrator($hydrator);
         $this->setObject(new CustomersPoints());
