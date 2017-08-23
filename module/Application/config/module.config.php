@@ -364,6 +364,18 @@ return [
                             ],
                         ],
                     ],
+                    'remove-point' => [
+                        'type'    => 'Segment',
+                        'options' => [
+                            'route'    => '/remove-point/:id',
+                            'constraints' => [
+                                'id' => '[0-9]*'
+                            ],
+                            'defaults' => [
+                                'action'        => 'remove-point',
+                            ],
+                        ],
+                    ],
                     'activate' => [
                         'type' => 'Segment',
                         'options' => [
@@ -1447,6 +1459,7 @@ return [
             'SettingForm' => 'Application\Form\SettingFormFactory',
             'PromoCodeForm' => 'Application\Form\PromoCodeFormFactory',
             'CustomerBonusForm' => 'Application\Form\CustomerBonusFormFactory',
+            'CustomerPointForm' => 'Application\Form\CustomerPointFormFactory',
             'TripCostForm' => 'Application\Form\TripCostFormFactory',
             'FaresForm' => 'Application\Form\FaresFormFactory',
             'EditTripForm' => 'Application\Form\EditTripFormFactory',

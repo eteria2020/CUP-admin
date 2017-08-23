@@ -29,7 +29,7 @@
             <?php
             /** @var \SharengoCore\Entity\CustomersPoints $point */
             foreach($this->listPoints as $point): ?>
-                <tr id="js-row-bonus-<?= $point->getId(); ?>">
+                <tr id="js-row-point-<?= $point->getId(); ?>">
                     <td style="font-weight: normal;"><?= $point->getTotal(); ?></td>
                     <td><?= $point->getResidual(); ?></td>
                     <td><?= is_object($point->getValidFrom()) ? $point->getValidFrom()->format('d-m-Y H:i:s') : ''; ?></td>
@@ -38,7 +38,7 @@
                     <td style="font-weight: normal;"><?= $point->getDescription(); ?></td>
                     <td>
                         <?php if ($point->canBeDeleted()): ?>
-                            <a href="javascript:void(0);" data-id="<?= $this->customer->getId(); ?>" data-bonus="<?= $point->getId(); ?>" class="btn btn-default" id="js-remove-bonus"><?= $this->translate("Elimina"); ?></a>
+                            <a href="javascript:void(0);" data-id="<?= $this->customer->getId(); ?>" data-point="<?= $point->getId(); ?>" class="btn btn-default" id="js-remove-point"><?= $this->translate("Elimina"); ?></a>
                         <?php endif; ?>
                     </td>
                 </tr>
