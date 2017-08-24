@@ -111,7 +111,7 @@ class CustomersController extends AbstractActionController
      * @param CardsService $cardsService
      * @param PromoCodesService $promoCodeService
      * @param BonusService $bonusService
-     * @param PointService $pointService,
+     * @param PointService $pointService
      * @param Form $customerForm
      * @param Form $driverForm
      * @param Form $settingForm

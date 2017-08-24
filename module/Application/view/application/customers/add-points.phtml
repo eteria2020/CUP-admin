@@ -33,22 +33,22 @@ $this->headScript()
                     <div class="row">
                         <div class="col-lg-4">
                             <label><?= $this->translate("Numero punti"); ?></label>
-                            <?= $this->formRow($form->get('customer-bonus')->get('total')); ?>
+                            <?= $this->formRow($form->get('customer-point')->get('total')); ?>
                         </div>
                         <div class="col-lg-8">
                             <label><?= $this->translate("Descrizione"); ?></label>
-                            <?= $this->formRow($form->get('customer-bonus')->get('description')); ?>
+                            <?= $this->formRow($form->get('customer-point')->get('description')); ?>
                         </div>
                     </div>
 
                     <div class="row" style="margin-top: 10px;">
                         <div class="col-lg-4">
                             <label><?= $this->translate("Utilizzabile dal"); ?></label>
-                            <?= $this->formRow($form->get('customer-bonus')->get('validFrom')); ?>
+                            <?= $this->formRow($form->get('customer-point')->get('validFrom')); ?>
                         </div>
                         <div class="col-lg-4">
                             <label><?= $this->translate("Utilizzabile fino al"); ?></label>
-                            <?= $this->formRow($form->get('customer-bonus')->get('validTo')); ?>
+                            <?= $this->formRow($form->get('customer-point')->get('validTo')); ?>
                         </div>
                     </div>
 

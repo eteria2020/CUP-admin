@@ -86,7 +86,7 @@ class CustomerPointFieldset extends Fieldset implements InputFilterProviderInter
                         'name'    => 'Callback',
                         'options' => [
                             'messages' => [
-                                \Zend\Validator\Callback::INVALID_VALUE => $this->translator->translate('Il valore massimo inseribile è 15 min.'),
+                                \Zend\Validator\Callback::INVALID_VALUE => $this->translator->translate('Il valore massimo inseribile è 15 punti.'),
                             ],
                             'callback' => function ($value) {
                                 
