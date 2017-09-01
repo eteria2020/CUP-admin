@@ -1,6 +1,8 @@
 <?php
 // Get data
 $trip = $this->trip;
+$business = $this->business;
+
 $tripPayment = $trip->getTripPayment();
 $customer = $trip->getCustomer();
 
@@ -11,6 +13,13 @@ $rfid = $customer->getCard() !== null ? $customer->getCard()->getCode() : 'n.a.'
 // Parse payment
 $payed = 'NO';
 $invoiced = 'NO';
+$b2b_link = 'NO';
+
+if(!is_null($business)) {
+    $b2b_link = sprintf("<a href='%s'>%s</a>",
+        $this->url('business/edit',['code'=> $business->getCode()], ['force_canonical' => true]),
+        $business->getName());
+}
 
 if ($tripPayment !== null) {
     $payed = $tripPayment->getPayedSuccessfullyAt() !== null ?
@@ -72,13 +81,18 @@ if(!is_null($trip->getKmBeginning()) && !is_null($trip->getKmEnd())){
             <div class="panel-body">
 
                 <div class="row">
-                    <div class="col-lg-3">
+                    <div class="col-lg-4">
                         <div class="form-group">
                             <label><?= $this->translate("Id corsa"); ?></label>
                             <div class="sng-info-box"><?= $trip->getId() ?></div>
                         </div>
                     </div>
-
+                    <div class="col-lg-4">
+                        <div class="form-group">
+                            <label><?= $this->translate("Business"); ?></label>
+                            <div class="sng-info-box"><?= $b2b_link ?></div>
+                        </div>
+                    </div>
                 </div>
 
                 <div class="row">
