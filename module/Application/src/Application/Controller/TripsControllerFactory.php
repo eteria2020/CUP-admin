@@ -27,6 +27,7 @@ class TripsControllerFactory implements FactoryInterface
         $datatablesSessionNamespace = $sharedServiceLocator->get('Configuration')['session']['datatablesNamespace'];
         $eventManager = $sharedServiceLocator->get('EventLogger\EventManager\EventManager');
         $businessService = $sharedServiceLocator->get('BusinessCore\Service\BusinessService');
+        $businessTripService = $sharedServiceLocator->get('BusinessCore\Service\BusinessTripService');
 
         $languageService = $sharedServiceLocator->get('LanguageService');
         $translator = $languageService->getTranslator();
@@ -44,7 +45,8 @@ class TripsControllerFactory implements FactoryInterface
             $eventManager,
             $closeTripDataFactory,
             $datatableFiltersSessionContainer,
-            $businessService
+            $businessService,
+            $businessTripService
         );
     }
 }
