@@ -14,6 +14,8 @@ use SharengoCore\Service\EventsService;
 use SharengoCore\Service\TripCostComputerService;
 use SharengoCore\Service\TripsService;
 use BusinessCore\Service\BusinessService;
+use BusinessCore\Service\BusinessTripService;
+
 // Externals
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\JsonModel;
@@ -54,15 +56,21 @@ class TripsController extends AbstractActionController
     private $closeTripDataFactory;
 
     /**
-     * @var $datatableFiltersSessionContainer
+     * @var datatableFiltersSessionContainer
      */
     private $datatableFiltersSessionContainer;
 
     /**
      *
-     * @var $businessService 
+     * @var businessService 
      */
     private $businessService;
+
+    /**
+     *
+     * @var businessTripService 
+     */
+    private $businessTripService;
 
     public function __construct(
         TripsService $tripsService,
@@ -72,7 +80,8 @@ class TripsController extends AbstractActionController
         EventManager $eventManager,
         CloseTripDataFactory $closeTripDataFactory,
         Container $datatableFiltersSessionContainer,
-        BusinessService $businessService
+        BusinessService $businessService,
+        BusinessTripService $businessTripService
     ) {
         $this->tripsService = $tripsService;
         $this->tripCostForm = $tripCostForm;
@@ -82,6 +91,7 @@ class TripsController extends AbstractActionController
         $this->closeTripDataFactory = $closeTripDataFactory;
         $this->datatableFiltersSessionContainer = $datatableFiltersSessionContainer;
         $this->businessService = $businessService;
+        $this->businessTripService = $businessTripService;
     }
 
     /**
@@ -184,7 +194,10 @@ class TripsController extends AbstractActionController
         $business = null;
 
         if(!is_null($trip->getPinType())){
-            $business = $this->businessService->getBusinessByCode($trip->getPinType());
+            $businessTrip = $this->businessTripService->getBusinessTripByTripId($trip->getId());
+            if(!is_null($businessTrip)){
+                $business = $businessTrip->getBusiness();
+            }
         }
 
         $view = new ViewModel([
