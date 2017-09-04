@@ -298,7 +298,7 @@
             "source": {
                 "type": "git",
                 "url": "ssh://git@gitlab.bulweria.com/sharengo-web/admin-business-module.git",
-                "reference": "ccbd00177a594693a1b62a48894b01a64b674ee6"
+                "reference": "b7a5ac5472f5d12a007bc090658b4887b84879f2"
             },
             "require": {
                 "php": ">=5.4",
@@ -315,7 +315,7 @@
                 }
             },
             "description": "Business area in Admin",
-            "time": "2017-06-13 09:06:17"
+            "time": "2017-09-04 07:49:35"
         },
         {
             "name": "cup-web/core-business",
