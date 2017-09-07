@@ -4,7 +4,7 @@ namespace Application\Controller;
 
 use Application\Form\InputData\CloseTripDataFactory;
 
-use DoctrineModule\Stdlib\Hydrator\DoctrineObject as DoctrineHydrator;
+//use DoctrineModule\Stdlib\Hydrator\DoctrineObject as DoctrineHydrator;
 use Zend\ServiceManager\FactoryInterface;
 use Zend\ServiceManager\ServiceLocatorInterface;
 use Zend\Session\Container;
@@ -26,6 +26,8 @@ class TripsControllerFactory implements FactoryInterface
         $tripsRepository = $entityManager->getRepository('SharengoCore\Entity\Trips');
         $datatablesSessionNamespace = $sharedServiceLocator->get('Configuration')['session']['datatablesNamespace'];
         $eventManager = $sharedServiceLocator->get('EventLogger\EventManager\EventManager');
+        $businessService = $sharedServiceLocator->get('BusinessCore\Service\BusinessService');
+        $businessTripService = $sharedServiceLocator->get('BusinessCore\Service\BusinessTripService');
 
         $languageService = $sharedServiceLocator->get('LanguageService');
         $translator = $languageService->getTranslator();
@@ -42,7 +44,9 @@ class TripsControllerFactory implements FactoryInterface
             $eventsService,
             $eventManager,
             $closeTripDataFactory,
-            $datatableFiltersSessionContainer
+            $datatableFiltersSessionContainer,
+            $businessService,
+            $businessTripService
         );
     }
 }

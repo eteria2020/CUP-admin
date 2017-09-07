@@ -5,14 +5,17 @@ namespace Application\Controller;
 use Application\Form\InputData\CloseTripDataFactory;
 use Application\Form\TripCostForm;
 use SharengoCore\Entity\Trips;
-use SharengoCore\Exception\EditTripDeniedException;
-use SharengoCore\Exception\EditTripNotDateTimeException;
-use SharengoCore\Exception\EditTripWrongDateException;
+//use SharengoCore\Exception\EditTripDeniedException;
+//use SharengoCore\Exception\EditTripNotDateTimeException;
+//use SharengoCore\Exception\EditTripWrongDateException;
 use SharengoCore\Exception\InvalidFormInputData;
 use SharengoCore\Exception\TripNotFoundException;
 use SharengoCore\Service\EventsService;
 use SharengoCore\Service\TripCostComputerService;
 use SharengoCore\Service\TripsService;
+use BusinessCore\Service\BusinessService;
+use BusinessCore\Service\BusinessTripService;
+
 // Externals
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\JsonModel;
@@ -53,9 +56,21 @@ class TripsController extends AbstractActionController
     private $closeTripDataFactory;
 
     /**
-     * @var Container
+     * @var datatableFiltersSessionContainer
      */
     private $datatableFiltersSessionContainer;
+
+    /**
+     *
+     * @var businessService 
+     */
+    private $businessService;
+
+    /**
+     *
+     * @var businessTripService 
+     */
+    private $businessTripService;
 
     public function __construct(
         TripsService $tripsService,
@@ -64,7 +79,9 @@ class TripsController extends AbstractActionController
         EventsService $eventsService,
         EventManager $eventManager,
         CloseTripDataFactory $closeTripDataFactory,
-        Container $datatableFiltersSessionContainer
+        Container $datatableFiltersSessionContainer,
+        BusinessService $businessService,
+        BusinessTripService $businessTripService
     ) {
         $this->tripsService = $tripsService;
         $this->tripCostForm = $tripCostForm;
@@ -73,6 +90,8 @@ class TripsController extends AbstractActionController
         $this->eventManager = $eventManager;
         $this->closeTripDataFactory = $closeTripDataFactory;
         $this->datatableFiltersSessionContainer = $datatableFiltersSessionContainer;
+        $this->businessService = $businessService;
+        $this->businessTripService = $businessTripService;
     }
 
     /**
@@ -156,9 +175,7 @@ class TripsController extends AbstractActionController
     public function detailsAction()
     {
         $id = (int)$this->params()->fromRoute('id', 0);
-
         $trip = $this->tripsService->getTripById($id);
-
         $tab = $this->params()->fromQuery('tab', 'info');
 
         return new ViewModel([
@@ -174,9 +191,18 @@ class TripsController extends AbstractActionController
         $id = (int)$this->params()->fromRoute('id', 0);
 
         $trip = $this->tripsService->getTripById($id);
+        $business = null;
+
+        if(!is_null($trip->getPinType())){
+            $businessTrip = $this->businessTripService->getBusinessTripByTripId($trip->getId());
+            if(!is_null($businessTrip)){
+                $business = $businessTrip->getBusiness();
+            }
+        }
 
         $view = new ViewModel([
-            'trip' => $trip
+            'trip' => $trip,
+            'business' => $business
         ]);
         $view->setTerminal(true);
 
