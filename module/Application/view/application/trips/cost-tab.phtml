@@ -36,11 +36,15 @@ if (!is_null($tripPayment)) {
         $tripPayment->getPayedSuccessfullyAt()->format('d-m-Y H:i:s') :
         $payed;
 } else {
-    if (!is_null($businessTripPayment) && !is_null($businessTripFare)) {
+    
+    if (!is_null($businessTripFare)) {
         $b2bMotionFare = round($businessTripFare->getBaseFareMotionCostPerMinute()  * ((100-$businessTripFare->getMotionDiscount())/100));
         $b2bParkingFare = round($businessTripFare->getBaseFareParkCostPerMinute() * ((100-$businessTripFare->getParkDiscount())/100));
         $tripFare = $b2bMotionFare . ' cent/min';
         $parkingFare = $b2bParkingFare . ' cent/min';
+    }
+
+    if (!is_null($businessTripPayment)) {
         $currency = $businessTripPayment->getCurrency();
         $amount = sprintf('%.2f %s',
             round($businessTripPayment->getAmount()/100, 2),
