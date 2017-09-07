@@ -5,9 +5,6 @@ namespace Application\Controller;
 use Application\Form\InputData\CloseTripDataFactory;
 use Application\Form\TripCostForm;
 use SharengoCore\Entity\Trips;
-//use SharengoCore\Exception\EditTripDeniedException;
-//use SharengoCore\Exception\EditTripNotDateTimeException;
-//use SharengoCore\Exception\EditTripWrongDateException;
 use SharengoCore\Exception\InvalidFormInputData;
 use SharengoCore\Exception\TripNotFoundException;
 use SharengoCore\Service\EventsService;
@@ -67,10 +64,12 @@ class TripsController extends AbstractActionController
     private $businessService;
 
     /**
+
+    /**
      *
-     * @var businessTripService 
+     * @var tripCostService 
      */
-    private $businessTripService;
+    private $tripCostService;
 
     public function __construct(
         TripsService $tripsService,
@@ -191,14 +190,7 @@ class TripsController extends AbstractActionController
         $id = (int)$this->params()->fromRoute('id', 0);
 
         $trip = $this->tripsService->getTripById($id);
-        $business = null;
-
-        if(!is_null($trip->getPinType())){
-            $businessTrip = $this->businessTripService->getBusinessTripByTripId($trip->getId());
-            if(!is_null($businessTrip)){
-                $business = $businessTrip->getBusiness();
-            }
-        }
+        $business = $this->tripsService->getBusinessByTrip($trip);
 
         $view = new ViewModel([
             'trip' => $trip,
@@ -212,11 +204,14 @@ class TripsController extends AbstractActionController
     public function costTabAction()
     {
         $id = (int)$this->params()->fromRoute('id', 0);
-
         $trip = $this->tripsService->getTripById($id);
+        $businessTripFare = $this->tripsService->getBusinessFareByTrip($trip);
+        $businessTripPayment = $this->tripsService->getBusinessTripPayment($trip);
 
         $view = new ViewModel([
-            'trip' => $trip
+            'trip' => $trip,
+            'businessTripPayment' => $businessTripPayment,
+            'businessTripFare' => $businessTripFare
         ]);
         $view->setTerminal(true);
 
