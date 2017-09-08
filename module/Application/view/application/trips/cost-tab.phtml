@@ -6,27 +6,55 @@ $tripPayment = $trip->getTripPayment();
 $tripFreeFares = $trip->getTripFreeFares();
 $tripBonuses = $trip->getTripBonuses();
 
+$businessTripFare = $this->businessTripFare;
+$businessTripPayment = $this->businessTripPayment;
+
 // Parse payment
 $tripFare = 'n.a.';
 $parkingFare = 'n.a.';
 $amount = 'n.a.';
+$payable = 'n.a.';
 $payed = 'NO';
+$customerDiscount = "n.a.";
 
 if ($trip->getIsaccounted()) {
     $amount = 0;
 }
 
-if ($tripPayment !== null) {
+if (!is_null($tripPayment)) {
+    //if(false) {
     $fare = $tripPayment->getFare();
     $tripFare = $fare->getMotionCostPerMinute() . ' cent/min';
     $parkingFare = $fare->getParkCostPerMinute() . ' cent/min';
 
     $amount = $tripPayment->getTotalCost();
-    $amount = floor($amount / 100) . ',' . ($amount % 100 < 10 ? '0' : '') . $amount % 100 . '€';
+    $amount = floor($amount / 100) . ',' . ($amount % 100 < 10 ? '0' : '') . $amount % 100 . ' €';
+    $customerDiscount = $customer->getDiscountRate() . '%';
+    $payable = $trip->getPayable() ? $this->translate("SI") : $this->translate("NO");
 
     $payed = $tripPayment->getPayedSuccessfullyAt() !== null ?
         $tripPayment->getPayedSuccessfullyAt()->format('d-m-Y H:i:s') :
         $payed;
+} else {
+    
+    if (!is_null($businessTripFare)) {
+        $b2bMotionFare = round($businessTripFare->getBaseFareMotionCostPerMinute()  * ((100-$businessTripFare->getMotionDiscount())/100));
+        $b2bParkingFare = round($businessTripFare->getBaseFareParkCostPerMinute() * ((100-$businessTripFare->getParkDiscount())/100));
+        $tripFare = $b2bMotionFare . ' cent/min';
+        $parkingFare = $b2bParkingFare . ' cent/min';
+    }
+
+    if (!is_null($businessTripPayment)) {
+        $currency = $businessTripPayment->getCurrency();
+        $amount = sprintf('%.2f %s',
+            round($businessTripPayment->getAmount()/100, 2),
+            $currency);
+        $payable = "SI";
+
+        $payed = $businessTripPayment->getPayedOnTs() !== null ?
+            $businessTripPayment->getPayedOnTs()->format('d-m-Y H:i:s') :
+            $payed;
+    }
 }
 
 ?>
@@ -76,7 +104,7 @@ if ($tripPayment !== null) {
                     <div class="col-lg-4">
                         <div class="form-group">
                             <label><?= $this->translate("Sconto cliente"); ?></label>
-                            <div class="sng-info-box"><?= $customer->getDiscountRate() . '%' ?></div>
+                            <div class="sng-info-box"><?= $customerDiscount ?></div>
                         </div>
                     </div>
                 </div>
@@ -198,7 +226,7 @@ if ($tripPayment !== null) {
                     <div class="col-lg-6">
                         <div class="form-group">
                             <label><?= $this->translate("Pagabile"); ?></label>
-                            <div class="sng-info-box"><?= $trip->getPayable() ? $this->translate("SI") : $this->translate("NO") ?></div>
+                            <div class="sng-info-box"><?= $payable ?></div>
                         </div>
                     </div>
                 </div>
