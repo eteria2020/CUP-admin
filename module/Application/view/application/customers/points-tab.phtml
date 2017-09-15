@@ -8,6 +8,11 @@
         <div class="btn-group btn-group-sm btn-group-solid margin-bottom-10 btn-group-spaced">
             <a href="<?= $this->url('customers/add-points', ['id' => $this->customer->getId()]); ?>" class="btn green"><i class="fa fa-plus"></i> <?= $this->translate("Aggiungi punti"); ?></a>
         </div>
+        <br/>
+        <div>
+            <h4>Punti totali: <?php echo $this->customer->getResidualPoints() ?></h4>
+        </div>
+        <br/>
 
         <?= $this->partial('partials/flash-messages.phtml', []); ?>
 
