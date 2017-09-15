@@ -4,8 +4,10 @@ namespace Application\Controller;
 // Internals
 use SharengoCore\Entity\Customers;
 use SharengoCore\Entity\CustomersBonus;
+use SharengoCore\Entity\CustomersPoints;
 use SharengoCore\Entity\PromoCodes;
 use SharengoCore\Service\BonusService;
+use SharengoCore\Service\PointService;
 use SharengoCore\Service\CardsService;
 use SharengoCore\Service\CustomersBonusPackagesService;
 use SharengoCore\Service\CustomersService;
@@ -60,6 +62,11 @@ class CustomersController extends AbstractActionController
      * @var
      */
     private $customerBonusForm;
+    
+    /**
+     * @var
+     */
+    private $customerPointForm;
 
     /**
      * @var
@@ -88,6 +95,11 @@ class CustomersController extends AbstractActionController
      * @var BonusService
      */
     private $bonusService;
+    
+    /**
+     * @var PointService
+     */
+    private $pointService;
 
     /**
      * @var Container
@@ -99,11 +111,13 @@ class CustomersController extends AbstractActionController
      * @param CardsService $cardsService
      * @param PromoCodesService $promoCodeService
      * @param BonusService $bonusService
+     * @param PointService $pointService
      * @param Form $customerForm
      * @param Form $driverForm
      * @param Form $settingForm
      * @param Form $promoCodeForm
      * @param Form $customerBonusForm
+     * @param Form $customerPointForm
      * @param Form $cardForm
      * @param HydratorInterface $hydrator
      * @param CartasiContractsService $cartasiContractsService
@@ -115,11 +129,13 @@ class CustomersController extends AbstractActionController
         CardsService $cardsService,
         PromoCodesService $promoCodeService,
         BonusService $bonusService,
+        PointService $pointService,
         Form $customerForm,
         Form $driverForm,
         Form $settingForm,
         Form $promoCodeForm,
         Form $customerBonusForm,
+        Form $customerPointForm,
         Form $cardForm,
         HydratorInterface $hydrator,
         CartasiContractsService $cartasiContractsService,
@@ -134,11 +150,13 @@ class CustomersController extends AbstractActionController
         $this->settingForm = $settingForm;
         $this->promoCodeForm = $promoCodeForm;
         $this->customerBonusForm = $customerBonusForm;
+        $this->customerPointForm = $customerPointForm;
         $this->cardForm = $cardForm;
         $this->hydrator = $hydrator;
         $this->cartasiContractsService = $cartasiContractsService;
         $this->disableContractService = $disableContractService;
         $this->bonusService = $bonusService;
+        $this->pointService = $pointService;
         $this->datatableFiltersSessionContainer = $datatableFiltersSessionContainer;
     }
 
@@ -291,6 +309,20 @@ class CustomersController extends AbstractActionController
         $view = new ViewModel([
             'customer' => $customer,
             'listBonus' => $this->customersService->getAllBonus($customer),
+        ]);
+        $view->setTerminal(true);
+
+        return $view;
+    }
+    
+    public function pointsTabAction()
+    {
+        /** @var Customers $customer */
+        $customer = $this->getCustomer();
+
+        $view = new ViewModel([
+            'customer' => $customer,
+            'listPoints' => $this->customersService->getAllPoints($customer),
         ]);
         $view->setTerminal(true);
 
@@ -488,6 +520,42 @@ class CustomersController extends AbstractActionController
             'promoCodeForm' => $form
         ]);
     }
+    
+    public function addPointsAction()
+    {
+        $translator = $this->TranslatorPlugin();
+        /** @var Customers $customer */
+        $customer = $this->getCustomer();
+        $form = $this->customerPointForm;
+
+        if ($this->getRequest()->isPost()) {
+            $postData = $this->getRequest()->getPost()->toArray();
+            $form->setData($postData);
+
+            if ($form->isValid()) {
+                try {
+                    $this->customersService->addPointFromWebUser($customer, $form->getData());
+
+                    $this->flashMessenger()->addSuccessMessage($translator->translate('Operazione completata con successo!'));
+                } catch (\Exception $e) {
+                    $this->flashMessenger()->addErrorMessage($translator->translate('Si è verificato un errore applicativo. L\'assistenza tecnica è già al corrente, ci scusiamo per l\'inconveniente'));
+
+                    return $this->redirect()->toRoute('customers/add-points', ['id' => $customer->getId()]);
+                }
+
+                return $this->redirect()->toRoute(
+                    'customers/edit',
+                    ['id' => $customer->getId()],
+                    ['query' => ['tab' => 'points']]
+                );
+            }
+        }
+
+        return new ViewModel([
+            'customer' => $customer,
+            'promoCodeForm' => $form
+        ]);
+    }
 
     public function removeBonusAction()
     {
@@ -499,6 +567,28 @@ class CustomersController extends AbstractActionController
                 $bonus = $this->customersService->findBonus($postData['bonus']);
 
                 if ($this->customersService->removeBonus($bonus)) {
+                    $status = 'success';
+                }
+            } catch (\Exception $e) {
+                $this->getResponse()->setStatusCode(Response::STATUS_CODE_500);
+            }
+        }
+
+        return new JsonModel([
+            'status' => $status
+        ]);
+    }
+    
+    public function removePointAction()
+    {
+        $status = 'error';
+
+        if ($this->getRequest()->isPost()) {
+            try {
+                $postData = $this->getRequest()->getPost()->toArray();
+                $point = $this->customersService->findPoint($postData['point']);
+
+                if ($this->customersService->removePoint($point)) {
                     $status = 'success';
                 }
             } catch (\Exception $e) {
