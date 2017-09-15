@@ -195,6 +195,18 @@ return [
                             ],
                         ],
                     ],
+                    'ajax-tab-points' => [
+                        'type'    => 'Segment',
+                        'options' => [
+                            'route'    => '/ajax-tab/points/:id',
+                            'constraints' => [
+                                'id' => '[0-9]*'
+                            ],
+                            'defaults' => [
+                                'action'        => 'points-tab',
+                            ],
+                        ],
+                    ],
                     'ajax-tab-card' => [
                         'type'    => 'Segment',
                         'options' => [
@@ -328,6 +340,18 @@ return [
                             ],
                         ],
                     ],
+                    'add-points' => [
+                        'type'    => 'Segment',
+                        'options' => [
+                            'route'    => '/add-points/:id',
+                            'constraints' => [
+                                'id' => '[0-9]*'
+                            ],
+                            'defaults' => [
+                                'action'        => 'add-points',
+                            ],
+                        ],
+                    ],
                     'remove-bonus' => [
                         'type'    => 'Segment',
                         'options' => [
@@ -337,6 +361,18 @@ return [
                             ],
                             'defaults' => [
                                 'action'        => 'remove-bonus',
+                            ],
+                        ],
+                    ],
+                    'remove-point' => [
+                        'type'    => 'Segment',
+                        'options' => [
+                            'route'    => '/remove-point/:id',
+                            'constraints' => [
+                                'id' => '[0-9]*'
+                            ],
+                            'defaults' => [
+                                'action'        => 'remove-point',
                             ],
                         ],
                     ],
@@ -1423,6 +1459,7 @@ return [
             'SettingForm' => 'Application\Form\SettingFormFactory',
             'PromoCodeForm' => 'Application\Form\PromoCodeFormFactory',
             'CustomerBonusForm' => 'Application\Form\CustomerBonusFormFactory',
+            'CustomerPointForm' => 'Application\Form\CustomerPointFormFactory',
             'TripCostForm' => 'Application\Form\TripCostFormFactory',
             'FaresForm' => 'Application\Form\FaresFormFactory',
             'EditTripForm' => 'Application\Form\EditTripFormFactory',
