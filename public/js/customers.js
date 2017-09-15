@@ -197,34 +197,5 @@ $(function() {
                 }
             });
         }
-    });//fine click #js-remove-bonus
-    
-    $(document).on("click", "#js-remove-point", function() {
-        var removePonit = confirm(translate("removepointConfirm"));
-        var customer = $(this).data("id");
-        var point = $(this).data("point");
-
-        if (removePonit) {
-            $.ajax({
-                url: "/customers/remove-point/" + customer,
-                type: "POST",
-                data: {
-                    point: point
-                },
-                cache: false,
-                statusCode: {
-                    200: function (response) {
-                        $("#js-row-point-" + point).hide();
-                        $("#js-message").show();
-                        setTimeout(function(){
-                            $("#js-message").hide();
-                        }, 3000);
-                    },
-                    500: function (response) {
-                        alert(translate("ajaxError"));
-                    }
-                }
-            });
-        }
-    });//fine click #js-remove-point
+    });
 });
