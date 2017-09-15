@@ -27,13 +27,11 @@ class CustomersControllerFactory implements FactoryInterface
         $cardsService = $sharedLocator->get('SharengoCore\Service\CardsService');
         $promoCodeService = $sharedLocator->get('SharengoCore\Service\PromoCodesService');
         $bonusService = $sharedLocator->get('SharengoCore\Service\BonusService');
-        $pointService = $sharedLocator->get('SharengoCore\Service\PointService');
         $customerForm = $sharedLocator->get('CustomerForm');
         $driverForm = $sharedLocator->get('DriverForm');
         $settingForm = $sharedLocator->get('SettingForm');
         $promoCodeForm = $sharedLocator->get('PromoCodeForm');
         $customerBonusForm = $sharedLocator->get('CustomerBonusForm');
-        $customerPointForm = $sharedLocator->get('CustomerPointForm');
         $cardForm = $sharedLocator->get('CardForm');
         $datatablesSessionNamespace = $sharedLocator->get('Configuration')['session']['datatablesNamespace'];
 
@@ -51,13 +49,11 @@ class CustomersControllerFactory implements FactoryInterface
             $cardsService,
             $promoCodeService,
             $bonusService,
-            $pointService,
             $customerForm,
             $driverForm,
             $settingForm,
             $promoCodeForm,
             $customerBonusForm,
-            $customerPointForm,
             $cardForm,
             $hydrator,
             $cartasiContractsService,
