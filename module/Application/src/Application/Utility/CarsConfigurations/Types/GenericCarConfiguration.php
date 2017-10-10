@@ -71,6 +71,6 @@ class GenericCarConfiguration implements CarsConfigurationsSingleValueTypesInter
 
     public function updateValue(array $data)
     {
-        $this->setValue($data['GenericCarConfiguration']);
+        $this->setValue($data['value']);
     }
 }
