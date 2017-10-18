@@ -8,6 +8,7 @@ $tripBonuses = $trip->getTripBonuses();
 
 $businessTripFare = $this->businessTripFare;
 $businessTripPayment = $this->businessTripPayment;
+$businessInvoice = $this->businessInvoice;
 
 // Parse payment
 $tripFare = 'n.a.';
@@ -15,29 +16,48 @@ $parkingFare = 'n.a.';
 $amount = 'n.a.';
 $payable = 'n.a.';
 $payed = 'NO';
-$customerDiscount = "n.a.";
+$invoiced = 'NO';
+$motionDiscount = "n.a.";
+$parkingDiscount = "n.a.";
 
-if ($trip->getIsaccounted()) {
-    $amount = 0;
-}
+$pinType = $trip->getPinType();
 
-if (!is_null($tripPayment)) {
-    //if(false) {
-    $fare = $tripPayment->getFare();
-    $tripFare = $fare->getMotionCostPerMinute() . ' cent/min';
-    $parkingFare = $fare->getParkCostPerMinute() . ' cent/min';
+if(is_null($pinType)) {
+    // trip private (no business)
+    if ($trip->getIsaccounted()) {
+        $amount = 0;
+    }
 
-    $amount = $tripPayment->getTotalCost();
-    $amount = floor($amount / 100) . ',' . ($amount % 100 < 10 ? '0' : '') . $amount % 100 . ' €';
-    $customerDiscount = $customer->getDiscountRate() . '%';
-    $payable = $trip->getPayable() ? $this->translate("SI") : $this->translate("NO");
+    if (!is_null($tripPayment)) {
+        //if(false) {
+        $fare = $tripPayment->getFare();
+        $tripFare = $fare->getMotionCostPerMinute() . ' cent/min';
+        $parkingFare = $fare->getParkCostPerMinute() . ' cent/min';
 
-    $payed = $tripPayment->getPayedSuccessfullyAt() !== null ?
-        $tripPayment->getPayedSuccessfullyAt()->format('d-m-Y H:i:s') :
-        $payed;
+        $amount = $tripPayment->getTotalCost();
+        $amount = floor($amount / 100) . ',' . ($amount % 100 < 10 ? '0' : '') . $amount % 100 . ' €';
+        $motionDiscount = $customer->getDiscountRate() . ' %';
+        $parkingDiscount = '-';
+        $payable = $trip->getPayable() ? $this->translate("SI") : $this->translate("NO");
+
+        $payed = $tripPayment->getPayedSuccessfullyAt() !== null ?
+            $tripPayment->getPayedSuccessfullyAt()->format('d-m-Y H:i:s') :
+            $payed;
+
+        $invoiced = $tripPayment->getInvoice() !== null ?
+            $tripPayment->getInvoicedAt()->format('d-m-Y H:i:s') .
+                ' <a href=' .
+                $this->url('pdf/invoices') . '/' .
+                $tripPayment->getInvoice()->getId() .
+                '><i class="fa fa-download"></i></a>' :
+            $invoiced;
+    }
 } else {
-    
+    // trip business
     if (!is_null($businessTripFare)) {
+        $motionDiscount = $businessTripFare->getMotionDiscount() . ' %';
+        $parkingDiscount = $businessTripFare->getParkDiscount() . ' %';
+
         $b2bMotionFare = round($businessTripFare->getBaseFareMotionCostPerMinute()  * ((100-$businessTripFare->getMotionDiscount())/100));
         $b2bParkingFare = round($businessTripFare->getBaseFareParkCostPerMinute() * ((100-$businessTripFare->getParkDiscount())/100));
         $tripFare = $b2bMotionFare . ' cent/min';
@@ -45,17 +65,22 @@ if (!is_null($tripPayment)) {
     }
 
     if (!is_null($businessTripPayment)) {
+        $payable = $this->translate("SI");
         $currency = $businessTripPayment->getCurrency();
         $amount = sprintf('%.2f %s',
             round($businessTripPayment->getAmount()/100, 2),
             $currency);
-        $payable = "SI";
 
-        $payed = $businessTripPayment->getPayedOnTs() !== null ?
-            $businessTripPayment->getPayedOnTs()->format('d-m-Y H:i:s') :
-            $payed;
+        if(!is_null($businessTripPayment->getPayedOnTs())) {
+            $payed = $businessTripPayment->getPayedOnTs()->format('d-m-Y H:i:s');
+        }
+
+        if(!is_null($businessInvoice)){
+            $invoiced = $businessInvoice->getGeneratedTs()->format('d-m-Y H:i:s');
+        }
     }
 }
+
 
 ?>
 
@@ -68,43 +93,64 @@ if (!is_null($tripPayment)) {
             <div class="panel-body">
 
                 <div class="row">
-                    <div class="col-lg-4">
+                    <div class="col-lg-2">
                         <div class="form-group">
                             <label><?= $this->translate("Inizio"); ?></label>
                             <div class="sng-info-box"><?= $trip->getTimestampBeginning()->format('d-m-Y H:i:s') ?></div>
                         </div>
                     </div>
-                    <div class="col-lg-4">
+                    <div class="col-lg-2">
                         <div class="form-group">
                             <label>Fine</label>
                             <div class="sng-info-box"><?= (null != $trip->getTimestampEnd() ? $trip->getTimestampEnd()->format('d-m-Y H:i:s') : $this->translate('n.d.')) ?></div>
                         </div>
                     </div>
-                    <div class="col-lg-4">
+                    <div class="col-lg-2">
                         <div class="form-group">
-                            <label><?= $this->translate("Durata"); ?></label>
+                            <label><?= $this->translate("Durata totale"); ?></label>
                             <div class="sng-info-box"><?= $trip->getDurationMinutes() ?> <?= $this->translate("minuti"); ?></div>
                         </div>
                     </div>
-                </div>
-
-                <div class="row">
-                    <div class="col-lg-4">
+                    <div class="col-lg-2">
+                        <div class="form-group">
+                            <label><?= $this->translate("Durata effettiva"); ?></label>
+                            <div class="sng-info-box"><?= $trip->getDurationMinutes() - round($trip->getParkSeconds()/60) ?> <?= $this->translate("minuti"); ?></div>
+                        </div>
+                    </div>
+                    <div class="col-lg-2">
                         <div class="form-group">
                             <label><?= $this->translate("Tariffa corsa"); ?></label>
                             <div class="sng-info-box"><?= $tripFare ?></div>
                         </div>
                     </div>
-                    <div class="col-lg-4">
+                    <div class="col-lg-2">
+                        <div class="form-group">
+                            <label><?= $this->translate("Sconto corsa"); ?></label>
+                            <div class="sng-info-box"><?= $motionDiscount; ?></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-lg-2"></div>
+                    <div class="col-lg-2"></div>
+                    <div class="col-lg-2"></div>
+                    <div class="col-lg-2">
+                        <div class="form-group">
+                            <label><?= $this->translate("Durata sosta"); ?></label>
+                            <div class="sng-info-box"><?= round($trip->getParkSeconds()/60)?> <?= $this->translate("minuti"); ?></div>
+                        </div>
+                    </div>
+                    <div class="col-lg-2">
                         <div class="form-group">
                             <label><?= $this->translate("Tariffa sosta"); ?></label>
                             <div class="sng-info-box"><?= $parkingFare ?></div>
                         </div>
                     </div>
-                    <div class="col-lg-4">
+                    <div class="col-lg-2">
                         <div class="form-group">
-                            <label><?= $this->translate("Sconto cliente"); ?></label>
-                            <div class="sng-info-box"><?= $customerDiscount ?></div>
+                            <label><?= $this->translate("Sconto sosta"); ?></label>
+                            <div class="sng-info-box"><?= $parkingDiscount ?></div>
                         </div>
                     </div>
                 </div>
@@ -213,32 +259,32 @@ if (!is_null($tripPayment)) {
 
             <div class="panel-heading"><?= $this->translate("Dati pagamento"); ?></div>
             <div class="panel-body">
-
                 <div class="row">
-                    <div class="col-lg-6">
-                        <div class="form-group">
-                            <label><?= $this->translate("Importo"); ?></label>
-                            <div class="sng-info-box"><?= $amount ?></div>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-lg-6">
+                    <div class="col-lg-12">
                         <div class="form-group">
                             <label><?= $this->translate("Pagabile"); ?></label>
                             <div class="sng-info-box"><?= $payable ?></div>
                         </div>
                     </div>
-                </div>
-                <div class="row">
                     <div class="col-lg-12">
                         <div class="form-group">
                             <label><?= $this->translate("Pagata"); ?></label>
                             <div class="sng-info-box"><?= $payed ?></div>
                         </div>
                     </div>
+                    <div class="col-lg-12">
+                        <div class="form-group">
+                            <label><?= $this->translate("Importo"); ?></label>
+                            <div class="sng-info-box"><?= $amount ?></div>
+                        </div>
+                    </div>
+                    <div class="col-lg-12">
+                        <div class="form-group">
+                            <label><?= $this->translate("Fatturata"); ?></label>
+                            <div class="sng-info-box"><?= $invoiced ?></div>
+                        </div>
+                    </div>
                 </div>
-
             </div>
 
         </div>

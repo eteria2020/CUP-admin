@@ -207,11 +207,13 @@ class TripsController extends AbstractActionController
         $trip = $this->tripsService->getTripById($id);
         $businessTripFare = $this->tripsService->getBusinessFareByTrip($trip);
         $businessTripPayment = $this->tripsService->getBusinessTripPayment($trip);
+        $businessInvoice = $this->tripsService->getBusinessInvoiceByTrip($trip);
 
         $view = new ViewModel([
             'trip' => $trip,
             'businessTripPayment' => $businessTripPayment,
-            'businessTripFare' => $businessTripFare
+            'businessTripFare' => $businessTripFare,
+            'businessInvoice' => $businessInvoice
         ]);
         $view->setTerminal(true);
 
