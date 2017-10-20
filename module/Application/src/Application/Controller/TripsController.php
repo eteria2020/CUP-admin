@@ -59,7 +59,7 @@ class TripsController extends AbstractActionController
 
     /**
      *
-     * @var businessService 
+     * @var businessService
      */
     private $businessService;
 
@@ -67,7 +67,7 @@ class TripsController extends AbstractActionController
 
     /**
      *
-     * @var tripCostService 
+     * @var tripCostService
      */
     private $tripCostService;
 
@@ -205,8 +205,9 @@ class TripsController extends AbstractActionController
     {
         $id = (int)$this->params()->fromRoute('id', 0);
         $trip = $this->tripsService->getTripById($id);
-        $businessTripFare = $this->tripsService->getBusinessFareByTrip($trip);
+
         $businessTripPayment = $this->tripsService->getBusinessTripPayment($trip);
+        $businessTripFare = $this->tripsService->getBusinessFareByTrip($trip);
         $businessInvoice = $this->tripsService->getBusinessInvoiceByTrip($trip);
 
         $view = new ViewModel([
