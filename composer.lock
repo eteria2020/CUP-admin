@@ -297,7 +297,7 @@
             "source": {
                 "type": "git",
                 "url": "ssh://git@gitlab.bulweria.com/sharengo-web/admin-business-module.git",
-                "reference": "b7a5ac5472f5d12a007bc090658b4887b84879f2"
+                "reference": "61f60751b5b8a449b3db7575009221c6bd60e583"
             },
             "require": {
                 "php": ">=5.4",
@@ -314,7 +314,7 @@
                 }
             },
             "description": "Business area in Admin",
-            "time": "2017-09-04T07:49:35+00:00"
+            "time": "2017-11-02T13:24:51+00:00"
         },
         {
             "name": "cup-web/core-business",
@@ -322,7 +322,7 @@
             "source": {
                 "type": "git",
                 "url": "ssh://git@gitlab.bulweria.com/sharengo-web/core-business.git",
-                "reference": "616ec0dec4ba9b09652c7608b600acaa13e02348"
+                "reference": "07562736ca670701e807512fc5525b39fea86de8"
             },
             "require": {
                 "doctrine/doctrine-orm-module": "0.9.*",
@@ -343,7 +343,7 @@
                 }
             },
             "description": "Business Core module",
-            "time": "2017-04-14T12:36:02+00:00"
+            "time": "2017-11-02T13:24:43+00:00"
         },
         {
             "name": "doctrine/annotations",
@@ -2106,7 +2106,7 @@
             "source": {
                 "type": "git",
                 "url": "ssh://git@gitlab.bulweria.com/sharengo-web/core.git",
-                "reference": "faa773b31923d898b640ae58b3b2575e2adcc253"
+                "reference": "adb3fc737cdd155c592b4cfd0ab425dda186626f"
             },
             "require": {
                 "doctrine/doctrine-orm-module": "0.*",
@@ -2127,7 +2127,7 @@
                 }
             },
             "description": "Core ZF2 module for Sharengo apps",
-            "time": "2017-10-25T09:22:24+00:00"
+            "time": "2017-10-31T09:25:56+00:00"
         },
         {
             "name": "mvlabs/zf2-multilanguage",
