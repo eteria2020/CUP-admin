@@ -261,6 +261,26 @@ class TripsController extends AbstractActionController
 
         return $view;
     }
+    
+    public function mapTabAction()
+    {
+        $id = $this->params()->fromRoute('id', 0);
+
+        $trip = $this->tripsService->getTripById($id);
+
+        if (!$trip instanceof Trips) {
+            throw new TripNotFoundException();
+        }
+
+        $events = $this->eventsService->getEventsByTrip($trip);
+
+        $view = new ViewModel();
+        $view->setTemplate('partials/map-trip.phtml');
+        $view->setVariables(['events' => $events]);
+        $view->setTerminal(true);
+
+        return $view;
+    }
 
     public function doCloseAction()
     {

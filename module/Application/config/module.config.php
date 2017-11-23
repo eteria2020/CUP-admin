@@ -738,6 +738,20 @@ return [
                             ]
                         ]
                     ],
+                    'map-tab' => [
+                        'type' => 'Segment',
+                        'options' => [
+                            'route' => '/tab/map/:id',
+                            'constraints' => [
+                                'id'    => '[0-9]*'
+                            ],
+                            'defaults' => [
+                                '__NAMESPACE__' => 'Application\Controller',
+                                'controller' => 'Trips',
+                                'action' => 'map-tab'
+                            ]
+                        ]
+                    ],
                     'do-close' => [
                         'type' => 'Literal',
                         'options' => [
