@@ -1,6 +1,4 @@
 
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBu-916DdpKAjTmJNIgngS6HL_kDIKU0aU&callback=myMap"></script>
-
 <!-- Events table -->
 <div class="row">
     <div class="col-md-12">
@@ -15,9 +13,31 @@
             <!-- Body -->
             <div class="portlet-body">
                 
+                <script>
+                    init(<?php $event ?>);
+                </script>
+                
+                <div id="conteiner">
+                    <div align="center" id="map"></div>  
+                </div>                
+
+
             </div>
             <!-- body -->
         </div>
     </div>
 </div>
 <!-- events table -->
+
+<style type="text/css">
+    #map {
+        width:100% !important; 
+        height:100%;
+    }
+    
+    #conteiner {
+        width:auto; 
+        height:80vh;
+        min-height: 100px
+    }
+</style>
