@@ -21,19 +21,19 @@
             "type": "git"
         },
         {
-            "url": "ssh://git@gitlab.bulweria.com/sharengo-web/admin-business-module.git",
+            "url": "ssh://git@git.sharengo.it/cup-it/admin-business-module.git",
             "type": "git"
         },
         {
-            "url": "ssh://git@gitlab.bulweria.com/sharengo-web/core-business.git",
+            "url": "ssh://git@git.sharengo.it/cup-it/core-business.git",
             "type": "git"
         },
         {
-            "url": "https://git.mvlabs.it/internals/payments.git",
+            "url": "ssh://git@git.sharengo.it/cup-it/payments.git",
             "type": "git"
         },
         {
-            "url": "https://git.mvlabs.it/internals/omnipay-cartasi.git",
+            "url": "ssh://git@git.sharengo.it/cup-it/omnipay-cartasi.git",
             "type": "git"
         }
     ],
