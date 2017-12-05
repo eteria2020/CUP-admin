@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "aa33b3ddc8079f38c8baaf209e143f45",
+    "content-hash": "a19ec996a2be4c97192bfba7214d4433",
     "packages": [
         {
             "name": "bjyoungblood/bjy-authorize",
@@ -296,7 +296,7 @@
             "version": "dev-master",
             "source": {
                 "type": "git",
-                "url": "ssh://git@gitlab.bulweria.com/sharengo-web/admin-business-module.git",
+                "url": "ssh://git@git.sharengo.it/cup-it/admin-business-module.git",
                 "reference": "508b0e209e9680b6b060667cd2987e2f49ea9ce8"
             },
             "require": {
@@ -321,7 +321,7 @@
             "version": "dev-master",
             "source": {
                 "type": "git",
-                "url": "ssh://git@gitlab.bulweria.com/sharengo-web/core-business.git",
+                "url": "ssh://git@git.sharengo.it/cup-it/core-business.git",
                 "reference": "8adf957d348858afdd3a31ee4bf5993e38b65fed"
             },
             "require": {
@@ -1964,7 +1964,7 @@
             "version": "dev-master",
             "source": {
                 "type": "git",
-                "url": "https://git.mvlabs.it/internals/payments.git",
+                "url": "ssh://git@git.sharengo.it/cup-it/payments.git",
                 "reference": "7ff26873007c9331c3f3e4423f88fe280f775abb"
             },
             "require": {
@@ -2051,8 +2051,8 @@
             "version": "dev-master",
             "source": {
                 "type": "git",
-                "url": "https://git.mvlabs.it/internals/omnipay-cartasi.git",
-                "reference": "10873be4c3ed27ce55caa7c9fd8acf65cefa17ac"
+                "url": "ssh://git@git.sharengo.it/cup-it/omnipay-cartasi.git",
+                "reference": "8f2ff0712b5187241f5b51d95fa6ef7b43bf7f27"
             },
             "require": {
                 "omnipay/common": "~2.0"
@@ -2098,7 +2098,7 @@
                 "cartasi",
                 "omnipay"
             ],
-            "time": "2016-07-22T09:03:51+00:00"
+            "time": "2017-12-01T16:25:57+00:00"
         },
         {
             "name": "mvlabs/sharengo-coremodule",
