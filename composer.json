@@ -9,15 +9,15 @@
     "homepage": "http://framework.zend.com/",
     "repositories": [
         {
-            "url": "ssh://git@gitlab.bulweria.com/sharengo-web/core.git",
+            "url": "ssh://git@git.sharengo.it/cup-it/core.git",
             "type": "git"
         },
         {
-            "url": "ssh://git@gitlab.bulweria.com/sharengo-web/cartasi.git",
+            "url": "ssh://git@git.sharengo.it/cup-it/cartasi.git",
             "type": "git"
         },
         {
-            "url": "https://git.mvlabs.it/internals/zf2-multilanguage.git",
+            "url": "ssh://git@git.sharengo.it/cup-it/zf2-multilanguage.git",
             "type": "git"
         },
         {

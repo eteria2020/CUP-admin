@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "a19ec996a2be4c97192bfba7214d4433",
+    "content-hash": "791366a15c51607246c0b3af99127b9e",
     "packages": [
         {
             "name": "bjyoungblood/bjy-authorize",
@@ -322,7 +322,7 @@
             "source": {
                 "type": "git",
                 "url": "ssh://git@git.sharengo.it/cup-it/core-business.git",
-                "reference": "8adf957d348858afdd3a31ee4bf5993e38b65fed"
+                "reference": "8612fa0bd7ebeda9ee3ba572f60db123dde368c6"
             },
             "require": {
                 "doctrine/doctrine-orm-module": "0.9.*",
@@ -343,7 +343,7 @@
                 }
             },
             "description": "Business Core module",
-            "time": "2017-11-06T16:56:39+00:00"
+            "time": "2017-11-16T10:58:03+00:00"
         },
         {
             "name": "doctrine/annotations",
@@ -2105,7 +2105,7 @@
             "version": "dev-master",
             "source": {
                 "type": "git",
-                "url": "ssh://git@gitlab.bulweria.com/sharengo-web/core.git",
+                "url": "ssh://git@git.sharengo.it/cup-it/core.git",
                 "reference": "3f3c032f9c2811c17d17f33e1258f07f1947fb4e"
             },
             "require": {
@@ -2134,7 +2134,7 @@
             "version": "dev-master",
             "source": {
                 "type": "git",
-                "url": "https://git.mvlabs.it/internals/zf2-multilanguage.git",
+                "url": "ssh://git@git.sharengo.it/cup-it/zf2-multilanguage.git",
                 "reference": "54efb90fbfad687696766f0a12a676e0a72b6657"
             },
             "require": {
@@ -2431,8 +2431,8 @@
             "version": "dev-master",
             "source": {
                 "type": "git",
-                "url": "ssh://git@gitlab.bulweria.com/sharengo-web/cartasi.git",
-                "reference": "b6e596812edd375ac645592c918af1bf010e1b44"
+                "url": "ssh://git@git.sharengo.it/cup-it/cartasi.git",
+                "reference": "3cf1666d9f151850783d3317349f8edefb2cbb5a"
             },
             "require": {
                 "doctrine/doctrine-orm-module": "0.*",
@@ -2446,7 +2446,7 @@
                 }
             },
             "description": "Cartasi module for Sharengo",
-            "time": "2016-05-06T13:16:50+00:00"
+            "time": "2017-11-21T10:29:26+00:00"
         },
         {
             "name": "symfony/console",
