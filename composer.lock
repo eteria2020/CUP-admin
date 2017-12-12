@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "aa33b3ddc8079f38c8baaf209e143f45",
+    "content-hash": "791366a15c51607246c0b3af99127b9e",
     "packages": [
         {
             "name": "bjyoungblood/bjy-authorize",
@@ -296,8 +296,8 @@
             "version": "dev-master",
             "source": {
                 "type": "git",
-                "url": "ssh://git@gitlab.bulweria.com/sharengo-web/admin-business-module.git",
-                "reference": "508b0e209e9680b6b060667cd2987e2f49ea9ce8"
+                "url": "ssh://git@git.sharengo.it/cup-it/admin-business-module.git",
+                "reference": "24beca107691ac10c21555bb6822933fb4bfe57b"
             },
             "require": {
                 "php": ">=5.4",
@@ -314,15 +314,15 @@
                 }
             },
             "description": "Business area in Admin",
-            "time": "2017-11-06T17:21:16+00:00"
+            "time": "2017-12-07T08:49:34+00:00"
         },
         {
             "name": "cup-web/core-business",
             "version": "dev-master",
             "source": {
                 "type": "git",
-                "url": "ssh://git@gitlab.bulweria.com/sharengo-web/core-business.git",
-                "reference": "8adf957d348858afdd3a31ee4bf5993e38b65fed"
+                "url": "ssh://git@git.sharengo.it/cup-it/core-business.git",
+                "reference": "8612fa0bd7ebeda9ee3ba572f60db123dde368c6"
             },
             "require": {
                 "doctrine/doctrine-orm-module": "0.9.*",
@@ -343,7 +343,7 @@
                 }
             },
             "description": "Business Core module",
-            "time": "2017-11-06T16:56:39+00:00"
+            "time": "2017-11-16T10:58:03+00:00"
         },
         {
             "name": "doctrine/annotations",
@@ -1964,7 +1964,7 @@
             "version": "dev-master",
             "source": {
                 "type": "git",
-                "url": "https://git.mvlabs.it/internals/payments.git",
+                "url": "ssh://git@git.sharengo.it/cup-it/payments.git",
                 "reference": "7ff26873007c9331c3f3e4423f88fe280f775abb"
             },
             "require": {
@@ -2051,8 +2051,8 @@
             "version": "dev-master",
             "source": {
                 "type": "git",
-                "url": "https://git.mvlabs.it/internals/omnipay-cartasi.git",
-                "reference": "10873be4c3ed27ce55caa7c9fd8acf65cefa17ac"
+                "url": "ssh://git@git.sharengo.it/cup-it/omnipay-cartasi.git",
+                "reference": "8f2ff0712b5187241f5b51d95fa6ef7b43bf7f27"
             },
             "require": {
                 "omnipay/common": "~2.0"
@@ -2098,14 +2098,14 @@
                 "cartasi",
                 "omnipay"
             ],
-            "time": "2016-07-22T09:03:51+00:00"
+            "time": "2017-12-01T16:25:57+00:00"
         },
         {
             "name": "mvlabs/sharengo-coremodule",
             "version": "dev-master",
             "source": {
                 "type": "git",
-                "url": "ssh://git@gitlab.bulweria.com/sharengo-web/core.git",
+                "url": "ssh://git@git.sharengo.it/cup-it/core.git",
                 "reference": "3f3c032f9c2811c17d17f33e1258f07f1947fb4e"
             },
             "require": {
@@ -2134,7 +2134,7 @@
             "version": "dev-master",
             "source": {
                 "type": "git",
-                "url": "https://git.mvlabs.it/internals/zf2-multilanguage.git",
+                "url": "ssh://git@git.sharengo.it/cup-it/zf2-multilanguage.git",
                 "reference": "54efb90fbfad687696766f0a12a676e0a72b6657"
             },
             "require": {
@@ -2431,8 +2431,8 @@
             "version": "dev-master",
             "source": {
                 "type": "git",
-                "url": "ssh://git@gitlab.bulweria.com/sharengo-web/cartasi.git",
-                "reference": "b6e596812edd375ac645592c918af1bf010e1b44"
+                "url": "ssh://git@git.sharengo.it/cup-it/cartasi.git",
+                "reference": "3cf1666d9f151850783d3317349f8edefb2cbb5a"
             },
             "require": {
                 "doctrine/doctrine-orm-module": "0.*",
@@ -2446,7 +2446,7 @@
                 }
             },
             "description": "Cartasi module for Sharengo",
-            "time": "2016-05-06T13:16:50+00:00"
+            "time": "2017-11-21T10:29:26+00:00"
         },
         {
             "name": "symfony/console",
