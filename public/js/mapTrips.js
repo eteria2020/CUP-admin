@@ -1,33 +1,33 @@
 var zoom=13;
-var url_image_default = "/img/car-icon.png";
-var url_image_SW_BOOT = "/img/car-icon.png";
-var url_image_RFID = "/img/car-icon.png";
-var url_image_BATTERY = "/img/car-icon.png";
-var url_image_SPEED = "/img/car-icon.png";
-var url_image_AREA = "/img/car-icon.png";
-var url_image_CHARGING = "/img/car-icon.png";
-var url_image_ENGINE = "/img/car-icon.png";
-var url_image_SOS = "/img/car-icon.png";
-var url_image_PARK = "/img/car-icon.png";
-var url_image_CMD = "/img/car-icon.png";
-var url_image_CLEANLINESS = "/img/car-icon.png";
-var url_image_OBCFAIL = "/img/car-icon.png";
-var url_image_OBCOK = "/img/car-icon.png";
-var url_image_KEY = "/img/car-icon.png";
-var url_image_READY = "/img/car-icon.png";
+var url_image_DEFAULT = "/img/DEFAULT.PNG";
+var url_image_SW_BOOT = "/img/SW_BOOT.PNG";
+var url_image_RFID = "/img/RFID.PNG";
+var url_image_BATTERY = "/img/BATTERY.PNG";
+var url_image_SPEED = "/img/SPEED.PNG";
+var url_image_AREA = "/img/AREA.PNG";
+var url_image_CHARGING = "/img/CHARGING.PNG";
+var url_image_ENGINE = "/img/ENGINE.PNG";
+var url_image_SOS = "/img/SOS.PNG";
+var url_image_PARK = "/img/PARK.PNG";
+var url_image_CMD = "/img/CMD.PNG";
+var url_image_CLEANLINESS = "/img/CLEANLINESS.PNG";
+var url_image_OBCFAIL = "/img/OBCFAIL.PNG";
+var url_image_OBCOK = "/img/OBCOK.PNG";
+var url_image_KEY = "/img/KEY.PNG";
+var url_image_READY = "/img/READY.PNG";
 var url_image_GEAR = "/img/GEAR.PNG";
-var url_image_DIAG = "/img/car-icon.png";
-var url_image_CARPLATE = "/img/car-icon.png";
-var url_image_3G = "/img/car-icon.png";
-var url_image_MAINTENANCE = "/img/car-icon.png";
-var url_image_OUTOFORDER = "/img/car-icon.png";
-var url_image_SELFCLOSE = "/img/car-icon.png";
-var url_image_DEVICEINFO = "/img/car-icon.png";
-var url_image_SHUTDOWN = "/img/car-icon.png";
-var url_image_LEASE = "/img/car-icon.png";
-var url_image_SOC = "/img/car-icon.png";
-var url_image_AREA = "/img/car-icon.png";
-var url_image_MENU_CLICK = "/img/car-icon.png";
+var url_image_DIAG = "/img/DIAG.PNG";
+var url_image_CARPLATE = "/img/CARPLATE.PNG";
+var url_image_3G = "/img/3G.PNG";
+var url_image_MAINTENANCE = "/img/MAINTENANCE.PNG";
+var url_image_OUTOFORDER = "/img/OUTOFORDER.PNG";
+var url_image_SELFCLOSE = "/img/SELFCLOSE.PNG";
+var url_image_DEVICEINFO = "/img/DEVICEINFO.PNG";
+var url_image_SHUTDOWN = "/img/SHUTDOWN.PNG";
+var url_image_LEASE = "/img/LEASE.PNG";
+var url_image_SOC = "/img/SOC.PNG";
+//var url_image_AREA = "/img/.PNG";
+var url_image_MENU_CLICK = "/img/MENU_CLICK.PNG";
 
 var init = function (events) {
    
@@ -142,7 +142,7 @@ var init = function (events) {
                 var icon = setIcon(url_image_MENU_CLICK, size, offset);
                 break;
             default:
-                var icon = setIcon(url_image_default, size, offset);
+                var icon = setIcon(url_image_DEFAULT, size, offset);
                 break;
         }
 
@@ -169,27 +169,3 @@ var lonLatFunction = function (lon, lat) {
 var setIcon = function (url_image, size, offset) {
     return new OpenLayers.Icon(url_image, size, offset);
 }
-
-
-
-
-
-
-
-
-/*
- * COME FARE DELLE LINEE TRA PUNTI
- * 
-    var lineLayer = new OpenLayers.Layer.Vector("Line Layer"); 
-    
-    map.addLayer(lineLayer);                    
-    map.addControl(new OpenLayers.Control.DrawFeature(lineLayer, OpenLayers.Handler.Path));                                     
-    var points = new Array(
-        new OpenLayers.Geometry.Point(9.22, 45.62).transform(new OpenLayers.Projection("EPSG:4326"), map.getProjectionObject()),
-        new OpenLayers.Geometry.Point(9.21, 45.61).transform(new OpenLayers.Projection("EPSG:4326"), map.getProjectionObject()),
-        new OpenLayers.Geometry.Point(9.20, 44.60).transform(new OpenLayers.Projection("EPSG:4326"), map.getProjectionObject())
-    );
-
-    var lineFeature = new OpenLayers.Feature.Vector(new OpenLayers.Geometry.LineString(points), null, {fillColor:'#143D29', fillOpacity:0.4});
-    lineLayer.addFeatures(lineFeature);
-*/
