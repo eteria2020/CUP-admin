@@ -278,8 +278,6 @@ class TripsController extends AbstractActionController
         $arrayEvent = array();
         $arrayJsonEvents = array();
         foreach ($events as $event){   
-            $arrayEvent['id'] = $event->getId();
-            $arrayEvent['eventId'] = $event->getEventId();
             $arrayEvent['lon'] = $event->getLon();;
             $arrayEvent['lat'] = $event->getLat();
             $arrayEvent['eventType'] =  ((($event->getEventType()) != null) ? strtoupper($event->getEventType()->getLabel()) : "null" );
