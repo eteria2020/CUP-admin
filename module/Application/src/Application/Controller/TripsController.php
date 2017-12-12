@@ -272,15 +272,39 @@ class TripsController extends AbstractActionController
             throw new TripNotFoundException();
         }
 
+        //2099829
         $events = $this->eventsService->getEventsByTrip($trip);
-
+        
+        $arrayEvent = array();
+        $arrayJsonEvents = array();
+        foreach ($events as $event){   
+            $arrayEvent['id'] = $event->getId();
+            $arrayEvent['eventId'] = $event->getEventId();
+            $arrayEvent['lon'] = $event->getLon();;
+            $arrayEvent['lat'] = $event->getLat();
+            $arrayEvent['eventType'] =  ((($event->getEventType()) != null) ? strtoupper($event->getEventType()->getLabel()) : "null" );
+            $arrayJsonEvents[] = $arrayEvent;
+        }
+        
         $view = new ViewModel();
         $view->setTemplate('partials/map-trip.phtml');
-        $view->setVariables(['events' => json_encode($events)]);//json di eventi
+        $view->setVariables(['events' => json_encode($arrayJsonEvents)]);//json di eventi
         $view->setTerminal(true);
 
         return $view;
     }
+    
+    function utf8ize($d) {
+        if (is_array($d)) {
+            foreach ($d as $k => $v) {
+                $d[$k] = utf8ize($v);
+            }
+        } else if (is_string ($d)) {
+            return utf8_encode($d);
+        }
+        return $d;
+    }
+
 
     public function doCloseAction()
     {

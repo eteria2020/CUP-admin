@@ -14,7 +14,8 @@
             <div class="portlet-body">
                 
                 <script>
-                    init(<?php $event ?>);
+                    var event_json = <?= $this->events; ?>;
+                    init(event_json);
                 </script>
                 
                 <div id="conteiner">

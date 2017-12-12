@@ -1,18 +1,42 @@
-var lat=45.46419;
-var lon=9.19161;
 var zoom=13;
-
-var url_image = 'http://maps.gstatic.com/intl/de_de/mapfiles/ms/micons/red-pushpin.png';
+var url_image_default = "/img/car-icon.png";
+var url_image_SW_BOOT = "/img/car-icon.png";
+var url_image_RFID = "/img/car-icon.png";
+var url_image_BATTERY = "/img/car-icon.png";
+var url_image_SPEED = "/img/car-icon.png";
+var url_image_AREA = "/img/car-icon.png";
+var url_image_CHARGING = "/img/car-icon.png";
+var url_image_ENGINE = "/img/car-icon.png";
+var url_image_SOS = "/img/car-icon.png";
+var url_image_PARK = "/img/car-icon.png";
+var url_image_CMD = "/img/car-icon.png";
+var url_image_CLEANLINESS = "/img/car-icon.png";
+var url_image_OBCFAIL = "/img/car-icon.png";
+var url_image_OBCOK = "/img/car-icon.png";
+var url_image_KEY = "/img/car-icon.png";
+var url_image_READY = "/img/car-icon.png";
+var url_image_GEAR = "/img/GEAR.PNG";
+var url_image_DIAG = "/img/car-icon.png";
+var url_image_CARPLATE = "/img/car-icon.png";
+var url_image_3G = "/img/car-icon.png";
+var url_image_MAINTENANCE = "/img/car-icon.png";
+var url_image_OUTOFORDER = "/img/car-icon.png";
+var url_image_SELFCLOSE = "/img/car-icon.png";
+var url_image_DEVICEINFO = "/img/car-icon.png";
+var url_image_SHUTDOWN = "/img/car-icon.png";
+var url_image_LEASE = "/img/car-icon.png";
+var url_image_SOC = "/img/car-icon.png";
+var url_image_AREA = "/img/car-icon.png";
+var url_image_MENU_CLICK = "/img/car-icon.png";
 
 var init = function (events) {
-    
-    var size = new OpenLayers.Size(21,25);
+   
+    var size = new OpenLayers.Size(42,50);
     var offset = new OpenLayers.Pixel(-(size.w/2), -size.h);
-    //var icon = new OpenLayers.Icon('http://maps.gstatic.com/intl/de_de/mapfiles/ms/micons/red-pushpin.png', size, offset);
     
     map = new OpenLayers.Map ("map", {
         controls:[ 
-                    new OpenLayers.Control.Navigation(),
+                   new OpenLayers.Control.Navigation(),
                    new OpenLayers.Control.PanZoomBar(),
                    new OpenLayers.Control.ScaleLine(),
                    new OpenLayers.Control.Permalink('permalink'),
@@ -27,33 +51,110 @@ var init = function (events) {
     map.addLayer(mapnik);
     
     layerCycleMap = new OpenLayers.Layer.OSM.CycleMap("CycleMap");
-    map.addLayer(layerCycleMap);
     
-    //star for sugli eventi in json
-    //for (var event in events) {
-    
-        //set lonlat per punto
-        var lonLat = lonLatFunction(lon, lat/*event['lon'], event['lat']*/);
+    events.forEach(function(event) {
+        
+        switch (event['eventType']){
+            case 'SW_BOOT':
+                var icon = setIcon(url_image_SW_BOOT, size, offset);
+                break;
+            case 'RFID':
+                var icon = setIcon(url_image_RFID, size, offset);
+                break;
+            case 'BATTERY':
+                var icon = setIcon(url_image_BATTERY, size, offset);
+                break;
+            case 'SPEED':
+                var icon = setIcon(url_image_SPEED, size, offset);
+                break;
+            case 'AREA':
+                var icon = setIcon(url_image_AREA, size, offset);
+                break;
+            case 'CHARGING':
+                var icon = setIcon(url_image_CHARGING, size, offset);
+                break;
+            case 'ENGINE':
+                var icon = setIcon(url_image_ENGINE, size, offset);
+                break;
+            case 'SOS':
+                var icon = setIcon(url_image_SOS, size, offset);
+                break;
+            case 'PARK':
+                var icon = setIcon(url_image_PARK, size, offset);
+                break;
+            case 'CMD':
+                var icon = setIcon(url_image_CMD, size, offset);
+                break;
+            case 'CLEANLINESS':
+                var icon = setIcon(url_image_CLEANLINESS, size, offset);
+                break;
+            case 'OBCFAIL':
+                var icon = setIcon(url_image_OBCFAIL, size, offset);
+                break;
+            case 'OBCOK':
+                var icon = setIcon(url_image_OBCOK, size, offset);
+                break;
+            case 'KEY':
+                var icon = setIcon(url_image_KEY, size, offset);
+                break;
+            case 'READY':
+                var icon = setIcon(url_image_READY, size, offset);
+                break;
+            case 'GEAR':
+                var icon = setIcon(url_image_GEAR, size, offset);
+                break;
+            case 'DIAG':
+                var icon = setIcon(url_image_DIAG, size, offset);
+                break;
+            case 'CARPLATE':
+                var icon = setIcon(url_image_CARPLATE, size, offset);
+                break;
+            case '3G':
+                var icon = setIcon(url_image_3G, size, offset);
+                break;
+            case 'MAINTENANCE':
+                var icon = setIcon(url_image_MAINTENANCE, size, offset);
+                break;
+            case 'OUTOFORDER':
+                var icon = setIcon(url_image_OUTOFORDER, size, offset);
+                break;
+            case 'SELFCLOSE':
+                var icon = setIcon(url_image_SELFCLOSE, size, offset);
+                break;
+            case 'DEVICEINFO':
+                var icon = setIcon(url_image_DEVICEINFO, size, offset);
+                break;
+            case 'SHUTDOWN':
+                var icon = setIcon(url_image_SHUTDOWN, size, offset);
+                break;
+            case 'LEASE':
+                var icon = setIcon(url_image_LEASE, size, offset);
+                break;
+            case 'SOC':
+                var icon = setIcon(url_image_SOC, size, offset);
+                break;
+            /*
+            case 'AREA':
+                var icon = setIcon(url_image_AREA, size, offset);
+                break;
+            */
+            case 'MENU_CLICK':
+                var icon = setIcon(url_image_MENU_CLICK, size, offset);
+                break;
+            default:
+                var icon = setIcon(url_image_default, size, offset);
+                break;
+        }
 
-        //switch type event
-        //switch (event['type']){
-            //case 'xxxxxxx':
-                //set image per punto
-                var icon = setIcon(url_image, size, offset);
-                //braek;
-        //}
-        
-        
-        //set marker in mappa con lonlat e img
+        //set marker in map with lonlat e img
         var markers = new OpenLayers.Layer.Markers( "Markers" );
         map.addLayer(markers);
-        markers.addMarker(new OpenLayers.Marker(lonLat,icon));
+        markers.addMarker(new OpenLayers.Marker(lonLatFunction(event['lon'], event['lat']),icon));
         
-    //}
-    //end for su eventi json
+    });
 
-    //set centro mappa
-    map.setCenter(lonLat, zoom);
+    //set center map, to first event
+    map.setCenter(lonLatFunction(events[0]['lon'], events[0]['lat']), zoom);
     
 };
 
