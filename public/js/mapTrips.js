@@ -131,7 +131,7 @@ var init = function (events) {
                 var icon = setIcon(url_image_LEASE, size, offset);
                 break;
             case 'SOC':
-                var icon = setIcon(url_image_SOC, size, offset);
+                var icon = setIcon(url_image_SOC, size, offset); 
                 break;
             /*
             case 'AREA':
