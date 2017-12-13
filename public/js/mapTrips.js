@@ -28,13 +28,14 @@ var img_SOC = "/img/SOC.PNG";
 //var img_AREA = "/img/.PNG";
 var img_MENU_CLICK = "/img/MENU_CLICK.PNG";
 
+var lon_default = 12.48;
+var lat_defautl = 41.88;
+var zoom_defaul = 5;
+
 var zoom = 14;
 var popup = null;
 
 var init = function (events) {
-
-    var size = new OpenLayers.Size(42, 50);
-    var offset = new OpenLayers.Pixel(-(size.w / 2), -size.h);
 
     map = new OpenLayers.Map("map", {
         controls: [
@@ -54,120 +55,125 @@ var init = function (events) {
 
     layerCycleMap = new OpenLayers.Layer.OSM.CycleMap("CycleMap");
 
-    events.forEach(function (event) {
+    if (events.length != 0) {
+        var size = new OpenLayers.Size(42, 50);
+        var offset = new OpenLayers.Pixel(-(size.w / 2), -size.h);
 
-        switch (event['label']) {
-            case 'SW_BOOT':
-                var icon = setIcon(img_SW_BOOT, size, offset);
-                break;
-            case 'RFID':
-                var icon = setIcon(img_RFID, size, offset);
-                break;
-            case 'BATTERY':
-                var icon = setIcon(img_img_BATTERY, size, offset);
-                break;
-            case 'SPEED':
-                var icon = setIcon(img_img_SPEED, size, offset);
-                break;
-            case 'AREA':
-                var icon = setIcon(img_AREA, size, offset);
-                break;
-            case 'CHARGING':
-                var icon = setIcon(img_CHARGING, size, offset);
-                break;
-            case 'ENGINE':
-                var icon = setIcon(img_ENGINE, size, offset);
-                break;
-            case 'SOS':
-                var icon = setIcon(img_SOS, size, offset);
-                break;
-            case 'PARK':
-                var icon = setIcon(img_PARK, size, offset);
-                break;
-            case 'CMD':
-                var icon = setIcon(img_CMD, size, offset);
-                break;
-            case 'CLEANLINESS':
-                var icon = setIcon(img_CLEANLINESS, size, offset);
-                break;
-            case 'OBCFAIL':
-                var icon = setIcon(img_OBCFAIL, size, offset);
-                break;
-            case 'OBCOK':
-                var icon = setIcon(img_OBCOK, size, offset);
-                break;
-            case 'KEY':
-                var icon = setIcon(img_KEY, size, offset);
-                break;
-            case 'READY':
-                var icon = setIcon(img_READY, size, offset);
-                break;
-            case 'GEAR':
-                var icon = setIcon(img_GEAR, size, offset);
-                break;
-            case 'DIAG':
-                var icon = setIcon(img_DIAG, size, offset);
-                break;
-            case 'CARPLATE':
-                var icon = setIcon(img_CARPLATE, size, offset);
-                break;
-            case '3G':
-                var icon = setIcon(img_3G, size, offset);
-                break;
-            case 'MAINTENANCE':
-                var icon = setIcon(img_MAINTENANCE, size, offset);
-                break;
-            case 'OUTOFORDER':
-                var icon = setIcon(img_OUTOFORDER, size, offset);
-                break;
-            case 'SELFCLOSE':
-                var icon = setIcon(img_SELFCLOSE, size, offset);
-                break;
-            case 'DEVICEINFO':
-                var icon = setIcon(img_DEVICEINFO, size, offset);
-                break;
-            case 'SHUTDOWN':
-                var icon = setIcon(img_SHUTDOWN, size, offset);
-                break;
-            case 'LEASE':
-                var icon = setIcon(img_LEASE, size, offset);
-                break;
-            case 'SOC':
-                var icon = setIcon(img_SOC, size, offset);
-                break;
-                /*
-                 case 'AREA':
-                 var icon = setIcon(img_AREA, size, offset);
-                 break;
-                 */
-            case 'MENU_CLICK':
-                var icon = setIcon(img_MENU_CLICK, size, offset);
-                break;
-            default:
-                var icon = setIcon(img_DEFAULT, size, offset);
-                break;
-        }
+        events.forEach(function (event) {
 
-        //set marker in map with lonlat e img
-        var markers = new OpenLayers.Layer.Markers("Markers");
-        map.addLayer(markers);
-        markers.addMarker(new OpenLayers.Marker(lonLatFunction(event['lon'], event['lat']), icon));
-
-        markers.events.register("click", markers, function (e) {
-            if (popup == null) {
-                popup = createPopup(event);
-                map.addPopup(popup);
-            } else {
-                destroyPopup();
-                popup = createPopup(event);
-                map.addPopup(popup);
+            switch (event['label']) {
+                case 'SW_BOOT':
+                    var icon = setIcon(img_SW_BOOT, size, offset);
+                    break;
+                case 'RFID':
+                    var icon = setIcon(img_RFID, size, offset);
+                    break;
+                case 'BATTERY':
+                    var icon = setIcon(img_img_BATTERY, size, offset);
+                    break;
+                case 'SPEED':
+                    var icon = setIcon(img_img_SPEED, size, offset);
+                    break;
+                case 'AREA':
+                    var icon = setIcon(img_AREA, size, offset);
+                    break;
+                case 'CHARGING':
+                    var icon = setIcon(img_CHARGING, size, offset);
+                    break;
+                case 'ENGINE':
+                    var icon = setIcon(img_ENGINE, size, offset);
+                    break;
+                case 'SOS':
+                    var icon = setIcon(img_SOS, size, offset);
+                    break;
+                case 'PARK':
+                    var icon = setIcon(img_PARK, size, offset);
+                    break;
+                case 'CMD':
+                    var icon = setIcon(img_CMD, size, offset);
+                    break;
+                case 'CLEANLINESS':
+                    var icon = setIcon(img_CLEANLINESS, size, offset);
+                    break;
+                case 'OBCFAIL':
+                    var icon = setIcon(img_OBCFAIL, size, offset);
+                    break;
+                case 'OBCOK':
+                    var icon = setIcon(img_OBCOK, size, offset);
+                    break;
+                case 'KEY':
+                    var icon = setIcon(img_KEY, size, offset);
+                    break;
+                case 'READY':
+                    var icon = setIcon(img_READY, size, offset);
+                    break;
+                case 'GEAR':
+                    var icon = setIcon(img_GEAR, size, offset);
+                    break;
+                case 'DIAG':
+                    var icon = setIcon(img_DIAG, size, offset);
+                    break;
+                case 'CARPLATE':
+                    var icon = setIcon(img_CARPLATE, size, offset);
+                    break;
+                case '3G':
+                    var icon = setIcon(img_3G, size, offset);
+                    break;
+                case 'MAINTENANCE':
+                    var icon = setIcon(img_MAINTENANCE, size, offset);
+                    break;
+                case 'OUTOFORDER':
+                    var icon = setIcon(img_OUTOFORDER, size, offset);
+                    break;
+                case 'SELFCLOSE':
+                    var icon = setIcon(img_SELFCLOSE, size, offset);
+                    break;
+                case 'DEVICEINFO':
+                    var icon = setIcon(img_DEVICEINFO, size, offset);
+                    break;
+                case 'SHUTDOWN':
+                    var icon = setIcon(img_SHUTDOWN, size, offset);
+                    break;
+                case 'LEASE':
+                    var icon = setIcon(img_LEASE, size, offset);
+                    break;
+                case 'SOC':
+                    var icon = setIcon(img_SOC, size, offset);
+                    break;
+                    /*
+                     case 'AREA':
+                     var icon = setIcon(img_AREA, size, offset);
+                     break;
+                     */
+                case 'MENU_CLICK':
+                    var icon = setIcon(img_MENU_CLICK, size, offset);
+                    break;
+                default:
+                    var icon = setIcon(img_DEFAULT, size, offset);
+                    break;
             }
+
+            //set marker in map with lonlat e img
+            var markers = new OpenLayers.Layer.Markers("Markers");
+            map.addLayer(markers);
+            markers.addMarker(new OpenLayers.Marker(lonLatFunction(event['lon'], event['lat']), icon));
+
+            markers.events.register("click", markers, function (e) {
+                if (popup == null) {
+                    popup = createPopup(event);
+                    map.addPopup(popup);
+                } else {
+                    destroyPopup();
+                    popup = createPopup(event);
+                    map.addPopup(popup);
+                }
+            });
         });
-    });
 
-    //set center map, to first event
-    map.setCenter(lonLatFunction(events[0]['lon'], events[0]['lat']), zoom);
-
+        //set center map, to first event
+        map.setCenter(lonLatFunction(events[0]['lon'], events[0]['lat']), zoom);
+    }else
+        map.setCenter(lonLatFunction(lon_default, lat_defautl), zoom_defaul);
 };
 
 var createPopup = function (event) {

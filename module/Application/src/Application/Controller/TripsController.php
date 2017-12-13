@@ -273,6 +273,7 @@ class TripsController extends AbstractActionController
         }
 
         //2099829
+        //1547576 
         $events = $this->eventsService->getEventsByTrip($trip);
         
         $arrayEvent = array();
