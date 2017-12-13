@@ -28,7 +28,7 @@ var url_image_SOC = "/img/SOC.PNG";
 //var url_image_AREA = "/img/.PNG";
 var url_image_MENU_CLICK = "/img/MENU_CLICK.PNG";
 
-var zoom = 13;
+var zoom = 14;
 var popup = null;
 
 var init = function (events) {
@@ -53,8 +53,6 @@ var init = function (events) {
     map.addLayer(mapnik);
 
     layerCycleMap = new OpenLayers.Layer.OSM.CycleMap("CycleMap");
-
-    var markers;
 
     events.forEach(function (event) {
 
@@ -151,71 +149,60 @@ var init = function (events) {
         }
 
         //set marker in map with lonlat e img
-        markers = new OpenLayers.Layer.Markers("Markers");
+        var markers = new OpenLayers.Layer.Markers("Markers");
         map.addLayer(markers);
         markers.addMarker(new OpenLayers.Marker(lonLatFunction(event['lon'], event['lat']), icon));
 
-
-
         markers.events.register("click", markers, function (e) {
-
             if (popup == null) {
-                popup = createPopup(event['lon'], event['lat'], map);
+                popup = createPopup(event['lon'], event['lat']);
                 map.addPopup(popup);
             } else {
-                if (popup != null) {
-                    //popup.destroy();
-                    //popup = null;
-                    destroyPopup();
-                    popup = createPopup(event['lon'], event['lat']);
-                    map.addPopup(popup);
-                }
+                destroyPopup();
+                popup = createPopup(event['lon'], event['lat']);
+                map.addPopup(popup);
             }
         });
 
 
+        /*
+         //mouseover event view popup
+         markers.events.register('mouseover', markers, function(evt) {
+         popup = new OpenLayers.Popup.FramedCloud("Popup",
+         lonLatFunction(event['lon'], event['lat']),
+         null,
+         '<div>\n\
+         Longitudine: ' + event['lon'] + '\
+         <br>\n\
+         Latitudine: ' + event['lat'] + '\
+         </div>',
+         null,
+         false);
+         map.addPopup(popup);
+         });
+         //mouseout event popup hide
+         markers.events.register('mouseout', markers, function(evt) {
+         popup.hide();
+         });
+         */
+
     });
-
-
-
-
-
-    /*
-     //mouseover event view popup
-     markers.events.register('mouseover', markers, function(evt) {
-     popup = new OpenLayers.Popup.FramedCloud("Popup",
-     lonLatFunction(event['lon'], event['lat']),
-     null,
-     '<div>\n\
-     Longitudine: ' + event['lon'] + '\
-     <br>\n\
-     Latitudine: ' + event['lat'] + '\
-     </div>',
-     null,
-     false);
-     map.addPopup(popup);
-     });
-     //mouseout event popup hide
-     markers.events.register('mouseout', markers, function(evt) {
-     popup.hide();
-     });
-     */
 
     //set center map, to first event
     map.setCenter(lonLatFunction(events[0]['lon'], events[0]['lat']), zoom);
 
 };
 
-var createPopup = function (lon, lat, map) {
+var createPopup = function (lon, lat, ) {
     return  popup = new OpenLayers.Popup.FramedCloud("chicken",
-            lonLatFunction(lon, lat),
-            new OpenLayers.Size(200, 200),
-            '<div>\n\
-                Longitudine: ' + lon + '\
-                <br>\n\
-                Latitudine: ' + lat + '\
-            </div>',
-            null, true);
+                        lonLatFunction(lon, lat),
+                        new OpenLayers.Size(700, 700),
+                        '<div>\n\
+                            Longitudine: ' + lon + '\
+                            <br>\n\
+                            Latitudine: ' + lat + '\
+                        </div>',
+                        null, true);
 }
 
 var destroyPopup = function () {
