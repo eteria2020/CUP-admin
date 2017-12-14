@@ -724,20 +724,6 @@ return [
                             ]
                         ]
                     ],
-                    'events-tab' => [
-                        'type' => 'Segment',
-                        'options' => [
-                            'route' => '/tab/events/:id',
-                            'constraints' => [
-                                'id'    => '[0-9]*'
-                            ],
-                            'defaults' => [
-                                '__NAMESPACE__' => 'Application\Controller',
-                                'controller' => 'Trips',
-                                'action' => 'events-tab'
-                            ]
-                        ]
-                    ],
                     'map-tab' => [
                         'type' => 'Segment',
                         'options' => [
