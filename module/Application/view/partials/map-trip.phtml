@@ -1,0 +1,44 @@
+
+<!-- Events table -->
+<div class="row">
+    <div class="col-md-12">
+        <div class="portlet box green">
+            <!-- Header -->
+            <div class="portlet-title">
+                <div class="caption">
+                    <i class="fa fa-cogs"></i><?php echo $this->translate("Mappa del viaggio"); ?>
+                </div>
+            </div>
+            <!-- header -->
+            <!-- Body -->
+            <div class="portlet-body">
+                
+                <script>
+                    var event_json = <?= $this->events; ?>;
+                    init(event_json);
+                </script>
+                
+                <div id="conteiner">
+                    <div align="center" id="map"></div>  
+                </div>                
+
+
+            </div>
+            <!-- body -->
+        </div>
+    </div>
+</div>
+<!-- events table -->
+
+<style type="text/css">
+    #map {
+        width:100% !important; 
+        height:100%;
+    }
+    
+    #conteiner {
+        width:auto; 
+        height:80vh;
+        min-height: 100px
+    }
+</style>
