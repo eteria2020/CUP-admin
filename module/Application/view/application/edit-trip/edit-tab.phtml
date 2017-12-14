@@ -102,10 +102,11 @@ else:
 <!-- edit table -->
 <?= $this->form()->closeTag(); ?>
 
-<?= $this->partial('partials/events-table.phtml', ['events' => $this->events]); ?>
-
 <?php
 // close editable trip section
 endif;
 ?>
+<br>
+<br>
+<?= $this->partial('partials/events-table.phtml', ['events' => $this->events]); ?>
 <script type="text/javascript" src="/js/edit-trip.js"></script>
