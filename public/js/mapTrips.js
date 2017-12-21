@@ -206,7 +206,7 @@ var init = function (events, logs) {
         map.setCenter(lonLatFunction(media_lon/(events.length+logs.length), media_lat/(events.length+logs.length)), zoom);
 };
 
-var createPopup = function (event) {
+var createPopup = function (data, value) {
     if(value){
         return  popup = new OpenLayers.Popup.FramedCloud("chicken",
                 lonLatFunction(data['lon'], data['lat']),
@@ -221,39 +221,39 @@ var createPopup = function (event) {
                 null, true);
     }
 }
-
-var popupHtmlCode = function (event) {
-    return '<div>\n\
-                <b>ID</b>: ' + event['id'] + '\
-                <br>\n\
-                <b>Data</b>: ' + event['date'] + '\
-                <br>\n\
-                <b>Batteria</b>: ' + event['battery'] + '\
-                <br>\n\
-                <b>KM</b>: ' + event['km'] + '\
-                <br>\n\
-                <b>Evento</b>: ' + event['eventTypeId'] + '\
-                <br>\n\
-                <b>Label</b>: ' + event['label'] + '\
-                <br>\n\
-                <b>Valore</b>: ' + event['textVal'] + '\
-                <br>\n\
-                <b>Intval</b>: ' + event['intVal'] + '\
-                <br>\n\
-                <b>Posizione</b>: ' + event['lon'] + '|' + event['lat'] + '\
-            </div>';
+                                                                                                       
+var popupHtmlCodeEvent = function (event) {
+    return '<div>' + 
+                '<b>ID</b>: ' + event['id'] + 
+                '<br>' +
+                '<b>Data</b>: ' + event['date'] + 
+                '<br>' +
+                '<b>Batteria</b>: ' + event['battery'] + 
+                '<br>' +
+                '<b>KM</b>: ' + event['km'] + 
+                '<br>' +
+                '<b>Evento</b>: ' + event['eventTypeId'] + 
+                '<br>' +
+                '<b>Label</b>: ' + event['label'] + 
+                '<br>' +
+                '<b>Valore</b>: ' + event['textVal'] +
+                '<br>' +
+                '<b>Intval</b>: ' + event['intVal'] + 
+                '<br>' +
+                '<b>Posizione</b>: ' + event['lon'] + '|' + event['lat'] + 
+            '</div>';
 }
 
 var popupHtmlCodeLog = function (log) {
-    return '<div>\n\
-                <b>ID</b>: ' + log['id'] + '\
-                <br>\n\
-                <b>SOC</b>: ' + log['SOC'] + '\
-                <br>\n\
-                <b>LogTime</b>: ' + log['logTime'] + '\
-                <br>\n\
-                <b>Posizione</b>: ' + log['lon'] + '|' + log['lat'] + '\
-            </div>';
+    return '<div>' +
+                '<b>ID</b>: ' + log['id'] + 
+                '<br>' +
+                '<b>SOC</b>: ' + log['SOC'] + 
+                '<br>' +
+                '<b>LogTime</b>: ' + log['logTime'] + 
+                '<br>' +
+                '<b>Posizione</b>: ' + log['lon'] + '|' + log['lat'] + 
+            '</div>';
 }
 
 var destroyPopup = function () {
