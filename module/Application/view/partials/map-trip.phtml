@@ -15,7 +15,8 @@
                 
                 <script>
                     var event_json = <?= $this->events; ?>;
-                    init(event_json);
+                    var log_json = <?= $this->logs; ?>;
+                    init(event_json, log_json);
                 </script>
                 
                 <div id="conteiner">

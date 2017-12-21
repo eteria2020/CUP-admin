@@ -27,15 +27,20 @@ var img_LEASE = "/img/LEASE.PNG";
 var img_SOC = "/img/SOC.PNG";
 //var img_AREA = "/img/.PNG";
 var img_MENU_CLICK = "/img/MENU_CLICK.PNG";
+var img_TRIP = "/img/car-icon.png"
 
 var lon_default = 12.48;
 var lat_defautl = 41.88;
 var zoom_defaul = 5;
 
 var zoom = 14;
+var media_lon = 0;
+var media_lat = 0;
 var popup = null;
 
-var init = function (events) {
+var set_default_center = true;
+
+var init = function (events, logs) {
 
     map = new OpenLayers.Map("map", {
         controls: [
@@ -54,13 +59,35 @@ var init = function (events) {
     map.addLayer(mapnik);
 
     layerCycleMap = new OpenLayers.Layer.OSM.CycleMap("CycleMap");
+    
+    var size = new OpenLayers.Size(42, 50);
+    var offset = new OpenLayers.Pixel(-(size.w / 2), -size.h);
+    
+    if (logs.length != 0) {
+        logs.forEach(function (log) {
+            var icon = setIcon(img_TRIP, size, offset);    
+            var markers = new OpenLayers.Layer.Markers("Markers");
+            map.addLayer(markers);
+            markers.addMarker(new OpenLayers.Marker(lonLatFunction(log['lon'], log['lat']), icon));
+            
+            markers.events.register("click", markers, function (e) {
+                if (popup == null) {
+                    popup = createPopup(log, false);
+                    map.addPopup(popup);
+                } else {
+                    destroyPopup();
+                    popup = createPopup(log, false);
+                    map.addPopup(popup);
+                }
+            });
+            media_lon += log['lon'];
+            media_lat += log['lat'];
+        });
+    }
 
     if (events.length != 0) {
-        var size = new OpenLayers.Size(42, 50);
-        var offset = new OpenLayers.Pixel(-(size.w / 2), -size.h);
-
+        set_default_center = false;
         events.forEach(function (event) {
-
             switch (event['label']) {
                 case 'SW_BOOT':
                     var icon = setIcon(img_SW_BOOT, size, offset);
@@ -160,50 +187,73 @@ var init = function (events) {
 
             markers.events.register("click", markers, function (e) {
                 if (popup == null) {
-                    popup = createPopup(event);
+                    popup = createPopup(event, true);
                     map.addPopup(popup);
                 } else {
                     destroyPopup();
-                    popup = createPopup(event);
+                    popup = createPopup(event, true);
                     map.addPopup(popup);
                 }
             });
+            media_lon += event['lon'];
+            media_lat += event['lat'];
         });
+    }
 
-        //set center map, to first event
-        map.setCenter(lonLatFunction(events[0]['lon'], events[0]['lat']), zoom);
-    }else
+    if(set_default_center)
         map.setCenter(lonLatFunction(lon_default, lat_defautl), zoom_defaul);
+    else
+        map.setCenter(lonLatFunction(media_lon/(events.length+logs.length), media_lat/(events.length+logs.length)), zoom);
 };
 
-var createPopup = function (event) {
-    return  popup = new OpenLayers.Popup.FramedCloud("chicken",
-            lonLatFunction(event['lon'], event['lat']),
-            new OpenLayers.Size(200, 1000),
-            popupHtmlCode(event),
-            null, true);
+var createPopup = function (data, value) {
+    if(value){
+        return  popup = new OpenLayers.Popup.FramedCloud("chicken",
+                lonLatFunction(data['lon'], data['lat']),
+                new OpenLayers.Size(200, 1000),
+                popupHtmlCodeEvent(data),
+                null, true);
+    }else{
+        return  popup = new OpenLayers.Popup.FramedCloud("chicken",
+                lonLatFunction(data['lon'], data['lat']),
+                new OpenLayers.Size(200, 1000),
+                popupHtmlCodeLog(data),
+                null, true);
+    }
+}
+                                                                                                       
+var popupHtmlCodeEvent = function (event) {
+    return '<div>' + 
+                '<b>ID</b>: ' + event['id'] + 
+                '<br>' +
+                '<b>Data</b>: ' + event['date'] + 
+                '<br>' +
+                '<b>Batteria</b>: ' + event['battery'] + 
+                '<br>' +
+                '<b>KM</b>: ' + event['km'] + 
+                '<br>' +
+                '<b>Evento</b>: ' + event['eventTypeId'] + 
+                '<br>' +
+                '<b>Label</b>: ' + event['label'] + 
+                '<br>' +
+                '<b>Valore</b>: ' + event['textVal'] +
+                '<br>' +
+                '<b>Intval</b>: ' + event['intVal'] + 
+                '<br>' +
+                '<b>Posizione</b>: ' + event['lon'] + '|' + event['lat'] + 
+            '</div>';
 }
 
-var popupHtmlCode = function (event) {
-    return '<div>\n\
-                <b>ID</b>: ' + event['id'] + '\
-                <br>\n\
-                <b>Data</b>: ' + event['date'] + '\
-                <br>\n\
-                <b>Batteria</b>: ' + event['battery'] + '\
-                <br>\n\
-                <b>KM</b>: ' + event['km'] + '\
-                <br>\n\
-                <b>Evento</b>: ' + event['eventTypeId'] + '\
-                <br>\n\
-                <b>Label</b>: ' + event['label'] + '\
-                <br>\n\
-                <b>Valore</b>: ' + event['textVal'] + '\
-                <br>\n\
-                <b>Intval</b>: ' + event['intVal'] + '\
-                <br>\n\
-                <b>Posizione</b>: ' + event['lon'] + '|' + event['lat'] + '\
-            </div>';
+var popupHtmlCodeLog = function (log) {
+    return '<div>' +
+                '<b>ID</b>: ' + log['id'] + 
+                '<br>' +
+                '<b>SOC</b>: ' + log['SOC'] + 
+                '<br>' +
+                '<b>LogTime</b>: ' + log['logTime'] + 
+                '<br>' +
+                '<b>Posizione</b>: ' + log['lon'] + '|' + log['lat'] + 
+            '</div>';
 }
 
 var destroyPopup = function () {
@@ -222,27 +272,3 @@ var lonLatFunction = function (lon, lat) {
 var setIcon = function (url_image, size, offset) {
     return new OpenLayers.Icon(url_image, size, offset);
 }
-
-
-/*
- * CODE TO GENERETE POPUP TO MOUSEOVER
- * 
- //mouseover event view popup
- markers.events.register('mouseover', markers, function(evt) {
- popup = new OpenLayers.Popup.FramedCloud("Popup",
- lonLatFunction(event['lon'], event['lat']),
- null,
- '<div>\n\
- Longitudine: ' + event['lon'] + '\
- <br>\n\
- Latitudine: ' + event['lat'] + '\
- </div>',
- null,
- false);
- map.addPopup(popup);
- });
- //mouseout event popup hide
- markers.events.register('mouseout', markers, function(evt) {
- popup.hide();
- });
- */

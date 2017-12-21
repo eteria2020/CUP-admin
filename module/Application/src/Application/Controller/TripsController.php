@@ -8,6 +8,7 @@ use SharengoCore\Entity\Trips;
 use SharengoCore\Exception\InvalidFormInputData;
 use SharengoCore\Exception\TripNotFoundException;
 use SharengoCore\Service\EventsService;
+use SharengoCore\Service\LogsService;
 use SharengoCore\Service\TripCostComputerService;
 use SharengoCore\Service\TripsService;
 use BusinessCore\Service\BusinessService;
@@ -41,6 +42,11 @@ class TripsController extends AbstractActionController
      * @var EventsService
      */
     private $eventsService;
+    
+    /**
+     * @var EventsService
+     */
+    private $logsService;
 
     /**
      * @var EventManager
@@ -76,6 +82,7 @@ class TripsController extends AbstractActionController
         TripCostForm $tripCostForm,
         TripCostComputerService $tripCostComputerService,
         EventsService $eventsService,
+        LogsService $logsService,
         EventManager $eventManager,
         CloseTripDataFactory $closeTripDataFactory,
         Container $datatableFiltersSessionContainer,
@@ -86,6 +93,7 @@ class TripsController extends AbstractActionController
         $this->tripCostForm = $tripCostForm;
         $this->tripCostComputerService = $tripCostComputerService;
         $this->eventsService = $eventsService;
+        $this->logsService = $logsService;
         $this->eventManager = $eventManager;
         $this->closeTripDataFactory = $closeTripDataFactory;
         $this->datatableFiltersSessionContainer = $datatableFiltersSessionContainer;
@@ -270,25 +278,27 @@ class TripsController extends AbstractActionController
             $arrayJsonEvents[] = $arrayEvent;
         }
         
+        $logs = $this->logsService->getLogsByTrip($trip);
+        
+        $arrayLog = array();
+        $arrayJsonLogs = array();
+        foreach ($logs as $log){   
+            $arrayLog['id'] = $log->getId();
+            $arrayLog['SOC'] = $log->getSoc();
+            $arrayLog['logTime'] = $log->getLogTime()->format('Y-m-d H:i:s');
+            $arrayLog['lon'] = $log->getIntLon();
+            $arrayLog['lat'] = $log->getIntLat();
+            $arrayJsonLogs[] = $arrayLog;
+        }
+        
         $view = new ViewModel();
         $view->setTemplate('partials/map-trip.phtml');
         $view->setVariables(['events' => json_encode($arrayJsonEvents)]);//json di eventi
+        $view->setVariables(['logs' => json_encode($arrayJsonLogs)]);//json di log
         $view->setTerminal(true);
 
         return $view;
     }
-    
-    function utf8ize($d) {
-        if (is_array($d)) {
-            foreach ($d as $k => $v) {
-                $d[$k] = utf8ize($v);
-            }
-        } else if (is_string ($d)) {
-            return utf8_encode($d);
-        }
-        return $d;
-    }
-
 
     public function doCloseAction()
     {
