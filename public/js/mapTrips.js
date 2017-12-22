@@ -32,11 +32,7 @@ var img_TRIP = "/img/car-icon.png"
 var lon_default = 12.48;
 var lat_defautl = 41.88;
 var zoom_defaul = 5;
-
 var zoom = 14;
-var media_lon = 0;
-var media_lat = 0;
-var popup = null;
 
 var set_default_center = true;
 
@@ -62,6 +58,10 @@ var init = function (events, logs) {
     
     var size = new OpenLayers.Size(42, 50);
     var offset = new OpenLayers.Pixel(-(size.w / 2), -size.h);
+    
+    var media_lon = 0;
+    var media_lat = 0;
+    var popup = null;
     
     if (logs.length != 0) {
         logs.forEach(function (log) {
