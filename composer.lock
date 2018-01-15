@@ -297,7 +297,7 @@
             "source": {
                 "type": "git",
                 "url": "ssh://git@git.sharengo.it/cup-it/admin-business-module.git",
-                "reference": "c7e766adae873d7c155dcab14239e838fa377c63"
+                "reference": "05cf1897dead6161be0248bf22509c430ee4b958"
             },
             "require": {
                 "php": ">=5.4",
@@ -314,7 +314,7 @@
                 }
             },
             "description": "Business area in Admin",
-            "time": "2017-12-19T15:27:49+00:00"
+            "time": "2018-01-15T08:36:20+00:00"
         },
         {
             "name": "cup-web/core-business",
@@ -322,7 +322,7 @@
             "source": {
                 "type": "git",
                 "url": "ssh://git@git.sharengo.it/cup-it/core-business.git",
-                "reference": "24e037a55f4b705ccfc581a5e62814fb876999fe"
+                "reference": "5b22d830c5f55adb2d4a972de6805aa0561b77ba"
             },
             "require": {
                 "doctrine/doctrine-orm-module": "0.9.*",
@@ -343,7 +343,7 @@
                 }
             },
             "description": "Business Core module",
-            "time": "2017-12-27T11:56:38+00:00"
+            "time": "2018-01-15T08:36:16+00:00"
         },
         {
             "name": "doctrine/annotations",
