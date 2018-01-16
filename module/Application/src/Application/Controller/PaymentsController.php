@@ -209,13 +209,15 @@ class PaymentsController extends AbstractActionController
     public function extraAction()
     {
         $penalties = $this->penaltiesService->getAllPenalties();
+        $causal = $this->penaltiesService->getAllCausal();
         $fleets = $this->fleetService->getAllFleets();
         $types = $this->extraPaymentsService->getAllTypes();
 
         return new ViewModel([
             'fleets' => $fleets,
             'types' => $types,
-            'penalties' => $penalties
+            'penalties' => $penalties,
+            'causal' => $causal
         ]);
     }
 

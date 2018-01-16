@@ -237,7 +237,9 @@ function addPaymentRow(isPenalty)
         "<div class=\"row sng-margin-top\">" +
             "<div class=\"col-lg-12\">" +
                 "<label>" + translate("cause") + "</label>" +
-                "<input id=\"reason" + blockNumber + "\" class=\"form-control\" type=\"text\"></input>" +
+                "<select id=\"reason" + blockNumber + "\" class=\"form-control\">" +
+                    causalOptions +
+                "</select>" +
             "</div>" +
         "</div>";
 

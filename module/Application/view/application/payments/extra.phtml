@@ -80,6 +80,19 @@ foreach($this->penalties as $penalty) {
         '</option>';
 }
 echo '"';
+
+?>
+    
+<?php
+
+echo 'var causalOptions = "';
+echo '<option>---</option>';
+foreach($this->causal as $causal) {
+    echo '<option data-reason=\"' . $causal->getReason() . '\">' .
+        $causal->getReason() .
+        '</option>';
+}
+echo '"';
 ?>
     
     
