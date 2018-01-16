@@ -192,6 +192,10 @@ $(function() {
             }
         }
     });
+    
+    var numero = $('#js-notifications-table').find('td:first').text();
+    //var numero = $('#js-notifications-table').find('tr:first').text();
+    console.log("numero dopo tabella: " +numero);
 
     $("#js-search").click(function() {
         table.fnFilter();
