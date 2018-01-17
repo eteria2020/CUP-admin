@@ -148,13 +148,15 @@ class NotificationsController extends AbstractActionController
                 $checkAllarm = false;
             }
         }
-*/
+        */
         return new JsonModel([
-            'draw' => $this->params()->fromQuery('sEcho', 0),
+            'draw' => $this->params()->fromQuery('sEcho', 0)
+            ,'checkAllarm' => true,
             'recordsTotal' => $totalNotifications,
             'recordsFiltered' => $recordsFiltered,
             'data' => $dataDataTable
             //,'checkAllarm' => $checkAllarm
+                
         ]);
     }
 
