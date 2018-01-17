@@ -98,7 +98,13 @@ $(function() {
                 "url": sSource,
                 "data": aoData,
                 "success": fnCallback
-            } );
+            } ),
+            success(function (){
+                if(aoData['checkAllarm']){
+                    $('#btnAllarmDiv').show();
+                    $('#audioAllarmDiv').html("<audio id='audio' src='/audio/beep.wav' autoplay loop></audio>");
+                }
+            });
         },
         "fnServerParams": function ( aoData ) {
             if (filterDate) {
@@ -193,9 +199,10 @@ $(function() {
         }
     });
     
-    var numero = $('#js-notifications-table').find('td:first').text();
-    //var numero = $('#js-notifications-table').find('tr:first').text();
-    console.log("numero dopo tabella: " +numero);
+    $('#btnAllarm').click(function (){
+        $('#audioAllarmDiv').html("<audio id='audio' src='/audio/beep.wav'></audio>");
+        $('#btnAllarmDiv').hide();
+    });
 
     $("#js-search").click(function() {
         table.fnFilter();
