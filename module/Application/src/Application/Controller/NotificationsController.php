@@ -133,7 +133,7 @@ class NotificationsController extends AbstractActionController
         $dataDataTable = $this->notificationsService->getDataDataTable($filters);
         $totalNotifications = $this->notificationsService->getTotalNotifications();
         $recordsFiltered = $this->getRecordsFiltered($filters, $totalNotifications);
-        /*
+        
         $lastId = max(array_column($recordsFiltered, 'id'));
         
         $sessionAllarm = new Container('sessionAllarm');
@@ -148,15 +148,13 @@ class NotificationsController extends AbstractActionController
                 $checkAllarm = false;
             }
         }
-        */
+        
         return new JsonModel([
-            'draw' => $this->params()->fromQuery('sEcho', 0)
-            ,'checkAllarm' => true,
+            'draw' => $this->params()->fromQuery('sEcho', 0),
+            'checkAllarm' => $checkAllarm,
             'recordsTotal' => $totalNotifications,
             'recordsFiltered' => $recordsFiltered,
             'data' => $dataDataTable
-            //,'checkAllarm' => $checkAllarm
-                
         ]);
     }
 
