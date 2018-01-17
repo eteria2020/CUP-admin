@@ -98,13 +98,7 @@ $(function() {
                 "url": sSource,
                 "data": aoData,
                 "success": fnCallback
-            } ),
-            success(function (){
-                if(aoData['checkAllarm']){
-                    $('#btnAllarmDiv').show();
-                    $('#audioAllarmDiv').html("<audio id='audio' src='/audio/beep.wav' autoplay loop></audio>");
-                }
-            });
+            } );
         },
         "fnServerParams": function ( aoData ) {
             if (filterDate) {
