@@ -134,7 +134,7 @@ class NotificationsController extends AbstractActionController
         $totalNotifications = $this->notificationsService->getTotalNotifications();
         $recordsFiltered = $this->getRecordsFiltered($filters, $totalNotifications);
         
-        $lastId = current((Array)current((Array)$array)[0])->id;
+        $lastId = current((Array)current((Array)$dataDataTable)[0])->id;
         
         $sessionAllarm = new Container('sessionAllarm');
         if(!$sessionAllarm->offsetExists('maxId')){
