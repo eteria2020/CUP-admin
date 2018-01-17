@@ -80,6 +80,8 @@ class NotificationsController extends AbstractActionController
     public function indexAction()
     {
         $sessionDatatableFilters = $this->getDataTableSessionFilters();
+        
+        $array = array();
 
         return new ViewModel([
             'filters' => json_encode($sessionDatatableFilters),
@@ -134,7 +136,7 @@ class NotificationsController extends AbstractActionController
         $totalNotifications = $this->notificationsService->getTotalNotifications();
         $recordsFiltered = $this->getRecordsFiltered($filters, $totalNotifications);
         
-        $lastId = max(array_column($recordsFiltered, 'id'));
+        $lastId = max(array_column($dataDataTable, 'id'));
         
         $sessionAllarm = new Container('sessionAllarm');
         if(!$sessionAllarm->offsetExists('maxId')){
