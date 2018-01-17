@@ -297,7 +297,7 @@
             "source": {
                 "type": "git",
                 "url": "ssh://git@git.sharengo.it/cup-it/admin-business-module.git",
-                "reference": "05cf1897dead6161be0248bf22509c430ee4b958"
+                "reference": "639dba63f6fe26b12fd4bc3ce1a9f68792de6071"
             },
             "require": {
                 "php": ">=5.4",
@@ -314,7 +314,7 @@
                 }
             },
             "description": "Business area in Admin",
-            "time": "2018-01-15T08:36:20+00:00"
+            "time": "2018-01-16T13:49:49+00:00"
         },
         {
             "name": "cup-web/core-business",
@@ -2106,7 +2106,7 @@
             "source": {
                 "type": "git",
                 "url": "ssh://git@git.sharengo.it/cup-it/core.git",
-                "reference": "4ec66e0ade0fb592cbf994572b3def3e66f00afb"
+                "reference": "2596b99d5594d5b6553cb918f10d8fbe9a8194fa"
             },
             "require": {
                 "doctrine/doctrine-orm-module": "0.*",
@@ -2127,7 +2127,7 @@
                 }
             },
             "description": "Core ZF2 module for Sharengo apps",
-            "time": "2017-12-21T11:50:03+00:00"
+            "time": "2018-01-16T15:38:14+00:00"
         },
         {
             "name": "mvlabs/zf2-multilanguage",
