@@ -1,6 +1,8 @@
 /* global  filters:true, translate:true, $, getSessionVars:true, jstz:true, moment:true, document: true */
 $(function() {
     "use strict";
+    
+    $('#btnAllarmDiv').hide();
 
     // Detect user timezone
     var userTimeZone = moment.tz.guess(); // Determines the time zone of the browser client

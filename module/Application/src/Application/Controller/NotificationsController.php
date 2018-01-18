@@ -80,57 +80,6 @@ class NotificationsController extends AbstractActionController
     public function indexAction()
     {
         $sessionDatatableFilters = $this->getDataTableSessionFilters();
-        /*
-        $a = "{\"data\":[{\"e\":{\"id\":52969,\"subject\":\"SOS call\",\"submitDate\":1515440451,\"sentDate\":1515440459,\"acknowledgeDate\":null},\"nc\":{\"name\":\"SOS\"},\"np\":{\"name\":\"Telegram\"},\"button\":52969},{\"e\":{\"id\":52968,\"subject\":\"SOS call\",\"submitDate\":1515440365,\"sentDate\":1515440369,\"acknowledgeDate\":null},\"nc\":{\"name\":\"SOS\"},\"np\":{\"name\":\"Telegram\"},\"button\":52968},{\"e\":{\"id\":52967,\"subject\":\"SOS call\",\"submitDate\":1515439288,\"sentDate\":1515439299,\"acknowledgeDate\":null},\"nc\":{\"name\":\"SOS\"},\"np\":{\"name\":\"Telegram\"},\"button\":52967},{\"e\":{\"id\":52966,\"subject\":\"SOS call\",\"submitDate\":1515439255,\"sentDate\":1515439259,\"acknowledgeDate\":null},\"nc\":{\"name\":\"SOS\"},\"np\":{\"name\":\"Telegram\"},\"button\":52966},{\"e\":{\"id\":52965,\"subject\":\"SOS call\",\"submitDate\":1515438502,\"sentDate\":1515438509,\"acknowledgeDate\":null},\"nc\":{\"name\":\"SOS\"},\"np\":{\"name\":\"Telegram\"},\"button\":52965},{\"e\":{\"id\":52964,\"subject\":\"SOS call\",\"submitDate\":1515437749,\"sentDate\":1515437759,\"acknowledgeDate\":null},\"nc\":{\"name\":\"SOS\"},\"np\":{\"name\":\"Telegram\"},\"button\":52964},{\"e\":{\"id\":52963,\"subject\":\"SOS call\",\"submitDate\":1515437631,\"sentDate\":1515437638,\"acknowledgeDate\":null},\"nc\":{\"name\":\"SOS\"},\"np\":{\"name\":\"Telegram\"},\"button\":52963},{\"e\":{\"id\":52962,\"subject\":\"SOS call\",\"submitDate\":1515437321,\"sentDate\":1515437328,\"acknowledgeDate\":null},\"nc\":{\"name\":\"SOS\"},\"np\":{\"name\":\"Telegram\"},\"button\":52962},{\"e\":{\"id\":52961,\"subject\":\"SOS call\",\"submitDate\":1515436395,\"sentDate\":1515436398,\"acknowledgeDate\":null},\"nc\":{\"name\":\"SOS\"},\"np\":{\"name\":\"Telegram\"},\"button\":52961},{\"e\":{\"id\":52960,\"subject\":\"SOS call\",\"submitDate\":1515436120,\"sentDate\":1515436129,\"acknowledgeDate\":null},\"nc\":{\"name\":\"SOS\"},\"np\":{\"name\":\"Telegram\"},\"button\":52960}]}";
-        $array = json_decode($a);
-        
-        
-        $ararara = array(
-            [0] => array(
-                ['e'] => array(
-                    ['id'] => 52969,
-                    ['subject'] => "SOS call",
-                    ['submitDate'] => 1515,
-                    ['sentDate'] => 5154,
-                    ['acknowledgeDate'] => NULL
-                ),
-                ['nc'] => array(
-                    ['name'] => "SOS"
-                ),
-                ['np'] => array(
-                    ['name'] => "Telegram"
-                ),
-                ['button'] => 52969
-            )/*,
-            [1] => array(
-                ["e"] => array(
-                    ["id"] =>
-                    52968,
-                    ["subject"] =>
-                    "SOS call",
-                    ["submitDate"] =>
-                    40365,
-                    ["sentDate"] =>
-                    15440,
-                    ["acknowledgeDate"] =>
-                    NULL
-                ),
-                ["nc"] =>array(
-                    ["name"] =>"SOS"
-                ),
-                ["np"] =>array(
-                    ["name"] =>"Telegram"
-                ),
-                ["button"] =>52968
-            )
-        );
-
-        $erer = current((Array)current((Array)$array)[0])->id;
-        $erered = current((Array)$array)[0]->button;
-        */
-        //$lastId = $array['data'][0];
-        //$gdf = max(array_column($array['data'][0], 'id'));
-
 
         return new ViewModel([
             'filters' => json_encode($sessionDatatableFilters),
@@ -185,7 +134,7 @@ class NotificationsController extends AbstractActionController
         $totalNotifications = $this->notificationsService->getTotalNotifications();
         $recordsFiltered = $this->getRecordsFiltered($filters, $totalNotifications);
         
-        $lastId = $dataDataTable[0];
+        $lastId = $dataDataTable[0]['e']['id'];
         
         $sessionAllarm = new Container('sessionAllarm');
         if(!$sessionAllarm->offsetExists('maxId')){
