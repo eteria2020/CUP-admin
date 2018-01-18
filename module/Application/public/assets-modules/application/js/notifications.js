@@ -1,6 +1,8 @@
 /* global  filters:true, translate:true, $, getSessionVars:true, jstz:true, moment:true, document: true */
 $(function() {
     "use strict";
+    
+    $('#btnAllarmDiv').hide();
 
     // Detect user timezone
     var userTimeZone = moment.tz.guess(); // Determines the time zone of the browser client
@@ -98,7 +100,12 @@ $(function() {
                 "url": sSource,
                 "data": aoData,
                 "success": fnCallback
-            } );
+            }).done(function( aoData ) {
+                if(aoData['checkAllarm']){
+                    $('#btnAllarmDiv').show();
+                    $('#audioAllarmDiv').html("<audio id='audio' src='/audio/beep.wav' autoplay loop></audio>");
+                }
+            });
         },
         "fnServerParams": function ( aoData ) {
             if (filterDate) {
@@ -191,6 +198,11 @@ $(function() {
                 "sSortDescending": translate("sSortDescending")
             }
         }
+    });
+    
+    $('#btnAllarm').click(function (){
+        $('#audioAllarmDiv').html("<audio id='audio' src='/audio/beep.wav'></audio>");
+        $('#btnAllarmDiv').hide();
     });
 
     $("#js-search").click(function() {
