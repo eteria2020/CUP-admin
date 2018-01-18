@@ -136,25 +136,38 @@ class NotificationsController extends AbstractActionController
         $lastId = $dataDataTable[0]['e']['id'];
 
         $sessionAllarm = new Container('sessionAllarm');
+        
         if (!$sessionAllarm->offsetExists('maxId')) {
             $sessionAllarm->offsetSet('maxId', $lastId);
-            $checkAllarm = false;
+            $sessionAllarm->offsetSet('checkAllarm', false);
         } else {
-            if ($sessionAllarm->offsetGet('maxId') < $lastId) {
-                $sessionAllarm->offsetSet('maxId', $lastId);
-                $checkAllarm = true;
+            if ($sessionAllarm->offsetGet('checkAllarm')) {
+                $sessionAllarm->offsetSet('checkAllarm', true);
             } else {
-                $checkAllarm = false;
+                if ($sessionAllarm->offsetGet('maxId') < $lastId) {
+                    $sessionAllarm->offsetSet('maxId', $lastId);
+                    $sessionAllarm->offsetSet('checkAllarm', true);
+                } else {
+                    $sessionAllarm->offsetSet('checkAllarm', false);
+                }
             }
         }
 
+
+
         return new JsonModel([
             'draw' => $this->params()->fromQuery('sEcho', 0),
-            'checkAllarm' => $checkAllarm,
+            'checkAllarm' => $sessionAllarm->offsetGet('checkAllarm'),
             'recordsTotal' => $totalNotifications,
             'recordsFiltered' => $recordsFiltered,
             'data' => $dataDataTable
         ]);
+    }
+    
+    public function stopAllarmAction() {
+        $sessionAllarm = new Container('sessionAllarm');
+        $sessionAllarm->offsetSet('checkAllarm', false);
+        return true;
     }
 
     /**
