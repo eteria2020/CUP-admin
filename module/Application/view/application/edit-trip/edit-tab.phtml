@@ -106,7 +106,51 @@ else:
 // close editable trip section
 endif;
 ?>
-<br>
-<br>
-<?= $this->partial('partials/events-table.phtml', ['events' => $this->events]); ?>
+
+<?php if (!$trip->isEnded()): ?>
+
+    <div class="row">
+        <div class="col-lg-12">
+
+            <?= $this->partial('partials/flash-messages.phtml', []); ?>
+            <div class="panel panel-default">
+                <div class="panel-heading"><?= $this->translate("Chiudi corsa"); ?></div>
+                <div class="panel-body">
+                    <form method="post" action="<?= $this->url('trips/do-close/post'); ?>">
+                        <input type="hidden" name="id" value="<?= $this->trip->getId(); ?>">
+
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <div class="form-group">
+                                    <label for="gender"><?= $this->translate("Data e ora chiusura"); ?></label>
+                                    <input type="text" name="datetime" id="datetime" class="form-control date-picker">
+                                </div>
+                            </div>
+
+                            <div class="col-lg-6">
+                                <div class="form-group">
+                                    <label for="name"><?= $this->translate("Pagabile"); ?></label>
+                                    <select name="payable" id="payable" class="form-control">
+                                        <option value="none">-</option>
+                                        <option value="yes"><?= $this->translate("Sì"); ?></option>
+                                        <option value="no"><?= $this->translate("No"); ?></option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <button type="submit" class="btn btn-success"><?= $this->translate("Chiudi corsa"); ?></button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+<?php endif; ?>
+
+<script type="text/javascript" src="/js/close-trip.js"></script>
 <script type="text/javascript" src="/js/edit-trip.js"></script>

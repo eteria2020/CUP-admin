@@ -14,14 +14,18 @@
             <div class="portlet-body">
                 
                 <script>
-                    var event_json = <?= $this->events; ?>;
-                    var log_json = <?= $this->logs; ?>;
+                    var event_json = <?= $this->eventsJson; ?>;
+                    var log_json = <?= $this->logsJson; ?>;
                     init(event_json, log_json);
                 </script>
-                
+
                 <div id="conteiner">
                     <div align="center" id="map"></div>  
-                </div>                
+                </div> 
+
+                <br>
+                <br>
+                <?= $this->partial('partials/events-table.phtml', ['events' => $this->events]); ?>
 
 
             </div>
