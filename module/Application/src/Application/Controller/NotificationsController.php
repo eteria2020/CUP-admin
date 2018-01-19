@@ -41,6 +41,9 @@ class NotificationsController extends AbstractActionController
      * @var Container
      */
     private $datatableFiltersSessionContainer;
+    
+    //variabile sessione
+    private $sessionAllarm;
 
     /**
      * @param NotificationsService $notificationsService
@@ -123,16 +126,31 @@ class NotificationsController extends AbstractActionController
         ]);
     }
 
-    public function datatableAction()
-    {
+    public function datatableAction() {
         $filters = $this->params()->fromPost();
         $filters['withLimit'] = true;
         $dataDataTable = $this->notificationsService->getDataDataTable($filters);
         $totalNotifications = $this->notificationsService->getTotalNotifications();
         $recordsFiltered = $this->getRecordsFiltered($filters, $totalNotifications);
 
+        $lastId = $dataDataTable[0]['e']['id'];
+
+        $sessionAllarm = new Container('sessionAllarm');
+        if (!$sessionAllarm->offsetExists('maxId')) {
+            $sessionAllarm->offsetSet('maxId', $lastId);
+            $checkAllarm = false;
+        } else {
+            if ($sessionAllarm->offsetGet('maxId') < $lastId) {
+                $sessionAllarm->offsetSet('maxId', $lastId);
+                $checkAllarm = true;
+            } else {
+                $checkAllarm = false;
+            }
+        }
+
         return new JsonModel([
             'draw' => $this->params()->fromQuery('sEcho', 0),
+            'checkAllarm' => $checkAllarm,
             'recordsTotal' => $totalNotifications,
             'recordsFiltered' => $recordsFiltered,
             'data' => $dataDataTable

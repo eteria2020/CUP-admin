@@ -1,3 +1,6 @@
+<head>
+    <meta http-equiv="refresh" content="30" > <!-- autorefresh page-->
+</head>
 <?php
 $this->headLink()
     ->appendStylesheet('/js/datatables/plugins/bootstrap/dataTables.bootstrap.css')
@@ -65,6 +68,11 @@ $this->headScript()
                     </div>
                 </div>
                 <hr>
+                <div id="audioAllarmDiv"></div>
+                <div id="btnAllarmDiv">
+                    <button id="btnAllarm" class="btn red">Stop Allarm</button>
+                    <hr>
+                </div>
                 <!-- BEGIN TABLE PORTLET-->
                 <div class="portlet box green">
                     <div class="portlet-title">
