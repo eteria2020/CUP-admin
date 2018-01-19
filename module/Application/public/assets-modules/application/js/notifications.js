@@ -103,7 +103,7 @@ $(function() {
             }).done(function( aoData ) {
                 if(aoData['checkAllarm']){
                     $('#btnAllarmDiv').show();
-                    $('#audioAllarmDiv').html("<audio id='audio' src='/audio/ship_bell.wav' autoplay></audio>");
+                    $('#audioAllarmDiv').html("<audio id='audio' src='/audio/beep45.wav' autoplay></audio>");
                 }
             });
         },
@@ -206,7 +206,7 @@ $(function() {
             url: "/notifications/stop-allarm",
             data: {'checkAllarm': false},
             success: function (data) {
-                $('#audioAllarmDiv').html("<audio id='audio' src='/audio/ship_bell.wav'></audio>");
+                $('#audioAllarmDiv').html("<audio id='audio' src='/audio/beep45.wav'></audio>");
                 $('#btnAllarmDiv').hide();
             },
             error: function () {
