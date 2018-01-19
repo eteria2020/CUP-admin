@@ -168,10 +168,10 @@ class NotificationsController extends AbstractActionController
     public function takeChargeAction() {
         // Get the Notification ID from route
         $id = (int) $this->params()->fromRoute('id', 0);
-        
+
         // Get the notification Object
         $notification = $this->notificationsService->getNotificationById($id);
-        
+
         $this->notificationsService->acknowledge($notification, date_create());
         $this->notificationsService->webuser($notification);
 
