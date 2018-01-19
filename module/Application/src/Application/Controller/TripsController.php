@@ -293,8 +293,9 @@ class TripsController extends AbstractActionController
         
         $view = new ViewModel();
         $view->setTemplate('partials/map-trip.phtml');
-        $view->setVariables(['events' => json_encode($arrayJsonEvents)]);//json di eventi
-        $view->setVariables(['logs' => json_encode($arrayJsonLogs)]);//json di log
+        $view->setVariables(['eventsJson' => json_encode($arrayJsonEvents)]);//json di eventi
+        $view->setVariables(['events' => $events]);//json di eventi
+        $view->setVariables(['logsJson' => json_encode($arrayJsonLogs)]);//json di log
         $view->setTerminal(true);
 
         return $view;
