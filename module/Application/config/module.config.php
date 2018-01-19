@@ -1423,6 +1423,15 @@ return [
                             ],
                         ],
                     ],
+                    'stop-allarm' => [
+                        'type' => 'Literal',
+                        'options' => [
+                            'route' => '/stop-allarm',
+                            'defaults' => [
+                                'action' => 'stop-allarm',
+                            ],
+                        ],
+                    ],
                     'ajax-acknowledgment' => [
                         'type'    => 'Segment',
                         'options' => [

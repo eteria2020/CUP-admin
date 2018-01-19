@@ -103,7 +103,7 @@ $(function() {
             }).done(function( aoData ) {
                 if(aoData['checkAllarm']){
                     $('#btnAllarmDiv').show();
-                    $('#audioAllarmDiv').html("<audio id='audio' src='/audio/beep.wav' autoplay loop></audio>");
+                    $('#audioAllarmDiv').html("<audio id='audio' src='/audio/beep45.wav' autoplay></audio>");
                 }
             });
         },
@@ -199,10 +199,20 @@ $(function() {
             }
         }
     });
-    
-    $('#btnAllarm').click(function (){
-        $('#audioAllarmDiv').html("<audio id='audio' src='/audio/beep.wav'></audio>");
-        $('#btnAllarmDiv').hide();
+
+    $('#btnAllarm').click(function () {
+        $.ajax({
+            type: "POST",
+            url: "/notifications/stop-allarm",
+            data: {'checkAllarm': false},
+            success: function (data) {
+                $('#audioAllarmDiv').html("<audio id='audio' src='/audio/beep45.wav'></audio>");
+                $('#btnAllarmDiv').hide();
+            },
+            error: function () {
+                console.log("ERROR stop-allarm");
+            }
+        });
     });
 
     $("#js-search").click(function() {
