@@ -158,7 +158,7 @@ $(function() {
                     if (data == null) {
                         var buttons = "<div class=\"btn-group\">" +
                                 "<a href=\"/notifications/take-charge/" + row.e.id + "\" class=\"btn btn-default\">" +
-                                "Presa in carico </a></div>";
+                                "Prendi in carico </a></div>";
                         return buttons;
                     } else {
                         return data;
