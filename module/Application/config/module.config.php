@@ -1423,6 +1423,18 @@ return [
                             ],
                         ],
                     ],
+                    'take-charge' => [
+                        'type' => 'Segment',
+                        'options' => [
+                            'route' => '/take-charge/:id',
+                            'constraints' => [
+                                'id' => '[0-9]*'
+                            ],
+                            'defaults' => [
+                                'action' => 'take-charge',
+                            ],
+                        ],
+                    ],
                     'ajax-acknowledgment' => [
                         'type'    => 'Segment',
                         'options' => [

@@ -127,6 +127,7 @@ $(function() {
             {data: "e.submitDate"},
             {data: "e.sentDate"},
             {data: "e.acknowledgeDate"},
+            {data: "e.webuser"},
             {data: "nc.name"},
             {data: "np.name"},
             {data: "button"}
@@ -140,9 +141,9 @@ $(function() {
                 targets: [2, 3, 4],
                 render: function (data) {
                     var momentDate;
-                    if (typeof data === "number"){
+                    if (typeof data === "number") {
                         momentDate = moment(data, "X");
-                        if (momentDate.isValid()){
+                        if (momentDate.isValid()) {
                             return momentDate.tz(userTimeZone).format("DD-MM-YYYY - HH:mm:ss");
                         }
                     }
@@ -150,21 +151,36 @@ $(function() {
                 }
             },
             {
-                targets: 7,
+                targets: 5,
+                render: function (data, type, row) {
+                    console.log(data);
+                    console.log(row);
+                    if (data == null) {
+                        var buttons = "<div class=\"btn-group\">" +
+                                "<a href=\"/notifications/take-charge/" + row.e.id + "\" class=\"btn btn-default\">" +
+                                "Presa in carico </a></div>";
+                        return buttons;
+                    } else {
+                        return data;
+                    }
+                }
+            },
+            {
+                targets: 8,
                 data: "button",
                 searchable: false,
                 sortable: false,
                 render: function (data, type, row) {
                     var buttons = "<div class=\"btn-group\">";
-
+                    /*
                     // Check if the notification have no ack date.
-                    if (typeof row.e.acknowledgeDate !== "number" && row.np.name === "Web"){
+                    if (typeof row.e.acknowledgeDate !== "number" && row.np.name === "Web") {
                         buttons += "<div class=\"btn btn-default\" id=\"ack-button\" data-id=\"" + data + "\">" +
-                        translate("acknowledgment") + "</div> ";
+                                translate("acknowledgment") + "</div> ";
                     }
-
+                    */
                     buttons += "<a href=\"/notifications/details/" + data + "\" class=\"btn btn-default\">" +
-                    translate("details") + "</a></div>";
+                            translate("details") + "</a></div>";
                     return buttons;
                 }
             }

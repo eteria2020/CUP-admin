@@ -156,6 +156,31 @@ class NotificationsController extends AbstractActionController
             'data' => $dataDataTable
         ]);
     }
+    
+    public function takeChargeAction() {
+        // Get the Notification ID from route
+        $id = (int) $this->params()->fromRoute('id', 0);
+        
+        // Get the notification Object
+        $notification = $this->notificationsService->getNotificationById($id);
+        
+        $this->notificationsService->acknowledge($notification, date_create());
+        $this->notificationsService->webuser($notification);
+        
+        
+        return new JsonModel([
+            'dateTimeZ' => true
+        ]);
+        /*
+        $view = new ViewModel();
+        $view->setTemplate('partials/map-trip.phtml');
+        $view->setVariables(['events' => json_encode($arrayJsonEvents)]);//json di eventi
+        $view->setVariables(['logs' => json_encode($arrayJsonLogs)]);//json di log
+        $view->setTerminal(true);
+
+        return $view;
+        */
+    }
 
     /**
      * Sets the acknowledge to the actual datetime of a specified notification.
