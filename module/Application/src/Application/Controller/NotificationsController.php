@@ -166,31 +166,9 @@ class NotificationsController extends AbstractActionController
         
         $this->notificationsService->acknowledge($notification, date_create());
         $this->notificationsService->webuser($notification);
-        
-        return $this->indexAction();
-        
-        /*
-        $view = new ViewModel();
-        $view->setTemplate('/notifications');
-        $view->setTerminal(true);
-        return $view;
-        
-        return true;
-        
-        return $this->redirect()->toRoute('/notification');
-        
-        return new JsonModel([
-            'dateTimeZ' => true
-        ]);
-        
-        $view = new ViewModel();
-        $view->setTemplate('partials/map-trip.phtml');
-        $view->setVariables(['events' => json_encode($arrayJsonEvents)]);//json di eventi
-        $view->setVariables(['logs' => json_encode($arrayJsonLogs)]);//json di log
-        $view->setTerminal(true);
 
-        return $view;
-        */
+        return $this->redirect()->toRoute('notifications');
+        
     }
 
     /**
