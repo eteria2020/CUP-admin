@@ -43,7 +43,7 @@ class NotificationsController extends AbstractActionController
     private $datatableFiltersSessionContainer;
     
     //variabile sessione
-    private $sessionAllarm;
+    //private $sessionAllarm;
 
     /**
      * @param NotificationsService $notificationsService
@@ -135,7 +135,7 @@ class NotificationsController extends AbstractActionController
 
         //$lastId = $dataDataTable[0]['e']['id'];
 
-        $sessionAllarm = new Container('sessionAllarm');
+        //$sessionAllarm = new Container('sessionAllarm');
 
 
         $dateZero = new \DateTime('2018-01-22');
@@ -143,19 +143,20 @@ class NotificationsController extends AbstractActionController
         foreach ($dataDataTable as $data){
             if ($data['e']['submitDate'] > $dateZero) {
                 if (is_null($data['e']['webuser'])) {
-                    $sessionAllarm->offsetSet('checkAllarm', true);
+                    //$sessionAllarm->offsetSet('checkAllarm', true);
+                    $checkAllarm = true;
                     break;
                 } else {
-                    $sessionAllarm->offsetSet('checkAllarm', false);
+                    //$sessionAllarm->offsetSet('checkAllarm', false);
+                    $checkAllarm = false;
                 }
             }
         }
 
-
-
         return new JsonModel([
             'draw' => $this->params()->fromQuery('sEcho', 0),
-            'checkAllarm' => $sessionAllarm->offsetGet('checkAllarm'),
+            //'checkAllarm' => $sessionAllarm->offsetGet('checkAllarm'),
+            'checkAllarm' => $checkAllarm = true,
             'recordsTotal' => $totalNotifications,
             'recordsFiltered' => $recordsFiltered,
             'data' => $dataDataTable
@@ -176,10 +177,10 @@ class NotificationsController extends AbstractActionController
                 $this->notificationsService->acknowledge($notification, date_create());
                 $this->notificationsService->webuser($notification);
                 //stop allarm
-                $this->stopAllarmAction();
-                $this->flashMessenger()->addSuccessMessage($translator->translate('SOS preso in carico'));
+                //$this->stopAllarmAction();
+                $this->flashMessenger()->addSuccessMessage($translator->translate('SOS preso in carico.'));
             } else{
-                $this->flashMessenger()->addWarningMessage($translator->translate('L\'SOS è già stato preso in carico da un altro operatore.'));
+                $this->flashMessenger()->addErrorMessage($translator->translate('SOS già preso in carico da un altro operatore.'));
             }
         } catch (\Exception $e) {
             $this->flashMessenger()->addErrorMessage($translator->translate('Errore durante la presa in carico dell\'SOS.'));
@@ -188,12 +189,14 @@ class NotificationsController extends AbstractActionController
         return $this->redirect()->toRoute('notifications');
     }
 
+    /*
     public function stopAllarmAction() {
         $sessionAllarm = new Container('sessionAllarm');
         $sessionAllarm->offsetSet('checkAllarm', false);
         return true;
     }
-
+    */
+    
     /**
      * Sets the acknowledge to the actual datetime of a specified notification.
      * The notification is retrived with the route parameter "id".
