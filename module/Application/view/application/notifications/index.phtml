@@ -65,12 +65,9 @@ $this->headScript()
                                     </li>
                                 </ul>
                             </div>
+                            <div id="divSoundAllarm" class="form-group pull-right" ></div>
                         </div>
                     </div>
-                </div>
-                <hr>
-                <div id="divSoundAllarm">
-                    <!--<h4>Sound: &nbsp&nbsp<button type="button" style="width: 80px;" class="btn green" id="sound">ON</button></h4>-->
                 </div>
                 <hr>
                 <div id="audioAllarmDiv"></div>
@@ -82,18 +79,17 @@ $this->headScript()
                         </div>
                     </div>
                     <div class="portlet-body">
-                        <table class="table table-striped table-bordered table-hover" id="js-notifications-table">
+                        <table class="table table-striped table-bordered table-hover text-center" id="js-notifications-table">
                             <thead>
                             <tr>
-                                <th><?= $this->translate("Id"); ?></th>
-                                <th><?= $this->translate("Oggetto"); ?></th>
-                                <th><?= $this->translate("Data Registrazione"); ?></th>
-                                <th><?= $this->translate("Data Invio"); ?></th>
-                                <th><?= $this->translate("Data Presa Visione"); ?></th>
-                                <th><?= $this->translate("Webuser"); ?></th>
-                                <th><?= $this->translate("Categoria Notifica"); ?></th>
-                                <th><?= $this->translate("Protocollo Notifica"); ?></th>
-                                <th><?= $this->translate("Azione"); ?></th>
+                                <th class="text-center"><?= $this->translate("Id"); ?></th>
+                                <th class="text-center"><?= $this->translate("Oggetto"); ?></th>
+                                <th class="text-center"><?= $this->translate("Data Registrazione"); ?></th>
+                                <th class="text-center"><?= $this->translate("Data Invio"); ?></th>
+                                <th class="text-center"><?= $this->translate("Data Presa Visione"); ?></th>
+                                <th class="text-center"><?= $this->translate("Webuser"); ?></th>
+                                <th class="text-center"><?= $this->translate("Categoria"); ?></th>
+                                <th class="text-center"><?= $this->translate("Protocollo"); ?></th>
                             </tr>
                             </thead>
                         </table>

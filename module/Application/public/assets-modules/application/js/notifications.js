@@ -153,13 +153,19 @@ $(function() {
             {data: "e.acknowledgeDate"},
             {data: "e.webuser"},
             {data: "nc.name"},
-            {data: "np.name"},
-            {data: "button"}
+            {data: "np.name"}
+            //,{data: "button"}
         ],
         "columnDefs": [
             {
                 targets: 0,
-                sortable: true
+                sortable: true,
+                render: function (data, type, row) {
+                    var link = "<a href=\"/notifications/details/" + row.e.id + "\" class=\"btn btn-default\">" +
+                            row.e.id + "</a>";
+                    return link;
+                }
+                
             },
             {
                 targets: [2, 3, 4],
@@ -185,25 +191,6 @@ $(function() {
                     } else {
                         return data;
                     }
-                }
-            },
-            {
-                targets: 8,
-                data: "button",
-                searchable: false,
-                sortable: false,
-                render: function (data, type, row) {
-                    var buttons = "<div class=\"btn-group\">";
-                    /*
-                    // Check if the notification have no ack date.
-                    if (typeof row.e.acknowledgeDate !== "number" && row.np.name === "Web") {
-                        buttons += "<div class=\"btn btn-default\" id=\"ack-button\" data-id=\"" + data + "\">" +
-                                translate("acknowledgment") + "</div> ";
-                    }
-                    */
-                    buttons += "<a href=\"/notifications/details/" + data + "\" class=\"btn btn-default\">" +
-                            translate("details") + "</a></div>";
-                    return buttons;
                 }
             }
         ],
@@ -237,7 +224,6 @@ $(function() {
             }
         }
     });
-    
 
     $("#js-search").click(function() {
         table.fnFilter();
@@ -258,31 +244,5 @@ $(function() {
 
     $(dataTableVars.column).change(function() {
         renderSearchField($(this));
-    });
-
-    $(document).on("click", "#ack-button", function() {
-        var thisButton = $(this);
-        var notificationId = thisButton.data("id");
-        var ackColumn = thisButton.parents("tr").children()[4];
-
-        $.ajax({
-            method: "GET",
-            url: "/notifications/acknowledgment/" + notificationId,
-            dataType: "json",
-            beforeSend: function(){
-                $(".dataTables_processing").show();
-            }
-        })
-        .success(function(data) {
-            var dateTimeStamp;
-            if (typeof data.dateTimeStamp === "number"){
-                dateTimeStamp = data.dateTimeStamp;
-                $(ackColumn).html(moment(dateTimeStamp, "X").tz(userTimeZone).format("DD-MM-YYYY - HH:mm:ss"));
-                thisButton.remove();
-            }
-        })
-        .complete(function() {
-            $(".dataTables_processing").hide();
-        });
     });
 });
