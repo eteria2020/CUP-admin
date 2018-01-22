@@ -1,8 +1,6 @@
 /* global  filters:true, translate:true, $, getSessionVars:true, jstz:true, moment:true, document: true */
 $(function() {
     "use strict";
-    
-    $('#btnAllarmDiv').hide();
 
     // Detect user timezone
     var userTimeZone = moment.tz.guess(); // Determines the time zone of the browser client
@@ -102,7 +100,6 @@ $(function() {
                 "success": fnCallback
             }).done(function( aoData ) {
                 if(aoData['checkAllarm']){
-                    $('#btnAllarmDiv').show();
                     $('#audioAllarmDiv').html("<audio id='audio' src='/audio/beep45.wav' autoplay></audio>");
                 }
             });
@@ -214,21 +211,6 @@ $(function() {
                 "sSortDescending": translate("sSortDescending")
             }
         }
-    });
-
-    $('#btnAllarm').click(function () {
-        $.ajax({
-            type: "POST",
-            url: "/notifications/stop-allarm",
-            data: {'checkAllarm': false},
-            success: function (data) {
-                $('#audioAllarmDiv').html("<audio id='audio' src='/audio/beep45.wav'></audio>");
-                $('#btnAllarmDiv').hide();
-            },
-            error: function () {
-                console.log("ERROR stop-allarm");
-            }
-        });
     });
 
     $("#js-search").click(function() {

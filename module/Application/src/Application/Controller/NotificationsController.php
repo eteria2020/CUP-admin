@@ -133,26 +133,40 @@ class NotificationsController extends AbstractActionController
         $totalNotifications = $this->notificationsService->getTotalNotifications();
         $recordsFiltered = $this->getRecordsFiltered($filters, $totalNotifications);
 
-        $lastId = $dataDataTable[0]['e']['id'];
+        //$lastId = $dataDataTable[0]['e']['id'];
 
         $sessionAllarm = new Container('sessionAllarm');
-        
-        if (!$sessionAllarm->offsetExists('maxId')) {
-            $sessionAllarm->offsetSet('maxId', $lastId);
-            $sessionAllarm->offsetSet('checkAllarm', false);
-        } else {
-            if ($sessionAllarm->offsetGet('checkAllarm')) {
-                $sessionAllarm->offsetSet('checkAllarm', true);
-            } else {
-                if ($sessionAllarm->offsetGet('maxId') < $lastId) {
-                    $sessionAllarm->offsetSet('maxId', $lastId);
-                    $sessionAllarm->offsetSet('checkAllarm', true);
-                } else {
-                    $sessionAllarm->offsetSet('checkAllarm', false);
-                }
-            }
-        }
 
+        /*
+          if (!$sessionAllarm->offsetExists('maxId')) {
+          $sessionAllarm->offsetSet('maxId', $lastId);
+          $sessionAllarm->offsetSet('checkAllarm', false);
+          } else {
+          if ($sessionAllarm->offsetGet('checkAllarm')) {
+          $sessionAllarm->offsetSet('checkAllarm', true);
+          } else {
+          if ($sessionAllarm->offsetGet('maxId') < $lastId) {
+          $sessionAllarm->offsetSet('maxId', $lastId);
+          $sessionAllarm->offsetSet('checkAllarm', true);
+          } else {
+          $sessionAllarm->offsetSet('checkAllarm', false);
+          }
+          }
+          } */
+
+        
+        if ($sessionAllarm->offsetExists('checkAllarm') && $sessionAllarm->offsetGet('checkAllarm'))
+            $sessionAllarm->offsetSet('checkAllarm', true);
+        else{
+            $dateZero = new \DateTime('2018-01-22');
+            $dateZero = $dateZero->format('U');
+            foreach ($dataDataTable as $data)
+                if ($data['e']['submitDate'] > $dateZero)
+                    if (is_null($data['e']['webuser'])) {
+                        $sessionAllarm->offsetSet('checkAllarm', true);
+                        break;
+                    }
+        }
 
 
         return new JsonModel([
@@ -163,17 +177,28 @@ class NotificationsController extends AbstractActionController
             'data' => $dataDataTable
         ]);
     }
-    
 
     public function takeChargeAction() {
+        
+        $translator = $this->TranslatorPlugin();
+        
         // Get the Notification ID from route
         $id = (int) $this->params()->fromRoute('id', 0);
-
-        // Get the notification Object
-        $notification = $this->notificationsService->getNotificationById($id);
-
-        $this->notificationsService->acknowledge($notification, date_create());
-        $this->notificationsService->webuser($notification);
+        
+        try {
+            // Get the notification Object
+            $notification = $this->notificationsService->getNotificationById($id);
+            if (is_null($notification->getWebuser())) {
+                $this->notificationsService->acknowledge($notification, date_create());
+                $this->notificationsService->webuser($notification);
+                //stop allarm
+                $this->stopAllarmAction();
+                $this->flashMessenger()->addSuccessMessage($translator->translate('SOS preso in carico'));
+            } else
+                $this->flashMessenger()->addWarningMessage($translator->translate('L\'SOS è già stato preso in carico da un altro operatore.'));
+        } catch (\Exception $e) {
+            $this->flashMessenger()->addErrorMessage($translator->translate('Errore durante la presa in carico dell\'SOS.'));
+        }
 
         return $this->redirect()->toRoute('notifications');
     }
