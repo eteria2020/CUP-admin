@@ -145,10 +145,20 @@ class NotificationsController extends AbstractActionController
                 }
             }
         }
-
+        
+        $allarm = new Container('allarm');
+        
+        if(!$allarm->offsetExists('onOff')){
+            $allarm->offsetSet('onOff', "on");
+            $onOff ="on";
+        }else{
+            $onOff = $allarm->offsetGet('onOff');
+        }
+        
         return new JsonModel([
             'draw' => $this->params()->fromQuery('sEcho', 0),
             'checkAllarm' => $checkAllarm,
+            'onOff' => $onOff,
             'recordsTotal' => $totalNotifications,
             'recordsFiltered' => $recordsFiltered,
             'data' => $dataDataTable
@@ -181,8 +191,9 @@ class NotificationsController extends AbstractActionController
     
     public function onOffAllarmAction() {
         $allarm = new Container('allarm');
-        $jbjh = $this->params()->fromPost('onOff');
         $allarm->offsetSet('onOff', $this->params()->fromPost('onOff'));
+        $gfgf = $allarm->offsetGet('onOff');
+        return true;
     }
 
     /**

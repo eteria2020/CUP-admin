@@ -1,24 +1,21 @@
 /* global  filters:true, translate:true, $, getSessionVars:true, jstz:true, moment:true, document: true */
 $(function() {
     "use strict";
-    
-    $('#divSoundAllarm ').html("<h4>Sound: &nbsp&nbsp<button type='button' style='width: 80px;' class='btn green' id='sound'>ON</button></h4>");
 
     $(document).on("click", "#sound", function () {
         var onOff = "";
         if ($('#sound').text() === "ON") {
             $('#divSoundAllarm ').html("<h4>Sound: &nbsp&nbsp<button type='button' style='width: 80px;' class='btn red' id='sound'>OFF</button></h4>");
-            onOff = false;
+            onOff = "off";
         } else {
             $('#divSoundAllarm ').html("<h4>Sound: &nbsp&nbsp<button type='button' style='width: 80px;' class='btn green' id='sound'>ON</button></h4>");
-            onOff = true;
+            onOff = "on";
         }
         $.ajax({
             type: "POST",
             url: "/notifications/on-off-allarm",
             data: {'onOff': onOff},
             success: function (data) {
-                console.log("success on-off-allarm");
             },
             error: function () {
                 console.log("ERROR on-off-allarm");
@@ -115,16 +112,22 @@ $(function() {
         "bStateSave": false,
         "bFilter": false,
         "sAjaxSource": "/notifications/datatable",
-        "fnServerData": function ( sSource, aoData, fnCallback, oSettings ) {
-            oSettings.jqXHR = $.ajax( {
+        "fnServerData": function (sSource, aoData, fnCallback, oSettings) {
+            oSettings.jqXHR = $.ajax({
                 "dataType": "json",
                 "type": "POST",
                 "url": sSource,
                 "data": aoData,
                 "success": fnCallback
-            }).done(function( aoData ) {
-                if(aoData['checkAllarm'] && $('#sound').text()==="ON"){
+            }).done(function (aoData) {
+                if (aoData['onOff'] === "on") {
+                    $('#divSoundAllarm ').html("<h4>Sound: &nbsp&nbsp<button type='button' style='width: 80px;' class='btn green' id='sound'>ON</button></h4>");
+                } else {
+                    $('#divSoundAllarm ').html("<h4>Sound: &nbsp&nbsp<button type='button' style='width: 80px;' class='btn red' id='sound'>OFF</button></h4>");
+                }
+                if (aoData['checkAllarm'] && aoData['onOff'] === "on") {
                     $('#audioAllarmDiv').html("<audio id='audio' src='/audio/beep45.wav' autoplay></audio>");
+
                 }
             });
         },
