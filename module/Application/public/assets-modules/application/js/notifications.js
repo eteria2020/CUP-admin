@@ -210,6 +210,16 @@ $(function() {
             }
         }
     });
+    
+    $(document).on("click", "#sound", function () {
+        if($('#sound').text()==="ON"){
+            $('#divSoundAllarm ').html("<h4>Sound: &nbsp&nbsp<button type='button' style='width: 80px;' class='btn red' id='sound'>OFF</button></h4>");
+        }else{
+            $('#divSoundAllarm ').html("<h4>Sound: &nbsp&nbsp<button type='button' style='width: 80px;' class='btn green' id='sound'>ON</button></h4>");
+        }
+       
+    });
+    
 
     $("#js-search").click(function() {
         table.fnFilter();
