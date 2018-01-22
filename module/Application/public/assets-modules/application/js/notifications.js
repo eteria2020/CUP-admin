@@ -1,6 +1,30 @@
 /* global  filters:true, translate:true, $, getSessionVars:true, jstz:true, moment:true, document: true */
 $(function() {
     "use strict";
+    
+    $('#divSoundAllarm ').html("<h4>Sound: &nbsp&nbsp<button type='button' style='width: 80px;' class='btn green' id='sound'>ON</button></h4>");
+
+    $(document).on("click", "#sound", function () {
+        var onOff = "";
+        if ($('#sound').text() === "ON") {
+            $('#divSoundAllarm ').html("<h4>Sound: &nbsp&nbsp<button type='button' style='width: 80px;' class='btn red' id='sound'>OFF</button></h4>");
+            onOff = false;
+        } else {
+            $('#divSoundAllarm ').html("<h4>Sound: &nbsp&nbsp<button type='button' style='width: 80px;' class='btn green' id='sound'>ON</button></h4>");
+            onOff = true;
+        }
+        $.ajax({
+            type: "POST",
+            url: "/notifications/on-off-allarm",
+            data: {'onOff': onOff},
+            success: function (data) {
+                console.log("success on-off-allarm");
+            },
+            error: function () {
+                console.log("ERROR on-off-allarm");
+            }
+        });
+    });
 
     // Detect user timezone
     var userTimeZone = moment.tz.guess(); // Determines the time zone of the browser client
@@ -99,7 +123,7 @@ $(function() {
                 "data": aoData,
                 "success": fnCallback
             }).done(function( aoData ) {
-                if(aoData['checkAllarm']){
+                if(aoData['checkAllarm'] && $('#sound').text()==="ON"){
                     $('#audioAllarmDiv').html("<audio id='audio' src='/audio/beep45.wav' autoplay></audio>");
                 }
             });
@@ -209,15 +233,6 @@ $(function() {
                 "sSortDescending": translate("sSortDescending")
             }
         }
-    });
-    
-    $(document).on("click", "#sound", function () {
-        if($('#sound').text()==="ON"){
-            $('#divSoundAllarm ').html("<h4>Sound: &nbsp&nbsp<button type='button' style='width: 80px;' class='btn red' id='sound'>OFF</button></h4>");
-        }else{
-            $('#divSoundAllarm ').html("<h4>Sound: &nbsp&nbsp<button type='button' style='width: 80px;' class='btn green' id='sound'>ON</button></h4>");
-        }
-       
     });
     
 

@@ -41,6 +41,9 @@ class NotificationsController extends AbstractActionController
      * @var Container
      */
     private $datatableFiltersSessionContainer;
+    
+    //var session
+    private $allarm;
 
     /**
      * @param NotificationsService $notificationsService
@@ -145,7 +148,6 @@ class NotificationsController extends AbstractActionController
 
         return new JsonModel([
             'draw' => $this->params()->fromQuery('sEcho', 0),
-            //'checkAllarm' => $sessionAllarm->offsetGet('checkAllarm'),
             'checkAllarm' => $checkAllarm,
             'recordsTotal' => $totalNotifications,
             'recordsFiltered' => $recordsFiltered,
@@ -177,6 +179,12 @@ class NotificationsController extends AbstractActionController
         return $this->redirect()->toRoute('notifications');
     }
     
+    public function onOffAllarmAction() {
+        $allarm = new Container('allarm');
+        $jbjh = $this->params()->fromPost('onOff');
+        $allarm->offsetSet('onOff', $this->params()->fromPost('onOff'));
+    }
+
     /**
      * Sets the acknowledge to the actual datetime of a specified notification.
      * The notification is retrived with the route parameter "id".

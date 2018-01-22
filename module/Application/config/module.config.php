@@ -1435,12 +1435,12 @@ return [
                             ],
                         ],
                     ],
-                    'stop-allarm' => [
+                    'on-off-allarm' => [
                         'type' => 'Literal',
                         'options' => [
-                            'route' => '/stop-allarm',
+                            'route' => '/on-off-allarm',
                             'defaults' => [
-                                'action' => 'stop-allarm',
+                                'action' => 'on-off-allarm',
                             ],
                         ],
                     ],
