@@ -41,9 +41,6 @@ class NotificationsController extends AbstractActionController
      * @var Container
      */
     private $datatableFiltersSessionContainer;
-    
-    //variabile sessione
-    //private $sessionAllarm;
 
     /**
      * @param NotificationsService $notificationsService
@@ -133,21 +130,14 @@ class NotificationsController extends AbstractActionController
         $totalNotifications = $this->notificationsService->getTotalNotifications();
         $recordsFiltered = $this->getRecordsFiltered($filters, $totalNotifications);
 
-        //$lastId = $dataDataTable[0]['e']['id'];
-
-        //$sessionAllarm = new Container('sessionAllarm');
-
-
         $dateZero = new \DateTime('2018-01-22');
         $dateZero = $dateZero->format('U');
         foreach ($dataDataTable as $data){
             if ($data['e']['submitDate'] > $dateZero) {
                 if (is_null($data['e']['webuser'])) {
-                    //$sessionAllarm->offsetSet('checkAllarm', true);
                     $checkAllarm = true;
                     break;
                 } else {
-                    //$sessionAllarm->offsetSet('checkAllarm', false);
                     $checkAllarm = false;
                 }
             }
@@ -156,7 +146,7 @@ class NotificationsController extends AbstractActionController
         return new JsonModel([
             'draw' => $this->params()->fromQuery('sEcho', 0),
             //'checkAllarm' => $sessionAllarm->offsetGet('checkAllarm'),
-            'checkAllarm' => $checkAllarm = true,
+            'checkAllarm' => $checkAllarm,
             'recordsTotal' => $totalNotifications,
             'recordsFiltered' => $recordsFiltered,
             'data' => $dataDataTable
@@ -176,8 +166,6 @@ class NotificationsController extends AbstractActionController
             if (is_null($notification->getWebuser())) {
                 $this->notificationsService->acknowledge($notification, date_create());
                 $this->notificationsService->webuser($notification);
-                //stop allarm
-                //$this->stopAllarmAction();
                 $this->flashMessenger()->addSuccessMessage($translator->translate('SOS preso in carico.'));
             } else{
                 $this->flashMessenger()->addErrorMessage($translator->translate('SOS già preso in carico da un altro operatore.'));
@@ -188,14 +176,6 @@ class NotificationsController extends AbstractActionController
 
         return $this->redirect()->toRoute('notifications');
     }
-
-    /*
-    public function stopAllarmAction() {
-        $sessionAllarm = new Container('sessionAllarm');
-        $sessionAllarm->offsetSet('checkAllarm', false);
-        return true;
-    }
-    */
     
     /**
      * Sets the acknowledge to the actual datetime of a specified notification.
