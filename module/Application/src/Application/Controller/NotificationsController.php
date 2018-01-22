@@ -137,36 +137,20 @@ class NotificationsController extends AbstractActionController
 
         $sessionAllarm = new Container('sessionAllarm');
 
-        /*
-          if (!$sessionAllarm->offsetExists('maxId')) {
-          $sessionAllarm->offsetSet('maxId', $lastId);
-          $sessionAllarm->offsetSet('checkAllarm', false);
-          } else {
-          if ($sessionAllarm->offsetGet('checkAllarm')) {
-          $sessionAllarm->offsetSet('checkAllarm', true);
-          } else {
-          if ($sessionAllarm->offsetGet('maxId') < $lastId) {
-          $sessionAllarm->offsetSet('maxId', $lastId);
-          $sessionAllarm->offsetSet('checkAllarm', true);
-          } else {
-          $sessionAllarm->offsetSet('checkAllarm', false);
-          }
-          }
-          } */
 
-        
-        if ($sessionAllarm->offsetExists('checkAllarm') && $sessionAllarm->offsetGet('checkAllarm'))
-            $sessionAllarm->offsetSet('checkAllarm', true);
-        else{
-            $dateZero = new \DateTime('2018-01-22');
-            $dateZero = $dateZero->format('U');
-            foreach ($dataDataTable as $data)
-                if ($data['e']['submitDate'] > $dateZero)
-                    if (is_null($data['e']['webuser'])) {
-                        $sessionAllarm->offsetSet('checkAllarm', true);
-                        break;
-                    }
+        $dateZero = new \DateTime('2018-01-22');
+        $dateZero = $dateZero->format('U');
+        foreach ($dataDataTable as $data){
+            if ($data['e']['submitDate'] > $dateZero) {
+                if (is_null($data['e']['webuser'])) {
+                    $sessionAllarm->offsetSet('checkAllarm', true);
+                    break;
+                } else {
+                    $sessionAllarm->offsetSet('checkAllarm', false);
+                }
+            }
         }
+
 
 
         return new JsonModel([
@@ -194,8 +178,9 @@ class NotificationsController extends AbstractActionController
                 //stop allarm
                 $this->stopAllarmAction();
                 $this->flashMessenger()->addSuccessMessage($translator->translate('SOS preso in carico'));
-            } else
+            } else{
                 $this->flashMessenger()->addWarningMessage($translator->translate('L\'SOS è già stato preso in carico da un altro operatore.'));
+            }
         } catch (\Exception $e) {
             $this->flashMessenger()->addErrorMessage($translator->translate('Errore durante la presa in carico dell\'SOS.'));
         }

@@ -150,8 +150,6 @@ $(function() {
             {
                 targets: 5,
                 render: function (data, type, row) {
-                    console.log(data);
-                    console.log(row);
                     if (data == null) {
                         var buttons = "<div class=\"btn-group\">" +
                                 "<a href=\"/notifications/take-charge/" + row.e.id + "\" class=\"btn btn-default\">" +
