@@ -1,5 +1,5 @@
 <head>
-    <meta http-equiv="refresh" content="30" > <!-- autorefresh page-->
+    <!--<meta http-equiv="refresh" content="30" > <!-- autorefresh page-->
 </head>
 <?php
 $this->headLink()
@@ -24,7 +24,7 @@ $this->headScript()
             <div class="col-md-12">
                 <?php echo $this->partial('partials/flash-messages.phtml', []); ?>
                 <div class="row">
-                    <div class="col-md-8">
+                    <div class="col-md-12">
                         <div class="form-inline">
                             <div class="form-group">
                                 <select name="column" id="js-column" class="form-control">
@@ -33,10 +33,10 @@ $this->headScript()
                                     <option value="e.subject"><?= $this->translate("Oggetto"); ?></option>
                                     <option value="e.submitDate"><?= $this->translate("Data Registrazione"); ?></option>
                                     <option value="e.sentDate"><?= $this->translate("Data Invio"); ?></option>
-                                    <option value="e.webuser"><?= $this->translate("Webuser"); ?></option>
-                                    <option value="nc.name"><?= $this->translate("Categoria Notifica"); ?></option>
-                                    <option value="np.name"><?= $this->translate("Protocollo Notifica"); ?></option>
                                     <option value="e.acknowledgeDate"><?= $this->translate("Data Presa Visione"); ?></option>
+                                    <option value="e.webuser"><?= $this->translate("Webuser"); ?></option>
+                                    <option value="nc.name"><?= $this->translate("Categoria"); ?></option>
+                                    <option value="np.name"><?= $this->translate("Protocollo"); ?></option>
                                 </select>
                             </div>
                             <div class="form-group">
@@ -65,7 +65,11 @@ $this->headScript()
                                     </li>
                                 </ul>
                             </div>
-                            <div id="divSoundAllarm" class="form-group pull-right" ></div>
+                            <div class="form-group pull-right">
+                                <div id="divSoundAllarm" class="pull-right"></div>
+                                <p>&nbsp</p>
+                                <div id="divRefresh" class="pull-right"></div>
+                            </div>
                         </div>
                     </div>
                 </div>

@@ -133,6 +133,7 @@ class NotificationsController extends AbstractActionController
         $totalNotifications = $this->notificationsService->getTotalNotifications();
         $recordsFiltered = $this->getRecordsFiltered($filters, $totalNotifications);
 
+        $checkAllarm = false;
         $dateZero = new \DateTime('2018-01-22');
         $dateZero = $dateZero->format('U');
         foreach ($dataDataTable as $data){
@@ -155,10 +156,18 @@ class NotificationsController extends AbstractActionController
             $onOff = $allarm->offsetGet('onOff');
         }
         
+        if(!$allarm->offsetExists('refresh')){
+            $allarm->offsetSet('refresh', "on");
+            $refresh = "on";
+        }else{
+            $refresh = $allarm->offsetGet('refresh');
+        }
+        
         return new JsonModel([
             'draw' => $this->params()->fromQuery('sEcho', 0),
             'checkAllarm' => $checkAllarm,
             'onOff' => $onOff,
+            'refresh' => $refresh,
             'recordsTotal' => $totalNotifications,
             'recordsFiltered' => $recordsFiltered,
             'data' => $dataDataTable
@@ -192,7 +201,12 @@ class NotificationsController extends AbstractActionController
     public function onOffAllarmAction() {
         $allarm = new Container('allarm');
         $allarm->offsetSet('onOff', $this->params()->fromPost('onOff'));
-        $gfgf = $allarm->offsetGet('onOff');
+        return true;
+    }
+    
+    public function autoRefreshNotificationsAction() {
+        $allarm = new Container('allarm');
+        $allarm->offsetSet('refresh', $this->params()->fromPost('refresh'));
         return true;
     }
 

@@ -1,14 +1,44 @@
 /* global  filters:true, translate:true, $, getSessionVars:true, jstz:true, moment:true, document: true */
 $(function() {
     "use strict";
+    
+    setTimeout(function () {
+                if ($('#refresh').text() === "ON") 
+                    location.reload();
+            }, 30000);
+   
+    $(document).on("click", "#refresh", function () {
+        var refresh = "";
+        if ($('#refresh').text() === "ON") {
+            $('#divRefresh').html("<h4>Auto-refresh: &nbsp<button type='button' style='width: 80px;' class='btn red' id='refresh'>OFF</button></h4>");
+            refresh = "off";
+        } else {
+            $('#divRefresh').html("<h4>Auto-refresh: &nbsp<button type='button' style='width: 80px;' class='btn green' id='refresh'>ON</button></h4>");
+            refresh = "on";
+            setTimeout(function () {
+                if ($('#refresh').text() === "ON") 
+                    location.reload();
+            }, 30000);
+        }
+        $.ajax({
+            type: "POST",
+            url: "/notifications/auto-refresh-notifications",
+            data: {'refresh': refresh},
+            success: function (data) {
+            },
+            error: function () {
+                console.log("ERROR auto-refresh-notifications");
+            }
+        });
+    });
 
     $(document).on("click", "#sound", function () {
         var onOff = "";
         if ($('#sound').text() === "ON") {
-            $('#divSoundAllarm ').html("<h4>Sound: &nbsp&nbsp<button type='button' style='width: 80px;' class='btn red' id='sound'>OFF</button></h4>");
+            $('#divSoundAllarm ').html("<h4>Sound: &nbsp<button type='button' style='width: 80px;' class='btn red' id='sound'>OFF</button></h4>");
             onOff = "off";
         } else {
-            $('#divSoundAllarm ').html("<h4>Sound: &nbsp&nbsp<button type='button' style='width: 80px;' class='btn green' id='sound'>ON</button></h4>");
+            $('#divSoundAllarm ').html("<h4>Sound: &nbsp<button type='button' style='width: 80px;' class='btn green' id='sound'>ON</button></h4>");
             onOff = "on";
         }
         $.ajax({
@@ -121,13 +151,17 @@ $(function() {
                 "success": fnCallback
             }).done(function (aoData) {
                 if (aoData['onOff'] === "on") {
-                    $('#divSoundAllarm ').html("<h4>Sound: &nbsp&nbsp<button type='button' style='width: 80px;' class='btn green' id='sound'>ON</button></h4>");
+                    $('#divSoundAllarm').html("<h4>Sound: &nbsp<button type='button' style='width: 80px;' class='btn green' id='sound'>ON</button></h4>");
                 } else {
-                    $('#divSoundAllarm ').html("<h4>Sound: &nbsp&nbsp<button type='button' style='width: 80px;' class='btn red' id='sound'>OFF</button></h4>");
+                    $('#divSoundAllarm').html("<h4>Sound: &nbsp<button type='button' style='width: 80px;' class='btn red' id='sound'>OFF</button></h4>");
                 }
                 if (aoData['checkAllarm'] && aoData['onOff'] === "on") {
                     $('#audioAllarmDiv').html("<audio id='audio' src='/audio/beep45.wav' autoplay></audio>");
-
+                }
+                if (aoData['refresh'] === "on") {
+                    $('#divRefresh').html("<h4>Auto-refresh: &nbsp<button type='button' style='width: 80px;' class='btn green' id='refresh'>ON</button></h4>");
+                } else {
+                    $('#divRefresh').html("<h4>Auto-refresh: &nbsp<button type='button' style='width: 80px;' class='btn red' id='refresh'>OFF</button></h4>");
                 }
             });
         },
@@ -137,8 +171,8 @@ $(function() {
                 aoData.push({ "name": "searchValue", "value": ""});
                 aoData.push({ "name": "from", "value": dataTableVars.searchValue.val().trim()});
                 aoData.push({ "name": "to", "value": dataTableVars.searchValue.val().trim()});
-                aoData.push({ "name": "columnFromDate", "value": "e." + filterDateField});
-                aoData.push({ "name": "columnFromEnd", "value": "e." + filterDateField});
+                aoData.push({ "name": "columnFromDate", "value": filterDateField});
+                aoData.push({ "name": "columnFromEnd", "value": filterDateField});
             } else {
                 aoData.push({ "name": "column", "value": $(dataTableVars.column).val()});
                 aoData.push({ "name": "searchValue", "value": dataTableVars.searchValue.val().trim()});
@@ -161,9 +195,7 @@ $(function() {
                 targets: 0,
                 sortable: true,
                 render: function (data, type, row) {
-                    var link = "<a href=\"/notifications/details/" + row.e.id + "\" class=\"btn btn-default\">" +
-                            row.e.id + "</a>";
-                    return link;
+                    return '<a href="notifications/details/' +  row.e.id + ' ">' + row.e.id + '</a>';
                 }
                 
             },

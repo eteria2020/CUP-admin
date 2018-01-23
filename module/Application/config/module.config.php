@@ -1444,6 +1444,15 @@ return [
                             ],
                         ],
                     ],
+                    'auto-refresh-notifications' => [
+                        'type' => 'Literal',
+                        'options' => [
+                            'route' => '/auto-refresh-notifications',
+                            'defaults' => [
+                                'action' => 'auto-refresh-notifications',
+                            ],
+                        ],
+                    ],
                     'ajax-acknowledgment' => [
                         'type'    => 'Segment',
                         'options' => [
