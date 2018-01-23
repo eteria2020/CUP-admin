@@ -3,10 +3,10 @@ $(function() {
     "use strict";
     
     setTimeout(function () {
-                if ($('#refresh').text() === "ON") 
-                    location.reload();
-            }, 30000);
-   
+        if ($('#refresh').text() === "ON")
+            location.reload();
+    }, 30000);
+
     $(document).on("click", "#refresh", function () {
         var refresh = "";
         if ($('#refresh').text() === "ON") {
@@ -119,6 +119,9 @@ $(function() {
                 break;
             case "e.id":
             case "e.subject":
+                dataTableVars.searchValue.val("");
+                break;
+            case "e.webuser":
                 dataTableVars.searchValue.val("");
                 break;
             default:
