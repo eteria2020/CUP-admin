@@ -132,21 +132,17 @@ class NotificationsController extends AbstractActionController
         $dataDataTable = $this->notificationsService->getDataDataTable($filters);
         $totalNotifications = $this->notificationsService->getTotalNotifications();
         $recordsFiltered = $this->getRecordsFiltered($filters, $totalNotifications);
-
+        
         $checkAllarm = false;
-        $dateZero = new \DateTime('2018-01-22');
-        $dateZero = $dateZero->format('U');
-        foreach ($dataDataTable as $data){
-            if ($data['e']['submitDate'] > $dateZero) {
-                if (is_null($data['e']['webuser'])) {
-                    $checkAllarm = true;
-                    break;
-                } else {
-                    $checkAllarm = false;
-                }
+        foreach ($dataDataTable as $data) {
+            if (is_null($data['e']['webuser'])) {
+                $checkAllarm = true;
+                break;
+            } else {
+                $checkAllarm = false;
             }
         }
-        
+
         $allarm = new Container('allarm');
         
         if(!$allarm->offsetExists('onOff')){

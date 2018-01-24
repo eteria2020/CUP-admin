@@ -122,7 +122,7 @@ $(function() {
                 dataTableVars.searchValue.val("");
                 break;
             case "e.webuser":
-                dataTableVars.searchValue.val("");
+                dataTableVars.searchValue.val();
                 break;
             default:
                 dataTableVars.searchValue.val("");
@@ -191,7 +191,6 @@ $(function() {
             {data: "e.webuser"},
             {data: "nc.name"},
             {data: "np.name"}
-            //,{data: "button"}
         ],
         "columnDefs": [
             {
