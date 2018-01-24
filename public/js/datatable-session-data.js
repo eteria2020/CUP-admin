@@ -51,7 +51,6 @@ var getSessionVars = function(filters, dataTableVars) {
             dataTableVars.columnFromDate = filters.columnFromDate;
         }
         if (typeof filters.to !== "undefined" && filters.to !== ""){
-            //dataTableVars.to.val(filters.to);
             dataTableVars.to = filters.to;
         }
         if (typeof filters.columnFromEnd !== "undefined"){
