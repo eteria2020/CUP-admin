@@ -1423,12 +1423,33 @@ return [
                             ],
                         ],
                     ],
-                    'stop-allarm' => [
+                    'take-charge' => [
+                        'type' => 'Segment',
+                        'options' => [
+                            'route' => '/take-charge/:id',
+                            'constraints' => [
+                                'id' => '[0-9]*'
+                            ],
+                            'defaults' => [
+                                'action' => 'take-charge',
+                            ],
+                        ],
+                    ],
+                    'on-off-allarm' => [
                         'type' => 'Literal',
                         'options' => [
-                            'route' => '/stop-allarm',
+                            'route' => '/on-off-allarm',
                             'defaults' => [
-                                'action' => 'stop-allarm',
+                                'action' => 'on-off-allarm',
+                            ],
+                        ],
+                    ],
+                    'auto-refresh-notifications' => [
+                        'type' => 'Literal',
+                        'options' => [
+                            'route' => '/auto-refresh-notifications',
+                            'defaults' => [
+                                'action' => 'auto-refresh-notifications',
                             ],
                         ],
                     ],

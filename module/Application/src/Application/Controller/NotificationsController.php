@@ -42,8 +42,8 @@ class NotificationsController extends AbstractActionController
      */
     private $datatableFiltersSessionContainer;
     
-    //variabile sessione
-    private $sessionAllarm;
+    //var session
+    private $allarm;
 
     /**
      * @param NotificationsService $notificationsService
@@ -132,41 +132,77 @@ class NotificationsController extends AbstractActionController
         $dataDataTable = $this->notificationsService->getDataDataTable($filters);
         $totalNotifications = $this->notificationsService->getTotalNotifications();
         $recordsFiltered = $this->getRecordsFiltered($filters, $totalNotifications);
-
-        $lastId = $dataDataTable[0]['e']['id'];
-
-        $sessionAllarm = new Container('sessionAllarm');
         
-        if (!$sessionAllarm->offsetExists('maxId')) {
-            $sessionAllarm->offsetSet('maxId', $lastId);
-            $sessionAllarm->offsetSet('checkAllarm', false);
-        } else {
-            if ($sessionAllarm->offsetGet('checkAllarm')) {
-                $sessionAllarm->offsetSet('checkAllarm', true);
+        $checkAllarm = false;
+        foreach ($dataDataTable as $data) {
+            if (is_null($data['e']['webuser'])) {
+                $checkAllarm = true;
+                break;
             } else {
-                if ($sessionAllarm->offsetGet('maxId') < $lastId) {
-                    $sessionAllarm->offsetSet('maxId', $lastId);
-                    $sessionAllarm->offsetSet('checkAllarm', true);
-                } else {
-                    $sessionAllarm->offsetSet('checkAllarm', false);
-                }
+                $checkAllarm = false;
             }
         }
 
-
-
+        $allarm = new Container('allarm');
+        
+        if(!$allarm->offsetExists('onOff')){
+            $allarm->offsetSet('onOff', "on");
+            $onOff ="on";
+        }else{
+            $onOff = $allarm->offsetGet('onOff');
+        }
+        
+        if(!$allarm->offsetExists('refresh')){
+            $allarm->offsetSet('refresh', "on");
+            $refresh = "on";
+        }else{
+            $refresh = $allarm->offsetGet('refresh');
+        }
+        
         return new JsonModel([
             'draw' => $this->params()->fromQuery('sEcho', 0),
-            'checkAllarm' => $sessionAllarm->offsetGet('checkAllarm'),
+            'checkAllarm' => $checkAllarm,
+            'onOff' => $onOff,
+            'refresh' => $refresh,
             'recordsTotal' => $totalNotifications,
             'recordsFiltered' => $recordsFiltered,
             'data' => $dataDataTable
         ]);
     }
+
+    public function takeChargeAction() {
+        
+        $translator = $this->TranslatorPlugin();
+        
+        // Get the Notification ID from route
+        $id = (int) $this->params()->fromRoute('id', 0);
+        
+        try {
+            // Get the notification Object
+            $notification = $this->notificationsService->getNotificationById($id);
+            if (is_null($notification->getWebuser())) {
+                $this->notificationsService->acknowledge($notification, date_create());
+                $this->notificationsService->webuser($notification);
+                $this->flashMessenger()->addSuccessMessage($translator->translate('SOS preso in carico.'));
+            } else{
+                $this->flashMessenger()->addErrorMessage($translator->translate('SOS già preso in carico da un altro operatore.'));
+            }
+        } catch (\Exception $e) {
+            $this->flashMessenger()->addErrorMessage($translator->translate('Errore durante la presa in carico dell\'SOS.'));
+        }
+
+        return $this->redirect()->toRoute('notifications');
+    }
     
-    public function stopAllarmAction() {
-        $sessionAllarm = new Container('sessionAllarm');
-        $sessionAllarm->offsetSet('checkAllarm', false);
+    public function onOffAllarmAction() {
+        $allarm = new Container('allarm');
+        $allarm->offsetSet('onOff', $this->params()->fromPost('onOff'));
+        return true;
+    }
+    
+    public function autoRefreshNotificationsAction() {
+        $allarm = new Container('allarm');
+        $allarm->offsetSet('refresh', $this->params()->fromPost('refresh'));
         return true;
     }
 

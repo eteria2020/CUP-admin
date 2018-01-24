@@ -44,13 +44,14 @@ var getSessionVars = function(filters, dataTableVars) {
          *   }
          */
         if (typeof filters.from !== "undefined" && filters.from !== ""){
-            dataTableVars.from.val(filters.from);
+            //dataTableVars.from.val(filters.from);
+            dataTableVars.from = filters.from;
         }
         if (typeof filters.columnFromDate !== "undefined"){
             dataTableVars.columnFromDate = filters.columnFromDate;
         }
         if (typeof filters.to !== "undefined" && filters.to !== ""){
-            dataTableVars.to.val(filters.to);
+            dataTableVars.to = filters.to;
         }
         if (typeof filters.columnFromEnd !== "undefined"){
             dataTableVars.columnFromEnd = filters.columnFromEnd;
