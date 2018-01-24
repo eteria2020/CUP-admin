@@ -65,6 +65,10 @@ $(function() {
         notificationsCategory: $("#js-notification-category"),
         notificationsProtocol: $("#js-notification-protocol"),
         column: $("#js-column"),
+        from: $("#js-value"),
+        columnFromDate: $("#js-value"),
+        to: $("#js-value"),
+        columnToDate: $("#js-value"),
         iSortCol_0: 2,
         sSortDir_0: "desc",
         iDisplayLength: 10
