@@ -136,8 +136,13 @@ class NotificationsController extends AbstractActionController
         $checkAllarm = false;
         foreach ($dataDataTable as $data) {
             if (is_null($data['e']['webuser'])) {
-                $checkAllarm = true;
-                break;
+                $date = new \DateTime();
+                $date = $date->modify("-30 minutes");
+                $date = $date->format('U');
+                if($date < $data['e']['submitDate']) {
+                    $checkAllarm = true;
+                    break;
+                }
             } else {
                 $checkAllarm = false;
             }

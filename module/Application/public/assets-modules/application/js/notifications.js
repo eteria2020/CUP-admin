@@ -224,7 +224,7 @@ $(function() {
                     if (data == null) {
                         var buttons = "<div class=\"btn-group\">" +
                                 "<a href=\"/notifications/take-charge/" + row.e.id + "\" class=\"btn btn-default\">" +
-                                "Prendi in carico </a></div>";
+                                "Non gestito</a></div>";
                         return buttons;
                     } else {
                         return data;
