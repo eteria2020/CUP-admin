@@ -5,7 +5,7 @@ $(function() {
     setTimeout(function () {
         if ($('#refresh').text() === "ON")
             location.reload();
-    }, 30000);
+    }, 15000);
 
     $(document).on("click", "#refresh", function () {
         var refresh = "";
@@ -18,7 +18,7 @@ $(function() {
             setTimeout(function () {
                 if ($('#refresh').text() === "ON") 
                     location.reload();
-            }, 30000);
+            }, 15000);
         }
         $.ajax({
             type: "POST",
