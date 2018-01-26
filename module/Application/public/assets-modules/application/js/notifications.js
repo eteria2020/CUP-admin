@@ -191,9 +191,9 @@ $(function() {
                 targets: 0,
                 sortable: true,
                 render: function (data, type, row) {
-                    return '<a href="notifications/details/' +  row.e.id + ' ">' + row.e.id + '</a>';
+                    return '<a href="notifications/details/' + row.e.id + ' ">' + row.e.id + '</a>';
                 }
-                
+
             },
             {
                 targets: [2, 3, 4],
