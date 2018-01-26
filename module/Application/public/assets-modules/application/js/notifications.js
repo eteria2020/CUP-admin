@@ -184,7 +184,12 @@ $(function() {
             {data: "e.sentDate"},
             {data: "e.acknowledgeDate"},
             {data: "e.webuser"},
-            {data: "nc.name"}
+            {data: "nc.name"},
+            {data: "trip.tripId"},
+            {data: "trip.carPlate"},
+            {data: "c.name"},
+            {data: "c.surname"},
+            {data: "c.mobile"}
         ],
         "columnDefs": [
             {
@@ -218,6 +223,28 @@ $(function() {
                         return buttons;
                     } else {
                         return data;
+                    }
+                }
+            },
+            {
+                targets: 7,
+                sortable: true,
+                render: function (data, type, row) {
+                    if (row.trip.tripId == null || row.trip.tripId == "" || row.trip.tripId == "0") {
+                        return '- - -'
+                    }else{
+                        return '<a href="trips/details/' + row.trip.tripId + ' ">' + row.trip.tripId + '</a>';
+                    }
+                }
+            },
+            {
+                targets: 8,
+                sortable: true,
+                render: function (data, type, row) {
+                    if (row.trip.carPlate == null || row.trip.carPlate == "") {
+                        return '- - -'
+                    }else{
+                        return '<a href="cars/edit/' + row.trip.carPlate + ' ">' + row.trip.carPlate + '</a>';
                     }
                 }
             }
