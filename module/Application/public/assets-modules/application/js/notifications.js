@@ -111,16 +111,6 @@ $(function() {
                     dataTableVars.searchValue.val(dataTableVars.notificationsCategory.val());
                 });
                 break;
-            case "np.name":
-                dataTableVars.searchValue.hide();
-                dataTableVars.searchValue.val(dataTableVars.notificationsProtocol.val());
-                dataTableVars.notificationsProtocol.show();
-
-                // Bind notificationsProtocol select change action
-                $(dataTableVars.notificationsProtocol).change(function() {
-                    dataTableVars.searchValue.val(dataTableVars.notificationsProtocol.val());
-                });
-                break;
             case "e.id":
             case "e.subject":
                 dataTableVars.searchValue.val("");
@@ -193,8 +183,7 @@ $(function() {
             {data: "e.sentDate"},
             {data: "e.acknowledgeDate"},
             {data: "e.webuser"},
-            {data: "nc.name"},
-            {data: "np.name"}
+            {data: "nc.name"}
         ],
         "columnDefs": [
             {
