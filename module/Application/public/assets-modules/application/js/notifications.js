@@ -147,6 +147,7 @@ $(function() {
                 "data": aoData,
                 "success": fnCallback
             }).done(function (aoData) {
+                $('#js-notifications-table td').css("vertical-align", "middle");
                 if (aoData['onOff'] === "on") {
                     $('#divSoundAllarm').html("<h4>Sound: &nbsp<button type='button' style='width: 80px;' class='btn green' id='sound'>ON</button></h4>");
                 } else {
