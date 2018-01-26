@@ -135,6 +135,10 @@ class PaymentsController extends AbstractActionController
     {
         $filters = $this->params()->fromPost();
         $filters['withLimit'] = true;
+        if($filters['column'] == "") {
+            $filters['columnWithoutLike'] = true;
+            $filters['columnValueWithoutLike'] = null;
+        }
         $dataDataTable = $this->tripPaymentsService->getFailedPaymentsData($filters);
         $totalFailedPayments = $this->tripPaymentsService->getTotalFailedPayments();
         $recordsFiltered = $this->getRecordsFiltered($filters, $totalFailedPayments);
