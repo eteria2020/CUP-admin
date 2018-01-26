@@ -111,16 +111,6 @@ $(function() {
                     dataTableVars.searchValue.val(dataTableVars.notificationsCategory.val());
                 });
                 break;
-            case "np.name":
-                dataTableVars.searchValue.hide();
-                dataTableVars.searchValue.val(dataTableVars.notificationsProtocol.val());
-                dataTableVars.notificationsProtocol.show();
-
-                // Bind notificationsProtocol select change action
-                $(dataTableVars.notificationsProtocol).change(function() {
-                    dataTableVars.searchValue.val(dataTableVars.notificationsProtocol.val());
-                });
-                break;
             case "e.id":
             case "e.subject":
                 dataTableVars.searchValue.val("");
@@ -157,6 +147,7 @@ $(function() {
                 "data": aoData,
                 "success": fnCallback
             }).done(function (aoData) {
+                $('#js-notifications-table td').css("vertical-align", "middle");
                 if (aoData['onOff'] === "on") {
                     $('#divSoundAllarm').html("<h4>Sound: &nbsp<button type='button' style='width: 80px;' class='btn green' id='sound'>ON</button></h4>");
                 } else {
@@ -193,17 +184,16 @@ $(function() {
             {data: "e.sentDate"},
             {data: "e.acknowledgeDate"},
             {data: "e.webuser"},
-            {data: "nc.name"},
-            {data: "np.name"}
+            {data: "nc.name"}
         ],
         "columnDefs": [
             {
                 targets: 0,
                 sortable: true,
                 render: function (data, type, row) {
-                    return '<a href="notifications/details/' +  row.e.id + ' ">' + row.e.id + '</a>';
+                    return '<a href="notifications/details/' + row.e.id + ' ">' + row.e.id + '</a>';
                 }
-                
+
             },
             {
                 targets: [2, 3, 4],
@@ -224,7 +214,7 @@ $(function() {
                     if (data == null) {
                         var buttons = "<div class=\"btn-group\">" +
                                 "<a href=\"/notifications/take-charge/" + row.e.id + "\" class=\"btn btn-default\">" +
-                                "Prendi in carico </a></div>";
+                                "Non gestito</a></div>";
                         return buttons;
                     } else {
                         return data;
