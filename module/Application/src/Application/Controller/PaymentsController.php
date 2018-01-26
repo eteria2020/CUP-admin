@@ -214,7 +214,7 @@ class PaymentsController extends AbstractActionController
     {
         $penalties = $this->penaltiesService->getAllPenalties();
         $causal = $this->penaltiesService->getAllCausal();
-        $fleets = $this->fleetService->getAllFleets();
+        $fleets = $this->fleetService->getAllFleetsNoDummy();
         $types = $this->extraPaymentsService->getAllTypes();
 
         return new ViewModel([
@@ -344,7 +344,7 @@ class PaymentsController extends AbstractActionController
             }
 
             // Get all fleets
-            $fleets = $this->fleetService->getAllFleets();
+            $fleets = $this->fleetService->getAllFleetsNoDummy();
             // Get income for each day of the selected month
             $dailyIncome = $this->recapService->getDailyIncomeForMonth($date);
             // Get income for last 4 weeks
