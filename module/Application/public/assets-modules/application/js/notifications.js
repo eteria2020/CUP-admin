@@ -116,6 +116,9 @@ $(function() {
                 dataTableVars.searchValue.val("");
                 break;
             case "e.webuser":
+            case "trip.tripId":
+            case "trip.carPlate":
+            case "c.id":
                 dataTableVars.searchValue.val();
                 break;
             default:
@@ -153,7 +156,7 @@ $(function() {
                 } else {
                     $('#divSoundAllarm').html("<h4>Sound: &nbsp<button type='button' style='width: 80px;' class='btn red' id='sound'>OFF</button></h4>");
                 }
-                if (aoData['checkAllarm'] && aoData['onOff'] === "on") {
+                if (aoData['checkAllarm'] && aoData['onOff'] === "on"){
                     $('#audioAllarmDiv').html("<audio id='audio' src='/audio/beep45.wav' autoplay></audio>");
                 }
                 if (aoData['refresh'] === "on") {
@@ -179,12 +182,14 @@ $(function() {
         "order": [[dataTableVars.iSortCol_0, dataTableVars.sSortDir_0]],
         "columns": [
             {data: "e.id"},
-            {data: "e.subject"},
             {data: "e.submitDate"},
             {data: "e.sentDate"},
             {data: "e.acknowledgeDate"},
             {data: "e.webuser"},
-            {data: "nc.name"}
+            {data: "trip.tripId"},
+            {data: "trip.carPlate"},
+            {data: "c.name_surname"},
+            {data: "c.mobile"}
         ],
         "columnDefs": [
             {
@@ -196,7 +201,7 @@ $(function() {
 
             },
             {
-                targets: [2, 3, 4],
+                targets: [1, 2, 3],
                 render: function (data) {
                     var momentDate;
                     if (typeof data === "number") {
@@ -209,7 +214,7 @@ $(function() {
                 }
             },
             {
-                targets: 5,
+                targets: 4,
                 render: function (data, type, row) {
                     if (data == null) {
                         var buttons = "<div class=\"btn-group\">" +
@@ -218,6 +223,39 @@ $(function() {
                         return buttons;
                     } else {
                         return data;
+                    }
+                }
+            },
+            {
+                targets: 5,
+                sortable: true,
+                render: function (data, type, row) {
+                    if (row.trip.tripId == null || row.trip.tripId == "" || row.trip.tripId == "0") {
+                        return ''
+                    }else{
+                        return '<a href="trips/details/' + row.trip.tripId + ' ">' + row.trip.tripId + '</a>';
+                    }
+                }
+            },
+            {
+                targets: 6,
+                sortable: true,
+                render: function (data, type, row) {
+                    if (row.trip.carPlate == null || row.trip.carPlate == "") {
+                        return ''
+                    }else{
+                        return '<a href="cars/edit/' + row.trip.carPlate + ' ">' + row.trip.carPlate + '</a>';
+                    }
+                }
+            },
+            {
+                targets: 7,
+                sortable: true,
+                render: function (data, type, row) {
+                    if (row.trip.carPlate == null || row.trip.carPlate == "") {
+                        return ''
+                    }else{
+                        return '<a href="customers/edit/' + row.c.id + ' ">' + row.c.name_surname + '</a>';
                     }
                 }
             }
