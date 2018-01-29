@@ -116,6 +116,8 @@ $(function() {
                 dataTableVars.searchValue.val("");
                 break;
             case "e.webuser":
+            case "trip.tripId":
+            case "trip.carPlate":
                 dataTableVars.searchValue.val();
                 break;
             default:
@@ -187,8 +189,7 @@ $(function() {
             {data: "nc.name"},
             {data: "trip.tripId"},
             {data: "trip.carPlate"},
-            {data: "c.name"},
-            {data: "c.surname"},
+            {data: "c.name_surname"},
             {data: "c.mobile"}
         ],
         "columnDefs": [
@@ -231,7 +232,7 @@ $(function() {
                 sortable: true,
                 render: function (data, type, row) {
                     if (row.trip.tripId == null || row.trip.tripId == "" || row.trip.tripId == "0") {
-                        return '- - -'
+                        return ''
                     }else{
                         return '<a href="trips/details/' + row.trip.tripId + ' ">' + row.trip.tripId + '</a>';
                     }
@@ -242,9 +243,20 @@ $(function() {
                 sortable: true,
                 render: function (data, type, row) {
                     if (row.trip.carPlate == null || row.trip.carPlate == "") {
-                        return '- - -'
+                        return ''
                     }else{
                         return '<a href="cars/edit/' + row.trip.carPlate + ' ">' + row.trip.carPlate + '</a>';
+                    }
+                }
+            },
+            {
+                targets: 9,
+                sortable: true,
+                render: function (data, type, row) {
+                    if (row.trip.carPlate == null || row.trip.carPlate == "") {
+                        return ''
+                    }else{
+                        return '<a href="customers/edit/' + row.c.id + ' ">' + row.c.name_surname + '</a>';
                     }
                 }
             }
