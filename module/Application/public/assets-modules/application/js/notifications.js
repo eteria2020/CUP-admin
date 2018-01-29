@@ -156,7 +156,7 @@ $(function() {
                 } else {
                     $('#divSoundAllarm').html("<h4>Sound: &nbsp<button type='button' style='width: 80px;' class='btn red' id='sound'>OFF</button></h4>");
                 }
-                if (aoData['checkAllarm'] && aoData['onOff'] === "on") {
+                if (aoData['checkAllarm'] && aoData['onOff'] === "on"){
                     $('#audioAllarmDiv').html("<audio id='audio' src='/audio/beep45.wav' autoplay></audio>");
                 }
                 if (aoData['refresh'] === "on") {
