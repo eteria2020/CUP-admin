@@ -1,6 +1,7 @@
 <?php
 $form = $this->carForm->prepare();
 $form->setAttribute('action', $this->url('cars/ajax-tab-edit', ['plate' => $this->car->getPlate()]));
+$form->get('car')->get('fleet')->setValue($this->car->getFleet()->getId());
 ?>
 <div class="row">
     <div class="col-md-12">
@@ -52,7 +53,13 @@ $form->setAttribute('action', $this->url('cars/ajax-tab-edit', ['plate' => $this
         </div>
 
         <div class="row">
-            <div class="col-lg-5">
+            <div class="col-lg-1">
+                <div class="form-group">
+                    <label for="name"><?= $this->translate("Flotta"); ?></label>
+                    <?= $this->formRow($form->get('car')->get('fleet')); ?>
+                </div>
+            </div>
+            <div class="col-lg-3">
                 <div class="form-group">
                     <label for="gender"><?= $this->translate("Note"); ?></label>
                     <?= $this->formRow($form->get('car')->get('notes')); ?>
@@ -83,7 +90,7 @@ $form->setAttribute('action', $this->url('cars/ajax-tab-edit', ['plate' => $this
                 <div class="col-lg-6" id="js-list-ricovery-car" style="display: none;">
                     <div class="form-group">
                         <label for="surname"><?= $this->translate("Sede di ricovero auto"); ?></label>
-                        <?php if($this->disableInputStatusMaintenance): ?>
+                        <?php if ($this->disableInputStatusMaintenance): ?>
                             <?= $this->formRow($form->get('location')->setAttribute('disabled', 'true')); ?>
                         <?php else: ?>
                             <?= $this->formRow($form->get('location')); ?>
@@ -96,7 +103,7 @@ $form->setAttribute('action', $this->url('cars/ajax-tab-edit', ['plate' => $this
         <div class="row" style="display: none;" id="js-note">
             <div class="col-lg-12">
                 <label for="note"><?= $this->translate("Note"); ?></label>
-                <?php if($this->disableInputStatusMaintenance): ?>
+                <?php if ($this->disableInputStatusMaintenance): ?>
                     <?= $this->formRow($form->get('note')->setAttribute('readonly', 'true')); ?>
                 <?php else: ?>
                     <?= $this->formRow($form->get('note')); ?>
@@ -124,13 +131,13 @@ $form->setAttribute('action', $this->url('cars/ajax-tab-edit', ['plate' => $this
 
         showListRecovery(selectStatus.val());
 
-        $(selectStatus).change(function() {
+        $(selectStatus).change(function () {
             var value = $(this).val();
             showListRecovery(value);
         });
 
         function showListRecovery(value) {
-            if(value == '<?= \SharengoCore\Utility\CarStatus::MAINTENANCE; ?>') {
+            if (value == '<?= \SharengoCore\Utility\CarStatus::MAINTENANCE; ?>') {
                 listRecovery.show();
                 noteInput.show();
             } else {

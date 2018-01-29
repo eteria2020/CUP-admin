@@ -1,4 +1,5 @@
 <?php
+
 namespace Application\Controller;
 
 // Internals
@@ -24,8 +25,8 @@ use Zend\View\Model\JsonModel;
 use Zend\View\Model\ViewModel;
 use Zend\Session\Container;
 
-class CarsController extends AbstractActionController
-{
+class CarsController extends AbstractActionController {
+
     /**
      * @var CarsService
      */
@@ -59,11 +60,7 @@ class CarsController extends AbstractActionController
      * @param Container $datatableFiltersSessionContainer
      */
     public function __construct(
-        CarsService $carsService,
-        CommandsService $commandsService,
-        Form $carForm,
-        HydratorInterface $hydrator,
-        Container $datatableFiltersSessionContainer
+    CarsService $carsService, CommandsService $commandsService, Form $carForm, HydratorInterface $hydrator, Container $datatableFiltersSessionContainer
     ) {
         $this->carsService = $carsService;
         $this->commandsService = $commandsService;
@@ -78,13 +75,11 @@ class CarsController extends AbstractActionController
      *
      * @return array
      */
-    private function getDataTableSessionFilters()
-    {
+    private function getDataTableSessionFilters() {
         return $this->datatableFiltersSessionContainer->offsetGet('Cars');
     }
 
-    public function indexAction()
-    {
+    public function indexAction() {
         $sessionDatatableFilters = $this->getDataTableSessionFilters();
 
         return new ViewModel([
@@ -92,8 +87,7 @@ class CarsController extends AbstractActionController
         ]);
     }
 
-    public function datatableAction()
-    {
+    public function datatableAction() {
         $as_filters = $this->params()->fromPost();
         $as_filters['withLimit'] = true;
         $as_dataDataTable = $this->carsService->getDataDataTable($as_filters);
@@ -101,15 +95,14 @@ class CarsController extends AbstractActionController
         $i_recordsFiltered = $this->_getRecordsFiltered($as_filters, $i_totalCars);
 
         return new JsonModel([
-            'draw'            => $this->params()->fromQuery('sEcho', 0),
-            'recordsTotal'    => $i_totalCars,
+            'draw' => $this->params()->fromQuery('sEcho', 0),
+            'recordsTotal' => $i_totalCars,
             'recordsFiltered' => $i_recordsFiltered,
-            'data'            => $as_dataDataTable
+            'data' => $as_dataDataTable
         ]);
     }
 
-    public function addAction()
-    {
+    public function addAction() {
         $translator = $this->TranslatorPlugin();
         $form = $this->carForm;
         $form->setStatus([CarStatus::OPERATIVE => CarStatus::OPERATIVE]);
@@ -126,11 +119,9 @@ class CarsController extends AbstractActionController
 
                     $this->carsService->saveData($form->getData());
                     $this->flashMessenger()->addSuccessMessage($translator->translate('Auto aggiunta con successo!'));
-
                 } catch (\Exception $e) {
 
                     $this->flashMessenger()->addErrorMessage($translator->translate('Si è verificato un errore applicativo. L\'assistenza tecnica è già al corrente, ci scusiamo per l\'inconveniente'));
-
                 }
 
                 return $this->redirect()->toRoute('cars');
@@ -142,19 +133,18 @@ class CarsController extends AbstractActionController
         ]);
     }
 
-    public function editAction () {
+    public function editAction() {
         $plate = $this->params()->fromRoute('plate', 0);
         $car = $this->carsService->getCarByPlate($plate);
         $tab = $this->params()->fromQuery('tab', 'edit');
 
         return new ViewModel([
-            'car'       => $car,
-            'tab'       => $tab
+            'car' => $car,
+            'tab' => $tab
         ]);
     }
 
-    public function editTabAction()
-    {
+    public function editTabAction() {
         $translator = $this->TranslatorPlugin();
         $plate = $this->params()->fromRoute('plate', 0);
         $car = $this->carsService->getCarByPlate($plate);
@@ -162,7 +152,6 @@ class CarsController extends AbstractActionController
 
         if (is_null($car)) {
             $this->getResponse()->setStatusCode(Response::STATUS_CODE_404);
-
             return false;
         }
 
@@ -172,11 +161,12 @@ class CarsController extends AbstractActionController
         /** @var CarForm $form */
         $form = $this->carForm;
         $form->setStatus($this->carsService->getStatusCarAvailable($car->getStatus()));
+        $form->setFleets($this->carsService->getFleets());
         $carData = $this->hydrator->extract($car);
         $data = [];
         $data['car'] = $carData;
 
-        if(!is_null($lastCarsMaintenance) && $car->getStatus() == CarStatus::MAINTENANCE) {
+        if (!is_null($lastCarsMaintenance) && $car->getStatus() == CarStatus::MAINTENANCE) {
             $data['location'] = $lastCarsMaintenance->getLocation();
             $data['note'] = $lastCarsMaintenance->getNotes();
             $disableInputStatusMaintenance = true;
@@ -189,58 +179,55 @@ class CarsController extends AbstractActionController
             $postData = $this->getRequest()->getPost()->toArray();
             $postData['car']['plate'] = $car->getPlate();
             $form->setData($postData);
-            $form->get('car')->remove('fleet'); // setValue($car->getFleet()->getId());
+            //$form->get('car')->remove('fleet'); // setValue($car->getFleet()->getId());
             $form->getInputFilter()->get('location')->setRequired(false);
 
             if ($form->isValid()) {
 
                 try {
-
                     $this->carsService->updateCar($form->getData(), $lastStatus, $postData, $this->identity());
                     $this->carsService->saveData($form->getData(), false);
                     $this->flashMessenger()->addSuccessMessage($translator->translate('Auto modificata con successo!'));
-
                 } catch (\Exception $e) {
 
                     $this->flashMessenger()->addErrorMessage($translator->translate('Si è verificato un errore applicativo. L\'assistenza tecnica è già al corrente, ci scusiamo per l\'inconveniente'));
-
                 }
 
-                $url = $this->url()->fromRoute('cars/edit', ['plate' => $car->getPlate()]).'#edit';
+                $url = $this->url()->fromRoute('cars/edit', ['plate' => $car->getPlate()]) . '#edit';
                 return $this->redirect()->toUrl($url);
             }
         }
 
         $view = new ViewModel([
-            'car'                           => $car,
-            'carForm'                       => $form,
+            'car' => $car,
+            'carForm' => $form,
             'disableInputStatusMaintenance' => $disableInputStatusMaintenance
         ]);
         $view->setTerminal(true);
         return $view;
     }
 
-    public function commandsTabAction () {
+    public function commandsTabAction() {
         $plate = $this->params()->fromRoute('plate', 0);
         $car = $this->carsService->getCarByPlate($plate);
         $commands = Commands::getCommandCodes();
         unset($commands[Commands::CLOSE_TRIP]);
         $view = new ViewModel([
             'commands' => $commands,
-            'car'      => $car,
+            'car' => $car,
         ]);
         $view->setTerminal(true);
         return $view;
     }
 
-    public function damagesTabAction () {
+    public function damagesTabAction() {
         $translator = $this->TranslatorPlugin();
         $plate = $this->params()->fromRoute('plate', 0);
         $car = $this->carsService->getCarByPlate($plate);
         if ($this->getRequest()->isPost()) {
             $postData = $this->getRequest()->getPost()->toArray();
             try {
-                if(isset($postData['damages'])){
+                if (isset($postData['damages'])) {
                     $this->carsService->updateDamages($car, $postData['damages']);
                 } else {
                     $this->carsService->updateDamages($car, null);
@@ -250,21 +237,20 @@ class CarsController extends AbstractActionController
                 $this->flashMessenger()->addErrorMessage($translator->translate('Si è verificato un errore applicativo. L\'assistenza tecnica è già al corrente, ci scusiamo per l\'inconveniente'));
             }
 
-            $url = $this->url()->fromRoute('cars/edit', ['plate' => $car->getPlate()]).'#damages';
+            $url = $this->url()->fromRoute('cars/edit', ['plate' => $car->getPlate()]) . '#damages';
             return $this->redirect()->toUrl($url);
         }
 
         $view = new ViewModel([
-            'damages'        => $this->carsService->getDamagesList(),
-            'car'            => $car,
-            'carDamages'     => json_decode($car->getDamages(), true)
+            'damages' => $this->carsService->getDamagesList(),
+            'car' => $car,
+            'carDamages' => json_decode($car->getDamages(), true)
         ]);
         $view->setTerminal(true);
         return $view;
     }
 
-    public function deleteAction()
-    {
+    public function deleteAction() {
         $translator = $this->TranslatorPlugin();
         $plate = $this->params()->fromRoute('plate', 0);
 
@@ -281,18 +267,15 @@ class CarsController extends AbstractActionController
 
             $this->carsService->deleteCar($car);
             $this->flashMessenger()->addSuccessMessage($translator->translate('Auto rimossa con successo!'));
-
         } catch (\Doctrine\DBAL\Exception\ForeignKeyConstraintViolationException $e) {
 
             $this->flashMessenger()->addErrorMessage($translator->translate('L\'auto non può essere rimossa perchè ha effettuato una o più corse.'));
-
         }
 
         return $this->redirect()->toRoute('cars');
     }
 
-    public function sendCommandAction()
-    {
+    public function sendCommandAction() {
         $translator = $this->TranslatorPlugin();
         $plate = $this->params()->fromRoute('plate', 0);
         $commandIndex = $this->params()->fromRoute('command', 0);
@@ -308,23 +291,19 @@ class CarsController extends AbstractActionController
 
             $this->commandsService->sendCommand($car, $commandIndex, $this->identity());
             $this->flashMessenger()->addSuccessMessage($translator->translate('Comando eseguito con successo'));
-
         } catch (\Exception $e) {
 
             $this->flashMessenger()->addErrorMessage($translator->translate('Errore nell\'esecuzione del comando'));
-
         }
 
-        $url = $this->url()->fromRoute('cars/edit', ['plate' => $car->getPlate()]).'#commands';
+        $url = $this->url()->fromRoute('cars/edit', ['plate' => $car->getPlate()]) . '#commands';
         return $this->redirect()->toUrl($url);
     }
 
-    protected function _getRecordsFiltered($as_filters, $i_totalCars)
-    {
+    protected function _getRecordsFiltered($as_filters, $i_totalCars) {
         if (empty($as_filters['searchValue']) && !isset($as_filters['columnValueWithoutLike'])) {
 
             return $i_totalCars;
-
         } else {
 
             $as_filters['withLimit'] = false;
@@ -332,4 +311,5 @@ class CarsController extends AbstractActionController
             return $this->carsService->getDataDataTable($as_filters, true);
         }
     }
+
 }
