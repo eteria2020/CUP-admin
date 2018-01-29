@@ -182,12 +182,10 @@ $(function() {
         "order": [[dataTableVars.iSortCol_0, dataTableVars.sSortDir_0]],
         "columns": [
             {data: "e.id"},
-            {data: "e.subject"},
             {data: "e.submitDate"},
             {data: "e.sentDate"},
             {data: "e.acknowledgeDate"},
             {data: "e.webuser"},
-            {data: "nc.name"},
             {data: "trip.tripId"},
             {data: "trip.carPlate"},
             {data: "c.name_surname"},
@@ -203,7 +201,7 @@ $(function() {
 
             },
             {
-                targets: [2, 3, 4],
+                targets: [1, 2, 3],
                 render: function (data) {
                     var momentDate;
                     if (typeof data === "number") {
@@ -216,7 +214,7 @@ $(function() {
                 }
             },
             {
-                targets: 5,
+                targets: 4,
                 render: function (data, type, row) {
                     if (data == null) {
                         var buttons = "<div class=\"btn-group\">" +
@@ -229,7 +227,7 @@ $(function() {
                 }
             },
             {
-                targets: 7,
+                targets: 5,
                 sortable: true,
                 render: function (data, type, row) {
                     if (row.trip.tripId == null || row.trip.tripId == "" || row.trip.tripId == "0") {
@@ -240,7 +238,7 @@ $(function() {
                 }
             },
             {
-                targets: 8,
+                targets: 6,
                 sortable: true,
                 render: function (data, type, row) {
                     if (row.trip.carPlate == null || row.trip.carPlate == "") {
@@ -251,7 +249,7 @@ $(function() {
                 }
             },
             {
-                targets: 9,
+                targets: 7,
                 sortable: true,
                 render: function (data, type, row) {
                     if (row.trip.carPlate == null || row.trip.carPlate == "") {
