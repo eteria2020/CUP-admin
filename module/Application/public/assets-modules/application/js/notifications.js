@@ -118,6 +118,7 @@ $(function() {
             case "e.webuser":
             case "trip.tripId":
             case "trip.carPlate":
+            case "c.id":
                 dataTableVars.searchValue.val();
                 break;
             default:
