@@ -135,7 +135,7 @@ class PaymentsController extends AbstractActionController
     {
         $filters = $this->params()->fromPost();
         $filters['withLimit'] = true;
-        if($filters['column'] == "") {
+        if($filters['column'] == "" && $filters['columnValueWithoutLike'] == ""){
             $filters['columnWithoutLike'] = true;
             $filters['columnValueWithoutLike'] = null;
         }
