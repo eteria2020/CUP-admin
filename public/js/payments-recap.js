@@ -31,9 +31,11 @@ function highlightLastRows()
         }
         var rows = tableBodies[i].getElementsByTagName('tr');
         var lastRow = rows[rows.length - 1];
-        var elements = lastRow.getElementsByTagName('td');
-        for(var j = elements.length - 1; j >= 0; j--) {
-            elements[j].className = elements[j].className + " sng-last-row";
+        if(typeof lastRow !== "undefined"){
+            var elements = lastRow.getElementsByTagName('td');
+            for(var j = elements.length - 1; j >= 0; j--) {
+                elements[j].className = elements[j].className + " sng-last-row";
+            }
         }
     }
 }
