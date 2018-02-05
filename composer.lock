@@ -297,7 +297,7 @@
             "source": {
                 "type": "git",
                 "url": "ssh://git@git.sharengo.it/cup-it/admin-business-module.git",
-                "reference": "8c5937602029acb83bb314c5ddae26cbdd1a6e19"
+                "reference": "5855c35aaaeca107f4af83cc7952746fc1214110"
             },
             "require": {
                 "php": ">=5.4",
@@ -314,7 +314,7 @@
                 }
             },
             "description": "Business area in Admin",
-            "time": "2018-01-31T09:32:37+00:00"
+            "time": "2018-02-05T07:58:51+00:00"
         },
         {
             "name": "cup-web/core-business",
