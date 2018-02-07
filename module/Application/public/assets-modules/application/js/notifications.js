@@ -101,18 +101,7 @@ $(function() {
                     weekStart: 1
                 });
                 break;
-            case "nc.name":
-                dataTableVars.searchValue.hide();
-                dataTableVars.searchValue.val(dataTableVars.notificationsCategory.val());
-                dataTableVars.notificationsCategory.show();
-
-                // Bind notificationsCategory select change action
-                $(dataTableVars.notificationsCategory).change(function() {
-                    dataTableVars.searchValue.val(dataTableVars.notificationsCategory.val());
-                });
-                break;
             case "e.id":
-            case "e.subject":
                 dataTableVars.searchValue.val("");
                 break;
             case "e.webuser":
@@ -161,6 +150,7 @@ $(function() {
                 } else {
                     $('#divRefresh').html("<h4>Auto-refresh: &nbsp<button type='button' style='width: 80px;' class='btn red' id='refresh'>OFF</button></h4>");
                 }
+                
             });
         },
         "fnServerParams": function ( aoData ) {
@@ -179,12 +169,14 @@ $(function() {
         "order": [[dataTableVars.iSortCol_0, dataTableVars.sSortDir_0]],
         "columns": [
             {data: "e.id"},
-            {data: "e.subject"},
             {data: "e.submitDate"},
             {data: "e.sentDate"},
             {data: "e.acknowledgeDate"},
             {data: "e.webuser"},
-            {data: "nc.name"}
+            {data: "t.carPlate"},
+            {data: "t.tripId"},
+            {data: "c.nameSurname"},
+            {data: "c.mobile"},
         ],
         "columnDefs": [
             {
@@ -196,7 +188,7 @@ $(function() {
 
             },
             {
-                targets: [2, 3, 4],
+                targets: [1, 2, 3,],
                 render: function (data) {
                     var momentDate;
                     if (typeof data === "number") {
@@ -209,7 +201,7 @@ $(function() {
                 }
             },
             {
-                targets: 5,
+                targets: 4,
                 render: function (data, type, row) {
                     if (data == null) {
                         var buttons = "<div class=\"btn-group\">" +
@@ -219,6 +211,30 @@ $(function() {
                     } else {
                         return data;
                     }
+                }
+            },
+            {
+                targets: 5,
+                sortable: true,
+                render: function (data, type, row) {
+                    return '<a href="cars/edit/' + row.t.carPlate + ' ">' + row.t.carPlate + '</a>';
+                }
+            },
+            {
+                targets: 6,
+                sortable: true,
+                render: function (data, type, row) {
+                    if(row.t.tripId != '0')
+                        return '<a href="trips/details/' + row.t.tripId + ' ">' + row.t.tripId + '</a>';
+                    else
+                        return " ";
+                }
+            },
+            {
+                targets: 7,
+                sortable: true,
+                render: function (data, type, row) {
+                    return '<a href="customers/edit/' + row.c.id + ' ">' + row.c.nameSurname + '</a>';
                 }
             }
         ],
