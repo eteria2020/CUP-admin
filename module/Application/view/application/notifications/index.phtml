@@ -10,7 +10,7 @@ $this->headScript()
     ->appendFile('/js/datatables/plugins/bootstrap/dataTables.bootstrap.js')
     ->appendFile('/plugins/bootstrap-datepicker/js/bootstrap-datepicker.js')
     ->appendFile($this->basePath() . '/js/datatable-session-data.js')
-    ->appendFile($this->basePath() .'/assets-modules/js/vendor.notifications.js');
+    ->appendFile($this->basePath() .'/assets-modules/js/vendor.notifications.js?v=1.0');
 ?>
 <div class="page-content-wrapper">
     <div class="page-content">
@@ -30,12 +30,10 @@ $this->headScript()
                                 <select name="column" id="js-column" class="form-control">
                                     <option value="select" selected>-- <?= $this->translate("Seleziona"); ?> --</option>
                                     <option value="e.id"><?= $this->translate("Id"); ?></option>
-                                    <option value="e.subject"><?= $this->translate("Oggetto"); ?></option>
                                     <option value="e.submitDate"><?= $this->translate("Data Registrazione"); ?></option>
                                     <option value="e.sentDate"><?= $this->translate("Data Invio"); ?></option>
                                     <option value="e.acknowledgeDate"><?= $this->translate("Data Presa Visione"); ?></option>
                                     <option value="e.webuser"><?= $this->translate("Webuser"); ?></option>
-                                    <option value="nc.name"><?= $this->translate("Categoria"); ?></option>
                                     <option value="nonGestito"><?= $this->translate("Non Gestito"); ?></option>
                                 </select>
                             </div>
@@ -92,12 +90,14 @@ $this->headScript()
                             <thead>
                             <tr>
                                 <th class="text-center"><?= $this->translate("Id"); ?></th>
-                                <th class="text-center"><?= $this->translate("Oggetto"); ?></th>
                                 <th class="text-center"><?= $this->translate("Data Registrazione"); ?></th>
                                 <th class="text-center"><?= $this->translate("Data Invio"); ?></th>
                                 <th class="text-center"><?= $this->translate("Data Presa Visione"); ?></th>
                                 <th class="text-center"><?= $this->translate("Webuser"); ?></th>
-                                <th class="text-center"><?= $this->translate("Categoria"); ?></th>
+                                <th class="text-center"><?= $this->translate("Targa"); ?></th>
+                                <th class="text-center"><?= $this->translate("Trip Id"); ?></th>
+                                <th class="text-center"><?= $this->translate("Cognome Nome"); ?></th>
+                                <th class="text-center"><?= $this->translate("Telefono"); ?></th>
                             </tr>
                             </thead>
                         </table>
