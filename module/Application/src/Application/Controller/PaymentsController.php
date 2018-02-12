@@ -130,6 +130,15 @@ class PaymentsController extends AbstractActionController
             'filters' => json_encode($sessionDatatableFilters),
         ]);
     }
+    
+    public function failedExtraAction()
+    {
+        $sessionDatatableFilters = $this->getDataTableSessionFilters();
+
+        return new ViewModel([
+            'filters' => json_encode($sessionDatatableFilters),
+        ]);
+    }
 
     public function failedPaymentsDatatableAction()
     {
@@ -142,7 +151,7 @@ class PaymentsController extends AbstractActionController
         }
         $dataDataTable = $this->tripPaymentsService->getFailedPaymentsData($filters);
         $totalFailedPayments = $this->tripPaymentsService->getTotalFailedPayments();
-        $recordsFiltered = $this->getRecordsFiltered($filters, $totalFailedPayments);
+        $recordsFiltered = $this->getRecordsFiltered($filters, $totalFailedPayments, "payment");
 
         return new JsonModel([
             'draw'            => $this->params()->fromQuery('sEcho', 0),
@@ -151,19 +160,41 @@ class PaymentsController extends AbstractActionController
             'data'            => $dataDataTable
         ]);
     }
-
-    protected function getRecordsFiltered($filters, $totalTripPayments)
+    
+    public function failedExtraDatatableAction()
     {
+        $filters = $this->params()->fromPost();
+        $filters['withLimit'] = true;
+        
+        if($filters['column'] == "" && isset($filters['columnValueWithoutLike']) && $filters['columnValueWithoutLike'] == ""){
+            $filters['columnWithoutLike'] = true;
+            $filters['columnValueWithoutLike'] = null;
+        }
+        $dataDataTable = $this->extraPaymentsService->getFailedExtraData($filters);
+        $totalFailedExtra = $this->extraPaymentsService->getTotalFailedExtra();
+        $recordsFiltered = $this->getRecordsFiltered($filters, $totalFailedExtra, "extra");
+
+        return new JsonModel([
+            'draw'            => $this->params()->fromQuery('sEcho', 0),
+            'recordsTotal'    => $totalFailedExtra,
+            'recordsFiltered' => $recordsFiltered,
+            'data'            => $dataDataTable
+        ]);
+    }
+
+    protected function getRecordsFiltered($filters, $recordsFiltered, $param) {
         if (empty($filters['searchValue']) && !isset($filters['columnValueWithoutLike'])) {
-            return $totalTripPayments;
+            return $recordsFiltered;
         } else {
             $filters['withLimit'] = false;
-
-            return count($this->tripPaymentsService->getFailedPaymentsData($filters));
+            if ($param === "payment")
+                return count($this->tripPaymentsService->getFailedPaymentsData($filters));
+            else
+                return count($this->extraPaymentsService->getFailedExtraData($filters));
         }
     }
 
-    public function retryAction()
+    public function retryPaymentsAction()
     {
         $id = (int)$this->params()->fromRoute('id', 0);
 
@@ -179,6 +210,31 @@ class PaymentsController extends AbstractActionController
             'tripPayment' => $tripPayment,
             'tripPaymentTries' => $tripPaymentTries,
             'customer' => $tripPayment->getCustomer()
+        ]);
+    }
+    
+    public function retryExtraAction()
+    {
+        $id = (int)$this->params()->fromRoute('id', 0);
+
+        $extraPayment = $this->extraPaymentsService->getExtraPaymentById($id);
+
+        if (!$extraPayment->isWrongExtra()) {
+            return $this->notFoundAction();
+        }
+
+        /*
+         * ---------------------------------
+         ** --------------------------------- 
+         * * ---------------------------------
+         * * ---------------------------------
+         */
+        $extraPaymentTries = $extraPayment->getExtraPaymentTries();
+
+        return new ViewModel([
+            'tripPayment' => $extraPayment,
+            'tripPaymentTries' => $extraPaymentTries,
+            'customer' => $extraPayment->getCustomer()
         ]);
     }
 

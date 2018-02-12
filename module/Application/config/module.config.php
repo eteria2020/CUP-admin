@@ -973,15 +973,27 @@ return [
                 ],
                 'may_terminate' => false,
                 'child_routes' => [
-                    'retry' => [
+                    'retry-payments' => [
                         'type' => 'Segment',
                         'options' => [
-                            'route' => '/retry/:id',
+                            'route' => '/retry-payments/:id',
                             'constraints' => [
                                 'id'    => '[0-9]*'
                             ],
                             'defaults' => [
-                                'action' => 'retry'
+                                'action' => 'retry-payments'
+                            ]
+                        ]
+                    ],
+                    'retry-extra' => [
+                        'type' => 'Segment',
+                        'options' => [
+                            'route' => '/retry-extra/:id',
+                            'constraints' => [
+                                'id'    => '[0-9]*'
+                            ],
+                            'defaults' => [
+                                'action' => 'retry-extra'
                             ]
                         ]
                     ],
@@ -1006,12 +1018,30 @@ return [
                             ]
                         ]
                     ],
+                    'failed-extra' => [
+                        'type' => 'Literal',
+                        'options' => [
+                            'route' => '/failed-extra',
+                            'defaults' => [
+                                'action' => 'failed-extra'
+                            ]
+                        ]
+                    ],
                     'failed-payments-datatable' => [
                         'type' => 'Literal',
                         'options' => [
                             'route' => '/failed-payments-datatable',
                             'defaults' => [
                                 'action' => 'failed-payments-datatable'
+                            ]
+                        ]
+                    ],
+                    'failed-extra-datatable' => [
+                        'type' => 'Literal',
+                        'options' => [
+                            'route' => '/failed-extra-datatable',
+                            'defaults' => [
+                                'action' => 'failed-extra-datatable'
                             ]
                         ]
                     ],
@@ -1929,6 +1959,11 @@ return [
                     [
                         'label' => $translator->translate('Pagamenti falliti'),
                         'route' => 'payments/failed-payments',
+                        'isVisible' => true
+                    ],
+                    [
+                        'label' => $translator->translate('Extra falliti'),
+                        'route' => 'payments/failed-extra',
                         'isVisible' => true
                     ],
                     [

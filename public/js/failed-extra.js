@@ -3,7 +3,7 @@ $(function() {
     "use strict";
 
      // DataTables
-    var table = $("#js-payments-table");
+    var table = $("#js-extra-table");
 
    // Define DataTables Filters
     var dataTableVars = {
@@ -36,22 +36,12 @@ $(function() {
         return (Math.floor(amount / 100)) + "," + toStringKeepZero(amount % 100) + " \u20ac";
     }
 
-    function renderDiscount(discount)
-    {
-        return discount + "%";
-    }
-
-    function renderMin(min)
-    {
-        return min + " min.";
-    }
-
     table.dataTable({
         "processing": true,
         "serverSide": true,
         "bStateSave": false,
         "bFilter": false,
-        "sAjaxSource": "/payments/failed-payments-datatable",
+        "sAjaxSource": "/payments/failed-extra-datatable",
         "fnServerData": function ( sSource, aoData, fnCallback, oSettings ) {
             oSettings.jqXHR = $.ajax( {
                 "dataType": "json",
@@ -83,33 +73,16 @@ $(function() {
         },
         "order": [[dataTableVars.iSortCol_0, dataTableVars.sSortDir_0]],
         "columns": [
-            {data: "e.firstPaymentTryTs"},
+            {data: "e.generatedTs"},
             {data: "cu.id"},
             {data: "cu.name"},
             {data: "cu.surname"},
             {data: "cu.mobile"},
             {data: "cu.email"},
-            {data: "e.trip"},
-            {data: "e.tripMinutes"},
-            {data: "e.parkingMinutes"},
-            {data: "e.discountPercentage"},
             {data: "e.totalCost"},
             {data: "button"}
         ],
         "columnDefs": [
-            {
-                targets: 1,
-                className: "sng-dt-right"
-            },
-            {
-                targets: 6,
-                className: "sng-dt-right",
-                "render": function (data) {
-                    return '<a href="/trips/details/' + data +
-                        '" title="' + translate("tripDetailId") + " " + data +
-                        ' ">' + data + '</a>';
-                }
-            },
             {
                 targets: [1, 2, 3],
                 "render": function (data, type, row) {
@@ -119,41 +92,20 @@ $(function() {
                 }
             },
             {
-                targets: 7,
+                targets: 6,
                 className: "sng-dt-right sng-no-wrap",
-                "render": function (data) {
-                    return renderMin(data);
-                }
-            },
-            {
-                targets: 8,
-                className: "sng-dt-right",
-                "render": function (data) {
-                    return renderMin(data);
-                }
-            },
-            {
-                targets: 9,
-                className: "sng-dt-right",
-                "render": function (data) {
-                    return renderDiscount(data);
-                }
-            },
-            {
-                targets: 10,
-                className: "sng-dt-right sng-no-wrap",
-                "render": function (data) {
+                "render": function (data, type, row) {
                     return renderAmount(data);
                 }
             },
             {
-                targets: 11,
+                targets: 7,
                 data: "button",
                 searchable: false,
                 sortable: false,
                 render: function (data) {
                     return '<div class="btn-group">' +
-                        '<a href="/payments/retry-payments/' + data + '" class="btn btn-default">' + translate("continue") + '</a> ' +
+                        '<a href="/payments/retry-extra/' + data + '" class="btn btn-default">' + translate("continue") + '</a> ' +
                         '</div>';
                 }
             }
@@ -225,11 +177,6 @@ $(function() {
             dataTableVars.searchValue.show();
 
             switch (value) {
-                // Columns that need a "=" instead the standard "LIKE" search operator.
-                case "e.trip":
-                    columnWithoutLike = value;
-                    //columnValueWithoutLike = true;
-                    break;
                 case "cu.id":
                     columnWithoutLike = value;
                     break;
