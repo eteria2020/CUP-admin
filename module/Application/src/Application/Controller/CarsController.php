@@ -169,6 +169,7 @@ class CarsController extends AbstractActionController {
         if (!is_null($lastCarsMaintenance) && $car->getStatus() == CarStatus::MAINTENANCE) {
             $data['location'] = $lastCarsMaintenance->getLocation();
             $data['note'] = $lastCarsMaintenance->getNotes();
+            $data['motivation'] = $lastCarsMaintenance->getMotivation()->getId();
             $disableInputStatusMaintenance = true;
         }
 
@@ -181,9 +182,9 @@ class CarsController extends AbstractActionController {
             $form->setData($postData);
             //$form->get('car')->remove('fleet'); // setValue($car->getFleet()->getId());
             $form->getInputFilter()->get('location')->setRequired(false);
+            $form->getInputFilter()->get('motivation')->setRequired(false);
 
             if ($form->isValid()) {
-
                 try {
                     $this->carsService->updateCar($form->getData(), $lastStatus, $postData, $this->identity());
                     $this->carsService->saveData($form->getData(), false);

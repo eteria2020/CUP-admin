@@ -23,7 +23,6 @@ class CarFieldset extends Fieldset implements InputFilterProviderInterface
     public function __construct(CarsService $carsService, HydratorInterface $hydrator, Translator $translator)
     {
         $this->carsService = $carsService;
-
         $this->setHydrator($hydrator);
         $this->setObject(new Cars());
 

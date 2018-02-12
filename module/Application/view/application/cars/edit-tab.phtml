@@ -100,6 +100,19 @@ $form->get('car')->get('fleet')->setValue($this->car->getFleet()->getId());
             </div>
         </div>
 
+        <div class="row">
+            <div class="col-lg-4" id="js-list-motivation-car" style="display: none;">
+                <div class="form-group">
+                    <label for="surname"><?= $this->translate("Motivazione"); ?></label>
+                    <?php if ($this->disableInputStatusMaintenance): ?>
+                        <?= $this->formRow($form->get('motivation')->setAttribute('disabled', 'true')); ?>
+                    <?php else: ?>
+                        <?= $this->formRow($form->get('motivation')); ?>
+                    <?php endif; ?>
+                </div>
+            </div>
+        </div>
+
         <div class="row" style="display: none;" id="js-note">
             <div class="col-lg-12">
                 <label for="note"><?= $this->translate("Note"); ?></label>
@@ -114,7 +127,7 @@ $form->get('car')->get('fleet')->setValue($this->car->getFleet()->getId());
 
         <div class="row">
             <div class="col-lg-12">
-                <button type="submit" class="btn btn-success"><?= $this->translate("Modifica Auto"); ?></button>
+                <button type="submit" class="btn btn-success" onclick="verify()"><?= $this->translate("Modifica Auto"); ?></button>
             </div>
         </div>
 
@@ -128,6 +141,7 @@ $form->get('car')->get('fleet')->setValue($this->car->getFleet()->getId());
         var listRecovery = $('#js-list-ricovery-car');
         var selectStatus = $('.js-status');
         var noteInput = $('#js-note');
+        var listMotivation = $('#js-list-motivation-car');
 
         showListRecovery(selectStatus.val());
 
@@ -140,10 +154,20 @@ $form->get('car')->get('fleet')->setValue($this->car->getFleet()->getId());
             if (value == '<?= \SharengoCore\Utility\CarStatus::MAINTENANCE; ?>') {
                 listRecovery.show();
                 noteInput.show();
+                listMotivation.show();
+                //console.log($("#motivation").val());
             } else {
                 listRecovery.hide();
                 noteInput.hide();
+                listMotivation.hide();
             }
         }
     });
+
+    function verify(){
+        if ($("#motivation").val() == "1" && $('.js-status').val() == '<?= \SharengoCore\Utility\CarStatus::MAINTENANCE; ?>'){
+            alert( "Devi selezionare una motivazione" );
+            event.preventDefault();
+        }
+    };
 </script>

@@ -3,13 +3,17 @@
 namespace Application\Form;
 
 use Zend\Form\Form;
+use SharengoCore\Service\MaintenanceMotivationsService;
 
 class CarForm extends Form
 {
-    public function __construct($carFieldset)
+    private $maintenanceMotivationsService;
+
+    public function __construct($carFieldset, MaintenanceMotivationsService $maintenanceMotivationsService)
     {
         parent::__construct('car');
         $this->setAttribute('method', 'post');
+        $this->maintenanceMotivationsService = $maintenanceMotivationsService;
 
         $this->add($carFieldset);
 
@@ -49,12 +53,26 @@ class CarForm extends Form
         ]);
 
         $this->add([
+            'name'       => 'motivation',
+            'type'       => 'Zend\Form\Element\Select',
+            'attributes' => [
+                'id'    => 'motivation',
+                'class' => 'form-control',
+            ],
+            'options'    => [
+                'value_options' =>
+                    $maintenanceMotivationsService->getAllMaintenanceMotivations()
+            ]
+        ]);
+
+        $this->add([
             'name'       => 'submit',
             'attributes' => [
                 'type'  => 'submit',
                 'value' => 'Submit'
             ]
         ]);
+
     }
 
     public function setStatus(array $status)
