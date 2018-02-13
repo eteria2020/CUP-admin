@@ -223,22 +223,16 @@ class PaymentsController extends AbstractActionController
             return $this->notFoundAction();
         }
 
-        /*
-         * ---------------------------------
-         ** --------------------------------- 
-         * * ---------------------------------
-         * * ---------------------------------
-         */
         $extraPaymentTries = $extraPayment->getExtraPaymentTries();
 
         return new ViewModel([
-            'tripPayment' => $extraPayment,
-            'tripPaymentTries' => $extraPaymentTries,
+            'extraPayment' => $extraPayment,
+            'extraPaymentTries' => $extraPaymentTries,
             'customer' => $extraPayment->getCustomer()
         ]);
     }
 
-    public function doRetryAction()
+    public function doRetryPaymentsAction()
     {
         $id = (int)$this->params()->fromRoute('id', 0);
 
@@ -265,6 +259,36 @@ class PaymentsController extends AbstractActionController
                 'message' => 'The trip is not anymore in wrong payment state'
             ]);
         }
+    }
+    
+    public function doRetryExtraAction()
+    {
+        $id = (int)$this->params()->fromRoute('id', 0);
+
+        $webuser = $this->identity();
+
+        $extraPayment = $this->extraPaymentsService->getExtraPaymentById($id);
+
+        if ($extraPayment->isWrongPayment()) {
+            // the second parameter is needed to avoid sending an email to the customer
+            $cartasiResponse = $this->paymentsService->tryExtraPayment($extraPayment, $webuser, true, false, false, true);
+
+            if ($cartasiResponse->getOutcome() === 'OK') {
+                $this->customersService->enableCustomerPayment($extraPayment->getCustomer());
+            }
+
+            return new JsonModel([
+                'outcome' => $cartasiResponse->getOutcome(),
+                'message' => $cartasiResponse->getMessage(),
+                'tripPaymentTriesId' => $extraPayment->getTripPaymentTries()[0]->getId()
+            ]);
+        } else {
+            return new JsonModel([
+                'outcome' => 'KO',
+                'message' => 'The trip is not anymore in wrong payment state'
+            ]);
+        }
+ 
     }
 
     public function extraAction()

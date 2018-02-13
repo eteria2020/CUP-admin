@@ -997,15 +997,27 @@ return [
                             ]
                         ]
                     ],
-                    'do-retry' => [
+                    'do-retry-payments' => [
                         'type' => 'Segment',
                         'options' => [
-                            'route' => '/do-retry/:id',
+                            'route' => '/do-retry-payments/:id',
                             'constraints' => [
                                 'id'    => '[0-9]*'
                             ],
                             'defaults' => [
-                                'action' => 'do-retry'
+                                'action' => 'do-retry-payments'
+                            ]
+                        ]
+                    ],
+                    'do-retry-extra' => [
+                        'type' => 'Segment',
+                        'options' => [
+                            'route' => '/do-retry-extra/:id',
+                            'constraints' => [
+                                'id'    => '[0-9]*'
+                            ],
+                            'defaults' => [
+                                'action' => 'do-retry-extra'
                             ]
                         ]
                     ],
