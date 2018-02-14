@@ -7,7 +7,7 @@ $(function () {
 
     $('#js-new-try').click(function () {
         $.post(retryUrl, {
-            tripPaymentId: extraPaymentId
+            extraPaymentId: extraPaymentId
         }, function (data) {
             $('#js-new-try').hide();
             if (data.outcome === 'OK') {

@@ -269,18 +269,23 @@ class PaymentsController extends AbstractActionController
 
         $extraPayment = $this->extraPaymentsService->getExtraPaymentById($id);
 
-        if ($extraPayment->isWrongPayment()) {
+        if ($extraPayment->isWrongExtra()) {
             // the second parameter is needed to avoid sending an email to the customer
             $cartasiResponse = $this->paymentsService->tryExtraPayment($extraPayment, $webuser, true, false, false, true);
 
+            
             if ($cartasiResponse->getOutcome() === 'OK') {
                 $this->customersService->enableCustomerPayment($extraPayment->getCustomer());
             }
+            
+            $c = $extraPayment->getExtraPaymentTries()[0]->getId();
 
+            $fgf = "";
+            
             return new JsonModel([
                 'outcome' => $cartasiResponse->getOutcome(),
                 'message' => $cartasiResponse->getMessage(),
-                'tripPaymentTriesId' => $extraPayment->getTripPaymentTries()[0]->getId()
+                'tripPaymentTriesId' => $extraPayment->getExtraPaymentTries()[0]->getId()
             ]);
         } else {
             return new JsonModel([
