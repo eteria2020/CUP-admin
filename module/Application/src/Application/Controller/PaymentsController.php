@@ -278,10 +278,6 @@ class PaymentsController extends AbstractActionController
                 $this->customersService->enableCustomerPayment($extraPayment->getCustomer());
             }
             
-            $c = $extraPayment->getExtraPaymentTries()[0]->getId();
-
-            $fgf = "";
-            
             return new JsonModel([
                 'outcome' => $cartasiResponse->getOutcome(),
                 'message' => $cartasiResponse->getMessage(),
