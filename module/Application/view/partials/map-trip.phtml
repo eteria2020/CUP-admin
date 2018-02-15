@@ -2,7 +2,12 @@
 <!-- Events table -->
 <div class="row">
     <div class="col-md-12">
+        <?= $this->partial('partials/events-table.phtml', ['events' => $this->events]); ?>
+
+        <br>
+        <br>
         <div class="portlet box green">
+
             <!-- Header -->
             <div class="portlet-title">
                 <div class="caption">
@@ -12,7 +17,7 @@
             <!-- header -->
             <!-- Body -->
             <div class="portlet-body">
-                
+
                 <script>
                     var event_json = <?= $this->eventsJson; ?>;
                     var log_json = <?= $this->logsJson; ?>;
@@ -22,11 +27,6 @@
                 <div id="conteiner">
                     <div align="center" id="map"></div>  
                 </div> 
-
-                <br>
-                <br>
-                <?= $this->partial('partials/events-table.phtml', ['events' => $this->events]); ?>
-
             </div>
             <!-- body -->
         </div>
@@ -39,7 +39,7 @@
         width:100% !important; 
         height:100%;
     }
-    
+
     #conteiner {
         width:auto; 
         height:80vh;
