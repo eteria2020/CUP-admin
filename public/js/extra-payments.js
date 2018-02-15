@@ -232,16 +232,27 @@ function addPaymentRow(isPenalty)
             "</div>" +
         "</div>";
 
-    // This is the html that corresponds to the reason row
-    var reasonContent = "<!-- REASON INPUT -->" +
+
+    if($('#type').val() == "extra"){
+        // This is the html that corresponds to the reason row
+        var reasonContent = "<!-- REASON INPUT -->" +
+            "<div class=\"row sng-margin-top\">" +
+                "<div class=\"col-lg-12\">" +
+                    "<label>" + translate("cause") + "</label>" +
+                    "<select id=\"reason" + blockNumber + "\" class=\"form-control\">" +
+                        causalOptions +
+                    "</select>" +
+                "</div>" +
+            "</div>";
+    }else{
+        var reasonContent = "<!-- REASON INPUT -->" +
         "<div class=\"row sng-margin-top\">" +
             "<div class=\"col-lg-12\">" +
                 "<label>" + translate("cause") + "</label>" +
-                "<select id=\"reason" + blockNumber + "\" class=\"form-control\">" +
-                    causalOptions +
-                "</select>" +
+                "<input id=\"reason" + blockNumber + "\" class=\"form-control\" type=\"text\">" +
             "</div>" +
         "</div>";
+    }
 
     // This is the html that corresponds to the amount row
     var amountContent = "<!-- AMOUNT INPUT -->" +
