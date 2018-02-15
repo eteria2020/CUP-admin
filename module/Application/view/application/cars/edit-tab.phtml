@@ -17,7 +17,14 @@ $form->get('car')->get('fleet')->setValue($this->car->getFleet()->getId());
                     <?= $this->formRow($form->get('car')->get('plate')->setAttribute('disabled', 'disabled')); ?>
                 </div>
             </div>
-
+            <div class="col-lg-1">
+                <div class="form-group">
+                    <label for="surname"><?= $this->translate("Stato"); ?></label><br />
+                    <?= $this->CarStatus($form->get('car')->get('status')->getValue()); ?>
+                </div>
+            </div>
+        </div>
+        <div class="row">
             <div class="col-lg-3">
                 <div class="form-group">
                     <label for="name"><?= $this->translate("Costruttore"); ?></label>
@@ -53,52 +60,54 @@ $form->get('car')->get('fleet')->setValue($this->car->getFleet()->getId());
         </div>
 
         <div class="row">
-            <div class="col-lg-1">
+            <div class="col-lg-2">
                 <div class="form-group">
                     <label for="name"><?= $this->translate("Flotta"); ?></label>
                     <?= $this->formRow($form->get('car')->get('fleet')); ?>
                 </div>
             </div>
-            <div class="col-lg-3">
-                <div class="form-group">
-                    <label for="gender"><?= $this->translate("Note"); ?></label>
-                    <?= $this->formRow($form->get('car')->get('notes')); ?>
-                </div>
-            </div>
-
             <div class="col-lg-2">
                 <div class="form-group">
                     <label for="name"><?= $this->translate("Attiva"); ?></label>
                     <?= $this->formRow($form->get('car')->get('active')); ?>
                 </div>
             </div>
-
-            <div class="col-lg-1">
-                <div class="form-group">
-                    <label for="surname"><?= $this->translate("Stato"); ?></label><br />
-                    <?= $this->CarStatus($form->get('car')->get('status')->getValue()); ?>
-                </div>
-            </div>
-
             <div class="col-lg-4">
-                <div class="col-lg-6">
-                    <div class="form-group">
-                        <label for="surname"><?= $this->translate("Aggiorna stato auto"); ?></label>
-                        <?= $this->formRow($form->get('car')->get('status')); ?>
-                    </div>
-                </div>
-                <div class="col-lg-6" id="js-list-ricovery-car" style="display: none;">
-                    <div class="form-group">
-                        <label for="surname"><?= $this->translate("Sede di ricovero auto"); ?></label>
-                        <?php if ($this->disableInputStatusMaintenance): ?>
-                            <?= $this->formRow($form->get('location')->setAttribute('disabled', 'true')); ?>
-                        <?php else: ?>
-                            <?= $this->formRow($form->get('location')); ?>
-                        <?php endif; ?>
-                    </div>
+                <div class="form-group">
+                    <label for="gender"><?= $this->translate("Telaio"); ?></label>
+                    <?= $this->formRow($form->get('car')->get('notes')); ?>
                 </div>
             </div>
         </div>
+        <div class="row">
+            <div class="col-lg-3">
+                <div class="form-group">
+                    <label for="surname"><?= $this->translate("Aggiorna stato auto"); ?></label>
+                    <?= $this->formRow($form->get('car')->get('status')); ?>
+                </div>
+            </div>
+            <div class="col-lg-3" id="js-list-ricovery-car" style="display: none;">
+                <div class="form-group">
+                    <label for="surname"><?= $this->translate("Sede di ricovero auto"); ?></label>
+                    <?php if ($this->disableInputStatusMaintenance): ?>
+                        <?= $this->formRow($form->get('location')->setAttribute('disabled', 'true')); ?>
+                    <?php else: ?>
+                        <?= $this->formRow($form->get('location')); ?>
+                    <?php endif; ?>
+                </div>
+            </div>
+            <div class="col-lg-5" id="js-list-motivation-car" style="display: none;">
+                <div class="form-group">
+                    <label for="surname"><?= $this->translate("Motivazione"); ?></label>
+                    <?php if ($this->disableInputStatusMaintenance): ?>
+                        <?= $this->formRow($form->get('motivation')->setAttribute('disabled', 'true')); ?>
+                    <?php else: ?>
+                        <?= $this->formRow($form->get('motivation')); ?>
+                    <?php endif; ?>
+                </div>
+            </div>
+        </div>
+
 
         <div class="row" style="display: none;" id="js-note">
             <div class="col-lg-12">
@@ -114,7 +123,7 @@ $form->get('car')->get('fleet')->setValue($this->car->getFleet()->getId());
 
         <div class="row">
             <div class="col-lg-12">
-                <button type="submit" class="btn btn-success"><?= $this->translate("Modifica Auto"); ?></button>
+                <button type="submit" class="btn btn-success" onclick="verify()"><?= $this->translate("Modifica Auto"); ?></button>
             </div>
         </div>
 
@@ -128,6 +137,7 @@ $form->get('car')->get('fleet')->setValue($this->car->getFleet()->getId());
         var listRecovery = $('#js-list-ricovery-car');
         var selectStatus = $('.js-status');
         var noteInput = $('#js-note');
+        var listMotivation = $('#js-list-motivation-car');
 
         showListRecovery(selectStatus.val());
 
@@ -140,10 +150,20 @@ $form->get('car')->get('fleet')->setValue($this->car->getFleet()->getId());
             if (value == '<?= \SharengoCore\Utility\CarStatus::MAINTENANCE; ?>') {
                 listRecovery.show();
                 noteInput.show();
+                listMotivation.show();
+                //console.log($("#motivation").val());
             } else {
                 listRecovery.hide();
                 noteInput.hide();
+                listMotivation.hide();
             }
         }
     });
+
+    function verify(){
+        if ($("#motivation").val() == "1" && $('.js-status').val() == '<?= \SharengoCore\Utility\CarStatus::MAINTENANCE; ?>'){
+            alert( "Devi selezionare una motivazione" );
+            event.preventDefault();
+        }
+    };
 </script>
