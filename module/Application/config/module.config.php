@@ -1045,15 +1045,15 @@ return [
                             ]
                         ]
                     ],
-                    'recap' => [
-                        'type' => 'Segment',
-                        'options' => [
-                            'route' => '/recap',
-                            'defaults' => [
-                                'action' => 'recap'
-                            ]
-                        ]
-                    ],
+//                    'recap' => [
+//                        'type' => 'Segment',
+//                        'options' => [
+//                            'route' => '/recap',
+//                            'defaults' => [
+//                                'action' => 'recap'
+//                            ]
+//                        ]
+//                    ],
                     'fares' => [
                         'type' => 'Segment',
                         'options' => [
@@ -1939,7 +1939,7 @@ return [
                     [
                         'label' => $translator->translate('Competenze'),
                         'route' => 'payments/recap',
-                        'isVisible' => true
+                        'isVisible' => false
                     ],
                     [
                         'label' => $translator->translate('Verifica CartaSI'),
