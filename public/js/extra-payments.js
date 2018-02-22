@@ -57,13 +57,20 @@ function startPaymentProcess()
     var customerId = $('#customer').val();
     var fleetId = parseInt($('#fleet').val());
     var type = $('#type').val();
+    var penalty = [];
     var reasons = [];
     var amounts = [];
 
     var paymentBlocks = document.getElementsByClassName(paymentContainerClass);
     for (var i = 0; i < paymentBlocks.length; i++) {
         var number = getBlockNumber(paymentBlocks[i]);
-        reasons[i] = $('#reason' + number).val();
+        if($('#type').val() === "extra"){
+            reasons[i] = $('#reason' + number).val();
+            penalty[i] = null;
+        }else{
+            reasons[i] = $('#reason' + number).val();
+            penalty[i] = $('#penalty' + number).val();;
+        }
         amounts[i] = $('#amount' + number).val();
     }
 
@@ -71,12 +78,13 @@ function startPaymentProcess()
         customerId,
         fleetId,
         type,
+        penalty,
         reasons,
         amounts
     );
 
     if (canProceed) {
-        proceedWithPayment(customerId, fleetId, type, reasons, amounts);
+        proceedWithPayment(customerId, fleetId, type, penalty, reasons, amounts);
     }
 }
 
@@ -90,7 +98,7 @@ function startPaymentProcess()
  * @param string[] reasons
  * @param string[] amounts
  */
-function checkAndFormatFields(customerId, fleetId, type, reasons, amounts)
+function checkAndFormatFields(customerId, fleetId, type, penalty, reasons, amounts)
 {
     if (!customerId || customerId < 0) {
         alert(translate("errorId"));
@@ -117,7 +125,12 @@ function checkAndFormatFields(customerId, fleetId, type, reasons, amounts)
     // Check all payment blocks for errors or omissions
     for (var i = 0; i < reasons.length; i++) {
         var reason = reasons[i];
+        var penalty = penalty[i];
         var amount = amounts[i];
+        if (penalty != null && penalty.length === 0) {
+            alert(translate("errorPenalty"));
+            return false;
+        }
         if (reason.length === 0) {
             alert(translate("errorCausal"));
             return false;
@@ -144,10 +157,11 @@ function checkAndFormatFields(customerId, fleetId, type, reasons, amounts)
  * @param integer customerId
  * @param integer fleetId
  * @param string type
+ * @param string[] penalty
  * @param string[] reasons
  * @param integer[] amounts
  */
-function proceedWithPayment(customerId, fleetId, type, reasons, amounts)
+function proceedWithPayment(customerId, fleetId, type, penalty, reasons, amounts)
 {
     $.get('/customers/info/' + customerId)
         .done(function (data) {
@@ -159,7 +173,7 @@ function proceedWithPayment(customerId, fleetId, type, reasons, amounts)
             if (confirm(translate("confirmPayment") + ' ' +
                 data.name + ' ' + data.surname +
                 ' ' + translate("confirmPaymentContinue") + ' ' + amount / 100 + ' euro')) {
-                sendPaymentRequest(customerId, fleetId, type, reasons, amounts);
+                sendPaymentRequest(customerId, fleetId, type, penalty, reasons, amounts);
             }
         })
         .fail(function (data) {
@@ -175,14 +189,16 @@ function proceedWithPayment(customerId, fleetId, type, reasons, amounts)
  * @param integer customerId
  * @param integer fleetId
  * @param string type
+ * @param string[] penalty
  * @param string[] reasons
  * @param integer[] amounts
  */
-function sendPaymentRequest(customerId, fleetId, type, reasons, amounts) {
+function sendPaymentRequest(customerId, fleetId, type, penalty, reasons, amounts) {
     $.post('/payments/pay-extra', {
         customerId: customerId,
         fleetId: fleetId,
         type: type,
+        penalty: penalty,
         reasons: reasons,
         amounts: amounts
     }).done(function (data) {
@@ -232,27 +248,20 @@ function addPaymentRow(isPenalty)
             "</div>" +
         "</div>";
 
-
-    if($('#type').val() == "extra"){
-        // This is the html that corresponds to the reason row
-        var reasonContent = "<!-- REASON INPUT -->" +
+    // This is the html that corresponds to the reason row
+    var reasonContent = "<!-- REASON INPUT -->" +
             "<div class=\"row sng-margin-top\">" +
                 "<div class=\"col-lg-12\">" +
-                    "<label>" + translate("cause") + "</label>" +
-                    "<select id=\"reason" + blockNumber + "\" class=\"form-control\">" +
-                        causalOptions +
-                    "</select>" +
-                "</div>" +
-            "</div>";
-    }else{
-        var reasonContent = "<!-- REASON INPUT -->" +
-        "<div class=\"row sng-margin-top\">" +
-            "<div class=\"col-lg-12\">" +
-                "<label>" + translate("cause") + "</label>" +
-                "<input id=\"reason" + blockNumber + "\" class=\"form-control\" type=\"text\">" +
-            "</div>" +
-        "</div>";
+                    "<label>" + translate("cause") + "</label>";
+    if ($('#type').val() == "extra") {
+        reasonContent += "<select id=\"reason" + blockNumber + "\" class=\"form-control\">" +
+                            causalOptions +
+                         "</select>";
+    } else {
+        reasonContent += "<input id=\"reason" + blockNumber + "\" class=\"form-control\" type=\"text\">";
     }
+    reasonContent += "</div>" +
+            "</div>";
 
     // This is the html that corresponds to the amount row
     var amountContent = "<!-- AMOUNT INPUT -->" +
@@ -277,7 +286,12 @@ function addPaymentRow(isPenalty)
             var selected = $(this).find('option:selected'),
                 reason = selected.data('reason') || '',
                 amount = parseFloat(selected.data('amount')) / 100 || '';
-            $("#reason" + blockNumber).val(reason);
+                //console.log(selected);
+            //var penalty =  $(this).find('option:selected');
+            //if($('#type').val() === extra)
+                $("#reason" + blockNumber).val(reason);
+            //else
+            //    $("#reason" + blockNumber).val(reason);
             $("#amount" + blockNumber).val(amount);
         });
     }

@@ -71,7 +71,7 @@ $('#type').change(function() {
     if($('#type').val() == "extra"){
         <?php
         echo 'causalOptions = "';
-        echo '<option>---</option>';
+        echo '<option>Non definito</option>';
         foreach($this->causal as $causal) {
             echo '<option data-reason=\"' . $causal->getReason() . '\">' .
                 $causal->getReason() .
@@ -97,7 +97,7 @@ function deactivate(e)
  * to the html of a selector.
  */
 echo 'var penaltyOptions = "';
-echo '<option>---</option>';
+echo '<option></option>';
 foreach($this->penalties as $penalty) {
     echo '<option data-reason=\"' . $penalty->getReason() . '\" data-amount=\"' . $penalty->getAmount() . '\">' .
         $penalty->getReason() . ' (' .number_format($penalty->getAmount()/100, 2) . '\u20ac)' .
