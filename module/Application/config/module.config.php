@@ -524,7 +524,7 @@ return [
                     'send-command' => [
                         'type'    => 'Segment',
                         'options' => [
-                            'route'    => '/send-command/:plate/:command',
+                            'route'    => '/send-command/:plate/:command/:txtArg1',
                             'constraints' => [
                                 'plate' => '[a-zA-Z0-9]*',
                                 'command' => '[0-9]*'
@@ -536,6 +536,17 @@ return [
                             ],
                         ],
                     ],
+                    /*'send-command' => [
+                        'type'    => 'Segment',
+                        'options' => [
+                            'route'    => '/send-command/:plate/:command',
+                            'defaults' => [
+                                '__NAMESPACE__' => 'Application\Controller',
+                                'controller'    => 'Cars',
+                                'action'        => 'send-command',
+                            ],
+                        ],
+                    ],*/
                     'ajax-tab-edit' => [
                         'type'    => 'Segment',
                         'options' => [
