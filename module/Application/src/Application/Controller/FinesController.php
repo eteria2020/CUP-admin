@@ -21,7 +21,7 @@ use Zend\View\Model\ViewModel;
 use Zend\Session\Container;
 use Zend\EventManager\EventManager;
 
-class TripsController extends AbstractActionController
+class FinesController extends AbstractActionController
 {
     /**
      * @var TripsService
@@ -115,7 +115,7 @@ class TripsController extends AbstractActionController
     public function indexAction()
     {
         $sessionDatatableFilters = $this->getDataTableSessionFilters();
-
+        error_log("qui entro? sneaky sneaky");
         return new ViewModel([
             'filters' => json_encode($sessionDatatableFilters),
         ]);

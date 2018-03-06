@@ -460,6 +460,59 @@ return [
                     ]
                 ],
             ],
+            'fines' => [
+                'type' => 'Literal',
+                'options' => [
+                    'route' => '/fines',
+                    'defaults' => [
+                        '__NAMESPACE__' => 'Application\Controller',
+                        'controller' => 'Fines',
+                        'action' => 'index'
+                    ]
+                ],
+                'may_terminate' => true,
+                'child_routes' => [
+                    'datatable' => [
+                        'type'    => 'Literal',
+                        'options' => [
+                            'route'    => '/datatable',
+                            'defaults' => [
+                                '__NAMESPACE__' => 'Application\Controller',
+                                'controller' => 'Fines',
+                                'action'        => 'datatable',
+                            ],
+                        ],
+                    ],
+                    'details' => [
+                        'type' => 'Segment',
+                        'options' => [
+                            'route' => '/details/:id',
+                            'constraints' => [
+                                'id' => '[0-9]*'
+                            ],
+                            'defaults' => [
+                                '__NAMESPACE__' => 'Application\Controller',
+                                'controller' => 'Fines',
+                                'action' => 'details'
+                            ]
+                        ]
+                    ],
+                    'info-tab' => [
+                        'type' => 'Segment',
+                        'options' => [
+                            'route' => '/tab/info/:id',
+                            'constraints' => [
+                                'id' => '[0-9]*'
+                            ],
+                            'defaults' => [
+                                '__NAMESPACE__' => 'Application\Controller',
+                                'controller' => 'Fines',
+                                'action' => 'info-tab'
+                            ]
+                        ]
+                    ],
+                ],
+            ],
             'cars' => [
                 'type' => 'Literal',
                 'options' => [
@@ -745,179 +798,6 @@ return [
                             'defaults' => [
                                 '__NAMESPACE__' => 'Application\Controller',
                                 'controller' => 'Trips',
-                                'action' => 'do-close'
-                            ]
-                        ],
-                        'may_terminate' => false,
-                        'child_routes' => [
-                            'post' => [
-                                'type' => 'Method',
-                                'options' => [
-                                    'verb' => 'post'
-                                ]
-                            ]
-                        ]
-                    ],
-                    'not-payed' => [
-                        'type' => 'Literal',
-                        'options' => [
-                            'route' => '/not-payed',
-                            'defaults' => [
-                                '__NAMESPACE__' => 'Application\Controller',
-                                'action' => 'list',
-                                'controller' => 'TripsNotPayed'
-                            ]
-                        ]
-                    ]
-                ],
-            ],
-            'safo' => [
-                'type' => 'Literal',
-                'options' => [
-                    'route' => '/safo',
-                    'defaults' => [
-                        '__NAMESPACE__' => 'Application\Controller',
-                        'controller' => 'Safo',
-                        'action' => 'index'
-                    ]
-                ],
-                'may_terminate' => true,
-                'child_routes' => [
-                    'datatable' => [
-                        'type'    => 'Literal',
-                        'options' => [
-                            'route'    => '/datatable',
-                            'defaults' => [
-                                '__NAMESPACE__' => 'Application\Controller',
-                                'controller' => 'Safo',
-                                'action'        => 'datatable',
-                            ],
-                        ],
-                    ],
-                    'not-payed-datatable' => [
-                        'type' => 'Literal',
-                        'options' => [
-                            'route' => '/not-payed-datatable',
-                            'defaults' => [
-                                '__NAMESPACE__' => 'Application\Controller',
-                                'action' => 'datatable',
-                                'controller' => 'TripsNotPayed'
-                            ]
-                        ]
-                    ],
-                    'cost' => [
-                        'type' => 'Literal',
-                        'options' => [
-                            'route' => '/cost',
-                            'defaults' => [
-                                '__NAMESPACE__' => 'Application\Controller',
-                                'controller' => 'Safo',
-                                'action' => 'trip-cost',
-                            ],
-                        ]
-                    ],
-                    'cost-computation' => [
-                        'type' => 'Literal',
-                        'options' => [
-                            'route' => '/cost-computation',
-                            'defaults' => [
-                                '__NAMESPACE__' => 'Application\Controller',
-                                'controller' => 'Safo',
-                                'action' => 'trip-cost-computation'
-                            ]
-                        ]
-                    ],
-                    'details' => [
-                        'type' => 'Segment',
-                        'options' => [
-                            'route' => '/details/:id',
-                            'constraints' => [
-                                'id' => '[0-9]*'
-                            ],
-                            'defaults' => [
-                                '__NAMESPACE__' => 'Application\Controller',
-                                'controller' => 'Safo',
-                                'action' => 'details'
-                            ]
-                        ]
-                    ],
-                    'info-tab' => [
-                        'type' => 'Segment',
-                        'options' => [
-                            'route' => '/tab/info/:id',
-                            'constraints' => [
-                                'id' => '[0-9]*'
-                            ],
-                            'defaults' => [
-                                '__NAMESPACE__' => 'Application\Controller',
-                                'controller' => 'Safo',
-                                'action' => 'info-tab'
-                            ]
-                        ]
-                    ],
-                    'cost-tab' => [
-                        'type' => 'Segment',
-                        'options' => [
-                            'route' => '/tab/cost/:id',
-                            'constraints' => [
-                                'id'    => '[0-9]*'
-                            ],
-                            'defaults' => [
-                                '__NAMESPACE__' => 'Application\Controller',
-                                'controller' => 'Safo',
-                                'action' => 'cost-tab'
-                            ]
-                        ]
-                    ],
-                    'edit-tab' => [
-                        'type' => 'Segment',
-                        'options' => [
-                            'route' => '/tab/edit/:id',
-                            'constraints' => [
-                                'id'    => '[0-9]*'
-                            ],
-                            'defaults' => [
-                                '__NAMESPACE__' => 'Application\Controller',
-                                'controller' => 'EditTrip',
-                                'action' => 'edit-tab'
-                            ]
-                        ]
-                    ],
-                    'close-tab' => [
-                        'type' => 'Segment',
-                        'options' => [
-                            'route' => '/tab/close/:id',
-                            'constraints' => [
-                                'id' => '[0-9]*'
-                            ],
-                            'defaults' => [
-                                '__NAMESPACE__' => 'Application\Controller',
-                                'controller' => 'Safo',
-                                'action' => 'close-tab'
-                            ]
-                        ]
-                    ],
-                    'map-tab' => [
-                        'type' => 'Segment',
-                        'options' => [
-                            'route' => '/tab/map/:id',
-                            'constraints' => [
-                                'id'    => '[0-9]*'
-                            ],
-                            'defaults' => [
-                                '__NAMESPACE__' => 'Application\Controller',
-                                'controller' => 'Safo',
-                                'action' => 'map-tab'
-                            ]
-                        ]
-                    ],
-                    'do-close' => [
-                        'type' => 'Literal',
-                        'options' => [
-                            'route' => '/do-close',
-                            'defaults' => [
-                                '__NAMESPACE__' => 'Application\Controller',
-                                'controller' => 'Safo',
                                 'action' => 'do-close'
                             ]
                         ],
@@ -1758,6 +1638,7 @@ return [
             'Application\Controller\ForeignDriversLicense' => 'Application\Controller\ForeignDriversLicenseControllerFactory',
             'Application\Controller\TripsNotPayed' => 'Application\Controller\TripsNotPayedControllerFactory',
             'Application\Controller\Notifications' => 'Application\Controller\NotificationsControllerFactory',
+            'Application\Controller\Fines' => 'Application\Controller\FinesControllerFactory',
         ]
     ],
     'controller_plugins' => [
@@ -1970,6 +1851,7 @@ return [
                 ['controller' => 'Application\Controller\ForeignDriversLicense', 'roles' => ['admin']],
                 ['controller' => 'Application\Controller\TripsNotPayed', 'roles' => ['admin']],
                 ['controller' => 'Application\Controller\Notifications', 'roles' => ['admin','callcenter']],
+                ['controller' => 'Application\Controller\Fines', 'roles' => ['admin','callcenter']]
             ],
         ],
     ],
@@ -2120,6 +2002,20 @@ return [
                         'isVisible' => true
                     ]
                 ]
+            ],
+            [
+                'label'     => $translator->translate('Multe'),
+                'route'     => 'fines',
+                'icon'      => 'fa fa-road',
+                'resource'  => 'admin',
+                'isRouteJs' => true,
+                'pages'     => [
+                    [
+                        'label' => $translator->translate('Elenco'),
+                        'route' => 'fines',
+                        'isVisible' => true
+                    ],
+                ],
             ],
             [
                 'label' => $translator->translate('Configurazione'),
