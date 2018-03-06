@@ -1,0 +1,56 @@
+<?php
+$this->headLink()
+    ->appendStylesheet('/js/datatables/plugins/bootstrap/dataTables.bootstrap.css')
+    ->appendStylesheet('/js/plugins/bootstrap-datetimepicker/css/bootstrap-datetimepicker.min.css');
+$this->headScript()
+    ->prependFile('/js/tabs.js')
+    ->appendFile('/js/moment.min.js')
+    ->appendFile('/js/mapTrips.js')
+    ->appendFile('/js/plugins/bootstrap-datetimepicker/js/bootstrap-datetimepicker.min.js');
+?>
+<script src="http://www.openlayers.org/api/OpenLayers.js"></script>
+<script src="http://www.openstreetmap.org/openlayers/OpenStreetMap.js"></script>
+<div class="page-content-wrapper">
+    <div class="page-content">
+
+        <div class="row">
+            <div class="col-lg-6">
+                <h3 class="page-title">
+                    <?= $this->translate("DETTAGLI CORSA"); ?>
+                    <small>ID <?= $this->tripId ?> - <?= $this->customer->getName() . ' ' . $this->customer->getSurname() ?></small>
+                </h3>
+            </div>
+
+            <div class="col-lg-6">
+                <a href="<?= $this->url('trips'); ?>" class="btn btn-success pull-right"><i class="fa fa-arrow-left"></i> <?= $this->translate("Torna alla lista"); ?></a>
+            </div>
+        </div>
+
+        <div class="page-bar">
+        </div>
+
+        <div class="row">
+            <div class="col-md-12">
+                <ul class="nav nav-tabs" id="js-tabs" role="tablist">
+                    <li role="presentation" id="menu-info"><a href="<?= $this->url('trips/info-tab', ['id' => $this->tripId]); ?>" data-target="#tab-info" role="tab" data-toggle="tab"><?= $this->translate("Informazioni"); ?></a></li>
+                    <li role="presentation" id="menu-cost"><a href="<?= $this->url('trips/cost-tab', ['id' => $this->tripId]); ?>" data-target="#tab-cost" role="tab" data-toggle="tab"><?= $this->translate("Costo"); ?></a></li>
+                    <li role="presentation" id="menu-edit"><a href="<?= $this->url('trips/edit-tab', ['id' => $this->tripId]); ?>" data-target="#tab-edit" role="tab" data-toggle="tab"><?= $this->translate("Modifica corsa"); ?></a></li>
+                    <li role="presentation" id="menu-map"><a href="<?= $this->url('trips/map-tab', ['id' => $this->tripId]); ?>" data-target="#tab-map" role="tab" data-toggle="tab"><?= $this->translate("Mappa corsa"); ?></a></li>
+                </ul>
+
+                <div class="tab-content">
+                    <div role="tabpanel" class="tab-pane" id="tab-info"></div>
+                    <div role="tabpanel" class="tab-pane" id="tab-cost"></div>
+                    <div role="tabpanel" class="tab-pane" id="tab-edit"></div>
+                    <div role="tabpanel" class="tab-pane" id="tab-map"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- END PAGE CONTENT-->
+    </div>
+</div>
+
+<script>
+var tab = '<?= $this->tab ?>';
+</script>

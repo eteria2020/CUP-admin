@@ -771,6 +771,179 @@ return [
                     ]
                 ],
             ],
+            'safo' => [
+                'type' => 'Literal',
+                'options' => [
+                    'route' => '/safo',
+                    'defaults' => [
+                        '__NAMESPACE__' => 'Application\Controller',
+                        'controller' => 'Safo',
+                        'action' => 'index'
+                    ]
+                ],
+                'may_terminate' => true,
+                'child_routes' => [
+                    'datatable' => [
+                        'type'    => 'Literal',
+                        'options' => [
+                            'route'    => '/datatable',
+                            'defaults' => [
+                                '__NAMESPACE__' => 'Application\Controller',
+                                'controller' => 'Safo',
+                                'action'        => 'datatable',
+                            ],
+                        ],
+                    ],
+                    'not-payed-datatable' => [
+                        'type' => 'Literal',
+                        'options' => [
+                            'route' => '/not-payed-datatable',
+                            'defaults' => [
+                                '__NAMESPACE__' => 'Application\Controller',
+                                'action' => 'datatable',
+                                'controller' => 'TripsNotPayed'
+                            ]
+                        ]
+                    ],
+                    'cost' => [
+                        'type' => 'Literal',
+                        'options' => [
+                            'route' => '/cost',
+                            'defaults' => [
+                                '__NAMESPACE__' => 'Application\Controller',
+                                'controller' => 'Safo',
+                                'action' => 'trip-cost',
+                            ],
+                        ]
+                    ],
+                    'cost-computation' => [
+                        'type' => 'Literal',
+                        'options' => [
+                            'route' => '/cost-computation',
+                            'defaults' => [
+                                '__NAMESPACE__' => 'Application\Controller',
+                                'controller' => 'Safo',
+                                'action' => 'trip-cost-computation'
+                            ]
+                        ]
+                    ],
+                    'details' => [
+                        'type' => 'Segment',
+                        'options' => [
+                            'route' => '/details/:id',
+                            'constraints' => [
+                                'id' => '[0-9]*'
+                            ],
+                            'defaults' => [
+                                '__NAMESPACE__' => 'Application\Controller',
+                                'controller' => 'Safo',
+                                'action' => 'details'
+                            ]
+                        ]
+                    ],
+                    'info-tab' => [
+                        'type' => 'Segment',
+                        'options' => [
+                            'route' => '/tab/info/:id',
+                            'constraints' => [
+                                'id' => '[0-9]*'
+                            ],
+                            'defaults' => [
+                                '__NAMESPACE__' => 'Application\Controller',
+                                'controller' => 'Safo',
+                                'action' => 'info-tab'
+                            ]
+                        ]
+                    ],
+                    'cost-tab' => [
+                        'type' => 'Segment',
+                        'options' => [
+                            'route' => '/tab/cost/:id',
+                            'constraints' => [
+                                'id'    => '[0-9]*'
+                            ],
+                            'defaults' => [
+                                '__NAMESPACE__' => 'Application\Controller',
+                                'controller' => 'Safo',
+                                'action' => 'cost-tab'
+                            ]
+                        ]
+                    ],
+                    'edit-tab' => [
+                        'type' => 'Segment',
+                        'options' => [
+                            'route' => '/tab/edit/:id',
+                            'constraints' => [
+                                'id'    => '[0-9]*'
+                            ],
+                            'defaults' => [
+                                '__NAMESPACE__' => 'Application\Controller',
+                                'controller' => 'EditTrip',
+                                'action' => 'edit-tab'
+                            ]
+                        ]
+                    ],
+                    'close-tab' => [
+                        'type' => 'Segment',
+                        'options' => [
+                            'route' => '/tab/close/:id',
+                            'constraints' => [
+                                'id' => '[0-9]*'
+                            ],
+                            'defaults' => [
+                                '__NAMESPACE__' => 'Application\Controller',
+                                'controller' => 'Safo',
+                                'action' => 'close-tab'
+                            ]
+                        ]
+                    ],
+                    'map-tab' => [
+                        'type' => 'Segment',
+                        'options' => [
+                            'route' => '/tab/map/:id',
+                            'constraints' => [
+                                'id'    => '[0-9]*'
+                            ],
+                            'defaults' => [
+                                '__NAMESPACE__' => 'Application\Controller',
+                                'controller' => 'Safo',
+                                'action' => 'map-tab'
+                            ]
+                        ]
+                    ],
+                    'do-close' => [
+                        'type' => 'Literal',
+                        'options' => [
+                            'route' => '/do-close',
+                            'defaults' => [
+                                '__NAMESPACE__' => 'Application\Controller',
+                                'controller' => 'Safo',
+                                'action' => 'do-close'
+                            ]
+                        ],
+                        'may_terminate' => false,
+                        'child_routes' => [
+                            'post' => [
+                                'type' => 'Method',
+                                'options' => [
+                                    'verb' => 'post'
+                                ]
+                            ]
+                        ]
+                    ],
+                    'not-payed' => [
+                        'type' => 'Literal',
+                        'options' => [
+                            'route' => '/not-payed',
+                            'defaults' => [
+                                '__NAMESPACE__' => 'Application\Controller',
+                                'action' => 'list',
+                                'controller' => 'TripsNotPayed'
+                            ]
+                        ]
+                    ]
+                ],
+            ],
             'zfcuser' => [
                 'child_routes' => [
                     'register' => [
