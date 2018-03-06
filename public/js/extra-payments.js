@@ -284,14 +284,9 @@ function addPaymentRow(isPenalty)
     if (isPenalty) {
         $("#penalty" + blockNumber).change(function () {
             var selected = $(this).find('option:selected'),
-                reason = selected.data('reason') || '',
-                amount = parseFloat(selected.data('amount')) / 100 || '';
-                //console.log(selected);
-            //var penalty =  $(this).find('option:selected');
-            //if($('#type').val() === extra)
-                $("#reason" + blockNumber).val(reason);
-            //else
-            //    $("#reason" + blockNumber).val(reason);
+                    reason = selected.data('reason') || '',
+                    amount = parseFloat(selected.data('amount')) / 100 || '';
+            $("#reason" + blockNumber).val(reason);
             $("#amount" + blockNumber).val(amount);
         });
     }
