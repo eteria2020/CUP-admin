@@ -497,20 +497,6 @@ return [
                             ]
                         ]
                     ],
-                    'info-tab' => [
-                        'type' => 'Segment',
-                        'options' => [
-                            'route' => '/tab/info/:id',
-                            'constraints' => [
-                                'id' => '[0-9]*'
-                            ],
-                            'defaults' => [
-                                '__NAMESPACE__' => 'Application\Controller',
-                                'controller' => 'Fines',
-                                'action' => 'info-tab'
-                            ]
-                        ]
-                    ],
                 ],
             ],
             'cars' => [
@@ -2006,7 +1992,7 @@ return [
             [
                 'label'     => $translator->translate('Multe'),
                 'route'     => 'fines',
-                'icon'      => 'fa fa-road',
+                'icon'      => 'fa fa-file',
                 'resource'  => 'admin',
                 'isRouteJs' => true,
                 'pages'     => [
