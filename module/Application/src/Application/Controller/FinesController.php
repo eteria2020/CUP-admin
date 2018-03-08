@@ -165,16 +165,13 @@ class FinesController extends AbstractActionController
         }
     }
 
-    public function retryAction()
+    public function detailsAction()
     {
         $id = (int)$this->params()->fromRoute('id', 0);
 
-        $tripPayment = $this->finesService->getTripPaymentById($id);
-
-        if (!$tripPayment->isWrongPayment()) {
-            return $this->notFoundAction();
-        }
-
+        $SafoPenalty = $this->finesService->getSafoPenaltyById($id);
+        error_log($safoPenalty);
+        
         $tripPaymentTries = $tripPayment->getTripPaymentTries();
 
         return new ViewModel([

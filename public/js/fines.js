@@ -94,47 +94,6 @@ $(function() {
             {data: "e.violationDescription"},
             {data: "e.complete"}
         ],
-        /*"columnDefs": [
-            {
-                targets: 1,
-                className: "sng-dt-right"
-            },
-            {
-                targets: 6,
-                className: "sng-dt-right",
-                "render": function (data) {
-                    return '<a href="/trips/details/' + data +
-                        '" title="' + translate("tripDetailId") + " " + data +
-                        ' ">' + data + '</a>';
-                }
-            },
-            {
-                targets: [1, 2, 3],
-                "render": function (data, type, row) {
-                    return '<a href="/customers/edit/' + row.e.customerId +
-                        '" title="' + translate("customersDetailId") + ' ' + row.e.customerId + data + '</a>';
-                }
-            },
-            {
-                targets: 7,
-                className: "sng-dt-right sng-no-wrap",
-                "render": function (data) {
-                    return renderMin(data);
-                }
-            },
-
-            {
-                targets: 8,
-                data: "button",
-                searchable: false,
-                sortable: false,
-                render: function (data) {
-                    return '<div class="btn-group">' +
-                        '<a href="/payments/retry/' + data + '" class="btn btn-default">' + translate("continue") + '</a> ' +
-                        '</div>';
-                }
-            }
-        ],*/
         "columnDefs": [
             {
                 targets: [0],
@@ -145,7 +104,11 @@ $(function() {
             {
                 targets: [1],
                 "render": function (data, type, row) {
-                    return '<a href="/customers/edit/'+row.fines.customerId+'">'+row.fines.customerId+'</a>';
+                    if(row.fines.customerId>0){
+                        return '<a href="/customers/edit/'+row.fines.customerId+'">'+row.fines.customerId+'</a>';
+                    }else{
+                        return 'no customer defined';
+                    }
                 }
             },
             {
@@ -157,13 +120,32 @@ $(function() {
             {
                 targets: [3],
                 "render": function (data, type, row) {
-                    return row.fines.vehicleFleetId;
+                    if(row.fines.vehicleFleetId>0){
+                        switch (row.fines.vehicleFleetId){
+                            case 1:
+                                return "Milano";
+                            case 2:
+                                return "Firenze";
+                            case 3:
+                                return "Roma";
+                            case 4:
+                                return "Modena";
+                            default:
+                                return row.fines.vehicleFleetId;
+                        }
+                    }else{
+                        return 'no fleet defined';
+                    }
                 }
             },
             {
                 targets: [4],
                 "render": function (data, type, row) {
-                    return '<a href="/trips/details/'+row.fines.tripId+'">'+row.fines.tripId+'</a>';
+                    if(row.fines.tripId>0){
+                        return '<a href="/trips/details/'+row.fines.tripId+'">'+row.fines.tripId+'</a>';
+                    }else{
+                        return 'no trip defined';
+                    }
                 }
             },
             {
@@ -197,7 +179,7 @@ $(function() {
                 sortable: false,
                 render: function (data, type, row) {
                     return '<div class="btn-group">' +
-                        '<a href="/fines/detail/' + row.fines.id + '" class="btn btn-default">' + translate("continue") + '</a> ' +
+                        '<a href="/fines/detail/' + row.fines.id + '" class="btn btn-default">Dettagli</a> ' +
                         '</div>';
                 }
             }
