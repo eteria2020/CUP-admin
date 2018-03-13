@@ -71,26 +71,26 @@ class LogisticController extends AbstractActionController {
             $lastStatus = $car->getStatus();
             $car->setStatus($this->params()->fromPost('status'));
             //$car->setStatus('maintenance');
-            
-            $postData['location'] = $this->params()->fromPost('location');
-            //$postData['location'] = 'garage';
-            error_log("+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+", 0);
-            error_log($postData['location'], 0);
-            error_log("+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+", 0);
-            
-            $postData['motivation'] = $this->params()->fromPost('motivation');
-            //$postData['motivation'] = 1;
-            error_log("+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+", 0);
-            error_log($postData['motivation'], 0);
-            error_log("+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+", 0);
-            
+            if ($this->params()->fromPost('status') != "operative") {
+                $postData['location'] = $this->params()->fromPost('location');
+                //$postData['location'] = 'garage';
+                error_log("+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+", 0);
+                error_log($postData['location'], 0);
+                error_log("+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+", 0);
+
+                $postData['motivation'] = $this->params()->fromPost('motivation');
+                //$postData['motivation'] = 1;
+                error_log("+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+", 0);
+                error_log($postData['motivation'], 0);
+                error_log("+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+", 0);
+            }
             $postData['note'] = $this->params()->fromPost('note');
             //$postData['note'] = 'note';
             error_log("+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+", 0);
             error_log($postData['note'], 0);
             error_log("+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+", 0);
             
-                        
+             
             //chiamare il metodo $this->carsService->updateCar(...)
             $this->carsService->updateCar($car, $lastStatus, $postData, $webuser);
             //da fare?!
