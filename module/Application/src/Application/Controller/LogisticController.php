@@ -43,20 +43,22 @@ class LogisticController extends AbstractActionController {
     }
     
     public function changeStatusCarAction() {
-        //http://admin.localhost.it/cars/status-by-eteria
+        //http://admin.localhost.it//logistic/change-status-car
 
         $a = "";
         error_log("-----------------------------------------------------", 0);
         error_log("+++++++++++++++++changeStatusCarAction++++++++++++++++", 0);
         error_log("++++++++++++++++++++++++INIZIO++++++++++++++++++++++++", 0);
         error_log("-----------------------------------------------------", 0);
-        if($_SERVER['REMOTE_ADDR'] == '185.81.1.24'){
+        //if($_SERVER['REMOTE_ADDR'] == '185.81.1.24'){
         //if($_SERVER['REMOTE_ADDR'] == '192.168.146.1'){
+        if($_SERVER['REMOTE_ADDR'] == '172.16.254.3'){
             //recupera vari oggetti dai dati
             
-            $webuser = $this->webusersService->findById('96');
+            $webuser = $this->webusersService->findById(96);
             error_log("+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+", 0);
-            error_log($webuser->getDisplayName(), 0);
+            //error_log($webuser->getDisplayName(), 0);
+            //error_log($webuser->getId(), 0);
             error_log("+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+", 0);
             
             $car = $this->carsService->getCarByPlate($this->params()->fromPost('plate'));
@@ -64,7 +66,7 @@ class LogisticController extends AbstractActionController {
             error_log($car->getPlate(), 0);
             error_log("+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+", 0);
             
-            $postData['location'] = $this->params()->fromPost('plate');
+            $postData['location'] = $this->params()->fromPost('location');
             error_log("+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+", 0);
             error_log($postData['location'], 0);
             error_log("+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+", 0);
@@ -78,7 +80,8 @@ class LogisticController extends AbstractActionController {
             error_log("+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+", 0);
             error_log($postData['note'], 0);
             error_log("+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+", 0);
-            /*            
+            
+                        
             //chiamare il metodo $this->carsService->updateCar(...)
             $this->carsService->updateCar($car, $car->getStatus(), $$postData, $webuser);
             //da fare?!
@@ -88,15 +91,18 @@ class LogisticController extends AbstractActionController {
             $response->setStatusCode(200);
             $response->setContent(json_encode(array("response" => "Auto modificata con successo!")));
             return $response;
-            */
+            
         } else {
-            /*$response = $this->getResponse();
-            $response->setStatusCode(401);
-            return $response;*/
+            
+        
             $postData['note'] = $this->params()->fromPost('note');
             error_log("+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+", 0);
             error_log("NON AUTORIZZATO", 0);
             error_log("+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+", 0);
+            
+            $response = $this->getResponse();
+            $response->setStatusCode(401);
+            return $response;
         }
         
         error_log("-----------------------------------------------------", 0);
