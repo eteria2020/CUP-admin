@@ -29,23 +29,30 @@ class LogisticController extends AbstractActionController {
      * @var MaintenanceMotivationsService
      */
     private $maintenanceMotivationsService;
+    
+    /**
+     * @var array
+     */
+    private $logisticConfig;
 
     /**
      * @param CarsService $carsService
      * @param WebusersService $webusersService
+     * array $logisticConfig
      */
     public function __construct(
-    CarsService $carsService, WebusersService $webusersService, MaintenanceMotivationsService $maintenanceMotivationsService
+    CarsService $carsService, WebusersService $webusersService, MaintenanceMotivationsService $maintenanceMotivationsService, array $logisticConfig
     ) {
         $this->carsService = $carsService;
         $this->webusersService = $webusersService;
         $this->maintenanceMotivationsService = $maintenanceMotivationsService;
+        $this->$logisticConfig = $logisticConfig;
     }
     
     public function changeStatusCarAction() {
-        if($_SERVER['REMOTE_ADDR'] == '172.16.254.3'){
+        if($_SERVER['REMOTE_ADDR'] == $this->logisticConfig['url_logistic']){
             //user logistic
-            $webuser = $this->webusersService->findByEmail('logistic@sharengo.eu');            
+            $webuser = $this->webusersService->findByEmail($this->logisticConfig['email_logistic']);            
             $car = $this->carsService->getCarByPlate($this->params()->fromPost('plate'));
             $lastStatus = $car->getStatus();
             $car->setStatus($this->params()->fromPost('status'));
@@ -70,7 +77,7 @@ class LogisticController extends AbstractActionController {
     }
     
     public function motivationAction() {
-        if($_SERVER['REMOTE_ADDR'] == '172.16.254.3'){
+        if($_SERVER['REMOTE_ADDR'] == $this->logisticConfig['url_logistic']){
             $motivation = $this->maintenanceMotivationsService->getAllMaintenanceMotivations();
             $response = $this->getResponse();
             $response->setStatusCode(200);
