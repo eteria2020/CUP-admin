@@ -41,12 +41,12 @@ class LogisticController extends AbstractActionController {
      * array $logisticConfig
      */
     public function __construct(
-    CarsService $carsService, WebusersService $webusersService, MaintenanceMotivationsService $maintenanceMotivationsService, array $logisticConfig
+    CarsService $carsService, WebusersService $webusersService, MaintenanceMotivationsService $maintenanceMotivationsService, $logisticConfig
     ) {
         $this->carsService = $carsService;
         $this->webusersService = $webusersService;
         $this->maintenanceMotivationsService = $maintenanceMotivationsService;
-        $this->$logisticConfig = $logisticConfig;
+        $this->logisticConfig = $logisticConfig['logistic'];;
     }
     
     public function changeStatusCarAction() {
