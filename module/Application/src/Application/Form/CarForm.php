@@ -34,11 +34,23 @@ class CarForm extends Form
             ],
             'options'    => [
                 'value_options' => [
-                    'garage velasca' => 'Garage Velasca',
-                    'garage sant\'ambrogio' => 'Garage Sant\'Ambrogio',
-                    'livorno' => 'Livorno',
-                    'milano'  => 'Milano',
-                    'philcar' => 'Philcar'
+                    'Carrozzeria Merciai, via del Pratellino 27/31, 50124 Firenze' => 'Carrozzeria Merciai, via del Pratellino 27/31, 50124 Firenze',
+                    'Rugi, via Gaetano Salvemini 3F, 50058 Signa' => 'Rugi, via Gaetano Salvemini 3F, 50058 Signa',
+                    'Rugi, via dei Colli 188, 50058 Signa' => 'Rugi, via dei Colli 188, 50058 Signa',
+                    'Sede, Piazza Eugenio Artom 12, 500127 Firenze'  => 'Sede, Piazza Eugenio Artom 12, 500127 Firenze',
+                    'GL Car via Felice Cavallotti n 29 Formigine' => 'GL Car via Felice Cavallotti n 29 Formigine',
+                    'Carrozzeria Special via Felice Cavallotti Formigine' => 'Carrozzeria Special via Felice Cavallotti Formigine',
+                    'Carrozzeria Doretto via Viazza II Tronco Ubersetto di Fiorano' => 'Carrozzeria Doretto via Viazza II Tronco Ubersetto di Fiorano',
+                    'Officina di via Guido da Velate 9, Milano (codice GDV)' => 'Officina di via Guido da Velate 9, Milano (codice GDV)',
+                    'Carrozzeria GTR Car Service, via Polidoro da Caravaggio, Milano (codice GTR)' => 'Carrozzeria GTR Car Service, via Polidoro da Caravaggio, Milano (codice GTR)',
+                    'Deposito carrozzeria GTR Car Service, via Turati, Pero (codice GTR)' => 'Deposito carrozzeria GTR Car Service, via Turati, Pero (codice GTR)',
+                    'Carrozzeria Midicar, via Ornato, Milano (codice MID)' => 'Carrozzeria Midicar, via Ornato, Milano (codice MID)',
+                    'Carrozzeria Idone, via Tiepolo, Segrate (codice IDO)' => 'Carrozzeria Idone, via Tiepolo, Segrate (codice IDO)',
+                    'Carrozzeria Romauto, via Dottesio (codice ROM)' => 'Carrozzeria Romauto, via Dottesio (codice ROM)',
+                    'Carrozzeria Pennestri, via Portaluppi, Milano (codice PEN)' => 'Carrozzeria Pennestri, via Portaluppi, Milano (codice PEN)',
+                    'Carrozzeria DamianiCar, viale Murillo, Milano (codice DAM)' => 'Carrozzeria DamianiCar, viale Murillo, Milano (codice DAM)',
+                    'Carrozzeria Brima, via delle Brughiere, Garbagnate Milanese (codice BRI)' => 'Carrozzeria Brima, via delle Brughiere, Garbagnate Milanese (codice BRI)',
+                    'Other (codice OTH)' => 'Other (codice OTH)'
                 ]
             ]
         ]);
