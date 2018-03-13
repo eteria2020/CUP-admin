@@ -1467,6 +1467,38 @@ return [
                     ],
                 ],
             ],
+            'logistic' => [
+                'type' => 'Literal',
+                'options' => [
+                    'route' => '/logistic',
+                    'defaults' => [
+                        '__NAMESPACE__' => 'Application\Controller',
+                        'controller' => 'Logistic',
+                        'action' => 'index',
+                    ],
+                ],
+                'may_terminate' => true,
+                'child_routes' => [
+                    'change-status-car' => [
+                        'type' => 'Segment',
+                        'options' => [
+                            'route' => '/change-status-car',
+                            'defaults' => [
+                                'action' => 'change-status-car',
+                            ],
+                        ],
+                    ],
+                    'motivation' => [
+                        'type' => 'Segment',
+                        'options' => [
+                            'route' => '/motivation',
+                            'defaults' => [
+                                'action' => 'motivation',
+                            ],
+                        ],
+                    ],
+                ],
+            ],
         ],
     ],
     'service_manager' => [
@@ -1585,6 +1617,7 @@ return [
             'Application\Controller\ForeignDriversLicense' => 'Application\Controller\ForeignDriversLicenseControllerFactory',
             'Application\Controller\TripsNotPayed' => 'Application\Controller\TripsNotPayedControllerFactory',
             'Application\Controller\Notifications' => 'Application\Controller\NotificationsControllerFactory',
+            'Application\Controller\Logistic' => 'Application\Controller\LogisticControllerFactory',
         ]
     ],
     'controller_plugins' => [
@@ -1796,7 +1829,7 @@ return [
                 ['controller' => 'Application\Controller\PaymentsCsv', 'roles' => ['admin']],
                 ['controller' => 'Application\Controller\ForeignDriversLicense', 'roles' => ['admin']],
                 ['controller' => 'Application\Controller\TripsNotPayed', 'roles' => ['admin']],
-                ['controller' => 'Application\Controller\Notifications', 'roles' => ['admin','callcenter']],
+                ['controller' => 'Application\Controller\Logistic', 'roles' => []],
             ],
         ],
     ],
