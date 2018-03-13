@@ -1829,6 +1829,7 @@ return [
                 ['controller' => 'Application\Controller\PaymentsCsv', 'roles' => ['admin']],
                 ['controller' => 'Application\Controller\ForeignDriversLicense', 'roles' => ['admin']],
                 ['controller' => 'Application\Controller\TripsNotPayed', 'roles' => ['admin']],
+                ['controller' => 'Application\Controller\Notifications', 'roles' => ['admin','callcenter']],
                 ['controller' => 'Application\Controller\Logistic', 'roles' => []],
             ],
         ],
