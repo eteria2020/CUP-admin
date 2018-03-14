@@ -46,7 +46,7 @@ class LogisticController extends AbstractActionController {
         $this->carsService = $carsService;
         $this->webusersService = $webusersService;
         $this->maintenanceMotivationsService = $maintenanceMotivationsService;
-        $this->logisticConfig = $logisticConfig['logistic'];;
+        $this->logisticConfig = $logisticConfig;
     }
     
     public function changeStatusCarAction() {
