@@ -38,7 +38,7 @@ class LogisticController extends AbstractActionController {
     /**
      * @param CarsService $carsService
      * @param WebusersService $webusersService
-     * array $logisticConfig
+     * @param array $logisticConfig
      */
     public function __construct(
     CarsService $carsService, WebusersService $webusersService, MaintenanceMotivationsService $maintenanceMotivationsService, $logisticConfig
