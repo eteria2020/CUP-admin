@@ -50,6 +50,9 @@ class LogisticController extends AbstractActionController {
     }
     
     public function changeStatusCarAction() {
+        error_log("TYPE (config): " + $this->logisticConfig['type']);
+        error_log("EMAIL_LOGISTIC (config): " + $this->logisticConfig['email_logistic']);
+        error_log("type PARAMETRO: " + $this->params()->fromPost('type'));
         if($this->logisticConfig['type'] == $this->params()->fromPost('type')){
             //user logistic
             $webuser = $this->webusersService->findByEmail($this->logisticConfig['email_logistic']);            
