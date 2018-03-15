@@ -11,6 +11,7 @@ use SharengoCore\Service\PointService;
 use SharengoCore\Service\CardsService;
 use SharengoCore\Service\CustomersBonusPackagesService;
 use SharengoCore\Service\CustomersService;
+use SharengoCore\Service\CustomerDeactivationService;
 use SharengoCore\Service\PromoCodesService;
 use SharengoCore\Service\DisableContractService;
 use SharengoCore\Exception\CustomerNotFoundException;
@@ -31,6 +32,11 @@ class CustomersController extends AbstractActionController
      * @var CustomersService
      */
     private $customersService;
+    
+    /**
+     * @var CustomerDeactivationService
+     */
+    private $customerDeactivationService;
 
     /**
      * @var CardsService
@@ -109,6 +115,7 @@ class CustomersController extends AbstractActionController
 
     /**
      * @param CustomersService $customersService
+     * @param CustomerDeactivationService $customerDeactivationService
      * @param CardsService $cardsService
      * @param PromoCodesService $promoCodeService
      * @param PointService $pointService
@@ -127,6 +134,7 @@ class CustomersController extends AbstractActionController
      */
     public function __construct(
         CustomersService $customersService,
+        CustomerDeactivationService $customerDeactivationService,
         CardsService $cardsService,
         PromoCodesService $promoCodeService,
         BonusService $bonusService,
@@ -144,6 +152,7 @@ class CustomersController extends AbstractActionController
         Container $datatableFiltersSessionContainer
     ) {
         $this->customersService = $customersService;
+        $this->customerDeactivationService = $customerDeactivationService;
         $this->cardsService = $cardsService;
         $this->promoCodeService = $promoCodeService;
         $this->customerForm = $customerForm;
@@ -233,9 +242,13 @@ class CustomersController extends AbstractActionController
                     if (!isset($postData['setting']['maintainer'])) {
                         $postData['setting']['maintainer'] = (int)$customer->getMaintainer();
                     }
+                    if (!isset($postData['setting']['firstPaymentCompleted'])) {
+                        $postData['setting']['firstPaymentCompleted'] = (int)$customer->getFirstPaymentCompleted();
+                    }
                     $postData['setting']['goldList'] =
                         $postData['setting']['goldList'] |
-                        $postData['setting']['maintainer'];
+                        $postData['setting']['maintainer'] |
+                        $postData['setting']['firstPaymentCompleted'];
                     break;
             }
 
@@ -244,6 +257,7 @@ class CustomersController extends AbstractActionController
             if ($form->isValid()) {
                 try {
                     $this->customersService->saveData($form->getData());
+                    $this->customerDeactivationService->reactivateCustomerForFirstPaymentFromAdmin($this->customersService->findById($postData['setting']['id']), $this->identity());
                     $this->flashMessenger()->addSuccessMessage($translator->translate('Modifica effettuta con successo!'));
 
                 } catch (\Exception $e) {

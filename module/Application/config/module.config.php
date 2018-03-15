@@ -1799,6 +1799,7 @@ return [
                     [['superadmin'], 'customer', 'discountRate'],
                     [['superadmin'], 'customer', 'maintainer'],
                     [['superadmin'], 'customer', 'goldList'],
+                    [['admin'], 'customer', 'firstPaymentCompleted'],
                 ],
             ],
         ],
