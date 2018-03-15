@@ -50,8 +50,7 @@ class LogisticController extends AbstractActionController {
     }
     
     public function changeStatusCarAction() {
-        error_log($_SERVER['SERVER_ADDR']);
-        if($_SERVER['SERVER_ADDR'] == $this->logisticConfig['url_logistic']){
+        if($this->logisticConfig['type'] == $this->params()->fromPost('type')){
             //user logistic
             $webuser = $this->webusersService->findByEmail($this->logisticConfig['email_logistic']);            
             $car = $this->carsService->getCarByPlate($this->params()->fromPost('plate'));
@@ -78,7 +77,7 @@ class LogisticController extends AbstractActionController {
     }
     
     public function motivationAction() {
-        if($_SERVER['SERVER_ADDR'] == $this->logisticConfig['url_logistic']){
+        if($this->logisticConfig['type'] == $this->params()->fromPost('type')){
             $motivation = $this->maintenanceMotivationsService->getAllMaintenanceMotivations();
             $response = $this->getResponse();
             $response->setStatusCode(200);
