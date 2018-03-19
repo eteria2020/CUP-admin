@@ -3,6 +3,5 @@
 return [
     'logistic' => [
         'email_logistic'  => 'logistic@sharengo.eu',
-        'type'  => 'ETR',
     ]
 ];
