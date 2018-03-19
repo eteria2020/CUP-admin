@@ -259,7 +259,6 @@ class CustomersController extends AbstractActionController
                     $this->customersService->saveData($form->getData());
                     $this->customerDeactivationService->reactivateCustomerForFirstPaymentFromAdmin($this->customersService->findById($postData['setting']['id']), $this->identity());
                     $this->flashMessenger()->addSuccessMessage($translator->translate('Modifica effettuta con successo!'));
-
                 } catch (\Exception $e) {
                     $this->flashMessenger()->addErrorMessage($translator->translate('Si è verificato un errore applicativo. L\'assistenza tecnica è già al corrente, ci scusiamo per l\'inconveniente'));
                 }
