@@ -50,34 +50,35 @@ class LogisticController extends AbstractActionController {
     }
     
     public function changeStatusCarAction() {
-        if($_SERVER['REMOTE_ADDR'] == $this->logisticConfig['url_logistic']){
-            //user logistic
-            $webuser = $this->webusersService->findByEmail($this->logisticConfig['email_logistic']);            
-            $car = $this->carsService->getCarByPlate($this->params()->fromPost('plate'));
-            $lastStatus = $car->getStatus();
-            $car->setStatus($this->params()->fromPost('status'));
-            if ($this->params()->fromPost('status') != "operative") {
-                $postData['location'] = $this->params()->fromPost('location');
-                $postData['motivation'] = $this->params()->fromPost('motivation');
-            }
-            $postData['note'] = $this->params()->fromPost('note');
-            
-            $this->carsService->updateCar($car, $lastStatus, $postData, $webuser);
-            $this->carsService->saveData($car, false);
-            
-            $response = $this->getResponse();
-            $response->setStatusCode(200);
-            $response->setContent(json_encode(array("response" => "Auto modificata con successo!")));
-            return $response;
-        } else {
-            $response = $this->getResponse();
-            $response->setStatusCode(401);
-            return $response;
+        $param = base64_decode($this->params()->fromPost('param'));
+        $param = explode('&', $param);
+        foreach ($param as $p){
+            $p = explode('=', $p);
+            $params[$p[0]] = $p[1];
         }
+        //user logistic
+        $webuser = $this->webusersService->findByEmail($this->logisticConfig['email_logistic']);
+        $car = $this->carsService->getCarByPlate($params['plate']);
+        $lastStatus = $car->getStatus();
+        $car->setStatus($params['status']);
+        if ($params['status'] != "operative") {
+            $postData['location'] = $params['location'];
+            $postData['motivation'] = $params['motivation'];
+        }
+        $postData['note'] = $params['note'];
+
+        $this->carsService->updateCar($car, $lastStatus, $postData, $webuser);
+        $this->carsService->saveData($car, false);
+
+        $response = $this->getResponse();
+        $response->setStatusCode(200);
+        $response->setContent(json_encode(array("response" => "Auto modificata con successo!")));
+        return $response;
     }
-    
+
+    /*
     public function motivationAction() {
-        if($_SERVER['REMOTE_ADDR'] == $this->logisticConfig['url_logistic']){
+        if($this->logisticConfig['type'] == $this->params()->fromPost('type')){
             $motivation = $this->maintenanceMotivationsService->getAllMaintenanceMotivations();
             $response = $this->getResponse();
             $response->setStatusCode(200);
@@ -89,5 +90,6 @@ class LogisticController extends AbstractActionController {
             return $response;
         }
     }
+    */
 
 }
