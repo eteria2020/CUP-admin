@@ -24,6 +24,7 @@ class CustomersControllerFactory implements FactoryInterface
         // dependency is fetched from Service Manager
         $entityManager = $sharedLocator->get('doctrine.entitymanager.orm_default');
         $clientService = $sharedLocator->get('SharengoCore\Service\CustomersService');
+        $customerDeactivationService = $sharedLocator->get('SharengoCore\Service\CustomerDeactivationService');
         $cardsService = $sharedLocator->get('SharengoCore\Service\CardsService');
         $promoCodeService = $sharedLocator->get('SharengoCore\Service\PromoCodesService');
         $bonusService = $sharedLocator->get('SharengoCore\Service\BonusService');
@@ -48,6 +49,7 @@ class CustomersControllerFactory implements FactoryInterface
         // Controller is constructed, dependencies are injected (IoC in action)
         return new CustomersController(
             $clientService,
+            $customerDeactivationService,
             $cardsService,
             $promoCodeService,
             $bonusService,

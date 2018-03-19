@@ -310,6 +310,18 @@ $formSetting = $this->settingForm->prepare();
                         </div>
                     </div>
                 </div>
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="form-group">
+                            <label for="goldList"><?= $this->translate("First Payment Completed"); ?></label>
+                            <?php if($this->customer->getFirstPaymentCompleted()): ?>
+                                <div class="alert alert-success"><?= $this->translate("Si"); ?></div>
+                            <?php else: ?>
+                                <div class="alert alert-danger"><?= $this->translate("No"); ?></div>
+                            <?php endif; ?>
+                        </div>
+                    </div>
+                </div>
 
             </div>
 
