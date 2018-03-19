@@ -51,13 +51,11 @@ class LogisticController extends AbstractActionController {
     
     public function changeStatusCarAction() {
         $param = base64_decode($this->params()->fromPost('param'));
-        //$param = "type=ETR&plate=EH43994&status=maintenance&location=Carrozzeria Merciai, via del Pratellino 27/31, 50124 Firenze&motivation=1&note=[csadmin] AABBCC";
         $param = explode('&', $param);
         foreach ($param as $p){
             $p = explode('=', $p);
             $params[$p[0]] = $p[1];
         }
-        
         //user logistic
         $webuser = $this->webusersService->findByEmail($this->logisticConfig['email_logistic']);
         $car = $this->carsService->getCarByPlate($params['plate']);
