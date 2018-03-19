@@ -50,11 +50,13 @@ class LogisticController extends AbstractActionController {
     }
     
     public function changeStatusCarAction() {
+        error_log("PARAM----------------------");
+        error_log($this->params()->fromPost('param'));
+        $str = $this->cryptoJsAesDecrypt("koala", $this->params()->fromPost('param'));
+        error_log("STR DECRIPT----------------------");
+        error_log($str);
         error_log("----------------------");
-        error_log("----------------------");
-        error_log("----------------------");
-        error_log("----------------------");
-        error_log("----------------------");
+        /*
         if($this->logisticConfig['type'] == $this->params()->fromPost('type')){
             //user logistic
             $webuser = $this->webusersService->findByEmail($this->logisticConfig['email_logistic']);            
@@ -79,6 +81,8 @@ class LogisticController extends AbstractActionController {
             $response->setStatusCode(401);
             return $response;
         }
+         * 
+         */
     }
     
     public function motivationAction() {
@@ -93,6 +97,35 @@ class LogisticController extends AbstractActionController {
             $response->setStatusCode(401);
             return $response;
         }
+    }
+
+    /**
+     * Decrypt data from a CryptoJS json encoding string
+     *
+     * @param mixed $passphrase
+     * @param mixed $jsonString
+     * @return mixed
+     */
+    function cryptoJsAesDecrypt($passphrase, $jsonString) {
+        $jsondata = json_decode($jsonString, true);
+        try {
+            $salt = hex2bin($jsondata["s"]);
+            $iv = hex2bin($jsondata["iv"]);
+        } catch (Exception $e) {
+            return null;
+        }
+        $ct = base64_decode($jsondata["ct"]);
+        $concatedPassphrase = $passphrase . $salt;
+        $md5 = array();
+        $md5[0] = md5($concatedPassphrase, true);
+        $result = $md5[0];
+        for ($i = 1; $i < 3; $i++) {
+            $md5[$i] = md5($md5[$i - 1] . $concatedPassphrase, true);
+            $result .= $md5[$i];
+        }
+        $key = substr($result, 0, 32);
+        $data = openssl_decrypt($ct, 'aes-256-cbc', $key, true, $iv);
+        return json_decode($data, true);
     }
 
 }
