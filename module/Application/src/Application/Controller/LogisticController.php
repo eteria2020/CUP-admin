@@ -50,41 +50,33 @@ class LogisticController extends AbstractActionController {
     }
     
     public function changeStatusCarAction() {
-        error_log("PARAM----------------------");
-        error_log($this->params()->fromPost('param'));
-        $str = $this->cryptoJsAesDecrypt("koala", $this->params()->fromPost('param'));
-        error_log("STR DECRIPT----------------------");
-        error_log($str);
-        error_log("----------------------");
-        /*
-        if($this->logisticConfig['type'] == $this->params()->fromPost('type')){
-            //user logistic
-            $webuser = $this->webusersService->findByEmail($this->logisticConfig['email_logistic']);            
-            $car = $this->carsService->getCarByPlate($this->params()->fromPost('plate'));
-            $lastStatus = $car->getStatus();
-            $car->setStatus($this->params()->fromPost('status'));
-            if ($this->params()->fromPost('status') != "operative") {
-                $postData['location'] = $this->params()->fromPost('location');
-                $postData['motivation'] = $this->params()->fromPost('motivation');
-            }
-            $postData['note'] = $this->params()->fromPost('note');
-            
-            $this->carsService->updateCar($car, $lastStatus, $postData, $webuser);
-            $this->carsService->saveData($car, false);
-            
-            $response = $this->getResponse();
-            $response->setStatusCode(200);
-            $response->setContent(json_encode(array("response" => "Auto modificata con successo!")));
-            return $response;
-        } else {
-            $response = $this->getResponse();
-            $response->setStatusCode(401);
-            return $response;
+        $param = $this->params()->fromPost('param');
+        $param = (split('&', $param));
+        foreach ($param as $p){
+            $p = (split('=', $p));
+            $params[$p[0]] = $p[1];
         }
-         * 
-         */
+
+        //user logistic
+        $webuser = $this->webusersService->findByEmail($this->logisticConfig['email_logistic']);
+        $car = $this->carsService->getCarByPlate($params['plate']);
+        $lastStatus = $car->getStatus();
+        $car->setStatus($params['status']);
+        if ($params['status'] != "operative") {
+            $postData['location'] = $params['location'];
+            $postData['motivation'] = $params['motivation'];
+        }
+        $postData['note'] = $params['note'];
+
+        $this->carsService->updateCar($car, $lastStatus, $postData, $webuser);
+        $this->carsService->saveData($car, false);
+
+        $response = $this->getResponse();
+        $response->setStatusCode(200);
+        $response->setContent(json_encode(array("response" => "Auto modificata con successo!")));
+        return $response;
     }
-    
+
     public function motivationAction() {
         if($this->logisticConfig['type'] == $this->params()->fromPost('type')){
             $motivation = $this->maintenanceMotivationsService->getAllMaintenanceMotivations();
@@ -108,13 +100,9 @@ class LogisticController extends AbstractActionController {
      */
     function cryptoJsAesDecrypt($passphrase, $jsonString) {
         $jsondata = json_decode($jsonString, true);
-        try {
-            $salt = hex2bin($jsondata["s"]);
-            $iv = hex2bin($jsondata["iv"]);
-        } catch (Exception $e) {
-            return null;
-        }
+        $salt = hex2bin($jsondata["s"]);
         $ct = base64_decode($jsondata["ct"]);
+        $iv = hex2bin($jsondata["iv"]);
         $concatedPassphrase = $passphrase . $salt;
         $md5 = array();
         $md5[0] = md5($concatedPassphrase, true);
