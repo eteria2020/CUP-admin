@@ -242,6 +242,11 @@ class CustomersController extends AbstractActionController
                     if (!isset($postData['setting']['maintainer'])) {
                         $postData['setting']['maintainer'] = (int)$customer->getMaintainer();
                     }
+                    $postData['setting']['goldList'] =
+                        $postData['setting']['goldList'] |
+                        $postData['setting']['maintainer'];
+                    break;
+                    /*
                     if (!isset($postData['setting']['firstPaymentCompleted'])) {
                         $postData['setting']['firstPaymentCompleted'] = (int)$customer->getFirstPaymentCompleted();
                     }
@@ -250,6 +255,7 @@ class CustomersController extends AbstractActionController
                         $postData['setting']['maintainer'] |
                         $postData['setting']['firstPaymentCompleted'];
                     break;
+                    */
             }
 
             $form->setData($postData);
@@ -257,7 +263,7 @@ class CustomersController extends AbstractActionController
             if ($form->isValid()) {
                 try {
                     $this->customersService->saveData($form->getData());
-                    $this->customerDeactivationService->reactivateCustomerForFirstPaymentFromAdmin($this->customersService->findById($postData['setting']['id']), $this->identity());
+                    //$this->customerDeactivationService->reactivateCustomerForFirstPaymentFromAdmin($this->customersService->findById($postData['setting']['id']), $this->identity());
                     $this->flashMessenger()->addSuccessMessage($translator->translate('Modifica effettuta con successo!'));
                 } catch (\Exception $e) {
                     $this->flashMessenger()->addErrorMessage($translator->translate('Si è verificato un errore applicativo. L\'assistenza tecnica è già al corrente, ci scusiamo per l\'inconveniente'));

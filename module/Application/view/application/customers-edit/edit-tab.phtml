@@ -313,22 +313,8 @@ $formSetting->setAttribute('action', $this->url('customers/edit', ['id' => $this
                         </div>
                     </div>
                 
-                    <div class="row">
-                        <div class="col-lg-12">
-                            <div class="form-group">
-                                <label for="firstPaymentCompleted"><?= $this->translate("First Payment Completed"); ?></label>
-                                <?php
-                                $a = "";
-                                    if($this->isAllowed('customer', 'firstPaymentCompleted')) {
-                                        echo $this->formRow($formSetting->get('setting')->get('firstPaymentCompleted'));
-                                    } else {
-                                        echo $this->formRow($formSetting->get('setting')->get('firstPaymentCompleted')->setAttribute('disabled', 'true'));
-                                    }
-                                ?>
-                            </div>
-                        </div>
-                    </div>
-
+                    
+                
                 <div class="row">
                     <div class="col-lg-12">
                         <button type="submit" class="btn btn-success"><?= $this->translate("Salva Dati"); ?></button>
