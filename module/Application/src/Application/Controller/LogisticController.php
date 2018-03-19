@@ -56,7 +56,6 @@ class LogisticController extends AbstractActionController {
             $p = (split('=', $p));
             $params[$p[0]] = $p[1];
         }
-
         //user logistic
         $webuser = $this->webusersService->findByEmail($this->logisticConfig['email_logistic']);
         $car = $this->carsService->getCarByPlate($params['plate']);
