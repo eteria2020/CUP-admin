@@ -179,7 +179,7 @@ $(function() {
                 sortable: false,
                 render: function (data, type, row) {
                     return '<div class="btn-group">' +
-                        '<a href="/fines/detail/' + row.fines.id + '" class="btn btn-default">Dettagli</a> ' +
+                        '<a href="/fines/details/' + row.fines.id + '" class="btn btn-default">Dettagli</a> ' +
                         '</div>';
                 }
             }

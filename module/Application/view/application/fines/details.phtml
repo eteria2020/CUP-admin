@@ -3,34 +3,25 @@ $this->headLink()->appendStylesheet('/js/datatables/plugins/bootstrap/dataTables
 $this->headScript()
     ->appendFile('/js/datatables/media/js/jquery.dataTables.min.js')
     ->appendFile('/js/datatables/plugins/bootstrap/dataTables.bootstrap.js')
-    ->appendFile($this->basePath() .'/js/fines.js');
 ?>
 
 <?php
-$tripPayment = $this->tripPayment;
-$customer = $this->customer;
+$safoPenalty = $this->safoPenalty;
 ?>
 
 <div class="page-content-wrapper">
     <div class="page-content">
-        <? 
-        echo 'test';
-        /*
         <!-- BEGIN PAGE HEADER-->
         <h3 class="page-title">
             <?= $this->translate("Dettagli multa"); ?>
         </h3>
 
         <div class="row">
-            <div class="col-md-8">
-                <div class="form-inline">
-                    <div class="btn-group">
-                        <button type="button" class="btn green" id="js-new-try">
-                            <i class="fa fa-try"></i>
-                            <?= $this->translate("Back"); ?>
-                        </button>
-                    </div>
-                </div>
+            <div class="col-lg-12">
+                <button type="button" class="btn btn-success pull-right" onclick="window.history.back();">
+                    <i class="fa fa-arrow-left"></i> 
+                    <?= $this->translate("Torna alla lista"); ?>
+                </button>
             </div>
         </div>
 
@@ -53,25 +44,124 @@ $customer = $this->customer;
                             <div class="col-lg-3">
                                 <div class="form-group">
                                     <label><?= $this->translate("ID multa"); ?></label>
-                                    <div class="sng-info-box"><?= $tripPayment->getTrip()->getId() ?></div>
+                                    <div class="sng-info-box"><?= $safoPenalty->getRusId() ?></div>
                                 </div>
                             </div>
                             <div class="col-lg-3">
                                 <div class="form-group">
-                                    <label><?= $this->translate("Data"); ?></label>
-                                    <div class="sng-info-box"><?= $tripPayment->getCreatedAt()->format("d-m-Y H:i:s") ?></div>
+                                    <label><?= $this->translate("Data multa"); ?></label>
+                                    <div class="sng-info-box"><?= $safoPenalty->getViolationTimestamp()->format("d-m-Y H:i:s") ?></div>
                                 </div>
                             </div>
                             <div class="col-lg-3">
                                 <div class="form-group">
                                     <label><?= $this->translate("ID cliente"); ?></label>
-                                    <div class="sng-info-box"><?= $customer->getName() ?></div>
+                                    <div class="sng-info-box"><?= $safoPenalty->getCustomerId() ?></div>
                                 </div>
                             </div>
                             <div class="col-lg-3">
                                 <div class="form-group">
                                     <label><?= $this->translate("ID corsa"); ?></label>
-                                    <div class="sng-info-box"><?= $customer->getSurname() ?></div>
+                                    <div class="sng-info-box"><?= $safoPenalty->getTripId() ?></div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="row">
+                            <div class="col-lg-3">
+                                <div class="form-group">
+                                    <label><?= $this->translate("Flotta veicolo"); ?></label>
+                                    <div class="sng-info-box"><?
+                                                                switch ($safoPenalty->getVehicleFleetId()){
+                                                                    case 1:
+                                                                        echo "Milano";
+                                                                        break;
+                                                                    case 2:
+                                                                        echo "Firenze";
+                                                                        break;
+                                                                    case 3:
+                                                                        echo "Roma";
+                                                                        break;
+                                                                    case 4:
+                                                                        echo "Modena";
+                                                                        break;
+                                                                    default:
+                                                                        echo "Non specificato";
+                                                                        break;
+                                                                }
+                                                                ?></div>
+                                </div>
+                            </div>
+                            <div class="col-lg-3">
+                                <div class="form-group">
+                                    <label><?= $this->translate("Targa"); ?></label>
+                                    <div class="sng-info-box"><?= $safoPenalty->getCarPlate() ?></div>
+                                </div>
+                            </div>
+                            <div class="col-lg-3">
+                                <div class="form-group">
+                                    <label><?= $this->translate("Categoria multa"); ?></label>
+                                    <div class="sng-info-box"><?= $safoPenalty->getViolationCategory() ?></div>
+                                </div>
+                            </div>
+                            <div class="col-lg-3">
+                                <div class="form-group">
+                                    <label><?= $this->translate("Violation Authority"); ?></label>
+                                    <div class="sng-info-box"><?= $safoPenalty->getViolationAuthority() ?></div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="row">
+                            <div class="col-lg-3">
+                                <div class="form-group">
+                                    <label><?= $this->translate("Descrizione Multa"); ?></label>
+                                    <div class="sng-info-box"><?= $safoPenalty->getViolationDescription() ?></div>
+                                </div>
+                            </div>
+                            <div class="col-lg-3">
+                                <div class="form-group">
+                                    <label><?= $this->translate("Numero Multa"); ?></label>
+                                    <div class="sng-info-box"><?= $safoPenalty->getViolationNumber() ?></div>
+                                </div>
+                            </div>
+                            <div class="col-lg-3">
+                                <div class="form-group">
+                                    <label><?= $this->translate("Status Multa"); ?></label>
+                                    <div class="sng-info-box"><?= $safoPenalty->getViolationStatus() ?></div>
+                                </div>
+                            </div>
+                            <div class="col-lg-3">
+                                <div class="form-group">
+                                    <label><?= $this->translate("Tipologia Richiesta Multa"); ?></label>
+                                    <div class="sng-info-box"><?= $safoPenalty->getViolationRequestType() ?></div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="row">
+                            <div class="col-lg-3">
+                                <div class="form-group">
+                                    <label><?= $this->translate("Costo multa"); ?></label>
+                                    <div class="sng-info-box"><?= $safoPenalty->getAmount() ?>&euro;</div>
+                                </div>
+                            </div>
+                            <div class="col-lg-3">
+                                <div class="form-group">
+                                    <label><?= $this->translate("Completato"); ?></label>
+                                    <div class="sng-info-box"><?= ($safoPenalty->isComplete() ? "Completo" : "Non completo")  ?></div>
+                                </div>
+                            </div>
+                            <div class="col-lg-3">
+                                <div class="form-group">
+                                    <label><?= $this->translate("Addebitato"); ?></label>
+                                    <div class="sng-info-box"><?= ($safoPenalty->isCharged() ? "SI" : "NO") ?></div>
+                                </div>
+                            </div>
+                            <div class="col-lg-3">
+                                <div class="form-group">
+                                    <label><?= $this->translate("Data Addebito"); ?></label>
+                                    <div class="sng-info-box"><?= (is_null($safoPenalty->getConsumedTs()) ? "Non addebitato" : $safoPenalty->getConsumedTs()->format("d-m-Y H:i:s") ) ?></div>
                                 </div>
                             </div>
                         </div>
@@ -83,9 +173,8 @@ $customer = $this->customer;
         <!-- details table -->
 
         <!-- END PAGE CONTENT-->
-        */?>
     </div>
 </div>
 <script>
-    var safoPenaltyId = "<?= $this->safoPenalty->getId() ?>",
+    var safoPenaltyId = "<?= $this->safoPenalty->getId() ?>";
 </script>

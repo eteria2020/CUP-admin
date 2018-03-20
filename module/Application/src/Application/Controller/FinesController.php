@@ -169,15 +169,10 @@ class FinesController extends AbstractActionController
     {
         $id = (int)$this->params()->fromRoute('id', 0);
 
-        $SafoPenalty = $this->finesService->getSafoPenaltyById($id);
-        error_log($safoPenalty);
-        
-        $tripPaymentTries = $tripPayment->getTripPaymentTries();
+        $safoPenalty = $this->finesService->getSafoPenaltyById($id);
 
         return new ViewModel([
-            'tripPayment' => $tripPayment,
-            'tripPaymentTries' => $tripPaymentTries,
-            'customer' => $tripPayment->getCustomer()
+            'safoPenalty' => $safoPenalty
         ]);
     }
 
