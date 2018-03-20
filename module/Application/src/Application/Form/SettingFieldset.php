@@ -109,7 +109,6 @@ class SettingFieldset extends Fieldset implements InputFilterProviderInterface
                 ]
             ]
         ]);
-        
         $this->add([
             'name'       => 'firstPaymentCompleted',
             'type'       => 'Zend\Form\Element\Select',

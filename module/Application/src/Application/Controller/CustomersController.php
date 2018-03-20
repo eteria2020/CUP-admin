@@ -242,6 +242,11 @@ class CustomersController extends AbstractActionController
                     if (!isset($postData['setting']['maintainer'])) {
                         $postData['setting']['maintainer'] = (int)$customer->getMaintainer();
                     }
+                    $postData['setting']['goldList'] =
+                        $postData['setting']['goldList'] |
+                        $postData['setting']['maintainer'];
+                    break;
+                    /*
                     if (!isset($postData['setting']['firstPaymentCompleted'])) {
                         $postData['setting']['firstPaymentCompleted'] = (int)$customer->getFirstPaymentCompleted();
                     }
@@ -250,6 +255,7 @@ class CustomersController extends AbstractActionController
                         $postData['setting']['maintainer'] |
                         $postData['setting']['firstPaymentCompleted'];
                     break;
+                    */
             }
 
             $form->setData($postData);
