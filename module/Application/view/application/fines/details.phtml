@@ -3,7 +3,7 @@ $this->headLink()->appendStylesheet('/js/datatables/plugins/bootstrap/dataTables
 $this->headScript()
     ->appendFile('/js/datatables/media/js/jquery.dataTables.min.js')
     ->appendFile('/js/datatables/plugins/bootstrap/dataTables.bootstrap.js')
-    ->appendFile($this->basePath() .'/js/retry-payment.js');
+    ->appendFile($this->basePath() .'/js/fines.js');
 ?>
 
 <?php
@@ -18,7 +18,7 @@ $customer = $this->customer;
         /*
         <!-- BEGIN PAGE HEADER-->
         <h3 class="page-title">
-            <?= $this->translate("RITENTA PAGAMENTO"); ?>
+            <?= $this->translate("Dettagli multa"); ?>
         </h3>
 
         <div class="row">
@@ -27,33 +27,9 @@ $customer = $this->customer;
                     <div class="btn-group">
                         <button type="button" class="btn green" id="js-new-try">
                             <i class="fa fa-try"></i>
-                            <?= $this->translate("Effettua nuovo tentativo di pagamento"); ?>
+                            <?= $this->translate("Back"); ?>
                         </button>
                     </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="row hidden" id="js-completed-message">
-            <div class="col-md-12">
-                <div class="alert alert-success">
-                    <strong><?= $this->translate("Pagamento completato con successo"); ?></strong>
-                </div>
-                <div class="form-inline">
-                    <div class="btn-group">
-                        <button type="button" class="btn green" id="js-abilitate-customer">
-                            <i class="fa fa-caret-square-o-right"></i>
-                            <?= $this->translate("Riabilita utente"); ?>
-                        </button>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="row hidden" id="js-refused-message">
-            <div class="col-md-12">
-                <div class="alert alert-warning">
-                    <strong><?= $this->translate("Il pagamento non è andato a buon fine"); ?> <span id="js-wrong-reason"></span></strong>
                 </div>
             </div>
         </div>
@@ -76,7 +52,7 @@ $customer = $this->customer;
                         <div class="row">
                             <div class="col-lg-3">
                                 <div class="form-group">
-                                    <label><?= $this->translate("ID Corsa"); ?></label>
+                                    <label><?= $this->translate("ID multa"); ?></label>
                                     <div class="sng-info-box"><?= $tripPayment->getTrip()->getId() ?></div>
                                 </div>
                             </div>
@@ -88,41 +64,14 @@ $customer = $this->customer;
                             </div>
                             <div class="col-lg-3">
                                 <div class="form-group">
-                                    <label><?= $this->translate("Nome"); ?></label>
+                                    <label><?= $this->translate("ID cliente"); ?></label>
                                     <div class="sng-info-box"><?= $customer->getName() ?></div>
                                 </div>
                             </div>
                             <div class="col-lg-3">
                                 <div class="form-group">
-                                    <label><?= $this->translate("Cognome"); ?></label>
+                                    <label><?= $this->translate("ID corsa"); ?></label>
                                     <div class="sng-info-box"><?= $customer->getSurname() ?></div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="row">
-                            <div class="col-lg-3">
-                                <div class="form-group">
-                                    <label><?= $this->translate("Corsa"); ?></label>
-                                    <div class="sng-info-box"><?= $tripPayment->getTripMinutes() . " min." ?></div>
-                                </div>
-                            </div>
-                            <div class="col-lg-3">
-                                <div class="form-group">
-                                    <label><?= $this->translate("Parcheggio"); ?></label>
-                                    <div class="sng-info-box"><?= $tripPayment->getParkingMinutes() . " min." ?></div>
-                                </div>
-                            </div>
-                            <div class="col-lg-3">
-                                <div class="form-group">
-                                    <label><?= $this->translate("Sconto"); ?></label>
-                                    <div class="sng-info-box"><?= $tripPayment->getDiscountPercentage() . "%" ?></div>
-                                </div>
-                            </div>
-                            <div class="col-lg-3">
-                                <div class="form-group">
-                                    <label><?= $this->translate("Costo"); ?></label>
-                                    <div class="sng-info-box"><?= $tripPayment->getFormattedTotalCost() ?></div>
                                 </div>
                             </div>
                         </div>
@@ -132,52 +81,6 @@ $customer = $this->customer;
             </div>
         </div>
         <!-- details table -->
-
-        <!-- Retries list table -->
-        <div class="row">
-            <div class="col-md-12">
-
-                <?= $this->partial('partials/flash-messages.phtml', []); ?>
-
-                <div class="portlet box green">
-                    <div class="portlet-title">
-                        <div class="caption">
-                            <i class="fa fa-cogs"></i><?= $this->translate("Elenco tentativi effettuati"); ?>
-                        </div>
-                    </div>
-                    <div class="portlet-body">
-                        <div class="col-lg-6">
-                            <label><a href="<?= $this->url('customers/edit', ['id' => $customer->getId()]); ?>?tab=failure"><?= $this->translate("Elenco completo corse con pagamento fallito"); ?></a></label>
-                        </div>
-                        <table class="table table-striped table-bordered table-hover" id="js-payments-table">
-                            <thead>
-                                <tr>
-                                    <th><?= $this->translate("Data del tentativo"); ?></th>
-                                    <th><?= $this->translate("Utente Admin"); ?></th>
-                                    <th><?= $this->translate("Prodotto"); ?></th>
-                                    <th><?= $this->translate("Esito"); ?></th>
-                                    <th><?= $this->translate("Risultato"); ?></th>
-                                    <th><?= $this->translate("Messaggio"); ?></th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <?php foreach($this->tripPaymentTries as $try): ?>
-                                    <tr>
-                                        <td><?= $try->getTs()->format('Y-m-d H:i:s') ?></td>
-                                        <td><?= $try->getWebuserName() ?></td>
-                                        <td><?= (null != $try->getTransaction()) ? $try->getTransaction()->getProductType() : 'n.d.' ?></td>
-                                        <td><?= $try->getOutcome() ?></td>
-                                        <td><?= (null != $try->getTransaction()) ? $try->getTransaction()->getOutcome() : 'n.d.'  ?></td>
-                                        <td><?= (null != $try->getTransaction()) ? $try->getTransaction()->getMessage() : 'n.d.'  ?></td>
-                                    </tr>
-                                <?php endforeach; ?>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- retries list table -->
 
         <!-- END PAGE CONTENT-->
         */?>
