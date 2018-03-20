@@ -319,7 +319,6 @@ $formSetting->setAttribute('action', $this->url('customers/edit', ['id' => $this
                             <div class="form-group">
                                 <label for="firstPaymentCompleted"><?= $this->translate("First Payment Completed"); ?></label>
                                 <?php
-                                $a = "";
                                 if ($this->isAllowed('customer', 'firstPaymentCompleted')) {
                                     echo $this->formRow($formSetting->get('setting')->get('firstPaymentCompleted'));
                                 } else {
