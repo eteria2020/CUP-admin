@@ -109,7 +109,6 @@ class SettingFieldset extends Fieldset implements InputFilterProviderInterface
                 ]
             ]
         ]);
-        /*
         $this->add([
             'name'       => 'firstPaymentCompleted',
             'type'       => 'Zend\Form\Element\Select',
@@ -123,7 +122,7 @@ class SettingFieldset extends Fieldset implements InputFilterProviderInterface
                     1 => $translator->translate("Si")
                 ]
             ]
-        ]);*/
+        ]);
     }
 
     public function getInputFilterSpecification()
@@ -157,10 +156,10 @@ class SettingFieldset extends Fieldset implements InputFilterProviderInterface
             ],
             'goldList' => [
                 'required' => true
-            ]/*,
+            ],
             'firstPaymentCompleted' => [
                 'required' => true
-            ]*/
+            ]
         ];
     }
 }
