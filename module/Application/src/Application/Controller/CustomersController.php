@@ -247,8 +247,7 @@ class CustomersController extends AbstractActionController
                     }
                     $postData['setting']['goldList'] =
                         $postData['setting']['goldList'] |
-                        $postData['setting']['maintainer'] |
-                        $postData['setting']['firstPaymentCompleted'];
+                        $postData['setting']['maintainer'];
                     break;
             }
 
