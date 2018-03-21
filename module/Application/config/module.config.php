@@ -1087,15 +1087,15 @@ return [
                             ]
                         ]
                     ],
-                    'recap' => [
-                        'type' => 'Segment',
-                        'options' => [
-                            'route' => '/recap',
-                            'defaults' => [
-                                'action' => 'recap'
-                            ]
-                        ]
-                    ],
+//                    'recap' => [
+//                        'type' => 'Segment',
+//                        'options' => [
+//                            'route' => '/recap',
+//                            'defaults' => [
+//                                'action' => 'recap'
+//                            ]
+//                        ]
+//                    ],
                     'fares' => [
                         'type' => 'Segment',
                         'options' => [
@@ -1509,6 +1509,38 @@ return [
                     ],
                 ],
             ],
+            'logistic' => [
+                'type' => 'Literal',
+                'options' => [
+                    'route' => '/logistic',
+                    'defaults' => [
+                        '__NAMESPACE__' => 'Application\Controller',
+                        'controller' => 'Logistic',
+                        'action' => 'index',
+                    ],
+                ],
+                'may_terminate' => true,
+                'child_routes' => [
+                    'change-status-car' => [
+                        'type' => 'Segment',
+                        'options' => [
+                            'route' => '/change-status-car',
+                            'defaults' => [
+                                'action' => 'change-status-car',
+                            ],
+                        ],
+                    ],
+                    'motivation' => [
+                        'type' => 'Segment',
+                        'options' => [
+                            'route' => '/motivation',
+                            'defaults' => [
+                                'action' => 'motivation',
+                            ],
+                        ],
+                    ],
+                ],
+            ],
         ],
     ],
     'service_manager' => [
@@ -1627,6 +1659,7 @@ return [
             'Application\Controller\ForeignDriversLicense' => 'Application\Controller\ForeignDriversLicenseControllerFactory',
             'Application\Controller\TripsNotPayed' => 'Application\Controller\TripsNotPayedControllerFactory',
             'Application\Controller\Notifications' => 'Application\Controller\NotificationsControllerFactory',
+            'Application\Controller\Logistic' => 'Application\Controller\LogisticControllerFactory',
         ]
     ],
     'controller_plugins' => [
@@ -1808,6 +1841,7 @@ return [
                     [['superadmin'], 'customer', 'discountRate'],
                     [['superadmin'], 'customer', 'maintainer'],
                     [['superadmin'], 'customer', 'goldList'],
+                    [['admin'], 'customer', 'firstPaymentCompleted'],
                 ],
             ],
         ],
@@ -1839,6 +1873,7 @@ return [
                 ['controller' => 'Application\Controller\ForeignDriversLicense', 'roles' => ['admin']],
                 ['controller' => 'Application\Controller\TripsNotPayed', 'roles' => ['admin']],
                 ['controller' => 'Application\Controller\Notifications', 'roles' => ['admin','callcenter']],
+                ['controller' => 'Application\Controller\Logistic', 'roles' => []],
             ],
         ],
     ],
@@ -1986,7 +2021,7 @@ return [
                     [
                         'label' => $translator->translate('Competenze'),
                         'route' => 'payments/recap',
-                        'isVisible' => true
+                        'isVisible' => false
                     ],
                     [
                         'label' => $translator->translate('Verifica CartaSI'),

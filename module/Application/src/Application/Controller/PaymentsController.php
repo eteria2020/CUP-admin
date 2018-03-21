@@ -335,6 +335,7 @@ class PaymentsController extends AbstractActionController
         $customerId = $this->params()->fromPost('customerId');
         $fleetId = $this->params()->fromPost('fleetId');
         $type = $this->params()->fromPost('type');
+        $penalty = $this->params()->fromPost('penalty');
         $reasons = $this->params()->fromPost('reasons');
         $amounts = $this->params()->fromPost('amounts');
 
@@ -386,6 +387,7 @@ class PaymentsController extends AbstractActionController
                 $response->getTransaction(),
                 $amount,
                 $type,
+                $penalty,
                 $reasons,
                 $amounts
             );
