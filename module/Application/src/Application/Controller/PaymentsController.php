@@ -372,25 +372,31 @@ class PaymentsController extends AbstractActionController
             foreach ($amounts as $value) {
                 $amount += intval($value);
             }
+
             $response = $this->cartasiCustomerPayments->sendPaymentRequest($customer, $amount);
-
-            if (!$response->getCompletedCorrectly()) {
-                $this->response->setStatusCode(402);
-                return new JsonModel([
-                    'error' => $translator->translate('Il tentativo di pagamento non è andato a buon fine. Il cliente è stato notificato da Cartasi')
-                ]);
-            }
-
+            
             $extraPayment = $this->extraPaymentsService->registerExtraPayment(
                 $customer,
                 $fleet,
-                $response->getTransaction(),
+                //$response->getTransaction(),
+                    null,
                 $amount,
                 $type,
                 $penalty,
                 $reasons,
                 $amounts
             );
+            
+            if (!$response->getCompletedCorrectly()) {
+                //extrapyaments tries
+                $extraPaymentTry = $this->extraPaymentTriesService->generateExtraPaymentTry(
+                        $extraPayment, $response->getOutcome(), $response->getTransaction(), $this->identity()
+                );
+                $this->response->setStatusCode(402);
+                return new JsonModel([
+                    'error' => $translator->translate('Il tentativo di pagamento non è andato a buon fine. Il cliente è stato notificato da Cartasi')
+                ]);
+            }
 
             return new JsonModel([
                 'message' => $translator->translate('Il tentativo di pagamento è andato a buon fine. Il cliente è stato notificato da Cartasi')
