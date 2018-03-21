@@ -250,13 +250,14 @@ class CustomersController extends AbstractActionController
                         $postData['setting']['maintainer'];
                     break;
             }
+            
 
             $form->setData($postData);
 
             if ($form->isValid()) {
                 try {
                     $this->customersService->saveData($form->getData());
-                    if($postData['setting']['firstPaymentCompleted'] == '1'){
+                    if(isset($postData['setting']) && $postData['setting']['firstPaymentCompleted'] == '1'){
                         $customer_id = $postData['setting']['id'];
                         $c = $this->customersService->findById($customer_id);
                         $this->customerDeactivationService->reactivateCustomerForFirstPaymentFromAdmin($c, $this->identity());
