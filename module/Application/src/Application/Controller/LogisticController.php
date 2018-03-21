@@ -63,6 +63,7 @@ class LogisticController extends AbstractActionController {
                 $postData['location'] = $params['location'];
                 $postData['motivation'] = $params['motivation'];
             }
+            error_log($params['note']);
             $postData['note'] = $params['note'];
 
             $this->carsService->updateCar($car, $lastStatus, $postData, $webuser);
