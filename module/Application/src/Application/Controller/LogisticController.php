@@ -5,7 +5,6 @@ namespace Application\Controller;
 use SharengoCore\Service\CarsService;
 use SharengoCore\Service\WebusersService;
 use SharengoCore\Service\MaintenanceMotivationsService;
-
 use Zend\EventManager\EventManager;
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\Stdlib\Hydrator\HydratorInterface;
@@ -19,17 +18,17 @@ class LogisticController extends AbstractActionController {
      * @var CarsService
      */
     private $carsService;
-    
+
     /**
      * @var WebusersService
      */
     private $webusersService;
-    
+
     /**
      * @var MaintenanceMotivationsService
      */
     private $maintenanceMotivationsService;
-    
+
     /**
      * @var array
      */
@@ -48,48 +47,52 @@ class LogisticController extends AbstractActionController {
         $this->maintenanceMotivationsService = $maintenanceMotivationsService;
         $this->logisticConfig = $logisticConfig;
     }
-    
+
     public function changeStatusCarAction() {
-        $param = base64_decode($this->params()->fromPost('param'));
-        $param = explode('&', $param);
-        foreach ($param as $p){
-            $p = explode('=', $p);
-            $params[$p[0]] = $p[1];
-        }
-        //user logistic
-        $webuser = $this->webusersService->findByEmail($this->logisticConfig['email_logistic']);
-        $car = $this->carsService->getCarByPlate($params['plate']);
-        $lastStatus = $car->getStatus();
-        $car->setStatus($params['status']);
-        if ($params['status'] != "operative") {
-            $postData['location'] = $params['location'];
-            $postData['motivation'] = $params['motivation'];
-        }
-        $postData['note'] = $params['note'];
 
-        $this->carsService->updateCar($car, $lastStatus, $postData, $webuser);
-        $this->carsService->saveData($car, false);
+        $params = json_decode(base64_decode($this->params()->fromPost('param')));
+        //$params = json_decode("{\"plate\":\"EG74543\",\"status\":\"maintenance\",\"location\":\"Carrozzeria Merciai, via del Pratellino 27/31, 50124 Firenze\",\"motivation\":\"1\",\"note\":\"[Messa in manutenzione da csadmin] Test ETERIA\"}", true);
 
-        $response = $this->getResponse();
-        $response->setStatusCode(200);
-        $response->setContent(json_encode(array("response" => "Auto modificata con successo!")));
-        return $response;
-    }
+        if (isset($params['plate']) && isset($params['status']) && isset($params['location']) && isset($params['motivation']) && isset($params['note'])) {
+            //user logistic
+            $webuser = $this->webusersService->findByEmail($this->logisticConfig['email_logistic']);
+            $car = $this->carsService->getCarByPlate($params['plate']);
+            $lastStatus = $car->getStatus();
+            $car->setStatus($params['status']);
+            if ($params['status'] != "operative") {
+                $postData['location'] = $params['location'];
+                $postData['motivation'] = $params['motivation'];
+            }
+            $postData['note'] = $params['note'];
 
-    /*
-    public function motivationAction() {
-        if($this->logisticConfig['type'] == $this->params()->fromPost('type')){
-            $motivation = $this->maintenanceMotivationsService->getAllMaintenanceMotivations();
+            $this->carsService->updateCar($car, $lastStatus, $postData, $webuser);
+            $this->carsService->saveData($car, false);
+
             $response = $this->getResponse();
             $response->setStatusCode(200);
-            $response->setContent(json_encode($motivation));
+            $response->setContent(json_encode(array("response" => "Auto modificata con successo!")));
             return $response;
         } else {
             $response = $this->getResponse();
-            $response->setStatusCode(401);
+            $response->setStatusCode(400);
+            $response->setContent(json_encode(array("response" => "Parametri mancanti")));
             return $response;
         }
     }
-    */
 
+    /*
+      public function motivationAction() {
+      if($this->logisticConfig['type'] == $this->params()->fromPost('type')){
+      $motivation = $this->maintenanceMotivationsService->getAllMaintenanceMotivations();
+      $response = $this->getResponse();
+      $response->setStatusCode(200);
+      $response->setContent(json_encode($motivation));
+      return $response;
+      } else {
+      $response = $this->getResponse();
+      $response->setStatusCode(401);
+      return $response;
+      }
+      }
+     */
 }
