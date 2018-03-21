@@ -51,7 +51,6 @@ class LogisticController extends AbstractActionController {
     public function changeStatusCarAction() {
 
         $params = json_decode(base64_decode($this->params()->fromPost('param')), true);
-        //$params = json_decode("{\"plate\":\"EG74543\",\"status\":\"operative\",\"location\":\"Carrozzeria Merciai, via del Pratellino 27/31, 50124 Firenze\",\"motivation\":\"1\",\"note\":\"[Messa in manutenzione da csadmin] Test ETERIA\"}", true);
 
         if (isset($params['plate']) && isset($params['status']) && isset($params['location']) && isset($params['motivation']) && isset($params['note'])) {
             //user logistic
@@ -63,7 +62,6 @@ class LogisticController extends AbstractActionController {
                 $postData['location'] = $params['location'];
                 $postData['motivation'] = $params['motivation'];
             }
-            //error_log($params['note']);
             $postData['note'] = $params['note'];
 
             $this->carsService->updateCar($car, $lastStatus, $postData, $webuser, true);
