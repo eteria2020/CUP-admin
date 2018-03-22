@@ -389,6 +389,7 @@ class PaymentsController extends AbstractActionController
                 $amounts
             );
             if (!$response->getCompletedCorrectly()) {                
+                error_log("pagamento non corretto...");
                 //set status worn_payment in extra_paymnets
                 $extraPayment = $this->extraPaymentsService->setStatus($extraPayment);
                 
@@ -404,8 +405,11 @@ class PaymentsController extends AbstractActionController
             
             
             //set status payed in extra_payment
-            $extraPayment = $this->extraPaymentsService->setStatusPayedCorrectly($extraPayment);
+            $extraPayment = $this->extraPaymentsService->setPayedCorrectly($extraPayment);
+            //scrivere un record sulla extra_payments_tries
             
+            
+            error_log("pagamento avvenuto con successo....");
             return new JsonModel([
                 'message' => $translator->translate('Il tentativo di pagamento è andato a buon fine. Il cliente è stato notificato da Cartasi')
             ]);
