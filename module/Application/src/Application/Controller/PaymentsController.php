@@ -407,8 +407,10 @@ class PaymentsController extends AbstractActionController
             //set status payed in extra_payment
             $extraPayment = $this->extraPaymentsService->setPayedCorrectly($extraPayment);
             //scrivere un record sulla extra_payments_tries
-            
-            
+            $extraPaymentTry = $this->extraPaymentTriesService->generateExtraPaymentTry(
+                    $extraPayment, $response->getOutcome(), $response->getTransaction(), $this->identity()
+            );
+
             error_log("pagamento avvenuto con successo....");
             return new JsonModel([
                 'message' => $translator->translate('Il tentativo di pagamento è andato a buon fine. Il cliente è stato notificato da Cartasi')
