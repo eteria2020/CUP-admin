@@ -275,6 +275,9 @@ class PaymentsController extends AbstractActionController
 
             
             if ($cartasiResponse->getOutcome() === 'OK') {
+                //set extra payed
+                $extraPayment = $this->extraPaymentsService->setStatusPayedCorrectly($extraPayment);
+                $extraPayment = $this->extraPaymentsService->setTrasaction($extraPayment, $cartasiResponse->getTransaction());
                 $this->customersService->enableCustomerPayment($extraPayment->getCustomer());
             }
             
@@ -286,7 +289,7 @@ class PaymentsController extends AbstractActionController
         } else {
             return new JsonModel([
                 'outcome' => 'KO',
-                'message' => 'The trip is not anymore in wrong payment state'
+                'message' => 'The extra is not anymore in wrong payment state'
             ]);
         }
  
@@ -378,16 +381,17 @@ class PaymentsController extends AbstractActionController
             $extraPayment = $this->extraPaymentsService->registerExtraPayment(
                 $customer,
                 $fleet,
-                //$response->getTransaction(),
-                    null,
+                $response->getTransaction(),
                 $amount,
                 $type,
                 $penalty,
                 $reasons,
                 $amounts
             );
-            
-            if (!$response->getCompletedCorrectly()) {
+            if (!$response->getCompletedCorrectly()) {                
+                //set status worn_payment in extra_paymnets
+                $extraPayment = $this->extraPaymentsService->setStatus($extraPayment);
+                
                 //extrapyaments tries
                 $extraPaymentTry = $this->extraPaymentTriesService->generateExtraPaymentTry(
                         $extraPayment, $response->getOutcome(), $response->getTransaction(), $this->identity()
@@ -397,7 +401,11 @@ class PaymentsController extends AbstractActionController
                     'error' => $translator->translate('Il tentativo di pagamento non è andato a buon fine. Il cliente è stato notificato da Cartasi')
                 ]);
             }
-
+            
+            
+            //set status payed in extra_payment
+            $extraPayment = $this->extraPaymentsService->setStatusPayedCorrectly($extraPayment);
+            
             return new JsonModel([
                 'message' => $translator->translate('Il tentativo di pagamento è andato a buon fine. Il cliente è stato notificato da Cartasi')
             ]);
