@@ -34,7 +34,7 @@ class CarForm extends Form
             ],
             'options'    => [
                 'value_options' => [
-                    ''=>'',
+                    '-'=>'',
                     'Firenze, Carrozzeria Merciai, via del Pratellino 27/31 50124' => 'Firenze, Carrozzeria Merciai, via del Pratellino 27/31 50124',
                     'Firenze, Rugi, via Gaetano Salvemini 3F, 50058 Signa' => 'Rugi, via Gaetano Salvemini 3F, 50058 Signa',
                     'Firenze, Rugi, via dei Colli 188, 50058 Signa' => 'Rugi, via dei Colli 188, 50058 Signa',
