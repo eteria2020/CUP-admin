@@ -284,7 +284,7 @@ class PaymentsController extends AbstractActionController
             
             if ($cartasiResponse->getOutcome() === 'OK') {
                 //set extra payed
-                $extraPayment = $this->extraPaymentsService->setStatusPayedCorrectly($extraPayment);
+                $extraPayment = $this->extraPaymentsService->setPayedCorrectly($extraPayment);
                 $extraPayment = $this->extraPaymentsService->setTrasaction($extraPayment, $cartasiResponse->getTransaction());
                 $this->customersService->enableCustomerPayment($extraPayment->getCustomer());
             }
@@ -399,7 +399,7 @@ class PaymentsController extends AbstractActionController
             if (!$response->getCompletedCorrectly()) {                
                 error_log("pagamento non corretto...");
                 //set status worn_payment in extra_paymnets
-                $extraPayment = $this->extraPaymentsService->setStatus($extraPayment);
+                $extraPayment = $this->extraPaymentsService->setStatusWrongPayment($extraPayment);
                 
                 //extrapyaments tries
                 $extraPaymentTry = $this->extraPaymentTriesService->generateExtraPaymentTry(
