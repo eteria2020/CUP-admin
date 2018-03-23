@@ -9,6 +9,7 @@ use SharengoCore\Service\TripPaymentsService;
 use SharengoCore\Service\PaymentsService;
 use SharengoCore\Service\CustomersService;
 use SharengoCore\Service\ExtraPaymentsService;
+use SharengoCore\Service\ExtraPaymentTriesService;
 use Cartasi\Service\CartasiContractsService;
 use Cartasi\Service\CartasiCustomerPayments;
 use SharengoCore\Service\PenaltiesService;
@@ -52,6 +53,11 @@ class PaymentsController extends AbstractActionController
      * @var ExtraPaymentsService
      */
     private $extraPaymentsService;
+    
+    /**
+     * @var ExtraPaymentTriesService
+     */
+    private $extraPaymentTriesService;
 
     /**
      * @var PenaltiesService
@@ -90,6 +96,7 @@ class PaymentsController extends AbstractActionController
         CartasiContractsService $cartasiContractsService,
         CartasiCustomerPayments $cartasiCustomerPayments,
         ExtraPaymentsService $extraPaymentsService,
+        ExtraPaymentTriesService $extraPaymentTriesService,
         PenaltiesService $penaltiesService,
         FleetService $fleetService,
         RecapService $recapService,
@@ -103,6 +110,7 @@ class PaymentsController extends AbstractActionController
         $this->cartasiContractsService = $cartasiContractsService;
         $this->cartasiCustomerPayments = $cartasiCustomerPayments;
         $this->extraPaymentsService = $extraPaymentsService;
+        $this->extraPaymentTriesService = $extraPaymentTriesService;
         $this->penaltiesService = $penaltiesService;
         $this->fleetService = $fleetService;
         $this->recapService = $recapService;
