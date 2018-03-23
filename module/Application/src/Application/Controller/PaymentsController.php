@@ -415,7 +415,7 @@ class PaymentsController extends AbstractActionController
             //set status payed in extra_payment
             $extraPayment = $this->extraPaymentsService->setPayedCorrectly($extraPayment);
             //scrivere un record sulla extra_payments_tries
-            $extraPaymentTry = $this->extraPaymentTriesService->generateExtraPaymentTry(
+            $extraPaymentTry = $this->extraPaymentTriesService->createExtraPaymentTry(
                     $extraPayment, $response->getOutcome(), $response->getTransaction(), $this->identity()
             );
 
