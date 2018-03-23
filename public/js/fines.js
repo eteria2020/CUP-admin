@@ -11,7 +11,7 @@ $(function() {
         column: $("#js-column"),
         iSortCol_0: 0,
         sSortDir_0: "desc",
-        iDisplayLength: 10
+        iDisplayLength: 0
     };
 
     var typeClean = $("#js-clean-type"),
@@ -97,12 +97,18 @@ $(function() {
         "columnDefs": [
             {
                 targets: [0],
+                sortable: false,
                 "render": function (data, type, row) {
-                    return row.fines.charged;
+                    if(row.fines.charged){
+                        return 'Si';
+                    }else{
+                        return 'No';
+                    }
                 }
             },
             {
                 targets: [1],
+                sortable: false,
                 "render": function (data, type, row) {
                     if(row.fines.customerId>0){
                         return '<a href="/customers/edit/'+row.fines.customerId+'">'+row.fines.customerId+'</a>';
@@ -113,12 +119,14 @@ $(function() {
             },
             {
                 targets: [2],
+                sortable: false,
                 "render": function (data, type, row) {
                     return row.fines.violationDescription;
                 }
             },
             {
                 targets: [3],
+                sortable: false,
                 "render": function (data, type, row) {
                     if(row.fines.vehicleFleetId>0){
                         switch (row.fines.vehicleFleetId){
@@ -140,6 +148,7 @@ $(function() {
             },
             {
                 targets: [4],
+                sortable: false,
                 "render": function (data, type, row) {
                     if(row.fines.tripId>0){
                         return '<a href="/trips/details/'+row.fines.tripId+'">'+row.fines.tripId+'</a>';
@@ -150,26 +159,34 @@ $(function() {
             },
             {
                 targets: [5],
+                sortable: false,
                 "render": function (data, type, row) {
                     return '<a href="/cars/edit/'+row.fines.carPlate+'">'+row.fines.carPlate+'</a>';
                 }
             },
             {
                 targets: [6],
+                sortable: false,
                 "render": function (data, type, row) {
                     return row.fines.violationAuthority;
                 }
             },
             {
                 targets: [7],
+                sortable: false,
                 "render": function (data, type, row) {
                     return renderAmount(row.fines.amount);
                 }
             },
             {
                 targets: [8],
+                sortable: false,
                 "render": function (data, type, row) {
-                    return row.fines.complete;
+                    if(row.fines.complete){
+                        return 'Verbale appena dematerializzato';
+                    }else{
+                        return 'Verbale in uscita (completo)';
+                    }
                 }
             },
             {
@@ -232,12 +249,12 @@ $(function() {
     });
 
     // Select Changed Action
-/*    $(dataTableVars.column).change(function() {
+    $(dataTableVars.column).change(function() {
         // Selected Column
         var value = $(this).val();
 
         // Column that need the standard "LIKE" search operator
-        if (value === "cu.surname") {
+        if ((value === "e.violationDescription")||(value === "e.carPlate")||(value === "e.vehicleFleetId")||(value === "e.id")||(value === "e.tripId")) {
             filterWithoutLike = false;
             dataTableVars.searchValue.val("");
             dataTableVars.searchValue.prop("disabled", false);
@@ -252,15 +269,15 @@ $(function() {
 
             switch (value) {
                 // Columns that need a "=" instead the standard "LIKE" search operator.
-                case "e.trip":
+                case "e.tripId":
                     columnWithoutLike = value;
                     //columnValueWithoutLike = true;
                     break;
-                case "cu.id":
+                case "e.customerId":
                     columnWithoutLike = value;
                     break;
             }
         }
-    });*/
+    });
 
 });

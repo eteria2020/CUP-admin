@@ -23,8 +23,11 @@ $this->headScript()
                             <div class="form-group">
                                 <select name="column" id="js-column" class="form-control">
                                     <option value="select" selected>-- <?= $this->translate("Seleziona"); ?> --</option>
-                                    <option value="e.description"><?= $this->translate("Description"); ?></option>
+                                    <option value="e.carPlate"><?= $this->translate("Targa"); ?></option>
+                                    <option value="e.vehicleFleetId"><?= $this->translate("Flotta"); ?></option>
                                     <option value="e.id"><?= $this->translate("ID Cliente"); ?></option>
+                                    <option value="e.tripId"><?= $this->translate("ID Corsa"); ?></option>
+                                    <option value="e.violationDescription"><?= $this->translate("Descrizione"); ?></option>
                                 </select>
                             </div>
                             <div class="form-group">
@@ -62,7 +65,7 @@ $this->headScript()
                                 <th><?= $this->translate("Targa"); ?></th>
                                 <th><?= $this->translate("Autorità"); ?></th>
                                 <th><?= $this->translate("Costo"); ?></th>
-                                <th><?= $this->translate("Completato"); ?></th>
+                                <th><?= $this->translate("Status"); ?></th>
                                 <th></th>
                             </tr>
                             </thead>

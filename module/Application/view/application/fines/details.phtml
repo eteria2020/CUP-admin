@@ -18,10 +18,7 @@ $safoPenalty = $this->safoPenalty;
 
         <div class="row">
             <div class="col-lg-12">
-                <button type="button" class="btn btn-success pull-right" onclick="window.history.back();">
-                    <i class="fa fa-arrow-left"></i> 
-                    <?= $this->translate("Torna alla lista"); ?>
-                </button>
+                <a href="/fines" class="btn btn-success pull-right"><i class="fa fa-arrow-left"></i> Torna alla lista</a>
             </div>
         </div>
 
@@ -56,13 +53,13 @@ $safoPenalty = $this->safoPenalty;
                             <div class="col-lg-3">
                                 <div class="form-group">
                                     <label><?= $this->translate("ID cliente"); ?></label>
-                                    <div class="sng-info-box"><?= $safoPenalty->getCustomerId() ?></div>
+                                    <div class="sng-info-box"><?= (($safoPenalty->getCustomerId()>0) ? '<a href="/customers/edit/'.$safoPenalty->getCustomerId().'">'.$safoPenalty->getCustomerId().'</a>' : $safoPenalty->getCustomerId()) ?></div>
                                 </div>
                             </div>
                             <div class="col-lg-3">
                                 <div class="form-group">
                                     <label><?= $this->translate("ID corsa"); ?></label>
-                                    <div class="sng-info-box"><?= $safoPenalty->getTripId() ?></div>
+                                    <div class="sng-info-box"><?= (($safoPenalty->getTripId()>0) ? '<a href="/trips/details/'.$safoPenalty->getTripId().'">'.$safoPenalty->getTripId().'</a>' : $safoPenalty->getTripId()) ?></div>
                                 </div>
                             </div>
                         </div>
@@ -95,13 +92,13 @@ $safoPenalty = $this->safoPenalty;
                             <div class="col-lg-3">
                                 <div class="form-group">
                                     <label><?= $this->translate("Targa"); ?></label>
-                                    <div class="sng-info-box"><?= $safoPenalty->getCarPlate() ?></div>
+                                    <div class="sng-info-box"><?= ((strlen($safoPenalty->getCarPlate())>0) ? '<a href="/cars/edit/'.$safoPenalty->getCarPlate().'">'.$safoPenalty->getCarPlate().'</a>' : $safoPenalty->getCarPlate()) ?></div>
                                 </div>
                             </div>
                             <div class="col-lg-3">
                                 <div class="form-group">
                                     <label><?= $this->translate("Categoria multa"); ?></label>
-                                    <div class="sng-info-box"><?= $safoPenalty->getViolationCategory() ?></div>
+                                    <div class="sng-info-box"><?= ($safoPenalty->getViolationCategory()===0 ? "Nessuna categoria" : $safoPenalty->getViolationCategory()) ?></div>
                                 </div>
                             </div>
                             <div class="col-lg-3">
@@ -128,7 +125,22 @@ $safoPenalty = $this->safoPenalty;
                             <div class="col-lg-3">
                                 <div class="form-group">
                                     <label><?= $this->translate("Status Multa"); ?></label>
-                                    <div class="sng-info-box"><?= $safoPenalty->getViolationStatus() ?></div>
+                                    <div class="sng-info-box"><?
+                                                                switch ($safoPenalty->getViolationStatus()){
+                                                                    case "R":
+                                                                        echo "Reintestata";
+                                                                        break;
+                                                                    case "C":
+                                                                        echo "Contestata";
+                                                                        break;
+                                                                    case "P":
+                                                                        echo "Pagata";
+                                                                        break;
+                                                                    default:
+                                                                        echo "Non specificato";
+                                                                        break;
+                                                                }
+                                                                ?></div>
                                 </div>
                             </div>
                             <div class="col-lg-3">
@@ -143,7 +155,7 @@ $safoPenalty = $this->safoPenalty;
                             <div class="col-lg-3">
                                 <div class="form-group">
                                     <label><?= $this->translate("Costo multa"); ?></label>
-                                    <div class="sng-info-box"><?= $safoPenalty->getAmount() ?>&euro;</div>
+                                    <div class="sng-info-box"><?= number_format(($safoPenalty->getAmount()/100),2,",","'"); ?>&euro;</div>
                                 </div>
                             </div>
                             <div class="col-lg-3">
