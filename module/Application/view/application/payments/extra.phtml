@@ -1,5 +1,5 @@
 <?php
-$this->headScript()->appendFile($this->basePath() .'/js/extra-payments.js');
+$this->headScript()->appendFile($this->basePath() .'/js/extra-payments.js?v=1.5');
 ?>
 <div class="page-content-wrapper">
     <div class="page-content">
@@ -66,34 +66,21 @@ $this->headScript()->appendFile($this->basePath() .'/js/extra-payments.js');
 </div>
 
 <script>
-<?php
-/**
- * This code creates a js variable that holds all the options for the penalties
- * selector. The generated variable contains a string that is ready to be added
- * to the html of a selector.
- */
-echo 'var penaltyOptions = "';
-echo '<option>---</option>';
-foreach($this->penalties as $penalty) {
-    echo '<option data-reason=\"' . $penalty->getReason() . '\" data-amount=\"' . $penalty->getAmount() . '\">' .
-        $penalty->getReason() . ' (' .number_format($penalty->getAmount()/100, 2) . '\u20ac)' .
-        '</option>';
-}
-echo '"';
-
-?>
-    
-<?php
-echo 'var causalOptions = "';
-echo '<option>---</option>';
-foreach($this->causal as $causal) {
-    echo '<option data-reason=\"' . $causal->getReason() . '\">' .
-        $causal->getReason() .
-        '</option>';
-}
-echo '"';
-?>
-    
+var causalOptions = "";
+$('#type').change(function() {
+    if($('#type').val() == "extra"){
+        <?php
+        echo 'causalOptions = "';
+        echo '<option>Non definito</option>';
+        foreach($this->causal as $causal) {
+            echo '<option data-reason=\"' . $causal->getReason() . '\">' .
+                $causal->getReason() .
+                '</option>';
+        }
+        echo '"';
+        ?>
+    }
+});
     
 function deactivate(e)
 {
@@ -102,4 +89,20 @@ function deactivate(e)
     }
 }
 
+
+<?php
+/**
+ * This code creates a js variable that holds all the options for the penalties
+ * selector. The generated variable contains a string that is ready to be added
+ * to the html of a selector.
+ */
+echo 'var penaltyOptions = "';
+echo '<option></option>';
+foreach($this->penalties as $penalty) {
+    echo '<option data-reason=\"' . $penalty->getReason() . '\" data-amount=\"' . $penalty->getAmount() . '\">' .
+        $penalty->getReason() . ' (' .number_format($penalty->getAmount()/100, 2) . '\u20ac)' .
+        '</option>';
+}
+echo '"';
+?>
 </script>
