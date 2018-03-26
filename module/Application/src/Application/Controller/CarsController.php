@@ -281,26 +281,23 @@ class CarsController extends AbstractActionController {
         $plate = $this->params()->fromRoute('plate', 0);
         $commandIndex = $this->params()->fromRoute('command', 0);
         
-        $intArg1 = $this->params()->fromRoute('$intArg1', 0) != null ? $this->params()->fromRoute('$intArg1', 0) : null;
-        $intArg2 = $this->params()->fromRoute('$intArg2', 0) != null ? $this->params()->fromRoute('$intArg2', 0) : null;
+        $intArg1 = $this->params()->fromRoute('intArg1', 0) != null ? $this->params()->fromRoute('intArg1', 0) : null;
+        $intArg2 = $this->params()->fromRoute('intArg2', 0) != null ? $this->params()->fromRoute('intArg2', 0) : null;
         $txtArg1 = $this->params()->fromRoute('txtArg1', 0) != null ? $this->params()->fromRoute('txtArg1', 0) : null;
-        $txtArg2 = $this->params()->fromRoute('$txtArg2', 0) != null ? $this->params()->fromRoute('$txtArg2', 0) : null;
-        $ttl = $this->params()->fromRoute('$ttl', 0) != null ? $this->params()->fromRoute('$ttl', 0) : null;
+        $txtArg2 = $this->params()->fromRoute('txtArg2', 0) != null ? $this->params()->fromRoute('txtArg2', 0) : null;
+        $ttl = $this->params()->fromRoute('ttl', 0) != null ? $this->params()->fromRoute('ttl', 0) : null;
         
         $car = $this->carsService->getCarByPlate($plate);
 
         if (is_null($car)) {
             $this->getResponse()->setStatusCode(Response::STATUS_CODE_404);
-
             return false;
         }
 
         try {
-
             $this->commandsService->sendCommand($car, $commandIndex, $this->identity(), $intArg1, $intArg2,  $txtArg1, $txtArg2, $ttl);
             $this->flashMessenger()->addSuccessMessage($translator->translate('Comando eseguito con successo'));
         } catch (\Exception $e) {
-
             $this->flashMessenger()->addErrorMessage($translator->translate('Errore nell\'esecuzione del comando'));
         }
 
