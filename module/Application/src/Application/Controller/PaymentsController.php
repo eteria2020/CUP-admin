@@ -397,12 +397,11 @@ class PaymentsController extends AbstractActionController
                 $amounts
             );
             if (!$response->getCompletedCorrectly()) {                
-                error_log("pagamento non corretto...");
                 //set status worn_payment in extra_paymnets
                 $extraPayment = $this->extraPaymentsService->setStatusWrongPayment($extraPayment);
                 
                 //extrapyaments tries
-                $extraPaymentTry = $this->extraPaymentTriesService->generateExtraPaymentTry(
+                $extraPaymentTry = $this->extraPaymentTriesService->createExtraPaymentTry(
                         $extraPayment, $response->getOutcome(), $response->getTransaction(), $this->identity()
                 );
                 $this->response->setStatusCode(402);
@@ -411,15 +410,13 @@ class PaymentsController extends AbstractActionController
                 ]);
             }
             
-            
             //set status payed in extra_payment
             $extraPayment = $this->extraPaymentsService->setPayedCorrectly($extraPayment);
             //scrivere un record sulla extra_payments_tries
             $extraPaymentTry = $this->extraPaymentTriesService->createExtraPaymentTry(
                     $extraPayment, $response->getOutcome(), $response->getTransaction(), $this->identity()
             );
-
-            error_log("pagamento avvenuto con successo....");
+            
             return new JsonModel([
                 'message' => $translator->translate('Il tentativo di pagamento è andato a buon fine. Il cliente è stato notificato da Cartasi')
             ]);
