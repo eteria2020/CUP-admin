@@ -177,6 +177,7 @@ $(function() {
             {data: "t.tripId"},
             {data: "c.nameSurname"},
             {data: "c.mobile"},
+            {data: "t.callMobile"},
         ],
         "columnDefs": [
             {
