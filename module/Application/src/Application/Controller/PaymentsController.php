@@ -285,7 +285,6 @@ class PaymentsController extends AbstractActionController
             if ($cartasiResponse->getOutcome() === 'OK') {
                 //set extra payed
                 $extraPayment = $this->extraPaymentsService->setPayedCorrectly($extraPayment);
-                error_log('in payments Controller');
                 error_log($cartasiResponse->getTransaction()->getId());
                 $extraPayment = $this->extraPaymentsService->setTrasaction($extraPayment, $cartasiResponse->getTransaction());
                 $this->customersService->enableCustomerPayment($extraPayment->getCustomer());
