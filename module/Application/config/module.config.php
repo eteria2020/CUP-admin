@@ -460,6 +460,45 @@ return [
                     ]
                 ],
             ],
+            'fines' => [
+                'type' => 'Literal',
+                'options' => [
+                    'route' => '/fines',
+                    'defaults' => [
+                        '__NAMESPACE__' => 'Application\Controller',
+                        'controller' => 'Fines',
+                        'action' => 'index'
+                    ]
+                ],
+                'may_terminate' => true,
+                'child_routes' => [
+                    'datatable' => [
+                        'type'    => 'Literal',
+                        'options' => [
+                            'route'    => '/datatable',
+                            'defaults' => [
+                                '__NAMESPACE__' => 'Application\Controller',
+                                'controller' => 'Fines',
+                                'action'        => 'datatable',
+                            ],
+                        ],
+                    ],
+                    'details' => [
+                        'type' => 'Segment',
+                        'options' => [
+                            'route' => '/details/:id',
+                            'constraints' => [
+                                'id' => '[0-9]*'
+                            ],
+                            'defaults' => [
+                                '__NAMESPACE__' => 'Application\Controller',
+                                'controller' => 'Fines',
+                                'action' => 'details'
+                            ]
+                        ]
+                    ],
+                ],
+            ],
             'cars' => [
                 'type' => 'Literal',
                 'options' => [
@@ -1628,6 +1667,7 @@ return [
             'Application\Controller\ForeignDriversLicense' => 'Application\Controller\ForeignDriversLicenseControllerFactory',
             'Application\Controller\TripsNotPayed' => 'Application\Controller\TripsNotPayedControllerFactory',
             'Application\Controller\Notifications' => 'Application\Controller\NotificationsControllerFactory',
+            'Application\Controller\Fines' => 'Application\Controller\FinesControllerFactory',
             'Application\Controller\Logistic' => 'Application\Controller\LogisticControllerFactory',
         ]
     ],
@@ -1842,6 +1882,7 @@ return [
                 ['controller' => 'Application\Controller\ForeignDriversLicense', 'roles' => ['admin']],
                 ['controller' => 'Application\Controller\TripsNotPayed', 'roles' => ['admin']],
                 ['controller' => 'Application\Controller\Notifications', 'roles' => ['admin','callcenter']],
+                ['controller' => 'Application\Controller\Fines', 'roles' => ['admin','callcenter']],
                 ['controller' => 'Application\Controller\Logistic', 'roles' => []],
             ],
         ],
@@ -1993,6 +2034,20 @@ return [
                         'isVisible' => true
                     ]
                 ]
+            ],
+            [
+                'label'     => $translator->translate('Multe'),
+                'route'     => 'fines',
+                'icon'      => 'fa fa-file',
+                'resource'  => 'admin',
+                'isRouteJs' => true,
+                'pages'     => [
+                    [
+                        'label' => $translator->translate('Elenco'),
+                        'route' => 'fines',
+                        'isVisible' => true
+                    ],
+                ],
             ],
             [
                 'label' => $translator->translate('Configurazione'),
