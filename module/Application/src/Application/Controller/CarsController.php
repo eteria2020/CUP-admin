@@ -150,6 +150,9 @@ class CarsController extends AbstractActionController {
         $car = $this->carsService->getCarByPlate($plate);
         $disableInputStatusMaintenance = false;
 
+        $authorize = $this->getServiceLocator()->get('BjyAuthorize\Provider\Identity\ProviderInterface');
+        $roles = $authorize->getIdentityRoles();
+
         if (is_null($car)) {
             $this->getResponse()->setStatusCode(Response::STATUS_CODE_404);
             return false;
@@ -179,6 +182,11 @@ class CarsController extends AbstractActionController {
         if ($this->getRequest()->isPost()) {
             $postData = $this->getRequest()->getPost()->toArray();
             $postData['car']['plate'] = $car->getPlate();
+
+            if(!isset($postData['car']['fleet'])) {
+                $postData['car']['fleet'] = $car->getFleet()->getId();
+            }
+
             $form->setData($postData);
             //$form->get('car')->remove('fleet'); // setValue($car->getFleet()->getId());
             $form->getInputFilter()->get('location')->setRequired(false);
@@ -202,7 +210,8 @@ class CarsController extends AbstractActionController {
         $view = new ViewModel([
             'car' => $car,
             'carForm' => $form,
-            'disableInputStatusMaintenance' => $disableInputStatusMaintenance
+            'disableInputStatusMaintenance' => $disableInputStatusMaintenance,
+            'roles' => $roles
         ]);
         $view->setTerminal(true);
         return $view;
