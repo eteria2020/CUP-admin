@@ -12,6 +12,7 @@ use SharengoCore\Entity\Cars;
 use SharengoCore\Entity\CarsMaintenance;
 use SharengoCore\Entity\Commands;
 use SharengoCore\Service\CarsService;
+use SharengoCore\Service\TripsService;
 use SharengoCore\Service\CarsDamagesService;
 use SharengoCore\Service\CommandsService;
 use SharengoCore\Utility\CarStatus;
@@ -51,6 +52,11 @@ class CarsController extends AbstractActionController {
      * @var Container
      */
     private $datatableFiltersSessionContainer;
+    
+    /**
+     * @var TripsService
+     */
+    private $tripsService;
 
     /**
      * @param CarsService $carsService
@@ -60,13 +66,14 @@ class CarsController extends AbstractActionController {
      * @param Container $datatableFiltersSessionContainer
      */
     public function __construct(
-    CarsService $carsService, CommandsService $commandsService, Form $carForm, HydratorInterface $hydrator, Container $datatableFiltersSessionContainer
+    CarsService $carsService, CommandsService $commandsService, Form $carForm, HydratorInterface $hydrator, Container $datatableFiltersSessionContainer, TripsService $tripsService
     ) {
         $this->carsService = $carsService;
         $this->commandsService = $commandsService;
         $this->carForm = $carForm;
         $this->hydrator = $hydrator;
         $this->datatableFiltersSessionContainer = $datatableFiltersSessionContainer;
+        $this->tripsService = $tripsService;
     }
 
     /**
@@ -213,6 +220,9 @@ class CarsController extends AbstractActionController {
         $car = $this->carsService->getCarByPlate($plate);
         $commands = Commands::getCommandCodes();
         unset($commands[Commands::CLOSE_TRIP]);
+        if(count($this->tripsService->getTripsByPlateNotEnded($car->getPlate()))>0){
+            unset($commands[Commands::START_TRIP]);
+        }
         $view = new ViewModel([
             'commands' => $commands,
             'car' => $car,
