@@ -277,7 +277,7 @@ class CarsController extends AbstractActionController {
     }
 
     public function sendCommandAction() {
-        error:log("sendCommandAction log");
+        error_log("sendCommandAction log");
         $translator = $this->TranslatorPlugin();
         $plate = $this->params()->fromRoute('plate', 0);
         $commandIndex = $this->params()->fromRoute('command', 0);
