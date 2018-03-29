@@ -30,23 +30,32 @@ function abcfd() {
     var callController = function (key) {
         var RFID = null;
         var plate = "<?= $this->car->getPlate(); ?>";
+        console.log("click comando");
         if (key == 13) {
+            console.log("selezionato apri porte");
             if(<?= $this->nTripOpen ?> == 0){
+                console.log("non ci sono altre corse");
                 var txt_message = prompt("Inserire RFID", "");
                 RFID = txt_message;
                 $.ajax({
                     url: "/cars/send-command/" +plate+ "/" +key+ "/"+RFID,
                 });
             }else{
+                console.log("corse aperte nonc chiamata");
                 alert("Per questa targa è presente una corsa ancora aperta");
             }
         }else{
+            console.log("altro comando");
             if(confirm('<?= $this->translate("Sei sicuro di voler eseguire questo comando?"); ?>')){
+                console.log("commando passa");
                 $.ajax({
                     url: "/cars/send-command/" +plate+ "/" +key,
                 });
+            }else{
+                console.log("comando annullato");
             }
         }
+        console.log("fine");
     }
 
 </script>
