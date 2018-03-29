@@ -26,22 +26,27 @@ function abcfd() {
 
 <script>
 
+    
     var callController = function (key) {
         var RFID = null;
-        
-            if (key == 13) {
+        var plate = "<?= $this->car->getPlate(); ?>";
+        if (key == 13) {
+            if(<?= $this->nTripOpen ?> == 0){
                 var txt_message = prompt("Inserire RFID", "");
                 RFID = txt_message;
-            } else {
-                confirm('<?= $this->translate("Sei sicuro di voler eseguire questo comando?"); ?>');
+                $.ajax({
+                    url: "/cars/send-command/" +plate+ "/" +key+ "/"+RFID,
+                });
+            }else{
+                alert("Per questa targa è presente una corsa ancora aperta");
             }
-            //ajax call
-            var plate = "<?= $this->car->getPlate(); ?>";
-            $.ajax({
-                url: "/cars/send-command/" +plate+ "/" +key+ "/"+RFID,
-            });
-        
-
+        }else{
+            if(confirm('<?= $this->translate("Sei sicuro di voler eseguire questo comando?"); ?>')){
+                $.ajax({
+                    url: "/cars/send-command/" +plate+ "/" +key,
+                });
+        }
     }
+    
 
 </script>
