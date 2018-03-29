@@ -54,7 +54,7 @@ class CarsController extends AbstractActionController {
 
     /**
      *
-     * @var string 
+     * @var string[] 
      */
     private $roles;
 
@@ -112,6 +112,9 @@ class CarsController extends AbstractActionController {
     }
 
     public function addAction() {
+        if($this->roles[0]!='superadmin') {
+            $this->redirect()->toRoute('cars');
+        }
         $translator = $this->TranslatorPlugin();
         $form = $this->carForm;
         $form->setStatus([CarStatus::OPERATIVE => CarStatus::OPERATIVE]);
