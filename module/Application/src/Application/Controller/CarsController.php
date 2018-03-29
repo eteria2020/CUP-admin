@@ -112,6 +112,7 @@ class CarsController extends AbstractActionController {
             $postData = $this->getRequest()->getPost()->toArray();
             $form->setData($postData);
             $form->getInputFilter()->get('location')->setRequired(false);
+            $form->getInputFilter()->get('motivation')->setRequired(false);
 
             if ($form->isValid()) {
 
