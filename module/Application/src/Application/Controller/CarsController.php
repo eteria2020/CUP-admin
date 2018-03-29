@@ -220,12 +220,13 @@ class CarsController extends AbstractActionController {
         $car = $this->carsService->getCarByPlate($plate);
         $commands = Commands::getCommandCodes();
         unset($commands[Commands::CLOSE_TRIP]);
-        if(count($this->tripsService->getTripsByPlateNotEnded($car->getPlate()))>0){
+        /*if(count($this->tripsService->getTripsByPlateNotEnded($car->getPlate()))>0){
             unset($commands[Commands::START_TRIP]);
-        }
+        }*/
         $view = new ViewModel([
             'commands' => $commands,
             'car' => $car,
+            'nTripOpen' => count($this->tripsService->getTripsByPlateNotEnded($car->getPlate()))
         ]);
         $view->setTerminal(true);
         return $view;
