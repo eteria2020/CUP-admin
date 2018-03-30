@@ -56,11 +56,6 @@ $this->headScript()->appendFile($this->basePath() .'/js/extra-payments.js?v=1.5'
                 <button id="js-extra-payment" class="btn btn-success sng-faded"><?= $this->translate("Effettua pagamento"); ?></button>
             </div>
         </div>
-        <div id="disableuserspan" style="margin-top:10px; display: none">
-           <form class="portlet-body" action="" method="post" id="form_deactive_user"  target="_blank">
-               <input id="js-reactivate" class="btn btn-success" type="submit" onclick="$('#form_deactive_user').attr('action','/customers/deactivate/'+$('#customer').val());deactivate(event);clearFields();$('#disableuserspan').hide();" value="Disabilita manualmente">
-           </form>
-        </div>
 
     </div>
 </div>

@@ -2050,7 +2050,7 @@ return [
                         'isVisible' => true
                     ],
                     [
-                        'label' => $translator->translate('Extra falliti'),
+                        'label' => $translator->translate('Elenco Extra'),
                         'route' => 'payments/failed-extra',
                         'isVisible' => true
                     ],

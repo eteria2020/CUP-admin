@@ -179,7 +179,7 @@ class PaymentsController extends AbstractActionController
             $filters['columnValueWithoutLike'] = null;
         }
         $dataDataTable = $this->extraPaymentsService->getFailedExtraData($filters);
-        $totalFailedExtra = $this->extraPaymentsService->getTotalFailedExtra();
+        $totalFailedExtra = $this->extraPaymentsService->getTotalExtra();
         $recordsFiltered = $this->getRecordsFiltered($filters, $totalFailedExtra, "extra");
 
         return new JsonModel([
@@ -226,10 +226,6 @@ class PaymentsController extends AbstractActionController
         $id = (int)$this->params()->fromRoute('id', 0);
 
         $extraPayment = $this->extraPaymentsService->getExtraPaymentById($id);
-
-        if (!$extraPayment->isWrongExtra()) {
-            return $this->notFoundAction();
-        }
 
         $extraPaymentTries = $extraPayment->getExtraPaymentTries();
 

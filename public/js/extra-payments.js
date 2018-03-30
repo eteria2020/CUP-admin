@@ -207,7 +207,7 @@ function sendPaymentRequest(customerId, fleetId, type, penalty, reasons, amounts
     }).fail(function (data) {
         var message = JSON.parse(data.responseText).error;
         alert(message);
-        $('#disableuserspan').show();
+        viewTries();
         //clearFields();
     });
 }
@@ -406,4 +406,9 @@ function togglePaymentEnabled(on)
 function setCurrentPaymentType()
 {
     currentType = $("#type option:selected").text();
+}
+
+function viewTries()
+{
+    
 }

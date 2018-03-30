@@ -68,32 +68,46 @@ $(function() {
             }
 
             aoData.push({ "name": "fixedColumn", "value": "e.status"});
-            aoData.push({ "name": "fixedValue", "value": "wrong_payment"});
             aoData.push({ "name": "fixedLike", "value": false});
         },
         "order": [[dataTableVars.iSortCol_0, dataTableVars.sSortDir_0]],
         "columns": [
             {data: "e.generatedTs"},
             {data: "cu.id"},
-            {data: "cu.name"},
-            {data: "cu.surname"},
+            {data: "cu.name_surname"},
             {data: "cu.mobile"},
-            {data: "cu.email"},
+            {data: "e.reasons"},
             {data: "e.totalCost"},
+            {data: "e.payed"},
             {data: "button"}
         ],
         "columnDefs": [
             {
-                targets: [1, 2, 3],
+                targets: [1, 2],
                 "render": function (data, type, row) {
                     return '<a href="/customers/edit/' + row.cu.id +
-                        '" title="' + translate("customersDetailId") + ' ' + row.cu.name +
-                        ' ' + row.cu.surname + ' ">' + data + '</a>';
+                        '" title="' + translate("customersDetailId") + ' ' + row.cu.name_surname + ' ">' + data + '</a>';
+                }
+            },
+            {
+                targets: 4,
+                "render": function (data, type, row) {
+                    if (typeof row.e.reasons[0] === 'undefined' || row.e.reasons[0] === null) {
+                        return '';
+                    }else{
+                        return row.e.reasons[0][0][0].substring(0, 20) + '...';
+                    }
+                }
+            },
+            {
+                targets: 5,
+                className: "sng-dt-right sng-no-wrap",
+                "render": function (data, type, row) {
+                    return (row.e.payed) ? 'Si' : 'No';
                 }
             },
             {
                 targets: 6,
-                className: "sng-dt-right sng-no-wrap",
                 "render": function (data, type, row) {
                     return renderAmount(data);
                 }
@@ -105,7 +119,7 @@ $(function() {
                 sortable: false,
                 render: function (data) {
                     return '<div class="btn-group">' +
-                        '<a href="/payments/retry-extra/' + data + '" class="btn btn-default">' + translate("continue") + '</a> ' +
+                        '<a href="/payments/retry-extra/' + data + '" class="btn btn-default">' + translate("details") + '</a> ' +
                         '</div>';
                 }
             }
