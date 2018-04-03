@@ -20,12 +20,14 @@ class PaymentsControllerFactory implements FactoryInterface
         $cartasiCustomerPayments = $sharedServiceManager->get('Cartasi\Service\CartasiCustomerPayments');
         $extraPaymentsService = $sharedServiceManager->get('SharengoCore\Service\ExtraPaymentsService');
         $extraPaymentTriesService = $sharedServiceManager->get('SharengoCore\Service\ExtraPaymentTriesService');
+        $deactivationService = $sharedServiceManager->get('SharengoCore\Service\CustomerDeactivationService');
         $penaltiesService = $sharedServiceManager->get('SharengoCore\Service\PenaltiesService');
         $fleetService = $sharedServiceManager->get('SharengoCore\Service\FleetService');
         $recapService = $sharedServiceManager->get('SharengoCore\Service\RecapService');
         $faresService = $sharedServiceManager->get('SharengoCore\Service\FaresService');
         $faresForm = $sharedServiceManager->get('FaresForm');
         $datatablesSessionNamespace = $sharedServiceManager->get('Configuration')['session']['datatablesNamespace'];
+        
 
         // Creating DataTable Filters Session Container
         $datatableFiltersSessionContainer = new Container($datatablesSessionNamespace);
@@ -43,7 +45,8 @@ class PaymentsControllerFactory implements FactoryInterface
             $recapService,
             $faresService,
             $faresForm,
-            $datatableFiltersSessionContainer
+            $datatableFiltersSessionContainer,
+            $deactivationService
         );
     }
 }

@@ -9,6 +9,7 @@ use SharengoCore\Service\TripPaymentsService;
 use SharengoCore\Service\PaymentsService;
 use SharengoCore\Service\CustomersService;
 use SharengoCore\Service\ExtraPaymentsService;
+use SharengoCore\Service\CustomerDeactivationService;
 use SharengoCore\Service\ExtraPaymentTriesService;
 use Cartasi\Service\CartasiContractsService;
 use Cartasi\Service\CartasiCustomerPayments;
@@ -88,6 +89,11 @@ class PaymentsController extends AbstractActionController
      * @var Container
      */
     private $datatableFiltersSessionContainer;
+    
+    /**
+     * @var CustomerDeactivationService
+     */
+    private $deactivationService;
 
     public function __construct(
         TripPaymentsService $tripPaymentsService,
@@ -102,7 +108,8 @@ class PaymentsController extends AbstractActionController
         RecapService $recapService,
         FaresService $faresService,
         FaresForm $faresForm,
-        Container $datatableFiltersSessionContainer
+        Container $datatableFiltersSessionContainer,
+        CustomerDeactivationService $deactivationService
     ) {
         $this->tripPaymentsService = $tripPaymentsService;
         $this->paymentsService = $paymentsService;
@@ -117,6 +124,7 @@ class PaymentsController extends AbstractActionController
         $this->faresService = $faresService;
         $this->faresForm = $faresForm;
         $this->datatableFiltersSessionContainer = $datatableFiltersSessionContainer;
+        $this->deactivationService = $deactivationService;
     }
 
     /**
@@ -275,7 +283,8 @@ class PaymentsController extends AbstractActionController
 
         if ($extraPayment->isWrongExtra()) {
             // the second parameter is needed to avoid sending an email to the customer
-            $cartasiResponse = $this->paymentsService->tryExtraPayment($extraPayment, $webuser, true, false, false, true);
+            //$cartasiResponse = $this->paymentsService->tryExtraPayment($extraPayment, $webuser, true, false, false, true);
+            $cartasiResponse = $this->paymentsService->tryExtraPayment($extraPayment, $webuser, true, false, false, false);
 
             
             if ($cartasiResponse->getOutcome() === 'OK') {
@@ -375,7 +384,6 @@ class PaymentsController extends AbstractActionController
                 ]);
             }
 
-
             $amount = 0;
             foreach ($amounts as $value) {
                 $amount += intval($value);
@@ -401,10 +409,14 @@ class PaymentsController extends AbstractActionController
                 $extraPaymentTry = $this->extraPaymentTriesService->createExtraPaymentTry(
                         $extraPayment, $response->getOutcome(), $response->getTransaction(), $this->identity()
                 );
+                
+                //disable customer
+                $this->deactivationService->deactivateForExtraPaymentTry($customer, $extraPaymentTry);
+                
                 $this->response->setStatusCode(402);
                 return new JsonModel([
                     'error' => $translator->translate('Il tentativo di pagamento non è andato a buon fine. Il cliente è stato notificato da Cartasi'),
-                    'extraPaymentTry' => json_encode($extraPaymentTry)
+                    //'extraPaymentTry' => json_encode($extraPaymentTry)
                     //'extraPaymentTry' => $extraPaymentTry
                 ]);
             }
@@ -418,7 +430,7 @@ class PaymentsController extends AbstractActionController
             
             return new JsonModel([
                 'message' => $translator->translate('Il tentativo di pagamento è andato a buon fine. Il cliente è stato notificato da Cartasi'),
-                'extraPaymentTry' => json_encode($extraPaymentTry)
+                //'extraPaymentTry' => json_encode($extraPaymentTry)
             ]);
         } catch (\Exception $e) {
             $this->response->setStatusCode(500);
