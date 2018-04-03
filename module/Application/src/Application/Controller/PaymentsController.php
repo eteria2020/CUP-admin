@@ -402,12 +402,10 @@ class PaymentsController extends AbstractActionController
                         $extraPayment, $response->getOutcome(), $response->getTransaction(), $this->identity()
                 );
                 $this->response->setStatusCode(402);
-                $var = json_encode($extraPaymentTry, JSON_UNESCAPED_UNICODE);
-                $gfg = $extraPaymentTry->getId();
                 return new JsonModel([
                     'error' => $translator->translate('Il tentativo di pagamento non è andato a buon fine. Il cliente è stato notificato da Cartasi'),
                     'extraPaymentTry' => json_encode($extraPaymentTry)
-                    //'extraPaymentTry' => "culo"
+                    //'extraPaymentTry' => $extraPaymentTry
                 ]);
             }
             
