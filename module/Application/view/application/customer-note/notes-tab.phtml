@@ -53,7 +53,7 @@
                             <tbody>
                                 <?php foreach ($this->notes as $note): ?>
                                 <tr>
-                                    <td class="sng-date-column"><?= $note->getInsertedTs()->format('d-m-Y H:i:s'); ?></td>
+                                    <td class="sng-date-column"><?= $note->getInsertedTs()->format('Y-m-d H:i:s'); ?></td>
                                     <td><?= $note->getWebuser()->getId() ?> - <?= $note->getWebuser()->getDisplayName() ?></td>
                                     <td><?= $note->getNote(); ?></td>
                                 </tr>
