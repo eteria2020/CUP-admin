@@ -207,7 +207,8 @@ function sendPaymentRequest(customerId, fleetId, type, penalty, reasons, amounts
     }).fail(function (data) {
         var message = JSON.parse(data.responseText).error;
         alert(message);
-        viewTries();
+        console.log(JSON.parse(data.responseText).extraPaymentTry);
+        //viewTries();
         //clearFields();
     });
 }
@@ -410,5 +411,10 @@ function setCurrentPaymentType()
 
 function viewTries()
 {
-    
+    $.ajax({
+        url: "/payments/retry-extra/" + $('#customer').val(),
+        success: function(data) {
+            console.log("----");
+        }
+    });
 }
