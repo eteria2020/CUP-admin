@@ -53,20 +53,28 @@ class CarsController extends AbstractActionController {
     private $datatableFiltersSessionContainer;
 
     /**
+     *
+     * @var string[] 
+     */
+    private $roles;
+
+    /**
      * @param CarsService $carsService
      * @param CommandsService $commandsService
      * @param Form $carForm
      * @param HydratorInterface $hydrator
      * @param Container $datatableFiltersSessionContainer
+     * @param string $roles
      */
     public function __construct(
-    CarsService $carsService, CommandsService $commandsService, Form $carForm, HydratorInterface $hydrator, Container $datatableFiltersSessionContainer
+    CarsService $carsService, CommandsService $commandsService, Form $carForm, HydratorInterface $hydrator, Container $datatableFiltersSessionContainer, $roles
     ) {
         $this->carsService = $carsService;
         $this->commandsService = $commandsService;
         $this->carForm = $carForm;
         $this->hydrator = $hydrator;
         $this->datatableFiltersSessionContainer = $datatableFiltersSessionContainer;
+        $this->roles = $roles;
     }
 
     /**
@@ -84,6 +92,7 @@ class CarsController extends AbstractActionController {
 
         return new ViewModel([
             'filters' => json_encode($sessionDatatableFilters),
+            'roles' => $this->roles,
         ]);
     }
 
@@ -103,6 +112,9 @@ class CarsController extends AbstractActionController {
     }
 
     public function addAction() {
+        if($this->roles[0]!='superadmin') {
+            $this->redirect()->toRoute('cars');
+        }
         $translator = $this->TranslatorPlugin();
         $form = $this->carForm;
         $form->setStatus([CarStatus::OPERATIVE => CarStatus::OPERATIVE]);
@@ -150,9 +162,6 @@ class CarsController extends AbstractActionController {
         $plate = $this->params()->fromRoute('plate', 0);
         $car = $this->carsService->getCarByPlate($plate);
         $disableInputStatusMaintenance = false;
-
-        $authorize = $this->getServiceLocator()->get('BjyAuthorize\Provider\Identity\ProviderInterface');
-        $roles = $authorize->getIdentityRoles();
 
         if (is_null($car)) {
             $this->getResponse()->setStatusCode(Response::STATUS_CODE_404);
@@ -212,7 +221,7 @@ class CarsController extends AbstractActionController {
             'car' => $car,
             'carForm' => $form,
             'disableInputStatusMaintenance' => $disableInputStatusMaintenance,
-            'roles' => $roles
+            'roles' => $this->roles
         ]);
         $view->setTerminal(true);
         return $view;

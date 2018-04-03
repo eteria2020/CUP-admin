@@ -64,9 +64,11 @@ $this->headScript()
                             </div>
                         </div>
                     </div>
+                    <?php if($this->roles[0]=="superadmin") { ?>
                     <div class="col-md-4">
                         <a href="<?= $this->url('cars/add'); ?>" class="btn green pull-right"><i class="fa fa-plus"></i> <?= $this->translate("Aggiungi Auto"); ?></a>
                     </div>
+                    <?php } ?>
                 </div>
 
                 <hr>
