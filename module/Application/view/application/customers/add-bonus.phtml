@@ -40,6 +40,13 @@ $this->headScript()
                             <?= $this->formRow($form->get('customer-bonus')->get('description')); ?>
                         </div>
                     </div>
+                    
+                    <div class="row">
+                        <div class="col-lg-8">
+                            <label><?= $this->translate("Note"); ?></label>
+                            <?= $this->formRow($form->get('customer-bonus')->get('note')); ?>
+                        </div>
+                    </div>
 
                     <div class="row" style="margin-top: 10px;">
                         <div class="col-lg-4">
