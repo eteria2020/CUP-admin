@@ -70,6 +70,7 @@ class CarsController extends AbstractActionController {
      * @param Form $carForm
      * @param HydratorInterface $hydrator
      * @param Container $datatableFiltersSessionContainer
+     * @param TripsService $tripsService
      * @param string $roles
      */
     public function __construct(
