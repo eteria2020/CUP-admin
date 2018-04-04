@@ -59,14 +59,21 @@ class CarsController extends AbstractActionController {
     private $tripsService;
 
     /**
+     *
+     * @var string[] 
+     */
+    private $roles;
+
+    /**
      * @param CarsService $carsService
      * @param CommandsService $commandsService
      * @param Form $carForm
      * @param HydratorInterface $hydrator
      * @param Container $datatableFiltersSessionContainer
+     * @param string $roles
      */
     public function __construct(
-    CarsService $carsService, CommandsService $commandsService, Form $carForm, HydratorInterface $hydrator, Container $datatableFiltersSessionContainer, TripsService $tripsService
+    CarsService $carsService, CommandsService $commandsService, Form $carForm, HydratorInterface $hydrator, Container $datatableFiltersSessionContainer, TripsService $tripsService, $roles
     ) {
         $this->carsService = $carsService;
         $this->commandsService = $commandsService;
@@ -74,6 +81,7 @@ class CarsController extends AbstractActionController {
         $this->hydrator = $hydrator;
         $this->datatableFiltersSessionContainer = $datatableFiltersSessionContainer;
         $this->tripsService = $tripsService;
+        $this->roles = $roles;
     }
 
     /**
@@ -91,6 +99,7 @@ class CarsController extends AbstractActionController {
 
         return new ViewModel([
             'filters' => json_encode($sessionDatatableFilters),
+            'roles' => $this->roles,
         ]);
     }
 
@@ -110,6 +119,9 @@ class CarsController extends AbstractActionController {
     }
 
     public function addAction() {
+        if($this->roles[0]!='superadmin') {
+            $this->redirect()->toRoute('cars');
+        }
         $translator = $this->TranslatorPlugin();
         $form = $this->carForm;
         $form->setStatus([CarStatus::OPERATIVE => CarStatus::OPERATIVE]);
@@ -119,6 +131,7 @@ class CarsController extends AbstractActionController {
             $postData = $this->getRequest()->getPost()->toArray();
             $form->setData($postData);
             $form->getInputFilter()->get('location')->setRequired(false);
+            $form->getInputFilter()->get('motivation')->setRequired(false);
 
             if ($form->isValid()) {
 
@@ -186,6 +199,11 @@ class CarsController extends AbstractActionController {
         if ($this->getRequest()->isPost()) {
             $postData = $this->getRequest()->getPost()->toArray();
             $postData['car']['plate'] = $car->getPlate();
+
+            if(!isset($postData['car']['fleet'])) {
+                $postData['car']['fleet'] = $car->getFleet()->getId();
+            }
+
             $form->setData($postData);
             //$form->get('car')->remove('fleet'); // setValue($car->getFleet()->getId());
             $form->getInputFilter()->get('location')->setRequired(false);
@@ -209,7 +227,8 @@ class CarsController extends AbstractActionController {
         $view = new ViewModel([
             'car' => $car,
             'carForm' => $form,
-            'disableInputStatusMaintenance' => $disableInputStatusMaintenance
+            'disableInputStatusMaintenance' => $disableInputStatusMaintenance,
+            'roles' => $this->roles
         ]);
         $view->setTerminal(true);
         return $view;

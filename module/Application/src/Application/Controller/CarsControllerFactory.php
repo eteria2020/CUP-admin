@@ -30,6 +30,8 @@ class CarsControllerFactory implements FactoryInterface
 
         // Creating DataTable Filters Session Container
         $datatableFiltersSessionContainer = new Container($datatablesSessionNamespace);
+        $authorize = $sharedServiceLocator->get('BjyAuthorize\Provider\Identity\ProviderInterface');
+        $roles = $authorize->getIdentityRoles();
 
         return new CarsController(
             $carsService,
@@ -37,7 +39,8 @@ class CarsControllerFactory implements FactoryInterface
             $carForm,
             $hydrator,
             $datatableFiltersSessionContainer,
-            $tripsService
+            $tripsService,
+            $roles
         );
     }
 }
