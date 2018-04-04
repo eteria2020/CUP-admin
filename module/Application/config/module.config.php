@@ -560,21 +560,6 @@ return [
                             ],
                         ],
                     ],
-                    /*'send-command' => [
-                        'type'    => 'Segment',
-                        'options' => [
-                            'route'    => '/send-command/:plate/:command/:txtArg1',
-                            'constraints' => [
-                                'plate' => '[a-zA-Z0-9]*',
-                                'command' => '[0-9]*'
-                            ],
-                            'defaults' => [
-                                '__NAMESPACE__' => 'Application\Controller',
-                                'controller'    => 'Cars',
-                                'action'        => 'send-command',
-                            ],
-                        ],
-                    ],*/
                     'send-command' => [
                         'type'    => 'Segment',
                         'options' => [
