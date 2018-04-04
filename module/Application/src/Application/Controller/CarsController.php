@@ -12,6 +12,7 @@ use SharengoCore\Entity\Cars;
 use SharengoCore\Entity\CarsMaintenance;
 use SharengoCore\Entity\Commands;
 use SharengoCore\Service\CarsService;
+use SharengoCore\Service\TripsService;
 use SharengoCore\Service\CarsDamagesService;
 use SharengoCore\Service\CommandsService;
 use SharengoCore\Utility\CarStatus;
@@ -51,6 +52,11 @@ class CarsController extends AbstractActionController {
      * @var Container
      */
     private $datatableFiltersSessionContainer;
+    
+    /**
+     * @var TripsService
+     */
+    private $tripsService;
 
     /**
      *
@@ -64,16 +70,18 @@ class CarsController extends AbstractActionController {
      * @param Form $carForm
      * @param HydratorInterface $hydrator
      * @param Container $datatableFiltersSessionContainer
+     * @param TripsService $tripsService
      * @param string $roles
      */
     public function __construct(
-    CarsService $carsService, CommandsService $commandsService, Form $carForm, HydratorInterface $hydrator, Container $datatableFiltersSessionContainer, $roles
+    CarsService $carsService, CommandsService $commandsService, Form $carForm, HydratorInterface $hydrator, Container $datatableFiltersSessionContainer, TripsService $tripsService, $roles
     ) {
         $this->carsService = $carsService;
         $this->commandsService = $commandsService;
         $this->carForm = $carForm;
         $this->hydrator = $hydrator;
         $this->datatableFiltersSessionContainer = $datatableFiltersSessionContainer;
+        $this->tripsService = $tripsService;
         $this->roles = $roles;
     }
 
@@ -232,9 +240,13 @@ class CarsController extends AbstractActionController {
         $car = $this->carsService->getCarByPlate($plate);
         $commands = Commands::getCommandCodes();
         unset($commands[Commands::CLOSE_TRIP]);
+        /*if(count($this->tripsService->getTripsByPlateNotEnded($car->getPlate()))>0){
+            unset($commands[Commands::START_TRIP]);
+        }*/
         $view = new ViewModel([
             'commands' => $commands,
             'car' => $car,
+            'nTripOpen' => count($this->tripsService->getTripsByPlateNotEnded($car->getPlate()))
         ]);
         $view->setTerminal(true);
         return $view;
@@ -299,20 +311,24 @@ class CarsController extends AbstractActionController {
         $translator = $this->TranslatorPlugin();
         $plate = $this->params()->fromRoute('plate', 0);
         $commandIndex = $this->params()->fromRoute('command', 0);
+        
+        $intArg1 = $this->params()->fromPost('intArg1') != null ? $this->params()->fromPost('intArg1') : null;
+        $intArg2 = $this->params()->fromPost('intArg2') != null ? $this->params()->fromPost('intArg2') : null;
+        $txtArg1 = $this->params()->fromPost('txtArg1') != null ? $this->params()->fromPost('txtArg1') : null;
+        $txtArg2 = $this->params()->fromPost('txtArg2') != null ? $this->params()->fromPost('txtArg2') : null;
+        $ttl = $this->params()->fromPost('ttl') != null ? $this->params()->fromPost('ttl') : null;
+        
         $car = $this->carsService->getCarByPlate($plate);
 
         if (is_null($car)) {
             $this->getResponse()->setStatusCode(Response::STATUS_CODE_404);
-
             return false;
         }
 
         try {
-
-            $this->commandsService->sendCommand($car, $commandIndex, $this->identity());
+            $this->commandsService->sendCommand($car, $commandIndex, $this->identity(), $intArg1, $intArg2,  $txtArg1, $txtArg2, $ttl);
             $this->flashMessenger()->addSuccessMessage($translator->translate('Comando eseguito con successo'));
         } catch (\Exception $e) {
-
             $this->flashMessenger()->addErrorMessage($translator->translate('Errore nell\'esecuzione del comando'));
         }
 
