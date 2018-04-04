@@ -560,7 +560,7 @@ return [
                             ],
                         ],
                     ],
-                    'send-command' => [
+                    /*'send-command' => [
                         'type'    => 'Segment',
                         'options' => [
                             'route'    => '/send-command/:plate/:command/:txtArg1',
@@ -574,8 +574,8 @@ return [
                                 'action'        => 'send-command',
                             ],
                         ],
-                    ],
-                    /*'send-command' => [
+                    ],*/
+                    'send-command' => [
                         'type'    => 'Segment',
                         'options' => [
                             'route'    => '/send-command/:plate/:command',
@@ -585,7 +585,7 @@ return [
                                 'action'        => 'send-command',
                             ],
                         ],
-                    ],*/
+                    ],
                     'ajax-tab-edit' => [
                         'type'    => 'Segment',
                         'options' => [

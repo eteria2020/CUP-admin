@@ -312,11 +312,11 @@ class CarsController extends AbstractActionController {
         $plate = $this->params()->fromRoute('plate', 0);
         $commandIndex = $this->params()->fromRoute('command', 0);
         
-        $intArg1 = $this->params()->fromRoute('intArg1', 0) != null ? $this->params()->fromRoute('intArg1', 0) : null;
-        $intArg2 = $this->params()->fromRoute('intArg2', 0) != null ? $this->params()->fromRoute('intArg2', 0) : null;
-        $txtArg1 = $this->params()->fromRoute('txtArg1', 0) != null ? $this->params()->fromRoute('txtArg1', 0) : null;
-        $txtArg2 = $this->params()->fromRoute('txtArg2', 0) != null ? $this->params()->fromRoute('txtArg2', 0) : null;
-        $ttl = $this->params()->fromRoute('ttl', 0) != null ? $this->params()->fromRoute('ttl', 0) : null;
+        $intArg1 = $this->params()->fromPost('intArg1') != null ? $this->params()->fromPost('intArg1') : null;
+        $intArg2 = $this->params()->fromPost('intArg2') != null ? $this->params()->fromPost('intArg2') : null;
+        $txtArg1 = $this->params()->fromPost('txtArg1') != null ? $this->params()->fromPost('txtArg1') : null;
+        $txtArg2 = $this->params()->fromPost('txtArg2') != null ? $this->params()->fromPost('txtArg2') : null;
+        $ttl = $this->params()->fromPost('ttl') != null ? $this->params()->fromPost('ttl') : null;
         
         $car = $this->carsService->getCarByPlate($plate);
 
