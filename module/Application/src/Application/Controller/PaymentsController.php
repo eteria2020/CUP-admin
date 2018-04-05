@@ -413,11 +413,12 @@ class PaymentsController extends AbstractActionController
                 //disable customer
                 $this->deactivationService->deactivateForExtraPaymentTry($customer, $extraPaymentTry);
                 
+                $extraTries = $this->encodeExtra($extraPaymentTry);
+                
                 $this->response->setStatusCode(402);
                 return new JsonModel([
                     'error' => $translator->translate('Il tentativo di pagamento non è andato a buon fine. Il cliente è stato notificato da Cartasi'),
-                    //'extraPaymentTry' => json_encode($extraPaymentTry)
-                    //'extraPaymentTry' => $extraPaymentTry
+                    'extraPaymentTry' => $extraTries
                 ]);
             }
             
@@ -428,9 +429,11 @@ class PaymentsController extends AbstractActionController
                     $extraPayment, $response->getOutcome(), $response->getTransaction(), $this->identity()
             );
             
+            $extraTries = $this->encodeExtra($extraPaymentTry);
+            
             return new JsonModel([
                 'message' => $translator->translate('Il tentativo di pagamento è andato a buon fine. Il cliente è stato notificato da Cartasi'),
-                //'extraPaymentTry' => json_encode($extraPaymentTry)
+                'extraPaymentTry' => $extraPaymentTry
             ]);
         } catch (\Exception $e) {
             $this->response->setStatusCode(500);
@@ -438,6 +441,18 @@ class PaymentsController extends AbstractActionController
                 'error' => $translator->translate('C\'è stato un errore durante la procedura di pagamento: ') . $e->getMessage()
             ]);
         }
+    }
+    
+    public function encodeExtra($extraPaymentTry) {
+        $array = array(
+            "dataTentativo" => $extraPaymentTry->getTs()->format('Y-m-d H:i:s'),
+            "webUser" => $extraPaymentTry->getWebuserName(),
+            "prodotto" => (null != $extraPaymentTry->getTransaction()) ? $extraPaymentTry->getTransaction()->getProductType() : 'n.d.',
+            "esito" => $extraPaymentTry->getOutcome(),
+            "risultato" => (null != $extraPaymentTry->getTransaction()) ? $extraPaymentTry->getTransaction()->getOutcome() : 'n.d.',
+            "messaggio" => (null != $extraPaymentTry->getTransaction()) ? $extraPaymentTry->getTransaction()->getMessage() : 'n.d.',
+        );
+        return json_encode($array);
     }
 
     public function recapAction()

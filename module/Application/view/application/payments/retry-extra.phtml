@@ -19,6 +19,7 @@ $customer = $this->customer;
             <?= $this->translate("RITENTA PAGEMENTO DI UN EXTRA"); ?>
         </h3>
         
+        <?php if($extraPayment->getStatus() != 'payed_correctly'){ ?>
         <div class="row">
             <div class="col-md-8">
                 <div class="form-inline">
@@ -31,6 +32,7 @@ $customer = $this->customer;
                 </div>
             </div>
         </div>
+        <?php } ?>
         
         <div class="row hidden" id="js-completed-message">
             <div class="col-md-12">
@@ -111,15 +113,46 @@ $customer = $this->customer;
                                     <div class="sng-info-box"><?= $customer->getEmail() ?></div>
                                 </div>
                             </div>
-
                             <div class="col-lg-3">
                                 <div class="form-group">
                                     <label><?= $this->translate("Costo"); ?></label>
                                     <div class="sng-info-box"><?= $extraPayment->getFormattedTotalCost() ?></div>
                                 </div>
                             </div>
+                            <div class="col-lg-3">
+                                <div class="form-group">
+                                    <label><?= $this->translate("Tipologia"); ?></label>
+                                    <div class="sng-info-box"><?= $extraPayment->getPaymentType() ?></div>
+                                </div>
+                            </div>
                         </div>
 
+                        <div class="row">
+                            <div class="col-lg-3">
+                                <div class="form-group">
+                                    <label><?= $this->translate("Reason"); ?></label>
+                                    <?php
+                                    $as = '';
+                                    foreach ($extraPayment->getReasons() as $reason){
+                                        $as .= $reason[0][0] . ' || ';
+                                    }
+                                    ?> 
+                                    <div class="sng-info-box"><?= rtrim($as,' || ') ?></div>
+                                </div>
+                            </div>
+                            <div class="col-lg-3">
+                                <div class="form-group">
+                                    <label><?= $this->translate("Data primo tentativo"); ?></label>
+                                    <div class="sng-info-box"><?= $extraPayment->getFirstExtraTryTs()->format('Y-m-d H:i:s') ?></div>
+                                </div>
+                            </div>
+                            <div class="col-lg-3">
+                                <div class="form-group">
+                                    <label><?= $this->translate("Stato"); ?></label>
+                                    <div class="sng-info-box"><?= $extraPayment->getStatus() ?></div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

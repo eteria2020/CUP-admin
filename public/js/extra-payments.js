@@ -208,7 +208,9 @@ function sendPaymentRequest(customerId, fleetId, type, penalty, reasons, amounts
         var message = JSON.parse(data.responseText).error;
         alert(message);
         //console.log("TEST DI extraPyament: " + JSON.parse(data.responseText).extraPaymentTry);
-        //viewTries();
+        //console.log("TEST DI extraPyament: " + JSON.parse(data.responseText).extraPaymentTry);
+        var extraPaymentTries = JSON.parse(data.responseText).extraPaymentTry;
+        viewTries(extraPaymentTries);
         //clearFields();
     });
 }
@@ -409,12 +411,13 @@ function setCurrentPaymentType()
     currentType = $("#type option:selected").text();
 }
 
-function viewTries()
+function viewTries(extraPaymentTries)
 {
-    $.ajax({
-        url: "/payments/retry-extra/" + $('#customer').val(),
-        success: function(data) {
-            console.log("----");
-        }
+    var extraTries = JSON.parse(extraPaymentTries);
+    console.log(extraPaymentTries);
+    $('#extraTries tr:last td').each(function (index) {
+        console.log( index + ": " + $( this ).text() );
+        $(this).html('yyyy');
     });
+    $('#extraTries').show();
 }

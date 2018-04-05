@@ -90,6 +90,10 @@ $(function() {
                 }
             },
             {
+                targets: 3,
+                sortable: false
+            },
+            {
                 targets: 4,
                 "render": function (data, type, row) {
                     if (typeof row.e.reasons[0] === 'undefined' || row.e.reasons[0] === null) {
@@ -109,7 +113,7 @@ $(function() {
             {
                 targets: 6,
                 "render": function (data, type, row) {
-                    return renderAmount(data);
+                    return renderAmount(row.e.totalCost);
                 }
             },
             {
