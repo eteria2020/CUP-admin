@@ -57,7 +57,7 @@ $this->headScript()->appendFile($this->basePath() .'/js/extra-payments.js?v=1.5'
             </div>
         </div>
 
-        <div id="extraTries">
+        <div id="extraTries" style="display:none">
             <hr>
             <div class="portlet box green">
                 <div class="portlet-title">
@@ -79,12 +79,12 @@ $this->headScript()->appendFile($this->basePath() .'/js/extra-payments.js?v=1.5'
                         </thead>
                         <tbody>
                             <tr>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
+                                <td id='date'></td>
+                                <td id='webuser'></td>
+                                <td id='product'></td>
+                                <td id='outcome'></td>
+                                <td id='result'></td>
+                                <td id='message'></td>
                             </tr>
                         </tbody>
                     </table>

@@ -433,7 +433,7 @@ class PaymentsController extends AbstractActionController
             
             return new JsonModel([
                 'message' => $translator->translate('Il tentativo di pagamento è andato a buon fine. Il cliente è stato notificato da Cartasi'),
-                'extraPaymentTry' => $extraPaymentTry
+                'extraPaymentTry' => $extraTries
             ]);
         } catch (\Exception $e) {
             $this->response->setStatusCode(500);
@@ -445,12 +445,12 @@ class PaymentsController extends AbstractActionController
     
     public function encodeExtra($extraPaymentTry) {
         $array = array(
-            "dataTentativo" => $extraPaymentTry->getTs()->format('Y-m-d H:i:s'),
+            "date" => $extraPaymentTry->getTs()->format('Y-m-d H:i:s'),
             "webUser" => $extraPaymentTry->getWebuserName(),
-            "prodotto" => (null != $extraPaymentTry->getTransaction()) ? $extraPaymentTry->getTransaction()->getProductType() : 'n.d.',
-            "esito" => $extraPaymentTry->getOutcome(),
-            "risultato" => (null != $extraPaymentTry->getTransaction()) ? $extraPaymentTry->getTransaction()->getOutcome() : 'n.d.',
-            "messaggio" => (null != $extraPaymentTry->getTransaction()) ? $extraPaymentTry->getTransaction()->getMessage() : 'n.d.',
+            "product" => (null != $extraPaymentTry->getTransaction()) ? $extraPaymentTry->getTransaction()->getProductType() : 'n.d.',
+            "outcome" => $extraPaymentTry->getOutcome(),
+            "result" => (null != $extraPaymentTry->getTransaction()) ? $extraPaymentTry->getTransaction()->getOutcome() : 'n.d.',
+            "message" => (null != $extraPaymentTry->getTransaction()) ? $extraPaymentTry->getTransaction()->getMessage() : 'n.d.',
         );
         return json_encode($array);
     }

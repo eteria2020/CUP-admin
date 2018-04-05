@@ -207,10 +207,8 @@ function sendPaymentRequest(customerId, fleetId, type, penalty, reasons, amounts
     }).fail(function (data) {
         var message = JSON.parse(data.responseText).error;
         alert(message);
-        //console.log("TEST DI extraPyament: " + JSON.parse(data.responseText).extraPaymentTry);
-        //console.log("TEST DI extraPyament: " + JSON.parse(data.responseText).extraPaymentTry);
         var extraPaymentTries = JSON.parse(data.responseText).extraPaymentTry;
-        viewTries(extraPaymentTries);
+        viewTries($.parseJSON(extraPaymentTries));
         //clearFields();
     });
 }
@@ -413,11 +411,12 @@ function setCurrentPaymentType()
 
 function viewTries(extraPaymentTries)
 {
-    var extraTries = JSON.parse(extraPaymentTries);
-    console.log(extraPaymentTries);
-    $('#extraTries tr:last td').each(function (index) {
-        console.log( index + ": " + $( this ).text() );
-        $(this).html('yyyy');
-    });
-    $('#extraTries').show();
+    $('#date').html(extraPaymentTries.date);
+    $('#webuser').html(extraPaymentTries.webUser);
+    $('#product').html(extraPaymentTries.product);
+    $('#outcome').html(extraPaymentTries.outcome);
+    $('#result').html(extraPaymentTries.result);
+    $('#message').html(extraPaymentTries.message);
+    
+    $('#extraTries').fadeIn();
 }
