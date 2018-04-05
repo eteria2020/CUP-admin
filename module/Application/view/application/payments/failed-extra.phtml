@@ -1,9 +1,11 @@
 <?php
-$this->headLink()->appendStylesheet('/js/datatables/plugins/bootstrap/dataTables.bootstrap.css');
+$this->headLink()->appendStylesheet('/js/datatables/plugins/bootstrap/dataTables.bootstrap.css')
+        ->appendStylesheet('/plugins/bootstrap-datepicker/css/datepicker3.css');
 $this->headScript()
     ->appendFile('/js/datatables/media/js/jquery.dataTables.min.js')
     ->appendFile('/js/datatables/plugins/bootstrap/dataTables.bootstrap.js')
     ->appendFile($this->basePath() . '/js/datatable-session-data.js')
+    ->appendFile('/plugins/bootstrap-datepicker/js/bootstrap-datepicker.js')
     ->appendFile($this->basePath() .'/js/failed-extra.js?v=2.7');
 ?>
 <div class="page-content-wrapper">
@@ -25,6 +27,8 @@ $this->headScript()
                                     <option value="select" selected>-- <?= $this->translate("Seleziona"); ?> --</option>
                                     <option value="cu.surname"><?= $this->translate("Nome Cognome"); ?></option>
                                     <option value="cu.id"><?= $this->translate("ID Cliente"); ?></option>
+                                    <option value="e.generatedTs"><?= $this->translate("Data pagamento"); ?></option>
+                                    <option value="e.reasons"><?= $this->translate("Reasons"); ?></option>
                                     <option value="cu.id"><?= $this->translate("Pagato SI"); ?></option>
                                     <option value="cu.id"><?= $this->translate("Pagato NO"); ?></option>
                                 </select>

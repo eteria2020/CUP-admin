@@ -175,11 +175,16 @@ $(function() {
         dataTableVars.column.val("select");
     });
 
+
+    var filterDate = false;
+    var filterDateField = "";
+        
     // Select Changed Action
     $(dataTableVars.column).change(function() {
         // Selected Column
         var value = $(this).val();
 
+/*
         // Column that need the standard "LIKE" search operator
         if (value === "cu.surname") {
             filterWithoutLike = false;
@@ -199,6 +204,36 @@ $(function() {
                     columnWithoutLike = value;
                     break;
             }
+        }
+*/
+
+        filterDate = false;
+        filterDateField = "";
+        dataTableVars.searchValue.show();
+        dataTableVars.searchValue.prop("disabled", false);
+        $(dataTableVars.searchValue).datepicker("remove");
+        
+        switch (value) {
+            case "e.generatedTs":
+                filterDate = true;
+                filterDateField = value;
+                dataTableVars.searchValue.val("");
+                $(dataTableVars.searchValue).datepicker({
+                    autoclose: true,
+                    format: "yyyy-mm-dd",
+                    weekStart: 1
+                });
+                break;
+            case "cu.id":
+                dataTableVars.searchValue.val("");
+                break;
+            case "e.reasons":
+                dataTableVars.searchValue.val();
+                break;
+            default:
+                dataTableVars.searchValue.val("");
+                dataTableVars.searchValue.prop("disabled", true);
+                break;
         }
     });
 
