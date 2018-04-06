@@ -72,6 +72,7 @@ $(function() {
         },
         "order": [[dataTableVars.iSortCol_0, dataTableVars.sSortDir_0]],
         "columns": [
+            {data: "e.id"},
             {data: "e.generatedTs"},
             {data: "cu.id"},
             {data: "cu.name_surname"},
@@ -83,18 +84,18 @@ $(function() {
         ],
         "columnDefs": [
             {
-                targets: [1, 2],
+                targets: [2, 3],
                 "render": function (data, type, row) {
                     return '<a href="/customers/edit/' + row.cu.id +
                         '" title="' + translate("customersDetailId") + ' ' + row.cu.name_surname + ' ">' + data + '</a>';
                 }
             },
             {
-                targets: 3,
+                targets: 4,
                 sortable: false
             },
             {
-                targets: 4,
+                targets: 5,
                 "render": function (data, type, row) {
                     if (typeof row.e.reasons[0] === 'undefined' || row.e.reasons[0] === null) {
                         return '';
@@ -104,20 +105,20 @@ $(function() {
                 }
             },
             {
-                targets: 5,
+                targets: 6,
                 className: "sng-dt-right sng-no-wrap",
                 "render": function (data, type, row) {
                     return (row.e.payed) ? 'Si' : 'No';
                 }
             },
             {
-                targets: 6,
+                targets: 7,
                 "render": function (data, type, row) {
                     return renderAmount(row.e.totalCost);
                 }
             },
             {
-                targets: 7,
+                targets: 8,
                 data: "button",
                 searchable: false,
                 sortable: false,
@@ -181,31 +182,9 @@ $(function() {
         
     // Select Changed Action
     $(dataTableVars.column).change(function() {
+        dataTableVars.searchValue.val("")
         // Selected Column
         var value = $(this).val();
-
-/*
-        // Column that need the standard "LIKE" search operator
-        if (value === "cu.surname") {
-            filterWithoutLike = false;
-            dataTableVars.searchValue.val("");
-            dataTableVars.searchValue.prop("disabled", false);
-            typeClean.hide();
-            dataTableVars.searchValue.show();
-        } else {
-            filterWithoutLike = true;
-            dataTableVars.searchValue.val("");
-            dataTableVars.searchValue.prop("disabled", false);
-            typeClean.hide();
-            dataTableVars.searchValue.show();
-
-            switch (value) {
-                case "cu.id":
-                    columnWithoutLike = value;
-                    break;
-            }
-        }
-*/
 
         filterDate = false;
         filterDateField = "";
@@ -225,10 +204,25 @@ $(function() {
                 });
                 break;
             case "cu.id":
-                dataTableVars.searchValue.val("");
-                break;
             case "e.reasons":
+            case "e.id":
                 dataTableVars.searchValue.val();
+                break;
+            case "cu.surname":
+            case "cu.email":
+                filterWithoutLike = false;
+                dataTableVars.searchValue.val("");
+                dataTableVars.searchValue.prop("disabled", false);
+                typeClean.hide();
+                dataTableVars.searchValue.show();
+                break;
+            case "e.status":
+                if($('#js-column option:selected').text() === "Pagato SI"){
+                    dataTableVars.searchValue.val("payed_correctly");
+                }else{
+                    dataTableVars.searchValue.val("wrong_payment");
+                }
+                dataTableVars.searchValue.prop("disabled", true);
                 break;
             default:
                 dataTableVars.searchValue.val("");
