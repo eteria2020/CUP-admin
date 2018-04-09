@@ -22,6 +22,7 @@
         var RFID = null;
         var plate = "<?= $this->car->getPlate(); ?>";
         if (key == 13) {
+               if(<?= $this->nTripOpen ?> == 0){
                 var txt_message = prompt("Inserire RFID", "");
                 RFID = txt_message;
                 if(RFID != null){
@@ -32,6 +33,9 @@
                     });
                 }
                 location.reload();
+            }else{
+                alert("Per questa targa è presente una corsa ancora aperta");
+            }
         }else{
             if(confirm('<?= $this->translate("Sei sicuro di voler eseguire questo comando?"); ?>')){
                 $.ajax({
