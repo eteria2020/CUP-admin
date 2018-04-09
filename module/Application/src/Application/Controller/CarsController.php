@@ -312,11 +312,11 @@ class CarsController extends AbstractActionController {
         $plate = $this->params()->fromRoute('plate', 0);
         $commandIndex = $this->params()->fromRoute('command', 0);
         
-        $intArg1 = $this->params()->fromPost('intArg1') != null ? $this->params()->fromPost('intArg1') : 0;
-        $intArg2 = $this->params()->fromPost('intArg2') != null ? $this->params()->fromPost('intArg2') : 0;
-        $txtArg1 = $this->params()->fromPost('txtArg1') != null ? $this->params()->fromPost('txtArg1') : '';
-        $txtArg2 = $this->params()->fromPost('txtArg2') != null ? $this->params()->fromPost('txtArg2') : '';
-        $ttl = $this->params()->fromPost('ttl') != null ? $this->params()->fromPost('ttl') : 0;
+        $intArg1 = trim($this->params()->fromPost('intArg1') != null ? $this->params()->fromPost('intArg1') : 0);
+        $intArg2 = trim($this->params()->fromPost('intArg2') != null ? $this->params()->fromPost('intArg2') : 0);
+        $txtArg1 = trim($this->params()->fromPost('txtArg1') != null ? $this->params()->fromPost('txtArg1') : '');
+        $txtArg2 = trim($this->params()->fromPost('txtArg2') != null ? $this->params()->fromPost('txtArg2') : '');
+        $ttl = trim($this->params()->fromPost('ttl') != null ? $this->params()->fromPost('ttl') : 0);
         
         $car = $this->carsService->getCarByPlate($plate);
 
@@ -326,7 +326,7 @@ class CarsController extends AbstractActionController {
         }
 
         try {
-            $this->commandsService->sendCommand($car, $commandIndex, $this->identity(), $intArg1, $intArg2,  $txtArg1, $txtArg2, $ttl);
+            //$this->commandsService->sendCommand($car, $commandIndex, $this->identity(), $intArg1, $intArg2,  $txtArg1, $txtArg2, $ttl);
             $this->flashMessenger()->addSuccessMessage($translator->translate('Comando eseguito con successo'));
         } catch (\Exception $e) {
             $this->flashMessenger()->addErrorMessage($translator->translate('Errore nell\'esecuzione del comando'));
