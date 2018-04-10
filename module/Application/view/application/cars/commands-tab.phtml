@@ -24,13 +24,13 @@
         if (key == 13) {
             if(<?= $this->nTripOpen ?> == 0){
                 console.log("viaggi ok call send command");
-                sendCommand();
+                sendCommand(key, plate);
             }else{
                 alert("Per questa targa è presente una corsa ancora aperta");
             }
         }else{
             if (key == 14) {
-                sendCommand();
+                sendCommand(key, plate);
             } else {
                 if (confirm('<?= $this->translate("Sei sicuro di voler eseguire questo comando?"); ?>')) {
                     $.ajax({
@@ -42,7 +42,7 @@
         }
     }
 
-    function sendCommand() {
+    function sendCommand(key, plate) {
         var txt_message = prompt("Inserire RFID", "");
         RFID = txt_message;
         if (RFID != null) {
