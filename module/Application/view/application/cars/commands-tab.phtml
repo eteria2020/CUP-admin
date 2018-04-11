@@ -19,7 +19,6 @@
 <script>
 
     var callController = function (key) {
-        var RFID = null;
         var plate = "<?= $this->car->getPlate(); ?>";
         if (key == 13) {
             if(<?= $this->nTripOpen ?> == 0){
@@ -34,15 +33,16 @@
             } else {
                 if (confirm('<?= $this->translate("Sei sicuro di voler eseguire questo comando?"); ?>')) {
                     $.ajax({
+                        type: 'POST',
                         url: "/cars/send-command/" + plate + "/" + key,
                     });
-                    location.reload();
                 }
             }
         }
     }
 
     function sendCommand(key, plate) {
+        var RFID = null;
         var txt_message = prompt("Inserire RFID", "");
         RFID = txt_message;
         if (RFID != null) {
@@ -52,7 +52,6 @@
                 url: "/cars/send-command/" + plate + "/" + key,
             });
         }
-        location.reload();
     }
 
 
