@@ -19,28 +19,38 @@
 <script>
 
     var callController = function (key) {
-        var RFID = null;
         var plate = "<?= $this->car->getPlate(); ?>";
         if (key == 13) {
             if(<?= $this->nTripOpen ?> == 0){
-                var txt_message = prompt("Inserire RFID", "");
-                RFID = txt_message;
-                if(RFID != null){
-                    $.ajax({
-                        type: 'POST',
-                        data: { txtArg1: RFID},
-                        url: "/cars/send-command/" +plate+ "/" +key,
-                    });
-                }
+                console.log("viaggi ok call send command");
+                sendCommand(key, plate);
             }else{
                 alert("Per questa targa è presente una corsa ancora aperta");
             }
         }else{
-            if(confirm('<?= $this->translate("Sei sicuro di voler eseguire questo comando?"); ?>')){
-                $.ajax({
-                    url: "/cars/send-command/" +plate+ "/" +key,
-                });
+            if (key == 14) {
+                sendCommand(key, plate);
+            } else {
+                if (confirm('<?= $this->translate("Sei sicuro di voler eseguire questo comando?"); ?>')) {
+                    $.ajax({
+                        type: 'POST',
+                        url: "/cars/send-command/" + plate + "/" + key,
+                    });
+                }
             }
+        }
+    }
+
+    function sendCommand(key, plate) {
+        var RFID = null;
+        var txt_message = prompt("Inserire RFID", "");
+        RFID = txt_message;
+        if (RFID != null) {
+            $.ajax({
+                type: 'POST',
+                data: {txtArg1: RFID},
+                url: "/cars/send-command/" + plate + "/" + key,
+            });
         }
     }
 
