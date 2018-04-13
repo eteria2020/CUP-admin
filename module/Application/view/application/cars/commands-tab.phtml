@@ -22,7 +22,6 @@
         var plate = "<?= $this->car->getPlate(); ?>";
         if (key == 13) {
             if(<?= $this->nTripOpen ?> == 0){
-                console.log("viaggi ok call send command");
                 sendCommand(key, plate);
             }else{
                 alert("Per questa targa è presente una corsa ancora aperta");
@@ -35,6 +34,9 @@
                     $.ajax({
                         type: 'POST',
                         url: "/cars/send-command/" + plate + "/" + key,
+                        success: function(){
+                            location.reload();
+                        }
                     });
                 }
             }
@@ -50,6 +52,9 @@
                 type: 'POST',
                 data: {txtArg1: RFID},
                 url: "/cars/send-command/" + plate + "/" + key,
+                success: function(){
+                    location.reload();
+                }
             });
         }
     }
