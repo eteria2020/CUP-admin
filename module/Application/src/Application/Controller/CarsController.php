@@ -322,7 +322,7 @@ class CarsController extends AbstractActionController {
         }
 
         try {
-            $this->commandsService->sendCommand($car, $commandIndex, $this->identity(), 0, 0, $txtArg1);
+            $this->commandsService->sendCommand($car, $commandIndex, $this->identity(), null, null, $txtArg1);
             $this->flashMessenger()->addSuccessMessage($translator->translate('Comando eseguito con successo'));
         } catch (\Exception $e) {
             $this->flashMessenger()->addErrorMessage($translator->translate('Errore nell\'esecuzione del comando'));
