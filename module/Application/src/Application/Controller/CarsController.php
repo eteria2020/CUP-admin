@@ -311,7 +311,6 @@ class CarsController extends AbstractActionController {
         $translator = $this->TranslatorPlugin();
         $plate = $this->params()->fromRoute('plate', 0);
         $commandIndex = $this->params()->fromRoute('command', 0);
-
         $txtArg1 = trim($this->params()->fromPost('txtArg1') != null ? $this->params()->fromPost('txtArg1') : '');
         
         $car = $this->carsService->getCarByPlate($plate);
