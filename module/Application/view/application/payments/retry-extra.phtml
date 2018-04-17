@@ -85,8 +85,8 @@ $customer = $this->customer;
                             </div>
                             <div class="col-lg-3">
                                 <div class="form-group">
-                                    <label><?= $this->translate("Data"); ?></label>
-                                    <div class="sng-info-box"><?= $extraPayment->getGeneratedTs()->format('Y-m-d H:i:s') ?></div>
+                                    <label><?= $this->translate("Email"); ?></label>
+                                    <div class="sng-info-box"><?= $customer->getEmail() ?></div>
                                 </div>
                             </div>
                             <div class="col-lg-3">
@@ -110,10 +110,22 @@ $customer = $this->customer;
                                     <div class="sng-info-box"><?= $customer->getMobile() ?></div>
                                 </div>
                             </div>
+                        </div>
+                        <div class="row">
                             <div class="col-lg-3">
                                 <div class="form-group">
-                                    <label><?= $this->translate("Email"); ?></label>
-                                    <div class="sng-info-box"><?= $customer->getEmail() ?></div>
+                                    <label><?= $this->translate("Data"); ?></label>
+                                    <div class="sng-info-box"><?= $extraPayment->getGeneratedTs()->format('Y-m-d H:i:s') ?></div>
+                                </div>
+                            </div>
+                            <div class="col-lg-3">
+                                <div class="form-group">
+                                    <label><?= $this->translate("Data primo tentativo"); ?></label>
+                                    <?php if(!is_null($extraPayment->getFirstExtraTryTs())){ ?>
+                                        <div class="sng-info-box"><?= $extraPayment->getFirstExtraTryTs()->format('Y-m-d H:i:s') ?></div>
+                                    <?php }else{ ?>
+                                        <div class="sng-info-box"> Non ancora effettuato </div>
+                                    <?php } ?>
                                 </div>
                             </div>
                             <div class="col-lg-3">
@@ -143,12 +155,7 @@ $customer = $this->customer;
                                     <div class="sng-info-box"><?= rtrim($as,' || ') ?></div>
                                 </div>
                             </div>
-                            <div class="col-lg-3">
-                                <div class="form-group">
-                                    <label><?= $this->translate("Data primo tentativo"); ?></label>
-                                    <div class="sng-info-box"><?= $extraPayment->getFirstExtraTryTs()->format('Y-m-d H:i:s') ?></div>
-                                </div>
-                            </div>
+                            
                             <div class="col-lg-3">
                                 <div class="form-group">
                                     <label><?= $this->translate("Stato"); ?></label>

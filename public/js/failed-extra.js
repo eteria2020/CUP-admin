@@ -84,7 +84,15 @@ $(function() {
         ],
         "columnDefs": [
             {
-                targets: [2, 3],
+                targets: 2,
+                "render": function (data, type, row) {
+                    return '<a href="/customers/edit/' + row.cu.id +
+                        '" title="' + translate("customersDetailId") + ' ' + row.cu.name_surname + ' ">' + data + '</a>';
+                }
+            },
+            {
+                targets: 3,
+                sortable: false,
                 "render": function (data, type, row) {
                     return '<a href="/customers/edit/' + row.cu.id +
                         '" title="' + translate("customersDetailId") + ' ' + row.cu.name_surname + ' ">' + data + '</a>';
@@ -114,7 +122,7 @@ $(function() {
             {
                 targets: 7,
                 "render": function (data, type, row) {
-                    return renderAmount(row.e.totalCost);
+                    return renderAmount(data);
                 }
             },
             {
