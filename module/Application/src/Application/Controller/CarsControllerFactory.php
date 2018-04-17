@@ -21,6 +21,7 @@ class CarsControllerFactory implements FactoryInterface
 
         $entityManager = $sharedServiceLocator->get('doctrine.entitymanager.orm_default');
         $carsService = $sharedServiceLocator->get('SharengoCore\Service\CarsService');
+        $tripsService = $sharedServiceLocator->get('SharengoCore\Service\TripsService');
         $commandsService = $sharedServiceLocator->get('SharengoCore\Service\CommandsService');
         $datatablesSessionNamespace = $sharedServiceLocator->get('Configuration')['session']['datatablesNamespace'];
 
@@ -29,13 +30,17 @@ class CarsControllerFactory implements FactoryInterface
 
         // Creating DataTable Filters Session Container
         $datatableFiltersSessionContainer = new Container($datatablesSessionNamespace);
+        $authorize = $sharedServiceLocator->get('BjyAuthorize\Provider\Identity\ProviderInterface');
+        $roles = $authorize->getIdentityRoles();
 
         return new CarsController(
             $carsService,
             $commandsService,
             $carForm,
             $hydrator,
-            $datatableFiltersSessionContainer
+            $datatableFiltersSessionContainer,
+            $tripsService,
+            $roles
         );
     }
 }

@@ -12,6 +12,7 @@ use SharengoCore\Entity\Cars;
 use SharengoCore\Entity\CarsMaintenance;
 use SharengoCore\Entity\Commands;
 use SharengoCore\Service\CarsService;
+use SharengoCore\Service\TripsService;
 use SharengoCore\Service\CarsDamagesService;
 use SharengoCore\Service\CommandsService;
 use SharengoCore\Utility\CarStatus;
@@ -51,6 +52,17 @@ class CarsController extends AbstractActionController {
      * @var Container
      */
     private $datatableFiltersSessionContainer;
+    
+    /**
+     * @var TripsService
+     */
+    private $tripsService;
+
+    /**
+     *
+     * @var string[] 
+     */
+    private $roles;
 
     /**
      * @param CarsService $carsService
@@ -58,15 +70,19 @@ class CarsController extends AbstractActionController {
      * @param Form $carForm
      * @param HydratorInterface $hydrator
      * @param Container $datatableFiltersSessionContainer
+     * @param TripsService $tripsService
+     * @param string $roles
      */
     public function __construct(
-    CarsService $carsService, CommandsService $commandsService, Form $carForm, HydratorInterface $hydrator, Container $datatableFiltersSessionContainer
+    CarsService $carsService, CommandsService $commandsService, Form $carForm, HydratorInterface $hydrator, Container $datatableFiltersSessionContainer, TripsService $tripsService, $roles
     ) {
         $this->carsService = $carsService;
         $this->commandsService = $commandsService;
         $this->carForm = $carForm;
         $this->hydrator = $hydrator;
         $this->datatableFiltersSessionContainer = $datatableFiltersSessionContainer;
+        $this->tripsService = $tripsService;
+        $this->roles = $roles;
     }
 
     /**
@@ -84,6 +100,7 @@ class CarsController extends AbstractActionController {
 
         return new ViewModel([
             'filters' => json_encode($sessionDatatableFilters),
+            'roles' => $this->roles,
         ]);
     }
 
@@ -103,6 +120,9 @@ class CarsController extends AbstractActionController {
     }
 
     public function addAction() {
+        if($this->roles[0]!='superadmin') {
+            $this->redirect()->toRoute('cars');
+        }
         $translator = $this->TranslatorPlugin();
         $form = $this->carForm;
         $form->setStatus([CarStatus::OPERATIVE => CarStatus::OPERATIVE]);
@@ -112,6 +132,7 @@ class CarsController extends AbstractActionController {
             $postData = $this->getRequest()->getPost()->toArray();
             $form->setData($postData);
             $form->getInputFilter()->get('location')->setRequired(false);
+            $form->getInputFilter()->get('motivation')->setRequired(false);
 
             if ($form->isValid()) {
 
@@ -179,6 +200,11 @@ class CarsController extends AbstractActionController {
         if ($this->getRequest()->isPost()) {
             $postData = $this->getRequest()->getPost()->toArray();
             $postData['car']['plate'] = $car->getPlate();
+
+            if(!isset($postData['car']['fleet'])) {
+                $postData['car']['fleet'] = $car->getFleet()->getId();
+            }
+
             $form->setData($postData);
             //$form->get('car')->remove('fleet'); // setValue($car->getFleet()->getId());
             $form->getInputFilter()->get('location')->setRequired(false);
@@ -202,7 +228,8 @@ class CarsController extends AbstractActionController {
         $view = new ViewModel([
             'car' => $car,
             'carForm' => $form,
-            'disableInputStatusMaintenance' => $disableInputStatusMaintenance
+            'disableInputStatusMaintenance' => $disableInputStatusMaintenance,
+            'roles' => $this->roles
         ]);
         $view->setTerminal(true);
         return $view;
@@ -213,9 +240,13 @@ class CarsController extends AbstractActionController {
         $car = $this->carsService->getCarByPlate($plate);
         $commands = Commands::getCommandCodes();
         unset($commands[Commands::CLOSE_TRIP]);
+        /*if(count($this->tripsService->getTripsByPlateNotEnded($car->getPlate()))>0){
+            unset($commands[Commands::START_TRIP]);
+        }*/
         $view = new ViewModel([
             'commands' => $commands,
             'car' => $car,
+            'nTripOpen' => count($this->tripsService->getTripsByPlateNotEnded($car->getPlate()))
         ]);
         $view->setTerminal(true);
         return $view;
@@ -280,23 +311,23 @@ class CarsController extends AbstractActionController {
         $translator = $this->TranslatorPlugin();
         $plate = $this->params()->fromRoute('plate', 0);
         $commandIndex = $this->params()->fromRoute('command', 0);
+
+        $txtArg1 = trim($this->params()->fromPost('txtArg1') != null ? $this->params()->fromPost('txtArg1') : '');
+        
         $car = $this->carsService->getCarByPlate($plate);
 
         if (is_null($car)) {
             $this->getResponse()->setStatusCode(Response::STATUS_CODE_404);
-
             return false;
         }
 
         try {
-
-            $this->commandsService->sendCommand($car, $commandIndex, $this->identity());
+            $this->commandsService->sendCommand($car, $commandIndex, $this->identity(), $txtArg1);
             $this->flashMessenger()->addSuccessMessage($translator->translate('Comando eseguito con successo'));
         } catch (\Exception $e) {
-
             $this->flashMessenger()->addErrorMessage($translator->translate('Errore nell\'esecuzione del comando'));
         }
-
+        
         $url = $this->url()->fromRoute('cars/edit', ['plate' => $car->getPlate()]) . '#commands';
         return $this->redirect()->toUrl($url);
     }

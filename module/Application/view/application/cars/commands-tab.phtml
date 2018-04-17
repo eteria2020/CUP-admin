@@ -5,13 +5,58 @@
 <div class="btn-group">
     <button type="button" class="btn btn-default"><?= $this->translate("Seleziona..."); ?></button>
     <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown"><i class="fa fa-angle-down"></i></button>
-    <ul class="dropdown-menu" role="menu">
-        <?php foreach($this->commands as $key => $command): ?>
+    <ul class="dropdown-menu" role="menu" id="menu">
+        <?php foreach ($this->commands as $key => $command): ?>
             <li>
-                <a href="<?= $this->url('cars/send-command', ['plate' => $this->car->getPlate(), 'command' => $key]); ?>" onclick="return confirm('<?= $this->translate("Sei sicuro di voler eseguire questo comando?"); ?>')">
+                <a onclick="callController(<?= $key ?>)">
                     <?= $command; ?>
                 </a>
             </li>
         <?php endforeach; ?>
     </ul>
 </div>
+
+<script>
+
+    var callController = function (key) {
+        var plate = "<?= $this->car->getPlate(); ?>";
+        if (key == 13) {
+            if(<?= $this->nTripOpen ?> == 0){
+                sendCommand(key, plate);
+            }else{
+                alert("Per questa targa è presente una corsa ancora aperta");
+            }
+        }else{
+            if (key == 14) {
+                sendCommand(key, plate);
+            } else {
+                if (confirm('<?= $this->translate("Sei sicuro di voler eseguire questo comando?"); ?>')) {
+                    $.ajax({
+                        type: 'POST',
+                        url: "/cars/send-command/" + plate + "/" + key,
+                        success: function(){
+                            location.reload();
+                        }
+                    });
+                }
+            }
+        }
+    }
+
+    function sendCommand(key, plate) {
+        var RFID = null;
+        var txt_message = prompt("Inserire RFID", "");
+        RFID = txt_message;
+        if (RFID != null) {
+            $.ajax({
+                type: 'POST',
+                data: {txtArg1: RFID},
+                url: "/cars/send-command/" + plate + "/" + key,
+                success: function(){
+                    location.reload();
+                }
+            });
+        }
+    }
+
+</script>

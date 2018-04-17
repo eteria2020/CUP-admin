@@ -23,6 +23,7 @@
                 <th><?= $this->translate("Valido Fino al"); ?></th>
                 <th><?= $this->translate("Tipologia"); ?></th>
                 <th><?= $this->translate("Descrizione"); ?></th>
+                <th><?= $this->translate("Note"); ?></th>
                 <th><?= $this->translate("Azioni"); ?></th>
             </tr>
             </thead>
@@ -37,6 +38,7 @@
                     <td><?= is_object($bonus->getValidTo()) ? $bonus->getValidTo()->format('d-m-Y H:i:s') : ''; ?></td>
                     <td style="font-weight: normal;"><?= $bonus->getType(); ?></td>
                     <td style="font-weight: normal;"><?= $bonus->getDescription(); ?></td>
+                    <td style="font-weight: normal;"><?= $bonus->getNote(); ?></td>
                     <td>
                         <?php if ($bonus->canBeDeleted()): ?>
                             <a href="javascript:void(0);" data-id="<?= $this->customer->getId(); ?>" data-bonus="<?= $bonus->getId(); ?>" class="btn btn-default" id="js-remove-bonus"><?= $this->translate("Elimina"); ?></a>

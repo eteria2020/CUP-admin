@@ -64,6 +64,14 @@ class CustomerBonusFieldset extends Fieldset implements InputFilterProviderInter
                 'class'    => 'form-control date-picker',
             ]
         ]);
+        $this->add([
+            'name'       => 'note',
+            'type'       => 'Zend\Form\Element\Text',
+            'attributes' => [
+                'id'       => 'note',
+                'class' => 'form-control',
+            ]
+        ]);
 
     }
 
@@ -139,7 +147,15 @@ class CustomerBonusFieldset extends Fieldset implements InputFilterProviderInter
                         ],
                     ],
                 ]
-            ]
+            ],
+            'note' => [
+                'required' => false,
+                'filters' => [
+                    [
+                        'name' => 'StringTrim',
+                    ]
+                ]
+            ],
         ];
     }
 

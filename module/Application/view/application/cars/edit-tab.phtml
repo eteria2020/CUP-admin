@@ -9,7 +9,6 @@ $form->get('car')->get('fleet')->setValue($this->car->getFleet()->getId());
         <?php echo $this->partial('partials/flash-messages.phtml', []); ?>
 
         <?= $this->form()->openTag($form); ?>
-
         <div class="row">
             <div class="col-lg-3">
                 <div class="form-group">
@@ -63,7 +62,13 @@ $form->get('car')->get('fleet')->setValue($this->car->getFleet()->getId());
             <div class="col-lg-2">
                 <div class="form-group">
                     <label for="name"><?= $this->translate("Flotta"); ?></label>
-                    <?= $this->formRow($form->get('car')->get('fleet')); ?>
+                    <?php 
+                    if($this->roles[0]=="superadmin") {
+                        echo $this->formRow($form->get('car')->get('fleet'));
+                    } else {
+                        echo $this->formRow($form->get('car')->get('fleet')->setAttribute('disabled', 'true'));
+                    }
+                    ?>
                 </div>
             </div>
             <div class="col-lg-2">
