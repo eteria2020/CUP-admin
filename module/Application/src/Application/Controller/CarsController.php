@@ -311,7 +311,6 @@ class CarsController extends AbstractActionController {
         $translator = $this->TranslatorPlugin();
         $plate = $this->params()->fromRoute('plate', 0);
         $commandIndex = $this->params()->fromRoute('command', 0);
-
         $txtArg1 = trim($this->params()->fromPost('txtArg1') != null ? $this->params()->fromPost('txtArg1') : '');
         
         $car = $this->carsService->getCarByPlate($plate);
@@ -322,7 +321,7 @@ class CarsController extends AbstractActionController {
         }
 
         try {
-            $this->commandsService->sendCommand($car, $commandIndex, $this->identity(), $txtArg1);
+            $this->commandsService->sendCommand($car, $commandIndex, $this->identity(), null, null, $txtArg1);
             $this->flashMessenger()->addSuccessMessage($translator->translate('Comando eseguito con successo'));
         } catch (\Exception $e) {
             $this->flashMessenger()->addErrorMessage($translator->translate('Errore nell\'esecuzione del comando'));
