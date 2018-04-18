@@ -204,8 +204,9 @@ function sendPaymentRequest(customerId, fleetId, type, penalty, reasons, amounts
     }).done(function (data) {
         alert(data.message);
         clearFields();
-        var extraPaymentTries = JSON.parse(data.responseText).extraPaymentTry;
-        viewTries($.parseJSON(extraPaymentTries));
+        //var extraPaymentTries = JSON.parse(data.responseText).extraPaymentTry;
+        //viewTries($.parseJSON(extraPaymentTries));
+        viewTries($.parseJSON(data.extraPaymentTry));
     }).fail(function (data) {
         var message = JSON.parse(data.responseText).error;
         alert(message);
