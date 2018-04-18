@@ -2046,7 +2046,7 @@ return [
                         'isVisible' => true
                     ],
                     [
-                        'label' => $translator->translate('Elenco Extra'),
+                        'label' => $translator->translate('Elenco Extra/Penali'),
                         'route' => 'payments/failed-extra',
                         'isVisible' => true
                     ],

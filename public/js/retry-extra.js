@@ -19,6 +19,9 @@ $(function () {
                     $('#js-wrong-reason').html(data.message);
                 }
             }
+            setTimeout(function () {
+                location.reload();
+            }, 2500);
         });
 
         $('#js-new-try').attr('disabled', true);

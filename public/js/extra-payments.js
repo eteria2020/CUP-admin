@@ -417,6 +417,7 @@ function viewTries(extraPaymentTries)
     $('#outcome').html(extraPaymentTries.outcome);
     $('#result').html(extraPaymentTries.result);
     $('#message').html(extraPaymentTries.message);
+    $('#amount').html(extraPaymentTries.amount + '€');
     
     $('#extraTries').fadeIn();
 }

@@ -449,6 +449,7 @@ class PaymentsController extends AbstractActionController
             "outcome" => $extraPaymentTry->getOutcome(),
             "result" => (null != $extraPaymentTry->getTransaction()) ? $extraPaymentTry->getTransaction()->getOutcome() : 'n.d.',
             "message" => (null != $extraPaymentTry->getTransaction()) ? $extraPaymentTry->getTransaction()->getMessage() : 'n.d.',
+            "amount" => (null != $extraPaymentTry->getExtraPayment()->getAmount()) ? $extraPaymentTry->getExtraPayment()->getAmount()/100 : 'n.d.',
         );
         return json_encode($array);
     }
