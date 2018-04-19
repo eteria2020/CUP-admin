@@ -47,11 +47,11 @@ $(function() {
                     tripParkSeconds: tripParkSeconds,
                     customerGender: customerGender,
                     customerBonus: customerBonus,
+                    customerDiscount: customerDiscount
                 },
                 function (data) {
-                    var costDiscounted = data.cost*(1-(customerDiscount/100));
-                    $('#trip-cost').html(parseFloat(data.cost / 100).toFixed(2));
-                    $('#trip-cost-discounted').html(parseFloat(costDiscounted/100).toFixed(2));
+                    $('#trip-cost').html(parseFloat(data.costNoDiscount/100).toFixed(2));
+                    $('#trip-cost-discounted').html(parseFloat(data.cost/100).toFixed(2));
                 }
             );
         }
