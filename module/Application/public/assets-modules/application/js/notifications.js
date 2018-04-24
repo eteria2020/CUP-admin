@@ -189,6 +189,10 @@ $(function() {
 
             },
             {
+                targets: 2,
+                sortable: false,
+            },
+            {
                 targets: [1, 3],
                 render: function (data) {
                     var momentDate;
@@ -233,10 +237,18 @@ $(function() {
             },
             {
                 targets: 7,
-                sortable: true,
+                sortable: false,
                 render: function (data, type, row) {
                     return '<a href="customers/edit/' + row.c.id + ' ">' + row.c.nameSurname + '</a>';
                 }
+            },
+            {
+                targets: 8,
+                sortable: false,
+            },
+            {
+                targets: 9,
+                sortable: false,
             }
         ],
         "lengthMenu": [
