@@ -69,7 +69,7 @@ $(function() {
         columnFromDate: $("#js-value"),
         to: $("#js-value"),
         columnToDate: $("#js-value"),
-        iSortCol_0: 2,
+        iSortCol_0: 0,
         sSortDir_0: "desc",
         iDisplayLength: 10
     };
@@ -126,6 +126,7 @@ $(function() {
         "processing": true,
         "serverSide": true,
         "bStateSave": false,
+        //"order": [[ 0, "desc" ]],
         "bFilter": false,
         "sAjaxSource": "/notifications/datatable",
         "fnServerData": function (sSource, aoData, fnCallback, oSettings) {
@@ -170,7 +171,6 @@ $(function() {
         "columns": [
             {data: "e.id"},
             {data: "e.submitDate"},
-            {data: "e.sentDate"},
             {data: "e.acknowledgeDate"},
             {data: "e.webuser"},
             {data: "t.carPlate"},
@@ -189,7 +189,7 @@ $(function() {
 
             },
             {
-                targets: [1, 2, 3,],
+                targets: [1, 2],
                 render: function (data) {
                     var momentDate;
                     if (typeof data === "number") {
@@ -202,7 +202,7 @@ $(function() {
                 }
             },
             {
-                targets: 4,
+                targets: 3,
                 render: function (data, type, row) {
                     if (data == null) {
                         var buttons = "<div class=\"btn-group\">" +
@@ -215,14 +215,14 @@ $(function() {
                 }
             },
             {
-                targets: 5,
+                targets: 4,
                 sortable: true,
                 render: function (data, type, row) {
                     return '<a href="cars/edit/' + row.t.carPlate + ' ">' + row.t.carPlate + '</a>';
                 }
             },
             {
-                targets: 6,
+                targets: 5,
                 sortable: true,
                 render: function (data, type, row) {
                     if(row.t.tripId != '0')
@@ -232,7 +232,7 @@ $(function() {
                 }
             },
             {
-                targets: 7,
+                targets: 6,
                 sortable: true,
                 render: function (data, type, row) {
                     return '<a href="customers/edit/' + row.c.id + ' ">' + row.c.nameSurname + '</a>';
