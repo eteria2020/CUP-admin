@@ -220,14 +220,14 @@ $(function() {
             },
             {
                 targets: 5,
-                sortable: true,
+                sortable: false,
                 render: function (data, type, row) {
                     return '<a href="cars/edit/' + row.t.carPlate + ' ">' + row.t.carPlate + '</a>';
                 }
             },
             {
                 targets: 6,
-                sortable: true,
+                sortable: false,
                 render: function (data, type, row) {
                     if(row.t.tripId != '0')
                         return '<a href="trips/details/' + row.t.tripId + ' ">' + row.t.tripId + '</a>';
