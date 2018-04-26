@@ -238,11 +238,24 @@ function resendEmailRegistrationComplite() {
         data: {'customer_id': $('#id').val()},
         success: function (data) {
             console.log(data.toString());
-            console.log("SUCCESS");
+            $('#resendEmailRegistration').hide();
+            switch(data.toString()){
+                case 'success':
+                    $('#responseMessageSendEmail').html("<div class='alert alert-success' role='alert'>Email inviata</div>");
+                break;
+                case 'error':
+                    $('#responseMessageSendEmail').html("<div class='alert alert-warning' role='alert'>Errore invio email</div>");
+                break;
+            }
+            $('#responseMessageSendEmail').fadeIn();
+            setTimeout(function () {
+                $('#responseMessageSendEmail').hide();
+                $('#resendEmailRegistration').fadeIn();
+            }, 4000);
         },
         error: function () {
-            console.log(data.toString());
-            console.log("ERROR");
+            $('#resendEmailRegistration').hide();
+            $('#responseMessageSendEmail').html("<div class='alert alert-danger' role='alert'<Errore invio email</div>");
         }
     });
 }

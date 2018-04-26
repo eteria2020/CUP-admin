@@ -69,13 +69,16 @@ final class RegistrationService
         /** @var callable $serverUrl */
         $serverUrl = $this->viewHelperManager->get('serverUrl');
 
+        $ttt = $serverUrl().'?user='.$hash;
+        
         $writeTo = $this->emailSettings['from'];
         $mail = $this->emailService->getMail(1, $language);
         $content = sprintf(
             $mail->getContent(),
             $name,
             $surname,
-            $serverUrl().$url('signup_insert').'?user='.$hash//,
+            $ttt
+            //$serverUrl().$url('signup_insert').'?user='.$hash//,
             //$writeTo
         );
 

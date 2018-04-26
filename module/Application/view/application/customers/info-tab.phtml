@@ -223,7 +223,7 @@ $formSetting = $this->settingForm->prepare();
 
     <div class="col-lg-3">
         <?php if(!$this->customer->getRegistrationCompleted()){?>
-        <div class="panel panel-default">
+        <div class="panel panel-default" id="resendEmailRegistration">
             <div class="panel-heading"><?= $this->translate("Reinvio email di completamento iscrizione"); ?></div>
             <div class="panel-body">
                 <div class="row">
@@ -234,6 +234,7 @@ $formSetting = $this->settingForm->prepare();
             </div>
         </div>
         <?php }?>
+        <div id="responseMessageSendEmail" style="display:none"></div>
         <div class="panel panel-default">
             <div class="panel-heading"><?= $this->translate("Altri dati"); ?></div>
             <div class="panel-body">
