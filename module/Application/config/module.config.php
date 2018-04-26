@@ -1573,6 +1573,7 @@ return [
             'CarsConfigurationsForm' => 'Application\Form\CarsConfigurationsFormFactory',
             'ChangeLanguageDetector.listener' => 'Application\Listener\ChangeLanguageDetectorFactory',
             'ZoneForm' => 'Application\Form\ZoneFormFactory',
+            'RegistrationService' => 'Application\Service\RegistrationServiceFactory',
         ]
     ],
     'asset_manager' => [

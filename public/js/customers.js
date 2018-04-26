@@ -231,15 +231,17 @@ $(function() {
 });
 
 function resendEmailRegistrationComplite() {
-    //console.log("dsddd");
+    //console.log($('#id').val());
     $.ajax({
         type: "POST",
         url: "/customers/resend-email-registration-complite",
-        data: {'id': 2},
+        data: {'customer_id': $('#id').val()},
         success: function (data) {
+            console.log(data.toString());
             console.log("SUCCESS");
         },
         error: function () {
+            console.log(data.toString());
             console.log("ERROR");
         }
     });
