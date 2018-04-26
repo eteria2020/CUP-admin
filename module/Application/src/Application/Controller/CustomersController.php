@@ -758,4 +758,8 @@ class CustomersController extends AbstractActionController
             ]);
         }
     }
+    
+    public function resendEmailRegistrationCompliteAction() {
+        $a = '';
+    }
 }

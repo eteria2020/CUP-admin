@@ -219,6 +219,16 @@ $formSetting = $this->settingForm->prepare();
                 </div>
             </div>
         </div>
+        <div class="panel panel-default">
+            <div class="panel-heading"><?= $this->translate("Reinvio email di completamento iscrizione"); ?></div>
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-lg-4">
+                        <button onclick="resendEmailRegistrationComplite(<?php $form->get('customer')->get('id') ?>)" class="btn btn-success"><?= $this->translate('Invia email'); ?></button>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 
     <div class="col-lg-3">
@@ -328,5 +338,6 @@ $formSetting = $this->settingForm->prepare();
 
         </div>
     </div>
+    
 
 </div>

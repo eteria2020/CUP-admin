@@ -409,6 +409,15 @@ return [
                             ]
                         ]
                     ],
+                    'resend-email-registration-complite' => [
+                        'type' => 'Segment',
+                        'options' => [
+                            'route' => '/resend-email-registration-complite',
+                            'defaults' => [
+                                'action' => 'resend-email-registration-complite'
+                            ]
+                        ]
+                    ],
                     'foreign-drivers-license' => [
                         'type' => 'Literal',
                         'options' => [

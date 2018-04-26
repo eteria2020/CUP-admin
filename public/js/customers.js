@@ -227,5 +227,21 @@ $(function() {
             });
         }
     });//fine click #js-remove-point
+    
 });
+
+function resendEmailRegistrationComplite() {
+    //console.log("dsddd");
+    $.ajax({
+        type: "POST",
+        url: "/customers/resend-email-registration-complite",
+        data: {'id': 2},
+        success: function (data) {
+            console.log("SUCCESS");
+        },
+        error: function () {
+            console.log("ERROR");
+        }
+    });
+}
 
