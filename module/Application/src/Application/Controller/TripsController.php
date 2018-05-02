@@ -165,17 +165,29 @@ class TripsController extends AbstractActionController
         $tripParkSeconds = (int) $this->params()->fromPost('tripParkSeconds');
         $customerGender = $this->params()->fromPost('customerGender');
         $customerBonus = (int) $this->params()->fromPost('customerBonus');
+        $customerDiscount = (int) $this->params()->fromPost('customerDiscount');
 
         $tripCost = $this->tripCostComputerService->computeCost(
             $tripBeginning,
             $tripEnd,
             $tripParkSeconds,
             $customerGender,
-            $customerBonus
+            $customerBonus,
+            $customerDiscount
+        );
+
+        $tripCostNoDiscount = $this->tripCostComputerService->computeCost(
+            $tripBeginning,
+            $tripEnd,
+            $tripParkSeconds,
+            $customerGender,
+            $customerBonus,
+            0
         );
 
         return new JsonModel([
-            'cost' => $tripCost
+            'cost' => $tripCost,
+            'costNoDiscount' => $tripCostNoDiscount
         ]);
     }
 
