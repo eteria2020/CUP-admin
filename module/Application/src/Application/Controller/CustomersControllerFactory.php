@@ -47,7 +47,6 @@ class CustomersControllerFactory implements FactoryInterface
         $datatableFiltersSessionContainer = new Container($datatablesSessionNamespace);
         
         $registrationService = $sharedLocator->get('RegistrationService');
-        //$registrationService = $sharedLocator->get('RegistrationService');
 
         // Controller is constructed, dependencies are injected (IoC in action)
         return new CustomersController(
