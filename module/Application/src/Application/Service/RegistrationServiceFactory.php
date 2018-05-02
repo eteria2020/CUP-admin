@@ -16,7 +16,7 @@ class RegistrationServiceFactory implements FactoryInterface
         $emailService = $serviceLocator->get('SharengoCore\Service\EmailService');
         $translationService = $serviceLocator->get('Translator');
         $viewHelperManager = $serviceLocator->get('viewHelperManager');
-        $config = $serviceLocator->getServiceLocator()->get('Config');
+        $config = $serviceLocator->get('Config');
         $website = $config['website'];
 
 
