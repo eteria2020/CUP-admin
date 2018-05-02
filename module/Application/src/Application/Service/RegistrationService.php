@@ -84,7 +84,6 @@ final class RegistrationService
             $name,
             $surname,
             $this->websiteConfig['uri']."/signup-insert?user=".$hash//,
-            //"www.sharengo.it/signup-insert?user=".$hash//,
             //$writeTo
         );
 

@@ -231,14 +231,12 @@ $(function() {
 });
 
 function resendEmailRegistrationComplite() {
-    //console.log($('#id').val());
+    $('#responseMessageSendEmail').html("<div></div>");
     $.ajax({
         type: "POST",
         url: "/customers/resend-email-registration-complite",
         data: {'customer_id': $('#id').val()},
         success: function (data) {
-            console.log(data.toString());
-            $('#resendEmailRegistration').hide();
             switch(data.toString()){
                 case 'success':
                     $('#responseMessageSendEmail').html("<div class='alert alert-success' role='alert'>Email inviata</div>");
@@ -248,13 +246,8 @@ function resendEmailRegistrationComplite() {
                 break;
             }
             $('#responseMessageSendEmail').fadeIn();
-            setTimeout(function () {
-                $('#responseMessageSendEmail').hide();
-                $('#resendEmailRegistration').fadeIn();
-            }, 4000);
         },
         error: function () {
-            $('#resendEmailRegistration').hide();
             $('#responseMessageSendEmail').html("<div class='alert alert-danger' role='alert'<Errore invio email</div>");
         }
     });
