@@ -33,6 +33,11 @@ final class RegistrationService
      * @var HelperPluginManager
      */
     private $viewHelperManager;
+    
+    /**
+     * @var array
+     */
+    private $websiteConfig;
 
     /**
      * @param EntityManager $entityManager
@@ -40,19 +45,22 @@ final class RegistrationService
      * @param EmailService $emailService
      * @param Translator $translator
      * @param HelperPluginManager $viewHelperManager
+     * @param array $websiteConfig
      */
     public function __construct(
         EntityManager $entityManager,
         array $emailSettings,
         EmailService $emailService,
         Translator $translator,
-        HelperPluginManager $viewHelperManager
+        HelperPluginManager $viewHelperManager,
+        $websiteConfig
     ) {
         $this->entityManager = $entityManager;
         $this->emailSettings = $emailSettings;
         $this->emailService = $emailService;
         $this->translator = $translator;
         $this->viewHelperManager = $viewHelperManager;
+        $this->websiteConfig = $websiteConfig;
     }
 
     /**
@@ -68,8 +76,6 @@ final class RegistrationService
         $url = $this->viewHelperManager->get('url');
         /** @var callable $serverUrl */
         $serverUrl = $this->viewHelperManager->get('serverUrl');
-
-        $ttt = $serverUrl().'?user='.$hash;
         
         $writeTo = $this->emailSettings['from'];
         $mail = $this->emailService->getMail(1, $language);
@@ -77,8 +83,8 @@ final class RegistrationService
             $mail->getContent(),
             $name,
             $surname,
-            $ttt
-            //$serverUrl().$url('signup_insert').'?user='.$hash//,
+            $this->websiteConfig['uri']."/signup-insert?user=".$hash//,
+            //"www.sharengo.it/signup-insert?user=".$hash//,
             //$writeTo
         );
 

@@ -772,7 +772,12 @@ class CustomersController extends AbstractActionController
         $customer_id = $this->params()->fromPost('customer_id');
         $customer = $this->customersService->findById($customer_id);
         try {
-            $this->registrationService->sendEmail($customer->getEmail(), $customer->getName(), $customer->getSurname(), 1, $customer->getLanguage());
+            $this->registrationService->sendEmail(
+                    $customer->getEmail(),
+                    $customer->getName(),
+                    $customer->getSurname(),
+                    hash("MD5", strtoupper($customer->getEmail()).strtoupper($customer->getPassword())),
+                    $customer->getLanguage());
         } catch (\Exception $e) {
             $response_msg = "error";
             $response = $this->getResponse();
