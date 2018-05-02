@@ -191,6 +191,13 @@ $(function() {
             {
                 targets: 2,
                 sortable: false,
+                render: function (data) {
+                    if(data == 'SOS'){
+                        return "<b style='color:red; font-size:16px'>SOS</b>";
+                    }else{
+                        return data;
+                    }
+                }
             },
             {
                 targets: [1, 3],
