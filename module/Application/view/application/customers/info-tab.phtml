@@ -222,8 +222,20 @@ $formSetting = $this->settingForm->prepare();
     </div>
 
     <div class="col-lg-3">
+        <?php if(!$this->customer->getRegistrationCompleted()){?>
         <div class="panel panel-default">
-
+            <div class="panel-heading"><?= $this->translate("Reinvio email di completamento iscrizione"); ?></div>
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-lg-4">
+                        <button onclick="resendEmailRegistrationComplite(<?php $form->get('customer')->get('id') ?>)" class="btn btn-success"><?= $this->translate('Invia email'); ?></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <?php }?>
+        <div id="responseMessageSendEmail" style="display:none"></div>
+        <div class="panel panel-default">
             <div class="panel-heading"><?= $this->translate("Altri dati"); ?></div>
             <div class="panel-body">
 
@@ -231,7 +243,7 @@ $formSetting = $this->settingForm->prepare();
                     <div class="col-lg-12">
                         <div class="form-group">
                             <label for="gender"><?= $this->translate("Abilitato"); ?></label>
-                            <?php if($this->customer->getEnabled()): ?>
+                            <?php if ($this->customer->getEnabled()): ?>
                                 <div class="alert alert-success"><?= $this->translate("Abilitato"); ?></div>
                             <?php else: ?>
                                 <div class="alert alert-danger"><?= $this->translate("Non Abilitato"); ?></div>
@@ -328,5 +340,6 @@ $formSetting = $this->settingForm->prepare();
 
         </div>
     </div>
+    
 
 </div>

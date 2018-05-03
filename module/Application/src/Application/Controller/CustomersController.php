@@ -14,6 +14,7 @@ use SharengoCore\Service\CustomersService;
 use SharengoCore\Service\CustomerDeactivationService;
 use SharengoCore\Service\PromoCodesService;
 use SharengoCore\Service\DisableContractService;
+use Application\Service\RegistrationService;
 use SharengoCore\Exception\CustomerNotFoundException;
 use SharengoCore\Exception\BonusAssignmentException;
 use Cartasi\Service\CartasiContractsService;
@@ -112,6 +113,11 @@ class CustomersController extends AbstractActionController
      * @var Container
      */
     private $datatableFiltersSessionContainer;
+    
+    /**
+     * @var RegistrationService
+     */
+    private $registrationService;
 
     /**
      * @param CustomersService $customersService
@@ -131,6 +137,7 @@ class CustomersController extends AbstractActionController
      * @param CartasiContractsService $cartasiContractsService
      * @param DisableContractService $disableContractService
      * @param Container $datatableFiltersSessionContainer
+     * @param RegistrationService $registrationService
      */
     public function __construct(
         CustomersService $customersService,
@@ -150,6 +157,7 @@ class CustomersController extends AbstractActionController
         CartasiContractsService $cartasiContractsService,
         DisableContractService $disableContractService,
         Container $datatableFiltersSessionContainer
+        ,RegistrationService $registrationService
     ) {
         $this->customersService = $customersService;
         $this->customerDeactivationService = $customerDeactivationService;
@@ -168,6 +176,7 @@ class CustomersController extends AbstractActionController
         $this->bonusService = $bonusService;
         $this->pointService = $pointService;
         $this->datatableFiltersSessionContainer = $datatableFiltersSessionContainer;
+        $this->registrationService = $registrationService;
     }
 
     /**
@@ -757,5 +766,29 @@ class CustomersController extends AbstractActionController
                 'error' => $translator->translate('Non esiste un cliente per l\'id specificato')
             ]);
         }
+    }
+    
+    public function resendEmailRegistrationCompliteAction() {
+        $customer_id = $this->params()->fromPost('customer_id');
+        $customer = $this->customersService->findById($customer_id);
+        try {
+            $this->registrationService->sendEmail(
+                    $customer->getEmail(),
+                    $customer->getName(),
+                    $customer->getSurname(),
+                    hash("MD5", strtoupper($customer->getEmail()).strtoupper($customer->getPassword())),
+                    $customer->getLanguage());
+        } catch (\Exception $e) {
+            $response_msg = "error";
+            $response = $this->getResponse();
+            $response->setStatusCode(200);
+            $response->setContent($response_msg);
+            return $response;
+        }
+        $response_msg = "success";
+        $response = $this->getResponse();
+        $response->setStatusCode(200);
+        $response->setContent($response_msg);
+        return $response;
     }
 }
