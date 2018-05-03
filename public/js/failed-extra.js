@@ -114,6 +114,7 @@ $(function() {
             },
             {
                 targets: 6,
+                sortable: false,
                 className: "sng-dt-right sng-no-wrap",
                 "render": function (data, type, row) {
                     return (row.e.payed) ? 'Si' : 'No';
