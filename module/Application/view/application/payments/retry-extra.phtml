@@ -19,7 +19,7 @@ $customer = $this->customer;
             <?= $this->translate("RITENTA PAGEMENTO DI UN EXTRA"); ?>
         </h3>
         
-        <?php if($extraPayment->getStatus() != 'payed_correctly'){ ?>
+        <?php if($extraPayment->getStatus() == 'wrong_payment' || $extraPayment->getStatus() == 'to_be_payed'){ ?>
         <div class="row">
             <div class="col-md-8">
                 <div class="form-inline">
