@@ -36,22 +36,6 @@ $customer = $this->customer;
             <hr>
             <h4><span class="glyphicon glyphicon-ok"></span> Pagamento avvenuto con successo</h4>
         <?php } ?>
-        
-        <div class="row hidden" id="js-completed-message">
-            <div class="col-md-12">
-                <div class="alert alert-success">
-                    <strong><?= $this->translate("Pagamento completato con successo"); ?></strong>
-                </div>
-                <div class="form-inline">
-                    <div class="btn-group">
-                        <button type="button" class="btn green" id="js-abilitate-customer">
-                            <i class="fa fa-caret-square-o-right"></i>
-                            <?= $this->translate("Riabilita utente"); ?>
-                        </button>
-                    </div>
-                </div>
-            </div>
-        </div>
 
         <div class="row hidden" id="js-refused-message">
             <div class="col-md-12">

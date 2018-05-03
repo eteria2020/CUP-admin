@@ -11,7 +11,6 @@ $(function () {
         }, function (data) {
             $('#js-new-try').hide();
             if (data.outcome === 'OK') {
-                $('#js-completed-message').removeClass('hidden');
                 extraPaymentTryId = data.extraPaymentTriesId;
             } else {
                 $('#js-refused-message').removeClass('hidden');
