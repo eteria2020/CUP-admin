@@ -123,7 +123,7 @@ $(function() {
             {
                 targets: 7,
                 "render": function (data, type, row) {
-                    return renderAmount(data);
+                    return renderAmount(row.e.totalCost);
                 }
             },
             {
