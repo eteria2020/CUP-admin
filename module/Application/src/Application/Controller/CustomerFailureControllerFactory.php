@@ -13,10 +13,12 @@ class CustomerFailureControllerFactory implements FactoryInterface
 
         $customersService = $sharedLocator->get('SharengoCore\Service\CustomersService');
         $tripPaymentsService = $sharedLocator->get('SharengoCore\Service\TripPaymentsService');
-
+        $extraPaymentsService = $sharedLocator->get('SharengoCore\Service\ExtraPaymentsService');
+        
         return new CustomerFailureController(
             $customersService,
-            $tripPaymentsService
+            $tripPaymentsService,
+            $extraPaymentsService
         );
     }
 }

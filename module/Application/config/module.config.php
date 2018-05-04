@@ -282,6 +282,19 @@ return [
                             ],
                         ],
                     ],
+                    'ajax-tab-extra' => [
+                        'type'    => 'Segment',
+                        'options' => [
+                            'route'    => '/ajax-tab/extra/:id',
+                            'constraints' => [
+                                'id' => '[0-9]*'
+                            ],
+                            'defaults' => [
+                                'controller' => 'CustomerFailure',
+                                'action' => 'extra-tab',
+                            ],
+                        ],
+                    ],
                     'ajax-tab-license' => [
                         'type'    => 'Segment',
                         'options' => [
