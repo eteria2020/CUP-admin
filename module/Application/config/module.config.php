@@ -409,6 +409,15 @@ return [
                             ]
                         ]
                     ],
+                    'resend-email-registration-complite' => [
+                        'type' => 'Segment',
+                        'options' => [
+                            'route' => '/resend-email-registration-complite',
+                            'defaults' => [
+                                'action' => 'resend-email-registration-complite'
+                            ]
+                        ]
+                    ],
                     'foreign-drivers-license' => [
                         'type' => 'Literal',
                         'options' => [
@@ -1606,6 +1615,7 @@ return [
             'CarsConfigurationsForm' => 'Application\Form\CarsConfigurationsFormFactory',
             'ChangeLanguageDetector.listener' => 'Application\Listener\ChangeLanguageDetectorFactory',
             'ZoneForm' => 'Application\Form\ZoneFormFactory',
+            'RegistrationService' => 'Application\Service\RegistrationServiceFactory',
         ]
     ],
     'asset_manager' => [

@@ -227,5 +227,29 @@ $(function() {
             });
         }
     });//fine click #js-remove-point
+    
 });
+
+function resendEmailRegistrationComplite() {
+    $('#responseMessageSendEmail').html("<div></div>");
+    $.ajax({
+        type: "POST",
+        url: "/customers/resend-email-registration-complite",
+        data: {'customer_id': $('#id').val()},
+        success: function (data) {
+            switch(data.toString()){
+                case 'success':
+                    $('#responseMessageSendEmail').html("<div class='alert alert-success' role='alert'>Email inviata</div>");
+                break;
+                case 'error':
+                    $('#responseMessageSendEmail').html("<div class='alert alert-warning' role='alert'>Errore invio email</div>");
+                break;
+            }
+            $('#responseMessageSendEmail').fadeIn();
+        },
+        error: function () {
+            $('#responseMessageSendEmail').html("<div class='alert alert-danger' role='alert'<Errore invio email</div>");
+        }
+    });
+}
 
