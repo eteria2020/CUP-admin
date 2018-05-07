@@ -125,7 +125,14 @@ class FinesController extends AbstractActionController
     public function indexAction()
     {
         $sessionDatatableFilters = $this->getDataTableSessionFilters();
-
+        
+        if(isset($sessionDatatableFilters['searchValue'])&&($sessionDatatableFilters['searchValue']!="")){
+            if($sessionDatatableFilters['column']=="e.vehicleFleetId"){
+                $fleets = $this->fleetService->getFleetsSelectorArray();
+                $sessionDatatableFilters['searchValue']=$fleets[$sessionDatatableFilters['searchValue']];
+            }
+        }
+        
         return new ViewModel([
             'filters' => json_encode($sessionDatatableFilters),
         ]);
@@ -175,8 +182,23 @@ class FinesController extends AbstractActionController
             'safoPenalty' => $safoPenalty
         ]);
     }
+    
+    public function payAction()
+    {
+        $safoPenalty = array();
+        $checkPost = $this->params()->fromPost('check');
+        if(isset($checkPost)){
+            for($x=0;$x<count($checkPost);$x++){
+                $fineObj = $this->finesService->getSafoPenaltyById($checkPost[$x]);
+                ($fineObj ? $safoPenalty[$x] = $fineObj : $safoPenalty[$x] = null );
+            }
+        }
 
+        //$safoPenalty = $this->finesService->getSafoPenaltyById($id);
 
-
+        return new ViewModel([
+            'safoPenalty' => $safoPenalty
+        ]);
+    }
 
 }

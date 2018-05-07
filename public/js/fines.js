@@ -2,14 +2,14 @@
 $(function() {
     "use strict";
 
-     // DataTables
+    // DataTables
     var table = $("#js-fines-table");
 
-   // Define DataTables Filters
+    // Define DataTables Filters
     var dataTableVars = {
         searchValue: $("#js-value"),
         column: $("#js-column"),
-        iSortCol_0: 0,
+        iSortCol_0: 1,
         sSortDir_0: "desc",
         iDisplayLength: 0
     };
@@ -22,7 +22,7 @@ $(function() {
     dataTableVars.searchValue.val("");
     dataTableVars.column.val("select");
 
-    if ( typeof getSessionVars !== "undefined"){
+    if (typeof getSessionVars !== "undefined"){
         getSessionVars(filters, dataTableVars);
     }
 
@@ -30,20 +30,10 @@ $(function() {
     {
         return ((value < 10) ? "0" : "") + value;
     }
-
+    
     function renderAmount(amount)
     {
         return (Math.floor(amount / 100)) + "," + toStringKeepZero(amount % 100) + " \u20ac";
-    }
-
-    function renderDiscount(discount)
-    {
-        return discount + "%";
-    }
-
-    function renderMin(min)
-    {
-        return min + " min.";
     }
 
     table.dataTable({
@@ -76,9 +66,6 @@ $(function() {
                 aoData.push({ "name": "column", "value": $(dataTableVars.column).val()});
                 aoData.push({ "name": "searchValue", "value": dataTableVars.searchValue.val().trim()});
             }
-
-            //aoData.push({ "name": "fixedColumn", "value": "e.status"});
-            //aoData.push({ "name": "fixedValue", "value": "wrong_payment"});
             aoData.push({ "name": "fixedLike", "value": false});
         },
         "order": [[dataTableVars.iSortCol_0, dataTableVars.sSortDir_0]],
@@ -97,6 +84,15 @@ $(function() {
         "columnDefs": [
             {
                 targets: [0],
+                data: "button",
+                searchable: false,
+                sortable: false,
+                render: function (data, type, row) {
+                    return '<center><input class="checkbox" type="checkbox" name="check[]" value="'+row.fines.id+'"></center>';
+                }
+            },
+            {
+                targets: [1],
                 sortable: false,
                 "render": function (data, type, row) {
                     if(row.fines.charged){
@@ -107,7 +103,7 @@ $(function() {
                 }
             },
             {
-                targets: [1],
+                targets: [2],
                 sortable: false,
                 "render": function (data, type, row) {
                     if(row.fines.customerId>0){
@@ -118,14 +114,14 @@ $(function() {
                 }
             },
             {
-                targets: [2],
+                targets: [3],
                 sortable: false,
                 "render": function (data, type, row) {
                     return row.fines.violationDescription;
                 }
             },
             {
-                targets: [3],
+                targets: [4],
                 sortable: false,
                 "render": function (data, type, row) {
                     if(row.fines.vehicleFleetId>0){
@@ -147,7 +143,7 @@ $(function() {
                 }
             },
             {
-                targets: [4],
+                targets: [5],
                 sortable: false,
                 "render": function (data, type, row) {
                     if(row.fines.tripId>0){
@@ -158,28 +154,28 @@ $(function() {
                 }
             },
             {
-                targets: [5],
+                targets: [6],
                 sortable: false,
                 "render": function (data, type, row) {
                     return '<a href="/cars/edit/'+row.fines.carPlate+'">'+row.fines.carPlate+'</a>';
                 }
             },
             {
-                targets: [6],
+                targets: [7],
                 sortable: false,
                 "render": function (data, type, row) {
                     return row.fines.violationAuthority;
                 }
             },
             {
-                targets: [7],
+                targets: [8],
                 sortable: false,
                 "render": function (data, type, row) {
                     return renderAmount(row.fines.amount);
                 }
             },
             {
-                targets: [8],
+                targets: [9],
                 sortable: false,
                 "render": function (data, type, row) {
                     if(row.fines.complete){
@@ -190,7 +186,14 @@ $(function() {
                 }
             },
             {
-                targets: [9],
+                targets: [10],
+                sortable: false,
+                "render": function (data, type, row) {
+                    return row.fines.violationTimestamp;
+                }
+            },
+            {
+                targets: [11],
                 data: "button",
                 searchable: false,
                 sortable: false,
@@ -254,7 +257,7 @@ $(function() {
         var value = $(this).val();
 
         // Column that need the standard "LIKE" search operator
-        if ((value === "e.violationDescription")||(value === "e.carPlate")||(value === "e.vehicleFleetId")||(value === "e.id")||(value === "e.tripId")) {
+        if ((value === "e.violationDescription")||(value === "e.carPlate")||(value === "e.vehicleFleetId")||(value === "e.customerId")||(value === "e.tripId")) {
             filterWithoutLike = false;
             dataTableVars.searchValue.val("");
             dataTableVars.searchValue.prop("disabled", false);
@@ -266,18 +269,8 @@ $(function() {
             dataTableVars.searchValue.prop("disabled", false);
             typeClean.hide();
             dataTableVars.searchValue.show();
-
-            switch (value) {
-                // Columns that need a "=" instead the standard "LIKE" search operator.
-                case "e.tripId":
-                    columnWithoutLike = value;
-                    //columnValueWithoutLike = true;
-                    break;
-                case "e.customerId":
-                    columnWithoutLike = value;
-                    break;
-            }
         }
     });
-
+    var intId = setInterval(function(){$("th").removeClass("sorting_desc");$("th").removeClass("sorting_asc");},100);
+    setTimeout(function(){clearInterval(intId);},2000);
 });

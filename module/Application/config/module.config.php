@@ -497,6 +497,17 @@ return [
                             ]
                         ]
                     ],
+                    'details' => [
+                        'type' => 'Segment',
+                        'options' => [
+                            'route' => '/pay/',
+                            'defaults' => [
+                                '__NAMESPACE__' => 'Application\Controller',
+                                'controller' => 'Fines',
+                                'action' => 'pay'
+                            ]
+                        ]
+                    ],
                 ],
             ],
             'cars' => [
