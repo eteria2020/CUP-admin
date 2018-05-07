@@ -497,7 +497,7 @@ return [
                             ]
                         ]
                     ],
-                    'details' => [
+                    'pay' => [
                         'type' => 'Segment',
                         'options' => [
                             'route' => '/pay/',
