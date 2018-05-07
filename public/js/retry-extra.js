@@ -34,3 +34,24 @@ $(function () {
         });
     });
 });
+
+
+function setPayableExtra(payable, id) {
+    $.ajax({
+        type: "POST",
+        url: "/payments/set-payable",
+        data: {'payable': payable, 'id': id},
+        success: function (data) {
+            switch(data.toString()){
+                case 'success':
+                    location.reload();
+                break;
+                case 'error':
+                    alert("Errore...");
+                break;
+            }
+        },
+        error: function () {
+        }
+    });
+}

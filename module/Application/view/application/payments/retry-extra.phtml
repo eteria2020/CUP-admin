@@ -13,29 +13,52 @@ $customer = $this->customer;
 
 <div class="page-content-wrapper">
     <div class="page-content">
-
         <!-- BEGIN PAGE HEADER-->
-        <h3 class="page-title">
-            <?= $this->translate("RITENTA PAGEMENTO DI UN EXTRA"); ?>
-        </h3>
-        
-        <?php if($extraPayment->getStatus() == 'wrong_payment' || $extraPayment->getStatus() == 'to_be_payed'){ ?>
         <div class="row">
-            <div class="col-md-8">
-                <div class="form-inline">
-                    <div class="btn-group">
-                        <button type="button" class="btn green" id="js-new-try">
-                            <i class="fa fa-try"></i>
-                            <?= $this->translate("Effettua nuovo tentativo di pagamento"); ?>
-                        </button>
-                    </div>
-                </div>
+            <div class="col-lg-6">
+                <h3 class="page-title">
+                    <?= $this->translate("RITENTA PAGEMENTO DI UN EXTRA"); ?>
+                </h3>
+            </div>
+
+            <div class="col-lg-6">
+                <a href="<?= $this->url('payments/failed-extra'); ?>" class="btn btn-success pull-right"><i class="fa fa-arrow-left"></i> <?= $this->translate("Torna alla lista"); ?></a>
             </div>
         </div>
-        <?php } else { ?>
-            <hr>
-            <h4><span class="glyphicon glyphicon-ok"></span> Pagamento avvenuto con successo</h4>
-        <?php } ?>
+        
+            <?php if ($extraPayment->getStatus() == 'wrong_payment' || $extraPayment->getStatus() == 'to_be_payed') { ?>
+                <div class="row">
+                    <div class="col-lg-5">
+                        <div class="form-inline">
+                            <div class="btn-group">
+                                <button type="button" class="btn green" id="js-new-try">
+                                    <i class="fa fa-try"></i>
+                                    <?= $this->translate("Effettua nuovo tentativo di pagamento"); ?>
+                                </button>
+                            </div>
+                        </div>
+                        </div>
+                        <?php if ($extraPayment->getPayable()) { ?>
+                        <div class="col-lg-5">
+                            <h4>Pagabile:
+                                <input type="checkbox" checked style="width:20px;height:20px;" onclick="setPayableExtra(true, <?= $extraPayment->getId() ?>)" >
+                            </h4>
+                        </div>
+                        <?php } else { ?>
+                            <div class="col-lg-5">
+                                <h4>Pagabile:
+                                    <input type="checkbox" style="width:20px;height:20px;" onclick="setPayableExtra(false, <?= $extraPayment->getId() ?>)">
+                                </h4>
+                            </div>
+                        <?php } ?>
+                </div>
+                <?php } else { ?>
+                <div class="row">
+                    <div class="col-md-8">
+                        <h4><span class="glyphicon glyphicon-ok"></span> Pagamento avvenuto con successo</h4>
+                    </div>
+                </div>
+            <?php } ?>
 
         <div class="row hidden" id="js-refused-message">
             <div class="col-md-12">

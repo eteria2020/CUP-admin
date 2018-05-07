@@ -1240,7 +1240,17 @@ return [
                                 'action' => 'upload'
                             ]
                         ]
-                    ]
+                    ],
+                    'set-payable' => [
+                        'type' => 'Segment',
+                        'options' => [
+                            'route' => '/set-payable',
+                            'defaults' => [
+                                'controller' => 'Payments',
+                                'action' => 'set-payable'
+                            ]
+                        ]
+                    ],
                 ]
             ],
             'configurations' => [

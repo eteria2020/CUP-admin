@@ -529,4 +529,32 @@ class PaymentsController extends AbstractActionController
             'faresForm' => $form
         ]);
     }
+    
+    
+    public function setPayableAction() {
+        try {
+            $id = $this->params()->fromPost('id');
+            $payable = $this->params()->fromPost('payable') == "true" ? true : false;
+
+            $extraPayment = $this->extraPaymentsService->getExtraPaymentById($id);
+
+            $extraPayment = $this->extraPaymentsService->setPayable($extraPayment, $payable);
+
+            //return $this->redirect()->toRoute('payments/retry-extra', ['id' => $id], ['force_canonical' => true]);
+            //return $this->redirect();//->toRoute('payments/retry-extra', ['id' => $id], ['force_canonical' => true]);
+            //return $this->redirect()->toUrl('payments/retry-extra/'.id);
+            //, ['force_canonical' => true]
+            $response_msg = "success";
+            $response = $this->getResponse();
+            $response->setStatusCode(200);
+            $response->setContent($response_msg);
+            return $response;
+        } catch (\Exception $e) {
+            $response_msg = "error";
+            $response = $this->getResponse();
+            $response->setStatusCode(200);
+            $response->setContent($response_msg);
+            return $response;
+        }
+    }
 }
