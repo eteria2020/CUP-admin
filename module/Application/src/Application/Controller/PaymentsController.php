@@ -538,12 +538,8 @@ class PaymentsController extends AbstractActionController
 
             $extraPayment = $this->extraPaymentsService->getExtraPaymentById($id);
 
-            $extraPayment = $this->extraPaymentsService->setPayable($extraPayment, $payable);
+            $extraPayment = $this->extraPaymentsService->setExtraFree($extraPayment, !$payable, $this->identity());
 
-            //return $this->redirect()->toRoute('payments/retry-extra', ['id' => $id], ['force_canonical' => true]);
-            //return $this->redirect();//->toRoute('payments/retry-extra', ['id' => $id], ['force_canonical' => true]);
-            //return $this->redirect()->toUrl('payments/retry-extra/'.id);
-            //, ['force_canonical' => true]
             $response_msg = "success";
             $response = $this->getResponse();
             $response->setStatusCode(200);
