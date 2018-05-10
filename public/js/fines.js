@@ -279,12 +279,31 @@ $(function() {
     var intId = setInterval(function(){$("th").removeClass("sorting_desc");$("th").removeClass("sorting_asc");},100);
     setTimeout(function(){clearInterval(intId);},2000);
     
-    $('#js-fine-try').click(function (id) {
+    $('#js-fine-try').click(function () {
         console.log("TEST STETST STETjs-fine-try");
         $.ajax({
             type: "POST",
             url: "/fines/pay/",
-            data: {'check': [id]},
+            data: {'check': [$('#id_penalty').html()]},
+            success: function (data) {
+            },
+            error: function () {
+            }
+        });
+    });
+    
+    
+    
+    $('#pay-fines-selected').click(function (id) {
+        var selected = new Array();
+        $(".checkbox:checked").each(function () {
+            selected.push($(this).val());
+        });
+        console.log(selected);
+        $.ajax({
+            type: "POST",
+            url: "/fines/pay/",
+            data: {'check': selected},
             success: function (data) {
             },
             error: function () {
