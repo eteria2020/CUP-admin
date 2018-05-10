@@ -126,7 +126,7 @@ class NotificationsController extends AbstractActionController
         ]);
     }
 
-    public function datatableAction() {
+    public function datatableAction(){
         $filters = $this->params()->fromPost();
         $filters['withLimit'] = true;
         $dataDataTable = $this->notificationsService->getDataDataTable($filters);
