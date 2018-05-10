@@ -69,7 +69,7 @@ $(function() {
         columnFromDate: $("#js-value"),
         to: $("#js-value"),
         columnToDate: $("#js-value"),
-        iSortCol_0: 2,
+        iSortCol_0: 1,
         sSortDir_0: "desc",
         iDisplayLength: 10
     };
@@ -170,7 +170,7 @@ $(function() {
         "columns": [
             {data: "e.id"},
             {data: "e.submitDate"},
-            {data: "e.sentDate"},
+            {data: "t.sosType"},
             {data: "e.acknowledgeDate"},
             {data: "e.webuser"},
             {data: "t.carPlate"},
@@ -189,7 +189,18 @@ $(function() {
 
             },
             {
-                targets: [1, 2, 3,],
+                targets: 2,
+                sortable: false,
+                render: function (data) {
+                    if(data == 'SOS'){
+                        return "<b style='color:red; font-size:16px'>SOS</b>";
+                    }else{
+                        return data;
+                    }
+                }
+            },
+            {
+                targets: [1, 3],
                 render: function (data) {
                     var momentDate;
                     if (typeof data === "number") {
@@ -216,14 +227,14 @@ $(function() {
             },
             {
                 targets: 5,
-                sortable: true,
+                sortable: false,
                 render: function (data, type, row) {
                     return '<a href="cars/edit/' + row.t.carPlate + ' ">' + row.t.carPlate + '</a>';
                 }
             },
             {
                 targets: 6,
-                sortable: true,
+                sortable: false,
                 render: function (data, type, row) {
                     if(row.t.tripId != '0')
                         return '<a href="trips/details/' + row.t.tripId + ' ">' + row.t.tripId + '</a>';
@@ -233,10 +244,18 @@ $(function() {
             },
             {
                 targets: 7,
-                sortable: true,
+                sortable: false,
                 render: function (data, type, row) {
                     return '<a href="customers/edit/' + row.c.id + ' ">' + row.c.nameSurname + '</a>';
                 }
+            },
+            {
+                targets: 8,
+                sortable: false,
+            },
+            {
+                targets: 9,
+                sortable: false,
             }
         ],
         "lengthMenu": [
