@@ -11,7 +11,7 @@ $(function() {
         column: $("#js-column"),
         iSortCol_0: 0,
         sSortDir_0: "desc",
-        iDisplayLength: 0
+        iDisplayLength: 10
     };
 
     var typeClean = $("#js-clean-type"),
@@ -98,10 +98,10 @@ $(function() {
                 sortable: false,
                 render: function (data, type, row) {
                     switch (row.fines.checkable){
-                        case 0: return '<center>V</center>';
+                        case 0: return '<center><span class="glyphicon glyphicon-ok"></span></center>';
                         case 1: return '<center><input class="checkbox" type="checkbox" name="check[]" value="'+row.fines.id+'"></center>';
-                        case 2: return '<center>X</center>';
-                        default: return 'eee';   
+                        case 2: return '<center><span class="glyphicon glyphicon-remove"></span></center>';
+                        default: return '---';   
                     }
                 }
             },
@@ -278,4 +278,17 @@ $(function() {
     });
     var intId = setInterval(function(){$("th").removeClass("sorting_desc");$("th").removeClass("sorting_asc");},100);
     setTimeout(function(){clearInterval(intId);},2000);
+    
+    $('#js-fine-try').click(function (id) {
+        console.log("TEST STETST STETjs-fine-try");
+        $.ajax({
+            type: "POST",
+            url: "/fines/pay/",
+            data: {'check': [id]},
+            success: function (data) {
+            },
+            error: function () {
+            }
+        });
+    });
 });

@@ -3,6 +3,7 @@ $this->headLink()->appendStylesheet('/js/datatables/plugins/bootstrap/dataTables
 $this->headScript()
     ->appendFile('/js/datatables/media/js/jquery.dataTables.min.js')
     ->appendFile('/js/datatables/plugins/bootstrap/dataTables.bootstrap.js')
+    ->appendFile($this->basePath() .'/js/fines.js');
 ?>
 
 <?php
@@ -17,6 +18,34 @@ $safoPenalty = $this->safoPenalty;
         </h3>
 
         <div class="row">
+            <?php if($safoPenalty->getCharged()){ ?>
+                    <div class="col-md-12">
+                        <div class="form-inline">
+                            <H4><span class="glyphicon glyphicon-ok"></span> Multa già pagata o messa in pagamento.</H4>
+                        </div>
+                    </div>
+            <?php }else{
+                    if($safoPenalty->getCustomerId() != 0 && $safoPenalty->getTripId() != 0 && $safoPenalty->isComplete()){ ?>
+                        <div class="col-md-12">
+                            <div class="form-inline">
+                                <div class="btn-group">
+                                    <button type="button" class="btn green" id="js-fine-try">
+                                        <i class="fa fa-try"></i>
+                                        <?= $this->translate("Effettua nuovo tentativo di pagamento"); ?>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+            <?php }else{ ?>    
+                    <div class="col-md-12">
+                        <div class="form-inline">
+                            <H4><span class="glyphicon glyphicon-remove"></span> Non è possibile effettura un pagemnto mancaza di dati</H4>
+                        </div>
+                    </div>
+            <?php }
+                }
+            ?>
+
             <div class="col-lg-12">
                 <a href="/fines" class="btn btn-success pull-right"><i class="fa fa-arrow-left"></i> Torna alla lista</a>
             </div>
