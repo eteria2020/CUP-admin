@@ -148,7 +148,6 @@ class FinesController extends AbstractActionController
             $filters['columnValueWithoutLike'] = null;
         }
 
-
         $dataDataTable = $this->finesService->getFinesData($filters);
         $totalFailedPayments = $this->finesService->getTotalFines();
         $recordsFiltered = $this->getRecordsFiltered($filters, $totalFailedPayments);

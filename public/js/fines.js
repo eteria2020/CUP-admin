@@ -9,7 +9,7 @@ $(function() {
     var dataTableVars = {
         searchValue: $("#js-value"),
         column: $("#js-column"),
-        iSortCol_0: 1,
+        iSortCol_0: 0,
         sSortDir_0: "desc",
         iDisplayLength: 0
     };
@@ -88,11 +88,25 @@ $(function() {
                 searchable: false,
                 sortable: false,
                 render: function (data, type, row) {
-                    return '<center><input class="checkbox" type="checkbox" name="check[]" value="'+row.fines.id+'"></center>';
+                    return '<a href="/fines/details/' + row.fines.id + '">' + row.fines.id + '</a>';
                 }
             },
             {
                 targets: [1],
+                //data: "button",
+                searchable: false,
+                sortable: false,
+                render: function (data, type, row) {
+                    switch (row.fines.checkable){
+                        case 0: return '<center>V</center>';
+                        case 1: return '<center><input class="checkbox" type="checkbox" name="check[]" value="'+row.fines.id+'"></center>';
+                        case 2: return '<center>X</center>';
+                        default: return 'eee';   
+                    }
+                }
+            },
+            {
+                targets: [2],
                 sortable: false,
                 "render": function (data, type, row) {
                     if(row.fines.charged){
@@ -103,53 +117,43 @@ $(function() {
                 }
             },
             {
-                targets: [2],
+                targets: [3],
                 sortable: false,
                 "render": function (data, type, row) {
                     if(row.fines.customerId>0){
                         return '<a href="/customers/edit/'+row.fines.customerId+'">'+row.fines.customerId+'</a>';
                     }else{
-                        return 'no customer defined';
+                        return '---';
                     }
-                }
-            },
-            {
-                targets: [3],
-                sortable: false,
-                "render": function (data, type, row) {
-                    return row.fines.violationDescription;
                 }
             },
             {
                 targets: [4],
                 sortable: false,
                 "render": function (data, type, row) {
-                    if(row.fines.vehicleFleetId>0){
-                        switch (row.fines.vehicleFleetId){
-                            case 1:
-                                return "Milano";
-                            case 2:
-                                return "Firenze";
-                            case 3:
-                                return "Roma";
-                            case 4:
-                                return "Modena";
-                            default:
-                                return row.fines.vehicleFleetId;
-                        }
-                    }else{
-                        return 'no fleet defined';
-                    }
+                    var str = row.fines.violationDescription;
+                    return str.substring(0, 20) + '...';
                 }
             },
             {
                 targets: [5],
                 sortable: false,
                 "render": function (data, type, row) {
-                    if(row.fines.tripId>0){
-                        return '<a href="/trips/details/'+row.fines.tripId+'">'+row.fines.tripId+'</a>';
+                    if(row.fines.vehicleFleetId>0){
+                        switch (row.fines.vehicleFleetId){
+                            case 1:
+                                return "MI";
+                            case 2:
+                                return "FI";
+                            case 3:
+                                return "RM";
+                            case 4:
+                                return "MO";
+                            default:
+                                return row.fines.vehicleFleetId;
+                        }
                     }else{
-                        return 'no trip defined';
+                        return '---';
                     }
                 }
             },
@@ -157,25 +161,37 @@ $(function() {
                 targets: [6],
                 sortable: false,
                 "render": function (data, type, row) {
-                    return '<a href="/cars/edit/'+row.fines.carPlate+'">'+row.fines.carPlate+'</a>';
+                    if(row.fines.tripId>0){
+                        return '<a href="/trips/details/'+row.fines.tripId+'">'+row.fines.tripId+'</a>';
+                    }else{
+                        return '---';
+                    }
                 }
             },
             {
                 targets: [7],
                 sortable: false,
                 "render": function (data, type, row) {
-                    return row.fines.violationAuthority;
+                    return '<a href="/cars/edit/'+row.fines.carPlate+'">'+row.fines.carPlate+'</a>';
                 }
             },
             {
                 targets: [8],
                 sortable: false,
                 "render": function (data, type, row) {
-                    return renderAmount(row.fines.amount);
+                    var str = row.fines.violationAuthority;
+                    return str.substring(0, 15) + '...';
                 }
             },
             {
                 targets: [9],
+                sortable: false,
+                "render": function (data, type, row) {
+                    return renderAmount(row.fines.amount);
+                }
+            },
+            {
+                targets: [10],
                 sortable: false,
                 "render": function (data, type, row) {
                     if(row.fines.complete){
@@ -186,21 +202,10 @@ $(function() {
                 }
             },
             {
-                targets: [10],
+                targets: [11],
                 sortable: false,
                 "render": function (data, type, row) {
                     return row.fines.violationTimestamp;
-                }
-            },
-            {
-                targets: [11],
-                data: "button",
-                searchable: false,
-                sortable: false,
-                render: function (data, type, row) {
-                    return '<div class="btn-group">' +
-                        '<a href="/fines/details/' + row.fines.id + '" class="btn btn-default">Dettagli</a> ' +
-                        '</div>';
                 }
             }
         ],
