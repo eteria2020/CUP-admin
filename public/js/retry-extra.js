@@ -37,21 +37,27 @@ $(function () {
 
 
 function setPayableExtra(payable, id) {
-    $.ajax({
-        type: "POST",
-        url: "/payments/set-payable",
-        data: {'payable': payable, 'id': id},
-        success: function (data) {
-            switch(data.toString()){
-                case 'success':
-                    location.reload();
-                break;
-                case 'error':
-                    alert("Errore...");
-                break;
+    if(confirm("Sei sicuro di rendere non pagabile questo extra/penale")){
+        console.log("CONFERMA");
+        $.ajax({
+            type: "POST",
+            url: "/payments/set-payable",
+            data: {'payable': payable, 'id': id},
+            success: function (data) {
+                switch (data.toString()) {
+                    case 'success':
+                        location.reload();
+                        break;
+                    case 'error':
+                        alert("Errore...");
+                        break;
+                }
+            },
+            error: function () {
             }
-        },
-        error: function () {
-        }
-    });
+        });
+    }else{
+        console.log("ANNULLA");
+        $('#check_payable').prop('checked', true);
+    }
 }

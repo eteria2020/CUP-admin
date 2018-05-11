@@ -41,7 +41,7 @@ $customer = $this->customer;
 
                     <div class="col-lg-5">
                         <h4>Pagabile:
-                            <input type="checkbox" checked style="width:20px;height:20px;" onclick="setPayableExtra(true, <?= $extraPayment->getId() ?>)" >
+                            <input type="checkbox" id="check_payable" checked style="width:20px;height:20px;" onclick="setPayableExtra(true, <?= $extraPayment->getId() ?>)" >
                         </h4>
                     </div>
                 <?php } else { ?>
