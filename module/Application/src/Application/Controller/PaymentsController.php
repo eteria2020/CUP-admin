@@ -177,8 +177,7 @@ class PaymentsController extends AbstractActionController
         ]);
     }
     
-    public function failedExtraDatatableAction()
-    {
+    public function failedExtraDatatableAction(){
         $filters = $this->params()->fromPost();
         $filters['withLimit'] = true;
         
