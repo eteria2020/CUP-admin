@@ -38,7 +38,6 @@ $(function () {
 
 function setPayableExtra(payable, id) {
     if(confirm("Sei sicuro di rendere non pagabile questo extra/penale")){
-        console.log("CONFERMA");
         $.ajax({
             type: "POST",
             url: "/payments/set-payable",
@@ -57,7 +56,6 @@ function setPayableExtra(payable, id) {
             }
         });
     }else{
-        console.log("ANNULLA");
         $('#check_payable').prop('checked', true);
     }
 }
