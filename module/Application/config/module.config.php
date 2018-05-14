@@ -517,6 +517,17 @@ return [
                             ]
                         ]
                     ],
+                    'find-fines-between-date' => [
+                        'type' => 'Segment',
+                        'options' => [
+                            'route' => '/find-fines-between-date/',
+                            'defaults' => [
+                                '__NAMESPACE__' => 'Application\Controller',
+                                'controller' => 'Fines',
+                                'action' => 'find-fines-between-date'
+                            ]
+                        ]
+                    ],
                 ],
             ],
             'cars' => [

@@ -279,8 +279,83 @@ $(function() {
     var intId = setInterval(function(){$("th").removeClass("sorting_desc");$("th").removeClass("sorting_asc");},100);
     setTimeout(function(){clearInterval(intId);},2000);
     
+    
+    
+    /*
+     * 
+     * 
+     * 
+     * 
+     * 
+     */
+    
+     $('#checkAll').click(function () {
+        if ($('#checkAll').is(':checked')) {
+            $('.checkbox').each(function(){
+                this.checked = true;
+            });
+            $('#pay-fines-selected').prop('disabled', false);
+            $('#pay-fines-betweenDate').prop('disabled', true);
+        }else{
+            $('.checkbox').each(function(){
+                this.checked = false;
+            });
+            $('#pay-fines-selected').prop('disabled', true);
+            $('#pay-fines-betweenDate').prop('disabled', false);
+        }
+    });
+
+    $(document).on("click", ".checkbox", function () {
+        var selected = new Array();
+        $(".checkbox:checked").each(function () {
+            selected.push($(this).val());
+        });
+        if (selected.length > 0) {
+            $('#pay-fines-selected').prop('disabled', false);
+            $('#pay-fines-betweenDate').prop('disabled', true);
+        } else {
+            $('#pay-fines-selected').prop('disabled', true);
+            $('#pay-fines-betweenDate').prop('disabled', false);
+        }
+    });
+    
+    $('#js-date-from').datepicker({
+        autoclose: true,
+        format: "yyyy-mm-dd"
+    });
+    
+    $('#js-date-to').datepicker({
+        autoclose: true,
+        format: "yyyy-mm-dd"
+    });
+    
+    $('#pay-fines-betweenDate').click(function (){
+        console.log("click");
+        $.ajax({
+            type: "POST",
+            url: "/fines/find-fines-between-date/",
+            data: {'from': $('#js-date-from').val(),
+                    'to': $('#js-date-to').val()
+                  },
+            beforeSend: function () {
+                //$('#test').html("<div><i class='fa fa-spinner fa-pulse fa-2x fa-fw'></i></div>");
+            },
+            success: function (data) {
+                console.log("success rtecupero ");
+                var result = JSON.parse(data.toString());
+                var selected = new Array();
+                result.forEach(function(element) {
+                    selected.push(element['id']);
+                });
+                payFines(selected);
+            },
+            error: function () {
+                console.log("error rtecupero ");
+            }
+        });
+    });
+    
     $('#js-fine-try').click(function () {
-        console.log("TEST STETST STETjs-fine-try");
         $.ajax({
             type: "POST",
             url: "/fines/pay/",
@@ -292,22 +367,28 @@ $(function() {
         });
     });
     
-    
-    
-    $('#pay-fines-selected').click(function (id) {
+    $('#pay-fines-selected').click(function () {
         var selected = new Array();
         $(".checkbox:checked").each(function () {
             selected.push($(this).val());
         });
-        console.log(selected);
+        if(confirm("Stai mandando in pagemnto " + selected.length + " multe. Confermi?")){
+            payFines(selected);
+        }
+    });
+
+    function payFines(selected) {
         $.ajax({
             type: "POST",
             url: "/fines/pay/",
             data: {'check': selected},
             success: function (data) {
+                console.log("success pagato ");
+                $("#closeModal").click();
             },
             error: function () {
+                console.log("error pagato ");
             }
         });
-    });
+    }
 });

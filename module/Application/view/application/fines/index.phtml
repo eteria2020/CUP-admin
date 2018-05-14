@@ -48,7 +48,10 @@ $this->headScript()
                             </div>
                         </div>
                     </div>
-                    <!--<div class="col-md-7">
+                </div>
+                <br>
+                <div class="row text-right">
+                    <div class="col-md-10">
                         <div class="form-inline">
                             <div class="form-group">
                                 <label> <?= $this->translate("da"); ?>: </label>
@@ -63,19 +66,20 @@ $this->headScript()
                                        placeholder="<?= $this->translate("Data fine"); ?>">
                             </div>
                             <div class="btn-group">
-                                <button type="button" class="btn green js-search" id="js-search"><i class="fa fa-search"></i> <?= $this->translate("Cerca"); ?></button>
-                                <button type="button" class="btn green dropdown-toggle" data-toggle="dropdown"><i class="fa fa-angle-down"></i></button>
-                                <ul class="dropdown-menu" role="menu">
-                                    <li>
-                                        <a href="javascript:void(0);" id="js-clear"><i class="fa fa-remove"></i> <?= $this->translate("Pulisci Ricerca"); ?>
-                                        </a>
-                                    </li>
-                                </ul>
+                                <button class="btn btn-success pull-right" id="pay-fines-betweenDate" data-toggle="modal" data-target="#myModal">Paga</button>
                             </div>
                         </div>
-                    </div>-->
-                    <div class="col-lg-12">
-                        <button class="btn btn-success pull-right" id="pay-fines-selected">Paga multe selezionate</button>
+                    </div>
+                    <div class="col-lg-2">
+                        <button class="btn btn-success pull-right" id="pay-fines-selected" disabled>Paga multe sel.</button>
+                    </div>
+                </div>
+                <div class="modal fade" id="myModal" role="dialog">
+                    <div class="modal-dialog">
+                        <div ><i class='fa fa-spinner fa-pulse fa-2x fa-fw'></i>assasasasasasasasas</div>
+                        <div id="close" style="display: none">
+                            <button id='closeModal' type='button' class='btn btn-default' data-dismiss='modal'></button>
+                        </div>
                     </div>
                 </div>
                 <hr>
@@ -92,7 +96,7 @@ $this->headScript()
                             <tr>
                                 <th><?= $this->translate("ID"); ?></th>
                                 <!--<th><div id="checkall"><div class="btn-group btn btn-default" onclick="checkAllFines();">Check all</div></div><input class="btn-group btn btn-default" type="Submit" value="Paga multe"></th>-->
-                                <th><center><input type="checkbox" id='checkAll' onclick="check();"/></th>
+                                <th><center><input type="checkbox" id='checkAll'/></th>
                                 <th><?= $this->translate("Addebitato"); ?></th>
                                 <th><?= $this->translate("ID cliente"); ?></th>
                                 <th><?= $this->translate("Descrizione"); ?></th>
@@ -116,15 +120,4 @@ $this->headScript()
 </div>
 <script>
     var filters = <?= $this->filters ?>;
-    function check(){
-        if ($('#checkAll').is(':checked')) {
-            $('.checkbox').each(function(){
-                this.checked = true;
-            });
-        }else{
-            $('.checkbox').each(function(){
-                this.checked = false;
-            });
-        }
-    }
 </script>

@@ -199,5 +199,17 @@ class FinesController extends AbstractActionController
             'safoPenalty' => $safoPenalty
         ]);
     }
+    
+    public function findFinesBetweenDateAction(){
+        $from = new \DateTime($this->params()->fromPost('from'));
+        $to = new \DateTime($this->params()->fromPost('to'));
+
+        $result = $this->finesService->getFinesBetweenDate($from->format('Y-m-d H:i:s'), $to->format('Y-m-d H:i:s'));
+
+        $response = $this->getResponse();
+        $response->setStatusCode(200);
+        $response->setContent(json_encode($result));
+        return $response;
+    }
 
 }

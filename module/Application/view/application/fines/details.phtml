@@ -19,14 +19,14 @@ $safoPenalty = $this->safoPenalty;
 
         <div class="row">
             <?php if($safoPenalty->getCharged()){ ?>
-                    <div class="col-md-12">
+                    <div class="col-md-6">
                         <div class="form-inline">
                             <H4><span class="glyphicon glyphicon-ok"></span> Multa già pagata o messa in pagamento.</H4>
                         </div>
                     </div>
             <?php }else{
                     if($safoPenalty->getCustomerId() != 0 && $safoPenalty->getTripId() != 0 && $safoPenalty->isComplete()){ ?>
-                        <div class="col-md-12">
+                        <div class="col-md-6">
                             <div class="form-inline">
                                 <div class="btn-group">
                                     <button type="button" class="btn green" id="js-fine-try">
@@ -37,7 +37,7 @@ $safoPenalty = $this->safoPenalty;
                             </div>
                         </div>
             <?php }else{ ?>    
-                    <div class="col-md-12">
+                    <div class="col-md-6">
                         <div class="form-inline">
                             <H4><span class="glyphicon glyphicon-remove"></span> Non è possibile effettura un pagemnto mancaza di dati</H4>
                         </div>
@@ -46,7 +46,7 @@ $safoPenalty = $this->safoPenalty;
                 }
             ?>
 
-            <div class="col-lg-12">
+            <div class="col-lg-6">
                 <a href="/fines" class="btn btn-success pull-right"><i class="fa fa-arrow-left"></i> Torna alla lista</a>
             </div>
         </div>
@@ -82,13 +82,13 @@ $safoPenalty = $this->safoPenalty;
                             <div class="col-lg-3">
                                 <div class="form-group">
                                     <label><?= $this->translate("Nome"); ?></label>
-                                    <div class="sng-info-box"><?= (($safoPenalty->getCustomerId()>0) ? '<a href="/customers/edit/'.$safoPenalty->getCustomerId().'">'.$safoPenalty->getCustomerId().'</a>' : $safoPenalty->getCustomerId()) ?></div>
+                                    <div class="sng-info-box"><?= is_null($safoPenalty->getCustomer()) ? '' : $safoPenalty->getCustomer()->getName() ?></div>
                                 </div>
                             </div>
                             <div class="col-lg-3">
                                 <div class="form-group">
                                     <label><?= $this->translate("Cognome"); ?></label>
-                                    <div class="sng-info-box"><?= (($safoPenalty->getCustomerId()>0) ? '<a href="/customers/edit/'.$safoPenalty->getCustomerId().'">'.$safoPenalty->getCustomerId().'</a>' : $safoPenalty->getCustomerId()) ?></div>
+                                    <div class="sng-info-box"><?= is_null($safoPenalty->getCustomer()) ? '' : $safoPenalty->getCustomer()->getSurname() ?></div>
                                 </div>
                             </div>
                         </div>
