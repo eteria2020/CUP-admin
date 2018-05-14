@@ -282,6 +282,19 @@ return [
                             ],
                         ],
                     ],
+                    'ajax-tab-extra' => [
+                        'type'    => 'Segment',
+                        'options' => [
+                            'route'    => '/ajax-tab/extra/:id',
+                            'constraints' => [
+                                'id' => '[0-9]*'
+                            ],
+                            'defaults' => [
+                                'controller' => 'CustomerFailure',
+                                'action' => 'extra-tab',
+                            ],
+                        ],
+                    ],
                     'ajax-tab-license' => [
                         'type'    => 'Segment',
                         'options' => [
@@ -1017,27 +1030,51 @@ return [
                 ],
                 'may_terminate' => false,
                 'child_routes' => [
-                    'retry' => [
+                    'retry-payments' => [
                         'type' => 'Segment',
                         'options' => [
-                            'route' => '/retry/:id',
+                            'route' => '/retry-payments/:id',
                             'constraints' => [
                                 'id'    => '[0-9]*'
                             ],
                             'defaults' => [
-                                'action' => 'retry'
+                                'action' => 'retry-payments'
                             ]
                         ]
                     ],
-                    'do-retry' => [
+                    'retry-extra' => [
                         'type' => 'Segment',
                         'options' => [
-                            'route' => '/do-retry/:id',
+                            'route' => '/retry-extra/:id',
                             'constraints' => [
                                 'id'    => '[0-9]*'
                             ],
                             'defaults' => [
-                                'action' => 'do-retry'
+                                'action' => 'retry-extra'
+                            ]
+                        ]
+                    ],
+                    'do-retry-payments' => [
+                        'type' => 'Segment',
+                        'options' => [
+                            'route' => '/do-retry-payments/:id',
+                            'constraints' => [
+                                'id'    => '[0-9]*'
+                            ],
+                            'defaults' => [
+                                'action' => 'do-retry-payments'
+                            ]
+                        ]
+                    ],
+                    'do-retry-extra' => [
+                        'type' => 'Segment',
+                        'options' => [
+                            'route' => '/do-retry-extra/:id',
+                            'constraints' => [
+                                'id'    => '[0-9]*'
+                            ],
+                            'defaults' => [
+                                'action' => 'do-retry-extra'
                             ]
                         ]
                     ],
@@ -1050,12 +1087,30 @@ return [
                             ]
                         ]
                     ],
+                    'failed-extra' => [
+                        'type' => 'Literal',
+                        'options' => [
+                            'route' => '/failed-extra',
+                            'defaults' => [
+                                'action' => 'failed-extra'
+                            ]
+                        ]
+                    ],
                     'failed-payments-datatable' => [
                         'type' => 'Literal',
                         'options' => [
                             'route' => '/failed-payments-datatable',
                             'defaults' => [
                                 'action' => 'failed-payments-datatable'
+                            ]
+                        ]
+                    ],
+                    'failed-extra-datatable' => [
+                        'type' => 'Literal',
+                        'options' => [
+                            'route' => '/failed-extra-datatable',
+                            'defaults' => [
+                                'action' => 'failed-extra-datatable'
                             ]
                         ]
                     ],
@@ -1185,7 +1240,17 @@ return [
                                 'action' => 'upload'
                             ]
                         ]
-                    ]
+                    ],
+                    'set-payable' => [
+                        'type' => 'Segment',
+                        'options' => [
+                            'route' => '/set-payable',
+                            'defaults' => [
+                                'controller' => 'Payments',
+                                'action' => 'set-payable'
+                            ]
+                        ]
+                    ],
                 ]
             ],
             'configurations' => [
@@ -2011,6 +2076,11 @@ return [
                     [
                         'label' => $translator->translate('Pagamenti falliti'),
                         'route' => 'payments/failed-payments',
+                        'isVisible' => true
+                    ],
+                    [
+                        'label' => $translator->translate('Elenco Extra/Penali'),
+                        'route' => 'payments/failed-extra',
                         'isVisible' => true
                     ],
                     [

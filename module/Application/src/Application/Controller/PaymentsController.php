@@ -9,6 +9,8 @@ use SharengoCore\Service\TripPaymentsService;
 use SharengoCore\Service\PaymentsService;
 use SharengoCore\Service\CustomersService;
 use SharengoCore\Service\ExtraPaymentsService;
+use SharengoCore\Service\CustomerDeactivationService;
+use SharengoCore\Service\ExtraPaymentTriesService;
 use Cartasi\Service\CartasiContractsService;
 use Cartasi\Service\CartasiCustomerPayments;
 use SharengoCore\Service\PenaltiesService;
@@ -52,6 +54,11 @@ class PaymentsController extends AbstractActionController
      * @var ExtraPaymentsService
      */
     private $extraPaymentsService;
+    
+    /**
+     * @var ExtraPaymentTriesService
+     */
+    private $extraPaymentTriesService;
 
     /**
      * @var PenaltiesService
@@ -82,6 +89,11 @@ class PaymentsController extends AbstractActionController
      * @var Container
      */
     private $datatableFiltersSessionContainer;
+    
+    /**
+     * @var CustomerDeactivationService
+     */
+    private $deactivationService;
 
     public function __construct(
         TripPaymentsService $tripPaymentsService,
@@ -90,12 +102,14 @@ class PaymentsController extends AbstractActionController
         CartasiContractsService $cartasiContractsService,
         CartasiCustomerPayments $cartasiCustomerPayments,
         ExtraPaymentsService $extraPaymentsService,
+        ExtraPaymentTriesService $extraPaymentTriesService,
         PenaltiesService $penaltiesService,
         FleetService $fleetService,
         RecapService $recapService,
         FaresService $faresService,
         FaresForm $faresForm,
-        Container $datatableFiltersSessionContainer
+        Container $datatableFiltersSessionContainer,
+        CustomerDeactivationService $deactivationService
     ) {
         $this->tripPaymentsService = $tripPaymentsService;
         $this->paymentsService = $paymentsService;
@@ -103,12 +117,14 @@ class PaymentsController extends AbstractActionController
         $this->cartasiContractsService = $cartasiContractsService;
         $this->cartasiCustomerPayments = $cartasiCustomerPayments;
         $this->extraPaymentsService = $extraPaymentsService;
+        $this->extraPaymentTriesService = $extraPaymentTriesService;
         $this->penaltiesService = $penaltiesService;
         $this->fleetService = $fleetService;
         $this->recapService = $recapService;
         $this->faresService = $faresService;
         $this->faresForm = $faresForm;
         $this->datatableFiltersSessionContainer = $datatableFiltersSessionContainer;
+        $this->deactivationService = $deactivationService;
     }
 
     /**
@@ -130,6 +146,15 @@ class PaymentsController extends AbstractActionController
             'filters' => json_encode($sessionDatatableFilters),
         ]);
     }
+    
+    public function failedExtraAction()
+    {
+        $sessionDatatableFilters = $this->getDataTableSessionFilters();
+
+        return new ViewModel([
+            'filters' => json_encode($sessionDatatableFilters),
+        ]);
+    }
 
     public function failedPaymentsDatatableAction()
     {
@@ -142,7 +167,7 @@ class PaymentsController extends AbstractActionController
         }
         $dataDataTable = $this->tripPaymentsService->getFailedPaymentsData($filters);
         $totalFailedPayments = $this->tripPaymentsService->getTotalFailedPayments();
-        $recordsFiltered = $this->getRecordsFiltered($filters, $totalFailedPayments);
+        $recordsFiltered = $this->getRecordsFiltered($filters, $totalFailedPayments, "payment");
 
         return new JsonModel([
             'draw'            => $this->params()->fromQuery('sEcho', 0),
@@ -151,19 +176,40 @@ class PaymentsController extends AbstractActionController
             'data'            => $dataDataTable
         ]);
     }
+    
+    public function failedExtraDatatableAction(){
+        $filters = $this->params()->fromPost();
+        $filters['withLimit'] = true;
+        
+        if($filters['column'] == "" && isset($filters['columnValueWithoutLike']) && $filters['columnValueWithoutLike'] == ""){
+            $filters['columnWithoutLike'] = true;
+            $filters['columnValueWithoutLike'] = null;
+        }
+        $dataDataTable = $this->extraPaymentsService->getFailedExtraData($filters);
+        $totalFailedExtra = $this->extraPaymentsService->getTotalExtra();
+        $recordsFiltered = $this->getRecordsFiltered($filters, $totalFailedExtra, "extra");
 
-    protected function getRecordsFiltered($filters, $totalTripPayments)
-    {
+        return new JsonModel([
+            'draw'            => $this->params()->fromQuery('sEcho', 0),
+            'recordsTotal'    => $totalFailedExtra,
+            'recordsFiltered' => $recordsFiltered,
+            'data'            => $dataDataTable
+        ]);
+    }
+
+    protected function getRecordsFiltered($filters, $recordsFiltered, $param) {
         if (empty($filters['searchValue']) && !isset($filters['columnValueWithoutLike'])) {
-            return $totalTripPayments;
+            return $recordsFiltered;
         } else {
             $filters['withLimit'] = false;
-
-            return count($this->tripPaymentsService->getFailedPaymentsData($filters));
+            if ($param === "payment")
+                return count($this->tripPaymentsService->getFailedPaymentsData($filters));
+            else
+                return count($this->extraPaymentsService->getFailedExtraData($filters));
         }
     }
 
-    public function retryAction()
+    public function retryPaymentsAction()
     {
         $id = (int)$this->params()->fromRoute('id', 0);
 
@@ -181,8 +227,23 @@ class PaymentsController extends AbstractActionController
             'customer' => $tripPayment->getCustomer()
         ]);
     }
+    
+    public function retryExtraAction()
+    {
+        $id = (int)$this->params()->fromRoute('id', 0);
 
-    public function doRetryAction()
+        $extraPayment = $this->extraPaymentsService->getExtraPaymentById($id);
+
+        $extraPaymentTries = $extraPayment->getExtraPaymentTries();
+
+        return new ViewModel([
+            'extraPayment' => $extraPayment,
+            'extraPaymentTries' => $extraPaymentTries,
+            'customer' => $extraPayment->getCustomer()
+        ]);
+    }
+
+    public function doRetryPaymentsAction()
     {
         $id = (int)$this->params()->fromRoute('id', 0);
 
@@ -209,6 +270,42 @@ class PaymentsController extends AbstractActionController
                 'message' => 'The trip is not anymore in wrong payment state'
             ]);
         }
+    }
+    
+    public function doRetryExtraAction()
+    {
+        $id = (int)$this->params()->fromRoute('id', 0);
+
+        $webuser = $this->identity();
+
+        $extraPayment = $this->extraPaymentsService->getExtraPaymentById($id);
+
+        if ($extraPayment->isWrongExtra()) {
+            // the second parameter is needed to avoid sending an email to the customer
+            //$cartasiResponse = $this->paymentsService->tryExtraPayment($extraPayment, $webuser, true, false, false, true);
+            $cartasiResponse = $this->paymentsService->tryExtraPayment($extraPayment, $webuser, true, false, false, false);
+
+            
+            if ($cartasiResponse->getOutcome() === 'OK') {
+                //set extra payed
+                $extraPayment = $this->extraPaymentsService->setPayedCorrectly($extraPayment);
+                //error_log($cartasiResponse->getTransaction()->getId());
+                $extraPayment = $this->extraPaymentsService->setTrasaction($extraPayment, $cartasiResponse->getTransaction());
+                $this->customersService->enableCustomerPayment($extraPayment->getCustomer());
+            }
+            
+            return new JsonModel([
+                'outcome' => $cartasiResponse->getOutcome(),
+                'message' => $cartasiResponse->getMessage(),
+                'tripPaymentTriesId' => $extraPayment->getExtraPaymentTries()[0]->getId()
+            ]);
+        } else {
+            return new JsonModel([
+                'outcome' => 'KO',
+                'message' => 'The extra is not anymore in wrong payment state'
+            ]);
+        }
+ 
     }
 
     public function extraAction()
@@ -286,20 +383,13 @@ class PaymentsController extends AbstractActionController
                 ]);
             }
 
-
             $amount = 0;
             foreach ($amounts as $value) {
                 $amount += intval($value);
             }
+
             $response = $this->cartasiCustomerPayments->sendPaymentRequest($customer, $amount);
-
-            if (!$response->getCompletedCorrectly()) {
-                $this->response->setStatusCode(402);
-                return new JsonModel([
-                    'error' => $translator->translate('Il tentativo di pagamento non è andato a buon fine. Il cliente è stato notificato da Cartasi')
-                ]);
-            }
-
+            
             $extraPayment = $this->extraPaymentsService->registerExtraPayment(
                 $customer,
                 $fleet,
@@ -310,9 +400,37 @@ class PaymentsController extends AbstractActionController
                 $reasons,
                 $amounts
             );
-
+            if (!$response->getCompletedCorrectly()) {                
+                //set status worn_payment in extra_paymnets
+                $extraPayment = $this->extraPaymentsService->setStatusWrongPayment($extraPayment);
+                
+                //extrapyaments tries
+                $extraPaymentTry = $this->extraPaymentTriesService->createExtraPaymentTry(
+                        $extraPayment, $response->getOutcome(), $response->getTransaction(), $this->identity()
+                );
+                
+                //disable customer
+                $this->deactivationService->deactivateForExtraPaymentTry($customer, $extraPaymentTry);
+                
+                $extraTries = $this->encodeExtra($extraPaymentTry);
+                
+                $this->response->setStatusCode(402);
+                return new JsonModel([
+                    'error' => $translator->translate('Il tentativo di pagamento non è andato a buon fine. Il cliente è stato notificato da Cartasi'),
+                    'extraPaymentTry' => $extraTries
+                ]);
+            }
+            
+            //set status payed in extra_payment
+            $extraPayment = $this->extraPaymentsService->setPayedCorrectlyFirstTime($extraPayment);
+            //scrivere un record sulla extra_payments_tries
+            $extraPaymentTry = $this->extraPaymentTriesService->createExtraPaymentTry($extraPayment, $response->getOutcome(), $response->getTransaction(), $this->identity());
+            
+            $extraTries = $this->encodeExtra($extraPaymentTry);
+            
             return new JsonModel([
-                'message' => $translator->translate('Il tentativo di pagamento è andato a buon fine. Il cliente è stato notificato da Cartasi')
+                'message' => $translator->translate('Il tentativo di pagamento è andato a buon fine. Il cliente è stato notificato da Cartasi'),
+                'extraPaymentTry' => $extraTries
             ]);
         } catch (\Exception $e) {
             $this->response->setStatusCode(500);
@@ -320,6 +438,19 @@ class PaymentsController extends AbstractActionController
                 'error' => $translator->translate('C\'è stato un errore durante la procedura di pagamento: ') . $e->getMessage()
             ]);
         }
+    }
+    
+    public function encodeExtra($extraPaymentTry) {
+        $array = array(
+            "date" => $extraPaymentTry->getTs()->format('Y-m-d H:i:s'),
+            "webUser" => $extraPaymentTry->getWebuserName(),
+            "product" => (null != $extraPaymentTry->getTransaction()) ? $extraPaymentTry->getTransaction()->getProductType() : 'n.d.',
+            "outcome" => $extraPaymentTry->getOutcome(),
+            "result" => (null != $extraPaymentTry->getTransaction()) ? $extraPaymentTry->getTransaction()->getOutcome() : 'n.d.',
+            "message" => (null != $extraPaymentTry->getTransaction()) ? $extraPaymentTry->getTransaction()->getMessage() : 'n.d.',
+            "amount" => (null != $extraPaymentTry->getExtraPayment()->getAmount()) ? $extraPaymentTry->getExtraPayment()->getAmount()/100 : 'n.d.',
+        );
+        return json_encode($array);
     }
 
     public function recapAction()
@@ -396,5 +527,29 @@ class PaymentsController extends AbstractActionController
         return new ViewModel([
             'faresForm' => $form
         ]);
+    }
+    
+    
+    public function setPayableAction() {
+        try {
+            $id = $this->params()->fromPost('id');
+            $payable = $this->params()->fromPost('payable') == "true" ? true : false;
+
+            $extraPayment = $this->extraPaymentsService->getExtraPaymentById($id);
+
+            $extraPayment = $this->extraPaymentsService->setExtraFree($extraPayment, !$payable, $this->identity());
+
+            $response_msg = "success";
+            $response = $this->getResponse();
+            $response->setStatusCode(200);
+            $response->setContent($response_msg);
+            return $response;
+        } catch (\Exception $e) {
+            $response_msg = "error";
+            $response = $this->getResponse();
+            $response->setStatusCode(200);
+            $response->setContent($response_msg);
+            return $response;
+        }
     }
 }

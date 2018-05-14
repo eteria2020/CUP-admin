@@ -56,10 +56,42 @@ $this->headScript()->appendFile($this->basePath() .'/js/extra-payments.js?v=1.5'
                 <button id="js-extra-payment" class="btn btn-success sng-faded"><?= $this->translate("Effettua pagamento"); ?></button>
             </div>
         </div>
-        <div id="disableuserspan" style="margin-top:10px; display: none">
-           <form class="portlet-body" action="" method="post" id="form_deactive_user"  target="_blank">
-               <input id="js-reactivate" class="btn btn-success" type="submit" onclick="$('#form_deactive_user').attr('action','/customers/deactivate/'+$('#customer').val());deactivate(event);clearFields();$('#disableuserspan').hide();" value="Disabilita manualmente">
-           </form>
+
+        <div id="extraTries" style="display:none">
+            <hr>
+            <div class="portlet box green">
+                <div class="portlet-title">
+                    <div class="caption">
+                        <i class="fa fa-cogs"></i><?= $this->translate("Risultato tentativo effettuato"); ?>
+                    </div>
+                </div>
+                <div class="portlet-body">
+                    <table class="table table-striped table-bordered table-hover">
+                        <thead>
+                            <tr>
+                                <th><?= $this->translate("Data del tentativo"); ?></th>
+                                <th><?= $this->translate("Utente Admin"); ?></th>
+                                <th><?= $this->translate("Prodotto"); ?></th>
+                                <th><?= $this->translate("Esito"); ?></th>
+                                <th><?= $this->translate("Risultato"); ?></th>
+                                <th><?= $this->translate("Messaggio"); ?></th>
+                                <th><?= $this->translate("Costo"); ?></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td id='date'></td>
+                                <td id='webuser'></td>
+                                <td id='product'></td>
+                                <td id='outcome'></td>
+                                <td id='result'></td>
+                                <td id='message'></td>
+                                <td id='amount'></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
         </div>
 
     </div>
