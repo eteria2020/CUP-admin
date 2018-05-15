@@ -561,8 +561,6 @@ class PaymentsController extends AbstractActionController
     private function checkIfEnable($extraPayment) {
         if(count($this->extraPaymentsService->getExtraPaymentsWrongAndPayable($extraPayment->getCustomer())) == 0){
             $this->deactivationService->reactivateCustomerForExtraPayed($extraPayment->getCustomer());
-        }else{
-            $a = '';
         }
     }
 }
