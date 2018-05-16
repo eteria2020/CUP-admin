@@ -71,18 +71,31 @@ $this->headScript()
                         </div>
                     </div>
                     <div class="col-lg-2">
-                        <button class="btn btn-success pull-right" id="pay-fines-selected" disabled>Paga multe sel.</button>
+                        <button class="btn btn-success pull-right" id="pay-fines-selected" data-toggle="modal" data-target="#myModal" disabled>Paga multe sel.</button>
                     </div>
                 </div>
-                <div class="modal fade" id="myModal" role="dialog">
+                
+                
+                <div class="modal fade" id="myModal" role="dialog" data-keyboard="false" data-backdrop="static">
                     <div class="modal-dialog">
-                        <div ><i class='fa fa-spinner fa-pulse fa-2x fa-fw'></i>assasasasasasasasas</div>
-                        <div id="close" style="display: none">
-                            <button id='closeModal' type='button' class='btn btn-default' data-dismiss='modal'></button>
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h4 class="modal-title" id="titleModal"></h4>
+                            </div>
+                            <center>
+                                <div class="modal-body">
+                                    <div id="body-text-modal"></div>
+                                </div>
+                            </center>
+                            <div class="modal-footer" id="btn-modal-close" style="display: none">
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                            </div>
                         </div>
                     </div>
                 </div>
                 <hr>
+                
+                
                 <!-- BEGIN EXAMPLE TABLE PORTLET-->
                 <div class="portlet box green">
                     <div class="portlet-title">
@@ -120,4 +133,15 @@ $this->headScript()
 </div>
 <script>
     var filters = <?= $this->filters ?>;
+    
+    $('#js-date-from').datepicker({
+        autoclose: true,
+        format: "yyyy-mm-dd"
+    });
+    
+    $('#js-date-to').datepicker({
+        autoclose: true,
+        format: "yyyy-mm-dd"
+    });
+    
 </script>

@@ -319,40 +319,36 @@ $(function() {
         }
     });
     
-    $('#js-date-from').datepicker({
-        autoclose: true,
-        format: "yyyy-mm-dd"
-    });
-    
-    $('#js-date-to').datepicker({
-        autoclose: true,
-        format: "yyyy-mm-dd"
-    });
-    
     $('#pay-fines-betweenDate').click(function (){
-        console.log("click");
-        $.ajax({
-            type: "POST",
-            url: "/fines/find-fines-between-date/",
-            data: {'from': $('#js-date-from').val(),
-                    'to': $('#js-date-to').val()
-                  },
-            beforeSend: function () {
-                //$('#test').html("<div><i class='fa fa-spinner fa-pulse fa-2x fa-fw'></i></div>");
-            },
-            success: function (data) {
-                console.log("success rtecupero ");
-                var result = JSON.parse(data.toString());
-                var selected = new Array();
-                result.forEach(function(element) {
-                    selected.push(element['id']);
-                });
-                payFines(selected);
-            },
-            error: function () {
-                console.log("error rtecupero ");
-            }
-        });
+        if($('#js-date-from').val() == "" && $('#js-date-to').val() == ""){
+            $('#titleModal').text("Errore:");
+            $('#body-text-modal').html("<div><p>Inserire almeno la data di partenza</p></div>");
+            $('#btn-modal-close').show();
+        } else {
+            $.ajax({
+                type: "POST",
+                url: "/fines/find-fines-between-date/",
+                data: {'from': $('#js-date-from').val(),
+                        'to': $('#js-date-to').val()
+                      },
+                beforeSend: function () {
+                    $('#titleModal').text("In elaborazione...");
+                    $('#body-text-modal').html("<i class='fa fa-spinner fa-pulse fa-2x fa-fw'></i>");
+                },
+                success: function (data) {
+                    var result = JSON.parse(data.toString());
+                    var selected = new Array();
+                    result.forEach(function(element) {
+                        selected.push(element['id']);
+                    });
+                    payFines(selected);
+                },
+                error: function () {
+                    $('#titleModal').text("Errore:");
+                    $('#body-text-modal').html("<div><p>Si è verificato un errore durante la procedura</p></div>");
+                }
+            });
+        }
     });
     
     $('#js-fine-try').click(function () {
@@ -382,12 +378,18 @@ $(function() {
             type: "POST",
             url: "/fines/pay/",
             data: {'check': selected},
+            beforeSend: function () {
+                $('#titleModal').text("In elaborazione...");
+                $('#body-text-modal').html("<i class='fa fa-spinner fa-pulse fa-2x fa-fw'></i>");
+            },
             success: function (data) {
-                console.log("success pagato ");
-                $("#closeModal").click();
+                $('#titleModal').text("Risulatato:");
+                $('#body-text-modal').html("<div><p>Multe passate: </p><p>Multe non passate</p></div>");
+                $('#btn-modal-close').show();
             },
             error: function () {
-                console.log("error pagato ");
+                $('#titleModal').text("Errore:");
+                $('#body-text-modal').html("<div><p>Si è verificato un errore durante la procedura</p></div>");
             }
         });
     }

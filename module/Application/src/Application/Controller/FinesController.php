@@ -184,25 +184,37 @@ class FinesController extends AbstractActionController
     
     public function payAction()
     {
-        $safoPenalty = array();
-        $checkPost = $this->params()->fromPost('check');
-        if(isset($checkPost)){
-            /*for($x=0;$x<count($checkPost);$x++){
-                $fineObj = $this->finesService->getSafoPenaltyById($checkPost[$x]);
-                ($fineObj ? $safoPenalty[$x] = $fineObj : $safoPenalty[$x] = null );
-            }*/
+        try {
+            $safoPenalty = array();
+            $checkPost = $this->params()->fromPost('check');
+            if (isset($checkPost)) {
+                /* for($x=0;$x<count($checkPost);$x++){
+                  $fineObj = $this->finesService->getSafoPenaltyById($checkPost[$x]);
+                  ($fineObj ? $safoPenalty[$x] = $fineObj : $safoPenalty[$x] = null );
+                  } */
+                foreach ($checkPost as $fines_id) {
+                    $fine = $this->finesService->getSafoPenaltyById($fines_id);
+                    //create extra payment
+                }
+            }
+
+            //$safoPenalty = $this->finesService->getSafoPenaltyById($id);
+
+            $response = $this->getResponse();
+            $response->setStatusCode(200);
+            $response->setContent("");
+            return $response;
+        } catch (Exception $e) {
+            $response = $this->getResponse();
+            $response->setStatusCode(200);
+            $response->setContent("erroe");
+            return $response;
         }
-
-        //$safoPenalty = $this->finesService->getSafoPenaltyById($id);
-
-        return new ViewModel([
-            'safoPenalty' => $safoPenalty
-        ]);
     }
     
     public function findFinesBetweenDateAction(){
         $from = new \DateTime($this->params()->fromPost('from'));
-        $to = new \DateTime($this->params()->fromPost('to'));
+        $to = $this->params()->fromPost('to') != "" ? new \DateTime($this->params()->fromPost('to')) : new \DateTime();
 
         $result = $this->finesService->getFinesBetweenDate($from->format('Y-m-d H:i:s'), $to->format('Y-m-d H:i:s'));
 
