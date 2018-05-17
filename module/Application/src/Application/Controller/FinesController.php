@@ -188,10 +188,6 @@ class FinesController extends AbstractActionController
             $safoPenalty = array();
             $checkPost = $this->params()->fromPost('check');
             if (isset($checkPost)) {
-                /* for($x=0;$x<count($checkPost);$x++){
-                  $fineObj = $this->finesService->getSafoPenaltyById($checkPost[$x]);
-                  ($fineObj ? $safoPenalty[$x] = $fineObj : $safoPenalty[$x] = null );
-                  } */
                 foreach ($checkPost as $fines_id) {
                     $fine = $this->finesService->getSafoPenaltyById($fines_id);
                     //create extra payment
