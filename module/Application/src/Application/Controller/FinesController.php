@@ -15,6 +15,7 @@ use SharengoCore\Service\PenaltiesService;
 use SharengoCore\Exception\FleetNotFoundException;
 use SharengoCore\Service\FleetService;
 use SharengoCore\Service\RecapService;
+use SharengoCore\Entity\ExtraPayments;
 // Externals
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\JsonModel;
@@ -24,7 +25,7 @@ use Zend\Session\Container;
 class FinesController extends AbstractActionController
 {
     /**
-     * @var finesService
+     * @var FinesService
      */
     private $finesService;
 
@@ -182,32 +183,6 @@ class FinesController extends AbstractActionController
         ]);
     }
     
-    public function payAction()
-    {
-        try {
-            $safoPenalty = array();
-            $checkPost = $this->params()->fromPost('check');
-            if (isset($checkPost)) {
-                foreach ($checkPost as $fines_id) {
-                    $fine = $this->finesService->getSafoPenaltyById($fines_id);
-                    //create extra payment
-                }
-            }
-
-            //$safoPenalty = $this->finesService->getSafoPenaltyById($id);
-
-            $response = $this->getResponse();
-            $response->setStatusCode(200);
-            $response->setContent("");
-            return $response;
-        } catch (Exception $e) {
-            $response = $this->getResponse();
-            $response->setStatusCode(200);
-            $response->setContent("erroe");
-            return $response;
-        }
-    }
-    
     public function findFinesBetweenDateAction(){
         $from = new \DateTime($this->params()->fromPost('from'));
         $to = $this->params()->fromPost('to') != "" ? new \DateTime($this->params()->fromPost('to')) : new \DateTime();
@@ -219,5 +194,49 @@ class FinesController extends AbstractActionController
         $response->setContent(json_encode($result));
         return $response;
     }
+    
+    public function payAction()
+    {
+        try {
+            $checkPost = $this->params()->fromPost('check');
+            $penalty = $this->penaltiesService->findById(1);
+            
+            if (isset($checkPost)) {
+                $c_success = 0;
+                $c_fail = 0;
+                foreach ($checkPost as $fines_id) {
+                    $fine = $this->finesService->getSafoPenaltyById($fines_id);
+                    
+                    $resp = $this->cartasiCustomerPayments->sendPaymentRequest($fine->getCustomer(), $penalty->getAmount());
+                    
+                    $extraPayment = $this->finesService->createExtraPayment($fine, $penalty, $resp->getTransaction());
+                    
+                    if (!$resp->getCompletedCorrectly()) {
+                        $extraPaymentTry = $this->extraPaymentsService->processWrongPayment($extraPayment, $resp);
+                        $c_fail ++;
+                    } else {
+                        $extraPaymentTry = $this->extraPaymentsService->processPayedCorrectly($extraPayment, $resp);
+                        $c_success ++;
+                    }
+                    
+                    //pulire l'entity manager
+                    $this->finesService->clearEntityManager();
+                }
+            }
+
+
+            $response = $this->getResponse();
+            $response->setStatusCode(200);
+            $response->setContent(json_encode([["n_success"][$c_success]][["n_fail"][$c_fail]]));
+            return $response;
+        } catch (Exception $e) {
+            $response = $this->getResponse();
+            $response->setStatusCode(200);
+            $response->setContent("erroe");
+            return $response;
+        }
+    }
+    
+    
 
 }
