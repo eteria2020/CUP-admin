@@ -182,7 +182,7 @@ $customer = $this->customer;
 </div>
 <script>
     var tripPaymentId = "<?= $this->tripPayment->getId() ?>",
-        retryUrl = "<?= $this->url('payments/do-retry', ['id' => $this->tripPayment->getId()], ['force_canonical' => true]) ?>",
+        retryUrl = "<?= $this->url('payments/do-retry-payments', ['id' => $this->tripPayment->getId()], ['force_canonical' => true]) ?>",
         abilitateUrl = "<?= $this->url('customers/reactivate', ['id' => $this->customer->getId()], ['force_canonical' => true]) ?>",
-        listUrl = "<?= $this->url('payments/failed-payments', [], ['force_canonical' => true]) ?>";
+        listUrl = "<?= $this->url('payments/failed-extra', [], ['force_canonical' => true]) ?>";
 </script>

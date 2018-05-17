@@ -204,10 +204,12 @@ function sendPaymentRequest(customerId, fleetId, type, penalty, reasons, amounts
     }).done(function (data) {
         alert(data.message);
         clearFields();
+        viewTries($.parseJSON(data.extraPaymentTry));
     }).fail(function (data) {
         var message = JSON.parse(data.responseText).error;
         alert(message);
-        $('#disableuserspan').show();
+        var extraPaymentTries = JSON.parse(data.responseText).extraPaymentTry;
+        viewTries($.parseJSON(extraPaymentTries));
         //clearFields();
     });
 }
@@ -406,4 +408,17 @@ function togglePaymentEnabled(on)
 function setCurrentPaymentType()
 {
     currentType = $("#type option:selected").text();
+}
+
+function viewTries(extraPaymentTries)
+{
+    $('#date').html(extraPaymentTries.date);
+    $('#webuser').html(extraPaymentTries.webUser);
+    $('#product').html(extraPaymentTries.product);
+    $('#outcome').html(extraPaymentTries.outcome);
+    $('#result').html(extraPaymentTries.result);
+    $('#message').html(extraPaymentTries.message);
+    $('#amount').html(extraPaymentTries.amount + '€');
+    
+    $('#extraTries').fadeIn();
 }

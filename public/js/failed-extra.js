@@ -3,7 +3,7 @@ $(function() {
     "use strict";
 
      // DataTables
-    var table = $("#js-payments-table");
+    var table = $("#js-extra-table");
 
    // Define DataTables Filters
     var dataTableVars = {
@@ -36,22 +36,12 @@ $(function() {
         return (Math.floor(amount / 100)) + "," + toStringKeepZero(amount % 100) + " \u20ac";
     }
 
-    function renderDiscount(discount)
-    {
-        return discount + "%";
-    }
-
-    function renderMin(min)
-    {
-        return min + " min.";
-    }
-
     table.dataTable({
         "processing": true,
         "serverSide": true,
         "bStateSave": false,
         "bFilter": false,
-        "sAjaxSource": "/payments/failed-payments-datatable",
+        "sAjaxSource": "/payments/failed-extra-datatable",
         "fnServerData": function ( sSource, aoData, fnCallback, oSettings ) {
             oSettings.jqXHR = $.ajax( {
                 "dataType": "json",
@@ -78,82 +68,76 @@ $(function() {
             }
 
             aoData.push({ "name": "fixedColumn", "value": "e.status"});
-            aoData.push({ "name": "fixedValue", "value": "wrong_payment"});
             aoData.push({ "name": "fixedLike", "value": false});
         },
         "order": [[dataTableVars.iSortCol_0, dataTableVars.sSortDir_0]],
         "columns": [
-            {data: "e.firstPaymentTryTs"},
+            {data: "e.id"},
+            {data: "e.generatedTs"},
             {data: "cu.id"},
-            {data: "cu.name"},
-            {data: "cu.surname"},
+            {data: "cu.name_surname"},
             {data: "cu.mobile"},
-            {data: "cu.email"},
-            {data: "e.trip"},
-            {data: "e.tripMinutes"},
-            {data: "e.parkingMinutes"},
-            {data: "e.discountPercentage"},
+            {data: "e.reasons"},
             {data: "e.totalCost"},
+            {data: "e.payed"},
             {data: "button"}
         ],
         "columnDefs": [
             {
-                targets: 1,
-                className: "sng-dt-right"
-            },
-            {
-                targets: 6,
-                className: "sng-dt-right",
-                "render": function (data) {
-                    return '<a href="/trips/details/' + data +
-                        '" title="' + translate("tripDetailId") + " " + data +
-                        ' ">' + data + '</a>';
+                targets: 2,
+                "render": function (data, type, row) {
+                    return '<a href="/customers/edit/' + row.cu.id +
+                        '" title="' + translate("customersDetailId") + ' ' + row.cu.name_surname + ' ">' + data + '</a>';
                 }
             },
             {
-                targets: [1, 2, 3],
+                targets: 3,
+                sortable: false,
                 "render": function (data, type, row) {
                     return '<a href="/customers/edit/' + row.cu.id +
-                        '" title="' + translate("customersDetailId") + ' ' + row.cu.name +
-                        ' ' + row.cu.surname + ' ">' + data + '</a>';
+                        '" title="' + translate("customersDetailId") + ' ' + row.cu.name_surname + ' ">' + data + '</a>';
+                }
+            },
+            {
+                targets: 4,
+                sortable: false
+            },
+            {
+                targets: 5,
+                "render": function (data, type, row) {
+                    if (typeof row.e.reasons[0] === 'undefined' || row.e.reasons[0] === null) {
+                        return '';
+                    }else{
+                        return row.e.reasons[0][0][0].substring(0, 20) + '...';
+                    }
+                }
+            },
+            {
+                targets: 6,
+                sortable: false,
+                className: "sng-dt-right sng-no-wrap",
+                "render": function (data, type, row) {
+                    return (row.e.payed) ? 'Si' : 'No';
                 }
             },
             {
                 targets: 7,
-                className: "sng-dt-right sng-no-wrap",
-                "render": function (data) {
-                    return renderMin(data);
+                "render": function (data, type, row) {
+                    if(row.e.totalCost == "FREE"){
+                        return row.e.totalCost
+                    }else{
+                        return renderAmount(row.e.totalCost);
+                    }
                 }
             },
             {
                 targets: 8,
-                className: "sng-dt-right",
-                "render": function (data) {
-                    return renderMin(data);
-                }
-            },
-            {
-                targets: 9,
-                className: "sng-dt-right",
-                "render": function (data) {
-                    return renderDiscount(data);
-                }
-            },
-            {
-                targets: 10,
-                className: "sng-dt-right sng-no-wrap",
-                "render": function (data) {
-                    return renderAmount(data);
-                }
-            },
-            {
-                targets: 11,
                 data: "button",
                 searchable: false,
                 sortable: false,
                 render: function (data) {
                     return '<div class="btn-group">' +
-                        '<a href="/payments/retry-payments/' + data + '" class="btn btn-default">' + translate("continue") + '</a> ' +
+                        '<a href="/payments/retry-extra/' + data + '" class="btn btn-default">' + translate("details") + '</a> ' +
                         '</div>';
                 }
             }
@@ -205,35 +189,58 @@ $(function() {
         dataTableVars.column.val("select");
     });
 
+
+    var filterDate = false;
+    var filterDateField = "";
+        
     // Select Changed Action
     $(dataTableVars.column).change(function() {
+        dataTableVars.searchValue.val("")
         // Selected Column
         var value = $(this).val();
 
-        // Column that need the standard "LIKE" search operator
-        if (value === "cu.surname") {
-            filterWithoutLike = false;
-            dataTableVars.searchValue.val("");
-            dataTableVars.searchValue.prop("disabled", false);
-            typeClean.hide();
-            dataTableVars.searchValue.show();
-        } else {
-            filterWithoutLike = true;
-            dataTableVars.searchValue.val("");
-            dataTableVars.searchValue.prop("disabled", false);
-            typeClean.hide();
-            dataTableVars.searchValue.show();
-
-            switch (value) {
-                // Columns that need a "=" instead the standard "LIKE" search operator.
-                case "e.trip":
-                    columnWithoutLike = value;
-                    //columnValueWithoutLike = true;
-                    break;
-                case "cu.id":
-                    columnWithoutLike = value;
-                    break;
-            }
+        filterDate = false;
+        filterDateField = "";
+        dataTableVars.searchValue.show();
+        dataTableVars.searchValue.prop("disabled", false);
+        $(dataTableVars.searchValue).datepicker("remove");
+        
+        switch (value) {
+            case "e.generatedTs":
+                filterDate = true;
+                filterDateField = value;
+                dataTableVars.searchValue.val("");
+                $(dataTableVars.searchValue).datepicker({
+                    autoclose: true,
+                    format: "yyyy-mm-dd",
+                    weekStart: 1
+                });
+                break;
+            case "cu.id":
+            case "e.reasons":
+            case "e.id":
+                dataTableVars.searchValue.val();
+                break;
+            case "cu.surname":
+            case "cu.email":
+                filterWithoutLike = false;
+                dataTableVars.searchValue.val("");
+                dataTableVars.searchValue.prop("disabled", false);
+                typeClean.hide();
+                dataTableVars.searchValue.show();
+                break;
+            case "e.status":
+                if($('#js-column option:selected').text() === "Pagato SI"){
+                    dataTableVars.searchValue.val("payed_correctly");
+                }else{
+                    dataTableVars.searchValue.val("wrong_payment");
+                }
+                dataTableVars.searchValue.prop("disabled", true);
+                break;
+            default:
+                dataTableVars.searchValue.val("");
+                dataTableVars.searchValue.prop("disabled", true);
+                break;
         }
     });
 

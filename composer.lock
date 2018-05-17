@@ -74,6 +74,7 @@
                 "zf2",
                 "zfc-user"
             ],
+            "abandoned": true,
             "time": "2013-07-05T11:59:46+00:00"
         },
         {
@@ -2106,7 +2107,7 @@
             "source": {
                 "type": "git",
                 "url": "ssh://git@git.sharengo.it/cup-it/core.git",
-                "reference": "addf8cb76725c4beae07b5cdaa63509b21495a0c"
+                "reference": "1f552e8abd0b72bbaa0b883c987c510e999a858c"
             },
             "require": {
                 "doctrine/doctrine-orm-module": "0.*",
@@ -2127,7 +2128,7 @@
                 }
             },
             "description": "Core ZF2 module for Sharengo apps",
-            "time": "2018-05-10T07:43:09+00:00"
+            "time": "2018-05-15T10:45:03+00:00"
         },
         {
             "name": "mvlabs/zf2-multilanguage",
