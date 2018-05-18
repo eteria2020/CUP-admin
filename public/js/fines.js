@@ -72,6 +72,7 @@ $(function() {
         "columns": [
             {data: "e.id"},
             {data: "e.charged"},
+            {data: "e.payed"},
             {data: "e.customerId"},
             {data: "e.vehicleFleetId"},
             {data: "e.tripId"},
@@ -93,7 +94,6 @@ $(function() {
             },
             {
                 targets: [1],
-                //data: "button",
                 searchable: false,
                 sortable: false,
                 render: function (data, type, row) {
@@ -118,6 +118,18 @@ $(function() {
             },
             {
                 targets: [3],
+                searchable: false,
+                sortable: false,
+                render: function (data, type, row) {
+                    if(row.fines.payed != null ){
+                        return row.fines.payed;
+                    }else{
+                        return '---';
+                    }
+                }
+            },
+            {
+                targets: [4],
                 sortable: false,
                 "render": function (data, type, row) {
                     if(row.fines.customerId>0){
@@ -128,7 +140,7 @@ $(function() {
                 }
             },
             {
-                targets: [4],
+                targets: [5],
                 sortable: false,
                 "render": function (data, type, row) {
                     var str = row.fines.violationDescription;
@@ -136,14 +148,14 @@ $(function() {
                 }
             },
             {
-                targets: [5],
+                targets: [6],
                 sortable: false,
                 "render": function (data, type, row) {
                     return (row.fines.vehicleFleetId != null) ? row.fines.vehicleFleetId : '---';
                 }
             },
             {
-                targets: [6],
+                targets: [7],
                 sortable: false,
                 "render": function (data, type, row) {
                     if(row.fines.tripId>0){
@@ -154,14 +166,14 @@ $(function() {
                 }
             },
             {
-                targets: [7],
+                targets: [8],
                 sortable: false,
                 "render": function (data, type, row) {
                     return '<a href="/cars/edit/'+row.fines.carPlate+'">'+row.fines.carPlate+'</a>';
                 }
             },
             {
-                targets: [8],
+                targets: [9],
                 sortable: false,
                 "render": function (data, type, row) {
                     var str = row.fines.violationAuthority;
@@ -169,14 +181,14 @@ $(function() {
                 }
             },
             {
-                targets: [9],
+                targets: [10],
                 sortable: false,
                 "render": function (data, type, row) {
                     return renderAmount(row.fines.amount);
                 }
             },
             {
-                targets: [10],
+                targets: [11],
                 sortable: false,
                 "render": function (data, type, row) {
                     if(row.fines.complete){
@@ -187,7 +199,7 @@ $(function() {
                 }
             },
             {
-                targets: [11],
+                targets: [12],
                 sortable: false,
                 "render": function (data, type, row) {
                     return row.fines.violationTimestamp;
@@ -342,11 +354,34 @@ $(function() {
             url: "/fines/pay/",
             data: {'check': [$('#id_penalty').html()]},
             success: function (data) {
+                var result = JSON.parse(data);
+                if(result.error == true){
+                    $('#resultPay').html("<br><div class='alert alert-danger'>Errore di sistema</div>");
+                    fadeOutPopUp();
+                }else{
+                    if(result.n_success == 1){
+                        $('#resultPay').html("<br><div class='alert alert-success'>Penale addebitata e passata</div>");
+                        fadeOutPopUp();
+                    } else {
+                        $('#resultPay').html("<br><div class='alert alert-warning'>Errore. Penale addebiatta ma non passata</div>");
+                        fadeOutPopUp();
+                    }
+                }
             },
             error: function () {
+               $('#resultPay').html("<br><div class='alert alert-danger'>Errore di sistema</div>");
+               fadeOutPopUp();
             }
         });
     });
+    
+    function fadeOutPopUp() {
+        $('#resultPay').fadeIn();
+        setTimeout(function () {
+            $('#resultPay').fadeOut();
+            location.reload();
+        }, 2000);
+    }
     
     $('#pay-fines-selected').click(function () {
         var selected = new Array();
@@ -368,7 +403,6 @@ $(function() {
                 $('#body-text-modal').html("<div><i class='fa fa-spinner fa-pulse fa-2x fa-fw'></i></div>");
             },
             success: function (data) {
-                console.log(data);
                 var result = JSON.parse(data);
                 if(result.error == true){
                     $('#titleModal').text("Errore:");
