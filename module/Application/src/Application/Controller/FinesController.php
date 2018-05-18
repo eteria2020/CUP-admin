@@ -206,11 +206,8 @@ class FinesController extends AbstractActionController
                 $c_fail = 0;
                 foreach ($checkPost as $fines_id) {
                     $fine = $this->finesService->getSafoPenaltyById($fines_id);
-                    
                     $resp = $this->cartasiCustomerPayments->sendPaymentRequest($fine->getCustomer(), $penalty->getAmount());
-                    
                     $extraPayment = $this->finesService->createExtraPayment($fine, $penalty, $resp->getTransaction());
-                    
                     if (!$resp->getCompletedCorrectly()) {
                         $extraPaymentTry = $this->extraPaymentsService->processWrongPayment($extraPayment, $resp);
                         $c_fail ++;
@@ -218,21 +215,18 @@ class FinesController extends AbstractActionController
                         $extraPaymentTry = $this->extraPaymentsService->processPayedCorrectly($extraPayment, $resp);
                         $c_success ++;
                     }
-                    
-                    //pulire l'entity manager
                     $this->finesService->clearEntityManager();
                 }
             }
 
-
             $response = $this->getResponse();
             $response->setStatusCode(200);
-            $response->setContent(json_encode([["n_success"][$c_success]][["n_fail"][$c_fail]]));
+            $response->setContent(json_encode(array('n_success' => $c_success, 'n_fail' => $c_fail)));
             return $response;
         } catch (Exception $e) {
             $response = $this->getResponse();
             $response->setStatusCode(200);
-            $response->setContent("erroe");
+            $response->setContent(json_encode(array('error' => true)));
             return $response;
         }
     }

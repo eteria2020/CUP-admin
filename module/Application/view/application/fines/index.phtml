@@ -87,8 +87,8 @@ $this->headScript()
                                     <div id="body-text-modal"></div>
                                 </div>
                             </center>
-                            <div class="modal-footer" id="btn-modal-close" style="display: none">
-                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                            <div class="modal-footer">
+                                <button type="button" id="btn-modal-close" class="btn btn-default" data-dismiss="modal" style="display: none">Close</button>
                             </div>
                         </div>
                     </div>
@@ -108,7 +108,6 @@ $this->headScript()
                             <thead>
                             <tr>
                                 <th><?= $this->translate("ID"); ?></th>
-                                <!--<th><div id="checkall"><div class="btn-group btn btn-default" onclick="checkAllFines();">Check all</div></div><input class="btn-group btn btn-default" type="Submit" value="Paga multe"></th>-->
                                 <th><center><input type="checkbox" id='checkAll'/></th>
                                 <th><?= $this->translate("Addebitato"); ?></th>
                                 <th><?= $this->translate("ID cliente"); ?></th>

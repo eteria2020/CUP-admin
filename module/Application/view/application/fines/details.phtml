@@ -123,25 +123,7 @@ $safoPenalty = $this->safoPenalty;
                             <div class="col-lg-3">
                                 <div class="form-group">
                                     <label><?= $this->translate("Flotta veicolo"); ?></label>
-                                    <div class="sng-info-box"><?
-                                                                switch ($safoPenalty->getVehicleFleetId()){
-                                                                    case 1:
-                                                                        echo "Milano";
-                                                                        break;
-                                                                    case 2:
-                                                                        echo "Firenze";
-                                                                        break;
-                                                                    case 3:
-                                                                        echo "Roma";
-                                                                        break;
-                                                                    case 4:
-                                                                        echo "Modena";
-                                                                        break;
-                                                                    default:
-                                                                        echo "Non specificato";
-                                                                        break;
-                                                                }
-                                                                ?></div>
+                                    <div class="sng-info-box"><? $safoPenalty->getFleetcode()>0; ?></div>
                                 </div>
                             </div>
                             <div class="col-lg-3">

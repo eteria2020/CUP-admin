@@ -139,22 +139,7 @@ $(function() {
                 targets: [5],
                 sortable: false,
                 "render": function (data, type, row) {
-                    if(row.fines.vehicleFleetId>0){
-                        switch (row.fines.vehicleFleetId){
-                            case 1:
-                                return "MI";
-                            case 2:
-                                return "FI";
-                            case 3:
-                                return "RM";
-                            case 4:
-                                return "MO";
-                            default:
-                                return row.fines.vehicleFleetId;
-                        }
-                    }else{
-                        return '---';
-                    }
+                    return (row.fines.vehicleFleetId != null) ? row.fines.vehicleFleetId : '---';
                 }
             },
             {
@@ -333,7 +318,7 @@ $(function() {
                       },
                 beforeSend: function () {
                     $('#titleModal').text("In elaborazione...");
-                    $('#body-text-modal').html("<i class='fa fa-spinner fa-pulse fa-2x fa-fw'></i>");
+                    $('#body-text-modal').html("<div><i class='fa fa-spinner fa-pulse fa-2x fa-fw'></i></div>");
                 },
                 success: function (data) {
                     var result = JSON.parse(data.toString());
@@ -380,17 +365,30 @@ $(function() {
             data: {'check': selected},
             beforeSend: function () {
                 $('#titleModal').text("In elaborazione...");
-                $('#body-text-modal').html("<i class='fa fa-spinner fa-pulse fa-2x fa-fw'></i>");
+                $('#body-text-modal').html("<div><i class='fa fa-spinner fa-pulse fa-2x fa-fw'></i></div>");
             },
             success: function (data) {
-                $('#titleModal').text("Risulatato:");
-                $('#body-text-modal').html("<div><p>Multe passate: </p><p>Multe non passate</p></div>");
-                $('#btn-modal-close').show();
+                console.log(data);
+                var result = JSON.parse(data);
+                if(result.error == true){
+                    $('#titleModal').text("Errore:");
+                    $('#body-text-modal').html("<div><p>Si è verificato un errore durante la procedura</p></div>");
+                    $('#btn-modal-close').show();
+                }else{
+                    $('#titleModal').text("Risulatato:");
+                    $('#body-text-modal').html("<div><p>Multe passate: "+ result.n_success +"</p><p>Multe non passate: "+ result.n_fail +"</p></div>");
+                    $('#btn-modal-close').show();
+                }
             },
             error: function () {
-                $('#titleModal').text("Errore:");
+                $('#titleModal').text("Errore NON GESTITO:");
                 $('#body-text-modal').html("<div><p>Si è verificato un errore durante la procedura</p></div>");
+                $('#btn-modal-close').show();
             }
         });
     }
+    
+    $(document).on("click", "#btn-modal-close", function () {
+        location.reload();
+    });
 });
