@@ -147,9 +147,14 @@ class PaymentsController extends AbstractActionController
         ]);
     }
     
+    private function getDataTableSessionExtraFilters()
+    {
+        return $this->datatableFiltersSessionContainer->offsetGet('ExtraPayments');
+    }
+    
     public function failedExtraAction()
     {
-        $sessionDatatableFilters = $this->getDataTableSessionFilters();
+        $sessionDatatableFilters = $this->getDataTableSessionExtraFilters();
 
         return new ViewModel([
             'filters' => json_encode($sessionDatatableFilters),
