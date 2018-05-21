@@ -231,6 +231,4 @@ class FinesController extends AbstractActionController
         }
     }
     
-    
-
 }

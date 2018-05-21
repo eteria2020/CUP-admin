@@ -71,7 +71,6 @@ $(function() {
         "order": [[dataTableVars.iSortCol_0, dataTableVars.sSortDir_0]],
         "columns": [
             {data: "e.id"},
-            {data: "e.charged"},
             {data: "e.payed"},
             {data: "e.customerId"},
             {data: "e.vehicleFleetId"},
@@ -98,26 +97,15 @@ $(function() {
                 sortable: false,
                 render: function (data, type, row) {
                     switch (row.fines.checkable){
-                        case 0: return '<center><span class="glyphicon glyphicon-ok"></span></center>';
-                        case 1: return '<center><input class="checkbox" type="checkbox" name="check[]" value="'+row.fines.id+'"></center>';
-                        case 2: return '<center><span class="glyphicon glyphicon-remove"></span></center>';
+                        case 0: return '<center><span class="glyphicon glyphicon-ok" title="Già addebitata"></span></center>';
+                        case 1: return '<center><input class="checkbox" type="checkbox" name="check[]" value="'+row.fines.id+'" title="Addebitabile"></center>';
+                        case 2: return '<center><span class="glyphicon glyphicon-remove" title="Non addebitabile"></span></center>';
                         default: return '---';   
                     }
                 }
             },
             {
                 targets: [2],
-                sortable: false,
-                "render": function (data, type, row) {
-                    if(row.fines.charged){
-                        return 'Si';
-                    }else{
-                        return 'No';
-                    }
-                }
-            },
-            {
-                targets: [3],
                 searchable: false,
                 sortable: false,
                 render: function (data, type, row) {
@@ -129,7 +117,7 @@ $(function() {
                 }
             },
             {
-                targets: [4],
+                targets: [3],
                 sortable: false,
                 "render": function (data, type, row) {
                     if(row.fines.customerId>0){
@@ -140,7 +128,7 @@ $(function() {
                 }
             },
             {
-                targets: [5],
+                targets: [4],
                 sortable: false,
                 "render": function (data, type, row) {
                     var str = row.fines.violationDescription;
@@ -148,14 +136,14 @@ $(function() {
                 }
             },
             {
-                targets: [6],
+                targets: [5],
                 sortable: false,
                 "render": function (data, type, row) {
                     return (row.fines.vehicleFleetId != null) ? row.fines.vehicleFleetId : '---';
                 }
             },
             {
-                targets: [7],
+                targets: [6],
                 sortable: false,
                 "render": function (data, type, row) {
                     if(row.fines.tripId>0){
@@ -166,14 +154,14 @@ $(function() {
                 }
             },
             {
-                targets: [8],
+                targets: [7],
                 sortable: false,
                 "render": function (data, type, row) {
                     return '<a href="/cars/edit/'+row.fines.carPlate+'">'+row.fines.carPlate+'</a>';
                 }
             },
             {
-                targets: [9],
+                targets: [8],
                 sortable: false,
                 "render": function (data, type, row) {
                     var str = row.fines.violationAuthority;
@@ -181,25 +169,25 @@ $(function() {
                 }
             },
             {
-                targets: [10],
+                targets: [9],
                 sortable: false,
                 "render": function (data, type, row) {
                     return renderAmount(row.fines.amount);
                 }
             },
             {
-                targets: [11],
+                targets: [10],
                 sortable: false,
                 "render": function (data, type, row) {
                     if(row.fines.complete){
-                        return 'Verbale appena dematerializzato';
-                    }else{
                         return 'Verbale in uscita (completo)';
+                    }else{
+                        return 'Verbale appena dematerializzato';
                     }
                 }
             },
             {
-                targets: [12],
+                targets: [11],
                 sortable: false,
                 "render": function (data, type, row) {
                     return row.fines.violationTimestamp;
@@ -334,6 +322,7 @@ $(function() {
                 },
                 success: function (data) {
                     var result = JSON.parse(data.toString());
+                    console.log(result);
                     var selected = new Array();
                     result.forEach(function(element) {
                         selected.push(element['id']);

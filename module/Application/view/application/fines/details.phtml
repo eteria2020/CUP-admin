@@ -222,6 +222,33 @@ $safoPenalty = $this->safoPenalty;
                                 </div>
                             </div>
                         </div>
+                        
+                        <div class="row">
+                            <div class="col-lg-3">
+                                <div class="form-group">
+                                    <label><?= $this->translate("ID Extra/penale"); ?></label>
+                                    <div class="sng-info-box"><?= is_null($safoPenalty->getExtraPayment()) ? '' : '<a href="/payments/retry-extra/'.$safoPenalty->getExtraPayment()->getId().'">'.$safoPenalty->getExtraPayment()->getId().'</a>'; ?></div>
+                                </div>
+                            </div>
+                            <div class="col-lg-3">
+                                <div class="form-group">
+                                    <label><?= $this->translate("Pagato"); ?></label>
+                                    <div class="sng-info-box"><?= is_null($safoPenalty->getExtraPayment()) ? '' : ($safoPenalty->getExtraPayment()->getStatus() == 'payed_correctly' || $safoPenalty->getExtraPayment()->getStatus() == 'invoiced' ? 'SI' : 'NO');  ?></div>
+                                </div>
+                            </div>
+                            <div class="col-lg-3">
+                                <div class="form-group">
+                                    <label><?= $this->translate("Data addebito"); ?></label>
+                                    <div class="sng-info-box"><?= is_null($safoPenalty->getExtraPayment()) ? '' : $safoPenalty->getExtraPayment()->getGeneratedTs()->format("d-m-Y H:i:s") ?></div>
+                                </div>
+                            </div>
+                            <div class="col-lg-3">
+                                <div class="form-group">
+                                    <label><?= $this->translate("Pagabile"); ?></label>
+                                    <div class="sng-info-box"><?= is_null($safoPenalty->getExtraPayment()) ? '' : ($safoPenalty->getExtraPayment()->getPayable()) ? 'SI' : 'NO' ?></div>
+                                </div>
+                            </div>
+                        </div>
 
                     </div>
                 </div>
