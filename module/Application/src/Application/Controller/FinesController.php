@@ -186,14 +186,15 @@ class FinesController extends AbstractActionController
     public function findFinesBetweenDateAction(){
         $from = new \DateTime($this->params()->fromPost('from'));
         $to = $this->params()->fromPost('to') != "" ? new \DateTime($this->params()->fromPost('to')) : new \DateTime();
-
-        $fines = $this->finesService->getFinesBetweenDate($from->format('Y-m-d H:i:s'), $to->format('Y-m-d H:i:s'));
-
-        $result = $this->encodeFine($fines);
         
+        $fines = $this->finesService->getFinesBetweenDate($from->format('Y-m-d H:i:s'), $to->format('Y-m-d H:i:s'));
+        
+        
+        //$a = json_encode(array_slice($fines, 0, 50)) . json_encode(array('nTotalFines' => count($fines)));
+        //$a = json_encode($fines) . json_encode(array('nTotalFines' => count($fines));
         $response = $this->getResponse();
         $response->setStatusCode(200);
-        $response->setContent($result);
+        $response->setContent(json_encode(array ('fine' => array_slice($fines, 0, 50), 'nTotal' => array('nTotalFines' => count($fines)))));
         return $response;
     }
     
@@ -231,21 +232,6 @@ class FinesController extends AbstractActionController
             $response->setContent(json_encode(array('error' => true)));
             return $response;
         }
-    }
-    
-    public function encodeFine($fines) {
-        $array = array();
-        foreach ($fines as $fine){
-            $array[] = array(
-                "id" => $fine->getId(),
-                "name" => $fine->getCustomer()->getName(),
-                "surname" => $fine->getCustomer()->getSurname(),
-                "fleet" => $fine->getFleet()->getCode(),
-                "trip_id" => $fine->getTripId(),
-                "car_plate" => $fine->getCarPlate()
-            );
-        }
-        return json_encode($array);
     }
     
 }

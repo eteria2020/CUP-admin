@@ -4,6 +4,8 @@ $(function() {
 
     // DataTables
     var table = $("#js-fines-table");
+    
+    var chageBtnPay = false;
 
     // Define DataTables Filters
     var dataTableVars = {
@@ -11,8 +13,17 @@ $(function() {
         column: $("#js-column"),
         iSortCol_0: 0,
         sSortDir_0: "desc",
-        iDisplayLength: 10
+        iDisplayLength: 10,
+        from: $("#js-date-from"),
+        to: $("#js-date-to"),
+        columnFromDate: $("#js-date-to"),
+        columnToDate: $("#js-date-to")
     };
+
+    var filterWithNull = true;
+    
+    var filterDate = false;
+    var filterDateField = "e.insertTs";
 
     var typeClean = $("#js-clean-type"),
         filterWithoutLike = false,
@@ -57,15 +68,24 @@ $(function() {
             } );
         },
         "fnServerParams": function ( aoData ) {
-            if (filterWithoutLike) {
-                aoData.push({ "name": "column", "value": ""});
-                aoData.push({ "name": "searchValue", "value": ""});
-                aoData.push({ "name": "columnWithoutLike", "value": columnWithoutLike});
-                aoData.push({ "name": "columnValueWithoutLike", "value": columnValueWithoutLike});
+            if (filterWithNull) {
+                if (filterWithoutLike) {
+                    aoData.push({"name": "column", "value": ""});
+                    aoData.push({"name": "searchValue", "value": ""});
+                    aoData.push({"name": "columnWithoutLike", "value": columnWithoutLike});
+                    aoData.push({"name": "columnValueWithoutLike", "value": columnValueWithoutLike});
+                } else {
+                    aoData.push({"name": "column", "value": $(dataTableVars.column).val()});
+                    aoData.push({"name": "searchValue", "value": dataTableVars.searchValue.val().trim()});
+                }
             } else {
-                aoData.push({ "name": "column", "value": $(dataTableVars.column).val()});
-                aoData.push({ "name": "searchValue", "value": dataTableVars.searchValue.val().trim()});
+                aoData.push({"name": "column", "value": ""});
+                aoData.push({"name": "searchValue", "value": ""});
             }
+            aoData.push({ "name": "from", "value": $(dataTableVars.from).val()});
+            aoData.push({ "name": "to", "value": $(dataTableVars.to).val()});
+            aoData.push({ "name": "columnFromDate", "value": filterDateField});
+            aoData.push({ "name": "columnFromEnd", "value": filterDateField});
             aoData.push({ "name": "fixedLike", "value": false});
         },
         "order": [[dataTableVars.iSortCol_0, dataTableVars.sSortDir_0]],
@@ -79,7 +99,8 @@ $(function() {
             {data: "e.violationAuthority"},
             {data: "e.amount"},
             {data: "e.violationDescription"},
-            {data: "e.complete"}
+            {data: "e.complete"},
+            {data: "e.insertTs"}
         ],
         "columnDefs": [
             {
@@ -227,6 +248,14 @@ $(function() {
 
     $("#js-search").click(function() {
         // Always set the columnValueWithoutLike (even for columns that will be filtered with the "LIKE" stmt.).
+        if($('#js-date-from').val() != ""){
+            chageBtnPay = true;
+            $('#pay-fines').fadeIn();
+            $('#pay-fines').text("Paga multe tramite date");
+        }else{
+            $('#pay-fines').fadeOut();
+            $('#pay-fines').text();
+        }
         columnValueWithoutLike = dataTableVars.searchValue.val();
 
         // Filter Action
@@ -235,18 +264,42 @@ $(function() {
 
     $("#js-clear").click(function() {
         dataTableVars.searchValue.val("");
+        dataTableVars.from.val("");
+        dataTableVars.to.val("");
         dataTableVars.searchValue.prop("disabled", false);
         typeClean.hide();
         dataTableVars.searchValue.show();
         dataTableVars.column.val("select");
+        filterWithNull = true;
     });
-
+        
     // Select Changed Action
     $(dataTableVars.column).change(function() {
         // Selected Column
         var value = $(this).val();
+        dataTableVars.searchValue.val();
+        filterWithNull = false;
+        /*
+        switch (value) {
+            case "e.generatedTs":
+                filterDate = true;
+                filterDateField = value;
+                dataTableVars.searchValue.val("");
+                $(dataTableVars.searchValue).datepicker({
+                    autoclose: true,
+                    format: "yyyy-mm-dd",
+                    weekStart: 1
+                });
+                break;
+            case "cu.id":
+            case "e.reasons":
+           case "e.id":
+                dataTableVars.searchValue.val();
+                break;
+        }*/
 
         // Column that need the standard "LIKE" search operator
+        /*
         if ((value === "e.violationDescription")||(value === "e.carPlate")||(value === "e.vehicleFleetId")||(value === "e.customerId")||(value === "e.tripId")) {
             filterWithoutLike = false;
             dataTableVars.searchValue.val("");
@@ -260,9 +313,12 @@ $(function() {
             typeClean.hide();
             dataTableVars.searchValue.show();
         }
+        */
     });
+    /*
     var intId = setInterval(function(){$("th").removeClass("sorting_desc");$("th").removeClass("sorting_asc");},100);
     setTimeout(function(){clearInterval(intId);},2000);
+    */
     
     
     
@@ -279,14 +335,18 @@ $(function() {
             $('.checkbox').each(function(){
                 this.checked = true;
             });
-            $('#pay-fines-selected').prop('disabled', false);
-            $('#pay-fines-betweenDate').prop('disabled', true);
+            $('#pay-fines').fadeIn();
+            $('#pay-fines').text("Paga multe sel.");
         }else{
             $('.checkbox').each(function(){
                 this.checked = false;
             });
-            $('#pay-fines-selected').prop('disabled', true);
-            $('#pay-fines-betweenDate').prop('disabled', false);
+            if(chageBtnPay){
+                $('#pay-fines').text("Paga multe tramite date");
+            }else{
+                $('#pay-fines').fadeOut();
+                $('#pay-fines').text();
+            }
         }
     });
 
@@ -296,66 +356,25 @@ $(function() {
             selected.push($(this).val());
         });
         if (selected.length > 0) {
-            $('#pay-fines-selected').prop('disabled', false);
-            $('#pay-fines-betweenDate').prop('disabled', true);
+            $('#pay-fines').fadeIn();
+            $('#pay-fines').text("Paga multe sel.");
         } else {
-            $('#pay-fines-selected').prop('disabled', true);
-            $('#pay-fines-betweenDate').prop('disabled', false);
+            if(chageBtnPay){
+                $('#pay-fines').text("Paga multe tramite date");
+            }else{
+                $('#pay-fines').fadeOut();
+                $('#pay-fines').text();
+            }
         }
     });
     
-    $('#pay-fines-betweenDate').click(function (){
-        if($('#js-date-from').val() == "" && $('#js-date-to').val() == ""){
-            $('#titleModal').text("Errore:");
-            $('#body-text-modal').html("<div><p>Inserire almeno la data di partenza</p></div>");
-            //$('#btn-modal-close').show();
-        } else {
-            $.ajax({
-                type: "POST",
-                url: "/fines/find-fines-between-date/",
-                data: {'from': $('#js-date-from').val(),
-                        'to': $('#js-date-to').val()
-                      },
-                beforeSend: function () {
-                    $('#titleModal').text("In elaborazione...");
-                    $('#body-text-modal').html("<div><i class='fa fa-spinner fa-pulse fa-2x fa-fw'></i></div>");
-                },
-                success: function (data) {
-                    var result = JSON.parse(data.toString());
-                    var selected = new Array();
-                    result.forEach(function(element) {
-                        selected.push(element['id']);
-                    });
-                    $('#body-text-modal').html("<div style='width: 400px; height: 300px; overflow-y: scroll;'>" +
-                                                "<table class='table table-striped table-bordered table-hover'>" +
-                                                    "<thead>" +
-                                                        "<tr>" +
-                                                            "<th></th>" +
-                                                            "<th></th>" +
-                                                            "<th></th>" +
-                                                            "<th></th>" +
-                                                            "<th></th>" +
-                                                            "<th></th>" +
-                                                            "<th></th>" +
-                                                            "<th></th>" +
-                                                            "<th></th>" +
-                                                            "<th></th>" +
-                                                            "<th></th>" +
-                                                            "<th></th>" +
-                                                        "</tr>" +
-                                                    "</thead>" +
-                                                    "</table>" +
-                                                "</div>");
-                    //payFines(selected);
-                },
-                error: function () {
-                    $('#titleModal').text("Errore:");
-                    $('#body-text-modal').html("<div><p>Si è verificato un errore durante la procedura</p></div>");
-                }
-            });
+    $('#js-date-from').change(function() {
+        if($(this).val() == ""){
+            chageBtnPay = false;
         }
     });
     
+    //create exra_payment and try payment to single fine in page details
     $('#js-fine-try').click(function () {
         $.ajax({
             type: "POST",
@@ -390,15 +409,121 @@ $(function() {
             location.reload();
         }, 2000);
     }
-    
-    $('#pay-fines-selected').click(function () {
-        var selected = new Array();
-        $(".checkbox:checked").each(function () {
-            selected.push($(this).val());
-        });
-        if(confirm("Stai mandando in pagemnto " + selected.length + " multe. Confermi?")){
-            payFines(selected);
+    /*
+    $('#pay-fines-betweenDate').click(function (){
+        if($('#js-date-from').val() == "" && $('#js-date-to').val() == ""){
+            $('#titleModal').text("Errore:");
+            $('#body-text-modal').html("<div><p>Inserire almeno la data di partenza</p></div>");
+            //$('#btn-modal-close').show();
+        } else {
+            $.ajax({
+                type: "POST",
+                url: "/fines/find-fines-between-date/",
+                data: {'from': $('#js-date-from').val(),
+                        'to': $('#js-date-to').val()
+                      },
+                beforeSend: function () {
+                    $('#titleModal').text("In elaborazione...");
+                    $('#body-text-modal').html("<div><i class='fa fa-spinner fa-pulse fa-2x fa-fw'></i></div>");
+                },
+                success: function (data) {
+                    var result = JSON.parse(data.toString());
+                    var selected = new Array();
+                    var row = '';
+                    result.forEach(function(element) {
+                        selected.push(element['id']);
+                        row += "<tr>" +
+                                    "<th>"+element['name']+"</th>" +
+                                    "<th>"+element['surname']+"</th>" +
+                                    "<th>"+element['fleet']+"</th>" +
+                                    "<th>"+element['trip_id']+"</th>" +
+                                    "<th>"+element['car_plate']+"</th>" +
+                                "</tr>";
+                        
+                    });
+                    $('#titleModal').text("Elenco multe estratte");
+                    $('#body-text-modal').html("<div style='width: 550px; height: 300px; overflow-y: scroll;'>" +
+                                                "<table class='table table-striped table-bordered table-hover'>" +
+                                                    "<thead>" +
+                                                        "<tr>" +
+                                                            "<th>Nome</th>" +
+                                                            "<th>Cognome</th>" +
+                                                            "<th>Flotta</th>" +
+                                                            "<th>Targa</th>" +
+                                                            "<th>Trip ID</th>" +
+                                                        "</tr>" +
+                                                    "</thead>" +
+                                                    row +
+                                                    "</table>" +
+                                                "</div>");
+                    //payFines(selected);
+                },
+                error: function () {
+                    $('#titleModal').text("Errore:");
+                    $('#body-text-modal').html("<div><p>Si è verificato un errore durante la procedura</p></div>");
+                }
+            });
         }
+    });
+    */
+    
+    var selecId = new Array();
+    
+    $('#pay-fines').click(function () {
+        if ($('#pay-fines').text() == 'Paga multe sel.') {
+            console.log("per seleizone");
+            $(".checkbox:checked").each(function () {
+                selecId.push($(this).val());
+            });
+            if (confirm("Stai mandando in pagemnto " + selecId.length + " multe. Confermi?")) {
+                payFines(selecId);
+            }
+        } else {
+            console.log("per data");
+            if ($('#js-date-from').val() == "" && $('#js-date-to').val() == "") {
+                console.log("date errate");
+                console.log();
+                $('#titleModal').text("Errore:");
+                $('#body-text-modal').html("<div><p>Inserire almeno la data di partenza</p></div>");
+                $('#btn-modal-close').show();
+            } else {
+                console.log("date corrette");
+                $.ajax({
+                    type: "POST",
+                    url: "/fines/find-fines-between-date/",
+                    data: {'from': $('#js-date-from').val(),
+                        'to': $('#js-date-to').val()
+                    },
+                    beforeSend: function () {
+                        $('#titleModal').text("In elaborazione...");
+                        $('#body-text-modal').html("<div><i class='fa fa-spinner fa-pulse fa-2x fa-fw'></i></div>");
+                    },
+                    success: function (data) {
+                        var result = JSON.parse(data.toString());
+                        console.log(result['fine']);
+                        var fine = result['fine'];
+                        fine.forEach(function (element) {
+                            selecId.push(element['id']);
+                        });
+                        console.log(selecId);
+                        $('#body-text-modal').html("<div><p>Stai mettendo in pagemnto " + fine.length + "multe su " + result['nTotal']['nTotalFines'] + ". Continuare?</p></div>");
+                        $('#btn-modal-close').show();
+                        $('#btn-pay').show();
+                    },
+                    error: function () {
+                        $('#titleModal').text("Errore:");
+                        $('#body-text-modal').html("<div><p>Si è verificato un errore durante la procedura</p></div>");
+                    }
+                });
+            }
+        }
+    });
+    
+    $('#btn-pay').click(function (){
+        $('#conteiner-btn').fadeOut();
+        $('#btn-modal-close').hide();
+        $('#btn-pay').hide();
+        payFines(selecId);
     });
 
     function payFines(selected) {
@@ -415,16 +540,19 @@ $(function() {
                 if(result.error == true){
                     $('#titleModal').text("Errore:");
                     $('#body-text-modal').html("<div><p>Si è verificato un errore durante la procedura</p></div>");
+                    $('#conteiner-btn').fadeIn();
                     $('#btn-modal-close').show();
                 }else{
                     $('#titleModal').text("Risulatato:");
                     $('#body-text-modal').html("<div><p>Multe passate: "+ result.n_success +"</p><p>Multe non passate: "+ result.n_fail +"</p></div>");
+                    $('#conteiner-btn').fadeIn();
                     $('#btn-modal-close').show();
                 }
             },
             error: function () {
                 $('#titleModal').text("Errore NON GESTITO:");
                 $('#body-text-modal').html("<div><p>Si è verificato un errore durante la procedura</p></div>");
+                $('#conteiner-btn').fadeIn();
                 $('#btn-modal-close').show();
             }
         });
