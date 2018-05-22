@@ -308,7 +308,7 @@ $(function() {
         if($('#js-date-from').val() == "" && $('#js-date-to').val() == ""){
             $('#titleModal').text("Errore:");
             $('#body-text-modal').html("<div><p>Inserire almeno la data di partenza</p></div>");
-            $('#btn-modal-close').show();
+            //$('#btn-modal-close').show();
         } else {
             $.ajax({
                 type: "POST",
@@ -322,12 +322,31 @@ $(function() {
                 },
                 success: function (data) {
                     var result = JSON.parse(data.toString());
-                    console.log(result);
                     var selected = new Array();
                     result.forEach(function(element) {
                         selected.push(element['id']);
                     });
-                    payFines(selected);
+                    $('#body-text-modal').html("<div style='width: 400px; height: 300px; overflow-y: scroll;'>" +
+                                                "<table class='table table-striped table-bordered table-hover'>" +
+                                                    "<thead>" +
+                                                        "<tr>" +
+                                                            "<th></th>" +
+                                                            "<th></th>" +
+                                                            "<th></th>" +
+                                                            "<th></th>" +
+                                                            "<th></th>" +
+                                                            "<th></th>" +
+                                                            "<th></th>" +
+                                                            "<th></th>" +
+                                                            "<th></th>" +
+                                                            "<th></th>" +
+                                                            "<th></th>" +
+                                                            "<th></th>" +
+                                                        "</tr>" +
+                                                    "</thead>" +
+                                                    "</table>" +
+                                                "</div>");
+                    //payFines(selected);
                 },
                 error: function () {
                     $('#titleModal').text("Errore:");
