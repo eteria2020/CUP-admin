@@ -9,6 +9,7 @@ use SharengoCore\Exception\EditTripWrongDateException;
 use SharengoCore\Exception\TripNotFoundException;
 use SharengoCore\Exception\EditTripExceed24HoursException;
 use SharengoCore\Exception\EditTripDeniedForScriptException;
+use SharengoCore\Exception\EditTripDeniedForB2BException;
 use SharengoCore\Service\EditTripsService;
 use SharengoCore\Service\EventsService;
 use SharengoCore\Service\TripsService;
@@ -111,6 +112,8 @@ class EditTripController extends AbstractActionController
                 $this->flashMessenger()->addSuccessMessage($translator->translate('Modifica effettuta con successo!'));
             } catch (EditTripDeniedException $e) {
                 $this->flashMessenger()->addErrorMessage($translator->translate('La corsa non può essere modificata perché non è conclusa.'));
+            } catch (EditTripDeniedForB2BException $e) {
+                $this->flashMessenger()->addErrorMessage($translator->translate('La corsa non può essere modificata perché è di tipo business.'));
             } catch (EditTripWrongDateException $e) {
                 $this->flashMessenger()->addErrorMessage($translator->translate('La data specificata non può essere precedente alla data di inizio della corsa'));
             } catch (EditTripNotDateTimeException $e) {
