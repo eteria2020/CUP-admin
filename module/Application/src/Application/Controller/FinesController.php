@@ -188,10 +188,7 @@ class FinesController extends AbstractActionController
         $to = $this->params()->fromPost('to') != "" ? new \DateTime($this->params()->fromPost('to')) : new \DateTime();
         
         $fines = $this->finesService->getFinesBetweenDate($from->format('Y-m-d H:i:s'), $to->format('Y-m-d H:i:s'));
-        
-        
-        //$a = json_encode(array_slice($fines, 0, 50)) . json_encode(array('nTotalFines' => count($fines)));
-        //$a = json_encode($fines) . json_encode(array('nTotalFines' => count($fines));
+
         $response = $this->getResponse();
         $response->setStatusCode(200);
         $response->setContent(json_encode(array ('fine' => array_slice($fines, 0, 50), 'nTotal' => array('nTotalFines' => count($fines)))));
@@ -203,10 +200,9 @@ class FinesController extends AbstractActionController
         try {
             $checkPost = $this->params()->fromPost('check');
             $penalty = $this->penaltiesService->findById(1);
-            
+            $c_success = 0;
+            $c_fail = 0;
             if (isset($checkPost)) {
-                $c_success = 0;
-                $c_fail = 0;
                 foreach ($checkPost as $fines_id) {
                     $fine = $this->finesService->getSafoPenaltyById($fines_id);
                     $resp = $this->cartasiCustomerPayments->sendPaymentRequest($fine->getCustomer(), $penalty->getAmount());

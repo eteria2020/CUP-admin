@@ -20,9 +20,8 @@ $(function() {
         columnToDate: $("#js-date-to")
     };
 
-    var filterWithNull = true;
+    var filterWithNull = false;
     
-    var filterDate = false;
     var filterDateField = "e.insertTs";
 
     var typeClean = $("#js-clean-type"),
@@ -46,6 +45,8 @@ $(function() {
     {
         return (Math.floor(amount / 100)) + "," + toStringKeepZero(amount % 100) + " \u20ac";
     }
+    
+    dataTableVars.column.val("select");
 
     table.dataTable({
         "processing": true,
@@ -82,8 +83,8 @@ $(function() {
                 aoData.push({"name": "column", "value": ""});
                 aoData.push({"name": "searchValue", "value": ""});
             }
-            aoData.push({ "name": "from", "value": $(dataTableVars.from).val()});
-            aoData.push({ "name": "to", "value": $(dataTableVars.to).val()});
+            aoData.push({ "name": "from", "value": $("#js-date-from").val()});
+            aoData.push({ "name": "to", "value": $("#js-date-to").val()});
             aoData.push({ "name": "columnFromDate", "value": filterDateField});
             aoData.push({ "name": "columnFromEnd", "value": filterDateField});
             aoData.push({ "name": "fixedLike", "value": false});
@@ -264,13 +265,13 @@ $(function() {
 
     $("#js-clear").click(function() {
         dataTableVars.searchValue.val("");
-        dataTableVars.from.val("");
-        dataTableVars.to.val("");
+        $("#js-date-from").val("");
+        $("#js-date-to").val("");
         dataTableVars.searchValue.prop("disabled", false);
         typeClean.hide();
         dataTableVars.searchValue.show();
         dataTableVars.column.val("select");
-        filterWithNull = true;
+        filterWithNull = false;
     });
         
     // Select Changed Action
@@ -278,7 +279,7 @@ $(function() {
         // Selected Column
         var value = $(this).val();
         dataTableVars.searchValue.val();
-        filterWithNull = false;
+        filterWithNull = true;
         /*
         switch (value) {
             case "e.generatedTs":
@@ -406,7 +407,7 @@ $(function() {
         $('#resultPay').fadeIn();
         setTimeout(function () {
             $('#resultPay').fadeOut();
-            location.reload();
+            location.reload(true);
         }, 2000);
     }
     /*
@@ -471,23 +472,18 @@ $(function() {
     
     $('#pay-fines').click(function () {
         if ($('#pay-fines').text() == 'Paga multe sel.') {
-            console.log("per seleizone");
             $(".checkbox:checked").each(function () {
                 selecId.push($(this).val());
             });
-            if (confirm("Stai mandando in pagemnto " + selecId.length + " multe. Confermi?")) {
+            if (confirm("Stai mandando in pagamento " + selecId.length + " multe. Vuoi proseguire?")) {
                 payFines(selecId);
             }
         } else {
-            console.log("per data");
             if ($('#js-date-from').val() == "" && $('#js-date-to').val() == "") {
-                console.log("date errate");
-                console.log();
                 $('#titleModal').text("Errore:");
                 $('#body-text-modal').html("<div><p>Inserire almeno la data di partenza</p></div>");
                 $('#btn-modal-close').show();
             } else {
-                console.log("date corrette");
                 $.ajax({
                     type: "POST",
                     url: "/fines/find-fines-between-date/",
@@ -500,13 +496,12 @@ $(function() {
                     },
                     success: function (data) {
                         var result = JSON.parse(data.toString());
-                        console.log(result['fine']);
                         var fine = result['fine'];
                         fine.forEach(function (element) {
                             selecId.push(element['id']);
                         });
-                        console.log(selecId);
-                        $('#body-text-modal').html("<div><p>Stai mettendo in pagemnto " + fine.length + "multe su " + result['nTotal']['nTotalFines'] + ". Continuare?</p></div>");
+                        $('#titleModal').text("Multe estratte:");
+                        $('#body-text-modal').html("<div><p>Stai mettendo in pagemnto " + fine.length + " multe su " + result['nTotal']['nTotalFines'] + ". Continuare?</p></div>");
                         $('#btn-modal-close').show();
                         $('#btn-pay').show();
                     },
@@ -559,6 +554,6 @@ $(function() {
     }
     
     $(document).on("click", "#btn-modal-close", function () {
-        location.reload();
+        location.reload(true);
     });
 });
