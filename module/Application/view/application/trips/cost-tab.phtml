@@ -35,7 +35,7 @@ if(is_null($pinType)) {
 
         $amount = $tripPayment->getTotalCost();
         $amount = floor($amount / 100) . ',' . ($amount % 100 < 10 ? '0' : '') . $amount % 100 . ' €';
-        $motionDiscount = $trip->getCustomer()->getDiscountRate() . ' %';
+        $motionDiscount = $trip->getDiscountPercentage() . ' %';
         $parkingDiscount = '-';
         $payable = $trip->getPayable() ? $this->translate("SI") : $this->translate("NO");
 
