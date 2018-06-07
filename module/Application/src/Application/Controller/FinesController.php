@@ -142,15 +142,16 @@ class FinesController extends AbstractActionController
     public function datatableAction()
     {
         $filters = $this->params()->fromPost();
-        $filters['withLimit'] = true;
+        $filters['withLimit'] = false;
 
         if($filters['column'] == "" && isset($filters['columnValueWithoutLike']) && $filters['columnValueWithoutLike'] == ""){
             $filters['columnWithoutLike'] = true;
             $filters['columnValueWithoutLike'] = null;
         }
 
-        $dataDataTable = $this->finesService->getFinesData($filters);
-        $totalFailedPayments = $this->finesService->getTotalFines();
+        $a = '';
+        $dataDataTable = array_slice($this->filterFinesComplete($this->finesService->getFinesData($filters)), (int)$filters['iDisplayStart'], (int)$filters['iDisplayLength']);
+        $totalFailedPayments = $this->finesService->getTotalFinesComplete();
         $recordsFiltered = $this->getRecordsFiltered($filters, $totalFailedPayments);
 
         return new JsonModel([
@@ -168,8 +169,18 @@ class FinesController extends AbstractActionController
         } else {
             $filters['withLimit'] = false;
 
-            return count($this->finesService->getFinesData($filters));
+            return count($this->filterFinesComplete($this->finesService->getFinesData($filters)));
         }
+    }
+    
+    private function filterFinesComplete($fines){
+        $result = array();
+        foreach ($fines as $record){
+            if($record['fines']['complete'] == 1 && isset($record['fines']['customerId']) && isset($record['fines']['tripId'])){
+                $result[] = $record;
+            }
+        }
+        return $result;
     }
 
     public function detailsAction()
