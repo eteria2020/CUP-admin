@@ -3,6 +3,7 @@ $this->headLink()->appendStylesheet('/js/datatables/plugins/bootstrap/dataTables
 $this->headScript()
     ->appendFile('/js/datatables/media/js/jquery.dataTables.min.js')
     ->appendFile('/js/datatables/plugins/bootstrap/dataTables.bootstrap.js')
+    ->appendFile($this->basePath() .'/js/fines.js?v=1.5');
 ?>
 
 <?php
@@ -17,8 +18,44 @@ $safoPenalty = $this->safoPenalty;
         </h3>
 
         <div class="row">
-            <div class="col-lg-12">
+            <?php if($safoPenalty->getCharged()){ ?>
+                    <div class="col-md-6">
+                        <div class="form-inline">
+                            <H4><span class="glyphicon glyphicon-ok"></span> Multa già pagata o messa in pagamento.</H4>
+                        </div>
+                    </div>
+            <?php }else{
+                    if($safoPenalty->getCustomerId() != 0 && $safoPenalty->getTripId() != 0 && $safoPenalty->isComplete()){ ?>
+                        <div class="col-md-6">
+                            <div class="form-inline">
+                                <div class="btn-group">
+                                    <button type="button" class="btn green" id="js-fine-try">
+                                        <i class="fa fa-try"></i>
+                                        <?= $this->translate("Effettua nuovo tentativo di pagamento"); ?>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+            <?php }else{ ?>    
+                    <div class="col-md-6">
+                        <div class="form-inline">
+                            <H4><span class="glyphicon glyphicon-remove"></span> Non è possibile effettura un pagemnto mancaza di dati</H4>
+                        </div>
+                    </div>
+            <?php }
+                }
+            ?>
+
+            <div class="col-lg-6">
                 <a href="/fines" class="btn btn-success pull-right"><i class="fa fa-arrow-left"></i> Torna alla lista</a>
+            </div>
+        </div>
+        
+        <div class="row">
+            <div class="col-md-6">
+                <div id="resultPay" style="display: none">
+                    
+                </div>
             </div>
         </div>
 
@@ -40,7 +77,33 @@ $safoPenalty = $this->safoPenalty;
                         <div class="row">
                             <div class="col-lg-3">
                                 <div class="form-group">
-                                    <label><?= $this->translate("ID multa"); ?></label>
+                                    <label><?= $this->translate("ID"); ?></label>
+                                    <div class="sng-info-box" id="id_penalty"><?= $safoPenalty->getId() ?></div>
+                                </div>
+                            </div>
+                            <div class="col-lg-3">
+                                <div class="form-group">
+                                    <label><?= $this->translate("ID cliente"); ?></label>
+                                    <div class="sng-info-box"><?= (($safoPenalty->getCustomerId()>0) ? '<a href="/customers/edit/'.$safoPenalty->getCustomerId().'">'.$safoPenalty->getCustomerId().'</a>' : $safoPenalty->getCustomerId()) ?></div>
+                                </div>
+                            </div>
+                            <div class="col-lg-3">
+                                <div class="form-group">
+                                    <label><?= $this->translate("Nome"); ?></label>
+                                    <div class="sng-info-box"><?= is_null($safoPenalty->getCustomer()) ? '' : $safoPenalty->getCustomer()->getName() ?></div>
+                                </div>
+                            </div>
+                            <div class="col-lg-3">
+                                <div class="form-group">
+                                    <label><?= $this->translate("Cognome"); ?></label>
+                                    <div class="sng-info-box"><?= is_null($safoPenalty->getCustomer()) ? '' : $safoPenalty->getCustomer()->getSurname() ?></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-3">
+                                <div class="form-group">
+                                    <label><?= $this->translate("ID multa (rus_id)"); ?></label>
                                     <div class="sng-info-box"><?= $safoPenalty->getRusId() ?></div>
                                 </div>
                             </div>
@@ -52,14 +115,14 @@ $safoPenalty = $this->safoPenalty;
                             </div>
                             <div class="col-lg-3">
                                 <div class="form-group">
-                                    <label><?= $this->translate("ID cliente"); ?></label>
-                                    <div class="sng-info-box"><?= (($safoPenalty->getCustomerId()>0) ? '<a href="/customers/edit/'.$safoPenalty->getCustomerId().'">'.$safoPenalty->getCustomerId().'</a>' : $safoPenalty->getCustomerId()) ?></div>
+                                    <label><?= $this->translate("ID corsa"); ?></label>
+                                    <div class="sng-info-box"><?= (($safoPenalty->getTripId()>0) ? '<a href="/trips/details/'.$safoPenalty->getTripId().'">'.$safoPenalty->getTripId().'</a>' : $safoPenalty->getTripId()) ?></div>
                                 </div>
                             </div>
                             <div class="col-lg-3">
                                 <div class="form-group">
-                                    <label><?= $this->translate("ID corsa"); ?></label>
-                                    <div class="sng-info-box"><?= (($safoPenalty->getTripId()>0) ? '<a href="/trips/details/'.$safoPenalty->getTripId().'">'.$safoPenalty->getTripId().'</a>' : $safoPenalty->getTripId()) ?></div>
+                                    <label><?= $this->translate("Data inserimento"); ?></label>
+                                    <div class="sng-info-box"><?= $safoPenalty->getInsertTs()->format("d-m-Y H:i:s") ?></div>
                                 </div>
                             </div>
                         </div>
@@ -68,25 +131,7 @@ $safoPenalty = $this->safoPenalty;
                             <div class="col-lg-3">
                                 <div class="form-group">
                                     <label><?= $this->translate("Flotta veicolo"); ?></label>
-                                    <div class="sng-info-box"><?
-                                                                switch ($safoPenalty->getVehicleFleetId()){
-                                                                    case 1:
-                                                                        echo "Milano";
-                                                                        break;
-                                                                    case 2:
-                                                                        echo "Firenze";
-                                                                        break;
-                                                                    case 3:
-                                                                        echo "Roma";
-                                                                        break;
-                                                                    case 4:
-                                                                        echo "Modena";
-                                                                        break;
-                                                                    default:
-                                                                        echo "Non specificato";
-                                                                        break;
-                                                                }
-                                                                ?></div>
+                                    <div class="sng-info-box"><? $safoPenalty->getFleetcode()>0; ?></div>
                                 </div>
                             </div>
                             <div class="col-lg-3">
@@ -174,6 +219,33 @@ $safoPenalty = $this->safoPenalty;
                                 <div class="form-group">
                                     <label><?= $this->translate("Data Addebito"); ?></label>
                                     <div class="sng-info-box"><?= (is_null($safoPenalty->getConsumedTs()) ? "Non addebitato" : $safoPenalty->getConsumedTs()->format("d-m-Y H:i:s") ) ?></div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="row">
+                            <div class="col-lg-3">
+                                <div class="form-group">
+                                    <label><?= $this->translate("ID Extra/penale"); ?></label>
+                                    <div class="sng-info-box"><?= is_null($safoPenalty->getExtraPayment()) ? '' : '<a href="/payments/retry-extra/'.$safoPenalty->getExtraPayment()->getId().'">'.$safoPenalty->getExtraPayment()->getId().'</a>'; ?></div>
+                                </div>
+                            </div>
+                            <div class="col-lg-3">
+                                <div class="form-group">
+                                    <label><?= $this->translate("Pagato"); ?></label>
+                                    <div class="sng-info-box"><?= is_null($safoPenalty->getExtraPayment()) ? '' : ($safoPenalty->getExtraPayment()->getStatus() == 'payed_correctly' || $safoPenalty->getExtraPayment()->getStatus() == 'invoiced' ? 'SI' : 'NO');  ?></div>
+                                </div>
+                            </div>
+                            <div class="col-lg-3">
+                                <div class="form-group">
+                                    <label><?= $this->translate("Data addebito"); ?></label>
+                                    <div class="sng-info-box"><?= is_null($safoPenalty->getExtraPayment()) ? '' : $safoPenalty->getExtraPayment()->getGeneratedTs()->format("d-m-Y H:i:s") ?></div>
+                                </div>
+                            </div>
+                            <div class="col-lg-3">
+                                <div class="form-group">
+                                    <label><?= $this->translate("Pagabile"); ?></label>
+                                    <div class="sng-info-box"><?= is_null($safoPenalty->getExtraPayment()) ? '' : ($safoPenalty->getExtraPayment()->getPayable()) ? 'SI' : 'NO' ?></div>
                                 </div>
                             </div>
                         </div>

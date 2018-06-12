@@ -519,6 +519,28 @@ return [
                             ]
                         ]
                     ],
+                    'pay' => [
+                        'type' => 'Segment',
+                        'options' => [
+                            'route' => '/pay/',
+                            'defaults' => [
+                                '__NAMESPACE__' => 'Application\Controller',
+                                'controller' => 'Fines',
+                                'action' => 'pay'
+                            ]
+                        ]
+                    ],
+                    'find-fines-between-date' => [
+                        'type' => 'Segment',
+                        'options' => [
+                            'route' => '/find-fines-between-date/',
+                            'defaults' => [
+                                '__NAMESPACE__' => 'Application\Controller',
+                                'controller' => 'Fines',
+                                'action' => 'find-fines-between-date'
+                            ]
+                        ]
+                    ],
                 ],
             ],
             'cars' => [
