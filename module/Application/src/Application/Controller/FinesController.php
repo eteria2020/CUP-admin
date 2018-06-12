@@ -142,14 +142,16 @@ class FinesController extends AbstractActionController
     public function datatableAction()
     {
         $filters = $this->params()->fromPost();
-        $filters['withLimit'] = false;
+        //$filters['withLimit'] = false;
+        $filters['withLimit'] = true;
 
         if($filters['column'] == "" && isset($filters['columnValueWithoutLike']) && $filters['columnValueWithoutLike'] == ""){
             $filters['columnWithoutLike'] = true;
             $filters['columnValueWithoutLike'] = null;
         }
 
-        $dataDataTable = array_slice($this->filterFinesComplete($this->finesService->getFinesData($filters)), (int)$filters['iDisplayStart'], (int)$filters['iDisplayLength']);
+        //$dataDataTable = array_slice($this->filterFinesComplete($this->finesService->getFinesData($filters)), (int)$filters['iDisplayStart'], (int)$filters['iDisplayLength']);
+        $dataDataTable = $this->finesService->getFinesData($filters);
         $totalFailedPayments = $this->finesService->getTotalFinesComplete();
         $recordsFiltered = $this->getRecordsFiltered($filters, $totalFailedPayments);
 
@@ -167,10 +169,11 @@ class FinesController extends AbstractActionController
             return $totalTripPayments;
         } else {
             $filters['withLimit'] = false;
-            return count($this->filterFinesComplete($this->finesService->getFinesData($filters)));
+            //return count($this->filterFinesComplete($this->finesService->getFinesData($filters)));
+            return count($this->finesService->getFinesData($filters));
         }
     }
-    
+    /*
     private function filterFinesComplete($fines){
         $result = array();
         foreach ($fines as $record){
@@ -180,7 +183,7 @@ class FinesController extends AbstractActionController
         }
         return $result;
     }
-
+*/
     public function detailsAction()
     {
         $id = (int)$this->params()->fromRoute('id', 0);

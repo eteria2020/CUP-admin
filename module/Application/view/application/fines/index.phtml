@@ -67,33 +67,12 @@ $this->headScript()
                         <button class="btn btn-success pull-right" id="pay-fines" data-toggle="modal" data-target="#myModal" style="display: none"></button>
                     </div>
                 </div>
-                <br>
-                <div class="row text-right">
-                    <!--
-                    <div class="col-md-10">
-                        <div class="form-inline">
-                            <div class="form-group">
-                                <label> <?= $this->translate("da"); ?>: </label>
-                                <input class="form-control form-control-inline input-small date-picker" size="16"
-                                       type="text" id="js-date-from"
-                                       placeholder="<?= $this->translate("Data inizio"); ?>">
-                            </div>
-                            <div class="form-group">
-                                <label> <?= $this->translate("a"); ?>: </label>
-                                <input class="form-control form-control-inline input-small date-picker" size="16"
-                                       type="text" id="js-date-to"
-                                       placeholder="<?= $this->translate("Data fine"); ?>">
-                            </div>
-                            <div class="btn-group">
-                                <button class="btn btn-success pull-right" id="pay-fines-betweenDate" data-toggle="modal" data-target="#myModal">Paga</button>
-                            </div>
-                        </div>
+                </br>
+                <div class="row">
+                    <div class="col-md-2">
+                        <button class="btn btn-success" id="remove-not-payed"></button>
                     </div>
-                    -->
-                    
                 </div>
-                
-                
                 <div class="modal fade" id="myModal" role="dialog" data-keyboard="false" data-backdrop="static">
                     <div class="modal-dialog">
                         <div class="modal-content">
@@ -115,7 +94,6 @@ $this->headScript()
                     </div>
                 </div>
                 <hr>
-                
                 
                 <!-- BEGIN EXAMPLE TABLE PORTLET-->
                 <div class="portlet box green">

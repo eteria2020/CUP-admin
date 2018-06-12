@@ -454,4 +454,8 @@ $(function() {
     $(document).on("click", "#btn-modal-close", function () {
         location.reload(true);
     });
+    
+    $("#remove-not-payed").click(function() {
+        $("js-fines-table").find("td");
+    });
 });
