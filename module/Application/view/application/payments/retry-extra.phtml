@@ -161,7 +161,7 @@ $customer = $this->customer;
                                     <label><?= $this->translate("Reason"); ?></label>
                                     <?php
                                     $as = '';
-                                    foreach ($extraPayment->getReasons() as $reason){   
+                                    foreach ($extraPayment->getReasons() as $reason){
                                         $as .= $reason[0][0] . ' || ';
                                     }
                                     ?> 
