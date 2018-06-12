@@ -167,7 +167,6 @@ class FinesController extends AbstractActionController
             return $totalTripPayments;
         } else {
             $filters['withLimit'] = false;
-
             return count($this->filterFinesComplete($this->finesService->getFinesData($filters)));
         }
     }

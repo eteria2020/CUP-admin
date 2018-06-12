@@ -280,56 +280,11 @@ $(function() {
         var value = $(this).val();
         dataTableVars.searchValue.val();
         filterWithNull = true;
-        /*
-        switch (value) {
-            case "e.generatedTs":
-                filterDate = true;
-                filterDateField = value;
-                dataTableVars.searchValue.val("");
-                $(dataTableVars.searchValue).datepicker({
-                    autoclose: true,
-                    format: "yyyy-mm-dd",
-                    weekStart: 1
-                });
-                break;
-            case "cu.id":
-            case "e.reasons":
-           case "e.id":
-                dataTableVars.searchValue.val();
-                break;
-        }*/
-
-        // Column that need the standard "LIKE" search operator
-        /*
-        if ((value === "e.violationDescription")||(value === "e.carPlate")||(value === "e.vehicleFleetId")||(value === "e.customerId")||(value === "e.tripId")) {
-            filterWithoutLike = false;
-            dataTableVars.searchValue.val("");
-            dataTableVars.searchValue.prop("disabled", false);
-            typeClean.hide();
-            dataTableVars.searchValue.show();
-        } else {
-            filterWithoutLike = true;
-            dataTableVars.searchValue.val("");
-            dataTableVars.searchValue.prop("disabled", false);
-            typeClean.hide();
-            dataTableVars.searchValue.show();
-        }
-        */
     });
     /*
     var intId = setInterval(function(){$("th").removeClass("sorting_desc");$("th").removeClass("sorting_asc");},100);
     setTimeout(function(){clearInterval(intId);},2000);
     */
-    
-    
-    
-    /*
-     * 
-     * 
-     * 
-     * 
-     * 
-     */
     
      $('#checkAll').click(function () {
         if ($('#checkAll').is(':checked')) {
@@ -410,63 +365,6 @@ $(function() {
             location.reload(true);
         }, 2000);
     }
-    /*
-    $('#pay-fines-betweenDate').click(function (){
-        if($('#js-date-from').val() == "" && $('#js-date-to').val() == ""){
-            $('#titleModal').text("Errore:");
-            $('#body-text-modal').html("<div><p>Inserire almeno la data di partenza</p></div>");
-            //$('#btn-modal-close').show();
-        } else {
-            $.ajax({
-                type: "POST",
-                url: "/fines/find-fines-between-date/",
-                data: {'from': $('#js-date-from').val(),
-                        'to': $('#js-date-to').val()
-                      },
-                beforeSend: function () {
-                    $('#titleModal').text("In elaborazione...");
-                    $('#body-text-modal').html("<div><i class='fa fa-spinner fa-pulse fa-2x fa-fw'></i></div>");
-                },
-                success: function (data) {
-                    var result = JSON.parse(data.toString());
-                    var selected = new Array();
-                    var row = '';
-                    result.forEach(function(element) {
-                        selected.push(element['id']);
-                        row += "<tr>" +
-                                    "<th>"+element['name']+"</th>" +
-                                    "<th>"+element['surname']+"</th>" +
-                                    "<th>"+element['fleet']+"</th>" +
-                                    "<th>"+element['trip_id']+"</th>" +
-                                    "<th>"+element['car_plate']+"</th>" +
-                                "</tr>";
-                        
-                    });
-                    $('#titleModal').text("Elenco multe estratte");
-                    $('#body-text-modal').html("<div style='width: 550px; height: 300px; overflow-y: scroll;'>" +
-                                                "<table class='table table-striped table-bordered table-hover'>" +
-                                                    "<thead>" +
-                                                        "<tr>" +
-                                                            "<th>Nome</th>" +
-                                                            "<th>Cognome</th>" +
-                                                            "<th>Flotta</th>" +
-                                                            "<th>Targa</th>" +
-                                                            "<th>Trip ID</th>" +
-                                                        "</tr>" +
-                                                    "</thead>" +
-                                                    row +
-                                                    "</table>" +
-                                                "</div>");
-                    //payFines(selected);
-                },
-                error: function () {
-                    $('#titleModal').text("Errore:");
-                    $('#body-text-modal').html("<div><p>Si è verificato un errore durante la procedura</p></div>");
-                }
-            });
-        }
-    });
-    */
     
     var selecId = new Array();
     
