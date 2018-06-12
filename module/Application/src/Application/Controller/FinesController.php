@@ -216,7 +216,7 @@ class FinesController extends AbstractActionController
                     $fine = $this->finesService->getSafoPenaltyById($fines_id);
                     $resp = $this->cartasiCustomerPayments->sendPaymentRequest($fine->getCustomer(), $penalty->getAmount());
                     $extraPayment = $this->finesService->createExtraPayment($fine, $penalty, $resp->getTransaction());
-                    if (!$resp->getCompletedCorrectly()) {
+                    if (!$resp->getCompletedCorrectly()){
                         $extraPaymentTry = $this->extraPaymentsService->processWrongPayment($extraPayment, $resp);
                         $c_fail ++;
                     } else {
