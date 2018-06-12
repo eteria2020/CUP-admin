@@ -431,6 +431,15 @@ return [
                             ]
                         ]
                     ],
+                    'customer-recess' => [
+                        'type' => 'Segment',
+                        'options' => [
+                            'route' => '/customer-recess',
+                            'defaults' => [
+                                'action' => 'customer-recess'
+                            ]
+                        ]
+                    ],
                     'foreign-drivers-license' => [
                         'type' => 'Literal',
                         'options' => [

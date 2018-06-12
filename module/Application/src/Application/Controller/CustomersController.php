@@ -791,4 +791,28 @@ class CustomersController extends AbstractActionController
         $response->setContent($response_msg);
         return $response;
     }
+    
+    public function customerRecessAction() {
+        $customer_id = $this->params()->fromPost('customer_id');
+        $customer = $this->customersService->findById($customer_id);
+        try {
+            //log customer in user_events
+            
+            //update customer
+            $customer = $this->customersService->recessCustomer($customer);
+            //send mail to nicola
+            
+        } catch (\Exception $e) {
+            $response_msg = "error";
+            $response = $this->getResponse();
+            $response->setStatusCode(200);
+            $response->setContent($response_msg);
+            return $response;
+        }
+        $response_msg = "success";
+        $response = $this->getResponse();
+        $response->setStatusCode(200);
+        $response->setContent($response_msg);
+        return $response;
+    }
 }
