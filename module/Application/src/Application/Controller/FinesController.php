@@ -154,12 +154,23 @@ class FinesController extends AbstractActionController
         $dataDataTable = $this->finesService->getFinesData($filters);
         $totalFailedPayments = $this->finesService->getTotalFinesComplete();
         $recordsFiltered = $this->getRecordsFiltered($filters, $totalFailedPayments);
+        
+        $areVisible = new Container('areVisible');
+        
+        if(!$areVisible->offsetExists('visible')){
+            $finesNotPayedAreVisible = true;
+            $A = '';
+        }else{
+            $finesNotPayedAreVisible = $areVisible->offsetGet('visible');
+            $A = '';
+        }
 
         return new JsonModel([
             'draw'            => $this->params()->fromQuery('sEcho', 0),
             'recordsTotal'    => $totalFailedPayments,
             'recordsFiltered' => $recordsFiltered,
-            'data'            => $dataDataTable
+            'data'            => $dataDataTable,
+            'visible'         => $finesNotPayedAreVisible
         ]);
     }
 
@@ -241,5 +252,21 @@ class FinesController extends AbstractActionController
             return $response;
         }
     }
+    
+    public function finesNotPayedAreVisibleAction(){
+        $visible = $this->params()->fromPost('visible');
+        if($visible){
+            $areVisible = new Container('areVisible');
+            $areVisible->offsetSet('visible', true);
+            $a = $areVisible->offsetGet('visible');
+            return true;
+        }else{
+            $areVisible = new Container('areVisible');
+            $areVisible->offsetSet('visible', false);
+            $a = $areVisible->offsetGet('visible');
+            return false;
+        }
+    }
+    
     
 }

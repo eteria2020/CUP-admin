@@ -66,7 +66,14 @@ $(function() {
                         loginRedirect(data, textStatus, jqXHR);
                     }
                 }
-            } );
+            }).done(function (aoData) {
+                console.log(aoData['visible']);
+                if (aoData['visible'] === true) {
+                    $(".glyphicon-remove").parent().parent().parent().show();
+                } else {
+                    $(".glyphicon-remove").parent().parent().parent().hide();
+                }
+            });
         },
         "fnServerParams": function ( aoData ) {
             if (filterWithNull) {
@@ -455,7 +462,34 @@ $(function() {
         location.reload(true);
     });
     
-    $("#remove-not-payed").click(function() {
-        $("js-fines-table").find("td");
+    $("#remove-not-payed").click(function () {
+        if ($(".glyphicon-remove").is(":visible")) {
+            $(".glyphicon-remove").parent().parent().parent().hide();
+            $.ajax({
+                type: "POST",
+                url: "/fines/fines-not-payed-are-visible/",
+                data: {'visible': 0},
+                success: function (data) {
+                    console.log("success");
+                },
+                error: function () {
+                    console.log("erroror");
+                }
+            });
+        } else {
+            $(".glyphicon-remove").parent().parent().parent().show();
+            $.ajax({
+                type: "POST",
+                url: "/fines/fines-not-payed-are-visible/",
+                data: {'visible': 1},
+                success: function (data) {
+                    console.log("success");
+                },
+                error: function () {
+                    console.log("erroror");
+                }
+            });
+        }
     });
+        
 });
