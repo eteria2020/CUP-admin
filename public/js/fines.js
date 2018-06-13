@@ -67,7 +67,6 @@ $(function() {
                     }
                 }
             }).done(function (aoData) {
-                console.log(aoData['visible']);
                 if (aoData['visible'] === true) {
                     $(".glyphicon-remove").parent().parent().parent().show();
                 } else {
@@ -470,10 +469,8 @@ $(function() {
                 url: "/fines/fines-not-payed-are-visible/",
                 data: {'visible': 0},
                 success: function (data) {
-                    console.log("success");
                 },
                 error: function () {
-                    console.log("erroror");
                 }
             });
         } else {
@@ -483,10 +480,8 @@ $(function() {
                 url: "/fines/fines-not-payed-are-visible/",
                 data: {'visible': 1},
                 success: function (data) {
-                    console.log("success");
                 },
                 error: function () {
-                    console.log("erroror");
                 }
             });
         }

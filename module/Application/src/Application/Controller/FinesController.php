@@ -159,10 +159,8 @@ class FinesController extends AbstractActionController
         
         if(!$areVisible->offsetExists('visible')){
             $finesNotPayedAreVisible = true;
-            $A = '';
         }else{
             $finesNotPayedAreVisible = $areVisible->offsetGet('visible');
-            $A = '';
         }
 
         return new JsonModel([
@@ -258,12 +256,10 @@ class FinesController extends AbstractActionController
         if($visible){
             $areVisible = new Container('areVisible');
             $areVisible->offsetSet('visible', true);
-            $a = $areVisible->offsetGet('visible');
             return true;
         }else{
             $areVisible = new Container('areVisible');
             $areVisible->offsetSet('visible', false);
-            $a = $areVisible->offsetGet('visible');
             return false;
         }
     }
