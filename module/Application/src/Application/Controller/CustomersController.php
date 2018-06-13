@@ -18,6 +18,7 @@ use Application\Service\RegistrationService;
 use SharengoCore\Exception\CustomerNotFoundException;
 use SharengoCore\Exception\BonusAssignmentException;
 use Cartasi\Service\CartasiContractsService;
+use SharengoCore\Service\EmailService;
 // Externals
 use Zend\Form\Form;
 use Zend\Http\Response;
@@ -118,6 +119,11 @@ class CustomersController extends AbstractActionController
      * @var RegistrationService
      */
     private $registrationService;
+    
+    /**
+     * @var EmailService
+     */
+    private $emailService;
 
     /**
      * @param CustomersService $customersService
@@ -138,6 +144,7 @@ class CustomersController extends AbstractActionController
      * @param DisableContractService $disableContractService
      * @param Container $datatableFiltersSessionContainer
      * @param RegistrationService $registrationService
+     * @param EmailService $emailService
      */
     public function __construct(
         CustomersService $customersService,
@@ -157,7 +164,8 @@ class CustomersController extends AbstractActionController
         CartasiContractsService $cartasiContractsService,
         DisableContractService $disableContractService,
         Container $datatableFiltersSessionContainer
-        ,RegistrationService $registrationService
+        ,RegistrationService $registrationService,
+        EmailService $emailService
     ) {
         $this->customersService = $customersService;
         $this->customerDeactivationService = $customerDeactivationService;
@@ -177,6 +185,7 @@ class CustomersController extends AbstractActionController
         $this->pointService = $pointService;
         $this->datatableFiltersSessionContainer = $datatableFiltersSessionContainer;
         $this->registrationService = $registrationService;
+        $this->emailService = $emailService;
     }
 
     /**
@@ -800,7 +809,9 @@ class CustomersController extends AbstractActionController
             
             //update customer
             $customer = $this->customersService->recessCustomer($customer);
-            //send mail to nicola
+            
+            //send mail to servizio clienti
+            $this->sendEmailUserRecess('servizioclienti@sharengo.eu', $customer->getId(), 'it', 19);/*<-------------------*/
             
         } catch (\Exception $e) {
             $response_msg = "error";
@@ -814,5 +825,25 @@ class CustomersController extends AbstractActionController
         $response->setStatusCode(200);
         $response->setContent($response_msg);
         return $response;
+    }
+    
+    
+    //fare in modo che la mail faccia il raplece dell'id e non del nome
+    private function sendEmailUserRecess($email, $id, $language, $category) {
+        $mail = $this->emailService->getMail($category, $language);
+        $content = sprintf(
+                $mail->getContent(), $id
+        );
+
+        //file_get_contents(__DIR__.'/../../../view/emails/parkbonus_pois-it_IT.html'),
+
+        $attachments = [
+                //'bannerphono.jpg' => __DIR__.'/../../../../../public/images/bannerphono.jpg'
+        ];
+        $this->emailService->sendEmail(
+                $email, //send to
+                $mail->getSubject(), //'Share’ngo: bonus 5 minuti',//object email
+                $content, $attachments
+        );
     }
 }
