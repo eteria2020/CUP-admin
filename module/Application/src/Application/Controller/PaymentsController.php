@@ -295,7 +295,7 @@ class PaymentsController extends AbstractActionController
                 //set extra payed
                 $extraPayment = $this->extraPaymentsService->setPayedCorrectly($extraPayment);
                 
-                $this->checkIfEnable($extraPayment);
+                $this->extraPaymentsService->checkIfEnable($extraPayment);
                 
                 $extraPayment = $this->extraPaymentsService->setTrasaction($extraPayment, $cartasiResponse->getTransaction());
                 $this->customersService->enableCustomerPayment($extraPayment->getCustomer());
@@ -407,17 +407,9 @@ class PaymentsController extends AbstractActionController
                 $reasons,
                 $amounts
             );
-            if (!$response->getCompletedCorrectly()) {                
-                //set status worn_payment in extra_paymnets
-                $extraPayment = $this->extraPaymentsService->setStatusWrongPayment($extraPayment);
+            if (!$response->getCompletedCorrectly()) {
                 
-                //extrapyaments tries
-                $extraPaymentTry = $this->extraPaymentTriesService->createExtraPaymentTry(
-                        $extraPayment, $response->getOutcome(), $response->getTransaction(), $this->identity()
-                );
-                
-                //disable customer
-                $this->deactivationService->deactivateForExtraPaymentTry($customer, $extraPaymentTry);
+                $extraPaymentTry = $this->extraPaymentsService->processWrongPayment($extraPayment, $response, $this->identity());
                 
                 $extraTries = $this->encodeExtra($extraPaymentTry);
                 
@@ -428,13 +420,7 @@ class PaymentsController extends AbstractActionController
                 ]);
             }
             
-            //set status payed in extra_payment
-            $extraPayment = $this->extraPaymentsService->setPayedCorrectlyFirstTime($extraPayment);
-            
-            $this->checkIfEnable($extraPayment);
-            
-            //scrivere un record sulla extra_payments_tries
-            $extraPaymentTry = $this->extraPaymentTriesService->createExtraPaymentTry($extraPayment, $response->getOutcome(), $response->getTransaction(), $this->identity());
+            $extraPaymentTry = $this->extraPaymentsService->processPayedCorrectly($extraPayment, $response, $this->identity());
             
             $extraTries = $this->encodeExtra($extraPaymentTry);
             
@@ -560,12 +546,6 @@ class PaymentsController extends AbstractActionController
             $response->setStatusCode(200);
             $response->setContent($response_msg);
             return $response;
-        }
-    }
-    
-    private function checkIfEnable($extraPayment) {
-        if(count($this->extraPaymentsService->getExtraPaymentsWrongAndPayable($extraPayment->getCustomer())) == 0){
-            $this->deactivationService->reactivateCustomerForExtraPayed($extraPayment->getCustomer());
         }
     }
 }

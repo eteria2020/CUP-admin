@@ -2,17 +2,27 @@
 $(function() {
     "use strict";
 
-     // DataTables
+    // DataTables
     var table = $("#js-fines-table");
+    
+    var chageBtnPay = false;
 
-   // Define DataTables Filters
+    // Define DataTables Filters
     var dataTableVars = {
         searchValue: $("#js-value"),
         column: $("#js-column"),
         iSortCol_0: 0,
         sSortDir_0: "desc",
-        iDisplayLength: 0
+        iDisplayLength: 10,
+        from: $("#js-date-from"),
+        to: $("#js-date-to"),
+        columnFromDate: $("#js-date-to"),
+        columnToDate: $("#js-date-to")
     };
+
+    var filterWithNull = false;
+    
+    var filterDateField = "e.insertTs";
 
     var typeClean = $("#js-clean-type"),
         filterWithoutLike = false,
@@ -22,7 +32,7 @@ $(function() {
     dataTableVars.searchValue.val("");
     dataTableVars.column.val("select");
 
-    if ( typeof getSessionVars !== "undefined"){
+    if (typeof getSessionVars !== "undefined"){
         getSessionVars(filters, dataTableVars);
     }
 
@@ -30,21 +40,13 @@ $(function() {
     {
         return ((value < 10) ? "0" : "") + value;
     }
-
+    
     function renderAmount(amount)
     {
         return (Math.floor(amount / 100)) + "," + toStringKeepZero(amount % 100) + " \u20ac";
     }
-
-    function renderDiscount(discount)
-    {
-        return discount + "%";
-    }
-
-    function renderMin(min)
-    {
-        return min + " min.";
-    }
+    
+    dataTableVars.column.val("select");
 
     table.dataTable({
         "processing": true,
@@ -67,24 +69,30 @@ $(function() {
             } );
         },
         "fnServerParams": function ( aoData ) {
-            if (filterWithoutLike) {
-                aoData.push({ "name": "column", "value": ""});
-                aoData.push({ "name": "searchValue", "value": ""});
-                aoData.push({ "name": "columnWithoutLike", "value": columnWithoutLike});
-                aoData.push({ "name": "columnValueWithoutLike", "value": columnValueWithoutLike});
+            if (filterWithNull) {
+                if (filterWithoutLike) {
+                    aoData.push({"name": "column", "value": ""});
+                    aoData.push({"name": "searchValue", "value": ""});
+                    aoData.push({"name": "columnWithoutLike", "value": columnWithoutLike});
+                    aoData.push({"name": "columnValueWithoutLike", "value": columnValueWithoutLike});
+                } else {
+                    aoData.push({"name": "column", "value": $(dataTableVars.column).val()});
+                    aoData.push({"name": "searchValue", "value": dataTableVars.searchValue.val().trim()});
+                }
             } else {
-                aoData.push({ "name": "column", "value": $(dataTableVars.column).val()});
-                aoData.push({ "name": "searchValue", "value": dataTableVars.searchValue.val().trim()});
+                aoData.push({"name": "column", "value": ""});
+                aoData.push({"name": "searchValue", "value": ""});
             }
-
-            //aoData.push({ "name": "fixedColumn", "value": "e.status"});
-            //aoData.push({ "name": "fixedValue", "value": "wrong_payment"});
+            aoData.push({ "name": "from", "value": $("#js-date-from").val()});
+            aoData.push({ "name": "to", "value": $("#js-date-to").val()});
+            aoData.push({ "name": "columnFromDate", "value": filterDateField});
+            aoData.push({ "name": "columnFromEnd", "value": filterDateField});
             aoData.push({ "name": "fixedLike", "value": false});
         },
         "order": [[dataTableVars.iSortCol_0, dataTableVars.sSortDir_0]],
         "columns": [
             {data: "e.id"},
-            {data: "e.charged"},
+            {data: "e.payed"},
             {data: "e.customerId"},
             {data: "e.vehicleFleetId"},
             {data: "e.tripId"},
@@ -92,57 +100,52 @@ $(function() {
             {data: "e.violationAuthority"},
             {data: "e.amount"},
             {data: "e.violationDescription"},
-            {data: "e.complete"}
+            {data: "e.complete"},
+            {data: "e.insertTs"}
         ],
         "columnDefs": [
             {
                 targets: [0],
+                data: "button",
+                searchable: false,
                 sortable: false,
-                "render": function (data, type, row) {
-                    if(row.fines.charged){
-                        return 'Si';
-                    }else{
-                        return 'No';
-                    }
+                render: function (data, type, row) {
+                    return '<a href="/fines/details/' + row.fines.id + '">' + row.fines.id + '</a>';
                 }
             },
             {
                 targets: [1],
+                searchable: false,
                 sortable: false,
-                "render": function (data, type, row) {
-                    if(row.fines.customerId>0){
-                        return '<a href="/customers/edit/'+row.fines.customerId+'">'+row.fines.customerId+'</a>';
-                    }else{
-                        return 'no customer defined';
+                render: function (data, type, row) {
+                    switch (row.fines.checkable){
+                        case 0: return '<center><span class="glyphicon glyphicon-ok" title="Già addebitata"></span></center>';
+                        case 1: return '<center><input class="checkbox" type="checkbox" name="check[]" value="'+row.fines.id+'" title="Addebitabile"></center>';
+                        case 2: return '<center><span class="glyphicon glyphicon-remove" title="Non addebitabile"></span></center>';
+                        default: return '---';   
                     }
                 }
             },
             {
                 targets: [2],
+                searchable: false,
                 sortable: false,
-                "render": function (data, type, row) {
-                    return row.fines.violationDescription;
+                render: function (data, type, row) {
+                    if(row.fines.payed != null ){
+                        return row.fines.payed;
+                    }else{
+                        return '---';
+                    }
                 }
             },
             {
                 targets: [3],
                 sortable: false,
                 "render": function (data, type, row) {
-                    if(row.fines.vehicleFleetId>0){
-                        switch (row.fines.vehicleFleetId){
-                            case 1:
-                                return "Milano";
-                            case 2:
-                                return "Firenze";
-                            case 3:
-                                return "Roma";
-                            case 4:
-                                return "Modena";
-                            default:
-                                return row.fines.vehicleFleetId;
-                        }
+                    if(row.fines.customerId>0){
+                        return '<a href="/customers/edit/'+row.fines.customerId+'">'+row.fines.customerId+'</a>';
                     }else{
-                        return 'no fleet defined';
+                        return '---';
                     }
                 }
             },
@@ -150,54 +153,66 @@ $(function() {
                 targets: [4],
                 sortable: false,
                 "render": function (data, type, row) {
-                    if(row.fines.tripId>0){
-                        return '<a href="/trips/details/'+row.fines.tripId+'">'+row.fines.tripId+'</a>';
-                    }else{
-                        return 'no trip defined';
-                    }
+                    var str = row.fines.violationDescription;
+                    return str.substring(0, 20) + '...';
                 }
             },
             {
                 targets: [5],
                 sortable: false,
                 "render": function (data, type, row) {
-                    return '<a href="/cars/edit/'+row.fines.carPlate+'">'+row.fines.carPlate+'</a>';
+                    return (row.fines.vehicleFleetId != null) ? row.fines.vehicleFleetId : '---';
                 }
             },
             {
                 targets: [6],
                 sortable: false,
                 "render": function (data, type, row) {
-                    return row.fines.violationAuthority;
+                    if(row.fines.tripId>0){
+                        return '<a href="/trips/details/'+row.fines.tripId+'">'+row.fines.tripId+'</a>';
+                    }else{
+                        return '---';
+                    }
                 }
             },
             {
                 targets: [7],
                 sortable: false,
                 "render": function (data, type, row) {
-                    return renderAmount(row.fines.amount);
+                    return '<a href="/cars/edit/'+row.fines.carPlate+'">'+row.fines.carPlate+'</a>';
                 }
             },
             {
                 targets: [8],
                 sortable: false,
                 "render": function (data, type, row) {
-                    if(row.fines.complete){
-                        return 'Verbale appena dematerializzato';
-                    }else{
-                        return 'Verbale in uscita (completo)';
-                    }
+                    var str = row.fines.violationAuthority;
+                    return str.substring(0, 15) + '...';
                 }
             },
             {
                 targets: [9],
-                data: "button",
-                searchable: false,
                 sortable: false,
-                render: function (data, type, row) {
-                    return '<div class="btn-group">' +
-                        '<a href="/fines/details/' + row.fines.id + '" class="btn btn-default">Dettagli</a> ' +
-                        '</div>';
+                "render": function (data, type, row) {
+                    return renderAmount(row.fines.amount);
+                }
+            },
+            {
+                targets: [10],
+                sortable: false,
+                "render": function (data, type, row) {
+                    if(row.fines.complete){
+                        return 'Verbale in uscita (completo)';
+                    }else{
+                        return 'Verbale appena dematerializzato';
+                    }
+                }
+            },
+            {
+                targets: [11],
+                sortable: false,
+                "render": function (data, type, row) {
+                    return row.fines.violationTimestamp;
                 }
             }
         ],
@@ -234,6 +249,14 @@ $(function() {
 
     $("#js-search").click(function() {
         // Always set the columnValueWithoutLike (even for columns that will be filtered with the "LIKE" stmt.).
+        if($('#js-date-from').val() != ""){
+            chageBtnPay = true;
+            $('#pay-fines').fadeIn();
+            $('#pay-fines').text("Paga multe tramite date");
+        }else{
+            $('#pay-fines').fadeOut();
+            $('#pay-fines').text();
+        }
         columnValueWithoutLike = dataTableVars.searchValue.val();
 
         // Filter Action
@@ -242,42 +265,193 @@ $(function() {
 
     $("#js-clear").click(function() {
         dataTableVars.searchValue.val("");
+        $("#js-date-from").val("");
+        $("#js-date-to").val("");
         dataTableVars.searchValue.prop("disabled", false);
         typeClean.hide();
         dataTableVars.searchValue.show();
         dataTableVars.column.val("select");
+        filterWithNull = false;
     });
-
+        
     // Select Changed Action
     $(dataTableVars.column).change(function() {
         // Selected Column
         var value = $(this).val();
-
-        // Column that need the standard "LIKE" search operator
-        if ((value === "e.violationDescription")||(value === "e.carPlate")||(value === "e.vehicleFleetId")||(value === "e.id")||(value === "e.tripId")) {
-            filterWithoutLike = false;
-            dataTableVars.searchValue.val("");
-            dataTableVars.searchValue.prop("disabled", false);
-            typeClean.hide();
-            dataTableVars.searchValue.show();
-        } else {
-            filterWithoutLike = true;
-            dataTableVars.searchValue.val("");
-            dataTableVars.searchValue.prop("disabled", false);
-            typeClean.hide();
-            dataTableVars.searchValue.show();
-
-            switch (value) {
-                // Columns that need a "=" instead the standard "LIKE" search operator.
-                case "e.tripId":
-                    columnWithoutLike = value;
-                    //columnValueWithoutLike = true;
-                    break;
-                case "e.customerId":
-                    columnWithoutLike = value;
-                    break;
+        dataTableVars.searchValue.val();
+        filterWithNull = true;
+    });
+    /*
+    var intId = setInterval(function(){$("th").removeClass("sorting_desc");$("th").removeClass("sorting_asc");},100);
+    setTimeout(function(){clearInterval(intId);},2000);
+    */
+    
+     $('#checkAll').click(function () {
+        if ($('#checkAll').is(':checked')) {
+            $('.checkbox').each(function(){
+                this.checked = true;
+            });
+            $('#pay-fines').fadeIn();
+            $('#pay-fines').text("Paga multe sel.");
+        }else{
+            $('.checkbox').each(function(){
+                this.checked = false;
+            });
+            if(chageBtnPay){
+                $('#pay-fines').text("Paga multe tramite date");
+            }else{
+                $('#pay-fines').fadeOut();
+                $('#pay-fines').text();
             }
         }
     });
 
+    $(document).on("click", ".checkbox", function () {
+        var selected = new Array();
+        $(".checkbox:checked").each(function () {
+            selected.push($(this).val());
+        });
+        if (selected.length > 0) {
+            $('#pay-fines').fadeIn();
+            $('#pay-fines').text("Paga multe sel.");
+        } else {
+            if(chageBtnPay){
+                $('#pay-fines').text("Paga multe tramite date");
+            }else{
+                $('#pay-fines').fadeOut();
+                $('#pay-fines').text();
+            }
+        }
+    });
+    
+    $('#js-date-from').change(function() {
+        if($(this).val() == ""){
+            chageBtnPay = false;
+        }
+    });
+    
+    //create exra_payment and try payment to single fine in page details
+    $('#js-fine-try').click(function () {
+        $.ajax({
+            type: "POST",
+            url: "/fines/pay/",
+            data: {'check': [$('#id_penalty').html()]},
+            success: function (data) {
+                var result = JSON.parse(data);
+                if(result.error == true){
+                    $('#resultPay').html("<br><div class='alert alert-danger'>Errore di sistema</div>");
+                    fadeOutPopUp();
+                }else{
+                    if(result.n_success == 1){
+                        $('#resultPay').html("<br><div class='alert alert-success'>Penale addebitata e passata</div>");
+                        fadeOutPopUp();
+                    } else {
+                        $('#resultPay').html("<br><div class='alert alert-warning'>Errore. Penale addebiatta ma non passata</div>");
+                        fadeOutPopUp();
+                    }
+                }
+            },
+            error: function () {
+               $('#resultPay').html("<br><div class='alert alert-danger'>Errore di sistema</div>");
+               fadeOutPopUp();
+            }
+        });
+    });
+    
+    function fadeOutPopUp() {
+        $('#resultPay').fadeIn();
+        setTimeout(function () {
+            $('#resultPay').fadeOut();
+            location.reload(true);
+        }, 2000);
+    }
+    
+    var selecId = new Array();
+    
+    $('#pay-fines').click(function () {
+        if ($('#pay-fines').text() == 'Paga multe sel.') {
+            $(".checkbox:checked").each(function () {
+                selecId.push($(this).val());
+            });
+            if (confirm("Stai mandando in pagamento " + selecId.length + " multe. Vuoi proseguire?")) {
+                payFines(selecId);
+            }
+        } else {
+            if ($('#js-date-from').val() == "" && $('#js-date-to').val() == "") {
+                $('#titleModal').text("Errore:");
+                $('#body-text-modal').html("<div><p>Inserire almeno la data di partenza</p></div>");
+                $('#btn-modal-close').show();
+            } else {
+                $.ajax({
+                    type: "POST",
+                    url: "/fines/find-fines-between-date/",
+                    data: {'from': $('#js-date-from').val(),
+                        'to': $('#js-date-to').val()
+                    },
+                    beforeSend: function () {
+                        $('#titleModal').text("In elaborazione...");
+                        $('#body-text-modal').html("<div><i class='fa fa-spinner fa-pulse fa-2x fa-fw'></i></div>");
+                    },
+                    success: function (data) {
+                        var result = JSON.parse(data.toString());
+                        var fine = result['fine'];
+                        fine.forEach(function (element) {
+                            selecId.push(element['id']);
+                        });
+                        $('#titleModal').text("Multe estratte:");
+                        $('#body-text-modal').html("<div><p>Stai mettendo in pagemnto " + fine.length + " multe su " + result['nTotal']['nTotalFines'] + ". Continuare?</p></div>");
+                        $('#btn-modal-close').show();
+                        $('#btn-pay').show();
+                    },
+                    error: function () {
+                        $('#titleModal').text("Errore:");
+                        $('#body-text-modal').html("<div><p>Si è verificato un errore durante la procedura</p></div>");
+                    }
+                });
+            }
+        }
+    });
+    
+    $('#btn-pay').click(function (){
+        $('#conteiner-btn').fadeOut();
+        $('#btn-modal-close').hide();
+        $('#btn-pay').hide();
+        payFines(selecId);
+    });
+
+    function payFines(selected) {
+        $.ajax({
+            type: "POST",
+            url: "/fines/pay/",
+            data: {'check': selected},
+            beforeSend: function () {
+                $('#titleModal').text("In elaborazione...");
+                $('#body-text-modal').html("<div><i class='fa fa-spinner fa-pulse fa-2x fa-fw'></i></div>");
+            },
+            success: function (data) {
+                var result = JSON.parse(data);
+                if(result.error == true){
+                    $('#titleModal').text("Errore:");
+                    $('#body-text-modal').html("<div><p>Si è verificato un errore durante la procedura</p></div>");
+                    $('#conteiner-btn').fadeIn();
+                    $('#btn-modal-close').show();
+                }else{
+                    $('#titleModal').text("Risulatato:");
+                    $('#body-text-modal').html("<div><p>Multe passate: "+ result.n_success +"</p><p>Multe non passate: "+ result.n_fail +"</p></div>");
+                    $('#conteiner-btn').fadeIn();
+                    $('#btn-modal-close').show();
+                }
+            },
+            error: function () {
+                $('#titleModal').text("Errore NON GESTITO:");
+                $('#body-text-modal').html("<div><p>Si è verificato un errore durante la procedura</p></div>");
+                $('#conteiner-btn').fadeIn();
+                $('#btn-modal-close').show();
+            }
+        });
+    }
+    
+    $(document).on("click", "#btn-modal-close", function () {
+        location.reload(true);
+    });
 });
