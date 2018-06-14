@@ -152,7 +152,7 @@ class FinesController extends AbstractActionController
 
         //$dataDataTable = array_slice($this->filterFinesComplete($this->finesService->getFinesData($filters)), (int)$filters['iDisplayStart'], (int)$filters['iDisplayLength']);
         $dataDataTable = $this->finesService->getFinesData($filters);
-        $totalFailedPayments = $this->finesService->getTotalFinesComplete();
+        $totalFailedPayments = $this->finesService->getTotalFines();
         $recordsFiltered = $this->getRecordsFiltered($filters, $totalFailedPayments);
         
         $areVisible = new Container('areVisible');

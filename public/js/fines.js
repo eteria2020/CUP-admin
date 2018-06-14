@@ -93,9 +93,9 @@ $(function() {
             aoData.push({ "name": "to", "value": $("#js-date-to").val()});
             aoData.push({ "name": "columnFromDate", "value": filterDateField});
             aoData.push({ "name": "columnFromEnd", "value": filterDateField});
-            aoData.push({ "name": "fixedColumn", "value": "e.complete"});
+            /*aoData.push({ "name": "fixedColumn", "value": "e.complete"});
             aoData.push({ "name": "fixedValue", "value": "true"});
-            aoData.push({ "name": "fixedLike", "value": false});
+            aoData.push({ "name": "fixedLike", "value": false});*/
         },
         "order": [[dataTableVars.iSortCol_0, dataTableVars.sSortDir_0]],
         "columns": [
@@ -290,7 +290,12 @@ $(function() {
     $(dataTableVars.column).change(function() {
         // Selected Column
         var value = $(this).val();
-        dataTableVars.searchValue.val();
+        if (value === "e.complete") {
+            dataTableVars.searchValue.val("true");
+            dataTableVars.searchValue.prop("disabled", true);
+        } else{
+            dataTableVars.searchValue.val();
+        }
         filterWithNull = true;
     });
     /*
