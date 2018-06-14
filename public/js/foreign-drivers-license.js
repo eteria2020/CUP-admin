@@ -82,18 +82,22 @@ $(function() {
             {data: "e.customerBirthDate"},
             {data: "e.customerBirthPlace"},
             {data: "e.driversLicenseNumber"},
-            {data: "e.driversLicenseAuthority"},
             {data: "e.driversLicenseCountry"},
-            {data: "e.driversLicenseReleaseDate"},
             {data: "e.driversLicenseName"},
-            {data: "e.driversLicenseCategories"},
             {data: "e.driversLicenseExpire"},
             {data: "e.id"},
             {data: showStatus}
         ],
         "columnDefs": [
             {
-                targets: 13,
+                targets: 0,
+                "render": function (data, type, row) {
+                    return '<a href="/customers/edit/' + row.cu.id + '" title="' +
+                        translate("showProfile") + " " + row.cu.fullname + ' ">' + data + '</a>';
+                }
+            },
+            {
+                targets: 10,
                 searchable: false,
                 sortable: false,
                 data: "cu.id",
@@ -103,7 +107,7 @@ $(function() {
                 }
             },
             {
-                targets: 14,
+                targets: 11,
                 searchable: false,
                 sortable: false
             }

@@ -174,22 +174,6 @@ $input = '<input type="text" class="form-control" required="required" readonly="
 
                     <div class="col-lg-4">
                         <div class="form-group">
-                            <label for="driverLicenseAuthority"><?= $this->translate("Rilasciato da (autorità)"); ?></label>
-                            <?= is_null($formDriver->get('driver')->get('driverLicenseAuthority')->getValue()) ? $input : $this->formRow($formDriver->get('driver')->get('driverLicenseAuthority')->setAttribute('disabled', 'true')); ?>
-                        </div>
-                    </div>
-
-                    <div class="col-lg-4">
-                        <div class="form-group">
-                            <label for="driverLicenseReleaseDate"><?= $this->translate("Rilasciato il"); ?></label>
-                            <?= is_null($formDriver->get('driver')->get('driverLicenseReleaseDate')->getValue()) ? $input : $this->formRow($formDriver->get('driver')->get('driverLicenseReleaseDate')->setAttribute('readonly', 'true')); ?>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="row">
-                    <div class="col-lg-4">
-                        <div class="form-group">
                             <label for="driverLicenseName"><?= $this->translate("Nome sulla patente"); ?></label>
                             <?= $this->formRow($formDriver->get('driver')->get('driverLicenseName')->setAttribute('readonly', 'true')); ?>
                         </div>
@@ -201,16 +185,16 @@ $input = '<input type="text" class="form-control" required="required" readonly="
                             <?= $this->formRow($formDriver->get('driver')->get('driverLicenseSurname')->setAttribute('readonly', 'true')); ?>
                         </div>
                     </div>
+                </div>
 
+                <div class="row">
                     <div class="col-lg-4">
                         <div class="form-group">
                             <label for="driverLicenseCountry"><?= $this->translate("Rilasciata da (nazione)"); ?></label>
                             <?= is_null($formDriver->get('driver')->get('driverLicenseCountry')->getValue()) ? $input : $this->formRow($formDriver->get('driver')->get('driverLicenseCountry')->setAttribute('disabled', 'true')); ?>
                         </div>
                     </div>
-                </div>
 
-                <div class="row">
                     <div class="col-lg-4">
                         <div class="form-group">
                             <label for="driverLicenseExpire"><?= $this->translate("Data di scadenza"); ?></label>
