@@ -185,7 +185,11 @@ $(function() {
                 targets: [7],
                 sortable: false,
                 "render": function (data, type, row) {
-                    return '<a href="/cars/edit/'+row.fines.carPlate+'">'+row.fines.carPlate+'</a>';
+                    if(row.fines.carPlate != null){
+                        return '<a href="/cars/edit/'+row.fines.carPlate+'">'+row.fines.carPlate+'</a>';
+                    }else{
+                        return '---';
+                    }
                 }
             },
             {
