@@ -541,6 +541,17 @@ return [
                             ]
                         ]
                     ],
+                    'fines-not-payed-are-visible' => [
+                        'type' => 'Segment',
+                        'options' => [
+                            'route' => '/fines-not-payed-are-visible/',
+                            'defaults' => [
+                                '__NAMESPACE__' => 'Application\Controller',
+                                'controller' => 'Fines',
+                                'action' => 'fines-not-payed-are-visible'
+                            ]
+                        ]
+                    ],
                 ],
             ],
             'cars' => [

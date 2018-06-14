@@ -66,7 +66,13 @@ $(function() {
                         loginRedirect(data, textStatus, jqXHR);
                     }
                 }
-            } );
+            }).done(function (aoData) {
+                if (aoData['visible'] === true) {
+                    $(".glyphicon-remove").parent().parent().parent().show();
+                } else {
+                    $(".glyphicon-remove").parent().parent().parent().hide();
+                }
+            });
         },
         "fnServerParams": function ( aoData ) {
             if (filterWithNull) {
@@ -454,4 +460,31 @@ $(function() {
     $(document).on("click", "#btn-modal-close", function () {
         location.reload(true);
     });
+    
+    $("#remove-not-payed").click(function () {
+        if ($(".glyphicon-remove").is(":visible")) {
+            $(".glyphicon-remove").parent().parent().parent().hide();
+            $.ajax({
+                type: "POST",
+                url: "/fines/fines-not-payed-are-visible/",
+                data: {'visible': 0},
+                success: function (data) {
+                },
+                error: function () {
+                }
+            });
+        } else {
+            $(".glyphicon-remove").parent().parent().parent().show();
+            $.ajax({
+                type: "POST",
+                url: "/fines/fines-not-payed-are-visible/",
+                data: {'visible': 1},
+                success: function (data) {
+                },
+                error: function () {
+                }
+            });
+        }
+    });
+        
 });

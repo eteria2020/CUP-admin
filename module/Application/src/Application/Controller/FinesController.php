@@ -142,22 +142,33 @@ class FinesController extends AbstractActionController
     public function datatableAction()
     {
         $filters = $this->params()->fromPost();
-        $filters['withLimit'] = false;
+        //$filters['withLimit'] = false;
+        $filters['withLimit'] = true;
 
         if($filters['column'] == "" && isset($filters['columnValueWithoutLike']) && $filters['columnValueWithoutLike'] == ""){
             $filters['columnWithoutLike'] = true;
             $filters['columnValueWithoutLike'] = null;
         }
 
-        $dataDataTable = array_slice($this->filterFinesComplete($this->finesService->getFinesData($filters)), (int)$filters['iDisplayStart'], (int)$filters['iDisplayLength']);
+        //$dataDataTable = array_slice($this->filterFinesComplete($this->finesService->getFinesData($filters)), (int)$filters['iDisplayStart'], (int)$filters['iDisplayLength']);
+        $dataDataTable = $this->finesService->getFinesData($filters);
         $totalFailedPayments = $this->finesService->getTotalFinesComplete();
         $recordsFiltered = $this->getRecordsFiltered($filters, $totalFailedPayments);
+        
+        $areVisible = new Container('areVisible');
+        
+        if(!$areVisible->offsetExists('visible')){
+            $finesNotPayedAreVisible = true;
+        }else{
+            $finesNotPayedAreVisible = $areVisible->offsetGet('visible');
+        }
 
         return new JsonModel([
             'draw'            => $this->params()->fromQuery('sEcho', 0),
             'recordsTotal'    => $totalFailedPayments,
             'recordsFiltered' => $recordsFiltered,
-            'data'            => $dataDataTable
+            'data'            => $dataDataTable,
+            'visible'         => $finesNotPayedAreVisible
         ]);
     }
 
@@ -167,10 +178,11 @@ class FinesController extends AbstractActionController
             return $totalTripPayments;
         } else {
             $filters['withLimit'] = false;
-            return count($this->filterFinesComplete($this->finesService->getFinesData($filters)));
+            //return count($this->filterFinesComplete($this->finesService->getFinesData($filters)));
+            return count($this->finesService->getFinesData($filters));
         }
     }
-    
+    /*
     private function filterFinesComplete($fines){
         $result = array();
         foreach ($fines as $record){
@@ -180,7 +192,7 @@ class FinesController extends AbstractActionController
         }
         return $result;
     }
-
+*/
     public function detailsAction()
     {
         $id = (int)$this->params()->fromRoute('id', 0);
@@ -238,5 +250,19 @@ class FinesController extends AbstractActionController
             return $response;
         }
     }
+    
+    public function finesNotPayedAreVisibleAction(){
+        $visible = $this->params()->fromPost('visible');
+        if($visible){
+            $areVisible = new Container('areVisible');
+            $areVisible->offsetSet('visible', true);
+            return true;
+        }else{
+            $areVisible = new Container('areVisible');
+            $areVisible->offsetSet('visible', false);
+            return false;
+        }
+    }
+    
     
 }
