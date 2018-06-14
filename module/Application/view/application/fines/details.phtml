@@ -245,7 +245,9 @@ $safoPenalty = $this->safoPenalty;
                             <div class="col-lg-3">
                                 <div class="form-group">
                                     <label><?= $this->translate("Pagabile"); ?></label>
-                                    <div class="sng-info-box"><?= is_null($safoPenalty->getExtraPayment()) ? '' : ($safoPenalty->getExtraPayment()->getPayable()) ? 'SI' : 'NO' ?></div>
+                                    <div class="sng-info-box"><?=
+                                    (!is_null($safoPenalty->getCustomer()) && !is_null($safoPenalty->getTrip()) && !is_null($safoPenalty->getCarPLate()) && !is_null($safoPenalty->isComplete())) ? 'SI' : 'NO';
+                                    ?></div>
                                 </div>
                             </div>
                         </div>

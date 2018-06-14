@@ -93,6 +93,8 @@ $(function() {
             aoData.push({ "name": "to", "value": $("#js-date-to").val()});
             aoData.push({ "name": "columnFromDate", "value": filterDateField});
             aoData.push({ "name": "columnFromEnd", "value": filterDateField});
+            aoData.push({ "name": "fixedColumn", "value": "e.complete"});
+            aoData.push({ "name": "fixedValue", "value": "true"});
             aoData.push({ "name": "fixedLike", "value": false});
         },
         "order": [[dataTableVars.iSortCol_0, dataTableVars.sSortDir_0]],
@@ -385,6 +387,10 @@ $(function() {
             });
             if (confirm("Stai mandando in pagamento " + selecId.length + " multe. Vuoi proseguire?")) {
                 payFines(selecId);
+            }else{
+                $('#titleModal').text("Notifica:");
+                $('#body-text-modal').html("<div><p>Hai annullato il processo di pagamento delle multe selezionate</p></div>");
+                $('#btn-modal-close').show();
             }
         } else {
             if ($('#js-date-from').val() == "" && $('#js-date-to').val() == "") {
