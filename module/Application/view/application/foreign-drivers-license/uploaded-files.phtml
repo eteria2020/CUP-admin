@@ -4,7 +4,7 @@ $this->headScript()
     ->appendFile('/js/datatables/media/js/jquery.dataTables.min.js')
     ->appendFile('/js/datatables/plugins/bootstrap/dataTables.bootstrap.js')
     ->appendFile($this->basePath() . '/js/datatable-session-data.js')
-    ->appendFile($this->basePath() .'/js/foreign-drivers-license.js');
+    ->appendFile($this->basePath() .'/js/foreign-drivers-license.js?v=1.1');
 ?>
 <div class="page-content-wrapper">
     <div class="page-content">
@@ -64,11 +64,8 @@ $this->headScript()
                                 <th><?= $this->translate("Data di nascita"); ?></th>
                                 <th><?= $this->translate("Luogo di nascita"); ?></th>
                                 <th><?= $this->translate("Numero patente"); ?></th>
-                                <th><?= $this->translate("Autorità"); ?></th>
                                 <th><?= $this->translate("Stato"); ?></th>
-                                <th><?= $this->translate("Rilasciata il"); ?></th>
                                 <th><?= $this->translate("Nome sulla patente"); ?></th>
-                                <th><?= $this->translate("Categoria"); ?></th>
                                 <th><?= $this->translate("Scade il"); ?></th>
                                 <th><?= $this->translate("File patente"); ?></th>
                                 <th><?= $this->translate("Stato"); ?></th>

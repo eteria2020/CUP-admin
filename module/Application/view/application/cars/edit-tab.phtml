@@ -71,16 +71,22 @@ $form->get('car')->get('fleet')->setValue($this->car->getFleet()->getId());
                     ?>
                 </div>
             </div>
-            <div class="col-lg-2">
+            <div class="col-lg-1">
                 <div class="form-group">
                     <label for="name"><?= $this->translate("Attiva"); ?></label>
                     <?= $this->formRow($form->get('car')->get('active')); ?>
                 </div>
             </div>
-            <div class="col-lg-4">
+            <div class="col-lg-3">
+                <div class="form-group">
+                    <label for="gender"><?= $this->translate("Note"); ?></label>
+                    <?= $this->formRow($form->get('car')->get('notes')); ?>
+                </div>
+            </div>
+            <div class="col-lg-3">
                 <div class="form-group">
                     <label for="gender"><?= $this->translate("Telaio"); ?></label>
-                    <?= $this->formRow($form->get('car')->get('notes')); ?>
+                    <?= $this->formRow($form->get('car')->get('vin')); ?>
                 </div>
             </div>
         </div>

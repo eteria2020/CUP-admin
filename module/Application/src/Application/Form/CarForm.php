@@ -69,6 +69,15 @@ class CarForm extends Form
         ]);
 
         $this->add([
+            'name'       => 'vin',
+            'type'       => 'Zend\Form\Element\Text',
+            'attributes' => [
+                'id'    => 'vin',
+                'class' => 'form-control',
+            ]
+        ]);
+
+        $this->add([
             'name'       => 'motivation',
             'type'       => 'Zend\Form\Element\Select',
             'attributes' => [

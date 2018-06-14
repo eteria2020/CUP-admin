@@ -193,22 +193,6 @@ $formSetting->setAttribute('action', $this->url('customers/edit', ['id' => $this
 
                         <div class="col-lg-4">
                             <div class="form-group">
-                                <label for="driverLicenseAuthority"><?= $this->translate("Rilasciato da (autorità)"); ?></label>
-                                <?= $this->formRow($formDriver->get('driver')->get('driverLicenseAuthority')); ?>
-                            </div>
-                        </div>
-
-                        <div class="col-lg-4">
-                            <div class="form-group">
-                                <label for="driverLicenseReleaseDate"><?= $this->translate("Rilasciato il"); ?></label>
-                                <?= $this->formRow($formDriver->get('driver')->get('driverLicenseReleaseDate')); ?>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="row">
-                        <div class="col-lg-4">
-                            <div class="form-group">
                                 <label for="driverLicenseName"><?= $this->translate("Nome sulla patente"); ?></label>
                                 <?= $this->formRow($formDriver->get('driver')->get('driverLicenseName')); ?>
                             </div>
@@ -220,6 +204,10 @@ $formSetting->setAttribute('action', $this->url('customers/edit', ['id' => $this
                                 <?= $this->formRow($formDriver->get('driver')->get('driverLicenseSurname')); ?>
                             </div>
                         </div>
+                    </div>
+
+                    <div class="row">
+
 
                         <div class="col-lg-4">
                             <div class="form-group">
