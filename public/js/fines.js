@@ -289,6 +289,7 @@ $(function() {
     // Select Changed Action
     $(dataTableVars.column).change(function() {
         // Selected Column
+        dataTableVars.searchValue.prop("disabled", false);
         var value = $(this).val();
         if (value === "e.complete") {
             dataTableVars.searchValue.val("true");
