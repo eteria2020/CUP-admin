@@ -1,10 +1,13 @@
 <?php
-$this->headLink()->appendStylesheet('/js/datatables/plugins/bootstrap/dataTables.bootstrap.css');
+$this->headLink()
+    ->appendStylesheet('/js/datatables/plugins/bootstrap/dataTables.bootstrap.css')
+    ->appendStylesheet('/js/plugins/bootstrap-datepicker/css/datepicker3.css');
 $this->headScript()
     ->appendFile('/js/datatables/media/js/jquery.dataTables.min.js')
     ->appendFile('/js/datatables/plugins/bootstrap/dataTables.bootstrap.js')
+    ->appendFile('/plugins/bootstrap-datepicker/js/bootstrap-datepicker.js')
     ->appendFile($this->basePath() . '/js/datatable-session-data.js')
-    ->appendFile($this->basePath() .'/js/fines.js');
+    ->appendFile($this->basePath() . '/js/fines.js?v=1.8');
 ?>
 <div class="page-content-wrapper">
     <div class="page-content">
@@ -18,20 +21,37 @@ $this->headScript()
             <div class="col-md-12">
                 <?= $this->partial('partials/flash-messages.phtml', []); ?>
                 <div class="row">
-                    <div class="col-md-8">
+                    <div class="col-md-4">
                         <div class="form-inline">
                             <div class="form-group">
                                 <select name="column" id="js-column" class="form-control">
                                     <option value="select" selected>-- <?= $this->translate("Seleziona"); ?> --</option>
-                                    <!--<option value="e.carPlate"><?= $this->translate("Targa"); ?></option>
-                                    <option value="e.vehicleFleetId"><?= $this->translate("Flotta"); ?></option>
-                                    <option value="e.id"><?= $this->translate("ID Cliente"); ?></option>
-                                    <option value="e.tripId"><?= $this->translate("ID Corsa"); ?></option>-->
-                                    <option value="e.violationDescription"><?= $this->translate("Descrizione"); ?></option>
+                                    <option value="e.id"><?= $this->translate("ID"); ?></option>
+                                    <option value="c.plate"><?= $this->translate("Targa"); ?></option>
+                                    <option value="f.name"><?= $this->translate("Flotta"); ?></option>
+                                    <option value="cu.id"><?= $this->translate("ID Cliente"); ?></option>
+                                    <option value="t.id"><?= $this->translate("ID Corsa"); ?></option>
+                                    <option value="e.complete"><?= $this->translate("Complete"); ?></option>
                                 </select>
                             </div>
                             <div class="form-group">
                                 <input type="text" name="value" value="" class="form-control" id="js-value" placeholder="<?= $this->translate("Filtra..."); ?>">
+                            </div>
+                        </div>
+                    </div>      
+                    <div class="col-md-6">
+                        <div class="form-inline">
+                            <div class="form-group">
+                                <label> <?= $this->translate("da"); ?>: </label>
+                                <input class="form-control form-control-inline input-small date-picker" size="16"
+                                       type="text" id="js-date-from"
+                                       placeholder="<?= $this->translate("Data inizio"); ?>">
+                            </div>
+                            <div class="form-group">
+                                <label> <?= $this->translate("a"); ?>: </label>
+                                <input class="form-control form-control-inline input-small date-picker" size="16"
+                                       type="text" id="js-date-to"
+                                       placeholder="<?= $this->translate("Data fine"); ?>">
                             </div>
                             <div class="btn-group">
                                 <button type="button" class="btn green js-search" id="js-search"><i class="fa fa-search"></i> <?= $this->translate("Cerca"); ?></button>
@@ -44,8 +64,38 @@ $this->headScript()
                             </div>
                         </div>
                     </div>
+                    <div class="col-md-2">
+                        <button class="btn btn-success pull-right" id="pay-fines" data-toggle="modal" data-target="#myModal" style="display: none"></button>
+                    </div>
+                </div>
+                </br>
+                <div class="row">
+                    <div class="col-md-2">
+                        <button class="btn btn-success" id="remove-not-payed">Mostra/Nascondi multe non pagabili</button>
+                    </div>
+                </div>
+                <div class="modal fade" id="myModal" role="dialog" data-keyboard="false" data-backdrop="static">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h4 class="modal-title" id="titleModal"></h4>
+                            </div>
+                            <center>
+                                <div class="modal-body">
+                                    <div id="body-text-modal"></div>
+                                </div>
+                            </center>
+                            <div class="modal-footer">
+                                <div id="conteiner-btn">
+                                    <button type="button" id="btn-pay" class="btn btn-default" style="display: none">Paga multe</button>
+                                    <button type="button" id="btn-modal-close" class="btn btn-default" data-dismiss="modal" style="display: none">Close</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
                 <hr>
+                
                 <!-- BEGIN EXAMPLE TABLE PORTLET-->
                 <div class="portlet box green">
                     <div class="portlet-title">
@@ -57,7 +107,9 @@ $this->headScript()
                         <table class="table table-striped table-bordered table-hover" id="js-fines-table">
                             <thead>
                             <tr>
-                                <th><?= $this->translate("Addebitato"); ?></th>
+                                <th><?= $this->translate("ID"); ?></th>
+                                <th><center><input type="checkbox" id='checkAll'/></th>
+                                <th><?= $this->translate("Pagato"); ?></th>
                                 <th><?= $this->translate("ID cliente"); ?></th>
                                 <th><?= $this->translate("Descrizione"); ?></th>
                                 <th><?= $this->translate("Flotta"); ?></th>
@@ -66,7 +118,7 @@ $this->headScript()
                                 <th><?= $this->translate("Autorità"); ?></th>
                                 <th><?= $this->translate("Costo"); ?></th>
                                 <th><?= $this->translate("Status"); ?></th>
-                                <th></th>
+                                <th><?= $this->translate("Data Infrazione"); ?></th>
                             </tr>
                             </thead>
                         </table>
@@ -80,4 +132,15 @@ $this->headScript()
 </div>
 <script>
     var filters = <?= $this->filters ?>;
+    
+    $('#js-date-from').datepicker({
+        autoclose: true,
+        format: "yyyy-mm-dd"
+    });
+    
+    $('#js-date-to').datepicker({
+        autoclose: true,
+        format: "yyyy-mm-dd"
+    });
+    
 </script>

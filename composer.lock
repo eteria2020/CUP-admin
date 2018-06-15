@@ -2107,7 +2107,7 @@
             "source": {
                 "type": "git",
                 "url": "ssh://git@git.sharengo.it/cup-it/core.git",
-                "reference": "33cb4af4a6ec474176b371ac974ed77ce25bae83"
+                "reference": "00e040a8092ffa2ba475888aa401fae9434d26d2"
             },
             "require": {
                 "doctrine/doctrine-orm-module": "0.*",
@@ -2128,7 +2128,7 @@
                 }
             },
             "description": "Core ZF2 module for Sharengo apps",
-            "time": "2018-05-23T13:12:59+00:00"
+            "time": "2018-06-14T15:19:10+00:00"
         },
         {
             "name": "mvlabs/zf2-multilanguage",
@@ -2433,7 +2433,7 @@
             "source": {
                 "type": "git",
                 "url": "ssh://git@git.sharengo.it/cup-it/cartasi.git",
-                "reference": "3cf1666d9f151850783d3317349f8edefb2cbb5a"
+                "reference": "fe8b514ffbb64a23ecf84da39e98e27fcdb8a00c"
             },
             "require": {
                 "doctrine/doctrine-orm-module": "0.*",
@@ -2447,7 +2447,7 @@
                 }
             },
             "description": "Cartasi module for Sharengo",
-            "time": "2017-11-21T10:29:26+00:00"
+            "time": "2018-06-13T08:07:57+00:00"
         },
         {
             "name": "symfony/console",

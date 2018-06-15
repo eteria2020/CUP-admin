@@ -15,6 +15,7 @@ use SharengoCore\Service\PenaltiesService;
 use SharengoCore\Exception\FleetNotFoundException;
 use SharengoCore\Service\FleetService;
 use SharengoCore\Service\RecapService;
+use SharengoCore\Entity\ExtraPayments;
 // Externals
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\JsonModel;
@@ -24,7 +25,7 @@ use Zend\Session\Container;
 class FinesController extends AbstractActionController
 {
     /**
-     * @var finesService
+     * @var FinesService
      */
     private $finesService;
 
@@ -125,7 +126,14 @@ class FinesController extends AbstractActionController
     public function indexAction()
     {
         $sessionDatatableFilters = $this->getDataTableSessionFilters();
-
+        
+        if(isset($sessionDatatableFilters['searchValue'])&&($sessionDatatableFilters['searchValue']!="")){
+            if($sessionDatatableFilters['column']=="e.vehicleFleetId"){
+                $fleets = $this->fleetService->getFleetsSelectorArray();
+                $sessionDatatableFilters['searchValue']=$fleets[$sessionDatatableFilters['searchValue']];
+            }
+        }
+        
         return new ViewModel([
             'filters' => json_encode($sessionDatatableFilters),
         ]);
@@ -134,6 +142,7 @@ class FinesController extends AbstractActionController
     public function datatableAction()
     {
         $filters = $this->params()->fromPost();
+        //$filters['withLimit'] = false;
         $filters['withLimit'] = true;
 
         if($filters['column'] == "" && isset($filters['columnValueWithoutLike']) && $filters['columnValueWithoutLike'] == ""){
@@ -141,16 +150,25 @@ class FinesController extends AbstractActionController
             $filters['columnValueWithoutLike'] = null;
         }
 
-
+        //$dataDataTable = array_slice($this->filterFinesComplete($this->finesService->getFinesData($filters)), (int)$filters['iDisplayStart'], (int)$filters['iDisplayLength']);
         $dataDataTable = $this->finesService->getFinesData($filters);
         $totalFailedPayments = $this->finesService->getTotalFines();
         $recordsFiltered = $this->getRecordsFiltered($filters, $totalFailedPayments);
+        
+        $areVisible = new Container('areVisible');
+        
+        if(!$areVisible->offsetExists('visible')){
+            $finesNotPayedAreVisible = true;
+        }else{
+            $finesNotPayedAreVisible = $areVisible->offsetGet('visible');
+        }
 
         return new JsonModel([
             'draw'            => $this->params()->fromQuery('sEcho', 0),
             'recordsTotal'    => $totalFailedPayments,
             'recordsFiltered' => $recordsFiltered,
-            'data'            => $dataDataTable
+            'data'            => $dataDataTable,
+            'visible'         => $finesNotPayedAreVisible
         ]);
     }
 
@@ -160,11 +178,21 @@ class FinesController extends AbstractActionController
             return $totalTripPayments;
         } else {
             $filters['withLimit'] = false;
-
+            //return count($this->filterFinesComplete($this->finesService->getFinesData($filters)));
             return count($this->finesService->getFinesData($filters));
         }
     }
-
+    /*
+    private function filterFinesComplete($fines){
+        $result = array();
+        foreach ($fines as $record){
+            if($record['fines']['complete'] == 1 && isset($record['fines']['customerId']) && isset($record['fines']['tripId'])){
+                $result[] = $record;
+            }
+        }
+        return $result;
+    }
+*/
     public function detailsAction()
     {
         $id = (int)$this->params()->fromRoute('id', 0);
@@ -175,8 +203,66 @@ class FinesController extends AbstractActionController
             'safoPenalty' => $safoPenalty
         ]);
     }
+    
+    public function findFinesBetweenDateAction(){
+        $from = new \DateTime($this->params()->fromPost('from'));
+        $to = $this->params()->fromPost('to') != "" ? new \DateTime($this->params()->fromPost('to')) : new \DateTime();
+        
+        $fines = $this->finesService->getFinesBetweenDate($from->format('Y-m-d H:i:s'), $to->format('Y-m-d H:i:s'));
 
+        $response = $this->getResponse();
+        $response->setStatusCode(200);
+        $response->setContent(json_encode(array ('fine' => array_slice($fines, 0, 50), 'nTotal' => array('nTotalFines' => count($fines)))));
+        return $response;
+    }
+    
+    public function payAction()
+    {
+        try {
+            $checkPost = $this->params()->fromPost('check');
+            $penalty = $this->penaltiesService->findById(1);
+            $c_success = 0;
+            $c_fail = 0;
+            if (isset($checkPost)) {
+                foreach ($checkPost as $fines_id) {
+                    $fine = $this->finesService->getSafoPenaltyById($fines_id);
+                    $resp = $this->cartasiCustomerPayments->sendPaymentRequest($fine->getCustomer(), $penalty->getAmount());
+                    $extraPayment = $this->finesService->createExtraPayment($fine, $penalty, $resp->getTransaction());
+                    if (!$resp->getCompletedCorrectly()){
+                        $extraPaymentTry = $this->extraPaymentsService->processWrongPayment($extraPayment, $resp);
+                        $c_fail ++;
+                    } else {
+                        $extraPaymentTry = $this->extraPaymentsService->processPayedCorrectly($extraPayment, $resp);
+                        $c_success ++;
+                    }
+                    $this->finesService->clearEntityManager();
+                }
+            }
 
-
-
+            $response = $this->getResponse();
+            $response->setStatusCode(200);
+            $response->setContent(json_encode(array('n_success' => $c_success, 'n_fail' => $c_fail)));
+            return $response;
+        } catch (Exception $e) {
+            $response = $this->getResponse();
+            $response->setStatusCode(200);
+            $response->setContent(json_encode(array('error' => true)));
+            return $response;
+        }
+    }
+    
+    public function finesNotPayedAreVisibleAction(){
+        $visible = $this->params()->fromPost('visible');
+        if($visible){
+            $areVisible = new Container('areVisible');
+            $areVisible->offsetSet('visible', true);
+            return true;
+        }else{
+            $areVisible = new Container('areVisible');
+            $areVisible->offsetSet('visible', false);
+            return false;
+        }
+    }
+    
+    
 }

@@ -53,32 +53,6 @@ class DriverFieldset extends Fieldset implements InputFilterProviderInterface
         ]);
 
         $this->add([
-            'name'       => 'driverLicenseAuthority',
-            'type'       => 'Zend\Form\Element\Select',
-            'attributes' => [
-                'id'          => 'driverLicenseAuthority',
-                'placeholder' => 'UCO',
-                'class'       => 'form-control',
-                'required' => 'required'
-            ],
-            'options' => [
-                'value_options' => $authorityService->getAllAuthorities()
-            ]
-        ]);
-
-        $this->add([
-            'name'       => 'driverLicenseReleaseDate',
-            'type'       => 'Zend\Form\Element\Date',
-            'attributes' => [
-                'id'    => 'driverLicenseReleaseDate',
-                'class' => 'form-control date-picker',
-                'max'   => date_create()->format('d-m-Y'),
-                'type'  => 'text',
-                'required' => 'required'
-            ]
-        ]);
-
-        $this->add([
             'name'       => 'driverLicenseName',
             'type'       => 'Zend\Form\Element\Text',
             'attributes' => [
@@ -144,34 +118,6 @@ class DriverFieldset extends Fieldset implements InputFilterProviderInterface
                     ]
                 ]
             ],
-            'driverLicenseAuthority' => [
-                'required' => true,
-                'filters' => [
-                    [
-                        'name' => 'StringTrim'
-                    ]
-                ],
-                'validators' => [
-                    [
-                        'name' => 'StringLength',
-                        'options' => [
-                            'min' => 2,
-                            'max' => 3
-                        ]
-                    ]
-                ]
-            ],
-            'driverLicenseReleaseDate' => [
-                'required' => true,
-                'validators' => [
-                    [
-                        'name' => 'Date'
-                    ],
-                    [
-                        'name' => 'Application\Form\Validator\NotFutureDate'
-                    ]
-                ]
-            ],
             'driverLicenseName' => [
                 'required' => true,
                 'filters' => [
@@ -183,7 +129,7 @@ class DriverFieldset extends Fieldset implements InputFilterProviderInterface
                     [
                         'name' => 'StringLength',
                         'options' => [
-                            'min' => 3,
+                            'min' => 2,
                             'max' => 32
                         ]
                     ]
@@ -200,7 +146,7 @@ class DriverFieldset extends Fieldset implements InputFilterProviderInterface
                     [
                         'name' => 'StringLength',
                         'options' => [
-                            'min' => 3,
+                            'min' => 2,
                             'max' => 32
                         ]
                     ]

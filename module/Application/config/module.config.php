@@ -528,6 +528,39 @@ return [
                             ]
                         ]
                     ],
+                    'pay' => [
+                        'type' => 'Segment',
+                        'options' => [
+                            'route' => '/pay/',
+                            'defaults' => [
+                                '__NAMESPACE__' => 'Application\Controller',
+                                'controller' => 'Fines',
+                                'action' => 'pay'
+                            ]
+                        ]
+                    ],
+                    'find-fines-between-date' => [
+                        'type' => 'Segment',
+                        'options' => [
+                            'route' => '/find-fines-between-date/',
+                            'defaults' => [
+                                '__NAMESPACE__' => 'Application\Controller',
+                                'controller' => 'Fines',
+                                'action' => 'find-fines-between-date'
+                            ]
+                        ]
+                    ],
+                    'fines-not-payed-are-visible' => [
+                        'type' => 'Segment',
+                        'options' => [
+                            'route' => '/fines-not-payed-are-visible/',
+                            'defaults' => [
+                                '__NAMESPACE__' => 'Application\Controller',
+                                'controller' => 'Fines',
+                                'action' => 'fines-not-payed-are-visible'
+                            ]
+                        ]
+                    ],
                 ],
             ],
             'cars' => [

@@ -1,0 +1,83 @@
+<?php
+$this->headLink()->appendStylesheet('/js/datatables/plugins/bootstrap/dataTables.bootstrap.css');
+$this->headScript()
+    ->appendFile('/js/datatables/media/js/jquery.dataTables.min.js')
+    ->appendFile('/js/datatables/plugins/bootstrap/dataTables.bootstrap.js')
+?>
+
+<?php
+$safoPenalty = $this->safoPenalty[0];
+?>
+
+<div class="page-content-wrapper">
+    <div class="page-content">
+        <!-- BEGIN PAGE HEADER-->
+        <h3 class="page-title">
+            <?= $this->translate("Associazione fines"); ?>
+        </h3>
+
+        <div class="row">
+            <div class="col-lg-12">
+                <a href="/fines" class="btn btn-success pull-right"><i class="fa fa-arrow-left"></i> Torna alla lista</a>
+            </div>
+        </div>
+
+        <hr>
+
+        <!-- Details table -->
+        <div class="row">
+            <div class="col-lg-12">
+
+                <?= $this->partial('partials/flash-messages.phtml', []); ?>
+                <div class="portlet box green">
+                    <div class="portlet-title">
+                        <div class="caption">
+                            <i class="fa fa-server"></i><?= $this->translate("Riepilogo"); ?>
+                        </div>
+                    </div>
+                    <div class="portlet-body">
+                        <?php
+                            foreach($this->safoPenalty as $safoPenalty){
+                        ?>
+                        <div class="row">
+                            <div class="col-lg-3">
+                                <div class="form-group">
+                                    <label><?= $this->translate("Numero Multa"); ?></label>
+                                    <div class="sng-info-box"><?= $safoPenalty->getViolationNumber() ?></div>
+                                </div>
+                            </div>
+                            <div class="col-lg-3">
+                                <div class="form-group">
+                                    <label><?= $this->translate("Data multa"); ?></label>
+                                    <div class="sng-info-box"><?= $safoPenalty->getViolationTimestamp()->format("d-m-Y H:i:s") ?></div>
+                                </div>
+                            </div>
+                            <div class="col-lg-3">
+                                <div class="form-group">
+                                    <label><?= $this->translate("ID cliente"); ?></label>
+                                    <div class="sng-info-box"><?= (($safoPenalty->getCustomerId()>0) ? '<a href="/customers/edit/'.$safoPenalty->getCustomerId().'">'.$safoPenalty->getCustomerId().'</a>' : $safoPenalty->getCustomerId()) ?></div>
+                                </div>
+                            </div>
+                            <div class="col-lg-3">
+                                <div class="form-group">
+                                    <label><?= $this->translate("ID corsa"); ?></label>
+                                    <div class="sng-info-box"><?= (($safoPenalty->getTripId()>0) ? '<a href="/trips/details/'.$safoPenalty->getTripId().'">'.$safoPenalty->getTripId().'</a>' : $safoPenalty->getTripId()) ?></div>
+                                </div>
+                            </div>
+                        </div>
+                        <?php   
+                            }
+                        ?>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- details table -->
+
+        <!-- END PAGE CONTENT-->
+    </div>
+</div>
+<script>
+    var safoPenaltyId = "<?= $this->safoPenalty[0]->getId() ?>";
+</script>

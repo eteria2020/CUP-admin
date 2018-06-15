@@ -2,6 +2,7 @@
 $form = $this->customerForm->prepare();
 $formDriver =  $this->driverForm->prepare();
 $formSetting = $this->settingForm->prepare();
+$input = '<input type="text" class="form-control" required="required" readonly="readonly" value="">';
 ?>
 <div class="row">
     <div class="col-lg-9">
@@ -15,7 +16,7 @@ $formSetting = $this->settingForm->prepare();
                     <div class="col-lg-4">
                         <div class="form-group">
                             <label for="gender"><?= $this->translate("Titolo"); ?></label>
-                            <?= $this->formRow($form->get('customer')->get('gender')->setAttribute('disabled', 'true')); ?>
+                            <?= is_null($form->get('customer')->get('gender')->getValue()) ? $input : $this->formRow($form->get('customer')->get('gender')->setAttribute('disabled', 'true')); ?>
                         </div>
                     </div>
 
@@ -52,7 +53,7 @@ $formSetting = $this->settingForm->prepare();
                     <div class="col-lg-4">
                         <div class="form-group">
                             <label for="surname"><?= $this->translate("Stato di nascita"); ?></label>
-                            <?= $this->formRow($form->get('customer')->get('birthCountry')->setAttribute('disabled', 'true')); ?>
+                            <?= is_null($form->get('customer')->get('birthCountry')->getValue()) ? $input :  $this->formRow($form->get('customer')->get('birthCountry')->setAttribute('disabled', 'true')); ?>
                         </div>
                     </div>
                 </div>
@@ -61,7 +62,7 @@ $formSetting = $this->settingForm->prepare();
                     <div class="col-lg-4">
                         <div class="form-group">
                             <label for="gender"><?= $this->translate("Provincia di nascita (EE = estero)"); ?></label>
-                            <?= $this->formRow($form->get('customer')->get('birthProvince')->setAttribute('disabled', 'true')); ?>
+                            <?= is_null($form->get('customer')->get('birthProvince')->getValue()) ? $input : $this->formRow($form->get('customer')->get('birthProvince')->setAttribute('disabled', 'true')); ?>
                         </div>
                     </div>
 
@@ -107,7 +108,7 @@ $formSetting = $this->settingForm->prepare();
                     <div class="col-lg-4">
                         <div class="form-group">
                             <label for="language"><?= $this->translate("Lingua preferita"); ?></label>
-                            <?= $this->formRow($form->get('customer')->get('language')->setAttribute('disabled', 'true')); ?>
+                            <?= is_null($form->get('customer')->get('language')->getValue()) ? $input : $this->formRow($form->get('customer')->get('language')->setAttribute('disabled', 'true')); ?>
                         </div>
                     </div>
 
@@ -173,22 +174,6 @@ $formSetting = $this->settingForm->prepare();
 
                     <div class="col-lg-4">
                         <div class="form-group">
-                            <label for="driverLicenseAuthority"><?= $this->translate("Rilasciato da (autorità)"); ?></label>
-                            <?= $this->formRow($formDriver->get('driver')->get('driverLicenseAuthority')->setAttribute('disabled', 'true')); ?>
-                        </div>
-                    </div>
-
-                    <div class="col-lg-4">
-                        <div class="form-group">
-                            <label for="driverLicenseReleaseDate"><?= $this->translate("Rilasciato il"); ?></label>
-                            <?= $this->formRow($formDriver->get('driver')->get('driverLicenseReleaseDate')->setAttribute('readonly', 'true')); ?>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="row">
-                    <div class="col-lg-4">
-                        <div class="form-group">
                             <label for="driverLicenseName"><?= $this->translate("Nome sulla patente"); ?></label>
                             <?= $this->formRow($formDriver->get('driver')->get('driverLicenseName')->setAttribute('readonly', 'true')); ?>
                         </div>
@@ -200,20 +185,20 @@ $formSetting = $this->settingForm->prepare();
                             <?= $this->formRow($formDriver->get('driver')->get('driverLicenseSurname')->setAttribute('readonly', 'true')); ?>
                         </div>
                     </div>
-
-                    <div class="col-lg-4">
-                        <div class="form-group">
-                            <label for="driverLicenseCountry"><?= $this->translate("Rilasciata da (nazione)"); ?></label>
-                            <?= $this->formRow($formDriver->get('driver')->get('driverLicenseCountry')->setAttribute('disabled', 'true')); ?>
-                        </div>
-                    </div>
                 </div>
 
                 <div class="row">
                     <div class="col-lg-4">
                         <div class="form-group">
+                            <label for="driverLicenseCountry"><?= $this->translate("Rilasciata da (nazione)"); ?></label>
+                            <?= is_null($formDriver->get('driver')->get('driverLicenseCountry')->getValue()) ? $input : $this->formRow($formDriver->get('driver')->get('driverLicenseCountry')->setAttribute('disabled', 'true')); ?>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-4">
+                        <div class="form-group">
                             <label for="driverLicenseExpire"><?= $this->translate("Data di scadenza"); ?></label>
-                            <?= $this->formRow($formDriver->get('driver')->get('driverLicenseExpire')->setAttribute('readonly', 'true')); ?>
+                            <?= is_null($formDriver->get('driver')->get('driverLicenseExpire')->getValue()) ? $input : $this->formRow($formDriver->get('driver')->get('driverLicenseExpire')->setAttribute('readonly', 'true')); ?>
                         </div>
                     </div>
                 </div>

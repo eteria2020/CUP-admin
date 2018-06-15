@@ -47,10 +47,15 @@ class CustomerLicenseController extends AbstractActionController
         $customer = $this->customersService->findById($id);
 
         $validations = $this->validationService->getByCustomer($customer);
-        $isValidated = !$this->deactivationService->hasActiveDeactivations(
-            $customer,
-            CustomerDeactivation::INVALID_DRIVERS_LICENSE
-        );
+        if(is_null($customer->getDriverLicense())) {
+            $isValidated = false;
+        }
+        else {
+            $isValidated = !$this->deactivationService->hasActiveDeactivations(
+                $customer,
+                CustomerDeactivation::INVALID_DRIVERS_LICENSE
+            );
+        }
 
         $view = new ViewModel([
             'validations' => $validations,
