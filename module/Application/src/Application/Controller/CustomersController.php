@@ -19,6 +19,8 @@ use SharengoCore\Exception\CustomerNotFoundException;
 use SharengoCore\Exception\BonusAssignmentException;
 use Cartasi\Service\CartasiContractsService;
 use SharengoCore\Service\EmailService;
+use SharengoCore\Entity\UserEvents;
+use SharengoCore\Service\UserEventsService;
 // Externals
 use Zend\Form\Form;
 use Zend\Http\Response;
@@ -124,6 +126,11 @@ class CustomersController extends AbstractActionController
      * @var EmailService
      */
     private $emailService;
+    
+    /**
+     * @var UserEventsService
+     */
+    private $userEventsService;
 
     /**
      * @param CustomersService $customersService
@@ -145,6 +152,7 @@ class CustomersController extends AbstractActionController
      * @param Container $datatableFiltersSessionContainer
      * @param RegistrationService $registrationService
      * @param EmailService $emailService
+     * @param UserEventsService $userEventsService
      */
     public function __construct(
         CustomersService $customersService,
@@ -165,7 +173,8 @@ class CustomersController extends AbstractActionController
         DisableContractService $disableContractService,
         Container $datatableFiltersSessionContainer
         ,RegistrationService $registrationService,
-        EmailService $emailService
+        EmailService $emailService,
+        UserEventsService $userEventsService
     ) {
         $this->customersService = $customersService;
         $this->customerDeactivationService = $customerDeactivationService;
@@ -186,6 +195,7 @@ class CustomersController extends AbstractActionController
         $this->datatableFiltersSessionContainer = $datatableFiltersSessionContainer;
         $this->registrationService = $registrationService;
         $this->emailService = $emailService;
+        $this->userEventsService = $userEventsService;
     }
 
     /**
@@ -805,13 +815,29 @@ class CustomersController extends AbstractActionController
         $customer_id = $this->params()->fromPost('customer_id');
         $customer = $this->customersService->findById($customer_id);
         try {
+            /*$oldCustomer = array('id' => $customer->getId(),
+                'email' => $customer->getEmail(),
+                'driverLicense' => $customer->getDriverLicense(),
+                'taxCode' => $customer->getTaxCode(),
+                'mobile' => $customer->getMobile());*/
+            $details = json_encode([
+                'event' => 'recess-customer',
+                'details' => array('id' => $customer->getId(),
+                    'email' => $customer->getEmail(),
+                    'driverLicense' => $customer->getDriverLicense(),
+                    'taxCode' => $customer->getTaxCode(),
+                    'mobile' => $customer->getMobile(),
+                    'enabled' => $customer->getEnabled())
+            ]);
             //log customer in user_events
+            $userEvent = new UserEvents($this->identity(), "user", $details);
+            $userEvent = $this->userEventsService->saveUserEvents($userEvent);
             
             //update customer
             $customer = $this->customersService->recessCustomer($customer);
-            
+
             //send mail to servizio clienti
-            $this->sendEmailUserRecess('servizioclienti@sharengo.eu', $customer->getId(), 'it', 19);/*<-------------------*/
+            $this->sendEmailUserRecess('servizioclienti@sharengo.eu', $customer->getId(), 'it', 23);/*<-------------------*/
             
         } catch (\Exception $e) {
             $response_msg = "error";

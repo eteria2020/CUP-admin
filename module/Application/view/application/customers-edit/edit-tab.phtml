@@ -426,16 +426,18 @@ $formSetting->setAttribute('action', $this->url('customers/edit', ['id' => $this
             </div>
         </div>
         <!-- END Customer activation/deactivation -->
-        <div class="panel panel-default">
-            <div class="panel-heading"><?= $this->translate("Recesso"); ?></div>
-            <div class="panel-body">
-                <div class="row">
-                    <div class="col-lg-4">
-                        <button onclick="customerRecess()" class="btn btn-success"><?= $this->translate('Conferma recessione cliente'); ?></button>
+        <?php if (strpos($customer->getEmail(), '_deactivated@') === false) { ?>
+            <div class="panel panel-default">
+                <div class="panel-heading"><?= $this->translate("Recesso"); ?></div>
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-lg-4">
+                            <button onclick="customerRecess()" class="btn btn-success"><?= $this->translate('Conferma recessione cliente'); ?></button>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
+        <?php } ?>
     </div>
 </div>
 <script type="text/javascript" src="<?= $this->basePath() .'/js/customers-edit.js'; ?>"></script>
