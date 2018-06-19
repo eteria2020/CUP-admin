@@ -815,11 +815,6 @@ class CustomersController extends AbstractActionController
         $customer_id = $this->params()->fromPost('customer_id');
         $customer = $this->customersService->findById($customer_id);
         try {
-            /*$oldCustomer = array('id' => $customer->getId(),
-                'email' => $customer->getEmail(),
-                'driverLicense' => $customer->getDriverLicense(),
-                'taxCode' => $customer->getTaxCode(),
-                'mobile' => $customer->getMobile());*/
             $details = json_encode([
                 'event' => 'recess-customer',
                 'details' => array('id' => $customer->getId(),
@@ -837,8 +832,7 @@ class CustomersController extends AbstractActionController
             $customer = $this->customersService->recessCustomer($customer);
 
             //send mail to servizio clienti
-            //$this->sendEmailUserRecess('servizioclienti@sharengo.eu', $customer->getId(), 'it', 23);/*<-------------------*/
-            $this->sendEmailUserRecess('tommaso.garavaglia@hotmail.it', $customer_id, 'it', 24);/*<-------------------*/
+            $this->sendEmailUserRecess('servizioclienti@sharengo.eu', $customer->getId(), 'it', 24);
             
         } catch (\Exception $e) {
             $response_msg = "error";
@@ -854,18 +848,11 @@ class CustomersController extends AbstractActionController
         return $response;
     }
     
-    
-    //fare in modo che la mail faccia il raplece dell'id e non del nome
     private function sendEmailUserRecess($email, $id, $language, $category) {
         $mail = $this->emailService->getMail($category, $language);
-        $content = sprintf(
-                $mail->getContent(), $id
-        );
+        $content = sprintf($mail->getContent(), $id);
 
-        //file_get_contents(__DIR__.'/../../../view/emails/parkbonus_pois-it_IT.html'),
-
-        $attachments = [
-                //'bannerphono.jpg' => __DIR__.'/../../../../../public/images/bannerphono.jpg'
+        $attachments = [//'bannerphono.jpg' => __DIR__.'/../../../../../public/images/bannerphono.jpg'
         ];
         $this->emailService->sendEmail(
                 $email, //send to
