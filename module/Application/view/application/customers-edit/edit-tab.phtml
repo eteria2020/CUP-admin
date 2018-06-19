@@ -426,7 +426,7 @@ $formSetting->setAttribute('action', $this->url('customers/edit', ['id' => $this
             </div>
         </div>
         <!-- END Customer activation/deactivation -->
-        <?php if (strpos($customer->getEmail(), '_deactivated@') === false) { ?>
+        <?php if (strpos($customer->getEmail(), '_deactivated@') === false && $webuserRole == 'superadmin') { ?>
             <div class="panel panel-default">
                 <div class="panel-heading"><?= $this->translate("Recesso"); ?></div>
                 <div class="panel-body">

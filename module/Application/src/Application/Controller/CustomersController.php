@@ -837,7 +837,8 @@ class CustomersController extends AbstractActionController
             $customer = $this->customersService->recessCustomer($customer);
 
             //send mail to servizio clienti
-            $this->sendEmailUserRecess('servizioclienti@sharengo.eu', $customer->getId(), 'it', 23);/*<-------------------*/
+            //$this->sendEmailUserRecess('servizioclienti@sharengo.eu', $customer->getId(), 'it', 23);/*<-------------------*/
+            $this->sendEmailUserRecess('tommaso.garavaglia@hotmail.it', $customer->getId(), 'it', 23);/*<-------------------*/
             
         } catch (\Exception $e) {
             $response_msg = "error";
