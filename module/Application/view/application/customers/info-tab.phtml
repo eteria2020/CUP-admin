@@ -207,18 +207,18 @@ $input = '<input type="text" class="form-control" required="required" readonly="
     </div>
 
     <div class="col-lg-3">
-        <?php if(!$this->customer->getRegistrationCompleted()){?>
+<!--        <?php /*if(!$this->customer->getRegistrationCompleted()){*/?>
         <div class="panel panel-default">
-            <div class="panel-heading"><?= $this->translate("Reinvio email di completamento iscrizione"); ?></div>
+            <div class="panel-heading"><?/*= $this->translate("Reinvio email di completamento iscrizione"); */?></div>
             <div class="panel-body">
                 <div class="row">
                     <div class="col-lg-4">
-                        <button onclick="resendEmailRegistrationComplite(<?php $form->get('customer')->get('id') ?>)" class="btn btn-success"><?= $this->translate('Invia email'); ?></button>
+                        <button onclick="resendEmailRegistrationComplite(<?php /*$form->get('customer')->get('id') */?>)" class="btn btn-success"><?/*= $this->translate('Invia email'); */?></button>
                     </div>
                 </div>
             </div>
         </div>
-        <?php }?>
+        --><?php /*}*/?>
         <div id="responseMessageSendEmail" style="display:none"></div>
         <div class="panel panel-default">
             <div class="panel-heading"><?= $this->translate("Altri dati"); ?></div>
