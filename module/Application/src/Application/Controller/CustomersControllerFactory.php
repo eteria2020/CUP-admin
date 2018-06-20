@@ -39,9 +39,8 @@ class CustomersControllerFactory implements FactoryInterface
         $customerPointForm = $sharedLocator->get('CustomerPointForm');
         $cardForm = $sharedLocator->get('CardForm');
         $datatablesSessionNamespace = $sharedLocator->get('Configuration')['session']['datatablesNamespace'];
-        $config = $sharedLocator->get('Config');//['emailSettings'];
+        $config = $sharedLocator->get('Config');
         $globalConfig = $config['emailSettings'];
-        //$globalConfig = $sharedLocator->get('Configuration')['emailSettings'];
         
         $hydrator = new DoctrineHydrator($entityManager);
 
