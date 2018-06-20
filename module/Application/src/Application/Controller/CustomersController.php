@@ -131,6 +131,11 @@ class CustomersController extends AbstractActionController
      * @var UserEventsService
      */
     private $userEventsService;
+    
+    /**
+     * @var array
+     */
+    private $globalConfig;
 
     /**
      * @param CustomersService $customersService
@@ -153,6 +158,7 @@ class CustomersController extends AbstractActionController
      * @param RegistrationService $registrationService
      * @param EmailService $emailService
      * @param UserEventsService $userEventsService
+     * @param array $globalConfig
      */
     public function __construct(
         CustomersService $customersService,
@@ -174,7 +180,8 @@ class CustomersController extends AbstractActionController
         Container $datatableFiltersSessionContainer
         ,RegistrationService $registrationService,
         EmailService $emailService,
-        UserEventsService $userEventsService
+        UserEventsService $userEventsService,
+        array $globalConfig
     ) {
         $this->customersService = $customersService;
         $this->customerDeactivationService = $customerDeactivationService;
@@ -196,6 +203,7 @@ class CustomersController extends AbstractActionController
         $this->registrationService = $registrationService;
         $this->emailService = $emailService;
         $this->userEventsService = $userEventsService;
+        $this->globalConfig = $globalConfig;
     }
 
     /**
@@ -812,6 +820,7 @@ class CustomersController extends AbstractActionController
     }
     
     public function customerRecessAction() {
+        $e = $this->globalConfig['from'];
         $customer_id = $this->params()->fromPost('customer_id');
         $customer = $this->customersService->findById($customer_id);
         try {
@@ -832,7 +841,7 @@ class CustomersController extends AbstractActionController
             $customer = $this->customersService->recessCustomer($customer);
 
             //send mail to servizio clienti
-            $this->sendEmailUserRecess('servizioclienti@sharengo.eu', $customer->getId(), 'it', 24);
+            $this->sendEmailUserRecess($this->globalConfig['from'], $customer->getId(), 'it', 24);
             
         } catch (\Exception $e) {
             $response_msg = "error";

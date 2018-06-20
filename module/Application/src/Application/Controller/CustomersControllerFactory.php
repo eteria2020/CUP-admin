@@ -39,7 +39,10 @@ class CustomersControllerFactory implements FactoryInterface
         $customerPointForm = $sharedLocator->get('CustomerPointForm');
         $cardForm = $sharedLocator->get('CardForm');
         $datatablesSessionNamespace = $sharedLocator->get('Configuration')['session']['datatablesNamespace'];
-
+        $config = $sharedLocator->get('Config');//['emailSettings'];
+        $globalConfig = $config['emailSettings'];
+        //$globalConfig = $sharedLocator->get('Configuration')['emailSettings'];
+        
         $hydrator = new DoctrineHydrator($entityManager);
 
         $cartasiContractsService = $sharedLocator->get('Cartasi\Service\CartasiContracts');
@@ -71,7 +74,8 @@ class CustomersControllerFactory implements FactoryInterface
             $datatableFiltersSessionContainer
             ,$registrationService,
             $emailService,
-            $userEventsService
+            $userEventsService,
+            $globalConfig
         );
     }
 }
