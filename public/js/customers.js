@@ -253,3 +253,29 @@ function resendEmailRegistrationComplite() {
     });
 }
 
+
+
+function customerRecess() {
+    if(confirm("Sei sicuro di voler procedere con il recesso del cliente?")){
+        $.ajax({
+            type: "POST",
+            url: "/customers/customer-recess",
+            data: {'customer_id': $('#id').val()},
+            success: function (data) {
+                switch(data.toString()){
+                    case 'success':
+                        alert("Procedura di recesso conclusa con successo!");
+                        location.reload();
+                    break;
+                    case 'error':
+                        alert("Si è verificato un errore durante la procedura di recesso!");
+                        location.reload();
+                    break;
+                }
+            },
+            error: function () {
+            }
+        });
+    }
+}
+

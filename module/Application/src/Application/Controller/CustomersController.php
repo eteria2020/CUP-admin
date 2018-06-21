@@ -18,6 +18,9 @@ use Application\Service\RegistrationService;
 use SharengoCore\Exception\CustomerNotFoundException;
 use SharengoCore\Exception\BonusAssignmentException;
 use Cartasi\Service\CartasiContractsService;
+use SharengoCore\Service\EmailService;
+use SharengoCore\Entity\UserEvents;
+use SharengoCore\Service\UserEventsService;
 // Externals
 use Zend\Form\Form;
 use Zend\Http\Response;
@@ -118,6 +121,21 @@ class CustomersController extends AbstractActionController
      * @var RegistrationService
      */
     private $registrationService;
+    
+    /**
+     * @var EmailService
+     */
+    private $emailService;
+    
+    /**
+     * @var UserEventsService
+     */
+    private $userEventsService;
+    
+    /**
+     * @var array
+     */
+    private $globalConfig;
 
     /**
      * @param CustomersService $customersService
@@ -138,6 +156,9 @@ class CustomersController extends AbstractActionController
      * @param DisableContractService $disableContractService
      * @param Container $datatableFiltersSessionContainer
      * @param RegistrationService $registrationService
+     * @param EmailService $emailService
+     * @param UserEventsService $userEventsService
+     * @param array $globalConfig
      */
     public function __construct(
         CustomersService $customersService,
@@ -157,7 +178,10 @@ class CustomersController extends AbstractActionController
         CartasiContractsService $cartasiContractsService,
         DisableContractService $disableContractService,
         Container $datatableFiltersSessionContainer
-        ,RegistrationService $registrationService
+        ,RegistrationService $registrationService,
+        EmailService $emailService,
+        UserEventsService $userEventsService,
+        array $globalConfig
     ) {
         $this->customersService = $customersService;
         $this->customerDeactivationService = $customerDeactivationService;
@@ -177,6 +201,9 @@ class CustomersController extends AbstractActionController
         $this->pointService = $pointService;
         $this->datatableFiltersSessionContainer = $datatableFiltersSessionContainer;
         $this->registrationService = $registrationService;
+        $this->emailService = $emailService;
+        $this->userEventsService = $userEventsService;
+        $this->globalConfig = $globalConfig;
     }
 
     /**
@@ -790,5 +817,55 @@ class CustomersController extends AbstractActionController
         $response->setStatusCode(200);
         $response->setContent($response_msg);
         return $response;
+    }
+    
+    public function customerRecessAction() {
+        $e = $this->globalConfig['from'];
+        $customer_id = $this->params()->fromPost('customer_id');
+        $customer = $this->customersService->findById($customer_id);
+        try {
+            $details = json_encode([
+                'event' => 'recess-customer',
+                'details' => array('id' => $customer->getId(),
+                    'email' => $customer->getEmail(),
+                    'driverLicense' => $customer->getDriverLicense(),
+                    'taxCode' => $customer->getTaxCode(),
+                    'mobile' => $customer->getMobile(),
+                    'enabled' => $customer->getEnabled())
+            ]);
+            //log customer in user_events
+            $userEvent = new UserEvents($this->identity(), "user", $details);
+            $userEvent = $this->userEventsService->saveUserEvents($userEvent);
+            
+            //update customer
+            $customer = $this->customersService->recessCustomer($customer);
+            //send mail to servizio clienti
+            $this->sendEmailUserRecess($this->globalConfig['from'], $customer_id, 'it', 24);
+            
+        } catch (\Exception $e) {
+            $response_msg = "error";
+            $response = $this->getResponse();
+            $response->setStatusCode(200);
+            $response->setContent($response_msg);
+            return $response;
+        }
+        $response_msg = "success";
+        $response = $this->getResponse();
+        $response->setStatusCode(200);
+        $response->setContent($response_msg);
+        return $response;
+    }
+    
+    private function sendEmailUserRecess($email, $id, $language, $category) {
+        $mail = $this->emailService->getMail($category, $language);
+        $content = sprintf($mail->getContent(), $id);
+
+        $attachments = [//'bannerphono.jpg' => __DIR__.'/../../../../../public/images/bannerphono.jpg'
+        ];
+        $this->emailService->sendEmail(
+                $email, //send to
+                $mail->getSubject(), //'Share’ngo: bonus 5 minuti',//object email
+                $content, $attachments
+        );
     }
 }

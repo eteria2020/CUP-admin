@@ -25,9 +25,11 @@ class CustomersControllerFactory implements FactoryInterface
         $entityManager = $sharedLocator->get('doctrine.entitymanager.orm_default');
         $clientService = $sharedLocator->get('SharengoCore\Service\CustomersService');
         $customerDeactivationService = $sharedLocator->get('SharengoCore\Service\CustomerDeactivationService');
+        $emailService = $sharedLocator->get('\SharengoCore\Service\EmailService');
         $cardsService = $sharedLocator->get('SharengoCore\Service\CardsService');
         $promoCodeService = $sharedLocator->get('SharengoCore\Service\PromoCodesService');
         $bonusService = $sharedLocator->get('SharengoCore\Service\BonusService');
+        $userEventsService = $sharedLocator->get('SharengoCore\Service\UserEventsService');
         $pointService = $sharedLocator->get('SharengoCore\Service\PointService');
         $customerForm = $sharedLocator->get('CustomerForm');
         $driverForm = $sharedLocator->get('DriverForm');
@@ -37,7 +39,9 @@ class CustomersControllerFactory implements FactoryInterface
         $customerPointForm = $sharedLocator->get('CustomerPointForm');
         $cardForm = $sharedLocator->get('CardForm');
         $datatablesSessionNamespace = $sharedLocator->get('Configuration')['session']['datatablesNamespace'];
-
+        $config = $sharedLocator->get('Config');
+        $globalConfig = $config['emailSettings'];
+        
         $hydrator = new DoctrineHydrator($entityManager);
 
         $cartasiContractsService = $sharedLocator->get('Cartasi\Service\CartasiContracts');
@@ -67,7 +71,10 @@ class CustomersControllerFactory implements FactoryInterface
             $cartasiContractsService,
             $disableContractService,
             $datatableFiltersSessionContainer
-            ,$registrationService
+            ,$registrationService,
+            $emailService,
+            $userEventsService,
+            $globalConfig
         );
     }
 }
