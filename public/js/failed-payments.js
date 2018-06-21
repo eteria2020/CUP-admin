@@ -9,11 +9,18 @@ $(function() {
     var dataTableVars = {
         searchValue: $("#js-value"),
         column: $("#js-column"),
+        from: $("#js-value"),
+        columnFromDate: $("#js-value"),
+        to: $("#js-value"),
+        columnToDate: $("#js-value"),
         iSortCol_0: 0,
         sSortDir_0: "desc",
         iDisplayLength: 10
     };
 
+    var filterDate = false,
+        filterDateField = "";
+        
     var typeClean = $("#js-clean-type"),
         filterWithoutLike = false,
         columnWithoutLike = false,
@@ -210,7 +217,7 @@ $(function() {
         // Selected Column
         var value = $(this).val();
 
-        if (value === "e.createdAt") {
+        if (value === "e.firstPaymentTryTs") {
             dataTableVars.searchValue.show();
             dataTableVars.searchValue.prop("disabled", false);
             $(dataTableVars.searchValue).datepicker("remove");
