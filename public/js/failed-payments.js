@@ -9,11 +9,18 @@ $(function() {
     var dataTableVars = {
         searchValue: $("#js-value"),
         column: $("#js-column"),
+        from: $("#js-value"),
+        columnFromDate: $("#js-value"),
+        to: $("#js-value"),
+        columnToDate: $("#js-value"),
         iSortCol_0: 0,
         sSortDir_0: "desc",
         iDisplayLength: 10
     };
 
+    var filterDate = false,
+        filterDateField = "";
+        
     var typeClean = $("#js-clean-type"),
         filterWithoutLike = false,
         columnWithoutLike = false,
@@ -206,35 +213,57 @@ $(function() {
     });
 
     // Select Changed Action
-    $(dataTableVars.column).change(function() {
+    $(dataTableVars.column).change(function () {
         // Selected Column
         var value = $(this).val();
 
-        // Column that need the standard "LIKE" search operator
-        if (value === "cu.surname") {
-            filterWithoutLike = false;
-            dataTableVars.searchValue.val("");
+        if (value === "e.firstPaymentTryTs") {
+            dataTableVars.searchValue.show();
             dataTableVars.searchValue.prop("disabled", false);
+            $(dataTableVars.searchValue).datepicker("remove");
             typeClean.hide();
             dataTableVars.searchValue.show();
+            filterDate = true;
+            filterDateField = value;
+            dataTableVars.searchValue.val("");
+            $(dataTableVars.searchValue).datepicker({
+                autoclose: true,
+                format: "yyyy-mm-dd",
+                weekStart: 1
+            });
         } else {
-            filterWithoutLike = true;
-            dataTableVars.searchValue.val("");
-            dataTableVars.searchValue.prop("disabled", false);
-            typeClean.hide();
-            dataTableVars.searchValue.show();
+            // Column that need the standard "LIKE" search operator
+            if (value === "cu.surname") {
+                filterWithoutLike = false;
+                dataTableVars.searchValue.val("");
+                dataTableVars.searchValue.prop("disabled", false);
+                typeClean.hide();
+                dataTableVars.searchValue.show();
+            } else {
+                filterWithoutLike = true;
+                dataTableVars.searchValue.val("");
+                dataTableVars.searchValue.prop("disabled", false);
+                typeClean.hide();
+                dataTableVars.searchValue.show();
 
-            switch (value) {
-                // Columns that need a "=" instead the standard "LIKE" search operator.
-                case "e.trip":
-                    columnWithoutLike = value;
-                    //columnValueWithoutLike = true;
-                    break;
-                case "cu.id":
-                    columnWithoutLike = value;
-                    break;
+                switch (value) {
+                    // Columns that need a "=" instead the standard "LIKE" search operator.
+                    case "e.trip":
+                        columnWithoutLike = value;
+                        //columnValueWithoutLike = true;
+                        break;
+                    case "cu.id":
+                        columnWithoutLike = value;
+                        break;
+                }
             }
         }
+    });
+    
+    $(".date-picker").datepicker({
+        autoclose: true,
+        format: "yyyy-mm-dd",
+        weekStart: 1
     });
 
 });
