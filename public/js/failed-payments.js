@@ -75,7 +75,7 @@ $(function() {
                 var tr = $('#js-payments-table tr td');
                 var n_columns = $('#js-payments-table tr');
                 var obj = aoData.data;
-                obj.forEach(function(element) {
+                obj.forEach(function(element){
                     if(element.cu.type)
                         for (var i = 0; i < n_columns.length+1; i++) 
                             $(tr[i]).css("background-color", "#ffb3b3");
