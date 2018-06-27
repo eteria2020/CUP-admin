@@ -256,6 +256,18 @@ return [
                             ],
                         ],
                     ],
+                    'ajax-tab-discount' => [
+                        'type'    => 'Segment',
+                        'options' => [
+                            'route'    => '/ajax-tab/discount/:id',
+                            'constraints' => [
+                                'id' => '[0-9]*'
+                            ],
+                            'defaults' => [
+                                'action' => 'discount-tab',
+                            ],
+                        ],
+                    ],
                     'add-note' => [
                         'type'    => 'Segment',
                         'options' => [

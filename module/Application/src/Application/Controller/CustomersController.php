@@ -21,6 +21,7 @@ use Cartasi\Service\CartasiContractsService;
 use SharengoCore\Service\EmailService;
 use SharengoCore\Entity\UserEvents;
 use SharengoCore\Service\UserEventsService;
+use SharengoCore\Service\OldCustomerDiscountsService;
 // Externals
 use Zend\Form\Form;
 use Zend\Http\Response;
@@ -136,6 +137,11 @@ class CustomersController extends AbstractActionController
      * @var array
      */
     private $globalConfig;
+    
+    /**
+     * @var OldCustomerDiscountsService
+     */
+    private $oldCustomerDiscountsService;
 
     /**
      * @param CustomersService $customersService
@@ -159,6 +165,7 @@ class CustomersController extends AbstractActionController
      * @param EmailService $emailService
      * @param UserEventsService $userEventsService
      * @param array $globalConfig
+     * #param OldCustomerDiscountsService $oldCustomerDiscountsService
      */
     public function __construct(
         CustomersService $customersService,
@@ -181,7 +188,8 @@ class CustomersController extends AbstractActionController
         ,RegistrationService $registrationService,
         EmailService $emailService,
         UserEventsService $userEventsService,
-        array $globalConfig
+        array $globalConfig,
+        OldCustomerDiscountsService $oldCustomerDiscountsService
     ) {
         $this->customersService = $customersService;
         $this->customerDeactivationService = $customerDeactivationService;
@@ -204,6 +212,7 @@ class CustomersController extends AbstractActionController
         $this->emailService = $emailService;
         $this->userEventsService = $userEventsService;
         $this->globalConfig = $globalConfig;
+        $this->oldCustomerDiscountsService = $oldCustomerDiscountsService;
     }
 
     /**
@@ -867,5 +876,16 @@ class CustomersController extends AbstractActionController
                 $mail->getSubject(), //'Share’ngo: bonus 5 minuti',//object email
                 $content, $attachments
         );
+    }
+    
+    public function discountTabAction(){
+        $customer = $this->getCustomer();
+        $view = new ViewModel([
+            'customer' => $customer,
+            'old_discount' => $this->oldCustomerDiscountsService->allOldDiscounts($customer),
+        ]);
+        $view->setTerminal(true);
+
+        return $view;
     }
 }
