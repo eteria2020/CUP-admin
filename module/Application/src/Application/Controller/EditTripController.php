@@ -96,23 +96,14 @@ class EditTripController extends AbstractActionController
             $postData = $this->getRequest()->getPost()->toArray();
 
             try {
-                if($this->tripsService->checkUserModifyTrip($trip->getCustomer()->getId())){
-                    $this->editTripsService->editTrip(
-                        $trip,
-                        !$postData['trip']['payable'],
-                        date_create_from_format('d-m-Y H:i:s', $postData['trip']['timestampEnd']),
-                        $webuser
-                    );
-
-                    $this->eventManager->trigger('trip-edited', $this, [
-                        'topic' => 'trips',
-                        'trip_id' => $trip->getId(),
-                        'action' => 'Edit trip data: payable ' . ($postData['trip']['payable'] ? 'true' : 'false') . ', end date ' . $postData['trip']['timestampEnd']
-                    ]);
-
-                    $this->flashMessenger()->addSuccessMessage($translator->translate('Modifica effettuta con successo!'));
+                if ($webuser->getRole() == 'superadmin' || $trip->getCustomer()->getGoldList() || $trip->getCustomer()->getMaintainer()) {
+                    $this->editedTrip($trip, $postData, $webuser, $translator);
                 } else {
-                    $this->flashMessenger()->addErrorMessage($translator->translate('Attenzione: superato il numero massimo (2) di chiusure/modifiche mensili!'));
+                    if ($this->tripsService->checkUserModifyTrip($trip->getCustomer()->getId())) {
+                        $this->editedTrip($trip, $postData, $webuser, $translator);
+                    } else {
+                        $this->flashMessenger()->addErrorMessage($translator->translate('Attenzione: superato il numero massimo (6) di chiusure/modifiche mensili!'));
+                    }
                 }
             } catch (EditTripDeniedException $e) {
                 $this->flashMessenger()->addErrorMessage($translator->translate('La corsa non può essere modificata perché non è conclusa.'));
@@ -153,4 +144,19 @@ class EditTripController extends AbstractActionController
 
         return $view;
     }
+    
+    private function editedTrip($trip, $postData, $webuser, $translator) {
+        $this->editTripsService->editTrip(
+                $trip, !$postData['trip']['payable'], date_create_from_format('d-m-Y H:i:s', $postData['trip']['timestampEnd']), $webuser
+        );
+
+        $this->eventManager->trigger('trip-edited', $this, [
+            'topic' => 'trips',
+            'trip_id' => $trip->getId(),
+            'action' => 'Edit trip data: payable ' . ($postData['trip']['payable'] ? 'true' : 'false') . ', end date ' . $postData['trip']['timestampEnd']
+        ]);
+
+        $this->flashMessenger()->addSuccessMessage($translator->translate('Modifica effettuta con successo!'));
+    }
+
 }
