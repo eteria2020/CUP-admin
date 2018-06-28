@@ -10,7 +10,7 @@
             <table class="table table-bordered">
                 <thead>
                 <tr>
-                    <th><?= $this->translate("Sconto (%)"); ?></th>
+                    <th><?= $this->translate("Sconto"); ?></th>
                     <th><?= $this->translate("Scaduto in data:"); ?></th>
                 </tr>
                 </thead>
@@ -19,7 +19,7 @@
                 foreach($this->old_discount as $discount){ ?>
                     <tr id="js-row-discount-<?= $discount->getId(); ?>">
                         <td><?= $discount->getDiscount(); ?> %</td>
-                        <td><?= $discount->getObsoleteFrom()->format('Y-m-d H:i:s'); ?></td>
+                        <td><?= $discount->getObsoleteFrom()->format('d-m-Y'); ?></td>
                     </tr>
                 <?php } ?>
                 </tbody>
