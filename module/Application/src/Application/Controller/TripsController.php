@@ -317,20 +317,20 @@ class TripsController extends AbstractActionController
     {
         $translator = $this->TranslatorPlugin();
         $data = $this->params()->fromPost();
-
+        
+        $trip = $this->tripsService->getTripById($data['id']);
+        $webuser = $this->identity();
+        
         try {
-            $inputData = $this->closeTripDataFactory->createFromArray($data);
-
-            $this->tripsService->closeTrip($inputData, $this->identity());
-
-            $this->eventManager->trigger('trip-closed', $this, [
-                'topic' => 'trips',
-                'trip_id' => $data['id'],
-                'action' => 'Close trip data: payable ' . ($data['payable'] ? 'true' : 'false') . ', end date ' . $data['datetime']
-            ]);
-
-            $this->flashMessenger()->addSuccessMessage($translator->translate('Corsa chiusa con successo'));
-
+            if ($webuser->getRole() == 'superadmin' || $trip->getCustomer()->getGoldList() || $trip->getCustomer()->getMaintainer()) {
+                $this->closeTrip($data, $translator);
+            } else {
+                if ($this->tripsService->checkUserModifyTrip($trip->getCustomer()->getId())) {
+                    $this->closeTrip($data, $translator);
+                } else {
+                    $this->flashMessenger()->addErrorMessage($translator->translate('Attenzione: superato il numero massimo (6) di chiusure/modifiche mensili!'));
+                }
+            }
             return $this->redirect()->toRoute('trips/details', ['id' => $data['id']]);
         } catch (InvalidFormInputData $e) {
             $this->flashMessenger()->addErrorMessage($e->getMessage());
@@ -338,4 +338,19 @@ class TripsController extends AbstractActionController
             return $this->redirect()->toRoute('trips/details', ['id' => $data['id']], ['query' => ['tab' => 'close']]);
         }
     }
+    
+    private function closeTrip($data, $translator) {
+        $inputData = $this->closeTripDataFactory->createFromArray($data);
+
+        $this->tripsService->closeTrip($inputData, $this->identity());
+
+        $this->eventManager->trigger('trip-closed', $this, [
+            'topic' => 'trips',
+            'trip_id' => $data['id'],
+            'action' => 'Close trip data: payable ' . ($data['payable'] ? 'true' : 'false') . ', end date ' . $data['datetime']
+        ]);
+
+        $this->flashMessenger()->addSuccessMessage($translator->translate('Corsa chiusa con successo'));
+    }
+
 }
