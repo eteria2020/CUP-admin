@@ -1,0 +1,32 @@
+<div class="row">
+    <div class="col-lg-12">
+        <div>
+            <h4>Sconto ciente attuale: <?php echo $this->customer->getDiscountRate() ?>%</h4>
+        </div>
+        <br/>
+
+        <?php if(count($this->old_discount) > 0){ ?>
+
+            <table class="table table-bordered">
+                <thead>
+                <tr>
+                    <th><?= $this->translate("Sconto"); ?></th>
+                    <th><?= $this->translate("Scaduto in data:"); ?></th>
+                </tr>
+                </thead>
+                <tbody>
+                <?php
+                foreach($this->old_discount as $discount){ ?>
+                    <tr id="js-row-discount-<?= $discount->getId(); ?>">
+                        <td><?= $discount->getDiscount(); ?> %</td>
+                        <td><?= $discount->getObsoleteFrom()->format('d-m-Y'); ?></td>
+                    </tr>
+                <?php } ?>
+                </tbody>
+            </table>
+
+        <?php }else{ ?>
+            <div class="alert alert-info"><?= $this->translate("Il cliente non ha nessun vecchio sconto"); ?></div>
+        <?php } ?>
+    </div>
+</div>
