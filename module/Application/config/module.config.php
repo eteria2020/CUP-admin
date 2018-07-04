@@ -551,6 +551,17 @@ return [
                             ]
                         ]
                     ],
+                    'payable' => [
+                        'type' => 'Segment',
+                        'options' => [
+                            'route' => '/payable/',
+                            'defaults' => [
+                                '__NAMESPACE__' => 'Application\Controller',
+                                'controller' => 'Fines',
+                                'action' => 'payable'
+                            ]
+                        ]
+                    ],
                     'find-fines-between-date' => [
                         'type' => 'Segment',
                         'options' => [

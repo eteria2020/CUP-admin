@@ -316,6 +316,8 @@ $(function() {
             });
             $('#pay-fines').fadeIn();
             $('#pay-fines').text("Paga multe sel.");
+            $('#not-payable').fadeIn();
+            $('#not-payable').text("No addebito sel.");
         }else{
             $('.checkbox').each(function(){
                 this.checked = false;
@@ -325,6 +327,8 @@ $(function() {
             }else{
                 $('#pay-fines').fadeOut();
                 $('#pay-fines').text();
+                $('#not-payable').fadeOut();
+                $('#not-payable').text();
             }
         }
     });
@@ -337,12 +341,16 @@ $(function() {
         if (selected.length > 0) {
             $('#pay-fines').fadeIn();
             $('#pay-fines').text("Paga multe sel.");
+            $('#not-payable').fadeIn();
+            $('#not-payable').text("No addebito sel.");
         } else {
             if(chageBtnPay){
                 $('#pay-fines').text("Paga multe tramite date");
             }else{
                 $('#pay-fines').fadeOut();
                 $('#pay-fines').text();
+                $('#not-payable').fadeOut();
+                $('#not-payable').text();
             }
         }
     });
@@ -438,6 +446,21 @@ $(function() {
             }
         }
     });
+
+    $('#not-payable').click(function () {
+        if ($('#not-payable').text() == 'No addebito sel.') {
+            $(".checkbox:checked").each(function () {
+                selecId.push($(this).val());
+            });
+            if (confirm("Stai contrassegnando come non addebitabili " + selecId.length + " multe. Vuoi proseguire?")) {
+                notPayableFines(selecId);
+            } else {
+                $('#titleModal').text("Notifica:");
+                $('#body-text-modal').html("<div><p>Hai annullato il processo delle multe selezionate</p></div>");
+                $('#btn-modal-close').show();
+            }
+        }
+    });
     
     $('#btn-pay').click(function (){
         $('#conteiner-btn').fadeOut();
@@ -463,8 +486,40 @@ $(function() {
                     $('#conteiner-btn').fadeIn();
                     $('#btn-modal-close').show();
                 }else{
-                    $('#titleModal').text("Risulatato:");
+                    $('#titleModal').text("Risultato:");
                     $('#body-text-modal').html("<div><p>Multe passate: "+ result.n_success +"</p><p>Multe non passate: "+ result.n_fail +"</p></div>");
+                    $('#conteiner-btn').fadeIn();
+                    $('#btn-modal-close').show();
+                }
+            },
+            error: function () {
+                $('#titleModal').text("Errore NON GESTITO:");
+                $('#body-text-modal').html("<div><p>Si è verificato un errore durante la procedura</p></div>");
+                $('#conteiner-btn').fadeIn();
+                $('#btn-modal-close').show();
+            }
+        });
+    }
+
+    function notPayableFines(selected) {
+        $.ajax({
+            type: "POST",
+            url: "/fines/payable/",
+            data: {'check': selected},
+            beforeSend: function () {
+                $('#titleModal').text("In elaborazione...");
+                $('#body-text-modal').html("<div><i class='fa fa-spinner fa-pulse fa-2x fa-fw'></i></div>");
+            },
+            success: function (data) {
+                var result = JSON.parse(data);
+                if(result.error == true){
+                    $('#titleModal').text("Errore:");
+                    $('#body-text-modal').html("<div><p>Si è verificato un errore durante la procedura</p></div>");
+                    $('#conteiner-btn').fadeIn();
+                    $('#btn-modal-close').show();
+                }else{
+                    $('#titleModal').text("Risultato:");
+                    $('#body-text-modal').html("<div><p>Multe segnate come non addebitabili: "+ result.n_success +"</p><p>Multe non passate: "+ result.n_fail +"</p></div>");
                     $('#conteiner-btn').fadeIn();
                     $('#btn-modal-close').show();
                 }

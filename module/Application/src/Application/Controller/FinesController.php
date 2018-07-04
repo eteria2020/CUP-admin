@@ -250,6 +250,33 @@ class FinesController extends AbstractActionController
             return $response;
         }
     }
+
+    public function payableAction()
+    {
+        try {
+            $checkPost = $this->params()->fromPost('check');
+            $c_success = 0;
+            $c_fail = 0;
+            if (isset($checkPost)) {
+                foreach ($checkPost as $fines_id) {
+                    error_log($fines_id);
+                    $fine = $this->finesService->getSafoPenaltyById($fines_id);
+                    $this->finesService->setFineNotPayable($fine);
+                    $c_success ++;
+                    $this->finesService->clearEntityManager();
+                }
+            }
+            $response = $this->getResponse();
+            $response->setStatusCode(200);
+            $response->setContent(json_encode(array('n_success' => $c_success, 'n_fail' => $c_fail)));
+            return $response;
+        } catch (Exception $e) {
+            $response = $this->getResponse();
+            $response->setStatusCode(200);
+            $response->setContent(json_encode(array('error' => true)));
+            return $response;
+        }
+    }
     
     public function finesNotPayedAreVisibleAction(){
         $visible = $this->params()->fromPost('visible');

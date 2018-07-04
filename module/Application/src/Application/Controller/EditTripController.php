@@ -124,7 +124,7 @@ class EditTripController extends AbstractActionController
             return $this->redirect()->toUrl('/trips/details/' . $trip->getId() . '?tab=edit');
         }
 
-        $events = $this->eventsService->getEventsByTrip($trip);
+        //$events = $this->eventsService->getEventsByTrip($trip);
 
         $tripArray = $trip->toArray($this->hydrator, []);
 
@@ -136,7 +136,7 @@ class EditTripController extends AbstractActionController
 
         $view = new ViewModel([
             'trip' => $trip,
-            'events' => $events,
+            //'events' => $events,
             'editTripForm' => $this->editTripForm,
             'scriptRunning' => $this->paymentScriptRunsService->isScriptRunning()
         ]);
