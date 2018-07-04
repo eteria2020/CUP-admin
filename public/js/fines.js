@@ -54,7 +54,12 @@ $(function() {
         "bStateSave": false,
         "bFilter": false,
         "sAjaxSource": "/fines/datatable",
-        "fnServerData": function ( sSource, aoData, fnCallback, oSettings ) {
+        "createdRow": function (row, data, dataIndex, cells) {
+            if(data.cu.type){
+                $('td', row).css('background', '#ffb3b3');
+            }
+        },
+        "fnServerData": function (sSource, aoData, fnCallback, oSettings) {
             oSettings.jqXHR = $.ajax( {
                 "dataType": "json",
                 "type": "POST",
