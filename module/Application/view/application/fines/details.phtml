@@ -39,7 +39,7 @@ $safoPenalty = $this->safoPenalty;
             <?php }else{ ?>    
                     <div class="col-md-6">
                         <div class="form-inline">
-                            <H4><span class="glyphicon glyphicon-remove"></span> Non è possibile effettura un pagemnto mancaza di dati</H4>
+                            <H4><span class="glyphicon glyphicon-remove"></span> Non è possibile effettuare un pagamento per mancanza di dati</H4>
                         </div>
                     </div>
             <?php }
@@ -246,7 +246,7 @@ $safoPenalty = $this->safoPenalty;
                                 <div class="form-group">
                                     <label><?= $this->translate("Pagabile"); ?></label>
                                     <div class="sng-info-box"><?=
-                                    (!is_null($safoPenalty->getCustomer()) && !is_null($safoPenalty->getTrip()) && !is_null($safoPenalty->getCarPLate()) && !is_null($safoPenalty->isComplete())) ? 'SI' : 'NO';
+                                    (!is_null($safoPenalty->getCustomer()) && !is_null($safoPenalty->getTrip()) && !is_null($safoPenalty->getCarPLate()) && $safoPenalty->isComplete() && $safoPenalty->isPayable()) ? 'SI' : 'NO';
                                     ?></div>
                                 </div>
                             </div>
