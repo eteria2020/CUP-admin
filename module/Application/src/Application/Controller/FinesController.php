@@ -259,7 +259,6 @@ class FinesController extends AbstractActionController
             $c_fail = 0;
             if (isset($checkPost)) {
                 foreach ($checkPost as $fines_id) {
-                    error_log($fines_id);
                     $fine = $this->finesService->getSafoPenaltyById($fines_id);
                     $this->finesService->setFineNotPayable($fine);
                     $c_success ++;
