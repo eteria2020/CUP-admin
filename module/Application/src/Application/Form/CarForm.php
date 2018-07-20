@@ -4,16 +4,18 @@ namespace Application\Form;
 
 use Zend\Form\Form;
 use SharengoCore\Service\MaintenanceMotivationsService;
+use SharengoCore\Service\MaintenanceLocationsService;
 
 class CarForm extends Form
 {
     private $maintenanceMotivationsService;
 
-    public function __construct($carFieldset, MaintenanceMotivationsService $maintenanceMotivationsService)
+    public function __construct($carFieldset, MaintenanceMotivationsService $maintenanceMotivationsService, MaintenanceLocationsService $maintenanceLocationsService)
     {
         parent::__construct('car');
         $this->setAttribute('method', 'post');
         $this->maintenanceMotivationsService = $maintenanceMotivationsService;
+        $this->maintenanceLocationsService = $maintenanceLocationsService;
 
         $this->add($carFieldset);
 
@@ -33,7 +35,8 @@ class CarForm extends Form
                 'class' => 'form-control',
             ],
             'options'    => [
-                'value_options' => [
+                'value_options' => 
+                    /*
                     '-'=>'',
                     'Firenze, Carrozzeria Merciai, via del Pratellino 27/31 50124' => 'Firenze, Carrozzeria Merciai, via del Pratellino 27/31 50124',
                     'Firenze, Rugi, via Gaetano Salvemini 3F, 50058 Signa' => 'Rugi, via Gaetano Salvemini 3F, 50058 Signa',
@@ -55,7 +58,9 @@ class CarForm extends Form
                     'Firenze Other (codice OTH)' => 'Firenze Other (codice OTH)',
                     'Roma Other (codice OTH)' => 'Roma Other (codice OTH)',
                     'Modena Other (codice OTH)' => 'Modena Other (codice OTH)'
-                ]
+                     * */
+                     $maintenanceLocationsService->getAllMaintenanceLocations(false)
+                
             ]
         ]);
 

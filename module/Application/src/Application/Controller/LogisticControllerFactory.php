@@ -21,10 +21,11 @@ class LogisticControllerFactory implements FactoryInterface {
         $carsService =     $sharedServiceLocator->get('SharengoCore\Service\CarsService');
         $webusersService = $sharedServiceLocator->get('SharengoCore\Service\WebusersService');
         $maintenanceMotivationsService = $sharedServiceLocator->get('SharengoCore\Service\MaintenanceMotivationsService');
+        $maintenanceLocationsService = $sharedServiceLocator->get('SharengoCore\Service\MaintenanceLocationsService');
         $config = $serviceLocator->getServiceLocator()->get('Config');
 
         return new LogisticController(
-                $carsService, $webusersService, $maintenanceMotivationsService, $config['logistic']
+                $carsService, $webusersService, $maintenanceMotivationsService, $config['logistic'], $maintenanceLocationsService
         );
     }
 

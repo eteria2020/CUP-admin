@@ -1662,12 +1662,30 @@ return [
                             ],
                         ],
                     ],
-                    'motivation' => [
+                    'get-last-maintenance-car' => [
                         'type' => 'Segment',
                         'options' => [
-                            'route' => '/motivation',
+                            'route' => '/get-last-maintenance-car',
                             'defaults' => [
-                                'action' => 'motivation',
+                                'action' => 'get last maintenance car',
+                            ],
+                        ],
+                    ],
+                    'update-maintenance' => [
+                        'type' => 'Segment',
+                        'options' => [
+                            'route' => '/update-maintenance',
+                            'defaults' => [
+                                'action' => 'update maintenance',
+                            ],
+                        ],
+                    ],
+                    'get-motivation' => [
+                        'type' => 'Segment',
+                        'options' => [
+                            'route' => '/get-motivation',
+                            'defaults' => [
+                                'action' => 'get motivation',
                             ],
                         ],
                     ],

@@ -23,11 +23,12 @@ class CarFormFactory implements FactoryInterface
 
         $languageService = $serviceLocator->get('LanguageService');
         $maintenanceMotivationsService = $serviceLocator->get('SharengoCore\Service\MaintenanceMotivationsService');
+        $maintenanceLocationsService = $serviceLocator->get('SharengoCore\Service\MaintenanceLocationsService');
         $translator = $languageService->getTranslator();
 
         $hydrator = new DoctrineHydrator($entityManager);
         $carFieldset = new CarFieldset($I_carsService, $hydrator, $translator);
 
-        return new CarForm($carFieldset, $maintenanceMotivationsService);
+        return new CarForm($carFieldset, $maintenanceMotivationsService, $maintenanceLocationsService);
     }
 }
