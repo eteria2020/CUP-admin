@@ -41,6 +41,14 @@
                         </div>
                     </div>
                     <div class="row">
+                        <div class="col-lg-4">
+                            <div class="form-group">
+                                <label><?= $this->translate("Partner"); ?></label>
+                                <div class="form-control" disabled><?= (is_null($this->contract->getPartner()) ? '': $this->contract->getPartner()->getCode())?></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
                         <div class="col-lg-12">
                             <?php if ($this->contract->getDisabledDate()): ?>
                                 <?= $this->translate("Data di disabilitazione:"); ?> <span><?= $this->contract->getDisabledDate()->format('Y-m-d H:i:s'); ?></span>
