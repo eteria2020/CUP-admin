@@ -38,6 +38,12 @@ class CarForm extends Form
                 'value_options' => 
                     /*
                     '-'=>'',
+                    'Roma, Officina Energeko Srl (Officina interna di riferimento), Via Gregorio VII, 37 - 000165 Roma' => 'Roma, Officina Energeko Srl (Officina interna di riferimento), Via Gregorio VII, 37 - 000165 Roma',
+                    'Roma, Carrozzeria Lucarelli, Via della Magliana, 642 – 00148' => 'Roma, Carrozzeria Lucarelli, Via della Magliana, 642 – 00148',
+                    'Roma, Carrozzeria Moderna, Via Vecchia di Napoli, 219/223 – 00049 Velletri' => 'Roma, Carrozzeria Moderna, Via Vecchia di Napoli, 219/223 – 00049 Velletri',
+                    'Roma, Carrozzeria Lucioli Franco, Via Prospero Intorcetta, 60 - 00126' => 'Roma, Carrozzeria Lucioli Franco, Via Prospero Intorcetta, 60 - 00126',
+                    'Roma, Carrozzeria Assistenza car service, Via prenestina nuova km 0.200' => 'Roma, Carrozzeria Assistenza car service, Via prenestina nuova km 0.200',
+                    'Roma, Carrozzeria Ventura & Bianchini, SEDE VIA OSTIENSE, 999 00144 - Via Guglielmo Massaia, 17 - Ostiense, 999' => 'Roma, Carrozzeria Ventura & Bianchini, SEDE VIA OSTIENSE, 999 00144 - Via Guglielmo Massaia, 17 - Ostiense, 999',
                     'Firenze, Carrozzeria Merciai, via del Pratellino 27/31 50124' => 'Firenze, Carrozzeria Merciai, via del Pratellino 27/31 50124',
                     'Firenze, Rugi, via Gaetano Salvemini 3F, 50058 Signa' => 'Rugi, via Gaetano Salvemini 3F, 50058 Signa',
                     'Firenze, Rugi, via dei Colli 188, 50058 Signa' => 'Rugi, via dei Colli 188, 50058 Signa',

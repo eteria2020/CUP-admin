@@ -849,7 +849,7 @@ class CustomersController extends AbstractActionController
             //update customer
             $customer = $this->customersService->recessCustomer($customer);
             //send mail to servizio clienti
-            $this->sendEmailUserRecess($this->globalConfig['from'], $customer_id, 'it', 24);
+            //$this->sendEmailUserRecess($this->globalConfig['from'], $customer_id, 'it', 24);
             
         } catch (\Exception $e) {
             $response_msg = "error";
