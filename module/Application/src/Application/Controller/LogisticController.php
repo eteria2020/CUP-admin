@@ -48,13 +48,13 @@ class LogisticController extends AbstractActionController {
      * @param array $logisticConfig
      */
     public function __construct(
-    CarsService $carsService, WebusersService $webusersService, MaintenanceMotivationsService $maintenanceMotivationsService, $logisticConfig, MaintenanceMotivationsService $maintenanceLocationsService
+    CarsService $carsService, WebusersService $webusersService, MaintenanceMotivationsService $maintenanceMotivationsService, $logisticConfig, MaintenanceLocationsService $maintenanceLocationsService
     ) {
         $this->carsService = $carsService;
         $this->webusersService = $webusersService;
         $this->maintenanceMotivationsService = $maintenanceMotivationsService;
-        $this->maintenanceLocationsService = $maintenanceLocationsService;
         $this->logisticConfig = $logisticConfig;
+        $this->maintenanceLocationsService = $maintenanceLocationsService;
     }
 
     public function changeStatusCarAction() {
@@ -122,18 +122,25 @@ class LogisticController extends AbstractActionController {
         $params = json_decode(base64_decode($this->params()->fromPost('param')), true);   
         if (isset($params['plate'])) {
             $car_maintenance = $this->carsService->getLastMaintenanceCar($params['plate']);
-            $response = $this->getResponse();
-            $response->setStatusCode(200);
-            $response->setContent(
-                    json_encode(
-                            array(
-                                "location" => $car_maintenance->getLocation(),
-                                "motivation" => $car_maintenance->getMotivation()->getDescription(),
-                                "note" => $car_maintenance->getNotes(),
-                            )
-                    )
-            );
-            return $response;
+            if(count($car_maintenance)>0){
+                $response = $this->getResponse();
+                $response->setStatusCode(200);
+                $response->setContent(
+                        json_encode(
+                                array(
+                                    "location" => $car_maintenance->getLocation(),
+                                    "motivation" => $car_maintenance->getMotivation()->getDescription(),
+                                    "note" => $car_maintenance->getNotes(),
+                                )
+                        )
+                );
+                return $response;
+            }else{
+                $response = $this->getResponse();
+                $response->setStatusCode(200);
+                $response->setContent(json_encode(array("response" => "Plate not found")));
+                return $response;
+            }
         } else {
             $response = $this->getResponse();
             $response->setStatusCode(400);
@@ -146,17 +153,22 @@ class LogisticController extends AbstractActionController {
 
         $params = json_decode(base64_decode($this->params()->fromPost('param')), true);
 
-        if (isset($params['plate']) &&  isset($params['location']) && isset($params['motivation']) && isset($params['note'])) {
+        if (isset($params['plate']) && isset($params['location']) && isset($params['motivation']) && isset($params['note'])) {
             //user logistic
             $webuser = $this->webusersService->findByEmail($this->logisticConfig['email_logistic']);
             $car_maintenance = $this->carsService->getLastMaintenanceCar($params['plate']);
-            
-            $this->carsService->updateMaintenance($car_maintenance, $params);
-
-            $response = $this->getResponse();
-            $response->setStatusCode(200);
-            $response->setContent(json_encode(array("response" => "Auto modificata con successo!")));
-            return $response;
+            if(count($car_maintenance)>0){
+                $this->carsService->updateMaintenance($car_maintenance, $params);
+                $response = $this->getResponse();
+                $response->setStatusCode(200);
+                $response->setContent(json_encode(array("response" => "Auto modificata con successo!")));
+                return $response;
+            }else{
+                $response = $this->getResponse();
+                $response->setStatusCode(200);
+                $response->setContent(json_encode(array("response" => "Plate not found")));
+                return $response;
+            }
         } else {
             $response = $this->getResponse();
             $response->setStatusCode(400);
