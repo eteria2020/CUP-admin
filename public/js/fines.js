@@ -55,8 +55,13 @@ $(function() {
         "bFilter": false,
         "sAjaxSource": "/fines/datatable",
         "createdRow": function (row, data, dataIndex, cells) {
-            if(data.cu.type){
-                $('td', row).css('background', '#ffb3b3');
+            switch (data.cu.type) {
+                case 1:
+                    $('td', row).css('background', '#ffe6e6');
+                    break;
+                case 2:
+                    $('td', row).css('background', '#f2ffcc');
+                    break;
             }
         },
         "fnServerData": function (sSource, aoData, fnCallback, oSettings) {
