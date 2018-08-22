@@ -22,6 +22,7 @@ $(function() {
 
     // Respond to type change
     $('#type').change(function () {
+        $("#fleet").attr("disabled", false);
         var newType = $("#type option:selected").text();
         // Do something only if user selected a different value
         if (currentType != newType) {
@@ -421,4 +422,22 @@ function viewTries(extraPaymentTries)
     $('#amount').html(extraPaymentTries.amount + '€');
     
     $('#extraTries').fadeIn();
+}
+
+$(document).on( "change", "#reason0", function() {
+    setFleetModena();
+});
+
+$(document).on( "change", "#penalty0", function() {
+    setFleetModena();    
+});
+
+function setFleetModena(){
+    var str = $("#reason0").val().toLowerCase();
+    if(str.indexOf("franchigia") != -1 || str.indexOf("singola multa") != -1){
+        $("#fleet").val(4);
+        $("#fleet").attr("disabled", true);
+    }else{
+        $("#fleet").attr("disabled", false);
+    }
 }
