@@ -438,6 +438,6 @@ function setFleetModena(){
         $("#fleet").val(4);
         $("#fleet").attr("disabled", true);
     }else{
-        $("#fleet").attr("disabled", false);
+        $("#fleet").attr("disabled", false); 
     }
 }
