@@ -64,9 +64,8 @@ class CarForm extends Form
                     'Roma Other (codice OTH)' => 'Roma Other (codice OTH)',
                     'Modena Other (codice OTH)' => 'Modena Other (codice OTH)'
                     
-                    $maintenanceLocationsService->getAllMaintenanceLocations(false)
                 ]*/
-                 'value_options' => $maintenanceLocationsService->getAllMaintenanceLocations(false)
+                'value_options' => $maintenanceLocationsService->getAllMaintenanceLocations(false)
             ]
         ]);
 
@@ -128,6 +127,15 @@ class CarForm extends Form
         }
 
         $this->get('car')->get('fleet')->setValueOptions($fleetsPlainArray);
+    }
+    
+    public function setLocations(array $locations)
+    {
+        $locations_array = [];
+        foreach($locations as $location) {
+            $locations_array[$location->getId()] = $location->getLocation();
+        }
+        $this->get('car')->get('location')->setValueOptions($locations_array);
     }
     
 }

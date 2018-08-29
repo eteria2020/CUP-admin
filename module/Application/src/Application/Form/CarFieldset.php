@@ -120,6 +120,15 @@ class CarFieldset extends Fieldset implements InputFilterProviderInterface
                 'class' => 'form-control',
             ]
         ]);
+        
+        $this->add([
+            'name'       => 'location',
+            'type'       => 'Zend\Form\Element\Select',
+            'attributes' => [
+                'id'    => 'active',
+                'class' => 'form-control',
+            ]
+        ]);
 
     }
 

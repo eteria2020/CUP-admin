@@ -127,6 +127,7 @@ class CarsController extends AbstractActionController {
         $form = $this->carForm;
         $form->setStatus([CarStatus::OPERATIVE => CarStatus::OPERATIVE]);
         $form->setFleets($this->carsService->getFleets());
+        //$form->setLocation("fdvdf");
 
         if ($this->getRequest()->isPost()) {
             $postData = $this->getRequest()->getPost()->toArray();
@@ -183,6 +184,7 @@ class CarsController extends AbstractActionController {
         $form = $this->carForm;
         $form->setStatus($this->carsService->getStatusCarAvailable($car->getStatus()));
         $form->setFleets($this->carsService->getFleets());
+        $form->setLocations($this->carsService->getLocations());
         $carData = $this->hydrator->extract($car);
         $data = [];
         $data['car'] = $carData;
