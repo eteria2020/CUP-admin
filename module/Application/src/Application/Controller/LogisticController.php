@@ -149,7 +149,7 @@ class LogisticController extends AbstractActionController {
         }
     }
     
-    public function updateMaintenanceAction() {
+    public function updateMaintenanceAction(){
 
         $params = json_decode(base64_decode($this->params()->fromPost('param')), true);
 
