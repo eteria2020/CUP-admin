@@ -35,7 +35,7 @@ class CarForm extends Form
                 'class' => 'form-control',
             ],
             'options'    => [
-                'value_options' => $maintenanceLocationsService->getAllMaintenanceLocations(false)
+                'value_options' => $maintenanceLocationsService->getAllMaintenanceLocations()
             ]
         ]);
 
