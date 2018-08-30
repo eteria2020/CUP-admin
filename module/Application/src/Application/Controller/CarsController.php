@@ -188,7 +188,7 @@ class CarsController extends AbstractActionController {
         $data['car'] = $carData;
 
         if (!is_null($lastCarsMaintenance) && $car->getStatus() == CarStatus::MAINTENANCE) {
-            $data['location'] = $lastCarsMaintenance->getLocation();
+            $data['location'] = $lastCarsMaintenance->getLocationId()->getId(); 
             $data['note'] = $lastCarsMaintenance->getNotes();
             $data['motivation'] = $lastCarsMaintenance->getMotivation()->getId();
             $disableInputStatusMaintenance = true;
