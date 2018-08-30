@@ -184,13 +184,12 @@ class CarsController extends AbstractActionController {
         $form = $this->carForm;
         $form->setStatus($this->carsService->getStatusCarAvailable($car->getStatus()));
         $form->setFleets($this->carsService->getFleets());
-        $form->setLocations($this->carsService->getLocations());
         $carData = $this->hydrator->extract($car);
         $data = [];
         $data['car'] = $carData;
 
         if (!is_null($lastCarsMaintenance) && $car->getStatus() == CarStatus::MAINTENANCE) {
-            $data['location'] = $lastCarsMaintenance->getLocation();
+            $data['location'] = $lastCarsMaintenance->getLocationId()->getId();
             $data['note'] = $lastCarsMaintenance->getNotes();
             $data['motivation'] = $lastCarsMaintenance->getMotivation()->getId();
             $disableInputStatusMaintenance = true;
