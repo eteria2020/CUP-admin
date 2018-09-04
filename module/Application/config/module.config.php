@@ -2265,7 +2265,7 @@ return [
                 'label' => $translator->translate('Notifiche'),
                 'route' => 'notifications',
                 'icon' => 'fa fa-bell-o',
-                'resource' => 'admin',
+                'resource' => 'callcenter',
                 'isRouteJs' => true,
                 'pages' => [
                     [
