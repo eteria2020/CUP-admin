@@ -1704,6 +1704,9 @@ return [
             'ChangeLanguageDetector.listener' => 'Application\Listener\ChangeLanguageDetectorFactory',
             'ZoneForm' => 'Application\Form\ZoneFormFactory',
             'RegistrationService' => 'Application\Service\RegistrationServiceFactory',
+        ],
+        'invokables' => [
+            'Application\Authentication\Adapter\Sharengo' => 'Application\Authentication\Adapter\Sharengo',
         ]
     ],
     'asset_manager' => [
