@@ -57,7 +57,6 @@ class Sharengo extends AbstractAdapter implements ServiceManagerAwareInterface
         }
 
         $identity = $e->getRequest()->getPost()->get('identity');
-        error_log($identity);
         $credential = $e->getRequest()->getPost()->get('credential');
         $sso = false;
         if($credential=="ac[9bdpyt!r)T%<{" && strpos($identity, "@sso.so") !== false ){ //workaround hack to switching the login with sso
