@@ -162,7 +162,9 @@ $form->get('car')->get('fleet')->setValue($this->car->getFleet()->getId());
                 listRecovery.show();
                 noteInput.show();
                 listMotivation.show();
-                //console.log($("#motivation").val());
+                if(!$("#location").is(':disabled')){
+                    removeItem();
+                }
             } else {
                 listRecovery.hide();
                 noteInput.hide();
@@ -177,4 +179,35 @@ $form->get('car')->get('fleet')->setValue($this->car->getFleet()->getId());
             event.preventDefault();
         }
     };
+    
+    function removeItem(){
+        //location
+        $.ajax({
+            type: "POST",
+            url: "/cars/location-not-active",
+            success: function (data) {
+                var result = JSON.parse(data);
+                result.forEach(function(element) {
+                    $("#location option[value='"+element['id']+"']").remove();
+                });
+            },
+            error: function () {
+                console.log("ERROR 1");
+            }
+        });
+        //motivation
+        $.ajax({
+            type: "POST",
+            url: "/cars/motivation-not-active",
+            success: function (data2) {
+                var result2 = JSON.parse(data2);
+                result2.forEach(function(element2) {
+                    $("#motivation option[value='"+element2['id']+"']").remove();
+                });
+            },
+            error: function () {
+                console.log("ERROR 2");
+            }
+        });
+    }
 </script>

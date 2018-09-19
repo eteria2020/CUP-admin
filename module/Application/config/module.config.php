@@ -694,6 +694,28 @@ return [
                             ],
                         ],
                     ],
+                    'location-not-active' => [
+                        'type'    => 'Literal',
+                        'options' => [
+                            'route'    => '/location-not-active',
+                            'defaults' => [
+                                '__NAMESPACE__' => 'Application\Controller',
+                                'controller'    => 'Cars',
+                                'action'        => 'location-not-active',
+                            ],
+                        ],
+                    ],
+                    'motivation-not-active' => [
+                        'type'    => 'Literal',
+                        'options' => [
+                            'route'    => '/motivation-not-active',
+                            'defaults' => [
+                                '__NAMESPACE__' => 'Application\Controller',
+                                'controller'    => 'Cars',
+                                'action'        => 'motivation-not-active',
+                            ],
+                        ],
+                    ],
                 ],
             ],
             'invoices' => [
