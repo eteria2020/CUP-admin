@@ -94,4 +94,35 @@ class LogisticController extends AbstractActionController {
       }
       }
      */
+    
+     public function getLastMaintenanceCarAction() {
+        $params = json_decode(base64_decode($this->params()->fromPost('param')), true);   
+        if (isset($params['plate'])) {
+            $car_maintenance = $this->carsService->getLastMaintenanceCar($params['plate']);
+            if(count($car_maintenance)>0){
+                $response = $this->getResponse();
+                $response->setStatusCode(200);
+                $response->setContent(
+                        json_encode(
+                                array(
+                                    "location" => $car_maintenance->getLocation(),
+                                    "motivation" => $car_maintenance->getMotivation()->getDescription(),
+                                    "note" => $car_maintenance->getNotes(),
+                                )
+                        )
+                );
+                return $response;
+            }else{
+                $response = $this->getResponse();
+                $response->setStatusCode(200);
+                $response->setContent(json_encode(array("response" => "Plate not found")));
+                return $response;
+            }
+        } else {
+            $response = $this->getResponse();
+            $response->setStatusCode(400);
+            $response->setContent(json_encode(array("response" => "Parametri mancanti")));
+            return $response;
+        }
+    }
 }
