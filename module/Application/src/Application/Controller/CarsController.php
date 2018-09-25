@@ -16,6 +16,8 @@ use SharengoCore\Service\TripsService;
 use SharengoCore\Service\CarsDamagesService;
 use SharengoCore\Service\CommandsService;
 use SharengoCore\Utility\CarStatus;
+use SharengoCore\Service\MaintenanceLocationsService;
+use SharengoCore\Service\MaintenanceMotivationsService;
 // Externals
 use Zend\Form\Form;
 use Zend\Http\Response;
@@ -63,6 +65,17 @@ class CarsController extends AbstractActionController {
      * @var string[] 
      */
     private $roles;
+    
+    /**
+     * @var MaintenanceLocationsService
+     */
+    private $maintenanceLocationsService;
+    
+    /**
+     * @var MaintenanceMotivationsService
+     */
+
+    private $maintenanceMotivationsService;
 
     /**
      * @param CarsService $carsService
@@ -72,9 +85,11 @@ class CarsController extends AbstractActionController {
      * @param Container $datatableFiltersSessionContainer
      * @param TripsService $tripsService
      * @param string $roles
+     * @param MaintenanceLocationsService $maintenanceLocationsService
+     * @param MaintenanceMotivationsService $maintenanceMotivationsService
      */
     public function __construct(
-    CarsService $carsService, CommandsService $commandsService, Form $carForm, HydratorInterface $hydrator, Container $datatableFiltersSessionContainer, TripsService $tripsService, $roles
+    CarsService $carsService, CommandsService $commandsService, Form $carForm, HydratorInterface $hydrator, Container $datatableFiltersSessionContainer, TripsService $tripsService, $roles, MaintenanceLocationsService $maintenanceLocationsService,MaintenanceMotivationsService $maintenanceMotivationsService
     ) {
         $this->carsService = $carsService;
         $this->commandsService = $commandsService;
@@ -83,6 +98,8 @@ class CarsController extends AbstractActionController {
         $this->datatableFiltersSessionContainer = $datatableFiltersSessionContainer;
         $this->tripsService = $tripsService;
         $this->roles = $roles;
+        $this->maintenanceLocationsService = $maintenanceLocationsService;
+        $this->maintenanceMotivationsService = $maintenanceMotivationsService;
     }
 
     /**
@@ -188,7 +205,11 @@ class CarsController extends AbstractActionController {
         $data['car'] = $carData;
 
         if (!is_null($lastCarsMaintenance) && $car->getStatus() == CarStatus::MAINTENANCE) {
-            $data['location'] = $lastCarsMaintenance->getLocation();
+            if(!is_null($lastCarsMaintenance->getLocationId())){
+                $data['location'] = $lastCarsMaintenance->getLocationId()->getId();
+            }else{
+                $data['location'] = 35;//viene mostrato "Nessuna sede"
+            }
             $data['note'] = $lastCarsMaintenance->getNotes();
             $data['motivation'] = $lastCarsMaintenance->getMotivation()->getId();
             $disableInputStatusMaintenance = true;
@@ -229,7 +250,7 @@ class CarsController extends AbstractActionController {
             'car' => $car,
             'carForm' => $form,
             'disableInputStatusMaintenance' => $disableInputStatusMaintenance,
-            'roles' => $this->roles
+            'roles' => $this->roles,
         ]);
         $view->setTerminal(true);
         return $view;
@@ -341,6 +362,26 @@ class CarsController extends AbstractActionController {
 
             return $this->carsService->getDataDataTable($as_filters, true);
         }
+    }
+    
+    public function locationNotActiveAction(){
+        
+        $locationNotActive = $this->maintenanceLocationsService->findAllNotActive();
+        
+        $response = $this->getResponse();
+        $response->setStatusCode(200);
+        $response->setContent(json_encode($locationNotActive));
+        return $response;
+    }
+    
+    public function motivationNotActiveAction(){
+        
+        $motivationNotActive = $this->maintenanceMotivationsService->findAllNotActive();
+        
+        $response = $this->getResponse();
+        $response->setStatusCode(200);
+        $response->setContent(json_encode($motivationNotActive));
+        return $response;
     }
 
 }

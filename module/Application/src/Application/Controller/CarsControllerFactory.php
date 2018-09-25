@@ -23,6 +23,8 @@ class CarsControllerFactory implements FactoryInterface
         $carsService = $sharedServiceLocator->get('SharengoCore\Service\CarsService');
         $tripsService = $sharedServiceLocator->get('SharengoCore\Service\TripsService');
         $commandsService = $sharedServiceLocator->get('SharengoCore\Service\CommandsService');
+        $maintenanceLocationsService = $sharedServiceLocator->get('SharengoCore\Service\MaintenanceLocationsService');
+        $maintenanceMotivationsService = $sharedServiceLocator->get('SharengoCore\Service\MaintenanceMotivationsService');
         $datatablesSessionNamespace = $sharedServiceLocator->get('Configuration')['session']['datatablesNamespace'];
 
         $carForm = $sharedServiceLocator->get('CarForm');
@@ -40,7 +42,9 @@ class CarsControllerFactory implements FactoryInterface
             $hydrator,
             $datatableFiltersSessionContainer,
             $tripsService,
-            $roles
+            $roles,
+            $maintenanceLocationsService,
+            $maintenanceMotivationsService
         );
     }
 }
