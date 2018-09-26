@@ -96,7 +96,7 @@ class LogisticController extends AbstractActionController {
      */
     
      public function getLastMaintenanceCarAction() {
-         
+          
         $response = $this->getResponse();
         $response->setStatusCode(200);
         $response->setContent(json_encode(array("response" => "TEST GET")));
