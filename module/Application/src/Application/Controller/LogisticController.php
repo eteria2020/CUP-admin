@@ -50,6 +50,8 @@ class LogisticController extends AbstractActionController {
 
     public function changeStatusCarAction() {
 
+        header('Access-Control-Allow-Origin: *');
+        
         $params = json_decode(base64_decode($this->params()->fromPost('param')), true);
 
         if (isset($params['plate']) && isset($params['status']) && isset($params['location']) && isset($params['motivation']) && isset($params['note'])) {
@@ -96,7 +98,9 @@ class LogisticController extends AbstractActionController {
      */
     
      public function getLastMaintenanceCarAction() {
+        
         header('Access-Control-Allow-Origin: *');
+         
         $response = $this->getResponse();
         $response->setStatusCode(200);
         $response->setContent(json_encode(array("response" => "TEST GET")));
