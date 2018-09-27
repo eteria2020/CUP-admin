@@ -122,7 +122,7 @@ class LogisticController extends AbstractActionController {
             }
         } else {
             $response = $this->getResponse();
-            $response->setStatusCode(400);
+            $response->setStatusCode(200);
             $response->setContent(json_encode(array("response" => "Parametri mancanti")));
             return $response;
         }
