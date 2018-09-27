@@ -100,7 +100,7 @@ class LogisticController extends AbstractActionController {
         header('Access-Control-Allow-Origin: *');
                 $response = $this->getResponse();
                 $response->setStatusCode(200);
-                $response->setContent(json_encode(array("response" => "AAAAAAAAAAAA")));
+                $response->setContent(json_encode(array("response" => "AAAAAAAAAAAA"))); 
                 return $response;
         /*
         $params = json_decode(base64_decode($this->params()->fromQuery('param')), true);   
