@@ -96,13 +96,8 @@ class LogisticController extends AbstractActionController {
      */
     
      public function getLastMaintenanceCarAction() {
+                header('Access-Control-Allow-Origin: *');
         
-        header('Access-Control-Allow-Origin: *');
-                $response = $this->getResponse();
-                $response->setStatusCode(200);
-                $response->setContent(json_encode(array("response" => "AAAAAAAAAAAA"))); 
-                return $response;
-        /*
         $params = json_decode(base64_decode($this->params()->fromQuery('param')), true);   
         if (isset($params['plate'])) {
             $car_maintenance = $this->carsService->getLastMaintenanceCar($params['plate']);
@@ -131,6 +126,6 @@ class LogisticController extends AbstractActionController {
             $response->setContent(json_encode(array("response" => "Parametri mancanti")));
             return $response;
         }
-    */
+    
     }
 }
