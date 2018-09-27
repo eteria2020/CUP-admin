@@ -107,8 +107,8 @@ class LogisticController extends AbstractActionController {
                 $response->setContent(
                         json_encode(
                                 array(
-                                    "location" => $car_maintenance->getLocation(),
-                                    "motivation" => $car_maintenance->getMotivation()->getDescription(),
+                                    "location" => $car_maintenance->getLocationId(),
+                                    "motivation" => $car_maintenance->getMotivation(),
                                     "note" => $car_maintenance->getNotes(),
                                 )
                         )
