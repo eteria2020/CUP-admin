@@ -50,26 +50,39 @@ class LogisticController extends AbstractActionController {
 
     public function changeStatusCarAction() {
 
-        $params = json_decode(base64_decode($this->params()->fromPost('param')), true);
+        //$params = json_decode(base64_decode($this->params()->fromPost('param')), true);
+        $params = json_decode(base64_decode($this->params()->fromQuery('param')), true);
 
         if (isset($params['plate']) && isset($params['status']) && isset($params['location']) && isset($params['motivation']) && isset($params['note'])) {
             //user logistic
             $webuser = $this->webusersService->findByEmail($this->logisticConfig['email_logistic']);
             $car = $this->carsService->getCarByPlate($params['plate']);
-            $lastStatus = $car->getStatus();
-            $car->setStatus($params['status']);
-            if ($params['status'] != "operative") {
+            $oldMantenance = $this->carsService->getLastMaintenanceCar($params['plate']);
+            if(count($oldMantenance) > 0 && $car->getStatus() == "maintenance" && $params['status'] == "maintenance"){
+                //update mantenance
                 $postData['location'] = $params['location'];
                 $postData['motivation'] = $params['motivation'];
-            }
-            $postData['note'] = $params['note'];
+                $postData['note'] = $params['note'];
+                $this->carsService->closeOldMantenance($oldMantenance, $webuser);
+                $this->carsService->updateCar($car, $car->getStatus(), $postData, $webuser, true);
+                $result = "Auto aggiornata con successo!";
+            }else{
+                $lastStatus = $car->getStatus();
+                $car->setStatus($params['status']);
+                if ($params['status'] != "operative") {
+                    $postData['location'] = $params['location'];
+                    $postData['motivation'] = $params['motivation'];
+                }
+                $postData['note'] = $params['note'];
 
-            $this->carsService->updateCar($car, $lastStatus, $postData, $webuser, true);
+                $this->carsService->updateCar($car, $lastStatus, $postData, $webuser, true);
+                $result = "Auto modificata con successo!";
+            }
             $this->carsService->saveData($car, false);
 
             $response = $this->getResponse();
             $response->setStatusCode(200);
-            $response->setContent(json_encode(array("response" => "Auto modificata con successo!")));
+            $response->setContent(json_encode(array("response" => $result)));
             return $response;
         } else {
             $response = $this->getResponse();
@@ -96,7 +109,7 @@ class LogisticController extends AbstractActionController {
      */
     
      public function getLastMaintenanceCarAction() {
-                header('Access-Control-Allow-Origin: *');
+        header('Access-Control-Allow-Origin: *');
         
         $params = json_decode(base64_decode($this->params()->fromQuery('param')), true);   
         if (isset($params['plate'])) {
@@ -126,6 +139,29 @@ class LogisticController extends AbstractActionController {
             $response->setContent(json_encode(array("response" => "Parametri mancanti")));
             return $response;
         }
+    }
     
+    public function updateMaintenanceAction() {
+        //$a = '';
+        $params = json_decode(base64_decode($this->params()->fromPost('param')), true);
+        $params = json_decode(base64_decode($this->params()->fromQuery('param')), true);   
+
+        if (isset($params['plate']) && isset($params['status']) && isset($params['location']) && isset($params['motivation']) && isset($params['note'])) {
+            //user logistic
+            $webuser = $this->webusersService->findByEmail($this->logisticConfig['email_logistic']);
+            $car = $this->carsService->getCarByPlate($params['plate']);
+            $postData['location'] = $params['location'];
+            $postData['motivation'] = $params['motivation'];
+            $postData['note'] = $params['note'];
+            $postData['status'] = $params['status'];
+            
+            $result = $this->carsService->updateMaintenance($car, $postData, $webuser, true);
+            
+        }else{
+            $response = $this->getResponse();
+            $response->setStatusCode(400);
+            $response->setContent(json_encode(array("response" => "Parametri mancanti")));
+            return $response;
+        }
     }
 }
