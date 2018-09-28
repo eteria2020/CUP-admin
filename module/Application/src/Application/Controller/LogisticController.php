@@ -50,8 +50,8 @@ class LogisticController extends AbstractActionController {
 
     public function changeStatusCarAction() {
 
-        //$params = json_decode(base64_decode($this->params()->fromPost('param')), true);
-        $params = json_decode(base64_decode($this->params()->fromQuery('param')), true);
+        $params = json_decode(base64_decode($this->params()->fromPost('param')), true);
+        //$params = json_decode(base64_decode($this->params()->fromQuery('param')), true);
 
         if (isset($params['plate']) && isset($params['status']) && isset($params['location']) && isset($params['motivation']) && isset($params['note'])) {
             //user logistic
