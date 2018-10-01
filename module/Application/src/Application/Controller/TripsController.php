@@ -328,7 +328,7 @@ class TripsController extends AbstractActionController
                 if ($this->tripsService->checkUserModifyTrip($trip->getCustomer()->getId())) {
                     $this->closeTrip($data, $translator);
                 } else {
-                    $this->flashMessenger()->addErrorMessage($translator->translate('Attenzione: superato il numero massimo (5) di chiusure/modifiche mensili!'));
+                    $this->flashMessenger()->addErrorMessage($translator->translate('Attenzione: superato il numero massimo (10) di chiusure/modifiche mensili!'));
                 }
             }
             return $this->redirect()->toRoute('trips/details', ['id' => $data['id']]);
