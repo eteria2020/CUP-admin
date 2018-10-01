@@ -56,20 +56,32 @@ class LogisticController extends AbstractActionController {
             //user logistic
             $webuser = $this->webusersService->findByEmail($this->logisticConfig['email_logistic']);
             $car = $this->carsService->getCarByPlate($params['plate']);
-            $lastStatus = $car->getStatus();
-            $car->setStatus($params['status']);
-            if ($params['status'] != "operative") {
+            $oldMantenance = $this->carsService->getLastMaintenanceCar($params['plate']);
+            if(count($oldMantenance) > 0 && $car->getStatus() == "maintenance" && $params['status'] == "maintenance"){
+                //update mantenance
                 $postData['location'] = $params['location'];
                 $postData['motivation'] = $params['motivation'];
-            }
-            $postData['note'] = $params['note'];
+                $postData['note'] = $params['note'];
+                $this->carsService->closeOldMantenance($oldMantenance, $webuser);
+                $this->carsService->updateCar($car, $car->getStatus(), $postData, $webuser, true);
+                $result = "Auto aggiornata con successo!";
+            }else{
+                $lastStatus = $car->getStatus();
+                $car->setStatus($params['status']);
+                if ($params['status'] != "operative") {
+                    $postData['location'] = $params['location'];
+                    $postData['motivation'] = $params['motivation'];
+                }
+                $postData['note'] = $params['note'];
 
-            $this->carsService->updateCar($car, $lastStatus, $postData, $webuser, true);
+                $this->carsService->updateCar($car, $lastStatus, $postData, $webuser, true);
+                $result = "Auto modificata con successo!";
+            }
             $this->carsService->saveData($car, false);
 
             $response = $this->getResponse();
             $response->setStatusCode(200);
-            $response->setContent(json_encode(array("response" => "Auto modificata con successo!")));
+            $response->setContent(json_encode(array("response" => $result)));
             return $response;
         } else {
             $response = $this->getResponse();
@@ -94,4 +106,37 @@ class LogisticController extends AbstractActionController {
       }
       }
      */
+    
+     public function getLastMaintenanceCarAction() {
+        header('Access-Control-Allow-Origin: *');
+        
+        $params = json_decode(base64_decode($this->params()->fromQuery('param')), true);   
+        if (isset($params['plate'])) {
+            $car_maintenance = $this->carsService->getLastMaintenanceCar($params['plate']);
+            if(count($car_maintenance)>0){
+                $response = $this->getResponse();
+                $response->setStatusCode(200);
+                $response->setContent(
+                        json_encode(
+                                array(
+                                    "location" => (is_null($car_maintenance->getLocationId()) ? null : $car_maintenance->getLocationId()->getId()),
+                                    "motivation" => $car_maintenance->getMotivation()->getId(),
+                                    "note" => $car_maintenance->getNotes(),
+                                )
+                        )
+                );
+                return $response;
+            }else{
+                $response = $this->getResponse();
+                $response->setStatusCode(200);
+                $response->setContent(json_encode(array("response" => "Plate not found")));
+                return $response;
+            }
+        } else {
+            $response = $this->getResponse();
+            $response->setStatusCode(200);
+            $response->setContent(json_encode(array("response" => "Parametri mancanti")));
+            return $response;
+        }
+    }
 }

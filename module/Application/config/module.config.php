@@ -1684,6 +1684,15 @@ return [
                             ],
                         ],
                     ],
+                    'get-last-maintenance-car' => [
+                        'type' => 'Segment',
+                        'options' => [
+                            'route' => '/get-last-maintenance-car',
+                            'defaults' => [
+                                'action' => 'get-last-maintenance-car',
+                            ],
+                        ],
+                    ],
                     'motivation' => [
                         'type' => 'Segment',
                         'options' => [
