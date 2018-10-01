@@ -139,27 +139,4 @@ class LogisticController extends AbstractActionController {
             return $response;
         }
     }
-    
-    public function updateMaintenanceAction() {
-        $params = json_decode(base64_decode($this->params()->fromPost('param')), true);
-        $params = json_decode(base64_decode($this->params()->fromQuery('param')), true);   
-
-        if (isset($params['plate']) && isset($params['status']) && isset($params['location']) && isset($params['motivation']) && isset($params['note'])) {
-            //user logistic
-            $webuser = $this->webusersService->findByEmail($this->logisticConfig['email_logistic']);
-            $car = $this->carsService->getCarByPlate($params['plate']);
-            $postData['location'] = $params['location'];
-            $postData['motivation'] = $params['motivation'];
-            $postData['note'] = $params['note'];
-            $postData['status'] = $params['status'];
-            
-            $result = $this->carsService->updateMaintenance($car, $postData, $webuser, true);
-            
-        }else{
-            $response = $this->getResponse();
-            $response->setStatusCode(400);
-            $response->setContent(json_encode(array("response" => "Parametri mancanti")));
-            return $response;
-        }
-    }
 }

@@ -1693,15 +1693,6 @@ return [
                             ],
                         ],
                     ],
-                    'update-maintenance' => [
-                        'type' => 'Segment',
-                        'options' => [
-                            'route' => '/update-maintenance',
-                            'defaults' => [
-                                'action' => 'update-maintenance',
-                            ],
-                        ],
-                    ],
                     'motivation' => [
                         'type' => 'Segment',
                         'options' => [
