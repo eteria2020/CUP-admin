@@ -7,6 +7,7 @@ use SharengoCore\Service\NotificationsService;
 use SharengoCore\Service\NotificationsProtocolsService;
 use SharengoCore\Service\NotificationsCategoriesService;
 use SharengoCore\Service\NotificationsCategories\NotificationsCategoriesAbstractFactory;
+use SharengoCore\Service\IncidentsService;
 // Externals
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\JsonModel;
@@ -36,6 +37,12 @@ class NotificationsController extends AbstractActionController
      * @var NotificationsCategoriesAbstractFactory
      */
     private $notificationsCategoriesAbstractFactory;
+    
+    /**
+     * @var IncidentsService
+     */
+    private $incidentsService;
+    
 
     /**
      * @var Container
@@ -51,19 +58,22 @@ class NotificationsController extends AbstractActionController
      * @param NotificationsCategoriesService $notificationsCategories
      * @param NotificationsCategoriesAbstractFactory $notificationsCategoriesAbstractFactory
      * @param Container $datatableFiltersSessionContainer
+     * #param IncidentsService $incidentsService
      */
     public function __construct(
         NotificationsService $notificationsService,
         NotificationsProtocolsService $notificationsProtocols,
         NotificationsCategoriesService $notificationsCategories,
         NotificationsCategoriesAbstractFactory $notificationsCategoriesAbstractFactory,
-        Container $datatableFiltersSessionContainer
+        Container $datatableFiltersSessionContainer,
+        IncidentsService $incidentsService
     ) {
         $this->notificationsService = $notificationsService;
         $this->notificationsProtocols = $notificationsProtocols;
         $this->notificationsCategories = $notificationsCategories;
         $this->notificationsCategoriesAbstractFactory = $notificationsCategoriesAbstractFactory;
         $this->datatableFiltersSessionContainer = $datatableFiltersSessionContainer;
+        $this->incidentsService = $incidentsService;
     }
 
     /**
@@ -255,5 +265,18 @@ class NotificationsController extends AbstractActionController
             $filters['withLimit'] = false;
             return $this->notificationsService->getDataDataTable($filters, true);
         }
+    }
+    
+    public function detailsIncidentAction() {
+
+        // Get the Notification ID from route
+        $id = (int) $this->params()->fromRoute('id', 0);
+
+        $incident = $this->incidentsService->getIncidentByTrip(28121);
+
+        return new ViewModel([
+            'notification' => $notification,
+            'data' => $categoryService->getData($notification)
+        ]);
     }
 }
