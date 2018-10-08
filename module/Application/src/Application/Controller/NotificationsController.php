@@ -270,13 +270,12 @@ class NotificationsController extends AbstractActionController
     public function detailsIncidentAction() {
 
         // Get the Notification ID from route
-        $id = (int) $this->params()->fromRoute('id', 0);
+        $trip_id = (int) $this->params()->fromRoute('id', 0);
 
-        $incident = $this->incidentsService->getIncidentByTrip(28121);
-
+        $incident = $this->incidentsService->getIncidentByTrip($trip_id);
+        $a = '';
         return new ViewModel([
-            'notification' => $notification,
-            'data' => $categoryService->getData($notification)
+            'incident' => $incident[0],
         ]);
     }
 }
