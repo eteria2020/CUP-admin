@@ -191,11 +191,17 @@ $(function() {
             {
                 targets: 2,
                 sortable: false,
-                render: function (data) {
-                    if(data == 'SOS'){
-                        return "<b style='color:red; font-size:16px'>SOS</b>";
-                    }else{
-                        return data;
+                render: function (data, type, row) {
+                    switch (data) {
+                        case "SOS":
+                            return "<b style='color:red; font-size:16px'>SOS</b>";
+                        break;
+                        case "Urto":
+                            return '<a href="notifications/details-incident/' + row.t.tripId + ' ">Urto</a>';
+                        break;
+                        default:
+                            return data;
+                        break;
                     }
                 }
             },

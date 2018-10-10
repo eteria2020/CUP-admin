@@ -1610,6 +1610,18 @@ return [
                             ]
                         ]
                     ],
+                    'details-incident' => [
+                        'type' => 'Segment',
+                        'options' => [
+                            'route' => '/details-incident/:id',
+                            'constraints' => [
+                                'id' => '[0-9]*'
+                            ],
+                            'defaults' => [
+                                'action' => 'details-incident'
+                            ]
+                        ]
+                    ],
                     'datatable' => [
                         'type' => 'Literal',
                         'options' => [

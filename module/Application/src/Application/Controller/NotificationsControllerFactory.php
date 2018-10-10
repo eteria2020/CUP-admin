@@ -17,6 +17,7 @@ class NotificationsControllerFactory implements FactoryInterface
         $notificationsService = $sharedServiceLocator->get('SharengoCore\Service\NotificationsService');
         $notificationsProtocolsService = $sharedServiceLocator->get('SharengoCore\Service\NotificationsProtocolsService');
         $notificationsCategoriesService = $sharedServiceLocator->get('SharengoCore\Service\NotificationsCategoriesService');
+        $incidentsService = $sharedServiceLocator->get('SharengoCore\Service\IncidentsService');
         $datatablesSessionNamespace = $sharedServiceLocator->get('Configuration')['session']['datatablesNamespace'];
 
         $notificationsCategoriesAbstractFactory = $sharedServiceLocator->get(
@@ -31,7 +32,8 @@ class NotificationsControllerFactory implements FactoryInterface
             $notificationsProtocolsService,
             $notificationsCategoriesService,
             $notificationsCategoriesAbstractFactory,
-            $datatableFiltersSessionContainer
+            $datatableFiltersSessionContainer,
+            $incidentsService
         );
     }
 }
