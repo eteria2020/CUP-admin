@@ -1,163 +1,187 @@
 <?php
 $a='';
-$ty = $this->incident;
-$a = '';
+if(isset($this->incident)){
+    $A = '';
+}else{
+    $r='';
+}
+$rt = '';
+
 
 ?>
 <div class="page-content-wrapper">
     <div class="page-content">
-        <!-- BEGIN PAGE HEADER-->
-        <div class="row">
-            <div class="col-lg-6">
-                <h3 class="page-title"><?= $this->translate('DETTAGLI URTO - VIAGGIO') ?> : <?= $this->incident->getTripId() ?></h3>
-            </div>
-            <div class="col-lg-6">
-                <a href="<?= $this->url('notifications'); ?>" class="btn btn-success pull-right">
-                    <i class="fa fa-arrow-left"></i> <?= $this->translate("Torna alla lista"); ?>
-                </a>
-            </div>
-        </div>
-        <div class="page-bar">
-        </div>
-        <div class="row">
-            <div class="col-md-12">
-                <!-- BEGIN Notification Data -->
-                <div class="portlet box green">
-                    <div class="portlet-title">
-                        <div class="caption">
-                            <i class="fa fa-bell-o"></i><?= $this->translate('Dati Urto') ?>
-                        </div>
-                    </div>
-                    <div class="portlet-body">
-                        <div class="row">
-                            <div class="col-lg-4">
-                                <div class="form-group">
-                                    <label for="name"><?= $this->translate('Trip ID') ?></label>
-                                    <div class="sng-info-box"><?= $this->incident->getTripId() ?></div>
-                                </div>
-                            </div>
-                            <div class="col-lg-4">
-                                <div class="form-group">
-                                    <label for="name"><?= $this->translate('Codice Errore') ?></label>
-                                    <div class="sng-info-box"><?= is_null($this->incident->getErrorCode()) ? '-' : $this->incident->getErrorCode() ?></div>
-                                </div>
-                            </div>
-                            <div class="col-lg-4">
-                                <div class="form-group">
-                                    <label for="name"><?= $this->translate('Data Server') ?></label>
-                                    <div class="sng-info-box"><?= is_null($this->incident->getServerTime()) ? '-' : $this->incident->getServerTime()->format('Y-m-d H:i:s') ?></div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-lg-4">
-                                <div class="form-group">
-                                    <label for="name"><?= $this->translate('Stato') ?></label>
-                                    <div class="sng-info-box"><?= is_null($this->incident->getState()) ? '-' : $this->incident->getState() ?></div>
-                                </div>
-                            </div>
-                            <div class="col-lg-4">
-                                <div class="form-group">
-                                    <label for="gender"><?= $this->translate('Mongo ID') ?></label>
-                                    <div class="sng-info-box"><?= $this->incident->getId() ?></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="portlet-body">
-                        <div class="row">
-                            <div class="col-lg-4">
-                                <div class="form-group">
-                                    <label for="name"><?= $this->translate('Targa') ?></label>
-                                    <div class="sng-info-box"><?= is_null($this->incident->getData()['codPlate']) ? '-' : $this->incident->getData()['codPlate'] ?></div>
-                                </div>
-                            </div>
-                            <div class="col-lg-4">
-                                <div class="form-group">
-                                    <label for="name"><?= $this->translate('Data locale inzio') ?></label>
-                                    <div class="sng-info-box"><?= is_null($this->incident->getData()['localDtStart']) ? '-' : $this->incident->getData()['localDtStart'] ?></div>
-                                </div>
-                            </div>
-                            <div class="col-lg-4">
-                                <div class="form-group">
-                                    <label for="name"><?= $this->translate('Data locale fine') ?></label>
-                                    <div class="sng-info-box"><?= is_null($this->incident->getData()['localDtEnd']) ? '-' : $this->incident->getData()['localDtEnd'] ?></div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-lg-4">
-                                <div class="form-group">
-                                    <label for="name"><?= $this->translate('Pro Crash') ?></label>
-                                    <div class="sng-info-box"><?= is_null($this->incident->getData()['proCrash']) ? '-' : $this->incident->getData()['proCrash'] ?></div>
-                                </div>
-                            </div>
-                            <div class="col-lg-4">
-                                <div class="form-group">
-                                    <label for="name"><?= $this->translate('Pro BlackBox') ?></label>
-                                    <div class="sng-info-box"><?= is_null($this->incident->getData()['proBlackBox']) ? '-' : $this->incident->getData()['proBlackBox'] ?></div>
-                                </div>
-                            </div>
-                            <div class="col-lg-4">
-                                <div class="form-group">
-                                    <label for="name"><?= $this->translate('Valore Batteria') ?></label>
-                                    <div class="sng-info-box"><?= is_null($this->incident->getData()['valBattery']) ? '-' : $this->incident->getData()['valBattery'] ?></div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-lg-4">
-                                <div class="form-group">
-                                    <label for="name"><?= $this->translate('Latitudine') ?></label>
-                                    <div class="sng-info-box"><?= is_null($this->incident->getData()['geoLatitude']) ? '-' : $this->incident->getData()['geoLatitude'] ?></div>
-                                </div>
-                            </div>
-                            <div class="col-lg-4">
-                                <div class="form-group">
-                                    <label for="name"><?= $this->translate('Longitudine') ?></label>
-                                    <div class="sng-info-box"><?= is_null($this->incident->getData()['geoLongitude']) ? '-' : $this->incident->getData()['geoLongitude'] ?></div>
-                                </div>
-                            </div>
-                            <div class="col-lg-4">
-                                <div class="form-group">
-                                    <label for="name"><?= $this->translate('Valore Car Direction') ?></label>
-                                    <div class="sng-info-box"><?= is_null($this->incident->getData()['valCarDirection']) ? '-' : $this->incident->getData()['valCarDirection'] ?></div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-lg-4">
-                                <div class="form-group">
-                                    <label for="name"><?= $this->translate('Valore Intensità') ?></label>
-                                    <div class="sng-info-box"><?= is_null($this->incident->getData()['valIntensity']) ? '-' : $this->incident->getData()['valIntensity'] ?></div>
-                                </div>
-                            </div>
-                            <div class="col-lg-4">
-                                <div class="form-group">
-                                    <label for="name"><?= $this->translate('Codice Cliente') ?></label>
-                                    <div class="sng-info-box"><?= is_null($this->incident->getData()['codCustomer']) ? '-' : $this->incident->getData()['codCustomer'] ?></div>
-                                </div>
-                            </div>
-                            <div class="col-lg-4">
-                                <div class="form-group">
-                                    <label for="name"><?= $this->translate('Codice Topic') ?></label>
-                                    <div class="sng-info-box"><?= is_null($this->incident->getData()['codTopic']) ? '-' : $this->incident->getData()['codTopic'] ?></div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-lg-4">
-                                <div class="form-group">
-                                    <label for="name"><?= $this->translate('Fleet') ?></label>
-                                    <div class="sng-info-box"><?= is_null($this->incident->getData()['codFleet']) ? '-' : $this->incident->getData()['codFleet'] ?></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+        <?php
+        if(isset($this->incident)){
+        ?>
+            <!-- BEGIN PAGE HEADER-->
+            <div class="row">
+                <div class="col-lg-6">
+                    <h3 class="page-title"><?= $this->translate('DETTAGLI URTO - VIAGGIO') ?> : <?= $this->incident->getTripId() ?></h3>
                 </div>
-                <!-- END Notification Data -->
+                <div class="col-lg-6">
+                    <a href="<?= $this->url('notifications'); ?>" class="btn btn-success pull-right">
+                        <i class="fa fa-arrow-left"></i> <?= $this->translate("Torna alla lista"); ?>
+                    </a>
+                </div>
             </div>
-        </div>
-        <!-- END PAGE CONTENT-->
+            <div class="page-bar">
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <!-- BEGIN Notification Data -->
+                    <div class="portlet box green">
+                        <div class="portlet-title">
+                            <div class="caption">
+                                <i class="fa fa-bell-o"></i><?= $this->translate('Dati Urto') ?>
+                            </div>
+                        </div>
+                        <div class="portlet-body">
+                            <div class="row">
+                                <div class="col-lg-4">
+                                    <div class="form-group">
+                                        <label for="name"><?= $this->translate('Trip ID') ?></label>
+                                        <div class="sng-info-box"><?= $this->incident->getTripId() ?></div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-4">
+                                    <div class="form-group">
+                                        <label for="name"><?= $this->translate('Codice Errore') ?></label>
+                                        <div class="sng-info-box"><?= is_null($this->incident->getErrorCode()) ? '-' : $this->incident->getErrorCode() ?></div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-4">
+                                    <div class="form-group">
+                                        <label for="name"><?= $this->translate('Data Server') ?></label>
+                                        <div class="sng-info-box"><?= is_null($this->incident->getServerTime()) ? '-' : $this->incident->getServerTime()->format('Y-m-d H:i:s') ?></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-4">
+                                    <div class="form-group">
+                                        <label for="name"><?= $this->translate('Stato') ?></label>
+                                        <div class="sng-info-box"><?= is_null($this->incident->getState()) ? '-' : $this->incident->getState() ?></div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-4">
+                                    <div class="form-group">
+                                        <label for="gender"><?= $this->translate('Mongo ID') ?></label>
+                                        <div class="sng-info-box"><?= $this->incident->getId() ?></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="portlet-body">
+                            <div class="row">
+                                <div class="col-lg-4">
+                                    <div class="form-group">
+                                        <label for="name"><?= $this->translate('Targa') ?></label>
+                                        <div class="sng-info-box"><?= is_null($this->incident->getData()['codPlate']) ? '-' : $this->incident->getData()['codPlate'] ?></div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-4">
+                                    <div class="form-group">
+                                        <label for="name"><?= $this->translate('Data locale inzio') ?></label>
+                                        <div class="sng-info-box"><?= is_null($this->incident->getData()['localDtStart']) ? '-' : $this->incident->getData()['localDtStart'] ?></div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-4">
+                                    <div class="form-group">
+                                        <label for="name"><?= $this->translate('Data locale fine') ?></label>
+                                        <div class="sng-info-box"><?= is_null($this->incident->getData()['localDtEnd']) ? '-' : $this->incident->getData()['localDtEnd'] ?></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-4">
+                                    <div class="form-group">
+                                        <label for="name"><?= $this->translate('Pro Crash') ?></label>
+                                        <div class="sng-info-box"><?= is_null($this->incident->getData()['proCrash']) ? '-' : $this->incident->getData()['proCrash'] ?></div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-4">
+                                    <div class="form-group">
+                                        <label for="name"><?= $this->translate('Pro BlackBox') ?></label>
+                                        <div class="sng-info-box"><?= is_null($this->incident->getData()['proBlackBox']) ? '-' : $this->incident->getData()['proBlackBox'] ?></div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-4">
+                                    <div class="form-group">
+                                        <label for="name"><?= $this->translate('Valore Batteria') ?></label>
+                                        <div class="sng-info-box"><?= is_null($this->incident->getData()['valBattery']) ? '-' : $this->incident->getData()['valBattery'] ?></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-4">
+                                    <div class="form-group">
+                                        <label for="name"><?= $this->translate('Latitudine') ?></label>
+                                        <div class="sng-info-box"><?= is_null($this->incident->getData()['geoLatitude']) ? '-' : $this->incident->getData()['geoLatitude'] ?></div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-4">
+                                    <div class="form-group">
+                                        <label for="name"><?= $this->translate('Longitudine') ?></label>
+                                        <div class="sng-info-box"><?= is_null($this->incident->getData()['geoLongitude']) ? '-' : $this->incident->getData()['geoLongitude'] ?></div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-4">
+                                    <div class="form-group">
+                                        <label for="name"><?= $this->translate('Valore Car Direction') ?></label>
+                                        <div class="sng-info-box"><?= is_null($this->incident->getData()['valCarDirection']) ? '-' : $this->incident->getData()['valCarDirection'] ?></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-4">
+                                    <div class="form-group">
+                                        <label for="name"><?= $this->translate('Valore Intensità') ?></label>
+                                        <div class="sng-info-box"><?= is_null($this->incident->getData()['valIntensity']) ? '-' : $this->incident->getData()['valIntensity'] ?></div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-4">
+                                    <div class="form-group">
+                                        <label for="name"><?= $this->translate('Codice Cliente') ?></label>
+                                        <div class="sng-info-box"><?= is_null($this->incident->getData()['codCustomer']) ? '-' : $this->incident->getData()['codCustomer'] ?></div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-4">
+                                    <div class="form-group">
+                                        <label for="name"><?= $this->translate('Codice Topic') ?></label>
+                                        <div class="sng-info-box"><?= is_null($this->incident->getData()['codTopic']) ? '-' : $this->incident->getData()['codTopic'] ?></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-4">
+                                    <div class="form-group">
+                                        <label for="name"><?= $this->translate('Fleet') ?></label>
+                                        <div class="sng-info-box"><?= is_null($this->incident->getData()['codFleet']) ? '-' : $this->incident->getData()['codFleet'] ?></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- END Notification Data -->
+                </div>
+            </div>
+            <!-- END PAGE CONTENT-->
+        <?php
+        }else{
+        ?>
+            <div class="row">
+                <div class="col-lg-6">
+                    <h3 class="page-title"><?= $this->translate('DETTAGLI URTO ') ?> : <?= $this->error ?></h3>
+                </div>
+                <div class="col-lg-6">
+                    <a href="<?= $this->url('notifications'); ?>" class="btn btn-success pull-right">
+                        <i class="fa fa-arrow-left"></i> <?= $this->translate("Torna alla lista"); ?>
+                    </a>
+                </div>
+            </div>
+        <?php
+        }
+        ?>
     </div>
 </div>

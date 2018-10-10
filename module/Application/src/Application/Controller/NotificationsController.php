@@ -273,9 +273,14 @@ class NotificationsController extends AbstractActionController
         $trip_id = (int) $this->params()->fromRoute('id', 0);
 
         $incident = $this->incidentsService->getIncidentByTrip($trip_id);
-        $a = '';
-        return new ViewModel([
-            'incident' => $incident[0],
-        ]);
+        if(count($incident) != 0){
+            return new ViewModel([
+                'incident' => $incident[0],
+            ]);
+        }else{
+            return new ViewModel([
+                'error' => "Non ci sono dettagli per questo urto",
+            ]);
+        }
     }
 }
