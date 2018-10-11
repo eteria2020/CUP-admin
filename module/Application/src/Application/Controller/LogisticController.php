@@ -150,7 +150,7 @@ class LogisticController extends AbstractActionController {
                     case "D":
                         $car = $this->carsService->setDirtyCar($car);
                         break;
-                    case "Cl":
+                    case "C":
                         $car = $this->carsService->setCleanCar($car);
                         //settare anche ora e giorno nel caso
                         break;
