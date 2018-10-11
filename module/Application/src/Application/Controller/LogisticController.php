@@ -142,7 +142,6 @@ class LogisticController extends AbstractActionController {
     
     public function cleanDirtyCarAction() {
         header('Access-Control-Allow-Origin: *');
-        
         $params = json_decode(base64_decode($this->params()->fromQuery('param')), true);   
         if (isset($params['plate']) && isset($params['status'])) {
             $car = $this->carsService->getCarByPlate($params['plate']);
