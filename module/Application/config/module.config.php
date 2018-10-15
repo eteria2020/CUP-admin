@@ -1705,6 +1705,15 @@ return [
                             ],
                         ],
                     ],
+                    'clean-dirty-car' => [
+                        'type' => 'Segment',
+                        'options' => [
+                            'route' => '/clean-dirty-car',
+                            'defaults' => [
+                                'action' => 'clean-dirty-car',
+                            ],
+                        ],
+                    ],
                     'motivation' => [
                         'type' => 'Segment',
                         'options' => [
