@@ -46,8 +46,8 @@
 
                     $(document).ready(function(){
                         $.each(data, function (i, item) {
-                            console.log("I: "+ i);
-                            console.log(item);
+                            // console.log("I: "+ i);
+                            // console.log(item);
                             $('#zone-sel').append($('<option>', {
                                 value: i,
                                 text : i + " - " + item.description
@@ -92,7 +92,7 @@
                         $('#map').height($('.page-content').outerHeight()-$('#map').offset().top);
                     };
                 </script>
-                <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCHVZSbufdhNoMVU8uJHi1aTmvPoYN4ErY&signed_in=true&callback=initMap"></script>
+                <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAjv0Ry_0P18id6pWKwNn0IptB8NvZGfxY&callback=initMap"></script>
             </div>
         </div>
     </div>
