@@ -265,8 +265,9 @@ $(function() {
             }
         ],
         "lengthMenu": [
-            [dataTableVars.iDisplayLength, dataTableVars.iDisplayLength * 5, dataTableVars.iDisplayLength * 10],
-            [dataTableVars.iDisplayLength, dataTableVars.iDisplayLength * 5, dataTableVars.iDisplayLength * 10]
+            10,
+            20,
+            50
         ],
         "pageLength": dataTableVars.iDisplayLength,
         "pagingType": "bootstrap_full_number",
