@@ -98,14 +98,15 @@
                     type: "POST",
                     url: "/google-maps-call",
                     success: function (data) {
-                        $mapPopup.html(
-                        '<img id="map-popup-img" src="' +
-                        data['src'] +
-                        '" class="map-popup-img">');
+                        src = data['src'];
+                        var tag = document.createElement('script');
+                        tag.src = src;
+                        tag.defer = true;
+                        var firstScriptTag = document.getElementsByTagName('script')[0];
+                        firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
                     },
                     error: function(){
-                        $mapPopup.html(
-                        '<img id="map-popup-img" src="" class="map-popup-img">');
+                        alert("Errore caricamento mappa");
                     }
                 });
                 </script>

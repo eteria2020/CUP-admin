@@ -100,14 +100,18 @@
                     url: "/google-maps-call",
                     success: function (data) {
                         src = data['src'];
-                        console.log(src);
+                        var tag = document.createElement('script');
+                        tag.src = src;
+                        tag.defer = true;
+                        var firstScriptTag = document.getElementsByTagName('script')[0];
+                        firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
                     },
                     error: function(){
-                        src = "";
+                        alert("Errore caricamento mappa");
                     }
                 });
                 </script>
-                <script async defer src=></script>
+                
             </div>
         </div>
     </div>
