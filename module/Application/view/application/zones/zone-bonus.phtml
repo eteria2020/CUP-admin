@@ -31,6 +31,7 @@
                     .row-filters {margin-bottom:30px;}
                 </style>
                 <script>
+                    var src = '';
                     var geoPoly,
                         data = {<?php
                         /** @var \SharengoCore\Entity\ZoneBonus $zone */
@@ -92,7 +93,21 @@
                         $('#map').height($('.page-content').outerHeight()-$('#map').offset().top);
                     };
                 </script>
-                <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCHVZSbufdhNoMVU8uJHi1aTmvPoYN4ErY&signed_in=true&callback=initMap"></script>
+                <!--<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAjv0Ry_0P18id6pWKwNn0IptB8NvZGfxY&callback=initMap"></script>-->
+                <script>
+                $.ajax({
+                    type: "POST",
+                    url: "/google-maps-call",
+                    success: function (data) {
+                        src = data['src'];
+                        console.log(src);
+                    },
+                    error: function(){
+                        src = "";
+                    }
+                });
+                </script>
+                <script async defer src=></script>
             </div>
         </div>
     </div>

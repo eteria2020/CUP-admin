@@ -41,19 +41,26 @@ class ZonesController extends AbstractActionController
      * @var Container
      */
     private $datatableFiltersSessionContainer;
+    
+    /**
+     * @var array
+     */
+    private $googleMapsConfig;
 
     public function __construct(
         ZonesService $zonesService,
         PostGisService $postGisService,
         ZoneForm $zoneForm,
         HydratorInterface $hydrator,
-        Container $datatableFiltersSessionContainer
+        Container $datatableFiltersSessionContainer,
+        array $googleMapsConfig
     ) {
         $this->zonesService = $zonesService;
         $this->postGisService = $postGisService;
         $this->zoneForm = $zoneForm;
         $this->hydrator = $hydrator;
         $this->datatableFiltersSessionContainer = $datatableFiltersSessionContainer;
+        $this->googleMapsConfig = $googleMapsConfig;
     }
 
     /**
@@ -219,5 +226,16 @@ class ZonesController extends AbstractActionController
             'zoneForm' => $form,
         ]);
         return $view;
+    }
+    
+    public function googleMapsCallAction(){
+        $a='';
+        
+        $src = 'https://maps.googleapis.com/maps/api/js?key=' . $this->googleMapsConfig['key'] . '&callback=initMap';
+        
+        return new JsonModel([
+            'src' => $src
+        ]);
+        
     }
 }

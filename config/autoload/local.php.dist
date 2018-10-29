@@ -32,5 +32,8 @@ return [
     'driversLicense' => [
         'path' => '/srv/apps/sharengo/data/drivers-license-uploads',
         'notifyTo' => 'email@domain'
+    ],
+    'googleMaps' => [
+        'key' => 'AIzaSyAjv0Ry_0P18id6pWKwNn0IptB8NvZGfxY'
     ]
 ];

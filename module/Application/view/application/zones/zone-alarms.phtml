@@ -92,7 +92,23 @@
                         $('#map').height($('.page-content').outerHeight()-$('#map').offset().top);
                     };
                 </script>
-                <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAjv0Ry_0P18id6pWKwNn0IptB8NvZGfxY&callback=initMap"></script>
+                <!--<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAjv0Ry_0P18id6pWKwNn0IptB8NvZGfxY&callback=initMap"></script>-->
+                <script>
+                $.ajax({
+                    type: "POST",
+                    url: "/google-maps-call",
+                    success: function (data) {
+                        $mapPopup.html(
+                        '<img id="map-popup-img" src="' +
+                        data['src'] +
+                        '" class="map-popup-img">');
+                    },
+                    error: function(){
+                        $mapPopup.html(
+                        '<img id="map-popup-img" src="" class="map-popup-img">');
+                    }
+                });
+                </script>
             </div>
         </div>
     </div>
