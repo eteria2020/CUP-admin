@@ -1340,6 +1340,17 @@ return [
                     ],
                 ]
             ],
+            'google-maps-call' => [
+                'type' => 'Segment',
+                'options' => [
+                    'route' => '/google-maps-call',
+                    'defaults' => [
+                        '__NAMESPACE__' => 'Application\Controller',
+                        'controller' => 'Zones',
+                        'action' => 'google-maps-call'
+                    ]
+                ]
+            ],
             'configurations' => [
                 'type' => 'Literal',
                 'options' => [

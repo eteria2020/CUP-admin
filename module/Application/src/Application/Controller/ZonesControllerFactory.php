@@ -18,6 +18,7 @@ class ZonesControllerFactory implements FactoryInterface
         $zonesService = $sharedServiceLocator->get('SharengoCore\Service\ZonesService');
         $postGisService = $sharedServiceLocator->get('SharengoCore\Service\PostGisService');
         $datatablesSessionNamespace = $sharedServiceLocator->get('Configuration')['session']['datatablesNamespace'];
+        $googleMapsConfig = $serviceLocator->getServiceLocator()->get('Config');
 
         $zoneForm = $sharedServiceLocator->get('ZoneForm');
         $hydrator = new DoctrineHydrator($entityManager);
@@ -30,7 +31,8 @@ class ZonesControllerFactory implements FactoryInterface
             $postGisService,
             $zoneForm,
             $hydrator,
-            $datatableFiltersSessionContainer
+            $datatableFiltersSessionContainer,
+            $googleMapsConfig['googleMaps']
         );
     }
 }
