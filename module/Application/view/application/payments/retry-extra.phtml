@@ -23,6 +23,11 @@ $customer = $this->customer;
 
             <div class="col-lg-6">
                 <a href="<?= $this->url('payments/failed-extra'); ?>" class="btn btn-success pull-right"><i class="fa fa-arrow-left"></i> <?= $this->translate("Torna alla lista"); ?></a>
+                <br>
+                <br>
+                <?php  if(!is_null($this->extraPayment_father)) { ?>
+                    <a href="<?= $this->url('payments/retry-extra', ['id' => $this->extraPayment_father ]); ?>" class="btn btn-success pull-right"><i class="fa fa-arrow-left"></i> <?= $this->translate("Torna al padre"); ?></a>
+                <?php } ?>
             </div>
         </div>
         <div class="row">
@@ -140,11 +145,15 @@ $customer = $this->customer;
                             <div class="col-lg-3">
                                 <div class="form-group">
                                     <label><?= $this->translate("Costo"); ?></label>
-                                    <?php if($extraPayment->getPayable()){?>
+                                    <?php if ($extraPayment->getPayable()) { ?>
                                         <div class="sng-info-box"><?= $extraPayment->getFormattedTotalCost() ?></div>
-                                    <?php } else {?>
-                                        <div class="sng-info-box">FREE</div>
-                                    <?php }?>
+                                    <?php } else {
+                                        if (count($this->extraPaymentRates) != 0) { ?>
+                                            <div class="sng-info-box">RATE</div>
+                                        <?php } else { ?>
+                                            <div class="sng-info-box">FREE</div>
+                                        <?php }
+                                    } ?>
                                 </div>
                             </div>
                             <div class="col-lg-3">
@@ -175,6 +184,14 @@ $customer = $this->customer;
                                     <div class="sng-info-box"><?= $extraPayment->getStatus() ?></div>
                                 </div>
                             </div>
+                            <?php if(count($this->extraPaymentRates) != 0) { ?>
+                            <div class="col-lg-3">
+                                <div class="form-group">
+                                    <label><?= $this->translate("Saldo"); ?></label>
+                                    <div class="sng-info-box"><?= $this->balance ?> €</div>
+                                </div>
+                            </div>
+                            <?php } ?>
                         </div>
                     </div>
                 </div>
@@ -188,6 +205,9 @@ $customer = $this->customer;
 
                 <?= $this->partial('partials/flash-messages.phtml', []); ?>
 
+                <?php
+                if(count($this->extraPaymentRates) == 0){
+                ?>
                 <div class="portlet box green">
                     <div class="portlet-title">
                         <div class="caption">
@@ -229,6 +249,51 @@ $customer = $this->customer;
                         <?php } ?> 
                     </div>
                 </div>
+                <?php }else{ ?> 
+                <div class="portlet box green">
+                    <div class="portlet-title">
+                        <div class="caption">
+                            <i class="fa fa-cogs"></i><?= $this->translate("Elenco rate"); ?>
+                        </div>
+                    </div>
+                    <div class="portlet-body">
+                        <table class="table table-striped table-bordered table-hover" id="js-extra-rate-table">
+                            <thead>
+                                <tr>
+                                    <th><?= $this->translate("ID"); ?></th>
+                                    <th><?= $this->translate("Cliente"); ?></th>
+                                    <th><?= $this->translate("Importo"); ?></th>
+                                    <th><?= $this->translate("Data inserimento"); ?></th>
+                                    <th><?= $this->translate("Data addebito"); ?></th>
+                                    <th><?= $this->translate("Pagamento padre"); ?></th>
+                                    <th><?= $this->translate("Pagamento Rata"); ?></th>
+                                    <th><?= $this->translate("Pagato"); ?></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php foreach($this->extraPaymentRates as $rate): ?>
+                                    <tr>
+                                        <td><?= $rate->getId() ?></td>
+                                        <td><a href="<?= $this->url('customers/edit', ['id' => $rate->getCustomer()->getId()]); ?>"><?= $rate->getCustomer()->getId() ?></a></td>
+                                        <td><?= $rate->getAmount()/100 ?> €</td>
+                                        <td><?= $rate->getInsertTs()->format('Y-m-d H:i:s') ?></td>
+                                        <td><?= $rate->getDebitTs()->format('Y-m-d H:i:s') ?></td>
+                                        <td><a href="<?= $this->url('payments/retry-extra', ['id' => $rate->getExtraPaymentFather()->getId() ]); ?>"><?= $rate->getExtraPaymentFather()->getId() ?></a></td>
+                                        <td>
+                                            <?php if(null != $rate->getExtraPayment()){ ?>
+                                                <a href="<?= $this->url('payments/retry-extra', ['id' => $rate->getExtraPayment()->getId()]); ?>"><?= $rate->getExtraPayment()->getId() ?></a>
+                                            <?php }else{?>
+                                                -
+                                            <?php } ?>
+                                        </td>
+                                        <td><?= (null != $rate->getExtraPayment()) ? (($rate->getExtraPayment()->getStatus() == 'wrong_payment' || $extraPayment->getStatus() == 'to_be_payed') ? 'NO' : 'SI') : '-' ?></td>
+                                    </tr>
+                                <?php endforeach; ?>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <?php } ?>
             </div>
         </div>
         <!-- retries list table -->

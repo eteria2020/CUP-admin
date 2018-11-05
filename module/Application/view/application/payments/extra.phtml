@@ -52,6 +52,24 @@ $this->headScript()->appendFile($this->basePath() .'/js/extra-payments.js?v=1.6'
         </div>
         -->
 
+        <div class="row sng-margin-top"  id="div-rates" style="display: none">
+            <div class="col-lg-3 sng-margin-top">
+                <label>Pagamento rateizzato <input id="js-rates" type="checkbox"></label>
+            </div>
+            <div class="col-lg-2 sng-margin-top"  style="display: none"  id="div-n-rates">
+                <label>Numero di rate:<input type="text" id="n-rates"></label>
+                <!--<label>Numero di rate:
+                    <select id="n-rates">
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                    </select>
+                </label>-->
+            </div>
+        </div>
+        <div id="summaryTableRates">
+        </div>
+        
         <!-- SUBMIT BUTTON -->
         <div class="row sng-margin-top">
             <div class="col-lg-12 sng-margin-top">

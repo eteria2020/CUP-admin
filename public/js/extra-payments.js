@@ -33,6 +33,10 @@ $(function() {
             toggleAddPaymentButton(true);
             togglePaymentEnabled(true);
         }
+        $('#div-rates').hide();
+        $("#js-rates").prop('checked', false);
+        $('#div-n-rates').hide();
+        $('#summaryTableRates').html("");
     });
 
     // Respond to add payment row button
@@ -44,8 +48,26 @@ $(function() {
 
     // Respond to pay button
     $('#js-extra-payment').click(function (e) {
-        if (paymentBtnEnabled == true) {
-            startPaymentProcess();
+        /*if ($('#amount0').val() < 100) {
+            alert("Errore: non puoi rateizzare un pagamento sotto 100 €");
+        } else {
+            if($('#n-rates').val() == ''){
+                alert("Errore: Hai selezionato il pagamento rateizzato, devi inserire il numero di rate");
+            }else{
+                if (paymentBtnEnabled == true) {
+                    startPaymentProcess();
+                }
+            }
+        }*/
+        //blocco commentanto per i test in produzione
+        //Da rimuovere le 3 righe sottostanti e decommnetare il blocco sopra
+        //controllo che l'importo totale debba essere sopra i 100€
+        if($('#n-rates').val() == ''){
+            alert("Errore: Hai selezionato il pagamento rateizzato, devi inserire il numero di rate");
+        }else{
+            if (paymentBtnEnabled == true) {
+                startPaymentProcess();
+            }
         }
     });
 });
@@ -61,6 +83,8 @@ function startPaymentProcess()
     var penalty = [];
     var reasons = [];
     var amounts = [];
+    var rate = ($("#js-rates").is(':checked') ? true : false);
+    var n_rates = (rate ? $('#n-rates').val() : "1");
 
     var paymentBlocks = document.getElementsByClassName(paymentContainerClass);
     for (var i = 0; i < paymentBlocks.length; i++) {
@@ -85,7 +109,7 @@ function startPaymentProcess()
     );
 
     if (canProceed) {
-        proceedWithPayment(customerId, fleetId, type, penalty, reasons, amounts);
+        proceedWithPayment(customerId, fleetId, type, penalty, reasons, amounts, rate, n_rates);
     }
 }
 
@@ -162,7 +186,7 @@ function checkAndFormatFields(customerId, fleetId, type, penalty, reasons, amoun
  * @param string[] reasons
  * @param integer[] amounts
  */
-function proceedWithPayment(customerId, fleetId, type, penalty, reasons, amounts)
+function proceedWithPayment(customerId, fleetId, type, penalty, reasons, amounts, rate, n_rates)
 {
     $.get('/customers/info/' + customerId)
         .done(function (data) {
@@ -171,10 +195,19 @@ function proceedWithPayment(customerId, fleetId, type, penalty, reasons, amounts
             for (var i = 0; i < amounts.length; i++) {
                 amount += amounts[i];
             }
-            if (confirm(translate("confirmPayment") + ' ' +
-                data.name + ' ' + data.surname +
-                ' ' + translate("confirmPaymentContinue") + ' ' + amount / 100 + ' euro')) {
-                sendPaymentRequest(customerId, fleetId, type, penalty, reasons, amounts);
+            if($("#js-rates").is(':checked')){
+                if (confirm(translate("confirmPayment") + ' ' +
+                    data.name + ' ' + data.surname +
+                    ' ' + translate("confirmPaymentContinue") + ' ' + amount / 100 + ' euro ' +
+                    translate("confirmPaymentRates") + ' ' + $("#n-rates").val()/*$("#n-rates option:selected").val()*/)) {
+                    sendPaymentRequest(customerId, fleetId, type, penalty, reasons, amounts, rate, n_rates);
+                }
+            }else{
+                if (confirm(translate("confirmPayment") + ' ' +
+                    data.name + ' ' + data.surname +
+                    ' ' + translate("confirmPaymentContinue") + ' ' + amount / 100 + ' euro')) {
+                    sendPaymentRequest(customerId, fleetId, type, penalty, reasons, amounts, rate, n_rates);
+                }
             }
         })
         .fail(function (data) {
@@ -194,14 +227,16 @@ function proceedWithPayment(customerId, fleetId, type, penalty, reasons, amounts
  * @param string[] reasons
  * @param integer[] amounts
  */
-function sendPaymentRequest(customerId, fleetId, type, penalty, reasons, amounts) {
+function sendPaymentRequest(customerId, fleetId, type, penalty, reasons, amounts, rate, n_rates) {
     $.post('/payments/pay-extra', {
         customerId: customerId,
         fleetId: fleetId,
         type: type,
         penalty: penalty,
         reasons: reasons,
-        amounts: amounts
+        amounts: amounts,
+        rate: rate,
+        n_rates: n_rates
     }).done(function (data) {
         alert(data.message);
         clearFields();
@@ -429,7 +464,8 @@ $(document).on( "change", "#reason0", function() {
 });
 
 $(document).on( "change", "#penalty0", function() {
-    setFleetModena();    
+    setFleetModena(); 
+    showDivRates();
 });
 
 function setFleetModena(){
@@ -440,4 +476,98 @@ function setFleetModena(){
     }else{
         $("#fleet").attr("disabled", false);
     }
+}
+
+$(document).on("change paste keyup", "#amount0", function() {
+    showDivRates();
+});
+
+$(document).on("change", "#js-rates", function() {
+    if($("#js-rates").is(':checked')){
+        $('#div-n-rates').show();
+        if($("#n-rates").val() > 0){
+            summaryTableRates();
+        }
+    }else{
+        $('#div-n-rates').hide();
+        $('#summaryTableRates').html("");
+    }
+});
+
+$(document).on("change paste keyup", "#n-rates", function() {
+    if ($("#n-rates").val() == "") {
+        $('#summaryTableRates').html("");
+    }else{
+        if ($("#n-rates").val() < 100) {
+            summaryTableRates();
+            $("#n-rates").css("border-color", "");
+        }else {
+            $("#n-rates").css("border-color", "#FF0000");
+        }
+    }
+
+});
+
+function showDivRates(){//524
+    if($("#amount0").val() >= 0){
+        $('#div-rates').show();
+        if($("#js-rates").is(':checked')){
+            if($("#n-rates").val() > 0){
+                summaryTableRates();
+            }
+        }
+    }else{
+        $('#div-rates').hide();
+        $("#js-rates").prop('checked', false);
+        $('#div-n-rates').hide();
+        $('#summaryTableRates').html("");
+    }
+}
+
+function summaryTableRates(){
+    var n = $("#n-rates").val();
+    var amount = $("#amount0").val() * 100;
+    var table = "";
+    var i = 0;
+    var singleRate = 0;
+    table += "<b>Riepilogo rate:</b><table class='table table-striped table-bordered table-hover'>" +
+                "<tr>" +
+                    "<th>N°</th>" +
+                    "<th>Importo</th>" +
+                    "<th>Data Addebito</th>" +
+                "</tr>" +
+            "";
+    if(n > 1){
+        singleRate = Math.round((amount/n))/100;
+        for(i=0;i<n-1;i++){
+            var row = '';
+            row += '<tr>';
+            //numero
+            row += '<td>' + (i+1) + "</td>";
+            //importo
+            row += '<td>' + singleRate + " €" + "</td>";
+            //data addebito
+            var dt = new Date();
+            dt.setMonth(dt.getMonth()+i);
+            row += '<td>' + dt.getDate() + "/" + (dt.getMonth()+1) + "/" + + dt.getFullYear() + "</td>";
+            row += '</tr>';
+            table += row;
+        }
+    }
+    row = '';
+    row += '<tr>';
+    //numero
+    row += '<td>' + (i + 1) + "</td>";
+    //importo
+    //var lastRate =  Math.round((amount/100)-(singleRate*(n-1)));
+    var lastRate =  Math.round((amount)-(singleRate*(n-1)*100))/100;
+    row += '<td>' + lastRate + " €" + "</td>";
+    //data addebito
+    var dt = new Date();
+    dt.setMonth(dt.getMonth()+(n-1));
+    row += '<td>' + dt.getDate() + "/" + (dt.getMonth()+1) + "/" + + dt.getFullYear() + "</td>";
+    row += '</tr>';
+    table += row;
+    table += "</table>"
+    $('#summaryTableRates').html(table);
 }
