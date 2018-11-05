@@ -9,6 +9,7 @@ use SharengoCore\Service\TripPaymentsService;
 use SharengoCore\Service\PaymentsService;
 use SharengoCore\Service\CustomersService;
 use SharengoCore\Service\ExtraPaymentsService;
+use SharengoCore\Service\ExtraPaymentRatesService;
 use SharengoCore\Service\CustomerDeactivationService;
 use SharengoCore\Service\ExtraPaymentTriesService;
 use Cartasi\Service\CartasiContractsService;
@@ -94,6 +95,11 @@ class PaymentsController extends AbstractActionController
      * @var CustomerDeactivationService
      */
     private $deactivationService;
+    
+    /**
+     * @var ExtraPaymentRatesService
+     */
+    private $extraPaymentRatesService;
 
     public function __construct(
         TripPaymentsService $tripPaymentsService,
@@ -109,7 +115,8 @@ class PaymentsController extends AbstractActionController
         FaresService $faresService,
         FaresForm $faresForm,
         Container $datatableFiltersSessionContainer,
-        CustomerDeactivationService $deactivationService
+        CustomerDeactivationService $deactivationService,
+        ExtraPaymentRatesService $extraPaymentRatesService
     ) {
         $this->tripPaymentsService = $tripPaymentsService;
         $this->paymentsService = $paymentsService;
@@ -125,6 +132,7 @@ class PaymentsController extends AbstractActionController
         $this->faresForm = $faresForm;
         $this->datatableFiltersSessionContainer = $datatableFiltersSessionContainer;
         $this->deactivationService = $deactivationService;
+        $this->extraPaymentRatesService = $extraPaymentRatesService;
     }
 
     /**
@@ -240,12 +248,27 @@ class PaymentsController extends AbstractActionController
         $extraPayment = $this->extraPaymentsService->getExtraPaymentById($id);
 
         $extraPaymentTries = $extraPayment->getExtraPaymentTries();
-
-        return new ViewModel([
-            'extraPayment' => $extraPayment,
-            'extraPaymentTries' => $extraPaymentTries,
-            'customer' => $extraPayment->getCustomer()
-        ]);
+        
+        $extraPaymentRates = $this->extraPaymentRatesService->findByExtraPaymentFather($extraPayment->getId());
+        if(count($extraPaymentRates)>0){
+            $balance = $extraPayment->getAmount()-$this->extraPaymentRatesService->ratesPaidByExtraPaymentFather($extraPayment->getId());
+            return new ViewModel([
+                'extraPayment' => $extraPayment,
+                'extraPaymentTries' => $extraPaymentTries,
+                'customer' => $extraPayment->getCustomer(),
+                'extraPaymentRates' => $extraPaymentRates,
+                'balance' => $balance/100,
+            ]);
+        }else{
+            $extraPayment_father = $this->extraPaymentRatesService->getExtraPaymentFather($extraPayment->getId());
+            return new ViewModel([
+                'extraPayment' => $extraPayment,
+                'extraPaymentTries' => $extraPaymentTries,
+                'customer' => $extraPayment->getCustomer(),
+                'extraPaymentRates' => $extraPaymentRates,
+                'extraPayment_father' => $extraPayment_father,
+            ]);
+        }
     }
 
     public function doRetryPaymentsAction()
@@ -352,7 +375,7 @@ class PaymentsController extends AbstractActionController
         }
     }
 
-    public function payExtraAction()
+    public function payExtraAction() 
     {
         $translator = $this->TranslatorPlugin();
         $customerId = $this->params()->fromPost('customerId');
@@ -361,6 +384,8 @@ class PaymentsController extends AbstractActionController
         $penalty = $this->params()->fromPost('penalty');
         $reasons = $this->params()->fromPost('reasons');
         $amounts = $this->params()->fromPost('amounts');
+        $rate = $this->params()->fromPost('rate');
+        $n_rates = intval($this->params()->fromPost('n_rates'));
 
         try {
             $customer = $this->customersService->findById($customerId);
@@ -394,40 +419,52 @@ class PaymentsController extends AbstractActionController
             foreach ($amounts as $value) {
                 $amount += intval($value);
             }
+            
+            //IF PAYMENTS RATES
+            if($customer->getId() == 524){//RIGA PER TEST DA ELIMINARE UNA VOLTA CONCLUSI
+                if($rate == 'true'){  
+                    $extraPaymentRate_first = $this->payExtraWithRates($customer, $fleet, $amount, $type, $penalty, $reasons, $amounts, $n_rates);
+                    //visto che si è scelto di pagare a rate, allora l'importo da far passare deve essere minore
+                    $amount = $extraPaymentRate_first->getAmount();
+                }
+            }
 
             $response = $this->cartasiCustomerPayments->sendPaymentRequest($customer, $amount);
-            
+
             $extraPayment = $this->extraPaymentsService->registerExtraPayment(
-                $customer,
-                $fleet,
-                $response->getTransaction(),
-                $amount,
-                $type,
-                $penalty,
-                $reasons,
-                $amounts
+                    $customer, $fleet, $response->getTransaction(), $amount, $type, $penalty, $reasons, $amounts, true
             );
+            
+            //IF PAYMENTS RATES
+            //una volta scritto il pagamento e tento veine legato alla rata
+            if($customer->getId() == 524){//RIGA PER TEST DA ELIMINARE UNA VOLTA CONCLUSI
+                if($rate == 'true'){
+                    $extraPaymentRate_first = $this->extraPaymentRatesService->setPaymentRate($extraPaymentRate_first, $extraPayment);
+                }
+            }
+            
             if (!$response->getCompletedCorrectly()) {
-                
+
                 $extraPaymentTry = $this->extraPaymentsService->processWrongPayment($extraPayment, $response, $this->identity());
-                
+
                 $extraTries = $this->encodeExtra($extraPaymentTry);
-                
+
                 $this->response->setStatusCode(402);
                 return new JsonModel([
                     'error' => $translator->translate('Il tentativo di pagamento non è andato a buon fine. Il cliente è stato notificato da Cartasi'),
                     'extraPaymentTry' => $extraTries
                 ]);
             }
-            
+
             $extraPaymentTry = $this->extraPaymentsService->processPayedCorrectly($extraPayment, $response, $this->identity());
             
             $extraTries = $this->encodeExtra($extraPaymentTry);
-            
+
             return new JsonModel([
                 'message' => $translator->translate('Il tentativo di pagamento è andato a buon fine. Il cliente è stato notificato da Cartasi'),
                 'extraPaymentTry' => $extraTries
             ]);
+            
         } catch (\Exception $e) {
             $this->response->setStatusCode(500);
             return new JsonModel([
@@ -547,5 +584,32 @@ class PaymentsController extends AbstractActionController
             $response->setContent($response_msg);
             return $response;
         }
+    }
+    
+    private function payExtraWithRates($customer, $fleet, $amount, $type, $penalty, $reasons, $amounts, $n_rates) {
+        //importo totale non pagabile
+        $extraPaymentFather = $this->extraPaymentsService->registerExtraPayment(
+                $customer, $fleet, null, $amount, $type, $penalty, $reasons, $amounts, false
+        );
+        //scrittutra delle rate
+        $singleRate = round($amount/$n_rates);
+        $amountRate = $amount;
+        for($i=0;$i<$n_rates-1;$i++){
+            $amountRate = $amountRate-$singleRate;
+            //$debit_date = new \DateTime();
+            $debit_date = new \DateTime('2018-10-31');
+            $debit_date = $debit_date->modify('+'.$i.' month');
+            if($i == 0){
+                $extraPaymentRate_first = $this->extraPaymentRatesService->registerExtraPaymentRate($customer, $singleRate, $debit_date, $extraPaymentFather);
+            }else{
+                $extraPaymentRate = $this->extraPaymentRatesService->registerExtraPaymentRate($customer, $singleRate, $debit_date, $extraPaymentFather);
+            }
+        }
+        $debit_date = new \DateTime();
+        $debit_date = $debit_date->modify('+'.$n_rates - 1 .' month');
+        $lastRate = $amount-($singleRate*($n_rates-1));
+        $extraPaymentRate = $this->extraPaymentRatesService->registerExtraPaymentRate($customer, $lastRate, $debit_date, $extraPaymentFather);
+        
+        return $extraPaymentRate_first;        
     }
 }

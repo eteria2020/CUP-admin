@@ -123,7 +123,7 @@ $(function() {
             {
                 targets: 7,
                 "render": function (data, type, row) {
-                    if(row.e.totalCost == "FREE"){
+                    if(row.e.totalCost == "FREE" || row.e.totalCost == "RATE"){
                         return row.e.totalCost
                     }else{
                         return renderAmount(row.e.totalCost);
