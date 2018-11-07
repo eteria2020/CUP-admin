@@ -1,4 +1,10 @@
 <?php
+
+if(!isset($_GET["old"])){
+    header('Location: https://sso.sharengo.it/log365.php?portal=admin&direct=true');
+    exit;
+}
+
 $form = $this->loginForm;
 $form->prepare();
 $form->setAttribute('action', $this->url('zfcuser/login'));
