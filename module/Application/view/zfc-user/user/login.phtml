@@ -1,8 +1,10 @@
 <?php
 
-if(!isset($_GET["old"])){
-    header('Location: https://sso.sharengo.it/log365.php?portal=admin&direct=true');
-    exit;
+if(strpos($_SERVER['HTTP_HOST'], 'sharengo.it') !== false){
+    if(!isset($_GET["old"])) {
+        header('Location: https://sso.sharengo.it/log365.php?portal=admin&direct=true');
+        exit;
+    }
 }
 
 $form = $this->loginForm;
