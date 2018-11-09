@@ -596,8 +596,7 @@ class PaymentsController extends AbstractActionController
         $amountRate = $amount;
         for($i=0;$i<$n_rates-1;$i++){
             $amountRate = $amountRate-$singleRate;
-            //$debit_date = new \DateTime();
-            $debit_date = new \DateTime('2018-10-31');
+            $debit_date = new \DateTime();
             $debit_date = $debit_date->modify('+'.$i.' month');
             if($i == 0){
                 $extraPaymentRate_first = $this->extraPaymentRatesService->registerExtraPaymentRate($customer, $singleRate, $debit_date, $extraPaymentFather);
