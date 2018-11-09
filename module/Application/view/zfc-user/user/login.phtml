@@ -1,12 +1,4 @@
 <?php
-
-if(strpos($_SERVER['HTTP_HOST'], 'sharengo.it') !== false){
-    if(!isset($_GET["old"])) {
-        header('Location: https://sso.sharengo.it/log365.php?portal=admin&direct=true');
-        exit;
-    }
-}
-
 $form = $this->loginForm;
 $form->prepare();
 $form->setAttribute('action', $this->url('zfcuser/login'));
@@ -15,9 +7,22 @@ $form->setAttribute('method', 'post');
 
 //fix per risolvere la mancata traduzione dentro ZfcUser
 $as_errorsIdentity = array();
+$login_error = false;
 if ($form->get('identity') instanceof Zend\Form\Element &&
     count($form->get('identity')->getMessages())>0 ) {
     $as_errorsIdentity = array("Nome utente o password errati");
+    $login_error = true;
+}
+//sso hack
+if(strpos($_SERVER['HTTP_HOST'], 'sharengo.it') !== false){
+    if(!isset($_GET["old"])) {
+        if($login_error){
+            header('Location: https://sso.sharengo.it/error.php?portal=admin');
+            exit;
+        }
+        header('Location: https://sso.sharengo.it/log365.php?portal=admin&direct=true');
+        exit;
+    }
 }
 
 $as_errors = array_merge($as_errorsIdentity,
