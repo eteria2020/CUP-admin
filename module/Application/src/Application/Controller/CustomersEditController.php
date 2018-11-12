@@ -174,8 +174,13 @@ class CustomersEditController extends AbstractActionController
              * This is the part used by the customers-edit view
              */
             } else {
-                $this->deactivationService->reactivateCustomer($customer, $webuser);
-                $this->flashMessenger()->addSuccessMessage($translator->translate('Utente riattivato'));
+                $errorMessage = "";
+                if($this->customerDataIsCorrect($customer, $errorMessage)) {
+                    $this->deactivationService->reactivateCustomer($customer, $webuser);
+                    $this->flashMessenger()->addSuccessMessage($translator->translate('Utente riattivato'));
+                } else {
+                    $this->flashMessenger()->addErrorMessage($translator->translate('ATTIVAZIONE FALLITA. Dati incompleti: ').$errorMessage);
+                }
             }
         } catch (Exception $e) {
             $this->flashMessenger()->addErrorMessage($translator->translate('Operazione fallita'));
@@ -195,6 +200,16 @@ class CustomersEditController extends AbstractActionController
         $deactivationId = $this->params()->fromQuery('deactivationId', 0);
 
         try {
+            $allActiveDeactivations = $this->deactivationService->getAllActive($customer);
+
+            if(count($allActiveDeactivations)===1) { // if only one deactivation request to remove, means an activation, then check the customer data
+                $errorMessage ="";
+                if(!$this->customerDataIsCorrect($customer, $errorMessage)) {
+                    $this->flashMessenger()->addErrorMessage($translator->translate('ATTIVAZIONE FALLITA. Dati incompleti: ').$errorMessage);
+                    return $this->reloadTab($customer);
+                }
+            }
+
             $deactivation = $this->deactivationService->getById($deactivationId);
             $this->deactivationService->reactivateByWebuser($deactivation, $webuser);
             $this->flashMessenger()->addSuccessMessage($translator->translate('Disattivazione rimossa'));
@@ -209,6 +224,7 @@ class CustomersEditController extends AbstractActionController
      * Reloads the page keeping the selected tab
      *
      * @param Customers $customer
+     * @return Response
      */
     private function reloadTab(Customers $customer)
     {
@@ -217,5 +233,113 @@ class CustomersEditController extends AbstractActionController
             ['id' => $customer->getId()],
             ['query' => ['tab' => 'edit']]
         );
+    }
+
+    /**
+     * Before enable the customer we check if all data is set.
+     *
+     * @param Customers $customer
+     * @param string $errorMessage
+     * @return bool
+     */
+    private function customerDataIsCorrect(Customers $customer, &$errorMessage) {
+        $translator = $this->TranslatorPlugin();
+        $result = true;
+        $errorMessage = "";
+
+
+        if($this->isNullOrEmptyString($customer->getGender())){
+            $errorMessage .= $translator->translate("genere utente vuoto,");
+        }
+
+        if($this->isNullOrEmptyString($customer->getName())){
+            $errorMessage .= $translator->translate("nome utente vuoto,");
+        }
+
+        if($this->isNullOrEmptyString($customer->getSurname())){
+            $errorMessage .= $translator->translate("cognome utente vuoto,");
+        }
+
+        if($this->isNullOrEmptyString($customer->getMobile())){
+            $errorMessage .= $translator->translate("numero cellulare utente vuoto,");
+        }
+
+        if($this->isNullOrEmptyString($customer->getBirthDate())){
+            $errorMessage .= $translator->translate("data nascita utente vuoto,");
+        }
+
+        if($this->isNullOrEmptyString($customer->getBirthTown())){
+            $errorMessage .= $translator->translate("città nascita utente vuoto,");
+        }
+
+        if($this->isNullOrEmptyString($customer->getBirthProvince())){
+            $errorMessage .= $translator->translate("provincia nascita utente vuoto,");
+        }
+
+        if($this->isNullOrEmptyString($customer->getBirthCountry())){
+            $errorMessage .= $translator->translate("nazione nascita utente vuoto,");
+        }
+
+        if($this->isNullOrEmptyString($customer->getAddress())){
+            $errorMessage .= $translator->translate("indirizzo utente vuoto,");
+        }
+
+        if($this->isNullOrEmptyString($customer->getTown())){
+            $errorMessage .= $translator->translate("città utente vuoto,");
+        }
+
+        if($this->isNullOrEmptyString($customer->getZipCode())){
+            $errorMessage .= $translator->translate("codice avviamento postale utente vuoto,");
+        }
+
+        if($this->isNullOrEmptyString($customer->getTaxCode())){
+            $errorMessage .= $translator->translate("codice fiscale vuoto,");
+        }
+
+        if($this->isNullOrEmptyString($customer->getDriverLicenseName())){
+            $errorMessage .= $translator->translate("nome patente guida vuoto,");
+        }
+
+        if($this->isNullOrEmptyString($customer->getDriverLicenseSurname())){
+            $errorMessage .= $translator->translate("cognome patente guida vuoto,");
+        }
+
+        if($this->isNullOrEmptyString($customer->getDriverLicense())){
+            $errorMessage .= $translator->translate("numero patente guida vuoto,");
+        }
+
+        if($this->isNullOrEmptyString($customer->getDriverLicenseCountry())){
+            $errorMessage .= $translator->translate("nazione patente guida vuoto,");
+        }
+
+        if($this->isNullOrEmptyString($customer->getDriverLicenseExpire())){
+            $errorMessage .= $translator->translate("scadenza patente guida vuoto,");
+        }
+
+        if($errorMessage !=="") {
+            $result = false;
+        }
+
+        return $result;
+    }
+
+    /**
+     * Check if $str is null or a string with spaces only
+     * @param $str
+     * @return bool
+     */
+    private function isNullOrEmptyString($str){
+        $result =false;
+
+        if (is_null($str)) {
+            $result = true;
+        } else {
+            if(gettype($str)==='string') {
+                if(trim($str)===''){
+                    $result = true;
+                }
+            }
+        }
+        return $result;
     }
 }
