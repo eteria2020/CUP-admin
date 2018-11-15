@@ -48,7 +48,7 @@ $(function() {
 
     // Respond to pay button
     $('#js-extra-payment').click(function (e) {
-        /*if ($("#js-rates").is(':checked') && $('#amount0').val() < 100) {
+        if ($("#js-rates").is(':checked') && $('#amount0').val() < 100) {
             alert("Errore: non puoi rateizzare un pagamento sotto 100 €");
         } else {
             if($("#js-rates").is(':checked') && $('#n-rates').val() == ''){
@@ -58,17 +58,17 @@ $(function() {
                     startPaymentProcess();
                 }
             }
-        }*/
+        }
         //blocco commentanto per i test in produzione
         //Da rimuovere le 3 righe sottostanti e decommnetare il blocco sopra
         //controllo che l'importo totale debba essere sopra i 100€
-        if($("#js-rates").is(':checked') && $('#n-rates').val() == ''){
+        /*if($("#js-rates").is(':checked') && $('#n-rates').val() == ''){
             alert("Errore: Hai selezionato il pagamento rateizzato, devi inserire il numero di rate");
         }else{
             if (paymentBtnEnabled == true) {
                 startPaymentProcess();
             }
-        }
+        }*/
     });
 });
 

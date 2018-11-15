@@ -419,14 +419,11 @@ class PaymentsController extends AbstractActionController
             foreach ($amounts as $value) {
                 $amount += intval($value);
             }
-            
-            //IF PAYMENTS RATES
-            if($customer->getId() == 524){//RIGA PER TEST DA ELIMINARE UNA VOLTA CONCLUSI
-                if($rate == 'true'){  
-                    $extraPaymentRate_first = $this->payExtraWithRates($customer, $fleet, $amount, $type, $penalty, $reasons, $amounts, $n_rates);
-                    //visto che si è scelto di pagare a rate, allora l'importo da far passare deve essere minore
-                    $amount = $extraPaymentRate_first->getAmount();
-                }
+
+            if($rate == 'true'){
+                $extraPaymentRate_first = $this->payExtraWithRates($customer, $fleet, $amount, $type, $penalty, $reasons, $amounts, $n_rates);
+                //visto che si è scelto di pagare a rate, allora l'importo da far passare deve essere minore
+                $amount = $extraPaymentRate_first->getAmount();
             }
 
             $response = $this->cartasiCustomerPayments->sendPaymentRequest($customer, $amount);
@@ -436,11 +433,8 @@ class PaymentsController extends AbstractActionController
             );
             
             //IF PAYMENTS RATES
-            //una volta scritto il pagamento e tento veine legato alla rata
-            if($customer->getId() == 524){//RIGA PER TEST DA ELIMINARE UNA VOLTA CONCLUSI
-                if($rate == 'true'){
-                    $extraPaymentRate_first = $this->extraPaymentRatesService->setPaymentRate($extraPaymentRate_first, $extraPayment);
-                }
+            if($rate == 'true'){
+                $extraPaymentRate_first = $this->extraPaymentRatesService->setPaymentRate($extraPaymentRate_first, $extraPayment);
             }
             
             if (!$response->getCompletedCorrectly()) {
