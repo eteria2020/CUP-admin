@@ -48,14 +48,19 @@ $(function() {
 
     // Respond to pay button
     $('#js-extra-payment').click(function (e) {
+        $('#js-extra-payment').prop('disabled', true);
         if ($("#js-rates").is(':checked') && $('#amount0').val() < 100) {
+            $('#js-extra-payment').prop('disabled', false);
             alert("Errore: non puoi rateizzare un pagamento sotto 100 €");
         } else {
             if($("#js-rates").is(':checked') && $('#n-rates').val() == ''){
+                $('#js-extra-payment').prop('disabled', false);
                 alert("Errore: Hai selezionato il pagamento rateizzato, devi inserire il numero di rate");
             }else{
                 if (paymentBtnEnabled == true) {
                     startPaymentProcess();
+                } else {
+                    $('#js-extra-payment').prop('disabled', false);
                 }
             }
         }
@@ -110,6 +115,8 @@ function startPaymentProcess()
 
     if (canProceed) {
         proceedWithPayment(customerId, fleetId, type, penalty, reasons, amounts, rate, n_rates);
+    } else {
+        $('#js-extra-payment').prop('disabled', false);
     }
 }
 
@@ -201,17 +208,22 @@ function proceedWithPayment(customerId, fleetId, type, penalty, reasons, amounts
                     ' ' + translate("confirmPaymentContinue") + ' ' + amount / 100 + ' euro ' +
                     translate("confirmPaymentRates") + ' ' + $("#n-rates").val()/*$("#n-rates option:selected").val()*/)) {
                     sendPaymentRequest(customerId, fleetId, type, penalty, reasons, amounts, rate, n_rates);
+                } else {
+                    $('#js-extra-payment').prop('disabled', false);
                 }
             }else{
                 if (confirm(translate("confirmPayment") + ' ' +
                     data.name + ' ' + data.surname +
                     ' ' + translate("confirmPaymentContinue") + ' ' + amount / 100 + ' euro')) {
                     sendPaymentRequest(customerId, fleetId, type, penalty, reasons, amounts, rate, n_rates);
+                } else {
+                    $('#js-extra-payment').prop('disabled', false);
                 }
             }
         })
         .fail(function (data) {
             var message = JSON.parse(data.responseText).error;
+            $('#js-extra-payment').prop('disabled', false);
             alert(message);
             clearFields();
         });
@@ -238,11 +250,13 @@ function sendPaymentRequest(customerId, fleetId, type, penalty, reasons, amounts
         rate: rate,
         n_rates: n_rates
     }).done(function (data) {
+        $('#js-extra-payment').prop('disabled', false);
         alert(data.message);
         clearFields();
         viewTries($.parseJSON(data.extraPaymentTry));
     }).fail(function (data) {
         var message = JSON.parse(data.responseText).error;
+        $('#js-extra-payment').prop('disabled', false);
         alert(message);
         var extraPaymentTries = JSON.parse(data.responseText).extraPaymentTry;
         viewTries($.parseJSON(extraPaymentTries));
