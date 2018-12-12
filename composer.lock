@@ -2107,7 +2107,7 @@
             "source": {
                 "type": "git",
                 "url": "ssh://git@git.sharengo.it/cup-it/core.git",
-                "reference": "c32756428ea16b7a6da70d38f841c19ec9297fec"
+                "reference": "4063ee6a025a6a5964620dbcd2b6445317253d0c"
             },
             "require": {
                 "doctrine/doctrine-orm-module": "0.*",
@@ -2128,7 +2128,7 @@
                 }
             },
             "description": "Core ZF2 module for Sharengo apps",
-            "time": "2018-11-12T10:35:44+00:00"
+            "time": "2018-12-12T10:21:19+00:00"
         },
         {
             "name": "mvlabs/zf2-multilanguage",

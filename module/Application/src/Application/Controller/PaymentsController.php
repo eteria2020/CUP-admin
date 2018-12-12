@@ -18,6 +18,7 @@ use SharengoCore\Service\PenaltiesService;
 use SharengoCore\Exception\FleetNotFoundException;
 use SharengoCore\Service\FleetService;
 use SharengoCore\Service\RecapService;
+use SharengoCore\Service\VatService;
 // Externals
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\JsonModel;
@@ -101,6 +102,11 @@ class PaymentsController extends AbstractActionController
      */
     private $extraPaymentRatesService;
 
+    /**
+     * @var VatService
+     */
+    private $vatService;
+
     public function __construct(
         TripPaymentsService $tripPaymentsService,
         PaymentsService $paymentsService,
@@ -116,7 +122,8 @@ class PaymentsController extends AbstractActionController
         FaresForm $faresForm,
         Container $datatableFiltersSessionContainer,
         CustomerDeactivationService $deactivationService,
-        ExtraPaymentRatesService $extraPaymentRatesService
+        ExtraPaymentRatesService $extraPaymentRatesService,
+        VatService $vatService
     ) {
         $this->tripPaymentsService = $tripPaymentsService;
         $this->paymentsService = $paymentsService;
@@ -133,6 +140,7 @@ class PaymentsController extends AbstractActionController
         $this->datatableFiltersSessionContainer = $datatableFiltersSessionContainer;
         $this->deactivationService = $deactivationService;
         $this->extraPaymentRatesService = $extraPaymentRatesService;
+        $this->vatService = $vatService;
     }
 
     /**
@@ -386,6 +394,7 @@ class PaymentsController extends AbstractActionController
         $amounts = $this->params()->fromPost('amounts');
         $rate = $this->params()->fromPost('rate');
         $n_rates = intval($this->params()->fromPost('n_rates'));
+        $vats = $this->params()->fromPost('vats');
 
         try {
             $customer = $this->customersService->findById($customerId);
@@ -415,6 +424,14 @@ class PaymentsController extends AbstractActionController
                 ]);
             }
 
+            $vat = null;
+
+            if(is_array($vats)) {
+                if($vats[0]!="") {
+                    $vat = $this->vatService->findById($vats[0]); // we manage a single vat
+                }
+            }
+
             $amount = 0;
             foreach ($amounts as $value) {
                 $amount += intval($value);
@@ -429,7 +446,7 @@ class PaymentsController extends AbstractActionController
             $response = $this->cartasiCustomerPayments->sendPaymentRequest($customer, $amount);
 
             $extraPayment = $this->extraPaymentsService->registerExtraPayment(
-                    $customer, $fleet, $response->getTransaction(), $amount, $type, $penalty, $reasons, $amounts, true
+                    $customer, $fleet, $response->getTransaction(), $amount, $type, $penalty, $reasons, $amounts, true, $vat
             );
             
             //IF PAYMENTS RATES

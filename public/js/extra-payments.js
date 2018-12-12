@@ -88,6 +88,7 @@ function startPaymentProcess()
     var penalty = [];
     var reasons = [];
     var amounts = [];
+    var vats = [];
     var rate = ($("#js-rates").is(':checked') ? true : false);
     var n_rates = (rate ? $('#n-rates').val() : "1");
 
@@ -97,11 +98,14 @@ function startPaymentProcess()
         if($('#type').val() === "extra"){
             reasons[i] = $('#reason' + number).val();
             penalty[i] = null;
+            vats[i] = $('#reason' + number + ' option:selected').data()["vatId"];
         }else{
             reasons[i] = $('#reason' + number).val();
-            penalty[i] = $('#penalty' + number).val();;
+            penalty[i] = $('#penalty' + number).val();
+            vats[i] = $('#penalty' + number + ' option:selected').data()["vatId"];
         }
         amounts[i] = $('#amount' + number).val();
+
     }
 
     var canProceed = checkAndFormatFields(
@@ -114,7 +118,7 @@ function startPaymentProcess()
     );
 
     if (canProceed) {
-        proceedWithPayment(customerId, fleetId, type, penalty, reasons, amounts, rate, n_rates);
+        proceedWithPayment(customerId, fleetId, type, penalty, reasons, amounts, rate, n_rates, vats);
     } else {
         $('#js-extra-payment').prop('disabled', false);
     }
@@ -192,8 +196,11 @@ function checkAndFormatFields(customerId, fleetId, type, penalty, reasons, amoun
  * @param string[] penalty
  * @param string[] reasons
  * @param integer[] amounts
+ * @param integer[] rate
+ * @param integer[] n_rates
+ * @param integer[] vats
  */
-function proceedWithPayment(customerId, fleetId, type, penalty, reasons, amounts, rate, n_rates)
+function proceedWithPayment(customerId, fleetId, type, penalty, reasons, amounts, rate, n_rates, vats)
 {
     $.get('/customers/info/' + customerId)
         .done(function (data) {
@@ -207,7 +214,7 @@ function proceedWithPayment(customerId, fleetId, type, penalty, reasons, amounts
                     data.name + ' ' + data.surname +
                     ' ' + translate("confirmPaymentContinue") + ' ' + amount / 100 + ' euro ' +
                     translate("confirmPaymentRates") + ' ' + $("#n-rates").val()/*$("#n-rates option:selected").val()*/)) {
-                    sendPaymentRequest(customerId, fleetId, type, penalty, reasons, amounts, rate, n_rates);
+                    sendPaymentRequest(customerId, fleetId, type, penalty, reasons, amounts, rate, n_rates, vats);
                 } else {
                     $('#js-extra-payment').prop('disabled', false);
                 }
@@ -215,7 +222,7 @@ function proceedWithPayment(customerId, fleetId, type, penalty, reasons, amounts
                 if (confirm(translate("confirmPayment") + ' ' +
                     data.name + ' ' + data.surname +
                     ' ' + translate("confirmPaymentContinue") + ' ' + amount / 100 + ' euro')) {
-                    sendPaymentRequest(customerId, fleetId, type, penalty, reasons, amounts, rate, n_rates);
+                    sendPaymentRequest(customerId, fleetId, type, penalty, reasons, amounts, rate, n_rates, vats);
                 } else {
                     $('#js-extra-payment').prop('disabled', false);
                 }
@@ -238,8 +245,11 @@ function proceedWithPayment(customerId, fleetId, type, penalty, reasons, amounts
  * @param string[] penalty
  * @param string[] reasons
  * @param integer[] amounts
+ * @param integer[] rate
+ * @param integer[] n_rates
+ * @param integer[] vats
  */
-function sendPaymentRequest(customerId, fleetId, type, penalty, reasons, amounts, rate, n_rates) {
+function sendPaymentRequest(customerId, fleetId, type, penalty, reasons, amounts, rate, n_rates, vats) {
     $.post('/payments/pay-extra', {
         customerId: customerId,
         fleetId: fleetId,
@@ -248,7 +258,8 @@ function sendPaymentRequest(customerId, fleetId, type, penalty, reasons, amounts
         reasons: reasons,
         amounts: amounts,
         rate: rate,
-        n_rates: n_rates
+        n_rates: n_rates,
+        vats: vats
     }).done(function (data) {
         $('#js-extra-payment').prop('disabled', false);
         alert(data.message);
