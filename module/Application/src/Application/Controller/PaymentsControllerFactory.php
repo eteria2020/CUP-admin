@@ -28,6 +28,7 @@ class PaymentsControllerFactory implements FactoryInterface
         $faresService = $sharedServiceManager->get('SharengoCore\Service\FaresService');
         $faresForm = $sharedServiceManager->get('FaresForm');
         $datatablesSessionNamespace = $sharedServiceManager->get('Configuration')['session']['datatablesNamespace'];
+        $vatService =  $sharedServiceManager->get('SharengoCore\Service\VatService');
         
 
         // Creating DataTable Filters Session Container
@@ -48,7 +49,8 @@ class PaymentsControllerFactory implements FactoryInterface
             $faresForm,
             $datatableFiltersSessionContainer,
             $deactivationService,
-            $extraPaymentRatesService
+            $extraPaymentRatesService,
+            $vatService
         );
     }
 }

@@ -1,5 +1,5 @@
 <?php
-$this->headScript()->appendFile($this->basePath() .'/js/extra-payments.js?v=1.7');
+$this->headScript()->appendFile($this->basePath() .'/js/extra-payments.js?v=1.8');
 ?>
 <div class="page-content-wrapper">
     <div class="page-content">
@@ -125,9 +125,17 @@ $('#type').change(function() {
         echo 'causalOptions = "';
         echo '<option>Non definito</option>';
         foreach($this->causal as $causal) {
-            echo '<option data-reason=\"' . $causal->getReason() . '\">' .
-                $causal->getReason() .
-                '</option>';
+            $dataVat = 'data-vat-id=\"\"';
+            $dataVatDescription = '';
+            if(!is_null($causal->getVat())) {
+                $dataVat = sprintf('data-vat-id=\"%d\"', $causal->getVat()->getId());
+                $dataVatDescription = sprintf(' (%s)',  $causal->getVat()->getDescription());
+            }
+
+            $reason = sprintf('%s%s', $causal->getReason(), $dataVatDescription);
+            $dataReason = sprintf('data-reason=\"%s\"', $reason);
+
+            echo sprintf('<option %s %s>%s</option>', $dataReason, $dataVat,  $reason);
         }
         echo '"';
         ?>
@@ -151,9 +159,22 @@ function deactivate(e)
 echo 'var penaltyOptions = "';
 echo '<option></option>';
 foreach($this->penalties as $penalty) {
-    echo '<option data-reason=\"' . $penalty->getReason() . '\" data-amount=\"' . $penalty->getAmount() . '\">' .
-        $penalty->getReason() . ' (' .number_format($penalty->getAmount()/100, 2) . '\u20ac)' .
-        '</option>';
+    $dataVat = 'data-vat-id=\"\"';
+    $dataVatDescription = '';
+    if(!is_null($penalty->getVat())) {
+        $dataVat = sprintf('data-vat-id=\"%d\"', $penalty->getVat()->getId());
+        $dataVatDescription = sprintf(' (%s)',  $penalty->getVat()->getDescription());
+    }
+
+    $reason = sprintf('%s%s', $penalty->getReason(), $dataVatDescription);
+    $dataReason = sprintf('data-reason=\"%s\"', $reason);
+    $dataAmount = sprintf('data-amount=\"%s\"', $penalty->getAmount());
+
+    $dataRreason = sprintf('%s (%.2f\u20ac)',
+        $penalty->getReason(),
+        number_format($penalty->getAmount()/100, 2));
+
+    echo sprintf('<option %s %s %s>%s</option>', $dataReason, $dataAmount, $dataVat, $reason);
 }
 echo '"';
 ?>
