@@ -384,4 +384,36 @@ class CarsController extends AbstractActionController {
         return $response;
     }
 
+    public function blackboxCoordinatesAction(){
+        $plate = $this->params()->fromQuery('plate', 0);
+        $response = $this->getResponse();
+        $response->setStatusCode(200);
+        $result = json_encode(["status" => "KO"]);
+        $response->setContent($result);
+
+        if(!is_null($plate) && $plate != "") {
+            $ch = curl_init();
+            curl_setopt($ch, CURLOPT_URL, "https://sharengo.kubris.com/service/plateInfo/" . $plate);
+            curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "GET");
+            curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+            $output = curl_exec($ch);
+            $res = json_decode($output, true);
+            curl_close($ch);
+        }else{
+            return $response;
+        }
+
+        if(isset($res['data']) && !is_null($res['data'])){
+            $positionLinkBlackBox = sprintf(
+                'http://maps.google.com/?q=%s,%s',
+                $res['data']['geoLatitude'],
+                $res['data']['geoLongitude']
+            );
+        } else {
+            return $response;
+        }
+        $response->setContent(json_encode(["status" => "OK", "link" => $positionLinkBlackBox]));
+        return $response;
+    }
+
 }

@@ -227,3 +227,37 @@ $(function() {
         }
     });
 });
+
+function blackbox(plate){
+    document.getElementById("blackbox-"+plate).removeAttribute("onclick");
+    document.getElementById("blackbox-"+plate).style.cursor = "wait";
+    $.get('cars/blackbox-coordinates?plate='+plate,
+        function(data){
+            data = JSON.parse(data);
+            if (data.status == "OK") {
+                var win = window.open(data.link, '_blank');
+                if (win) {
+                    document.getElementById("blackbox-"+plate).style.cursor = "not-allowed";
+                    setTimeout(function () {
+                        document.getElementById("blackbox-"+plate).setAttribute("onclick", "blackbox('"+plate+"')");
+                        document.getElementById("blackbox-"+plate).style.cursor = "pointer";
+                    }, 30000);
+                    win.focus();
+                } else {
+                    //Browser has blocked it
+                    document.getElementById("blackbox-"+plate).style.cursor = "not-allowed";
+                    setTimeout(function () {
+                        document.getElementById("blackbox-"+plate).setAttribute("onclick", "blackbox('"+plate+"')");
+                        document.getElementById("blackbox-"+plate).style.cursor = "pointer";
+                    }, 30000);
+                    alert('Please allow popups for this page');
+                }
+            } else if (data.status == "KO"){
+                document.getElementById("blackbox-"+plate).style.cursor = "not-allowed";
+                alert("No black box coordinates found");
+            }
+    });
+
+
+
+}

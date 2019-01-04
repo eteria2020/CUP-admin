@@ -658,6 +658,17 @@ return [
                             ],
                         ],
                     ],
+                    'blackbox-coordinates' => [
+                        'type'    => 'Literal',
+                        'options' => [
+                            'route'    => '/blackbox-coordinates',
+                            'defaults' => [
+                                '__NAMESPACE__' => 'Application\Controller',
+                                'controller'    => 'Cars',
+                                'action'        => 'blackbox-coordinates',
+                            ],
+                        ],
+                    ],
                     'ajax-tab-edit' => [
                         'type'    => 'Segment',
                         'options' => [

@@ -38,7 +38,7 @@
         }
     ],
     "require": {
-        "php": ">=5.3.3",
+        "php": ">=5.4.0",
         "zendframework/zendframework": "~2.4",
         "bjyoungblood/bjy-authorize": "1.4.0",
         "zf-commons/zfc-user-doctrine-orm": "^1.0",
