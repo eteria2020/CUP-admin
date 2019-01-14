@@ -4,6 +4,7 @@ $form->prepare();
 $form->setAttribute('action', $this->url('zfcuser/login'));
 $form->setAttribute('method', 'post');
 
+$serverInstance = $this->ConfigHelper()->getServerInstance();
 
 //fix per risolvere la mancata traduzione dentro ZfcUser
 $as_errorsIdentity = array();
@@ -52,8 +53,17 @@ $as_errors = array_merge($as_errorsIdentity,
 <div class="form-actions">
     <?php echo $this->formButton($form->get('submit')->setAttributes(array('class'=>'btn btn-success uppercase palette-change login-button'))->setLabel('Login'));?>
 </div>
-<center>
-    <hr style= "border-top: 1px solid #999">
-    <a href="https://sso.sharengo.it/log365.php?portal=admin&direct=true"><img src="/img/login365.png"></a>
-</center>
-<?php echo $this->form()->closeTag() ?>
+
+
+<?php
+
+if($serverInstance!="sk_SK") {
+    echo '<div style="text-align:center ">';
+    //echo '<hr style= "border-top: 1px solid #999">';
+    echo '<a href="https://sso.sharengo.it/log365.php?portal=admin&direct=true"><img src="/img/login365.png"></a>';
+    echo '</div>';
+}
+
+echo $this->form()->closeTag()
+
+?>
