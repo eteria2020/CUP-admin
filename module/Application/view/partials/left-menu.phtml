@@ -8,8 +8,9 @@
 
         <?php
         $s_menu = '';
-
         $i_cnt = 0;
+        $serverInstance = $this->ConfigHelper()->getServerInstance();
+
         foreach ($this->container as $page) {
 
             if ($this->navigation('navigation')->accept($page)) {
@@ -53,17 +54,24 @@
 
                 $isRouteJs = $page->get('isRouteJs');
 
-                if ($page->get('openOnNewWindow')) {
-                    $s_menu .= sprintf('<a href="%s" target="_blank">', isset($isRouteJs) ? 'javascript:;' : $page->getHref());
+                if($page->getLabel()=='Aziende' && $serverInstance=='sk_SK') {
+                    // hide "aziende" menu for Slovakia server
                 } else {
-                    $s_menu .= sprintf('<a href="%s">', isset($isRouteJs) ? 'javascript:;' : $page->getHref());
-                }
-                $s_menu .= sprintf('<i class="%s"></i>', $page->get('icon'));
-                $s_menu .= sprintf('<span class="title">%s</span>', $this->translate($page->getLabel()));
+                    if ($page->get('openOnNewWindow')) {
+                        $s_menu .= sprintf('<a href="%s" target="_blank">', isset($isRouteJs) ? 'javascript:;' : $page->getHref());
+                    } else {
+                        $s_menu .= sprintf('<a href="%s">', isset($isRouteJs) ? 'javascript:;' : $page->getHref());
+                    }
 
-                if ($page->hasPages()) {
-                    $s_menu .= sprintf('<span class="arrow %s"></span>', $b_childActive ? 'open' : '');
+                    $s_menu .= sprintf('<i class="%s"></i>', $page->get('icon'));
+                    $s_menu .= sprintf('<span class="title">%s</span>', $this->translate($page->getLabel()));
+
+                    if ($page->hasPages()) {
+                        $s_menu .= sprintf('<span class="arrow %s"></span>', $b_childActive ? 'open' : '');
+                    }
                 }
+
+
 
                 $s_menu .= '</a>';
 

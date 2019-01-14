@@ -161,7 +161,8 @@ class Module
     {
         return [
             'factories' => [
-                'languageMenuHelper' => 'Application\\View\\Helper\\LanguageMenuHelperFactory'
+                'languageMenuHelper' => 'Application\\View\\Helper\\LanguageMenuHelperFactory',
+                'configHelper'  => 'Application\\View\\Helper\\ConfigHelperFactory',
             ],
         ];
     }

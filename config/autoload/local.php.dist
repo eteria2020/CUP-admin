@@ -35,5 +35,9 @@ return [
     ],
     'googleMaps' => [
         'key' => 'AIzaSyAjv0Ry_0P18id6pWKwNn0IptB8NvZGfxY'
-    ]
+    ],
+    // for Sharengo Slovakia 'id' => 'sk_SK'
+    'serverInstance' => [
+        'id' => ''
+    ],
 ];
