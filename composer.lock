@@ -323,7 +323,7 @@
             "source": {
                 "type": "git",
                 "url": "ssh://git@git.sharengo.it/cup-it/core-business.git",
-                "reference": "e3e11a11fa0d68ca3a22444b125d35a14a323a1a"
+                "reference": "9a72635a94839f38232cfe0c7fbd947f183fad69"
             },
             "require": {
                 "doctrine/doctrine-orm-module": "0.9.*",
@@ -344,7 +344,7 @@
                 }
             },
             "description": "Business Core module",
-            "time": "2018-05-21T14:48:06+00:00"
+            "time": "2019-02-04T14:06:35+00:00"
         },
         {
             "name": "doctrine/annotations",
