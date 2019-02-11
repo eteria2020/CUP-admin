@@ -148,7 +148,7 @@ class CustomerFieldset extends Fieldset implements InputFilterProviderInterface
             'type'       => 'Zend\Form\Element\Text',
             'attributes' => [
                 'id'        => 'address',
-                'maxlength' => 64,
+                'maxlength' => 60,
                 'class'     => 'form-control',
                 'required'  => 'required'
             ]
@@ -159,7 +159,7 @@ class CustomerFieldset extends Fieldset implements InputFilterProviderInterface
             'type'       => 'Zend\Form\Element\Text',
             'attributes' => [
                 'id'        => 'addressInfo',
-                'maxlength' => 64,
+                'maxlength' => 60,
                 'class'     => 'form-control'
             ]
         ]);
@@ -169,7 +169,7 @@ class CustomerFieldset extends Fieldset implements InputFilterProviderInterface
             'type'       => 'Zend\Form\Element\Text',
             'attributes' => [
                 'id'        => 'zipCode',
-                'maxlength' => 12,
+                'maxlength' => 5,
                 'class'     => 'form-control',
                 'required'  => 'required'
             ]
@@ -180,7 +180,7 @@ class CustomerFieldset extends Fieldset implements InputFilterProviderInterface
             'type'       => 'Zend\Form\Element\Text',
             'attributes' => [
                 'id'        => 'town',
-                'maxlength' => 64,
+                'maxlength' => 60,
                 'class'     => 'form-control',
                 'required'  => 'required'
             ]
@@ -329,6 +329,11 @@ class CustomerFieldset extends Fieldset implements InputFilterProviderInterface
                 'filters' => [
                     [
                         'name' => 'StringTrim'
+                    ]
+                ],
+                'validators' => [
+                    [
+                        'name' => 'Application\Form\Validator\ZipCode'
                     ]
                 ]
             ],
