@@ -17,6 +17,10 @@ use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\JsonModel;
 use Zend\View\Model\ViewModel;
 
+use BusinessCore\Form\Validator\VatNumber;
+use BusinessCore\Form\Validator\ZipCode;
+
+
 class CustomersEditController extends AbstractActionController
 {
     /**
@@ -288,12 +292,18 @@ class CustomersEditController extends AbstractActionController
             $errorMessage .= $translator->translate("città utente vuoto,");
         }
 
-        if($this->isNullOrEmptyString($customer->getZipCode())){
-            $errorMessage .= $translator->translate("codice avviamento postale utente vuoto,");
+        $validator = new ZipCode();
+        if(!$validator->isValid($customer->getZipCode())){
+            $errorMessage .= implode( ",", $validator->getMessages()).",";;
         }
 
         if($this->isNullOrEmptyString($customer->getTaxCode())){
             $errorMessage .= $translator->translate("codice fiscale vuoto,");
+        }
+
+        $validator = new VatNumber();
+        if(!$this->isNullOrEmptyString($customer->getVat()) && !$validator->isValid($customer->getVat())){
+            $errorMessage .= implode( ",", $validator->getMessages()).",";
         }
 
         if($this->isNullOrEmptyString($customer->getDriverLicenseName())){
