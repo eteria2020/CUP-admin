@@ -262,9 +262,8 @@ class CustomersController extends AbstractActionController
                         $postData['customer']['email'] = $customer->getEmail();
                     }
 
-                    // ensure vat is not NULL but a string
-                    if (is_null($postData['customer']['vat'])) {
-                        $postData['customer']['birthDate'] = '';
+                    if ($postData['customer']['vat']=='') {
+                        $postData['customer']['vat'] = null;
                     }
 
                     $this->customersService->setValidatorEmail($customer->getEmail());
@@ -295,7 +294,6 @@ class CustomersController extends AbstractActionController
                         $postData['setting']['maintainer'];
                     break;
             }
-            
 
             $form->setData($postData);
 
