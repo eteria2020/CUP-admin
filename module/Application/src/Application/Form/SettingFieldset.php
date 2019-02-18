@@ -109,6 +109,22 @@ class SettingFieldset extends Fieldset implements InputFilterProviderInterface
                 ]
             ]
         ]);
+
+        $this->add([
+            'name'       => 'silverList',
+            'type'       => 'Zend\Form\Element\Select',
+            'attributes' => [
+                'id'    => 'silverList',
+                'class' => 'form-control',
+            ],
+            'options'    => [
+                'value_options' => [
+                    0 => $translator->translate("No"),
+                    1 => $translator->translate("Si")
+                ]
+            ]
+        ]);
+
         $this->add([
             'name'       => 'firstPaymentCompleted',
             'type'       => 'Zend\Form\Element\Select',
@@ -155,6 +171,9 @@ class SettingFieldset extends Fieldset implements InputFilterProviderInterface
                 'required' => true
             ],
             'goldList' => [
+                'required' => true
+            ],
+            'silverList' => [
                 'required' => true
             ],
             'firstPaymentCompleted' => [

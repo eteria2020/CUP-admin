@@ -283,6 +283,9 @@ class CustomersController extends AbstractActionController
                     if (!isset($postData['setting']['goldList'])) {
                         $postData['setting']['goldList'] = (int)$customer->getGoldList();
                     }
+                    if (!isset($postData['setting']['silverList'])) {
+                        $postData['setting']['silverList'] = (int)$customer->getSilverList();
+                    }
                     if (!isset($postData['setting']['maintainer'])) {
                         $postData['setting']['maintainer'] = (int)$customer->getMaintainer();
                     }                    
