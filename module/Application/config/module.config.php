@@ -2049,7 +2049,6 @@ return [
                     // for limiting certains operations
                     [['superadmin','admin'], 'customer', 'changeEmail'],
                     [['superadmin'], 'customer', 'userArea'],
-                    [['superadmin'], 'customer', 'discountRate'],
                     [['superadmin'], 'customer', 'maintainer'],
                     [['superadmin'], 'customer', 'goldList'],
                     [['superadmin'], 'customer', 'silverList'],

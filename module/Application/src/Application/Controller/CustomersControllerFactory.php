@@ -53,8 +53,12 @@ class CustomersControllerFactory implements FactoryInterface
         
         $registrationService = $sharedLocator->get('RegistrationService');
 
+        $authorize = $sharedLocator->get('BjyAuthorize\Provider\Identity\ProviderInterface');
+        $roles = $authorize->getIdentityRoles();
+
         // Controller is constructed, dependencies are injected (IoC in action)
         return new CustomersController(
+            $roles,
             $clientService,
             $customerDeactivationService,
             $cardsService,
