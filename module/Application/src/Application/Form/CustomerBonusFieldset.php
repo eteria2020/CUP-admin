@@ -14,13 +14,15 @@ class CustomerBonusFieldset extends Fieldset implements InputFilterProviderInter
 {
 
     private $translator;
-    public function __construct(HydratorInterface $hydrator, Translator $translator, AddBonusService $addBonusService)
+    private $config;
+    public function __construct(HydratorInterface $hydrator, Translator $translator, AddBonusService $addBonusService, $config)
     {
         parent::__construct('customer-bonus', [
             'use_as_base_fieldset' => true
         ]);
         $this->addBonusService = $addBonusService;
         $this->translator = $translator;
+        $this->config = $config;
         $this->setHydrator($hydrator);
         $this->setObject(new CustomersBonus());
 
@@ -97,7 +99,13 @@ class CustomerBonusFieldset extends Fieldset implements InputFilterProviderInter
                                 \Zend\Validator\Callback::INVALID_VALUE => $this->translator->translate('Il valore massimo inseribile è 15 min.'),
                             ],
                             'callback' => function ($value) {
-                                
+
+                                if(isset($this->config['serverInstance']["id"])) {
+                                    if($this->config['serverInstance']["id"]=="sk_SK") {
+                                        return true;
+                                    }
+                                }
+
                                 return $value <= 15 ? true : false;
                             },
                         ],

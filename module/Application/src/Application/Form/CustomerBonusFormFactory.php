@@ -20,8 +20,9 @@ class CustomerBonusFormFactory implements FactoryInterface
         $addBonusService = $serviceLocator->get('SharengoCore\Service\AddBonusService');
         $languageService = $serviceLocator->get('LanguageService');
         $translator = $languageService->getTranslator();
+        $config = $serviceLocator->get('Config');
 
-        $customerBonusFieldset = new CustomerBonusFieldset($hydrator, $translator, $addBonusService);
+        $customerBonusFieldset = new CustomerBonusFieldset($hydrator, $translator, $addBonusService, $config);
 
         return new CustomerBonusForm($customerBonusFieldset);
     }
