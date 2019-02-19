@@ -34,6 +34,11 @@ use Zend\Session\Container;
 class CustomersController extends AbstractActionController
 {
     /**
+     * @var role
+     */
+    private $roles;
+
+    /**
      * @var CustomersService
      */
     private $customersService;
@@ -144,18 +149,20 @@ class CustomersController extends AbstractActionController
     private $oldCustomerDiscountsService;
 
     /**
+     * CustomersController constructor.
+     * @param $roles
      * @param CustomersService $customersService
      * @param CustomerDeactivationService $customerDeactivationService
      * @param CardsService $cardsService
      * @param PromoCodesService $promoCodeService
-     * @param PointService $pointService
      * @param BonusService $bonusService
+     * @param PointService $pointService
      * @param Form $customerForm
      * @param Form $driverForm
      * @param Form $settingForm
      * @param Form $promoCodeForm
-     * @param Form $customerPointForm
      * @param Form $customerBonusForm
+     * @param Form $customerPointForm
      * @param Form $cardForm
      * @param HydratorInterface $hydrator
      * @param CartasiContractsService $cartasiContractsService
@@ -165,9 +172,10 @@ class CustomersController extends AbstractActionController
      * @param EmailService $emailService
      * @param UserEventsService $userEventsService
      * @param array $globalConfig
-     * #param OldCustomerDiscountsService $oldCustomerDiscountsService
+     * @param OldCustomerDiscountsService $oldCustomerDiscountsService
      */
     public function __construct(
+        $roles,
         CustomersService $customersService,
         CustomerDeactivationService $customerDeactivationService,
         CardsService $cardsService,
@@ -191,6 +199,7 @@ class CustomersController extends AbstractActionController
         array $globalConfig,
         OldCustomerDiscountsService $oldCustomerDiscountsService
     ) {
+        $this->roles = $roles;
         $this->customersService = $customersService;
         $this->customerDeactivationService = $customerDeactivationService;
         $this->cardsService = $cardsService;
@@ -279,6 +288,13 @@ class CustomersController extends AbstractActionController
                     $form = $this->settingForm;
                     $postData['setting']['id'] = $customer->getId();
                     $postData['setting']['enabled'] = $customer->getEnabled() ? 'true' : 'false';
+
+                    if (isset($postData['setting']['discountRate'])) {
+                        if($this->roles[0]!=='superadmin' && intval($postData['setting']['discountRate'])>15) {
+                            $this->flashMessenger()->addErrorMessage($translator->translate('Aggiornamento fallito, percentuale sconto superiore al 15%'));
+                            return $this->redirect()->toRoute('customers/edit', ['id' => $customer->getId()]);
+                        }
+                    }
 
                     if (!isset($postData['setting']['goldList'])) {
                         $postData['setting']['goldList'] = (int)$customer->getGoldList();
