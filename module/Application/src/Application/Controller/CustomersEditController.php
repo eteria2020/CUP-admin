@@ -9,6 +9,7 @@ use SharengoCore\Exception\CustomerNotFoundException;
 use SharengoCore\Service\CustomerDeactivationService;
 use SharengoCore\Service\CustomersService;
 use SharengoCore\Service\TripPaymentTriesService;
+use SharengoCore\Form\Validator\TaxCode;
 
 use DoctrineModule\Stdlib\Hydrator\DoctrineObject as DoctrineHydrator;
 use Zend\Form\Form;
@@ -297,8 +298,9 @@ class CustomersEditController extends AbstractActionController
             $errorMessage .= implode( ",", $validator->getMessages()).",";;
         }
 
-        if($this->isNullOrEmptyString($customer->getTaxCode())){
-            $errorMessage .= $translator->translate("codice fiscale vuoto,");
+        $validator = new TaxCode();
+        if(!$validator->isValid($customer->getTaxCode())){
+            $errorMessage .= implode( ",", $validator->getMessages()).",";;
         }
 
         $validator = new VatNumber();
