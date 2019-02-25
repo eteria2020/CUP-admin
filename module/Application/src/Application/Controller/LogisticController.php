@@ -49,6 +49,7 @@ class LogisticController extends AbstractActionController {
     }
 
     public function changeStatusCarAction() {
+        header("Access-Control-Allow-Origin: *");
 
         $params = json_decode(base64_decode($this->params()->fromPost('param')), true);
 
