@@ -8,6 +8,8 @@ $formSetting = $this->settingForm->prepare();
 $form->setAttribute('action', $this->url('customers/edit', ['id' => $this->customer->getId()]));
 $formDriver->setAttribute('action', $this->url('customers/edit', ['id' => $this->customer->getId()]));
 $formSetting->setAttribute('action', $this->url('customers/edit', ['id' => $this->customer->getId()]));
+
+
 ?>
 <div class="row">
 
@@ -26,30 +28,37 @@ $formSetting->setAttribute('action', $this->url('customers/edit', ['id' => $this
                     <input type="hidden" name="type" value="customer">
 
                     <div class="row">
-                        <div class="col-lg-4">
+                        <div class="col-lg-2">
+                            <div class="form-group">
+                                <label for="id"><?= $this->translate("Id"); ?></label>
+                                <?php $idElement = $form->get('customer')->get('id');
+                                $idElement->setAttributes(['type'=>'text','readonly'=>'true','class'=>'form-control']);
+                                ?>
+                                <?= $this->formRow($idElement); ?>
+                            </div>
+                        </div>
+                        <div class="col-lg-2">
                             <div class="form-group">
                                 <label for="gender"><?= $this->translate("Titolo"); ?></label>
-                                <?= $this->formRow($form->get('customer')->get('gender')); ?>
+                                <?= $this->formRow($form->get('customer')->get('gender')->setAttribute('disabled', 'true')); ?>
+                                <input type="hidden" id="gender" name="customer[gender]" value="<?= $customer->getGender() ?>">
                             </div>
                         </div>
 
-                        <div class="col-lg-4">
+                        <div class="col-lg-3">
                             <div class="form-group">
                                 <label for="name"><?= $this->translate("Nome"); ?></label>
                                 <?= $this->formRow($form->get('customer')->get('name')->setAttribute('readonly', 'true')); ?>
                             </div>
                         </div>
 
-                        <div class="col-lg-4">
+                        <div class="col-lg-3">
                             <div class="form-group">
                                 <label for="surname"><?= $this->translate("Cognome"); ?></label>
                                 <?= $this->formRow($form->get('customer')->get('surname')->setAttribute('readonly', 'true')); ?>
                             </div>
                         </div>
-                    </div>
-
-                    <div class="row">
-                        <div class="col-lg-4">
+                        <div class="col-lg-2">
                             <div class="form-group">
                                 <label for="gender"><?= $this->translate("Email"); ?></label>
                                 <?php if ($this->isAllowed('customer', 'changeEmail')) {
@@ -60,110 +69,208 @@ $formSetting->setAttribute('action', $this->url('customers/edit', ['id' => $this
                                 ?>
                             </div>
                         </div>
-
-                        <div class="col-lg-4">
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-2">
+                            <b><?= $this->translate("Dati di nascita"); ?></b>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-2">
                             <div class="form-group">
-                                <label for="name"><?= $this->translate("Data di nascita"); ?></label>
-                                <?= $this->formRow($form->get('customer')->get('birthDate')->setAttributes(['readonly'=> 'true', 'class' => 'form-control'])); ?>
+                                <label for="surname"><?= $this->translate("Nazione"); ?></label>
+                                <?= $this->formRow($form->get('customer')->get('birthCountry')->setAttribute('disabled', 'true')); ?>
+                                <input type="hidden" id="birthCountry" name="customer[birthCountry]" value="<?= $customer->getBirthCountry() ?>">
                             </div>
                         </div>
-
-                        <div class="col-lg-4">
+                        <div class="col-lg-2">
                             <div class="form-group">
-                                <label for="surname"><?= $this->translate("Stato di nascita"); ?></label>
-                                <?= $this->formRow($form->get('customer')->get('birthCountry')); ?>
+                                <label for="gender"><?= $this->translate("Provincia"); ?></label>
+                                <?
+                                if($customer->getBirthCountry()==='it') {
+                                    echo $this->formRow($form->get('customer')->get('birthProvince')->setAttribute('disabled', 'true'));
+                                    echo '<input type="hidden" id="birthProvince" name="customer[birthProvince]" value="'.$customer->getBirthProvince().'">';
+                                } else {
+                                    echo '<input type="text" class="form-control" id="birthProvince" name="customer[birthProvince]" value="'.$customer->getBirthProvince().'" readonly="readonly">';
+                                }
+                                ?>
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="form-group">
+                                <label for="name"><?= $this->translate("Comune"); ?></label>
+                                <?= $this->formRow($form->get('customer')->get('birthTown')->setAttribute('disabled', 'true')); ?>
+                                <input type="hidden" id="birthTown" name="customer[birthTown]" value="<?= $customer->getBirthTown() ?>">
+                            </div>
+                        </div>
+                        <div class="col-lg-2">
+                            <div class="form-group">
+                                <label for="name"><?= $this->translate("Data di nascita"); ?></label>
+                                <?= $this->formRow($form->get('customer')->get('birthDate')->setAttribute('disabled', 'true')); ?>
                             </div>
                         </div>
                     </div>
-
                     <div class="row">
-                        <div class="col-lg-4">
+                        <div class="col-lg-2">
+                            <b><?= $this->translate("Residenza"); ?></b>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-2">
                             <div class="form-group">
-                                <label for="gender"><?= $this->translate("Provincia di nascita (EE = estero)"); ?></label>
-                                <?= $this->formRow($form->get('customer')->get('birthProvince')); ?>
+                                <label for="surname"><?= $this->translate("Nazione"); ?></label>
+                                <?= $this->formRow($form->get('customer')->get('country')); ?>
                             </div>
                         </div>
-
-                        <div class="col-lg-4">
+                        <div class="col-lg-2">
                             <div class="form-group">
-                                <label for="name"><?= $this->translate("Comune di nascita"); ?></label>
-                                <?= $this->formRow($form->get('customer')->get('birthTown')); ?>
+                                <label for="surname"><?= $this->translate("Provincia"); ?></label>
+                                <?
+
+                                echo $this->formRow($form->get('customer')->get('province'));
+
+//                                $province2 = $form->get('customer')->get('province');
+//                                $input = '<input name="' . $province2->getName() . '" ';
+//                                foreach ($province2->getAttributes() as $attribute => $value) {
+//                                    $input .= $attribute . '="'.$value .'" ';
+//                                }
+//                                $input .= ' style="display: none;" value="' . $province2->getValue() . '" disabled></ipnut>';
+
+                                $input = sprintf('<input name="customer[province]" type="text" id="province" class="form-control" required="required" style="display: none;" value="%s" disabled aria-required="true">',
+                                    $customer->getProvince());
+                                echo $input;
+                                ?>
                             </div>
                         </div>
+                        <div class="col-lg-3">
+                            <div class="form-group">
+                                <label for="surname"><?= $this->translate("Città"); ?></label>
+                                <?
+                                $town = $form->get('customer')->get('town');
+                                $select = '<select name="' . $town->getName() . '" ';
+                                foreach ($town->getAttributes() as $attribute => $value) {
+                                    $select .= $attribute . '="' . $value . '" ';
+                                }
 
-                        <div class="col-lg-4">
+                                $select .= '>';
+                                if(is_null($customer->getTown())) {
+                                    $select .= '<option></option>';
+                                } else {
+                                    $select .= $attribute . '="' . $customer->getTown() . '">';
+                                    $select .= '<option value="' . $customer->getTown() . '">' . $customer->getTown() . '</option>';
+                                }
+                                $select .= '</select>';
+                                echo $select;
+
+                                $town2 = $form->get('customer')->get('town');
+                                $input = '<input name="' . $town2->getName() . '" ';
+                                foreach ($town2->getAttributes() as $attribute => $value) {
+                                    $input .= $attribute . '="'.$value .'" ';
+                                }
+                                $input .= ' style="display: none;" value="' . $town2->getValue() . '" disabled></ipnut>';
+                                echo $input;
+                                ?>
+                            </div>
+                        </div>
+                        <div class="col-lg-3">
                             <div class="form-group">
                                 <label for="surname"><?= $this->translate("Via e numero civico"); ?></label>
                                 <?= $this->formRow($form->get('customer')->get('address')); ?>
                             </div>
                         </div>
-                    </div>
-
-                    <div class="row">
-                        <div class="col-lg-4">
-                            <div class="form-group">
-                                <label for="gender"><?= $this->translate("Informazioni aggiuntive"); ?></label>
-                                <?= $this->formRow($form->get('customer')->get('addressInfo')); ?>
-                            </div>
-                        </div>
-
-                        <div class="col-lg-4">
+                        <div class="col-lg-2">
                             <div class="form-group">
                                 <label for="name"><?= $this->translate("CAP"); ?></label>
-                                <?= $this->formRow($form->get('customer')->get('zipCode')); ?>
-                            </div>
-                        </div>
+                                <?
+                                $zipCode = $form->get('customer')->get('zipCode');
+                                $select = '<select name="' . $zipCode->getName() . '" ';
+                                foreach ($zipCode->getAttributes() as $attribute => $value) {
+                                    $select .= $attribute . '="' . $value . '" ';
+                                }
+                                $select .= '>';
+                                if(is_null($customer->getZipCode())) {
 
-                        <div class="col-lg-4">
-                            <div class="form-group">
-                                <label for="surname"><?= $this->translate("Città"); ?></label>
-                                <?= $this->formRow($form->get('customer')->get('town')); ?>
+                                } else {
+                                    $select .= $attribute . '="' . $customer->getZipCode() . '">';
+                                    $select .= '<option value="' . $customer->getZipCode() . '">' . $customer->getZipCode() . '</option>';
+                                }
+                                $select .= '<option value="00000" >00000</option></select>';
+                                echo $select;
+
+                                $zipCode2 = $form->get('customer')->get('zipCode');
+                                $input = '<input name="' . $zipCode2->getName() . '" ';
+                                foreach ($zipCode2->getAttributes() as $attribute => $value) {
+                                    $input .= $attribute . '="'.$value .'" ';
+                                }
+                                $input .= ' style="display: none;" value="' . $zipCode2->getValue() . '" disabled></ipnut>';
+                                echo $input;
+
+                                ?>
                             </div>
                         </div>
                     </div>
-
                     <div class="row">
-                        <div class="col-lg-4">
-                            <div class="form-group">
-                                <label for="language"><?= $this->translate("Lingua preferita"); ?></label>
-                                <?= $this->formRow($form->get('customer')->get('language')); ?>
-                            </div>
+                        <div class="col-lg-2">
+                            <b><?= $this->translate("Dati Fiscali"); ?></b>
                         </div>
-
-                        <div class="col-lg-4">
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-3">
                             <div class="form-group">
                                 <label for="taxCode"><?= $this->translate("Codice fiscale"); ?></label>
                                 <?= $this->formRow($form->get('customer')->get('taxCode')->setAttribute('readonly', 'true')); ?>
                             </div>
                         </div>
 
-                        <div class="col-lg-4">
+                        <div class="col-lg-3">
                             <div class="form-group">
                                 <label for="vat"><?= $this->translate("Partita IVA (opzionale)"); ?></label>
-                                <?= $this->formRow($form->get('customer')->get('vat')); ?>
+                                <?= $this->formRow($form->get('customer')->get('vat')->setAttribute('readonly', 'true')); ?>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-3">
+                            <div class="form-group">
+                                <label for="gender"><?= $this->translate("Cod. destinatario"); ?></label>
+                                <?= $this->formRow($form->get('customer')->get('recipientCode')->setAttribute('readonly', 'true')); ?>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-3">
+                            <div class="form-group">
+                                <label for="surname"><?= $this->translate("PEC"); ?></label>
+                                <?= $this->formRow($form->get('customer')->get('cem')->setAttribute('readonly', 'true')); ?>
                             </div>
                         </div>
                     </div>
-
                     <div class="row">
-                        <div class="col-lg-4">
+                        <div class="col-lg-2">
+                            <b><?= $this->translate("Contatti"); ?></b>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-3">
                             <div class="form-group">
                                 <label for="mobile"><?= $this->translate("Cellulare"); ?></label>
                                 <?= $this->formRow($form->get('customer')->get('mobile')); ?>
                             </div>
                         </div>
-
-                        <div class="col-lg-4">
+                        <div class="col-lg-3">
                             <div class="form-group">
                                 <label for="phone"><?= $this->translate("Telefono"); ?></label>
                                 <?= $this->formRow($form->get('customer')->get('phone')); ?>
                             </div>
                         </div>
-
-                        <div class="col-lg-4">
+                        <div class="col-lg-3">
+                            <div class="form-group">
+                                <label for="phone"><?= $this->translate("Lingua preferita"); ?></label>
+                                <?= $this->formRow($form->get('customer')->get('language')->setAttribute('readonly', 'true')); ?>
+                            </div>
+                        </div>
+                        <div class="col-lg-3">
+                            <div class="form-group"></div>
                         </div>
                     </div>
-
                     <div class="row">
                         <div class="col-lg-12">
                             <button type="submit" class="btn btn-success"><?= $this->translate("Salva Dati Anagrafici"); ?></button>
@@ -184,46 +291,37 @@ $formSetting->setAttribute('action', $this->url('customers/edit', ['id' => $this
                     <input type="hidden" name="type" value="driver">
 
                     <div class="row">
-                        <div class="col-lg-4">
+                        <div class="col-lg-2">
+                            <div class="form-group">
+                                <label for="driverLicenseCountry"><?= $this->translate("Nazione"); ?></label>
+                                <?= $this->formRow($formDriver->get('driver')->get('driverLicenseCountry')); ?>
+                            </div>
+                        </div>
+                        <div class="col-lg-2">
                             <div class="form-group">
                                 <label for="driverLicense"><?= $this->translate("Patente"); ?></label>
                                 <?= $this->formRow($formDriver->get('driver')->get('driverLicense')); ?>
                             </div>
                         </div>
-
-                        <div class="col-lg-4">
+                        <div class="col-lg-3">
                             <div class="form-group">
                                 <label for="driverLicenseName"><?= $this->translate("Nome sulla patente"); ?></label>
                                 <?= $this->formRow($formDriver->get('driver')->get('driverLicenseName')); ?>
                             </div>
                         </div>
-
-                        <div class="col-lg-4">
+                        <div class="col-lg-3">
                             <div class="form-group">
                                 <label for="driverLicenseName"><?= $this->translate("Cognome sulla patente"); ?></label>
                                 <?= $this->formRow($formDriver->get('driver')->get('driverLicenseSurname')); ?>
                             </div>
                         </div>
-                    </div>
-
-                    <div class="row">
-
-
-                        <div class="col-lg-4">
+                        <div class="col-lg-2">
                             <div class="form-group">
-                                <label for="driverLicenseCountry"><?= $this->translate("Rilasciata da (nazione)"); ?></label>
-                                <?= $this->formRow($formDriver->get('driver')->get('driverLicenseCountry')); ?>
-                            </div>
-                        </div>
-
-                        <div class="col-lg-4">
-                            <div class="form-group">
-                                <label for="driverLicenseExpire"><?= $this->translate("Data di scadenza"); ?></label>
+                                <label for="driverLicenseExpire"><?= $this->translate("Scadenza"); ?></label>
                                 <?= $this->formRow($formDriver->get('driver')->get('driverLicenseExpire')); ?>
                             </div>
                         </div>
                     </div>
-
                     <div class="row">
                         <div class="col-lg-12">
                             <button type="submit" class="btn btn-success"><?= $this->translate("Salva Dati Patente"); ?></button>
@@ -448,4 +546,4 @@ $formSetting->setAttribute('action', $this->url('customers/edit', ['id' => $this
         <?php } ?>
     </div>
 </div>
-<script type="text/javascript" src="<?= $this->basePath() .'/js/customers-edit.js'; ?>"></script>
+<script type="text/javascript" src="<?= $this->basePath() .'/js/customers-edit.js?ver=1'; ?>"></script>
