@@ -144,6 +144,33 @@ class CustomerFieldset extends Fieldset implements InputFilterProviderInterface
         ]);
 
         $this->add([
+            'name'       => 'province',
+            'type'       => 'Zend\Form\Element\Select',
+            'attributes' => [
+                'id'       => 'province',
+                'class'    => 'form-control',
+                'required' => 'required'
+
+            ],
+            'options' => [
+                'value_options' => $provincesService->getAllProvinces()
+            ]
+        ]);
+
+        $this->add([
+            'name'       => 'country',
+            'type'       => 'Zend\Form\Element\Select',
+            'attributes' => [
+                'id'       => 'country',
+                'class'    => 'form-control',
+                'required' => 'required'
+            ],
+            'options'    => [
+                'value_options' => $countriesService->getAllCountries()
+            ]
+        ]);
+
+        $this->add([
             'name'       => 'address',
             'type'       => 'Zend\Form\Element\Text',
             'attributes' => [
@@ -227,6 +254,26 @@ class CustomerFieldset extends Fieldset implements InputFilterProviderInterface
                 'maxlength'   => 13,
                 'placeholder' => 'ITNNNNNNNNNNN',
                 'class'       => 'form-control',
+            ]
+        ]);
+
+        $this->add([
+            'name'       => 'recipientCode',
+            'type'       => 'Zend\Form\Element\Text',
+            'attributes' => [
+                'id'          => 'recipientCode',
+                'maxlength'   => 7,
+                'placeholder' => 'XXXXXXX',
+                'class'       => 'form-control',
+            ]
+        ]);
+
+        $this->add([
+            'name'       => 'cem',
+            'type'       => 'Zend\Form\Element\Text',
+            'attributes' => [
+                'id'       => 'cem',
+                'class'    => 'form-control'
             ]
         ]);
 
@@ -316,6 +363,17 @@ class CustomerFieldset extends Fieldset implements InputFilterProviderInterface
                     ]
                 ]
             ],
+            'country' => [
+                'required' => true
+            ],
+            'province' => [
+                'required' => true,
+                'filters' => [
+                    [
+                        'name' => 'StringTrim'
+                    ]
+                ]
+            ],
             'address' => [
                 'required' => true,
                 'filters' => [
@@ -329,11 +387,6 @@ class CustomerFieldset extends Fieldset implements InputFilterProviderInterface
                 'filters' => [
                     [
                         'name' => 'StringTrim'
-                    ]
-                ],
-                'validators' => [
-                    [
-                        'name' => 'Application\Form\Validator\ZipCode'
                     ]
                 ]
             ],
@@ -374,6 +427,22 @@ class CustomerFieldset extends Fieldset implements InputFilterProviderInterface
                 'validators' => [
                     [
                         'name' => 'Application\Form\Validator\VatNumber'
+                    ]
+                ]
+            ],
+            'recipientCode' => [
+                'required' => false,
+                'filters' => [
+                    [
+                        'name' => 'StringTrim'
+                    ]
+                ]
+            ],
+            'cem' => [
+                'required' => false,
+                'filters' => [
+                    [
+                        'name' => 'StringTrim'
                     ]
                 ]
             ],

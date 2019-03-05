@@ -264,7 +264,10 @@ class CustomersController extends AbstractActionController
                     $postData['customer']['name'] = $customer->getName();
                     $postData['customer']['surname'] = $customer->getSurname();
                     $postData['customer']['taxCode'] = $customer->getTaxCode();
-                    $postData['customer']['birthDate'] = $customer->getBirthDate()->format('Y-m-d');
+
+                    if(!is_null($customer->getBirthDate())) {
+                        $postData['customer']['birthDate'] = $customer->getBirthDate()->format('Y-m-d');
+                    }
 
                     // Check if Webuser can edit email
                     if (!$this->isAllowed('customer', 'changeEmail')) {
@@ -334,9 +337,11 @@ class CustomersController extends AbstractActionController
                 //add type of error
                 $e = '';
                 foreach ($form->getMessages() as $field) {
+                    $arrayOfKeys =array_keys($field);
+                    $i=0;
                     foreach ($field as $message) {
                         foreach ($message as $error) {
-                            $e = $e . $error . ' ';
+                            $e .= $error . ' (' . $arrayOfKeys[$i++] . '). ';
                         }
                     }
                 }
