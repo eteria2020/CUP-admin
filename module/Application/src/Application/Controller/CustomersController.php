@@ -330,7 +330,7 @@ class CustomersController extends AbstractActionController
             if ($form->isValid()) {
                 try {
                     //se non era silver list devo assegnare i minuti bonus mensili
-                    if($postData['setting']['silverList'] == 1){
+                    if(isset($postData['setting']['silverList']) && $postData['setting']['silverList'] == 1){
                         //controllare che non abbia già avuto un Bonus Silver List in questo mese
                         $start = new \DateTime("first day of this month");
                         $start->setTime(0,0,0);
