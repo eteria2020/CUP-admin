@@ -7,6 +7,7 @@ use Zend\ServiceManager\FactoryInterface;
 use Zend\ServiceManager\ServiceLocatorInterface;
 use DoctrineModule\Stdlib\Hydrator\DoctrineObject as DoctrineHydrator;
 use Zend\Session\Container;
+use SharengoCore\Entity\Configurations;
 
 class CustomersControllerFactory implements FactoryInterface
 {
@@ -56,6 +57,9 @@ class CustomersControllerFactory implements FactoryInterface
         $authorize = $sharedLocator->get('BjyAuthorize\Provider\Identity\ProviderInterface');
         $roles = $authorize->getIdentityRoles();
 
+        $configurationService = $serviceLocator->getServiceLocator()->get('SharengoCore\Service\ConfigurationsService');
+        $silverConfig = $configurationService->getConfigurationsKeyValueBySlug(Configurations::SILVER);
+
         // Controller is constructed, dependencies are injected (IoC in action)
         return new CustomersController(
             $roles,
@@ -75,12 +79,13 @@ class CustomersControllerFactory implements FactoryInterface
             $hydrator,
             $cartasiContractsService,
             $disableContractService,
-            $datatableFiltersSessionContainer
-            ,$registrationService,
+            $datatableFiltersSessionContainer,
+            $registrationService,
             $emailService,
             $userEventsService,
             $globalConfig,
-            $oldCustomerDiscountsService
+            $oldCustomerDiscountsService,
+            $silverConfig
         );
     }
 }
