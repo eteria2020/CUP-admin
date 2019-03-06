@@ -45,20 +45,23 @@ $formSetting->setAttribute('action', $this->url('customers/edit', ['id' => $this
                             </div>
                         </div>
 
-                        <div class="col-lg-3">
+                        <div class="col-lg-4">
                             <div class="form-group">
                                 <label for="name"><?= $this->translate("Nome"); ?></label>
                                 <?= $this->formRow($form->get('customer')->get('name')->setAttribute('readonly', 'true')); ?>
                             </div>
                         </div>
 
-                        <div class="col-lg-3">
+                        <div class="col-lg-4">
                             <div class="form-group">
                                 <label for="surname"><?= $this->translate("Cognome"); ?></label>
                                 <?= $this->formRow($form->get('customer')->get('surname')->setAttribute('readonly', 'true')); ?>
                             </div>
                         </div>
-                        <div class="col-lg-2">
+
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-4">
                             <div class="form-group">
                                 <label for="gender"><?= $this->translate("Email"); ?></label>
                                 <?php if ($this->isAllowed('customer', 'changeEmail')) {
@@ -96,14 +99,14 @@ $formSetting->setAttribute('action', $this->url('customers/edit', ['id' => $this
                                 ?>
                             </div>
                         </div>
-                        <div class="col-lg-6">
+                        <div class="col-lg-4">
                             <div class="form-group">
                                 <label for="name"><?= $this->translate("Comune"); ?></label>
                                 <?= $this->formRow($form->get('customer')->get('birthTown')->setAttribute('disabled', 'true')); ?>
                                 <input type="hidden" id="birthTown" name="customer[birthTown]" value="<?= $customer->getBirthTown() ?>">
                             </div>
                         </div>
-                        <div class="col-lg-2">
+                        <div class="col-lg-4">
                             <div class="form-group">
                                 <label for="name"><?= $this->translate("Data di nascita"); ?></label>
                                 <?= $this->formRow($form->get('customer')->get('birthDate')->setAttribute('disabled', 'true')); ?>
@@ -217,8 +220,10 @@ $formSetting->setAttribute('action', $this->url('customers/edit', ['id' => $this
                     <div class="row">
                         <div class="col-lg-3">
                             <div class="form-group">
-                                <label for="taxCode"><?= $this->translate("Codice fiscale"); ?></label>
-                                <?= $this->formRow($form->get('customer')->get('taxCode')->setAttribute('readonly', 'true')); ?>
+                                <label for="taxCode"><?= $this->translate("Codice fiscale"); ?> (test)</label>
+                                <div onclick="OpenLinkCheckTaxCode()">
+                                    <?= $this->formRow($form->get('customer')->get('taxCode')->setAttribute('readonly', 'true')); ?>
+                                </div>
                             </div>
                         </div>
 
