@@ -149,6 +149,11 @@ class CustomersController extends AbstractActionController
     private $oldCustomerDiscountsService;
 
     /**
+     * @var array
+     */
+    private $silverConfig;
+
+    /**
      * CustomersController constructor.
      * @param $roles
      * @param CustomersService $customersService
@@ -173,6 +178,7 @@ class CustomersController extends AbstractActionController
      * @param UserEventsService $userEventsService
      * @param array $globalConfig
      * @param OldCustomerDiscountsService $oldCustomerDiscountsService
+     * @param array $silverConfig
      */
     public function __construct(
         $roles,
@@ -192,12 +198,13 @@ class CustomersController extends AbstractActionController
         HydratorInterface $hydrator,
         CartasiContractsService $cartasiContractsService,
         DisableContractService $disableContractService,
-        Container $datatableFiltersSessionContainer
-        ,RegistrationService $registrationService,
+        Container $datatableFiltersSessionContainer,
+        RegistrationService $registrationService,
         EmailService $emailService,
         UserEventsService $userEventsService,
         array $globalConfig,
-        OldCustomerDiscountsService $oldCustomerDiscountsService
+        OldCustomerDiscountsService $oldCustomerDiscountsService,
+        array $silverConfig
     ) {
         $this->roles = $roles;
         $this->customersService = $customersService;
@@ -222,6 +229,7 @@ class CustomersController extends AbstractActionController
         $this->userEventsService = $userEventsService;
         $this->globalConfig = $globalConfig;
         $this->oldCustomerDiscountsService = $oldCustomerDiscountsService;
+        $this->silverConfig = $silverConfig;
     }
 
     /**
@@ -318,6 +326,19 @@ class CustomersController extends AbstractActionController
 
             if ($form->isValid()) {
                 try {
+                    //se non era silver list devo assegnare i minuti bonus mensili
+                    if($postData['setting']['silverList'] == 1){
+                        //controllare che non abbia già avuto un Bonus Silver List in questo mese
+                        $start = new \DateTime("first day of this month");
+                        $start->setTime(0,0,0);
+                        $end = new \DateTime("last day of this month");
+                        $end->setTime(23,59,59);
+                        $previousBonus = $this->bonusService->verifySilverList($customer, $start, $end);
+
+                        if(count($previousBonus) == 0){
+                            $this->bonusService->createBonusForCustomerFromData($customer,$this->silverConfig['silver_list'],'promo','Bonus Silver List', $end->format('Y-m-d H:i:s'), $start->format('Y-m-d H:i:s'));
+                        }
+                    }
                     $this->customersService->saveData($form->getData());
                     if(isset($postData['setting']) && $postData['setting']['firstPaymentCompleted'] == '1'){
                         $customer_id = $postData['setting']['id'];
