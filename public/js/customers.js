@@ -41,7 +41,7 @@ $(function() {
         },
         "fnServerParams": function ( aoData ) {
             aoData.push({ "name": "column", "value": $(dataTableVars.column).val()});
-            aoData.push({ "name": "searchValue", "value": dataTableVars.searchValue.val().trim()});
+            aoData.push({ "name": "searchValue", "value": dataTableVars.searchValue.val().toLowerCase().trim()});
         },
         "order": [[dataTableVars.iSortCol_0, dataTableVars.sSortDir_0]],
         "columns": [
