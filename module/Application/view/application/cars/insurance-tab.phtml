@@ -1,0 +1,74 @@
+
+<h4><?= $this->translate("Polizza assicurativa"); ?></h4>
+
+<form method="POST" action="<?php echo $this->url('cars/ajax-tab-insurance', ['plate' => $this->car->getPlate()]) ?>">
+    <div class="row">
+        <div class="col-md-12">
+            <?php echo $this->partial('partials/flash-messages.phtml', []); ?>
+            <div class="row">
+                <div class="col-lg-3">
+                    <div class="form-group">
+                        <label for="gender"><?= $this->translate("Compagnia"); ?></label>
+
+
+                            <?
+                            $disableInsuranceNumber = 'disabled="disabled"';
+
+                            if(count($this->insuranceConfig)==0) {
+                                $disableInsuranceNumber = "";
+                                echo '<input type="text" class="form-control" name="company" value="'.$this->carInfo->getInsuranceCompany().'">';
+                            } else {
+                                echo '<select class="form-control" name="company">';
+                                $flagNotIncluded = true;
+                                foreach ($this->insuranceConfig as $value) {
+                                    $selected = "";
+                                    if ($this->carInfo->getInsuranceCompany()==$value->company) {
+                                        $selected = "selected";
+                                        $flagNotIncluded = false;
+                                    }
+                                    echo '<option value="'.$value->company.'" '.$selected.'>'.$value->company.'</option>';
+                                }
+                                if($flagNotIncluded) {
+                                    echo '<option value="'.$this->carInfo->getInsuranceCompany().'" selected>'.$this->carInfo->getInsuranceCompany().'</option>';
+                                }
+                                echo "</select>";
+                            }
+                            ?>
+
+                    </div>
+                </div>
+                <div class="col-lg-3">
+                    <div class="form-group">
+                        <label for="gender"><?= $this->translate("Numero polizza"); ?></label>
+                        <input type="text" class="form-control" name="number" <?=$disableInsuranceNumber; ?> maxlength="20" value="<?= $carInfo->getInsuranceNumber() ?>">
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-3">
+                    <div class="form-group">
+                        <label for="gender"><?= $this->translate("Decorrenza"); ?></label>
+                        <input type="text" class="form-control date-picker" name="valid_from" value="<?= is_null($carInfo->getInsuranceValidFrom()) ? '' : date_format($carInfo->getInsuranceValidFrom(), 'd-m-Y'); ?>">
+                    </div>
+                </div>
+                <div class="col-lg-3">
+                    <div class="form-group">
+                        <label for="gender"><?= $this->translate("Scadenza"); ?></label>
+                        <input type="text" class="form-control date-picker" name="expiry" value="<?=  is_null($carInfo->getInsuranceExpiry()) ? '' : date_format($carInfo->getInsuranceExpiry(), 'd-m-Y'); ?>">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <button type="submit" class="btn btn-success"><?= $this->translate("Salva"); ?></button>
+</form>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('.date-picker').datepicker({
+            autoclose: true,
+            format: 'dd-mm-yyyy',
+            weekStart: 1
+        });
+    });
+</script>
