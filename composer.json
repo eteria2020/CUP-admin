@@ -35,7 +35,12 @@
         {
             "url": "ssh://git@git.sharengo.it/cup-it/omnipay-cartasi.git",
             "type": "git"
+        },
+        {
+            "url": "ssh://git@git.sharengo.it/cup-it/gpwebpay.git",
+            "type": "git"
         }
+
     ],
     "require": {
         "php": ">=5.4.0",
@@ -58,7 +63,8 @@
         "cup-web/core-business": "dev-master",
         "mvlabs/mvlabs-payments": "dev-master",
         "mvlabs/omnipay-cartasi": "dev-master",
-        "usu/codice-fiscale": "^1.0"
+        "usu/codice-fiscale": "^1.0",
+        "sharengo-web/gpwebpay": "dev-master"
     },
     "require-dev": {
         "phpunit/phpunit": "^4.8",

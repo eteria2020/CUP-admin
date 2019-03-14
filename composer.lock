@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "af11d87f4905e752dad94a668a78a5b9",
+    "content-hash": "01feb6fe6e866560378a57500d4e94b2",
     "packages": [
         {
             "name": "bjyoungblood/bjy-authorize",
@@ -2451,6 +2451,29 @@
             "time": "2018-08-03T06:53:04+00:00"
         },
         {
+            "name": "sharengo-web/gpwebpay",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "ssh://git@git.sharengo.it/cup-it/gpwebpay.git",
+                "reference": "d9d66defa83aaa010dc74ed044b59180c4907958"
+            },
+            "require": {
+                "doctrine/doctrine-orm-module": "0.*",
+                "php": ">=5.4.0",
+                "sharengo-web/cartasi": "dev-master",
+                "zendframework/zendframework": "2.4.*"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "GPWebpay": "src/"
+                }
+            },
+            "description": "GPWebpay module for Sharengo",
+            "time": "2019-03-08T16:23:29+00:00"
+        },
+        {
             "name": "symfony/console",
             "version": "v2.8.2",
             "source": {
@@ -4419,6 +4442,7 @@
         "cup-web/core-business": 20,
         "mvlabs/mvlabs-payments": 20,
         "mvlabs/omnipay-cartasi": 20,
+        "sharengo-web/gpwebpay": 20,
         "phpmd/phpmd": 0
     },
     "prefer-stable": false,
