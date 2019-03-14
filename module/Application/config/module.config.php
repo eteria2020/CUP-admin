@@ -705,6 +705,18 @@ return [
                             ],
                         ],
                     ],
+                    'ajax-tab-insurance' => [
+                        'type'    => 'Segment',
+                        'options' => [
+                            'route'    => '/ajax-tab/insurance/:plate',
+                            'constraints' => [
+                                'plate' => '[a-zA-Z0-9]*',
+                            ],
+                            'defaults' => [
+                                'action'        => 'insurance-tab',
+                            ],
+                        ],
+                    ],
                     'location-not-active' => [
                         'type'    => 'Literal',
                         'options' => [

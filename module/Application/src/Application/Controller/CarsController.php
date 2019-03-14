@@ -11,13 +11,18 @@ use MvLabsMultilanguage\Service\LanguageService;
 use SharengoCore\Entity\Cars;
 use SharengoCore\Entity\CarsMaintenance;
 use SharengoCore\Entity\Commands;
+use SharengoCore\Entity\Configurations;
+
 use SharengoCore\Service\CarsService;
 use SharengoCore\Service\TripsService;
 use SharengoCore\Service\CarsDamagesService;
 use SharengoCore\Service\CommandsService;
-use SharengoCore\Utility\CarStatus;
+use SharengoCore\Service\ConfigurationsService;
 use SharengoCore\Service\MaintenanceLocationsService;
 use SharengoCore\Service\MaintenanceMotivationsService;
+
+use SharengoCore\Utility\CarStatus;
+
 // Externals
 use Zend\Form\Form;
 use Zend\Http\Response;
@@ -54,7 +59,11 @@ class CarsController extends AbstractActionController {
      * @var Container
      */
     private $datatableFiltersSessionContainer;
-    
+
+    /**
+     * @var ConfigurationsService
+     */
+    private $configurationsService;
     /**
      * @var TripsService
      */
@@ -78,24 +87,36 @@ class CarsController extends AbstractActionController {
     private $maintenanceMotivationsService;
 
     /**
+     * CarsController constructor.
      * @param CarsService $carsService
      * @param CommandsService $commandsService
      * @param Form $carForm
      * @param HydratorInterface $hydrator
      * @param Container $datatableFiltersSessionContainer
+     * @param ConfigurationsService $configurationsService
      * @param TripsService $tripsService
-     * @param string $roles
+     * @param $roles
      * @param MaintenanceLocationsService $maintenanceLocationsService
      * @param MaintenanceMotivationsService $maintenanceMotivationsService
      */
     public function __construct(
-    CarsService $carsService, CommandsService $commandsService, Form $carForm, HydratorInterface $hydrator, Container $datatableFiltersSessionContainer, TripsService $tripsService, $roles, MaintenanceLocationsService $maintenanceLocationsService,MaintenanceMotivationsService $maintenanceMotivationsService
+        CarsService $carsService,
+        CommandsService $commandsService,
+        Form $carForm,
+        HydratorInterface $hydrator,
+        Container $datatableFiltersSessionContainer,
+        ConfigurationsService $configurationsService,
+        TripsService $tripsService,
+        $roles,
+        MaintenanceLocationsService $maintenanceLocationsService,
+        MaintenanceMotivationsService $maintenanceMotivationsService
     ) {
         $this->carsService = $carsService;
         $this->commandsService = $commandsService;
         $this->carForm = $carForm;
         $this->hydrator = $hydrator;
         $this->datatableFiltersSessionContainer = $datatableFiltersSessionContainer;
+        $this->configurationsService = $configurationsService;
         $this->tripsService = $tripsService;
         $this->roles = $roles;
         $this->maintenanceLocationsService = $maintenanceLocationsService;
@@ -303,6 +324,48 @@ class CarsController extends AbstractActionController {
         return $view;
     }
 
+    public function insuranceTabAction() {
+        $translator = $this->TranslatorPlugin();
+        $plate = $this->params()->fromRoute('plate', 0);
+        $car = $this->carsService->getCarByPlate($plate);
+        $carInfo = $car->getCarsInfo();
+
+        $insuranceConfig = $this->getCarsInfoConfiguration();
+
+        if ($this->getRequest()->isPost()) {
+            try {
+                $postData = $this->getRequest()->getPost()->toArray();
+
+                if(!isset($postData['number'])) {
+                    $postData['number'] = $carInfo->getInsuranceNumber();
+                }
+
+                foreach ($insuranceConfig as $value) {
+                    if ($value->company==$postData['company']) {
+                        $postData['number'] = $value->number;
+                        break;
+                    }
+                }
+
+                $this->carsService->updateInsurance($car, $postData['company'], $postData['number'], $postData['valid_from'], $postData['expiry']);
+                $this->flashMessenger()->addSuccessMessage($translator->translate('Dati polizza assicurativa modificati con successo!'));
+
+            } catch (\Exception $e) {
+                $this->flashMessenger()->addErrorMessage($translator->translate('Si è verificato un errore applicativo. L\'assistenza tecnica è già al corrente, ci scusiamo per l\'inconveniente'));
+            }
+            $url = $this->url()->fromRoute('cars/edit', ['plate' => $car->getPlate()]) . '#insurance';
+            return $this->redirect()->toUrl($url);
+        }
+
+        $view = new ViewModel([
+            'insuranceConfig' => $insuranceConfig,
+            'car' => $car,
+            'carInfo' => $carInfo
+        ]);
+        $view->setTerminal(true);
+        return $view;
+    }
+
     public function deleteAction() {
         $translator = $this->TranslatorPlugin();
         $plate = $this->params()->fromRoute('plate', 0);
@@ -414,6 +477,20 @@ class CarsController extends AbstractActionController {
         }
         $response->setContent(json_encode(["status" => "OK", "link" => $positionLinkBlackBox]));
         return $response;
+    }
+
+
+    private function  getCarsInfoConfiguration()
+    {
+        $result = [];
+        $carConfigurations = $this->configurationsService->getConfigurationsBySlug(Configurations::CAR, false);
+        foreach ($carConfigurations as $configuration) {
+            if($configuration->getConfigKey()=="cars_info_insurance" && $configuration->getConfigValue()=="true") {
+                $result = json_decode($configuration->getConfigSpecific());
+            }
+        }
+
+        return $result;
     }
 
 }

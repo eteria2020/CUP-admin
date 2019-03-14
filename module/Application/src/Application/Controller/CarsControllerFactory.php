@@ -26,6 +26,7 @@ class CarsControllerFactory implements FactoryInterface
         $maintenanceLocationsService = $sharedServiceLocator->get('SharengoCore\Service\MaintenanceLocationsService');
         $maintenanceMotivationsService = $sharedServiceLocator->get('SharengoCore\Service\MaintenanceMotivationsService');
         $datatablesSessionNamespace = $sharedServiceLocator->get('Configuration')['session']['datatablesNamespace'];
+        $configurationsService = $serviceLocator->getServiceLocator()->get('SharengoCore\Service\ConfigurationsService');
 
         $carForm = $sharedServiceLocator->get('CarForm');
         $hydrator = new DoctrineHydrator($entityManager);
@@ -41,6 +42,7 @@ class CarsControllerFactory implements FactoryInterface
             $carForm,
             $hydrator,
             $datatableFiltersSessionContainer,
+            $configurationsService,
             $tripsService,
             $roles,
             $maintenanceLocationsService,
