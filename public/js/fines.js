@@ -62,6 +62,9 @@ $(function() {
                 case 2:
                     $('td', row).css('background', '#f2ffcc');
                     break;
+                case 3:
+                    $('td', row).css('background', '#dfdfdf');
+                    break;
             }
         },
         "fnServerData": function (sSource, aoData, fnCallback, oSettings) {
