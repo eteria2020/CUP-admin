@@ -57,7 +57,7 @@ $as_errors = array_merge($as_errorsIdentity,
 
 <?php
 
-if($serverInstance!="sk_SK") {
+if(!isset($serverInstance) || $serverInstance == "it_IT" || $serverInstance == "") {
     echo '<div style="text-align:center ">';
     //echo '<hr style= "border-top: 1px solid #999">';
     echo '<a href="https://sso.sharengo.it/log365.php?portal=admin&direct=true"><img src="/img/login365.png"></a>';
