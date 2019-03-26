@@ -55,6 +55,16 @@ class CustomersEditController extends AbstractActionController
     private $settingForm;
 
     /**
+     * @var array
+     */
+    private $config;
+
+    /**
+     * @var $serverInstance
+     */
+    private $serverInstance = "";
+
+    /**
      * @param CustomersService $customersService
      * @param CustomerDeactivationService $deactivationService
      * @param TripPaymentTriesService $tripPaymentTriesService
@@ -62,6 +72,7 @@ class CustomersEditController extends AbstractActionController
      * @param CustomerForm $customerForm
      * @param DriverForm $driverForm
      * @param SettingForm $settingForm
+     * @param array $config
      */
     public function __construct(
         CustomersService $customersService,
@@ -70,7 +81,8 @@ class CustomersEditController extends AbstractActionController
         DoctrineHydrator $hydrator,
         CustomerForm $customerForm,
         DriverForm $driverForm,
-        SettingForm $settingForm
+        SettingForm $settingForm,
+        array $config
     ) {
         $this->customersService = $customersService;
         $this->deactivationService = $deactivationService;
@@ -79,6 +91,11 @@ class CustomersEditController extends AbstractActionController
         $this->customerForm = $customerForm;
         $this->driverForm = $driverForm;
         $this->settingForm = $settingForm;
+        $this->config = $config;
+
+        if(isset($this->config['serverInstance'])) {
+            $this->serverInstance = $this->config['serverInstance'];
+        }
     }
 
     public function editTabAction()
@@ -297,10 +314,11 @@ class CustomersEditController extends AbstractActionController
         if(!$validator->isValid($customer->getZipCode())){
             $errorMessage .= implode( ",", $validator->getMessages()).",";;
         }
-
-        $validator = new TaxCode();
-        if(!$validator->isValid($customer->getTaxCode())){
-            $errorMessage .= implode( ",", $validator->getMessages()).",";;
+        if(!isset($this->serverInstance) || is_null($this->serverInstance) ||  $this->serverInstance == "it_IT"){
+            $validator = new TaxCode();
+            if(!$validator->isValid($customer->getTaxCode())){
+                $errorMessage .= implode( ",", $validator->getMessages()).",";
+            }
         }
 
         $validator = new VatNumber();

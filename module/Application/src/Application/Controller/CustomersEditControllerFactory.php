@@ -20,6 +20,7 @@ class CustomersEditControllerFactory implements FactoryInterface
         $customerForm = $sharedLocator->get('CustomerForm');
         $driverForm = $sharedLocator->get('DriverForm');
         $settingForm = $sharedLocator->get('SettingForm');
+        $config = $sharedLocator->get('Config');
 
         return new CustomersEditController(
             $customersService,
@@ -28,7 +29,8 @@ class CustomersEditControllerFactory implements FactoryInterface
             $hydrator,
             $customerForm,
             $driverForm,
-            $settingForm
+            $settingForm,
+            $config
         );
     }
 }
