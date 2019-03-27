@@ -2434,7 +2434,7 @@
             "source": {
                 "type": "git",
                 "url": "ssh://git@git.sharengo.it/cup-it/cartasi.git",
-                "reference": "f3c8e804e70b9bdddadcd93aa3553fea4b556a24"
+                "reference": "4d2038f95b4763f0e816e90bc5c02fddb0e8e3fd"
             },
             "require": {
                 "doctrine/doctrine-orm-module": "0.*",
@@ -2448,7 +2448,7 @@
                 }
             },
             "description": "Cartasi module for Sharengo",
-            "time": "2018-08-03T06:53:04+00:00"
+            "time": "2019-03-27T10:37:19+00:00"
         },
         {
             "name": "sharengo-web/gpwebpay",
