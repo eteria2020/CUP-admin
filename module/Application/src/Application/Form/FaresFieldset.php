@@ -22,20 +22,10 @@ class FaresFieldset extends Fieldset implements InputFilterProviderInterface
         $costSteps = $fare->getCostSteps();
 
         $this->add([
-            'name' => 'costStep60',
-            'type' => 'Zend\Form\Element\Number',
-            'attributes' => [
-                'id'    => 'costStep60',
-                'class' => 'form-control',
-                'value' => $costSteps['60']
-            ]
-        ]);
-
-        $this->add([
             'name' => 'costStep1440',
             'type' => 'Zend\Form\Element\Number',
             'attributes' => [
-                'id'    => 'costStep60',
+                'id'    => 'costStep1440',
                 'class' => 'form-control',
                 'value' => $costSteps['1440']
             ]
@@ -45,12 +35,6 @@ class FaresFieldset extends Fieldset implements InputFilterProviderInterface
     public function getInputFilterSpecification()
     {
         return [
-            'costStep60' => [
-                'required' => true,
-            ],
-            'costStep240' => [
-                'required' => true,
-            ],
             'costStep1440' => [
                 'required' => true,
             ],
