@@ -62,7 +62,7 @@ class CustomersEditController extends AbstractActionController
     /**
      * @var $serverInstance
      */
-    private $serverInstance = "";
+    private $serverInstance = null;
 
     /**
      * @param CustomersService $customersService
@@ -290,8 +290,10 @@ class CustomersEditController extends AbstractActionController
             $errorMessage .= $translator->translate("data nascita utente vuoto,");
         }
 
-        if($this->isNullOrEmptyString($customer->getBirthTown())){
-            $errorMessage .= $translator->translate("città nascita utente vuoto,");
+        if(!isset($this->serverInstance) || is_null($this->serverInstance) || $this->serverInstance["id"] == "it_IT") {
+            if ($this->isNullOrEmptyString($customer->getBirthTown())) {
+                $errorMessage .= $translator->translate("città nascita utente vuoto,");
+            }
         }
 
         if($this->isNullOrEmptyString($customer->getBirthProvince())){
@@ -314,7 +316,7 @@ class CustomersEditController extends AbstractActionController
         if(!$validator->isValid($customer->getZipCode())){
             $errorMessage .= implode( ",", $validator->getMessages()).",";;
         }
-        if(!isset($this->serverInstance) || is_null($this->serverInstance) ||  $this->serverInstance == "it_IT"){
+        if(!isset($this->serverInstance) || is_null($this->serverInstance) || $this->serverInstance["id"] == "it_IT"){
             $validator = new TaxCode();
             if(!$validator->isValid($customer->getTaxCode())){
                 $errorMessage .= implode( ",", $validator->getMessages()).",";
