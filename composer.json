@@ -64,7 +64,8 @@
         "mvlabs/mvlabs-payments": "dev-master",
         "mvlabs/omnipay-cartasi": "dev-master",
         "usu/codice-fiscale": "^1.0",
-        "sharengo-web/gpwebpay": "dev-master"
+        "sharengo-web/gpwebpay": "dev-master",
+        "mattketmo/email-checker": "^1.5"
     },
     "require-dev": {
         "phpunit/phpunit": "^4.8",
