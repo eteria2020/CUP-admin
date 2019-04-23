@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "01feb6fe6e866560378a57500d4e94b2",
+    "content-hash": "d0fee098e9916b27c58ec2a5bda663e4",
     "packages": [
         {
             "name": "bjyoungblood/bjy-authorize",
@@ -1795,6 +1795,68 @@
             "time": "2014-11-24T18:39:20+00:00"
         },
         {
+            "name": "mattketmo/email-checker",
+            "version": "v1.5.5",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/MattKetmo/EmailChecker.git",
+                "reference": "3b1afb8a1d439eefed687fecf3340967cdb7c106"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/MattKetmo/EmailChecker/zipball/3b1afb8a1d439eefed687fecf3340967cdb7c106",
+                "reference": "3b1afb8a1d439eefed687fecf3340967cdb7c106",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^5.4 || ^7.0"
+            },
+            "require-dev": {
+                "fabpot/php-cs-fixer": "^1.9",
+                "knplabs/gaufrette": "^0.1",
+                "phpunit/phpunit": "^4.8",
+                "symfony/validator": "^2.1"
+            },
+            "suggest": {
+                "knplabs/gaufrette": "Use filesystem abstraction layer to read data",
+                "symfony/validator": "Add validation constraints"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "EmailChecker\\Laravel\\EmailCheckerServiceProvider"
+                    ],
+                    "aliases": {
+                        "EmailChecker": "EmailChecker\\Laravel\\EmailCheckerFacade"
+                    }
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "EmailChecker\\": "src/EmailChecker"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Matthieu Moquet",
+                    "email": "matthieu@moquet.net"
+                }
+            ],
+            "description": "Throwaway email detection library",
+            "keywords": [
+                "check",
+                "disposable",
+                "email",
+                "throwaway"
+            ],
+            "time": "2018-08-29T06:39:00+00:00"
+        },
+        {
             "name": "mockery/mockery",
             "version": "0.9.4",
             "source": {
@@ -2107,11 +2169,12 @@
             "source": {
                 "type": "git",
                 "url": "ssh://git@git.sharengo.it/cup-it/core.git",
-                "reference": "2e31cd3994ac89605e6f67e0473b036ad0b01cbd"
+                "reference": "6ed9c5528864a7586010a9cac25d43cc125d73dc"
             },
             "require": {
                 "doctrine/doctrine-orm-module": "0.*",
                 "h4cc/wkhtmltopdf-amd64": "0.12.0",
+                "mattketmo/email-checker": "^1.5",
                 "mvlabs/mvlabs-snappy": "0.2.*",
                 "php": ">=5.4.0",
                 "rwoverdijk/assetmanager": "1.4.*",
@@ -2129,7 +2192,7 @@
                 }
             },
             "description": "Core ZF2 module for Sharengo apps",
-            "time": "2019-04-03T13:18:13+00:00"
+            "time": "2019-04-23T14:50:01+00:00"
         },
         {
             "name": "mvlabs/zf2-multilanguage",

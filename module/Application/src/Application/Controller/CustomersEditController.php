@@ -10,6 +10,7 @@ use SharengoCore\Service\CustomerDeactivationService;
 use SharengoCore\Service\CustomersService;
 use SharengoCore\Service\TripPaymentTriesService;
 use SharengoCore\Form\Validator\TaxCode;
+use SharengoCore\Form\Validator\DisposableEmail;
 
 use DoctrineModule\Stdlib\Hydrator\DoctrineObject as DoctrineHydrator;
 use Zend\Form\Form;
@@ -269,6 +270,10 @@ class CustomersEditController extends AbstractActionController
         $result = true;
         $errorMessage = "";
 
+        $validator = new DisposableEmail();
+        if(!$validator->isValid($customer->getEmail())){
+            $errorMessage .= implode( ",", $validator->getMessages()).",";;
+        }
 
         if($this->isNullOrEmptyString($customer->getGender())){
             $errorMessage .= $translator->translate("genere utente vuoto,");
