@@ -89,7 +89,7 @@ $formSetting->setAttribute('action', $this->url('customers/edit', ['id' => $this
                         <div class="col-lg-2">
                             <div class="form-group">
                                 <label for="gender"><?= $this->translate("Provincia"); ?></label>
-                                <?
+                                <?php
                                 if($customer->getBirthCountry()==='it') {
                                     echo $this->formRow($form->get('customer')->get('birthProvince')->setAttribute('disabled', 'true'));
                                     echo '<input type="hidden" id="birthProvince" name="customer[birthProvince]" value="'.$customer->getBirthProvince().'">';
@@ -128,7 +128,7 @@ $formSetting->setAttribute('action', $this->url('customers/edit', ['id' => $this
                         <div class="col-lg-2">
                             <div class="form-group">
                                 <label for="surname"><?= $this->translate("Provincia"); ?></label>
-                                <?
+                                <?php
 
                                 echo $this->formRow($form->get('customer')->get('province'));
 
@@ -148,7 +148,7 @@ $formSetting->setAttribute('action', $this->url('customers/edit', ['id' => $this
                         <div class="col-lg-3">
                             <div class="form-group">
                                 <label for="surname"><?= $this->translate("Città"); ?></label>
-                                <?
+                                <?php
                                 $town = $form->get('customer')->get('town');
                                 $select = '<select name="' . $town->getName() . '" ';
                                 foreach ($town->getAttributes() as $attribute => $value) {
@@ -184,7 +184,7 @@ $formSetting->setAttribute('action', $this->url('customers/edit', ['id' => $this
                         <div class="col-lg-2">
                             <div class="form-group">
                                 <label for="name"><?= $this->translate("CAP"); ?></label>
-                                <?
+                                <?php
                                 $zipCode = $form->get('customer')->get('zipCode');
                                 $select = '<select name="' . $zipCode->getName() . '" ';
                                 foreach ($zipCode->getAttributes() as $attribute => $value) {
