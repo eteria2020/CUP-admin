@@ -96,6 +96,8 @@ class CustomersEditController extends AbstractActionController
 
         if(isset($this->config['serverInstance'])) {
             $this->serverInstance = $this->config['serverInstance'];
+        } else {
+            $this->serverInstance["id"] = "";
         }
     }
 
@@ -295,12 +297,6 @@ class CustomersEditController extends AbstractActionController
             $errorMessage .= $translator->translate("data nascita utente vuoto,");
         }
 
-        if(!isset($this->serverInstance) || is_null($this->serverInstance) || $this->serverInstance["id"] == "it_IT") {
-            if ($this->isNullOrEmptyString($customer->getBirthTown())) {
-                $errorMessage .= $translator->translate("città nascita utente vuoto,");
-            }
-        }
-
         if($this->isNullOrEmptyString($customer->getBirthProvince())){
             $errorMessage .= $translator->translate("provincia nascita utente vuoto,");
         }
@@ -317,11 +313,16 @@ class CustomersEditController extends AbstractActionController
             $errorMessage .= $translator->translate("città utente vuoto,");
         }
 
-        $validator = new ZipCode();
-        if(!$validator->isValid($customer->getZipCode())){
-            $errorMessage .= implode( ",", $validator->getMessages()).",";;
-        }
-        if(!isset($this->serverInstance) || is_null($this->serverInstance) || $this->serverInstance["id"] == "it_IT"){
+        if($this->serverInstance["id"] == "") {     // check on for Italy
+            if ($this->isNullOrEmptyString($customer->getBirthTown())) {
+                $errorMessage .= $translator->translate("città nascita utente vuoto,");
+            }
+
+            $validator = new ZipCode();
+            if(!$validator->isValid($customer->getZipCode())){
+                $errorMessage .= implode( ",", $validator->getMessages()).",";;
+            }
+
             $validator = new TaxCode();
             if(!$validator->isValid($customer->getTaxCode())){
                 $errorMessage .= implode( ",", $validator->getMessages()).",";
