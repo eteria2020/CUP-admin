@@ -48,7 +48,7 @@ class CloseTripDataFactory
 
         if ($dateTime > date_create()) {
             throw new InvalidFormInputData($this->translator->translate('Non è possibile utilizzare una data futura'));
-        } else if ($dateTime < $trip->getTimestampBeginning()) {
+        } elseif ($dateTime < $trip->getTimestampBeginning()) {
             throw new InvalidFormInputData($this->translator->translate('Non è possibile chiudere una corsa prima del suo inizio'));
         }
 

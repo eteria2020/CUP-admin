@@ -73,7 +73,7 @@ class ReservationsController extends AbstractActionController
 
             return $this->reservationsService->getDataDataTable($filters, true);
 
-        } else if (empty($filters['searchValue'])) {
+        } elseif (empty($filters['searchValue'])) {
 
             return $totalReservations;
 
