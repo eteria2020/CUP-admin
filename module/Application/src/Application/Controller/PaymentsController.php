@@ -282,9 +282,7 @@ class PaymentsController extends AbstractActionController
     public function doRetryPaymentsAction()
     {
         $id = (int)$this->params()->fromRoute('id', 0);
-
         $webuser = $this->identity();
-
         $tripPayment = $this->tripPaymentsService->getTripPaymentById($id);
 
         if ($tripPayment->isWrongPayment()) {
@@ -398,6 +396,7 @@ class PaymentsController extends AbstractActionController
 
         try {
             $customer = $this->customersService->findById($customerId);
+            $webuser = $this->identity();
 
             if (is_null($customer)) {
                 $this->getResponse()->setStatusCode(422);
@@ -411,7 +410,7 @@ class PaymentsController extends AbstractActionController
             if (is_null($contract)) {
                 $this->getResponse()->setStatusCode(422);
                 return new JsonModel([
-                    'error' => $translator->translate('Il cliente non ha un contratto valido con Cartasi')
+                    'error' => $translator->translate('Il cliente non ha un contratto valido')
                 ]);
             }
 
@@ -439,16 +438,19 @@ class PaymentsController extends AbstractActionController
 
             if($rate == 'true'){
                 $extraPaymentRate_first = $this->payExtraWithRates($customer, $fleet, $amount, $type, $penalty, $reasons, $amounts, $n_rates);
-                //visto che si è scelto di pagare a rate, allora l'importo da far passare deve essere minore
+                //we have chose to pay with installments, the the amount is the first installment (less that the total amount)
                 $amount = $extraPaymentRate_first->getAmount();
             }
 
-            $response = $this->cartasiCustomerPayments->sendPaymentRequest($customer, $amount);
+            //$response = $this->cartasiCustomerPayments->sendPaymentRequest($customer, $amount);
 
             $extraPayment = $this->extraPaymentsService->registerExtraPayment(
-                    $customer, $fleet, $response->getTransaction(), $amount, $type, $penalty, $reasons, $amounts, true, $vat
+                    $customer, $fleet, null, $amount, $type, $penalty, $reasons, $amounts, true, $vat
             );
-            
+
+            $response = $this->paymentsService->tryExtraPayment($extraPayment,$webuser);
+            $extraPayment->setTransaction($response->getTransaction());
+
             //IF PAYMENTS RATES
             if($rate == 'true'){
                 $extraPaymentRate_first = $this->extraPaymentRatesService->setPaymentRate($extraPaymentRate_first, $extraPayment);
@@ -456,23 +458,23 @@ class PaymentsController extends AbstractActionController
             
             if (!$response->getCompletedCorrectly()) {
 
-                $extraPaymentTry = $this->extraPaymentsService->processWrongPayment($extraPayment, $response, $this->identity());
+                $extraPaymentTry = $this->extraPaymentsService->processWrongPayment($extraPayment, $response, $webuser);
 
                 $extraTries = $this->encodeExtra($extraPaymentTry);
 
                 $this->response->setStatusCode(402);
                 return new JsonModel([
-                    'error' => $translator->translate('Il tentativo di pagamento non è andato a buon fine. Il cliente è stato notificato da Cartasi'),
+                    'error' => $translator->translate('Il tentativo di pagamento non è andato a buon fine. Il cliente è stato notificato.'),
                     'extraPaymentTry' => $extraTries
                 ]);
             }
 
-            $extraPaymentTry = $this->extraPaymentsService->processPayedCorrectly($extraPayment, $response, $this->identity());
+            $extraPaymentTry = $this->extraPaymentsService->processPayedCorrectly($extraPayment, $response, $webuser);
             
             $extraTries = $this->encodeExtra($extraPaymentTry);
 
             return new JsonModel([
-                'message' => $translator->translate('Il tentativo di pagamento è andato a buon fine. Il cliente è stato notificato da Cartasi'),
+                'message' => $translator->translate('Il tentativo di pagamento è andato a buon fine. Il cliente è stato notificato.'),
                 'extraPaymentTry' => $extraTries
             ]);
             
