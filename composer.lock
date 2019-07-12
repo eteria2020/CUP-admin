@@ -2169,7 +2169,7 @@
             "source": {
                 "type": "git",
                 "url": "ssh://git@git.sharengo.it/cup-it/core.git",
-                "reference": "0d2f839da3bbd7147166acbf06c4acb351d87233"
+                "reference": "add1b9341c92eb0261711750e48a0581489d82dd"
             },
             "require": {
                 "doctrine/doctrine-orm-module": "0.*",
@@ -2183,7 +2183,8 @@
             },
             "require-dev": {
                 "mockery/mockery": "^0.9.4",
-                "phpunit/phpunit": "^4.7"
+                "phpunit/phpunit": "^4.7",
+                "smsgatewayme/client": "^0.0.1"
             },
             "type": "library",
             "autoload": {
@@ -2192,7 +2193,7 @@
                 }
             },
             "description": "Core ZF2 module for Sharengo apps",
-            "time": "2019-06-03T12:11:10+00:00"
+            "time": "2019-07-12T13:13:18+00:00"
         },
         {
             "name": "mvlabs/zf2-multilanguage",
