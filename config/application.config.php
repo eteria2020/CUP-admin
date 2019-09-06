@@ -25,7 +25,8 @@ $config = [
         'MvLabsMultilanguage',
         'BusinessCore',
         'CUPAdminBusinessModule',
-        'GPWebpay'
+        'GPWebpay',
+        'Mollie'
     ],
 
     // These are various options for the listeners attached to the ModuleManager
