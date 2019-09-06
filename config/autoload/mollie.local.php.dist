@@ -1,0 +1,16 @@
+<?php
+
+return [
+    'mollie' => [
+        'url_base' => 'https://api.mollie.com/v2',
+        'currency' => 'EUR',
+        'locale' => 'nl_NL',
+        'webhook_url' => 'http://public.localhost.it/mollie/webhook',
+        'return_first_payment' => 'http://public.localhost.it/mollie/return-first-payment',
+        'first_payment_amount' => 500,
+        'return_change_card_payment' => 'http://public.localhost.it/mollie/return-change-card',
+        'change_card_amount' => 100,
+        'private_key_password' => 'Bearer  test_fSzmrMG2wK5rkp4NckDPBrbets7xee',
+        'valid_ip' => ''
+    ]
+];
