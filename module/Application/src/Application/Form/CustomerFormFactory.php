@@ -22,6 +22,7 @@ class CustomerFormFactory implements FactoryInterface
         $I_clientService = $serviceLocator->get('SharengoCore\Service\CustomersService');
         $countriesService = $serviceLocator->get('SharengoCore\Service\CountriesService');
         $provincesService = $serviceLocator->get('SharengoCore\Service\ProvincesService');
+        $fleetsService = $serviceLocator->get('SharengoCore\Service\FleetService');
 
         $languageService = $serviceLocator->get('LanguageService');
         $translator = $languageService->getTranslator();
@@ -30,6 +31,7 @@ class CustomerFormFactory implements FactoryInterface
             $I_clientService,
             $countriesService,
             $provincesService,
+            $fleetsService,
             $hydrator,
             $translator
         );

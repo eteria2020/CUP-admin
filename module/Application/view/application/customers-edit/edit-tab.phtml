@@ -9,7 +9,7 @@ $form->setAttribute('action', $this->url('customers/edit', ['id' => $this->custo
 $formDriver->setAttribute('action', $this->url('customers/edit', ['id' => $this->customer->getId()]));
 $formSetting->setAttribute('action', $this->url('customers/edit', ['id' => $this->customer->getId()]));
 
-
+$form->get('customer')->get('fleet')->setValue($this->customer->getFleet()->getId());
 ?>
 <div class="row">
 
@@ -268,12 +268,15 @@ $formSetting->setAttribute('action', $this->url('customers/edit', ['id' => $this
                         </div>
                         <div class="col-lg-3">
                             <div class="form-group">
-                                <label for="phone"><?= $this->translate("Lingua preferita"); ?></label>
+                                <label for="language"><?= $this->translate("Lingua preferita"); ?></label>
                                 <?= $this->formRow($form->get('customer')->get('language')->setAttribute('readonly', 'true')); ?>
                             </div>
                         </div>
                         <div class="col-lg-3">
-                            <div class="form-group"></div>
+                            <div class="form-group">
+                                <label for="fleet"><?= $this->translate("Flotta"); ?></label>
+                                <?= $this->formRow($form->get('customer')->get('fleet')); ?>
+                            </div>
                         </div>
                     </div>
                     <div class="row">

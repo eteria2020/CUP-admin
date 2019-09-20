@@ -5,6 +5,7 @@ use SharengoCore\Entity\Customers;
 use SharengoCore\Service\CountriesService;
 use SharengoCore\Service\CustomersService;
 use SharengoCore\Service\ProvincesService;
+use SharengoCore\Service\FleetService;
 use SharengoCore\Service\AuthorityService;
 
 use Zend\Form\Fieldset;
@@ -28,6 +29,7 @@ class CustomerFieldset extends Fieldset implements InputFilterProviderInterface
         CustomersService $customersService,
         CountriesService $countriesService,
         ProvincesService $provincesService,
+        FleetService $fleetsService,
         HydratorInterface $hydrator,
         Translator $translator
     ) {
@@ -235,6 +237,19 @@ class CustomerFieldset extends Fieldset implements InputFilterProviderInterface
         ]);
 
         $this->add([
+            'name'       => 'fleet',
+            'type'       => 'Zend\Form\Element\Select',
+            'attributes' => [
+                'id'    => 'fleet',
+                'class' => 'form-control',
+                'required' => 'required'
+            ],
+            'options'    => [
+                'value_options' => $fleetsService->getFleetsSelectorArray()
+            ]
+        ]);
+
+        $this->add([
             'name'       => 'taxCode',
             'type'       => 'Zend\Form\Element\Text',
             'attributes' => [
@@ -391,6 +406,14 @@ class CustomerFieldset extends Fieldset implements InputFilterProviderInterface
                 ]
             ],
             'town' => [
+                'required' => true,
+                'filters' => [
+                    [
+                        'name' => 'StringTrim'
+                    ]
+                ]
+            ],
+            'fleet' => [
                 'required' => true,
                 'filters' => [
                     [
