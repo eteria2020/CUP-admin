@@ -4,7 +4,7 @@ $this->headScript()
     ->appendFile('/js/datatables/media/js/jquery.dataTables.min.js')
     ->appendFile('/js/datatables/plugins/bootstrap/dataTables.bootstrap.js')
     ->appendFile($this->basePath() . '/js/datatable-session-data.js')
-    ->appendFile($this->basePath() .'/js/foreign-drivers-license.js?v=1.1');
+    ->appendFile($this->basePath() .'/js/foreign-drivers-license.js?v=1.2');
 ?>
 <div class="page-content-wrapper">
     <div class="page-content">
@@ -60,6 +60,7 @@ $this->headScript()
                                 <th><?= $this->translate("Id cliente"); ?></th>
                                 <th><?= $this->translate("Nome"); ?></th>
                                 <th><?= $this->translate("Cognome"); ?></th>
+                                <th><?= $this->translate("Flotta"); ?></th>
                                 <th><?= $this->translate("Indirizzo"); ?></th>
                                 <th><?= $this->translate("Data di nascita"); ?></th>
                                 <th><?= $this->translate("Luogo di nascita"); ?></th>
