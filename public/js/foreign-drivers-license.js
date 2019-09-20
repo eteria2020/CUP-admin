@@ -78,6 +78,7 @@ $(function() {
             {data: "cu.id"},
             {data: "e.customerName"},
             {data: "e.customerSurname"},
+            {data: "e.fleetName"},
             {data: "e.customerAddress"},
             {data: "e.customerBirthDate"},
             {data: "e.customerBirthPlace"},
@@ -97,7 +98,12 @@ $(function() {
                 }
             },
             {
-                targets: 10,
+                targets: 3,
+                searchable: true,
+                sortable: false,
+            },
+            {
+                targets: 11,
                 searchable: false,
                 sortable: false,
                 data: "cu.id",
@@ -107,7 +113,7 @@ $(function() {
                 }
             },
             {
-                targets: 11,
+                targets: 12,
                 searchable: false,
                 sortable: false
             }

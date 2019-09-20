@@ -48,6 +48,7 @@ $(function() {
             {data: "e.id"},
             {data: "e.name"},
             {data: "e.surname"},
+            {data: "e.fleetName"},
             {data: "e.mobile"},
             {data: "cc.code"},
             {data: "e.driverLicense"},
@@ -59,12 +60,17 @@ $(function() {
         ],
         "columnDefs": [
             {
-                targets: 9,
-                searchable: false,
+                targets: 3,
+                searchable: true,
                 sortable: false
             },
             {
                 targets: 10,
+                searchable: false,
+                sortable: false
+            },
+            {
+                targets: 11,
                 data: "button",
                 searchable: false,
                 sortable: false,
