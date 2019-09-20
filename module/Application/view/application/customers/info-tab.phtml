@@ -1,5 +1,6 @@
 <?php
 $form = $this->customerForm->prepare();
+$form->get('customer')->get('fleet')->setValue($this->customer->getFleet()->getId());
 $formDriver =  $this->driverForm->prepare();
 $formSetting = $this->settingForm->prepare();
 $input = '<input type="text" class="form-control" required="required" readonly="readonly" value="">';
@@ -180,11 +181,15 @@ if($this->customer->getCountry()!=="it") {
                     </div>
                     <div class="col-lg-3">
                         <div class="form-group">
-                            <label for="phone"><?= $this->translate("Lingua preferita"); ?></label>
+                            <label for="language"><?= $this->translate("Lingua preferita"); ?></label>
                             <?= $this->formRow($form->get('customer')->get('language')->setAttribute('disabled', 'true')); ?>
                         </div>
                     </div>
                     <div class="col-lg-3">
+                        <div class="form-group">
+                            <label for="fleet"><?= $this->translate("Flotta"); ?></label>
+                            <?= $this->formRow($form->get('customer')->get('fleet')->setAttribute('disabled', 'true')); ?>
+                        </div>
                     </div>
                 </div>
             </div>
