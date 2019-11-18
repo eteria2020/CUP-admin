@@ -61,9 +61,9 @@ $(function() {
             {data: "e.customer"},
             {data: "e.cards"},
             {data: "e.active"},
-            {data: "e.send"},
-            {data: "e.consumed"},
-            {data: "e.deleted"}
+            {data: "e.sentTs"},
+            {data: "e.consumedTs"},
+            {data: "e.deletedTs"}
         ],
         "columnDefs": [
             {
