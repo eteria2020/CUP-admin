@@ -15,7 +15,11 @@ class CustomerBonusFieldset extends Fieldset implements InputFilterProviderInter
 
     private $translator;
     private $config;
-    public function __construct(HydratorInterface $hydrator, Translator $translator, AddBonusService $addBonusService, $config)
+    private $roles;
+    private $max_minutes = 15; // for normal user
+    private $max_minutes_sa = 250; // for superadmin
+    
+    public function __construct(HydratorInterface $hydrator, Translator $translator, AddBonusService $addBonusService, $config, $roles)
     {
         parent::__construct('customer-bonus', [
             'use_as_base_fieldset' => true
@@ -23,6 +27,8 @@ class CustomerBonusFieldset extends Fieldset implements InputFilterProviderInter
         $this->addBonusService = $addBonusService;
         $this->translator = $translator;
         $this->config = $config;
+        $this->roles = $roles;
+        
         $this->setHydrator($hydrator);
         $this->setObject(new CustomersBonus());
 
@@ -96,7 +102,7 @@ class CustomerBonusFieldset extends Fieldset implements InputFilterProviderInter
                         'name'    => 'Callback',
                         'options' => [
                             'messages' => [
-                                \Zend\Validator\Callback::INVALID_VALUE => $this->translator->translate('Il valore massimo inseribile è 15 min.'),
+                                \Zend\Validator\Callback::INVALID_VALUE => $this->translator->translate('Il massimo valore inseribile è stato superato:') . ' ' . $this->max_minutes,
                             ],
                             'callback' => function ($value) {
 
@@ -105,11 +111,36 @@ class CustomerBonusFieldset extends Fieldset implements InputFilterProviderInter
                                         return true;
                                     }
                                 }
-
-                                return $value <= 15 ? true : false;
+                                                                
+                                if($this->roles[0]!=='superadmin' && $value >$this->max_minutes) {
+                                    return false;
+                                } else {
+                                    return true;
+                                }
                             },
                         ],
                     ],
+                    [
+                        'name'    => 'Callback',
+                        'options' => [
+                            'messages' => [
+                                \Zend\Validator\Callback::INVALID_VALUE => $this->translator->translate('Il massimo valore inseribile è stato superato:') . ' ' . $this->max_minutes_sa,
+                            ],
+                            'callback' => function ($value) {
+
+                                if(isset($this->config['serverInstance']["id"])) {
+                                    if($this->config['serverInstance']["id"]=="sk_SK") {
+                                        return true;
+                                    }
+                                }
+                                if($this->roles[0]=='superadmin' && $value >$this->max_minutes_sa) {
+                                    return false;
+                                } else {
+                                    return true;
+                                }
+                            },
+                        ],
+                    ],             
                 ]
             ],
             'description' => [
