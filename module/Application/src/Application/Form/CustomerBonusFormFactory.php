@@ -22,7 +22,10 @@ class CustomerBonusFormFactory implements FactoryInterface
         $translator = $languageService->getTranslator();
         $config = $serviceLocator->get('Config');
 
-        $customerBonusFieldset = new CustomerBonusFieldset($hydrator, $translator, $addBonusService, $config);
+        $authorize = $serviceLocator->get('BjyAuthorize\Provider\Identity\ProviderInterface');
+        $roles = $authorize->getIdentityRoles();
+        
+        $customerBonusFieldset = new CustomerBonusFieldset($hydrator, $translator, $addBonusService, $config, $roles);
 
         return new CustomerBonusForm($customerBonusFieldset);
     }

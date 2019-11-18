@@ -628,6 +628,7 @@ class CustomersController extends AbstractActionController
                     ['query' => ['tab' => 'bonus']]
                 );
             }
+
         }
 
         return new ViewModel([
