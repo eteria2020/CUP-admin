@@ -25,8 +25,8 @@ use Zend\View\Model\JsonModel;
 use Zend\View\Model\ViewModel;
 use Zend\Session\Container;
 
-class PaymentsController extends AbstractActionController
-{
+class PaymentsController extends AbstractActionController {
+
     /**
      * @var TripPaymentsService
      */
@@ -56,7 +56,7 @@ class PaymentsController extends AbstractActionController
      * @var ExtraPaymentsService
      */
     private $extraPaymentsService;
-    
+
     /**
      * @var ExtraPaymentTriesService
      */
@@ -91,12 +91,12 @@ class PaymentsController extends AbstractActionController
      * @var Container
      */
     private $datatableFiltersSessionContainer;
-    
+
     /**
      * @var CustomerDeactivationService
      */
     private $deactivationService;
-    
+
     /**
      * @var ExtraPaymentRatesService
      */
@@ -108,22 +108,7 @@ class PaymentsController extends AbstractActionController
     private $vatService;
 
     public function __construct(
-        TripPaymentsService $tripPaymentsService,
-        PaymentsService $paymentsService,
-        CustomersService $customersService,
-        CartasiContractsService $cartasiContractsService,
-        CartasiCustomerPayments $cartasiCustomerPayments,
-        ExtraPaymentsService $extraPaymentsService,
-        ExtraPaymentTriesService $extraPaymentTriesService,
-        PenaltiesService $penaltiesService,
-        FleetService $fleetService,
-        RecapService $recapService,
-        FaresService $faresService,
-        FaresForm $faresForm,
-        Container $datatableFiltersSessionContainer,
-        CustomerDeactivationService $deactivationService,
-        ExtraPaymentRatesService $extraPaymentRatesService,
-        VatService $vatService
+    TripPaymentsService $tripPaymentsService, PaymentsService $paymentsService, CustomersService $customersService, CartasiContractsService $cartasiContractsService, CartasiCustomerPayments $cartasiCustomerPayments, ExtraPaymentsService $extraPaymentsService, ExtraPaymentTriesService $extraPaymentTriesService, PenaltiesService $penaltiesService, FleetService $fleetService, RecapService $recapService, FaresService $faresService, FaresForm $faresForm, Container $datatableFiltersSessionContainer, CustomerDeactivationService $deactivationService, ExtraPaymentRatesService $extraPaymentRatesService, VatService $vatService
     ) {
         $this->tripPaymentsService = $tripPaymentsService;
         $this->paymentsService = $paymentsService;
@@ -149,27 +134,23 @@ class PaymentsController extends AbstractActionController
      *
      * @return array
      */
-    private function getDataTableSessionFilters()
-    {
+    private function getDataTableSessionFilters() {
         return $this->datatableFiltersSessionContainer->offsetGet('TripPayments');
     }
 
-    public function failedPaymentsAction()
-    {
+    public function failedPaymentsAction() {
         $sessionDatatableFilters = $this->getDataTableSessionFilters();
 
         return new ViewModel([
             'filters' => json_encode($sessionDatatableFilters),
         ]);
     }
-    
-    private function getDataTableSessionExtraFilters()
-    {
+
+    private function getDataTableSessionExtraFilters() {
         return $this->datatableFiltersSessionContainer->offsetGet('ExtraPayments');
     }
-    
-    public function failedExtraAction()
-    {
+
+    public function failedExtraAction() {
         $sessionDatatableFilters = $this->getDataTableSessionExtraFilters();
 
         return new ViewModel([
@@ -177,12 +158,11 @@ class PaymentsController extends AbstractActionController
         ]);
     }
 
-    public function failedPaymentsDatatableAction()
-    {
+    public function failedPaymentsDatatableAction() {
         $filters = $this->params()->fromPost();
         $filters['withLimit'] = true;
-        
-        if($filters['column'] == "" && isset($filters['columnValueWithoutLike']) && $filters['columnValueWithoutLike'] == ""){
+
+        if ($filters['column'] == "" && isset($filters['columnValueWithoutLike']) && $filters['columnValueWithoutLike'] == "") {
             $filters['columnWithoutLike'] = true;
             $filters['columnValueWithoutLike'] = null;
         }
@@ -191,18 +171,18 @@ class PaymentsController extends AbstractActionController
         $recordsFiltered = $this->getRecordsFiltered($filters, $totalFailedPayments, "payment");
 
         return new JsonModel([
-            'draw'            => $this->params()->fromQuery('sEcho', 0),
-            'recordsTotal'    => $totalFailedPayments,
+            'draw' => $this->params()->fromQuery('sEcho', 0),
+            'recordsTotal' => $totalFailedPayments,
             'recordsFiltered' => $recordsFiltered,
-            'data'            => $dataDataTable
+            'data' => $dataDataTable
         ]);
     }
-    
-    public function failedExtraDatatableAction(){
+
+    public function failedExtraDatatableAction() {
         $filters = $this->params()->fromPost();
         $filters['withLimit'] = true;
-        
-        if($filters['column'] == "" && isset($filters['columnValueWithoutLike']) && $filters['columnValueWithoutLike'] == ""){
+
+        if ($filters['column'] == "" && isset($filters['columnValueWithoutLike']) && $filters['columnValueWithoutLike'] == "") {
             $filters['columnWithoutLike'] = true;
             $filters['columnValueWithoutLike'] = null;
         }
@@ -211,10 +191,10 @@ class PaymentsController extends AbstractActionController
         $recordsFiltered = $this->getRecordsFiltered($filters, $totalFailedExtra, "extra");
 
         return new JsonModel([
-            'draw'            => $this->params()->fromQuery('sEcho', 0),
-            'recordsTotal'    => $totalFailedExtra,
+            'draw' => $this->params()->fromQuery('sEcho', 0),
+            'recordsTotal' => $totalFailedExtra,
             'recordsFiltered' => $recordsFiltered,
-            'data'            => $dataDataTable
+            'data' => $dataDataTable
         ]);
     }
 
@@ -230,9 +210,8 @@ class PaymentsController extends AbstractActionController
         }
     }
 
-    public function retryPaymentsAction()
-    {
-        $id = (int)$this->params()->fromRoute('id', 0);
+    public function retryPaymentsAction() {
+        $id = (int) $this->params()->fromRoute('id', 0);
 
         $tripPayment = $this->tripPaymentsService->getTripPaymentById($id);
 
@@ -248,26 +227,25 @@ class PaymentsController extends AbstractActionController
             'customer' => $tripPayment->getCustomer()
         ]);
     }
-    
-    public function retryExtraAction()
-    {
-        $id = (int)$this->params()->fromRoute('id', 0);
+
+    public function retryExtraAction() {
+        $id = (int) $this->params()->fromRoute('id', 0);
 
         $extraPayment = $this->extraPaymentsService->getExtraPaymentById($id);
 
         $extraPaymentTries = $extraPayment->getExtraPaymentTries();
-        
+
         $extraPaymentRates = $this->extraPaymentRatesService->findByExtraPaymentFather($extraPayment->getId());
-        if(count($extraPaymentRates)>0){
-            $balance = $extraPayment->getAmount()-$this->extraPaymentRatesService->ratesPaidByExtraPaymentFather($extraPayment->getId());
+        if (count($extraPaymentRates) > 0) {
+            $balance = $extraPayment->getAmount() - $this->extraPaymentRatesService->ratesPaidByExtraPaymentFather($extraPayment->getId());
             return new ViewModel([
                 'extraPayment' => $extraPayment,
                 'extraPaymentTries' => $extraPaymentTries,
                 'customer' => $extraPayment->getCustomer(),
                 'extraPaymentRates' => $extraPaymentRates,
-                'balance' => $balance/100,
+                'balance' => $balance / 100,
             ]);
-        }else{
+        } else {
             $extraPayment_father = $this->extraPaymentRatesService->getExtraPaymentFather($extraPayment->getId());
             return new ViewModel([
                 'extraPayment' => $extraPayment,
@@ -279,9 +257,8 @@ class PaymentsController extends AbstractActionController
         }
     }
 
-    public function doRetryPaymentsAction()
-    {
-        $id = (int)$this->params()->fromRoute('id', 0);
+    public function doRetryPaymentsAction() {
+        $id = (int) $this->params()->fromRoute('id', 0);
         $webuser = $this->identity();
         $tripPayment = $this->tripPaymentsService->getTripPaymentById($id);
 
@@ -305,10 +282,9 @@ class PaymentsController extends AbstractActionController
             ]);
         }
     }
-    
-    public function doRetryExtraAction()
-    {
-        $id = (int)$this->params()->fromRoute('id', 0);
+
+    public function doRetryExtraAction() {
+        $id = (int) $this->params()->fromRoute('id', 0);
 
         $webuser = $this->identity();
 
@@ -319,17 +295,17 @@ class PaymentsController extends AbstractActionController
             //$cartasiResponse = $this->paymentsService->tryExtraPayment($extraPayment, $webuser, true, false, false, true);
             $cartasiResponse = $this->paymentsService->tryExtraPayment($extraPayment, $webuser, true, false, false, false);
 
-            
+
             if ($cartasiResponse->getOutcome() === 'OK') {
                 //set extra payed
                 $extraPayment = $this->extraPaymentsService->setPayedCorrectly($extraPayment);
-                
+
                 $this->extraPaymentsService->checkIfEnable($extraPayment);
-                
+
                 $extraPayment = $this->extraPaymentsService->setTrasaction($extraPayment, $cartasiResponse->getTransaction());
                 $this->customersService->enableCustomerPayment($extraPayment->getCustomer());
             }
-            
+
             return new JsonModel([
                 'outcome' => $cartasiResponse->getOutcome(),
                 'message' => $cartasiResponse->getMessage(),
@@ -341,11 +317,9 @@ class PaymentsController extends AbstractActionController
                 'message' => 'The extra is not anymore in wrong payment state'
             ]);
         }
- 
     }
 
-    public function extraAction()
-    {
+    public function extraAction() {
         $penalties = $this->penaltiesService->getAllPenalties();
         $causal = $this->penaltiesService->getAllCausal();
         $fleets = $this->fleetService->getAllFleetsNoDummy();
@@ -359,11 +333,9 @@ class PaymentsController extends AbstractActionController
         ]);
     }
 
-
-    public function setTripAsPayedAjaxAction()
-    {
+    public function setTripAsPayedAjaxAction() {
         $translator = $this->TranslatorPlugin();
-        $id = (int)$this->params()->fromRoute('id', 0);
+        $id = (int) $this->params()->fromRoute('id', 0);
         $tripPayment = $this->tripPaymentsService->getTripPaymentById($id);
 
         try {
@@ -381,8 +353,7 @@ class PaymentsController extends AbstractActionController
         }
     }
 
-    public function payExtraAction() 
-    {
+    public function payExtraAction() {
         $translator = $this->TranslatorPlugin();
         $customerId = $this->params()->fromPost('customerId');
         $fleetId = $this->params()->fromPost('fleetId');
@@ -425,8 +396,8 @@ class PaymentsController extends AbstractActionController
 
             $vat = null;
 
-            if(is_array($vats)) {
-                if($vats[0]!="") {
+            if (is_array($vats)) {
+                if ($vats[0] != "") {
                     $vat = $this->vatService->findById($vats[0]); // we manage a single vat
                 }
             }
@@ -436,7 +407,7 @@ class PaymentsController extends AbstractActionController
                 $amount += intval($value);
             }
 
-            if($rate == 'true'){
+            if ($rate == 'true') {
                 $extraPaymentRate_first = $this->payExtraWithRates($customer, $fleet, $amount, $type, $penalty, $reasons, $amounts, $n_rates);
                 //we have chose to pay with installments, the the amount is the first installment (less that the total amount)
                 $amount = $extraPaymentRate_first->getAmount();
@@ -448,14 +419,14 @@ class PaymentsController extends AbstractActionController
                     $customer, $fleet, null, $amount, $type, $penalty, $reasons, $amounts, true, $vat
             );
 
-            $response = $this->paymentsService->tryExtraPayment($extraPayment,$webuser);
+            $response = $this->paymentsService->tryExtraPayment($extraPayment, $webuser);
             $extraPayment->setTransaction($response->getTransaction());
 
             //IF PAYMENTS RATES
-            if($rate == 'true'){
+            if ($rate == 'true') {
                 $extraPaymentRate_first = $this->extraPaymentRatesService->setPaymentRate($extraPaymentRate_first, $extraPayment);
             }
-            
+
             if (!$response->getCompletedCorrectly()) {
 
                 $extraPaymentTry = $this->extraPaymentsService->processWrongPayment($extraPayment, $response, $webuser);
@@ -470,14 +441,13 @@ class PaymentsController extends AbstractActionController
             }
 
             $extraPaymentTry = $this->extraPaymentsService->processPayedCorrectly($extraPayment, $response, $webuser);
-            
+
             $extraTries = $this->encodeExtra($extraPaymentTry);
 
             return new JsonModel([
                 'message' => $translator->translate('Il tentativo di pagamento è andato a buon fine. Il cliente è stato notificato.'),
                 'extraPaymentTry' => $extraTries
             ]);
-            
         } catch (\Exception $e) {
             $this->response->setStatusCode(500);
             return new JsonModel([
@@ -485,7 +455,7 @@ class PaymentsController extends AbstractActionController
             ]);
         }
     }
-    
+
     public function encodeExtra($extraPaymentTry) {
         $array = array(
             "date" => $extraPaymentTry->getTs()->format('Y-m-d H:i:s'),
@@ -494,13 +464,12 @@ class PaymentsController extends AbstractActionController
             "outcome" => $extraPaymentTry->getOutcome(),
             "result" => (null != $extraPaymentTry->getTransaction()) ? $extraPaymentTry->getTransaction()->getOutcome() : 'n.d.',
             "message" => (null != $extraPaymentTry->getTransaction()) ? $extraPaymentTry->getTransaction()->getMessage() : 'n.d.',
-            "amount" => (null != $extraPaymentTry->getExtraPayment()->getAmount()) ? $extraPaymentTry->getExtraPayment()->getAmount()/100 : 'n.d.',
+            "amount" => (null != $extraPaymentTry->getExtraPayment()->getAmount()) ? $extraPaymentTry->getExtraPayment()->getAmount() / 100 : 'n.d.',
         );
         return json_encode($array);
     }
 
-    public function recapAction()
-    {
+    public function recapAction() {
         $months = null;
         $date = date("Y-m-d H:i:s");
         $fleets = null;
@@ -511,42 +480,70 @@ class PaymentsController extends AbstractActionController
         $authorize = $this->getServiceLocator()->get('BjyAuthorize\Provider\Identity\ProviderInterface');
         $roles = $authorize->getIdentityRoles();
 
-        if($roles[0]==='superadmin'){
+        if ($roles[0] === 'superadmin') {
             // Get months
-            $months = $this->recapService->getAvailableMonths();
-
+            $months = $this->recapService->getAvailableMonths(true);
+            $years = $this->recapService->getAvailableYears(true);
             // Get the selected month or default to last available
-            $date = '';
-            if (is_null($this->params()->fromQuery('date'))) {
-                $date = $months[0]['date'];
-            } else {
+            $date = $months[0];
+            if (!is_null($this->params()->fromQuery('date'))) {
                 $date = $this->params()->fromQuery('date');
+                if (in_array($this->params()->fromQuery('date'), $months)) {
+                    $date = $this->params()->fromQuery('date');
+                }
             }
-
+            
+            $selectYear = '0';
+            if (!is_null($this->params()->fromQuery('year'))) {
+                if (in_array($this->params()->fromQuery('year'), $years)) {
+                    $selectYear = $this->params()->fromQuery('year');
+                }
+            }
+            
+            $tab = 1;
+            if (!is_null($this->params()->fromQuery('tab'))) {
+                $tab = (int)$this->params()->fromQuery('tab');
+            }
+            
             // Get all fleets
-            $fleets = $this->fleetService->getAllFleetsNoDummy();
-            // Get income for each day of the selected month
-            $dailyIncome = $this->recapService->getDailyIncomeForMonth($date);
-            // Get income for last 4 weeks
-            $weeklyIncome = $this->recapService->getWeeklyIncome();
-            // Get income for last 12 months
-            $monthlyIncome = $this->recapService->getMonthlyIncome();
+            $fleets = array();
+            $fleets = $this->fleetService->getFleetsSelectorArrayNoDummy($fleets);
+            
+            if (count($fleets) > 0) {
+                $fleets_arr = array_keys($fleets);
+                $id_fleet = $fleets_arr[0];
+                
+                if (!is_null($this->params()->fromQuery('fleet'))) {
+                    $f = $this->params()->fromQuery('fleet');
+                    if (array_key_exists($f, $fleets)) {
+                        $id_fleet = $f;
+                    }
+                }
+                
+                // Get income for each day of the selected month
+                $dailyIncome = $this->recapService->getDailyIncomeForMonthFleet($date, $id_fleet);
+                // Get income for last 12 months
+                $monthlyIncome = $this->recapService->getMonthlyIncomeFleetYear($id_fleet, $selectYear);
+            }
         }
 
         return new ViewModel([
             'months' => $months,
+            'years' => $years,
             'selectedMonth' => $date,
-            'isLastMonth' => $date == $months[0]['date'],
+            'selectedFleet' => $id_fleet,
+            'selectYear' => $selectYear,
+            'isLastMonth' => $date == $months[0],
             'fleets' => $fleets,
             'daily' => $dailyIncome,
             'weekly' => $weeklyIncome,
             'monthly' => $monthlyIncome,
-            'roles' => $roles
+            'roles' => $roles,
+            'tab' => $tab
         ]);
     }
 
-    public function faresAction()
-    {
+    public function faresAction() {
         $translator = $this->TranslatorPlugin();
         $form = $this->faresForm;
 
@@ -563,7 +560,6 @@ class PaymentsController extends AbstractActionController
                     }
                 } catch (\Exception $e) {
                     $this->flashMessenger()->addErrorMessage($translator->translate('Si è verificato un errore applicativo. L\'assistenza tecnica è già al corrente, ci scusiamo per l\'inconveniente'));
-
                 }
 
                 return $this->redirect()->toRoute('payments/fares');
@@ -574,8 +570,7 @@ class PaymentsController extends AbstractActionController
             'faresForm' => $form
         ]);
     }
-    
-    
+
     public function setPayableAction() {
         try {
             $id = $this->params()->fromPost('id');
@@ -598,30 +593,31 @@ class PaymentsController extends AbstractActionController
             return $response;
         }
     }
-    
+
     private function payExtraWithRates($customer, $fleet, $amount, $type, $penalty, $reasons, $amounts, $n_rates) {
         //importo totale non pagabile
         $extraPaymentFather = $this->extraPaymentsService->registerExtraPayment(
                 $customer, $fleet, null, $amount, $type, $penalty, $reasons, $amounts, false
         );
         //scrittutra delle rate
-        $singleRate = round($amount/$n_rates);
+        $singleRate = round($amount / $n_rates);
         $amountRate = $amount;
-        for($i=0;$i<$n_rates-1;$i++){
-            $amountRate = $amountRate-$singleRate;
+        for ($i = 0; $i < $n_rates - 1; $i++) {
+            $amountRate = $amountRate - $singleRate;
             $debit_date = new \DateTime();
-            $debit_date = $debit_date->modify('+'.$i.' month');
-            if($i == 0){
+            $debit_date = $debit_date->modify('+' . $i . ' month');
+            if ($i == 0) {
                 $extraPaymentRate_first = $this->extraPaymentRatesService->registerExtraPaymentRate($customer, $singleRate, $debit_date, $extraPaymentFather);
-            }else{
+            } else {
                 $extraPaymentRate = $this->extraPaymentRatesService->registerExtraPaymentRate($customer, $singleRate, $debit_date, $extraPaymentFather);
             }
         }
         $debit_date = new \DateTime();
-        $debit_date = $debit_date->modify('+'.$n_rates - 1 .' month');
-        $lastRate = $amount-($singleRate*($n_rates-1));
+        $debit_date = $debit_date->modify('+' . $n_rates - 1 . ' month');
+        $lastRate = $amount - ($singleRate * ($n_rates - 1));
         $extraPaymentRate = $this->extraPaymentRatesService->registerExtraPaymentRate($customer, $lastRate, $debit_date, $extraPaymentFather);
-        
-        return $extraPaymentRate_first;        
+
+        return $extraPaymentRate_first;
     }
+
 }

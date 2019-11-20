@@ -1,19 +1,57 @@
 $(document).ready(function() {
     selectMonth(selectedMonth);
+    
     highlightLastRows();
 });
 
 $("#month-selector").change(function()
 {
-    var selectedValue = $(this).find(":selected").val();
-    reloadPageWithMonth(selectedValue);
+    var selectedMonth = $(this).find(":selected").val();
+    var selectedFleet = $('#fleet-selector').find(":selected").val();
+    var selectedYear = $('#year-selector').find(":selected").val();
+    reloadPageWithMonthYear(selectedMonth, selectedYear, selectedFleet, 1);
+});
+
+$("#fleet-selector").change(function()
+{
+    var selectedFleet = $(this).find(":selected").val();
+    var selectedMonth = $('#month-selector').find(":selected").val();
+    var selectedYear = $('#year-selector').find(":selected").val();
+    reloadPageWithMonthYear(selectedMonth, selectedYear, selectedFleet, 1);
+});
+
+/* months */
+$("#fleet-selector2").change(function()
+{
+    var selectedFleet = $(this).find(":selected").val();
+    var selectedMonth = $('#month-selector').find(":selected").val();
+    var selectedYear = $('#year-selector').find(":selected").val();
+    reloadPageWithMonthYear(selectedMonth, selectedYear, selectedFleet, 2);
+});
+
+$("#year-selector").change(function()
+{
+    var selectedYear = $(this).find(":selected").val();
+    var selectedFleet = $('#fleet-selector2').find(":selected").val();
+    var selectedMonth = $('#month-selector').find(":selected").val();
+    reloadPageWithMonthYear(selectedMonth, selectedYear, selectedFleet, 2);
 });
 
 // Reload the page after selector value has changed displaying new month data
-function reloadPageWithMonth(month)
+function reloadPageWithMonth(month, fleet, tab)
 {
-    window.location.replace(reloadUrl + "?date=" + month);
+    window.location.replace(reloadUrl + "?date=" + month + "&fleet="+ fleet + "&tab=" + tab);
 }
+// Reload the page after selector value has changed displaying new month data
+function reloadPageWithMonthYear(month, year, fleet, tab)
+{
+    if (year == 0) {
+        reloadPageWithMonth(month, fleet, tab);
+    } else {
+        window.location.replace(reloadUrl + "?date=" + month + "&fleet="+ fleet + "&year=" + year + "&tab=" + tab);
+    }
+}
+
 
 // Change the selected value in the selector to match the current month displayed
 function selectMonth(month)
