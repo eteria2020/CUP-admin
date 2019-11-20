@@ -21,44 +21,48 @@ $daily = $this->daily;
 
                         <!-- BEGIN tabs headers -->
                         <ul class="nav nav-tabs">
-                            <li class="active"><a href="#tab_1_1" data-toggle="tab"><?= $this->translate("Riepilogo giornaliero"); ?></a></li>
-                            <li><a href="#tab_1_2" data-toggle="tab"><?= $this->translate("Riepilogo settimanale"); ?></a></li>
-                            <li><a href="#tab_1_3" data-toggle="tab"><?= $this->translate("Riepilogo mensile"); ?></a></li>
+                            <li <?= ($tab == 1)?'class="active"':''; ?>><a href="#tab_1_1" data-toggle="tab"><?= $this->translate("Riepilogo giornaliero"); ?></a></li>
+                            <li <?= ($tab == 2)?'class="active"':''; ?>><a href="#tab_1_2" data-toggle="tab"><?= $this->translate("Riepilogo mensile"); ?></a></li>
                         </ul>
                         <!-- END tabs headers -->
 
                         <div class="tab-content">
 
                             <!-- BEGIN daily tab -->
-                            <div class="tab-pane active" id="tab_1_1">
-                                <select id="month-selector">
-                                    <?php foreach($this->months as $month): ?>
-                                        <option value="<?= $month['date'] ?>"><?= $month['date'] ?></option>
+                            <div class="tab-pane <?= ($tab == 1)?'active':''; ?>" id="tab_1_1">
+                                <select id="fleet-selector1">
+                                    <?php foreach($this->fleets as $id => $fleet): ?>
+                                        <option value="<?= $id ?>" <?= ($id == $this->selectedFleet)?'selected':''; ?> ><?= $fleet ?></option>
                                     <?php endforeach; ?>
                                 </select>
-
+                                <select id="month-selector">
+                                    <?php foreach($this->months as $month): ?>
+                                        <option value="<?= $month ?>"><?= $month ?></option>
+                                    <?php endforeach; ?>
+                                </select>
                                 <table class="table table-striped table-bordered table-hover sng-margin-top">
                                     <thead>
                                         <tr>
                                             <th class="sng-date-column"><?= $this->translate("Data"); ?></th>
-                                            <?php foreach($this->fleets as $fleet): ?>
-                                            <th class="sng-text-right"><?= $fleet->getName() ?></th>
-                                            <?php endforeach; ?>
+                                            <th class="sng-text-right"><?= $this->translate("Viaggi"); ?></th>
+                                            <th class="sng-text-right"><?= $this->translate("Iscrizioni"); ?></th>
+                                            <th class="sng-text-right"><?= $this->translate("Multe e penali"); ?></th>
+                                            <th class="sng-text-right"><?= $this->translate("Pacchetti"); ?></th>
+                                            <th class="sng-text-right"><?= $this->translate("Totale"); ?></th>
                                         </tr>
                                     </thead>
                                     <tbody id="daily-body">
-                                        <?php foreach($daily as $day => $amounts): ?>
+                                        <?php foreach($daily as $day => $amount): ?>
                                             <tr>
                                                 <td><?= $day ?></td>
-                                                <?php
-                                                foreach($this->fleets as $fleet) {
-                                                    $entry = $this->translate('n.d.');
-                                                    if (array_key_exists($fleet->getName(), $amounts)) {
-                                                        $entry = sprintf('%.2f €', $amounts[$fleet->getName()] / 100);
-                                                    }
-                                                    echo '<td class="sng-dt-right">' . $entry . "</td>";
-                                                }
-                                                ?>
+                                                
+                                                <td class="sng-dt-right"><?= sprintf('%.2f €', $amount['tp_amount'] / 100) ?></td>
+                                                <td class="sng-dt-right"><?= sprintf('%.2f €', $amount['sp_amount'] / 100) ?></td>
+                                                <td class="sng-dt-right"><?= sprintf('%.2f €', $amount['ep_amount'] / 100) ?></td>
+                                                <td class="sng-dt-right"><?= sprintf('%.2f €', $amount['bpp_amount'] / 100) ?></td>
+                                                
+                                                <td class="sng-dt-right"><?= sprintf('%.2f €', $amount['amount'] / 100) ?></td>
+                                                
                                             </tr>
                                         <?php endforeach; ?>
                                     </tbody>
@@ -66,70 +70,44 @@ $daily = $this->daily;
                             </div>
                             <!-- END daily tab -->
 
-                            <!-- BEGIN weekly tab -->
-                            <div class="tab-pane" id="tab_1_2">
-                                <table class="table table-striped table-bordered table-hover sng-margin-top">
-                                    <thead>
-                                        <tr>
-                                            <th class="sng-date-column"><?= $this->translate("Data"); ?></th>
-                                            <?php foreach($this->fleets as $fleet): ?>
-                                            <th class="sng-text-right"><?= $fleet->getName() ?></th>
-                                            <?php endforeach; ?>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <?php foreach($weekly as $week => $amounts): ?>
-                                            <tr>
-                                                <?php
-                                                $interval = new \DateInterval('P7D');
-                                                $weekStart = date_create(substr($week, 0, 5) . "W" . substr($week, 5, 2));
-                                                $weekEnd = clone($weekStart);
-                                                $weekEnd->add($interval);
-                                                echo "<td>" . strftime("%d %b", $weekStart->getTimestamp()) . " - " . strftime("%d %b", $weekEnd->getTimestamp() - 1) . "</td>";
-
-                                                foreach($this->fleets as $fleet) {
-                                                    $entry = $this->translate('n.d.');
-                                                    if (array_key_exists($fleet->getName(), $amounts)) {
-                                                        $entry = sprintf('%.2f €', $amounts[$fleet->getName()] / 100);
-                                                    }
-                                                    echo '<td class="sng-dt-right">' . $entry . "</td>";
-                                                }
-                                                ?>
-                                            </tr>
-                                        <?php endforeach;?>
-                                    </tbody>
-                                </table>
-                            </div>
-                            <!-- END weekly tab -->
-
                             <!-- BEGIN monthly tab -->
-                            <div class="tab-pane" id="tab_1_3">
+                            <div class="tab-pane <?= ($tab == 2)?'active':''; ?>" id="tab_1_2">
+                                <select id="fleet-selector2">
+                                    <?php foreach($this->fleets as $id => $fleet): ?>
+                                        <option value="<?= $id ?>" <?= ($id == $this->selectedFleet)?'selected':''; ?> ><?= $fleet ?></option>
+                                    <?php endforeach; ?>
+                                </select>
+                                <select id="year-selector">
+                                    <option value="0" <?= (0 == $this->selectYear)?'selected':''; ?> ><?= $this->translate("Ultimi 12 mesi"); ?></option>
+                                    <?php foreach($this->years as $year): ?>
+                                        <option <?= ($year == $this->selectYear)?'selected':''; ?> value="<?= $year ?>"><?= $year ?></option>
+                                    <?php endforeach; ?>
+                                </select>
                                 <table class="table table-striped table-bordered table-hover sng-margin-top">
                                     <thead>
                                         <tr>
                                             <th class="sng-date-column"><?= $this->translate("Data"); ?></th>
-                                            <?php foreach($this->fleets as $fleet): ?>
-                                            <th class="sng-text-right"><?= $fleet->getName() ?></th>
-                                            <?php endforeach; ?>
+                                            <th class="sng-text-right"><?= $this->translate("Viaggi"); ?></th>
+                                            <th class="sng-text-right"><?= $this->translate("Iscrizioni"); ?></th>
+                                            <th class="sng-text-right"><?= $this->translate("Multe e penali"); ?></th>
+                                            <th class="sng-text-right"><?= $this->translate("Pacchetti"); ?></th>
+                                            <th class="sng-text-right"><?= $this->translate("Totale"); ?></th>
+                                            
                                         </tr>
                                     </thead>
                                     <tbody>
                                         <?php
-                                        foreach($monthly as $month => $amounts):
+                                        foreach($monthly as $month => $amount):
                                             $month = date_create_from_format("Y-m", $month);
                                             $month = strftime("%B %G", $month->getTimestamp());
                                         ?>
                                             <tr>
                                                 <td><?= $month ?></td>
-                                                <?php
-                                                foreach($this->fleets as $fleet) {
-                                                    $entry = $this->translate('n.d.');
-                                                    if (array_key_exists($fleet->getName(), $amounts)) {
-                                                        $entry = sprintf('%.2f €', $amounts[$fleet->getName()] / 100);
-                                                    }
-                                                    echo '<td class="sng-dt-right">' . $entry . "</td>";
-                                                }
-                                                ?>
+                                                <td class="sng-dt-right"><?= sprintf('%.2f €', $amount['tp_amount'] / 100) ?></td>
+                                                <td class="sng-dt-right"><?= sprintf('%.2f €', $amount['sp_amount'] / 100) ?></td>
+                                                <td class="sng-dt-right"><?= sprintf('%.2f €', $amount['ep_amount'] / 100) ?></td>
+                                                <td class="sng-dt-right"><?= sprintf('%.2f €', $amount['bpp_amount'] / 100) ?></td>
+                                                <td class="sng-dt-right"><?= sprintf('%.2f €', $amount['amount'] / 100) ?></td>
                                             </tr>
                                         <?php endforeach; ?>
                                     </tbody>
@@ -162,6 +140,7 @@ setlocale(LC_TIME, 'en_EN.UTF-8');
 <script type="text/javascript">
 var reloadUrl = "<?= $this->url('payments/recap'); ?>";
 var selectedMonth = "<?= $this->selectedMonth ?>";
+var selectedFleet = "<?= $this->selectedFleet  ?>";
 var isLastMonth = <?= $this->isLastMonth ? "true" : "false"; ?>;
 </script>
 <script type="text/javascript" src="<?= $this->basePath(); ?>/js/payments-recap.js"></script>

@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Sharengo\n"
-"POT-Creation-Date: 2019-11-18 11:30+0100\n"
-"PO-Revision-Date: 2019-11-18 11:31+0100\n"
+"POT-Creation-Date: 2019-11-20 11:12+0100\n"
+"PO-Revision-Date: 2019-11-20 11:19+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: en\n"
@@ -300,7 +300,7 @@ msgstr "Car added successfully!"
 #: Application/src/Application/Controller/CustomersController.php:584
 #: Application/src/Application/Controller/CustomersController.php:620
 #: Application/src/Application/Controller/CustomersController.php:657
-#: Application/src/Application/Controller/PaymentsController.php:565
+#: Application/src/Application/Controller/PaymentsController.php:561
 #: Application/src/Application/Controller/UsersController.php:96
 #: Application/src/Application/Controller/UsersController.php:147
 msgid ""
@@ -390,7 +390,7 @@ msgid "Qualcosa è andato storto durante la creazione"
 msgstr "Something went wrong"
 
 #: Application/src/Application/Controller/CustomersController.php:855
-#: Application/src/Application/Controller/PaymentsController.php:404
+#: Application/src/Application/Controller/PaymentsController.php:375
 msgid "Non esiste un cliente per l'id specificato"
 msgstr "No customers with given id"
 
@@ -560,44 +560,44 @@ msgstr "Notification with ID has been seen:"
 msgid "Errore durante la presa visione della notifica."
 msgstr "An error occurred."
 
-#: Application/src/Application/Controller/PaymentsController.php:374
+#: Application/src/Application/Controller/PaymentsController.php:346
 msgid "La corsa è stata segnata come pagata"
 msgstr "Trip as been marked as payed"
 
-#: Application/src/Application/Controller/PaymentsController.php:379
+#: Application/src/Application/Controller/PaymentsController.php:351
 msgid "si è verificato un errore"
 msgstr "An error occurred."
 
-#: Application/src/Application/Controller/PaymentsController.php:413
+#: Application/src/Application/Controller/PaymentsController.php:384
 msgid "Il cliente non ha un contratto valido"
 msgstr "The customer doesn't have a valid contract with CartaSi"
 
-#: Application/src/Application/Controller/PaymentsController.php:422
+#: Application/src/Application/Controller/PaymentsController.php:393
 msgid "La flotta selezionata non è valida"
 msgstr "The selected fleet is invalid"
 
-#: Application/src/Application/Controller/PaymentsController.php:467
+#: Application/src/Application/Controller/PaymentsController.php:438
 msgid ""
 "Il tentativo di pagamento non è andato a buon fine. Il cliente è stato "
 "notificato."
 msgstr "The payment attempt was unsuccessful. The customer has been notified"
 
-#: Application/src/Application/Controller/PaymentsController.php:477
+#: Application/src/Application/Controller/PaymentsController.php:448
 msgid ""
 "Il tentativo di pagamento è andato a buon fine. Il cliente è stato "
 "notificato."
 msgstr ""
 "The payment attempt has been successfull. The customer has been notified."
 
-#: Application/src/Application/Controller/PaymentsController.php:484
+#: Application/src/Application/Controller/PaymentsController.php:454
 msgid "C'è stato un errore durante la procedura di pagamento: "
 msgstr "An error occurred while processing the payment: "
 
-#: Application/src/Application/Controller/PaymentsController.php:560
+#: Application/src/Application/Controller/PaymentsController.php:556
 msgid "Tariffa creata con successo!"
 msgstr "New rate created successfully!"
 
-#: Application/src/Application/Controller/PaymentsController.php:562
+#: Application/src/Application/Controller/PaymentsController.php:558
 msgid "Tariffa invariata"
 msgstr "Rate unchanged"
 
@@ -1936,9 +1936,8 @@ msgstr ""
 #: Application/view/application/payments-csv/details.phtml:77
 #: Application/view/application/payments-csv/details.phtml:139
 #: Application/view/application/payments-csv/details.phtml:346
-#: Application/view/application/payments/recap.phtml:43
-#: Application/view/application/payments/recap.phtml:74
-#: Application/view/application/payments/recap.phtml:110
+#: Application/view/application/payments/recap.phtml:46
+#: Application/view/application/payments/recap.phtml:89
 #: Application/view/application/payments/retry-extra.phtml:131
 #: Application/view/application/payments/retry-payments.phtml:83
 #: Application/view/application/reservations/index.phtml:35
@@ -2412,6 +2411,8 @@ msgstr "Add bonus"
 #: Application/view/application/customers/invoices-tab.phtml:80
 #: Application/view/application/customers/points-tab.phtml:24
 #: Application/view/application/invoices/index.phtml:86
+#: Application/view/application/payments/recap.phtml:51
+#: Application/view/application/payments/recap.phtml:94
 msgid "Totale"
 msgstr "Total"
 
@@ -3459,22 +3460,38 @@ msgid "Riepilogo giornaliero"
 msgstr "Daily summary"
 
 #: Application/view/application/payments/recap.phtml:25
-msgid "Riepilogo settimanale"
-msgstr "Weekly summary"
-
-#: Application/view/application/payments/recap.phtml:26
 msgid "Riepilogo mensile"
 msgstr "Monthly summary"
 
-#: Application/view/application/payments/recap.phtml:55
-#: Application/view/application/payments/recap.phtml:91
-#: Application/view/application/payments/recap.phtml:126
-#: Application/view/application/trips/cost-tab.phtml:104
-#: Application/view/application/trips/info-tab.phtml:168
-msgid "n.d."
-msgstr "n.a."
+#: Application/view/application/payments/recap.phtml:47
+#: Application/view/application/payments/recap.phtml:90
+msgid "Viaggi"
+msgstr "Trips"
 
-#: Application/view/application/payments/recap.phtml:145
+#: Application/view/application/payments/recap.phtml:48
+#: Application/view/application/payments/recap.phtml:91
+msgid "Iscrizioni"
+msgstr "Subscriptions"
+
+#: Application/view/application/payments/recap.phtml:49
+#: Application/view/application/payments/recap.phtml:92
+#, fuzzy
+#| msgid "Elenco eventi"
+msgid "Multe e penali"
+msgstr "Events list"
+
+#: Application/view/application/payments/recap.phtml:50
+#: Application/view/application/payments/recap.phtml:93
+#, fuzzy
+#| msgid "Pacchetto bonus"
+msgid "Pacchetti"
+msgstr "Bonus pack"
+
+#: Application/view/application/payments/recap.phtml:81
+msgid "Ultimi 12 mesi"
+msgstr ""
+
+#: Application/view/application/payments/recap.phtml:123
 msgid "Attenzione! Area riservata agli utenti super-admin."
 msgstr ""
 
@@ -3658,6 +3675,11 @@ msgstr "Stop"
 #: Application/view/application/trips/info-tab.phtml:65
 msgid "Dettagli Corsa"
 msgstr "Trip details"
+
+#: Application/view/application/trips/cost-tab.phtml:104
+#: Application/view/application/trips/info-tab.phtml:168
+msgid "n.d."
+msgstr "n.a."
 
 #: Application/view/application/trips/cost-tab.phtml:109
 #, fuzzy
@@ -4675,6 +4697,9 @@ msgstr "Districts list"
 #: Reports/view/reports/index/tripscity.phtml:150
 msgid "Distretti"
 msgstr "Districts"
+
+#~ msgid "Riepilogo settimanale"
+#~ msgstr "Weekly summary"
 
 #, fuzzy
 #~| msgid "Il valore massimo inseribile è 15 min."
