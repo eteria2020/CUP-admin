@@ -21,8 +21,8 @@ $daily = $this->daily;
 
                         <!-- BEGIN tabs headers -->
                         <ul class="nav nav-tabs">
-                            <li <?= ($tab == 1)?'class="active"':''; ?>><a href="#tab_1_1" data-toggle="tab"><?= $this->translate("Riepilogo giornaliero"); ?></a></li>
-                            <li <?= ($tab == 2)?'class="active"':''; ?>><a href="#tab_1_2" data-toggle="tab"><?= $this->translate("Riepilogo mensile"); ?></a></li>
+                            <li <?= ($tab == 1)?'class="active"':''; ?>><a href="" id="tab_1"><?= $this->translate("Riepilogo giornaliero"); ?></a></li>
+                            <li <?= ($tab == 2)?'class="active"':''; ?>><a href="" id="tab_2"><?= $this->translate("Riepilogo mensile"); ?></a></li>
                         </ul>
                         <!-- END tabs headers -->
 
@@ -78,7 +78,7 @@ $daily = $this->daily;
                                     <?php endforeach; ?>
                                 </select>
                                 <select id="year-selector">
-                                    <option value="0" <?= (0 == $this->selectYear)?'selected':''; ?> ><?= $this->translate("Ultimi 12 mesi"); ?></option>
+                                    <option value="0" <?= (0 == $this->selectYear)?'selected':''; ?> ><?= $this->translate("Ultimi 4 mesi"); ?></option>
                                     <?php foreach($this->years as $year): ?>
                                         <option <?= ($year == $this->selectYear)?'selected':''; ?> value="<?= $year ?>"><?= $year ?></option>
                                     <?php endforeach; ?>

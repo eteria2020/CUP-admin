@@ -1,173 +1,274 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Sharengo\n"
-"POT-Creation-Date: 2016-09-19 13:11+0100\n"
-"PO-Revision-Date: 2016-09-19 13:11+0100\n"
+"POT-Creation-Date: 2019-11-20 17:42+0100\n"
+"PO-Revision-Date: 2019-11-20 17:46+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: zh_CN\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 1.6.10\n"
-"X-Poedit-Basepath: ../../\n"
+"X-Generator: Poedit 2.2.4\n"
+"X-Poedit-Basepath: ../..\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 "X-Poedit-KeywordsList: translate\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 "X-Poedit-SearchPath-0: .\n"
 
-#: Application/config/module.config.php:1701
+#: Application/config/module.config.php:2110
 #: Reports/view/reports/index/routes.phtml:56
 msgid "Clienti"
 msgstr "客户"
 
-#: Application/config/module.config.php:1708
-#: Application/config/module.config.php:1744
-#: Application/config/module.config.php:1770
-#: Application/config/module.config.php:1794
-#: Application/config/module.config.php:1808
-#: Application/config/module.config.php:1928
+#: Application/config/module.config.php:2117
+#: Application/config/module.config.php:2153
+#: Application/config/module.config.php:2179
+#: Application/config/module.config.php:2203
+#: Application/config/module.config.php:2217
+#: Application/config/module.config.php:2265
+#: Application/config/module.config.php:2361
 #: Application/view/application/trips-not-payed/list.phtml:56
 msgid "Elenco"
 msgstr "目录"
 
-#: Application/config/module.config.php:1713
-#: Application/view/application/customers/edit.phtml:38
-#: Application/view/application/customers/list.phtml:69
+#: Application/config/module.config.php:2122
+#: Application/view/application/customers/edit.phtml:39
+#: Application/view/application/customers/list.phtml:71
 #: Application/view/application/reservations/index.phtml:76
 msgid "Card"
 msgstr "卡片"
 
-#: Application/config/module.config.php:1718
+#: Application/config/module.config.php:2127
 msgid "Patenti estere"
 msgstr "外国车照"
 
-#: Application/config/module.config.php:1737
+#: Application/config/module.config.php:2146
 #: Application/view/partials/notifications/sos-category.phtml:31
 msgid "Auto"
 msgstr "汽车"
 
-#: Application/config/module.config.php:1763
-#: Application/view/partials/translations.phtml:62
+#: Application/config/module.config.php:2172
+#: Application/view/partials/translations.phtml:65
 #: Reports/view/layout/layout.phtml:37
 #: Reports/view/reports/index/routes.phtml:69
 msgid "Corse"
 msgstr "行程"
 
-#: Application/config/module.config.php:1775
+#: Application/config/module.config.php:2184
 msgid "Costo corsa"
 msgstr "行程的费用"
 
-#: Application/config/module.config.php:1780
+#: Application/config/module.config.php:2189
 msgid "Corse non pagate"
 msgstr "不支付行程"
 
-#: Application/config/module.config.php:1787
+#: Application/config/module.config.php:2196
 msgid "Prenotazioni"
 msgstr "预订"
 
-#: Application/config/module.config.php:1801
-#: Application/view/application/customers/edit.phtml:39
+#: Application/config/module.config.php:2210
+#: Application/view/application/customers/edit.phtml:40
 msgid "Fatture"
 msgstr "发票"
 
-#: Application/config/module.config.php:1815
+#: Application/config/module.config.php:2224
 msgid "Pagamenti"
 msgstr "付款"
 
-#: Application/config/module.config.php:1822
-#: Application/view/application/customers/edit.phtml:42
+#: Application/config/module.config.php:2231
+#: Application/view/application/customers/edit.phtml:43
 msgid "Pagamenti falliti"
 msgstr "未成付款"
 
-#: Application/config/module.config.php:1827
+#: Application/config/module.config.php:2236
+#, fuzzy
+#| msgid "Elenco Prenotazioni"
+msgid "Elenco Extra/Penali"
+msgstr "预订列表"
+
+#: Application/config/module.config.php:2241
 msgid "Addebita penale/extra"
 msgstr "指控罚款"
 
-#: Application/config/module.config.php:1832
+#: Application/config/module.config.php:2246
 msgid "Competenze"
 msgstr "本领"
 
-#: Application/config/module.config.php:1837
+#: Application/config/module.config.php:2251
 #: Application/view/application/payments-csv/csv.phtml:15
 msgid "Verifica CartaSI"
 msgstr "CartaSI 的验证"
 
-#: Application/config/module.config.php:1844
+#: Application/config/module.config.php:2258
+msgid "Multe"
+msgstr ""
+
+#: Application/config/module.config.php:2272
 msgid "Configurazione"
 msgstr "配置"
 
-#: Application/config/module.config.php:1851
+#: Application/config/module.config.php:2279
 msgid "Gestione soglie allarme"
 msgstr ""
 "警报\n"
 "限制的管理"
 
-#: Application/config/module.config.php:1856
+#: Application/config/module.config.php:2284
 msgid "Gestione POIS"
 msgstr "POIS 管理"
 
-#: Application/config/module.config.php:1861
+#: Application/config/module.config.php:2289
 msgid "Tariffe"
 msgstr "关税"
 
-#: Application/config/module.config.php:1868
+#: Application/config/module.config.php:2296
 #, fuzzy
 msgid "Configurazione Auto"
 msgstr "配置"
 
-#: Application/config/module.config.php:1875
+#: Application/config/module.config.php:2303
 #, fuzzy
 msgid "Elenco Completo"
 msgstr "行程列表"
 
-#: Application/config/module.config.php:1880
+#: Application/config/module.config.php:2308
 #, fuzzy
 msgid "Elenco Globale"
 msgstr "注解列表"
 
-#: Application/config/module.config.php:1885
+#: Application/config/module.config.php:2313
 #, fuzzy
 msgid "Elenco per Citta'"
 msgstr "事件列表"
 
-#: Application/config/module.config.php:1890
+#: Application/config/module.config.php:2318
 msgid "Elenco per Modello / Citta'"
 msgstr ""
 
-#: Application/config/module.config.php:1895
+#: Application/config/module.config.php:2323
 #, fuzzy
 msgid "Elenco per Auto"
 msgstr "汽车"
 
-#: Application/config/module.config.php:1902
+#: Application/config/module.config.php:2330
 msgid "Aree"
 msgstr "地区"
 
-#: Application/config/module.config.php:1909
+#: Application/config/module.config.php:2337
 msgid "Gestione aree"
 msgstr "地区管理"
 
-#: Application/config/module.config.php:1914
+#: Application/config/module.config.php:2342
 msgid "Aree d'allarme"
 msgstr "警报地区"
 
-#: Application/config/module.config.php:1921
+#: Application/config/module.config.php:2347
+msgid "Aree bonus"
+msgstr ""
+
+#: Application/config/module.config.php:2354
 #, fuzzy
 msgid "Notifiche"
 msgstr "统计数据"
 
-#: Application/config/module.config.php:1935
+#: Application/config/module.config.php:2368
 msgid "Statistiche"
 msgstr "统计数据"
 
-#: Application/config/module.config.php:1942
+#: Application/config/module.config.php:2375
 msgid "Call center"
 msgstr "呼叫中心"
 
-#: Application/config/module.config.php:1949
+#: Application/config/module.config.php:2382
 msgid "Mappa Allarmi"
 msgstr "警报图"
+
+#: Application/public/assets-modules/application/js/notifications.js:275
+msgid "sNotificationsEmptyTable"
+msgstr ""
+
+#: Application/public/assets-modules/application/js/notifications.js:276
+#: Application/public/js/private-trips.js:144
+msgid "sInfo"
+msgstr ""
+
+#: Application/public/assets-modules/application/js/notifications.js:277
+#: Application/public/js/private-trips.js:145
+msgid "sInfoEmpty"
+msgstr ""
+
+#: Application/public/assets-modules/application/js/notifications.js:278
+#: Application/public/js/private-trips.js:146
+msgid "sInfoFiltered"
+msgstr ""
+
+#: Application/public/assets-modules/application/js/notifications.js:281
+#: Application/public/js/private-trips.js:149
+msgid "sLengthMenu"
+msgstr ""
+
+#: Application/public/assets-modules/application/js/notifications.js:282
+#: Application/public/js/private-trips.js:150
+msgid "sLoadingRecords"
+msgstr ""
+
+#: Application/public/assets-modules/application/js/notifications.js:283
+#: Application/public/js/private-trips.js:151
+msgid "sProcessing"
+msgstr ""
+
+#: Application/public/assets-modules/application/js/notifications.js:284
+#: Application/public/js/private-trips.js:152
+msgid "sSearch"
+msgstr ""
+
+#: Application/public/assets-modules/application/js/notifications.js:285
+#: Application/public/js/private-trips.js:153
+msgid "sZeroRecords"
+msgstr ""
+
+#: Application/public/assets-modules/application/js/notifications.js:287
+#: Application/public/js/private-trips.js:155
+msgid "oPaginateFirst"
+msgstr ""
+
+#: Application/public/assets-modules/application/js/notifications.js:288
+#: Application/public/js/private-trips.js:156
+msgid "oPaginatePrevious"
+msgstr ""
+
+#: Application/public/assets-modules/application/js/notifications.js:289
+#: Application/public/js/private-trips.js:157
+msgid "oPaginateNext"
+msgstr ""
+
+#: Application/public/assets-modules/application/js/notifications.js:290
+#: Application/public/js/private-trips.js:158
+msgid "oPaginateLast"
+msgstr ""
+
+#: Application/public/assets-modules/application/js/notifications.js:293
+#: Application/public/js/private-trips.js:161
+msgid "sSortAscending"
+msgstr ""
+
+#: Application/public/assets-modules/application/js/notifications.js:294
+#: Application/public/js/private-trips.js:162
+msgid "sSortDescending"
+msgstr ""
+
+#: Application/public/js/private-trips.js:94
+msgid "showProfile"
+msgstr ""
+
+#: Application/public/js/private-trips.js:143
+msgid "sTripEmptyTable"
+msgstr ""
+
+#: Application/public/js/private-trips.js:216
+msgid "details"
+msgstr ""
 
 #: Application/src/Application/Controller/CarsConfigurationsController.php:133
 #: Application/src/Application/Controller/CarsConfigurationsController.php:200
@@ -183,7 +284,6 @@ msgid "Configurazione Auto aggiunta con successo!"
 msgstr "存档配置的成功"
 
 #: Application/src/Application/Controller/CarsConfigurationsController.php:184
-#: Application/src/Application/Controller/CustomersController.php:229
 msgid "Dati inseriti non validi"
 msgstr "插入的资料是无效的"
 
@@ -202,17 +302,19 @@ msgstr "存档配置的成功"
 msgid "Configurazione Auto aggioranta con successo!"
 msgstr "存档配置的成功"
 
-#: Application/src/Application/Controller/CarsController.php:128
+#: Application/src/Application/Controller/CarsController.php:180
 msgid "Auto aggiunta con successo!"
 msgstr "把汽车添加得成功！"
 
-#: Application/src/Application/Controller/CarsController.php:132
-#: Application/src/Application/Controller/CarsController.php:205
-#: Application/src/Application/Controller/CarsController.php:246
-#: Application/src/Application/Controller/CustomersController.php:224
-#: Application/src/Application/Controller/CustomersController.php:430
-#: Application/src/Application/Controller/CustomersController.php:466
-#: Application/src/Application/Controller/PaymentsController.php:366
+#: Application/src/Application/Controller/CarsController.php:183
+#: Application/src/Application/Controller/CarsController.php:262
+#: Application/src/Application/Controller/CarsController.php:311
+#: Application/src/Application/Controller/CarsController.php:354
+#: Application/src/Application/Controller/CustomersController.php:353
+#: Application/src/Application/Controller/CustomersController.php:584
+#: Application/src/Application/Controller/CustomersController.php:620
+#: Application/src/Application/Controller/CustomersController.php:657
+#: Application/src/Application/Controller/PaymentsController.php:574
 #: Application/src/Application/Controller/UsersController.php:96
 #: Application/src/Application/Controller/UsersController.php:147
 msgid ""
@@ -220,28 +322,34 @@ msgid ""
 "corrente, ci scusiamo per l'inconveniente"
 msgstr "这是一个应用程式的错误。技术援助已经知道。我们的不变表示歉意。"
 
-#: Application/src/Application/Controller/CarsController.php:201
+#: Application/src/Application/Controller/CarsController.php:259
 msgid "Auto modificata con successo!"
 msgstr "把汽车变更得成功！"
 
-#: Application/src/Application/Controller/CarsController.php:244
+#: Application/src/Application/Controller/CarsController.php:309
 msgid "Danni auto modificati con successo!"
 msgstr "把损坏汽车改变得成功！ "
 
-#: Application/src/Application/Controller/CarsController.php:279
+#: Application/src/Application/Controller/CarsController.php:351
+#, fuzzy
+#| msgid "Danni auto modificati con successo!"
+msgid "Dati polizza assicurativa modificati con successo!"
+msgstr "把损坏汽车改变得成功！ "
+
+#: Application/src/Application/Controller/CarsController.php:385
 msgid "Auto rimossa con successo!"
 msgstr "把汽车消除得成功！"
 
-#: Application/src/Application/Controller/CarsController.php:283
+#: Application/src/Application/Controller/CarsController.php:388
 #, fuzzy
 msgid "L'auto non può essere rimossa perchè ha effettuato una o più corse."
 msgstr "路线不能改变，因为它是不完成的。"
 
-#: Application/src/Application/Controller/CarsController.php:306
+#: Application/src/Application/Controller/CarsController.php:409
 msgid "Comando eseguito con successo"
 msgstr "执行命令得成功"
 
-#: Application/src/Application/Controller/CarsController.php:310
+#: Application/src/Application/Controller/CarsController.php:411
 msgid "Errore nell'esecuzione del comando"
 msgstr "执行命令得错误"
 
@@ -259,75 +367,190 @@ msgstr "添加辅助的成功"
 msgid "Errore nell'inserimento della nota"
 msgstr "插入辅助的成功"
 
-#: Application/src/Application/Controller/CustomersController.php:221
-#: Application/src/Application/Controller/EditTripController.php:100
+#: Application/src/Application/Controller/CustomersController.php:305
+msgid "Aggiornamento fallito, percentuale sconto superiore al 15%"
+msgstr ""
+
+#: Application/src/Application/Controller/CustomersController.php:351
+#: Application/src/Application/Controller/EditTripController.php:159
 msgid "Modifica effettuta con successo!"
 msgstr "有变化得成功"
 
-#: Application/src/Application/Controller/CustomersController.php:379
+#: Application/src/Application/Controller/CustomersController.php:369
+#, fuzzy
+#| msgid "Dati inseriti non validi"
+msgid "Dati inseriti non validi - "
+msgstr "插入的资料是无效的"
+
+#: Application/src/Application/Controller/CustomersController.php:533
 msgid "Contratto disabilitato correttamente!"
 msgstr "停用合同得好"
 
-#: Application/src/Application/Controller/CustomersController.php:381
+#: Application/src/Application/Controller/CustomersController.php:535
 msgid "Errore durante la disabilitazione del contratto"
 msgstr "停用合同上的错误"
 
-#: Application/src/Application/Controller/CustomersController.php:400
-#: Application/src/Application/Controller/CustomersController.php:426
-#: Application/src/Application/Controller/CustomersController.php:464
-#: Application/src/Application/Controller/CustomersController.php:551
+#: Application/src/Application/Controller/CustomersController.php:554
+#: Application/src/Application/Controller/CustomersController.php:580
+#: Application/src/Application/Controller/CustomersController.php:618
+#: Application/src/Application/Controller/CustomersController.php:655
+#: Application/src/Application/Controller/CustomersController.php:764
 msgid "Operazione completata con successo!"
 msgstr "完成行动得成功"
 
-#: Application/src/Application/Controller/CustomersController.php:403
+#: Application/src/Application/Controller/CustomersController.php:557
 #, fuzzy
 msgid "Si è verificato un errore applicativo. Operazione non completata"
 msgstr "有一个问题"
 
-#: Application/src/Application/Controller/CustomersController.php:553
+#: Application/src/Application/Controller/CustomersController.php:766
 msgid "Qualcosa è andato storto durante la creazione"
 msgstr "创造之际， 什么事出了"
 
-#: Application/src/Application/Controller/CustomersController.php:642
-#: Application/src/Application/Controller/PaymentsController.php:259
+#: Application/src/Application/Controller/CustomersController.php:855
+#: Application/src/Application/Controller/PaymentsController.php:375
 msgid "Non esiste un cliente per l'id specificato"
 msgstr "一个客户不存在为这个用户名"
 
-#: Application/src/Application/Controller/CustomersEditController.php:133
+#: Application/src/Application/Controller/CustomersEditController.php:159
 msgid "Utente disattivato"
 msgstr "停用的用户"
 
-#: Application/src/Application/Controller/CustomersEditController.php:135
-#: Application/src/Application/Controller/CustomersEditController.php:180
-#: Application/src/Application/Controller/CustomersEditController.php:201
+#: Application/src/Application/Controller/CustomersEditController.php:161
+#: Application/src/Application/Controller/CustomersEditController.php:211
+#: Application/src/Application/Controller/CustomersEditController.php:242
 msgid "Operazione fallita"
 msgstr "未成的行动"
 
-#: Application/src/Application/Controller/CustomersEditController.php:168
+#: Application/src/Application/Controller/CustomersEditController.php:194
 msgid "Riattivazione per pagamento riuscito completata"
 msgstr "完成的重作用为成功支付"
 
-#: Application/src/Application/Controller/CustomersEditController.php:177
+#: Application/src/Application/Controller/CustomersEditController.php:205
 msgid "Utente riattivato"
 msgstr "重作用的用户"
 
-#: Application/src/Application/Controller/CustomersEditController.php:199
+#: Application/src/Application/Controller/CustomersEditController.php:207
+#: Application/src/Application/Controller/CustomersEditController.php:233
+msgid "ATTIVAZIONE FALLITA. Dati incompleti: "
+msgstr ""
+
+#: Application/src/Application/Controller/CustomersEditController.php:240
 msgid "Disattivazione rimossa"
 msgstr "消除的失效"
 
-#: Application/src/Application/Controller/EditTripController.php:102
+#: Application/src/Application/Controller/CustomersEditController.php:281
+msgid "genere utente vuoto,"
+msgstr ""
+
+#: Application/src/Application/Controller/CustomersEditController.php:285
+msgid "nome utente vuoto,"
+msgstr ""
+
+#: Application/src/Application/Controller/CustomersEditController.php:289
+#, fuzzy
+#| msgid "Cognome sulla patente"
+msgid "cognome utente vuoto,"
+msgstr "在车照的姓"
+
+#: Application/src/Application/Controller/CustomersEditController.php:293
+msgid "numero cellulare utente vuoto,"
+msgstr ""
+
+#: Application/src/Application/Controller/CustomersEditController.php:297
+msgid "data nascita utente vuoto,"
+msgstr ""
+
+#: Application/src/Application/Controller/CustomersEditController.php:301
+#, fuzzy
+#| msgid "Provincia di nascita (EE = estero)"
+msgid "provincia nascita utente vuoto,"
+msgstr "出生省 (EE= 外国)"
+
+#: Application/src/Application/Controller/CustomersEditController.php:305
+msgid "nazione nascita utente vuoto,"
+msgstr ""
+
+#: Application/src/Application/Controller/CustomersEditController.php:309
+msgid "indirizzo utente vuoto,"
+msgstr ""
+
+#: Application/src/Application/Controller/CustomersEditController.php:313
+msgid "città utente vuoto,"
+msgstr ""
+
+#: Application/src/Application/Controller/CustomersEditController.php:318
+msgid "città nascita utente vuoto,"
+msgstr ""
+
+#: Application/src/Application/Controller/CustomersEditController.php:338
+msgid "nome patente guida vuoto,"
+msgstr ""
+
+#: Application/src/Application/Controller/CustomersEditController.php:342
+msgid "cognome patente guida vuoto,"
+msgstr ""
+
+#: Application/src/Application/Controller/CustomersEditController.php:346
+#, fuzzy
+#| msgid "Numero patente"
+msgid "numero patente guida vuoto,"
+msgstr "车照号"
+
+#: Application/src/Application/Controller/CustomersEditController.php:350
+msgid "nazione patente guida vuoto,"
+msgstr ""
+
+#: Application/src/Application/Controller/CustomersEditController.php:354
+#, fuzzy
+#| msgid "Scadenza Patente"
+msgid "scadenza patente guida vuoto,"
+msgstr "期限车照"
+
+#: Application/src/Application/Controller/EditTripController.php:105
+#: Application/src/Application/Controller/TripsController.php:331
+msgid ""
+"Attenzione: superato il numero massimo (5) di chiusure/modifiche mensili!"
+msgstr ""
+
+#: Application/src/Application/Controller/EditTripController.php:109
 msgid "La corsa non può essere modificata perché non è conclusa."
 msgstr "路线不能改变，因为它是不完成的。"
 
-#: Application/src/Application/Controller/EditTripController.php:104
+#: Application/src/Application/Controller/EditTripController.php:111
+#, fuzzy
+#| msgid "La corsa non può essere modificata perché non è conclusa."
+msgid "La corsa non può essere modificata perché è di tipo business."
+msgstr "路线不能改变，因为它是不完成的。"
+
+#: Application/src/Application/Controller/EditTripController.php:113
 msgid ""
 "La data specificata non può essere precedente alla data di inizio della corsa"
 msgstr "在指定的日期不得超过行程的开始日期"
 
-#: Application/src/Application/Controller/EditTripController.php:106
+#: Application/src/Application/Controller/EditTripController.php:115
 msgid ""
 "La data specificata non è nel formato corretto. Verifica i dati inseriti."
 msgstr "指定的日期不正确的格式。请检查您的数据。"
+
+#: Application/src/Application/Controller/EditTripController.php:117
+#: Application/view/application/edit-trip/edit-tab.phtml:32
+#, fuzzy
+#| msgid "La corsa non può essere modificata perché risulta già pagata."
+msgid ""
+"La corsa non può essere modificata perché è in corso la procedura di "
+"pagamento."
+msgstr "路线不能改变，因为它是已经支付的"
+
+#: Application/src/Application/Controller/EditTripController.php:119
+#, fuzzy
+#| msgid ""
+#| "La data specificata non può essere precedente alla data di inizio della "
+#| "corsa"
+msgid ""
+"La data specificata di fine della corsa non può eccedere le 24 ore da quella "
+"di inizio."
+msgstr "在指定的日期不得超过行程的开始日期"
 
 #: Application/src/Application/Controller/ForeignDriversLicenseController.php:127
 msgid "Patente validata con successo."
@@ -347,58 +570,81 @@ msgstr "把汽车验证得成功"
 msgid "Si è verificato un errore durante la revoca della patente"
 msgstr "这是在验证车照的错误"
 
-#: Application/src/Application/Controller/NotificationsController.php:104
 #: Application/src/Application/Controller/NotificationsController.php:117
+#: Application/src/Application/Controller/NotificationsController.php:130
 msgid "Il valore identificativo della notifica non è un valore accettato."
 msgstr ""
 
-#: Application/src/Application/Controller/NotificationsController.php:167
+#: Application/src/Application/Controller/NotificationsController.php:201
+msgid "SOS preso in carico."
+msgstr ""
+
+#: Application/src/Application/Controller/NotificationsController.php:203
+msgid "SOS già preso in carico da un altro operatore."
+msgstr ""
+
+#: Application/src/Application/Controller/NotificationsController.php:206
+#, fuzzy
+msgid "Errore durante la presa in carico dell'SOS."
+msgstr "停用合同上的错误"
+
+#: Application/src/Application/Controller/NotificationsController.php:249
 msgid "Presa visione della notifica con ID: "
 msgstr ""
 
-#: Application/src/Application/Controller/NotificationsController.php:169
+#: Application/src/Application/Controller/NotificationsController.php:251
 #, fuzzy
 msgid "Errore durante la presa visione della notifica."
 msgstr "停用合同上的错误"
 
-#: Application/src/Application/Controller/PaymentsController.php:234
+#: Application/src/Application/Controller/PaymentsController.php:346
 msgid "La corsa è stata segnata come pagata"
 msgstr ""
 
-#: Application/src/Application/Controller/PaymentsController.php:239
+#: Application/src/Application/Controller/PaymentsController.php:351
 #, fuzzy
 msgid "si è verificato un errore"
 msgstr "有一个问题"
 
-#: Application/src/Application/Controller/PaymentsController.php:268
-msgid "Il cliente non ha un contratto valido con Cartasi"
+#: Application/src/Application/Controller/PaymentsController.php:384
+#, fuzzy
+#| msgid "Il cliente non ha un contratto valido con Cartasi"
+msgid "Il cliente non ha un contratto valido"
 msgstr "客户没有一个CartaSI的有效合同"
 
-#: Application/src/Application/Controller/PaymentsController.php:277
+#: Application/src/Application/Controller/PaymentsController.php:393
 msgid "La flotta selezionata non è valida"
 msgstr "选择车队无效"
 
-#: Application/src/Application/Controller/PaymentsController.php:291
+#: Application/src/Application/Controller/PaymentsController.php:438
+#, fuzzy
+#| msgid ""
+#| "Il tentativo di pagamento non è andato a buon fine. Il cliente è stato "
+#| "notificato da Cartasi"
 msgid ""
 "Il tentativo di pagamento non è andato a buon fine. Il cliente è stato "
-"notificato da Cartasi"
+"notificato."
 msgstr "在付款失败结束。客户已被Cartasi通知"
 
-#: Application/src/Application/Controller/PaymentsController.php:306
+#: Application/src/Application/Controller/PaymentsController.php:448
+#, fuzzy
+#| msgid ""
+#| "Il tentativo di pagamento è andato a buon fine. Il cliente è stato "
+#| "notificato da Cartasi"
 msgid ""
 "Il tentativo di pagamento è andato a buon fine. Il cliente è stato "
-"notificato da Cartasi"
+"notificato."
 msgstr "在付款失败结束。客户已被Cartasi通知"
 
-#: Application/src/Application/Controller/PaymentsController.php:311
+#: Application/src/Application/Controller/PaymentsController.php:454
 msgid "C'è stato un errore durante la procedura di pagamento: "
 msgstr "付款程序之际，"
 
-#: Application/src/Application/Controller/PaymentsController.php:361
+#: Application/src/Application/Controller/PaymentsController.php:569
 msgid "Tariffa creata con successo!"
 msgstr "把关税创造得成功"
 
-#: Application/src/Application/Controller/PaymentsController.php:363
+#: Application/src/Application/Controller/PaymentsController.php:571
 msgid "Tariffa invariata"
 msgstr "不变化的关税"
 
@@ -449,7 +695,7 @@ msgid ""
 "l'inconveniente"
 msgstr "这是一个应用程式的错误。技术援助已经知道。我们的不变表示歉意。"
 
-#: Application/src/Application/Controller/TripsController.php:243
+#: Application/src/Application/Controller/TripsController.php:353
 msgid "Corsa chiusa con successo"
 msgstr "完成"
 
@@ -463,17 +709,17 @@ msgstr ""
 msgid "Utente modificato con successo!"
 msgstr "把用户改变得成功 "
 
-#: Application/src/Application/Controller/ZonesController.php:178
+#: Application/src/Application/Controller/ZonesController.php:194
 #, fuzzy
 msgid "Non e' stato possibile elaborare il file"
 msgstr "不能验证文档的格式化"
 
-#: Application/src/Application/Controller/ZonesController.php:181
+#: Application/src/Application/Controller/ZonesController.php:197
 msgid "Il file fornito non e' un valido KML"
 msgstr ""
 
-#: Application/src/Application/Controller/ZonesController.php:185
-#: Application/src/Application/Controller/ZonesController.php:202
+#: Application/src/Application/Controller/ZonesController.php:201
+#: Application/src/Application/Controller/ZonesController.php:218
 #: Reports/src/Reports/Controller/ApiController.php:76
 #: Reports/src/Reports/Controller/ApiController.php:121
 #: Reports/src/Reports/Controller/ApiController.php:179
@@ -486,19 +732,19 @@ msgstr ""
 msgid "Si è verificato un errore applicativo."
 msgstr "有一个问题"
 
-#: Application/src/Application/Controller/ZonesController.php:199
+#: Application/src/Application/Controller/ZonesController.php:215
 #, fuzzy
 msgid "Zona modificata con successo!"
 msgstr "把汽车变更得成功！"
 
-#: Application/src/Application/Form/CarFieldset.php:92
+#: Application/src/Application/Form/CarFieldset.php:100
 #: Application/src/Application/Form/ZoneFieldset.php:61
 #: Application/view/application/zones/edit.phtml:40
 #: Application/view/application/zones/list-tab.phtml:49
 msgid "Attivo"
 msgstr "作用"
 
-#: Application/src/Application/Form/CarFieldset.php:93
+#: Application/src/Application/Form/CarFieldset.php:101
 #: Application/src/Application/Form/ZoneFieldset.php:62
 msgid "Non Attivo"
 msgstr "不作用"
@@ -524,23 +770,24 @@ msgid "Volume"
 msgstr ""
 
 #: Application/src/Application/Form/CarsConfigurations/RadioSetupForm.php:52
-#: Application/view/application/customers-edit/edit-tab.phtml:38
-#: Application/view/application/customers/info-tab.phtml:24
-#: Application/view/application/customers/list.phtml:66
+#: Application/view/application/customers-edit/edit-tab.phtml:50
+#: Application/view/application/customers/info-tab.phtml:43
+#: Application/view/application/customers/list.phtml:67
+#: Application/view/application/fines/details.phtml:92
 #: Application/view/application/foreign-drivers-license/uploaded-files.phtml:61
 #: Application/view/application/invoices/index.phtml:30
 #: Application/view/application/invoices/index.phtml:83
 #: Application/view/application/payments-csv/csv.phtml:69
 #: Application/view/application/payments-csv/csv.phtml:93
-#: Application/view/application/payments/failed-payments.phtml:59
-#: Application/view/application/payments/retry.phtml:89
+#: Application/view/application/payments/failed-payments.phtml:63
+#: Application/view/application/payments/retry-extra.phtml:108
+#: Application/view/application/payments/retry-payments.phtml:89
 #: Application/view/application/pois/add.phtml:51
 #: Application/view/application/pois/edit.phtml:51
 #: Application/view/application/pois/index.phtml:29
 #: Application/view/application/pois/index.phtml:78
 #: Application/view/application/trips-not-payed/list.phtml:65
 #: Application/view/application/trips/index.phtml:92
-#: Application/view/application/trips/info-tab.phtml:46
 #: Application/view/application/zones/edit.phtml:31
 #: Application/view/application/zones/list-tab.phtml:17
 #: Application/view/application/zones/list-tab.phtml:48
@@ -617,49 +864,59 @@ msgstr "不能验证文档的格式化"
 msgid "Il file caricato non è leggibile o non esiste"
 msgstr "把文档装载漫漶还是不存在"
 
-#: Application/src/Application/Form/CustomerBonusFieldset.php:115
+#: Application/src/Application/Form/CustomerBonusFieldset.php:105
+#: Application/src/Application/Form/CustomerBonusFieldset.php:127
+msgid "Il massimo valore inseribile è stato superato:"
+msgstr "已超过可以输入的最大值:"
+
+#: Application/src/Application/Form/CustomerBonusFieldset.php:178
+#: Application/src/Application/Form/CustomerPointFieldset.php:131
 msgid "La data di fine validità deve essere posteriore alla data di inizio"
 msgstr "有效性结束的日期要是开始日期以后"
 
-#: Application/src/Application/Form/CustomerFieldset.php:60
+#: Application/src/Application/Form/CustomerFieldset.php:62
 msgid "Sig."
 msgstr "先生"
 
-#: Application/src/Application/Form/CustomerFieldset.php:61
+#: Application/src/Application/Form/CustomerFieldset.php:63
 msgid "Sig.ra"
 msgstr "女士"
 
-#: Application/src/Application/Form/CustomerFieldset.php:198
+#: Application/src/Application/Form/CustomerFieldset.php:227
 msgid "Italiano"
 msgstr "意大利语"
 
-#: Application/src/Application/Form/CustomerFieldset.php:199
+#: Application/src/Application/Form/CustomerFieldset.php:228
 msgid "tedesco"
 msgstr "德语"
 
-#: Application/src/Application/Form/CustomerFieldset.php:200
+#: Application/src/Application/Form/CustomerFieldset.php:229
 msgid "francese"
 msgstr "法语"
 
-#: Application/src/Application/Form/CustomerFieldset.php:201
+#: Application/src/Application/Form/CustomerFieldset.php:230
 msgid "spagnolo"
 msgstr "西班牙语"
 
-#: Application/src/Application/Form/CustomerFieldset.php:202
+#: Application/src/Application/Form/CustomerFieldset.php:231
 msgid "inglese"
 msgstr "英语"
 
-#: Application/src/Application/Form/CustomerFieldset.php:203
+#: Application/src/Application/Form/CustomerFieldset.php:232
 msgid "cinese"
 msgstr "汉语"
 
-#: Application/src/Application/Form/CustomerFieldset.php:204
+#: Application/src/Application/Form/CustomerFieldset.php:233
 msgid "russo"
 msgstr "俄语"
 
-#: Application/src/Application/Form/CustomerFieldset.php:205
+#: Application/src/Application/Form/CustomerFieldset.php:234
 msgid "portoghese"
 msgstr "葡萄牙语"
+
+#: Application/src/Application/Form/CustomerPointFieldset.php:89
+msgid "Il valore massimo inseribile è 15 punti."
+msgstr ""
 
 #: Application/src/Application/Form/InputData/CloseTripDataFactory.php:36
 msgid "Impossibile trovare la corsa corretta"
@@ -693,15 +950,13 @@ msgstr "推广的代码"
 #: Application/src/Application/Form/SettingFieldset.php:77
 #: Application/src/Application/Form/SettingFieldset.php:92
 #: Application/src/Application/Form/SettingFieldset.php:107
-#: SharengoCore/src/SharengoCore/Service/CardsService.php:97
-#: SharengoCore/src/SharengoCore/Service/CardsService.php:99
-#: SharengoCore/src/SharengoCore/Service/ReservationsService.php:119
-#: SharengoCore/src/SharengoCore/Service/TripsService.php:158
-#: SharengoCore/src/SharengoCore/Service/TripsService.php:172
-#: SharengoCore/src/SharengoCore/Service/TripsService.php:183
-#: Application/view/application/customers/info-tab.phtml:295
-#: Application/view/application/customers/info-tab.phtml:308
-#: Application/view/application/trips/close-tab.phtml:25
+#: Application/src/Application/Form/SettingFieldset.php:122
+#: Application/src/Application/Form/SettingFieldset.php:137
+#: Application/view/application/customers/info-tab.phtml:324
+#: Application/view/application/customers/info-tab.phtml:337
+#: Application/view/application/customers/info-tab.phtml:350
+#: Application/view/application/customers/info-tab.phtml:363
+#: Application/view/application/edit-trip/edit-tab.phtml:136
 msgid "No"
 msgstr "不是"
 
@@ -709,14 +964,12 @@ msgstr "不是"
 #: Application/src/Application/Form/SettingFieldset.php:78
 #: Application/src/Application/Form/SettingFieldset.php:93
 #: Application/src/Application/Form/SettingFieldset.php:108
-#: SharengoCore/src/SharengoCore/Service/CardsService.php:97
-#: SharengoCore/src/SharengoCore/Service/CardsService.php:99
-#: SharengoCore/src/SharengoCore/Service/ReservationsService.php:119
-#: SharengoCore/src/SharengoCore/Service/TripsService.php:158
-#: SharengoCore/src/SharengoCore/Service/TripsService.php:172
-#: SharengoCore/src/SharengoCore/Service/TripsService.php:183
-#: Application/view/application/customers/info-tab.phtml:293
-#: Application/view/application/customers/info-tab.phtml:306
+#: Application/src/Application/Form/SettingFieldset.php:123
+#: Application/src/Application/Form/SettingFieldset.php:138
+#: Application/view/application/customers/info-tab.phtml:322
+#: Application/view/application/customers/info-tab.phtml:335
+#: Application/view/application/customers/info-tab.phtml:348
+#: Application/view/application/customers/info-tab.phtml:361
 msgid "Si"
 msgstr "是"
 
@@ -728,14 +981,20 @@ msgstr "男"
 msgid "Femmina"
 msgstr "女"
 
+#: Application/src/Application/Form/Validator/ZipCode.php:18
+#, fuzzy
+#| msgid "Formato id cliente non corretto"
+msgid "Codice Avviamento Postale non corretto"
+msgstr "错的客户用户名"
+
 #: Application/src/Application/Form/ZoneFieldset.php:76
 #: Application/view/application/cars/index.phtml:40
-#: Application/view/application/cars/index.phtml:94
+#: Application/view/application/cars/index.phtml:96
 msgid "Nascosta"
 msgstr "藏"
 
 #: Application/src/Application/Form/ZoneFieldset.php:77
-#: Application/view/partials/translations.phtml:88
+#: Application/view/partials/translations.phtml:91
 msgid "Visibile"
 msgstr ""
 
@@ -786,6 +1045,375 @@ msgstr "维修"
 msgid "Non operativa"
 msgstr "不运转"
 
+#: Application/src/Application/View/Helper/DatatableFiltersHelper.php:28
+#: Application/view/application/cars/index.phtml:30
+#: Application/view/application/customers/invoices-tab.phtml:21
+#: Application/view/application/customers/list.phtml:26
+#: Application/view/application/fines/index.phtml:28
+#: Application/view/application/foreign-drivers-license/uploaded-files.phtml:25
+#: Application/view/application/invoices/index.phtml:28
+#: Application/view/application/notifications/index.phtml:31
+#: Application/view/application/payments/failed-extra.phtml:27
+#: Application/view/application/payments/failed-payments.phtml:28
+#: Application/view/application/pois/index.phtml:25
+#: Application/view/application/reservations/index.phtml:34
+#: Application/view/application/trips-not-payed/list.phtml:24
+#: Application/view/application/trips/index.phtml:29
+#: Application/view/application/users/index.phtml:25
+#: Application/view/application/zones/zone-alarms.phtml:18
+#: Application/view/application/zones/zone-bonus.phtml:18
+msgid "Seleziona"
+msgstr "选择"
+
+#: Application/src/Application/View/Helper/DatatableFiltersHelper.php:36
+#: Application/view/application/cars-configurations/list-all.phtml:33
+#: Application/view/application/cars-configurations/list-car.phtml:30
+#: Application/view/application/cars-configurations/list-fleet.phtml:30
+#: Application/view/application/cars-configurations/list-global.phtml:29
+#: Application/view/application/cars-configurations/list-model.phtml:31
+#: Application/view/application/cars/index.phtml:54
+#: Application/view/application/customers/invoices-tab.phtml:35
+#: Application/view/application/customers/list.phtml:39
+#: Application/view/application/fines/index.phtml:38
+#: Application/view/application/foreign-drivers-license/uploaded-files.phtml:33
+#: Application/view/application/invoices/index.phtml:44
+#: Application/view/application/notifications/index.phtml:54
+#: Application/view/application/payments/failed-extra.phtml:39
+#: Application/view/application/payments/failed-payments.phtml:35
+#: Application/view/application/pois/index.phtml:38
+#: Application/view/application/reservations/index.phtml:44
+#: Application/view/application/trips-not-payed/list.phtml:34
+#: Application/view/application/trips/index.phtml:43
+#: Application/view/application/users/index.phtml:34
+msgid "Filtra..."
+msgstr "过滤"
+
+#: Application/src/Application/View/Helper/DatatableFiltersHelper.php:43
+#: Application/view/application/fines/index.phtml:45
+#: Application/view/application/trips/index.phtml:50
+msgid "da"
+msgstr "从"
+
+#: Application/src/Application/View/Helper/DatatableFiltersHelper.php:46
+#: Application/view/application/edit-trip/edit-tab.phtml:63
+#: Application/view/application/fines/index.phtml:48
+#: Application/view/application/trips/index.phtml:53
+#: Application/view/application/trips/info-tab.phtml:161
+msgid "Data inizio"
+msgstr "开始的日期"
+
+#: Application/src/Application/View/Helper/DatatableFiltersHelper.php:49
+#: Application/view/application/fines/index.phtml:51
+#: Application/view/application/trips/index.phtml:56
+#: Reports/view/reports/index/map.phtml:29
+msgid "a"
+msgstr "到"
+
+#: Application/src/Application/View/Helper/DatatableFiltersHelper.php:52
+#: Application/view/application/edit-trip/edit-tab.phtml:69
+#: Application/view/application/fines/index.phtml:54
+#: Application/view/application/trips/index.phtml:59
+#: Application/view/application/trips/info-tab.phtml:167
+msgid "Data fine"
+msgstr "结束的日期"
+
+#: Application/src/Application/View/Helper/DatatableFiltersHelper.php:56
+#: Application/view/application/cars-configurations/list-all.phtml:36
+#: Application/view/application/cars-configurations/list-car.phtml:33
+#: Application/view/application/cars-configurations/list-fleet.phtml:33
+#: Application/view/application/cars-configurations/list-global.phtml:32
+#: Application/view/application/cars-configurations/list-model.phtml:34
+#: Application/view/application/cars/index.phtml:57
+#: Application/view/application/customers/invoices-tab.phtml:42
+#: Application/view/application/customers/list.phtml:42
+#: Application/view/application/fines/index.phtml:57
+#: Application/view/application/foreign-drivers-license/uploaded-files.phtml:36
+#: Application/view/application/invoices/index.phtml:50
+#: Application/view/application/notifications/index.phtml:57
+#: Application/view/application/payments/failed-extra.phtml:42
+#: Application/view/application/payments/failed-payments.phtml:38
+#: Application/view/application/pois/index.phtml:42
+#: Application/view/application/reservations/index.phtml:47
+#: Application/view/application/trips-not-payed/list.phtml:38
+#: Application/view/application/trips/index.phtml:63
+#: Application/view/application/users/index.phtml:38
+#: Application/view/application/zones/list-tab.phtml:25
+msgid "Cerca"
+msgstr "搜寻"
+
+#: Application/src/Application/View/Helper/DatatableFiltersHelper.php:62
+#: Application/view/application/cars-configurations/list-all.phtml:40
+#: Application/view/application/cars-configurations/list-car.phtml:37
+#: Application/view/application/cars-configurations/list-fleet.phtml:37
+#: Application/view/application/cars-configurations/list-global.phtml:36
+#: Application/view/application/cars-configurations/list-model.phtml:38
+#: Application/view/application/cars/index.phtml:61
+#: Application/view/application/customers/invoices-tab.phtml:50
+#: Application/view/application/customers/list.phtml:46
+#: Application/view/application/fines/index.phtml:61
+#: Application/view/application/foreign-drivers-license/uploaded-files.phtml:40
+#: Application/view/application/invoices/index.phtml:58
+#: Application/view/application/notifications/index.phtml:61
+#: Application/view/application/payments/failed-extra.phtml:46
+#: Application/view/application/payments/failed-payments.phtml:42
+#: Application/view/application/pois/index.phtml:50
+#: Application/view/application/reservations/index.phtml:51
+#: Application/view/application/trips-not-payed/list.phtml:44
+#: Application/view/application/trips/index.phtml:69
+#: Application/view/application/users/index.phtml:46
+#: Application/view/application/zones/list-tab.phtml:29
+msgid "Pulisci Ricerca"
+msgstr "重置搜寻"
+
+#: Reports/public/assets-modules/reports/js/live.js:325
+#: Reports/public/assets-modules/reports/js/live.js:338
+msgid "Punto Scia"
+msgstr ""
+
+#: Reports/public/assets-modules/reports/js/live.js:363
+#: Reports/public/assets-modules/reports/js/map.js:82
+#: Reports/view/partials/reports_translations.phtml:3
+#, fuzzy
+msgid "Spostati su"
+msgstr "停止"
+
+#: Reports/public/assets-modules/reports/js/map.js:217
+#: Reports/view/partials/reports_translations.phtml:6
+#: Reports/view/reports/index/map.phtml:19
+msgid "Passa a Posizione di Arrivo"
+msgstr ""
+
+#: Reports/public/assets-modules/reports/js/map.js:217
+#: Reports/view/partials/reports_translations.phtml:7
+msgid "Passa a Posizione di Partenza"
+msgstr ""
+
+#: Reports/public/assets-modules/reports/js/menu.js:29
+#: Reports/view/partials/reports_translations.phtml:10
+#, fuzzy
+msgid "Corse per Citt&agrave;"
+msgstr "开行程"
+
+#: Reports/public/assets-modules/reports/js/routes.js:104
+#: Reports/view/partials/reports_translations.phtml:19
+#: Reports/view/reports/index/routes.phtml:31
+#, fuzzy
+msgid "corse precedenti a"
+msgstr "以前的例外"
+
+#: Reports/public/assets-modules/reports/js/routes.js:459
+#: Reports/view/partials/reports_translations.phtml:20
+msgid "Targa Veicolo"
+msgstr ""
+
+#: Reports/public/assets-modules/reports/js/routes.js:459
+#: Application/view/application/trips-not-payed/list.phtml:73
+#: Application/view/application/trips/index.phtml:100
+#: Application/view/application/trips/info-tab.phtml:173
+#: Application/view/partials/notifications/sos-category.phtml:219
+#: Reports/view/partials/reports_translations.phtml:21
+msgid "Durata"
+msgstr "长短"
+
+#: Reports/public/assets-modules/reports/js/routes.js:459
+#: Reports/view/partials/reports_translations.phtml:22
+#, fuzzy
+msgid "Numero Punti"
+msgstr "分钟"
+
+#: Reports/public/assets-modules/reports/js/routes.js:459
+#: Reports/view/partials/reports_translations.phtml:23
+#, fuzzy
+msgid "Data Inizio Corsa"
+msgstr "行程的开始"
+
+#: Reports/public/assets-modules/reports/js/routes.js:459
+#: Reports/view/partials/reports_translations.phtml:24
+#, fuzzy
+msgid "Data Fine Corsa"
+msgstr "行程的结束"
+
+#: Reports/public/assets-modules/reports/js/routes.js:466
+#: Reports/view/partials/reports_translations.phtml:25
+msgid "Itinerario"
+msgstr ""
+
+#: Reports/public/assets-modules/reports/js/routes.js:481
+#: Reports/public/assets-modules/reports/js/routes.js:616
+#: Reports/view/partials/reports_translations.phtml:26
+msgid "Non sono state trovate corse con i filtri selezionati"
+msgstr ""
+
+#: Reports/public/assets-modules/reports/js/routes.js:523
+#: Reports/view/partials/reports_translations.phtml:27
+#, fuzzy
+msgid "Controlli"
+msgstr "监察员"
+
+#: Reports/public/assets-modules/reports/js/routes.js:523
+#: Reports/view/partials/reports_translations.phtml:28
+#, fuzzy
+msgid "Ferma"
+msgstr "证实"
+
+#: Reports/public/assets-modules/reports/js/routes.js:523
+#: Reports/view/partials/reports_translations.phtml:29
+#, fuzzy
+msgid "Pausa"
+msgstr "因果"
+
+#: Reports/public/assets-modules/reports/js/routes.js:523
+#: Reports/view/partials/reports_translations.phtml:30
+msgid "Avvia"
+msgstr ""
+
+#: Reports/public/assets-modules/reports/js/routes.js:523
+#: Reports/view/partials/reports_translations.phtml:31
+msgid "Velocit&agrave;"
+msgstr ""
+
+#: Reports/public/assets-modules/reports/js/routes.js:523
+#: Reports/view/partials/reports_translations.phtml:32
+#, fuzzy
+msgid "Data Rilevazione Punto"
+msgstr "启用合同的日期"
+
+#: Reports/public/assets-modules/reports/js/routes.js:523
+#: Reports/view/partials/reports_translations.phtml:33
+msgid "Blocca Vista su Auto"
+msgstr ""
+
+#: Reports/public/assets-modules/reports/js/routes.js:530
+#: Reports/view/partials/reports_translations.phtml:34
+#, fuzzy
+msgid "Durata Corsa"
+msgstr "行程的长短"
+
+#: Reports/public/assets-modules/reports/js/routes.js:647
+#: Reports/view/partials/reports_translations.phtml:35
+msgid "Apri"
+msgstr ""
+
+#: Reports/public/assets-modules/reports/js/trips.city.js:112
+#: Reports/public/assets-modules/reports/js/trips.city.js:245
+#: Reports/public/assets-modules/reports/js/trips.main.js:89
+#: Reports/public/assets-modules/reports/js/trips.main.js:242
+#: Reports/view/partials/reports_translations.phtml:38
+msgid "Lunedi"
+msgstr ""
+
+#: Reports/public/assets-modules/reports/js/trips.city.js:112
+#: Reports/public/assets-modules/reports/js/trips.city.js:246
+#: Reports/public/assets-modules/reports/js/trips.main.js:90
+#: Reports/public/assets-modules/reports/js/trips.main.js:243
+#: Reports/view/partials/reports_translations.phtml:39
+msgid "Martedi"
+msgstr ""
+
+#: Reports/public/assets-modules/reports/js/trips.city.js:112
+#: Reports/public/assets-modules/reports/js/trips.city.js:247
+#: Reports/public/assets-modules/reports/js/trips.main.js:91
+#: Reports/public/assets-modules/reports/js/trips.main.js:244
+#: Reports/view/partials/reports_translations.phtml:40
+msgid "Mercoledi"
+msgstr ""
+
+#: Reports/public/assets-modules/reports/js/trips.city.js:112
+#: Reports/public/assets-modules/reports/js/trips.city.js:248
+#: Reports/public/assets-modules/reports/js/trips.main.js:92
+#: Reports/public/assets-modules/reports/js/trips.main.js:245
+#: Reports/view/partials/reports_translations.phtml:41
+msgid "Giovedi"
+msgstr ""
+
+#: Reports/public/assets-modules/reports/js/trips.city.js:112
+#: Reports/public/assets-modules/reports/js/trips.city.js:249
+#: Reports/public/assets-modules/reports/js/trips.main.js:93
+#: Reports/public/assets-modules/reports/js/trips.main.js:246
+#: Reports/view/partials/reports_translations.phtml:42
+msgid "Venerdi"
+msgstr ""
+
+#: Reports/public/assets-modules/reports/js/trips.city.js:112
+#: Reports/public/assets-modules/reports/js/trips.city.js:250
+#: Reports/public/assets-modules/reports/js/trips.main.js:94
+#: Reports/public/assets-modules/reports/js/trips.main.js:247
+#: Reports/view/partials/reports_translations.phtml:43
+msgid "Sabato"
+msgstr ""
+
+#: Reports/public/assets-modules/reports/js/trips.city.js:112
+#: Reports/public/assets-modules/reports/js/trips.city.js:251
+#: Reports/public/assets-modules/reports/js/trips.main.js:95
+#: Reports/public/assets-modules/reports/js/trips.main.js:248
+#: Reports/view/partials/reports_translations.phtml:44
+msgid "Domenica"
+msgstr ""
+
+#: Reports/public/assets-modules/reports/js/trips.city.js:206
+#: Reports/public/assets-modules/reports/js/trips.main.js:180
+#: Reports/view/partials/reports_translations.phtml:45
+#: Reports/view/reports/index/trips.phtml:115
+#: Reports/view/reports/index/tripscity.phtml:92
+msgid "oltre"
+msgstr ""
+
+#: Reports/public/assets-modules/reports/js/trips.city.js:218
+#: Reports/public/assets-modules/reports/js/trips.main.js:192
+#: Reports/view/partials/reports_translations.phtml:46
+msgid "Uomini"
+msgstr ""
+
+#: Reports/public/assets-modules/reports/js/trips.city.js:218
+#: Reports/public/assets-modules/reports/js/trips.main.js:192
+#: Reports/view/partials/reports_translations.phtml:47
+msgid "Donne"
+msgstr ""
+
+#: Reports/public/assets-modules/reports/js/trips.city.js:333
+#: Reports/view/partials/reports_translations.phtml:48
+msgid "Area"
+msgstr ""
+
+#: Reports/public/assets-modules/reports/js/trips.city.js:333
+#: Reports/view/partials/reports_translations.phtml:49
+#, fuzzy
+msgid "Concentrazione"
+msgstr "配置"
+
+#: Reports/public/assets-modules/reports/js/trips.city.js:380
+#: Reports/public/assets-modules/reports/js/trips.main.js:309
+#: Reports/view/partials/reports_translations.phtml:50
+#, fuzzy
+msgid "selezionate di"
+msgstr "选择"
+
+#: Reports/public/assets-modules/reports/js/trips.city.js:380
+#: Reports/public/assets-modules/reports/js/trips.main.js:309
+#: Reports/view/partials/reports_translations.phtml:51
+#, fuzzy
+msgid "corse"
+msgstr "行程"
+
+#: Reports/public/assets-modules/reports/js/trips.city.js:381
+#: Reports/public/assets-modules/reports/js/trips.main.js:310
+#: Reports/view/partials/reports_translations.phtml:52
+msgid "Azzera tutti i filtri"
+msgstr ""
+
+#: Reports/public/assets-modules/reports/js/trips.city.js:382
+#: Reports/public/assets-modules/reports/js/trips.main.js:311
+#: Reports/view/partials/reports_translations.phtml:53
+msgid "Tutte le"
+msgstr ""
+
+#: Reports/public/assets-modules/reports/js/trips.city.js:382
+#: Reports/public/assets-modules/reports/js/trips.main.js:311
+#: Reports/view/partials/reports_translations.phtml:54
+msgid ""
+"corse sono selezionate. Clicca su uno dei grafici per applicarne dei filtri."
+msgstr ""
+
 #: Reports/src/Reports/Controller/ApiController.php:72
 #: Reports/src/Reports/Controller/ApiController.php:116
 #, fuzzy
@@ -810,58 +1438,6 @@ msgid ""
 "o pi&ugrave; parametri."
 msgstr ""
 
-#: SharengoCore/src/SharengoCore/Service/CardsService.php:70
-#, php-format
-msgid "Rfid: %s - Codice: %s"
-msgstr "射频名: %s - 代码: %s"
-
-#: SharengoCore/src/SharengoCore/Service/CarsService.php:166
-msgid "Interna"
-msgstr "内"
-
-#: SharengoCore/src/SharengoCore/Service/CarsService.php:166
-msgid "Esterna"
-msgstr "外"
-
-#: SharengoCore/src/SharengoCore/Service/CarsService.php:169
-#: Application/view/application/zones/list-tab.phtml:64
-#: Application/view/partials/notifications/sos-category.phtml:318
-msgid "Mappa"
-msgstr "地图"
-
-#: SharengoCore/src/SharengoCore/Service/ConfigurationsService.php:85
-msgid "Si è verificato un errore durante il salvataggio della configurazione"
-msgstr "保存配置之际，发生了错误"
-
-#: SharengoCore/src/SharengoCore/Service/CustomersService.php:281
-msgid "Completata"
-msgstr "完成"
-
-#: SharengoCore/src/SharengoCore/Service/CustomersService.php:281
-msgid "Non Completata"
-msgstr "不完成"
-
-#: SharengoCore/src/SharengoCore/Service/CustomersService.php:424
-#: SharengoCore/src/SharengoCore/Service/CustomersService.php:450
-msgid "Codice promo non valido."
-msgstr "推广的代码是无效的"
-
-#: SharengoCore/src/SharengoCore/Service/CustomersService.php:428
-msgid "Codice promo già associato a questo account."
-msgstr "推广的代码相符已经这个账户"
-
-#: SharengoCore/src/SharengoCore/Service/CustomersService.php:527
-msgid "SHARENGO - NOTIFICA DI DISABILITAZIONE"
-msgstr "SHARENGO-禁用的通知"
-
-#: SharengoCore/src/SharengoCore/Service/CustomersService.php:586
-msgid "SHARENGO - RIABILITAZIONE UTENTE"
-msgstr "SHARENGO-重启用的用户"
-
-#: SharengoCore/src/SharengoCore/Service/ReservationsService.php:118
-msgid "PRENOTAZIONE DI SISTEMA"
-msgstr "系统的预订"
-
 #: Application/view/application/cars-configurations/add.phtml:8
 #, fuzzy
 msgid "AGGIUNGI CONFIGURAZIONE AUTO"
@@ -871,12 +1447,15 @@ msgstr "添加汽车"
 #: Application/view/application/cars-configurations/details.phtml:18
 #: Application/view/application/cars-configurations/edit.phtml:16
 #: Application/view/application/cars/add.phtml:12
-#: Application/view/application/cars/edit.phtml:14
+#: Application/view/application/cars/edit.phtml:17
 #: Application/view/application/customers/edit.phtml:25
+#: Application/view/application/notifications/details-incident.phtml:13
+#: Application/view/application/notifications/details-incident.phtml:168
 #: Application/view/application/notifications/details.phtml:10
+#: Application/view/application/payments/retry-extra.phtml:25
 #: Application/view/application/pois/add.phtml:13
 #: Application/view/application/pois/edit.phtml:13
-#: Application/view/application/trips/details.phtml:22
+#: Application/view/application/trips/details.phtml:25
 #: Application/view/application/zones/edit.phtml:13
 msgid "Torna alla lista"
 msgstr "返回列表"
@@ -890,10 +1469,18 @@ msgstr "返回列表"
 #: Application/view/application/cars-configurations/list-model.phtml:25
 #: Application/view/application/cars-configurations/list-model.phtml:60
 #: Application/view/application/cars/add.phtml:75
+#: Application/view/application/cars/edit-tab.phtml:64
 #: Application/view/application/cars/index.phtml:33
-#: Application/view/application/cars/index.phtml:87
+#: Application/view/application/cars/index.phtml:89
+#: Application/view/application/customers-edit/edit-tab.phtml:277
+#: Application/view/application/customers/info-tab.phtml:190
+#: Application/view/application/customers/list.phtml:35
+#: Application/view/application/customers/list.phtml:69
+#: Application/view/application/fines/index.phtml:31
+#: Application/view/application/fines/index.phtml:122
+#: Application/view/application/foreign-drivers-license/uploaded-files.phtml:63
 #: Application/view/application/invoices/index.phtml:32
-#: Application/view/application/payments/extra.phtml:22
+#: Application/view/application/payments/extra.phtml:21
 #: Application/view/application/trips-not-payed/list.phtml:28
 #: Application/view/application/trips-not-payed/list.phtml:68
 #: Application/view/application/trips/index.phtml:38
@@ -928,13 +1515,18 @@ msgstr "地方"
 #: Application/view/application/cars/add.phtml:28
 #: Application/view/application/cars/edit-tab.phtml:15
 #: Application/view/application/cars/index.phtml:31
-#: Application/view/application/cars/index.phtml:85
+#: Application/view/application/cars/index.phtml:87
+#: Application/view/application/fines/details.phtml:139
+#: Application/view/application/fines/index.phtml:30
+#: Application/view/application/fines/index.phtml:124
+#: Application/view/application/notifications/details-incident.phtml:68
+#: Application/view/application/notifications/index.phtml:96
 #: Application/view/application/reservations/index.phtml:36
 #: Application/view/application/reservations/index.phtml:74
 #: Application/view/application/trips-not-payed/list.phtml:67
 #: Application/view/application/trips/index.phtml:36
 #: Application/view/application/trips/index.phtml:95
-#: Application/view/application/trips/info-tab.phtml:73
+#: Application/view/application/trips/info-tab.phtml:108
 msgid "Targa"
 msgstr "牌照"
 
@@ -972,33 +1564,34 @@ msgstr "改变汽车"
 msgid "Lista Opzioni"
 msgstr "目录"
 
-#: Application/view/application/cars-configurations/edit.phtml:41
+#: Application/view/application/cars-configurations/edit.phtml:45
 #: Application/view/application/cars-configurations/list-all.phtml:67
 #: Application/view/application/cars-configurations/list-car.phtml:62
 #: Application/view/application/cars-configurations/list-fleet.phtml:62
 #: Application/view/application/cars-configurations/list-global.phtml:60
 #: Application/view/application/cars-configurations/list-model.phtml:64
-#: Application/view/application/customers/bonus-tab.phtml:26
-#: Application/view/application/customers/list.phtml:75
+#: Application/view/application/customers/bonus-tab.phtml:27
+#: Application/view/application/customers/list.phtml:77
+#: Application/view/application/customers/points-tab.phtml:30
 #: Application/view/application/zones/list-tab.phtml:53
 msgid "Azioni"
 msgstr "作用"
 
-#: Application/view/application/cars-configurations/edit.phtml:57
+#: Application/view/application/cars-configurations/edit.phtml:61
 #, fuzzy
 msgid "Modifica Configurazione"
 msgstr "配置"
 
-#: Application/view/application/cars-configurations/edit.phtml:75
+#: Application/view/application/cars-configurations/edit.phtml:79
 msgid "Modifica Opzione Configurazione Auto"
 msgstr ""
 
-#: Application/view/application/cars-configurations/edit.phtml:75
+#: Application/view/application/cars-configurations/edit.phtml:79
 #, fuzzy
 msgid "Modifica Configurazione Auto"
 msgstr "配置"
 
-#: Application/view/application/cars-configurations/edit.phtml:79
+#: Application/view/application/cars-configurations/edit.phtml:83
 #: Application/view/partials/translations.phtml:23
 msgid "Elaborazione in corso..."
 msgstr "处理进步"
@@ -1016,10 +1609,12 @@ msgstr "预订列表"
 #: Application/view/application/cars/index.phtml:14
 #: Application/view/application/customers/list-card.phtml:13
 #: Application/view/application/customers/list.phtml:14
+#: Application/view/application/fines/index.phtml:16
 #: Application/view/application/foreign-drivers-license/uploaded-files.phtml:13
 #: Application/view/application/invoices/index.phtml:13
-#: Application/view/application/notifications/index.phtml:16
-#: Application/view/application/payments/failed-payments.phtml:13
+#: Application/view/application/notifications/index.phtml:19
+#: Application/view/application/payments/failed-extra.phtml:15
+#: Application/view/application/payments/failed-payments.phtml:16
 #: Application/view/application/pois/index.phtml:13
 #: Application/view/application/reservations/index.phtml:18
 #: Application/view/application/trips/index.phtml:17
@@ -1046,68 +1641,6 @@ msgstr "选择"
 #: Application/view/partials/events-table.phtml:24
 msgid "Valore"
 msgstr "价值"
-
-#: Application/view/application/cars-configurations/list-all.phtml:33
-#: Application/view/application/cars-configurations/list-car.phtml:30
-#: Application/view/application/cars-configurations/list-fleet.phtml:30
-#: Application/view/application/cars-configurations/list-global.phtml:29
-#: Application/view/application/cars-configurations/list-model.phtml:31
-#: Application/view/application/cars/index.phtml:54
-#: Application/view/application/customers/invoices-tab.phtml:35
-#: Application/view/application/customers/list.phtml:38
-#: Application/view/application/foreign-drivers-license/uploaded-files.phtml:33
-#: Application/view/application/invoices/index.phtml:44
-#: Application/view/application/notifications/index.phtml:53
-#: Application/view/application/payments/failed-payments.phtml:31
-#: Application/view/application/pois/index.phtml:38
-#: Application/view/application/reservations/index.phtml:44
-#: Application/view/application/trips-not-payed/list.phtml:34
-#: Application/view/application/trips/index.phtml:43
-#: Application/view/application/users/index.phtml:34
-msgid "Filtra..."
-msgstr "过滤"
-
-#: Application/view/application/cars-configurations/list-all.phtml:36
-#: Application/view/application/cars-configurations/list-car.phtml:33
-#: Application/view/application/cars-configurations/list-fleet.phtml:33
-#: Application/view/application/cars-configurations/list-global.phtml:32
-#: Application/view/application/cars-configurations/list-model.phtml:34
-#: Application/view/application/cars/index.phtml:57
-#: Application/view/application/customers/invoices-tab.phtml:42
-#: Application/view/application/customers/list.phtml:41
-#: Application/view/application/foreign-drivers-license/uploaded-files.phtml:36
-#: Application/view/application/invoices/index.phtml:50
-#: Application/view/application/notifications/index.phtml:56
-#: Application/view/application/payments/failed-payments.phtml:34
-#: Application/view/application/pois/index.phtml:42
-#: Application/view/application/reservations/index.phtml:47
-#: Application/view/application/trips-not-payed/list.phtml:38
-#: Application/view/application/trips/index.phtml:63
-#: Application/view/application/users/index.phtml:38
-#: Application/view/application/zones/list-tab.phtml:25
-msgid "Cerca"
-msgstr "搜寻"
-
-#: Application/view/application/cars-configurations/list-all.phtml:40
-#: Application/view/application/cars-configurations/list-car.phtml:37
-#: Application/view/application/cars-configurations/list-fleet.phtml:37
-#: Application/view/application/cars-configurations/list-global.phtml:36
-#: Application/view/application/cars-configurations/list-model.phtml:38
-#: Application/view/application/cars/index.phtml:61
-#: Application/view/application/customers/invoices-tab.phtml:50
-#: Application/view/application/customers/list.phtml:45
-#: Application/view/application/foreign-drivers-license/uploaded-files.phtml:40
-#: Application/view/application/invoices/index.phtml:58
-#: Application/view/application/notifications/index.phtml:60
-#: Application/view/application/payments/failed-payments.phtml:38
-#: Application/view/application/pois/index.phtml:50
-#: Application/view/application/reservations/index.phtml:51
-#: Application/view/application/trips-not-payed/list.phtml:44
-#: Application/view/application/trips/index.phtml:69
-#: Application/view/application/users/index.phtml:46
-#: Application/view/application/zones/list-tab.phtml:29
-msgid "Pulisci Ricerca"
-msgstr "重置搜寻"
 
 #: Application/view/application/cars-configurations/list-all.phtml:47
 #: Application/view/application/cars-configurations/list-car.phtml:44
@@ -1148,42 +1681,46 @@ msgid "AGGIUNGI AUTO"
 msgstr "添加汽车"
 
 #: Application/view/application/cars/add.phtml:39
-#: Application/view/application/cars/edit-tab.phtml:22
+#: Application/view/application/cars/edit-tab.phtml:29
 msgid "Costruttore"
 msgstr "营造商"
 
 #: Application/view/application/cars/add.phtml:50
-#: Application/view/application/cars/edit-tab.phtml:33
+#: Application/view/application/cars/edit-tab.phtml:40
 msgid "Modello"
 msgstr "样子"
 
 #: Application/view/application/cars/add.phtml:61
-#: Application/view/application/cars/edit-tab.phtml:44
+#: Application/view/application/cars/edit-tab.phtml:51
 #: Application/view/application/cars/index.phtml:32
 msgid "Identificativo"
 msgstr "用户名"
 
 #: Application/view/application/cars/add.phtml:82
-#: Application/view/application/cars/edit-tab.phtml:64
+#: Application/view/application/cars/edit-tab.phtml:76
 #: Application/view/application/cars/index.phtml:41
 #: Application/view/application/reservations/index.phtml:77
 msgid "Attiva"
 msgstr "运转"
 
 #: Application/view/application/cars/add.phtml:89
-#: Application/view/application/cars/edit-tab.phtml:71
-#: Application/view/application/cars/index.phtml:93
+#: Application/view/application/cars/edit-tab.phtml:21
+#: Application/view/application/cars/index.phtml:95
 #: Application/view/application/foreign-drivers-license/uploaded-files.phtml:68
-#: Application/view/application/foreign-drivers-license/uploaded-files.phtml:74
+#: Application/view/application/foreign-drivers-license/uploaded-files.phtml:72
+#: Application/view/application/notifications/details-incident.phtml:52
 #: Application/view/application/payments-csv/details.phtml:98
-#: Application/view/partials/notifications/sos-category.phtml:266
+#: Application/view/application/payments/retry-extra.phtml:183
+#: Application/view/partials/notifications/sos-category.phtml:273
 msgid "Stato"
 msgstr "情况"
 
 #: Application/view/application/cars/add.phtml:98
-#: Application/view/application/cars/edit-tab.phtml:57
-#: Application/view/application/cars/edit-tab.phtml:98
-#: Application/view/application/customers/edit.phtml:41
+#: Application/view/application/cars/edit-tab.phtml:82
+#: Application/view/application/cars/edit-tab.phtml:125
+#: Application/view/application/customers/add-bonus.phtml:46
+#: Application/view/application/customers/bonus-tab.phtml:26
+#: Application/view/application/customers/edit.phtml:42
 #: Application/view/application/customers/list-card.phtml:51
 #: Application/view/application/payments-csv/details.phtml:332
 #: Application/view/partials/notifications/sos-category.phtml:146
@@ -1191,85 +1728,94 @@ msgid "Note"
 msgstr "注解"
 
 #: Application/view/application/cars/add.phtml:106
-#: Application/view/application/cars/index.phtml:68
+#: Application/view/application/cars/index.phtml:69
 msgid "Aggiungi Auto"
 msgstr "添加汽车"
+
+#: Application/view/application/cars/commands-tab.phtml:1
+msgid "Esegui comandi sull'auto"
+msgstr ""
 
 #: Application/view/application/cars/commands-tab.phtml:6
 msgid "Seleziona..."
 msgstr "选择"
 
-#: Application/view/application/cars/commands-tab.phtml:11
+#: Application/view/application/cars/commands-tab.phtml:33
 msgid "Sei sicuro di voler eseguire questo comando?"
 msgstr "您肯定执行这个命令吗?"
 
-#: Application/view/application/cars/damages-tab.phtml:13
+#: Application/view/application/cars/damages-tab.phtml:1
+msgid "Segnala danni auto"
+msgstr ""
+
+#: Application/view/application/cars/damages-tab.phtml:34
+#: Application/view/application/cars/insurance-tab.phtml:63
 #: Application/view/application/configurations/manage-alarm.phtml:32
 msgid "Salva"
 msgstr "存储"
 
-#: Application/view/application/cars/edit-tab.phtml:79
+#: Application/view/application/cars/edit-tab.phtml:88
+msgid "Telaio"
+msgstr ""
+
+#: Application/view/application/cars/edit-tab.phtml:96
 msgid "Aggiorna stato auto"
 msgstr "更新汽车情况"
 
-#: Application/view/application/cars/edit-tab.phtml:85
+#: Application/view/application/cars/edit-tab.phtml:102
 msgid "Sede di ricovero auto"
 msgstr "汽车维修的地方"
 
-#: Application/view/application/cars/edit-tab.phtml:110
+#: Application/view/application/cars/edit-tab.phtml:112
+#, fuzzy
+#| msgid "Posizione"
+msgid "Motivazione"
+msgstr "地方"
+
+#: Application/view/application/cars/edit-tab.phtml:137
 msgid "Modifica Auto"
 msgstr "改变汽车"
 
-#: Application/view/application/cars/edit.phtml:11
+#: Application/view/application/cars/edit.phtml:14
 msgid "MODIFICA AUTO:"
 msgstr "改变汽车"
 
-#: Application/view/application/cars/edit.phtml:24
+#: Application/view/application/cars/edit.phtml:27
 #: Application/view/application/customers/edit.phtml:36
 #: Application/view/partials/translations.phtml:4
 msgid "Modifica"
 msgstr "改变"
 
-#: Application/view/application/cars/edit.phtml:25
+#: Application/view/application/cars/edit.phtml:28
 msgid "Comandi"
 msgstr "指令"
 
-#: Application/view/application/cars/edit.phtml:26
+#: Application/view/application/cars/edit.phtml:29
 msgid "Gestione Danni"
 msgstr "损坏管理"
+
+#: Application/view/application/cars/edit.phtml:30
+#, fuzzy
+#| msgid "Iscrizione"
+msgid "Assicurazione"
+msgstr "预订"
 
 #: Application/view/application/cars/index.phtml:14
 msgid "ELENCO AUTO"
 msgstr "汽车列表"
 
-#: Application/view/application/cars/index.phtml:30
-#: Application/view/application/customers/invoices-tab.phtml:21
-#: Application/view/application/customers/list.phtml:26
-#: Application/view/application/foreign-drivers-license/uploaded-files.phtml:25
-#: Application/view/application/invoices/index.phtml:28
-#: Application/view/application/notifications/index.phtml:28
-#: Application/view/application/payments/failed-payments.phtml:25
-#: Application/view/application/pois/index.phtml:25
-#: Application/view/application/reservations/index.phtml:34
-#: Application/view/application/trips-not-payed/list.phtml:24
-#: Application/view/application/trips/index.phtml:29
-#: Application/view/application/users/index.phtml:25
-#: Application/view/application/zones/zone-alarms.phtml:18
-msgid "Seleziona"
-msgstr "选择"
-
 #: Application/view/application/cars/index.phtml:34
-#: Application/view/application/cars/index.phtml:95
+#: Application/view/application/cars/index.phtml:97
 msgid "GPS"
 msgstr "全球位置测定系统"
 
 #: Application/view/application/cars/index.phtml:35
-#: Application/view/application/cars/index.phtml:96
+#: Application/view/application/cars/index.phtml:98
 msgid "GPRS"
 msgstr "GPRS"
 
 #: Application/view/application/cars/index.phtml:36
-#: Application/view/application/cars/index.phtml:97
+#: Application/view/application/cars/index.phtml:99
 msgid "OBC"
 msgstr "OBC"
 
@@ -1313,44 +1859,71 @@ msgstr "媒体"
 msgid "Sporco"
 msgstr "脏"
 
-#: Application/view/application/cars/index.phtml:78
+#: Application/view/application/cars/index.phtml:80
 msgid "Elenco Auto"
 msgstr "汽车"
 
-#: Application/view/application/cars/index.phtml:86
+#: Application/view/application/cars/index.phtml:88
 msgid "Identif."
 msgstr "用户名"
 
-#: Application/view/application/cars/index.phtml:88
+#: Application/view/application/cars/index.phtml:90
 #: Application/view/partials/events-table.phtml:20
 msgid "Batteria"
 msgstr "电池"
 
-#: Application/view/application/cars/index.phtml:89
+#: Application/view/application/cars/index.phtml:91
 msgid "Ultimo Contatto"
 msgstr "最后交往"
 
-#: Application/view/application/cars/index.phtml:90
+#: Application/view/application/cars/index.phtml:92
 #: Application/view/partials/events-table.phtml:21
 msgid "Km"
 msgstr "公里"
 
-#: Application/view/application/cars/index.phtml:91
+#: Application/view/application/cars/index.phtml:93
 msgid "Pulizia"
 msgstr "干净"
 
-#: Application/view/application/cars/index.phtml:92
-#: Application/view/application/cars/index.phtml:98
+#: Application/view/application/cars/index.phtml:94
+#: Application/view/application/cars/index.phtml:100
 #: Application/view/partials/events-table.phtml:26
 msgid "Posizione"
 msgstr "地方"
 
-#: Application/view/application/cars/index.phtml:99
-#: Application/view/application/notifications/index.phtml:86
+#: Application/view/application/cars/index.phtml:101
 #: Application/view/application/pois/index.phtml:83
 #: Application/view/application/users/index.phtml:75
 msgid "Azione"
 msgstr "作用"
+
+#: Application/view/application/cars/insurance-tab.phtml:2
+msgid "Polizza assicurativa"
+msgstr ""
+
+#: Application/view/application/cars/insurance-tab.phtml:11
+#, fuzzy
+#| msgid "Completata"
+msgid "Compagnia"
+msgstr "完成"
+
+#: Application/view/application/cars/insurance-tab.phtml:42
+#, fuzzy
+#| msgid "Numero patente"
+msgid "Numero polizza"
+msgstr "车照号"
+
+#: Application/view/application/cars/insurance-tab.phtml:50
+msgid "Decorrenza"
+msgstr ""
+
+#: Application/view/application/cars/insurance-tab.phtml:56
+#: Application/view/application/customers-edit/edit-tab.phtml:328
+#: Application/view/application/customers/info-tab.phtml:232
+#, fuzzy
+#| msgid "Scadenza Patente"
+msgid "Scadenza"
+msgstr "期限车照"
 
 #: Application/view/application/configurations/manage-alarm.phtml:9
 msgid "GESTIONE SOGLIE ALLARME"
@@ -1358,8 +1931,50 @@ msgstr ""
 "警报\n"
 "限制的管理"
 
+#: Application/view/application/customer-failure/extra-tab.phtml:11
+#, fuzzy
+#| msgid "Elenco pagamenti falliti"
+msgid "Elenco extra/penali falliti"
+msgstr "未成付款的列表"
+
+#: Application/view/application/customer-failure/extra-tab.phtml:20
+msgid "Id extra"
+msgstr ""
+
+#: Application/view/application/customer-failure/extra-tab.phtml:21
+#: Application/view/application/customer-failure/failure-tab.phtml:21
+#: Application/view/application/payments-csv/details.phtml:104
+#: Application/view/application/payments-csv/details.phtml:152
+#: Application/view/application/payments/retry-extra.phtml:265
+#: Application/view/application/trips/cost-tab.phtml:276
+#: Application/view/partials/translations.phtml:89
+msgid "Importo"
+msgstr "量"
+
+#: Application/view/application/customer-failure/extra-tab.phtml:22
+#: Application/view/application/customer-failure/failure-tab.phtml:22
+#: Application/view/application/payments-csv/details.phtml:52
+msgid "Data risoluzione"
+msgstr "解决的日期"
+
+#: Application/view/application/customer-failure/extra-tab.phtml:23
+#: Application/view/application/customer-failure/failure-tab.phtml:23
+msgid "Tempo risoluzione"
+msgstr "解决的时间"
+
+#: Application/view/application/customer-failure/extra-tab.phtml:24
+#: Application/view/application/customer-failure/failure-tab.phtml:24
+#: Application/view/application/customer-license/license-tab.phtml:18
+msgid "Tentativi"
+msgstr "尝试"
+
+#: Application/view/application/customer-failure/extra-tab.phtml:46
+#: Application/view/application/customer-failure/failure-tab.phtml:38
+msgid "%a giorni, %h ore, %i minuti"
+msgstr "%日，%小时，%分钟"
+
 #: Application/view/application/customer-failure/failure-tab.phtml:11
-#: Application/view/application/payments/failed-payments.phtml:50
+#: Application/view/application/payments/failed-payments.phtml:54
 msgid "Elenco pagamenti falliti"
 msgstr "未成付款的列表"
 
@@ -1369,60 +1984,33 @@ msgstr "未成付款的列表"
 msgid "Id Corsa"
 msgstr "行程代码"
 
-#: Application/view/application/customer-failure/failure-tab.phtml:21
-#: Application/view/application/payments-csv/details.phtml:104
-#: Application/view/application/payments-csv/details.phtml:152
-#: Application/view/application/trips/cost-tab.phtml:192
-#: Application/view/partials/translations.phtml:86
-msgid "Importo"
-msgstr "量"
-
-#: Application/view/application/customer-failure/failure-tab.phtml:22
-#: Application/view/application/payments-csv/details.phtml:52
-msgid "Data risoluzione"
-msgstr "解决的日期"
-
-#: Application/view/application/customer-failure/failure-tab.phtml:23
-msgid "Tempo risoluzione"
-msgstr "解决的时间"
-
-#: Application/view/application/customer-failure/failure-tab.phtml:24
-#: Application/view/application/customer-license/license-tab.phtml:18
-msgid "Tentativi"
-msgstr "尝试"
-
-#: Application/view/application/customer-failure/failure-tab.phtml:38
-msgid "%a giorni, %h ore, %i minuti"
-msgstr "%日，%小时，%分钟"
-
 #: Application/view/application/customer-license/license-tab.phtml:5
 #, fuzzy
 msgid "Validazione Patente"
 msgstr "保存车照数据"
 
 #: Application/view/application/customer-license/license-tab.phtml:11
-#: Application/view/partials/translations.phtml:75
+#: Application/view/partials/translations.phtml:78
 msgid "Valida"
 msgstr "有效"
 
 #: Application/view/application/customer-license/license-tab.phtml:12
 #: Application/view/application/customer-license/license-tab.phtml:26
-#: Application/view/application/trips/cost-tab.phtml:201
-#: Application/view/application/trips/info-tab.phtml:137
-#: Application/view/application/trips/info-tab.phtml:157
+#: Application/view/application/trips/cost-tab.phtml:40
+#: Application/view/application/trips/cost-tab.phtml:67
+#: Application/view/application/trips/info-tab.phtml:136
 #: Application/view/partials/notifications/sos-category.phtml:139
-#: Application/view/partials/notifications/sos-category.phtml:239
+#: Application/view/partials/notifications/sos-category.phtml:240
 msgid "SI"
 msgstr "是"
 
 #: Application/view/application/customer-license/license-tab.phtml:12
 #: Application/view/application/customer-license/license-tab.phtml:26
-#: Application/view/application/edit-trip/edit-tab.phtml:68
-#: Application/view/application/trips/cost-tab.phtml:201
-#: Application/view/application/trips/info-tab.phtml:137
-#: Application/view/application/trips/info-tab.phtml:157
+#: Application/view/application/edit-trip/edit-tab.phtml:81
+#: Application/view/application/trips/cost-tab.phtml:40
+#: Application/view/application/trips/info-tab.phtml:136
 #: Application/view/partials/notifications/sos-category.phtml:139
-#: Application/view/partials/notifications/sos-category.phtml:239
+#: Application/view/partials/notifications/sos-category.phtml:240
 msgid "NO"
 msgstr "不是"
 
@@ -1450,10 +2038,10 @@ msgstr ""
 #: Application/view/application/payments-csv/details.phtml:77
 #: Application/view/application/payments-csv/details.phtml:139
 #: Application/view/application/payments-csv/details.phtml:346
-#: Application/view/application/payments/recap.phtml:43
-#: Application/view/application/payments/recap.phtml:74
-#: Application/view/application/payments/recap.phtml:110
-#: Application/view/application/payments/retry.phtml:83
+#: Application/view/application/payments/recap.phtml:46
+#: Application/view/application/payments/recap.phtml:89
+#: Application/view/application/payments/retry-extra.phtml:131
+#: Application/view/application/payments/retry-payments.phtml:83
 #: Application/view/application/reservations/index.phtml:35
 #: Application/view/partials/events-table.phtml:18
 msgid "Data"
@@ -1461,7 +2049,9 @@ msgstr "日期"
 
 #: Application/view/application/customer-license/license-tab.phtml:54
 #: Application/view/application/payments-csv/details.phtml:146
-#: Application/view/application/payments/retry.phtml:156
+#: Application/view/application/payments/extra.phtml:95
+#: Application/view/application/payments/retry-extra.phtml:228
+#: Application/view/application/payments/retry-payments.phtml:156
 msgid "Esito"
 msgstr "结果"
 
@@ -1476,7 +2066,9 @@ msgid "Codice"
 msgstr "代码"
 
 #: Application/view/application/customer-license/license-tab.phtml:56
-#: Application/view/application/payments/retry.phtml:158
+#: Application/view/application/payments/extra.phtml:97
+#: Application/view/application/payments/retry-extra.phtml:230
+#: Application/view/application/payments/retry-payments.phtml:158
 #: Application/view/error/404.phtml:71 Application/view/error/404.phtml:95
 #: Application/view/error/index.phtml:15 Application/view/error/index.phtml:39
 msgid "Messaggio"
@@ -1489,6 +2081,7 @@ msgstr ""
 #: Application/view/application/customer-note/notes-tab.phtml:5
 #: Application/view/application/customers/bonus-tab.phtml:5
 #: Application/view/application/customers/invoices-tab.phtml:5
+#: Application/view/application/customers/points-tab.phtml:5
 msgid "Operazione eseguita con successo"
 msgstr "执行操作得成功"
 
@@ -1515,43 +2108,61 @@ msgstr "用户名"
 msgid "Nota"
 msgstr "注释"
 
-#: Application/view/application/customers-edit/edit-tab.phtml:22
-#: Application/view/application/customers/info-tab.phtml:11
+#: Application/view/application/customers-edit/edit-tab.phtml:24
+#: Application/view/application/customers/info-tab.phtml:20
 #: Application/view/partials/notifications/sos-category.phtml:79
 msgid "Anagrafica"
 msgstr "人口动态统计"
 
-#: Application/view/application/customers-edit/edit-tab.phtml:31
-#: Application/view/application/customers/info-tab.phtml:17
+#: Application/view/application/customers-edit/edit-tab.phtml:33
+#: Application/view/application/customers/info-tab.phtml:26
+#: Application/view/application/customers/list.phtml:27
+#: Application/view/application/customers/list.phtml:66
+#: Application/view/application/foreign-drivers-license/uploaded-files.phtml:26
+#: Application/view/application/notifications/index.phtml:32
+#: Application/view/application/notifications/index.phtml:91
+#: Application/view/application/pois/index.phtml:26
+#: Application/view/application/pois/index.phtml:75
+#: Application/view/application/users/index.phtml:26
+#: Application/view/application/users/index.phtml:71
+msgid "Id"
+msgstr "用户名"
+
+#: Application/view/application/customers-edit/edit-tab.phtml:42
+#: Application/view/application/customers/info-tab.phtml:36
 msgid "Titolo"
 msgstr "谶纬"
 
-#: Application/view/application/customers-edit/edit-tab.phtml:45
-#: Application/view/application/customers/info-tab.phtml:31
+#: Application/view/application/customers-edit/edit-tab.phtml:57
+#: Application/view/application/customers/info-tab.phtml:50
 #: Application/view/application/customers/list.phtml:28
-#: Application/view/application/customers/list.phtml:67
+#: Application/view/application/customers/list.phtml:68
+#: Application/view/application/fines/details.phtml:98
 #: Application/view/application/foreign-drivers-license/uploaded-files.phtml:27
 #: Application/view/application/foreign-drivers-license/uploaded-files.phtml:62
 #: Application/view/application/invoices/index.phtml:31
 #: Application/view/application/invoices/index.phtml:84
-#: Application/view/application/payments/failed-payments.phtml:26
-#: Application/view/application/payments/failed-payments.phtml:60
-#: Application/view/application/payments/retry.phtml:95
+#: Application/view/application/payments/failed-extra.phtml:29
+#: Application/view/application/payments/failed-payments.phtml:29
+#: Application/view/application/payments/failed-payments.phtml:64
+#: Application/view/application/payments/retry-extra.phtml:114
+#: Application/view/application/payments/retry-payments.phtml:95
 #: Application/view/application/reservations/index.phtml:38
 #: Application/view/application/trips-not-payed/list.phtml:25
 #: Application/view/application/trips-not-payed/list.phtml:64
 #: Application/view/application/trips/index.phtml:91
-#: Application/view/application/trips/info-tab.phtml:52
 #: Application/view/partials/notifications/sos-category.phtml:98
 msgid "Cognome"
 msgstr "姓"
 
-#: Application/view/application/customers-edit/edit-tab.phtml:54
-#: Application/view/application/customers/info-tab.phtml:40
+#: Application/view/application/customers-edit/edit-tab.phtml:66
+#: Application/view/application/customers/info-tab.phtml:58
 #: Application/view/application/customers/list.phtml:34
-#: Application/view/application/customers/list.phtml:72
+#: Application/view/application/customers/list.phtml:74
 #: Application/view/application/foreign-drivers-license/uploaded-files.phtml:28
-#: Application/view/application/payments/failed-payments.phtml:62
+#: Application/view/application/payments/failed-extra.phtml:30
+#: Application/view/application/payments/failed-payments.phtml:66
+#: Application/view/application/payments/retry-extra.phtml:102
 #: Application/view/application/users/add.phtml:53
 #: Application/view/application/users/edit.phtml:53
 #: Application/view/application/users/index.phtml:73
@@ -1559,214 +2170,262 @@ msgstr "姓"
 msgid "Email"
 msgstr "电邮地址"
 
-#: Application/view/application/customers-edit/edit-tab.phtml:66
-#: Application/view/application/customers/info-tab.phtml:47
-#: Application/view/application/foreign-drivers-license/uploaded-files.phtml:64
+#: Application/view/application/customers-edit/edit-tab.phtml:78
+#: Application/view/application/customers/info-tab.phtml:67
+#, fuzzy
+#| msgid "Data di nascita"
+msgid "Dati di nascita"
+msgstr "出生日期"
+
+#: Application/view/application/customers-edit/edit-tab.phtml:84
+#: Application/view/application/customers-edit/edit-tab.phtml:124
+#: Application/view/application/customers-edit/edit-tab.phtml:304
+#: Application/view/application/customers/info-tab.phtml:73
+#: Application/view/application/customers/info-tab.phtml:102
+#: Application/view/application/customers/info-tab.phtml:205
+#, fuzzy
+#| msgid "Sanzione"
+msgid "Nazione"
+msgstr "制裁"
+
+#: Application/view/application/customers-edit/edit-tab.phtml:91
+#: Application/view/application/customers-edit/edit-tab.phtml:130
+#: Application/view/application/customers/info-tab.phtml:79
+#: Application/view/application/customers/info-tab.phtml:108
+#: Application/view/application/pois/add.phtml:90
+#: Application/view/application/pois/edit.phtml:90
+#: Application/view/application/pois/index.phtml:33
+#: Application/view/application/pois/index.phtml:82
+#: Application/view/partials/notifications/sos-category.phtml:291
+msgid "Provincia"
+msgstr "省"
+
+#: Application/view/application/customers-edit/edit-tab.phtml:104
+#: Application/view/application/customers/info-tab.phtml:85
+msgid "Comune"
+msgstr ""
+
+#: Application/view/application/customers-edit/edit-tab.phtml:111
+#: Application/view/application/customers/info-tab.phtml:90
+#: Application/view/application/foreign-drivers-license/uploaded-files.phtml:65
 #: Application/view/partials/notifications/sos-category.phtml:118
 msgid "Data di nascita"
 msgstr "出生日期"
 
-#: Application/view/application/customers-edit/edit-tab.phtml:73
-#: Application/view/application/customers/info-tab.phtml:54
-msgid "Stato di nascita"
-msgstr "出生国家"
+#: Application/view/application/customers-edit/edit-tab.phtml:118
+#: Application/view/application/customers/info-tab.phtml:96
+#, fuzzy
+#| msgid "Residuo"
+msgid "Residenza"
+msgstr "残余"
 
-#: Application/view/application/customers-edit/edit-tab.phtml:82
-#: Application/view/application/customers/info-tab.phtml:63
-msgid "Provincia di nascita (EE = estero)"
-msgstr "出生省 (EE= 外国)"
-
-#: Application/view/application/customers-edit/edit-tab.phtml:89
-#: Application/view/application/customers/info-tab.phtml:70
-msgid "Comune di nascita"
-msgstr "出生地区"
-
-#: Application/view/application/customers-edit/edit-tab.phtml:96
-#: Application/view/application/customers/info-tab.phtml:77
-msgid "Via e numero civico"
-msgstr "地址"
-
-#: Application/view/application/customers-edit/edit-tab.phtml:105
-#: Application/view/application/customers/info-tab.phtml:86
-#: Application/view/error/404.phtml:64 Application/view/error/index.phtml:8
-msgid "Informazioni aggiuntive"
-msgstr "添加的信息"
-
-#: Application/view/application/customers-edit/edit-tab.phtml:112
-#: Application/view/application/customers/info-tab.phtml:93
-#: Application/view/application/pois/add.phtml:83
-#: Application/view/application/pois/edit.phtml:83
-#: Application/view/application/pois/index.phtml:32
-#: Application/view/application/pois/index.phtml:81
-#: Application/view/partials/notifications/sos-category.phtml:296
-msgid "CAP"
-msgstr "CAP"
-
-#: Application/view/application/customers-edit/edit-tab.phtml:119
-#: Application/view/application/customers/info-tab.phtml:100
-#: Application/view/application/customers/list.phtml:32
+#: Application/view/application/customers-edit/edit-tab.phtml:150
+#: Application/view/application/customers/info-tab.phtml:114
 #: Application/view/application/pois/add.phtml:76
 #: Application/view/application/pois/edit.phtml:76
 #: Application/view/application/pois/index.phtml:31
 #: Application/view/application/pois/index.phtml:80
-#: Application/view/partials/notifications/sos-category.phtml:290
+#: Application/view/partials/notifications/sos-category.phtml:297
 msgid "Città"
 msgstr "城市"
 
-#: Application/view/application/customers-edit/edit-tab.phtml:128
-#: Application/view/application/customers/info-tab.phtml:109
-msgid "Lingua preferita"
-msgstr "最好的语言"
+#: Application/view/application/customers-edit/edit-tab.phtml:180
+#: Application/view/application/customers/info-tab.phtml:120
+msgid "Via e numero civico"
+msgstr "地址"
 
-#: Application/view/application/customers-edit/edit-tab.phtml:135
-#: Application/view/application/customers/info-tab.phtml:116
+#: Application/view/application/customers-edit/edit-tab.phtml:186
+#: Application/view/application/customers/info-tab.phtml:126
+#: Application/view/application/pois/add.phtml:83
+#: Application/view/application/pois/edit.phtml:83
+#: Application/view/application/pois/index.phtml:32
+#: Application/view/application/pois/index.phtml:81
+#: Application/view/partials/notifications/sos-category.phtml:303
+msgid "CAP"
+msgstr "CAP"
+
+#: Application/view/application/customers-edit/edit-tab.phtml:217
+#: Application/view/application/customers/info-tab.phtml:133
+#, fuzzy
+msgid "Dati Fiscali"
+msgstr "统计数据"
+
+#: Application/view/application/customers-edit/edit-tab.phtml:223
+#: Application/view/application/customers/info-tab.phtml:139
 msgid "Codice fiscale"
 msgstr "财政代码"
 
-#: Application/view/application/customers-edit/edit-tab.phtml:142
-#: Application/view/application/customers/info-tab.phtml:123
+#: Application/view/application/customers-edit/edit-tab.phtml:232
+#: Application/view/application/customers/info-tab.phtml:147
 msgid "Partita IVA (opzionale)"
 msgstr "增值税 (可选)"
 
-#: Application/view/application/customers-edit/edit-tab.phtml:151
-#: Application/view/application/customers/info-tab.phtml:132
+#: Application/view/application/customers-edit/edit-tab.phtml:239
+#: Application/view/application/customers/info-tab.phtml:153
+msgid "Cod. destinatario"
+msgstr ""
+
+#: Application/view/application/customers-edit/edit-tab.phtml:246
+#: Application/view/application/customers/info-tab.phtml:159
+msgid "PEC"
+msgstr ""
+
+#: Application/view/application/customers-edit/edit-tab.phtml:253
+#: Application/view/application/customers/info-tab.phtml:166
+#, fuzzy
+#| msgid "Contratto"
+msgid "Contatti"
+msgstr "合同"
+
+#: Application/view/application/customers-edit/edit-tab.phtml:259
+#: Application/view/application/customers/info-tab.phtml:172
 #: Application/view/application/customers/list.phtml:31
-#: Application/view/application/customers/list.phtml:68
+#: Application/view/application/customers/list.phtml:70
 #: Application/view/application/foreign-drivers-license/uploaded-files.phtml:29
-#: Application/view/application/payments/failed-payments.phtml:61
+#: Application/view/application/payments/failed-extra.phtml:69
+#: Application/view/application/payments/failed-payments.phtml:65
+#: Application/view/application/payments/retry-extra.phtml:123
 #: Application/view/application/trips/index.phtml:93
-#: Application/view/application/trips/info-tab.phtml:61
+#: Application/view/application/trips/info-tab.phtml:92
 #: Application/view/partials/notifications/sos-category.phtml:106
 msgid "Cellulare"
 msgstr "手机号码"
 
-#: Application/view/application/customers-edit/edit-tab.phtml:158
-#: Application/view/application/customers/info-tab.phtml:139
+#: Application/view/application/customers-edit/edit-tab.phtml:265
+#: Application/view/application/customers/info-tab.phtml:178
 msgid "Telefono"
 msgstr "电话号码"
 
-#: Application/view/application/customers-edit/edit-tab.phtml:169
+#: Application/view/application/customers-edit/edit-tab.phtml:271
+#: Application/view/application/customers/info-tab.phtml:184
+msgid "Lingua preferita"
+msgstr "最好的语言"
+
+#: Application/view/application/customers-edit/edit-tab.phtml:284
 msgid "Salva Dati Anagrafici"
 msgstr "保存人口动态统计的数据"
 
-#: Application/view/application/customers-edit/edit-tab.phtml:180
-#: Application/view/application/customers/info-tab.phtml:163
+#: Application/view/application/customers-edit/edit-tab.phtml:295
+#: Application/view/application/customers/info-tab.phtml:199
 msgid "Dati Patente"
 msgstr "车照数据"
 
-#: Application/view/application/customers-edit/edit-tab.phtml:189
-#: Application/view/application/customers/edit.phtml:43
-#: Application/view/application/customers/info-tab.phtml:169
+#: Application/view/application/customers-edit/edit-tab.phtml:310
+#: Application/view/application/customers/edit.phtml:45
+#: Application/view/application/customers/info-tab.phtml:212
 #: Application/view/application/customers/list.phtml:30
-#: Application/view/application/customers/list.phtml:70
+#: Application/view/application/customers/list.phtml:72
 #: Application/view/partials/notifications/sos-category.phtml:132
 msgid "Patente"
 msgstr "车照"
 
-#: Application/view/application/customers-edit/edit-tab.phtml:196
-#: Application/view/application/customers/info-tab.phtml:176
-msgid "Rilasciato da (autorità)"
-msgstr "封被 (权力)"
-
-#: Application/view/application/customers-edit/edit-tab.phtml:203
-#: Application/view/application/customers/info-tab.phtml:183
-msgid "Rilasciato il"
-msgstr "封的时间"
-
-#: Application/view/application/customers-edit/edit-tab.phtml:212
-#: Application/view/application/customers/info-tab.phtml:192
-#: Application/view/application/foreign-drivers-license/uploaded-files.phtml:70
+#: Application/view/application/customers-edit/edit-tab.phtml:316
+#: Application/view/application/customers/info-tab.phtml:219
+#: Application/view/application/foreign-drivers-license/uploaded-files.phtml:69
 msgid "Nome sulla patente"
 msgstr "在车照的名字"
 
-#: Application/view/application/customers-edit/edit-tab.phtml:219
-#: Application/view/application/customers/info-tab.phtml:199
+#: Application/view/application/customers-edit/edit-tab.phtml:322
+#: Application/view/application/customers/info-tab.phtml:226
 msgid "Cognome sulla patente"
 msgstr "在车照的姓"
 
-#: Application/view/application/customers-edit/edit-tab.phtml:226
-#: Application/view/application/customers/info-tab.phtml:206
-msgid "Rilasciata da (nazione)"
-msgstr "封被 (国家)"
-
-#: Application/view/application/customers-edit/edit-tab.phtml:233
-#: Application/view/application/customers/info-tab.phtml:215
-msgid "Data di scadenza"
-msgstr "期限日期"
-
-#: Application/view/application/customers-edit/edit-tab.phtml:241
+#: Application/view/application/customers-edit/edit-tab.phtml:335
 msgid "Salva Dati Patente"
 msgstr "保存车照数据"
 
-#: Application/view/application/customers-edit/edit-tab.phtml:258
-#: Application/view/application/customers/info-tab.phtml:227
+#: Application/view/application/customers-edit/edit-tab.phtml:352
+#: Application/view/application/customers/info-tab.phtml:256
 msgid "Altri dati"
 msgstr "别数据"
 
-#: Application/view/application/customers-edit/edit-tab.phtml:264
-#: Application/view/application/customers/info-tab.phtml:246
+#: Application/view/application/customers-edit/edit-tab.phtml:358
+#: Application/view/application/customers/info-tab.phtml:275
 msgid "Stato Iscrizione"
 msgstr "预订情况"
 
-#: Application/view/application/customers-edit/edit-tab.phtml:273
-#: Application/view/application/customers/info-tab.phtml:272
+#: Application/view/application/customers-edit/edit-tab.phtml:368
+#: Application/view/application/customers/info-tab.phtml:301
 msgid "Percentuale Sconto"
 msgstr "拍马的百分比"
 
-#: Application/view/application/customers-edit/edit-tab.phtml:282
-#: Application/view/application/customers/info-tab.phtml:291
+#: Application/view/application/customers-edit/edit-tab.phtml:377
+#: Application/view/application/customers/info-tab.phtml:320
 msgid "Maintainer"
 msgstr "维修人"
 
-#: Application/view/application/customers-edit/edit-tab.phtml:291
-#: Application/view/application/customers/info-tab.phtml:304
+#: Application/view/application/customers-edit/edit-tab.phtml:392
+#: Application/view/application/customers/info-tab.phtml:333
 msgid "Gold List"
 msgstr "黄金名单"
 
-#: Application/view/application/customers-edit/edit-tab.phtml:299
+#: Application/view/application/customers-edit/edit-tab.phtml:407
+#: Application/view/application/customers/info-tab.phtml:346
+#, fuzzy
+#| msgid "Gold List"
+msgid "Silver List"
+msgstr "黄金名单"
+
+#: Application/view/application/customers-edit/edit-tab.phtml:422
+#: Application/view/application/customers/info-tab.phtml:359
+msgid "First Payment Completed"
+msgstr ""
+
+#: Application/view/application/customers-edit/edit-tab.phtml:441
 msgid "Salva Dati"
 msgstr "保存数据"
 
-#: Application/view/application/customers-edit/edit-tab.phtml:316
+#: Application/view/application/customers-edit/edit-tab.phtml:458
 msgid "Abilitazione"
 msgstr "启用"
 
-#: Application/view/application/customers-edit/edit-tab.phtml:321
+#: Application/view/application/customers-edit/edit-tab.phtml:463
 msgid "Stato:"
 msgstr "情况"
 
-#: Application/view/application/customers-edit/edit-tab.phtml:322
-#: Application/view/application/customers/info-tab.phtml:233
-#: Application/view/application/customers/info-tab.phtml:235
+#: Application/view/application/customers-edit/edit-tab.phtml:464
+#: Application/view/application/customers/info-tab.phtml:262
+#: Application/view/application/customers/info-tab.phtml:264
 #: Application/view/partials/notifications/sos-category.phtml:138
 msgid "Abilitato"
 msgstr "启用"
 
-#: Application/view/application/customers-edit/edit-tab.phtml:322
+#: Application/view/application/customers-edit/edit-tab.phtml:464
 msgid "Disabilitato"
 msgstr "禁用"
 
-#: Application/view/application/customers-edit/edit-tab.phtml:330
+#: Application/view/application/customers-edit/edit-tab.phtml:472
 msgid "Motivi:"
 msgstr "原因"
 
-#: Application/view/application/customers-edit/edit-tab.phtml:340
+#: Application/view/application/customers-edit/edit-tab.phtml:482
 msgid "Generata automaticamente, alcuni dati potrebbero non essere corretti"
 msgstr "创造得自流，一些数据可能不正确"
 
-#: Application/view/application/customers-edit/edit-tab.phtml:371
+#: Application/view/application/customers-edit/edit-tab.phtml:513
 msgid "Riabilita"
 msgstr "重新启用"
 
-#: Application/view/application/customers-edit/edit-tab.phtml:390
+#: Application/view/application/customers-edit/edit-tab.phtml:532
 msgid "Disabilita manualmente"
 msgstr "禁用得人手"
+
+#: Application/view/application/customers-edit/edit-tab.phtml:545
+msgid "Recesso"
+msgstr ""
+
+#: Application/view/application/customers-edit/edit-tab.phtml:549
+#, fuzzy
+#| msgid "Contratto cliente"
+msgid "Conferma recessione cliente"
+msgstr "客户合同"
 
 #: Application/view/application/customers/add-bonus.phtml:14
 msgid "AGGIUNGI BONUS"
 msgstr "添加奖金"
 
 #: Application/view/application/customers/add-bonus.phtml:19
+#: Application/view/application/customers/add-points.phtml:19
 #: Application/view/application/customers/assign-promo-code.phtml:15
 msgid "Torna alla scheda cliente"
 msgstr "返回客户的页面"
@@ -1776,7 +2435,10 @@ msgid "Numero minuti"
 msgstr "分钟"
 
 #: Application/view/application/customers/add-bonus.phtml:39
+#: Application/view/application/customers/add-points.phtml:39
 #: Application/view/application/customers/bonus-tab.phtml:25
+#: Application/view/application/customers/points-tab.phtml:29
+#: Application/view/application/fines/index.phtml:121
 #: Application/view/application/zones/edit.phtml:60
 #: Application/view/application/zones/list-tab.phtml:18
 #: Application/view/application/zones/list-tab.phtml:51
@@ -1784,15 +2446,17 @@ msgstr "分钟"
 msgid "Descrizione"
 msgstr "描述"
 
-#: Application/view/application/customers/add-bonus.phtml:46
+#: Application/view/application/customers/add-bonus.phtml:53
+#: Application/view/application/customers/add-points.phtml:46
 msgid "Utilizzabile dal"
 msgstr "使得从"
 
-#: Application/view/application/customers/add-bonus.phtml:50
+#: Application/view/application/customers/add-bonus.phtml:57
+#: Application/view/application/customers/add-points.phtml:50
 msgid "Utilizzabile fino al"
 msgstr "使得到"
 
-#: Application/view/application/customers/add-bonus.phtml:56
+#: Application/view/application/customers/add-bonus.phtml:63
 msgid "Aggiungi Bonus"
 msgstr "添加奖金"
 
@@ -1805,6 +2469,23 @@ msgstr "添加卡片"
 #: Application/view/application/customers/list-card.phtml:27
 msgid "Aggiungi Card"
 msgstr "添加卡片"
+
+#: Application/view/application/customers/add-points.phtml:14
+#, fuzzy
+#| msgid "AGGIUNGI POI"
+msgid "AGGIUNGI PUNTI"
+msgstr "添加POI"
+
+#: Application/view/application/customers/add-points.phtml:35
+#, fuzzy
+msgid "Numero punti"
+msgstr "分钟"
+
+#: Application/view/application/customers/add-points.phtml:56
+#, fuzzy
+#| msgid "Aggiungi Auto"
+msgid "Aggiungi Punti"
+msgstr "添加汽车"
 
 #: Application/view/application/customers/assign-promo-code.phtml:10
 msgid "ASSOCIA CODICE PROMO"
@@ -1824,37 +2505,47 @@ msgstr "添加红利"
 
 #: Application/view/application/customers/bonus-tab.phtml:20
 #: Application/view/application/customers/invoices-tab.phtml:80
+#: Application/view/application/customers/points-tab.phtml:24
 #: Application/view/application/invoices/index.phtml:86
+#: Application/view/application/payments/recap.phtml:51
+#: Application/view/application/payments/recap.phtml:94
 msgid "Totale"
 msgstr "总体"
 
 #: Application/view/application/customers/bonus-tab.phtml:21
+#: Application/view/application/customers/points-tab.phtml:25
 msgid "Residuo"
 msgstr "残余"
 
 #: Application/view/application/customers/bonus-tab.phtml:22
+#: Application/view/application/customers/points-tab.phtml:26
 msgid "Valido Dal"
 msgstr "有效从"
 
 #: Application/view/application/customers/bonus-tab.phtml:23
+#: Application/view/application/customers/points-tab.phtml:27
 msgid "Valido Fino al"
 msgstr "有效到"
 
 #: Application/view/application/customers/bonus-tab.phtml:24
+#: Application/view/application/customers/points-tab.phtml:28
+#: Application/view/application/notifications/index.phtml:93
 #: Application/view/application/payments-csv/csv.phtml:129
 #: Application/view/application/payments-csv/csv.phtml:158
-#: Application/view/application/payments/extra.phtml:33
+#: Application/view/application/payments/extra.phtml:32
+#: Application/view/application/payments/retry-extra.phtml:161
 msgid "Tipologia"
 msgstr ""
 "种\n"
 "类"
 
-#: Application/view/application/customers/bonus-tab.phtml:42
+#: Application/view/application/customers/bonus-tab.phtml:44
+#: Application/view/application/customers/points-tab.phtml:46
 #: Application/view/partials/translations.phtml:5
 msgid "Elimina"
 msgstr "除"
 
-#: Application/view/application/customers/bonus-tab.phtml:51
+#: Application/view/application/customers/bonus-tab.phtml:53
 msgid "Il cliente non ha alcun bonus assegnato."
 msgstr "客户没有颁发的奖金"
 
@@ -1907,24 +2598,44 @@ msgid "Scadenza carta di credito"
 msgstr "信用卡期限的日期"
 
 #: Application/view/application/customers/contract-tab.phtml:46
+msgid "Partner"
+msgstr ""
+
+#: Application/view/application/customers/contract-tab.phtml:54
 msgid "Data di disabilitazione:"
 msgstr "启用的日期"
 
-#: Application/view/application/customers/contract-tab.phtml:49
+#: Application/view/application/customers/contract-tab.phtml:57
 msgid "Disabilita contratto"
 msgstr "禁用合同"
 
-#: Application/view/application/customers/contract-tab.phtml:57
+#: Application/view/application/customers/contract-tab.phtml:65
 msgid ""
 "Il cliente selezionato non ha al momento un contratto valido con Cartasi"
 msgstr "选择的客户现在没有一个CartaSI的有效合同"
+
+#: Application/view/application/customers/discount-tab.phtml:13
+#: Application/view/application/payments/failed-payments.phtml:70
+#: Application/view/application/payments/retry-payments.phtml:116
+msgid "Sconto"
+msgstr "折"
+
+#: Application/view/application/customers/discount-tab.phtml:14
+msgid "Scaduto in data:"
+msgstr ""
+
+#: Application/view/application/customers/discount-tab.phtml:29
+#, fuzzy
+#| msgid "Il cliente non ha alcun bonus assegnato."
+msgid "Il cliente non ha nessun vecchio sconto"
+msgstr "客户没有颁发的奖金"
 
 #: Application/view/application/customers/edit.phtml:20
 msgid "MODIFICA CLIENTE"
 msgstr "变更客户"
 
 #: Application/view/application/customers/edit.phtml:35
-#: Application/view/application/trips/details.phtml:32
+#: Application/view/application/trips/details.phtml:35
 msgid "Informazioni"
 msgstr "信息"
 
@@ -1933,56 +2644,57 @@ msgstr "信息"
 msgid "Bonus"
 msgstr "奖金"
 
-#: Application/view/application/customers/edit.phtml:40
+#: Application/view/application/customers/edit.phtml:38
+msgid "Points"
+msgstr ""
+
+#: Application/view/application/customers/edit.phtml:41
 msgid "Contratto"
 msgstr "合同"
 
-#: Application/view/application/customers/info-tab.phtml:146
-#: Application/view/application/customers/list.phtml:27
-#: Application/view/application/customers/list.phtml:65
-#: Application/view/application/foreign-drivers-license/uploaded-files.phtml:26
-#: Application/view/application/notifications/index.phtml:29
-#: Application/view/application/notifications/index.phtml:79
-#: Application/view/application/pois/index.phtml:26
-#: Application/view/application/pois/index.phtml:75
-#: Application/view/application/users/index.phtml:26
-#: Application/view/application/users/index.phtml:71
-msgid "Id"
-msgstr "用户名"
+#: Application/view/application/customers/edit.phtml:44
+msgid "Extra/Penali fallite"
+msgstr ""
 
-#: Application/view/application/customers/info-tab.phtml:237
+#: Application/view/application/customers/edit.phtml:46
+#, fuzzy
+#| msgid "Sconto"
+msgid "Sconti"
+msgstr "折"
+
+#: Application/view/application/customers/info-tab.phtml:266
 msgid "Non Abilitato"
 msgstr "不启用"
 
-#: Application/view/application/customers/info-tab.phtml:248
+#: Application/view/application/customers/info-tab.phtml:277
 msgid "Registrazione Confermata"
 msgstr "肯定的报名"
 
-#: Application/view/application/customers/info-tab.phtml:250
+#: Application/view/application/customers/info-tab.phtml:279
 msgid "Registrazione Non Confermata"
 msgstr "不肯定的报名"
 
-#: Application/view/application/customers/info-tab.phtml:259
+#: Application/view/application/customers/info-tab.phtml:288
 msgid "Stato Primo Pagamento"
 msgstr "第一付款情况"
 
-#: Application/view/application/customers/info-tab.phtml:261
+#: Application/view/application/customers/info-tab.phtml:290
 msgid "Pagamento Effettuato"
 msgstr "支付"
 
-#: Application/view/application/customers/info-tab.phtml:263
+#: Application/view/application/customers/info-tab.phtml:292
 msgid "Pagamento Non Ancora Effettuato"
 msgstr "未支付"
 
-#: Application/view/application/customers/info-tab.phtml:281
+#: Application/view/application/customers/info-tab.phtml:310
 msgid "Data/Ora"
 msgstr "日期/小时"
 
-#: Application/view/application/customers/info-tab.phtml:282
+#: Application/view/application/customers/info-tab.phtml:311
 msgid "Iscrizione:"
 msgstr "预订"
 
-#: Application/view/application/customers/info-tab.phtml:283
+#: Application/view/application/customers/info-tab.phtml:312
 msgid "Ultima Modifica: "
 msgstr "最后变化"
 
@@ -1995,21 +2707,21 @@ msgstr "发票号码"
 
 #: Application/view/application/customers/invoices-tab.phtml:31
 #: Application/view/application/invoices/index.phtml:40
-#: Application/view/partials/translations.phtml:61
+#: Application/view/partials/translations.phtml:64
 msgid "Iscrizione"
 msgstr "预订"
 
 #: Application/view/application/customers/invoices-tab.phtml:32
 #: Application/view/application/invoices/index.phtml:41
-#: Application/view/application/payments/failed-payments.phtml:64
-#: Application/view/application/payments/retry.phtml:104
-#: Application/view/partials/notifications/sos-category.phtml:165
+#: Application/view/application/payments/failed-payments.phtml:68
+#: Application/view/application/payments/retry-payments.phtml:104
+#: Application/view/partials/notifications/sos-category.phtml:166
 msgid "Corsa"
 msgstr "行程"
 
 #: Application/view/application/customers/invoices-tab.phtml:33
 #: Application/view/application/invoices/index.phtml:42
-#: Application/view/partials/translations.phtml:63
+#: Application/view/partials/translations.phtml:66
 msgid "Sanzione"
 msgstr "制裁"
 
@@ -2065,26 +2777,44 @@ msgid "ELENCO CLIENTI"
 msgstr "客户列表"
 
 #: Application/view/application/customers/list.phtml:29
-#: Application/view/application/customers/list.phtml:73
+#: Application/view/application/customers/list.phtml:75
 #: Application/view/application/reservations/index.phtml:37
 msgid "Codice Fiscale"
 msgstr "财政代码"
+
+#: Application/view/application/customers/list.phtml:32
+#, fuzzy
+#| msgid "Data di scadenza"
+msgid "Città di residenza"
+msgstr "期限日期"
 
 #: Application/view/application/customers/list.phtml:33
 msgid "Codice Card"
 msgstr "卡片代码"
 
-#: Application/view/application/customers/list.phtml:58
+#: Application/view/application/customers/list.phtml:59
 msgid "Elenco clienti"
 msgstr "客户列表"
 
-#: Application/view/application/customers/list.phtml:71
+#: Application/view/application/customers/list.phtml:73
 msgid "Scadenza Patente"
 msgstr "期限车照"
 
-#: Application/view/application/customers/list.phtml:74
+#: Application/view/application/customers/list.phtml:76
 msgid "Registrazione"
 msgstr "报名"
+
+#: Application/view/application/customers/points-tab.phtml:9
+#, fuzzy
+#| msgid "Aggiungi Auto"
+msgid "Aggiungi punti"
+msgstr "添加汽车"
+
+#: Application/view/application/customers/points-tab.phtml:55
+#, fuzzy
+#| msgid "Il cliente non ha alcun bonus assegnato."
+msgid "Il cliente non ha alcun punto assegnato."
+msgstr "客户没有颁发的奖金"
 
 #: Application/view/application/edit-trip/edit-tab.phtml:9
 msgid "La corsa non può essere modificata perché non risulta ancora conclusa."
@@ -2094,39 +2824,261 @@ msgstr "路线不能改变，因为它是不完成的。"
 msgid "La corsa non può essere modificata perché risulta già pagata."
 msgstr "路线不能改变，因为它是已经支付的"
 
-#: Application/view/application/edit-trip/edit-tab.phtml:42
+#: Application/view/application/edit-trip/edit-tab.phtml:54
 msgid "Dati corsa"
 msgstr "路线材料"
 
-#: Application/view/application/edit-trip/edit-tab.phtml:51
-#: Application/view/application/trips/index.phtml:53
-msgid "Data inizio"
-msgstr "开始的日期"
-
-#: Application/view/application/edit-trip/edit-tab.phtml:57
-#: Application/view/application/trips/index.phtml:59
-msgid "Data fine"
-msgstr "结束的日期"
-
-#: Application/view/application/edit-trip/edit-tab.phtml:57
+#: Application/view/application/edit-trip/edit-tab.phtml:69
 msgid "(non precedente a quella di inizio)"
 msgstr "(不前开始的日期)"
 
-#: Application/view/application/edit-trip/edit-tab.phtml:63
-#: Application/view/application/trips/close-tab.phtml:21
-#: Application/view/application/trips/cost-tab.phtml:200
+#: Application/view/application/edit-trip/edit-tab.phtml:75
+#: Application/view/application/edit-trip/edit-tab.phtml:132
+#: Application/view/application/fines/details.phtml:247
+#: Application/view/application/trips/cost-tab.phtml:264
 #: Application/view/application/trips/index.phtml:104
-#: Application/view/application/trips/info-tab.phtml:156
 msgid "Pagabile"
 msgstr "即付"
 
-#: Application/view/application/edit-trip/edit-tab.phtml:63
+#: Application/view/application/edit-trip/edit-tab.phtml:75
 msgid "(impostabile solo a non pagabile)"
 msgstr "(只设定不即付)"
 
-#: Application/view/application/edit-trip/edit-tab.phtml:80
+#: Application/view/application/edit-trip/edit-tab.phtml:93
 msgid "Salva Dati Corsa"
 msgstr "保存行程数据"
+
+#: Application/view/application/edit-trip/edit-tab.phtml:117
+#: Application/view/application/edit-trip/edit-tab.phtml:144
+msgid "Chiudi corsa"
+msgstr "结束行程"
+
+#: Application/view/application/edit-trip/edit-tab.phtml:125
+msgid "Data e ora chiusura"
+msgstr "结束的日期和小时"
+
+#: Application/view/application/edit-trip/edit-tab.phtml:135
+msgid "Sì"
+msgstr "是"
+
+#: Application/view/application/fines/details.phtml:17
+#, fuzzy
+#| msgid "Dettagli Anomalia"
+msgid "Dettagli multa"
+msgstr "异常细节"
+
+#: Application/view/application/fines/details.phtml:34
+#: Application/view/application/payments/retry-extra.phtml:41
+#: Application/view/application/payments/retry-payments.phtml:28
+msgid "Effettua nuovo tentativo di pagamento"
+msgstr "做一个新的付款尝试"
+
+#: Application/view/application/fines/details.phtml:72
+#: Application/view/application/fines/pay.phtml:35
+#: Application/view/application/payments/retry-extra.phtml:88
+#: Application/view/application/payments/retry-payments.phtml:69
+msgid "Riepilogo"
+msgstr "摘要"
+
+#: Application/view/application/fines/details.phtml:80
+#: Application/view/application/fines/index.phtml:29
+#: Application/view/application/fines/index.phtml:117
+#: Application/view/application/notifications/details.phtml:30
+#: Application/view/application/payments/failed-extra.phtml:28
+#: Application/view/application/payments/failed-extra.phtml:65
+#: Application/view/application/payments/retry-extra.phtml:263
+#: Application/view/application/reservations/index.phtml:73
+#: Application/view/application/zones/groups-tab.phtml:7
+#: Application/view/application/zones/prices-tab.phtml:7
+#: Application/view/partials/events-table.phtml:17
+#: Application/view/partials/notifications/sos-category.phtml:86
+#: Application/view/partials/notifications/sos-category.phtml:173
+msgid "ID"
+msgstr "用户名"
+
+#: Application/view/application/fines/details.phtml:86
+#: Application/view/application/fines/index.phtml:120
+#: Application/view/application/fines/pay.phtml:57
+#: Application/view/application/payments/failed-extra.phtml:67
+#: Application/view/application/payments/failed-payments.phtml:62
+msgid "ID cliente"
+msgstr "用户名的客户"
+
+#: Application/view/application/fines/details.phtml:106
+msgid "ID multa (rus_id)"
+msgstr ""
+
+#: Application/view/application/fines/details.phtml:112
+#: Application/view/application/fines/pay.phtml:51
+#, fuzzy
+msgid "Data multa"
+msgstr "分钟"
+
+#: Application/view/application/fines/details.phtml:118
+#: Application/view/application/fines/pay.phtml:63
+#, fuzzy
+#| msgid "Id corsa"
+msgid "ID corsa"
+msgstr "行程代码"
+
+#: Application/view/application/fines/details.phtml:124
+#: Application/view/application/payments-csv/csv.phtml:70
+#: Application/view/application/payments/retry-extra.phtml:266
+msgid "Data inserimento"
+msgstr "插入的日期"
+
+#: Application/view/application/fines/details.phtml:133
+#, fuzzy
+#| msgid "Flotta"
+msgid "Flotta veicolo"
+msgstr "车队"
+
+#: Application/view/application/fines/details.phtml:145
+#, fuzzy
+#| msgid "Categoria"
+msgid "Categoria multa"
+msgstr "类"
+
+#: Application/view/application/fines/details.phtml:151
+msgid "Violation Authority"
+msgstr ""
+
+#: Application/view/application/fines/details.phtml:160
+#, fuzzy
+#| msgid "Descrizione"
+msgid "Descrizione Multa"
+msgstr "描述"
+
+#: Application/view/application/fines/details.phtml:166
+#: Application/view/application/fines/pay.phtml:45
+#, fuzzy
+#| msgid "Numero auto"
+msgid "Numero Multa"
+msgstr "汽车号码"
+
+#: Application/view/application/fines/details.phtml:172
+msgid "Status Multa"
+msgstr ""
+
+#: Application/view/application/fines/details.phtml:193
+msgid "Tipologia Richiesta Multa"
+msgstr ""
+
+#: Application/view/application/fines/details.phtml:202
+#, fuzzy
+#| msgid "Costo corsa"
+msgid "Costo multa"
+msgstr "行程的费用"
+
+#: Application/view/application/fines/details.phtml:208
+#, fuzzy
+#| msgid "Completata"
+msgid "Completato"
+msgstr "完成"
+
+#: Application/view/application/fines/details.phtml:214
+#, fuzzy
+#| msgid "Abilitato"
+msgid "Addebitato"
+msgstr "启用"
+
+#: Application/view/application/fines/details.phtml:220
+#, fuzzy
+msgid "Data Addebito"
+msgstr "插入的日期"
+
+#: Application/view/application/fines/details.phtml:229
+msgid "ID Extra/penale"
+msgstr ""
+
+#: Application/view/application/fines/details.phtml:235
+#: Application/view/application/fines/index.phtml:119
+#: Application/view/application/payments/failed-extra.phtml:71
+#: Application/view/application/payments/retry-extra.phtml:270
+#, fuzzy
+#| msgid "Pagata"
+msgid "Pagato"
+msgstr "支付"
+
+#: Application/view/application/fines/details.phtml:241
+#: Application/view/application/payments/retry-extra.phtml:267
+#, fuzzy
+#| msgid "Data pagamento"
+msgid "Data addebito"
+msgstr "支付的日期"
+
+#: Application/view/application/fines/index.phtml:16
+#, fuzzy
+#| msgid "ELENCO UTENTI"
+msgid "ELENCO MULTE"
+msgstr "用户列表"
+
+#: Application/view/application/fines/index.phtml:32
+#: Application/view/application/payments/failed-extra.phtml:31
+#: Application/view/application/payments/failed-payments.phtml:30
+#: Application/view/application/payments/retry-extra.phtml:96
+#: Application/view/application/reservations/index.phtml:39
+#: Application/view/application/trips-not-payed/list.phtml:26
+#: Application/view/application/trips/index.phtml:32
+#: Application/view/partials/notifications/sos-category.phtml:66
+msgid "ID Cliente"
+msgstr "客户用户名"
+
+#: Application/view/application/fines/index.phtml:33
+#: Application/view/application/fines/index.phtml:123
+#: Application/view/application/payments/failed-payments.phtml:67
+#: Application/view/application/payments/retry-payments.phtml:77
+#: Application/view/application/trips-not-payed/list.phtml:29
+#: Application/view/application/trips/index.phtml:31
+msgid "ID Corsa"
+msgstr "行程代码"
+
+#: Application/view/application/fines/index.phtml:34
+#, fuzzy
+#| msgid "Completata"
+msgid "Complete"
+msgstr "完成"
+
+#: Application/view/application/fines/index.phtml:110
+#, fuzzy
+#| msgid "Elenco Auto"
+msgid "Elenco multe"
+msgstr "汽车"
+
+#: Application/view/application/fines/index.phtml:125
+msgid "Autorità"
+msgstr "权力"
+
+#: Application/view/application/fines/index.phtml:126
+#: Application/view/application/payments/extra.phtml:98
+#: Application/view/application/payments/failed-extra.phtml:72
+#: Application/view/application/payments/failed-payments.phtml:71
+#: Application/view/application/payments/retry-extra.phtml:147
+#: Application/view/application/payments/retry-payments.phtml:122
+#: Application/view/application/trips-not-payed/list.phtml:75
+#: Application/view/application/trips/details.phtml:36
+#: Application/view/application/trips/index.phtml:106
+#: Application/view/application/zones/prices-tab.phtml:9
+msgid "Costo"
+msgstr "代价"
+
+#: Application/view/application/fines/index.phtml:127
+#, fuzzy
+#| msgid "Stato"
+msgid "Status"
+msgstr "情况"
+
+#: Application/view/application/fines/index.phtml:128
+#, fuzzy
+#| msgid "Data fine"
+msgid "Data Infrazione"
+msgstr "结束的日期"
+
+#: Application/view/application/fines/pay.phtml:16
+#, fuzzy
+#| msgid "Descrizione bonus"
+msgid "Associazione fines"
+msgstr "奖金的描述"
 
 #: Application/view/application/foreign-drivers-license/uploaded-files.phtml:13
 msgid "UPLOAD PATENTI ESTERE"
@@ -2140,7 +3092,7 @@ msgstr "装载文档的列表"
 msgid "Id cliente"
 msgstr "用户身份证"
 
-#: Application/view/application/foreign-drivers-license/uploaded-files.phtml:63
+#: Application/view/application/foreign-drivers-license/uploaded-files.phtml:64
 #: Application/view/application/pois/add.phtml:62
 #: Application/view/application/pois/edit.phtml:62
 #: Application/view/application/pois/index.phtml:30
@@ -2148,31 +3100,19 @@ msgstr "用户身份证"
 msgid "Indirizzo"
 msgstr "地址"
 
-#: Application/view/application/foreign-drivers-license/uploaded-files.phtml:65
+#: Application/view/application/foreign-drivers-license/uploaded-files.phtml:66
 msgid "Luogo di nascita"
 msgstr "出生地方"
 
-#: Application/view/application/foreign-drivers-license/uploaded-files.phtml:66
+#: Application/view/application/foreign-drivers-license/uploaded-files.phtml:67
 msgid "Numero patente"
 msgstr "车照号"
 
-#: Application/view/application/foreign-drivers-license/uploaded-files.phtml:67
-msgid "Autorità"
-msgstr "权力"
-
-#: Application/view/application/foreign-drivers-license/uploaded-files.phtml:69
-msgid "Rilasciata il"
-msgstr "封的时间"
-
-#: Application/view/application/foreign-drivers-license/uploaded-files.phtml:71
-msgid "Categoria"
-msgstr "类"
-
-#: Application/view/application/foreign-drivers-license/uploaded-files.phtml:72
+#: Application/view/application/foreign-drivers-license/uploaded-files.phtml:70
 msgid "Scade il"
 msgstr "期限的时间"
 
-#: Application/view/application/foreign-drivers-license/uploaded-files.phtml:73
+#: Application/view/application/foreign-drivers-license/uploaded-files.phtml:71
 msgid "File patente"
 msgstr "车照文档"
 
@@ -2183,6 +3123,104 @@ msgstr "仪表盘"
 #: Application/view/application/invoices/index.phtml:13
 msgid "ELENCO FATTURE"
 msgstr "发票列表"
+
+#: Application/view/application/notifications/details-incident.phtml:9
+#, fuzzy
+msgid "DETTAGLI URTO - VIAGGIO"
+msgstr "行程的细节"
+
+#: Application/view/application/notifications/details-incident.phtml:25
+#, fuzzy
+#| msgid "Dati Utente"
+msgid "Dati Urto"
+msgstr "客户数据"
+
+#: Application/view/application/notifications/details-incident.phtml:32
+msgid "Trip ID"
+msgstr ""
+
+#: Application/view/application/notifications/details-incident.phtml:38
+#, fuzzy
+#| msgid "Codice promo"
+msgid "Codice Errore"
+msgstr "推广的代码"
+
+#: Application/view/application/notifications/details-incident.phtml:44
+#, fuzzy
+#| msgid "Data fine"
+msgid "Data Server"
+msgstr "结束的日期"
+
+#: Application/view/application/notifications/details-incident.phtml:58
+msgid "Mongo ID"
+msgstr ""
+
+#: Application/view/application/notifications/details-incident.phtml:74
+#, fuzzy
+#| msgid "Data inizio"
+msgid "Data locale inzio"
+msgstr "开始的日期"
+
+#: Application/view/application/notifications/details-incident.phtml:80
+#, fuzzy
+#| msgid "Data fine"
+msgid "Data locale fine"
+msgstr "结束的日期"
+
+#: Application/view/application/notifications/details-incident.phtml:88
+msgid "Pro Crash"
+msgstr ""
+
+#: Application/view/application/notifications/details-incident.phtml:94
+msgid "Pro BlackBox"
+msgstr ""
+
+#: Application/view/application/notifications/details-incident.phtml:100
+#, fuzzy
+#| msgid "Batteria"
+msgid "Valore Batteria"
+msgstr "电池"
+
+#: Application/view/application/notifications/details-incident.phtml:108
+#: Application/view/partials/notifications/sos-category.phtml:339
+msgid "Latitudine"
+msgstr ""
+
+#: Application/view/application/notifications/details-incident.phtml:114
+#: Application/view/partials/notifications/sos-category.phtml:333
+msgid "Longitudine"
+msgstr ""
+
+#: Application/view/application/notifications/details-incident.phtml:120
+#, fuzzy
+msgid "Valore Car Direction"
+msgstr "价值"
+
+#: Application/view/application/notifications/details-incident.phtml:128
+msgid "Valore Intensità"
+msgstr ""
+
+#: Application/view/application/notifications/details-incident.phtml:134
+#, fuzzy
+#| msgid "Cognome Cliente"
+msgid "Codice Cliente"
+msgstr "客户姓"
+
+#: Application/view/application/notifications/details-incident.phtml:140
+#, fuzzy
+#| msgid "Codice fiscale"
+msgid "Codice Topic"
+msgstr "财政代码"
+
+#: Application/view/application/notifications/details-incident.phtml:148
+msgid "Fleet"
+msgstr ""
+
+#: Application/view/application/notifications/details-incident.phtml:164
+#, fuzzy
+#| msgid "DETTAGLI CORSA"
+msgid "DETTAGLI URTO "
+msgstr "行程的细节"
 
 #: Application/view/application/notifications/details.phtml:6
 #, fuzzy
@@ -2196,23 +3234,11 @@ msgid "Dati Notifica"
 msgstr "统计数据"
 
 #: Application/view/application/notifications/details.phtml:30
-#: Application/view/application/reservations/index.phtml:73
-#: Application/view/application/zones/groups-tab.phtml:7
-#: Application/view/application/zones/prices-tab.phtml:7
-#: Application/view/partials/events-table.phtml:17
-#: Application/view/partials/notifications/sos-category.phtml:86
-#: Application/view/partials/notifications/sos-category.phtml:172
-msgid "ID"
-msgstr "用户名"
-
-#: Application/view/application/notifications/details.phtml:30
 #, fuzzy
 msgid "Notifica"
 msgstr "改变"
 
 #: Application/view/application/notifications/details.phtml:36
-#: Application/view/application/notifications/index.phtml:33
-#: Application/view/application/notifications/index.phtml:84
 #, fuzzy
 msgid "Categoria Notifica"
 msgstr "类"
@@ -2239,44 +3265,67 @@ msgid "Data Inserimento"
 msgstr "插入的日期"
 
 #: Application/view/application/notifications/details.phtml:76
-#: Application/view/application/notifications/index.phtml:32
-#: Application/view/application/notifications/index.phtml:82
 #, fuzzy
 msgid "Data Invio"
 msgstr "开始的日期"
 
 #: Application/view/application/notifications/details.phtml:82
-#: Application/view/application/notifications/index.phtml:35
-#: Application/view/application/notifications/index.phtml:83
+#: Application/view/application/notifications/index.phtml:34
+#: Application/view/application/notifications/index.phtml:94
 #, fuzzy
 msgid "Data Presa Visione"
 msgstr "解决的日期"
 
-#: Application/view/application/notifications/index.phtml:16
+#: Application/view/application/notifications/index.phtml:19
 #, fuzzy
 msgid "ELENCO NOTIFICHE"
 msgstr "用户列表"
 
-#: Application/view/application/notifications/index.phtml:30
-#: Application/view/application/notifications/index.phtml:80
-msgid "Oggetto"
-msgstr ""
-
-#: Application/view/application/notifications/index.phtml:31
-#: Application/view/application/notifications/index.phtml:81
+#: Application/view/application/notifications/index.phtml:33
+#: Application/view/application/notifications/index.phtml:92
 #, fuzzy
 msgid "Data Registrazione"
 msgstr "报名"
 
-#: Application/view/application/notifications/index.phtml:34
-#: Application/view/application/notifications/index.phtml:85
-msgid "Protocollo Notifica"
-msgstr ""
+#: Application/view/application/notifications/index.phtml:35
+#: Application/view/application/notifications/index.phtml:95
+#: Application/view/application/payments-csv/details.phtml:347
+#, fuzzy
+msgid "Webuser"
+msgstr "用户名"
 
-#: Application/view/application/notifications/index.phtml:72
+#: Application/view/application/notifications/index.phtml:36
+#, fuzzy
+#| msgid "Non Attivo"
+msgid "Non Gestito"
+msgstr "不作用"
+
+#: Application/view/application/notifications/index.phtml:84
 #, fuzzy
 msgid "Elenco Notifiche"
 msgstr "注解列表"
+
+#: Application/view/application/notifications/index.phtml:97
+msgid "Trip Id"
+msgstr ""
+
+#: Application/view/application/notifications/index.phtml:98
+#, fuzzy
+#| msgid "Cognome"
+msgid "Cognome Nome"
+msgstr "姓"
+
+#: Application/view/application/notifications/index.phtml:99
+#, fuzzy
+#| msgid "Numero patente"
+msgid "Numero cliente"
+msgstr "车照号"
+
+#: Application/view/application/notifications/index.phtml:100
+#, fuzzy
+#| msgid "Numero patente"
+msgid "Numero modificato cliente"
+msgstr "车照号"
 
 #: Application/view/application/payments-csv/csv.phtml:27
 msgid "Gestione file"
@@ -2293,10 +3342,6 @@ msgstr "装载新文档"
 #: Application/view/application/payments-csv/csv.phtml:65
 msgid "Nuovi file"
 msgstr "新文档"
-
-#: Application/view/application/payments-csv/csv.phtml:70
-msgid "Data inserimento"
-msgstr "插入的日期"
 
 #: Application/view/application/payments-csv/csv.phtml:89
 msgid "File analizzati"
@@ -2363,6 +3408,7 @@ msgid "Dati file CSV CartaSi"
 msgstr ""
 
 #: Application/view/application/payments-csv/details.phtml:83
+#: Application/view/application/payments/retry-extra.phtml:264
 #: Application/view/application/reservations/index.phtml:75
 #: Application/view/partials/notifications/sos-category.phtml:79
 msgid "Cliente"
@@ -2409,20 +3455,15 @@ msgstr "给用户欧元"
 msgid "Segna come risolta"
 msgstr "标志如解决"
 
-#: Application/view/application/payments-csv/details.phtml:347
-#, fuzzy
-msgid "Webuser"
-msgstr "用户名"
-
 #: Application/view/application/payments-csv/details.phtml:370
 msgid "Nuova Nota"
 msgstr "新注解"
 
-#: Application/view/application/payments/extra.phtml:9
+#: Application/view/application/payments/extra.phtml:8
 msgid "ADDEBITI EXTRA/PENALI"
 msgstr "指控罚款"
 
-#: Application/view/application/payments/extra.phtml:16
+#: Application/view/application/payments/extra.phtml:15
 msgid "Id Cliente"
 msgstr "用户名的客户"
 
@@ -2430,66 +3471,99 @@ msgstr "用户名的客户"
 msgid "Aggiungi addebito"
 msgstr "添加指控"
 
-#: Application/view/application/payments/extra.phtml:57
+#: Application/view/application/payments/extra.phtml:76
 msgid "Effettua pagamento"
 msgstr "支付"
 
-#: Application/view/application/payments/failed-payments.phtml:13
-msgid "PAGAMENTI FALLITI"
-msgstr "未成付款"
+#: Application/view/application/payments/extra.phtml:85
+#, fuzzy
+#| msgid "Elenco tentativi effettuati"
+msgid "Risultato tentativo effettuato"
+msgstr "做的尝试的列表"
 
-#: Application/view/application/payments/failed-payments.phtml:27
-#: Application/view/application/payments/failed-payments.phtml:63
-#: Application/view/application/payments/retry.phtml:77
-#: Application/view/application/trips-not-payed/list.phtml:29
-#: Application/view/application/trips/index.phtml:31
-msgid "ID Corsa"
-msgstr "行程代码"
+#: Application/view/application/payments/extra.phtml:92
+#: Application/view/application/payments/retry-extra.phtml:225
+#: Application/view/application/payments/retry-payments.phtml:153
+msgid "Data del tentativo"
+msgstr "尝试的日期"
 
-#: Application/view/application/payments/failed-payments.phtml:57
+#: Application/view/application/payments/extra.phtml:93
+#: Application/view/application/payments/retry-extra.phtml:226
+#: Application/view/application/payments/retry-payments.phtml:154
+msgid "Utente Admin"
+msgstr "管理用户"
+
+#: Application/view/application/payments/extra.phtml:94
+#: Application/view/application/payments/retry-extra.phtml:227
+#: Application/view/application/payments/retry-payments.phtml:155
+msgid "Prodotto"
+msgstr "产物"
+
+#: Application/view/application/payments/extra.phtml:96
+#: Application/view/application/payments/retry-extra.phtml:229
+#: Application/view/application/payments/retry-payments.phtml:157
+msgid "Risultato"
+msgstr "成效"
+
+#: Application/view/application/payments/failed-extra.phtml:15
+#, fuzzy
+#| msgid "ADDEBITI EXTRA/PENALI"
+msgid "ELENCO EXTRA/PENALI"
+msgstr "指控罚款"
+
+#: Application/view/application/payments/failed-extra.phtml:32
+#: Application/view/application/payments/failed-extra.phtml:66
+#: Application/view/application/payments/failed-payments.phtml:31
+#: Application/view/application/payments/failed-payments.phtml:61
 msgid "Data pagamento"
 msgstr "支付的日期"
 
-#: Application/view/application/payments/failed-payments.phtml:58
-msgid "ID cliente"
-msgstr "用户名的客户"
+#: Application/view/application/payments/failed-extra.phtml:33
+#: Application/view/application/payments/failed-extra.phtml:70
+msgid "Reasons"
+msgstr ""
 
-#: Application/view/application/payments/failed-payments.phtml:65
-#: Application/view/application/payments/retry.phtml:110
+#: Application/view/application/payments/failed-extra.phtml:34
+#, fuzzy
+#| msgid "Pagata"
+msgid "Pagato SI"
+msgstr "支付"
+
+#: Application/view/application/payments/failed-extra.phtml:35
+#, fuzzy
+#| msgid "Pagata"
+msgid "Pagato NO"
+msgstr "支付"
+
+#: Application/view/application/payments/failed-extra.phtml:58
+#, fuzzy
+#| msgid "Elenco eventi"
+msgid "Elenco extra/penali"
+msgstr "事件列表"
+
+#: Application/view/application/payments/failed-extra.phtml:68
+#, fuzzy
+msgid "Nome Cognome"
+msgstr "名字和性"
+
+#: Application/view/application/payments/failed-payments.phtml:16
+msgid "PAGAMENTI FALLITI"
+msgstr "未成付款"
+
+#: Application/view/application/payments/failed-payments.phtml:69
+#: Application/view/application/payments/retry-payments.phtml:110
 msgid "Parcheggio"
 msgstr "停车场"
-
-#: Application/view/application/payments/failed-payments.phtml:66
-#: Application/view/application/payments/retry.phtml:116
-msgid "Sconto"
-msgstr "折"
-
-#: Application/view/application/payments/failed-payments.phtml:67
-#: Application/view/application/payments/retry.phtml:122
-#: Application/view/application/trips-not-payed/list.phtml:75
-#: Application/view/application/trips/details.phtml:33
-#: Application/view/application/trips/index.phtml:106
-#: Application/view/application/zones/prices-tab.phtml:9
-msgid "Costo"
-msgstr "代价"
 
 #: Application/view/application/payments/fares.phtml:8
 msgid "TARIFFE"
 msgstr "关税"
 
 #: Application/view/application/payments/fares.phtml:17
-msgid "Soglia Tariffaria 60 min"
-msgstr "关税限制60分钟"
-
-#: Application/view/application/payments/fares.phtml:26
-msgid "Soglia Tariffaria 240 min"
-msgstr "关税限制240分钟"
-
-#: Application/view/application/payments/fares.phtml:35
 msgid "Soglia Tariffaria 1440 min"
 msgstr "关税限制1440分钟"
 
-#: Application/view/application/payments/fares.phtml:43
+#: Application/view/application/payments/fares.phtml:25
 msgid "Salva tariffe"
 msgstr "关税"
 
@@ -2502,80 +3576,116 @@ msgid "Riepilogo giornaliero"
 msgstr "每日摘要"
 
 #: Application/view/application/payments/recap.phtml:25
-msgid "Riepilogo settimanale"
-msgstr "每星期摘要"
-
-#: Application/view/application/payments/recap.phtml:26
 msgid "Riepilogo mensile"
 msgstr "每月摘要"
 
-#: Application/view/application/payments/recap.phtml:55
+#: Application/view/application/payments/recap.phtml:47
+#: Application/view/application/payments/recap.phtml:90
+msgid "Viaggi"
+msgstr "旅游"
+
+#: Application/view/application/payments/recap.phtml:48
 #: Application/view/application/payments/recap.phtml:91
-#: Application/view/application/payments/recap.phtml:126
-#: Application/view/application/trips/cost-tab.phtml:52
-#: Application/view/application/trips/info-tab.phtml:110
-msgid "n.d."
+msgid "Iscrizioni"
+msgstr "铭文"
+
+#: Application/view/application/payments/recap.phtml:49
+#: Application/view/application/payments/recap.phtml:92
+msgid "Multe e penali"
+msgstr "罚款和罚款"
+
+#: Application/view/application/payments/recap.phtml:50
+#: Application/view/application/payments/recap.phtml:93
+msgid "Pacchetti"
+msgstr "红利封包"
+
+#: Application/view/application/payments/recap.phtml:81
+msgid "Ultimi 4 mesi"
+msgstr "最近4个月"
+
+#: Application/view/application/payments/recap.phtml:123
+msgid "Attenzione! Area riservata agli utenti super-admin."
 msgstr ""
 
-#: Application/view/application/payments/retry.phtml:19
-msgid "RITENTA PAGAMENTO"
+#: Application/view/application/payments/retry-extra.phtml:20
+#, fuzzy
+#| msgid "RITENTA PAGAMENTO"
+msgid "RITENTA PAGAMENTO DI UN EXTRA"
 msgstr "重试付款"
 
-#: Application/view/application/payments/retry.phtml:28
-msgid "Effettua nuovo tentativo di pagamento"
-msgstr "做一个新的付款尝试"
+#: Application/view/application/payments/retry-extra.phtml:29
+#, fuzzy
+#| msgid "Torna alla lista"
+msgid "Torna al padre"
+msgstr "返回列表"
 
-#: Application/view/application/payments/retry.phtml:38
-msgid "Pagamento completato con successo"
-msgstr "把付款得成功"
-
-#: Application/view/application/payments/retry.phtml:44
-msgid "Riabilita utente"
-msgstr "重新启用用户"
-
-#: Application/view/application/payments/retry.phtml:54
+#: Application/view/application/payments/retry-extra.phtml:73
+#: Application/view/application/payments/retry-payments.phtml:54
 msgid "Il pagamento non è andato a buon fine"
 msgstr "付款失败结束"
 
-#: Application/view/application/payments/retry.phtml:69
-msgid "Riepilogo"
-msgstr "摘要"
+#: Application/view/application/payments/retry-extra.phtml:137
+#, fuzzy
+#| msgid "Data del tentativo"
+msgid "Data primo tentativo"
+msgstr "尝试的日期"
 
-#: Application/view/application/payments/retry.phtml:143
+#: Application/view/application/payments/retry-extra.phtml:170
+msgid "Reason"
+msgstr ""
+
+#: Application/view/application/payments/retry-extra.phtml:190
+msgid "Saldo"
+msgstr ""
+
+#: Application/view/application/payments/retry-extra.phtml:214
+#: Application/view/application/payments/retry-payments.phtml:143
 msgid "Elenco tentativi effettuati"
 msgstr "做的尝试的列表"
 
-#: Application/view/application/payments/retry.phtml:148
-msgid "Elenco completo corse con pagamento fallito"
+#: Application/view/application/payments/retry-extra.phtml:219
+#, fuzzy
+#| msgid "Elenco completo corse con pagamento fallito"
+msgid "Elenco completo extra con pagamento fallito"
 msgstr "行程跟失败付款的完全列表"
 
-#: Application/view/application/payments/retry.phtml:153
-msgid "Data del tentativo"
-msgstr "尝试的日期"
+#: Application/view/application/payments/retry-extra.phtml:256
+#, fuzzy
+#| msgid "Elenco Note"
+msgid "Elenco rate"
+msgstr "注解列表"
 
-#: Application/view/application/payments/retry.phtml:154
-msgid "Utente Admin"
-msgstr "管理用户"
+#: Application/view/application/payments/retry-extra.phtml:268
+#, fuzzy
+#| msgid "Pagamenti"
+msgid "Pagamento padre"
+msgstr "付款"
 
-#: Application/view/application/payments/retry.phtml:155
-msgid "Prodotto"
-msgstr "产物"
+#: Application/view/application/payments/retry-extra.phtml:269
+#, fuzzy
+#| msgid "Pagamenti falliti"
+msgid "Pagamento Rata"
+msgstr "未成付款"
 
-#: Application/view/application/payments/retry.phtml:157
-msgid "Risultato"
-msgstr "成效"
+#: Application/view/application/payments/retry-payments.phtml:19
+msgid "RITENTA PAGAMENTO"
+msgstr "重试付款"
+
+#: Application/view/application/payments/retry-payments.phtml:38
+msgid "Pagamento completato con successo"
+msgstr "把付款得成功"
+
+#: Application/view/application/payments/retry-payments.phtml:44
+msgid "Riabilita utente"
+msgstr "重新启用用户"
+
+#: Application/view/application/payments/retry-payments.phtml:148
+msgid "Elenco completo corse con pagamento fallito"
+msgstr "行程跟失败付款的完全列表"
 
 #: Application/view/application/pois/add.phtml:9
 msgid "AGGIUNGI POI"
 msgstr "添加POI"
-
-#: Application/view/application/pois/add.phtml:90
-#: Application/view/application/pois/edit.phtml:90
-#: Application/view/application/pois/index.phtml:33
-#: Application/view/application/pois/index.phtml:82
-#: Application/view/partials/notifications/sos-category.phtml:284
-msgid "Provincia"
-msgstr "省"
 
 #: Application/view/application/pois/add.phtml:97
 #: Application/view/application/pois/edit.phtml:97
@@ -2619,16 +3729,21 @@ msgstr "种类"
 msgid "ELENCO PRENOTAZIONI"
 msgstr "预订列表"
 
-#: Application/view/application/reservations/index.phtml:39
-#: Application/view/application/trips-not-payed/list.phtml:26
-#: Application/view/application/trips/index.phtml:32
-#: Application/view/partials/notifications/sos-category.phtml:66
-msgid "ID Cliente"
-msgstr "客户用户名"
-
 #: Application/view/application/reservations/index.phtml:66
 msgid "Elenco Prenotazioni"
 msgstr "预订列表"
+
+#: Application/view/application/reservations/index.phtml:78
+msgid "Inviata"
+msgstr ""
+
+#: Application/view/application/reservations/index.phtml:79
+msgid "Consumata"
+msgstr ""
+
+#: Application/view/application/reservations/index.phtml:80
+msgid "Cancellata"
+msgstr ""
 
 #: Application/view/application/trips-not-payed/list.phtml:14
 msgid "CORSE NON PAGATE"
@@ -2636,150 +3751,159 @@ msgstr "不支付行程"
 
 #: Application/view/application/trips-not-payed/list.phtml:69
 #: Application/view/application/trips/index.phtml:96
-#: Application/view/application/trips/info-tab.phtml:88
-#: Application/view/partials/notifications/sos-category.phtml:192
+#: Application/view/partials/notifications/sos-category.phtml:193
 msgid "Km Inizio"
 msgstr "开始的公里"
 
 #: Application/view/application/trips-not-payed/list.phtml:70
 #: Application/view/application/trips/index.phtml:97
-#: Application/view/application/trips/info-tab.phtml:94
-#: Application/view/partials/notifications/sos-category.phtml:198
+#: Application/view/partials/notifications/sos-category.phtml:199
 msgid "Km Fine"
 msgstr "结束的公里"
 
 #: Application/view/application/trips-not-payed/list.phtml:71
-#: Application/view/application/trips/cost-tab.phtml:45
+#: Application/view/application/trips/cost-tab.phtml:97
 #: Application/view/application/trips/index.phtml:98
-#: Application/view/application/trips/info-tab.phtml:103
-#: Application/view/partials/notifications/sos-category.phtml:206
+#: Application/view/partials/notifications/sos-category.phtml:207
 #: Application/view/partials/translations.phtml:26
 msgid "Inizio"
 msgstr "开始"
 
 #: Application/view/application/trips-not-payed/list.phtml:72
 #: Application/view/application/trips/index.phtml:99
-#: Application/view/application/trips/info-tab.phtml:109
-#: Application/view/partials/notifications/sos-category.phtml:212
+#: Application/view/partials/notifications/sos-category.phtml:213
 #: Application/view/partials/translations.phtml:29
 msgid "Fine"
 msgstr "结束"
 
-#: Application/view/application/trips-not-payed/list.phtml:73
-#: Application/view/application/trips/cost-tab.phtml:57
-#: Application/view/application/trips/index.phtml:100
-#: Application/view/application/trips/info-tab.phtml:115
-#: Application/view/partials/notifications/sos-category.phtml:218
-#: Reports/view/partials/reports_translations.phtml:18
-msgid "Durata"
-msgstr "长短"
-
 #: Application/view/application/trips-not-payed/list.phtml:74
 #: Application/view/application/trips/index.phtml:101
-#: Application/view/application/trips/info-tab.phtml:124
-#: Application/view/partials/notifications/sos-category.phtml:226
+#: Application/view/application/trips/info-tab.phtml:129
+#: Application/view/partials/notifications/sos-category.phtml:227
 msgid "Sosta"
 msgstr "停止"
 
-#: Application/view/application/trips/close-tab.phtml:6
-#: Application/view/application/trips/close-tab.phtml:33
-#: Application/view/application/trips/details.phtml:36
-msgid "Chiudi corsa"
-msgstr "结束行程"
-
-#: Application/view/application/trips/close-tab.phtml:14
-msgid "Data e ora chiusura"
-msgstr "结束的日期和小时"
-
-#: Application/view/application/trips/close-tab.phtml:24
-msgid "Sì"
-msgstr "是"
-
-#: Application/view/application/trips/cost-tab.phtml:39
-#: Application/view/application/trips/info-tab.phtml:34
+#: Application/view/application/trips/cost-tab.phtml:91
+#: Application/view/application/trips/info-tab.phtml:65
 msgid "Dettagli Corsa"
 msgstr "行程的细节"
 
-#: Application/view/application/trips/cost-tab.phtml:58
-#: Application/view/application/trips/info-tab.phtml:116
-#: Application/view/partials/notifications/sos-category.phtml:219
+#: Application/view/application/trips/cost-tab.phtml:104
+#: Application/view/application/trips/info-tab.phtml:168
+msgid "n.d."
+msgstr ""
+
+#: Application/view/application/trips/cost-tab.phtml:109
+#, fuzzy
+#| msgid "Durata corsa"
+msgid "Durata totale"
+msgstr "行程的长短"
+
+#: Application/view/application/trips/cost-tab.phtml:110
+#: Application/view/application/trips/cost-tab.phtml:116
+#: Application/view/application/trips/cost-tab.phtml:140
+#: Application/view/application/trips/info-tab.phtml:130
+#: Application/view/application/trips/info-tab.phtml:174
+#: Application/view/partials/notifications/sos-category.phtml:220
 msgid "minuti"
 msgstr "分钟"
 
-#: Application/view/application/trips/cost-tab.phtml:66
+#: Application/view/application/trips/cost-tab.phtml:115
+#, fuzzy
+#| msgid "Data del tentativo"
+msgid "Durata effettiva"
+msgstr "尝试的日期"
+
+#: Application/view/application/trips/cost-tab.phtml:121
 msgid "Tariffa corsa"
 msgstr "行程的关税"
 
-#: Application/view/application/trips/cost-tab.phtml:72
+#: Application/view/application/trips/cost-tab.phtml:127
+#, fuzzy
+#| msgid "Costo corsa"
+msgid "Sconto corsa"
+msgstr "行程的费用"
+
+#: Application/view/application/trips/cost-tab.phtml:139
+#, fuzzy
+#| msgid "Durata corsa"
+msgid "Durata sosta"
+msgstr "行程的长短"
+
+#: Application/view/application/trips/cost-tab.phtml:145
 msgid "Tariffa sosta"
 msgstr "关税的停止"
 
-#: Application/view/application/trips/cost-tab.phtml:78
-#: Application/view/application/trips/trip-cost.phtml:69
-msgid "Sconto cliente"
-msgstr "客户折扣"
+#: Application/view/application/trips/cost-tab.phtml:151
+#, fuzzy
+#| msgid "Secondi di sosta"
+msgid "Sconto sosta"
+msgstr "停止的秒"
 
-#: Application/view/application/trips/cost-tab.phtml:89
+#: Application/view/application/trips/cost-tab.phtml:162
 msgid "Minuti addebitati"
 msgstr "收费的分钟"
 
-#: Application/view/application/trips/cost-tab.phtml:95
-#: Application/view/application/trips/cost-tab.phtml:125
-#: Application/view/application/trips/cost-tab.phtml:157
+#: Application/view/application/trips/cost-tab.phtml:168
+#: Application/view/application/trips/cost-tab.phtml:198
+#: Application/view/application/trips/cost-tab.phtml:230
 msgid "Dal"
 msgstr "从"
 
-#: Application/view/application/trips/cost-tab.phtml:96
-#: Application/view/application/trips/cost-tab.phtml:126
-#: Application/view/application/trips/cost-tab.phtml:158
+#: Application/view/application/trips/cost-tab.phtml:169
+#: Application/view/application/trips/cost-tab.phtml:199
+#: Application/view/application/trips/cost-tab.phtml:231
 msgid "Fino al"
 msgstr "到"
 
-#: Application/view/application/trips/cost-tab.phtml:97
-#: Application/view/application/trips/cost-tab.phtml:127
-#: Application/view/application/trips/cost-tab.phtml:159
+#: Application/view/application/trips/cost-tab.phtml:170
+#: Application/view/application/trips/cost-tab.phtml:200
+#: Application/view/application/trips/cost-tab.phtml:232
 msgid "Minuti"
 msgstr "分钟"
 
-#: Application/view/application/trips/cost-tab.phtml:119
+#: Application/view/application/trips/cost-tab.phtml:192
 msgid "Minuti bonus usufruiti"
 msgstr "用的奖金分钟"
 
-#: Application/view/application/trips/cost-tab.phtml:128
+#: Application/view/application/trips/cost-tab.phtml:201
 msgid "Descrizione bonus"
 msgstr "奖金的描述"
 
-#: Application/view/application/trips/cost-tab.phtml:151
+#: Application/view/application/trips/cost-tab.phtml:224
 msgid "Sconti / tariffe speciali"
 msgstr "折扣"
 
-#: Application/view/application/trips/cost-tab.phtml:160
+#: Application/view/application/trips/cost-tab.phtml:233
 msgid "Descrizione sconto / tariffa speciale"
 msgstr "折扣的描述"
 
-#: Application/view/application/trips/cost-tab.phtml:186
-#: Application/view/application/trips/info-tab.phtml:150
+#: Application/view/application/trips/cost-tab.phtml:259
 msgid "Dati pagamento"
 msgstr "付款数据"
 
-#: Application/view/application/trips/cost-tab.phtml:208
+#: Application/view/application/trips/cost-tab.phtml:270
 #: Application/view/application/trips/index.phtml:105
-#: Application/view/application/trips/info-tab.phtml:164
 msgid "Pagata"
 msgstr "支付"
 
-#: Application/view/application/trips/details.phtml:16
+#: Application/view/application/trips/cost-tab.phtml:282
+msgid "Fatturata"
+msgstr "发票的"
+
+#: Application/view/application/trips/details.phtml:19
 msgid "DETTAGLI CORSA"
 msgstr "行程的细节"
 
-#: Application/view/application/trips/details.phtml:34
+#: Application/view/application/trips/details.phtml:37
 msgid "Modifica corsa"
 msgstr "改变行程"
 
 #: Application/view/application/trips/details.phtml:38
 #, fuzzy
-msgid "Eventi corsa"
-msgstr "路线材料"
+#| msgid "Durata corsa"
+msgid "Mappa corsa"
+msgstr "行程的长短"
 
 #: Application/view/application/trips/index.phtml:16
 msgid "ELENCO CORSE"
@@ -2797,15 +3921,6 @@ msgstr "客户姓"
 msgid "eMail Cliente"
 msgstr "客户电邮地址"
 
-#: Application/view/application/trips/index.phtml:50
-msgid "da"
-msgstr "从"
-
-#: Application/view/application/trips/index.phtml:56
-#: Reports/view/reports/index/map.phtml:29
-msgid "a"
-msgstr "到"
-
 #: Application/view/application/trips/index.phtml:82
 msgid "Elenco Corse"
 msgstr "行程列表"
@@ -2816,37 +3931,72 @@ msgid "eMail"
 msgstr "电邮地址"
 
 #: Application/view/application/trips/index.phtml:102
-#: Application/view/application/trips/info-tab.phtml:130
-#: Application/view/partials/notifications/sos-category.phtml:232
+#: Application/view/partials/notifications/sos-category.phtml:233
 msgid "Stato Quadro"
 msgstr "仪表盘的情况"
 
 #: Application/view/application/trips/index.phtml:103
+#: Application/view/application/trips/info-tab.phtml:135
 msgid "In sosta"
 msgstr "停止"
 
-#: Application/view/application/trips/info-tab.phtml:40
+#: Application/view/application/trips/info-tab.phtml:71
 msgid "Id corsa"
 msgstr "行程代码"
 
-#: Application/view/application/trips/info-tab.phtml:67
-#: Application/view/partials/notifications/sos-category.phtml:178
+#: Application/view/application/trips/info-tab.phtml:77
+msgid "Business"
+msgstr ""
+
+#: Application/view/application/trips/info-tab.phtml:86
+#, fuzzy
+#| msgid "Nome & Cognome"
+msgid "Nome / Cognome"
+msgstr "名字和性"
+
+#: Application/view/application/trips/info-tab.phtml:98
+#: Application/view/partials/notifications/sos-category.phtml:179
 msgid "RFID cliente"
 msgstr "射频名"
 
-#: Application/view/application/trips/info-tab.phtml:82
-#: Application/view/partials/notifications/sos-category.phtml:184
+#: Application/view/application/trips/info-tab.phtml:114
+#: Application/view/partials/notifications/sos-category.phtml:185
 msgid "Numero auto"
 msgstr "汽车号码"
 
-#: Application/view/application/trips/info-tab.phtml:136
-#: Application/view/partials/notifications/sos-category.phtml:238
-msgid "In Sosta"
-msgstr "停止"
+#: Application/view/application/trips/info-tab.phtml:120
+#, fuzzy
+#| msgid "Stato Quadro"
+msgid "Stato quadro"
+msgstr "仪表盘的情况"
 
-#: Application/view/application/trips/info-tab.phtml:172
-msgid "Fatturata"
-msgstr "发票的"
+#: Application/view/application/trips/info-tab.phtml:144
+#, fuzzy
+#| msgid "Indirizzo"
+msgid "Indirizzo inizio"
+msgstr "地址"
+
+#: Application/view/application/trips/info-tab.phtml:150
+#, fuzzy
+#| msgid "Indirizzo"
+msgid "Indirizzo fine"
+msgstr "地址"
+
+#: Application/view/application/trips/info-tab.phtml:182
+#, fuzzy
+#| msgid "Km Inizio"
+msgid "Km inizio"
+msgstr "开始的公里"
+
+#: Application/view/application/trips/info-tab.phtml:188
+#, fuzzy
+#| msgid "Data fine"
+msgid "Km fine"
+msgstr "结束的日期"
+
+#: Application/view/application/trips/info-tab.phtml:194
+msgid "Km percorsi"
+msgstr ""
 
 #: Application/view/application/trips/trip-cost.phtml:18
 msgid "COSTO CORSA"
@@ -2867,7 +4017,9 @@ msgid "Durata corsa"
 msgstr "行程的长短"
 
 #: Application/view/application/trips/trip-cost.phtml:48
-msgid "Secondi di sosta"
+#, fuzzy
+#| msgid "Secondi di sosta"
+msgid "Minuti di sosta"
 msgstr "停止的秒"
 
 #: Application/view/application/trips/trip-cost.phtml:55
@@ -2877,6 +4029,10 @@ msgstr "客户性别"
 #: Application/view/application/trips/trip-cost.phtml:62
 msgid "Minuti bonus"
 msgstr "奖金分钟"
+
+#: Application/view/application/trips/trip-cost.phtml:69
+msgid "Sconto cliente"
+msgstr "客户折扣"
 
 #: Application/view/application/trips/trip-cost.phtml:81
 msgid "Calcola costo"
@@ -3017,6 +4173,7 @@ msgstr "不是"
 
 #: Application/view/application/zones/index.phtml:18
 #: Application/view/application/zones/zone-alarms.phtml:7
+#: Application/view/application/zones/zone-bonus.phtml:7
 msgid "Gestione Aree"
 msgstr "地区管理"
 
@@ -3036,6 +4193,11 @@ msgstr "目录"
 #, fuzzy
 msgid "Elenco Zone"
 msgstr "注解列表"
+
+#: Application/view/application/zones/list-tab.phtml:64
+#: Application/view/partials/notifications/sos-category.phtml:325
+msgid "Mappa"
+msgstr "地图"
 
 #: Application/view/application/zones/prices-tab.phtml:8
 msgid "Condizione"
@@ -3075,6 +4237,10 @@ msgstr "监察员"
 #, php-format
 msgid "resolves to %s"
 msgstr "解析到 %s"
+
+#: Application/view/error/404.phtml:64 Application/view/error/index.phtml:8
+msgid "Informazioni aggiuntive"
+msgstr "添加的信息"
 
 #: Application/view/error/404.phtml:75 Application/view/error/404.phtml:99
 #: Application/view/error/index.phtml:19 Application/view/error/index.phtml:43
@@ -3123,11 +4289,17 @@ msgstr "标签"
 msgid "Intval"
 msgstr ""
 
-#: Application/view/partials/menu-user.phtml:13
+#: Application/view/partials/map-trip.phtml:14
+#, fuzzy
+#| msgid "Mappa Allarmi"
+msgid "Mappa del viaggio"
+msgstr "警报图"
+
+#: Application/view/partials/menu-user.phtml:14
 msgid "Gestioni Utenti"
 msgstr "用户管理"
 
-#: Application/view/partials/menu-user.phtml:18
+#: Application/view/partials/menu-user.phtml:20
 msgid "Log Out"
 msgstr "登出"
 
@@ -3166,46 +4338,42 @@ msgstr ""
 msgid "Apri informazioni Cliente"
 msgstr "添加的信息"
 
-#: Application/view/partials/notifications/sos-category.phtml:246
+#: Application/view/partials/notifications/sos-category.phtml:239
+msgid "In Sosta"
+msgstr "停止"
+
+#: Application/view/partials/notifications/sos-category.phtml:247
 #, fuzzy
 msgid "Apri informazioni Corsa"
 msgstr "信息"
 
-#: Application/view/partials/notifications/sos-category.phtml:257
+#: Application/view/partials/notifications/sos-category.phtml:264
 #, fuzzy
 msgid "Dati Posizione"
 msgstr "地方"
 
-#: Application/view/partials/notifications/sos-category.phtml:272
+#: Application/view/partials/notifications/sos-category.phtml:279
 #, fuzzy
 msgid "Codice Stato"
 msgstr "合同代码"
 
-#: Application/view/partials/notifications/sos-category.phtml:278
+#: Application/view/partials/notifications/sos-category.phtml:285
 #, fuzzy
 msgid "Regione"
 msgstr "报名"
 
-#: Application/view/partials/notifications/sos-category.phtml:302
-#: Application/view/partials/notifications/sos-category.phtml:308
+#: Application/view/partials/notifications/sos-category.phtml:309
+#: Application/view/partials/notifications/sos-category.phtml:315
 #, fuzzy
 msgid "Via"
 msgstr "有效"
 
-#: Application/view/partials/notifications/sos-category.phtml:308
+#: Application/view/partials/notifications/sos-category.phtml:315
 #, fuzzy
 msgid "Maggiori Informazioni"
 msgstr "信息"
 
-#: Application/view/partials/notifications/sos-category.phtml:326
-msgid "Longitudine"
-msgstr ""
-
-#: Application/view/partials/notifications/sos-category.phtml:332
-msgid "Latitudine"
-msgstr ""
-
-#: Application/view/partials/notifications/sos-category.phtml:340
+#: Application/view/partials/notifications/sos-category.phtml:347
 msgid "Dato GEO"
 msgstr ""
 
@@ -3332,10 +4500,16 @@ msgid "Sei sicuro di voler rimuovere questo bonus?"
 msgstr "您肯定消除这个奖金吗?"
 
 #: Application/view/partials/translations.phtml:43
+#, fuzzy
+#| msgid "Sei sicuro di voler rimuovere questo bonus?"
+msgid "Sei sicuro di voler rimuovere questo punto?"
+msgstr "您肯定消除这个奖金吗?"
+
+#: Application/view/partials/translations.phtml:44
 msgid "Qualcosa è andato storto, riprova!"
 msgstr "什么事出了， 再尝试"
 
-#: Application/view/partials/translations.phtml:45
+#: Application/view/partials/translations.phtml:46
 msgid ""
 "La procedura di pagamento è già iniziata. Per procedere sarà necessario "
 "annullare tutti i tentativi di pagamento effettuati. Confermi di voler "
@@ -3344,160 +4518,138 @@ msgstr ""
 "付款程序已经开始。如果您要继续，您应该取消所有的做的付款尝试。您肯定取消所有"
 "的做的付款尝试吗?"
 
-#: Application/view/partials/translations.phtml:47
+#: Application/view/partials/translations.phtml:48
 msgid "Formato id cliente non corretto"
 msgstr "错的客户用户名"
 
-#: Application/view/partials/translations.phtml:48
+#: Application/view/partials/translations.phtml:49
 msgid "Selezionare una flotta"
 msgstr "选择车队"
 
-#: Application/view/partials/translations.phtml:49
+#: Application/view/partials/translations.phtml:50
 msgid "Selezionare una tipologia"
 msgstr "选择种类"
 
-#: Application/view/partials/translations.phtml:50
+#: Application/view/partials/translations.phtml:51
 msgid "Aggiungere almeno un addebito"
 msgstr "添加至少一个借机"
 
-#: Application/view/partials/translations.phtml:51
+#: Application/view/partials/translations.phtml:52
 msgid "Inserire una causale valida"
 msgstr "插入一个有效的原因"
 
-#: Application/view/partials/translations.phtml:52
+#: Application/view/partials/translations.phtml:53
+#, fuzzy
+#| msgid "Inserire una causale valida"
+msgid "Inserire una penale valida"
+msgstr "插入一个有效的原因"
+
+#: Application/view/partials/translations.phtml:54
 msgid "Inserire un importo valido in euro"
 msgstr "插入一个有效的欧元项"
 
-#: Application/view/partials/translations.phtml:53
+#: Application/view/partials/translations.phtml:55
 msgid "Confermi il pagamento al cliente"
 msgstr "为客户肯定付款"
 
-#: Application/view/partials/translations.phtml:54
+#: Application/view/partials/translations.phtml:56
 msgid "di un importo di"
 msgstr "的欧元项"
 
-#: Application/view/partials/translations.phtml:56
 #: Application/view/partials/translations.phtml:57
+msgid "rateizzato in rate"
+msgstr ""
+
+#: Application/view/partials/translations.phtml:59
+#: Application/view/partials/translations.phtml:60
 msgid "Visualizza corsa ID"
 msgstr "显示行程代码"
 
-#: Application/view/partials/translations.phtml:58
-#: Application/view/partials/translations.phtml:60
+#: Application/view/partials/translations.phtml:61
+#: Application/view/partials/translations.phtml:63
 msgid "Prosegui"
 msgstr "继续"
 
-#: Application/view/partials/translations.phtml:64
+#: Application/view/partials/translations.phtml:67
 msgid "Pacchetto bonus"
 msgstr "红利封包"
 
-#: Application/view/partials/translations.phtml:66
+#: Application/view/partials/translations.phtml:69
 #, fuzzy
 msgid "Presa Visione"
 msgstr "地方"
 
-#: Application/view/partials/translations.phtml:68
+#: Application/view/partials/translations.phtml:71
 msgid "Confermi l\\'eliminazione del poi? L\\'operazione non è annullabile"
 msgstr "您肯定消除POI?该操作不能撤消"
 
-#: Application/view/partials/translations.phtml:70
+#: Application/view/partials/translations.phtml:73
 msgid "Visualizza auto targata"
 msgstr "显示牌照的汽车"
 
-#: Application/view/partials/translations.phtml:71
+#: Application/view/partials/translations.phtml:74
 msgid "Visualizza profilo di"
 msgstr "显示资料"
 
-#: Application/view/partials/translations.phtml:73
-msgid "i campi \"Inizio corsa\" e \"Fine corsa\" devono essere compilati"
-msgstr "需要编\"行程的开始\"的方面和\"行程的结束\""
-
 #: Application/view/partials/translations.phtml:76
+msgid "Il campio \"Durata corsa\" deve avere formato \"HH:MM:SS\""
+msgstr ""
+
+#: Application/view/partials/translations.phtml:79
 msgid "Revoca"
 msgstr ""
 
-#: Application/view/partials/translations.phtml:77
+#: Application/view/partials/translations.phtml:80
 msgid "Scarica"
 msgstr "下载"
 
-#: Application/view/partials/translations.phtml:78
+#: Application/view/partials/translations.phtml:81
 msgid "Confermare la validazione?"
 msgstr "肯定有效吗?"
 
-#: Application/view/partials/translations.phtml:79
+#: Application/view/partials/translations.phtml:82
 #, fuzzy
 msgid "Confermare la revoca della patente?"
 msgstr "肯定有效吗?"
 
-#: Application/view/partials/translations.phtml:80
+#: Application/view/partials/translations.phtml:83
 #, fuzzy
 msgid "Validata"
 msgstr "有效"
 
-#: Application/view/partials/translations.phtml:81
+#: Application/view/partials/translations.phtml:84
 msgid "Da validare"
 msgstr ""
 
-#: Application/view/partials/translations.phtml:82
+#: Application/view/partials/translations.phtml:85
 msgid "Revocata"
 msgstr ""
 
-#: Application/view/partials/translations.phtml:84
+#: Application/view/partials/translations.phtml:87
 msgid "Penale"
 msgstr "罚款"
 
-#: Application/view/partials/translations.phtml:85
+#: Application/view/partials/translations.phtml:88
 msgid "Causale"
 msgstr "因果"
 
-#: Application/view/partials/translations.phtml:89
+#: Application/view/partials/translations.phtml:92
 msgid "Non Visibile"
 msgstr ""
 
-#: Application/view/partials/translations.phtml:90
+#: Application/view/partials/translations.phtml:93
 msgid "Fuoco"
 msgstr ""
 
-#: Application/view/partials/translations.phtml:92
+#: Application/view/partials/translations.phtml:95
 #, fuzzy
 msgid "Sei sicuro di voler assegnare questo bonus all\\'utente?"
 msgstr "您肯定消除这个奖金吗?"
 
-#: Application/view/partials/translations.phtml:93
+#: Application/view/partials/translations.phtml:96
 #, fuzzy
 msgid "Sei sicuro di voler contrassegnare questa corsa come pagata?"
 msgstr "您肯定执行这个命令吗?"
-
-#: Cartasi/view/cartasi/cartasi-payments/rejected-first-payment.phtml:10
-msgid "Pagamento annullato o rifutato"
-msgstr "把付款撤销了或拒绝了"
-
-#: Cartasi/view/cartasi/cartasi-payments/rejected-first-payment.phtml:11
-msgid "La procedura di pagamento con Cartasi ha dato esito "
-msgstr "CartaSI的付款办法结束了得成功"
-
-#: Cartasi/view/cartasi/cartasi-payments/return-first-payment.phtml:11
-msgid "Attivazione completata"
-msgstr "完成的激活"
-
-#: Cartasi/view/cartasi/cartasi-payments/return-first-payment.phtml:12
-msgid "Ti confermiamo la ricezione del pagamento"
-msgstr "我们确认收到付款"
-
-#: Cartasi/view/cartasi/cartasi-payments/return-first-payment.phtml:22
-msgid "Si è verificato un problema"
-msgstr "有一个问题"
-
-#: Cartasi/view/cartasi/cartasi-payments/return-first-payment.phtml:23
-msgid "Il pagamento non è andato a buon fine."
-msgstr "付款失败结束"
-
-#: Cartasi/view/cartasi/cartasi-payments/return-first-payment.phtml:24
-msgid "Il messaggio di errore che abbiamo ricevuto è: \""
-msgstr "我们收到的错误消息:\""
-
-#: Cartasi/view/cartasi/cartasi-payments/return-first-payment.phtml:25
-msgid "Contattare l'assistenza per maggiori informazioni"
-msgstr "联系支持为有详细信息"
 
 #: Reports/view/layout/layout.phtml:33
 #, fuzzy
@@ -3513,29 +4665,9 @@ msgstr ""
 msgid "Itinerari"
 msgstr ""
 
-#: Reports/view/layout/layout.phtml:40
-#: Reports/view/reports/index/live.phtml:15
+#: Reports/view/layout/layout.phtml:40 Reports/view/reports/index/live.phtml:15
 msgid "In tempo reale"
 msgstr ""
-
-#: Reports/view/partials/reports_translations.phtml:3
-#, fuzzy
-msgid "Spostati su"
-msgstr "停止"
-
-#: Reports/view/partials/reports_translations.phtml:6
-#: Reports/view/reports/index/map.phtml:19
-msgid "Passa a Posizione di Arrivo"
-msgstr ""
-
-#: Reports/view/partials/reports_translations.phtml:7
-msgid "Passa a Posizione di Partenza"
-msgstr ""
-
-#: Reports/view/partials/reports_translations.phtml:10
-#, fuzzy
-msgid "Corse per Citt&agrave;"
-msgstr "开行程"
 
 #: Reports/view/partials/reports_translations.phtml:11
 msgid "Roma"
@@ -3549,152 +4681,18 @@ msgstr ""
 msgid "Firenze"
 msgstr ""
 
+#: Reports/view/partials/reports_translations.phtml:14
+#, fuzzy
+#| msgid "Modello"
+msgid "Modena"
+msgstr "样子"
+
+#: Reports/view/partials/reports_translations.phtml:15
+msgid "Košice"
+msgstr ""
+
 #: Reports/view/partials/reports_translations.phtml:16
-#: Reports/view/reports/index/routes.phtml:31
-#, fuzzy
-msgid "corse precedenti a"
-msgstr "以前的例外"
-
-#: Reports/view/partials/reports_translations.phtml:17
-msgid "Targa Veicolo"
-msgstr ""
-
-#: Reports/view/partials/reports_translations.phtml:19
-#, fuzzy
-msgid "Numero Punti"
-msgstr "分钟"
-
-#: Reports/view/partials/reports_translations.phtml:20
-#, fuzzy
-msgid "Data Inizio Corsa"
-msgstr "行程的开始"
-
-#: Reports/view/partials/reports_translations.phtml:21
-#, fuzzy
-msgid "Data Fine Corsa"
-msgstr "行程的结束"
-
-#: Reports/view/partials/reports_translations.phtml:22
-msgid "Itinerario"
-msgstr ""
-
-#: Reports/view/partials/reports_translations.phtml:23
-msgid "Non sono state trovate corse con i filtri selezionati"
-msgstr ""
-
-#: Reports/view/partials/reports_translations.phtml:24
-#, fuzzy
-msgid "Controlli"
-msgstr "监察员"
-
-#: Reports/view/partials/reports_translations.phtml:25
-#, fuzzy
-msgid "Ferma"
-msgstr "证实"
-
-#: Reports/view/partials/reports_translations.phtml:26
-#, fuzzy
-msgid "Pausa"
-msgstr "因果"
-
-#: Reports/view/partials/reports_translations.phtml:27
-msgid "Avvia"
-msgstr ""
-
-#: Reports/view/partials/reports_translations.phtml:28
-msgid "Velocit&agrave;"
-msgstr ""
-
-#: Reports/view/partials/reports_translations.phtml:29
-#, fuzzy
-msgid "Data Rilevazione Punto"
-msgstr "启用合同的日期"
-
-#: Reports/view/partials/reports_translations.phtml:30
-msgid "Blocca Vista su Auto"
-msgstr ""
-
-#: Reports/view/partials/reports_translations.phtml:31
-#, fuzzy
-msgid "Durata Corsa"
-msgstr "行程的长短"
-
-#: Reports/view/partials/reports_translations.phtml:32
-msgid "Apri"
-msgstr ""
-
-#: Reports/view/partials/reports_translations.phtml:35
-msgid "Lunedi"
-msgstr ""
-
-#: Reports/view/partials/reports_translations.phtml:36
-msgid "Martedi"
-msgstr ""
-
-#: Reports/view/partials/reports_translations.phtml:37
-msgid "Mercoledi"
-msgstr ""
-
-#: Reports/view/partials/reports_translations.phtml:38
-msgid "Giovedi"
-msgstr ""
-
-#: Reports/view/partials/reports_translations.phtml:39
-msgid "Venerdi"
-msgstr ""
-
-#: Reports/view/partials/reports_translations.phtml:40
-msgid "Sabato"
-msgstr ""
-
-#: Reports/view/partials/reports_translations.phtml:41
-msgid "Domenica"
-msgstr ""
-
-#: Reports/view/partials/reports_translations.phtml:42
-#: Reports/view/reports/index/trips.phtml:115
-#: Reports/view/reports/index/tripscity.phtml:92
-msgid "oltre"
-msgstr ""
-
-#: Reports/view/partials/reports_translations.phtml:43
-msgid "Uomini"
-msgstr ""
-
-#: Reports/view/partials/reports_translations.phtml:44
-msgid "Donne"
-msgstr ""
-
-#: Reports/view/partials/reports_translations.phtml:45
-msgid "Area"
-msgstr ""
-
-#: Reports/view/partials/reports_translations.phtml:46
-#, fuzzy
-msgid "Concentrazione"
-msgstr "配置"
-
-#: Reports/view/partials/reports_translations.phtml:47
-#, fuzzy
-msgid "selezionate di"
-msgstr "选择"
-
-#: Reports/view/partials/reports_translations.phtml:48
-#, fuzzy
-msgid "corse"
-msgstr "行程"
-
-#: Reports/view/partials/reports_translations.phtml:49
-msgid "Azzera tutti i filtri"
-msgstr ""
-
-#: Reports/view/partials/reports_translations.phtml:50
-msgid "Tutte le"
-msgstr ""
-
-#: Reports/view/partials/reports_translations.phtml:51
-msgid ""
-"corse sono selezionate. Clicca su uno dei grafici per applicarne dei filtri."
+msgid "Dummy fleet"
 msgstr ""
 
 #: Reports/view/reports/index/live.phtml:20
@@ -3845,6 +4843,96 @@ msgstr ""
 #: Reports/view/reports/index/tripscity.phtml:150
 msgid "Distretti"
 msgstr ""
+
+#~ msgid "Riepilogo settimanale"
+#~ msgstr "每星期摘要"
+
+#, php-format
+#~ msgid "Rfid: %s - Codice: %s"
+#~ msgstr "射频名: %s - 代码: %s"
+
+#~ msgid "Interna"
+#~ msgstr "内"
+
+#~ msgid "Esterna"
+#~ msgstr "外"
+
+#~ msgid ""
+#~ "Si è verificato un errore durante il salvataggio della configurazione"
+#~ msgstr "保存配置之际，发生了错误"
+
+#~ msgid "Non Completata"
+#~ msgstr "不完成"
+
+#~ msgid "Codice promo non valido."
+#~ msgstr "推广的代码是无效的"
+
+#~ msgid "Codice promo già associato a questo account."
+#~ msgstr "推广的代码相符已经这个账户"
+
+#~ msgid "SHARENGO - NOTIFICA DI DISABILITAZIONE"
+#~ msgstr "SHARENGO-禁用的通知"
+
+#~ msgid "SHARENGO - RIABILITAZIONE UTENTE"
+#~ msgstr "SHARENGO-重启用的用户"
+
+#~ msgid "PRENOTAZIONE DI SISTEMA"
+#~ msgstr "系统的预订"
+
+#~ msgid "Stato di nascita"
+#~ msgstr "出生国家"
+
+#~ msgid "Comune di nascita"
+#~ msgstr "出生地区"
+
+#~ msgid "Rilasciato da (autorità)"
+#~ msgstr "封被 (权力)"
+
+#~ msgid "Rilasciato il"
+#~ msgstr "封的时间"
+
+#~ msgid "Rilasciata da (nazione)"
+#~ msgstr "封被 (国家)"
+
+#~ msgid "Rilasciata il"
+#~ msgstr "封的时间"
+
+#~ msgid "Soglia Tariffaria 60 min"
+#~ msgstr "关税限制60分钟"
+
+#~ msgid "Soglia Tariffaria 240 min"
+#~ msgstr "关税限制240分钟"
+
+#, fuzzy
+#~ msgid "Eventi corsa"
+#~ msgstr "路线材料"
+
+#~ msgid "i campi \"Inizio corsa\" e \"Fine corsa\" devono essere compilati"
+#~ msgstr "需要编\"行程的开始\"的方面和\"行程的结束\""
+
+#~ msgid "Pagamento annullato o rifutato"
+#~ msgstr "把付款撤销了或拒绝了"
+
+#~ msgid "La procedura di pagamento con Cartasi ha dato esito "
+#~ msgstr "CartaSI的付款办法结束了得成功"
+
+#~ msgid "Attivazione completata"
+#~ msgstr "完成的激活"
+
+#~ msgid "Ti confermiamo la ricezione del pagamento"
+#~ msgstr "我们确认收到付款"
+
+#~ msgid "Si è verificato un problema"
+#~ msgstr "有一个问题"
+
+#~ msgid "Il pagamento non è andato a buon fine."
+#~ msgstr "付款失败结束"
+
+#~ msgid "Il messaggio di errore che abbiamo ricevuto è: \""
+#~ msgstr "我们收到的错误消息:\""
+
+#~ msgid "Contattare l'assistenza per maggiori informazioni"
+#~ msgstr "联系支持为有详细信息"
 
 #~ msgid "Dati csv"
 #~ msgstr "CSV数据"
