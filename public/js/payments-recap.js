@@ -4,15 +4,29 @@ $(document).ready(function() {
     highlightLastRows();
 });
 
+$("#tab_2").on('click', function(event) {
+    var selectedFleet = $('#fleet-selector1').find(":selected").val();
+    reloadPageWithYear(selectedFleet, 0, 2);
+    event.preventDefault();
+    event.stopPropagation();
+});
+
+$("#tab_1").on('click', function(event) {
+    var selectedFleet = $('#fleet-selector2').find(":selected").val();
+    reloadPage(selectedFleet, 1)
+    event.preventDefault();
+    event.stopPropagation();
+});
+
 $("#month-selector").change(function()
 {
     var selectedMonth = $(this).find(":selected").val();
-    var selectedFleet = $('#fleet-selector').find(":selected").val();
+    var selectedFleet = $('#fleet-selector1').find(":selected").val();
     var selectedYear = $('#year-selector').find(":selected").val();
     reloadPageWithMonthYear(selectedMonth, selectedYear, selectedFleet, 1);
 });
 
-$("#fleet-selector").change(function()
+$("#fleet-selector1").change(function()
 {
     var selectedFleet = $(this).find(":selected").val();
     var selectedMonth = $('#month-selector').find(":selected").val();
@@ -42,6 +56,12 @@ function reloadPageWithMonth(month, fleet, tab)
 {
     window.location.replace(reloadUrl + "?date=" + month + "&fleet="+ fleet + "&tab=" + tab);
 }
+
+function reloadPageWithYear(fleet, year, tab)
+{
+    window.location.replace(reloadUrl + "?fleet="+ fleet + "&year=" + year + "&tab=" + tab);
+}
+
 // Reload the page after selector value has changed displaying new month data
 function reloadPageWithMonthYear(month, year, fleet, tab)
 {
@@ -52,6 +72,10 @@ function reloadPageWithMonthYear(month, year, fleet, tab)
     }
 }
 
+function reloadPage(fleet, tab)
+{
+    window.location.replace(reloadUrl + "?fleet="+ fleet + "&tab=" + tab);
+}
 
 // Change the selected value in the selector to match the current month displayed
 function selectMonth(month)
