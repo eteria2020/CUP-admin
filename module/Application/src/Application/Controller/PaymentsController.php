@@ -470,14 +470,21 @@ class PaymentsController extends AbstractActionController {
     }
 
     public function recapAction() {
+        
+        $days = array();
         $months = array();
-        $date = date("Y-m-d H:i:s");
+        $months2 = array();
         $fleets = array();
         $dailyIncome = array();
         $monthlyIncome = array();
-        $start = false;
         $years = array();
-        $selectYear = 0;
+        $selectYear = '0';
+        $selectYear2 = '0';
+        $selectMonth = '0';
+        $selectMonth2 = '0';
+        $selectDay = '0';
+        $selectedFleet = '0';
+        $selectedFleet2 = '0';
         
         $authorize = $this->getServiceLocator()->get('BjyAuthorize\Provider\Identity\ProviderInterface');
         $roles = $authorize->getIdentityRoles();
@@ -490,63 +497,117 @@ class PaymentsController extends AbstractActionController {
             }
             
             if ($tab == 1) {
-                // Get months
-                $months = $this->recapService->getAvailableMonths(true);
+                
+                $fleets = $this->fleetService->getFleetsSelectorArrayNoDummy($fleets);
             
-                // Get the selected month or default to last available
-                $date = $months[0];
-                if (!is_null($this->params()->fromQuery('date'))) {
-                    $date = $this->params()->fromQuery('date');
-                    if (in_array($this->params()->fromQuery('date'), $months)) {
-                        $date = $this->params()->fromQuery('date');
+                if (count($fleets) > 0) {
+                    if (!is_null($this->params()->fromQuery('fleet'))) {
+                        $f = $this->params()->fromQuery('fleet');
+                        if (array_key_exists($f, $fleets)) {
+                            $selectedFleet = $f;
+                        }
+                    }
+                }
+                
+                if ($selectedFleet != '0') {
+                    // Get Years
+                    $years = $this->recapService->getAvailableYears(true);
+
+                    if (!is_null($this->params()->fromQuery('year'))) {
+                        if (in_array($this->params()->fromQuery('year'), $years)) {
+                            $selectYear = $this->params()->fromQuery('year');
+                        }
+                    }
+
+                    if ($selectYear != '0') {
+                        $months = $this->recapService->getAvailableMonths(true, $selectYear);
+                        if (count($months) > '0') {
+                            // Get the selected month or default to last available
+                            if (!is_null($this->params()->fromQuery('month'))) {
+                                if (in_array($this->params()->fromQuery('month'), $months)) {
+                                    $selectMonth = $this->params()->fromQuery('month');
+                                }
+                            }
+                        }
+                        
+                        if ($selectMonth != '0') {
+                            $days = $this->recapService->getAvailableDays(true, $selectYear, $selectMonth);
+                            if (count($days) > '0') {
+                                // Get the selected month or default to last available
+                                if (!is_null($this->params()->fromQuery('day'))) {
+                                    if (in_array($this->params()->fromQuery('day'), $days)) {
+                                        $selectDay = $this->params()->fromQuery('day');
+                                    }
+                                }
+                            }                          
+                        }
+                        
                     }
                 }
                 
             } else {
-                // Get Years
-                $years = $this->recapService->getAvailableYears(true);
-                
-                $selectYear = '0';
-                if (!is_null($this->params()->fromQuery('year'))) {
-                    if (in_array($this->params()->fromQuery('year'), $years)) {
-                        $selectYear = $this->params()->fromQuery('year');
+                $fleets = $this->fleetService->getFleetsSelectorArrayNoDummy($fleets);
+            
+                if (count($fleets) > 0) {
+                    if (!is_null($this->params()->fromQuery('fleet2'))) {
+                        $f = $this->params()->fromQuery('fleet2');
+                        if (array_key_exists($f, $fleets)) {
+                            $selectedFleet2 = $f;
+                        }
                     }
                 }
                 
+                if ($selectedFleet2 != '0') {
+                    // Get Years
+                    $years = $this->recapService->getAvailableYears(true);
+
+                    if (!is_null($this->params()->fromQuery('year2'))) {
+                        if (in_array($this->params()->fromQuery('year2'), $years)) {
+                            $selectYear2 = $this->params()->fromQuery('year2');
+                        }
+                    }
+
+                    if ($selectYear2 != '0') {
+                        $months2 = $this->recapService->getAvailableMonths(true, $selectYear2);
+                        if (count($months2) > '0') {
+                            // Get the selected month or default to last available
+                            if (!is_null($this->params()->fromQuery('month2'))) {
+                                if (in_array($this->params()->fromQuery('month2'), $months2)) {
+                                    $selectMonth2 = $this->params()->fromQuery('month2');
+                                }
+                            }
+                        }
+                    }
+                }
             }
 
-            // Get all fleets
-            
-            $fleets = $this->fleetService->getFleetsSelectorArrayNoDummy($fleets);
-            
-            if (count($fleets) > 0) {
-                $fleets_arr = array_keys($fleets);
-                $id_fleet = $fleets_arr[0];
-                
-                if (!is_null($this->params()->fromQuery('fleet'))) {
-                    $f = $this->params()->fromQuery('fleet');
-                    if (array_key_exists($f, $fleets)) {
-                        $id_fleet = $f;
-                    }
-                }
-                
-                if ($tab == 1) {
+            if ($tab == 1) {
+                if ($selectedFleet != '0' && $selectYear != '0' && $selectMonth != '0' && $selectDay != '0') {
                     // Get income for each day of the selected month
-                    $dailyIncome = $this->recapService->getDailyIncomeForMonthFleet($date, $id_fleet);
-                } else {
+                    $dailyIncome = $this->recapService->getDailyIncomeForYearMonthDayFleet($selectDay, $selectMonth, $selectYear, $selectedFleet);
+                }
+                
+            } else {
+                if ($selectedFleet2 != '0' && $selectYear2 != '0' && $selectMonth2 != '0') {
                     // Get income for last 12 months
-                    $monthlyIncome =$this->recapService->getMonthlyIncomeFleetYear($id_fleet, $selectYear);
+                    $monthlyIncome =$this->recapService->getMonthlyIncomeFleetYearMonth($selectedFleet2, $selectYear2, $selectMonth2);
                 }
             }
+            
         }
-
+        
         return new ViewModel([
+            'days' => $days,
             'months' => $months,
+            'months2' => $months2,
             'years' => $years,
-            'selectedMonth' => $date,
-            'selectedFleet' => $id_fleet,
+            'selectedFleet' => $selectedFleet,
             'selectYear' => $selectYear,
-            'isLastMonth' => (count($months) && $date == $months[0]),
+            'selectYear2' => $selectYear2,
+            'selectedFleet2' => $selectedFleet2,
+            'selectMonth' => $selectMonth,
+            'selectMonth2' => $selectMonth2,
+            'selectDay' => $selectDay,
             'fleets' => $fleets,
             'daily' => $dailyIncome,
             'monthly' => $monthlyIncome,
