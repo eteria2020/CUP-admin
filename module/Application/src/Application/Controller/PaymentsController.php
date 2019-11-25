@@ -471,17 +471,12 @@ class PaymentsController extends AbstractActionController {
 
     public function recapAction() {
         
-        $days = array();
-        $months = array();
-        $months2 = array();
         $fleets = array();
         $dailyIncome = array();
         $monthlyIncome = array();
-        $years = array();
         $selectYear = '0';
         $selectYear2 = '0';
         $selectMonth = '0';
-        $selectMonth2 = '0';
         $selectDay = '0';
         $selectedFleet = '0';
         $selectedFleet2 = '0';
@@ -489,6 +484,16 @@ class PaymentsController extends AbstractActionController {
         $authorize = $this->getServiceLocator()->get('BjyAuthorize\Provider\Identity\ProviderInterface');
         $roles = $authorize->getIdentityRoles();
 
+        $first = 2015;
+        $now = date('Y');
+                
+        $years = array();
+        while($first < (int)$now) {
+            $years[] = $first;
+            $first++;
+        }
+        
+        
         if ($roles[0] === 'superadmin') {
             
             $tab = 1;
@@ -501,8 +506,9 @@ class PaymentsController extends AbstractActionController {
                 $fleets = $this->fleetService->getFleetsSelectorArrayNoDummy($fleets);
             
                 if (count($fleets) > 0) {
-                    if (!is_null($this->params()->fromQuery('fleet'))) {
-                        $f = $this->params()->fromQuery('fleet');
+                    $selectedFleet = array_keys($fleets)[0];
+                    if (!is_null($this->params()->fromPost('fleet'))) {
+                        $f = $this->params()->fromPost('fleet');
                         if (array_key_exists($f, $fleets)) {
                             $selectedFleet = $f;
                         }
@@ -511,37 +517,10 @@ class PaymentsController extends AbstractActionController {
                 
                 if ($selectedFleet != '0') {
                     // Get Years
-                    $years = $this->recapService->getAvailableYears(true);
-
-                    if (!is_null($this->params()->fromQuery('year'))) {
-                        if (in_array($this->params()->fromQuery('year'), $years)) {
-                            $selectYear = $this->params()->fromQuery('year');
-                        }
-                    }
-
-                    if ($selectYear != '0') {
-                        $months = $this->recapService->getAvailableMonths(true, $selectYear);
-                        if (count($months) > '0') {
-                            // Get the selected month or default to last available
-                            if (!is_null($this->params()->fromQuery('month'))) {
-                                if (in_array($this->params()->fromQuery('month'), $months)) {
-                                    $selectMonth = $this->params()->fromQuery('month');
-                                }
-                            }
-                        }
-                        
-                        if ($selectMonth != '0') {
-                            $days = $this->recapService->getAvailableDays(true, $selectYear, $selectMonth);
-                            if (count($days) > '0') {
-                                // Get the selected month or default to last available
-                                if (!is_null($this->params()->fromQuery('day'))) {
-                                    if (in_array($this->params()->fromQuery('day'), $days)) {
-                                        $selectDay = $this->params()->fromQuery('day');
-                                    }
-                                }
-                            }                          
-                        }
-                        
+                    
+                    $selectDay = date('Y-m-d',strtotime("-1 days"));
+                    if (!is_null($this->params()->fromPost('day'))) {
+                        $selectDay = $this->params()->fromPost('day');
                     }
                 }
                 
@@ -549,8 +528,9 @@ class PaymentsController extends AbstractActionController {
                 $fleets = $this->fleetService->getFleetsSelectorArrayNoDummy($fleets);
             
                 if (count($fleets) > 0) {
-                    if (!is_null($this->params()->fromQuery('fleet2'))) {
-                        $f = $this->params()->fromQuery('fleet2');
+                    $selectedFleet2 = array_keys($fleets)[0];
+                    if (!is_null($this->params()->fromPost('fleet2'))) {
+                        $f = $this->params()->fromPost('fleet2');
                         if (array_key_exists($f, $fleets)) {
                             $selectedFleet2 = $f;
                         }
@@ -559,54 +539,39 @@ class PaymentsController extends AbstractActionController {
                 
                 if ($selectedFleet2 != '0') {
                     // Get Years
-                    $years = $this->recapService->getAvailableYears(true);
-
-                    if (!is_null($this->params()->fromQuery('year2'))) {
-                        if (in_array($this->params()->fromQuery('year2'), $years)) {
-                            $selectYear2 = $this->params()->fromQuery('year2');
-                        }
-                    }
-
-                    if ($selectYear2 != '0') {
-                        $months2 = $this->recapService->getAvailableMonths(true, $selectYear2);
-                        if (count($months2) > '0') {
-                            // Get the selected month or default to last available
-                            if (!is_null($this->params()->fromQuery('month2'))) {
-                                if (in_array($this->params()->fromQuery('month2'), $months2)) {
-                                    $selectMonth2 = $this->params()->fromQuery('month2');
-                                }
-                            }
-                        }
+                    $selectMonth = date('Y-m');
+                    if (!is_null($this->params()->fromPost('month'))) {
+                        $selectMonth = $this->params()->fromPost('month');
                     }
                 }
+                
             }
 
             if ($tab == 1) {
-                if ($selectedFleet != '0' && $selectYear != '0' && $selectMonth != '0' && $selectDay != '0') {
+                if ($selectedFleet != '0' && $selectDay != '0') {
+                                        
                     // Get income for each day of the selected month
-                    $dailyIncome = $this->recapService->getDailyIncomeForYearMonthDayFleet($selectDay, $selectMonth, $selectYear, $selectedFleet);
+                    $dailyIncome = $this->recapService->getDailyIncomeForYearMonthDayFleet($selectDay, $selectedFleet);
                 }
                 
             } else {
-                if ($selectedFleet2 != '0' && $selectYear2 != '0' && $selectMonth2 != '0') {
+                if ($selectedFleet2 != '0' && $selectMonth != '0') {
                     // Get income for last 12 months
-                    $monthlyIncome =$this->recapService->getMonthlyIncomeFleetYearMonth($selectedFleet2, $selectYear2, $selectMonth2);
+                    $monthlyIncome =$this->recapService->getMonthlyIncomeFleetYearMonth($selectedFleet2, $selectMonth);
                 }
             }
             
         }
         
         return new ViewModel([
-            'days' => $days,
-            'months' => $months,
-            'months2' => $months2,
             'years' => $years,
+            'max_day' => date('Y-m-d'),
+            'max_month' => date('Y-m'),
             'selectedFleet' => $selectedFleet,
             'selectYear' => $selectYear,
             'selectYear2' => $selectYear2,
             'selectedFleet2' => $selectedFleet2,
             'selectMonth' => $selectMonth,
-            'selectMonth2' => $selectMonth2,
             'selectDay' => $selectDay,
             'fleets' => $fleets,
             'daily' => $dailyIncome,

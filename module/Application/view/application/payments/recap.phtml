@@ -30,30 +30,17 @@ $daily = $this->daily;
 
                             <!-- BEGIN daily tab -->
                             <div class="tab-pane <?= ($tab == 1)?'active':''; ?>" id="tab_1_1">
-                                <select id="fleet-selector1">
-                                    <option value="0" <?= ('0' == $this->selectFleet)?'selected':''; ?> ><?= $this->translate("Seleziona Flotta"); ?></option>
-                                    <?php foreach($this->fleets as $id => $fleet): ?>
-                                        <option value="<?= $id ?>" <?= ($id == $this->selectedFleet)?'selected':''; ?> ><?= $fleet ?></option>
-                                    <?php endforeach; ?>
-                                </select>
-                                <select id="year-selector1">
-                                    <option value="0" <?= ('0' == $this->selectYear)?'selected':''; ?> ><?= $this->translate("Seleziona Anno"); ?></option>
-                                    <?php foreach($this->years as $year): ?>
-                                        <option <?= ($year == $this->selectYear)?'selected':''; ?> value="<?= $year ?>"><?= $year ?></option>
-                                    <?php endforeach; ?>
-                                </select>
-                                <select id="month-selector1">
-                                    <option value="0" <?= ('0' == $this->selectMonth)?'selected':''; ?> ><?= $this->translate("Seleziona Mese"); ?></option>
-                                    <?php foreach($this->months as $month): ?>
-                                        <option value="<?= $month ?>" <?= ($month == $this->selectMonth)?'selected':''; ?>><?= $month ?></option>
-                                    <?php endforeach; ?>
-                                </select>
-                                 <select id="day-selector1">
-                                    <option value="0" <?= ('0' == $this->selectDay)?'selected':''; ?> ><?= $this->translate("Seleziona Giorno"); ?></option>
-                                    <?php foreach($this->days as $day): ?>
-                                        <option value="<?= $day ?>" <?= ($day == $this->selectDay)?'selected':''; ?>><?= $day ?></option>
-                                    <?php endforeach; ?>
-                                </select>
+                                <form action="<?= $this->url('payments/recap'); ?>?tab=1" method="POST">
+                                    <select id="fleet-selector1" name="fleet">
+                                        <?php foreach($this->fleets as $id => $fleet): ?>
+                                            <option value="<?= $id ?>" <?= ($id == $this->selectedFleet)?'selected':''; ?> ><?= $fleet ?></option>
+                                        <?php endforeach; ?>
+                                    </select>
+
+                                    <input id="day-selector1" type="date" name="day" value="<?= $this->selectDay; ?>" max="<?= $this->max_day; ?>">
+                                    
+                                    <input type="submit" value="<?= $this->translate("Cerca"); ?>">
+                                </form>
                                 <table class="table table-striped table-bordered table-hover sng-margin-top">
                                     <thead>
                                         <tr>
@@ -70,12 +57,12 @@ $daily = $this->daily;
                                             <tr>
                                                 <td><?= $day ?></td>
                                                 
-                                                <td class="sng-dt-right"><?= sprintf('%.2f €', $amount['tp_amount'] / 100) ?></td>
-                                                <td class="sng-dt-right"><?= sprintf('%.2f €', $amount['sp_amount'] / 100) ?></td>
-                                                <td class="sng-dt-right"><?= sprintf('%.2f €', $amount['ep_amount'] / 100) ?></td>
-                                                <td class="sng-dt-right"><?= sprintf('%.2f €', $amount['bpp_amount'] / 100) ?></td>
                                                 
-                                                <td class="sng-dt-right"><?= sprintf('%.2f €', $amount['amount'] / 100) ?></td>
+                                                <td class="sng-dt-right"><?= number_format($amount['tp_amount'] / 100, 0, '.', ','); ?></td>
+                                                <td class="sng-dt-right"><?= number_format($amount['sp_amount'] / 100, 0, '.', ','); ?></td>
+                                                <td class="sng-dt-right"><?= number_format($amount['ep_amount'] / 100, 0, '.', ','); ?></td>
+                                                <td class="sng-dt-right"><?= number_format($amount['bpp_amount'] / 100, 0, '.', ','); ?></td>
+                                                <td class="sng-dt-right"><?= number_format($amount['amount'] / 100, 0, '.', ','); ?></td>
                                                 
                                             </tr>
                                         <?php endforeach; ?>
@@ -86,24 +73,19 @@ $daily = $this->daily;
 
                             <!-- BEGIN monthly tab -->
                             <div class="tab-pane <?= ($tab == 2)?'active':''; ?>" id="tab_1_2">
-                                <select id="fleet-selector2">
-                                    <option value="0" <?= (0 == $this->selectFleet2)?'selected':''; ?> ><?= $this->translate("Seleziona Flotta"); ?></option>
-                                    <?php foreach($this->fleets as $id => $fleet): ?>
-                                        <option value="<?= $id ?>" <?= ($id == $this->selectedFleet2)?'selected':''; ?> ><?= $fleet ?></option>
-                                    <?php endforeach; ?>
-                                </select>
-                                <select id="year-selector2">
-                                    <option value="0" <?= (0 == $this->selectYear2)?'selected':''; ?> ><?= $this->translate("Seleziona Anno"); ?></option>
-                                    <?php foreach($this->years as $year): ?>
-                                        <option <?= ($year == $this->selectYear2)?'selected':''; ?> value="<?= $year ?>"><?= $year ?></option>
-                                    <?php endforeach; ?>
-                                </select>
-                                <select id="month-selector2">
-                                    <option value="0" <?= (0 == $this->selectMonth2)?'selected':''; ?> ><?= $this->translate("Seleziona Mese"); ?></option>
-                                    <?php foreach($this->months2 as $month): ?>
-                                        <option value="<?= $month ?>" <?= ($month == $this->selectMonth2)?'selected':''; ?>><?= $month ?></option>
-                                    <?php endforeach; ?>
-                                </select>
+                                
+                                <form action="<?= $this->url('payments/recap'); ?>?tab=2" method="POST">
+                                    <select id="fleet-selector2" name="fleet2">
+                                        <?php foreach($this->fleets as $id => $fleet): ?>
+                                            <option value="<?= $id ?>" <?= ($id == $this->selectedFleet2)?'selected':''; ?> ><?= $fleet ?></option>
+                                        <?php endforeach; ?>
+                                    </select>
+                                    
+                                    <input id="month-selector" type="month" name="month" value="<?= $this->selectMonth; ?>" max="<?= $this->max_month; ?>">
+                                    
+                                    <input type="submit" value="<?= $this->translate("Cerca"); ?>">
+                                </form>
+                                
                                 <table class="table table-striped table-bordered table-hover sng-margin-top">
                                     <thead>
                                         <tr>
@@ -124,11 +106,12 @@ $daily = $this->daily;
                                         ?>
                                             <tr>
                                                 <td><?= $month ?></td>
-                                                <td class="sng-dt-right"><?= sprintf('%.2f €', $amount['tp_amount'] / 100) ?></td>
-                                                <td class="sng-dt-right"><?= sprintf('%.2f €', $amount['sp_amount'] / 100) ?></td>
-                                                <td class="sng-dt-right"><?= sprintf('%.2f €', $amount['ep_amount'] / 100) ?></td>
-                                                <td class="sng-dt-right"><?= sprintf('%.2f €', $amount['bpp_amount'] / 100) ?></td>
-                                                <td class="sng-dt-right"><?= sprintf('%.2f €', $amount['amount'] / 100) ?></td>
+                                                
+                                                <td class="sng-dt-right"><?= number_format($amount['tp_amount'] / 100, 0, '.', ','); ?></td>
+                                                <td class="sng-dt-right"><?= number_format($amount['sp_amount'] / 100, 0, '.', ','); ?></td>
+                                                <td class="sng-dt-right"><?= number_format($amount['ep_amount'] / 100, 0, '.', ','); ?></td>
+                                                <td class="sng-dt-right"><?= number_format($amount['bpp_amount'] / 100, 0, '.', ','); ?></td>
+                                                <td class="sng-dt-right"><?= number_format($amount['amount'] / 100, 0, '.', ','); ?></td>
                                             </tr>
                                         <?php endforeach; ?>
                                     </tbody>
