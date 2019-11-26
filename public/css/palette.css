@@ -18,6 +18,12 @@
 	width: 340px !important;
 }
 
+@media (max-width: 440px) {
+ .login-button {
+	width: 220px !important;
+    }   
+}
+
 .login-button:hover,
 .login-button:focus {
 	background-color: #33933c !important;

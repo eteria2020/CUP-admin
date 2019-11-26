@@ -21,6 +21,7 @@
         ->prependStylesheet($this->basePath('css/bootstrap.min.css'))
         ->prependStylesheet($this->basePath('plugins/simple-line-icons/simple-line-icons.min.css'))
         ->prependStylesheet($this->basePath('css/font-awesome.min.css'))
+        ->prependStylesheet($this->basePath('/css/country'.$this->ConfigHelper()->getServerInstance().'.css'))
         ->prependStylesheet('http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700&subset=all') ?>
 
     <!-- Scripts -->
@@ -42,7 +43,11 @@
         <img src="/img/logo_white.png" alt=""/>
     </a>
 </div>
-
+<div class="login-flag-container">
+    <div class="login-flag">
+        <br/>
+    </div>
+</div>
 <div class="content">
     <?php echo $this->content; ?>
 </div>
