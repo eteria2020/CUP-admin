@@ -474,10 +474,8 @@ class PaymentsController extends AbstractActionController {
         $fleets = array();
         $dailyIncome = array();
         $monthlyIncome = array();
-        $selectYear = '0';
-        $selectYear2 = '0';
-        $selectMonth = '0';
-        $selectDay = '0';
+        $selectMonth = '';
+        $selectDay = '';
         $selectedFleet = '0';
         $selectedFleet2 = '0';
         
@@ -568,8 +566,6 @@ class PaymentsController extends AbstractActionController {
             'max_day' => date('Y-m-d'),
             'max_month' => date('Y-m'),
             'selectedFleet' => $selectedFleet,
-            'selectYear' => $selectYear,
-            'selectYear2' => $selectYear2,
             'selectedFleet2' => $selectedFleet2,
             'selectMonth' => $selectMonth,
             'selectDay' => $selectDay,
