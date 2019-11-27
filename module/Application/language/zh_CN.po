@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Sharengo\n"
-"POT-Creation-Date: 2019-11-22 12:53+0100\n"
-"PO-Revision-Date: 2019-11-22 12:54+0100\n"
+"POT-Creation-Date: 2019-11-27 11:02+0100\n"
+"PO-Revision-Date: 2019-11-27 11:04+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: zh_CN\n"
@@ -314,7 +314,7 @@ msgstr "把汽车添加得成功！"
 #: Application/src/Application/Controller/CustomersController.php:584
 #: Application/src/Application/Controller/CustomersController.php:620
 #: Application/src/Application/Controller/CustomersController.php:657
-#: Application/src/Application/Controller/PaymentsController.php:635
+#: Application/src/Application/Controller/PaymentsController.php:596
 #: Application/src/Application/Controller/UsersController.php:96
 #: Application/src/Application/Controller/UsersController.php:147
 msgid ""
@@ -640,11 +640,11 @@ msgstr "在付款失败结束。客户已被Cartasi通知"
 msgid "C'è stato un errore durante la procedura di pagamento: "
 msgstr "付款程序之际，"
 
-#: Application/src/Application/Controller/PaymentsController.php:630
+#: Application/src/Application/Controller/PaymentsController.php:591
 msgid "Tariffa creata con successo!"
 msgstr "把关税创造得成功"
 
-#: Application/src/Application/Controller/PaymentsController.php:632
+#: Application/src/Application/Controller/PaymentsController.php:593
 msgid "Tariffa invariata"
 msgstr "不变化的关税"
 
@@ -1132,6 +1132,8 @@ msgstr "结束的日期"
 #: Application/view/application/notifications/index.phtml:57
 #: Application/view/application/payments/failed-extra.phtml:42
 #: Application/view/application/payments/failed-payments.phtml:38
+#: Application/view/application/payments/recap.phtml:42
+#: Application/view/application/payments/recap.phtml:86
 #: Application/view/application/pois/index.phtml:42
 #: Application/view/application/reservations/index.phtml:47
 #: Application/view/application/trips-not-payed/list.phtml:38
@@ -2038,8 +2040,8 @@ msgstr ""
 #: Application/view/application/payments-csv/details.phtml:77
 #: Application/view/application/payments-csv/details.phtml:139
 #: Application/view/application/payments-csv/details.phtml:346
-#: Application/view/application/payments/recap.phtml:60
-#: Application/view/application/payments/recap.phtml:110
+#: Application/view/application/payments/recap.phtml:47
+#: Application/view/application/payments/recap.phtml:92
 #: Application/view/application/payments/retry-extra.phtml:131
 #: Application/view/application/payments/retry-payments.phtml:83
 #: Application/view/application/reservations/index.phtml:35
@@ -2507,8 +2509,8 @@ msgstr "添加红利"
 #: Application/view/application/customers/invoices-tab.phtml:80
 #: Application/view/application/customers/points-tab.phtml:24
 #: Application/view/application/invoices/index.phtml:86
-#: Application/view/application/payments/recap.phtml:65
-#: Application/view/application/payments/recap.phtml:115
+#: Application/view/application/payments/recap.phtml:52
+#: Application/view/application/payments/recap.phtml:97
 msgid "Totale"
 msgstr "总体"
 
@@ -2835,6 +2837,7 @@ msgstr "(不前开始的日期)"
 #: Application/view/application/edit-trip/edit-tab.phtml:75
 #: Application/view/application/edit-trip/edit-tab.phtml:132
 #: Application/view/application/fines/details.phtml:247
+#: Application/view/application/payments/retry-extra.phtml:58
 #: Application/view/application/trips/cost-tab.phtml:264
 #: Application/view/application/trips/index.phtml:104
 msgid "Pagabile"
@@ -3471,6 +3474,14 @@ msgstr "用户名的客户"
 msgid "Aggiungi addebito"
 msgstr "添加指控"
 
+#: Application/view/application/payments/extra.phtml:57
+msgid "Pagamento rateizzato"
+msgstr "分期付款"
+
+#: Application/view/application/payments/extra.phtml:60
+msgid "Numero di rate"
+msgstr "分期付款数"
+
 #: Application/view/application/payments/extra.phtml:76
 msgid "Effettua pagamento"
 msgstr "支付"
@@ -3506,10 +3517,8 @@ msgid "Risultato"
 msgstr "成效"
 
 #: Application/view/application/payments/failed-extra.phtml:15
-#, fuzzy
-#| msgid "ADDEBITI EXTRA/PENALI"
 msgid "ELENCO EXTRA/PENALI"
-msgstr "指控罚款"
+msgstr "额外清单/罚则"
 
 #: Application/view/application/payments/failed-extra.phtml:32
 #: Application/view/application/payments/failed-extra.phtml:66
@@ -3536,10 +3545,8 @@ msgid "Pagato NO"
 msgstr "支付"
 
 #: Application/view/application/payments/failed-extra.phtml:58
-#, fuzzy
-#| msgid "Elenco eventi"
 msgid "Elenco extra/penali"
-msgstr "事件列表"
+msgstr "额外/处罚清单"
 
 #: Application/view/application/payments/failed-extra.phtml:68
 #, fuzzy
@@ -3579,46 +3586,27 @@ msgstr "每日摘要"
 msgid "Riepilogo mensile"
 msgstr "每月摘要"
 
-#: Application/view/application/payments/recap.phtml:34
-#: Application/view/application/payments/recap.phtml:90
-msgid "Seleziona Flotta"
-msgstr "选择车队"
-
-#: Application/view/application/payments/recap.phtml:40
-#: Application/view/application/payments/recap.phtml:96
-msgid "Seleziona Anno"
-msgstr "选择年份"
-
-#: Application/view/application/payments/recap.phtml:46
-#: Application/view/application/payments/recap.phtml:102
-msgid "Seleziona Mese"
-msgstr "选择月份"
-
-#: Application/view/application/payments/recap.phtml:52
-msgid "Seleziona Giorno"
-msgstr "选择日"
-
-#: Application/view/application/payments/recap.phtml:61
-#: Application/view/application/payments/recap.phtml:111
+#: Application/view/application/payments/recap.phtml:48
+#: Application/view/application/payments/recap.phtml:93
 msgid "Viaggi"
 msgstr "旅游"
 
-#: Application/view/application/payments/recap.phtml:62
-#: Application/view/application/payments/recap.phtml:112
+#: Application/view/application/payments/recap.phtml:49
+#: Application/view/application/payments/recap.phtml:94
 msgid "Iscrizioni"
 msgstr "铭文"
 
-#: Application/view/application/payments/recap.phtml:63
-#: Application/view/application/payments/recap.phtml:113
+#: Application/view/application/payments/recap.phtml:50
+#: Application/view/application/payments/recap.phtml:95
 msgid "Multe e penali"
 msgstr "罚款和罚款"
 
-#: Application/view/application/payments/recap.phtml:64
-#: Application/view/application/payments/recap.phtml:114
+#: Application/view/application/payments/recap.phtml:51
+#: Application/view/application/payments/recap.phtml:96
 msgid "Pacchetti"
 msgstr "红利封包"
 
-#: Application/view/application/payments/recap.phtml:144
+#: Application/view/application/payments/recap.phtml:127
 msgid "Attenzione! Area riservata agli utenti super-admin."
 msgstr ""
 
@@ -3634,6 +3622,18 @@ msgstr "重试付款"
 msgid "Torna al padre"
 msgstr "返回列表"
 
+#: Application/view/application/payments/retry-extra.phtml:54
+#, fuzzy
+#| msgid "Effettua nuovo tentativo di pagamento"
+msgid "Non è possibile effettutare un nuovo tentivo di pagamento"
+msgstr "做一个新的付款尝试"
+
+#: Application/view/application/payments/retry-extra.phtml:65
+#, fuzzy
+#| msgid "Pagamento completato con successo"
+msgid "Pagamento avvenuto con successo"
+msgstr "把付款得成功"
+
 #: Application/view/application/payments/retry-extra.phtml:73
 #: Application/view/application/payments/retry-payments.phtml:54
 msgid "Il pagamento non è andato a buon fine"
@@ -3644,6 +3644,12 @@ msgstr "付款失败结束"
 #| msgid "Data del tentativo"
 msgid "Data primo tentativo"
 msgstr "尝试的日期"
+
+#: Application/view/application/payments/retry-extra.phtml:141
+#, fuzzy
+#| msgid "Pagamento Non Ancora Effettuato"
+msgid "Non ancora effettuato"
+msgstr "未支付"
 
 #: Application/view/application/payments/retry-extra.phtml:170
 msgid "Reason"
@@ -3663,6 +3669,10 @@ msgstr "做的尝试的列表"
 #| msgid "Elenco completo corse con pagamento fallito"
 msgid "Elenco completo extra con pagamento fallito"
 msgstr "行程跟失败付款的完全列表"
+
+#: Application/view/application/payments/retry-extra.phtml:248
+msgid "Non ci sono tentativi di pagamento. Extra/Penale resa non pagabile."
+msgstr ""
 
 #: Application/view/application/payments/retry-extra.phtml:256
 #, fuzzy
@@ -4858,6 +4868,18 @@ msgstr ""
 #: Reports/view/reports/index/tripscity.phtml:150
 msgid "Distretti"
 msgstr ""
+
+#~ msgid "Seleziona Flotta"
+#~ msgstr "选择车队"
+
+#~ msgid "Seleziona Anno"
+#~ msgstr "选择年份"
+
+#~ msgid "Seleziona Mese"
+#~ msgstr "选择月份"
+
+#~ msgid "Seleziona Giorno"
+#~ msgstr "选择日"
 
 #~ msgid "Ultimi 4 mesi"
 #~ msgstr "最近4个月"
