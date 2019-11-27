@@ -54,10 +54,10 @@ $this->headScript()->appendFile($this->basePath() .'/js/extra-payments.js?v=1.8'
 
         <div class="row sng-margin-top"  id="div-rates" style="display: none">
             <div class="col-lg-3 sng-margin-top">
-                <label>Pagamento rateizzato <input id="js-rates" type="checkbox"></label>
+                <label><?= $this->translate("Pagamento rateizzato"); ?> <input id="js-rates" type="checkbox"></label>
             </div>
             <div class="col-lg-2 sng-margin-top"  style="display: none"  id="div-n-rates">
-                <label>Numero di rate:<input type="text" id="n-rates"></label>
+                <label><?= $this->translate("Numero di rate"); ?>:<input type="text" id="n-rates"></label>
                 <!--<label>Numero di rate:
                     <select id="n-rates">
                         <option value="2">2</option>

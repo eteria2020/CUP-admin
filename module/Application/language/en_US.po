@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Sharengo\n"
-"POT-Creation-Date: 2019-11-22 12:49+0100\n"
-"PO-Revision-Date: 2019-11-22 12:52+0100\n"
+"POT-Creation-Date: 2019-11-27 10:30+0100\n"
+"PO-Revision-Date: 2019-11-27 11:01+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: en\n"
@@ -567,7 +567,7 @@ msgstr "Car added successfully!"
 #: module/Application/src/Application/Controller/CustomersController.php:584
 #: module/Application/src/Application/Controller/CustomersController.php:620
 #: module/Application/src/Application/Controller/CustomersController.php:657
-#: module/Application/src/Application/Controller/PaymentsController.php:635
+#: module/Application/src/Application/Controller/PaymentsController.php:596
 #: module/Application/src/Application/Controller/UsersController.php:96
 #: module/Application/src/Application/Controller/UsersController.php:147
 msgid ""
@@ -860,11 +860,11 @@ msgstr ""
 msgid "C'è stato un errore durante la procedura di pagamento: "
 msgstr "An error occurred while processing the payment: "
 
-#: module/Application/src/Application/Controller/PaymentsController.php:630
+#: module/Application/src/Application/Controller/PaymentsController.php:591
 msgid "Tariffa creata con successo!"
 msgstr "New rate created successfully!"
 
-#: module/Application/src/Application/Controller/PaymentsController.php:632
+#: module/Application/src/Application/Controller/PaymentsController.php:593
 msgid "Tariffa invariata"
 msgstr "Rate unchanged"
 
@@ -1385,6 +1385,8 @@ msgstr "End date"
 #: module/Application/view/application/notifications/index.phtml:57
 #: module/Application/view/application/payments/failed-extra.phtml:42
 #: module/Application/view/application/payments/failed-payments.phtml:38
+#: module/Application/view/application/payments/recap.phtml:42
+#: module/Application/view/application/payments/recap.phtml:86
 #: module/Application/view/application/pois/index.phtml:42
 #: module/Application/view/application/reservations/index.phtml:47
 #: module/Application/view/application/trips-not-payed/list.phtml:38
@@ -3185,8 +3187,8 @@ msgstr ""
 #: module/Application/view/application/payments-csv/details.phtml:77
 #: module/Application/view/application/payments-csv/details.phtml:139
 #: module/Application/view/application/payments-csv/details.phtml:346
-#: module/Application/view/application/payments/recap.phtml:60
-#: module/Application/view/application/payments/recap.phtml:110
+#: module/Application/view/application/payments/recap.phtml:47
+#: module/Application/view/application/payments/recap.phtml:92
 #: module/Application/view/application/payments/retry-extra.phtml:131
 #: module/Application/view/application/payments/retry-payments.phtml:83
 #: module/Application/view/application/reservations/index.phtml:35
@@ -3663,8 +3665,8 @@ msgstr "Add bonus"
 #: module/Application/view/application/customers/invoices-tab.phtml:80
 #: module/Application/view/application/customers/points-tab.phtml:24
 #: module/Application/view/application/invoices/index.phtml:86
-#: module/Application/view/application/payments/recap.phtml:65
-#: module/Application/view/application/payments/recap.phtml:115
+#: module/Application/view/application/payments/recap.phtml:52
+#: module/Application/view/application/payments/recap.phtml:97
 #: vendor/cup-web/admin-business-module/view/cup-admin-business-module/invoice/index.phtml:78
 msgid "Totale"
 msgstr "Total"
@@ -3974,6 +3976,7 @@ msgstr "(not preceding the start date)"
 #: module/Application/view/application/edit-trip/edit-tab.phtml:75
 #: module/Application/view/application/edit-trip/edit-tab.phtml:132
 #: module/Application/view/application/fines/details.phtml:247
+#: module/Application/view/application/payments/retry-extra.phtml:58
 #: module/Application/view/application/trips/cost-tab.phtml:264
 #: module/Application/view/application/trips/index.phtml:104
 #: vendor/cup-web/admin-business-module/view/cup-admin-business-module/business-trip/index.phtml:107
@@ -4598,13 +4601,19 @@ msgstr "Customer id"
 msgid "Aggiungi addebito"
 msgstr "Add charge"
 
+#: module/Application/view/application/payments/extra.phtml:57
+msgid "Pagamento rateizzato"
+msgstr "Payment by installments"
+
+#: module/Application/view/application/payments/extra.phtml:60
+msgid "Numero di rate"
+msgstr "Number of installments"
+
 #: module/Application/view/application/payments/extra.phtml:76
 msgid "Effettua pagamento"
 msgstr "Make payment"
 
 #: module/Application/view/application/payments/extra.phtml:85
-#, fuzzy
-#| msgid "Elenco tentativi effettuati"
 msgid "Risultato tentativo effettuato"
 msgstr "Attempts list"
 
@@ -4633,8 +4642,6 @@ msgid "Risultato"
 msgstr "Result"
 
 #: module/Application/view/application/payments/failed-extra.phtml:15
-#, fuzzy
-#| msgid "ADDEBITI EXTRA/PENALI"
 msgid "ELENCO EXTRA/PENALI"
 msgstr "EXTRA/FINES CHARGES"
 
@@ -4651,26 +4658,18 @@ msgid "Reasons"
 msgstr ""
 
 #: module/Application/view/application/payments/failed-extra.phtml:34
-#, fuzzy
-#| msgid "Pagata"
 msgid "Pagato SI"
-msgstr "Payed"
+msgstr "Paid YES"
 
 #: module/Application/view/application/payments/failed-extra.phtml:35
-#, fuzzy
-#| msgid "Pagata"
 msgid "Pagato NO"
-msgstr "Payed"
+msgstr "Paid NO"
 
 #: module/Application/view/application/payments/failed-extra.phtml:58
-#, fuzzy
-#| msgid "Elenco eventi"
 msgid "Elenco extra/penali"
-msgstr "Events list"
+msgstr "List of extra/penalties"
 
 #: module/Application/view/application/payments/failed-extra.phtml:68
-#, fuzzy
-#| msgid "Nome e Cognome"
 msgid "Nome Cognome"
 msgstr "Name and Surname"
 
@@ -4707,60 +4706,45 @@ msgstr "Daily summary"
 msgid "Riepilogo mensile"
 msgstr "Monthly summary"
 
-#: module/Application/view/application/payments/recap.phtml:34
-#: module/Application/view/application/payments/recap.phtml:90
-msgid "Seleziona Flotta"
-msgstr "Select a fleet"
-
-#: module/Application/view/application/payments/recap.phtml:40
-#: module/Application/view/application/payments/recap.phtml:96
-msgid "Seleziona Anno"
-msgstr "Select Year"
-
-#: module/Application/view/application/payments/recap.phtml:46
-#: module/Application/view/application/payments/recap.phtml:102
-msgid "Seleziona Mese"
-msgstr "Select Month"
-
-#: module/Application/view/application/payments/recap.phtml:52
-msgid "Seleziona Giorno"
-msgstr "Select Day"
-
-#: module/Application/view/application/payments/recap.phtml:61
-#: module/Application/view/application/payments/recap.phtml:111
+#: module/Application/view/application/payments/recap.phtml:48
+#: module/Application/view/application/payments/recap.phtml:93
 msgid "Viaggi"
 msgstr "Trips"
 
-#: module/Application/view/application/payments/recap.phtml:62
-#: module/Application/view/application/payments/recap.phtml:112
+#: module/Application/view/application/payments/recap.phtml:49
+#: module/Application/view/application/payments/recap.phtml:94
 msgid "Iscrizioni"
 msgstr "Subscriptions"
 
-#: module/Application/view/application/payments/recap.phtml:63
-#: module/Application/view/application/payments/recap.phtml:113
+#: module/Application/view/application/payments/recap.phtml:50
+#: module/Application/view/application/payments/recap.phtml:95
 msgid "Multe e penali"
 msgstr "Penalties and fines"
 
-#: module/Application/view/application/payments/recap.phtml:64
-#: module/Application/view/application/payments/recap.phtml:114
+#: module/Application/view/application/payments/recap.phtml:51
+#: module/Application/view/application/payments/recap.phtml:96
 msgid "Pacchetti"
 msgstr "Bonus pack"
 
-#: module/Application/view/application/payments/recap.phtml:144
+#: module/Application/view/application/payments/recap.phtml:127
 msgid "Attenzione! Area riservata agli utenti super-admin."
 msgstr ""
 
 #: module/Application/view/application/payments/retry-extra.phtml:20
-#, fuzzy
-#| msgid "RITENTA PAGAMENTO"
 msgid "RITENTA PAGAMENTO DI UN EXTRA"
 msgstr "RETRY PAYMENT"
 
 #: module/Application/view/application/payments/retry-extra.phtml:29
-#, fuzzy
-#| msgid "Torna alla lista"
 msgid "Torna al padre"
 msgstr "Back to list"
+
+#: module/Application/view/application/payments/retry-extra.phtml:54
+msgid "Non è possibile effettutare un nuovo tentivo di pagamento"
+msgstr "It is not possible to make a new payment attempt"
+
+#: module/Application/view/application/payments/retry-extra.phtml:65
+msgid "Pagamento avvenuto con successo"
+msgstr "Payment successful"
 
 #: module/Application/view/application/payments/retry-extra.phtml:73
 #: module/Application/view/application/payments/retry-payments.phtml:54
@@ -4768,10 +4752,12 @@ msgid "Il pagamento non è andato a buon fine"
 msgstr "The payment has not been successful"
 
 #: module/Application/view/application/payments/retry-extra.phtml:137
-#, fuzzy
-#| msgid "Data del tentativo"
 msgid "Data primo tentativo"
-msgstr "Attempt date"
+msgstr "First attempt date"
+
+#: module/Application/view/application/payments/retry-extra.phtml:141
+msgid "Non ancora effettuato"
+msgstr "Payment not yet made"
 
 #: module/Application/view/application/payments/retry-extra.phtml:170
 msgid "Reason"
@@ -4792,11 +4778,13 @@ msgstr "Attempts list"
 msgid "Elenco completo extra con pagamento fallito"
 msgstr "Trip list with failed payment"
 
+#: module/Application/view/application/payments/retry-extra.phtml:248
+msgid "Non ci sono tentativi di pagamento. Extra/Penale resa non pagabile."
+msgstr ""
+
 #: module/Application/view/application/payments/retry-extra.phtml:256
-#, fuzzy
-#| msgid "Elenco Note"
 msgid "Elenco rate"
-msgstr "Notes list"
+msgstr "List of installments"
 
 #: module/Application/view/application/payments/retry-extra.phtml:268
 #, fuzzy
@@ -4805,10 +4793,8 @@ msgid "Pagamento padre"
 msgstr "Payments"
 
 #: module/Application/view/application/payments/retry-extra.phtml:269
-#, fuzzy
-#| msgid "Pagamenti falliti"
 msgid "Pagamento Rata"
-msgstr "Failed payments"
+msgstr "Installment payment"
 
 #: module/Application/view/application/payments/retry-payments.phtml:19
 msgid "RITENTA PAGAMENTO"
@@ -6678,6 +6664,18 @@ msgstr ""
 #: vendor/zf-commons/zfc-user/view/zfc-user/user/login.phtml:14
 msgid "Sign up!"
 msgstr ""
+
+#~ msgid "Seleziona Flotta"
+#~ msgstr "Select a fleet"
+
+#~ msgid "Seleziona Anno"
+#~ msgstr "Select Year"
+
+#~ msgid "Seleziona Mese"
+#~ msgstr "Select Month"
+
+#~ msgid "Seleziona Giorno"
+#~ msgstr "Select Day"
 
 #~ msgid "Ultimi 4 mesi"
 #~ msgstr "Last 4 months"
