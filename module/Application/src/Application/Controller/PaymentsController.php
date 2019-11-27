@@ -492,7 +492,7 @@ class PaymentsController extends AbstractActionController {
         }
         
         
-        if ($roles[0] === 'superadmin') {
+        //if ($roles[0] === 'superadmin') {
             
             $tab = 1;
             if (!is_null($this->params()->fromQuery('tab'))) {
@@ -559,7 +559,7 @@ class PaymentsController extends AbstractActionController {
                 }
             }
             
-        }
+        //}
         
         return new ViewModel([
             'years' => $years,
