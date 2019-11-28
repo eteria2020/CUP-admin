@@ -15,7 +15,7 @@ $daily = $this->daily;
             <div class="row-fluid">
                 <div class="span6">
 
-                    <?php if($this->roles[0]==="superadmin") { ?>
+                    <?php if($this->roles[0]==="superadmin" || $this->roles[0]==="admin") { ?>
                     <!-- BEGIN tabs -->
                     <div class="tabbable tabbable-custom">
 
@@ -124,7 +124,7 @@ $daily = $this->daily;
                     <!-- END tabs -->
                     <?php }
                     else {
-                        echo ($this->translate("Attenzione! Area riservata agli utenti super-admin."));
+                        echo ($this->translate("Attenzione! Area riservata agli utenti admin."));
                     }
                     ?>
                 </div>
