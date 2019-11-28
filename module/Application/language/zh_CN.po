@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Sharengo\n"
-"POT-Creation-Date: 2019-11-27 11:02+0100\n"
-"PO-Revision-Date: 2019-11-27 11:04+0100\n"
+"POT-Creation-Date: 2019-11-27 12:26+0100\n"
+"PO-Revision-Date: 2019-11-27 12:27+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: zh_CN\n"
@@ -3607,8 +3607,8 @@ msgid "Pacchetti"
 msgstr "红利封包"
 
 #: Application/view/application/payments/recap.phtml:127
-msgid "Attenzione! Area riservata agli utenti super-admin."
-msgstr ""
+msgid "Attenzione! Area riservata agli utenti admin."
+msgstr "警告！为管理员用户保留的区域。"
 
 #: Application/view/application/payments/retry-extra.phtml:20
 #, fuzzy
