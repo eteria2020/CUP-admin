@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Sharengo\n"
-"POT-Creation-Date: 2019-11-27 12:25+0100\n"
-"PO-Revision-Date: 2019-11-27 12:26+0100\n"
+"POT-Creation-Date: 2019-12-12 15:15+0100\n"
+"PO-Revision-Date: 2019-12-12 15:37+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: en\n"
@@ -14,11 +14,13 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Poedit-KeywordsList: translate\n"
 "X-Poedit-SourceCharset: UTF-8\n"
-"X-Poedit-SearchPath-0: .\n"
-"X-Poedit-SearchPath-1: module/Application\n"
+"X-Poedit-SearchPath-0: module/Application/src\n"
+"X-Poedit-SearchPath-1: module/Application/view\n"
+"X-Poedit-SearchPath-2: module/Application/config\n"
+"X-Poedit-SearchPath-3: module/Application/public\n"
+"X-Poedit-SearchPath-4: vendor/cup-web/admin-business-module\n"
 
 #: module/Application/config/module.config.php:2110
-#: module/Reports/view/reports/index/routes.phtml:56
 msgid "Clienti"
 msgstr "Customers"
 
@@ -36,7 +38,7 @@ msgstr "List"
 
 #: module/Application/config/module.config.php:2122
 #: module/Application/view/application/customers/edit.phtml:39
-#: module/Application/view/application/customers/list.phtml:71
+#: module/Application/view/application/customers/list.phtml:72
 #: module/Application/view/application/reservations/index.phtml:76
 msgid "Card"
 msgstr "Card"
@@ -52,8 +54,6 @@ msgstr "Car"
 
 #: module/Application/config/module.config.php:2172
 #: module/Application/view/partials/translations.phtml:65
-#: module/Reports/view/layout/layout.phtml:37
-#: module/Reports/view/reports/index/routes.phtml:69
 msgid "Corse"
 msgstr "Trips"
 
@@ -103,7 +103,7 @@ msgstr "Verify CartaSI"
 
 #: module/Application/config/module.config.php:2258
 msgid "Multe"
-msgstr ""
+msgstr "Fines"
 
 #: module/Application/config/module.config.php:2272
 msgid "Configurazione"
@@ -180,23 +180,13 @@ msgid "Mappa Allarmi"
 msgstr "Alarm map"
 
 #: module/Application/public/assets-modules/application/js/notifications.js:275
+#, fuzzy
+#| msgid "Configurazione"
 msgid "sNotificationsEmptyTable"
-msgstr ""
+msgstr "Configuration"
 
 #: module/Application/public/assets-modules/application/js/notifications.js:276
-#: module/Application/public/js/private-trips.js:144 public/js/cards.js:48
-#: public/js/cars-configurations-edit.js:64
-#: public/js/cars-configurations-list-all.js:88
-#: public/js/cars-configurations-list-car.js:89
-#: public/js/cars-configurations-list-fleet.js:89
-#: public/js/cars-configurations-list-global.js:88
-#: public/js/cars-configurations-list-model.js:90 public/js/cars.js:132
-#: public/js/customer-invoices.js:81 public/js/customers.js:90
-#: public/js/failed-extra.js:153 public/js/failed-payments.js:185
-#: public/js/fines.js:252 public/js/foreign-drivers-license.js:128
-#: public/js/invoices.js:103 public/js/payments-csv.js:10 public/js/pois.js:93
-#: public/js/reservations.js:99 public/js/trips-not-payed.js:95
-#: public/js/users.js:85 public/js/zones-list-tab.js:249
+#: module/Application/public/js/private-trips.js:144
 #: vendor/cup-web/admin-business-module/public/assets-modules/cup-admin-business-module/js/business-edit.js:13
 #: vendor/cup-web/admin-business-module/public/assets-modules/cup-admin-business-module/js/business-edit.js:146
 #: vendor/cup-web/admin-business-module/public/assets-modules/cup-admin-business-module/js/business-trips.js:178
@@ -207,19 +197,7 @@ msgid "sInfo"
 msgstr ""
 
 #: module/Application/public/assets-modules/application/js/notifications.js:277
-#: module/Application/public/js/private-trips.js:145 public/js/cards.js:49
-#: public/js/cars-configurations-edit.js:65
-#: public/js/cars-configurations-list-all.js:89
-#: public/js/cars-configurations-list-car.js:90
-#: public/js/cars-configurations-list-fleet.js:90
-#: public/js/cars-configurations-list-global.js:89
-#: public/js/cars-configurations-list-model.js:91 public/js/cars.js:133
-#: public/js/customer-invoices.js:82 public/js/customers.js:91
-#: public/js/failed-extra.js:154 public/js/failed-payments.js:186
-#: public/js/fines.js:253 public/js/foreign-drivers-license.js:129
-#: public/js/invoices.js:104 public/js/payments-csv.js:11 public/js/pois.js:94
-#: public/js/reservations.js:100 public/js/trips-not-payed.js:96
-#: public/js/users.js:86 public/js/zones-list-tab.js:250
+#: module/Application/public/js/private-trips.js:145
 #: vendor/cup-web/admin-business-module/public/assets-modules/cup-admin-business-module/js/business-edit.js:14
 #: vendor/cup-web/admin-business-module/public/assets-modules/cup-admin-business-module/js/business-edit.js:147
 #: vendor/cup-web/admin-business-module/public/assets-modules/cup-admin-business-module/js/business-trips.js:179
@@ -230,19 +208,7 @@ msgid "sInfoEmpty"
 msgstr ""
 
 #: module/Application/public/assets-modules/application/js/notifications.js:278
-#: module/Application/public/js/private-trips.js:146 public/js/cards.js:50
-#: public/js/cars-configurations-edit.js:66
-#: public/js/cars-configurations-list-all.js:90
-#: public/js/cars-configurations-list-car.js:91
-#: public/js/cars-configurations-list-fleet.js:91
-#: public/js/cars-configurations-list-global.js:90
-#: public/js/cars-configurations-list-model.js:92 public/js/cars.js:134
-#: public/js/customer-invoices.js:83 public/js/customers.js:92
-#: public/js/failed-extra.js:155 public/js/failed-payments.js:187
-#: public/js/fines.js:254 public/js/foreign-drivers-license.js:130
-#: public/js/invoices.js:105 public/js/payments-csv.js:12 public/js/pois.js:95
-#: public/js/reservations.js:101 public/js/trips-not-payed.js:97
-#: public/js/users.js:87 public/js/zones-list-tab.js:251
+#: module/Application/public/js/private-trips.js:146
 #: vendor/cup-web/admin-business-module/public/assets-modules/cup-admin-business-module/js/business-edit.js:15
 #: vendor/cup-web/admin-business-module/public/assets-modules/cup-admin-business-module/js/business-edit.js:148
 #: vendor/cup-web/admin-business-module/public/assets-modules/cup-admin-business-module/js/business-trips.js:180
@@ -253,19 +219,7 @@ msgid "sInfoFiltered"
 msgstr ""
 
 #: module/Application/public/assets-modules/application/js/notifications.js:281
-#: module/Application/public/js/private-trips.js:149 public/js/cards.js:53
-#: public/js/cars-configurations-edit.js:69
-#: public/js/cars-configurations-list-all.js:93
-#: public/js/cars-configurations-list-car.js:94
-#: public/js/cars-configurations-list-fleet.js:94
-#: public/js/cars-configurations-list-global.js:93
-#: public/js/cars-configurations-list-model.js:95 public/js/cars.js:137
-#: public/js/customer-invoices.js:86 public/js/customers.js:95
-#: public/js/failed-extra.js:158 public/js/failed-payments.js:190
-#: public/js/fines.js:257 public/js/foreign-drivers-license.js:133
-#: public/js/invoices.js:108 public/js/payments-csv.js:15 public/js/pois.js:98
-#: public/js/reservations.js:104 public/js/trips-not-payed.js:100
-#: public/js/users.js:90 public/js/zones-list-tab.js:254
+#: module/Application/public/js/private-trips.js:149
 #: vendor/cup-web/admin-business-module/public/assets-modules/cup-admin-business-module/js/business-edit.js:18
 #: vendor/cup-web/admin-business-module/public/assets-modules/cup-admin-business-module/js/business-edit.js:151
 #: vendor/cup-web/admin-business-module/public/assets-modules/cup-admin-business-module/js/business-trips.js:183
@@ -276,19 +230,7 @@ msgid "sLengthMenu"
 msgstr ""
 
 #: module/Application/public/assets-modules/application/js/notifications.js:282
-#: module/Application/public/js/private-trips.js:150 public/js/cards.js:54
-#: public/js/cars-configurations-edit.js:70
-#: public/js/cars-configurations-list-all.js:94
-#: public/js/cars-configurations-list-car.js:95
-#: public/js/cars-configurations-list-fleet.js:95
-#: public/js/cars-configurations-list-global.js:94
-#: public/js/cars-configurations-list-model.js:96 public/js/cars.js:138
-#: public/js/customer-invoices.js:87 public/js/customers.js:96
-#: public/js/failed-extra.js:159 public/js/failed-payments.js:191
-#: public/js/fines.js:258 public/js/foreign-drivers-license.js:134
-#: public/js/invoices.js:109 public/js/payments-csv.js:16 public/js/pois.js:99
-#: public/js/reservations.js:105 public/js/trips-not-payed.js:101
-#: public/js/users.js:91 public/js/zones-list-tab.js:255
+#: module/Application/public/js/private-trips.js:150
 #: vendor/cup-web/admin-business-module/public/assets-modules/cup-admin-business-module/js/business-edit.js:19
 #: vendor/cup-web/admin-business-module/public/assets-modules/cup-admin-business-module/js/business-edit.js:152
 #: vendor/cup-web/admin-business-module/public/assets-modules/cup-admin-business-module/js/business-trips.js:184
@@ -299,19 +241,7 @@ msgid "sLoadingRecords"
 msgstr ""
 
 #: module/Application/public/assets-modules/application/js/notifications.js:283
-#: module/Application/public/js/private-trips.js:151 public/js/cards.js:55
-#: public/js/cars-configurations-edit.js:71
-#: public/js/cars-configurations-list-all.js:95
-#: public/js/cars-configurations-list-car.js:96
-#: public/js/cars-configurations-list-fleet.js:96
-#: public/js/cars-configurations-list-global.js:95
-#: public/js/cars-configurations-list-model.js:97 public/js/cars.js:139
-#: public/js/customer-invoices.js:88 public/js/customers.js:97
-#: public/js/failed-extra.js:160 public/js/failed-payments.js:192
-#: public/js/fines.js:259 public/js/foreign-drivers-license.js:135
-#: public/js/invoices.js:110 public/js/payments-csv.js:17 public/js/pois.js:100
-#: public/js/reservations.js:106 public/js/trips-not-payed.js:102
-#: public/js/users.js:92 public/js/zones-list-tab.js:256
+#: module/Application/public/js/private-trips.js:151
 #: vendor/cup-web/admin-business-module/public/assets-modules/cup-admin-business-module/js/business-edit.js:20
 #: vendor/cup-web/admin-business-module/public/assets-modules/cup-admin-business-module/js/business-edit.js:153
 #: vendor/cup-web/admin-business-module/public/assets-modules/cup-admin-business-module/js/business-trips.js:185
@@ -322,19 +252,7 @@ msgid "sProcessing"
 msgstr ""
 
 #: module/Application/public/assets-modules/application/js/notifications.js:284
-#: module/Application/public/js/private-trips.js:152 public/js/cards.js:56
-#: public/js/cars-configurations-edit.js:72
-#: public/js/cars-configurations-list-all.js:96
-#: public/js/cars-configurations-list-car.js:97
-#: public/js/cars-configurations-list-fleet.js:97
-#: public/js/cars-configurations-list-global.js:96
-#: public/js/cars-configurations-list-model.js:98 public/js/cars.js:140
-#: public/js/customer-invoices.js:89 public/js/customers.js:98
-#: public/js/failed-extra.js:161 public/js/failed-payments.js:193
-#: public/js/fines.js:260 public/js/foreign-drivers-license.js:136
-#: public/js/invoices.js:111 public/js/payments-csv.js:18 public/js/pois.js:101
-#: public/js/reservations.js:107 public/js/trips-not-payed.js:103
-#: public/js/users.js:93 public/js/zones-list-tab.js:257
+#: module/Application/public/js/private-trips.js:152
 #: vendor/cup-web/admin-business-module/public/assets-modules/cup-admin-business-module/js/business-edit.js:21
 #: vendor/cup-web/admin-business-module/public/assets-modules/cup-admin-business-module/js/business-edit.js:154
 #: vendor/cup-web/admin-business-module/public/assets-modules/cup-admin-business-module/js/business-trips.js:186
@@ -345,19 +263,7 @@ msgid "sSearch"
 msgstr ""
 
 #: module/Application/public/assets-modules/application/js/notifications.js:285
-#: module/Application/public/js/private-trips.js:153 public/js/cards.js:57
-#: public/js/cars-configurations-edit.js:73
-#: public/js/cars-configurations-list-all.js:97
-#: public/js/cars-configurations-list-car.js:98
-#: public/js/cars-configurations-list-fleet.js:98
-#: public/js/cars-configurations-list-global.js:97
-#: public/js/cars-configurations-list-model.js:99 public/js/cars.js:141
-#: public/js/customer-invoices.js:90 public/js/customers.js:99
-#: public/js/failed-extra.js:162 public/js/failed-payments.js:194
-#: public/js/fines.js:261 public/js/foreign-drivers-license.js:137
-#: public/js/invoices.js:112 public/js/payments-csv.js:19 public/js/pois.js:102
-#: public/js/reservations.js:108 public/js/trips-not-payed.js:104
-#: public/js/users.js:94 public/js/zones-list-tab.js:258
+#: module/Application/public/js/private-trips.js:153
 #: vendor/cup-web/admin-business-module/public/assets-modules/cup-admin-business-module/js/business-edit.js:22
 #: vendor/cup-web/admin-business-module/public/assets-modules/cup-admin-business-module/js/business-edit.js:155
 #: vendor/cup-web/admin-business-module/public/assets-modules/cup-admin-business-module/js/business-trips.js:187
@@ -368,19 +274,7 @@ msgid "sZeroRecords"
 msgstr ""
 
 #: module/Application/public/assets-modules/application/js/notifications.js:287
-#: module/Application/public/js/private-trips.js:155 public/js/cards.js:59
-#: public/js/cars-configurations-edit.js:75
-#: public/js/cars-configurations-list-all.js:99
-#: public/js/cars-configurations-list-car.js:100
-#: public/js/cars-configurations-list-fleet.js:100
-#: public/js/cars-configurations-list-global.js:99
-#: public/js/cars-configurations-list-model.js:101 public/js/cars.js:143
-#: public/js/customer-invoices.js:92 public/js/customers.js:101
-#: public/js/failed-extra.js:164 public/js/failed-payments.js:196
-#: public/js/fines.js:263 public/js/foreign-drivers-license.js:139
-#: public/js/invoices.js:114 public/js/payments-csv.js:21 public/js/pois.js:104
-#: public/js/reservations.js:110 public/js/trips-not-payed.js:106
-#: public/js/users.js:96 public/js/zones-list-tab.js:260
+#: module/Application/public/js/private-trips.js:155
 #: vendor/cup-web/admin-business-module/public/assets-modules/cup-admin-business-module/js/business-edit.js:24
 #: vendor/cup-web/admin-business-module/public/assets-modules/cup-admin-business-module/js/business-edit.js:157
 #: vendor/cup-web/admin-business-module/public/assets-modules/cup-admin-business-module/js/business-trips.js:189
@@ -391,19 +285,7 @@ msgid "oPaginateFirst"
 msgstr ""
 
 #: module/Application/public/assets-modules/application/js/notifications.js:288
-#: module/Application/public/js/private-trips.js:156 public/js/cards.js:60
-#: public/js/cars-configurations-edit.js:76
-#: public/js/cars-configurations-list-all.js:100
-#: public/js/cars-configurations-list-car.js:101
-#: public/js/cars-configurations-list-fleet.js:101
-#: public/js/cars-configurations-list-global.js:100
-#: public/js/cars-configurations-list-model.js:102 public/js/cars.js:144
-#: public/js/customer-invoices.js:93 public/js/customers.js:102
-#: public/js/failed-extra.js:165 public/js/failed-payments.js:197
-#: public/js/fines.js:264 public/js/foreign-drivers-license.js:140
-#: public/js/invoices.js:115 public/js/payments-csv.js:22 public/js/pois.js:105
-#: public/js/reservations.js:111 public/js/trips-not-payed.js:107
-#: public/js/users.js:97 public/js/zones-list-tab.js:261
+#: module/Application/public/js/private-trips.js:156
 #: vendor/cup-web/admin-business-module/public/assets-modules/cup-admin-business-module/js/business-edit.js:25
 #: vendor/cup-web/admin-business-module/public/assets-modules/cup-admin-business-module/js/business-edit.js:158
 #: vendor/cup-web/admin-business-module/public/assets-modules/cup-admin-business-module/js/business-trips.js:190
@@ -414,19 +296,7 @@ msgid "oPaginatePrevious"
 msgstr ""
 
 #: module/Application/public/assets-modules/application/js/notifications.js:289
-#: module/Application/public/js/private-trips.js:157 public/js/cards.js:61
-#: public/js/cars-configurations-edit.js:77
-#: public/js/cars-configurations-list-all.js:101
-#: public/js/cars-configurations-list-car.js:102
-#: public/js/cars-configurations-list-fleet.js:102
-#: public/js/cars-configurations-list-global.js:101
-#: public/js/cars-configurations-list-model.js:103 public/js/cars.js:145
-#: public/js/customer-invoices.js:94 public/js/customers.js:103
-#: public/js/failed-extra.js:166 public/js/failed-payments.js:198
-#: public/js/fines.js:265 public/js/foreign-drivers-license.js:141
-#: public/js/invoices.js:116 public/js/payments-csv.js:23 public/js/pois.js:106
-#: public/js/reservations.js:112 public/js/trips-not-payed.js:108
-#: public/js/users.js:98 public/js/zones-list-tab.js:262
+#: module/Application/public/js/private-trips.js:157
 #: vendor/cup-web/admin-business-module/public/assets-modules/cup-admin-business-module/js/business-edit.js:26
 #: vendor/cup-web/admin-business-module/public/assets-modules/cup-admin-business-module/js/business-edit.js:159
 #: vendor/cup-web/admin-business-module/public/assets-modules/cup-admin-business-module/js/business-trips.js:191
@@ -437,19 +307,7 @@ msgid "oPaginateNext"
 msgstr ""
 
 #: module/Application/public/assets-modules/application/js/notifications.js:290
-#: module/Application/public/js/private-trips.js:158 public/js/cards.js:62
-#: public/js/cars-configurations-edit.js:78
-#: public/js/cars-configurations-list-all.js:102
-#: public/js/cars-configurations-list-car.js:103
-#: public/js/cars-configurations-list-fleet.js:103
-#: public/js/cars-configurations-list-global.js:102
-#: public/js/cars-configurations-list-model.js:104 public/js/cars.js:146
-#: public/js/customer-invoices.js:95 public/js/customers.js:104
-#: public/js/failed-extra.js:167 public/js/failed-payments.js:199
-#: public/js/fines.js:266 public/js/foreign-drivers-license.js:142
-#: public/js/invoices.js:117 public/js/payments-csv.js:24 public/js/pois.js:107
-#: public/js/reservations.js:113 public/js/trips-not-payed.js:109
-#: public/js/users.js:99 public/js/zones-list-tab.js:263
+#: module/Application/public/js/private-trips.js:158
 #: vendor/cup-web/admin-business-module/public/assets-modules/cup-admin-business-module/js/business-edit.js:27
 #: vendor/cup-web/admin-business-module/public/assets-modules/cup-admin-business-module/js/business-edit.js:160
 #: vendor/cup-web/admin-business-module/public/assets-modules/cup-admin-business-module/js/business-trips.js:192
@@ -460,19 +318,7 @@ msgid "oPaginateLast"
 msgstr ""
 
 #: module/Application/public/assets-modules/application/js/notifications.js:293
-#: module/Application/public/js/private-trips.js:161 public/js/cards.js:65
-#: public/js/cars-configurations-edit.js:81
-#: public/js/cars-configurations-list-all.js:105
-#: public/js/cars-configurations-list-car.js:106
-#: public/js/cars-configurations-list-fleet.js:106
-#: public/js/cars-configurations-list-global.js:105
-#: public/js/cars-configurations-list-model.js:107 public/js/cars.js:149
-#: public/js/customer-invoices.js:98 public/js/customers.js:107
-#: public/js/failed-extra.js:170 public/js/failed-payments.js:202
-#: public/js/fines.js:269 public/js/foreign-drivers-license.js:145
-#: public/js/invoices.js:120 public/js/payments-csv.js:27 public/js/pois.js:110
-#: public/js/reservations.js:116 public/js/trips-not-payed.js:112
-#: public/js/users.js:102 public/js/zones-list-tab.js:266
+#: module/Application/public/js/private-trips.js:161
 #: vendor/cup-web/admin-business-module/public/assets-modules/cup-admin-business-module/js/business-edit.js:30
 #: vendor/cup-web/admin-business-module/public/assets-modules/cup-admin-business-module/js/business-edit.js:163
 #: vendor/cup-web/admin-business-module/public/assets-modules/cup-admin-business-module/js/business-trips.js:195
@@ -483,19 +329,7 @@ msgid "sSortAscending"
 msgstr ""
 
 #: module/Application/public/assets-modules/application/js/notifications.js:294
-#: module/Application/public/js/private-trips.js:162 public/js/cards.js:66
-#: public/js/cars-configurations-edit.js:82
-#: public/js/cars-configurations-list-all.js:106
-#: public/js/cars-configurations-list-car.js:107
-#: public/js/cars-configurations-list-fleet.js:107
-#: public/js/cars-configurations-list-global.js:106
-#: public/js/cars-configurations-list-model.js:108 public/js/cars.js:150
-#: public/js/customer-invoices.js:99 public/js/customers.js:108
-#: public/js/failed-extra.js:171 public/js/failed-payments.js:203
-#: public/js/fines.js:270 public/js/foreign-drivers-license.js:146
-#: public/js/invoices.js:121 public/js/payments-csv.js:28 public/js/pois.js:111
-#: public/js/reservations.js:117 public/js/trips-not-payed.js:113
-#: public/js/users.js:103 public/js/zones-list-tab.js:267
+#: module/Application/public/js/private-trips.js:162
 #: vendor/cup-web/admin-business-module/public/assets-modules/cup-admin-business-module/js/business-edit.js:31
 #: vendor/cup-web/admin-business-module/public/assets-modules/cup-admin-business-module/js/business-edit.js:164
 #: vendor/cup-web/admin-business-module/public/assets-modules/cup-admin-business-module/js/business-trips.js:196
@@ -506,24 +340,16 @@ msgid "sSortDescending"
 msgstr ""
 
 #: module/Application/public/js/private-trips.js:94
-#: public/js/foreign-drivers-license.js:97 public/js/reservations.js:85
-#: public/js/trips-not-payed.js:76
 #: vendor/cup-web/admin-business-module/public/assets-modules/cup-admin-business-module/js/business-trips.js:132
 msgid "showProfile"
 msgstr ""
 
 #: module/Application/public/js/private-trips.js:143
-#: public/js/trips-not-payed.js:94
 #: vendor/cup-web/admin-business-module/public/assets-modules/cup-admin-business-module/js/business-trips.js:177
 msgid "sTripEmptyTable"
 msgstr ""
 
 #: module/Application/public/js/private-trips.js:216
-#: public/js/cars-configurations-list-all.js:72
-#: public/js/cars-configurations-list-car.js:73
-#: public/js/cars-configurations-list-fleet.js:73
-#: public/js/cars-configurations-list-global.js:72
-#: public/js/cars-configurations-list-model.js:74 public/js/failed-extra.js:140
 msgid "details"
 msgstr ""
 
@@ -587,7 +413,7 @@ msgstr "Car damages edited successfully!"
 
 #: module/Application/src/Application/Controller/CarsController.php:351
 msgid "Dati polizza assicurativa modificati con successo!"
-msgstr "Car damages edited successfully!"
+msgstr "Insurance policy data changed successfully!"
 
 #: module/Application/src/Application/Controller/CarsController.php:385
 msgid "Auto rimossa con successo!"
@@ -714,7 +540,7 @@ msgstr "Province of birth (EE = not Italy)"
 
 #: module/Application/src/Application/Controller/CustomersEditController.php:305
 msgid "nazione nascita utente vuoto,"
-msgstr ""
+msgstr "User birth country empty"
 
 #: module/Application/src/Application/Controller/CustomersEditController.php:309
 msgid "indirizzo utente vuoto,"
@@ -742,7 +568,7 @@ msgstr "Driving license number"
 
 #: module/Application/src/Application/Controller/CustomersEditController.php:350
 msgid "nazione patente guida vuoto,"
-msgstr ""
+msgstr "country driver license empty"
 
 #: module/Application/src/Application/Controller/CustomersEditController.php:354
 msgid "scadenza patente guida vuoto,"
@@ -937,14 +763,6 @@ msgstr "Provided file is not a valid KML"
 
 #: module/Application/src/Application/Controller/ZonesController.php:201
 #: module/Application/src/Application/Controller/ZonesController.php:218
-#: module/Reports/src/Reports/Controller/ApiController.php:76
-#: module/Reports/src/Reports/Controller/ApiController.php:121
-#: module/Reports/src/Reports/Controller/ApiController.php:179
-#: module/Reports/src/Reports/Controller/ApiController.php:201
-#: module/Reports/src/Reports/Controller/ApiController.php:231
-#: module/Reports/src/Reports/Controller/ApiController.php:274
-#: module/Reports/src/Reports/Controller/ApiController.php:315
-#: module/Reports/src/Reports/Controller/ApiController.php:353
 msgid "Si è verificato un errore applicativo."
 msgstr "An error occurred."
 
@@ -986,7 +804,7 @@ msgstr "Volume"
 #: module/Application/src/Application/Form/CarsConfigurations/RadioSetupForm.php:52
 #: module/Application/view/application/customers-edit/edit-tab.phtml:50
 #: module/Application/view/application/customers/info-tab.phtml:43
-#: module/Application/view/application/customers/list.phtml:67
+#: module/Application/view/application/customers/list.phtml:68
 #: module/Application/view/application/fines/details.phtml:92
 #: module/Application/view/application/foreign-drivers-license/uploaded-files.phtml:61
 #: module/Application/view/application/invoices/index.phtml:30
@@ -1127,7 +945,7 @@ msgstr "portuguese"
 
 #: module/Application/src/Application/Form/CustomerPointFieldset.php:89
 msgid "Il valore massimo inseribile è 15 punti."
-msgstr ""
+msgstr "The maximum value that can be entered is 15 points."
 
 #: module/Application/src/Application/Form/InputData/CloseTripDataFactory.php:36
 msgid "Impossibile trovare la corsa corretta"
@@ -1169,12 +987,6 @@ msgstr "Promo code"
 #: vendor/cup-web/admin-business-module/src/Controller/BusinessTripController.php:138
 #: vendor/cup-web/admin-business-module/src/Form/BusinessConfigParamsForm.php:85
 #: vendor/cup-web/admin-business-module/src/Form/BusinessConfigParamsForm.php:100
-#: vendor/mvlabs/sharengo-coremodule/src/SharengoCore/Service/CardsService.php:97
-#: vendor/mvlabs/sharengo-coremodule/src/SharengoCore/Service/CardsService.php:99
-#: vendor/mvlabs/sharengo-coremodule/src/SharengoCore/Service/ReservationsService.php:129
-#: vendor/mvlabs/sharengo-coremodule/src/SharengoCore/Service/TripsService.php:215
-#: vendor/mvlabs/sharengo-coremodule/src/SharengoCore/Service/TripsService.php:229
-#: vendor/mvlabs/sharengo-coremodule/src/SharengoCore/Service/TripsService.php:239
 #: module/Application/view/application/customers/info-tab.phtml:324
 #: module/Application/view/application/customers/info-tab.phtml:337
 #: module/Application/view/application/customers/info-tab.phtml:350
@@ -1195,12 +1007,6 @@ msgstr "No"
 #: vendor/cup-web/admin-business-module/src/Controller/BusinessTripController.php:138
 #: vendor/cup-web/admin-business-module/src/Form/BusinessConfigParamsForm.php:86
 #: vendor/cup-web/admin-business-module/src/Form/BusinessConfigParamsForm.php:101
-#: vendor/mvlabs/sharengo-coremodule/src/SharengoCore/Service/CardsService.php:97
-#: vendor/mvlabs/sharengo-coremodule/src/SharengoCore/Service/CardsService.php:99
-#: vendor/mvlabs/sharengo-coremodule/src/SharengoCore/Service/ReservationsService.php:129
-#: vendor/mvlabs/sharengo-coremodule/src/SharengoCore/Service/TripsService.php:215
-#: vendor/mvlabs/sharengo-coremodule/src/SharengoCore/Service/TripsService.php:229
-#: vendor/mvlabs/sharengo-coremodule/src/SharengoCore/Service/TripsService.php:239
 #: module/Application/view/application/customers/info-tab.phtml:322
 #: module/Application/view/application/customers/info-tab.phtml:335
 #: module/Application/view/application/customers/info-tab.phtml:348
@@ -1217,8 +1023,6 @@ msgid "Femmina"
 msgstr "Female"
 
 #: module/Application/src/Application/Form/Validator/ZipCode.php:18
-#: vendor/cup-web/core-business/src/Form/Validator/ZipCode.php:18
-#: vendor/mvlabs/sharengo-coremodule/src/SharengoCore/Form/Validator/ZipCode.php:18
 msgid "Codice Avviamento Postale non corretto"
 msgstr "The Customer ID is not correct"
 
@@ -1310,7 +1114,7 @@ msgstr "Select"
 #: module/Application/view/application/cars-configurations/list-model.phtml:31
 #: module/Application/view/application/cars/index.phtml:54
 #: module/Application/view/application/customers/invoices-tab.phtml:35
-#: module/Application/view/application/customers/list.phtml:39
+#: module/Application/view/application/customers/list.phtml:40
 #: module/Application/view/application/fines/index.phtml:38
 #: module/Application/view/application/foreign-drivers-license/uploaded-files.phtml:33
 #: module/Application/view/application/invoices/index.phtml:44
@@ -1352,7 +1156,6 @@ msgstr "Start date"
 #: module/Application/src/Application/View/Helper/DatatableFiltersHelper.php:49
 #: module/Application/view/application/fines/index.phtml:51
 #: module/Application/view/application/trips/index.phtml:56
-#: module/Reports/view/reports/index/map.phtml:29
 #: vendor/cup-web/admin-business-module/view/cup-admin-business-module/business-payments/payments-tab.phtml:48
 #: vendor/cup-web/admin-business-module/view/cup-admin-business-module/business-statistics/index.phtml:47
 #: vendor/cup-web/admin-business-module/view/cup-admin-business-module/business-trip/index.phtml:62
@@ -1378,7 +1181,7 @@ msgstr "End date"
 #: module/Application/view/application/cars-configurations/list-model.phtml:34
 #: module/Application/view/application/cars/index.phtml:57
 #: module/Application/view/application/customers/invoices-tab.phtml:42
-#: module/Application/view/application/customers/list.phtml:42
+#: module/Application/view/application/customers/list.phtml:43
 #: module/Application/view/application/fines/index.phtml:57
 #: module/Application/view/application/foreign-drivers-license/uploaded-files.phtml:36
 #: module/Application/view/application/invoices/index.phtml:50
@@ -1408,7 +1211,7 @@ msgstr "Search"
 #: module/Application/view/application/cars-configurations/list-model.phtml:38
 #: module/Application/view/application/cars/index.phtml:61
 #: module/Application/view/application/customers/invoices-tab.phtml:50
-#: module/Application/view/application/customers/list.phtml:46
+#: module/Application/view/application/customers/list.phtml:47
 #: module/Application/view/application/fines/index.phtml:61
 #: module/Application/view/application/foreign-drivers-license/uploaded-files.phtml:40
 #: module/Application/view/application/invoices/index.phtml:58
@@ -1429,590 +1232,44 @@ msgstr "Search"
 msgid "Pulisci Ricerca"
 msgstr "Reset search"
 
-#: module/Reports/public/assets-modules/reports/js/live.js:325
-#: module/Reports/public/assets-modules/reports/js/live.js:338
-msgid "Punto Scia"
-msgstr ""
-
-#: module/Reports/public/assets-modules/reports/js/live.js:363
-#: module/Reports/public/assets-modules/reports/js/map.js:82
-#: module/Reports/view/partials/reports_translations.phtml:3
-msgid "Spostati su"
-msgstr "Go to"
-
-#: module/Reports/public/assets-modules/reports/js/map.js:217
-#: module/Reports/view/partials/reports_translations.phtml:6
-#: module/Reports/view/reports/index/map.phtml:19
-msgid "Passa a Posizione di Arrivo"
-msgstr "Go to arrival location"
-
-#: module/Reports/public/assets-modules/reports/js/map.js:217
-#: module/Reports/view/partials/reports_translations.phtml:7
-msgid "Passa a Posizione di Partenza"
-msgstr "Go to departure location"
-
-#: module/Reports/public/assets-modules/reports/js/menu.js:29
-#: module/Reports/view/partials/reports_translations.phtml:10
-msgid "Corse per Citt&agrave;"
-msgstr "Trips by City"
-
-#: module/Reports/public/assets-modules/reports/js/routes.js:104
-#: module/Reports/view/partials/reports_translations.phtml:19
-#: module/Reports/view/reports/index/routes.phtml:31
-msgid "corse precedenti a"
-msgstr "trips before"
-
-#: module/Reports/public/assets-modules/reports/js/routes.js:459
-#: module/Reports/view/partials/reports_translations.phtml:20
-msgid "Targa Veicolo"
-msgstr "Car plate"
-
-#: module/Reports/public/assets-modules/reports/js/routes.js:459
-#: module/Application/view/application/trips-not-payed/list.phtml:73
-#: module/Application/view/application/trips/index.phtml:100
-#: module/Application/view/application/trips/info-tab.phtml:173
-#: module/Application/view/partials/notifications/sos-category.phtml:219
-#: module/Reports/view/partials/reports_translations.phtml:21
-#: vendor/cup-web/admin-business-module/view/cup-admin-business-module/business-trip/index.phtml:104
-msgid "Durata"
-msgstr "Duration"
-
-#: module/Reports/public/assets-modules/reports/js/routes.js:459
-#: module/Reports/view/partials/reports_translations.phtml:22
-msgid "Numero Punti"
-msgstr "Points number"
-
-#: module/Reports/public/assets-modules/reports/js/routes.js:459
-#: module/Reports/view/partials/reports_translations.phtml:23
-msgid "Data Inizio Corsa"
-msgstr "Start Trip Date"
-
-#: module/Reports/public/assets-modules/reports/js/routes.js:459
-#: module/Reports/view/partials/reports_translations.phtml:24
-msgid "Data Fine Corsa"
-msgstr "End Trip Date"
-
-#: module/Reports/public/assets-modules/reports/js/routes.js:466
-#: module/Reports/view/partials/reports_translations.phtml:25
-msgid "Itinerario"
-msgstr "Route"
-
-#: module/Reports/public/assets-modules/reports/js/routes.js:481
-#: module/Reports/public/assets-modules/reports/js/routes.js:616
-#: module/Reports/view/partials/reports_translations.phtml:26
-msgid "Non sono state trovate corse con i filtri selezionati"
-msgstr "No result with selected filters"
-
-#: module/Reports/public/assets-modules/reports/js/routes.js:523
-#: module/Reports/view/partials/reports_translations.phtml:27
-msgid "Controlli"
-msgstr "Controls"
-
-#: module/Reports/public/assets-modules/reports/js/routes.js:523
-#: module/Reports/view/partials/reports_translations.phtml:28
-msgid "Ferma"
-msgstr "Stationary"
-
-#: module/Reports/public/assets-modules/reports/js/routes.js:523
-#: module/Reports/view/partials/reports_translations.phtml:29
-msgid "Pausa"
-msgstr "Pause"
-
-#: module/Reports/public/assets-modules/reports/js/routes.js:523
-#: module/Reports/view/partials/reports_translations.phtml:30
-msgid "Avvia"
-msgstr "Starts"
-
-#: module/Reports/public/assets-modules/reports/js/routes.js:523
-#: module/Reports/view/partials/reports_translations.phtml:31
-msgid "Velocit&agrave;"
-msgstr "Speed"
-
-#: module/Reports/public/assets-modules/reports/js/routes.js:523
-#: module/Reports/view/partials/reports_translations.phtml:32
-msgid "Data Rilevazione Punto"
-msgstr "Point detection date"
-
-#: module/Reports/public/assets-modules/reports/js/routes.js:523
-#: module/Reports/view/partials/reports_translations.phtml:33
-msgid "Blocca Vista su Auto"
-msgstr "Block sight on auto"
-
-#: module/Reports/public/assets-modules/reports/js/routes.js:530
-#: module/Reports/view/partials/reports_translations.phtml:34
-msgid "Durata Corsa"
-msgstr "Trip Duration"
-
-#: module/Reports/public/assets-modules/reports/js/routes.js:647
-#: module/Reports/view/partials/reports_translations.phtml:35
-msgid "Apri"
-msgstr "Open"
-
-#: module/Reports/public/assets-modules/reports/js/trips.city.js:112
-#: module/Reports/public/assets-modules/reports/js/trips.city.js:245
-#: module/Reports/public/assets-modules/reports/js/trips.main.js:89
-#: module/Reports/public/assets-modules/reports/js/trips.main.js:242
-#: module/Reports/view/partials/reports_translations.phtml:38
-msgid "Lunedi"
-msgstr "Monday"
-
-#: module/Reports/public/assets-modules/reports/js/trips.city.js:112
-#: module/Reports/public/assets-modules/reports/js/trips.city.js:246
-#: module/Reports/public/assets-modules/reports/js/trips.main.js:90
-#: module/Reports/public/assets-modules/reports/js/trips.main.js:243
-#: module/Reports/view/partials/reports_translations.phtml:39
-msgid "Martedi"
-msgstr "Tuesday"
-
-#: module/Reports/public/assets-modules/reports/js/trips.city.js:112
-#: module/Reports/public/assets-modules/reports/js/trips.city.js:247
-#: module/Reports/public/assets-modules/reports/js/trips.main.js:91
-#: module/Reports/public/assets-modules/reports/js/trips.main.js:244
-#: module/Reports/view/partials/reports_translations.phtml:40
-msgid "Mercoledi"
-msgstr "Wednesday"
-
-#: module/Reports/public/assets-modules/reports/js/trips.city.js:112
-#: module/Reports/public/assets-modules/reports/js/trips.city.js:248
-#: module/Reports/public/assets-modules/reports/js/trips.main.js:92
-#: module/Reports/public/assets-modules/reports/js/trips.main.js:245
-#: module/Reports/view/partials/reports_translations.phtml:41
-msgid "Giovedi"
-msgstr "Thursday"
-
-#: module/Reports/public/assets-modules/reports/js/trips.city.js:112
-#: module/Reports/public/assets-modules/reports/js/trips.city.js:249
-#: module/Reports/public/assets-modules/reports/js/trips.main.js:93
-#: module/Reports/public/assets-modules/reports/js/trips.main.js:246
-#: module/Reports/view/partials/reports_translations.phtml:42
-msgid "Venerdi"
-msgstr "Friday"
-
-#: module/Reports/public/assets-modules/reports/js/trips.city.js:112
-#: module/Reports/public/assets-modules/reports/js/trips.city.js:250
-#: module/Reports/public/assets-modules/reports/js/trips.main.js:94
-#: module/Reports/public/assets-modules/reports/js/trips.main.js:247
-#: module/Reports/view/partials/reports_translations.phtml:43
-msgid "Sabato"
-msgstr "Saturday"
-
-#: module/Reports/public/assets-modules/reports/js/trips.city.js:112
-#: module/Reports/public/assets-modules/reports/js/trips.city.js:251
-#: module/Reports/public/assets-modules/reports/js/trips.main.js:95
-#: module/Reports/public/assets-modules/reports/js/trips.main.js:248
-#: module/Reports/view/partials/reports_translations.phtml:44
-msgid "Domenica"
-msgstr "Sunday"
-
-#: module/Reports/public/assets-modules/reports/js/trips.city.js:206
-#: module/Reports/public/assets-modules/reports/js/trips.main.js:180
-#: module/Reports/view/partials/reports_translations.phtml:45
-#: module/Reports/view/reports/index/trips.phtml:115
-#: module/Reports/view/reports/index/tripscity.phtml:92
-msgid "oltre"
-msgstr "over"
-
-#: module/Reports/public/assets-modules/reports/js/trips.city.js:218
-#: module/Reports/public/assets-modules/reports/js/trips.main.js:192
-#: module/Reports/view/partials/reports_translations.phtml:46
-msgid "Uomini"
-msgstr "Men"
-
-#: module/Reports/public/assets-modules/reports/js/trips.city.js:218
-#: module/Reports/public/assets-modules/reports/js/trips.main.js:192
-#: module/Reports/view/partials/reports_translations.phtml:47
-msgid "Donne"
-msgstr "Women"
-
-#: module/Reports/public/assets-modules/reports/js/trips.city.js:333
-#: module/Reports/view/partials/reports_translations.phtml:48
-msgid "Area"
-msgstr "Area"
-
-#: module/Reports/public/assets-modules/reports/js/trips.city.js:333
-#: module/Reports/view/partials/reports_translations.phtml:49
-msgid "Concentrazione"
-msgstr "Concentration"
-
-#: module/Reports/public/assets-modules/reports/js/trips.city.js:380
-#: module/Reports/public/assets-modules/reports/js/trips.main.js:309
-#: module/Reports/view/partials/reports_translations.phtml:50
-msgid "selezionate di"
-msgstr "selected of "
-
-#: module/Reports/public/assets-modules/reports/js/trips.city.js:380
-#: module/Reports/public/assets-modules/reports/js/trips.main.js:309
-#: module/Reports/view/partials/reports_translations.phtml:51
-msgid "corse"
-msgstr "trips"
-
-#: module/Reports/public/assets-modules/reports/js/trips.city.js:381
-#: module/Reports/public/assets-modules/reports/js/trips.main.js:310
-#: module/Reports/view/partials/reports_translations.phtml:52
-msgid "Azzera tutti i filtri"
-msgstr "Clear filters"
-
-#: module/Reports/public/assets-modules/reports/js/trips.city.js:382
-#: module/Reports/public/assets-modules/reports/js/trips.main.js:311
-#: module/Reports/view/partials/reports_translations.phtml:53
-msgid "Tutte le"
-msgstr "All"
-
-#: module/Reports/public/assets-modules/reports/js/trips.city.js:382
-#: module/Reports/public/assets-modules/reports/js/trips.main.js:311
-#: module/Reports/view/partials/reports_translations.phtml:54
-msgid ""
-"corse sono selezionate. Clicca su uno dei grafici per applicarne dei filtri."
-msgstr "trips are selected. Click on one of the graph to apply filters."
-
-#: module/Reports/src/Reports/Controller/ApiController.php:72
-#: module/Reports/src/Reports/Controller/ApiController.php:116
-msgid "Si è verificato un errore applicativo nel parsing dei dati CSV."
-msgstr "An error occurred while parsing CSV data."
-
-#: module/Reports/src/Reports/Controller/ApiController.php:108
-#: module/Reports/src/Reports/Controller/ApiController.php:265
-#: module/Reports/src/Reports/Controller/ApiController.php:307
-#: module/Reports/src/Reports/Controller/ApiController.php:344
-msgid ""
-"Si è verificato un errore applicativo causato dalla mancanza di uno o "
-"pi&ugrave; parametri."
-msgstr "Application error, missing parameters."
-
-#: module/Reports/src/Reports/Controller/ApiController.php:112
-#: module/Reports/src/Reports/Controller/ApiController.php:269
-#: module/Reports/src/Reports/Controller/ApiController.php:311
-#: module/Reports/src/Reports/Controller/ApiController.php:348
-msgid ""
-"Si è verificato un errore applicativo causato dall'invalidit&agrave; di uno "
-"o pi&ugrave; parametri."
-msgstr "Application error, parameters not valid."
-
-#: public/js/cards.js:47
-msgid "sCardsEmptyTable"
-msgstr ""
-
-#: public/js/cars-configurations-edit.js:42
-#: public/js/cars-configurations-list-all.js:74
-#: public/js/cars-configurations-list-car.js:75
-#: public/js/cars-configurations-list-fleet.js:75
-#: public/js/cars-configurations-list-global.js:74
-#: public/js/cars-configurations-list-model.js:76 public/js/cars.js:118
-#: public/js/customers.js:78 public/js/pois.js:79 public/js/users.js:74
-#: public/js/zones-list-tab.js:237
-#: vendor/cup-web/admin-business-module/public/assets-modules/cup-admin-business-module/js/business.js:64
-msgid "modify"
-msgstr ""
-
-#: public/js/cars-configurations-edit.js:43
-#: public/js/cars-configurations-list-all.js:76
-#: public/js/cars-configurations-list-car.js:77
-#: public/js/cars-configurations-list-fleet.js:77
-#: public/js/cars-configurations-list-global.js:76
-#: public/js/cars-configurations-list-model.js:78 public/js/cars.js:119
-#: public/js/pois.js:80
-msgid "delete"
-msgstr ""
-
-#: public/js/cars-configurations-edit.js:63 public/js/cars.js:131
-msgid "sCarsEmptyTable"
-msgstr ""
-
-#: public/js/cars-configurations-edit.js:88
-#: public/js/cars-configurations-list-all.js:124
-#: public/js/cars-configurations-list-car.js:125
-#: public/js/cars-configurations-list-fleet.js:125
-#: public/js/cars-configurations-list-global.js:124
-#: public/js/cars-configurations-list-model.js:126
-#, fuzzy
-#| msgid "Modifica Configurazione"
-msgid "confirmCarConfigurationDelete"
-msgstr "Change configuration"
-
-#: public/js/cars-configurations-list-all.js:87
-#: public/js/cars-configurations-list-car.js:88
-#: public/js/cars-configurations-list-fleet.js:88
-#: public/js/cars-configurations-list-global.js:87
-#: public/js/cars-configurations-list-model.js:89
-#, fuzzy
-#| msgid "Configurazione"
-msgid "sCarsConfigurationsEmptyTable"
-msgstr "Configuration"
-
-#: public/js/cars.js:169
-msgid "confirmCarDelete"
-msgstr ""
-
-#: public/js/csv-details.js:7
-msgid "confirmAssignBonus"
-msgstr ""
-
-#: public/js/csv-details.js:20
-msgid "confirmAssignTripPayed"
-msgstr ""
-
-#: public/js/customer-invoices.js:80 public/js/invoices.js:102
-#: vendor/cup-web/admin-business-module/public/assets-modules/cup-admin-business-module/js/customer-business-invoices.js:52
-msgid "sInvoicesEmptyTable"
-msgstr ""
-
-#: public/js/customers-edit.js:149
-msgid "deactivateUser"
-msgstr ""
-
-#: public/js/customers-edit.js:156
-msgid "reactivateUser"
-msgstr ""
-
-#: public/js/customers-edit.js:163
-#, fuzzy
-#| msgid "Rimuovere disattivazione?"
-msgid "removeDeactivation"
-msgstr "Remove disabling?"
-
-#: public/js/customers.js:89 public/js/failed-extra.js:152
-#: public/js/failed-payments.js:184 public/js/fines.js:251
-#: public/js/reservations.js:98 public/js/zones-list-tab.js:248
-msgid "sCustomersEmptyTable"
-msgstr ""
-
-#: public/js/customers.js:129
-msgid "removeCardConfirm"
-msgstr ""
-
-#: public/js/customers.js:147 public/js/customers.js:173
-#: public/js/customers.js:201 public/js/customers.js:230
-#, fuzzy
-#| msgid "Errore"
-msgid "ajaxError"
-msgstr "An error occurred"
-
-#: public/js/customers.js:180
-msgid "removeBonusConfirm"
-msgstr ""
-
-#: public/js/customers.js:209
-msgid "removepointConfirm"
-msgstr ""
-
-#: public/js/edit-trip.js:11
-msgid "confirmRemoveTries"
-msgstr ""
-
-#: public/js/extra-payments.js:140
-#, fuzzy
-#| msgid "Errore"
-msgid "errorId"
-msgstr "An error occurred"
-
-#: public/js/extra-payments.js:145
-#, fuzzy
-#| msgid "Errore"
-msgid "errorFleet"
-msgstr "An error occurred"
-
-#: public/js/extra-payments.js:151
-#, fuzzy
-#| msgid "Errore"
-msgid "errorType"
-msgstr "An error occurred"
-
-#: public/js/extra-payments.js:157
-#, fuzzy
-#| msgid "Abilitato"
-msgid "errorAddDebit"
-msgstr "Enabled"
-
-#: public/js/extra-payments.js:167
-msgid "errorPenalty"
-msgstr ""
-
-#: public/js/extra-payments.js:171
-#, fuzzy
-#| msgid "Causale"
-msgid "errorCausal"
-msgstr "Cause"
-
-#: public/js/extra-payments.js:178
-msgid "errorAmount"
-msgstr ""
-
-#: public/js/extra-payments.js:213 public/js/extra-payments.js:222
-msgid "confirmPayment"
-msgstr ""
-
-#: public/js/extra-payments.js:215 public/js/extra-payments.js:224
-msgid "confirmPaymentContinue"
-msgstr ""
-
-#: public/js/extra-payments.js:216
-msgid "confirmPaymentRates"
-msgstr ""
-
-#: public/js/extra-payments.js:307
-#, fuzzy
-#| msgid "Penale"
-msgid "penalty"
-msgstr "Penalty"
-
-#: public/js/extra-payments.js:318
-msgid "cause"
-msgstr ""
-
-#: public/js/extra-payments.js:333
-msgid "amount"
-msgstr ""
-
-#: public/js/failed-extra.js:90 public/js/failed-extra.js:98
-#: public/js/failed-payments.js:133
-msgid "customersDetailId"
-msgstr ""
-
-#: public/js/failed-payments.js:125
-msgid "tripDetailId"
-msgstr ""
-
-#: public/js/failed-payments.js:172
-#, fuzzy
-#| msgid "Sconti"
-msgid "continue"
-msgstr "Discount"
-
-#: public/js/foreign-drivers-license.js:35
-msgid "confirmRevoke"
-msgstr ""
-
-#: public/js/foreign-drivers-license.js:36
-#, fuzzy
-#| msgid "Valida"
-msgid "valid"
-msgstr "Validate"
-
-#: public/js/foreign-drivers-license.js:39
-msgid "revoke"
-msgstr ""
-
-#: public/js/foreign-drivers-license.js:42
-msgid "pending"
-msgstr ""
-
-#: public/js/foreign-drivers-license.js:43
-msgid "revoked"
-msgstr ""
-
-#: public/js/foreign-drivers-license.js:45
-#, fuzzy
-#| msgid "Validata"
-msgid "confirmValidate"
-msgstr "Validated"
-
-#: public/js/foreign-drivers-license.js:49
-#, fuzzy
-#| msgid "Validata"
-msgid "validate"
-msgstr "Validated"
-
-#: public/js/foreign-drivers-license.js:112
-#, fuzzy
-#| msgid "Download"
-msgid "download"
-msgstr "Download"
-
-#: public/js/foreign-drivers-license.js:127
-msgid "sDrivingLicenseEmptyTable"
-msgstr ""
-
-#: public/js/invoices.js:69
-msgid "showProfileOf"
-msgstr ""
-
-#: public/js/invoices.js:162
-msgid "renderFirstPayment"
-msgstr ""
-
-#: public/js/invoices.js:164
-msgid "renderTrip"
-msgstr ""
-
-#: public/js/invoices.js:166
-msgid "renderPenality"
-msgstr ""
-
-#: public/js/invoices.js:168
-msgid "renderBonusPackage"
-msgstr ""
-
-#: public/js/moment.min.js:6
-msgid "\n"
-msgstr ""
-
-#: public/js/payments-csv.js:9
-#: vendor/cup-web/admin-business-module/public/assets-modules/cup-admin-business-module/js/business-edit.js:12
-#: vendor/cup-web/admin-business-module/public/assets-modules/cup-admin-business-module/js/business-edit.js:145
-#: vendor/cup-web/admin-business-module/public/assets-modules/cup-admin-business-module/js/business.js:75
-#: vendor/cup-web/admin-business-module/public/assets-modules/cup-admin-business-module/js/time-packages.js:8
-msgid "sEmptyTable"
-msgstr ""
-
-#: public/js/pois.js:92
-msgid "sPoisEmptyTable"
-msgstr ""
-
-#: public/js/pois.js:130
-msgid "confirmPaymentDelete"
-msgstr ""
-
-#: public/js/reservations.js:77
-msgid "showCarPlate"
-msgstr ""
-
-#: public/js/trip-cost.js:39
-msgid "alertEmptyFields"
-msgstr ""
-
-#: public/js/users.js:84
-msgid "sUserEmptyTable"
-msgstr ""
-
-#: public/js/zones-list-tab.js:233
-msgid "zonesListTabDataOnText"
-msgstr ""
-
-#: public/js/zones-list-tab.js:233
-msgid "zonesListTabDataOffText"
-msgstr ""
-
-#: public/js/zones-list-tab.js:236
-msgid "zonesListFocusText"
-msgstr ""
-
 #: vendor/cup-web/admin-business-module/config/module.config.php:490
 msgid "Aziende"
-msgstr ""
+msgstr "Companies"
 
 #: vendor/cup-web/admin-business-module/config/module.config.php:507
-#, fuzzy
-#| msgid "Addebita penale/extra"
 msgid "Addebito penale/extra"
 msgstr "Charge fee/extra"
 
 #: vendor/cup-web/admin-business-module/config/module.config.php:512
-#, fuzzy
-#| msgid "Gestione aree"
 msgid "Gestione pacchetti"
-msgstr "Manage areas"
+msgstr "Package manage"
+
+#: vendor/cup-web/admin-business-module/public/assets-modules/cup-admin-business-module/js/business-edit.js:12
+#: vendor/cup-web/admin-business-module/public/assets-modules/cup-admin-business-module/js/business-edit.js:145
+#: vendor/cup-web/admin-business-module/public/assets-modules/cup-admin-business-module/js/business.js:75
+#: vendor/cup-web/admin-business-module/public/assets-modules/cup-admin-business-module/js/time-packages.js:8
+#, fuzzy
+#| msgid "Configurazione"
+msgid "sEmptyTable"
+msgstr "Configuration"
+
+#: vendor/cup-web/admin-business-module/public/assets-modules/cup-admin-business-module/js/business.js:64
+msgid "modify"
+msgstr ""
+
+#: vendor/cup-web/admin-business-module/public/assets-modules/cup-admin-business-module/js/customer-business-invoices.js:52
+#, fuzzy
+#| msgid "Configurazione"
+msgid "sInvoicesEmptyTable"
+msgstr "Configuration"
 
 #: vendor/cup-web/admin-business-module/src/Controller/BusinessController.php:139
-#, fuzzy
-#| msgid "Nota aggiunta con successo"
 msgid "Azienda aggiunta con successo"
-msgstr "Note added successfully"
+msgstr "Company successfully added"
 
 #: vendor/cup-web/admin-business-module/src/Controller/BusinessController.php:173
-#, fuzzy
-#| msgid "Zona modificata con successo!"
 msgid "Azienda modificata con successo"
-msgstr "Zone modified successfully"
+msgstr "Company successfully modified"
 
 #: vendor/cup-web/admin-business-module/src/Controller/BusinessController.php:197
 #, fuzzy
@@ -2027,10 +1284,8 @@ msgid "Tariffa aggiornata con successo"
 msgstr "New rate created successfully!"
 
 #: vendor/cup-web/admin-business-module/src/Controller/BusinessController.php:213
-#, fuzzy
-#| msgid "La data inserita non è corretta"
 msgid "Valori inseriti non corretti"
-msgstr "Impossible to parse the provided date"
+msgstr "Values ​​entered incorrect"
 
 #: vendor/cup-web/admin-business-module/src/Controller/BusinessController.php:235
 #, fuzzy
@@ -2066,16 +1321,12 @@ msgstr "User successfully created!"
 
 #: vendor/cup-web/admin-business-module/src/Controller/BusinessController.php:467
 #: vendor/cup-web/admin-business-module/src/Form/BusinessConfigParamsForm.php:37
-#, fuzzy
-#| msgid "Gold List"
 msgid "Gold list"
-msgstr "Gold List"
+msgstr ""
 
 #: vendor/cup-web/admin-business-module/src/Controller/BusinessController.php:470
-#, fuzzy
-#| msgid "Modifica"
 msgid "Bonifico"
-msgstr "Edit"
+msgstr "Transfer"
 
 #: vendor/cup-web/admin-business-module/src/Controller/BusinessController.php:473
 msgid "Carta"
@@ -2089,16 +1340,12 @@ msgstr ""
 
 #: vendor/cup-web/admin-business-module/src/Controller/BusinessPaymentsController.php:151
 #: vendor/cup-web/admin-business-module/view/cup-admin-business-module/business-payments/payments-tab.phtml:23
-#, fuzzy
-#| msgid "Pacchetto bonus"
 msgid "Pacchetto minuti"
-msgstr "Bonus pack"
+msgstr "Package minutes"
 
 #: vendor/cup-web/admin-business-module/src/Controller/BusinessPaymentsController.php:153
-#, fuzzy
-#| msgid "Elenco Extra/Penali"
 msgid "Extra / Penale"
-msgstr "Reservations list"
+msgstr "Extra / Fine"
 
 #: vendor/cup-web/admin-business-module/src/Controller/BusinessPaymentsController.php:155
 #: vendor/cup-web/admin-business-module/src/Controller/InvoiceController.php:141
@@ -2113,10 +1360,8 @@ msgstr "Trip"
 
 #: vendor/cup-web/admin-business-module/src/Controller/BusinessPaymentsController.php:157
 #: vendor/cup-web/admin-business-module/view/cup-admin-business-module/business-payments/payments-tab.phtml:26
-#, fuzzy
-#| msgid "Stato Iscrizione"
 msgid "Sottoscrizione"
-msgstr "Registration status"
+msgstr "Registration"
 
 #: vendor/cup-web/admin-business-module/src/Controller/BusinessPaymentsController.php:178
 #: module/Application/view/application/fines/details.phtml:235
@@ -2124,33 +1369,25 @@ msgstr "Registration status"
 #: module/Application/view/application/payments/failed-extra.phtml:71
 #: module/Application/view/application/payments/retry-extra.phtml:270
 #: vendor/cup-web/admin-business-module/view/cup-admin-business-module/business-payments/payments-tab.phtml:31
-#, fuzzy
-#| msgid "Pagata"
 msgid "Pagato"
 msgstr "Payed"
 
 #: vendor/cup-web/admin-business-module/src/Controller/BusinessPaymentsController.php:180
 msgid "Pagato, in attesa di conferma"
-msgstr ""
+msgstr "Paid, awaiting confirmation"
 
 #: vendor/cup-web/admin-business-module/src/Controller/BusinessPaymentsController.php:182
-#, fuzzy
-#| msgid "Pagamento Effettuato"
 msgid "Pagato e fatturato"
-msgstr "Payment is still pending"
+msgstr "Payed and invoiced"
 
 #: vendor/cup-web/admin-business-module/src/Controller/BusinessPaymentsController.php:184
 #: vendor/cup-web/admin-business-module/view/cup-admin-business-module/business-payments/payments-tab.phtml:29
-#, fuzzy
-#| msgid "Pagata"
 msgid "Non pagato"
-msgstr "Payed"
+msgstr "Unpayed"
 
 #: vendor/cup-web/admin-business-module/src/Controller/BusinessPaymentsController.php:204
-#, fuzzy
-#| msgid "Corse non pagate"
 msgid "Conferma come pagata"
-msgstr "Unpaid trips"
+msgstr "Confirm payed"
 
 #: vendor/cup-web/admin-business-module/src/Controller/BusinessTripController.php:183
 #: module/Application/view/application/trips/cost-tab.phtml:104
@@ -2159,10 +1396,8 @@ msgid "n.d."
 msgstr "n.a."
 
 #: vendor/cup-web/admin-business-module/src/Controller/InvoiceController.php:139
-#, fuzzy
-#| msgid "Stato Primo Pagamento"
 msgid "Primo pagamento"
-msgstr "First payment status"
+msgstr "First payment"
 
 #: vendor/cup-web/admin-business-module/src/Controller/InvoiceController.php:143
 #: module/Application/view/application/customers/invoices-tab.phtml:33
@@ -2197,26 +1432,20 @@ msgid "Importo addebito in €"
 msgstr ""
 
 #: vendor/cup-web/admin-business-module/src/Form/ChargePenaltyOrExtraForm.php:49
-#, fuzzy
-#| msgid "Data pagamento"
 msgid "Causale addebito"
-msgstr "Payment date"
+msgstr "Debit cause"
 
 #: vendor/cup-web/admin-business-module/src/Form/Helper/BusinessPaymentHelper.php:23
 msgid "Bonifico Bancario"
-msgstr ""
+msgstr "Bank transfer"
 
 #: vendor/cup-web/admin-business-module/src/Form/Helper/BusinessPaymentHelper.php:25
-#, fuzzy
-#| msgid "Carta di credito inserita"
 msgid "Carta di credito"
-msgstr "Credit Card saved"
+msgstr "Credit Card"
 
 #: vendor/cup-web/admin-business-module/src/Form/Helper/BusinessPaymentHelper.php:27
-#, fuzzy
-#| msgid "Riepilogo settimanale"
 msgid "Settimanale"
-msgstr "Weekly summary"
+msgstr "Weekly"
 
 #: vendor/cup-web/admin-business-module/src/Form/Helper/BusinessPaymentHelper.php:29
 msgid "Quindicinale"
@@ -2224,371 +1453,6 @@ msgstr ""
 
 #: vendor/cup-web/admin-business-module/src/Form/Helper/BusinessPaymentHelper.php:31
 msgid "Mensile"
-msgstr ""
-
-#: vendor/cup-web/core-business/src/Form/InputData/BusinessDataFactory.php:118
-#, fuzzy
-#| msgid "si è verificato un errore"
-msgid "Si è verificato un errore"
-msgstr "An error occurred."
-
-#: vendor/cup-web/core-business/src/Form/InputData/BusinessDataFactory.php:122
-msgid "La quota di iscrizione deve essere di almeno 1€"
-msgstr ""
-
-#: vendor/cup-web/core-business/src/Form/InputData/BusinessDataFactory.php:126
-msgid "Flotta non trovata"
-msgstr ""
-
-#: vendor/cup-web/core-business/src/Form/InputData/BusinessUserFactory.php:21
-#, fuzzy
-#| msgid "Il controller richiesto non può essere inviato"
-msgid "Il nome utente non può essere vuoto"
-msgstr "The requested controller was not dispatchable."
-
-#: vendor/cup-web/core-business/src/Form/InputData/BusinessUserFactory.php:25
-#: vendor/cup-web/core-business/src/Form/InputData/BusinessUserFactory.php:45
-msgid "Password deve essere lunga almeno 8 caratteri"
-msgstr ""
-
-#: vendor/cup-web/core-business/src/Form/InputData/BusinessUserFactory.php:29
-#: vendor/cup-web/core-business/src/Form/InputData/BusinessUserFactory.php:49
-msgid "Le password inserite non coincidono"
-msgstr ""
-
-#: vendor/cup-web/core-business/src/Form/Validator/RecipientCode.php:21
-msgid "Il codice destinatario deve essere una cifra di 7 caratteri numerici"
-msgstr ""
-
-#: vendor/cup-web/core-business/src/Form/Validator/RecipientCode.php:22
-msgid "Il codice destinatario deve avere solo caratteri alfanumerici"
-msgstr ""
-
-#: vendor/cup-web/core-business/src/Form/Validator/VatNumber.php:24
-msgid "La partita IVA non può contenere spazi"
-msgstr ""
-
-#: vendor/cup-web/core-business/src/Form/Validator/VatNumber.php:25
-msgid "La partita IVA deve essere numerica, al più preceduta dal prefisso IT"
-msgstr ""
-
-#: vendor/cup-web/core-business/src/Form/Validator/VatNumber.php:26
-msgid ""
-"La partita IVA deve essere di 11 cifre, al più preceduta dal prefisso IT"
-msgstr ""
-
-#: vendor/cup-web/core-business/src/Form/Validator/VatNumber.php:27
-#, fuzzy
-#| msgid "La flotta selezionata non è valida"
-msgid "La partita IVA non è valida"
-msgstr "The selected fleet is invalid"
-
-#: vendor/cup-web/core-business/src/Service/BusinessPaymentService.php:70
-#, fuzzy
-#| msgid "Codice promo non valido."
-msgid "Importo non valido"
-msgstr "Invalid promo code"
-
-#: vendor/cup-web/core-business/src/Service/BusinessPaymentService.php:74
-msgid "Azienda non trovata"
-msgstr ""
-
-#: vendor/cup-web/core-business/src/Service/BusinessService.php:140
-msgid "Errore di duplicazione codice azienda"
-msgstr ""
-
-#: vendor/cup-web/core-business/src/Service/BusinessService.php:324
-msgid "Senza gruppo"
-msgstr ""
-
-#: vendor/cup-web/core-business/src/Service/GroupService.php:64
-msgid "Nessun gruppo con questo id"
-msgstr ""
-
-#: vendor/cup-web/core-business/src/View/Helper/BusinessEmployeeAvailableActionButtonHelper.php:14
-#: module/Application/view/application/payments-csv/csv.phtml:139
-#: module/Application/view/application/payments-csv/csv.phtml:168
-#: module/Application/view/partials/translations.phtml:3
-#: vendor/cup-web/admin-business-module/view/cup-admin-business-module/business-payments/payments-tab.phtml:93
-msgid "Dettagli"
-msgstr "Details"
-
-#: vendor/cup-web/core-business/src/View/Helper/BusinessEmployeeAvailableActionButtonHelper.php:20
-#: vendor/cup-web/admin-business-module/view/partials/business-employees-table.phtml:37
-#, fuzzy
-#| msgid "Sei sicuro di voler rimuovere questo bonus?"
-msgid "Sei sicuro di voler sbloccare questo utente?"
-msgstr "Are you sure you want to remove this bonus?"
-
-#: vendor/cup-web/core-business/src/View/Helper/BusinessEmployeeAvailableActionButtonHelper.php:22
-#: vendor/cup-web/admin-business-module/view/partials/business-employees-table.phtml:39
-msgid "Sblocca"
-msgstr ""
-
-#: vendor/cup-web/core-business/src/View/Helper/BusinessEmployeeAvailableActionButtonHelper.php:29
-#: vendor/cup-web/admin-business-module/view/partials/business-employees-table.phtml:44
-#, fuzzy
-#| msgid "Sei sicuro di voler rimuovere questo bonus?"
-msgid "Sei sicuro di voler bloccare questo utente?"
-msgstr "Are you sure you want to remove this bonus?"
-
-#: vendor/cup-web/core-business/src/View/Helper/BusinessEmployeeAvailableActionButtonHelper.php:31
-#: vendor/cup-web/admin-business-module/view/partials/business-employees-table.phtml:46
-msgid "Blocca"
-msgstr ""
-
-#: vendor/cup-web/core-business/src/View/Helper/BusinessEmployeeAvailableActionButtonHelper.php:37
-#: vendor/cup-web/admin-business-module/view/partials/business-employees-table.phtml:51
-#, fuzzy
-#| msgid "Sei sicuro di voler rimuovere questo bonus?"
-msgid "Sei sicuro di voler approvare questo utente?"
-msgstr "Are you sure you want to remove this bonus?"
-
-#: vendor/cup-web/core-business/src/View/Helper/BusinessEmployeeAvailableActionButtonHelper.php:39
-#: vendor/cup-web/admin-business-module/view/partials/business-employees-table.phtml:53
-msgid "Approva"
-msgstr ""
-
-#: vendor/cup-web/core-business/src/View/Helper/BusinessEmployeeAvailableActionButtonHelper.php:46
-#: vendor/cup-web/admin-business-module/view/partials/business-employees-table.phtml:58
-#, fuzzy
-#| msgid "Sei sicuro di voler rimuovere questo bonus?"
-msgid "Sei sicuro di voler eliminare questo utente?"
-msgstr "Are you sure you want to remove this bonus?"
-
-#: vendor/cup-web/core-business/src/View/Helper/BusinessEmployeeAvailableActionButtonHelper.php:48
-#: module/Application/view/application/customers/bonus-tab.phtml:44
-#: module/Application/view/application/customers/points-tab.phtml:46
-#: module/Application/view/partials/translations.phtml:5
-#: vendor/cup-web/admin-business-module/view/partials/business-employees-table.phtml:60
-msgid "Elimina"
-msgstr "Delete"
-
-#: vendor/cup-web/core-business/src/View/Helper/BusinessEmployeeStatusHelper.php:24
-#: vendor/cup-web/admin-business-module/view/cup-admin-business-module/business/employees-tab.phtml:16
-msgid "In attesa di approvazione"
-msgstr ""
-
-#: vendor/cup-web/core-business/src/View/Helper/BusinessEmployeeStatusHelper.php:26
-msgid "Bloccato"
-msgstr ""
-
-#: vendor/cup-web/core-business/src/View/Helper/BusinessEmployeeStatusHelper.php:28
-msgid "Approvato"
-msgstr ""
-
-#: vendor/cup-web/core-business/src/View/Helper/BusinessEmployeeStatusHelper.php:30
-#, fuzzy
-#| msgid "Disabilitato"
-msgid "Disattivato"
-msgstr "Disabled"
-
-#: vendor/cup-web/core-business/src/View/Helper/BusinessEmployeeStatusHelper.php:32
-msgid "Approvato, in attesa pagamento iscrizione azienda"
-msgstr ""
-
-#: vendor/mvlabs/sharengo-coremodule/src/SharengoCore/Form/Validator/DisposableEmail.php:21
-#, fuzzy
-#| msgid "Indirizzo"
-msgid "Indirizzo email non accettato"
-msgstr "Address"
-
-#: vendor/mvlabs/sharengo-coremodule/src/SharengoCore/Form/Validator/TaxCode.php:21
-#, fuzzy
-#| msgid "Codice promo non valido."
-msgid "Codice fiscale non valido"
-msgstr "Invalid promo code"
-
-#: vendor/mvlabs/sharengo-coremodule/src/SharengoCore/Form/Validator/TaxCode.php:22
-msgid "Età non consentita per la guida"
-msgstr ""
-
-#: vendor/mvlabs/sharengo-coremodule/src/SharengoCore/Service/CardsService.php:70
-#, php-format
-msgid "Rfid: %s - Codice: %s"
-msgstr "Rfid: %s - Code: %s"
-
-#: vendor/mvlabs/sharengo-coremodule/src/SharengoCore/Service/CarsService.php:204
-msgid "Interna"
-msgstr "Internal"
-
-#: vendor/mvlabs/sharengo-coremodule/src/SharengoCore/Service/CarsService.php:204
-msgid "Esterna"
-msgstr "External"
-
-#: vendor/mvlabs/sharengo-coremodule/src/SharengoCore/Service/CarsService.php:544
-#: module/Application/view/application/zones/list-tab.phtml:64
-#: module/Application/view/partials/notifications/sos-category.phtml:325
-msgid "Mappa"
-msgstr "Map"
-
-#: vendor/mvlabs/sharengo-coremodule/src/SharengoCore/Service/CarsService.php:556
-msgid "(Black Box)"
-msgstr ""
-
-#: vendor/mvlabs/sharengo-coremodule/src/SharengoCore/Service/ConfigurationsService.php:97
-msgid "Si è verificato un errore durante il salvataggio della configurazione"
-msgstr "An error occurred while saving the settings"
-
-#: vendor/mvlabs/sharengo-coremodule/src/SharengoCore/Service/CustomersService.php:349
-#, fuzzy
-#| msgid "Completata"
-msgid "Completata"
-msgstr "Completed"
-
-#: vendor/mvlabs/sharengo-coremodule/src/SharengoCore/Service/CustomersService.php:349
-msgid "Non Completata"
-msgstr "Not completed"
-
-#: vendor/mvlabs/sharengo-coremodule/src/SharengoCore/Service/CustomersService.php:570
-#: vendor/mvlabs/sharengo-coremodule/src/SharengoCore/Service/CustomersService.php:596
-msgid "Codice promo non valido."
-msgstr "Invalid promo code"
-
-#: vendor/mvlabs/sharengo-coremodule/src/SharengoCore/Service/CustomersService.php:574
-msgid "Codice promo già associato a questo account."
-msgstr "Promo code already associated to this account"
-
-#: vendor/mvlabs/sharengo-coremodule/src/SharengoCore/Service/CustomersService.php:1104
-#: vendor/mvlabs/sharengo-coremodule/src/SharengoCore/Service/CustomersService.php:1108
-#, fuzzy
-#| msgid "Codice fiscale"
-msgid "Codice fiscale, genere "
-msgstr "Security number (CF)"
-
-#: vendor/mvlabs/sharengo-coremodule/src/SharengoCore/Service/CustomersService.php:1115
-#, fuzzy
-#| msgid "Codice fiscale"
-msgid "Codice fiscale, data di nascita "
-msgstr "Security number (CF)"
-
-#: vendor/mvlabs/sharengo-coremodule/src/SharengoCore/Service/CustomersService.php:1121
-msgid "Codice fiscale, luogo di nascita incongruente."
-msgstr ""
-
-#: vendor/mvlabs/sharengo-coremodule/src/SharengoCore/Service/CustomersService.php:1129
-msgid "Codice fiscale, sintassi incongruente."
-msgstr ""
-
-#: vendor/mvlabs/sharengo-coremodule/src/SharengoCore/Service/CustomersService.php:1134
-#, fuzzy
-#| msgid "Codice fiscale"
-msgid "Codice fiscale, sintassi errata."
-msgstr "Security number (CF)"
-
-#: vendor/mvlabs/sharengo-coremodule/src/SharengoCore/Service/ReservationsService.php:128
-msgid "PRENOTAZIONE DI SISTEMA"
-msgstr "SYSTEM RESERVATION"
-
-#: vendor/sharengo-web/mollie/src/Mollie/Controller/MolliePaymentsController.php:198
-#, fuzzy
-#| msgid "Formattazione del file non valida"
-msgid "Transazione non valida"
-msgstr "File formatting not valid"
-
-#: vendor/zf-commons/zfc-user/src/ZfcUser/language/msgIds.php:6
-#, fuzzy
-#| msgid "Esterna"
-msgid "Username"
-msgstr "External"
-
-#: vendor/zf-commons/zfc-user/src/ZfcUser/language/msgIds.php:7
-#: module/Application/view/application/customers-edit/edit-tab.phtml:66
-#: module/Application/view/application/customers/info-tab.phtml:58
-#: module/Application/view/application/customers/list.phtml:34
-#: module/Application/view/application/customers/list.phtml:74
-#: module/Application/view/application/foreign-drivers-license/uploaded-files.phtml:28
-#: module/Application/view/application/payments/failed-extra.phtml:30
-#: module/Application/view/application/payments/failed-payments.phtml:66
-#: module/Application/view/application/payments/retry-extra.phtml:102
-#: module/Application/view/application/users/add.phtml:53
-#: module/Application/view/application/users/edit.phtml:53
-#: module/Application/view/application/users/index.phtml:73
-#: module/Application/view/partials/notifications/sos-category.phtml:112
-#: vendor/cup-web/admin-business-module/view/cup-admin-business-module/business/add.phtml:40
-#: vendor/cup-web/admin-business-module/view/cup-admin-business-module/business/business-user-tab.phtml:76
-#: vendor/cup-web/admin-business-module/view/cup-admin-business-module/business/edit-details-tab.phtml:26
-#: vendor/cup-web/admin-business-module/view/cup-admin-business-module/business/info-tab.phtml:32
-#: vendor/cup-web/admin-business-module/view/partials/business-employees-table.phtml:13
-msgid "Email"
-msgstr "Email"
-
-#: vendor/zf-commons/zfc-user/src/ZfcUser/language/msgIds.php:8
-#, fuzzy
-#| msgid "Email"
-msgid "New Email"
-msgstr "Email"
-
-#: vendor/zf-commons/zfc-user/src/ZfcUser/language/msgIds.php:9
-msgid "Verify New Email"
-msgstr ""
-
-#: vendor/zf-commons/zfc-user/src/ZfcUser/language/msgIds.php:10
-msgid "Display Name"
-msgstr ""
-
-#: vendor/zf-commons/zfc-user/src/ZfcUser/language/msgIds.php:11
-#: module/Application/view/application/users/add.phtml:75
-#: module/Application/view/application/users/edit.phtml:75
-#: vendor/cup-web/admin-business-module/view/cup-admin-business-module/business/business-user-tab.phtml:21
-#: vendor/cup-web/admin-business-module/view/cup-admin-business-module/business/business-user-tab.phtml:88
-msgid "Password"
-msgstr "Password"
-
-#: vendor/zf-commons/zfc-user/src/ZfcUser/language/msgIds.php:12
-#, fuzzy
-#| msgid "Password"
-msgid "Password Verify"
-msgstr "Password"
-
-#: vendor/zf-commons/zfc-user/src/ZfcUser/language/msgIds.php:13
-#, fuzzy
-#| msgid "Ripeti Password"
-msgid "Current Password"
-msgstr "Repeat password"
-
-#: vendor/zf-commons/zfc-user/src/ZfcUser/language/msgIds.php:14
-#, fuzzy
-#| msgid "Ripeti Password"
-msgid "Verify New Password"
-msgstr "Repeat password"
-
-#: vendor/zf-commons/zfc-user/src/ZfcUser/language/msgIds.php:15
-#, fuzzy
-#| msgid "Password"
-msgid "New Password"
-msgstr "Password"
-
-#: vendor/zf-commons/zfc-user/src/ZfcUser/language/msgIds.php:16
-msgid "Please type the following text"
-msgstr ""
-
-#: vendor/zf-commons/zfc-user/src/ZfcUser/language/msgIds.php:17
-msgid "Submit"
-msgstr ""
-
-#: vendor/zf-commons/zfc-user/src/ZfcUser/language/msgIds.php:18
-#: vendor/zf-commons/zfc-user/view/zfc-user/user/login.phtml:1
-msgid "Sign In"
-msgstr ""
-
-#: vendor/zf-commons/zfc-user/src/ZfcUser/language/msgIds.php:19
-#: vendor/zf-commons/zfc-user/view/zfc-user/user/register.phtml:1
-#, fuzzy
-#| msgid "Registrazione"
-msgid "Register"
-msgstr "Registration"
-
-#: vendor/zf-commons/zfc-user/src/ZfcUser/language/msgIds.php:20
-msgid "No record matching the input was found"
-msgstr ""
-
-#: vendor/zf-commons/zfc-user/src/ZfcUser/language/msgIds.php:21
-msgid "A record matching the input was found"
-msgstr ""
-
-#: vendor/zf-commons/zfc-user/src/ZfcUser/language/msgIds.php:22
-msgid "Authentication failed. Please try again."
 msgstr ""
 
 #: module/Application/view/application/cars-configurations/add.phtml:8
@@ -2629,8 +1493,8 @@ msgstr "Back to list"
 #: module/Application/view/application/cars/index.phtml:89
 #: module/Application/view/application/customers-edit/edit-tab.phtml:277
 #: module/Application/view/application/customers/info-tab.phtml:190
-#: module/Application/view/application/customers/list.phtml:35
-#: module/Application/view/application/customers/list.phtml:69
+#: module/Application/view/application/customers/list.phtml:36
+#: module/Application/view/application/customers/list.phtml:70
 #: module/Application/view/application/fines/index.phtml:31
 #: module/Application/view/application/fines/index.phtml:122
 #: module/Application/view/application/foreign-drivers-license/uploaded-files.phtml:63
@@ -2727,7 +1591,7 @@ msgstr "Options List"
 #: module/Application/view/application/cars-configurations/list-global.phtml:60
 #: module/Application/view/application/cars-configurations/list-model.phtml:64
 #: module/Application/view/application/customers/bonus-tab.phtml:27
-#: module/Application/view/application/customers/list.phtml:77
+#: module/Application/view/application/customers/list.phtml:78
 #: module/Application/view/application/customers/points-tab.phtml:30
 #: module/Application/view/application/zones/list-tab.phtml:53
 #: vendor/cup-web/admin-business-module/view/cup-admin-business-module/business/index.phtml:76
@@ -2890,7 +1754,7 @@ msgstr "Add auto"
 
 #: module/Application/view/application/cars/commands-tab.phtml:1
 msgid "Esegui comandi sull'auto"
-msgstr ""
+msgstr "Run commands on the car"
 
 #: module/Application/view/application/cars/commands-tab.phtml:6
 msgid "Seleziona..."
@@ -3051,7 +1915,7 @@ msgstr "Action"
 
 #: module/Application/view/application/cars/insurance-tab.phtml:2
 msgid "Polizza assicurativa"
-msgstr ""
+msgstr "Insurance policy"
 
 #: module/Application/view/application/cars/insurance-tab.phtml:11
 msgid "Compagnia"
@@ -3063,7 +1927,7 @@ msgstr "Insurance number"
 
 #: module/Application/view/application/cars/insurance-tab.phtml:50
 msgid "Decorrenza"
-msgstr ""
+msgstr "Effective date"
 
 #: module/Application/view/application/cars/insurance-tab.phtml:56
 #: module/Application/view/application/customers-edit/edit-tab.phtml:328
@@ -3076,10 +1940,8 @@ msgid "GESTIONE SOGLIE ALLARME"
 msgstr "ALARMS THRESHOLD MANAGEMENT"
 
 #: module/Application/view/application/customer-failure/extra-tab.phtml:11
-#, fuzzy
-#| msgid "Elenco pagamenti falliti"
 msgid "Elenco extra/penali falliti"
-msgstr "Payment failures list"
+msgstr "List extra/fines fail"
 
 #: module/Application/view/application/customer-failure/extra-tab.phtml:20
 msgid "Id extra"
@@ -3272,7 +2134,7 @@ msgstr "Registry"
 #: module/Application/view/application/customers-edit/edit-tab.phtml:33
 #: module/Application/view/application/customers/info-tab.phtml:26
 #: module/Application/view/application/customers/list.phtml:27
-#: module/Application/view/application/customers/list.phtml:66
+#: module/Application/view/application/customers/list.phtml:67
 #: module/Application/view/application/foreign-drivers-license/uploaded-files.phtml:26
 #: module/Application/view/application/notifications/index.phtml:32
 #: module/Application/view/application/notifications/index.phtml:91
@@ -3291,7 +2153,7 @@ msgstr "Title"
 #: module/Application/view/application/customers-edit/edit-tab.phtml:57
 #: module/Application/view/application/customers/info-tab.phtml:50
 #: module/Application/view/application/customers/list.phtml:28
-#: module/Application/view/application/customers/list.phtml:68
+#: module/Application/view/application/customers/list.phtml:69
 #: module/Application/view/application/fines/details.phtml:98
 #: module/Application/view/application/foreign-drivers-license/uploaded-files.phtml:27
 #: module/Application/view/application/foreign-drivers-license/uploaded-files.phtml:62
@@ -3310,10 +2172,28 @@ msgstr "Title"
 msgid "Cognome"
 msgstr "Surname"
 
+#: module/Application/view/application/customers-edit/edit-tab.phtml:66
+#: module/Application/view/application/customers/info-tab.phtml:58
+#: module/Application/view/application/customers/list.phtml:35
+#: module/Application/view/application/customers/list.phtml:75
+#: module/Application/view/application/foreign-drivers-license/uploaded-files.phtml:28
+#: module/Application/view/application/payments/failed-extra.phtml:30
+#: module/Application/view/application/payments/failed-payments.phtml:66
+#: module/Application/view/application/payments/retry-extra.phtml:102
+#: module/Application/view/application/users/add.phtml:53
+#: module/Application/view/application/users/edit.phtml:53
+#: module/Application/view/application/users/index.phtml:73
+#: module/Application/view/partials/notifications/sos-category.phtml:112
+#: vendor/cup-web/admin-business-module/view/cup-admin-business-module/business/add.phtml:40
+#: vendor/cup-web/admin-business-module/view/cup-admin-business-module/business/business-user-tab.phtml:76
+#: vendor/cup-web/admin-business-module/view/cup-admin-business-module/business/edit-details-tab.phtml:26
+#: vendor/cup-web/admin-business-module/view/cup-admin-business-module/business/info-tab.phtml:32
+#: vendor/cup-web/admin-business-module/view/partials/business-employees-table.phtml:13
+msgid "Email"
+msgstr "Email"
+
 #: module/Application/view/application/customers-edit/edit-tab.phtml:78
 #: module/Application/view/application/customers/info-tab.phtml:67
-#, fuzzy
-#| msgid "Data di nascita"
 msgid "Dati di nascita"
 msgstr "Birth date"
 
@@ -3323,10 +2203,8 @@ msgstr "Birth date"
 #: module/Application/view/application/customers/info-tab.phtml:73
 #: module/Application/view/application/customers/info-tab.phtml:102
 #: module/Application/view/application/customers/info-tab.phtml:205
-#, fuzzy
-#| msgid "Sanzione"
 msgid "Nazione"
-msgstr "Penalty"
+msgstr "Country"
 
 #: module/Application/view/application/customers-edit/edit-tab.phtml:91
 #: module/Application/view/application/customers-edit/edit-tab.phtml:130
@@ -3344,7 +2222,7 @@ msgstr "Province"
 #: module/Application/view/application/customers-edit/edit-tab.phtml:104
 #: module/Application/view/application/customers/info-tab.phtml:85
 msgid "Comune"
-msgstr ""
+msgstr "Municipality"
 
 #: module/Application/view/application/customers-edit/edit-tab.phtml:111
 #: module/Application/view/application/customers/info-tab.phtml:90
@@ -3355,10 +2233,8 @@ msgstr "Birth date"
 
 #: module/Application/view/application/customers-edit/edit-tab.phtml:118
 #: module/Application/view/application/customers/info-tab.phtml:96
-#, fuzzy
-#| msgid "Residuo"
 msgid "Residenza"
-msgstr "Left"
+msgstr "Residence"
 
 #: module/Application/view/application/customers-edit/edit-tab.phtml:150
 #: module/Application/view/application/customers/info-tab.phtml:114
@@ -3391,10 +2267,8 @@ msgstr "ZIP"
 
 #: module/Application/view/application/customers-edit/edit-tab.phtml:217
 #: module/Application/view/application/customers/info-tab.phtml:133
-#, fuzzy
-#| msgid "Dati Statistici"
 msgid "Dati Fiscali"
-msgstr "Stats"
+msgstr "Tax data"
 
 #: module/Application/view/application/customers-edit/edit-tab.phtml:223
 #: module/Application/view/application/customers/info-tab.phtml:139
@@ -3408,10 +2282,8 @@ msgstr "VAT Number (optional)"
 
 #: module/Application/view/application/customers-edit/edit-tab.phtml:239
 #: module/Application/view/application/customers/info-tab.phtml:153
-#, fuzzy
-#| msgid "Destinatario"
 msgid "Cod. destinatario"
-msgstr "Receiver"
+msgstr "Destination code"
 
 #: module/Application/view/application/customers-edit/edit-tab.phtml:246
 #: module/Application/view/application/customers/info-tab.phtml:159
@@ -3421,15 +2293,13 @@ msgstr ""
 
 #: module/Application/view/application/customers-edit/edit-tab.phtml:253
 #: module/Application/view/application/customers/info-tab.phtml:166
-#, fuzzy
-#| msgid "Contratto"
 msgid "Contatti"
 msgstr "Contract"
 
 #: module/Application/view/application/customers-edit/edit-tab.phtml:259
 #: module/Application/view/application/customers/info-tab.phtml:172
-#: module/Application/view/application/customers/list.phtml:31
-#: module/Application/view/application/customers/list.phtml:70
+#: module/Application/view/application/customers/list.phtml:32
+#: module/Application/view/application/customers/list.phtml:71
 #: module/Application/view/application/foreign-drivers-license/uploaded-files.phtml:29
 #: module/Application/view/application/payments/failed-extra.phtml:69
 #: module/Application/view/application/payments/failed-payments.phtml:65
@@ -3442,6 +2312,7 @@ msgstr "Mobile phone"
 
 #: module/Application/view/application/customers-edit/edit-tab.phtml:265
 #: module/Application/view/application/customers/info-tab.phtml:178
+#: module/Application/view/application/customers/list.phtml:31
 #: vendor/cup-web/admin-business-module/view/cup-admin-business-module/business/add.phtml:45
 #: vendor/cup-web/admin-business-module/view/cup-admin-business-module/business/edit-details-tab.phtml:32
 #: vendor/cup-web/admin-business-module/view/cup-admin-business-module/business/info-tab.phtml:38
@@ -3466,7 +2337,7 @@ msgstr "Driving license data"
 #: module/Application/view/application/customers/edit.phtml:45
 #: module/Application/view/application/customers/info-tab.phtml:212
 #: module/Application/view/application/customers/list.phtml:30
-#: module/Application/view/application/customers/list.phtml:72
+#: module/Application/view/application/customers/list.phtml:73
 #: module/Application/view/partials/notifications/sos-category.phtml:132
 msgid "Patente"
 msgstr "Driving license"
@@ -3513,10 +2384,8 @@ msgstr "Gold List"
 
 #: module/Application/view/application/customers-edit/edit-tab.phtml:407
 #: module/Application/view/application/customers/info-tab.phtml:346
-#, fuzzy
-#| msgid "Gold List"
 msgid "Silver List"
-msgstr "Gold List"
+msgstr ""
 
 #: module/Application/view/application/customers-edit/edit-tab.phtml:422
 #: module/Application/view/application/customers/info-tab.phtml:359
@@ -3564,16 +2433,12 @@ msgid "Disabilita manualmente"
 msgstr "Manually disable"
 
 #: module/Application/view/application/customers-edit/edit-tab.phtml:545
-#, fuzzy
-#| msgid "Sesso"
 msgid "Recesso"
-msgstr "Sex"
+msgstr "Withdrawal"
 
 #: module/Application/view/application/customers-edit/edit-tab.phtml:549
-#, fuzzy
-#| msgid "Contratto cliente"
 msgid "Conferma recessione cliente"
-msgstr "Customer contract"
+msgstr "Customer withdrawal confirmation"
 
 #: module/Application/view/application/customers/add-bonus.phtml:14
 msgid "AGGIUNGI BONUS"
@@ -3628,22 +2493,16 @@ msgid "Aggiungi Card"
 msgstr "Add Card"
 
 #: module/Application/view/application/customers/add-points.phtml:14
-#, fuzzy
-#| msgid "AGGIUNGI POI"
 msgid "AGGIUNGI PUNTI"
-msgstr "ADD POI"
+msgstr "ADD POINTS"
 
 #: module/Application/view/application/customers/add-points.phtml:35
-#, fuzzy
-#| msgid "Numero Punti"
 msgid "Numero punti"
 msgstr "Points number"
 
 #: module/Application/view/application/customers/add-points.phtml:56
-#, fuzzy
-#| msgid "Aggiungi Auto"
 msgid "Aggiungi Punti"
-msgstr "Add auto"
+msgstr "Add points"
 
 #: module/Application/view/application/customers/assign-promo-code.phtml:10
 msgid "ASSOCIA CODICE PROMO"
@@ -3698,6 +2557,13 @@ msgstr "Valid until"
 #: vendor/cup-web/admin-business-module/view/cup-admin-business-module/penalty/charge.phtml:43
 msgid "Tipologia"
 msgstr "Type"
+
+#: module/Application/view/application/customers/bonus-tab.phtml:44
+#: module/Application/view/application/customers/points-tab.phtml:46
+#: module/Application/view/partials/translations.phtml:5
+#: vendor/cup-web/admin-business-module/view/partials/business-employees-table.phtml:60
+msgid "Elimina"
+msgstr "Delete"
 
 #: module/Application/view/application/customers/bonus-tab.phtml:53
 msgid "Il cliente non ha alcun bonus assegnato."
@@ -3769,6 +2635,10 @@ msgid ""
 "Il cliente selezionato non ha al momento un contratto valido con Cartasi"
 msgstr "The selected customer doesn't have a valid contract with CartaSi"
 
+#: module/Application/view/application/customers/discount-tab.phtml:4
+msgid "Sconto cliente attuale"
+msgstr "Current customer discount"
+
 #: module/Application/view/application/customers/discount-tab.phtml:13
 #: module/Application/view/application/payments/failed-payments.phtml:70
 #: module/Application/view/application/payments/retry-payments.phtml:116
@@ -3808,7 +2678,7 @@ msgstr "Contract"
 
 #: module/Application/view/application/customers/edit.phtml:44
 msgid "Extra/Penali fallite"
-msgstr ""
+msgstr "Extra/Fines failure"
 
 #: module/Application/view/application/customers/edit.phtml:46
 msgid "Sconti"
@@ -3832,7 +2702,7 @@ msgstr "First payment status"
 
 #: module/Application/view/application/customers/info-tab.phtml:290
 msgid "Pagamento Effettuato"
-msgstr "Payment is still pending"
+msgstr "Payment done"
 
 #: module/Application/view/application/customers/info-tab.phtml:292
 msgid "Pagamento Non Ancora Effettuato"
@@ -3922,40 +2792,42 @@ msgid "ELENCO CLIENTI"
 msgstr "Customers list"
 
 #: module/Application/view/application/customers/list.phtml:29
-#: module/Application/view/application/customers/list.phtml:75
+#: module/Application/view/application/customers/list.phtml:76
 #: module/Application/view/application/reservations/index.phtml:37
 msgid "Codice Fiscale"
 msgstr "Security number (CF)"
 
-#: module/Application/view/application/customers/list.phtml:32
+#: module/Application/view/application/customers/list.phtml:33
 msgid "Città di residenza"
 msgstr "Home town"
 
-#: module/Application/view/application/customers/list.phtml:33
+#: module/Application/view/application/customers/list.phtml:34
 msgid "Codice Card"
 msgstr "Card code"
 
-#: module/Application/view/application/customers/list.phtml:59
+#: module/Application/view/application/customers/list.phtml:60
 msgid "Elenco clienti"
 msgstr "Customer list"
 
-#: module/Application/view/application/customers/list.phtml:73
+#: module/Application/view/application/customers/list.phtml:74
 msgid "Scadenza Patente"
 msgstr "Driving license expiration date"
 
-#: module/Application/view/application/customers/list.phtml:76
+#: module/Application/view/application/customers/list.phtml:77
 msgid "Registrazione"
 msgstr "Registration"
 
 #: module/Application/view/application/customers/points-tab.phtml:9
 msgid "Aggiungi punti"
-msgstr "Add auto"
+msgstr "Add points"
+
+#: module/Application/view/application/customers/points-tab.phtml:13
+msgid "Punti totali"
+msgstr "Total points"
 
 #: module/Application/view/application/customers/points-tab.phtml:55
-#, fuzzy
-#| msgid "Il cliente non ha alcun bonus assegnato."
 msgid "Il cliente non ha alcun punto assegnato."
-msgstr "The customer doesn't have any assigned bonus."
+msgstr "The customer doesn't have any assigned points."
 
 #: module/Application/view/application/edit-trip/edit-tab.phtml:9
 msgid "La corsa non può essere modificata perché non risulta ancora conclusa."
@@ -4005,10 +2877,8 @@ msgid "Sì"
 msgstr "Yes"
 
 #: module/Application/view/application/fines/details.phtml:17
-#, fuzzy
-#| msgid "Dettagli Anomalia"
 msgid "Dettagli multa"
-msgstr "Anomaly details"
+msgstr "Fine details"
 
 #: module/Application/view/application/fines/details.phtml:34
 #: module/Application/view/application/payments/retry-extra.phtml:41
@@ -4055,15 +2925,11 @@ msgstr ""
 
 #: module/Application/view/application/fines/details.phtml:112
 #: module/Application/view/application/fines/pay.phtml:51
-#, fuzzy
-#| msgid "Durata (minuti)"
 msgid "Data multa"
-msgstr "Duration (minutes)"
+msgstr "Fine date"
 
 #: module/Application/view/application/fines/details.phtml:118
 #: module/Application/view/application/fines/pay.phtml:63
-#, fuzzy
-#| msgid "Id corsa"
 msgid "ID corsa"
 msgstr "Trip ID"
 
@@ -4076,33 +2942,25 @@ msgid "Data inserimento"
 msgstr "Upload date"
 
 #: module/Application/view/application/fines/details.phtml:133
-#, fuzzy
-#| msgid "Flotta"
 msgid "Flotta veicolo"
 msgstr "Fleet"
 
 #: module/Application/view/application/fines/details.phtml:145
-#, fuzzy
-#| msgid "Categoria"
 msgid "Categoria multa"
-msgstr "Category"
+msgstr "Fine category"
 
 #: module/Application/view/application/fines/details.phtml:151
 msgid "Violation Authority"
 msgstr ""
 
 #: module/Application/view/application/fines/details.phtml:160
-#, fuzzy
-#| msgid "Descrizione"
 msgid "Descrizione Multa"
-msgstr "Description"
+msgstr "Fine description"
 
 #: module/Application/view/application/fines/details.phtml:166
 #: module/Application/view/application/fines/pay.phtml:45
-#, fuzzy
-#| msgid "Numero auto"
 msgid "Numero Multa"
-msgstr "Car number"
+msgstr "Fine number"
 
 #: module/Application/view/application/fines/details.phtml:172
 msgid "Status Multa"
@@ -4113,28 +2971,20 @@ msgid "Tipologia Richiesta Multa"
 msgstr ""
 
 #: module/Application/view/application/fines/details.phtml:202
-#, fuzzy
-#| msgid "Costo corsa"
 msgid "Costo multa"
-msgstr "Trip cost"
+msgstr "Fine cost"
 
 #: module/Application/view/application/fines/details.phtml:208
-#, fuzzy
-#| msgid "Completata"
 msgid "Completato"
 msgstr "Completed"
 
 #: module/Application/view/application/fines/details.phtml:214
-#, fuzzy
-#| msgid "Abilitato"
 msgid "Addebitato"
-msgstr "Enabled"
+msgstr "Charged"
 
 #: module/Application/view/application/fines/details.phtml:220
-#, fuzzy
-#| msgid "Data Inserimento"
 msgid "Data Addebito"
-msgstr "Date added"
+msgstr "Debit date"
 
 #: module/Application/view/application/fines/details.phtml:229
 msgid "ID Extra/penale"
@@ -4142,16 +2992,12 @@ msgstr ""
 
 #: module/Application/view/application/fines/details.phtml:241
 #: module/Application/view/application/payments/retry-extra.phtml:267
-#, fuzzy
-#| msgid "Data pagamento"
 msgid "Data addebito"
-msgstr "Payment date"
+msgstr "Debit date"
 
 #: module/Application/view/application/fines/index.phtml:16
-#, fuzzy
-#| msgid "ELENCO UTENTI"
 msgid "ELENCO MULTE"
-msgstr "USER LIST"
+msgstr "FINES LIST"
 
 #: module/Application/view/application/fines/index.phtml:32
 #: module/Application/view/application/payments/failed-extra.phtml:31
@@ -4176,16 +3022,16 @@ msgid "ID Corsa"
 msgstr "Trip ID"
 
 #: module/Application/view/application/fines/index.phtml:34
-#, fuzzy
-#| msgid "Completata"
 msgid "Complete"
 msgstr "Completed"
 
+#: module/Application/view/application/fines/index.phtml:75
+msgid "Mostra/Nascondi multe non pagabili"
+msgstr "Show/Hide non-payable fines"
+
 #: module/Application/view/application/fines/index.phtml:110
-#, fuzzy
-#| msgid "Elenco Auto"
 msgid "Elenco multe"
-msgstr "Car list"
+msgstr "Fines list"
 
 #: module/Application/view/application/fines/index.phtml:125
 msgid "Autorità"
@@ -4208,16 +3054,12 @@ msgid "Costo"
 msgstr "Cost"
 
 #: module/Application/view/application/fines/index.phtml:127
-#, fuzzy
-#| msgid "Stato"
 msgid "Status"
 msgstr "Status"
 
 #: module/Application/view/application/fines/index.phtml:128
-#, fuzzy
-#| msgid "Data fine"
 msgid "Data Infrazione"
-msgstr "End date"
+msgstr "Infraction date"
 
 #: module/Application/view/application/fines/pay.phtml:16
 #, fuzzy
@@ -4346,22 +3188,16 @@ msgid "Valore Car Direction"
 msgstr "Raw Value"
 
 #: module/Application/view/application/notifications/details-incident.phtml:128
-#, fuzzy
-#| msgid "Valore Testuale"
 msgid "Valore Intensità"
-msgstr "Textual value"
+msgstr "Intensity value"
 
 #: module/Application/view/application/notifications/details-incident.phtml:134
-#, fuzzy
-#| msgid "Cognome Cliente"
 msgid "Codice Cliente"
-msgstr "Customer surname"
+msgstr "Customer code"
 
 #: module/Application/view/application/notifications/details-incident.phtml:140
-#, fuzzy
-#| msgid "Codice fiscale"
 msgid "Codice Topic"
-msgstr "Security number (CF)"
+msgstr "Topic code"
 
 #: module/Application/view/application/notifications/details-incident.phtml:148
 msgid "Fleet"
@@ -4434,10 +3270,8 @@ msgid "Webuser"
 msgstr "Webuser"
 
 #: module/Application/view/application/notifications/index.phtml:36
-#, fuzzy
-#| msgid "Non Attivo"
 msgid "Non Gestito"
-msgstr "Idle"
+msgstr "Unmanaged"
 
 #: module/Application/view/application/notifications/index.phtml:84
 msgid "Elenco Notifiche"
@@ -4448,22 +3282,16 @@ msgid "Trip Id"
 msgstr ""
 
 #: module/Application/view/application/notifications/index.phtml:98
-#, fuzzy
-#| msgid "Cognome"
 msgid "Cognome Nome"
-msgstr "Surname"
+msgstr "Surname Name"
 
 #: module/Application/view/application/notifications/index.phtml:99
-#, fuzzy
-#| msgid "Numero patente"
 msgid "Numero cliente"
-msgstr "Driving license number"
+msgstr "Customer number"
 
 #: module/Application/view/application/notifications/index.phtml:100
-#, fuzzy
-#| msgid "Numero patente"
 msgid "Numero modificato cliente"
-msgstr "Driving license number"
+msgstr "Customer number modified"
 
 #: module/Application/view/application/payments-csv/csv.phtml:27
 msgid "Gestione file"
@@ -4505,6 +3333,13 @@ msgstr "Anomalies not fixed"
 #: module/Application/view/error/index.phtml:35
 msgid "File"
 msgstr "File"
+
+#: module/Application/view/application/payments-csv/csv.phtml:139
+#: module/Application/view/application/payments-csv/csv.phtml:168
+#: module/Application/view/partials/translations.phtml:3
+#: vendor/cup-web/admin-business-module/view/cup-admin-business-module/business-payments/payments-tab.phtml:93
+msgid "Dettagli"
+msgstr "Details"
 
 #: module/Application/view/application/payments-csv/csv.phtml:152
 msgid "Anomalie risolte"
@@ -4641,6 +3476,10 @@ msgstr "Product"
 msgid "Risultato"
 msgstr "Result"
 
+#: module/Application/view/application/payments/extra.phtml:125
+msgid "Non definito"
+msgstr "Undefined"
+
 #: module/Application/view/application/payments/failed-extra.phtml:15
 msgid "ELENCO EXTRA/PENALI"
 msgstr "EXTRA/FINES CHARGES"
@@ -4719,7 +3558,7 @@ msgstr "Subscriptions"
 #: module/Application/view/application/payments/recap.phtml:50
 #: module/Application/view/application/payments/recap.phtml:95
 msgid "Multe e penali"
-msgstr "Penalties and fines"
+msgstr "Fines and penalties"
 
 #: module/Application/view/application/payments/recap.phtml:51
 #: module/Application/view/application/payments/recap.phtml:96
@@ -4773,10 +3612,8 @@ msgid "Elenco tentativi effettuati"
 msgstr "Attempts list"
 
 #: module/Application/view/application/payments/retry-extra.phtml:219
-#, fuzzy
-#| msgid "Elenco completo corse con pagamento fallito"
 msgid "Elenco completo extra con pagamento fallito"
-msgstr "Trip list with failed payment"
+msgstr "Complete extra list with failed payment"
 
 #: module/Application/view/application/payments/retry-extra.phtml:248
 msgid "Non ci sono tentativi di pagamento. Extra/Penale resa non pagabile."
@@ -4787,10 +3624,8 @@ msgid "Elenco rate"
 msgstr "List of installments"
 
 #: module/Application/view/application/payments/retry-extra.phtml:268
-#, fuzzy
-#| msgid "Pagamenti"
 msgid "Pagamento padre"
-msgstr "Payments"
+msgstr "Father payment"
 
 #: module/Application/view/application/payments/retry-extra.phtml:269
 msgid "Pagamento Rata"
@@ -4864,15 +3699,15 @@ msgstr "Reservations list"
 
 #: module/Application/view/application/reservations/index.phtml:78
 msgid "Inviata"
-msgstr ""
+msgstr "Send"
 
 #: module/Application/view/application/reservations/index.phtml:79
 msgid "Consumata"
-msgstr ""
+msgstr "Consummate"
 
 #: module/Application/view/application/reservations/index.phtml:80
 msgid "Cancellata"
-msgstr ""
+msgstr "Deleted"
 
 #: module/Application/view/application/trips-not-payed/list.phtml:14
 msgid "CORSE NON PAGATE"
@@ -4907,6 +3742,14 @@ msgstr "Start"
 msgid "Fine"
 msgstr "End"
 
+#: module/Application/view/application/trips-not-payed/list.phtml:73
+#: module/Application/view/application/trips/index.phtml:100
+#: module/Application/view/application/trips/info-tab.phtml:173
+#: module/Application/view/partials/notifications/sos-category.phtml:219
+#: vendor/cup-web/admin-business-module/view/cup-admin-business-module/business-trip/index.phtml:104
+msgid "Durata"
+msgstr "Duration"
+
 #: module/Application/view/application/trips-not-payed/list.phtml:74
 #: module/Application/view/application/trips/index.phtml:101
 #: module/Application/view/application/trips/info-tab.phtml:129
@@ -4921,10 +3764,8 @@ msgid "Dettagli Corsa"
 msgstr "Trip details"
 
 #: module/Application/view/application/trips/cost-tab.phtml:109
-#, fuzzy
-#| msgid "Durata corsa"
 msgid "Durata totale"
-msgstr "Trip duration"
+msgstr "Total duration"
 
 #: module/Application/view/application/trips/cost-tab.phtml:110
 #: module/Application/view/application/trips/cost-tab.phtml:116
@@ -4936,36 +3777,28 @@ msgid "minuti"
 msgstr "minutes"
 
 #: module/Application/view/application/trips/cost-tab.phtml:115
-#, fuzzy
-#| msgid "Data del tentativo"
 msgid "Durata effettiva"
-msgstr "Attempt date"
+msgstr "Effective duration"
 
 #: module/Application/view/application/trips/cost-tab.phtml:121
 msgid "Tariffa corsa"
 msgstr "Trip fee"
 
 #: module/Application/view/application/trips/cost-tab.phtml:127
-#, fuzzy
-#| msgid "Costo corsa"
 msgid "Sconto corsa"
-msgstr "Trip cost"
+msgstr "Travel discount"
 
 #: module/Application/view/application/trips/cost-tab.phtml:139
-#, fuzzy
-#| msgid "Durata corsa"
 msgid "Durata sosta"
-msgstr "Trip duration"
+msgstr "Parking duration"
 
 #: module/Application/view/application/trips/cost-tab.phtml:145
 msgid "Tariffa sosta"
 msgstr "Stop fee"
 
 #: module/Application/view/application/trips/cost-tab.phtml:151
-#, fuzzy
-#| msgid "Secondi di sosta"
 msgid "Sconto sosta"
-msgstr "Stop duration in seconds"
+msgstr "Parking discount"
 
 #: module/Application/view/application/trips/cost-tab.phtml:162
 msgid "Minuti addebitati"
@@ -5031,10 +3864,8 @@ msgid "Modifica corsa"
 msgstr "Edit trip"
 
 #: module/Application/view/application/trips/details.phtml:38
-#, fuzzy
-#| msgid "Mappa a calore"
 msgid "Mappa corsa"
-msgstr "Heat map"
+msgstr "Trip map"
 
 #: module/Application/view/application/trips/index.phtml:16
 #: vendor/cup-web/admin-business-module/view/cup-admin-business-module/business-trip/index.phtml:20
@@ -5087,10 +3918,8 @@ msgid "Business"
 msgstr ""
 
 #: module/Application/view/application/trips/info-tab.phtml:86
-#, fuzzy
-#| msgid "Nome & Cognome"
-msgid "Nome / Cognome"
-msgstr "Name and surname"
+msgid "Nome/Cognome"
+msgstr "Name/Surname"
 
 #: module/Application/view/application/trips/info-tab.phtml:98
 #: module/Application/view/partials/notifications/sos-category.phtml:179
@@ -5103,38 +3932,28 @@ msgid "Numero auto"
 msgstr "Car number"
 
 #: module/Application/view/application/trips/info-tab.phtml:120
-#, fuzzy
-#| msgid "Stato Quadro"
 msgid "Stato quadro"
 msgstr "Panel status"
 
 #: module/Application/view/application/trips/info-tab.phtml:144
-#, fuzzy
-#| msgid "Indirizzo"
 msgid "Indirizzo inizio"
-msgstr "Address"
+msgstr "Start address"
 
 #: module/Application/view/application/trips/info-tab.phtml:150
-#, fuzzy
-#| msgid "Indirizzo"
 msgid "Indirizzo fine"
-msgstr "Address"
+msgstr "End address"
 
 #: module/Application/view/application/trips/info-tab.phtml:182
-#, fuzzy
-#| msgid "Km Inizio"
 msgid "Km inizio"
-msgstr "Start KM"
+msgstr "Start Km"
 
 #: module/Application/view/application/trips/info-tab.phtml:188
-#, fuzzy
-#| msgid "Data fine"
 msgid "Km fine"
-msgstr "End date"
+msgstr "End Km"
 
 #: module/Application/view/application/trips/info-tab.phtml:194
 msgid "Km percorsi"
-msgstr ""
+msgstr "Traveled Km"
 
 #: module/Application/view/application/trips/trip-cost.phtml:18
 msgid "COSTO CORSA"
@@ -5155,10 +3974,8 @@ msgid "Durata corsa"
 msgstr "Trip duration"
 
 #: module/Application/view/application/trips/trip-cost.phtml:48
-#, fuzzy
-#| msgid "Secondi di sosta"
 msgid "Minuti di sosta"
-msgstr "Stop duration in seconds"
+msgstr "Parking minutes"
 
 #: module/Application/view/application/trips/trip-cost.phtml:55
 msgid "Sesso del cliente"
@@ -5214,6 +4031,13 @@ msgstr "Role"
 #: module/Application/view/application/users/edit.phtml:64
 msgid "Ripeti Email"
 msgstr "Repeat Email"
+
+#: module/Application/view/application/users/add.phtml:75
+#: module/Application/view/application/users/edit.phtml:75
+#: vendor/cup-web/admin-business-module/view/cup-admin-business-module/business/business-user-tab.phtml:21
+#: vendor/cup-web/admin-business-module/view/cup-admin-business-module/business/business-user-tab.phtml:88
+msgid "Password"
+msgstr "Password"
 
 #: module/Application/view/application/users/add.phtml:86
 #: module/Application/view/application/users/edit.phtml:86
@@ -5320,6 +4144,11 @@ msgstr "Price list"
 msgid "Elenco Zone"
 msgstr "Zones List"
 
+#: module/Application/view/application/zones/list-tab.phtml:64
+#: module/Application/view/partials/notifications/sos-category.phtml:325
+msgid "Mappa"
+msgstr "Map"
+
 #: module/Application/view/application/zones/prices-tab.phtml:8
 msgid "Condizione"
 msgstr "Condition"
@@ -5419,10 +4248,8 @@ msgid "Intval"
 msgstr "Intval"
 
 #: module/Application/view/partials/map-trip.phtml:14
-#, fuzzy
-#| msgid "Mappa Allarmi"
 msgid "Mappa del viaggio"
-msgstr "Alarm map"
+msgstr "Map of the trip"
 
 #: module/Application/view/partials/menu-user.phtml:14
 msgid "Gestioni Utenti"
@@ -5617,10 +4444,8 @@ msgid "Sei sicuro di voler rimuovere questo bonus?"
 msgstr "Are you sure you want to remove this bonus?"
 
 #: module/Application/view/partials/translations.phtml:43
-#, fuzzy
-#| msgid "Sei sicuro di voler rimuovere questo bonus?"
 msgid "Sei sicuro di voler rimuovere questo punto?"
-msgstr "Are you sure you want to remove this bonus?"
+msgstr "Are you sure you want to remove this point?"
 
 #: module/Application/view/partials/translations.phtml:44
 msgid "Qualcosa è andato storto, riprova!"
@@ -5674,7 +4499,7 @@ msgstr "of an amount of"
 
 #: module/Application/view/partials/translations.phtml:57
 msgid "rateizzato in rate"
-msgstr ""
+msgstr "in installments in installments"
 
 #: module/Application/view/partials/translations.phtml:59
 #: module/Application/view/partials/translations.phtml:60
@@ -5759,333 +4584,116 @@ msgstr "Are you sure you want to assign this bonus to the user?"
 msgid "Sei sicuro di voler contrassegnare questa corsa come pagata?"
 msgstr "Are you sure you want to mark this trip as payed?"
 
-#: module/Reports/view/layout/layout.phtml:33
-msgid "Dati Statistici"
-msgstr "Stats"
-
-#: module/Reports/view/layout/layout.phtml:38
-#: module/Reports/view/reports/index/map.phtml:15
-msgid "Mappa a calore"
-msgstr "Heat map"
-
-#: module/Reports/view/layout/layout.phtml:39
-#: module/Reports/view/reports/index/routes.phtml:20
-msgid "Itinerari"
-msgstr "Routes"
-
-#: module/Reports/view/layout/layout.phtml:40
-#: module/Reports/view/reports/index/live.phtml:15
-msgid "In tempo reale"
-msgstr "Real time"
-
-#: module/Reports/view/partials/reports_translations.phtml:11
-msgid "Roma"
-msgstr "Rome"
-
-#: module/Reports/view/partials/reports_translations.phtml:12
-msgid "Milano"
-msgstr "Milan"
-
-#: module/Reports/view/partials/reports_translations.phtml:13
-msgid "Firenze"
-msgstr "Florence"
-
-#: module/Reports/view/partials/reports_translations.phtml:14
-msgid "Modena"
-msgstr ""
-
-#: module/Reports/view/partials/reports_translations.phtml:15
-msgid "Košice"
-msgstr ""
-
-#: module/Reports/view/partials/reports_translations.phtml:16
-msgid "Dummy fleet"
-msgstr ""
-
-#: module/Reports/view/reports/index/live.phtml:20
-#: module/Reports/view/reports/index/routes.phtml:44
-msgid "Aggiorna i dati"
-msgstr "Update data"
-
-#: module/Reports/view/reports/index/live.phtml:24
-msgid "Nascondi auto ferme"
-msgstr "Hide stationary cars"
-
-#: module/Reports/view/reports/index/live.phtml:30
-#: module/Reports/view/reports/index/map.phtml:36
-msgid "Totali"
-msgstr "Total"
-
-#: module/Reports/view/reports/index/map.phtml:24
-msgid "Intervallo di tempo"
-msgstr "Time interval"
-
-#: module/Reports/view/reports/index/routes.phtml:26
-msgid "Verranno caricate"
-msgstr "Will be loaded"
-
-#: module/Reports/view/reports/index/routes.phtml:31
-msgid "le"
-msgstr "the"
-
-#: module/Reports/view/reports/index/routes.phtml:49
-msgid "Inseguimento"
-msgstr "Following"
-
-#: module/Reports/view/reports/index/routes.phtml:56
-msgid "Manutentori"
-msgstr "Mantainers"
-
-#: module/Reports/view/reports/index/trips.phtml:15
-#: module/Reports/view/reports/index/tripscity.phtml:17
-msgid "Riepilogo Corse"
-msgstr "Trips summary"
-
-#: module/Reports/view/reports/index/trips.phtml:31
-#: module/Reports/view/reports/index/trips.phtml:141
-#: module/Reports/view/reports/index/tripscity.phtml:28
-#: module/Reports/view/reports/index/tripscity.phtml:144
-msgid "Range dati (Ultimi 28 giorni)"
-msgstr "Data range (last 28 days)"
-
-#: module/Reports/view/reports/index/trips.phtml:35
-#: module/Reports/view/reports/index/trips.phtml:50
-#: module/Reports/view/reports/index/trips.phtml:65
-#: module/Reports/view/reports/index/trips.phtml:80
-#: module/Reports/view/reports/index/trips.phtml:93
-#: module/Reports/view/reports/index/trips.phtml:108
-#: module/Reports/view/reports/index/trips.phtml:127
-#: module/Reports/view/reports/index/tripscity.phtml:31
-#: module/Reports/view/reports/index/tripscity.phtml:44
-#: module/Reports/view/reports/index/tripscity.phtml:57
-#: module/Reports/view/reports/index/tripscity.phtml:70
-#: module/Reports/view/reports/index/tripscity.phtml:104
-msgid "filtro"
-msgstr "filter"
-
-#: module/Reports/view/reports/index/trips.phtml:36
-#: module/Reports/view/reports/index/trips.phtml:51
-#: module/Reports/view/reports/index/trips.phtml:66
-#: module/Reports/view/reports/index/trips.phtml:81
-#: module/Reports/view/reports/index/trips.phtml:94
-#: module/Reports/view/reports/index/trips.phtml:109
-#: module/Reports/view/reports/index/trips.phtml:128
-#: module/Reports/view/reports/index/tripscity.phtml:32
-#: module/Reports/view/reports/index/tripscity.phtml:45
-#: module/Reports/view/reports/index/tripscity.phtml:58
-#: module/Reports/view/reports/index/tripscity.phtml:71
-#: module/Reports/view/reports/index/tripscity.phtml:86
-#: module/Reports/view/reports/index/tripscity.phtml:105
-#: module/Reports/view/reports/index/tripscity.phtml:120
-#: module/Reports/view/reports/index/tripscity.phtml:133
-msgid "Azzera"
-msgstr "Clear"
-
-#: module/Reports/view/reports/index/trips.phtml:46
-#: module/Reports/view/reports/index/trips.phtml:142
-#: module/Reports/view/reports/index/tripscity.phtml:40
-#: module/Reports/view/reports/index/tripscity.phtml:145
-msgid "Giorno della settimana"
-msgstr "Day of the week"
-
-#: module/Reports/view/reports/index/trips.phtml:61
-#: module/Reports/view/reports/index/trips.phtml:143
-msgid "Citt&agrave;"
-msgstr "City"
-
-#: module/Reports/view/reports/index/trips.phtml:76
-#: module/Reports/view/reports/index/trips.phtml:144
-#: module/Reports/view/reports/index/tripscity.phtml:53
-#: module/Reports/view/reports/index/tripscity.phtml:146
-msgid "Durata (minuti)"
-msgstr "Duration (minutes)"
-
-#: module/Reports/view/reports/index/trips.phtml:89
-#: module/Reports/view/reports/index/trips.phtml:145
-#: module/Reports/view/reports/index/tripscity.phtml:66
-#: module/Reports/view/reports/index/tripscity.phtml:147
-msgid "Orario inizio corsa"
-msgstr "Start trip time"
-
-#: module/Reports/view/reports/index/trips.phtml:104
-#: module/Reports/view/reports/index/trips.phtml:146
-#: module/Reports/view/reports/index/tripscity.phtml:81
-#: module/Reports/view/reports/index/tripscity.phtml:148
-msgid "Classe di et&agrave;"
-msgstr "Age class"
-
-#: module/Reports/view/reports/index/trips.phtml:123
-#: module/Reports/view/reports/index/trips.phtml:147
-#: module/Reports/view/reports/index/tripscity.phtml:100
-#: module/Reports/view/reports/index/tripscity.phtml:149
-msgid "Sesso"
-msgstr "Sex"
-
-#: module/Reports/view/reports/index/tripscity.phtml:85
-msgid "classe"
-msgstr "class"
-
-#: module/Reports/view/reports/index/tripscity.phtml:115
-msgid "Mappa Distretti"
-msgstr "Districts map"
-
-#: module/Reports/view/reports/index/tripscity.phtml:119
-#: module/Reports/view/reports/index/tripscity.phtml:132
-msgid "selezionati"
-msgstr "Selected"
-
-#: module/Reports/view/reports/index/tripscity.phtml:128
-msgid "Lista Distretti"
-msgstr "Districts list"
-
-#: module/Reports/view/reports/index/tripscity.phtml:150
-msgid "Distretti"
-msgstr "Districts"
-
 #: vendor/cup-web/admin-business-module/view/cup-admin-business-module/business-payments/payments-tab.phtml:18
 #: vendor/cup-web/admin-business-module/view/cup-admin-business-module/business-payments/payments-tab.phtml:90
-#, fuzzy
-#| msgid "Data pagamento"
 msgid "Stato pagamento"
-msgstr "Payment date"
+msgstr "Payment status"
 
 #: vendor/cup-web/admin-business-module/view/cup-admin-business-module/business-payments/payments-tab.phtml:25
-#, fuzzy
-#| msgid "Elenco eventi"
 msgid "Extra/penale"
-msgstr "Events list"
+msgstr "Extra/Fine"
 
 #: vendor/cup-web/admin-business-module/view/cup-admin-business-module/business-payments/payments-tab.phtml:30
 msgid "Pagato ma in attesa di conferma"
-msgstr ""
+msgstr "Paid but awaiting confirmation"
 
 #: vendor/cup-web/admin-business-module/view/cup-admin-business-module/business-payments/payments-tab.phtml:32
-#, fuzzy
-#| msgid "Fatturata"
 msgid "Fatturato"
-msgstr "Billed"
+msgstr "Invoiced"
 
 #: vendor/cup-web/admin-business-module/view/cup-admin-business-module/business-payments/payments-tab.phtml:42
-#, fuzzy
-#| msgid "Data inserimento"
 msgid "Data inserimento da"
-msgstr "Upload date"
+msgstr "Inserted date from"
 
 #: vendor/cup-web/admin-business-module/view/cup-admin-business-module/business-payments/payments-tab.phtml:78
-#, fuzzy
-#| msgid "Elenco eventi"
 msgid "Elenco Pagamenti"
-msgstr "Events list"
+msgstr "Payments list"
 
 #: vendor/cup-web/admin-business-module/view/cup-admin-business-module/business-payments/payments-tab.phtml:91
-#, fuzzy
-#| msgid "Effettua pagamento"
 msgid "Conferma pagamento"
-msgstr "Make payment"
+msgstr "Payment confirm"
 
 #: vendor/cup-web/admin-business-module/view/cup-admin-business-module/business-payments/payments-tab.phtml:92
-#, fuzzy
-#| msgid "Segna come risolta"
 msgid "Segnato come pagato"
-msgstr "Mark as resolved"
+msgstr "Marked as paid"
 
 #: vendor/cup-web/admin-business-module/view/cup-admin-business-module/business-statistics/index.phtml:17
 msgid "STATISTICHE AZIENDE"
-msgstr ""
+msgstr "COMPANY STATISTICS"
 
 #: vendor/cup-web/admin-business-module/view/cup-admin-business-module/business-statistics/index.phtml:32
-#, fuzzy
-#| msgid "Seleziona data fine"
 msgid "Seleziona azienda"
-msgstr "Choose an end date"
+msgstr "Select company"
 
 #: vendor/cup-web/admin-business-module/view/cup-admin-business-module/business-statistics/index.phtml:54
-#, fuzzy
-#| msgid "Aggiorna i dati"
 msgid "Aggiorna grafico"
-msgstr "Update data"
+msgstr "Update graph"
 
 #: vendor/cup-web/admin-business-module/view/cup-admin-business-module/business-trip/index.phtml:43
 #: vendor/cup-web/admin-business-module/view/cup-admin-business-module/invoice/index.phtml:31
 msgid "Azienda"
-msgstr ""
+msgstr "Company"
 
 #: vendor/cup-web/admin-business-module/view/cup-admin-business-module/business-trip/index.phtml:44
-#, fuzzy
-#| msgid "Corse Aperte"
 msgid "Corse aperte da (h)"
-msgstr "Ongoing trips"
+msgstr "Open trips from (h)"
 
 #: vendor/cup-web/admin-business-module/view/cup-admin-business-module/business-trip/index.phtml:97
-#, fuzzy
-#| msgid "Cognome"
 msgid "Cognome/Nome"
-msgstr "Surname"
+msgstr "Surname/Name"
 
 #: vendor/cup-web/admin-business-module/view/cup-admin-business-module/business-trip/index.phtml:99
 msgid "Tel.mobile"
-msgstr ""
+msgstr "Mobile phone"
 
 #: vendor/cup-web/admin-business-module/view/cup-admin-business-module/business-trip/index.phtml:101
-#, fuzzy
-#| msgid "Stato Quadro"
 msgid "Quadro"
-msgstr "Panel status"
+msgstr "Panel"
 
 #: vendor/cup-web/admin-business-module/view/cup-admin-business-module/business-trip/index.phtml:111
 msgid "B2B"
 msgstr ""
 
 #: vendor/cup-web/admin-business-module/view/cup-admin-business-module/business/add.phtml:11
-#, fuzzy
-#| msgid "AGGIUNGI CARD"
 msgid "AGGIUNGI AZIENDA"
-msgstr "ADD CARD"
+msgstr "ADD COMPANY"
 
 #: vendor/cup-web/admin-business-module/view/cup-admin-business-module/business/add.phtml:30
 #: vendor/cup-web/admin-business-module/view/cup-admin-business-module/business/edit-details-tab.phtml:14
 msgid "Ragione Sociale (*)"
-msgstr ""
+msgstr "Business name (*)"
 
 #: vendor/cup-web/admin-business-module/view/cup-admin-business-module/business/add.phtml:35
 #: vendor/cup-web/admin-business-module/view/cup-admin-business-module/business/edit-details-tab.phtml:20
 #: vendor/cup-web/admin-business-module/view/cup-admin-business-module/business/index.phtml:69
 #: vendor/cup-web/admin-business-module/view/cup-admin-business-module/business/info-tab.phtml:26
-#, fuzzy
-#| msgid "Uomini"
 msgid "Domini"
-msgstr "Men"
+msgstr "Domain"
 
 #: vendor/cup-web/admin-business-module/view/cup-admin-business-module/business/add.phtml:35
 #: vendor/cup-web/admin-business-module/view/cup-admin-business-module/business/edit-details-tab.phtml:20
 msgid "separati da uno spazio"
-msgstr ""
+msgstr "separated by a space"
 
 #: vendor/cup-web/admin-business-module/view/cup-admin-business-module/business/add.phtml:53
 #: vendor/cup-web/admin-business-module/view/cup-admin-business-module/business/edit-details-tab.phtml:41
-#, fuzzy
-#| msgid "Indirizzo"
 msgid "Indirizzo (*)"
-msgstr "Address"
+msgstr "Address (*)"
 
 #: vendor/cup-web/admin-business-module/view/cup-admin-business-module/business/add.phtml:58
 #: vendor/cup-web/admin-business-module/view/cup-admin-business-module/business/edit-details-tab.phtml:47
 msgid "CAP (*)"
-msgstr ""
+msgstr "ZIP code (*)"
 
 #: vendor/cup-web/admin-business-module/view/cup-admin-business-module/business/add.phtml:63
 #: vendor/cup-web/admin-business-module/view/cup-admin-business-module/business/edit-details-tab.phtml:53
-#, fuzzy
-#| msgid "Provincia"
 msgid "Provincia (*)"
-msgstr "Province"
+msgstr "Province (*)"
 
 #: vendor/cup-web/admin-business-module/view/cup-admin-business-module/business/add.phtml:68
 #: vendor/cup-web/admin-business-module/view/cup-admin-business-module/business/edit-details-tab.phtml:59
-#, fuzzy
-#| msgid "Città"
 msgid "Città (*)"
-msgstr "City"
+msgstr "City (*)"
 
 #: vendor/cup-web/admin-business-module/view/cup-admin-business-module/business/add.phtml:75
 #: vendor/cup-web/admin-business-module/view/cup-admin-business-module/business/edit-details-tab.phtml:65
@@ -6095,34 +4703,28 @@ msgstr ""
 
 #: vendor/cup-web/admin-business-module/view/cup-admin-business-module/business/add.phtml:80
 #: vendor/cup-web/admin-business-module/view/cup-admin-business-module/business/edit-details-tab.phtml:73
-#, fuzzy
-#| msgid "Partita IVA (opzionale)"
 msgid "Partita IVA (*)"
-msgstr "VAT Number (optional)"
+msgstr "VAT Number (*)"
 
 #: vendor/cup-web/admin-business-module/view/cup-admin-business-module/business/add.phtml:85
 #: vendor/cup-web/admin-business-module/view/cup-admin-business-module/business/edit-params-tab.phtml:33
-#, fuzzy
-#| msgid "Tipo di caricamento dati"
 msgid "Tipo di pagamento"
-msgstr "Data type"
+msgstr "Payment type"
 
 #: vendor/cup-web/admin-business-module/view/cup-admin-business-module/business/add.phtml:90
 #: vendor/cup-web/admin-business-module/view/cup-admin-business-module/business/edit-params-tab.phtml:39
-#, fuzzy
-#| msgid "Effettua pagamento"
 msgid "Frequenza pagamento"
-msgstr "Make payment"
+msgstr "Payment frequency"
 
 #: vendor/cup-web/admin-business-module/view/cup-admin-business-module/business/add.phtml:97
 #: vendor/cup-web/admin-business-module/view/cup-admin-business-module/business/edit-params-tab.phtml:45
 msgid "Frequenza fatturazione"
-msgstr ""
+msgstr "Invoicing frequency"
 
 #: vendor/cup-web/admin-business-module/view/cup-admin-business-module/business/add.phtml:102
 #: vendor/cup-web/admin-business-module/view/cup-admin-business-module/business/edit-params-tab.phtml:25
 msgid "Controllo email aziendale"
-msgstr ""
+msgstr "Check company email"
 
 #: vendor/cup-web/admin-business-module/view/cup-admin-business-module/business/add.phtml:108
 #: vendor/cup-web/admin-business-module/view/cup-admin-business-module/business/edit-params-tab.phtml:53
@@ -6130,30 +4732,26 @@ msgid "Quota di iscrizione (€)"
 msgstr ""
 
 #: vendor/cup-web/admin-business-module/view/cup-admin-business-module/business/add.phtml:113
-#, fuzzy
-#| msgid "Flotta"
 msgid "Flotta (*)"
-msgstr "Fleet"
+msgstr "Fleet (*)"
 
 #: vendor/cup-web/admin-business-module/view/cup-admin-business-module/business/add.phtml:121
 msgid "Percentuale di sconto tariffa corsa (*)"
-msgstr ""
+msgstr "Travel fare discount percentage (*)"
 
 #: vendor/cup-web/admin-business-module/view/cup-admin-business-module/business/add.phtml:127
 msgid "Percentuale di sconto tariffa in sosta (*)"
-msgstr ""
+msgstr "Rate discount rate parked (*)"
 
 #: vendor/cup-web/admin-business-module/view/cup-admin-business-module/business/add.phtml:132
 #: vendor/cup-web/admin-business-module/view/cup-admin-business-module/business/edit-details-tab.phtml:78
 msgid "I campi contrassegnati con (*) sono obbligatori"
-msgstr ""
+msgstr "Fields marked with (*) are mandatory"
 
 #: vendor/cup-web/admin-business-module/view/cup-admin-business-module/business/add.phtml:137
 #: vendor/cup-web/admin-business-module/view/cup-admin-business-module/business/index.phtml:50
-#, fuzzy
-#| msgid "Aggiungi Utente"
 msgid "Aggiungi Azienda"
-msgstr "Add User"
+msgstr "Add Company"
 
 #: vendor/cup-web/admin-business-module/view/cup-admin-business-module/business/business-user-tab.phtml:9
 #, fuzzy
@@ -6178,8 +4776,10 @@ msgid "Email: "
 msgstr "Email"
 
 #: vendor/cup-web/admin-business-module/view/cup-admin-business-module/business/business-user-tab.phtml:14
+#, fuzzy
+#| msgid "Ripeti Password"
 msgid "Cambia password "
-msgstr ""
+msgstr "Repeat password"
 
 #: vendor/cup-web/admin-business-module/view/cup-admin-business-module/business/business-user-tab.phtml:22
 #: vendor/cup-web/admin-business-module/view/cup-admin-business-module/business/business-user-tab.phtml:89
@@ -6188,8 +4788,6 @@ msgstr ""
 
 #: vendor/cup-web/admin-business-module/view/cup-admin-business-module/business/business-user-tab.phtml:33
 #: vendor/cup-web/admin-business-module/view/cup-admin-business-module/business/business-user-tab.phtml:101
-#, fuzzy
-#| msgid "Ripeti Password"
 msgid "Ripeti password"
 msgstr "Repeat password"
 
@@ -6229,8 +4827,10 @@ msgid "Azienda abilitata"
 msgstr "Disabled"
 
 #: vendor/cup-web/admin-business-module/view/cup-admin-business-module/business/edit-params-tab.phtml:61
+#, fuzzy
+#| msgid "Modifica corsa"
 msgid "Modifica parametri aziendali"
-msgstr ""
+msgstr "Edit trip"
 
 #: vendor/cup-web/admin-business-module/view/cup-admin-business-module/business/edit.phtml:18
 #, fuzzy
@@ -6284,6 +4884,10 @@ msgstr ""
 msgid "Approvati"
 msgstr ""
 
+#: vendor/cup-web/admin-business-module/view/cup-admin-business-module/business/employees-tab.phtml:16
+msgid "In attesa di approvazione"
+msgstr ""
+
 #: vendor/cup-web/admin-business-module/view/cup-admin-business-module/business/fare-tab.phtml:11
 #, fuzzy
 #| msgid "Percentuale Sconto"
@@ -6303,23 +4907,19 @@ msgid "Modifica tariffa aziendale"
 msgstr "Edit user"
 
 #: vendor/cup-web/admin-business-module/view/cup-admin-business-module/business/index.phtml:13
-#, fuzzy
-#| msgid "ELENCO CARD"
 msgid "ELENCO AZIENDE"
-msgstr "CARD LIST"
+msgstr "COMPANY LIST"
 
 #: vendor/cup-web/admin-business-module/view/cup-admin-business-module/business/index.phtml:30
 #: vendor/cup-web/admin-business-module/view/cup-admin-business-module/business/index.phtml:67
 #: vendor/cup-web/admin-business-module/view/cup-admin-business-module/business/info-tab.phtml:20
 #: vendor/cup-web/admin-business-module/view/cup-admin-business-module/invoice/index.phtml:29
 msgid "Ragione Sociale"
-msgstr ""
+msgstr "Business name"
 
 #: vendor/cup-web/admin-business-module/view/cup-admin-business-module/business/index.phtml:60
-#, fuzzy
-#| msgid "Elenco Zone"
 msgid "Elenco Aziende"
-msgstr "Zones List"
+msgstr "Company List"
 
 #: vendor/cup-web/admin-business-module/view/cup-admin-business-module/business/index.phtml:71
 msgid "Tel"
@@ -6327,19 +4927,15 @@ msgstr ""
 
 #: vendor/cup-web/admin-business-module/view/cup-admin-business-module/business/index.phtml:72
 msgid "P.IVA"
-msgstr ""
+msgstr "VAT number"
 
 #: vendor/cup-web/admin-business-module/view/cup-admin-business-module/business/index.phtml:75
-#, fuzzy
-#| msgid "Pagamenti"
 msgid "Pagamento"
-msgstr "Payments"
+msgstr "Payment"
 
 #: vendor/cup-web/admin-business-module/view/cup-admin-business-module/business/info-tab.phtml:79
-#, fuzzy
-#| msgid "Partita IVA (opzionale)"
 msgid "Partita IVA"
-msgstr "VAT Number (optional)"
+msgstr "VAT Number"
 
 #: vendor/cup-web/admin-business-module/view/cup-admin-business-module/business/info-tab.phtml:82
 #, fuzzy
@@ -6392,8 +4988,10 @@ msgid "mensile"
 msgstr ""
 
 #: vendor/cup-web/admin-business-module/view/cup-admin-business-module/business/info-tab.phtml:118
+#, fuzzy
+#| msgid "Pagamento Effettuato"
 msgid "Fatturazione frequenza (ultimo)"
-msgstr ""
+msgstr "Payment is still pending"
 
 #: vendor/cup-web/admin-business-module/view/cup-admin-business-module/business/time-packages-tab.phtml:9
 msgid "Salva pacchetti acquistabili"
@@ -6401,8 +4999,10 @@ msgstr ""
 
 #: vendor/cup-web/admin-business-module/view/cup-admin-business-module/business/time-packages-tab.phtml:10
 #: vendor/cup-web/admin-business-module/view/cup-admin-business-module/time-packages/index.phtml:24
+#, fuzzy
+#| msgid "Pacchetto bonus"
 msgid "Crea nuovo pacchetto"
-msgstr ""
+msgstr "Bonus pack"
 
 #: vendor/cup-web/admin-business-module/view/cup-admin-business-module/business/time-packages-tab.phtml:16
 #: vendor/cup-web/admin-business-module/view/cup-admin-business-module/time-packages/index.phtml:31
@@ -6439,7 +5039,7 @@ msgstr "Bonus pack"
 
 #: vendor/cup-web/admin-business-module/view/cup-admin-business-module/invoice/index.phtml:76
 msgid "Ragione sociale"
-msgstr ""
+msgstr "Business name"
 
 #: vendor/cup-web/admin-business-module/view/cup-admin-business-module/penalty/charge.phtml:15
 #, fuzzy
@@ -6460,8 +5060,10 @@ msgid "Addebita importo"
 msgstr "Enabled"
 
 #: vendor/cup-web/admin-business-module/view/cup-admin-business-module/time-packages/add.phtml:10
+#, fuzzy
+#| msgid "ELENCO CLIENTI"
 msgid "CREA PACCHETTO MINUTI"
-msgstr ""
+msgstr "Customers list"
 
 #: vendor/cup-web/admin-business-module/view/cup-admin-business-module/time-packages/add.phtml:35
 #, fuzzy
@@ -6503,167 +5105,512 @@ msgstr "Confirm"
 msgid "PIN Aziendale"
 msgstr ""
 
-#: vendor/sharengo-web/cartasi/view/cartasi/cartasi-payments/rejected-change-card-payment.phtml:10
+#: vendor/cup-web/admin-business-module/view/partials/business-employees-table.phtml:37
 #, fuzzy
-#| msgid "Pagamento annullato o rifutato"
-msgid "Cambio carta annullato o rifutato"
-msgstr "Payment canceled or rejected"
+#| msgid "Sei sicuro di voler rimuovere questo bonus?"
+msgid "Sei sicuro di voler sbloccare questo utente?"
+msgstr "Are you sure you want to remove this bonus?"
 
-#: vendor/sharengo-web/cartasi/view/cartasi/cartasi-payments/rejected-change-card-payment.phtml:11
-#: vendor/sharengo-web/cartasi/view/cartasi/cartasi-payments/rejected-first-payment-multi.phtml:11
-#: vendor/sharengo-web/cartasi/view/cartasi/cartasi-payments/rejected-first-payment.phtml:11
-msgid "La procedura di pagamento con Cartasi ha dato esito "
-msgstr "The payment with Cartasi has been successfull"
-
-#: vendor/sharengo-web/cartasi/view/cartasi/cartasi-payments/rejected-first-payment-multi.phtml:10
-#: vendor/sharengo-web/cartasi/view/cartasi/cartasi-payments/rejected-first-payment.phtml:10
-msgid "Pagamento annullato o rifutato"
-msgstr "Payment canceled or rejected"
-
-#: vendor/sharengo-web/cartasi/view/cartasi/cartasi-payments/return-change-card-payment.phtml:21
-#: vendor/sharengo-web/gpwebpay/view/gp-webpay/gp-webpay-payments/return-change-card-payment.phtml:21
-#: vendor/sharengo-web/mollie/view/mollie/mollie-payments/return-change-card-payment.phtml:26
-#, fuzzy
-#| msgid "Completata"
-msgid "Cambio carta completato"
-msgstr "Completed"
-
-#: vendor/sharengo-web/cartasi/view/cartasi/cartasi-payments/return-change-card-payment.phtml:22
-#: vendor/sharengo-web/gpwebpay/view/gp-webpay/gp-webpay-payments/return-change-card-payment.phtml:22
-#: vendor/sharengo-web/mollie/view/mollie/mollie-payments/return-change-card-payment.phtml:27
-#, fuzzy
-#| msgid "Ti confermiamo la ricezione del pagamento"
-msgid "Ti confermiamo la ricezione dei tuoi nuovi dati."
-msgstr "We confirm we have received the payment"
-
-#: vendor/sharengo-web/cartasi/view/cartasi/cartasi-payments/return-change-card-payment.phtml:33
-#: vendor/sharengo-web/cartasi/view/cartasi/cartasi-payments/return-first-payment-multi.phtml:22
-#: vendor/sharengo-web/cartasi/view/cartasi/cartasi-payments/return-first-payment.phtml:22
-#: vendor/sharengo-web/gpwebpay/view/gp-webpay/gp-webpay-payments/return-change-card-payment.phtml:33
-#: vendor/sharengo-web/gpwebpay/view/gp-webpay/gp-webpay-payments/return-first-payment-multi.phtml:22
-#: vendor/sharengo-web/gpwebpay/view/gp-webpay/gp-webpay-payments/return-first-payment.phtml:22
-#: vendor/sharengo-web/mollie/view/mollie/mollie-payments/return-change-card-payment.phtml:29
-#: vendor/sharengo-web/mollie/view/mollie/mollie-payments/return-first-payment-multi.phtml:22
-#: vendor/sharengo-web/mollie/view/mollie/mollie-payments/return-first-payment.phtml:29
-msgid "Si è verificato un problema"
-msgstr "An error occurred"
-
-#: vendor/sharengo-web/cartasi/view/cartasi/cartasi-payments/return-change-card-payment.phtml:34
-#: vendor/sharengo-web/cartasi/view/cartasi/cartasi-payments/return-first-payment-multi.phtml:23
-#: vendor/sharengo-web/cartasi/view/cartasi/cartasi-payments/return-first-payment.phtml:23
-#: vendor/sharengo-web/gpwebpay/view/gp-webpay/gp-webpay-payments/return-change-card-payment.phtml:34
-#: vendor/sharengo-web/gpwebpay/view/gp-webpay/gp-webpay-payments/return-first-payment-multi.phtml:23
-#: vendor/sharengo-web/gpwebpay/view/gp-webpay/gp-webpay-payments/return-first-payment.phtml:23
-#: vendor/sharengo-web/mollie/view/mollie/mollie-payments/return-change-card-payment.phtml:30
-#: vendor/sharengo-web/mollie/view/mollie/mollie-payments/return-first-payment-multi.phtml:23
-#: vendor/sharengo-web/mollie/view/mollie/mollie-payments/return-first-payment.phtml:30
-msgid "Il pagamento non è andato a buon fine."
-msgstr "The payment has not been successful"
-
-#: vendor/sharengo-web/cartasi/view/cartasi/cartasi-payments/return-change-card-payment.phtml:35
-#: vendor/sharengo-web/cartasi/view/cartasi/cartasi-payments/return-first-payment-multi.phtml:24
-#: vendor/sharengo-web/cartasi/view/cartasi/cartasi-payments/return-first-payment.phtml:24
-#: vendor/sharengo-web/gpwebpay/view/gp-webpay/gp-webpay-payments/return-first-payment-multi.phtml:24
-#: vendor/sharengo-web/gpwebpay/view/gp-webpay/gp-webpay-payments/return-first-payment.phtml:24
-#: vendor/sharengo-web/mollie/view/mollie/mollie-payments/return-first-payment-multi.phtml:24
-msgid "Il messaggio di errore che abbiamo ricevuto è: \""
-msgstr "The error message received is: \""
-
-#: vendor/sharengo-web/cartasi/view/cartasi/cartasi-payments/return-change-card-payment.phtml:36
-#: vendor/sharengo-web/cartasi/view/cartasi/cartasi-payments/return-first-payment-multi.phtml:25
-#: vendor/sharengo-web/cartasi/view/cartasi/cartasi-payments/return-first-payment.phtml:25
-#: vendor/sharengo-web/gpwebpay/view/gp-webpay/gp-webpay-payments/return-change-card-payment.phtml:35
-#: vendor/sharengo-web/gpwebpay/view/gp-webpay/gp-webpay-payments/return-first-payment-multi.phtml:25
-#: vendor/sharengo-web/gpwebpay/view/gp-webpay/gp-webpay-payments/return-first-payment.phtml:25
-#: vendor/sharengo-web/mollie/view/mollie/mollie-payments/return-change-card-payment.phtml:31
-#: vendor/sharengo-web/mollie/view/mollie/mollie-payments/return-first-payment-multi.phtml:25
-#: vendor/sharengo-web/mollie/view/mollie/mollie-payments/return-first-payment.phtml:31
-msgid "Contattare l'assistenza per maggiori informazioni"
-msgstr "Please contact support for further informations"
-
-#: vendor/sharengo-web/cartasi/view/cartasi/cartasi-payments/return-first-payment-multi.phtml:11
-#: vendor/sharengo-web/cartasi/view/cartasi/cartasi-payments/return-first-payment.phtml:11
-#: vendor/sharengo-web/gpwebpay/view/gp-webpay/gp-webpay-payments/return-first-payment-multi.phtml:11
-#: vendor/sharengo-web/gpwebpay/view/gp-webpay/gp-webpay-payments/return-first-payment.phtml:11
-#: vendor/sharengo-web/mollie/view/mollie/mollie-payments/return-first-payment-multi.phtml:11
-#: vendor/sharengo-web/mollie/view/mollie/mollie-payments/return-first-payment.phtml:26
-msgid "Attivazione completata"
-msgstr "Activation completed"
-
-#: vendor/sharengo-web/cartasi/view/cartasi/cartasi-payments/return-first-payment-multi.phtml:12
-#: vendor/sharengo-web/cartasi/view/cartasi/cartasi-payments/return-first-payment.phtml:12
-#: vendor/sharengo-web/gpwebpay/view/gp-webpay/gp-webpay-payments/return-first-payment-multi.phtml:12
-#: vendor/sharengo-web/gpwebpay/view/gp-webpay/gp-webpay-payments/return-first-payment.phtml:12
-#: vendor/sharengo-web/mollie/view/mollie/mollie-payments/return-first-payment-multi.phtml:12
-#: vendor/sharengo-web/mollie/view/mollie/mollie-payments/return-first-payment.phtml:27
-msgid "Ti confermiamo la ricezione del pagamento"
-msgstr "We confirm we have received the payment"
-
-#: vendor/sharengo-web/mollie/view/mollie/mollie-payments/return-change-card-payment.phtml:12
-msgid "Verifica cambio di carta in corso."
+#: vendor/cup-web/admin-business-module/view/partials/business-employees-table.phtml:39
+msgid "Sblocca"
 msgstr ""
 
-#: vendor/sharengo-web/mollie/view/mollie/mollie-payments/return-change-card-payment.phtml:13
-#: vendor/sharengo-web/mollie/view/mollie/mollie-payments/return-first-payment.phtml:13
-msgid "(attendere prego)"
-msgstr ""
-
-#: vendor/sharengo-web/mollie/view/mollie/mollie-payments/return-change-card-payment.phtml:15
-#: vendor/sharengo-web/mollie/view/mollie/mollie-payments/return-first-payment.phtml:15
-msgid "Vai in area riservata"
-msgstr ""
-
-#: vendor/sharengo-web/mollie/view/mollie/mollie-payments/return-first-payment.phtml:12
+#: vendor/cup-web/admin-business-module/view/partials/business-employees-table.phtml:44
 #, fuzzy
-#| msgid "Elaborazione in corso..."
-msgid "Verifica transazione in corso."
-msgstr "Loading..."
+#| msgid "Sei sicuro di voler rimuovere questo bonus?"
+msgid "Sei sicuro di voler bloccare questo utente?"
+msgstr "Are you sure you want to remove this bonus?"
 
-#: vendor/zf-commons/zfc-user/view/zfc-user/user/changeemail.phtml:1
+#: vendor/cup-web/admin-business-module/view/partials/business-employees-table.phtml:46
+msgid "Blocca"
+msgstr ""
+
+#: vendor/cup-web/admin-business-module/view/partials/business-employees-table.phtml:51
+#, fuzzy
+#| msgid "Sei sicuro di voler rimuovere questo bonus?"
+msgid "Sei sicuro di voler approvare questo utente?"
+msgstr "Are you sure you want to remove this bonus?"
+
+#: vendor/cup-web/admin-business-module/view/partials/business-employees-table.phtml:53
+msgid "Approva"
+msgstr ""
+
+#: vendor/cup-web/admin-business-module/view/partials/business-employees-table.phtml:58
+#, fuzzy
+#| msgid "Sei sicuro di voler rimuovere questo bonus?"
+msgid "Sei sicuro di voler eliminare questo utente?"
+msgstr "Are you sure you want to remove this bonus?"
+
+#~ msgid "Spostati su"
+#~ msgstr "Go to"
+
+#~ msgid "Passa a Posizione di Arrivo"
+#~ msgstr "Go to arrival location"
+
+#~ msgid "Passa a Posizione di Partenza"
+#~ msgstr "Go to departure location"
+
+#~ msgid "Corse per Citt&agrave;"
+#~ msgstr "Trips by City"
+
+#~ msgid "corse precedenti a"
+#~ msgstr "trips before"
+
+#~ msgid "Targa Veicolo"
+#~ msgstr "Car plate"
+
+#~ msgid "Numero Punti"
+#~ msgstr "Points number"
+
+#~ msgid "Data Inizio Corsa"
+#~ msgstr "Start Trip Date"
+
+#~ msgid "Data Fine Corsa"
+#~ msgstr "End Trip Date"
+
+#~ msgid "Itinerario"
+#~ msgstr "Route"
+
+#~ msgid "Non sono state trovate corse con i filtri selezionati"
+#~ msgstr "No result with selected filters"
+
+#~ msgid "Controlli"
+#~ msgstr "Controls"
+
+#~ msgid "Ferma"
+#~ msgstr "Stationary"
+
+#~ msgid "Pausa"
+#~ msgstr "Pause"
+
+#~ msgid "Avvia"
+#~ msgstr "Starts"
+
+#~ msgid "Velocit&agrave;"
+#~ msgstr "Speed"
+
+#~ msgid "Data Rilevazione Punto"
+#~ msgstr "Point detection date"
+
+#~ msgid "Blocca Vista su Auto"
+#~ msgstr "Block sight on auto"
+
+#~ msgid "Durata Corsa"
+#~ msgstr "Trip Duration"
+
+#~ msgid "Apri"
+#~ msgstr "Open"
+
+#~ msgid "Lunedi"
+#~ msgstr "Monday"
+
+#~ msgid "Martedi"
+#~ msgstr "Tuesday"
+
+#~ msgid "Mercoledi"
+#~ msgstr "Wednesday"
+
+#~ msgid "Giovedi"
+#~ msgstr "Thursday"
+
+#~ msgid "Venerdi"
+#~ msgstr "Friday"
+
+#~ msgid "Sabato"
+#~ msgstr "Saturday"
+
+#~ msgid "Domenica"
+#~ msgstr "Sunday"
+
+#~ msgid "oltre"
+#~ msgstr "over"
+
+#~ msgid "Uomini"
+#~ msgstr "Men"
+
+#~ msgid "Donne"
+#~ msgstr "Women"
+
+#~ msgid "Area"
+#~ msgstr "Area"
+
+#~ msgid "Concentrazione"
+#~ msgstr "Concentration"
+
+#~ msgid "selezionate di"
+#~ msgstr "selected of "
+
+#~ msgid "corse"
+#~ msgstr "trips"
+
+#~ msgid "Azzera tutti i filtri"
+#~ msgstr "Clear filters"
+
+#~ msgid "Tutte le"
+#~ msgstr "All"
+
+#~ msgid ""
+#~ "corse sono selezionate. Clicca su uno dei grafici per applicarne dei "
+#~ "filtri."
+#~ msgstr "trips are selected. Click on one of the graph to apply filters."
+
+#~ msgid "Si è verificato un errore applicativo nel parsing dei dati CSV."
+#~ msgstr "An error occurred while parsing CSV data."
+
+#~ msgid ""
+#~ "Si è verificato un errore applicativo causato dalla mancanza di uno o "
+#~ "pi&ugrave; parametri."
+#~ msgstr "Application error, missing parameters."
+
+#~ msgid ""
+#~ "Si è verificato un errore applicativo causato dall'invalidit&agrave; di "
+#~ "uno o pi&ugrave; parametri."
+#~ msgstr "Application error, parameters not valid."
+
+#, fuzzy
+#~| msgid "Modifica Configurazione"
+#~ msgid "confirmCarConfigurationDelete"
+#~ msgstr "Change configuration"
+
+#, fuzzy
+#~| msgid "Rimuovere disattivazione?"
+#~ msgid "removeDeactivation"
+#~ msgstr "Remove disabling?"
+
+#, fuzzy
+#~| msgid "Errore"
+#~ msgid "ajaxError"
+#~ msgstr "An error occurred"
+
+#, fuzzy
+#~| msgid "Errore"
+#~ msgid "errorId"
+#~ msgstr "An error occurred"
+
+#, fuzzy
+#~| msgid "Errore"
+#~ msgid "errorFleet"
+#~ msgstr "An error occurred"
+
+#, fuzzy
+#~| msgid "Errore"
+#~ msgid "errorType"
+#~ msgstr "An error occurred"
+
+#, fuzzy
+#~| msgid "Abilitato"
+#~ msgid "errorAddDebit"
+#~ msgstr "Enabled"
+
+#, fuzzy
+#~| msgid "Causale"
+#~ msgid "errorCausal"
+#~ msgstr "Cause"
+
+#, fuzzy
+#~| msgid "Penale"
+#~ msgid "penalty"
+#~ msgstr "Penalty"
+
+#, fuzzy
+#~| msgid "Sconti"
+#~ msgid "continue"
+#~ msgstr "Discount"
+
+#, fuzzy
+#~| msgid "Valida"
+#~ msgid "valid"
+#~ msgstr "Validate"
+
+#, fuzzy
+#~| msgid "Validata"
+#~ msgid "confirmValidate"
+#~ msgstr "Validated"
+
+#, fuzzy
+#~| msgid "Validata"
+#~ msgid "validate"
+#~ msgstr "Validated"
+
+#, fuzzy
+#~| msgid "Download"
+#~ msgid "download"
+#~ msgstr "Download"
+
+#, fuzzy
+#~| msgid "si è verificato un errore"
+#~ msgid "Si è verificato un errore"
+#~ msgstr "An error occurred."
+
+#, fuzzy
+#~| msgid "Il controller richiesto non può essere inviato"
+#~ msgid "Il nome utente non può essere vuoto"
+#~ msgstr "The requested controller was not dispatchable."
+
+#, fuzzy
+#~| msgid "La flotta selezionata non è valida"
+#~ msgid "La partita IVA non è valida"
+#~ msgstr "The selected fleet is invalid"
+
+#, fuzzy
+#~| msgid "Codice promo non valido."
+#~ msgid "Importo non valido"
+#~ msgstr "Invalid promo code"
+
+#, fuzzy
+#~| msgid "Disabilitato"
+#~ msgid "Disattivato"
+#~ msgstr "Disabled"
+
+#, fuzzy
+#~| msgid "Indirizzo"
+#~ msgid "Indirizzo email non accettato"
+#~ msgstr "Address"
+
+#, fuzzy
+#~| msgid "Codice promo non valido."
+#~ msgid "Codice fiscale non valido"
+#~ msgstr "Invalid promo code"
+
+#, fuzzy
+#~| msgid "Il valore identificativo della notifica non è un valore accettato."
+#~ msgid "Il numero identificativo non è corretto"
+#~ msgstr "Id value of the notification is not acceptable."
+
 #, php-format
-msgid "Change Email for %s"
-msgstr ""
+#~ msgid "Rfid: %s - Codice: %s"
+#~ msgstr "Rfid: %s - Code: %s"
 
-#: vendor/zf-commons/zfc-user/view/zfc-user/user/changeemail.phtml:3
-msgid "Email address changed successfully."
-msgstr ""
+#~ msgid "Interna"
+#~ msgstr "Internal"
 
-#: vendor/zf-commons/zfc-user/view/zfc-user/user/changeemail.phtml:5
-msgid "Unable to update your email address. Please try again."
-msgstr ""
+#~ msgid "Esterna"
+#~ msgstr "External"
 
-#: vendor/zf-commons/zfc-user/view/zfc-user/user/changepassword.phtml:1
-#, php-format
-msgid "Change Password for %s"
-msgstr ""
+#~ msgid ""
+#~ "Si è verificato un errore durante il salvataggio della configurazione"
+#~ msgstr "An error occurred while saving the settings"
 
-#: vendor/zf-commons/zfc-user/view/zfc-user/user/changepassword.phtml:3
-msgid "Password changed successfully."
-msgstr ""
-
-#: vendor/zf-commons/zfc-user/view/zfc-user/user/changepassword.phtml:5
-msgid "Unable to update your password. Please try again."
-msgstr ""
-
-#: vendor/zf-commons/zfc-user/view/zfc-user/user/index.phtml:2
 #, fuzzy
-#| msgid "Modello"
-msgid "Hello"
-msgstr "Model"
+#~| msgid "Completata"
+#~ msgid "Completata"
+#~ msgstr "Completed"
 
-#: vendor/zf-commons/zfc-user/view/zfc-user/user/index.phtml:3
+#~ msgid "Non Completata"
+#~ msgstr "Not completed"
+
+#~ msgid "Codice promo non valido."
+#~ msgstr "Invalid promo code"
+
+#~ msgid "Codice promo già associato a questo account."
+#~ msgstr "Promo code already associated to this account"
+
 #, fuzzy
-#| msgid "Log Out"
-msgid "Sign Out"
-msgstr "Log Out"
+#~| msgid "Codice fiscale"
+#~ msgid "Codice fiscale, genere "
+#~ msgstr "Security number (CF)"
 
-#: vendor/zf-commons/zfc-user/view/zfc-user/user/login.phtml:14
-msgid "Not registered?"
-msgstr ""
+#, fuzzy
+#~| msgid "Codice fiscale"
+#~ msgid "Codice fiscale, data di nascita "
+#~ msgstr "Security number (CF)"
 
-#: vendor/zf-commons/zfc-user/view/zfc-user/user/login.phtml:14
-msgid "Sign up!"
-msgstr ""
+#, fuzzy
+#~| msgid "Codice fiscale"
+#~ msgid "Codice fiscale, sintassi errata."
+#~ msgstr "Security number (CF)"
+
+#~ msgid "PRENOTAZIONE DI SISTEMA"
+#~ msgstr "SYSTEM RESERVATION"
+
+#, fuzzy
+#~| msgid "Formattazione del file non valida"
+#~ msgid "Transazione non valida"
+#~ msgstr "File formatting not valid"
+
+#, fuzzy
+#~| msgid "Formattazione del file non valida"
+#~ msgid "Transazione non valida (id non trovato)"
+#~ msgstr "File formatting not valid"
+
+#, fuzzy
+#~| msgid "Esterna"
+#~ msgid "Username"
+#~ msgstr "External"
+
+#, fuzzy
+#~| msgid "Email"
+#~ msgid "New Email"
+#~ msgstr "Email"
+
+#, fuzzy
+#~| msgid "Password"
+#~ msgid "Password Verify"
+#~ msgstr "Password"
+
+#, fuzzy
+#~| msgid "Ripeti Password"
+#~ msgid "Current Password"
+#~ msgstr "Repeat password"
+
+#, fuzzy
+#~| msgid "Ripeti Password"
+#~ msgid "Verify New Password"
+#~ msgstr "Repeat password"
+
+#, fuzzy
+#~| msgid "Password"
+#~ msgid "New Password"
+#~ msgstr "Password"
+
+#, fuzzy
+#~| msgid "Registrazione"
+#~ msgid "Register"
+#~ msgstr "Registration"
+
+#~ msgid "Dati Statistici"
+#~ msgstr "Stats"
+
+#~ msgid "Mappa a calore"
+#~ msgstr "Heat map"
+
+#~ msgid "Itinerari"
+#~ msgstr "Routes"
+
+#~ msgid "In tempo reale"
+#~ msgstr "Real time"
+
+#~ msgid "Roma"
+#~ msgstr "Rome"
+
+#~ msgid "Milano"
+#~ msgstr "Milan"
+
+#~ msgid "Firenze"
+#~ msgstr "Florence"
+
+#~ msgid "Aggiorna i dati"
+#~ msgstr "Update data"
+
+#~ msgid "Nascondi auto ferme"
+#~ msgstr "Hide stationary cars"
+
+#~ msgid "Totali"
+#~ msgstr "Total"
+
+#~ msgid "Intervallo di tempo"
+#~ msgstr "Time interval"
+
+#~ msgid "Verranno caricate"
+#~ msgstr "Will be loaded"
+
+#~ msgid "le"
+#~ msgstr "the"
+
+#~ msgid "Inseguimento"
+#~ msgstr "Following"
+
+#~ msgid "Manutentori"
+#~ msgstr "Mantainers"
+
+#~ msgid "Riepilogo Corse"
+#~ msgstr "Trips summary"
+
+#~ msgid "Range dati (Ultimi 28 giorni)"
+#~ msgstr "Data range (last 28 days)"
+
+#~ msgid "filtro"
+#~ msgstr "filter"
+
+#~ msgid "Azzera"
+#~ msgstr "Clear"
+
+#~ msgid "Giorno della settimana"
+#~ msgstr "Day of the week"
+
+#~ msgid "Citt&agrave;"
+#~ msgstr "City"
+
+#~ msgid "Durata (minuti)"
+#~ msgstr "Duration (minutes)"
+
+#~ msgid "Orario inizio corsa"
+#~ msgstr "Start trip time"
+
+#~ msgid "Classe di et&agrave;"
+#~ msgstr "Age class"
+
+#~ msgid "Sesso"
+#~ msgstr "Sex"
+
+#~ msgid "classe"
+#~ msgstr "class"
+
+#~ msgid "Mappa Distretti"
+#~ msgstr "Districts map"
+
+#~ msgid "selezionati"
+#~ msgstr "Selected"
+
+#~ msgid "Lista Distretti"
+#~ msgstr "Districts list"
+
+#~ msgid "Distretti"
+#~ msgstr "Districts"
+
+#, fuzzy
+#~| msgid "Completata"
+#~ msgid "Cambio carta completato"
+#~ msgstr "Completed"
+
+#~ msgid "Ti confermiamo la ricezione del pagamento"
+#~ msgstr "We confirm we have received the payment"
+
+#~ msgid "Si è verificato un problema"
+#~ msgstr "An error occurred"
+
+#~ msgid "Il pagamento non è andato a buon fine."
+#~ msgstr "The payment has not been successful"
+
+#~ msgid "Il messaggio di errore che abbiamo ricevuto è: \""
+#~ msgstr "The error message received is: \""
+
+#~ msgid "Contattare l'assistenza per maggiori informazioni"
+#~ msgstr "Please contact support for further informations"
+
+#~ msgid "Attivazione completata"
+#~ msgstr "Activation completed"
+
+#, fuzzy
+#~| msgid "Pagamento annullato o rifutato"
+#~ msgid "Cambio carta annullato o rifutato"
+#~ msgstr "Payment canceled or rejected"
+
+#~ msgid "La procedura di pagamento con Cartasi ha dato esito "
+#~ msgstr "The payment with Cartasi has been successfull"
+
+#~ msgid "Pagamento annullato o rifutato"
+#~ msgstr "Payment canceled or rejected"
+
+#, fuzzy
+#~| msgid "Ti confermiamo la ricezione del pagamento"
+#~ msgid "Ti confermiamo la ricezione dei tuoi nuovi dati."
+#~ msgstr "We confirm we have received the payment"
+
+#, fuzzy
+#~| msgid "Elaborazione in corso..."
+#~ msgid "Verifica transazione in corso."
+#~ msgstr "Loading..."
+
+#, fuzzy
+#~| msgid "Modello"
+#~ msgid "Hello"
+#~ msgstr "Model"
+
+#, fuzzy
+#~| msgid "Log Out"
+#~ msgid "Sign Out"
+#~ msgstr "Log Out"
 
 #~ msgid "Seleziona Flotta"
 #~ msgstr "Select a fleet"

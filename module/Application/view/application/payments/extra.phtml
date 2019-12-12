@@ -122,22 +122,22 @@ var causalOptions = "";
 $('#type').change(function() {
     if($('#type').val() == "extra"){
         <?php
-        echo 'causalOptions = "';
-        echo '<option>Non definito</option>';
-        foreach($this->causal as $causal) {
-            $dataVat = 'data-vat-id=\"\"';
-            $dataVatDescription = '';
-            if(!is_null($causal->getVat())) {
-                $dataVat = sprintf('data-vat-id=\"%d\"', $causal->getVat()->getId());
-                $dataVatDescription = sprintf(' (%s)',  $causal->getVat()->getDescription());
+            echo sprintf('causalOptions = "<option>%s</option>', $this->translate("Non definito") );
+
+            foreach($this->causal as $causal) {
+                $dataVat = 'data-vat-id=\"\"';
+                $dataVatDescription = '';
+                if(!is_null($causal->getVat())) {
+                    $dataVat = sprintf('data-vat-id=\"%d\"', $causal->getVat()->getId());
+                    $dataVatDescription = sprintf(' (%s)',  $causal->getVat()->getDescription());
+                }
+
+                $reason = sprintf('%s%s', $causal->getReason(), $dataVatDescription);
+                $dataReason = sprintf('data-reason=\"%s\"', $reason);
+
+                echo sprintf('<option %s %s>%s</option>', $dataReason, $dataVat,  $reason);
             }
-
-            $reason = sprintf('%s%s', $causal->getReason(), $dataVatDescription);
-            $dataReason = sprintf('data-reason=\"%s\"', $reason);
-
-            echo sprintf('<option %s %s>%s</option>', $dataReason, $dataVat,  $reason);
-        }
-        echo '"';
+            echo '"';
         ?>
     }
 });
