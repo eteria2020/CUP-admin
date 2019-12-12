@@ -1,0 +1,21 @@
+<?php
+
+return [
+    'bankart' => [
+
+        'username' => 'ApiSharengo',
+        'password' => 'lu$wIYIPK?2QV?CqH!I*$hSl0ph9#',
+        'api_key' => '2083302IT500782-Sim',
+        'shared_secret' => 'Y6roszpSJMZvosoM5Mig2dPuVDpmon',
+
+        'currency' => 'EUR',
+        'locale' => 'sl_SI',
+
+        'return_first_payment' => 'https://public.sharengo.si/bankart/return-first-payment',
+        'first_payment_amount' => 500,
+        'return_change_card_payment' => 'https://public.sharengo.si/bankart/return-change-card',
+        'change_card_amount' => 100,
+
+        'valid_ip' => ''
+    ]
+];

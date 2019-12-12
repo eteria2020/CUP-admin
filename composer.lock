@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "1db2b8d902655e9fdc3dee7d10220ff9",
+    "content-hash": "411c6f477ecdff8aa519bcb407cf1704",
     "packages": [
         {
             "name": "bjyoungblood/bjy-authorize",
@@ -2169,7 +2169,7 @@
             "source": {
                 "type": "git",
                 "url": "ssh://git@git.sharengo.it/cup-it/core.git",
-                "reference": "37f47fd8463098520e1988edc018bd7c097c1de0"
+                "reference": "0f405c5db69e6e331bc4b210a1a0b3961d4aaf7a"
             },
             "require": {
                 "doctrine/doctrine-orm-module": "0.*",
@@ -2183,8 +2183,7 @@
             },
             "require-dev": {
                 "mockery/mockery": "^0.9.4",
-                "phpunit/phpunit": "^4.7",
-                "smsgatewayme/client": "^0.0.1"
+                "phpunit/phpunit": "^4.7"
             },
             "type": "library",
             "autoload": {
@@ -2193,7 +2192,7 @@
                 }
             },
             "description": "Core ZF2 module for Sharengo apps",
-            "time": "2019-11-27T08:44:21+00:00"
+            "time": "2019-12-12T08:22:37+00:00"
         },
         {
             "name": "mvlabs/zf2-multilanguage",
@@ -2491,6 +2490,29 @@
                 "zf2"
             ],
             "time": "2015-03-12T07:10:33+00:00"
+        },
+        {
+            "name": "sharengo-web/bankart",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "ssh://git@git.sharengo.it/cup-it/bankart.git",
+                "reference": "106570aaf52908efb20088fbdae0ed9d88a13f94"
+            },
+            "require": {
+                "doctrine/doctrine-orm-module": "0.*",
+                "php": ">=5.4.0",
+                "sharengo-web/cartasi": "dev-master",
+                "zendframework/zendframework": "2.4.*"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "Bankart": "src/"
+                }
+            },
+            "description": "Bankart module for Sharengo",
+            "time": "2019-12-12T08:29:06+00:00"
         },
         {
             "name": "sharengo-web/cartasi",
@@ -4531,6 +4553,7 @@
         "mvlabs/omnipay-cartasi": 20,
         "sharengo-web/gpwebpay": 20,
         "sharengo-web/mollie": 20,
+        "sharengo-web/bankart": 20,
         "phpmd/phpmd": 0
     },
     "prefer-stable": false,
