@@ -43,6 +43,10 @@
         {
             "url": "ssh://git@git.sharengo.it/cup-it/mollie.git",
             "type": "git"
+        },
+        {
+            "url": "ssh://git@git.sharengo.it/cup-it/bankart.git",
+            "type": "git"
         }
 
     ],
@@ -70,6 +74,7 @@
         "usu/codice-fiscale": "^1.0",
         "sharengo-web/gpwebpay": "dev-master",
         "sharengo-web/mollie": "dev-master",
+        "sharengo-web/bankart": "dev-master",
         "mattketmo/email-checker": "^1.5"
     },
     "require-dev": {
