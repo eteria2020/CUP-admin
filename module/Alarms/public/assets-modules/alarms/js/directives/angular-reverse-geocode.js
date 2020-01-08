@@ -15,7 +15,6 @@ angular.module('SharengoCsApp')
                                 method: 'GET',
                                 url: 'https://maps.sharengo.it/reverse.php?format=json&zoom=18&addressdetails=1&lon=' + scope.lng + '&lat=' + scope.lat
                             }).then(function successCallback(response) {
-                                console.log(response);
                                 element.text(response.data.display_name);
                             }, function errorCallback(response) {
 
