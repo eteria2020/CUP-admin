@@ -11,6 +11,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 
 - Modified _angular-reverse-geocode.js_ in CallCenter and Alarms modules. Replace the Google reverse geocoding with maps.sharengo.it
+- Modified Google API version from 3.31 to 'weekly', as Google recommends
 
 
 ## [1.0.9] - 2019-12-12
