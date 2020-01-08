@@ -3,7 +3,7 @@
 angular.module('SharengoCsApp').config(function (uiGmapGoogleMapApiProvider) {
     uiGmapGoogleMapApiProvider.configure({
         key: 'AIzaSyAJI72g18pmBzA3coDaeZXUgMVuQk-_VjY',
-        v: '3.31',
+        v: 'weekly',
         libraries: 'weather,geometry,visualization'
     });
 });
