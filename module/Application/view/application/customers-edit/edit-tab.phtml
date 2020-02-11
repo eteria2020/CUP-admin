@@ -226,21 +226,18 @@ $form->get('customer')->get('fleet')->setValue($this->customer->getFleet()->getI
                                 </div>
                             </div>
                         </div>
-
                         <div class="col-lg-3">
                             <div class="form-group">
                                 <label for="vat"><?= $this->translate("Partita IVA (opzionale)"); ?></label>
                                 <?= $this->formRow($form->get('customer')->get('vat')->setAttribute('readonly', 'true')); ?>
                             </div>
                         </div>
-
                         <div class="col-lg-3">
                             <div class="form-group">
                                 <label for="gender"><?= $this->translate("Cod. destinatario"); ?></label>
                                 <?= $this->formRow($form->get('customer')->get('recipientCode')->setAttribute('readonly', 'true')); ?>
                             </div>
                         </div>
-
                         <div class="col-lg-3">
                             <div class="form-group">
                                 <label for="surname"><?= $this->translate("PEC"); ?></label>
@@ -276,6 +273,38 @@ $form->get('customer')->get('fleet')->setValue($this->customer->getFleet()->getI
                             <div class="form-group">
                                 <label for="fleet"><?= $this->translate("Flotta"); ?></label>
                                 <?= $this->formRow($form->get('customer')->get('fleet')); ?>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-lg-3">
+                            <b><?= $this->translate("Condizioni Contrattuali"); ?></b>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-3">
+                            <div class="form-group">
+                                <div class="glyphicon <?= $this->customer->getPrivacyCondition()?"glyphicon-ok-sign":"glyphicon-remove-sign"; ?>" readonly="readonly"></div>
+                                <label for="mobile"><?= $this->translate("Privacy"); ?></label>
+                            </div>
+                        </div>
+                        <div class="col-lg-3">
+                            <div class="form-group">
+                                <div class="glyphicon <?= $this->customer->getGeneralCondition2()?"glyphicon-ok-sign":"glyphicon-remove-sign"; ?>" readonly="readonly"></div>
+                                <label for="phone"><?= $this->translate("Contratto"); ?></label>
+                            </div>
+                        </div>
+                        <div class="col-lg-3">
+                            <div class="form-group">
+                                <div class="glyphicon <?= $this->customer->getGeneralCondition1()?"glyphicon-ok":"glyphicon-remove"; ?>" readonly="readonly"></div>
+                                <label for="language"><?= $this->translate("Condizioni assicurative"); ?></label>
+                            </div>
+                        </div>
+                        <div class="col-lg-3">
+                            <div class="form-group">
+                                <div class="glyphicon <?= $this->customer->getNewsletter()?"glyphicon-ok":"glyphicon-remove"; ?>" readonly="readonly"></div>
+                                <label for="fleet"><?= $this->translate("News letter"); ?></label>
                             </div>
                         </div>
                     </div>
@@ -351,7 +380,6 @@ $form->get('customer')->get('fleet')->setValue($this->customer->getFleet()->getI
 
             <div class="panel-heading"><?= $this->translate("Altri dati"); ?></div>
             <div class="panel-body">
-
                 <div class="row">
                     <div class="col-lg-12">
                         <div class="form-group">
@@ -360,47 +388,42 @@ $form->get('customer')->get('fleet')->setValue($this->customer->getFleet()->getI
                         </div>
                     </div>
                 </div>
-
-
-                    <div class="row">
-                        <div class="col-lg-12">
-                            <div class="form-group">
-                                <label for="gender"><?= $this->translate("Percentuale Sconto"); ?></label>
-                                <?= $this->formRow(is_null($formSetting->get('setting')->get('discountRate')) ? '0' : $formSetting->get('setting')->get('discountRate'));                                ?>
-                            </div>
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="form-group">
+                            <label for="gender"><?= $this->translate("Percentuale Sconto"); ?></label>
+                            <?= $this->formRow(is_null($formSetting->get('setting')->get('discountRate')) ? '0' : $formSetting->get('setting')->get('discountRate'));                                ?>
                         </div>
                     </div>
-
-                    <div class="row">
-                        <div class="col-lg-12">
-                            <div class="form-group">
-                                <label for="goldList"><?= $this->translate("Maintainer"); ?></label>
-                                <?php
-                                    if($this->isAllowed('customer', 'maintainer')) {
-                                        echo $this->formRow($formSetting->get('setting')->get('maintainer'));
-                                    } else {
-                                        echo $this->formRow($formSetting->get('setting')->get('maintainer')->setAttribute('disabled', 'true'));
-                                    }
-                                ?>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="row">
-                        <div class="col-lg-12">
-                            <div class="form-group">
-                                <label for="goldList"><?= $this->translate("Gold List"); ?></label>
-                                <?php
-                                if ($this->isAllowed('customer', 'goldList')) {
-                                    echo $this->formRow($formSetting->get('setting')->get('goldList'));
+                </div>
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="form-group">
+                            <label for="goldList"><?= $this->translate("Maintainer"); ?></label>
+                            <?php
+                                if($this->isAllowed('customer', 'maintainer')) {
+                                    echo $this->formRow($formSetting->get('setting')->get('maintainer'));
                                 } else {
-                                    echo $this->formRow($formSetting->get('setting')->get('goldList')->setAttribute('disabled', 'true'));
+                                    echo $this->formRow($formSetting->get('setting')->get('maintainer')->setAttribute('disabled', 'true'));
                                 }
-                                ?>
-                            </div>
+                            ?>
                         </div>
                     </div>
-
+                </div>
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="form-group">
+                            <label for="goldList"><?= $this->translate("Gold List"); ?></label>
+                            <?php
+                            if ($this->isAllowed('customer', 'goldList')) {
+                                echo $this->formRow($formSetting->get('setting')->get('goldList'));
+                            } else {
+                                echo $this->formRow($formSetting->get('setting')->get('goldList')->setAttribute('disabled', 'true'));
+                            }
+                            ?>
+                        </div>
+                    </div>
+                </div>
                 <div class="row">
                     <div class="col-lg-12">
                         <div class="form-group">
@@ -415,35 +438,30 @@ $form->get('customer')->get('fleet')->setValue($this->customer->getFleet()->getI
                         </div>
                     </div>
                 </div>
-
-                    <div class="row">
-                        <div class="col-lg-12">
-                            <div class="form-group">
-                                <label for="firstPaymentCompleted"><?= $this->translate("First Payment Completed"); ?></label>
-                                <?php
-                                if ($this->isAllowed('customer', 'firstPaymentCompleted')) {
-                                    if($customer->getRegistrationCompleted()){
-                                        echo $this->formRow($formSetting->get('setting')->get('firstPaymentCompleted'));
-                                    }else{
-                                        echo $this->formRow($formSetting->get('setting')->get('firstPaymentCompleted')->setAttribute('disabled', 'true'));
-                                    }
-                                } else {
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="form-group">
+                            <label for="firstPaymentCompleted"><?= $this->translate("First Payment Completed"); ?></label>
+                            <?php
+                            if ($this->isAllowed('customer', 'firstPaymentCompleted')) {
+                                if($customer->getRegistrationCompleted()){
+                                    echo $this->formRow($formSetting->get('setting')->get('firstPaymentCompleted'));
+                                }else{
                                     echo $this->formRow($formSetting->get('setting')->get('firstPaymentCompleted')->setAttribute('disabled', 'true'));
                                 }
-                                ?>
-                            </div>
+                            } else {
+                                echo $this->formRow($formSetting->get('setting')->get('firstPaymentCompleted')->setAttribute('disabled', 'true'));
+                            }
+                            ?>
                         </div>
                     </div>
-
-
-                    <div class="row">
-                        <div class="col-lg-12">
-                            <button type="submit" class="btn btn-success"><?= $this->translate("Salva Dati"); ?></button>
-                        </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-12">
+                        <button type="submit" class="btn btn-success"><?= $this->translate("Salva Dati"); ?></button>
                     </div>
-
+                </div>
             </div>
-
         </div>
         <!-- END Other details -->
         <?= $this->form()->closeTag(); ?>
