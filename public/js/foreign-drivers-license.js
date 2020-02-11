@@ -17,7 +17,11 @@ $(function() {
    var rowPerPage = Object.freeze({
         option1: dataTableVars.iDisplayLength,
         option2: dataTableVars.iDisplayLength * 2,
-        option3: dataTableVars.iDisplayLength * 3
+        option3: dataTableVars.iDisplayLength * 3,
+        option4: dataTableVars.iDisplayLength * 10,
+        option5: dataTableVars.iDisplayLength * 20,
+        option6: dataTableVars.iDisplayLength * 30
+
     });
 
     dataTableVars.searchValue.val("");
@@ -119,7 +123,12 @@ $(function() {
             }
         ],
         "lengthMenu": [
-            rowPerPage.option1, rowPerPage.option2, rowPerPage.option3
+            rowPerPage.option1,
+            rowPerPage.option2,
+            rowPerPage.option3,
+            rowPerPage.option4,
+            rowPerPage.option5,
+            rowPerPage.option6
         ],
         "pageLength": dataTableVars.iDisplayLength,
         "pagingType": "bootstrap_full_number",
