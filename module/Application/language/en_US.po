@@ -1,15 +1,15 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Sharengo\n"
-"POT-Creation-Date: 2019-12-12 15:15+0100\n"
-"PO-Revision-Date: 2019-12-12 15:37+0100\n"
+"POT-Creation-Date: 2020-02-07 14:53+0100\n"
+"PO-Revision-Date: 2020-02-07 15:03+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: en\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 2.2.4\n"
+"X-Generator: Poedit 2.3\n"
 "X-Poedit-Basepath: ../../..\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Poedit-KeywordsList: translate\n"
@@ -987,10 +987,10 @@ msgstr "Promo code"
 #: vendor/cup-web/admin-business-module/src/Controller/BusinessTripController.php:138
 #: vendor/cup-web/admin-business-module/src/Form/BusinessConfigParamsForm.php:85
 #: vendor/cup-web/admin-business-module/src/Form/BusinessConfigParamsForm.php:100
-#: module/Application/view/application/customers/info-tab.phtml:324
-#: module/Application/view/application/customers/info-tab.phtml:337
-#: module/Application/view/application/customers/info-tab.phtml:350
-#: module/Application/view/application/customers/info-tab.phtml:363
+#: module/Application/view/application/customers/info-tab.phtml:355
+#: module/Application/view/application/customers/info-tab.phtml:368
+#: module/Application/view/application/customers/info-tab.phtml:381
+#: module/Application/view/application/customers/info-tab.phtml:394
 #: module/Application/view/application/edit-trip/edit-tab.phtml:136
 msgid "No"
 msgstr "No"
@@ -1007,10 +1007,10 @@ msgstr "No"
 #: vendor/cup-web/admin-business-module/src/Controller/BusinessTripController.php:138
 #: vendor/cup-web/admin-business-module/src/Form/BusinessConfigParamsForm.php:86
 #: vendor/cup-web/admin-business-module/src/Form/BusinessConfigParamsForm.php:101
-#: module/Application/view/application/customers/info-tab.phtml:322
-#: module/Application/view/application/customers/info-tab.phtml:335
-#: module/Application/view/application/customers/info-tab.phtml:348
-#: module/Application/view/application/customers/info-tab.phtml:361
+#: module/Application/view/application/customers/info-tab.phtml:353
+#: module/Application/view/application/customers/info-tab.phtml:366
+#: module/Application/view/application/customers/info-tab.phtml:379
+#: module/Application/view/application/customers/info-tab.phtml:392
 msgid "Si"
 msgstr "Yes"
 
@@ -1302,22 +1302,16 @@ msgid "Dipendente approvato"
 msgstr ""
 
 #: vendor/cup-web/admin-business-module/src/Controller/BusinessController.php:408
-#, fuzzy
-#| msgid "Utente creato con successo!"
 msgid "Dipendente eliminato con successo"
-msgstr "User successfully created!"
+msgstr "Employee successfully deleted"
 
 #: vendor/cup-web/admin-business-module/src/Controller/BusinessController.php:420
-#, fuzzy
-#| msgid "Utente creato con successo!"
 msgid "Dipendente bloccato con successo"
-msgstr "User successfully created!"
+msgstr "Employee successfully locked"
 
 #: vendor/cup-web/admin-business-module/src/Controller/BusinessController.php:432
-#, fuzzy
-#| msgid "Utente creato con successo!"
 msgid "Dipendente sbloccato con successo"
-msgstr "User successfully created!"
+msgstr "Employee successfully un-locked"
 
 #: vendor/cup-web/admin-business-module/src/Controller/BusinessController.php:467
 #: vendor/cup-web/admin-business-module/src/Form/BusinessConfigParamsForm.php:37
@@ -1412,10 +1406,8 @@ msgid "Pacchetto bonus"
 msgstr "Bonus pack"
 
 #: vendor/cup-web/admin-business-module/src/Controller/PenaltyController.php:64
-#, fuzzy
-#| msgid "Auto aggiunta con successo!"
 msgid "Addebito avvenuto con successo"
-msgstr "Car added successfully!"
+msgstr "Successful charge"
 
 #: vendor/cup-web/admin-business-module/src/Controller/TimePackagesController.php:59
 #, fuzzy
@@ -1931,7 +1923,7 @@ msgstr "Effective date"
 
 #: module/Application/view/application/cars/insurance-tab.phtml:56
 #: module/Application/view/application/customers-edit/edit-tab.phtml:328
-#: module/Application/view/application/customers/info-tab.phtml:232
+#: module/Application/view/application/customers/info-tab.phtml:263
 msgid "Scadenza"
 msgstr "Driving license expiration date"
 
@@ -2202,7 +2194,7 @@ msgstr "Birth date"
 #: module/Application/view/application/customers-edit/edit-tab.phtml:304
 #: module/Application/view/application/customers/info-tab.phtml:73
 #: module/Application/view/application/customers/info-tab.phtml:102
-#: module/Application/view/application/customers/info-tab.phtml:205
+#: module/Application/view/application/customers/info-tab.phtml:236
 msgid "Nazione"
 msgstr "Country"
 
@@ -2329,13 +2321,13 @@ msgid "Salva Dati Anagrafici"
 msgstr "Save "
 
 #: module/Application/view/application/customers-edit/edit-tab.phtml:295
-#: module/Application/view/application/customers/info-tab.phtml:199
+#: module/Application/view/application/customers/info-tab.phtml:230
 msgid "Dati Patente"
 msgstr "Driving license data"
 
 #: module/Application/view/application/customers-edit/edit-tab.phtml:310
 #: module/Application/view/application/customers/edit.phtml:45
-#: module/Application/view/application/customers/info-tab.phtml:212
+#: module/Application/view/application/customers/info-tab.phtml:243
 #: module/Application/view/application/customers/list.phtml:30
 #: module/Application/view/application/customers/list.phtml:73
 #: module/Application/view/partials/notifications/sos-category.phtml:132
@@ -2343,13 +2335,13 @@ msgid "Patente"
 msgstr "Driving license"
 
 #: module/Application/view/application/customers-edit/edit-tab.phtml:316
-#: module/Application/view/application/customers/info-tab.phtml:219
+#: module/Application/view/application/customers/info-tab.phtml:250
 #: module/Application/view/application/foreign-drivers-license/uploaded-files.phtml:69
 msgid "Nome sulla patente"
 msgstr "Name on driving license"
 
 #: module/Application/view/application/customers-edit/edit-tab.phtml:322
-#: module/Application/view/application/customers/info-tab.phtml:226
+#: module/Application/view/application/customers/info-tab.phtml:257
 msgid "Cognome sulla patente"
 msgstr "Surname on driving license"
 
@@ -2358,37 +2350,37 @@ msgid "Salva Dati Patente"
 msgstr "Save driving license data"
 
 #: module/Application/view/application/customers-edit/edit-tab.phtml:352
-#: module/Application/view/application/customers/info-tab.phtml:256
+#: module/Application/view/application/customers/info-tab.phtml:287
 msgid "Altri dati"
 msgstr "Other informations"
 
 #: module/Application/view/application/customers-edit/edit-tab.phtml:358
-#: module/Application/view/application/customers/info-tab.phtml:275
+#: module/Application/view/application/customers/info-tab.phtml:306
 msgid "Stato Iscrizione"
 msgstr "Registration status"
 
 #: module/Application/view/application/customers-edit/edit-tab.phtml:368
-#: module/Application/view/application/customers/info-tab.phtml:301
+#: module/Application/view/application/customers/info-tab.phtml:332
 msgid "Percentuale Sconto"
 msgstr "Discount amount (percent)"
 
 #: module/Application/view/application/customers-edit/edit-tab.phtml:377
-#: module/Application/view/application/customers/info-tab.phtml:320
+#: module/Application/view/application/customers/info-tab.phtml:351
 msgid "Maintainer"
 msgstr "Maintainer"
 
 #: module/Application/view/application/customers-edit/edit-tab.phtml:392
-#: module/Application/view/application/customers/info-tab.phtml:333
+#: module/Application/view/application/customers/info-tab.phtml:364
 msgid "Gold List"
 msgstr "Gold List"
 
 #: module/Application/view/application/customers-edit/edit-tab.phtml:407
-#: module/Application/view/application/customers/info-tab.phtml:346
+#: module/Application/view/application/customers/info-tab.phtml:377
 msgid "Silver List"
 msgstr ""
 
 #: module/Application/view/application/customers-edit/edit-tab.phtml:422
-#: module/Application/view/application/customers/info-tab.phtml:359
+#: module/Application/view/application/customers/info-tab.phtml:390
 msgid "First Payment Completed"
 msgstr ""
 
@@ -2406,8 +2398,8 @@ msgid "Stato:"
 msgstr "Status:"
 
 #: module/Application/view/application/customers-edit/edit-tab.phtml:464
-#: module/Application/view/application/customers/info-tab.phtml:262
-#: module/Application/view/application/customers/info-tab.phtml:264
+#: module/Application/view/application/customers/info-tab.phtml:293
+#: module/Application/view/application/customers/info-tab.phtml:295
 #: module/Application/view/partials/notifications/sos-category.phtml:138
 msgid "Abilitato"
 msgstr "Enabled"
@@ -2673,6 +2665,7 @@ msgid "Points"
 msgstr ""
 
 #: module/Application/view/application/customers/edit.phtml:41
+#: module/Application/view/application/customers/info-tab.phtml:210
 msgid "Contratto"
 msgstr "Contract"
 
@@ -2684,39 +2677,55 @@ msgstr "Extra/Fines failure"
 msgid "Sconti"
 msgstr "Discount"
 
-#: module/Application/view/application/customers/info-tab.phtml:266
+#: module/Application/view/application/customers/info-tab.phtml:197
+msgid "Condizioni Contrattuali"
+msgstr "Contractual terms"
+
+#: module/Application/view/application/customers/info-tab.phtml:204
+msgid "Privacy"
+msgstr ""
+
+#: module/Application/view/application/customers/info-tab.phtml:216
+msgid "Condizioni assicurative"
+msgstr "Insurance policy"
+
+#: module/Application/view/application/customers/info-tab.phtml:222
+msgid "News letter"
+msgstr ""
+
+#: module/Application/view/application/customers/info-tab.phtml:297
 msgid "Non Abilitato"
 msgstr "Not enabled"
 
-#: module/Application/view/application/customers/info-tab.phtml:277
+#: module/Application/view/application/customers/info-tab.phtml:308
 msgid "Registrazione Confermata"
 msgstr "Registration confirmed"
 
-#: module/Application/view/application/customers/info-tab.phtml:279
+#: module/Application/view/application/customers/info-tab.phtml:310
 msgid "Registrazione Non Confermata"
 msgstr "Registration not confirmed"
 
-#: module/Application/view/application/customers/info-tab.phtml:288
+#: module/Application/view/application/customers/info-tab.phtml:319
 msgid "Stato Primo Pagamento"
 msgstr "First payment status"
 
-#: module/Application/view/application/customers/info-tab.phtml:290
+#: module/Application/view/application/customers/info-tab.phtml:321
 msgid "Pagamento Effettuato"
 msgstr "Payment done"
 
-#: module/Application/view/application/customers/info-tab.phtml:292
+#: module/Application/view/application/customers/info-tab.phtml:323
 msgid "Pagamento Non Ancora Effettuato"
 msgstr "Payment not yet made"
 
-#: module/Application/view/application/customers/info-tab.phtml:310
+#: module/Application/view/application/customers/info-tab.phtml:341
 msgid "Data/Ora"
 msgstr "Date/Time"
 
-#: module/Application/view/application/customers/info-tab.phtml:311
+#: module/Application/view/application/customers/info-tab.phtml:342
 msgid "Iscrizione:"
 msgstr "Sign up:"
 
-#: module/Application/view/application/customers/info-tab.phtml:312
+#: module/Application/view/application/customers/info-tab.phtml:343
 msgid "Ultima Modifica: "
 msgstr "Last edit: "
 
@@ -3114,48 +3123,36 @@ msgid "ELENCO FATTURE"
 msgstr "INVOICES LIST"
 
 #: module/Application/view/application/notifications/details-incident.phtml:9
-#, fuzzy
-#| msgid "DETTAGLI CONFIGURAZIONE"
 msgid "DETTAGLI URTO - VIAGGIO"
-msgstr "CONFIGURATION DETAILS"
+msgstr "DETAILS IMPACT - TRIP"
 
 #: module/Application/view/application/notifications/details-incident.phtml:25
-#, fuzzy
-#| msgid "Dati Utente"
 msgid "Dati Urto"
-msgstr "User data"
+msgstr "Impact data"
 
 #: module/Application/view/application/notifications/details-incident.phtml:32
 msgid "Trip ID"
 msgstr ""
 
 #: module/Application/view/application/notifications/details-incident.phtml:38
-#, fuzzy
-#| msgid "Codice promo"
 msgid "Codice Errore"
-msgstr "Promo code"
+msgstr "Error code"
 
 #: module/Application/view/application/notifications/details-incident.phtml:44
-#, fuzzy
-#| msgid "Data fine"
 msgid "Data Server"
-msgstr "End date"
+msgstr "Date Server"
 
 #: module/Application/view/application/notifications/details-incident.phtml:58
 msgid "Mongo ID"
 msgstr ""
 
 #: module/Application/view/application/notifications/details-incident.phtml:74
-#, fuzzy
-#| msgid "Data inizio"
 msgid "Data locale inzio"
-msgstr "Start date"
+msgstr "Local date start"
 
 #: module/Application/view/application/notifications/details-incident.phtml:80
-#, fuzzy
-#| msgid "Data fine"
 msgid "Data locale fine"
-msgstr "End date"
+msgstr "Local date end"
 
 #: module/Application/view/application/notifications/details-incident.phtml:88
 msgid "Pro Crash"
@@ -4770,16 +4767,12 @@ msgid "Nome: "
 msgstr "Name"
 
 #: vendor/cup-web/admin-business-module/view/cup-admin-business-module/business/business-user-tab.phtml:12
-#, fuzzy
-#| msgid "Email"
 msgid "Email: "
-msgstr "Email"
+msgstr "Email:"
 
 #: vendor/cup-web/admin-business-module/view/cup-admin-business-module/business/business-user-tab.phtml:14
-#, fuzzy
-#| msgid "Ripeti Password"
 msgid "Cambia password "
-msgstr "Repeat password"
+msgstr "Change password"
 
 #: vendor/cup-web/admin-business-module/view/cup-admin-business-module/business/business-user-tab.phtml:22
 #: vendor/cup-web/admin-business-module/view/cup-admin-business-module/business/business-user-tab.phtml:89
@@ -4796,16 +4789,12 @@ msgid "Cambia"
 msgstr ""
 
 #: vendor/cup-web/admin-business-module/view/cup-admin-business-module/business/contract-tab.phtml:11
-#, fuzzy
-#| msgid "Contratto cliente"
 msgid "Contratto numero: "
-msgstr "Customer contract"
+msgstr "Contract number:"
 
 #: vendor/cup-web/admin-business-module/view/cup-admin-business-module/business/contract-tab.phtml:16
-#, fuzzy
-#| msgid "Data fine"
 msgid "Data creazione: "
-msgstr "End date"
+msgstr "Creation date:"
 
 #: vendor/cup-web/admin-business-module/view/cup-admin-business-module/business/contract-tab.phtml:25
 #, fuzzy
@@ -4821,10 +4810,8 @@ msgstr "Edit zone"
 
 #: vendor/cup-web/admin-business-module/view/cup-admin-business-module/business/edit-params-tab.phtml:13
 #: vendor/cup-web/admin-business-module/view/cup-admin-business-module/business/info-tab.phtml:9
-#, fuzzy
-#| msgid "Disabilitato"
 msgid "Azienda abilitata"
-msgstr "Disabled"
+msgstr "Enabled company"
 
 #: vendor/cup-web/admin-business-module/view/cup-admin-business-module/business/edit-params-tab.phtml:61
 #, fuzzy
@@ -4839,8 +4826,6 @@ msgid "MODIFICA AZIENDA"
 msgstr "EDIT ZONE"
 
 #: vendor/cup-web/admin-business-module/view/cup-admin-business-module/business/edit.phtml:18
-#, fuzzy
-#| msgid "Codice"
 msgid "Codice "
 msgstr "Code"
 
@@ -4938,10 +4923,8 @@ msgid "Partita IVA"
 msgstr "VAT Number"
 
 #: vendor/cup-web/admin-business-module/view/cup-admin-business-module/business/info-tab.phtml:82
-#, fuzzy
-#| msgid "Destinatario"
 msgid "Codice destinatario"
-msgstr "Receiver"
+msgstr "Destination code"
 
 #: vendor/cup-web/admin-business-module/view/cup-admin-business-module/business/info-tab.phtml:92
 #: vendor/cup-web/admin-business-module/view/partials/business-employees-table.phtml:16
@@ -4959,10 +4942,8 @@ msgid "mai"
 msgstr "Email"
 
 #: vendor/cup-web/admin-business-module/view/cup-admin-business-module/business/info-tab.phtml:96
-#, fuzzy
-#| msgid "Posizionamento"
 msgid "Aggiornamento"
-msgstr "Position"
+msgstr "Update"
 
 #: vendor/cup-web/admin-business-module/view/cup-admin-business-module/business/info-tab.phtml:100
 #, fuzzy
@@ -4999,30 +4980,22 @@ msgstr ""
 
 #: vendor/cup-web/admin-business-module/view/cup-admin-business-module/business/time-packages-tab.phtml:10
 #: vendor/cup-web/admin-business-module/view/cup-admin-business-module/time-packages/index.phtml:24
-#, fuzzy
-#| msgid "Pacchetto bonus"
 msgid "Crea nuovo pacchetto"
-msgstr "Bonus pack"
+msgstr "Create new package"
 
 #: vendor/cup-web/admin-business-module/view/cup-admin-business-module/business/time-packages-tab.phtml:16
 #: vendor/cup-web/admin-business-module/view/cup-admin-business-module/time-packages/index.phtml:31
-#, fuzzy
-#| msgid "Elenco clienti"
 msgid "Elenco pacchetti"
-msgstr "Customer list"
+msgstr "List packages"
 
 #: vendor/cup-web/admin-business-module/view/cup-admin-business-module/business/time-packages-tab.phtml:28
 #: vendor/cup-web/admin-business-module/view/cup-admin-business-module/time-packages/index.phtml:42
-#, fuzzy
-#| msgid "Data fine"
 msgid "Data creazione"
-msgstr "End date"
+msgstr "Creation date"
 
 #: vendor/cup-web/admin-business-module/view/cup-admin-business-module/business/time-packages-tab.phtml:29
-#, fuzzy
-#| msgid "Assegnabile"
 msgid "Acquistabile"
-msgstr "Assignable"
+msgstr "Purchasable"
 
 #: vendor/cup-web/admin-business-module/view/cup-admin-business-module/business/time-packages-tab.phtml:34
 #: vendor/cup-web/admin-business-module/view/cup-admin-business-module/time-packages/index.phtml:47
@@ -5042,8 +5015,6 @@ msgid "Ragione sociale"
 msgstr "Business name"
 
 #: vendor/cup-web/admin-business-module/view/cup-admin-business-module/penalty/charge.phtml:15
-#, fuzzy
-#| msgid "ADDEBITI EXTRA/PENALI"
 msgid "ADDEBITO PENALE/EXTRA"
 msgstr "EXTRA/FINES CHARGES"
 
@@ -5054,34 +5025,24 @@ msgid "Seleziona l'azienda"
 msgstr "Choose an end date"
 
 #: vendor/cup-web/admin-business-module/view/cup-admin-business-module/penalty/charge.phtml:72
-#, fuzzy
-#| msgid "Abilitato"
 msgid "Addebita importo"
-msgstr "Enabled"
+msgstr "Charge amount"
 
 #: vendor/cup-web/admin-business-module/view/cup-admin-business-module/time-packages/add.phtml:10
-#, fuzzy
-#| msgid "ELENCO CLIENTI"
 msgid "CREA PACCHETTO MINUTI"
-msgstr "Customers list"
+msgstr "CREATE PACKAGE MINUTES"
 
 #: vendor/cup-web/admin-business-module/view/cup-admin-business-module/time-packages/add.phtml:35
-#, fuzzy
-#| msgid "Costo"
 msgid "Costo (€)"
-msgstr "Cost"
+msgstr "Cost (€)"
 
 #: vendor/cup-web/admin-business-module/view/cup-admin-business-module/time-packages/add.phtml:41
-#, fuzzy
-#| msgid "Pacchetto bonus"
 msgid "Crea pacchetto"
-msgstr "Bonus pack"
+msgstr "Create package"
 
 #: vendor/cup-web/admin-business-module/view/cup-admin-business-module/time-packages/index.phtml:18
-#, fuzzy
-#| msgid "ELENCO CLIENTI"
 msgid "ELENCO PACCHETTI MINUTI"
-msgstr "Customers list"
+msgstr "LIST PACKAGES MINUTES"
 
 #: vendor/cup-web/admin-business-module/view/partials/business-employees-table.phtml:12
 #, fuzzy
@@ -5096,10 +5057,8 @@ msgid "Gruppo"
 msgstr "Groups"
 
 #: vendor/cup-web/admin-business-module/view/partials/business-employees-table.phtml:17
-#, fuzzy
-#| msgid "Conferma"
 msgid "Confermato"
-msgstr "Confirm"
+msgstr "Confirmed"
 
 #: vendor/cup-web/admin-business-module/view/partials/business-employees-table.phtml:18
 msgid "PIN Aziendale"

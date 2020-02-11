@@ -192,6 +192,37 @@ if($this->customer->getCountry()!=="it") {
                         </div>
                     </div>
                 </div>
+                <div class="row">
+                    <div class="col-lg-3">
+                        <b><?= $this->translate("Condizioni Contrattuali"); ?></b>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-3">
+                        <div class="form-group">
+                            <div class="glyphicon <?= $this->customer->getPrivacyCondition()?"glyphicon-ok-sign":"glyphicon-remove-sign"; ?>" readonly="readonly"></div>
+                            <label for="mobile"><?= $this->translate("Privacy"); ?></label>
+                        </div>
+                    </div>
+                    <div class="col-lg-3">
+                        <div class="form-group">
+                            <div class="glyphicon <?= $this->customer->getGeneralCondition2()?"glyphicon-ok-sign":"glyphicon-remove-sign"; ?>" readonly="readonly"></div>
+                            <label for="phone"><?= $this->translate("Contratto"); ?></label>
+                        </div>
+                    </div>
+                    <div class="col-lg-3">
+                        <div class="form-group">
+                            <div class="glyphicon <?= $this->customer->getGeneralCondition1()?"glyphicon-ok":"glyphicon-remove"; ?>" readonly="readonly"></div>
+                            <label for="language"><?= $this->translate("Condizioni assicurative"); ?></label>
+                        </div>
+                    </div>
+                    <div class="col-lg-3">
+                        <div class="form-group">
+                            <div class="glyphicon <?= $this->customer->getNewsletter()?"glyphicon-ok":"glyphicon-remove"; ?>" readonly="readonly"></div>
+                            <label for="fleet"><?= $this->translate("News letter"); ?></label>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
 
