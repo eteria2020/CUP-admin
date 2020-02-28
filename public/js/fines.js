@@ -23,7 +23,7 @@ $(function() {
     var filterWithNull = false;
     
     var filterDateField = "e.insertTs";
-
+    
     var typeClean = $("#js-clean-type"),
         filterWithoutLike = false,
         columnWithoutLike = false,
@@ -80,11 +80,11 @@ $(function() {
                     }
                 }
             }).done(function (aoData) {
-                if (aoData['visible'] === true) {
-                    $(".glyphicon-remove").parent().parent().parent().show();
-                } else {
-                    $(".glyphicon-remove").parent().parent().parent().hide();
-                }
+//                if (aoData['visible'] === true) {
+//                    $(".glyphicon-remove").parent().parent().parent().show();
+//                } else {
+//                    $(".glyphicon-remove").parent().parent().parent().hide();
+//                }
             });
         },
         "fnServerParams": function ( aoData ) {
@@ -106,6 +106,14 @@ $(function() {
             aoData.push({ "name": "to", "value": $("#js-date-to").val()});
             aoData.push({ "name": "columnFromDate", "value": filterDateField});
             aoData.push({ "name": "columnFromEnd", "value": filterDateField});
+            
+            if ($("input[name='remove-not-payed']:checked").val() == 1) {
+                aoData.push({ "name": "columnNotNull", "value": ["e.customer","e.trip","e.car"] });
+                aoData.push({ "name": "columnWhere", "value": ["e.payable","e.complete"] });
+                aoData.push({ "name": "columnWhereValue", "value": [1,true] });
+            }
+            
+            
             /*aoData.push({ "name": "fixedColumn", "value": "e.complete"});
             aoData.push({ "name": "fixedValue", "value": "true"});
             aoData.push({ "name": "fixedLike", "value": false});*/
@@ -545,30 +553,16 @@ $(function() {
         location.reload(true);
     });
     
-    $("#remove-not-payed").click(function () {
-        if ($(".glyphicon-remove").is(":visible")) {
-            $(".glyphicon-remove").parent().parent().parent().hide();
-            $.ajax({
-                type: "POST",
-                url: "/fines/fines-not-payed-are-visible/",
-                data: {'visible': 0},
-                success: function (data) {
-                },
-                error: function () {
-                }
-            });
-        } else {
-            $(".glyphicon-remove").parent().parent().parent().show();
-            $.ajax({
-                type: "POST",
-                url: "/fines/fines-not-payed-are-visible/",
-                data: {'visible': 1},
-                success: function (data) {
-                },
-                error: function () {
-                }
-            });
-        }
+//    $("input[@name='remove-not-payed']").change(function(){
+//    // Do something interesting here
+//    });
+
+    
+    
+    $('input[type=radio][name=remove-not-payed]').on('change', function () {
+        
+        // Filter Action
+        table.fnFilter();
     });
         
 });

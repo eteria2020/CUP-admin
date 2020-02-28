@@ -7,6 +7,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 This file is in [Markdown](https://www.markdownguide.org/basic-syntax/) language.
 
+# [1.0.13] - 2020-02-28
+
+### Changed
+
+- on the fines page the hiding of non-payable fines has been modified. 
+It is no longer client side (javascript) but server side. (Ticket #865)
+
 ## [1.0.12] - 2020-02-11
 
 ### Changed

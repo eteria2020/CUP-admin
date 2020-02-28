@@ -1,15 +1,15 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Sharengo\n"
-"POT-Creation-Date: 2019-12-12 15:45+0100\n"
-"PO-Revision-Date: 2019-12-12 15:54+0100\n"
+"POT-Creation-Date: 2020-02-28 11:18+0100\n"
+"PO-Revision-Date: 2020-02-28 11:19+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: zh_CN\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 2.2.4\n"
+"X-Generator: Poedit 2.3\n"
 "X-Poedit-Basepath: ../../..\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Poedit-KeywordsList: translate\n"
@@ -1040,11 +1040,12 @@ msgstr "推广的代码"
 #: vendor/cup-web/admin-business-module/src/Controller/BusinessTripController.php:138
 #: vendor/cup-web/admin-business-module/src/Form/BusinessConfigParamsForm.php:85
 #: vendor/cup-web/admin-business-module/src/Form/BusinessConfigParamsForm.php:100
-#: module/Application/view/application/customers/info-tab.phtml:324
-#: module/Application/view/application/customers/info-tab.phtml:337
-#: module/Application/view/application/customers/info-tab.phtml:350
-#: module/Application/view/application/customers/info-tab.phtml:363
+#: module/Application/view/application/customers/info-tab.phtml:355
+#: module/Application/view/application/customers/info-tab.phtml:368
+#: module/Application/view/application/customers/info-tab.phtml:381
+#: module/Application/view/application/customers/info-tab.phtml:394
 #: module/Application/view/application/edit-trip/edit-tab.phtml:136
+#: module/Application/view/application/fines/index.phtml:83
 msgid "No"
 msgstr "不是"
 
@@ -1060,10 +1061,11 @@ msgstr "不是"
 #: vendor/cup-web/admin-business-module/src/Controller/BusinessTripController.php:138
 #: vendor/cup-web/admin-business-module/src/Form/BusinessConfigParamsForm.php:86
 #: vendor/cup-web/admin-business-module/src/Form/BusinessConfigParamsForm.php:101
-#: module/Application/view/application/customers/info-tab.phtml:322
-#: module/Application/view/application/customers/info-tab.phtml:335
-#: module/Application/view/application/customers/info-tab.phtml:348
-#: module/Application/view/application/customers/info-tab.phtml:361
+#: module/Application/view/application/customers/info-tab.phtml:353
+#: module/Application/view/application/customers/info-tab.phtml:366
+#: module/Application/view/application/customers/info-tab.phtml:379
+#: module/Application/view/application/customers/info-tab.phtml:392
+#: module/Application/view/application/fines/index.phtml:79
 msgid "Si"
 msgstr "是"
 
@@ -1445,7 +1447,7 @@ msgstr "预订情况"
 
 #: vendor/cup-web/admin-business-module/src/Controller/BusinessPaymentsController.php:178
 #: module/Application/view/application/fines/details.phtml:235
-#: module/Application/view/application/fines/index.phtml:119
+#: module/Application/view/application/fines/index.phtml:129
 #: module/Application/view/application/payments/failed-extra.phtml:71
 #: module/Application/view/application/payments/retry-extra.phtml:270
 #: vendor/cup-web/admin-business-module/view/cup-admin-business-module/business-payments/payments-tab.phtml:31
@@ -1590,12 +1592,12 @@ msgstr "返回列表"
 #: module/Application/view/application/cars/edit-tab.phtml:64
 #: module/Application/view/application/cars/index.phtml:33
 #: module/Application/view/application/cars/index.phtml:89
-#: module/Application/view/application/customers-edit/edit-tab.phtml:277
+#: module/Application/view/application/customers-edit/edit-tab.phtml:274
 #: module/Application/view/application/customers/info-tab.phtml:190
 #: module/Application/view/application/customers/list.phtml:36
 #: module/Application/view/application/customers/list.phtml:70
 #: module/Application/view/application/fines/index.phtml:31
-#: module/Application/view/application/fines/index.phtml:122
+#: module/Application/view/application/fines/index.phtml:132
 #: module/Application/view/application/foreign-drivers-license/uploaded-files.phtml:63
 #: module/Application/view/application/invoices/index.phtml:32
 #: module/Application/view/application/payments/extra.phtml:21
@@ -1641,7 +1643,7 @@ msgstr "地方"
 #: module/Application/view/application/cars/index.phtml:87
 #: module/Application/view/application/fines/details.phtml:139
 #: module/Application/view/application/fines/index.phtml:30
-#: module/Application/view/application/fines/index.phtml:124
+#: module/Application/view/application/fines/index.phtml:134
 #: module/Application/view/application/notifications/details-incident.phtml:68
 #: module/Application/view/application/notifications/index.phtml:96
 #: module/Application/view/application/reservations/index.phtml:36
@@ -2049,8 +2051,8 @@ msgid "Decorrenza"
 msgstr ""
 
 #: module/Application/view/application/cars/insurance-tab.phtml:56
-#: module/Application/view/application/customers-edit/edit-tab.phtml:328
-#: module/Application/view/application/customers/info-tab.phtml:232
+#: module/Application/view/application/customers-edit/edit-tab.phtml:357
+#: module/Application/view/application/customers/info-tab.phtml:263
 #, fuzzy
 #| msgid "Scadenza Patente"
 msgid "Scadenza"
@@ -2324,10 +2326,10 @@ msgstr "出生数据"
 
 #: module/Application/view/application/customers-edit/edit-tab.phtml:84
 #: module/Application/view/application/customers-edit/edit-tab.phtml:124
-#: module/Application/view/application/customers-edit/edit-tab.phtml:304
+#: module/Application/view/application/customers-edit/edit-tab.phtml:333
 #: module/Application/view/application/customers/info-tab.phtml:73
 #: module/Application/view/application/customers/info-tab.phtml:102
-#: module/Application/view/application/customers/info-tab.phtml:205
+#: module/Application/view/application/customers/info-tab.phtml:236
 msgid "Nazione"
 msgstr "国家"
 
@@ -2403,30 +2405,30 @@ msgstr "统计数据"
 msgid "Codice fiscale"
 msgstr "财政代码"
 
-#: module/Application/view/application/customers-edit/edit-tab.phtml:232
+#: module/Application/view/application/customers-edit/edit-tab.phtml:231
 #: module/Application/view/application/customers/info-tab.phtml:147
 msgid "Partita IVA (opzionale)"
 msgstr "增值税 (可选)"
 
-#: module/Application/view/application/customers-edit/edit-tab.phtml:239
+#: module/Application/view/application/customers-edit/edit-tab.phtml:237
 #: module/Application/view/application/customers/info-tab.phtml:153
 msgid "Cod. destinatario"
 msgstr ""
 
-#: module/Application/view/application/customers-edit/edit-tab.phtml:246
+#: module/Application/view/application/customers-edit/edit-tab.phtml:243
 #: module/Application/view/application/customers/info-tab.phtml:159
 #: vendor/cup-web/admin-business-module/view/cup-admin-business-module/business/info-tab.phtml:86
 msgid "PEC"
 msgstr ""
 
-#: module/Application/view/application/customers-edit/edit-tab.phtml:253
+#: module/Application/view/application/customers-edit/edit-tab.phtml:250
 #: module/Application/view/application/customers/info-tab.phtml:166
 #, fuzzy
 #| msgid "Contratto"
 msgid "Contatti"
 msgstr "合同"
 
-#: module/Application/view/application/customers-edit/edit-tab.phtml:259
+#: module/Application/view/application/customers-edit/edit-tab.phtml:256
 #: module/Application/view/application/customers/info-tab.phtml:172
 #: module/Application/view/application/customers/list.phtml:32
 #: module/Application/view/application/customers/list.phtml:71
@@ -2440,7 +2442,7 @@ msgstr "合同"
 msgid "Cellulare"
 msgstr "手机号码"
 
-#: module/Application/view/application/customers-edit/edit-tab.phtml:265
+#: module/Application/view/application/customers-edit/edit-tab.phtml:262
 #: module/Application/view/application/customers/info-tab.phtml:178
 #: module/Application/view/application/customers/list.phtml:31
 #: vendor/cup-web/admin-business-module/view/cup-admin-business-module/business/add.phtml:45
@@ -2449,126 +2451,156 @@ msgstr "手机号码"
 msgid "Telefono"
 msgstr "电话号码"
 
-#: module/Application/view/application/customers-edit/edit-tab.phtml:271
+#: module/Application/view/application/customers-edit/edit-tab.phtml:268
 #: module/Application/view/application/customers/info-tab.phtml:184
 msgid "Lingua preferita"
 msgstr "最好的语言"
 
-#: module/Application/view/application/customers-edit/edit-tab.phtml:284
+#: module/Application/view/application/customers-edit/edit-tab.phtml:282
+#: module/Application/view/application/customers/info-tab.phtml:197
+#, fuzzy
+#| msgid "Codice contratto"
+msgid "Condizioni Contrattuali"
+msgstr "合同代码"
+
+#: module/Application/view/application/customers-edit/edit-tab.phtml:289
+#: module/Application/view/application/customers/info-tab.phtml:204
+msgid "Privacy"
+msgstr ""
+
+#: module/Application/view/application/customers-edit/edit-tab.phtml:295
+#: module/Application/view/application/customers/edit.phtml:41
+#: module/Application/view/application/customers/info-tab.phtml:210
+msgid "Contratto"
+msgstr "合同"
+
+#: module/Application/view/application/customers-edit/edit-tab.phtml:301
+#: module/Application/view/application/customers/info-tab.phtml:216
+#, fuzzy
+#| msgid "Informazioni aggiuntive"
+msgid "Condizioni assicurative"
+msgstr "添加的信息"
+
+#: module/Application/view/application/customers-edit/edit-tab.phtml:307
+#: module/Application/view/application/customers/info-tab.phtml:222
+msgid "News letter"
+msgstr ""
+
+#: module/Application/view/application/customers-edit/edit-tab.phtml:313
 msgid "Salva Dati Anagrafici"
 msgstr "保存人口动态统计的数据"
 
-#: module/Application/view/application/customers-edit/edit-tab.phtml:295
-#: module/Application/view/application/customers/info-tab.phtml:199
+#: module/Application/view/application/customers-edit/edit-tab.phtml:324
+#: module/Application/view/application/customers/info-tab.phtml:230
 msgid "Dati Patente"
 msgstr "车照数据"
 
-#: module/Application/view/application/customers-edit/edit-tab.phtml:310
+#: module/Application/view/application/customers-edit/edit-tab.phtml:339
 #: module/Application/view/application/customers/edit.phtml:45
-#: module/Application/view/application/customers/info-tab.phtml:212
+#: module/Application/view/application/customers/info-tab.phtml:243
 #: module/Application/view/application/customers/list.phtml:30
 #: module/Application/view/application/customers/list.phtml:73
 #: module/Application/view/partials/notifications/sos-category.phtml:132
 msgid "Patente"
 msgstr "车照"
 
-#: module/Application/view/application/customers-edit/edit-tab.phtml:316
-#: module/Application/view/application/customers/info-tab.phtml:219
+#: module/Application/view/application/customers-edit/edit-tab.phtml:345
+#: module/Application/view/application/customers/info-tab.phtml:250
 #: module/Application/view/application/foreign-drivers-license/uploaded-files.phtml:69
 msgid "Nome sulla patente"
 msgstr "在车照的名字"
 
-#: module/Application/view/application/customers-edit/edit-tab.phtml:322
-#: module/Application/view/application/customers/info-tab.phtml:226
+#: module/Application/view/application/customers-edit/edit-tab.phtml:351
+#: module/Application/view/application/customers/info-tab.phtml:257
 msgid "Cognome sulla patente"
 msgstr "在车照的姓"
 
-#: module/Application/view/application/customers-edit/edit-tab.phtml:335
+#: module/Application/view/application/customers-edit/edit-tab.phtml:364
 msgid "Salva Dati Patente"
 msgstr "保存车照数据"
 
-#: module/Application/view/application/customers-edit/edit-tab.phtml:352
-#: module/Application/view/application/customers/info-tab.phtml:256
+#: module/Application/view/application/customers-edit/edit-tab.phtml:381
+#: module/Application/view/application/customers/info-tab.phtml:287
 msgid "Altri dati"
 msgstr "别数据"
 
-#: module/Application/view/application/customers-edit/edit-tab.phtml:358
-#: module/Application/view/application/customers/info-tab.phtml:275
+#: module/Application/view/application/customers-edit/edit-tab.phtml:386
+#: module/Application/view/application/customers/info-tab.phtml:306
 msgid "Stato Iscrizione"
 msgstr "预订情况"
 
-#: module/Application/view/application/customers-edit/edit-tab.phtml:368
-#: module/Application/view/application/customers/info-tab.phtml:301
+#: module/Application/view/application/customers-edit/edit-tab.phtml:394
+#: module/Application/view/application/customers/info-tab.phtml:332
 msgid "Percentuale Sconto"
 msgstr "拍马的百分比"
 
-#: module/Application/view/application/customers-edit/edit-tab.phtml:377
-#: module/Application/view/application/customers/info-tab.phtml:320
+#: module/Application/view/application/customers-edit/edit-tab.phtml:402
+#: module/Application/view/application/customers/info-tab.phtml:351
 msgid "Maintainer"
 msgstr "维修人"
 
-#: module/Application/view/application/customers-edit/edit-tab.phtml:392
-#: module/Application/view/application/customers/info-tab.phtml:333
+#: module/Application/view/application/customers-edit/edit-tab.phtml:416
+#: module/Application/view/application/customers/info-tab.phtml:364
 msgid "Gold List"
 msgstr "黄金名单"
 
-#: module/Application/view/application/customers-edit/edit-tab.phtml:407
-#: module/Application/view/application/customers/info-tab.phtml:346
+#: module/Application/view/application/customers-edit/edit-tab.phtml:430
+#: module/Application/view/application/customers/info-tab.phtml:377
 #, fuzzy
 #| msgid "Gold List"
 msgid "Silver List"
 msgstr "黄金名单"
 
-#: module/Application/view/application/customers-edit/edit-tab.phtml:422
-#: module/Application/view/application/customers/info-tab.phtml:359
+#: module/Application/view/application/customers-edit/edit-tab.phtml:444
+#: module/Application/view/application/customers/info-tab.phtml:390
 msgid "First Payment Completed"
 msgstr ""
 
-#: module/Application/view/application/customers-edit/edit-tab.phtml:441
+#: module/Application/view/application/customers-edit/edit-tab.phtml:461
 msgid "Salva Dati"
 msgstr "保存数据"
 
-#: module/Application/view/application/customers-edit/edit-tab.phtml:458
+#: module/Application/view/application/customers-edit/edit-tab.phtml:476
 #: vendor/cup-web/admin-business-module/view/cup-admin-business-module/business/index.phtml:74
 msgid "Abilitazione"
 msgstr "启用"
 
-#: module/Application/view/application/customers-edit/edit-tab.phtml:463
+#: module/Application/view/application/customers-edit/edit-tab.phtml:481
 msgid "Stato:"
 msgstr "情况"
 
-#: module/Application/view/application/customers-edit/edit-tab.phtml:464
-#: module/Application/view/application/customers/info-tab.phtml:262
-#: module/Application/view/application/customers/info-tab.phtml:264
+#: module/Application/view/application/customers-edit/edit-tab.phtml:482
+#: module/Application/view/application/customers/info-tab.phtml:293
+#: module/Application/view/application/customers/info-tab.phtml:295
 #: module/Application/view/partials/notifications/sos-category.phtml:138
 msgid "Abilitato"
 msgstr "启用"
 
-#: module/Application/view/application/customers-edit/edit-tab.phtml:464
+#: module/Application/view/application/customers-edit/edit-tab.phtml:482
 msgid "Disabilitato"
 msgstr "禁用"
 
-#: module/Application/view/application/customers-edit/edit-tab.phtml:472
+#: module/Application/view/application/customers-edit/edit-tab.phtml:490
 msgid "Motivi:"
 msgstr "原因"
 
-#: module/Application/view/application/customers-edit/edit-tab.phtml:482
+#: module/Application/view/application/customers-edit/edit-tab.phtml:500
 msgid "Generata automaticamente, alcuni dati potrebbero non essere corretti"
 msgstr "创造得自流，一些数据可能不正确"
 
-#: module/Application/view/application/customers-edit/edit-tab.phtml:513
+#: module/Application/view/application/customers-edit/edit-tab.phtml:531
 msgid "Riabilita"
 msgstr "重新启用"
 
-#: module/Application/view/application/customers-edit/edit-tab.phtml:532
+#: module/Application/view/application/customers-edit/edit-tab.phtml:550
 msgid "Disabilita manualmente"
 msgstr "禁用得人手"
 
-#: module/Application/view/application/customers-edit/edit-tab.phtml:545
+#: module/Application/view/application/customers-edit/edit-tab.phtml:563
 msgid "Recesso"
 msgstr ""
 
-#: module/Application/view/application/customers-edit/edit-tab.phtml:549
+#: module/Application/view/application/customers-edit/edit-tab.phtml:567
 #, fuzzy
 #| msgid "Contratto cliente"
 msgid "Conferma recessione cliente"
@@ -2592,7 +2624,7 @@ msgstr "分钟"
 #: module/Application/view/application/customers/add-points.phtml:39
 #: module/Application/view/application/customers/bonus-tab.phtml:25
 #: module/Application/view/application/customers/points-tab.phtml:29
-#: module/Application/view/application/fines/index.phtml:121
+#: module/Application/view/application/fines/index.phtml:131
 #: module/Application/view/application/zones/edit.phtml:60
 #: module/Application/view/application/zones/list-tab.phtml:18
 #: module/Application/view/application/zones/list-tab.phtml:51
@@ -2817,10 +2849,6 @@ msgstr "奖金"
 msgid "Points"
 msgstr "点"
 
-#: module/Application/view/application/customers/edit.phtml:41
-msgid "Contratto"
-msgstr "合同"
-
 #: module/Application/view/application/customers/edit.phtml:44
 msgid "Extra/Penali fallite"
 msgstr "额外/失败的罚款"
@@ -2829,39 +2857,39 @@ msgstr "额外/失败的罚款"
 msgid "Sconti"
 msgstr "折扣"
 
-#: module/Application/view/application/customers/info-tab.phtml:266
+#: module/Application/view/application/customers/info-tab.phtml:297
 msgid "Non Abilitato"
 msgstr "不启用"
 
-#: module/Application/view/application/customers/info-tab.phtml:277
+#: module/Application/view/application/customers/info-tab.phtml:308
 msgid "Registrazione Confermata"
 msgstr "肯定的报名"
 
-#: module/Application/view/application/customers/info-tab.phtml:279
+#: module/Application/view/application/customers/info-tab.phtml:310
 msgid "Registrazione Non Confermata"
 msgstr "不肯定的报名"
 
-#: module/Application/view/application/customers/info-tab.phtml:288
+#: module/Application/view/application/customers/info-tab.phtml:319
 msgid "Stato Primo Pagamento"
 msgstr "第一付款情况"
 
-#: module/Application/view/application/customers/info-tab.phtml:290
+#: module/Application/view/application/customers/info-tab.phtml:321
 msgid "Pagamento Effettuato"
 msgstr "支付"
 
-#: module/Application/view/application/customers/info-tab.phtml:292
+#: module/Application/view/application/customers/info-tab.phtml:323
 msgid "Pagamento Non Ancora Effettuato"
 msgstr "未支付"
 
-#: module/Application/view/application/customers/info-tab.phtml:310
+#: module/Application/view/application/customers/info-tab.phtml:341
 msgid "Data/Ora"
 msgstr "日期/小时"
 
-#: module/Application/view/application/customers/info-tab.phtml:311
+#: module/Application/view/application/customers/info-tab.phtml:342
 msgid "Iscrizione:"
 msgstr "预订"
 
-#: module/Application/view/application/customers/info-tab.phtml:312
+#: module/Application/view/application/customers/info-tab.phtml:343
 msgid "Ultima Modifica: "
 msgstr "最后变化"
 
@@ -3050,7 +3078,7 @@ msgstr "摘要"
 
 #: module/Application/view/application/fines/details.phtml:80
 #: module/Application/view/application/fines/index.phtml:29
-#: module/Application/view/application/fines/index.phtml:117
+#: module/Application/view/application/fines/index.phtml:127
 #: module/Application/view/application/notifications/details.phtml:30
 #: module/Application/view/application/payments/failed-extra.phtml:28
 #: module/Application/view/application/payments/failed-extra.phtml:65
@@ -3067,7 +3095,7 @@ msgid "ID"
 msgstr "用户名"
 
 #: module/Application/view/application/fines/details.phtml:86
-#: module/Application/view/application/fines/index.phtml:120
+#: module/Application/view/application/fines/index.phtml:130
 #: module/Application/view/application/fines/pay.phtml:57
 #: module/Application/view/application/payments/failed-extra.phtml:67
 #: module/Application/view/application/payments/failed-payments.phtml:62
@@ -3189,7 +3217,7 @@ msgid "ID Cliente"
 msgstr "客户用户名"
 
 #: module/Application/view/application/fines/index.phtml:33
-#: module/Application/view/application/fines/index.phtml:123
+#: module/Application/view/application/fines/index.phtml:133
 #: module/Application/view/application/payments/failed-payments.phtml:67
 #: module/Application/view/application/payments/retry-payments.phtml:77
 #: module/Application/view/application/trips-not-payed/list.phtml:29
@@ -3204,21 +3232,21 @@ msgstr "行程代码"
 msgid "Complete"
 msgstr "完成"
 
-#: module/Application/view/application/fines/index.phtml:75
-msgid "Mostra/Nascondi multe non pagabili"
-msgstr ""
+#: module/Application/view/application/fines/index.phtml:77
+msgid "Mostra solo multe pagabili"
+msgstr "仅显示应付罚款"
 
-#: module/Application/view/application/fines/index.phtml:110
+#: module/Application/view/application/fines/index.phtml:120
 #, fuzzy
 #| msgid "Elenco Auto"
 msgid "Elenco multe"
 msgstr "汽车"
 
-#: module/Application/view/application/fines/index.phtml:125
+#: module/Application/view/application/fines/index.phtml:135
 msgid "Autorità"
 msgstr "权力"
 
-#: module/Application/view/application/fines/index.phtml:126
+#: module/Application/view/application/fines/index.phtml:136
 #: module/Application/view/application/payments/extra.phtml:98
 #: module/Application/view/application/payments/failed-extra.phtml:72
 #: module/Application/view/application/payments/failed-payments.phtml:71
@@ -3234,13 +3262,13 @@ msgstr "权力"
 msgid "Costo"
 msgstr "代价"
 
-#: module/Application/view/application/fines/index.phtml:127
+#: module/Application/view/application/fines/index.phtml:137
 #, fuzzy
 #| msgid "Stato"
 msgid "Status"
 msgstr "情况"
 
-#: module/Application/view/application/fines/index.phtml:128
+#: module/Application/view/application/fines/index.phtml:138
 #, fuzzy
 #| msgid "Data fine"
 msgid "Data Infrazione"
@@ -5573,7 +5601,6 @@ msgstr "您肯定消除这个奖金吗?"
 #~ msgid "Ultimi 4 mesi"
 #~ msgstr "最近4个月"
 
-#, php-format
 #~ msgid "Rfid: %s - Codice: %s"
 #~ msgstr "射频名: %s - 代码: %s"
 
