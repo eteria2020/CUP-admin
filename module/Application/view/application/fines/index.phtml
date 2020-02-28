@@ -28,7 +28,7 @@ $this->headScript()
                                     <option value="select" selected>-- <?= $this->translate("Seleziona"); ?> --</option>
                                     <option value="e.id"><?= $this->translate("ID"); ?></option>
                                     <option value="c.plate"><?= $this->translate("Targa"); ?></option>
-                                    <option value="f.name"><?= $this->translate("Flotta"); ?></option>
+                                    <option value="f.code"><?= $this->translate("Flotta"); ?></option>
                                     <option value="cu.id"><?= $this->translate("ID Cliente"); ?></option>
                                     <option value="t.id"><?= $this->translate("ID Corsa"); ?></option>
                                     <option value="e.complete"><?= $this->translate("Complete"); ?></option>
@@ -71,8 +71,18 @@ $this->headScript()
                 </br>
                 <div class="row">
                     <div class="col-md-3">
+                        
                         <div class="form-inline">
-                            <button class="btn btn-success pull-left" id="remove-not-payed"><?= $this->translate("Mostra/Nascondi multe non pagabili") ?></button>
+                            <div class="form-group">
+                                <label> <?= $this->translate("Mostra solo multe pagabili") ?>:&nbsp;&nbsp;</label>
+                                <input name="remove-not-payed" type="radio" id="payed-yes" value="1">
+                                <label for="payed-yes"><?= $this->translate("Si"); ?></label>
+                            </div>
+                            <div class="form-group">
+                                <input name="remove-not-payed" type="radio" id="payed-no" value="0" checked>
+                                <label for="payed-no"><?= $this->translate("No"); ?></label>
+                            </div>
+                            
                         </div>
                     </div>
                     <div class="col-md-2">
