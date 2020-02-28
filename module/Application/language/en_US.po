@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Sharengo\n"
-"POT-Creation-Date: 2020-02-28 11:10+0100\n"
-"PO-Revision-Date: 2020-02-28 11:13+0100\n"
+"POT-Creation-Date: 2020-02-28 15:30+0100\n"
+"PO-Revision-Date: 2020-02-28 15:32+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: en\n"
@@ -450,7 +450,7 @@ msgid "Aggiornamento fallito, percentuale sconto superiore al 15%"
 msgstr ""
 
 #: module/Application/src/Application/Controller/CustomersController.php:351
-#: module/Application/src/Application/Controller/EditTripController.php:159
+#: module/Application/src/Application/Controller/EditTripController.php:168
 msgid "Modifica effettuta con successo!"
 msgstr "Changes saved successfully!"
 
@@ -590,8 +590,8 @@ msgstr "The trip can't be edited because it is not finished"
 
 #: module/Application/src/Application/Controller/EditTripController.php:113
 msgid ""
-"La data specificata non può essere precedente alla data di inizio della corsa"
-msgstr "The specified date can't be before the trip start date"
+"La data di fine corsa non può essere precedente alla data di inizio corsa"
+msgstr "The race end date cannot be earlier than the race start date"
 
 #: module/Application/src/Application/Controller/EditTripController.php:115
 msgid ""
@@ -2856,6 +2856,10 @@ msgstr "The trip can't be modified because it's already been payed."
 #: module/Application/view/application/edit-trip/edit-tab.phtml:54
 msgid "Dati corsa"
 msgstr "Trip data"
+
+#: module/Application/view/application/edit-trip/edit-tab.phtml:63
+msgid "(precedente a quella di fine)"
+msgstr "(previous to the end one)"
 
 #: module/Application/view/application/edit-trip/edit-tab.phtml:69
 msgid "(non precedente a quella di inizio)"

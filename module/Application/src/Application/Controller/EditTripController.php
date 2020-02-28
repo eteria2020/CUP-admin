@@ -110,7 +110,7 @@ class EditTripController extends AbstractActionController
             } catch (EditTripDeniedForB2BException $e) {
                 $this->flashMessenger()->addErrorMessage($translator->translate('La corsa non può essere modificata perché è di tipo business.'));
             } catch (EditTripWrongDateException $e) {
-                $this->flashMessenger()->addErrorMessage($translator->translate('La data specificata non può essere precedente alla data di inizio della corsa'));
+                $this->flashMessenger()->addErrorMessage($translator->translate('La data di fine corsa non può essere precedente alla data di inizio corsa'));
             } catch (EditTripNotDateTimeException $e) {
                 $this->flashMessenger()->addErrorMessage($translator->translate('La data specificata non è nel formato corretto. Verifica i dati inseriti.'));
             } catch (EditTripDeniedForScriptException $e) {
@@ -128,6 +128,8 @@ class EditTripController extends AbstractActionController
 
         $tripArray = $trip->toArray($this->hydrator, []);
 
+        $tripArray['timestampBeginning'] = $tripArray['timestampBeginning']->format('d-m-Y H:i:s');
+        
         if ($trip->isEnded()) {
             $tripArray['timestampEnd'] = $tripArray['timestampEnd']->format('d-m-Y H:i:s');
         }
@@ -145,15 +147,22 @@ class EditTripController extends AbstractActionController
         return $view;
     }
     
-    private function editedTrip($trip, $postData, $webuser, $translator) {
+    private function editedTrip($trip, $postData, $webuser, $translator) {        
+        
         $this->editTripsService->editTrip(
-                $trip, !$postData['trip']['payable'], date_create_from_format('d-m-Y H:i:s', $postData['trip']['timestampEnd']), $webuser
+                $trip, 
+                !$postData['trip']['payable'],
+                date_create_from_format('d-m-Y H:i:s', $postData['trip']['timestampBeginning']),
+                date_create_from_format('d-m-Y H:i:s', $postData['trip']['timestampEnd']),
+                $webuser
         );
 
         $this->eventManager->trigger('trip-edited', $this, [
             'topic' => 'trips',
             'trip_id' => $trip->getId(),
-            'action' => 'Edit trip data: payable ' . ($postData['trip']['payable'] ? 'true' : 'false') . ', end date ' . $postData['trip']['timestampEnd']
+            'action' => 'Edit trip data: payable ' . ($postData['trip']['payable'] ? 'true' : 'false') . 
+                        ', start date ' . $postData['trip']['timestampBeginning'].
+                        ', end date ' . $postData['trip']['timestampEnd']
         ]);
 
         $this->flashMessenger()->addSuccessMessage($translator->translate('Modifica effettuta con successo!'));
