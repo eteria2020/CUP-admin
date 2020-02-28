@@ -20,6 +20,16 @@ class EditTripFieldset extends Fieldset
         ]);
 
         $this->add([
+            'name'       => 'timestampBeginning',
+            'type'       => 'Zend\Form\Element\Date',
+            'attributes' => [
+                'id'       => 'timestampBeginning',
+                'class'    => 'form-control',
+                'type'     => 'text'
+            ]
+        ]);
+        
+        $this->add([
             'name'       => 'timestampEnd',
             'type'       => 'Zend\Form\Element\Date',
             'attributes' => [

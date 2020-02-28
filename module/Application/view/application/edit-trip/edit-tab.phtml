@@ -60,8 +60,8 @@ else:
                 <div class="row">
                     <div class="col-lg-4">
                         <div class="form-group">
-                            <label><?= $this->translate("Data inizio"); ?></label>
-                            <div class="sng-info-box"><?= $timestampBeginning ?></div>
+                            <label><?= $this->translate("Data inizio"); ?> <span class="sng-hint"><?= $this->translate("(precedente a quella di fine)"); ?></span></label>
+                            <?= $this->formRow($form->get('trip')->get('timestampBeginning')); ?>
                         </div>
                     </div>
                     <div class="col-lg-4">

@@ -4,6 +4,9 @@ $(function() {
     $('#timestampEnd').datetimepicker({
         format: "DD-MM-YYYY HH:mm:ss"
     });
+    $('#timestampBeginning').datetimepicker({
+        format: "DD-MM-YYYY HH:mm:ss"
+    });
 });
 
 function removeTries(e)
