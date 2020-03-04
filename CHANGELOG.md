@@ -7,13 +7,19 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 This file is in [Markdown](https://www.markdownguide.org/basic-syntax/) language.
 
-# [1.0.14] - 2020-02-28
+## [1.0.15] - 2020-03-04
+
+### Changed
+
+- update BankArt module
+
+## [1.0.14] - 2020-02-28
 
 ### Changed
 
 - added the possibility to change the start date and time into the race modification page (Ticket #868)
 
-# [1.0.13] - 2020-02-28
+## [1.0.13] - 2020-02-28
 
 ### Changed
 
