@@ -11,6 +11,7 @@ return [
         'currency' => 'EUR',
         'locale' => 'sl_SI',
 
+        'callback'             => 'https://public.sharengo.si/bankart/callback',
         'return_first_payment' => 'https://public.sharengo.si/bankart/return-first-payment',
         'first_payment_amount' => 500,
         'return_change_card_payment' => 'https://public.sharengo.si/bankart/return-change-card',
