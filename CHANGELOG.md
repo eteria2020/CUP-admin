@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 This file is in [Markdown](https://www.markdownguide.org/basic-syntax/) language.
 
+## [1.0.16] - 2020-03-18
+
+### Changed
+
+- update BankArt module
+
 ## [1.0.15] - 2020-03-04
 
 ### Changed
