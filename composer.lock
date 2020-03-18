@@ -2169,7 +2169,7 @@
             "source": {
                 "type": "git",
                 "url": "ssh://git@git.sharengo.it/cup-it/core.git",
-                "reference": "4bab8be9d54646d697b7ae45eabaf4194f836780"
+                "reference": "79f01fd4e27eceb48df2aaa2d5a72fb30f7335f6"
             },
             "require": {
                 "doctrine/doctrine-orm-module": "0.*",
@@ -2192,7 +2192,7 @@
                 }
             },
             "description": "Core ZF2 module for Sharengo apps",
-            "time": "2020-02-28T15:01:03+00:00"
+            "time": "2020-03-05T14:54:55+00:00"
         },
         {
             "name": "mvlabs/zf2-multilanguage",
@@ -2497,7 +2497,7 @@
             "source": {
                 "type": "git",
                 "url": "ssh://git@git.sharengo.it/cup-it/bankart.git",
-                "reference": "625ea765a57ccc26bd78e072eb0408939d2e34de"
+                "reference": "1b9e7caf362d85345d8ef8169314b1b52a682d54"
             },
             "require": {
                 "doctrine/doctrine-orm-module": "0.*",
@@ -2512,7 +2512,7 @@
                 }
             },
             "description": "Bankart module for Sharengo",
-            "time": "2020-03-04T13:28:45+00:00"
+            "time": "2020-03-17T15:17:39+00:00"
         },
         {
             "name": "sharengo-web/cartasi",
