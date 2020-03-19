@@ -152,7 +152,7 @@ class FinesController extends AbstractActionController
 
         //$dataDataTable = array_slice($this->filterFinesComplete($this->finesService->getFinesData($filters)), (int)$filters['iDisplayStart'], (int)$filters['iDisplayLength']);
         $dataDataTable = $this->finesService->getFinesData($filters);
-        $totalFailedPayments = $this->finesService->getTotalFines();
+        $totalFailedPayments = $this->finesService->getTotalFines();        
         $recordsFiltered = $this->getRecordsFiltered($filters, $totalFailedPayments);
         
         $areVisible = new Container('areVisible');
@@ -174,12 +174,18 @@ class FinesController extends AbstractActionController
 
     protected function getRecordsFiltered($filters, $totalTripPayments)
     {
-        if (empty($filters['searchValue']) && !isset($filters['columnValueWithoutLike'])) {
+        if (empty($filters['searchValue']) && 
+            empty($filters['columnValueWithoutLike']) &&
+            empty($filters['from']) &&
+            empty($filters['to']) &&
+            empty($filters['columnNotNull']) &&
+            empty($filters['columnWhere'])) {
+            
             return $totalTripPayments;
         } else {
             $filters['withLimit'] = false;
             //return count($this->filterFinesComplete($this->finesService->getFinesData($filters)));
-            return count($this->finesService->getFinesData($filters));
+            return $this->finesService->getFinesData($filters, true);
         }
     }
     /*
