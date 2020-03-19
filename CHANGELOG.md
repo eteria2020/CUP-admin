@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 This file is in [Markdown](https://www.markdownguide.org/basic-syntax/) language.
 
+## [1.0.17] - 2020-03-19
+
+### Changed
+
+- Fix filters of fines listing 
+
 ## [1.0.16] - 2020-03-18
 
 ### Changed

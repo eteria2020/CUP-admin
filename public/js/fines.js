@@ -109,14 +109,9 @@ $(function() {
             
             if ($("input[name='remove-not-payed']:checked").val() == 1) {
                 aoData.push({ "name": "columnNotNull", "value": ["e.customer","e.trip","e.car"] });
-                aoData.push({ "name": "columnWhere", "value": ["e.payable","e.complete"] });
-                aoData.push({ "name": "columnWhereValue", "value": [1,true] });
+                aoData.push({ "name": "columnWhereValue", "value": [true,true,'payed_correctly','invoiced', false] });
+                aoData.push({ "name": "columnWhere", "value": "e.charged = :where_4 AND e.payable = :where_0 AND e.complete = :where_1 AND (e.extrapayment IS NULL OR NOT (ep.status = :where_2 OR ep.status = :where_3))" });
             }
-            
-            
-            /*aoData.push({ "name": "fixedColumn", "value": "e.complete"});
-            aoData.push({ "name": "fixedValue", "value": "true"});
-            aoData.push({ "name": "fixedLike", "value": false});*/
         },
         "order": [[dataTableVars.iSortCol_0, dataTableVars.sSortDir_0]],
         "columns": [
@@ -130,7 +125,7 @@ $(function() {
             {data: "e.amount"},
             {data: "e.violationDescription"},
             {data: "e.complete"},
-            {data: "e.insertTs"}
+            {data: "e.insertTs"},
         ],
         "columnDefs": [
             {
