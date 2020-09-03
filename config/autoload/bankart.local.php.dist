@@ -3,10 +3,10 @@
 return [
     'bankart' => [
 
-        'username' => 'ApiSharengo',
-        'password' => 'lu$wIYIPK?2QV?CqH!I*$hSl0ph9#',
-        'api_key' => '2083302IT500782-Sim',
-        'shared_secret' => 'Y6roszpSJMZvosoM5Mig2dPuVDpmon',
+	'username' => 'Api01Sharengo',
+        'password' => '*9q1=2iLmxJK/7mYHOlB=P(.2d._O',
+        'api_key' => '2083302IT500782',
+        'shared_secret' => 'Czp9OjBu8bAxD1ejhZQYUK5EKgYkyb',
 
         'currency' => 'EUR',
         'locale' => 'sl_SI',

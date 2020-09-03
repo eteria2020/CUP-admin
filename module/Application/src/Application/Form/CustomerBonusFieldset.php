@@ -16,7 +16,7 @@ class CustomerBonusFieldset extends Fieldset implements InputFilterProviderInter
     private $translator;
     private $config;
     private $roles;
-    private $max_minutes = 15; // for normal user
+    private $max_minutes = 100; // for normal user
     private $max_minutes_sa = 250; // for superadmin
     
     public function __construct(HydratorInterface $hydrator, Translator $translator, AddBonusService $addBonusService, $config, $roles)
