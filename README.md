@@ -3,7 +3,7 @@
 ## Description
 
 This is Admin project of CUP (Car sharing Universal Platform).
-Admin is the front end interface used by Share'n Go operators.
+Admin is the front end interface used by operators.
 
 Require
 - [Zend Framework 2.4](https://framework.zend.com/downloads/archives) 
