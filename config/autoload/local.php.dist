@@ -34,7 +34,7 @@ return [
         'notifyTo' => 'email@domain'
     ],
     'googleMaps' => [
-        'key' => 'AIzaSyAjv0Ry_0P18id6pWKwNn0IptB8NvZGfxY'
+        'key' => 'AIzaSyAjv0Ry_***********IptB8NvZGfxY' /* censored */
     ],
     // for Sharengo Slovakia 'id' => 'sk_SK'
     'serverInstance' => [
